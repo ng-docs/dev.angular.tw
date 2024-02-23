@@ -1,0 +1,36 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">Checked 後表達式改變</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0100.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-video-container">
+      <iframe
+      class="docs-video"
+      src="https://www.youtube.com/embed/O47uUnJjbJc"
+      
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      credentialless
+      title="Video player"
+      ></iframe>
+    </div>
+    <p>當表達式值在變更偵測完成後被變更時，Angular 會擲出 <code>ExpressionChangedAfterItHasBeenCheckedError</code>。Angular 僅在開發模式中擲出此錯誤。</p>
+<p>在開發模式中，Angular 會在每次變更偵測執行後執行額外的檢查，以確保繫結沒有變更。這會捕捉到檢視處於不一致狀態的錯誤。例如，如果方法或 getter 在每次呼叫時傳回不同的值，或者子元件在其父項上變更值，則可能會發生這種情況。如果出現這兩種情況中的任何一種，這表示變更偵測不穩定。Angular 會拋出錯誤以確保資料始終正確反映在檢視中，這可防止不穩定的 UI 行為或可能的無限迴圈。</p>
+<p>當您新增範本表達式或已開始實作生命週期掛鉤（例如 <code>ngAfterViewInit</code> 或 <code>ngOnChanges</code>）時，通常會發生此錯誤。在處理載入狀態和非同步作業，或子元件變更其父項繫結時，這也很常見。</p>
+
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>CLI 產生的 <a href="https://developer.mozilla.org/docs/Tools/Debugger/How_to/Use_a_source_map" target="_blank">原始碼對照表</a> 在除錯時非常有用。沿著呼叫堆疊往上導覽，直到找到錯誤中顯示的值已變更的範本表達式。</p>
+<p>確保在變更偵測執行後，範本中的繫結沒有變更。這通常表示要重新調整以使用正確的元件生命週期掛鉤，以符合您的使用案例。如果問題存在於 <code>ngAfterViewInit</code> 中，建議的解決方案是使用建構函式或 <code>ngOnInit</code> 來設定初始值，或使用 <code>ngAfterContentInit</code> 作為其他值繫結。</p>
+<p>如果您在檢視中繫結到方法，請確保呼叫不會更新範本中的其他繫結。</p>
+<p>在 <a href="https://indepth.dev/posts/1001/everything-you-need-to-know-about-the-expressionchangedafterithasbeencheckederror-error" target="_blank">「ExpressionChangedAfterItHasBeenCheckedError」錯誤的相關資訊</a> 和 <a href="https://blog.angular-university.io/angular-debugging" target="_blank">Angular 除錯：「在檢查後表達式已變更」：簡單說明（和解決方法）</a> 中進一步了解哪個解決方案適合您，以及為什麼這很有用。</p>

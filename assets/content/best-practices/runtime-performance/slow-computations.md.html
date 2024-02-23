@@ -1,0 +1,42 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">緩慢的計算</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/best-practices/runtime-performance/slow-computations.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>在每個變更偵測週期中，Angular 同步地：</p>
+
+  <ul class="docs-list">
+    <li>除非另有指定，否則會根據各個元件的偵測策略，評估所有元件中所有的範本表達式</li>
+<li>執行 <code>ngDoCheck</code>、<code>ngAfterContentChecked</code>、<code>ngAfterViewChecked</code> 和 <code>ngOnChanges</code> 生命週期掛鉤。
+範本或生命週期掛鉤中的單一緩慢運算可能會減慢整個變更偵測程序，因為 Angular 會依序執行運算。</li>
+
+  </ul>
+  
+  <h2 id="">識別緩慢的運算</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 識別緩慢的運算"></a>
+  <p>您可使用 Angular DevTools 的分析器來識別繁重的運算。在效能時間軸中，按一下長條圖以預覽特定的變更偵測週期。這會顯示一個長條圖，其中顯示架構在每個元件的變更偵測中所花費的時間。當您按一下元件時，您可以預覽 Angular 花費了多少時間來評估其範本和生命週期鉤子。</p>
+<img alt="Angular DevTools profiler preview showing slow computation" src="https://angular.dev/assets/images/best-practices/runtime-performance/slow-computations.png">
+
+<p>例如，在前面的螢幕截圖中，選取了第二個已記錄的變更偵測週期。Angular 在這個週期花費了 573 毫秒以上，其中在 <code>EmployeeListComponent</code> 中花費的時間最長。在詳細資料面板中，您可以看到 Angular 花費了 297 毫秒以上來評估 <code>EmployeeListComponent</code> 的範本。</p>
+
+  <h2 id="">優化慢速運算</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 優化慢速運算"></a>
+  <p>以下是一些移除緩慢運算的方法：</p>
+
+  <ul class="docs-list">
+    <li><strong>優化基礎演算法</strong>。這是建議的方法。如果你可以加速造成問題的演算法，就能加速整個變更偵測機制。</li>
+<li><strong>使用純粹管道快取</strong>。你可以將繁重的運算移到純粹的 <a href="/guide/pipes">管道</a>。Angular 僅在偵測到其輸入內容已變更時，相較於上次 Angular 呼叫它時，才會重新評估純粹管道。</li>
+<li><strong>使用記憶化</strong>。<a href="https://zh.wikipedia.org/wiki/%E8%A8%98%E6%86%B6%E5%8C%96" target="_blank">記憶化</a> 是與純粹管道類似的技術，不同之處在於純粹管道僅保留運算的最後一個結果，而記憶化可以儲存多個結果。</li>
+<li><strong>避免在生命週期鉤子中重新繪製/重新配置</strong>。某些 <a href="https://web.dev/avoid-large-complex-layouts-and-layout-thrashing/" target="_blank">操作</a> 會導致瀏覽器同步重新計算頁面配置或重新呈現。由於重新配置和重新繪製通常很慢，因此你應避免在每個變更偵測週期中執行它們。</li>
+
+  </ul>
+  <p>純粹管道和記憶化有不同的取捨。純粹管道是 Angular 內建的概念，而記憶化則是快取函式結果的一般軟體工程實務。如果你經常使用不同的參數呼叫大量的運算，則記憶化的記憶體開銷可能會很大。</p>

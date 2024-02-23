@@ -1,0 +1,306 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">範本類型檢查</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/template-typecheck.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+  <h2 id="">範本類型檢查概述</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 範本類型檢查概述"></a>
+  <p>就像 TypeScript 能在您的程式碼中偵測類型錯誤，Angular 會檢查應用程式範本中的表達式和繫結，並報告它找到的任何類型錯誤。
+Angular 目前有三個執行此作業的模式，視 <a href="reference/configs/angular-compiler-options">Angular 編譯器選項</a> 中 <code>fullTemplateTypeCheck</code> 和 <code>strictTemplates</code> 旗標的值而定。</p>
+
+  <h3 id="">基本模式</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 基本模式"></a>
+  <p>在最基本的類型檢查模式中，將 <code>fullTemplateTypeCheck</code> 標記設定為 <code>false</code> 時，Angular 僅驗證範本中的頂層運算式。</p>
+<p>如果您撰寫 <code>&lt;map [city]=&quot;user.address.city&quot;&gt;</code>, 編譯器會驗證下列事項：</p>
+
+  <ul class="docs-list">
+    <li><code>user</code> 是元件類別上的屬性</li>
+<li><code>user</code> 是具有 address 屬性的物件</li>
+<li><code>user.address</code> 是具有 city 屬性的物件</li>
+
+  </ul>
+  <p>編譯器不會驗證 <code>user.address.city</code> 的值是否可指派給 <code>&lt;map&gt;</code> 元件的城市輸入。</p>
+<p>編譯器在這個模式中也有一些重要的限制：</p>
+
+  <ul class="docs-list">
+    <li>重要的是，它不檢查嵌入式檢視，例如 <code>*ngIf</code>、<code>*ngFor</code>、其他 <code>&lt;ng-template&gt;</code> 嵌入式檢視。</li>
+<li>它不會找出 <code>#refs</code> 的類型、管道結果或事件繫結中 <code>$event</code> 的類型。</li>
+
+  </ul>
+  <p>在許多情況下，這些東西最終會成為類型 <code>any</code>，這可能會導致表達式的後續部分未經檢查。</p>
+
+  <h3 id="">全螢幕模式</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 全螢幕模式"></a>
+  <p>如果將 <code>fullTemplateTypeCheck</code> 標記設定為 <code>true</code>，Angular 會在範本中更積極地進行型別檢查。
+特別是：</p>
+
+  <ul class="docs-list">
+    <li>嵌入式檢視（例如在 <code>*ngIf</code> 或 <code>*ngFor</code> 內）已檢查</li>
+<li>管道具有正確的回傳類型</li>
+<li>對指令和管道的區域參考具有正確的類型（任何泛型參數除外，這些參數將為 <code>any</code>）</li>
+
+  </ul>
+  <p>以下仍然具有類型 <code>any</code>。</p>
+
+  <ul class="docs-list">
+    <li>本地 DOM 元素參考</li>
+<li><code>$event</code> 物件</li>
+<li>安全導航表達式</li>
+
+  </ul>
+  <p>重要：Angular 13 中已棄用 <code>fullTemplateTypeCheck</code> 旗標。
+應改用編譯器選項的 <code>strictTemplates</code> 系列。</p>
+
+  <h3 id="">嚴格模式</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 嚴格模式"></a>
+  <p>Angular 維持 <code>fullTemplateTypeCheck</code> 旗標的行為，並引入第三個「嚴格模式」。
+嚴格模式是完整模式的超集，並可透過將 <code>strictTemplates</code> 旗標設定為 true 來存取。
+此旗標取代 <code>fullTemplateTypeCheck</code> 旗標。</p>
+<p>除了完整的模式行為，Angular 執行下列動作：</p>
+
+  <ul class="docs-list">
+    <li>驗證元件/指令繫結是否可指定給其 <code>@Input()</code></li>
+<li>在驗證前述模式時遵守 TypeScript 的 <code>strictNullChecks</code> 旗標</li>
+<li>推斷元件/指令的正確類型，包括泛型</li>
+<li>推斷已設定的範本內容類型 (例如，允許正確類型檢查 <code>NgFor</code>)</li>
+<li>推斷元件/指令、DOM 和動畫事件繫結中 <code>$event</code> 的正確類型</li>
+<li>基於標記名稱推斷 DOM 元素的正確本地參照類型 (例如，<code>document.createElement</code> 為該標記返回的類型)</li>
+
+  </ul>
+  
+  <h2 id="-ngfor">檢查 <code>*ngFor</code></h2>
+  <a href="#-ngfor" class="docs-anchor" tabindex="-1" aria-label="Link to 檢查 <code>*ngFor</code>"></a>
+  <p>三種型別檢查模式以不同的方式處理內嵌檢視。
+考慮以下範例。</p>
+<div class="docs-code" header="User interface">
+    <div class="docs-code-header"><h3>User interface</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">User</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">address</span>: {</div><div class="hljs-ln-line">    <span class="hljs-attr">city</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">    <span class="hljs-attr">state</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let user of users"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>{{config.title}}<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>City: {{user.address.city}}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div></code>
+    </pre>
+  </div><p><code>&lt;h2&gt;</code> 和 <code>&lt;span&gt;</code> 位於 <code>*ngFor</code> 嵌入式檢視中。
+在基本模式下，Angular 都不會檢查它們。
+然而，在完整模式下，Angular 會檢查 <code>config</code> 和 <code>user</code> 是否存在，並且假設類型為 <code>any</code>。
+在嚴格模式下，Angular 知道 <code>&lt;span&gt;</code> 中的 <code>user</code> 類型為 <code>User</code>，而 <code>address</code> 是具有類型為 <code>string</code> 的 <code>city</code> 屬性的物件。</p>
+
+  <h2 id="">疑難排解範本錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 疑難排解範本錯誤"></a>
+  <p>使用嚴格模式時，您可能會遇到之前任何模式中都未出現的範本錯誤。
+這些錯誤通常表示範本中真正的類型不匹配，而之前的工具沒有捕捉到。
+如果是這樣，錯誤訊息應該明確指出範本中問題發生在哪裡。</p>
+<p>當 Angular 函式庫的類型化不完整或不正確時，或者當類型化與預期不符時，也可能出現誤判，例如以下情況。</p>
+
+  <ul class="docs-list">
+    <li><p>當函式庫的型別錯誤或不完整時（例如，函式庫並非考慮 <code>strictNullChecks</code> 而缺少 <code>null | undefined</code>）</p>
+</li>
+<li><p>當函式庫的輸入型別太過狹窄，而函式庫尚未添加適當的元數據供 Angular 瞭解時。
+  這通常會發生在用作屬性的已停用或其他常見布林輸入，例如，<code>&lt;input disabled&gt;</code>。</p>
+</li>
+<li><p>當對 DOM 事件使用 <code>$event.target</code> 時（由於事件冒泡的可能性，DOM 型別中的 <code>$event.target</code> 不具有您可能預期的型別）</p>
+</li>
+
+  </ul>
+  <p>在出現像這些的誤判時，有幾個選項：</p>
+
+  <ul class="docs-list">
+    <li>在某些情況下使用 <code>$any()</code> 類型轉換函式，以選擇不對表達式的一部分進行類型檢查</li>
+<li>在應用的 TypeScript 組態檔案 <code>tsconfig.json</code> 中設定 <code>strictTemplates: false</code>，以完全停用嚴格檢查</li>
+<li>設定 <em>嚴格性標誌</em> 為 <code>false</code>，以個別停用某些類型檢查操作，同時在其他方面保持嚴格性</li>
+<li>如果你想要同時使用 <code>strictTemplates</code> 和 <code>strictNullChecks</code>，請使用 <code>strictNullInputTypes</code> 特別針對輸入繫結選擇不進行嚴格的 null 類型檢查</li>
+
+  </ul>
+  <p>除非另有註解，每個後續選項都會設定為 <code>strictTemplates</code> 的值（當 <code>strictTemplates</code> 為 <code>true</code> 時為 <code>true</code>，反之亦然）。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">嚴格性標記</th>
+<th align="left">效果</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>strictInputTypes</code></td>
+<td align="left">檢查約束表達式是否可指定給 <code>@Input()</code> 欄位。也會影響指令泛型類型的推斷。</td>
+</tr>
+<tr>
+<td align="left"><code>strictInputAccessModifiers</code></td>
+<td align="left">在將約束表達式指定給 <code>@Input()</code> 時，是否遵守存取修飾詞，例如 <code>private</code>/<code>protected</code>/<code>readonly</code>。如果停用，則會忽略 <code>@Input</code> 的存取修飾詞；只會檢查類型。即使將 <code>strictTemplates</code> 設為 <code>true</code>，此選項預設為 <code>false</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>strictNullInputTypes</code></td>
+<td align="left">檢查 <code>@Input()</code> 繫結（依據 <code>strictInputTypes</code>）時，是否遵守 <code>strictNullChecks</code>。如果停用，在使用未考量 <code>strictNullChecks</code> 而建置的函式庫時會很有用。</td>
+</tr>
+<tr>
+<td align="left"><code>strictAttributeTypes</code></td>
+<td align="left">檢查使用文字屬性建立的 <code>@Input()</code> 繫結。例如，<docs-code hideCopy language="html"> &lt;input matInput disabled=&quot;true&quot;&gt; </docs-code>（將 <code>disabled</code> 屬性設為字串 <code>&#39;true&#39;</code>）相對於 <docs-code hideCopy language="html"> &lt;input matInput [disabled]=&quot;true&quot;&gt; </docs-code>（將 <code>disabled</code> 屬性設為布林值 <code>true</code>）。</td>
+</tr>
+<tr>
+<td align="left"><code>strictSafeNavigationTypes</code></td>
+<td align="left">安全導覽作業的傳回類型（例如，<code>user?.name</code>）是否會根據 <code>user</code> 的類型正確推斷。如果停用，<code>user?.name</code> 的類型會是 <code>any</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>strictDomLocalRefTypes</code></td>
+<td align="left">DOM 元素的區域參考是否具有正確的類型。如果停用，<code>&lt;input #ref&gt;</code> 的 <code>ref</code> 類型會是 <code>any</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>strictOutputEventTypes</code></td>
+<td align="left"><code>$event</code> 是否具有正確的類型，以供事件繫結到元件/指令 <code>@Output()</code> 或動畫事件。如果停用，它會是 <code>any</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>strictDomEventTypes</code></td>
+<td align="left"><code>$event</code> 是否具有正確的類型，以供事件繫結到 DOM 事件。如果停用，它會是 <code>any</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>strictContextGenerics</code></td>
+<td align="left">泛型元件的類型參數是否會正確推斷（包括任何泛型邊界）。如果停用，任何類型參數都會是 <code>any</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>strictLiteralTypes</code></td>
+<td align="left">範本中宣告的物件和陣列文字是否會推斷其類型。如果停用，此類文字的類型會是 <code>any</code>。當 <em><code>fullTemplateTypeCheck</code></em> 或 <em><code>strictTemplates</code></em> 設為 <code>true</code> 時，此標記為 <code>true</code>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>如果您在使用這些標記進行疑難排解後仍然遇到問題，請停用 <code>strictTemplates</code> 以回復為完整模式。</p>
+<p>如果這不起作用，最後的手段選項是使用 <code>fullTemplateTypeCheck: false</code> 完全關閉完整模式。</p>
+<p>任何建議的方法都無法解決的類型檢查錯誤，可能是範本類型檢查器本身的錯誤。
+如果您遇到需要退回到基本模式的錯誤，很可能是此類錯誤。
+如果發生這種情況，請 <a href="https://github.com/angular/angular/issues" target="_blank">提出問題</a>，以便團隊可以解決它。</p>
+
+  <h2 id="">輸入和類型檢查</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 輸入和類型檢查"></a>
+  <p>範本類型檢查器會檢查繫結表達式的類型是否與對應指令輸入的類型相容。
+舉例來說，請考慮以下元件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">User</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'user-detail'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'{{ user.name }}'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserDetailComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">user</span>: <span class="hljs-title class_">User</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><code>AppComponent</code> 範本以以下方式使用此元件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;user-detail [user]="selectedUser"&gt;&lt;/user-detail&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">selectedUser</span>: <span class="hljs-title class_">User</span> | <span class="hljs-literal">null</span> = <span class="hljs-literal">null</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>在此，在對 <code>AppComponent</code> 的範本進行類型檢查時，<code>[user]=&quot;selectedUser&quot;</code> 繫結與 <code>UserDetailComponent.user</code> 輸入相應。
+因此，Angular 將 <code>selectedUser</code> 屬性指定給 <code>UserDetailComponent.user</code>，如果它們的類型不相容，則會導致錯誤。
+TypeScript 根據其類型系統檢查指定，遵守在應用程式中配置的旗標，例如 <code>strictNullChecks</code>。</p>
+<p>透過提供更詳細的範本類型檢查器範本類型需求，避免執行時期類型錯誤。
+透過在指令定義中提供範本防護函式，讓您自己的指令的輸入類型需求盡可能具體。
+請參閱本指南中的 <a href="guide/directives/structural-directives#directive-type-checks">改進自訂指令的範本類型檢查</a>。</p>
+
+  <h3 id="-null-">嚴格的 null 檢查</h3>
+  <a href="#-null-" class="docs-anchor" tabindex="-1" aria-label="Link to 嚴格的 null 檢查"></a>
+  <p>當您啟用 <code>strictTemplates</code> 和 TypeScript 標記 <code>strictNullChecks</code> 時，可能會發生某些情況的類型檢查錯誤，這些情況可能無法輕易避免。
+例如：</p>
+
+  <ul class="docs-list">
+    <li><p>可為空值，並繫結至未啟用 <code>strictNullChecks</code> 的函式庫中的指令。</p>
+<p>  對於未編譯 <code>strictNullChecks</code> 的函式庫，其宣告檔案不會指出欄位是否可以為 <code>null</code>。
+  在函式庫正確處理 <code>null</code> 的情況下，這是個問題，因為編譯器會針對可為空的欄位檢查省略 <code>null</code> 類型的宣告檔案。
+  因此，編譯器會產生類型檢查錯誤，因為它遵守 <code>strictNullChecks</code>。</p>
+</li>
+<li><p>使用 <code>async</code> 管道搭配您知道會同步發出的可觀察序列。</p>
+<p>  <code>async</code> 管道目前假設它訂閱的可觀察序列可能是非同步的，這表示可能尚無可用值。
+  在這種情況下，它仍必須傳回某些內容，即 <code>null</code>。
+  換句話說，<code>async</code> 管道的傳回類型包含 <code>null</code>，在知道可觀察序列會同步發出非可為空值的情況下，這可能會導致錯誤。</p>
+</li>
+
+  </ul>
+  <p>處理前面問題的兩個潛在解決方法：</p>
+
+  <ul class="docs-list">
+    <li><p>在範本中，在可為空表達式的結尾包含非空斷言運算子 <code>!</code>，例如</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">user-detail</span> [<span class="hljs-attr">user</span>]=<span class="hljs-string">"user!"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">user-detail</span>&gt;</span></div></code>
+    </pre>
+  </div><p>  在此範例中，編譯器忽略空值的類型不相容性，就像在 TypeScript 程式碼中一樣。
+  在 <code>async</code> 管道的案例中，請注意表達式需要用括號括起來，就像在</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">user-detail</span> [<span class="hljs-attr">user</span>]=<span class="hljs-string">"(user$ | async)!"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">user-detail</span>&gt;</span></div></code>
+    </pre>
+  </div></li>
+<li><p>完全停用 Angular 範本中的嚴格空值檢查。</p>
+<p>  啟用 <code>strictTemplates</code> 時，仍然可以停用類型檢查的某些方面。
+  將選項 <code>strictNullInputTypes</code> 設為 <code>false</code> 會停用 Angular 範本中的嚴格空值檢查。
+  此標記套用於屬於應用程式的所有元件。</p>
+</li>
+
+  </ul>
+  
+  <h3 id="">圖書館作者建議</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 圖書館作者建議"></a>
+  <p>作為函式庫作者，您可以採取多項措施來為您的使用者提供最佳體驗。
+首先，啟用 <code>strictNullChecks</code> 並在輸入的類型中包含 <code>null</code>（視情況而定），這會傳達給您的使用者，他們是否可以提供可為空值。
+此外，可以提供特定於範本類型檢查器的類型提示。
+請參閱 <a href="guide/directives/structural-directives#directive-type-checks">改進自訂指令範本類型檢查</a> 和 <a href="#input-setter-coercion">輸入設定值強制轉換</a>。</p>
+
+  <h2 id="-setter-">輸入 setter 強制轉換</h2>
+  <a href="#-setter-" class="docs-anchor" tabindex="-1" aria-label="Link to 輸入 setter 強制轉換"></a>
+  <p>有時，指令或元件的 <code>@Input()</code> 需要變更繫結到它的值，通常會使用輸入的 getter/setter 配對。
+以下是一個自訂按鈕元件的範例：</p>
+<p>考慮以下指令：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'submit-button'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;div class="wrapper"&gt;</div><div class="hljs-ln-line">      &lt;button [disabled]="disabled"&gt;Submit&lt;/button&gt;</div><div class="hljs-ln-line">    &lt;/div&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SubmitButton</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> <span class="hljs-attr">_disabled</span>: <span class="hljs-built_in">boolean</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Input</span>()</div><div class="hljs-ln-line">  <span class="hljs-keyword">get</span> <span class="hljs-title function_">disabled</span>(): <span class="hljs-built_in">boolean</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">_disabled</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">set</span> <span class="hljs-title function_">disabled</span>(<span class="hljs-params">value: <span class="hljs-built_in">boolean</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">_disabled</span> = value;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>在此，元件的 <code>disabled</code> 輸入正在傳遞給範本中的 <code>&lt;button&gt;</code>。
+只要輸入繫結的是 <code>boolean</code> 值，以上所有內容都會如預期般運作。
+但是，假設消費者在範本中使用此輸入作為屬性：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">submit-button</span> <span class="hljs-attr">disabled</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">submit-button</span>&gt;</span></div></code>
+    </pre>
+  </div><p>這與 binding 的效果相同：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">submit-button</span> [<span class="hljs-attr">disabled</span>]=<span class="hljs-string">"''"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">submit-button</span>&gt;</span></div></code>
+    </pre>
+  </div><p>在執行期間，輸入將被設定為空字串，這不是 <code>boolean</code> 值。
+處理這個問題的 Angular 元件函式庫經常在 setter 中「強制」將值轉換為正確的類型：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">set</span> <span class="hljs-title function_">disabled</span>(<span class="hljs-params">value: <span class="hljs-built_in">boolean</span></span>) {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">_disabled</span> = (value === <span class="hljs-string">''</span>) || value;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>理想情況下，這裡的 <code>value</code> 類型應從 <code>boolean</code> 變更為 <code>boolean|&#39;&#39;</code>，以符合實際上為 setter 接受的值集。
+TypeScript 4.3 之前的版本要求 getter 和 setter 具有相同的類型，因此，如果 getter 應傳回 <code>boolean</code>，則 setter 就會卡在較窄的類型中。</p>
+<p>如果消費者啟用了 Angular 對範本的最嚴格類型檢查，這會產生一個問題：空字串 (<code>&#39;&#39;</code>) 實際上無法指定給 <code>disabled</code> 欄位，這會在使用屬性表單時產生類型錯誤。</p>
+<p>為了解決此問題，Angular 支援檢查比輸入欄位本身宣告更廣泛、更寬鬆的類型給 <code>@Input()</code>。
+透過將一個具有 <code>ngAcceptInputType_</code> 前綴的靜態屬性加入元件類別，即可啟用這個功能：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SubmitButton</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> <span class="hljs-attr">_disabled</span>: <span class="hljs-built_in">boolean</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Input</span>()</div><div class="hljs-ln-line">  <span class="hljs-keyword">get</span> <span class="hljs-title function_">disabled</span>(): <span class="hljs-built_in">boolean</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">_disabled</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">set</span> <span class="hljs-title function_">disabled</span>(<span class="hljs-params">value: <span class="hljs-built_in">boolean</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">_disabled</span> = (value === <span class="hljs-string">''</span>) || value;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">static</span> <span class="hljs-attr">ngAcceptInputType_disabled</span>: <span class="hljs-built_in">boolean</span>|<span class="hljs-string">''</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>自 TypeScript 4.3 開始，setter 可以宣告為接受 <code>boolean|&#39;&#39;</code> 作為類型，使輸入 setter 強制轉換欄位過時。
+因此，輸入 setter 強制轉換欄位已棄用。</p>
+<p>此欄位不一定要有值。
+它的存在會傳達給 Angular 型別檢查器，<code>disabled</code> 輸入應被視為接受符合 <code>boolean|&#39;&#39;</code> 型別的繫結。
+字尾應為 <code>@Input</code> <em>欄位</em> 名稱。</p>
+<p>如果某個輸入具有 <code>ngAcceptInputType_</code> 覆寫，則應小心處理，因為設定器應該能夠處理覆寫類型的任何值。</p>
+
+  <h2 id="-any-">使用 <code>$any()</code> 關閉類型檢查`</h2>
+  <a href="#-any-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 <code>$any()</code> 關閉類型檢查`"></a>
+  <p>透過將繫結表達式包圍在對 <code>$any()</code> 偽函式的呼叫中，以停用繫結表達式的檢查。
+編譯器將其視為對 <code>any</code> 類型的轉換，就像在 TypeScript 中使用 <code>&lt;any&gt;</code> 或 <code>as any</code> 轉換時一樣。</p>
+<p>在以下範例中，將 <code>person</code> 導向 <code>any</code> 類型可以抑制錯誤 <code>Property address does not exist</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'{{$any(person).address.street}}'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  person?: <span class="hljs-title class_">Person</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

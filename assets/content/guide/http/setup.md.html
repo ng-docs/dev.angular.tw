@@ -1,0 +1,126 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">設定 <code>HttpClient</code></h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/http/setup.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>在您的應用程式中使用 <code>HttpClient</code> 之前，您必須使用 <a href="guide/di">相依性注入</a> 來設定它。</p>
+
+  <h2 id="-httpclient">透過相依性注入提供 <code>HttpClient</code></h2>
+  <a href="#-httpclient" class="docs-anchor" tabindex="-1" aria-label="Link to 透過相依性注入提供 <code>HttpClient</code>"></a>
+  <p><code>HttpClient</code> 是使用 <code>provideHttpClient</code> 輔助函式提供的，大多數應用程式會將其包含在 <code>app.config.ts</code> 的應用程式 <code>providers</code> 中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideHttpClient</span>(),</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div><p>如果您的應用程式使用基於 NgModule 的引導程式，您可以將 <code>provideHttpClient</code> 包含在應用程式 NgModule 的提供者中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideHttpClient</span>(),</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-comment">// ... other application configuration</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> {}</div></code>
+    </pre>
+  </div><p>然後，您可以將 <code>HttpClient</code> 服務注入為元件、服務或其他類別的相依性：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({<span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ConfigService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> http: HttpClient</span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// This service can now make HTTP requests via `this.http`.</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="-httpclient-">配置 <code>HttpClient</code> 的功能`</h2>
+  <a href="#-httpclient-" class="docs-anchor" tabindex="-1" aria-label="Link to 配置 <code>HttpClient</code> 的功能`"></a>
+  <p><code>provideHttpClient</code> 接受一個選用功能設定清單，以啟用或設定客戶端不同面向的行為。本節詳述選用功能及其用法。</p>
+
+  <h3 id="withfetch"><code>withFetch</code></h3>
+  <a href="#withfetch" class="docs-anchor" tabindex="-1" aria-label="Link to <code>withFetch</code>"></a>
+  <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideHttpClient</span>(</div><div class="hljs-ln-line">      <span class="hljs-title function_">withFetch</span>(),</div><div class="hljs-ln-line">    ),</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div><p>預設情況下，<code>HttpClient</code> 使用 <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest" target="_blank"><code>XMLHttpRequest</code></a> API 發出請求。<code>withFetch</code> 功能將用戶端切換為使用 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank"><code>fetch</code></a> API。</p>
+<p><code>fetch</code> 是較新的 API，可供 <code>XMLHttpRequest</code> 不受支援的一些環境使用。它有一些限制，例如不產生上傳進度事件。</p>
+
+  <h3 id="withinterceptors"><code>withInterceptors(...)</code>`</h3>
+  <a href="#withinterceptors" class="docs-anchor" tabindex="-1" aria-label="Link to <code>withInterceptors(...)</code>`"></a>
+  <p><code>withInterceptors</code> 配置一組攔截器函式，這些函式會處理透過 <code>HttpClient</code> 進行的請求。請參閱 <a href="guide/http/interceptors">攔截器指南</a> 以了解更多資訊。</p>
+
+  <h3 id="withinterceptorsfromdi"><code>withInterceptorsFromDi()</code></h3>
+  <a href="#withinterceptorsfromdi" class="docs-anchor" tabindex="-1" aria-label="Link to <code>withInterceptorsFromDi()</code>"></a>
+  <p><code>withInterceptorsFromDi</code> 在 <code>HttpClient</code> 組態中包含舊式類別基礎攔截器。請參閱 <a href="guide/http/interceptors">攔截器指南</a> 以了解更多資訊。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 具有較可預測排序的功能性攔截器 (透過 <code>withInterceptors</code>)，我們建議使用它們而不是基於 DI 的攔截器。</p>
+
+    </div>
+    
+  <h3 id="withrequestsmadeviaparent"><code>withRequestsMadeViaParent()</code></h3>
+  <a href="#withrequestsmadeviaparent" class="docs-anchor" tabindex="-1" aria-label="Link to <code>withRequestsMadeViaParent()</code>"></a>
+  <p>預設情況下，當您在給定的注入器中使用 <code>provideHttpClient</code> 配置 <code>HttpClient</code> 時，此配置將覆寫父注入器中可能存在的 <code>HttpClient</code> 的任何配置。</p>
+<p>當你加入 <code>withRequestsMadeViaParent()</code>，<code>HttpClient</code> 會被配置為將請求傳遞到父層注入器中的 <code>HttpClient</code> 實例，一旦它們透過此層級的任何已配置攔截器。如果你想在子層級注入器中 <em>新增</em> 攔截器，同時仍透過父層級注入器的攔截器來傳送請求，這將會很有用。</p>
+<p>CRITICAL：您必須在目前的注入器上方配置 <code>HttpClient</code> 的執行個體，否則此選項無效，而當您嘗試使用它時，您會收到執行時期錯誤。</p>
+
+  <h3 id="withjsonpsupport"><code>withJsonpSupport()</code></h3>
+  <a href="#withjsonpsupport" class="docs-anchor" tabindex="-1" aria-label="Link to <code>withJsonpSupport()</code>"></a>
+  <p>包含 <code>withJsonpSupport</code> 啟用 <code>HttpClient</code> 上的 <code>.jsonp()</code> 方法，該方法透過 <a href="https://en.wikipedia.org/wiki/JSONP" target="_blank">JSONP 慣例</a> 進行 GET 要求，以跨網域載入資料。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 盡可能使用 <a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS" target="_blank">CORS</a> 來進行跨網域請求，而不是 JSONP。</p>
+
+    </div>
+    
+  <h3 id="withxsrfconfiguration"><code>withXsrfConfiguration(...)</code></h3>
+  <a href="#withxsrfconfiguration" class="docs-anchor" tabindex="-1" aria-label="Link to <code>withXsrfConfiguration(...)</code>"></a>
+  <p>包含此選項允許自定義 <code>HttpClient</code> 內建的 XSRF 安全性功能。有關更多資訊，請參閱 <a href="guide/http/security">安全性指南</a>。</p>
+
+  <h3 id="withnoxsrfprotection"><code>withNoXsrfProtection()</code></h3>
+  <a href="#withnoxsrfprotection" class="docs-anchor" tabindex="-1" aria-label="Link to <code>withNoXsrfProtection()</code>"></a>
+  <p>包含此選項會停用 <code>HttpClient</code> 內建的 XSRF 安全性功能。請參閱 <a href="guide/http/security">安全性指南</a>以了解更多資訊。</p>
+
+  <h2 id="-httpclientmodule-">基於 <code>HttpClientModule</code> 的設定</h2>
+  <a href="#-httpclientmodule-" class="docs-anchor" tabindex="-1" aria-label="Link to 基於 <code>HttpClientModule</code> 的設定"></a>
+  <p>某些應用程式可能會使用基於 NgModules 的舊 API 來配置 <code>HttpClient</code>。</p>
+<p>下表列出 <code>@angular/common/http</code> 提供的 NgModules，以及它們與上述提供者組態函式的關聯。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th><strong>NgModule</strong></th>
+<th>等同於 <code>provideHttpClient()</code></th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td><code>HttpClientModule</code></td>
+<td><code>provideHttpClient(withInterceptorsFromDi())</code></td>
+</tr>
+<tr>
+<td><code>HttpClientJsonpModule</code></td>
+<td><code>withJsonpSupport()</code></td>
+</tr>
+<tr>
+<td><code>HttpClientXsrfModule.withOptions(...)</code></td>
+<td><code>withXsrfConfiguration(...)</code></td>
+</tr>
+<tr>
+<td><code>HttpClientXsrfModule.disable()</code></td>
+<td><code>withNoXsrfProtection()</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-callout docs-callout-important">
+      <h3>在多個注入器中使用 HttpClientModule 時小心</h3>
+      <p>當 <code>HttpClientModule</code> 出現在多個注入器中時，攔截器的行為定義不明確，且取決於確切的選項和提供者/匯入順序。</p>
+<p>對於多注入器配置，優先使用 <code>provideHttpClient</code>，因為它具有更穩定的行為。請參閱上面的 <code>withRequestsMadeViaParent</code> 功能。</p>
+
+    </div>
+    

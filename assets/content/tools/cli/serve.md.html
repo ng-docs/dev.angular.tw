@@ -1,0 +1,59 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">為開發服務 Angular 應用程式</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/serve.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>您可以使用 <code>ng serve</code> 指令來服務您的 Angular CLI 應用程式。
+這會編譯您的應用程式，略過不必要的最佳化，啟動一個開發伺服器，並自動重新建置和即時重新載入任何後續變更。
+您可以按 <code>Ctrl+C</code> 來停止伺服器。</p>
+<p><code>ng serve</code> 只執行 <code>angular.json</code> 中所指定的預設專案的 <code>serve</code> 目標的建構器。
+雖然任何建構器都可以在這裡使用，但最常見（也是預設）的建構器是 <code>@angular-devkit/build-angular:dev-server</code>。</p>
+<p>您可以透過檢視該專案的 <code>serve</code> 目標來判斷哪個建構工具正在為特定專案使用。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"my-app"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-comment">// `ng serve` invokes the Architect target named `serve`.</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"serve"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:dev-server"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-comment">/* ... */</span> <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"test"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-comment">/* ... */</span> <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>此頁面討論 <code>@angular-devkit/build-angular:dev-server</code> 的用法和選項。</p>
+
+  <h2 id="">代理到後端伺服器</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 代理到後端伺服器"></a>
+  <p>使用 <a href="https://webpack.js.org/configuration/dev-server/#devserverproxy" target="_blank">代理支援</a> 將特定 URL 轉移至後端伺服器，方法是將檔案傳遞給 <code>--proxy-config</code> 建置選項。
+例如，若要將所有對 <code>http://localhost:4200/api</code> 的呼叫轉移至執行於 <code>http://localhost:3000/api</code> 的伺服器，請執行下列步驟。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>在專案的 <code>src/</code> 資料夾中建立 <code>proxy.conf.json</code> 檔案。</p>
+</li>
+<li><p>將下列內容新增至新的代理檔案：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">   <span class="hljs-attr">"/api"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">     <span class="hljs-attr">"target"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"http://localhost:3000"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">     <span class="hljs-attr">"secure"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span></div><div class="hljs-ln-line">   <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"> <span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div></li>
+<li><p>在 CLI 組態檔案 <code>angular.json</code> 中，將 <code>proxyConfig</code> 選項新增至 <code>serve</code> 目標：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">   <span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">     <span class="hljs-attr">"my-app"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">       <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">         <span class="hljs-attr">"serve"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">           <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:dev-server"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">           <span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">             <span class="hljs-attr">"proxyConfig"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"src/proxy.conf.json"</span></div><div class="hljs-ln-line">           <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">         <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">       <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">     <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">   <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"> <span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div></li>
+<li><p>要使用這個代理組態執行開發伺服器，請呼叫 <code>ng serve</code>。</p>
+</li>
+
+    </ol>
+    <p>編輯代理組態檔案來新增組態選項；以下是一些範例。
+有關所有選項的說明，請參閱 <a href="https://webpack.js.org/configuration/dev-server/#devserverproxy" target="_blank">webpack DevServer 文件</a>。</p>
+<p>NOTE：如果您編輯代理設定檔，您必須重新啟動 <code>ng serve</code> 程序才能讓您的變更生效。</p>
+
+  <h2 id="localhost-"><code>localhost</code> 解析度</h2>
+  <a href="#localhost-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>localhost</code> 解析度"></a>
+  <p>自 Node 版本 17 起，Node 將 <em>不</em> 總是將 <code>http://localhost:&lt;port&gt;</code> 解析為 <code>http://127.0.0.1:&lt;port&gt;</code>，具體取決於每台電腦的配置。</p>
+<p>如果您使用代理程式鎖定 <code>localhost</code> URL 時收到 <code>ECONNREFUSED</code> 錯誤，您可以透過將目標從 <code>http://localhost:&lt;port&gt;</code> 更新為 <code>http://127.0.0.1:&lt;port&gt;</code> 來修正此問題。</p>
+<p>請參閱 <a href="https://github.com/chimurai/http-proxy-middleware#nodejs-17-econnrefused-issue-with-ipv6-and-localhost-705" target="_blank">http-proxy-middleware 文件</a> 以獲取更多資訊。</p>

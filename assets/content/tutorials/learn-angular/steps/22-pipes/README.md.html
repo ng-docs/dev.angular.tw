@@ -1,0 +1,72 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">管線</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/22-pipes/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>管道是函式，用於轉換範本中的資料。一般來說，管道是「純」函式，不會造成副作用。Angular 有許多有用的內建管道，您可以匯入並在您的元件中使用。您也可以建立自訂管道。</p>
+<p>在本次活動中，您將匯入一個管線並在範本中使用它。</p>
+<hr>
+
+<p>若要於範本中使用管線，請將其包含在插補表達式中。請參考以下範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">UpperCasePipe</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">template</span>: <span class="hljs-string">`{{ loudMessage | uppercase }}`</span>,</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">UpperCasePipe</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">    loudMessage = <span class="hljs-string">'we think you are doing great!'</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>現在，輪到您來嘗試了：</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-lowercase-">匯入 <code>LowerCase</code> 管道</h3>
+  <a href="#-lowercase-" class="docs-anchor" tabindex="-1" aria-label="Link to 匯入 <code>LowerCase</code> 管道"></a>
+  
+      <p>首先，透過新增 <code>@angular/common</code> 的 <code>LowerCasePipe</code> 檔案等級匯入，來更新 <code>app.component.ts</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">LowerCasePipe</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">將管線新增至範本匯入</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 將管線新增至範本匯入"></a>
+  
+      <p>接下來，更新 <code>@Component()</code> 宣告裝飾器 <code>imports</code> 以包含對 <code>LowerCasePipe</code> 的參照`</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">LowerCasePipe</span>]</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">將管道新增到範本</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 將管道新增到範本"></a>
+  
+      <p>最後，在 <code>app.component.ts</code> 中更新範本，以包含 <code>lowercase</code> 管道：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">template</span>: <span class="hljs-string">`{{username | lowercase }}`</span></div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p>管道亦可接受參數，這些參數可用於配置其輸出。在下一項活動中了解更多。</p>
+<p><span class="docs-emoji">P.S. 你做得很棒 ⭐️</span></p>

@@ -1,0 +1,21 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">HTML 內容在伺服器端渲染後被更改</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0507.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>當 Angular 偵測到伺服器端渲染 (SSR) 所產生的內容在渲染後被變更時，就會拋出此錯誤。水合的過程仰賴 SSR 後的內容保持不變，其中也包含空白和註解節點。這些空白和註解節點必須保留在 SSR 過程所產生的 HTML 中。在水合指南中了解更多。</p>
+
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>通常在以下情況發生：</p>
+<p>有些 CDN 提供者內建移除 HTML 中的空白和註解節點作為優化的功能。請驗證 CDN 組態中是否有此選項，並將它關閉。
+如果你使用 SSR (作為建置步驟) 所產生的 HTML 的自訂後處理，請確定此程序不會移除空白和註解節點。</p>

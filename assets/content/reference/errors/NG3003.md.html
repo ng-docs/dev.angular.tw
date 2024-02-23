@@ -1,0 +1,62 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">循環匯入偵測</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG3003.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>此元件、指令或管線被此元件參照，編譯器需要新增一個匯入，這將導致匯入迴圈。
+例如，考慮一個 <code>ParentComponent</code> 在其範本中參照 <code>ChildComponent</code> 的場景：</p>
+<div class="docs-code" path="adev/src/content/examples/errors/cyclic-imports/parent.component.ts" header="parent.component.ts">
+    <div class="docs-code-header"><h3>parent.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { ChildComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./child.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-parent'</span>,</div><div class="hljs-ln-line">  imports: [ChildComponent],</div><div class="hljs-ln-line">  template: <span class="hljs-string">'&lt;app-child/&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ParentComponent</span> {}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/errors/cyclic-imports/child.component.ts" header="child.component.ts">
+    <div class="docs-code-header"><h3>child.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">ParentComponent</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'./parent.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-child'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'The child!'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> parent: ParentComponent</span>) {}</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>由於 <code>ChildComponent</code> 在其建構函式中參照 <code>ParentComponent</code>，因此已經從 <code>child.component.ts</code> 匯入到 <code>parent.component.ts</code>。</p>
+<p>HELPFUL：父元件的範本包含 <code>&lt;child&gt;&lt;/child&gt;</code>.
+此範本的產生程式碼因此必須包含對 <code>ChildComponent</code> 類別的參考。
+為了建立此參考，編譯器必須從 <code>parent.component.ts</code> 新增匯入至 <code>child.component.ts</code>，這將導致匯入循環：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">parent.component.ts -&gt; child.component.ts -&gt; parent.component.ts</div></code>
+    </pre>
+  </div>
+  <h2 id="">遠程作用域</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 遠程作用域"></a>
+  <p>如果您使用 NgModules，為了避免新增會產生循環的匯入，會在宣告連結依賴項的元件的 <code>NgModule</code> 類別中新增額外的程式碼。</p>
+<p>這被稱為「遠程作用域」。</p>
+
+  <h2 id="">函式庫</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 函式庫"></a>
+  <p>很遺憾，「遠端範圍」程式碼會產生副作用&mdash;這會阻礙 tree shaking&mdash;且無法在程式庫中使用。
+因此，在使用 <code>&quot;compilationMode&quot;: &quot;partial&quot;</code> 設定來建構程式庫時，任何需要循環匯入的元件都會導致這個 <code>NG3003</code> 編譯器錯誤被提出。</p>
+
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>產生的循環顯示為錯誤訊息的一部分。
+例如：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">The component ChildComponent is used <span class="hljs-keyword">in</span> the template but importing it would create <span class="hljs-selector-tag">a</span> cycle:</div><div class="hljs-ln-line">/parent<span class="hljs-selector-class">.component</span><span class="hljs-selector-class">.ts</span> -&gt; /child<span class="hljs-selector-class">.component</span><span class="hljs-selector-class">.ts</span> -&gt; /parent<span class="hljs-selector-class">.component</span>.ts</div></code>
+    </pre>
+  </div><p>使用這個來識別被引用的元件、管道或指令如何具有對正在編譯的元件的反向依賴。
+以下是一些解決問題的想法：</p>
+
+  <ul class="docs-list">
+    <li>嘗試重新排列您的依賴項以避免循環。
+例如，使用儲存在獨立檔案中的中間介面，可以匯入到兩個依賴檔案中，而不會造成匯入循環。</li>
+<li>將互相參考的類別移至同一個檔案中，以避免它們之間的任何匯入。</li>
+<li>如果匯入的宣告僅用於類型，則將匯入陳述式轉換為僅類型匯入（使用 <code>import type</code> 語法），因為僅類型匯入不會造成循環。</li>
+
+  </ul>
+  

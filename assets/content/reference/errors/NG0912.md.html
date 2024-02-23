@@ -1,0 +1,64 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">元件 ID 產生碰撞</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0912.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>當建立元件時，Angular 會為每個元件產生一個獨特的元件 ID。這是使用 Angular 元件的資訊來產生的，包括但不限於：選擇器、主機繫結數目、類別屬性名稱、檢視和內容查詢。當兩個元件的資訊相同時（通常會共用相同的選擇器），就會發生 ID 產生衝突。</p>
+<p>元件 ID 在 Angular 內部使用：</p>
+
+  <ul class="docs-list">
+    <li>針對樣式封裝的 DOM 節點的額外註解</li>
+<li>在 <a href="guide/hydration">水合</a> 期間，還原 <a href="guide/ssr">伺服器端渲染</a> 後的應用程式狀態。</li>
+
+  </ul>
+  <p>為了避免元件 ID 碰撞可能造成的議題，建議您按照以下說明解決。</p>
+
+  <h2 id="">範例：元件識別碼衝突</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 範例：元件識別碼衝突"></a>
+  <p>html</p>
+<div id="uniqueId">
+  <p>This is a unique ID</p>
+</div>
+
+<div class="uniqueId">
+  <p>This is a class name</p>
+</div>
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'complex-template'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SomeComponent</span> {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'empty-template'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SomeMockedComponent</span> {}</div></code>
+    </pre>
+  </div><p>定義這兩個元件將會觸發 ID 產生衝突，而且在開發期間會顯示警告。</p>
+
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>警告訊息包括 ID 衝突的兩個元件的類別名稱。</p>
+<p>以下列舉的其中一個解決方案可以解決此問題：</p>
+
+    <ol class="docs-ordered-list">
+      <li>變更兩個元件其中一個的選擇器。例如使用無效果的偽類別選擇器，例如 <code>:not()</code> 和不同的標記名稱。</li>
+
+    </ol>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component:not(p)'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'empty-template'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SomeMockedComponent</span> {}</div></code>
+    </pre>
+  </div>
+    <ol class="docs-ordered-list">
+      <li>為其中一個元件新增一個額外的 host 屬性。</li>
+
+    </ol>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'complex-template'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">host</span>: {<span class="hljs-string">'some-binding'</span>: <span class="hljs-string">'some-value'</span>},</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SomeComponent</span> {}</div></code>
+    </pre>
+  </div>

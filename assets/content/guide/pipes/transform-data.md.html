@@ -1,0 +1,78 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">自訂管線以進行新轉換</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/pipes/transform-data.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>建立自訂管道以封裝內建管道未提供的轉換。
+然後，在範本表達式中使用您的自訂管道，與使用內建管道的方式相同—將輸入值轉換為輸出值以供顯示。</p>
+
+  <h2 id="">將類別標記為管線</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 將類別標記為管線"></a>
+  <p>若要將類別標記為管道並提供組態元資料，請將 <code>@Pipe</code> 套用到該類別。</p>
+<p>對應的 <code>name</code> 字串，請使用 UpperCamelCase (類別名稱的一般慣例) 作為 pipe 類別名稱，並使用 camelCase。</p>
+<p>請勿在 <code>name</code> 中使用連字號。</p>
+<p>有關詳細資訊和更多範例，請參閱 <a href="/style-guide#pipe-names" title=Angular 程式碼風格指南中的 Pipe 名稱>Pipe 名稱</a>。</p>
+<p>在範本表達式中使用 <code>name</code>，就像使用內建管線一樣。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pipe</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Pipe</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-string">'greet'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GreetPipe</span> {}</div></code>
+    </pre>
+  </div>
+  <h2 id="-pipetransform-">使用 PipeTransform 介面</h2>
+  <a href="#-pipetransform-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 PipeTransform 介面"></a>
+  <p>在您的自訂管線類別中實作 <a href="/api/core/PipeTransform" title=PipeTransform 的 API 參考><code>PipeTransform</code></a> 介面以執行轉換。</p>
+<p>Angular 會以繫結值作為第一個參數，任何參數以列表形式作為第二個參數來呼叫 <code>transform</code> 方法，並傳回轉換值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pipe</span>, <span class="hljs-title class_">PipeTransform</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Pipe</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-string">'greet'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GreetPipe</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">PipeTransform</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">param1</span>: <span class="hljs-built_in">boolean</span>, <span class="hljs-attr">param2</span>: <span class="hljs-built_in">boolean</span>): <span class="hljs-built_in">string</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello <span class="hljs-subst">${value}</span>`</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">範例：將值以指數方式轉換</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 範例：將值以指數方式轉換"></a>
+  <p>在遊戲中，您可能想實現一個轉換，將值以指數方式提高，以增加英雄的力量。
+例如，如果英雄的分數為 2，則以 10 為指數增強英雄的力量，會產生 1024 的分數（<code>2**10</code>）。
+使用自定義管道進行此轉換。</p>
+<p>以下程式碼範例顯示兩個元件定義：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">檔案</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>exponential-strength.pipe.ts</code></td>
+<td align="left">定義一個自訂管線命名為 <code>exponentialStrength</code>，使用 <code>transform</code> 方法來執行轉換。它為 <code>transform</code> 方法定義一個參數 (<code>exponent</code>) 來接收傳遞給管線的參數。</td>
+</tr>
+<tr>
+<td align="left"><code>power-booster.component.ts</code></td>
+<td align="left">示範如何使用管線，指定一個值 (<code>2</code>) 和指數參數 (<code>10</code>)。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="docs-code-multifile" path="adev/src/content/examples/pipes/src/app/power-booster.component.ts" preview="true">
+    <div class="docs-code" path="adev/src/content/examples/pipes/src/app/exponential-strength.pipe.ts" header="src/app/exponential-strength.pipe.ts">
+    <div class="docs-code-header"><h3>src/app/exponential-strength.pipe.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pipe</span>, <span class="hljs-title class_">PipeTransform</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-comment">/*</span></div><div class="hljs-ln-line"> * Raise the value exponentially</div><div class="hljs-ln-line"> * Takes an exponent argument that defaults to 1.</div><div class="hljs-ln-line"> * Usage:</div><div class="hljs-ln-line"> *   value | exponentialStrength:exponent</div><div class="hljs-ln-line"> * Example:</div><div class="hljs-ln-line"> *   {{ 2 | exponentialStrength:10 }}</div><div class="hljs-ln-line"> *   formats to: 1024</div><div class="hljs-ln-line">*/</div><div class="hljs-ln-line"><span class="hljs-meta">@Pipe</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-string">'exponentialStrength'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ExponentialStrengthPipe</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">PipeTransform</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">number</span>, exponent = <span class="hljs-number">1</span>): <span class="hljs-built_in">number</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">pow</span>(value, exponent);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/pipes/src/app/power-booster.component.ts" header="src/app/power-booster.component.ts">
+    <div class="docs-code-header"><h3>src/app/power-booster.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { ExponentialStrengthPipe } <span class="hljs-keyword">from</span> <span class="hljs-string">'./exponential-strength.pipe'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-power-booster'</span>,</div><div class="hljs-ln-line">  template: `<span class="language-javascript"></span></div><div class="hljs-ln-line">    &lt;h2&gt;<span class="hljs-title class_">Power</span> <span class="hljs-title class_">Booster</span>&lt;/h2&gt;</div><div class="hljs-ln-line">    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Super power boost: {{2 | exponentialStrength: 10}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  imports: [ExponentialStrengthPipe]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PowerBoosterComponent</span> { }</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    </div>

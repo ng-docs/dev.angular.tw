@@ -1,0 +1,280 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">發出 HTTP 請求</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/http/making-requests.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>HttpClient<code>有對應於用於發出要求的不同 HTTP 動詞的方法，用於載入資料和套用伺服器上的突變。每種方法都會傳回一個 [RxJS</code>Observable`](<a href="https://rxjs.dev/guide/observable)，當訂閱時，會傳送要求，然後在伺服器回應時發出結果。" target="_blank">https://rxjs.dev/guide/observable)，當訂閱時，會傳送要求，然後在伺服器回應時發出結果。</a></p>
+<p>備註：由 <code>HttpClient</code> 建立的 <code>Observable</code> 可以訂閱任意次數，並會為每個訂閱建立新的後端要求。</p>
+<p>透過傳遞給 request 方法的選項物件，可以調整請求的各種屬性和回傳的回應類型。</p>
+
+  <h2 id="-json-">擷取 JSON 資料</h2>
+  <a href="#-json-" class="docs-anchor" tabindex="-1" aria-label="Link to 擷取 JSON 資料"></a>
+  <p>從後端擷取資料通常需要使用 <a href="api/common/http/HttpClient#get"><code>HttpClient.get()</code></a> 方法發出 GET 要求。此方法接受兩個參數：要從中擷取的字串端點 URL，以及用於設定要求的<em>選項物件</em>。</p>
+<p>例如，使用 <code>HttpClient.get()</code> 方法從假設的 API 中擷取組態資料：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-property">get</span>&lt;<span class="hljs-title class_">Config</span>&gt;(<span class="hljs-string">'/api/config'</span>).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// process the configuration.</span></div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p>注意指定伺服器回傳資料為 <code>Config</code> 類型的泛型類型引數。此引數為選用，若您省略它，回傳資料類型為 <code>any</code>。</p>
+<p>提示：如果資料具有未知的形狀，那麼 <code>any</code> 的更安全的替代方案是使用 <code>unknown</code> 類型作為回應類型。</p>
+
+    <div class="docs-alert docs-alert-critical">
+    <p><strong>CRITICAL:</strong> 要求方法的泛型類型是對伺服器傳回資料的一種類型 <strong>斷言</strong>。<code>HttpClient</code> 沒有驗證實際傳回的資料是否符合此類型。</p>
+
+    </div>
+    
+  <h2 id="">擷取其他類型的資料</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 擷取其他類型的資料"></a>
+  <p><code>HttpClient</code> 預設假設伺服器會回傳 JSON 資料。當與非 JSON API 互動時，您可以在發出請求時告訴 <code>HttpClient</code> 預期和回傳的回應類型。這是透過 <code>responseType</code> 選項來完成。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th><strong><code>responseType</code> 值</strong></th>
+<th><strong>回傳的回應類型</strong></th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td><code>&#39;json&#39;</code> (預設)</td>
+<td>具有給定一般類型的 JSON 資料</td>
+</tr>
+<tr>
+<td><code>&#39;text&#39;</code></td>
+<td>字串資料</td>
+</tr>
+<tr>
+<td><code>&#39;arraybuffer&#39;</code></td>
+<td>包含原始回應位元組的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer" target="_blank"><code>ArrayBuffer</code></a></td>
+</tr>
+<tr>
+<td><code>&#39;blob&#39;</code></td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob" target="_blank"><code>Blob</code></a> 實例</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>例如，您可以要求 <code>HttpClient</code> 將 <code>.jpeg</code> 圖像的原始位元組下載到 <code>ArrayBuffer</code> 中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-title function_">get</span>(<span class="hljs-string">'/images/dog.jpg'</span>, {<span class="hljs-attr">responseType</span>: <span class="hljs-string">'arraybuffer'</span>}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">buffer</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'The image is '</span> + buffer.<span class="hljs-property">length</span> + <span class="hljs-string">' bytes large'</span>);</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-important">
+      <h3><code>responseType</code> 的字面值</h3>
+      <p>由於 <code>responseType</code> 的值會影響 <code>HttpClient</code> 傳回的類型，它必須具有字面值類型，而不是 <code>string</code> 類型。</p>
+<p>如果傳遞給 request 方法的選項物件為文字物件，這會自動發生，但如果您要將要求選項提取到變數或輔助方法中，您可能需要明確地指定為文字，例如 <code>responseType: &#39;text&#39; as const</code>。</p>
+
+    </div>
+    
+  <h2 id="">改變伺服器狀態</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 改變伺服器狀態"></a>
+  <p>執行變更的伺服器 API 通常需要建立 POST 要求，其中要求主體指定新的狀態或要進行的變更。</p>
+<p><a href="api/common/http/HttpClient#post"><code>HttpClient.post()</code></a> 方法行為類似於 <code>get()</code>，並在選項之前接受額外的 <code>body</code> 參數：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-property">post</span>&lt;<span class="hljs-title class_">Config</span>&gt;(<span class="hljs-string">'/api/config'</span>, newConfig).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Updated config:'</span>, config);</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p>請求的 <code>body</code> 可以提供許多不同類型的值，而 <code>HttpClient</code> 會相應地序列化它們：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th><strong><code>body</code> 類型</strong></th>
+<th><strong>序列化為</strong></th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td>字串</td>
+<td>純文字</td>
+</tr>
+<tr>
+<td>數字、布林值、陣列或一般物件</td>
+<td>JSON</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer" target="_blank"><code>ArrayBuffer</code></a></td>
+<td>緩衝區的原始資料</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob" target="_blank"><code>Blob</code></a></td>
+<td>具有 <code>Blob</code> 內容類型的原始資料</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData" target="_blank"><code>FormData</code></a></td>
+<td><code>multipart/form-data</code> 編碼資料</td>
+</tr>
+<tr>
+<td><a href="api/common/http/HttpParams"><code>HttpParams</code></a> 或 <a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams" target="_blank"><code>URLSearchParams</code></a></td>
+<td><code>application/x-www-form-urlencoded</code> 格式的字串</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>重要：請記得<code>.subscribe()</code> 到變更要求 <code>Observable</code>，以便實際發出要求。</p>
+
+  <h2 id="-url-">設定 URL 參數</h2>
+  <a href="#-url-" class="docs-anchor" tabindex="-1" aria-label="Link to 設定 URL 參數"></a>
+  <p>使用 <code>params</code> 選項指定應包含在要求 URL 中的要求參數。</p>
+<p>傳遞一個物件字面值是最簡單的 URL 參數設定方式：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-title function_">get</span>(<span class="hljs-string">'/api/config'</span>, {</div><div class="hljs-ln-line">  <span class="hljs-attr">params</span>: {<span class="hljs-attr">filter</span>: <span class="hljs-string">'all'</span>},</div><div class="hljs-ln-line">}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p>或者，如果您需要更精確地控制參數的建構或序列化，請傳遞 <code>HttpParams</code> 的執行個體。</p>
+
+    <div class="docs-alert docs-alert-important">
+    <p><strong>IMPORTANT:</strong> <code>HttpParams</code> 的實例是 <em>不可變</em> 的，且無法直接變更。相反地，突變方法（例如 <code>append()</code>）會回傳一個已套用突變的 <code>HttpParams</code> 新實例。</p>
+
+    </div>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> baseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpParams</span>().<span class="hljs-title function_">set</span>(<span class="hljs-string">'filter'</span>, <span class="hljs-string">'all'</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">http.<span class="hljs-title function_">get</span>(<span class="hljs-string">'/api/config'</span>, {</div><div class="hljs-ln-line">  <span class="hljs-attr">params</span>: baseParams.<span class="hljs-title function_">set</span>(<span class="hljs-string">'details'</span>, <span class="hljs-string">'enabled'</span>),</div><div class="hljs-ln-line">}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p>您可以使用決定 <code>HttpClient</code> 將如何將參數編碼到 URL 的自訂 <code>HttpParameterCodec</code> 來實例化 <code>HttpParams</code>。</p>
+
+  <h2 id="">設定請求標頭</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 設定請求標頭"></a>
+  <p>使用 <code>headers</code> 選項指定應包含在請求中的請求標頭。</p>
+<p>透過物件文字傳遞是最簡單的設定要求標頭方式：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-title function_">get</span>(<span class="hljs-string">'/api/config'</span>, {</div><div class="hljs-ln-line">  <span class="hljs-attr">headers</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">'X-Debug-Level'</span>: <span class="hljs-string">'verbose'</span>,</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p>或者，如果您需要更多控制權來建構標頭，請傳遞 <code>HttpHeaders</code> 的執行個體</p>
+<p>重要提示：<code>HttpHeaders</code> 的實例是 <em>不可變</em> 的，且無法直接變更。相反地，異動方法（例如 <code>append()</code>）會傳回一個已套用異動的新 <code>HttpHeaders</code> 實例。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> baseHeaders = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpHeaders</span>().<span class="hljs-title function_">set</span>(<span class="hljs-string">'X-Debug-Level'</span>, <span class="hljs-string">'minimal'</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">http.<span class="hljs-property">get</span>&lt;<span class="hljs-title class_">Config</span>&gt;(<span class="hljs-string">'/api/config'</span>, {</div><div class="hljs-ln-line">  <span class="hljs-attr">params</span>: baseParams.<span class="hljs-title function_">set</span>(<span class="hljs-string">'X-Debug-Level'</span>, <span class="hljs-string">'verbose'</span>),</div><div class="hljs-ln-line">}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+  <h2 id="">與伺服器回應事件互動</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 與伺服器回應事件互動"></a>
+  <p>為了方便，<code>HttpClient</code> 預設會傳回伺服器傳回資料的 <code>Observable</code> (回應內文)。偶爾會想要檢查實際的回應，例如擷取特定的回應標頭。</p>
+<p>如需存取完整回應，請將 <code>observe</code> 選項設為 <code>&#39;response&#39;</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-property">get</span>&lt;<span class="hljs-title class_">Config</span>&gt;(<span class="hljs-string">'/api/config'</span>, {<span class="hljs-attr">observe</span>: <span class="hljs-string">'response'</span>}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Response status:'</span>, res.<span class="hljs-property">status</span>);</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Body:'</span>, res.<span class="hljs-property">body</span>);</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-important">
+      <h3><code>observe</code> 的字面值</h3>
+      <p>因為 <code>observe</code> 的值會影響 <code>HttpClient</code> 回傳的類型，所以它必須是字面類型而非 <code>string</code> 類型。</p>
+<p>如果傳遞給請求方法的選項物件是文字物件，則會自動執行此動作，但如果您將請求選項萃取到變數或輔助方法中，您可能需要明確地將它指定為文字，例如 <code>observe: &#39;response&#39; as const</code>。</p>
+
+    </div>
+    
+  <h2 id="">接收原始進度事件</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 接收原始進度事件"></a>
+  <p>除了回應主體或回應物件之外，<code>HttpClient</code> 也能傳回對應於請求生命週期中的特定時刻的原始 <em>事件</em> 串流。這些事件包括請求發送時、回應標頭傳回時，以及主體完成時。這些事件也可以包含 <em>進度事件</em>，以報告大型請求或回應主體的上傳和下載狀態。</p>
+<p>進度事件在預設情況下已停用（因為它們有性能成本），但可以使用 <code>reportProgress</code> 選項啟用它們。</p>
+<p>注：<code>HttpClient</code> 的可選 <code>fetch</code> 實作不會報告 <em>上傳</em> 進度事件。</p>
+<p>若要觀察事件串流，請將 <code>observe</code> 選項設定為 <code>&#39;events&#39;</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-title function_">post</span>(<span class="hljs-string">'/api/upload'</span>, myData, {</div><div class="hljs-ln-line">  <span class="hljs-attr">reportProgress</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">observe</span>: <span class="hljs-string">'events'</span>,</div><div class="hljs-ln-line">}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">switch</span> (event.<span class="hljs-property">type</span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">case</span> <span class="hljs-title class_">HttpEventType</span>.<span class="hljs-property">UploadProgress</span>:</div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Uploaded '</span> + event.<span class="hljs-property">loaded</span> + <span class="hljs-string">' out of '</span> + event.<span class="hljs-property">total</span> + <span class="hljs-string">' bytes'</span>);</div><div class="hljs-ln-line">      <span class="hljs-keyword">break</span>;</div><div class="hljs-ln-line">    <span class="hljs-keyword">case</span> <span class="hljs-title class_">HttpEventType</span>.<span class="hljs-property">Response</span>:</div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Finished uploading!'</span>);</div><div class="hljs-ln-line">      <span class="hljs-keyword">break</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-important">
+      <h3><code>observe</code> 的字面值</h3>
+      <p>因為 <code>observe</code> 的值會影響 <code>HttpClient</code> 回傳的類型，所以它必須是字面類型而非 <code>string</code> 類型。</p>
+<p>如果傳遞給 request 方法的選項物件是字面值物件，這會自動發生，但如果您將要求選項萃取到變數或輔助方法中，您可能需要明確地指定它為字面值，例如 <code>observe: &#39;events&#39; as const</code>。</p>
+
+    </div>
+    <p>事件串流中所報告的每個 <code>HttpEvent</code> 都有 <code>type</code>，用來區分事件代表的內容：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th><strong><code>type</code> 值</strong></th>
+<th><strong>事件含義</strong></th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td><code>HttpEventType.Sent</code></td>
+<td>請求已派發到伺服器</td>
+</tr>
+<tr>
+<td><code>HttpEventType.UploadProgress</code></td>
+<td><code>HttpUploadProgressEvent</code> 報告上傳請求主體的進度</td>
+</tr>
+<tr>
+<td><code>HttpEventType.ResponseHeader</code></td>
+<td>已收到回應的標頭，包括狀態和標頭</td>
+</tr>
+<tr>
+<td><code>HttpEventType.DownloadProgress</code></td>
+<td><code>HttpDownloadProgressEvent</code> 報告下載回應主體的進度</td>
+</tr>
+<tr>
+<td><code>HttpEventType.Response</code></td>
+<td>已收到整個回應，包括回應主體</td>
+</tr>
+<tr>
+<td><code>HttpEventType.User</code></td>
+<td>Http 攔截器的自訂事件。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">處理請求失敗</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 處理請求失敗"></a>
+  <p>HTTP 要求有兩種可能失敗的方式：</p>
+
+  <ul class="docs-list">
+    <li>網路或連線錯誤可能導致請求無法到達後端伺服器。</li>
+<li>後端可以收到請求，但無法處理它，並返回錯誤回應。</li>
+
+  </ul>
+  <p><code>HttpClient</code> 會在 <code>HttpErrorResponse</code> 中擷取兩種錯誤，並透過 <code>Observable</code> 的錯誤頻道回傳。網路錯誤的 <code>status</code> 程式碼為 <code>0</code>，而 <code>error</code> 為 <a href="https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent" target="_blank"><code>ProgressEvent</code></a> 的執行個體。後端錯誤會回傳後端返回的失敗 <code>status</code> 程式碼，而錯誤回應則為 <code>error</code>。檢查回應以識別錯誤原因和處理錯誤的適當動作。</p>
+<p><a href="https://rxjs.dev/" target="_blank">RxJS 函式庫</a> 提供了幾個可用於錯誤處理的運算子。</p>
+<p>您可以使用 <code>catchError</code> 運算子將錯誤回應轉換為 UI 的值。此值可以告訴 UI 顯示錯誤頁面或值，並在必要時擷取錯誤原因。</p>
+<p>有時暫時性錯誤，例如網路中斷，會導致要求意外失敗，而只需重試要求即可讓它成功。RxJS 提供多個 <em>retry</em> 運算子，可在特定條件下自動重新訂閱失敗的 <code>Observable</code>。例如，<code>retry()</code> 運算子會自動嘗試重新訂閱指定次數。</p>
+
+  <h2 id="http-observable">Http <code>Observable</code></h2>
+  <a href="#http-observable" class="docs-anchor" tabindex="-1" aria-label="Link to Http <code>Observable</code>"></a>
+  
+  <h2 id="http-observables">Http <code>Observable</code>s</h2>
+  <a href="#http-observables" class="docs-anchor" tabindex="-1" aria-label="Link to Http <code>Observable</code>s"></a>
+  <p><code>HttpClient</code> 上的每個請求方法都會建構並傳回請求回應類型的一個 <code>Observable</code>。在使用 <code>HttpClient</code> 時，了解這些 <code>Observable</code> 的工作方式非常重要。</p>
+<p><code>HttpClient</code> 產生 RxJS 所稱的「冷」<code>Observable</code>，表示在 <code>Observable</code> 訂閱之前不會發生實際的請求。只有在那個時候，請求才會實際發送至伺服器。多次訂閱同一個 <code>Observable</code> 將會觸發多個後端請求。每個訂閱都是獨立的。</p>
+<p>提示：您可以將 <code>HttpClient</code> <code>Observable</code> 視為實際伺服器請求的_藍圖_。</p>
+<p>一旦訂閱，取消訂閱將中止正在進行的請求。這非常有用，如果 <code>Observable</code> 是透過 <code>async</code> 管道訂閱的，因為如果使用者導覽離開目前的頁面，它會自動取消請求。此外，如果您將 <code>Observable</code> 與 RxJS 組合器一起使用，例如 <code>switchMap</code>，這個取消將會清除任何過期的請求。</p>
+<p>一旦回應返回，<code>HttpClient</code> 的 <code>Observable</code> 通常會完成 (儘管攔截器可能會影響此行為)。</p>
+<p>由於自動完成，<code>HttpClient</code> 訂閱通常不會有記憶體洩漏的風險。但是，與任何非同步操作一樣，我們強烈建議您在使用它們的元件毀損時清除訂閱，否則訂閱回呼可能會執行並在嘗試與毀損的元件互動時遇到錯誤。</p>
+<p>TIP：使用 <code>async</code> 管道或 <code>toSignal</code> 運算來訂閱 <code>Observable</code> 可確保訂閱正確地被處置。</p>
+
+  <h2 id="">最佳實務範例</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 最佳實務範例"></a>
+  <p>雖然 <code>HttpClient</code> 可以注入並直接從元件使用，但我們通常建議您建立可重複使用、可注入的服務，以隔離和封裝資料存取邏輯。例如，此 <code>UserService</code> 封裝了根據其 ID 要求使用者資料的邏輯：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({<span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> http: HttpClient</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">getUser</span>(<span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span>): <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-title class_">User</span>&gt; {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">http</span>.<span class="hljs-property">get</span>&lt;<span class="hljs-title class_">User</span>&gt;(<span class="hljs-string">`/api/user/<span class="hljs-subst">${id}</span>`</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>在元件內，您可以結合 <code>NgIf</code> 與 <code>async</code> 管道，來在資料載入完成之後才呈現 UI：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;ng-container *ngIf="user$ | async as user"&gt;</div><div class="hljs-ln-line">      &lt;p&gt;Name: {{ user.name }}&lt;/p&gt;</div><div class="hljs-ln-line">      &lt;p&gt;Biography: {{ user.biography }}&lt;/p&gt;</div><div class="hljs-ln-line">    &lt;/ng-container&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserProfileComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() userId!: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  user$!: <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-title class_">User</span>&gt;;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> userService: UserService</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">ngOnInit</span>(): <span class="hljs-built_in">void</span> {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">user$</span> = userService.<span class="hljs-title function_">getUser</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">userId</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

@@ -1,0 +1,48 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">無效的香蕉盒</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/extended-diagnostics/NG8101.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>此診斷檢測 <a href="guide/templates/two-way-binding">雙向繫結</a> 的「banana-in-box」語法反向。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">user-viewer</span> ([<span class="hljs-attr">user</span>])=<span class="hljs-string">"loggedInUser"</span> /&gt;</span></div></code>
+    </pre>
+  </div>
+  <h2 id="">有什麼問題？</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 有什麼問題？"></a>
+  <p>就其本身而言，<code>([var])</code> 實際上是一個名稱為 <code>[var]</code> 的 <a href="guide/templates/event-binding">事件繫結</a>。
+作者可能打算將這作為一個雙向繫結到一個名為 <code>var</code> 的變數，但依據所寫的內容，此繫結沒有任何效果。</p>
+
+  <h2 id="">我該怎麼做？</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 我該怎麼做？"></a>
+  <p>修正錯別字。
+顧名思義，香蕉 <code>(</code> 應放在盒子 <code>[]</code> <em>裡面</em>。
+在此情況下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">user-viewer</span> [(<span class="hljs-attr">user</span>)]=<span class="hljs-string">"loggedInUser"</span> /&gt;</span></div></code>
+    </pre>
+  </div>
+  <h2 id="">組態需求</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 組態需求"></a>
+  <p>必須啟用 <a href="tools/cli/template-typecheck#strict-mode"><code>strictTemplates</code></a> 才能發出任何擴充診斷。
+<code>invalidBananaInBox</code> 除了 <code>strictTemplates</code> 之外沒有其他額外需求。</p>
+
+  <h2 id="">如果我無法避免這件事怎麼辦？</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 如果我無法避免這件事怎麼辦？"></a>
+  <p>這個診斷可以透過編輯專案的 <code>tsconfig.json</code> 檔案停用：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"angularCompilerOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"extendedDiagnostics"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"checks"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"invalidBananaInBox"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"suppress"</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>參閱 <a href="extended-diagnostics#configuration">進階診斷設定</a> 以取得更多資訊。</p>

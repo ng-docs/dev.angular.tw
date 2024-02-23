@@ -1,0 +1,32 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>NgZoneOptions</h1><div class="docs-api-item-label" data-mode="full" data-type="interface">interface</div></div></div><p class="docs-reference-description"><p>Used to configure event and run coalescing with <code>provideZoneChangeDetection</code>.</p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/core/provideZoneChangeDetection">provideZoneChangeDetection</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">interface</span> <span class="hljs-title class_">NgZoneOptions</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="eventCoalescing">  eventCoalescing?: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="runCoalescing">  runCoalescing?: <span class="hljs-built_in">boolean</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="eventCoalescing" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>eventCoalescing</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Optionally specify coalescing event change detections or not.
+Consider the following case.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">&quot;doSomething()&quot;</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">&quot;doSomethingElse()&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p>When button is clicked, because of the event bubbling, both
+event handlers will be called and 2 change detections will be
+triggered. We can coalesce such kind of events to only trigger
+change detection only once.</p>
+<p>By default, this option will be false. So the events will not be
+coalesced and the change detection will be triggered multiple times.
+And if this option be set to true, the change detection will be
+triggered async by scheduling a animation frame. So in the case above,
+the change detection will only be triggered once.</p></div></div></div></div><div id="runCoalescing" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>runCoalescing</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Optionally specify if <code>NgZone#run()</code> method invocations should be coalesced
+into a single change detection.</p>
+<p>Consider the following case.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">for (let i <span class="hljs-operator">=</span> <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; 10; i ++) {</span></span><span class="hljs-ln-line">  ngZone.run(() <span class="hljs-operator">=</span>&gt; {</span><span class="hljs-ln-line">    // do something</span><span class="hljs-ln-line">  })<span class="hljs-comment">;</span></span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p>This case triggers the change detection multiple times.
+With ngZoneRunCoalescing options, all change detections in an event loop trigger only once.
+In addition, the change detection executes in requestAnimation.</p></div></div></div></div></div></div></div>

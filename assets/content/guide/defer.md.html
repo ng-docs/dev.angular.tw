@@ -1,0 +1,197 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">可延遲檢視</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/defer.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+  <h2 id="">概述</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 概述"></a>
+  <p>延遲檢視可於元件範本中使用，以延遲載入該範本內的選取相依性。這些相依性包含元件、指令和管道，以及任何關聯的 CSS。如要使用此功能，您可以宣告性地將範本的區段包覆在 <code>@defer</code> 區塊中，並指定載入條件。</p>
+<p>可延遲檢視支援一系列 <a href="guide/defer#triggers">觸發器</a>、<a href="guide/defer#prefetching">預先擷取</a>，以及多個用於 <a href="guide/defer#placeholder">預留位置</a>、<a href="guide/defer#loading">載入</a> 和 <a href="guide/defer#error">錯誤</a> 狀態管理的子區塊。您也可以使用 <a href="guide/defer#when"><code>when</code></a> 和 <a href="guide/defer#prefetching"><code>prefetch when</code></a> 建立自訂條件。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">large-component</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="-deferrable-views">為什麼要使用 Deferrable Views?</h2>
+  <a href="#-deferrable-views" class="docs-anchor" tabindex="-1" aria-label="Link to 為什麼要使用 Deferrable Views?"></a>
+  <p>可延遲檢視，又稱為 <code>@defer</code> 區塊，是一種強大的工具，可用於減少應用程式的初始組合大小或延遲可能永遠不會載入到較晚時間的負載元件。這應會導致更快速的初始載入和改善您的核心網路生命週期 (CWV) 結果。延遲某些元件到稍後時間應特別改善最大內容繪製 (LCP) 和首次位元組時間 (TTFB)。</p>
+<p>注意：強烈建議任何可能會在載入相依項後導致版面變動的延遲載入元件都放在摺疊下方或其他使用者尚未看到的地方。</p>
+
+  <h2 id="">哪些依賴項是可延遲載入的？</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 哪些依賴項是可延遲載入的？"></a>
+  <p>要讓 <code>@defer</code> 區塊內的相依性被遞延，它們需要符合兩個條件：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>它們必須是獨立的。非獨立的依賴項無法遞延，即使在 <code>@defer</code> 區塊中，仍會急切載入。</p>
+</li>
+<li><p>它們不能在 <code>@defer</code> 區塊外，直接從同一個檔案被參照；這包括 ViewChild 查詢。</p>
+</li>
+
+    </ol>
+    <p>在 defer 區塊中使用的元件、指令和管道的遞移性依賴項可以是獨立的或基於 NgModule，並且仍會被延遲。</p>
+
+  <h2 id="">區塊</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 區塊"></a>
+  <p><code>@defer</code> 區塊有多個子區塊，讓您能夠優雅地處理延遲載入過程中的不同階段。</p>
+
+  <h3 id="defer"><code>@defer</code></h3>
+  <a href="#defer" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@defer</code>"></a>
+  <p>主 <code>@defer</code> 區塊的內容是延遲載入的內容區段。它不會一開始就呈現，並且所有內容將在指定的 <a href="guide/defer#triggers">觸發器</a> 或 <code>when</code> 條件符合且已擷取相依項之後才會顯示。預設情況下，當瀏覽器狀態變為 <a href="guide/defer#on-idle">閒置</a> 時，會觸發 <code>@defer</code> 區塊。</p>
+
+  <h3 id="placeholder"><code>@placeholder</code></h3>
+  <a href="#placeholder" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@placeholder</code>"></a>
+  <p>預設情況下，defer 區塊在觸發前不會呈現任何內容。<code>@placeholder</code> 是個選擇性區塊，用於宣告在 defer 區塊觸發前要顯示的內容。這個 placeholder 內容會在載入完成後由主要內容取代。您可以在 placeholder 區段中使用任何內容，包括純 HTML、元件、指令和管道；但請記住，placeholder 區塊的相依項會優先載入。</p>
+<p>注意：為了獲得最佳使用者體驗，您應該總是指定一個 <code>@placeholder</code> 區塊。</p>
+<p><code>@placeholder</code> 區塊接受一個選用參數，以指定此位置保留項應顯示的「最短」時間。此「最短」參數以毫秒數 (ms) 或秒數 (s) 為時間增量來指定。此參數存在是為了防止在快速擷取延遲的依存項時，位置保留項內容快速閃爍。<code>@placeholder</code> 區塊的「最短」計時器在完成此 <code>@placeholder</code> 區塊的初始呈現後開始。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">large-component</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder (minimum 500ms) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Placeholder content<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>注意：某些觸發器可能需要 <code>@placeholder</code> 或 <a href="guide/templates/reference-variables">範本參考變數</a> 才能運作。請參閱 <a href="guide/defer#triggers">觸發器</a> 部分以取得更多詳細資訊。</p>
+
+  <h3 id="loading"><code>@loading</code>`</h3>
+  <a href="#loading" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@loading</code>`"></a>
+  <p><code>@loading</code> 區塊是一個可選區塊，允許您宣告在任何延遲依賴項載入期間要顯示的內容。例如，您可以顯示一個載入指示器。類似於 <code>@placeholder</code>，<code>@loading</code> 區塊的依賴項會優先載入。</p>
+<p><code>@loading</code> 區塊接受兩個選用參數來指定這個預留位置應顯示的「最小」時間量，以及在開始載入後，等候多長時間才顯示載入範本。<code>minimum</code> 和 <code>after</code> 參數以毫秒 (ms) 或秒 (s) 為時間增量指定。就像 <code>@placeholder</code> 一樣，這些參數的存在是為了防止在快速擷取延遲的相依項時，內容快速閃爍。<code>@loading</code> 區塊的 <code>minimum</code> 和 <code>after</code> 計時器都在觸發載入後立即開始。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">large-component</span> /&gt;</span></div><div class="hljs-ln-line">} @loading (after 100ms; minimum 1s) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"loading..."</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"loading.gif"</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="error"><code>@error</code></h3>
+  <a href="#error" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@error</code>"></a>
+  <p>@error<code>區塊允許您宣告在延遲載入失敗時要顯示的內容。類似於</code>@placeholder<code>和</code>@loading<code>，</code>@error<code> 區塊的相依項會優先載入。</code>@error` 區塊是選用的。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @error {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Failed to load the calendar<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="triggers">Triggers</h2>
+  <a href="#triggers" class="docs-anchor" tabindex="-1" aria-label="Link to Triggers"></a>
+  <p>當觸發 <code>@defer</code> 區塊時，它會使用延遲載入的內容取代預留位置內容。有兩個選項可配置此交換觸發時機：<code>on</code> 和 <code>when</code>。</p>
+<p><code>&lt;a id=&quot;on&quot;&gt;&lt;/a&gt;</code>
+<code>on</code> 使用下列可用觸發器清單中的觸發器來指定觸發條件。範例包括互動或視窗。</p>
+<p>可以同時定義多個事件觸發器。例如：<code>on interaction; on timer(5s)</code> 表示當使用者與佔位元件互動或經過 5 秒後，defer 區塊就會觸發。</p>
+<p>備註：多個 <code>on</code> 觸發器始終為 OR 條件。類似地，<code>on</code> 與 <code>when</code> 條件混合使用也是 OR 條件。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on viewport; on timer(5s)) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"placeholder.png"</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><a id="when"></a>
+<code>when</code> 指定一個條件，作為回傳布林值的表達式。當此表達式變為真時，就會以延遲載入的內容替換 placeholder（如果需要擷取相依性，這可能會是一個非同步操作）。</p>
+<p>註解：如果 <code>when</code> 條件又切換回 <code>false</code>，則 defer 區塊不會還原回 placeholder。這個交換是單次操作。如果區塊內的內容應該有條件地呈現，可以在區塊本身內使用 <code>if</code> 條件。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (when cond) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>您也可以在一個語句中同時使用 <code>when</code> 和 <code>on</code>，如果任一條件符合，交換就會觸發。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on viewport; when cond) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"placeholder.png"</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="on-idle">on idle</h3>
+  <a href="#on-idle" class="docs-anchor" tabindex="-1" aria-label="Link to on idle"></a>
+  <p><code>idle</code> 將在瀏覽器達到閒置狀態後觸發延遲載入（在後台使用 <code>requestIdleCallback</code> API 偵測）。這是 defer 區塊的預設行為。</p>
+
+  <h3 id="">在視窗上</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 在視窗上"></a>
+  <p><code>viewport</code> 會在指定內容使用 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API" target="_blank"><code>IntersectionObserver</code> API</a> 進入視窗時觸發延遲區塊。這可以是預留位置內容或元素參考。</p>
+<p>預設情況下，只要是單一根元素節點，預留位置就會作為觀察視窗進入的元素。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on viewport) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Calendar placeholder<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>或者，您可以與 <code>@defer</code> 區塊在同一個範本中，指定一個 <a href="guide/templates/reference-variables">範本參考變數</a> 作為被監控進入視窗的元素。此變數會作為視窗觸發器上的參數傳入。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> #<span class="hljs-attr">greeting</span>&gt;</span>Hello!<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@defer (on viewport(greeting)) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">greetings-cmp</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="on-interaction">on interaction</h3>
+  <a href="#on-interaction" class="docs-anchor" tabindex="-1" aria-label="Link to on interaction"></a>
+  <p><code>interaction</code> 將在使用者透過 <code>click</code> 或 <code>keydown</code> 事件與指定元素互動時觸發延遲區塊。</p>
+<p>預設情況下，只要替位元素是單一根元素節點，它就會作為互動元素。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on interaction) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Calendar placeholder<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>或者，您可以指定 <a href="guide/templates/reference-variables">範本參照變數</a> 作為觸發互動的元素。此變數在互動觸發器上傳入為參數。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> #<span class="hljs-attr">greeting</span>&gt;</span>Hello!<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@defer (on interaction(greeting)) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Calendar placeholder<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="">懸停時</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 懸停時"></a>
+  <p>當滑鼠懸停在觸發區域時，<code>hover</code> 會觸發延遲載入。用於此目的的事件為 <code>mouseenter</code> 和 <code>focusin</code>。</p>
+<p>預設情況下，只要替位符是單一根元素節點，它就會充當滑鼠懸停元素。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on hover) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Calendar placeholder<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>或者，您可以指定一個 <a href="guide/templates/reference-variables">範本參考變數</a> 作為滑鼠暫留元素。此變數會在滑鼠暫留觸發器上傳入參數。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> #<span class="hljs-attr">greeting</span>&gt;</span>Hello!<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@defer (on hover(greeting)) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Calendar placeholder<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="on-immediate">on immediate</h3>
+  <a href="#on-immediate" class="docs-anchor" tabindex="-1" aria-label="Link to on immediate"></a>
+  <p><code>immediate</code> 會立即觸發延遲載入，表示一旦用戶端完成呈現，延遲區塊就會立即開始擷取。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on immediate) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Calendar placeholder<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="">定時</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 定時"></a>
+  <p><code>timer(x)</code> 會在指定時間後觸發。時間是必需的，並且可以用 <code>ms</code> 或 <code>s</code> 指定。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on timer(500ms)) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">預先擷取</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 預先擷取"></a>
+  <p><code>@defer</code> 允許指定預先擷取相依項的觸發條件。您可以使用特殊的 <code>prefetch</code> 關鍵字。<code>prefetch</code> 語法與主要延遲條件類似，並接受 <code>when</code> 和/或 <code>on</code> 來宣告觸發器。</p>
+<p>在這種情況下，<code>when</code> 和 <code>on</code> 與 defer 控制關聯，用於控制何時要呈現，而 <code>prefetch when</code> 和 <code>prefetch on</code> 則是用來控制何時要擷取資源。這可以支援更進階的行為，例如讓您可以在使用者實際看到或與 defer 區塊互動之前就開始預先擷取資源，但可能會在不久後與之互動，讓資源更快可用。</p>
+<p>在下面的範例中，當瀏覽器閒置時預先擷取會開始，而且區塊的內容會在互動時呈現。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on interaction; prefetch on idle) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"placeholder.png"</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">測試</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 測試"></a>
+  <p>Angular 提供 TestBed API 以簡化測試 <code>@defer</code> 區塊和在測試期間觸發不同狀態的流程。預設情況下，測試中的 <code>@defer</code> 區塊會像 defer 區塊在真實應用程式中的行為一樣播放。如果您想要手動逐步執行狀態，您可以在 TestBed 配置中將 defer 區塊行為切換為「手動」。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">it</span>(<span class="hljs-string">'should render a defer block in different states'</span>, <span class="hljs-keyword">async</span> () =&gt; {</div><div class="hljs-ln-line">  <span class="hljs-comment">// configures the defer block behavior to start in "paused" state for manual control.</span></div><div class="hljs-ln-line">  <span class="hljs-title class_">TestBed</span>.<span class="hljs-title function_">configureTestingModule</span>({<span class="hljs-attr">deferBlockBehavior</span>: <span class="hljs-title class_">DeferBlockBehavior</span>.<span class="hljs-property">Manual</span>});</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">    <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">    <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">      @defer {</div><div class="hljs-ln-line">        &lt;large-component /&gt;</div><div class="hljs-ln-line">      } @placeholder {</div><div class="hljs-ln-line">        Placeholder</div><div class="hljs-ln-line">      } @loading {</div><div class="hljs-ln-line">        Loading...</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    `</div><div class="hljs-ln-line">  })</div><div class="hljs-ln-line">  <span class="hljs-keyword">class</span> <span class="hljs-title class_">ComponentA</span> {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// Create component fixture.</span></div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> componentFixture = <span class="hljs-title class_">TestBed</span>.<span class="hljs-title function_">createComponent</span>(<span class="hljs-title class_">ComponentA</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// Retrieve the list of all defer block fixtures and get the first block.</span></div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> deferBlockFixture = (<span class="hljs-keyword">await</span> componentFixture.<span class="hljs-title function_">getDeferBlocks</span>())[<span class="hljs-number">0</span>];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// Renders placeholder state by default.</span></div><div class="hljs-ln-line">  <span class="hljs-title function_">expect</span>(componentFixture.<span class="hljs-property">nativeElement</span>.<span class="hljs-property">innerHTML</span>).<span class="hljs-title function_">toContain</span>(<span class="hljs-string">'Placeholder'</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// Render loading state and verify rendered output.</span></div><div class="hljs-ln-line">  <span class="hljs-keyword">await</span> deferBlockFixture.<span class="hljs-title function_">render</span>(<span class="hljs-title class_">DeferBlockState</span>.<span class="hljs-property">Loading</span>);</div><div class="hljs-ln-line">  <span class="hljs-title function_">expect</span>(componentFixture.<span class="hljs-property">nativeElement</span>.<span class="hljs-property">innerHTML</span>).<span class="hljs-title function_">toContain</span>(<span class="hljs-string">'Loading'</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// Render final state and verify the output.</span></div><div class="hljs-ln-line">  <span class="hljs-keyword">await</span> deferBlockFixture.<span class="hljs-title function_">render</span>(<span class="hljs-title class_">DeferBlockState</span>.<span class="hljs-property">Complete</span>);</div><div class="hljs-ln-line">  <span class="hljs-title function_">expect</span>(componentFixture.<span class="hljs-property">nativeElement</span>.<span class="hljs-property">innerHTML</span>).<span class="hljs-title function_">toContain</span>(<span class="hljs-string">'large works!'</span>);</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+  <h2 id="-ssr--ssg-">伺服器端渲染 (SSR) 和靜態網站產生 (SSG) 的行為</h2>
+  <a href="#-ssr--ssg-" class="docs-anchor" tabindex="-1" aria-label="Link to 伺服器端渲染 (SSR) 和靜態網站產生 (SSG) 的行為"></a>
+  <p>當在伺服器上呈現應用程式（使用 SSR 或 SSG），遞延區塊總是會呈現其 <code>@placeholder</code>（或如果沒有指定 placeholder，則不會呈現任何內容）。觸發器在伺服器上會被忽略。</p>
+
+  <h2 id="-ngmodule-">與 <code>NgModule</code> 的行為</h2>
+  <a href="#-ngmodule-" class="docs-anchor" tabindex="-1" aria-label="Link to 與 <code>NgModule</code> 的行為"></a>
+  <p>@defer<code>區塊可以使用在獨立和基於 NgModule 的元件、指令和管道中。您可以在</code>@defer`區塊中使用獨立和基於 NgModule 的相依性，但是<strong>只有獨立元件、指令和管道可以遞延</strong>。基於 NgModule 的相依性會包含在急切載入的套件中。</p>
+
+  <h2 id="-defer-">嵌套 <code>@defer</code> 區塊和避免串聯載入</h2>
+  <a href="#-defer-" class="docs-anchor" tabindex="-1" aria-label="Link to 嵌套 <code>@defer</code> 區塊和避免串聯載入"></a>
+  <p>在存在多個嵌套 <code>@defer</code> 區塊的情況下，可能會造成級聯要求。一個範例是具有立即觸發器的 <code>@defer</code> 區塊，具有另一個立即觸發器的嵌套 <code>@defer</code> 區塊。當您具有嵌套 <code>@defer</code> 區塊時，請確認內部區塊具有不同的條件集合，以便它們不會在同一時間觸發，造成級聯要求。</p>
+
+  <h2 id="">避免版面位移</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 避免版面位移"></a>
+  <p>不要在初始載入時延遲會在使用者視窗中顯示的元件，這是推薦的最佳實務。這會導致累積佈局偏移 (CLS) 增加，進而對核心網路生命週期指標產生負面影響。如果您選擇在這個區域延遲元件，最好避免會在頁面初始渲染期間載入內容的「立即」、「計時器」、「視窗」和自訂「何時」條件。</p>

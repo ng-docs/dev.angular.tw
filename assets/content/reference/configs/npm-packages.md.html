@@ -1,0 +1,105 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">工作區 npm 相依性</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/configs/npm-packages.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>Angular Framework、Angular CLI 和 Angular 應用程式使用的元件都打包為 <a href="https://docs.npmjs.com/getting-started/what-is-npm" title=什麼是 npm？ target="_blank">npm 套件</a>，並使用 <a href="https://docs.npmjs.com" target="_blank">npm 登錄</a> 分發。</p>
+<p>您可以使用 <a href="https://docs.npmjs.com/cli/install" target="_blank">npm CLI 客戶端</a> 下載並安裝這些 npm 套件。
+預設情況下，Angular CLI 使用 npm 客戶端。</p>
+<p>HELPFUL：有關必備版本以及 <code>Node.js</code> 和 <code>npm</code> 的安裝資訊，請參閱 <a href="tools/cli/setup-local" title=設定本機開發環境>本機環境設定</a>。</p>
+<p>如果您已經在機器上使用其他版本的 Node.js 和 npm 執行專案，請考慮使用 <a href="https://github.com/creationix/nvm" target="_blank">nvm</a> 來管理多個版本的 Node.js 和 npm。</p>
+
+  <h2 id="packagejson"><code>package.json</code></h2>
+  <a href="#packagejson" class="docs-anchor" tabindex="-1" aria-label="Link to <code>package.json</code>"></a>
+  <p><code>npm</code> 安裝在 <a href="https://docs.npmjs.com/files/package.json" target="_blank"><code>package.json</code></a> 檔案中識別的套件。</p>
+<p>當 CLI 命令 <code>ng new</code> 建立新工作區時，它會建立一個 <code>package.json</code> 檔案。
+這個 <code>package.json</code> 會被工作區中的所有專案使用，包括 CLI 在建立工作區時建立的初始應用程式專案。
+使用 <code>ng generate library</code> 建立的函式庫會包含自己的 <code>package.json</code> 檔案。</p>
+<p>最初，此 <code>package.json</code> 包含 <em>一組入門套件</em>，其中一些為 Angular 所需，其他則支援常見的應用程式場景。
+隨著應用程式的發展，您可以將套件新增至 <code>package.json</code>。</p>
+
+  <h2 id="">預設依賴</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 預設依賴"></a>
+  <p>以下的 Angular 套件包含在新的 Angular 工作區的預設 <code>package.json</code> 檔案中作為相依性。
+如需完整的 Angular 套件清單，請參閱 <a href="api">API 參考</a>。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">套件名稱</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><a href="api/animations"><code>@angular/animations</code></a></td>
+<td align="left">Angular 的動畫程式庫可輕鬆定義和套用動畫效果，例如頁面和清單轉場。如需更多資訊，請參閱 <a href="guide/animations">動畫指南</a>。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/common"><code>@angular/common</code></a></td>
+<td align="left">由 Angular 團隊提供的常用服務、管線和指令。</td>
+</tr>
+<tr>
+<td align="left"><code>@angular/compiler</code></td>
+<td align="left">Angular 的範本編譯器。它了解 Angular 範本，並可以將它們轉換成讓應用程式執行的程式碼。</td>
+</tr>
+<tr>
+<td align="left"><code>@angular/compiler-cli</code></td>
+<td align="left">Angular 的編譯器，由 Angular CLI 的 <code>ng build</code> 和 <code>ng serve</code> 命令呼叫。它在標準 TypeScript 編譯中使用 <code>@angular/compiler</code> 處理 Angular 範本。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/core"><code>@angular/core</code></a></td>
+<td align="left">每個應用程式需要的架構的關鍵執行時期部分。包含所有元資料裝飾器，例如 <code>@Component</code>、相依性注入和元件生命週期掛勾。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/forms"><code>@angular/forms</code></a></td>
+<td align="left">支援 <a href="guide/forms">範本驅動</a> 和 <a href="guide/forms/reactive-forms">反應表單</a>。請參閱 <a href="guide/forms">表單簡介</a>。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/platform-browser"><code>@angular/platform-browser</code></a></td>
+<td align="left">所有與 DOM 和瀏覽器相關的內容，特別是協助呈現在 DOM 中的部分。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/platform-browser-dynamic"><code>@angular/platform-browser-dynamic</code></a></td>
+<td align="left">包含 <a href="api/core/Provider">提供者</a> 和方法，以使用 <a href="tools/cli/aot-compiler#choosing-a-compiler">JIT 編譯器</a> 在用戶端編譯和執行應用程式。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router"><code>@angular/router</code></a></td>
+<td align="left">當瀏覽器網址變更時，路由器模組會在應用程式頁面之間導覽。如需更多資訊，請參閱 <a href="guide/routing">路由和導覽</a>。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/angular/angular-cli" target="_blank"><code>@angular/cli</code></a></td>
+<td align="left">包含 Angular CLI 二進位檔，用於執行 <code>ng</code> 命令。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/angular/angular-cli" target="_blank"><code>@angular-devkit/build-angular</code></a></td>
+<td align="left">包含用於捆綁、測試和提供 Angular 應用程式和程式庫的預設 CLI 建構器。</td>
+</tr>
+<tr>
+<td align="left"><code>rxjs</code></td>
+<td align="left">使用 <code>Observables</code> 的響應式程式設計程式庫。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/angular/zone.js" target="_blank"><code>zone.js</code></a></td>
+<td align="left">Angular 仰賴 <code>zone.js</code> 在原生 JavaScript 作業引發事件時執行 Angular 的變更偵測程序。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.npmjs.com/package/typescript" target="_blank"><code>typescript</code></a></td>
+<td align="left">TypeScript 編譯器、語言伺服器和內建型別定義。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  

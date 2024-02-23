@@ -1,0 +1,188 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">建立 Angular 應用程式</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/build.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>您可以使用 <code>ng build</code> 指令來建置您的 Angular CLI 應用程式或函式庫。
+這會將您的 TypeScript 程式碼編譯為 JavaScript，並適當優化、組合及壓縮輸出。</p>
+<p><code>ng build</code> 只執行 <code>angular.json</code> 中指定的預設專案的 <code>build</code> 目標的建構器。
+Angular CLI 包含四個通常用作 <code>build</code> 目標的建構器：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th>Builder</th>
+<th>用途</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td><code>@angular-devkit/build-angular:browser</code></td>
+<td>使用 <a href="https://webpack.js.org/" target="_blank">Webpack</a> 將客戶端應用程式打包成可於瀏覽器中使用的應用程式。</td>
+</tr>
+<tr>
+<td><code>@angular-devkit/build-angular:browser-esbuild</code></td>
+<td>使用 <a href="https://esbuild.github.io/" target="_blank">esbuild</a> 將客戶端應用程式打包成可於瀏覽器中使用的應用程式。請參閱 <a href="tools/cli/esbuild"><code>browser-esbuild</code> 文件</a> 以進一步了解。</td>
+</tr>
+<tr>
+<td><code>@angular-devkit/build-angular:application</code></td>
+<td>使用 <a href="https://esbuild.github.io/" target="_blank">esbuild</a> 建置包含客戶端套件、Node 伺服器和建置時間預先呈現路由的應用程式。</td>
+</tr>
+<tr>
+<td><code>@angular-devkit/build-angular:ng-packagr</code></td>
+<td>建置符合 <a href="tools/libraries/angular-package-format">Angular 套件格式</a> 的 Angular 函式庫。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>由 <code>ng new</code> 產生的應用程式預設使用 <code>@angular-devkit/build-angular:application</code>。
+由 <code>ng generate library</code> 產生的函式庫預設使用 <code>@angular-devkit/build-angular:ng-packagr</code>。</p>
+<p>您可以透過查詢該項目的 <code>build</code> 目標來確定正在為特定項目使用哪個建構器。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"my-app"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-comment">// `ng build` invokes the Architect target named `build`.</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:application"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          …</div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"serve"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> … <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"test"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> … <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">        …</div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>此頁面討論 <code>@angular-devkit/build-angular:application</code> 的用法和選項。</p>
+
+  <h2 id="">輸出目錄</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 輸出目錄"></a>
+  <p>此建置程序的結果輸出至目錄 (<code>dist/${PROJECT_NAME}</code> 預設值)。</p>
+
+  <h2 id="">調整大小預算</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 調整大小預算"></a>
+  <p>隨著應用程式功能的增長，它們的大小也會增長。
+CLI 讓您在設定檔中設定大小閾值，以確保應用程式的部分保持在您定義的大小範圍內。</p>
+<p>在 CLI 組態檔案 <code>angular.json</code> 中，為每個 <a href="tools/cli/environments">已設定的環境</a> 在 <code>budgets</code> 區段定義大小界限。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">"configurations"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"production"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      …</div><div class="hljs-ln-line">      <span class="hljs-attr">"budgets"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"initial"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"maximumWarning"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"250kb"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"maximumError"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"500kb"</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>您可以為整個應用程式和特定部分指定大小預算。
+每個預算項目配置給定類型預算。
+以以下格式指定大小值：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">大小值</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>123</code> 或 <code>123b</code></td>
+<td align="left">以位元組為單位的檔案大小。</td>
+</tr>
+<tr>
+<td align="left"><code>123kb</code></td>
+<td align="left">以千位元組為單位的檔案大小。</td>
+</tr>
+<tr>
+<td align="left"><code>123mb</code></td>
+<td align="left">以百萬位元組為單位的檔案大小。</td>
+</tr>
+<tr>
+<td align="left"><code>12%</code></td>
+<td align="left">相對於基準大小的檔案大小百分比。\（不適用於基準值。\）</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>當您設定預算時，當應用程式的某個部分達到或超過您設定的邊界大小時，建構器會提出警告或報告錯誤。</p>
+<p>每個預算條目都是一個具有下列屬性的 JSON 物件：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">屬性</th>
+<th align="left">值</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">類型</td>
+<td align="left">預算類型。其中之一：<table> <thead> <tr> <th> 值 </th> <th> 詳細資訊 </th> </tr> </thead> <tbody> <tr> <td> bundle </td> <td>特定套件的大小。</td> </tr> <tr> <td> initial </td> <td>應用程式啟動所需的 JavaScript 大小。預設值為 500kb 警告、1mb 錯誤。</td> </tr> <tr> <td> allScript </td> <td>所有指令碼的大小。</td> </tr> <tr> <td> all </td> <td>整個應用程式的大小。</td> </tr> <tr> <td> anyComponentStyle </td> <td>任何一個元件樣式表的大小。預設值為 2kb 警告、4kb 錯誤。</td> </tr> <tr> <td> anyScript </td> <td>任何一個指令碼的大小。</td> </tr> <tr> <td> any </td> <td>任何檔案的大小。</td> </tr> </tbody> </table></td>
+</tr>
+<tr>
+<td align="left">名稱</td>
+<td align="left">套件名稱（適用於 <code>type=bundle</code>）。</td>
+</tr>
+<tr>
+<td align="left">基準</td>
+<td align="left">比較的基準大小。</td>
+</tr>
+<tr>
+<td align="left">最大警告</td>
+<td align="left">相對於基準的最大警告閾值。</td>
+</tr>
+<tr>
+<td align="left">最大錯誤</td>
+<td align="left">相對於基準的最大錯誤閾值。</td>
+</tr>
+<tr>
+<td align="left">最小警告</td>
+<td align="left">相對於基準的最小警告閾值。</td>
+</tr>
+<tr>
+<td align="left">最小錯誤</td>
+<td align="left">相對於基準的最小錯誤閾值。</td>
+</tr>
+<tr>
+<td align="left">警告</td>
+<td align="left">相對於基準的警告閾值（最小和最大）。</td>
+</tr>
+<tr>
+<td align="left">錯誤</td>
+<td align="left">相對於基準的錯誤閾值（最小和最大）。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="-commonjs-">配置 CommonJS 相依性</h2>
+  <a href="#-commonjs-" class="docs-anchor" tabindex="-1" aria-label="Link to 配置 CommonJS 相依性"></a>
+  <p>在整個應用程式及其相依性中，始終優先使用原生 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import" target="_blank">ECMAScript 模組</a> (ESM)。
+ESM 是一項完全規範的網路標準和 JavaScript 語言功能，具有強大的靜態分析支援。這使得套件最佳化比其他模組格式更強大。</p>
+<p>Angular CLI 也支援將 <a href="https://nodejs.org/api/modules.html" target="_blank">CommonJS</a> 相依項匯入您的專案，並且會自動組合這些相依項。
+但是，CommonJS 模組可能會阻止組合器和壓縮器有效地最佳化這些模組，這會導致更大的組合大小。
+如需更多資訊，請參閱 <a href="https://web.dev/commonjs-larger-bundles" target="_blank">CommonJS 如何讓您的組合變大</a>。</p>
+<p>如果 Angular CLI 偵測到您的瀏覽器應用程式依賴 CommonJS 模組，它會輸出警告。
+當您遇到 CommonJS 相依性時，請考慮要求維護者支援 ECMAScript 模組，或自行提供支援，或使用符合您需求的替代相依性。
+如果最佳選項是使用 CommonJS 相依性，您可以透過將 CommonJS 模組名稱新增到位於 <code>angular.json</code> 中 <code>build</code> 選項的 <code>allowedCommonJsDependencies</code> 選項來停用這些警告。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:browser"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">     <span class="hljs-attr">"allowedCommonJsDependencies"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">        <span class="hljs-string">"lodash"</span></div><div class="hljs-ln-line">     <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line">     …</div><div class="hljs-ln-line">   <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">   …</div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div></code>
+    </pre>
+  </div>
+  <h2 id="">設定瀏覽器相容性</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 設定瀏覽器相容性"></a>
+  <p>Angular CLI 使用 <a href="https://github.com/browserslist/browserslist" target="_blank">Browserslist</a> 來確保與不同瀏覽器版本相容。
+根據支援的瀏覽器，Angular 會自動填補並轉換特定 JavaScript 和 CSS 功能，以確保建置的應用程式不會使用受支援瀏覽器尚未實作的功能。</p>
+<p>在內部，Angular CLI 使用以下預設的 <code>browserslist</code> 設定，與 Angular <a href="reference/versions#browser-support">支援的瀏覽器</a> 相符。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">last 2 Chrome versions</div><div class="hljs-ln-line">last 1 Firefox version</div><div class="hljs-ln-line">last 2 Edge major versions</div><div class="hljs-ln-line">last 2 Safari major versions</div><div class="hljs-ln-line">last 2 iOS major versions</div><div class="hljs-ln-line">Firefox ESR</div></code>
+    </pre>
+  </div><p>若要覆寫內部設定，請執行 <a href="cli/generate#config-command"><code>ng generate config browserslist</code></a>，這會在專案目錄中產生 <code>.browserslistrc</code> 設定檔。</p>
+<p>請參閱 <a href="https://github.com/browserslist/browserslist" target="_blank">browserslist repository</a> 以獲取更多關於如何鎖定特定瀏覽器和版本的範例。
+避免將此清單擴充套件到更多瀏覽器。即使您的應用程式程式碼更廣泛相容，Angular 本身可能不是。
+您應該只減少此清單中的瀏覽器或版本集合。</p>
+<p>HELPFUL：使用 <a href="https://browsersl.ist" target="_blank">browsersl.ist</a> 顯示與 <code>browserslist</code> 查詢相容的瀏覽器。</p>

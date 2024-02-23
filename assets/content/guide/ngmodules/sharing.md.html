@@ -1,0 +1,49 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">共享模組</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/sharing.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>建立共用模組，可讓您整理並簡化程式碼。
+您可以將常用指令、管道和元件放入一個模組，然後在應用程式的其他部分需要時，僅匯入該模組。</p>
+<p>考慮以下一個假想應用程式的模組：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CommonModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FormsModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CustomerComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./customer.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NewItemDirective</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./new-item.directive'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">OrdersPipe</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./orders.pipe'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">CommonModule</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">CustomerComponent</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">NewItemDirective</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">OrdersPipe</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">CustomerComponent</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">NewItemDirective</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">OrdersPipe</span>,</div><div class="hljs-ln-line highlighted">    <span class="hljs-title class_">CommonModule</span>,</div><div class="hljs-ln-line highlighted">    <span class="hljs-title class_">FormsModule</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SharedModule</span> { }</div></code>
+    </pre>
+  </div><p>請注意以下事項：</p>
+
+  <ul class="docs-list">
+    <li>它匯入 <code>CommonModule</code> 因為模組的元件需要常見的指令</li>
+<li>它宣告並匯出工具管道、指令和元件類別</li>
+<li>它重新匯出 <code>CommonModule</code> 和 <code>FormsModule</code></li>
+
+  </ul>
+  <p>藉由重新匯出 <code>CommonModule</code> 和 <code>FormsModule</code>，任何匯入此 <code>SharedModule</code> 的其他模組，都能存取 <code>CommonModule</code> 的指令，例如 <code>NgIf</code> 和 <code>NgFor</code>，並能以 <code>FormsModule</code> 中的指令 <code>[(ngModel)]</code> 繫結至元件屬性。</p>
+<p>即使由 <code>SharedModule</code> 宣告的元件可能不會與 <code>[(ngModel)]</code> 繫結，而且 <code>SharedModule</code> 可能不需要匯入 <code>FormsModule</code>，<code>SharedModule</code> 仍然可以匯出 <code>FormsModule</code>，而不用將它列在 <code>imports</code> 之中。
+這樣您可以讓其他模組存取 <code>FormsModule</code>，而不用讓它自己可用。</p>
+
+  <h2 id="-ngmodules">更多有關 NgModules</h2>
+  <a href="#-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to 更多有關 NgModules"></a>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="/guide/ngmodules/providers">
+      提供者
+    </a>
+    
+    <a class="docs-pill" href="/guide/ngmodules/module-types">
+      功能模組類型
+    </a>
+    
+
+    </nav>
+    

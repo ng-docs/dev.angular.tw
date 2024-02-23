@@ -1,0 +1,117 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">元件選擇器</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/selectors.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>提示：本指南假設您已經閱讀過 <a href="essentials">精華指南</a>。如果您是 Angular 新手，請先閱讀該指南。</p>
+<p>每個元件都定義
+一個 <a href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/CSS_selectors" target="_blank">CSS 選擇器</a> 來決定
+該元件如何使用：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'profile-photo'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfilePhoto</span> { }</div></code>
+    </pre>
+  </div><p>您使用元件，方法是在 <em>其他</em> 元件的範本中建立一個匹配的 HTML 元素：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line highlighted">    &lt;profile-photo /&gt;</div><div class="hljs-ln-line">    &lt;button&gt;Upload a new profile photo&lt;/button&gt;`,</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserProfile</span> { }</div></code>
+    </pre>
+  </div><p>**Angular 在編譯時靜態匹配選擇器。**在執行時變更 DOM，無論是透過 Angular 繫結或 DOM API，都不會影響所呈現的元件。</p>
+<p>**一個元素只能匹配一個元件選擇器。**如果多個元件選擇器匹配單個元素，Angular 會報告錯誤。</p>
+<p><strong>元件選取器是區分大小寫的。</strong></p>
+
+  <h2 id="">選擇器的種類</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 選擇器的種類"></a>
+  <p>Angular 支援基本 CSS 選擇器類型](<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors" target="_blank">https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors</a>) 中的有限子集，用於元件選擇器：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th><strong>選擇器類型</strong></th>
+<th><strong>說明</strong></th>
+<th><strong>範例</strong></th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td>類型選擇器</td>
+<td>根據元素的 HTML 標記名稱或節點名稱來匹配元素。</td>
+<td><code>profile-photo</code></td>
+</tr>
+<tr>
+<td>屬性選擇器</td>
+<td>根據 HTML 屬性的存在，以及選擇性地為該屬性提供一個確切的值來匹配元素。</td>
+<td><code>[dropzone]</code> <code>[type=&quot;reset&quot;]</code></td>
+</tr>
+<tr>
+<td>類別選擇器</td>
+<td>根據 CSS 類別的存在來匹配元素。</td>
+<td><code>.menu-item</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>對於屬性值，Angular 支援使用等號 (<code>=</code>) 運算子來匹配精確的屬性值。Angular 不支援其他屬性值運算子。</p>
+<p>Angular 元件選擇器不支援組合器，包括
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Descendant_combinator" target="_blank">後代組合器</a>
+或 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Child_combinator" target="_blank">子元素組合器</a>。</p>
+<p>Angular 元件選擇器不支援指定 <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Namespaces_Crash_Course" target="_blank">namespaces</a>。</p>
+
+  <h3 id="-not">偽類別 <code>:not</code></h3>
+  <a href="#-not" class="docs-anchor" tabindex="-1" aria-label="Link to 偽類別 <code>:not</code>"></a>
+  <p>Angular 支援 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:not" target="_blank"><code>:not</code> 偽類別</a>。
+您可以將此偽類別附加至任何其他選擇器，以縮小元件選擇器比對的元素範圍。例如，您可以定義一個 <code>[dropzone]</code> 屬性選擇器，並防止比對 <code>textarea</code> 元素：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'[dropzone]:not(textarea)'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DropZone</span> { }</div></code>
+    </pre>
+  </div><p>Angular 不支援元件選擇器中的任何其他偽類別或偽元素。</p>
+
+  <h3 id="">組合選擇器</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 組合選擇器"></a>
+  <p>您可以透過串連多個選擇器來組合它們。例如，您可以比對指定 <code>type=&quot;reset&quot;</code> 的 <code>&lt;button&gt;</code> 元素：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'button[type="reset"]'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ResetButton</span> { }</div></code>
+    </pre>
+  </div><p>您可以使用逗號分隔的清單來定義多個選擇器：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'drop-zone, [dropzone]'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DropZone</span> { }</div></code>
+    </pre>
+  </div><p>Angular 為清單中 <em>任何</em> 與選擇器配對的元素，建立一個元件。</p>
+
+  <h2 id="">選擇一個選擇器</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 選擇一個選擇器"></a>
+  <p>絕大多數元件應使用自訂元素名稱作為其選取器。所有自訂元素名稱應包含連字號，如 <a href="https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name" target="_blank">HTML 規範</a> 所述。
+預設情況下，如果 Angular 遇到與任何可用元件不匹配的自訂標籤名稱，它會報告錯誤，防止因元件名稱輸入錯誤而產生的錯誤。</p>
+<p>請參閱 <a href="guide/components/advanced-configuration">進階元件配置</a>，以瞭解如何在 Angular 樣板中使用 <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components" target="_blank">原生自訂元素</a>。</p>
+
+  <h3 id="">選擇器前綴</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 選擇器前綴"></a>
+  <p>Angular 團隊建議對專案內定義的所有自訂元件使用簡短一致的前置詞。例如，如果您要使用 Angular 建置 YouTube，則您可以使用 <code>yt-</code> 作為元件前置詞，並使用 <code>yt-menu</code>、<code>yt-player</code> 等元件。像這樣對選取器進行命名空間，可以立即清楚地了解特定元件的來源。預設情況下，Angular CLI 使用 <code>app-</code>。</p>
+<p>Angular 使用 <code>ng</code> 選擇器字首作為其專屬的框架 API。千萬不要將 <code>ng</code> 用作您自訂元件的選擇器字首。</p>
+
+  <h3 id="">何時使用屬性選擇器</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 何時使用屬性選擇器"></a>
+  <p>當您想在標準原生元素上建立一個元件時，您應該考慮使用屬性選擇器。例如，如果您想建立一個自訂按鈕元件，您可以藉由使用屬性選擇器來利用標準的 <code>&lt;button&gt;</code> 元素：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'button[yt-upload]'</span>,</div><div class="hljs-ln-line">   ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">YouTubeUploadButton</span> { }</div></code>
+    </pre>
+  </div><p>這種方法允許元件的使用者直接使用所有元素的標準 API，而無需額外的作業。這對於 ARIA 屬性（例如 <code>aria-label</code>）特別有價值。</p>
+<p>當遇到與可用元件不匹配的客製化屬性時，Angular 並不會回報錯誤。在使用具有屬性選擇器的元件時，使用者可能會忘記匯入元件或其 NgModule，導致元件無法渲染。
+請參閱 <a href="guide/components/importing">匯入和使用元件</a>以了解更多資訊。</p>
+<p>定義屬性選擇器的元件應使用小寫、破折號的屬性。您可以遵循上述相同的字首建議。</p>

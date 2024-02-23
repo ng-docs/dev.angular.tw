@@ -1,0 +1,295 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">工作區和專案檔案結構</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/configs/file-structure.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>您在 Angular 工作區的內容中開發應用程式。
+工作區包含一個或多個專案的檔案。
+專案是組成應用程式或可共用程式庫的檔案集。</p>
+<p>Angular CLI <code>ng new</code> 指令建立一個工作空間。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng new my-project</div></code>
+    </pre>
+  </div><p>當您執行此命令時，CLI 會在新的工作區中安裝必要的 Angular npm 套件和其他相依性，其中包含名為 <em>my-project</em> 的根級應用程式。</p>
+<p>預設情況下，<code>ng new</code> 會在工作區的根目錄下建立一個初始的骨架應用程式，連同其端到端測試。
+該骨架適用於一個簡單的歡迎應用程式，該應用程式已準備好運行且易於修改。
+根級別應用程式的名稱與工作區的名稱相同，而原始檔案位於工作區的 <code>src/</code> 子資料夾中。</p>
+<p>此預設行為適合於典型的「多個儲存庫」開發風格，其中每個應用程式都位於其自己的工作區。
+建議初學者和中級使用者使用 <code>ng new</code> 為每個應用程式建立一個獨立的工作區。</p>
+<p>Angular 也支援有多個專案的工作區 (<a href="#multiple-projects">multiple projects</a>)。
+這類型的開發環境適合開發可共享程式庫的高階使用者，以及採用「單一存放庫」開發風格的企業，並以單一存放庫和全域設定來處理所有 Angular 專案。</p>
+<p>若要設定 monorepo 工作區，您應該略過建立根應用程式。
+請參閱以下 <a href="#multiple-projects">設定多專案工作區</a>。</p>
+
+  <h2 id="">工作區設定檔</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 工作區設定檔"></a>
+  <p>工作區內的所有專案共用一個 <a href="reference/configs/workspace-config">設定檔</a>。
+工作區的頂層包含工作區範圍的設定檔、根層級應用程式的設定檔，以及根層級應用程式原始碼和測試檔案的子資料夾。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">工作區設定檔</th>
+<th align="left">用途</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>.editorconfig</code></td>
+<td align="left">程式編輯器的設定。參閱 <a href="https://editorconfig.org" target="_blank">EditorConfig</a>。</td>
+</tr>
+<tr>
+<td align="left"><code>.gitignore</code></td>
+<td align="left">指定 <a href="https://git-scm.com" target="_blank">Git</a> 應略過的已知未追蹤檔案。</td>
+</tr>
+<tr>
+<td align="left"><code>README.md</code></td>
+<td align="left">工作區的說明文件。</td>
+</tr>
+<tr>
+<td align="left"><code>angular.json</code></td>
+<td align="left">工作區中所有專案的 CLI 設定，包括如何建置、提供服務和測試每個專案的設定選項。有關詳細資訊，請參閱 <a href="reference/configs/workspace-config">Angular 工作區設定</a>。</td>
+</tr>
+<tr>
+<td align="left"><code>package.json</code></td>
+<td align="left">設定可供工作區中所有專案使用的 <a href="reference/configs/npm-packages">npm 套件相依性</a>。有關此檔案的特定格式和內容，請參閱 <a href="https://docs.npmjs.com/files/package.json" target="_blank">npm 文件</a>。</td>
+</tr>
+<tr>
+<td align="left"><code>package-lock.json</code></td>
+<td align="left">提供 npm 客戶端安裝至 <code>node_modules</code> 的所有套件的版本資訊。有關詳細資訊，請參閱 <a href="https://docs.npmjs.com/files/package-lock.json" target="_blank">npm 文件</a>。</td>
+</tr>
+<tr>
+<td align="left"><code>src/</code></td>
+<td align="left">根層級應用程式專案的原始檔。</td>
+</tr>
+<tr>
+<td align="left"><code>node_modules/</code></td>
+<td align="left">整個工作區已安裝的 <a href="reference/configs/npm-packages">npm 套件</a>。工作區範圍的 <code>node_modules</code> 相依性對所有專案都可見。</td>
+</tr>
+<tr>
+<td align="left"><code>tsconfig.json</code></td>
+<td align="left">工作區中專案的基本 <a href="https://www.typescriptlang.org" target="_blank">TypeScript</a> 設定。所有其他設定檔都繼承自此基本檔案。有關更多資訊，請參閱 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#tsconfig-bases" target="_blank">相關的 TypeScript 文件</a>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">應用程式專案檔案</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 應用程式專案檔案"></a>
+  <p>預設情況下，CLI 命令 <code>ng new my-app</code> 會建立一個名為「my-app」的工作區資料夾，並在工作區最上層的 <code>src/</code> 資料夾中產生一個新的應用程式範本。
+新產生的應用程式包含一個根模組的原始碼檔案，其中包含一個根元件和範本。</p>
+<p>當工作區檔案結構就定位後，您可以在命令列上使用 <code>ng generate</code> 指令，將功能和資料新增至應用程式。
+這個初始根層級應用程式是 CLI 指令的「預設應用程式」（除非您在建立 <a href="#multiple-projects">其他應用程式</a> 後變更預設值）。</p>
+<p>對於單一應用程式工作區，工作區的 <code>src</code> 子資料夾包含根應用程式的原始檔案（應用程式邏輯、資料和資產）。
+對於多專案工作區，<code>projects</code> 資料夾中的其他專案包含具相同結構的 <code>project-name/src/</code> 子資料夾。</p>
+
+  <h3 id="">應用程式原始檔</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 應用程式原始檔"></a>
+  <p>位於 <code>src/</code> 頂層的檔案支援執行您的應用程式。
+次資料夾包含應用程式來源和應用程式特定組態。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">應用程式支援檔案</th>
+<th align="left">目的</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>app/</code></td>
+<td align="left">包含定義應用程式邏輯和資料的元件檔案。詳情請參閱 <a href="#app-src">下方</a>。</td>
+</tr>
+<tr>
+<td align="left"><code>assets/</code></td>
+<td align="left">包含影像和其他資產檔案，可由開發伺服器提供為靜態檔案，並在您建置應用程式時按原樣複製。</td>
+</tr>
+<tr>
+<td align="left"><code>favicon.ico</code></td>
+<td align="left">在書籤列中用於此應用程式的圖示。</td>
+</tr>
+<tr>
+<td align="left"><code>index.html</code></td>
+<td align="left">當有人造訪您的網站時提供的 HTML 主頁。CLI 會在建置應用程式時自動加入所有 JavaScript 和 CSS 檔案，因此您通常不需要在此手動加入任何 <code>&lt;script&gt;</code> 或<code>&lt;link&gt;</code> 標籤。</td>
+</tr>
+<tr>
+<td align="left"><code>main.ts</code></td>
+<td align="left">應用程式的主要進入點。</td>
+</tr>
+<tr>
+<td align="left"><code>styles.css</code></td>
+<td align="left">套用到整個應用程式的全域 CSS 樣式。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>在 <code>src</code> 資料夾內，<code>app</code> 資料夾包含專案的邏輯和資料。
+Angular 元件、範本及樣式在此。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left"><code>src/app/</code> 檔案</th>
+<th align="left">目的</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>app.config.ts</code></td>
+<td align="left">定義應用程式設定，告訴 Angular 如何組合應用程式。當您加入更多提供者至應用程式時，應在此處宣告它們。<br><br><em>僅在使用 <code>--standalone</code> 選項時產生。</em></td>
+</tr>
+<tr>
+<td align="left"><code>app.component.ts</code></td>
+<td align="left">定義應用程式的根元件，命名為 <code>AppComponent</code>。與此根元件關聯的檢視會成為檢視層級的根，當您將元件與服務加入應用程式時。</td>
+</tr>
+<tr>
+<td align="left"><code>app.component.html</code></td>
+<td align="left">定義與 <code>AppComponent</code> 關聯的 HTML 範本。</td>
+</tr>
+<tr>
+<td align="left"><code>app.component.css</code></td>
+<td align="left">定義 <code>AppComponent</code> 的 CSS 樣式表。</td>
+</tr>
+<tr>
+<td align="left"><code>app.component.spec.ts</code></td>
+<td align="left">定義 <code>AppComponent</code> 的單元測試。</td>
+</tr>
+<tr>
+<td align="left"><code>app.module.ts</code></td>
+<td align="left">定義根模組，命名為 <code>AppModule</code>，告訴 Angular 如何組合應用程式。最初僅宣告 <code>AppComponent</code>。當您加入更多元件至應用程式時，必須在此處宣告它們。<br><br><em>僅在使用 <code>--standalone false</code> 選項時產生。</em></td>
+</tr>
+<tr>
+<td align="left"><code>app.routes.ts</code></td>
+<td align="left">定義應用程式的路由設定。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="">應用程式設定檔</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 應用程式設定檔"></a>
+  <p>根應用程式的應用程式專用設定檔位於工作區根目錄層級。
+對於多專案工作區，專案專用設定檔位於專案根目錄，在 <code>projects/project-name/</code> 下。</p>
+<p>專案特定的 <a href="https://www.typescriptlang.org" target="_blank">TypeScript</a> 組態檔繼承自工作區範圍的 <code>tsconfig.json</code>。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">應用程式專用組態檔</th>
+<th align="left">目的</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>tsconfig.app.json</code></td>
+<td align="left">應用程式專用的 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 組態</a>，包含 <a href="reference/configs/angular-compiler-options">Angular 編譯器選項</a>。</td>
+</tr>
+<tr>
+<td align="left"><code>tsconfig.spec.json</code></td>
+<td align="left">應用程式測試的 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 組態</a>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">多個專案</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 多個專案"></a>
+  <p>多專案工作區適合於使用單一存放庫和全域設定來處理多個 Angular 專案（「monorepo」模型）的組織。
+多專案工作區也支援函式庫開發。</p>
+
+  <h3 id="">建立多個專案的工作空間</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 建立多個專案的工作空間"></a>
+  <p>如果您打算在工作區中有多個專案，您可以建立工作區時略過初始應用程式產生，並為工作區取一個唯一名稱。
+以下指令建立一個工作區，包含所有工作區範圍的設定檔，但沒有根層級應用程式。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng new my-workspace --no-create-application</div></code>
+    </pre>
+  </div><p>然後，您可以產生在工作區內名稱獨一無二的應用程式和函式庫。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">cd my-workspace</div><div class="hljs-ln-line">ng generate application my-app</div><div class="hljs-ln-line">ng generate library my-lib</div></code>
+    </pre>
+  </div>
+  <h3 id="">多重專案檔案結構</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 多重專案檔案結構"></a>
+  <p>第一個明確產生的應用程式會和工作空間中的所有其他專案一起進入 <code>projects</code> 資料夾。
+新產生的程式庫也會新增至 <code>projects</code> 底下。
+當你以這種方式建立專案時，工作空間的檔案結構會與 <a href="reference/configs/workspace-config">工作空間設定檔</a> <code>angular.json</code> 的結構完全一致。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">my-workspace/</div><div class="hljs-ln-line">  ├── …                (workspace-wide configuration files)</div><div class="hljs-ln-line">  └── projects/        (applications and libraries)</div><div class="hljs-ln-line"><span class="hljs-code">      ├── my-app/      (an explicitly generated application)</span></div><div class="hljs-ln-line">      │   └── …        (application-specific code and configuration)</div><div class="hljs-ln-line">      └── my-lib/      (a generated library)</div><div class="hljs-ln-line">          └── …        (library-specific code and configuration)</div></code>
+    </pre>
+  </div>
+  <h2 id="">函式庫專案檔案</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 函式庫專案檔案"></a>
+  <p>當您使用 CLI (以命令 <code>ng generate library my-lib</code> 為例) 產生函式庫時，產生的檔案會進入工作區的 <code>projects/</code> 資料夾中。
+有關如何建立自己的函式庫的更多資訊，請參閱 <a href="tools/libraries/creating-libraries">建立函式庫</a>。</p>
+<p>與應用程式不同，函式庫有它自己的 <code>package.json</code> 組態檔案。</p>
+<p>在 <code>projects/</code> 資料夾下，<code>my-lib</code> 資料夾包含您的程式庫程式碼。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">函式庫原始碼檔案</th>
+<th align="left">目的</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>src/lib</code></td>
+<td align="left">包含函式庫專案的邏輯與資料。如同應用程式專案，函式庫專案可以包含元件、服務、模組、指令和管線。</td>
+</tr>
+<tr>
+<td align="left"><code>src/public-api.ts</code></td>
+<td align="left">指定從函式庫匯出的所有檔案。</td>
+</tr>
+<tr>
+<td align="left"><code>ng-package.json</code></td>
+<td align="left">供 <a href="https://github.com/ng-packagr/ng-packagr" target="_blank">ng-packagr</a> 用於建立函式庫的設定檔。</td>
+</tr>
+<tr>
+<td align="left"><code>package.json</code></td>
+<td align="left">設定此函式庫所需的 <a href="reference/configs/npm-packages">npm 套件相依性</a>。</td>
+</tr>
+<tr>
+<td align="left"><code>tsconfig.lib.json</code></td>
+<td align="left">函式庫專屬的 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 設定</a>，包含 <a href="reference/configs/angular-compiler-options">Angular 編譯器選項</a>。</td>
+</tr>
+<tr>
+<td align="left"><code>tsconfig.lib.prod.json</code></td>
+<td align="left">函式庫專屬的 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 設定</a>，用於以生產模式建立函式庫。</td>
+</tr>
+<tr>
+<td align="left"><code>tsconfig.spec.json</code></td>
+<td align="left">函式庫單元測試的 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 設定</a>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,0 +1,284 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">延遲載入功能模組</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/lazy-loading.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>預設情況下，NgModules 會被急切載入。這表示當應用程式載入時，所有 NgModules 也會載入，無論它們是否立即需要。
+對於具有大量路由的大型應用程式，請考慮採用延遲載入，這是一種在需要時載入 NgModules 的設計模式。
+延遲載入有助於減小初始套件大小，進而有助於減少載入時間。</p>
+<!-- 有關此頁面所述兩個延遲載入模組的最終範例應用程式： -->
+
+<!-- TODO：連結至 GitHub -->
+
+<!-- <docs-code live/> -->
+
+
+  <h2 id="">延遲載入基礎知識</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 延遲載入基礎知識"></a>
+  <p>本節介紹配置延遲載入路由的基本程序。
+有關逐步範例，請參閱此頁面上的 <a href="#step-by-step-setup">逐步設定</a> 部分。</p>
+<p>若要延遲載入 Angular 模組，請在 <code>AppRoutingModule</code> <code>routes</code> 組態中使用 <code>loadChildren</code>（取代 <code>component</code>），如下所示。</p>
+<div class="docs-code" header="AppRoutingModule (excerpt)">
+    <div class="docs-code-header"><h3>AppRoutingModule (excerpt)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'items'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">loadChildren</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./items/items.module'</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">ItemsModule</span>)</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div><p>在延遲載入模組的路由模組中，為元件新增路由。</p>
+<div class="docs-code" header="Routing module for lazy loaded module (excerpt)">
+    <div class="docs-code-header"><h3>Routing module for lazy loaded module (excerpt)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">ItemsComponent</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div><p>同時務必將 <code>ItemsModule</code> 從 <code>AppModule</code> 中移除。
+若要了解延遲載入模組的分步說明，請繼續閱讀本頁的以下各節。</p>
+
+  <h2 id="">步驟式設定</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 步驟式設定"></a>
+  <p>設定一個延遲載入的功能模組需要兩個主要的步驟：</p>
+
+    <ol class="docs-ordered-list">
+      <li>使用 <code>--route</code> 旗標，透過 Angular CLI 建立功能模組。</li>
+<li>設定路由。</li>
+
+    </ol>
+    
+  <h3 id="">設定應用程式</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 設定應用程式"></a>
+  <p>如果您還沒有應用程式，請遵照以下步驟使用 Angular CLI 建立一個應用程式。
+如果您已經有應用程式，請跳至 <a href="#config-routes">設定路徑</a>。</p>
+<p>在 <code>customer-app</code> 是你的應用程式名稱的地方，輸入下列指令：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng new customer-app --no-standalone --routing</div></code>
+    </pre>
+  </div><p>這會建立一個名為 <code>customer-app</code> 的應用程式，<code>--no-standalone</code> 標記讓應用程式以模組為基礎，而 <code>--routing</code> 標記會產生一個名為 <code>app-routing.module.ts</code> 的檔案。
+這是設定功能模組延遲載入所需的其中一個檔案。
+透過下達 <code>cd customer-app</code> 指令來導航至專案。</p>
+
+  <h3 id="">使用路由建立功能模組</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 使用路由建立功能模組"></a>
+  <p>接下來，您需要一個帶有要導向到的元件的功能模組。
+要建立一個，請在命令列工具中輸入以下命令，其中 <code>customers</code> 是功能模組的名稱。
+載入 <code>customers</code> 功能模組的路徑也是 <code>customers</code>，因為它使用 <code>--route</code> 選項指定：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate module customers --route customers --module app.module</div></code>
+    </pre>
+  </div><p>這會建立一個 <code>customers</code> 目錄，其中包含在 <code>customers.module.ts</code> 檔案中定義的新惰性可載入功能模組 <code>CustomersModule</code>，以及在 <code>customers-routing.module.ts</code> 檔案中定義的路由模組 <code>CustomersRoutingModule</code>。
+此命令會自動在新的功能模組內宣告 <code>CustomersComponent</code> 並匯入 <code>CustomersRoutingModule</code>。</p>
+<p>因為新模組可延遲載入，所以指令 <strong>不會</strong> 在應用程式的根模組檔案 <code>app.module.ts</code> 中新增對它的參照。
+相反地，它會將已宣告的路由 <code>customers</code> 新增到在提供 <code>--module</code> 選項的模組中宣告的 <code>routes</code> 陣列。</p>
+<div class="docs-code" header="src/app/app-routing.module.ts">
+    <div class="docs-code-header"><h3>src/app/app-routing.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'customers'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">loadChildren</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./customers/customers.module'</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">CustomersModule</span>)</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div><p>請注意延遲載入語法使用 <code>loadChildren</code> 後接一個使用瀏覽器內建 <code>import(&#39;...&#39;)</code> 語法進行動態匯入的函式。
+匯入路徑是相對於模組的相對路徑。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3>基於字串的延遲載入</h3>
+      <p>在 Angular 版本 8 中，<code>loadChildren</code> 路徑規範的字串語法已棄用，取而代之的是 <code>import()</code> 語法。
+您可以選擇使用基於字串的延遲載入 (<code>loadChildren: &#39;./path/to/module#Module&#39;</code>)，方法是在您的 <code>tsconfig</code> 檔案中包含延遲載入的路由，其中包含編譯中的延遲載入檔案。</p>
+<p>預設情況下，Angular CLI 會產生包含更嚴格檔案的專案，供與 <code>import()</code> 語法搭配使用。</p>
+
+    </div>
+    
+  <h3 id="">加入另一個功能模組</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 加入另一個功能模組"></a>
+  <p>使用相同的指令建立第二個具有路由的延遲載入功能模組，並加上 stub 元件。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate module orders --route orders --module app.module</div></code>
+    </pre>
+  </div><p>這會建立一個新的目錄，稱為 <code>orders</code>，其中包含 <code>OrdersModule</code> 和 <code>OrdersRoutingModule</code>，以及新的 <code>OrdersComponent</code> 原始檔。
+使用延遲載入語法將 <code>orders</code> 路由（使用 <code>--route</code> 選項指定）新增到 <code>app-routing.module.ts</code> 檔案中的 <code>routes</code> 陣列。</p>
+<div class="docs-code" header="src/app/app-routing.module.ts">
+    <div class="docs-code-header"><h3>src/app/app-routing.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'customers'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">loadChildren</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./customers/customers.module'</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">CustomersModule</span>)</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line highlighted">  {</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">path</span>: <span class="hljs-string">'orders'</span>,</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">loadChildren</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./orders/orders.module'</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">OrdersModule</span>)</div><div class="hljs-ln-line highlighted">  }</div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div>
+  <h3 id="-ui">建立 UI</h3>
+  <a href="#-ui" class="docs-anchor" tabindex="-1" aria-label="Link to 建立 UI"></a>
+  <p>雖然你可以將網址輸入位址列中，但導覽 UI 對使用者來說很簡單，也更為常見。
+用自訂導覽取代 <code>app.component.html</code> 中的預設 placeholder 標記，如此一來你就能在瀏覽器中導覽你的模組：</p>
+<div class="docs-code" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line">  {{title}}</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/customers"</span>&gt;</span>Customers<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/orders"</span>&gt;</span>Orders<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">""</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div></code>
+    </pre>
+  </div><p>要查看目前在瀏覽器中的應用程式，請在命令列工具視窗中輸入以下指令：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng serve</div></code>
+    </pre>
+  </div><p>然後前往 <code>localhost:4200</code>，您應該會看到「customer-app」和三個按鈕。</p>
+<img alt="瀏覽器中的三個按鈕" src="https://angular.dev/assets/images/guide/modules/lazy-loading-three-buttons.png" width="300">
+
+<p>這些按鈕有效運作，因為 Angular CLI 自動將功能模組的路由新增到 <code>app-routing.module.ts</code> 中的 <code>routes</code> 陣列。</p>
+
+  <h3 id="">匯入和路由配置</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 匯入和路由配置"></a>
+  <p>Angular CLI 會自動將每個功能模組新增到應用程式層級的路由映射。
+透過新增預設路由完成此動作。
+在 <code>app-routing.module.ts</code> 檔案中，以下列內容更新 <code>routes</code> 陣列：</p>
+<div class="docs-code" header="src/app/app-routing.module.ts">
+    <div class="docs-code-header"><h3>src/app/app-routing.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'customers'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">loadChildren</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./customers/customers.module'</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">CustomersModule</span>)</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'orders'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">loadChildren</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./orders/orders.module'</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">OrdersModule</span>)</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">redirectTo</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">pathMatch</span>: <span class="hljs-string">'full'</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div><p>前兩個路徑是 <code>CustomersModule</code> 和 <code>OrdersModule</code> 的路由。
+最後一個項目定義了預設路由。
+空路徑符合任何與先前路徑不符的內容。</p>
+
+  <h3 id="">在功能模組內</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 在功能模組內"></a>
+  <p>接下來，請看看 <code>customers.module.ts</code> 檔案。
+如果您使用 Angular CLI 並且依照此頁面中概述的步驟進行，您無須在此處執行任何操作。</p>
+<div class="docs-code" header="src/app/customers/customers.module.ts">
+    <div class="docs-code-header"><h3>src/app/customers/customers.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CommonModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CustomersRoutingModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./customers-routing.module'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CustomersComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./customers.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">CommonModule</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">CustomersRoutingModule</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [<span class="hljs-title class_">CustomersComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomersModule</span> { }</div></code>
+    </pre>
+  </div><p><code>customers.module.ts</code> 檔案匯入 <code>customers-routing.module.ts</code> 與 <code>customers.component.ts</code> 檔案。
+<code>CustomersRoutingModule</code> 列在 <code>@NgModule</code> <code>imports</code> 陣列中，讓 <code>CustomersModule</code> 可以存取自己的路由模組。
+<code>CustomersComponent</code> 位於 <code>declarations</code> 陣列中，這表示 <code>CustomersComponent</code> 屬於 <code>CustomersModule</code>。</p>
+<p>然後，<code>app-routing.module.ts</code> 使用 JavaScript 的動態匯入匯入功能模組 <code>customers.module.ts</code>。</p>
+<p>特定於功能的路由定義檔案 <code>customers-routing.module.ts</code> 匯入它自己定義在 <code>customers.component.ts</code> 檔案中的功能元件，連同其他 JavaScript 匯入陳述。
+然後它將空路徑對應到 <code>CustomersComponent</code>。</p>
+<div class="docs-code" header="src/app/customers/customers-routing.module.ts">
+    <div class="docs-code-header"><h3>src/app/customers/customers-routing.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Routes</span>, <span class="hljs-title class_">RouterModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CustomersComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./customers.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">path</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">CustomersComponent</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">];</div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">RouterModule</span>.<span class="hljs-title function_">forChild</span>(routes)],</div><div class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [<span class="hljs-title class_">RouterModule</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomersRoutingModule</span> { }</div></code>
+    </pre>
+  </div><p>此處的 <code>path</code> 設為空字串，因為 <code>AppRoutingModule</code> 中的路徑已設為 <code>customers</code>，因此 <code>CustomersRoutingModule</code> 中的這個路由已在 <code>customers</code> 的內容中。
+此路由模組中的每個路由都是子路由。</p>
+<p>其他功能模組的路由模組配置類似。</p>
+<div class="docs-code" header="src/app/orders/orders-routing.module.ts (excerpt)">
+    <div class="docs-code-header"><h3>src/app/orders/orders-routing.module.ts (excerpt)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">OrdersComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./orders.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">OrdersComponent</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div>
+  <h3 id="">驗證延遲載入</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 驗證延遲載入"></a>
+  <p>您可以使用 Chrome 開發人員工具驗證模組是否確實是延遲載入。
+在 Chrome 中，按一下 Mac 上的 <kbd>⌘ Cmd</kbd>+<kbd>Option</kbd>+<kbd>i</kbd> 或 PC 上的 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>j</kbd> 開啟開發人員工具，然後前往「網路」索引標籤。</p>
+<img alt="延遲載入模組圖示" src="https://angular.dev/assets/images/guide/modules/lazy-loading-network-tab.png" width="600">
+
+<p>點擊「訂單」或「客戶」按鈕。
+如果您看到區塊出現，一切均已正確連接，且功能模組正在延遲載入。
+區塊應出現在「訂單」和「客戶」中，但每個只出現一次。</p>
+<img alt="延遲載入模組圖表" src="https://angular.dev/assets/images/guide/modules/lazy-loading-chunk-arrow.png" width="600">
+
+<p>如要再看一次，或在做出變更後測試，請按一下網路標籤左上角的帶有斜線的圓圈：</p>
+<img alt="延遲載入模組圖" src="https://angular.dev/assets/images/guide/modules/lazy-loading-clear.gif" width="200">
+
+<p>然後使用 <kbd>⌘ Cmd</kbd>+<kbd>R</kbd> 或 <kbd>Ctrl</kbd>+<kbd>R</kbd> 重新載入，視您的平台而定。</p>
+
+  <h2 id="forroot--forchild"><code>forRoot()</code> 和 <code>forChild()</code></h2>
+  <a href="#forroot--forchild" class="docs-anchor" tabindex="-1" aria-label="Link to <code>forRoot()</code> 和 <code>forChild()</code>"></a>
+  <p>您可能注意到 Angular CLI 將 <code>RouterModule.forRoot(routes)</code> 新增至 <code>AppRoutingModule</code> <code>imports</code> 陣列中。
+這讓 Angular 知道 <code>AppRoutingModule</code> 是路由模組，而 <code>forRoot()</code> 則指定這是根路由模組。
+它會設定您傳遞給它的所有路由，讓您存取路由器指令，並註冊 <code>Router</code> 服務。
+在 <code>AppRoutingModule</code> 中，僅在應用程式內使用 <code>forRoot()</code> 一次。</p>
+<p>Angular CLI 也會將 <code>RouterModule.forChild(routes)</code> 新增至功能路由模組。
+這樣，Angular 便知道路由清單僅負責提供額外的路由，並用於功能模組。
+您可以在多個模組中使用 <code>forChild()</code>。</p>
+<p><code>forRoot()</code> 方法負責路由器的 <em>全域</em> 注入器設定。
+<code>forChild()</code> 方法沒有注入器設定。
+它使用指令，例如 <code>RouterOutlet</code> 和 <code>RouterLink</code>。
+如需更多資訊，請參閱單一服務指南的 <a href="guide/ngmodules/singleton-services#forRoot"><code>forRoot()</code> 模式</a> 區段。</p>
+
+  <h2 id="">預載</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 預載"></a>
+  <p>預載透過背景載入應用程式部分來改善 UX。
+您可以預載模組、獨立元件或元件資料。</p>
+
+  <h3 id="">預載入模組和獨立元件</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 預載入模組和獨立元件"></a>
+  <p>預先載入模組和獨立元件可讓您的應用程式在背景中載入部份內容，藉此改善 UX。這樣一來，當使用者啟用路由時，就不用等待元素下載。</p>
+<p>為了啟用所有延遲載入模組和獨立元件的預載，請從 Angular <code>router</code> 匯入 <code>PreloadAllModules</code> 標記。</p>
+
+  <h3 id="">基於模組的應用程式</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 基於模組的應用程式"></a>
+  <div class="docs-code" header="AppRoutingModule (excerpt)">
+    <div class="docs-code-header"><h3>AppRoutingModule (excerpt)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">PreloadAllModules</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div></code>
+    </pre>
+  </div><p>然後，在 <code>AppRoutingModule</code> 的 <code>RouterModule.forRoot()</code> 呼叫中指定您的預載入策略。</p>
+<div class="docs-code" header="AppRoutingModule (excerpt)">
+    <div class="docs-code-header"><h3>AppRoutingModule (excerpt)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title class_">RouterModule</span>.<span class="hljs-title function_">forRoot</span>(</div><div class="hljs-ln-line">  appRoutes,</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">preloadingStrategy</span>: <span class="hljs-title class_">PreloadAllModules</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">)</div></code>
+    </pre>
+  </div>
+  <h3 id="">獨立應用程式</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 獨立應用程式"></a>
+  <p>對於獨立應用程式，透過在 <code>app.config.ts</code> 中將 <code>withPreloading</code> 加入 <code>provideRouter</code> 的 RouterFeatures 來設定預載入策略</p>
+<div class="docs-code" header="app.config.ts">
+    <div class="docs-code-header"><h3>app.config.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ApplicationConfig</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title class_">PreloadAllModules</span>,</div><div class="hljs-ln-line">  provideRouter</div><div class="hljs-ln-line highlighted">  withPreloading,</div><div class="hljs-ln-line">} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { routes } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.routes'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideRouter</span>(</div><div class="hljs-ln-line">      routes,</div><div class="hljs-ln-line highlighted">      <span class="hljs-title function_">withPreloading</span>(<span class="hljs-title class_">PreloadAllModules</span>)</div><div class="hljs-ln-line">    ),</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div>
+  <h3 id="">預先載入元件資料</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 預先載入元件資料"></a>
+  <p>若要預載元件資料，請使用 <code>resolver</code>。
+Resolvers 透過在所有必要的資料都可供完整顯示頁面之前封鎖頁面載入來改善 UX。</p>
+
+  <h4 id="">解析器</h4>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 解析器"></a>
+  <p>建立一個解析器服務。
+使用 Angular CLI，建立服務的指令如下：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate service &lt;service-name&gt;</div></code>
+    </pre>
+  </div><p>在新建的服務中，實作由 <code>@angular/router</code> 套件提供的 <code>Resolve</code> 介面：</p>
+<div class="docs-code" header="Resolver service (excerpt)">
+    <div class="docs-code-header"><h3>Resolver service (excerpt)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Resolve</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">…</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">/*An interface that represents your data model*/</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Crisis</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CrisisDetailResolverService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Resolve</span>&lt;<span class="hljs-title class_">Crisis</span>&gt; {</div><div class="hljs-ln-line">  <span class="hljs-title function_">resolve</span>(<span class="hljs-attr">route</span>: <span class="hljs-title class_">ActivatedRouteSnapshot</span>, <span class="hljs-attr">state</span>: <span class="hljs-title class_">RouterStateSnapshot</span>): <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-title class_">Crisis</span>&gt; {</div><div class="hljs-ln-line">    <span class="hljs-comment">// your logic goes here</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>將此解析器匯入至您的模組路由模組中。</p>
+<div class="docs-code" header="Feature module's routing module (excerpt)">
+    <div class="docs-code-header"><h3>Feature module's routing module (excerpt)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CrisisDetailResolverService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./crisis-detail-resolver.service'</span>;</div></code>
+    </pre>
+  </div><p>將 <code>resolve</code> 物件新增到元件的 <code>route</code> 組態。</p>
+<div class="docs-code" header="Feature module's routing module (excerpt)">
+    <div class="docs-code-header"><h3>Feature module's routing module (excerpt)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{</div><div class="hljs-ln-line">  <span class="hljs-attr">path</span>: <span class="hljs-string">'/your-path'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">component</span>: <span class="hljs-title class_">YourComponent</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">resolve</span>: {</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">crisis</span>: <span class="hljs-title class_">CrisisDetailResolverService</span></div><div class="hljs-ln-line highlighted">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>在元件的建構函式中，注入一個代表目前路由的 <code>ActivatedRoute</code> 類別實例。</p>
+<div class="docs-code" header="Component's constructor (excerpt)">
+    <div class="docs-code-header"><h3>Component's constructor (excerpt)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { ActivatedRoute } from <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component({ … })</span></div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">YourComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">constructor</span>(<span class="hljs-keyword">private</span> route: ActivatedRoute) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>使用注入的 <code>ActivatedRoute</code> 類別實例存取與指定路徑相關的 <code>data</code>。</p>
+<div class="docs-code" header="Component's ngOnInit lifecycle hook (excerpt)">
+    <div class="docs-code-header"><h3>Component's ngOnInit lifecycle hook (excerpt)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ActivatedRoute</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ … })</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">YourComponent</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> route: ActivatedRoute</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">route</span>.<span class="hljs-property">data</span></div><div class="hljs-ln-line">      .<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {</div><div class="hljs-ln-line">        <span class="hljs-keyword">const</span> <span class="hljs-attr">crisis</span>: <span class="hljs-title class_">Crisis</span> = data.<span class="hljs-property">crisis</span>;</div><div class="hljs-ln-line">        <span class="hljs-comment">// …</span></div><div class="hljs-ln-line">      });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">疑難排解延遲載入模組</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 疑難排解延遲載入模組"></a>
+  <p>在延遲載入模組時的一個常見錯誤是，在應用程式中的多個位置匯入共用模組。
+首先，使用 Angular CLI 並包含 <code>--route route-name</code> 參數來產生模組，測試此狀況，其中 <code>route-name</code> 是模組的名稱。
+接下來，建立不帶有 <code>--route</code> 參數的模組。
+如果帶有 <code>--route</code> 參數的 <code>ng generate module</code> 傳回錯誤，但沒有該參數則可以正確執行，您可能在多個位置匯入了相同的模組。</p>
+<p>請記住，應在應用程式基礎處匯入許多常見的 Angular 模組。</p>
+<p>有關 Angular 模組的更多資訊，請參閱 <a href="/guide/ngmodules">NgModules</a>。</p>
+
+  <h2 id="-ngmodules-">關於 NgModules 和路由的更多資訊</h2>
+  <a href="#-ngmodules-" class="docs-anchor" tabindex="-1" aria-label="Link to 關於 NgModules 和路由的更多資訊"></a>
+  <p>您可能也有興趣：</p>
+
+  <ul class="docs-list">
+    <li><a href="guide/routing">路由和導航</a></li>
+<li><a href="guide/ngmodules/providers">提供者</a></li>
+<li><a href="guide/ngmodules/module-types">功能模組類型</a></li>
+<li><a href="https://web.dev/route-level-code-splitting-in-angular" target="_blank">Angular 中的路由級別程式碼拆分</a></li>
+<li><a href="https://web.dev/route-preloading-in-angular" target="_blank">Angular 中的路線預載入策略</a></li>
+
+  </ul>
+  

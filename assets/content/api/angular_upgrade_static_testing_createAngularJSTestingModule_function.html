@@ -1,0 +1,102 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/upgrade/static/testing</span><div class="docs-reference-title"><div><h1>createAngularJSTestingModule</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div></div><p class="docs-reference-description"><p>A helper function to use when unit testing AngularJS services that depend upon downgraded Angular
+services.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">createAngularJSTestingModule</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">angularModules</span>: <span class="hljs-built_in">any</span>[]</div><div class="hljs-ln-line ">): <span class="hljs-built_in">string</span>;</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>A helper function to use when unit testing AngularJS services that depend upon downgraded Angular
+services.</p>
+<p>This function returns an AngularJS module that is configured to wire up the AngularJS and Angular
+injectors without the need to actually bootstrap a hybrid application.
+This makes it simpler and faster to unit test services.</p>
+<p>Use the returned AngularJS module in a call to
+<a href="https://docs.angularjs.org/api/ngMock/function/angular.mock.module"><code>angular.mocks.module</code></a> to
+include this module in the unit test injector.</p>
+<p>In the following code snippet, we are configuring the <code>$injector</code> with two modules:
+The AngularJS <code>ng1AppModule</code>, which is the AngularJS part of our hybrid application and the
+<code>Ng2AppModule</code>, which is the Angular part.</p>
+<p><code-example path="upgrade/static/ts/full/module.spec.ts"
+region="angularjs-setup"></code-example></p>
+<p>Once this is done we can get hold of services via the AngularJS <code>$injector</code> as normal.
+Services that are (or have dependencies on) a downgraded Angular service, will be instantiated as
+needed by the Angular root <code>Injector</code>.</p>
+<p>In the following code snippet, <code>heroesService</code> is a downgraded Angular service that we are
+accessing from AngularJS.</p>
+<p><code-example path="upgrade/static/ts/full/module.spec.ts"
+region="angularjs-spec"></code-example></p>
+<div class="alert is-important">
+
+<p>This helper is for testing services not components.
+For Component testing you must still bootstrap a hybrid app. See <code>UpgradeModule</code> or
+<code>downgradeModule</code> for more information.</p>
+</div>
+
+<div class="alert is-important">
+
+<p>The resulting configuration does not wire up AngularJS digests to Zone hooks. It is the
+responsibility of the test writer to call <code>$rootScope.$apply</code>, as necessary, to trigger
+AngularJS handlers of async events from Angular.</p>
+</div>
+
+<div class="alert is-important">
+
+<p>The helper sets up global variables to hold the shared Angular and AngularJS injectors.</p>
+
+    <ul class="docs-list">
+      <li>Only call this helper once per spec.</li>
+<li>Do not use <code>createAngularJSTestingModule</code> in the same spec as <code>createAngularTestingModule</code>.</li>
+
+    </ul>
+    </div>
+
+<p>Here is the example application and its unit tests that use <code>createAngularTestingModule</code>
+and <code>createAngularJSTestingModule</code>.</p>
+<code-tabs>
+ <code-pane header="module.spec.ts" path="upgrade/static/ts/full/module.spec.ts"></code-pane>
+ <code-pane header="module.ts" path="upgrade/static/ts/full/module.ts"></code-pane>
+</code-tabs></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>createAngularJSTestingModule</h3><div><code>string</code></div></div><span></span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>A helper function to use when unit testing AngularJS services that depend upon downgraded Angular
+services.</p>
+<p>This function returns an AngularJS module that is configured to wire up the AngularJS and Angular
+injectors without the need to actually bootstrap a hybrid application.
+This makes it simpler and faster to unit test services.</p>
+<p>Use the returned AngularJS module in a call to
+<a href="https://docs.angularjs.org/api/ngMock/function/angular.mock.module"><code>angular.mocks.module</code></a> to
+include this module in the unit test injector.</p>
+<p>In the following code snippet, we are configuring the <code>$injector</code> with two modules:
+The AngularJS <code>ng1AppModule</code>, which is the AngularJS part of our hybrid application and the
+<code>Ng2AppModule</code>, which is the Angular part.</p>
+<p><code-example path="upgrade/static/ts/full/module.spec.ts"
+region="angularjs-setup"></code-example></p>
+<p>Once this is done we can get hold of services via the AngularJS <code>$injector</code> as normal.
+Services that are (or have dependencies on) a downgraded Angular service, will be instantiated as
+needed by the Angular root <code>Injector</code>.</p>
+<p>In the following code snippet, <code>heroesService</code> is a downgraded Angular service that we are
+accessing from AngularJS.</p>
+<p><code-example path="upgrade/static/ts/full/module.spec.ts"
+region="angularjs-spec"></code-example></p>
+<div class="alert is-important">
+
+<p>This helper is for testing services not components.
+For Component testing you must still bootstrap a hybrid app. See <code>UpgradeModule</code> or
+<code>downgradeModule</code> for more information.</p>
+</div>
+
+<div class="alert is-important">
+
+<p>The resulting configuration does not wire up AngularJS digests to Zone hooks. It is the
+responsibility of the test writer to call <code>$rootScope.$apply</code>, as necessary, to trigger
+AngularJS handlers of async events from Angular.</p>
+</div>
+
+<div class="alert is-important">
+
+<p>The helper sets up global variables to hold the shared Angular and AngularJS injectors.</p>
+
+    <ul class="docs-list">
+      <li>Only call this helper once per spec.</li>
+<li>Do not use <code>createAngularJSTestingModule</code> in the same spec as <code>createAngularTestingModule</code>.</li>
+
+    </ul>
+    </div>
+
+<p>Here is the example application and its unit tests that use <code>createAngularTestingModule</code>
+and <code>createAngularJSTestingModule</code>.</p>
+<code-tabs>
+ <code-pane header="module.spec.ts" path="upgrade/static/ts/full/module.spec.ts"></code-pane>
+ <code-pane header="module.ts" path="upgrade/static/ts/full/module.ts"></code-pane>
+</code-tabs></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">angularModules</span><code>any[]</code><div class="docs-parameter-description"><p>a collection of Angular modules to include in the configuration.</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>string</code></div></div></div></div></div></div></div>

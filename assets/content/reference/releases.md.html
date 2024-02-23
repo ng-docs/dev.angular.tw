@@ -1,0 +1,331 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">Angular 版本和版本發佈</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/releases.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>我們了解您需要 Angular 框架的穩定性。
+穩定性可確保可重複使用的元件和程式庫、教學課程、工具和學習方法不會意外地過時。
+穩定性對於 Angular 周圍的生態系統蓬勃發展至關重要。</p>
+<p>我們也與您分享 Angular 持續演進的必要性。
+我們努力確保您建立其上的基礎不斷改進，並讓您隨時掌握其餘網路生態系統和使用者需求。</p>
+<p>這份文件包含我們遵循的慣例，以提供一個領先的應用程式開發平台，並兼具穩定性。
+我們努力確保未來變更始終以可預測的方式推出。
+我們希望所有依賴 Angular 的人知道何時以及如何新增新功能，並在淘汰舊功能時做好萬全準備。</p>
+<p>有時候，<em>重大變更</em>（例如移除 API 或功能）是必要的，才能創新並跟上不斷變化的最佳實務、變更的依賴項或網路平台的轉變。這些重大變更會經歷我們的 <a href="#deprecation-policy">棄用政策</a> 中說明的棄用程序。</p>
+<p>為了讓這些轉換盡可能直接，Angular 團隊做出以下承諾：</p>
+
+  <ul class="docs-list">
+    <li>我們努力減少重大變更的次數，並在可能的情況下提供遷移工具</li>
+<li>我們遵循此處所述的棄用政策，因此您有時間將應用程式更新為最新 API 和最佳實務</li>
+
+  </ul>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 本文件所述的規範適用於 Angular 2.0 及後續版本。</p>
+
+    </div>
+    <p>如果您目前使用的是 AngularJS，請參閱 <a href="https://angular.io/guide/upgrade" title=從 Angular JS 升級 target="_blank">從 AngularJS 升級</a>。
+<em>AngularJS</em> 是所有 v1.x 版本的 Angular 的名稱。</p>
+
+  <h2 id="angular-">Angular 版本</h2>
+  <a href="#angular-" class="docs-anchor" tabindex="-1" aria-label="Link to Angular 版本"></a>
+  <p>Angular 版本號碼指出發行版引入的變更層級。
+使用 <a href="https://semver.org/" title=語意版本規範 target="_blank">語意版本</a> 可幫助您了解更新至新版本的潛在影響。</p>
+<p>Angular 版本號碼分為三部分：<code>major.minor.patch</code>。
+例如，版本 7.2.11 表示主要版本 7、次要版本 2 和修補程式等級 11。</p>
+<p>版本號碼會根據發行版本中包含的變更等級而遞增。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">變更等級</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">重大版本發布</td>
+<td align="left">包含重要的新功能，預期在更新期間會有一些但最少的開發人員協助。在更新到新的重大版本時，您可能需要執行更新腳本、重構程式碼、執行額外的測試以及學習新的 API。</td>
+</tr>
+<tr>
+<td align="left">次要版本發布</td>
+<td align="left">包含較小的功能。次要版本完全向後相容；在更新期間預期沒有開發人員協助，但您可以選擇修改您的應用程式和程式庫，以開始使用版本中新增的 API、功能和功能。我們透過擴充支援的版本來更新次要版本中的對等依賴項，但我們不要求專案更新這些依賴項。</td>
+</tr>
+<tr>
+<td align="left">修補程序版本發布</td>
+<td align="left">風險低、錯誤修正版本。在更新期間預期沒有開發人員協助。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 自 Angular 版本 7 起，Angular core 和 CLI 的主要版本已對齊。</p>
+
+    </div>
+    <p>這表示要使用 CLI 來開發 Angular 應用程式，<code>@angular/core</code> 和 CLI 的版本必須相同。</p>
+
+  <h3 id="">預覽版本</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 預覽版本"></a>
+  <p>我們讓您可以預覽即將推出的內容，方法是為每個主要和次要版本提供「下一個」和候選版本 (<code>rc</code>) 預發行版本：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">預發佈類型</th>
+<th align="left">詳細資訊</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">下一個</td>
+<td align="left">正在積極開發和測試中的發佈版本。下一個發佈版本以附有 <code>-next</code> 識別符的發佈標籤表示，例如 <code>8.1.0-next.0</code>。</td>
+</tr>
+<tr>
+<td align="left">發佈候選版本</td>
+<td align="left">已完成功能且正在進行最終測試的發佈版本。發佈候選版本以附有 <code>-rc</code> 識別符的發佈標籤表示，例如版本 <code>8.1.0-rc.0</code>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>文件最新發布的 <code>next</code> 或 <code>rc</code> 預覽版可於 <a href="https://next.angular.dev" target="_blank">next.angular.dev</a> 取得。</p>
+
+  <h2 id="">發布頻率</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 發布頻率"></a>
+  <p>我們努力維持定期的發佈時間表，以便您可以規劃並協調您的更新與 Angular 的持續演進。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 日期僅供一般參考，如有變更，恕不另行通知。</p>
+
+    </div>
+    <p>一般而言，預期以下的發布週期：</p>
+
+  <ul class="docs-list">
+    <li>每 6 個月一個重大版本</li>
+<li>每個重大版本有 1-3 個次要版本</li>
+<li>每週幾乎都有修補版本和預發布 (<code>next</code> 或 <code>rc</code>) 版本</li>
+
+  </ul>
+  <p>這種發布節奏讓急切的開發人員在功能完全開發並透過我們的程式碼審查和整合測試流程後即可存取新功能，同時也為希望在功能透過 Google 和使用預發佈版本的其他開發人員驗證後才接收功能的生產用戶維持平台的穩定性和可靠性。</p>
+
+  <h2 id="">支援政策與時程表</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 支援政策與時程表"></a>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 提供的預估日期僅供一般參考，並可能變更。</p>
+
+    </div>
+    
+  <h3 id="">發佈時程</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 發佈時程"></a>
+  
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">版本</th>
+<th align="left">日期</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">v17.1</td>
+<td align="left">2024-01-15 週</td>
+</tr>
+<tr>
+<td align="left">v17.2</td>
+<td align="left">2024-02-12 週</td>
+</tr>
+<tr>
+<td align="left">v17.3</td>
+<td align="left">2024-03-11 週</td>
+</tr>
+<tr>
+<td align="left">v18.0</td>
+<td align="left">2024-05-20 週</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="">支援視窗</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 支援視窗"></a>
+  <p>所有主要版本通常支援 18 個月。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">支援階段</th>
+<th align="left">支援時間</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">活躍</td>
+<td align="left">6 個月</td>
+<td align="left">定期排程更新和修補程式發佈</td>
+</tr>
+<tr>
+<td align="left">長期 (LTS)</td>
+<td align="left">12 個月</td>
+<td align="left">只有 <a href="#lts-fixes">重大修正和安全性修補程式</a> 發佈</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="">積極支援的版本</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 積極支援的版本"></a>
+  <p>以下表格提供受支援 Angular 版本的狀態。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">版本</th>
+<th align="left">狀態</th>
+<th align="left">發布日期</th>
+<th align="left">有效期結束</th>
+<th align="left">LTS 結束</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">^17.0.0</td>
+<td align="left">有效</td>
+<td align="left">2023-11-08</td>
+<td align="left">2024-05-08</td>
+<td align="left">2025-05-15</td>
+</tr>
+<tr>
+<td align="left">^16.0.0</td>
+<td align="left">LTS</td>
+<td align="left">2023-05-03</td>
+<td align="left">2023-11-08</td>
+<td align="left">2024-11-08</td>
+</tr>
+<tr>
+<td align="left">^15.0.0</td>
+<td align="left">LTS</td>
+<td align="left">2022-11-18</td>
+<td align="left">2023-05-03</td>
+<td align="left">2024-05-18</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>Angular 版本 v2 到 v14 不再支援。</p>
+
+  <h3 id="lts-">LTS 修復</h3>
+  <a href="#lts-" class="docs-anchor" tabindex="-1" aria-label="Link to LTS 修復"></a>
+  <p>作為一般規則，如果符合下列條件之一，則會考慮為 LTS 版本提供修正：</p>
+
+  <ul class="docs-list">
+    <li>新識別安全漏洞，</li>
+<li>自 LTS 開始的迴歸，是由第三方變更造成，例如新的瀏覽器版本。</li>
+
+  </ul>
+  
+  <h2 id="">棄用政策</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 棄用政策"></a>
+  <p>當 Angular 團隊打算移除 API 或功能時，它會被標記為 <em>已棄用</em>。這會在 API 過時、被其他 API 取代或已中斷時發生。已棄用的 API 會在棄用階段繼續可用，此階段至少會持續兩個主要版本（大約一年）。</p>
+<p>為了確保您有充足的時間和明確的更新路徑，這是我們的棄用政策：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">棄用階段</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">公告</td>
+<td align="left">我們在 <a href="https://github.com/angular/angular/blob/main/CHANGELOG.md" title=Angular 變更日誌 target="_blank">變更日誌</a> 中公告已棄用的 API 和功能。已棄用的 API 會以 <del>刪除線</del> 顯示在 <a href="api?status=deprecated">文件</a> 中。當我們公告棄用時，我們也會公告建議的更新路徑。此外，所有已棄用的 API 都會在對應的文件中註解為 <code>@deprecated</code>，使文字編輯器和 IDE 能夠在您的專案依賴它們時提供提示。</td>
+</tr>
+<tr>
+<td align="left">棄用期間</td>
+<td align="left">當 API 或功能被棄用時，它至少會在接下來的兩個主要版本中繼續存在 (至少 12 個月)。之後，已棄用的 API 和功能將成為移除候選。棄用可以在任何版本中公告，但已棄用 API 或功能的移除只會在主要版本中發生。在已棄用的 API 或功能被移除之前，它會根據 LTS 支援政策進行維護，這意味著只有關鍵和安全性問題會獲得修復。</td>
+</tr>
+<tr>
+<td align="left">npm 依賴項</td>
+<td align="left">我們只會在主要版本中進行需要變更您的應用程式的 npm 依賴項更新。在次要版本中，我們會透過擴充支援的版本來更新對等依賴項，但我們不要求專案在未來的主要版本之前更新這些依賴項。這意味著在次要 Angular 版本期間，Angular 應用程式和函式庫中的 npm 依賴項更新是可選的。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">相容性政策</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 相容性政策"></a>
+  <p>Angular 是許多套件、子專案和工具的集合。
+為了防止意外使用私人 API，並讓您清楚了解此處所述做法涵蓋的內容，我們文件化了什麼是和什麼不是我們公開的 API 表面。
+有關詳細資訊，請參閱 <a href="https://github.com/angular/angular/blob/main/docs/PUBLIC_API.md" title=Angular 的受支援公開 API 表面 target="_blank">Angular 的受支援公開 API 表面</a>。</p>
+<p>為了保證 Angular 的向後相容性，我們在合併任何變更之前都會執行一系列檢查：</p>
+
+  <ul class="docs-list">
+    <li>單元測試和整合測試</li>
+<li>比較變更前後公開 API 表面的類型定義</li>
+<li>執行所有依賴 Angular 的 Google 應用程式測試</li>
+
+  </ul>
+  <p>任何對公共 API 表面所做的變更均依照先前所述的版本控制、支援和棄用政策執行。在特殊情況下，例如重大安全性修補程式，修正程式可能會引入向後不相容的變更。此類特殊情況會在框架的官方溝通管道中附有明確的通知。</p>
+
+  <h2 id="">破壞性變更政策與更新路徑</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 破壞性變更政策與更新路徑"></a>
+  <p>中斷變更要求您進行作業，因為變更後的狀態與變更前的狀態不相容。您可以在 <a href="#compatibility-policy">相容性政策</a> 中找到此規則的罕見例外。中斷變更的範例是移除公開 API 或其他 Angular 類型定義的變更、變更呼叫時機，或更新到 Angular 的相依項的新版本，其中包含中斷變更本身。</p>
+<p>如要支援您因 Angular 中的重大變更而遇到的問題：</p>
+
+  <ul class="docs-list">
+    <li>在移除公開 API 前，我們會遵循我們的 <a href="#deprecation-policy">棄用政策</a></li>
+<li>透過 <code>ng update</code> 指令支援更新自動化。它提供程式碼轉換，我們常常在 Google 數十萬個專案中預先測試過</li>
+<li>有關如何從一個主要版本更新到另一個主要版本的逐步說明，請參閱 <a href="https://update.angular.io/" target="_blank">&quot;Angular 更新指南&quot;</a></li>
+
+  </ul>
+  <p>只要符合下列標準，您可以使用 <code>ng update</code> 更新到任何版本的 Angular：</p>
+
+  <ul class="docs-list">
+    <li>您想更新 <em>到</em> 的版本受支援。</li>
+<li>您想更新 <em>從</em> 的版本在您想升級到的版本的一個主要版本內。</li>
+
+  </ul>
+  <p>例如，您可以從版本 11 更新到版本 12，前提是版本 12 仍受支援。
+如果您想跨多個主要版本更新，請一次執行一個主要版本更新。
+例如，要從版本 10 更新到版本 12：</p>
+
+    <ol class="docs-ordered-list">
+      <li>從版本 10 更新到版本 11。</li>
+<li>從版本 11 更新到版本 12。</li>
+
+    </ol>
+    
+  <h2 id="">開發人員預覽</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 開發人員預覽"></a>
+  <p>偶爾我們在「開發人員預覽版」標籤下引入新的 API。這些 API 具有完整的功能且已進行優化，但我們尚未準備好根據正常的棄用政策讓它們穩定下來。</p>
+<p>這可能是因為我們想在穩定化之前從實際應用程式收集回饋，或者因為相關文件或遷移工具尚未完全完成。</p>
+<p>文件中所述的政策和做法不適用於標示為開發人員預覽版的 API。此類 API 隨時可能變更，即使是在架構的新修補程式版本中也是如此。團隊應自行決定使用開發人員預覽版 API 的好處是否值得冒著在我們正常使用語意版本控制之外發生重大變更的風險。</p>

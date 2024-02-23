@@ -1,0 +1,52 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">使用 RouterLink 進行導航</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/14-routerLink/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>在應用程式的目前狀態中，當我們點擊應用程式內存在的內部連結時，整個頁面都會重新整理。雖然在小型應用程式中這似乎無關緊要，但對於內容較多的大型頁面，使用者必須重新下載資源並再次執行計算，這可能會對效能造成影響。</p>
+<p>在這個活動中，你將會學習如何利用 <code>RouterLink</code> 指令來充分利用 Angular Router。</p>
+<hr>
+
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-routerlink-">匯入 <code>RouterLink</code> 指令</h3>
+  <a href="#-routerlink-" class="docs-anchor" tabindex="-1" aria-label="Link to 匯入 <code>RouterLink</code> 指令"></a>
+  
+      <p>在 <code>app.component.ts</code> 中將 <code>RouterLink</code> 指令匯入新增到現有 <code>@angular/router</code> 匯入陳述式，並將其新增到元件裝飾器的 <code>imports</code> 陣列中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">RouterLink</span>, <span class="hljs-title class_">RouterOutlet</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">RouterLink</span>, <span class="hljs-title class_">RouterOutlet</span>],</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-routerlink">在範本中新增 <code>routerLink</code></h3>
+  <a href="#-routerlink" class="docs-anchor" tabindex="-1" aria-label="Link to 在範本中新增 <code>routerLink</code>"></a>
+  
+      <p>若要使用 <code>RouterLink</code> 指令，請將 <code>href</code> 屬性替換為 <code>routerLink</code>。使用此變更更新範本。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">RouterLink</span>, <span class="hljs-title class_">RouterOutlet</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line">    &lt;a routerLink="/"&gt;Home&lt;/a&gt;</div><div class="hljs-ln-line">    &lt;a routerLink="/user"&gt;User&lt;/a&gt;</div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">RouterLink</span>, <span class="hljs-title class_">RouterOutlet</span>],</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p>當您現在點擊導覽中的連結，您不應該會看到任何閃爍，而只有頁面本身的內容（即 <code>router-outlet</code><span class="docs-emoji">）被變更 🎉</span></p>
+<p>恭喜你學會使用 Angular 來學習路由。這只是 <code>Router</code> API 的皮毛，想了解更多，請查看 <a href="guide/routing">Angular 路由文件</a>。</p>

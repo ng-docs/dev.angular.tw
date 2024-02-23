@@ -1,0 +1,56 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">iframe 元素上的不安全繫結</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0910.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>當 Angular 在 <code>&lt;iframe&gt;</code> 元素上使用以下屬性名稱偵測到屬性繫結或屬性繫結時，您會看到此錯誤：</p>
+
+  <ul class="docs-list">
+    <li>sandbox</li>
+<li>allow</li>
+<li>allowFullscreen</li>
+<li>referrerPolicy</li>
+<li>csp</li>
+<li>fetchPriority</li>
+
+  </ul>
+  <p>以下提到的屬性會影響 <code>&lt;iframe&gt;</code> 的安全性模型設定，而且在設定 <code>src</code> 或 <code>srcdoc</code> 屬性之前套用它們非常重要。為了強制執行這一點，Angular 要求在 <code>&lt;iframe&gt;</code> 上將這些屬性設定為靜態屬性，因此這些值會在元素建立時設定，並且在 <code>&lt;iframe&gt;</code> 執行個體的整個生命週期中保持不變。</p>
+<p>當使用具有以下其中一個屬性名稱的屬性繫結時，就會擲出錯誤：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> [<span class="hljs-attr">sandbox</span>]=<span class="hljs-string">"'allow-scripts'"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div></code>
+    </pre>
+  </div><p>or 當它是屬性繫結時：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> [<span class="hljs-attr">attr.sandbox</span>]=<span class="hljs-string">"'allow-scripts'"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div></code>
+    </pre>
+  </div><p>另外，當在 Directive 的主機繫結中使用類似模式時，也會引發錯誤：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'iframe'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">host</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">'[sandbox]'</span>: <span class="hljs-string">`'allow-scripts'`</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">'[attr.sandbox]'</span>: <span class="hljs-string">`'allow-scripts'`</span>,</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">IframeDirective</span> {}</div></code>
+    </pre>
+  </div>
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>錯誤訊息包含具有範本的元件名稱，其中包含具有不安全繫結的 <code>&lt;iframe&gt;</code> 元素。</p>
+<p>建議的解決方案是將提到的屬性作為靜態屬性使用，例如：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">sandbox</span>=<span class="hljs-string">"allow-scripts"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div></code>
+    </pre>
+  </div><p>如果您需要針對這些屬性有不同的值（取決於各種條件），您可以在 <code>&lt;iframe&gt;</code> 元素上使用 <code>*ngIf</code> 或 <code>*ngSwitch</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"someConditionA"</span> <span class="hljs-attr">sandbox</span>=<span class="hljs-string">"allow-scripts"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"someConditionB"</span> <span class="hljs-attr">sandbox</span>=<span class="hljs-string">"allow-forms"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"someConditionC"</span> <span class="hljs-attr">sandbox</span>=<span class="hljs-string">"allow-popups"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div></code>
+    </pre>
+  </div>

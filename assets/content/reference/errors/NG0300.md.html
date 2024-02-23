@@ -1,0 +1,37 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">選擇器衝突</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0300.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-video-container">
+      <iframe
+      class="docs-video"
+      src="https://www.youtube.com/embed/z_3Z5mOm59I"
+      
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      credentialless
+      title="Video player"
+      ></iframe>
+    </div>
+    <p>兩個或多個 <a href="guide/components">元件</a> 使用相同的元素選取器。因為一個元素只能關聯到一個元件，所以選取器必須是唯一的字串，以防止 Angular 產生歧義。</p>
+
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>使用錯誤訊息中的元素名稱，在你的程式碼庫中搜尋你使用相同選擇器宣告的地方：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'YOUR_STRING'</span>,</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p>確保每個元件都有唯一的 CSS 選擇器。這將保證 Angular 呈現您預期的元件。</p>
+<p>如果您使用這個選擇器標記名稱時遇到尋找多個元件的問題，請檢查來自匯入元件庫（例如 Angular Material）的元件。請務必遵循選擇器的 <a href="style-guide#component-selectors">最佳實務</a>以避免衝突。</p>

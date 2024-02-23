@@ -1,0 +1,116 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>NgOptimizedImage</h1><div class="docs-api-item-label" data-mode="full" data-type="directive">directive</div></div></div><p class="docs-reference-description"><p>Directive that improves image loading performance by enforcing best practices.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">NgOptimizedImage</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngSrc">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">ngSrc</span>: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngSrcset">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">ngSrcset</span>: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="sizes">  <span class="hljs-meta">@Input</span>() sizes?: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="width">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">width</span>: <span class="hljs-built_in">number</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="height">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">height</span>: <span class="hljs-built_in">number</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="loading">  <span class="hljs-meta">@Input</span>() loading?: <span class="hljs-string">&quot;auto&quot;</span> | <span class="hljs-string">&quot;lazy&quot;</span> | <span class="hljs-string">&quot;eager&quot;</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="priority">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">priority</span>: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="loaderParams">  <span class="hljs-meta">@Input</span>() loaderParams?: { [<span class="hljs-attr">key</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>; };</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="disableOptimizedSrcset">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">disableOptimizedSrcset</span>: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="fill">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">fill</span>: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="placeholder">  <span class="hljs-meta">@Input</span>() placeholder?: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="placeholderConfig">  <span class="hljs-meta">@Input</span>() placeholderConfig?: <span class="hljs-title class_">ImagePlaceholderConfig</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="src">  <span class="hljs-meta">@Input</span>() src?: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="srcset">  <span class="hljs-meta">@Input</span>() srcset?: <span class="hljs-built_in">string</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>Directive that improves image loading performance by enforcing best practices.</p>
+<p><code>NgOptimizedImage</code> ensures that the loading of the Largest Contentful Paint (LCP) image is
+prioritized by:</p>
+
+    <ul class="docs-list">
+      <li>Automatically setting the <code>fetchpriority</code> attribute on the <code>&lt;img&gt;</code> tag</li>
+<li>Lazy loading non-priority images by default</li>
+<li>Automatically generating a preconnect link tag in the document head</li>
+
+    </ul>
+    <p>In addition, the directive:</p>
+
+    <ul class="docs-list">
+      <li>Generates appropriate asset URLs if a corresponding <code>ImageLoader</code> function is provided</li>
+<li>Automatically generates a srcset</li>
+<li>Requires that <code>width</code> and <code>height</code> are set</li>
+<li>Warns if <code>width</code> or <code>height</code> have been set incorrectly</li>
+<li>Warns if the image will be visually distorted when rendered</li>
+
+    </ul></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>The <code>NgOptimizedImage</code> directive is marked as <a href="guide/components/importing">standalone</a> and can
+be imported directly.</p>
+<p>Follow the steps below to enable and use the directive:</p>
+
+      <ol class="docs-ordered-list">
+        <li>Import it into the necessary NgModule or a standalone Component.</li>
+<li>Optionally provide an <code>ImageLoader</code> if you use an image hosting service.</li>
+<li>Update the necessary <code>&lt;img&gt;</code> tags in templates and replace <code>src</code> attributes with <code>ngSrc</code>.
+Using a <code>ngSrc</code> allows the directive to control when the <code>src</code> gets set, which triggers an image
+download.</li>
+
+      </ol>
+      <p>Step 1: import the <code>NgOptimizedImage</code> directive.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgOptimizedImage</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/common&#x27;</span>;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-comment">// Include it into the necessary NgModule</span></span><span class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">NgOptimizedImage</span>],</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> {}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-comment">// ... or a standalone Component</span></span><span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span></span><span class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">NgOptimizedImage</span>],</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyStandaloneComponent</span> {}</span>
+          </code>
+        </pre>
+      </div>
+    <p>Step 2: configure a loader.</p>
+<p>To use the <strong>default loader</strong>: no additional code changes are necessary. The URL returned by the
+generic loader will always match the value of &quot;src&quot;. In other words, this loader applies no
+transformations to the resource URL and the value of the <code>ngSrc</code> attribute will be used as is.</p>
+<p>To use an existing loader for a <strong>third-party image service</strong>: add the provider factory for your
+chosen service to the <code>providers</code> array. In the example below, the Imgix loader is used:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {provideImgixLoader} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/common&#x27;</span>;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-comment">// Call the function and add the result to the `providers` array:</span></span><span class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">  <span class="hljs-title function_">provideImgixLoader</span>(<span class="hljs-string">&quot;https://my.base.url/&quot;</span>),</span><span class="hljs-ln-line">],</span>
+          </code>
+        </pre>
+      </div>
+    <p>The <code>NgOptimizedImage</code> directive provides the following functions:</p>
+
+    <ul class="docs-list">
+      <li><code>provideCloudflareLoader</code></li>
+<li><code>provideCloudinaryLoader</code></li>
+<li><code>provideImageKitLoader</code></li>
+<li><code>provideImgixLoader</code></li>
+
+    </ul>
+    <p>If you use a different image provider, you can create a custom loader function as described
+below.</p>
+<p>To use a <strong>custom loader</strong>: provide your loader function as a value for the <code>IMAGE_LOADER</code> DI
+token.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-variable constant_">IMAGE_LOADER</span>, <span class="hljs-title class_">ImageLoaderConfig</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/common&#x27;</span>;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-comment">// Configure the loader using the `IMAGE_LOADER` token.</span></span><span class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">  {</span><span class="hljs-ln-line">     <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">IMAGE_LOADER</span>,</span><span class="hljs-ln-line">     <span class="hljs-attr">useValue</span>: <span class="hljs-function">(<span class="hljs-params">config: ImageLoaderConfig</span>) =&gt;</span> {</span><span class="hljs-ln-line">       <span class="hljs-keyword">return</span> <span class="hljs-string">`https://example.com/<span class="hljs-subst">${config.src}</span>-<span class="hljs-subst">${config.width}</span>.jpg}`</span>;</span><span class="hljs-ln-line">     }</span><span class="hljs-ln-line">  },</span><span class="hljs-ln-line">],</span>
+          </code>
+        </pre>
+      </div>
+    <p>Step 3: update <code>&lt;img&gt;</code> tags in templates to use <code>ngSrc</code> instead of <code>src</code>.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;img <span class="hljs-attribute">ngSrc</span>=<span class="hljs-string">&quot;logo.png&quot;</span> <span class="hljs-attribute">width</span>=<span class="hljs-string">&quot;200&quot;</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">&quot;100&quot;</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="ngSrc" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngSrc</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Name of the source image.
+Image name will be processed by the image loader and the final URL will be applied as the <code>src</code>
+property of the image.</p></div></div></div></div><div id="ngSrcset" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngSrcset</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>A comma separated list of width or density descriptors.
+The image name will be taken from <code>ngSrc</code> and combined with the list of width or density
+descriptors to generate the final <code>srcset</code> property of the image.</p>
+<p>Example:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;img ngSrc<span class="hljs-operator">=</span><span class="hljs-string">&quot;hello.jpg&quot;</span> ngSrcset<span class="hljs-operator">=</span><span class="hljs-string">&quot;100w, 200w&quot;</span> /&gt;  <span class="hljs-operator">=</span>&gt;</span><span class="hljs-ln-line">&lt;img src<span class="hljs-operator">=</span><span class="hljs-string">&quot;path/hello.jpg&quot;</span> srcset<span class="hljs-operator">=</span><span class="hljs-string">&quot;path/hello.jpg?w=100 100w, path/hello.jpg?w=200 200w&quot;</span> /&gt;</span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="sizes" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>sizes</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>The base <code>sizes</code> attribute passed through to the <code>&lt;img&gt;</code> element.
+Providing sizes causes the image to create an automatic responsive srcset.</p></div></div></div></div><div id="width" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>width</h3><div><code>number</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>For responsive images: the intrinsic width of the image in pixels.
+For fixed size images: the desired rendered width of the image in pixels.</p></div></div></div></div><div id="height" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>height</h3><div><code>number</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>For responsive images: the intrinsic height of the image in pixels.
+For fixed size images: the desired rendered height of the image in pixels.* The intrinsic
+height of the image in pixels.</p></div></div></div></div><div id="loading" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>loading</h3><div><code>&quot;auto&quot; | &quot;lazy&quot; | &quot;eager&quot;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>The desired loading behavior (lazy, eager, or auto). Defaults to <code>lazy</code>,
+which is recommended for most images.</p>
+<p>Warning: Setting images as loading=&quot;eager&quot; or loading=&quot;auto&quot; marks them
+as non-priority images and can hurt loading performance. For images which
+may be the LCP element, use the <code>priority</code> attribute instead of <code>loading</code>.</p></div></div></div></div><div id="priority" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>priority</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Indicates whether this image should have a high priority.</p></div></div></div></div><div id="loaderParams" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>loaderParams</h3><div><code>{ [key: string]: any; }</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Data to pass through to custom loaders.</p></div></div></div></div><div id="disableOptimizedSrcset" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>disableOptimizedSrcset</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Disables automatic srcset generation for this image.</p></div></div></div></div><div id="fill" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>fill</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Sets the image to &quot;fill mode&quot;, which eliminates the height/width requirement and adds
+styles such that the image fills its containing element.</p></div></div></div></div><div id="placeholder" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>placeholder</h3><div><code>string | boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>A URL or data URL for an image to be used as a placeholder while this image loads.</p></div></div></div></div><div id="placeholderConfig" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>placeholderConfig</h3><div><code>ImagePlaceholderConfig</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Configuration object for placeholder settings. Options:</p>
+
+    <ul class="docs-list">
+      <li>blur: Setting this to false disables the automatic CSS blur.</li>
+
+    </ul></div></div></div></div><div id="src" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>src</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Value of the <code>src</code> attribute if set on the host <code>&lt;img&gt;</code> element.
+This input is exclusively read to assert that <code>src</code> is not set in conflict
+with <code>ngSrc</code> and that images don&#39;t start to load until a lazy loading strategy is set.</p></div></div></div></div><div id="srcset" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>srcset</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Value of the <code>srcset</code> attribute if set on the host <code>&lt;img&gt;</code> element.
+This input is exclusively read to assert that <code>srcset</code> is not set in conflict
+with <code>ngSrcset</code> and that images don&#39;t start to load until a lazy loading strategy is set.</p></div></div></div></div></div></div></div>

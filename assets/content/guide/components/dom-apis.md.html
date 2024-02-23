@@ -1,0 +1,84 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">使用 DOM API</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/dom-apis.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>提示：本指南假設您已經閱讀過 <a href="essentials">精華指南</a>。如果您是 Angular 新手，請先閱讀該指南。</p>
+<p>Angular 會自動處理大部分的 DOM 建立、更新和移除。不過，您可能偶爾需要直接與元件的 DOM 互動。元件可以注入 ElementRef 以取得對元件主機元素的參照：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfilePhoto</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">elementRef: ElementRef</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(elementRef.<span class="hljs-property">nativeElement</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><code>nativeElement</code> 屬性參照主機 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element" target="_blank">Element</a> 實例。</p>
+<p>你可以使用 Angular 的 <code>afterRender</code> 和 <code>afterNextRender</code> 函式來註冊一個 <strong>渲染回呼</strong>，當 Angular 完成頁面的渲染時執行。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfilePhoto</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">elementRef: ElementRef</span>) {</div><div class="hljs-ln-line">    <span class="hljs-title function_">afterRender</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-comment">// Focus the first input element in this component.</span></div><div class="hljs-ln-line">      elementRef.<span class="hljs-property">nativeElement</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'input'</span>)?.<span class="hljs-title function_">focus</span>();</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><code>afterRender</code> 和 <code>afterNextRender</code> 必須在 <em>注入內容</em> 中呼叫，通常是元件的建構函式。</p>
+<p>**盡可能避免直接操作 DOM。**請務必優先在元件範本中表達您的 DOM 結構，並使用繫結來更新該 DOM。</p>
+<p><strong>回呼函式在伺服器端渲染或建構時間預先渲染期間從不執行。</strong></p>
+<p><strong>切勿直接處理其他 Angular 生命週期掛鉤內的 DOM</strong>。Angular 不保證元件的 DOM 在回呼函式以外的任何地方都已完全呈現。
+此外，在其他生命週期掛鉤期間讀取或修改 DOM 可能會造成 <a href="https://web.dev/avoid-large-complex-layouts-and-layout-thrashing" target="_blank">版面重排</a>，進而對網頁效能造成負面影響。</p>
+
+  <h2 id="">使用元件的渲染器</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 使用元件的渲染器"></a>
+  <p>html</p>
+<div id="app">
+  <div v-for="item in items">
+    {{ item.name }}
+  </div>
+</div>
+
+
+<p>js
+new Vue({
+  el: &#39;#app&#39;,
+  data: {
+    items: [
+      { name: &#39;apple&#39; },
+      { name: &#39;banana&#39; },
+      { name: &#39;cherry&#39; }
+    ]
+  },
+  render: function (createElement) {
+    return createElement(
+      &#39;ul&#39;,
+      this.items.map(function (item) {
+        return createElement(&#39;li&#39;, item.name)
+      })
+    )
+  }
+})</p>
+<p>元件可以注入 <code>Renderer2</code> 的實例，以執行與其他 Angular 功能相關的某些 DOM 操作。</p>
+<p>由元件的 <code>Renderer2</code> 建立的任何 DOM 元素都會參與該元件的 <a href="guide/components/styling#style-scoping">樣式封裝</a>。</p>
+<p>某些 <code>Renderer2</code> API 也與 Angular 動畫系統繫結。您可以使用 <code>setProperty</code> 方法更新合成動畫屬性，並使用 <code>listen</code> 方法新增合成動畫事件的事件監聽器。詳情請參閱 <a href="guide/animations">動畫</a> 指南。</p>
+<p>除了這兩個狹窄的使用案例外，使用 <code>Renderer2</code> 和原生 DOM API 之間沒有區別。<code>Renderer2</code> API 不支援伺服器端渲染或建置時間預渲染內容中的 DOM 處理。</p>
+
+  <h2 id="-dom-api">什麼時候使用 DOM API</h2>
+  <a href="#-dom-api" class="docs-anchor" tabindex="-1" aria-label="Link to 什麼時候使用 DOM API"></a>
+  
+  <h2 id="-dom-api">何時使用 DOM API</h2>
+  <a href="#-dom-api" class="docs-anchor" tabindex="-1" aria-label="Link to 何時使用 DOM API"></a>
+  <p>儘管 Angular 處理大部分的呈現問題，某些行為可能仍需要使用 DOM API。一些常見的使用案例包括：</p>
+
+  <ul class="docs-list">
+    <li>管理元素焦點</li>
+<li>測量元素幾何，例如使用 <code>getBoundingClientRect</code></li>
+<li>讀取元素的文字內容</li>
+<li>設定原生觀察器，例如
+<a href="https://developer.mozilla.org/zh-TW/docs/Web/API/MutationObserver" target="_blank"><code>MutationObserver</code></a>、
+<a href="https://developer.mozilla.org/zh-TW/docs/Web/API/ResizeObserver" target="_blank"><code>ResizeObserver</code></a> 或
+<a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Intersection_Observer_API" target="_blank"><code>IntersectionObserver</code></a>。</li>
+
+  </ul>
+  <p>避免插入、移除和修改 DOM 元素。特別是，<strong>切勿直接設定元素的 <code>innerHTML</code> 屬性</strong>，這會讓您的應用程式容易受到 <a href="https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting" target="_blank">跨網站指令碼 (XSS) 攻擊</a> 的影響。Angular 的範本繫結，包括 <code>innerHTML</code> 的繫結，包含可幫助防止 XSS 攻擊的安全防護。詳情請參閱 <a href="guide/security">安全性指南</a>。</p>

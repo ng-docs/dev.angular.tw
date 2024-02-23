@@ -1,0 +1,35 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">遺失的值存取器</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG01203.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>對於所有自訂表單控制，您必須註冊一個值訪問器。</p>
+<p>以下是如何提供範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">NG_VALUE_ACCESSOR</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">useExisting</span>: <span class="hljs-title function_">forwardRef</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">MyInputField</span>),</div><div class="hljs-ln-line">    <span class="hljs-attr">multi</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">]</div></code>
+    </pre>
+  </div>
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>如上所述，預期你的控制項會有一個值存取器，但卻找不到一個。然而，在實際情況下，可能有很多不同的原因導致這種情況。以下列出一些導致此錯誤的已知問題。</p>
+
+    <ol class="docs-ordered-list">
+      <li>如果你<strong>定義</strong>了自訂表單控制項，你是否記得提供值訪問器？</li>
+<li>你是否將 <code>ngModel</code> 放置在沒有值的元素或<strong>無效元素</strong>上（例如 <code>&lt;div [(ngModel)]=&quot;foo&quot;&gt;</code>）？</li>
+<li>你是否在 <code>NgModule</code> 內部使用宣告的自訂表單控制項？如果是，請確定你<strong>匯入</strong>了 <code>NgModule</code>。</li>
+<li>你是否將 <code>ngModel</code> 與第三方自訂表單控制項一起使用？請檢查該控制項是否提供值訪問器。如果不是，請在控制項的元素上使用**<code>ngDefaultControl</code>**。</li>
+<li>你是否<strong>測試</strong>自訂表單控制項？請務必將測試平台設定為了解該控制項。你可以使用 <code>Testbed.configureTestingModule</code> 來做到這一點。</li>
+<li>你是否在 Webpack 中使用<strong>Nx 和模組聯合</strong>？你的 <code>webpack.config.js</code> 可能需要<a href="https://github.com/angular/angular/issues/43821#issuecomment-1054845431" target="_blank">額外設定</a>以確保表單套件是共用的。</li>
+
+    </ol>
+    

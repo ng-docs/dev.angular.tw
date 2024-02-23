@@ -1,0 +1,68 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">可重複使用的動畫</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/animations/reusable-animations.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>本主題提供一些範例，說明如何建立可重複使用的動畫。</p>
+
+  <h2 id="">建立可重複使用的動畫</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 建立可重複使用的動畫"></a>
+  <p>若要建立可重複使用的動畫，請使用 <a href="api/animations/animation"><code>animation()</code></a> 函式在獨立的 <code>.ts</code> 檔案中定義動畫，並將此動畫定義宣告為 <code>const</code> 匯出變數。
+然後，您可以使用 <a href="api/animations/useAnimation"><code>useAnimation()</code></a> 函式匯入並在任何應用程式元件中重複使用此動畫。</p>
+<div class="docs-code" path="adev/src/content/examples/animations/src/app/animations.1.ts" visiblelines="0,1,2,3,4,5,6,7,8,9" header="src/app/animations.ts">
+    <div class="docs-code-header"><h3>src/app/animations.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">import { animation, style, animate, trigger, transition, useAnimation } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/animations'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">export <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">transitionAnimation</span> = <span class="hljs-title function_ invoke__">animation</span>([</div><div class="hljs-ln-line">  <span class="hljs-title function_ invoke__">style</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">height</span>: <span class="hljs-string">'{{ height }}'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">opacity</span>: <span class="hljs-string">'{{ opacity }}'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'{{ backgroundColor }}'</span></div><div class="hljs-ln-line">  }),</div><div class="hljs-ln-line">  <span class="hljs-title function_ invoke__">animate</span>(<span class="hljs-string">'{{ time }}'</span>)</div><div class="hljs-ln-line">]);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">export <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">triggerAnimation</span> = <span class="hljs-title function_ invoke__">trigger</span>(<span class="hljs-string">'openClose'</span>, [</div><div class="hljs-ln-line">  <span class="hljs-title function_ invoke__">transition</span>(<span class="hljs-string">'open =&gt; closed'</span>, [</div><div class="hljs-ln-line">    <span class="hljs-title function_ invoke__">useAnimation</span>(transitionAnimation, {</div><div class="hljs-ln-line">      <span class="hljs-attr">params</span>: {</div><div class="hljs-ln-line">        <span class="hljs-attr">height</span>: <span class="hljs-number">0</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">opacity</span>: <span class="hljs-number">1</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'red'</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">time</span>: <span class="hljs-string">'1s'</span></div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    })</div><div class="hljs-ln-line">  ])</div><div class="hljs-ln-line">]);</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>在前面的程式碼片段中，<code>transitionAnimation</code> 透過宣告為 export 變數來使其可重複使用。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <code>height</code>, <code>opacity</code>, <code>backgroundColor</code> 和 <code>time</code> 輸入在執行期間會被替換。</p>
+
+    </div>
+    <p>您也可以匯出動畫的一部分。
+例如，以下程式片段匯出動畫 <code>trigger</code>。</p>
+<div class="docs-code" path="adev/src/content/examples/animations/src/app/animations.1.ts" visiblelines="0,11,12,13,14,15,16,17,18,19,20,21,22" header="src/app/animations.1.ts">
+    <div class="docs-code-header"><h3>src/app/animations.1.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">import { animation, style, animate, trigger, transition, useAnimation } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/animations'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">export <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">transitionAnimation</span> = <span class="hljs-title function_ invoke__">animation</span>([</div><div class="hljs-ln-line">  <span class="hljs-title function_ invoke__">style</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">height</span>: <span class="hljs-string">'{{ height }}'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">opacity</span>: <span class="hljs-string">'{{ opacity }}'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'{{ backgroundColor }}'</span></div><div class="hljs-ln-line">  }),</div><div class="hljs-ln-line">  <span class="hljs-title function_ invoke__">animate</span>(<span class="hljs-string">'{{ time }}'</span>)</div><div class="hljs-ln-line">]);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">export <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">triggerAnimation</span> = <span class="hljs-title function_ invoke__">trigger</span>(<span class="hljs-string">'openClose'</span>, [</div><div class="hljs-ln-line">  <span class="hljs-title function_ invoke__">transition</span>(<span class="hljs-string">'open =&gt; closed'</span>, [</div><div class="hljs-ln-line">    <span class="hljs-title function_ invoke__">useAnimation</span>(transitionAnimation, {</div><div class="hljs-ln-line">      <span class="hljs-attr">params</span>: {</div><div class="hljs-ln-line">        <span class="hljs-attr">height</span>: <span class="hljs-number">0</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">opacity</span>: <span class="hljs-number">1</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'red'</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">time</span>: <span class="hljs-string">'1s'</span></div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    })</div><div class="hljs-ln-line">  ])</div><div class="hljs-ln-line">]);</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>從此處，您可以在您的元件類別中匯入可重複使用的動畫變數。
+例如，以下程式碼片段匯入 <code>transitionAnimation</code> 變數，並透過 <code>useAnimation()</code> 函式使用它。</p>
+<div class="docs-code" path="adev/src/content/examples/animations/src/app/open-close.component.3.ts" visiblelines="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23" header="src/app/open-close.component.ts">
+    <div class="docs-code-header"><h3>src/app/open-close.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component, Input } from <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { transition, trigger, useAnimation, AnimationEvent } from <span class="hljs-string">'@angular/animations'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { transitionAnimation } from <span class="hljs-string">'./animations'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component({</span></div><div class="hljs-ln-line">  standalone: true,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-open-close-reusable'</span>,</div><div class="hljs-ln-line">  animations: [</div><div class="hljs-ln-line">    trigger(<span class="hljs-string">'openClose'</span>, [</div><div class="hljs-ln-line">      transition(<span class="hljs-string">'open =&gt; closed'</span>, [</div><div class="hljs-ln-line">        useAnimation(transitionAnimation, {</div><div class="hljs-ln-line">          params: {</div><div class="hljs-ln-line">            height: 0,</div><div class="hljs-ln-line">            opacity: 1,</div><div class="hljs-ln-line">            backgroundColor: <span class="hljs-string">'red'</span>,</div><div class="hljs-ln-line">            time: <span class="hljs-string">'1s'</span></div><div class="hljs-ln-line">          }</div><div class="hljs-ln-line">        })</div><div class="hljs-ln-line">      ])</div><div class="hljs-ln-line">    ])</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'open-close.component.html'</span>,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'open-close.component.css'</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> <span class="hljs-title class_">OpenCloseBooleanComponent</span> {</div><div class="hljs-ln-line">  isOpen = <span class="hljs-literal">false</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  toggle() {</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.isOpen = !<span class="hljs-keyword">this</span>.isOpen;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-meta">@Input()</span> logging = <span class="hljs-literal">false</span>;</div><div class="hljs-ln-line">  onAnimationEvent(event: AnimationEvent) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.logging) {</div><div class="hljs-ln-line">      <span class="hljs-keyword">return</span>;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="-angular-">更多關於 Angular 動畫</h2>
+  <a href="#-angular-" class="docs-anchor" tabindex="-1" aria-label="Link to 更多關於 Angular 動畫"></a>
+  <p>您可能也有興趣：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="guide/animations">
+      Angular 動畫介紹
+    </a>
+    
+    <a class="docs-pill" href="guide/animations/transition-and-triggers">
+      轉場和觸發器
+    </a>
+    
+    <a class="docs-pill" href="guide/animations/complex-sequences">
+      複雜的動畫順序
+    </a>
+    
+    <a class="docs-pill" href="guide/animations/route-animations">
+      路由轉場動畫
+    </a>
+    
+
+    </nav>
+    

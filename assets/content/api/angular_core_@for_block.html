@@ -1,0 +1,77 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>@for</h1><div class="docs-api-item-label" data-mode="full" data-type="block">block</div></div></div><p class="docs-reference-description"><p>The <code>@for</code> block repeatedly renders content of a block for each item in a collection.</p></p></header><div data-tab="Description" data-tab-url="description"><div><p>The <code>@for</code> block repeatedly renders content of a block for each item in a collection.</p>
+<h2>Syntax</h2>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">@for (item of items; track item.name) {</span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span> {{ item.name }} <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="hljs-ln-line">} @empty {</span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span> There are no items. <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <h2>Description</h2>
+<p>The <code>@for</code> block renders its content in response to changes in a collection. Collections can be any
+JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols">iterable</a>,
+but there are performance advantages of using a regular <code>Array</code>.</p>
+<p>You can optionally include an <code>@empty</code> section immediately after the <code>@for</code> block content. The
+content of the <code>@empty</code> block displays when there are no items.</p>
+<h3> track and objects identity </h3>
+
+<p>The value of the <code>track</code> expression determines a key used to associate array items with the views in
+the DOM. Having clear indication of the item identity allows Angular to execute a minimal set of DOM
+operations as items are added, removed or moved in a collection.</p>
+<p>Loops over immutable data without <code>trackBy</code> as one of the most common causes for performance issues
+across Angular applications. Because of the potential for poor performance, the <code>track</code> expression
+is required for the <code>@for</code> loops. When in doubt, using <code>track $index</code> is a good default.</p>
+<h3> `$index` and other contextual variables </h3>
+
+<p>Inside <code>@for</code>  contents, several implicit variables are always available:</p>
+
+      <div class="docs-table docs-scroll-track-transparent">
+        <table>
+          <thead>
+            <tr>
+<th>Variable</th>
+<th>Meaning</th>
+</tr>
+
+          </thead>
+          <tbody>
+            <tr>
+<td><code>$count</code></td>
+<td>Number of items in a collection iterated over</td>
+</tr>
+<tr>
+<td><code>$index</code></td>
+<td>Index of the current row</td>
+</tr>
+<tr>
+<td><code>$first</code></td>
+<td>Whether the current row is the first row</td>
+</tr>
+<tr>
+<td><code>$last</code></td>
+<td>Whether the current row is the last row</td>
+</tr>
+<tr>
+<td><code>$even</code></td>
+<td>Whether the current row index is even</td>
+</tr>
+<tr>
+<td><code>$odd</code></td>
+<td>Whether the current row index is odd</td>
+</tr>
+
+          </tbody>
+        </table>
+      </div>
+    <p>These variables are always available with these names, but can be aliased via a <code>let</code> segment:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">@for (item of items; track item.id; let idx = $index, e = $even) {</span><span class="hljs-ln-line">  Item #{{ idx }}: {{ item.name }}</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p>The aliasing is especially useful in case of using nested <code>@for</code> blocks where contextual variable
+names could collide.</p></div></div></div>

@@ -1,0 +1,108 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>@defer</h1><div class="docs-api-item-label" data-mode="full" data-type="block">block</div></div></div><p class="docs-reference-description"><p>A type of <a href="api/core/@defer">block</a> that can be used to defer load the JavaScript for components,
+directives and pipes used inside a component template.</p></p></header><div data-tab="Description" data-tab-url="description"><div><p>A type of <a href="api/core/@defer">block</a> that can be used to defer load the JavaScript for components,
+directives and pipes used inside a component template.</p>
+<h2>Syntax</h2>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">@defer ( on <span class="hljs-tag">&lt;<span class="hljs-name">trigger</span>&gt;</span>; when <span class="hljs-tag">&lt;<span class="hljs-name">condition</span>&gt;</span>; prefetch on <span class="hljs-tag">&lt;<span class="hljs-name">trigger</span>&gt;</span>; prefetch when <span class="hljs-tag">&lt;<span class="hljs-name">condition</span>&gt;</span> ) {</span><span class="hljs-ln-line">  <span class="hljs-comment">&lt;!-- deferred template fragment --&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></span><span class="hljs-ln-line">} @placeholder ( minimum? <span class="hljs-tag">&lt;<span class="hljs-name">duration</span>&gt;</span> ) {</span><span class="hljs-ln-line">  <span class="hljs-comment">&lt;!-- placeholder template fragment --&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Placeholder<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><span class="hljs-ln-line">} @loading ( minimum? <span class="hljs-tag">&lt;<span class="hljs-name">duration</span>&gt;</span>; after? <span class="hljs-tag">&lt;<span class="hljs-name">duration</span>&gt;</span> ) {</span><span class="hljs-ln-line">  <span class="hljs-comment">&lt;!-- loading template fragment --&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;loading image&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;loading.gif&quot;</span> /&gt;</span></span><span class="hljs-ln-line">} @error {</span><span class="hljs-ln-line">  <span class="hljs-comment">&lt;!-- error template fragment --&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>An loading error occurred<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <h2>Description</h2>
+<h3>Blocks</h3>
+<p>Supported sections of a defer block. Note: only the @defer block template fragment is deferred
+loaded. The remaining optional blocks are eagerly loaded.</p>
+
+      <div class="docs-table docs-scroll-track-transparent">
+        <table>
+          <thead>
+            <tr>
+<th>block</th>
+<th>Description</th>
+</tr>
+
+          </thead>
+          <tbody>
+            <tr>
+<td><code>@defer</code></td>
+<td>The defer loaded block of content</td>
+</tr>
+<tr>
+<td><code>@placeholder</code></td>
+<td>Content shown prior to defer loading (Optional)</td>
+</tr>
+<tr>
+<td><code>@loading</code></td>
+<td>Content shown during defer loading (Optional)</td>
+</tr>
+<tr>
+<td><code>@error</code></td>
+<td>Content shown when defer loading errors occur (Optional)</td>
+</tr>
+
+          </tbody>
+        </table>
+      </div>
+    <h3>Triggers</h3>
+
+<p>Triggers provide conditions for when defer loading occurs. Some allow a template reference variable
+as an optional parameter. Separate multiple triggers with a semicolon.</p>
+
+      <div class="docs-table docs-scroll-track-transparent">
+        <table>
+          <thead>
+            <tr>
+<th>trigger</th>
+<th>Triggers...</th>
+</tr>
+
+          </thead>
+          <tbody>
+            <tr>
+<td><code>on idle</code></td>
+<td>when the browser reports idle state (default)</td>
+</tr>
+<tr>
+<td><code>on viewport(&lt;elementRef&gt;?)</code></td>
+<td>when the element enters the viewport</td>
+</tr>
+<tr>
+<td><code>on interaction(&lt;elementRef&gt;?)</code></td>
+<td>when clicked, touched, or focused</td>
+</tr>
+<tr>
+<td><code>on hover(&lt;elementRef&gt;?)</code></td>
+<td>when element has been hovered</td>
+</tr>
+<tr>
+<td><code>on immediate</code></td>
+<td>when the page finishes rendering</td>
+</tr>
+<tr>
+<td><code>on timer(&lt;duration&gt;)</code></td>
+<td>after a specific timeout</td>
+</tr>
+<tr>
+<td><code>when &lt;condition&gt;</code></td>
+<td>on a custom condition</td>
+</tr>
+
+          </tbody>
+        </table>
+      </div>
+    <h2>Prefetch</h2>
+
+<p>Configures prefetching of the defer block used in the <code>@defer</code> parameters, but does not affect
+rendering. Rendering is handled by the standard <code>on</code> and <code>when</code> conditions. Separate multiple
+prefetch configurations with a semicolon.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">@defer (prefetch on <span class="hljs-tag">&lt;<span class="hljs-name">trigger</span>&gt;</span>; prefetch when <span class="hljs-tag">&lt;<span class="hljs-name">condition</span>&gt;</span>) {</span><span class="hljs-ln-line">  <span class="hljs-comment">&lt;!-- deferred template fragment --&gt;</span></span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p>Learn more in the <a href="guide/defer">defer loading guide</a>.</p></div></div></div>

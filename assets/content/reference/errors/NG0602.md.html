@@ -1,0 +1,49 @@
+<p>@name 在響應式內容中呼叫不允許的函式
+@category 執行階段
+@shortDescription 在響應式內容中呼叫不允許的函式</p>
+<p>@description
+一個在響應式上下文中不被允許執行的函式從響應式上下文中被呼叫。</p>
+<p>例如，無法在 <code>computed</code> 或正在執行中的 <code>effect</code> 內安排 <code>effect</code>。
+避免將函式（例如 <code>effect</code>）呼叫為範本表達式的一部分，因為這些函式會在它們自己的響應式內容中執行。</p>
+<p>計算過的表達式預期是純粹的。
+純粹表示表達式不會觸發任何副作用。
+副作用是像安排 <code>afterRender</code>、建立新的 <code>effect</code> 或訂閱 observables 的操作。</p>
+<p>為了避免常見的陷阱，一些操作在響應式內容裡明文禁止。
+舉例來說，在 <code>computed</code> 裡使用 <code>afterRender</code> 會在每次計算式表達式評估時，排定新的渲染掛勾。
+這很可能不是預期的行為，而且會降低應用程式的效能。</p>
+
+  <h3 id="">修復錯誤</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 修復錯誤"></a>
+  <p>這個錯誤指南並非詳盡無遺。
+它擷取了一些常見情境以及如何解決錯誤。</p>
+
+  <h4 id="afterrender"><code>afterRender</code></h4>
+  <a href="#afterrender" class="docs-anchor" tabindex="-1" aria-label="Link to <code>afterRender</code>"></a>
+  <p>將 <code>afterRender</code> 的呼叫移到 reactive context 外面。</p>
+<p>在元件的類別建構函式中排程 <code>after render</code> 掛鉤是一個不錯的地方。
+或者，使用 <code>untracked</code> 離開響應式內容並明確選擇不使用此錯誤。</p>
+
+  <h4 id="effect"><code>effect</code></h4>
+  <a href="#effect" class="docs-anchor" tabindex="-1" aria-label="Link to <code>effect</code>"></a>
+  <p>將 <code>effect</code> 的呼叫移至響應式內容外。</p>
+<p>安排效果的適當位置是在 <code>@Component</code> 的類別建構函式中。</p>
+
+  <h4 id="tosignal"><code>toSignal</code>`</h4>
+  <a href="#tosignal" class="docs-anchor" tabindex="-1" aria-label="Link to <code>toSignal</code>`"></a>
+  <p>將呼叫 <code>toSignal</code> 移到 reactive context 外部。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">result = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> dataSignal = <span class="hljs-title function_">toSignal</span>(dataObservable$);</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-title function_">doSomething</span>(<span class="hljs-title function_">dataSignal</span>());</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p>可重構為：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">dataSignal = <span class="hljs-title function_">toSignal</span>(dataObservable$);</div><div class="hljs-ln-line">result = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">doSomething</span>(<span class="hljs-title function_">dataSignal</span>()));</div></code>
+    </pre>
+  </div><p>或者，如果這不可行，請考慮手動訂閱可觀察到的內容。</p>
+<p>作為最後的手段，使用 <code>untracked</code> 離開 reactivate 環境。
+小心，因為離開 reactivate 環境可能會導致在 <code>untracked</code> 內忽略信號讀取。</p>
+<p>@debugging</p>
+<p>錯誤訊息提到意外呼叫的函式。
+在您的應用程式碼中尋找此函式呼叫。</p>
+<p>或者，瀏覽器中的堆疊追蹤會顯示函式在哪裡被呼叫，以及它的位置。</p>

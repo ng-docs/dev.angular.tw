@@ -1,0 +1,42 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">找出你正在測試的程式碼量</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/testing/code-coverage.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>Angular CLI 可以執行單元測試和建立程式碼覆蓋率報告。
+程式碼覆蓋率報告會顯示您的程式碼庫中可能未透過單元測試適當測試的任何部分。</p>
+<p>要產生覆蓋率報告，請在專案的根目錄執行以下指令。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng test --no-watch --code-coverage</div></code>
+    </pre>
+  </div><p>測試完成後，指令會在專案中建立新的 <code>/coverage</code> 目錄。
+開啟 <code>index.html</code> 檔案，即可檢視包含原始程式碼和程式碼涵蓋率數值的報告。</p>
+<p>如果你想在每次測試時建立程式碼覆蓋率報告，請在 Angular CLI 組態檔案 <code>angular.json</code> 中設定下列選項：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"test"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"codeCoverage"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <h2 id="">程式碼覆蓋率強制執行</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 程式碼覆蓋率強制執行"></a>
+  <p>程式碼覆蓋率百分比讓您可以估計已測試的程式碼比例。
+如果您的團隊決定一組要進行單元測試的最低數量，請使用 Angular CLI 執行此最低數量。</p>
+<p>例如，假設您想要程式碼庫擁有至少 80% 的程式碼覆蓋率。
+為啟用此功能，請開啟 <a href="https://karma-runner.github.io" target="_blank">Karma</a> 測試平台設定檔 <code>karma.conf.js</code>，並在 <code>coverageReporter:</code> 鍵中新增 <code>check</code> 屬性。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">coverageReporter</span>: {</div><div class="hljs-ln-line">  <span class="hljs-attr">dir</span>: <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>).<span class="hljs-title function_">join</span>(__dirname, <span class="hljs-string">'./coverage/&lt;project-name&gt;'</span>),</div><div class="hljs-ln-line">  <span class="hljs-attr">subdir</span>: <span class="hljs-string">'.'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">reporters</span>: [</div><div class="hljs-ln-line">    { <span class="hljs-attr">type</span>: <span class="hljs-string">'html'</span> },</div><div class="hljs-ln-line">    { <span class="hljs-attr">type</span>: <span class="hljs-string">'text-summary'</span> }</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">check</span>: {</div><div class="hljs-ln-line">    <span class="hljs-attr">global</span>: {</div><div class="hljs-ln-line">      <span class="hljs-attr">statements</span>: <span class="hljs-number">80</span>,</div><div class="hljs-ln-line">      <span class="hljs-attr">branches</span>: <span class="hljs-number">80</span>,</div><div class="hljs-ln-line">      <span class="hljs-attr">functions</span>: <span class="hljs-number">80</span>,</div><div class="hljs-ln-line">      <span class="hljs-attr">lines</span>: <span class="hljs-number">80</span></div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>HELPFUL：閱讀 <a href="guide/testing#configuration">測試指南</a>，以進一步了解如何建立和微調 Karma 組態。</p>
+<p><code>check</code> 屬性會導致工具在專案中執行單元測試時強制執行至少 80% 的程式碼覆蓋率。</p>
+<p>在 <a href="https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md" target="_blank">karma 覆蓋率文件</a> 中閱讀更多關於覆蓋率配置選項。</p>

@@ -1,0 +1,30 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/animations</span><div class="docs-reference-title"><div><h1>keyframes</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div></div><p class="docs-reference-description"><p>Defines a set of animation styles, associating each style with an optional <code>offset</code> value.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">keyframes</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">steps</span>: <span class="hljs-title class_">AnimationStyleMetadata</span>[]</div><div class="hljs-ln-line ">): <span class="hljs-title class_">AnimationKeyframesSequenceMetadata</span>;</div></code></pre></div></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>Use with the <code>animate()</code> call. Instead of applying animations
+from the current state
+to the destination state, keyframes describe how each style entry is applied and at what point
+within the animation arc.
+Compare <a href="https://www.w3schools.com/css/css3_animations.asp">CSS Keyframe Animations</a>.</p>
+<h3>Usage</h3>
+<p>In the following example, the offset values describe
+when each <code>backgroundColor</code> value is applied. The color is red at the start, and changes to
+blue when 20% of the total time has elapsed.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// the provided offset values</span></span><span class="hljs-ln-line"><span class="hljs-title function_">animate</span>(<span class="hljs-string">&quot;5s&quot;</span>, <span class="hljs-title function_">keyframes</span>([</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0</span> }),</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0.2</span> }),</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0.3</span> }),</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">1</span> })</span><span class="hljs-ln-line">]))</span>
+          </code>
+        </pre>
+      </div>
+    <p>If there are no <code>offset</code> values specified in the style entries, the offsets
+are calculated automatically.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">animate</span>(<span class="hljs-string">&quot;5s&quot;</span>, <span class="hljs-title function_">keyframes</span>([</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&quot;red&quot;</span> }) <span class="hljs-comment">// offset = 0</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&quot;blue&quot;</span> }) <span class="hljs-comment">// offset = 0.33</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&quot;orange&quot;</span> }) <span class="hljs-comment">// offset = 0.66</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&quot;black&quot;</span> }) <span class="hljs-comment">// offset = 1</span></span><span class="hljs-ln-line">]))</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>keyframes</h3><div><code>AnimationKeyframesSequenceMetadata</code></div></div><span></span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Defines a set of animation styles, associating each style with an optional <code>offset</code> value.</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">steps</span><code>AnimationStyleMetadata[]</code><div class="docs-parameter-description"><p>A set of animation styles with optional offset data.
+The optional <code>offset</code> value for a style specifies a percentage of the total animation
+time at which that style is applied.</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>AnimationKeyframesSequenceMetadata</code></div></div></div></div></div></div></div>

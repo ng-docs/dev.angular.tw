@@ -1,0 +1,56 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">Nullish coalescing 不為 nullable</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/extended-diagnostics/NG8102.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>此診斷偵測 Angular 範本中無用的空值合併運算子 (<code>??</code>) 字元。
+具體來說，它會尋找輸入不為「可為空值」，代表其類型不包含 <code>null</code> 或 <code>undefined</code> 的運算。
+對於此類值，<code>??</code> 的右側永遠不會使用。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">// Template displays `username` if present, falls back to 'root' if it is</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// `null` or `undefined`.</span></div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div&gt;{{ username ?? 'root' }}&lt;/div&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// `username` is declared as a `string` which *cannot* be `null` or</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// `undefined`.</span></div><div class="hljs-ln-line">  <span class="hljs-attr">username</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">'Angelino'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">有什麼問題？</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 有什麼問題？"></a>
+  <p>使用非可空輸入的空值合併運算子沒有效果，且表示值允許的類型與範本中呈現的方式之間存在差異。
+開發人員可能會合理地假設在某些情況下會顯示空值合併運算子號的右側，但實際上絕不會顯示。
+這可能會導致對程式預期輸出的混淆。</p>
+
+  <h2 id="">我該怎麼做？</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 我該怎麼做？"></a>
+  <p>更新範本和已宣告類型以保持同步。
+仔細檢查輸入的類型，並確認是否實際上預期為可為空。</p>
+<p>如果輸入應該為可為空，請將 <code>null</code> 或 <code>undefined</code> 加入其類型以表示這點。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div&gt;{{ username ?? 'root' }}&lt;/div&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// `username` is now nullable. If it is ever set to `null`, 'root' will be</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// displayed.</span></div><div class="hljs-ln-line">  <span class="hljs-attr">username</span>: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span> = <span class="hljs-string">'Angelino'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>如果輸入不應為 <em>nullable</em>，請刪除 <code>??</code> 運算子及其右運算元，因為 TypeScript 保證該值永遠是非 <em>nullable</em> 的。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">// Template always displays `username`, which is guaranteed to never be `null`</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// or `undefined`.</span></div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div&gt;{{ username }}&lt;/div&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">username</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">'Angelino'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">組態需求</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 組態需求"></a>
+  <p>必須啟用 <a href="tools/cli/template-typecheck#strict-mode"><code>strictTemplates</code></a> 才能發出任何延伸診斷。
+也必須啟用 <a href="tools/cli/template-typecheck#strict-null-checks"><code>strictNullChecks</code></a> 才能發出 <code>nullishCoalescingNotNullable</code> 診斷。</p>
+
+  <h2 id="">如果我無法避免這件事怎麼辦？</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 如果我無法避免這件事怎麼辦？"></a>
+  <p>這個診斷可以透過編輯專案的 <code>tsconfig.json</code> 檔案停用：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"angularCompilerOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"extendedDiagnostics"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"checks"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"nullishCoalescingNotNullable"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"suppress"</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>參閱 <a href="extended-diagnostics#configuration">進階診斷設定</a> 以取得更多資訊。</p>

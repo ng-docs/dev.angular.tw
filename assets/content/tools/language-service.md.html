@@ -1,0 +1,171 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">Angular Language Service</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/language-service.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>Angular 語言服務為程式碼編輯器提供一種在 Angular 範本中取得完成、錯誤、提示和導覽的方式。
+它適用於獨立 HTML 檔案中的外部範本，也適用於內嵌範本。</p>
+
+  <h2 id="-angular-">為 Angular 語言服務設定編譯器選項</h2>
+  <a href="#-angular-" class="docs-anchor" tabindex="-1" aria-label="Link to 為 Angular 語言服務設定編譯器選項"></a>
+  <p>如要啟用最新的語言服務功能，請在 <code>tsconfig.json</code> 中將 <code>strictTemplates</code> 選項設為 <code>true</code>，如下例所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"angularCompilerOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"strictTemplates"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>有關更多資訊，請參閱 <a href="reference/configs/angular-compiler-options">Angular 編譯器選項</a>指南。</p>
+
+  <h2 id="">特色</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 特色"></a>
+  <p>您的編輯器會自動偵測您正在開啟一個 Angular 檔案。
+然後它會使用 Angular 語言服務來讀取您的 <code>tsconfig.json</code> 檔案，找到您應用程式中的所有範本，然後為您開啟的任何範本提供語言服務。</p>
+<p>語言服務包括：</p>
+
+  <ul class="docs-list">
+    <li>自動完成清單</li>
+<li>AOT 診斷訊息</li>
+<li>快速資訊</li>
+<li>前往定義</li>
+
+  </ul>
+  
+  <h3 id="">自動完成</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 自動完成"></a>
+  <p>自動完成功能會在您輸入時提供您情境可能性和提示，從而加快您的開發時間。
+此範例顯示插補中的自動完成功能。
+在您輸入時，您可以按下 tab 鍵來完成。</p>
+<img alt="自動完成功能" src="https://angular.dev/assets/images/guide/language-service/language-completion.gif">
+
+<p>元素內也有補全功能。</p>
+<p>您作為元件選擇器擁有的任何元素都將顯示在補全清單中。</p>
+
+  <h3 id="">錯誤檢查</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 錯誤檢查"></a>
+  <p>Angular 語言服務可以預先警告您程式碼中的錯誤。
+在此範例中，Angular 不知道 <code>orders</code> 是什麼或它從何而來。</p>
+<img alt="錯誤檢查" src="https://angular.dev/assets/images/guide/language-service/language-error.gif">
+
+
+  <h3 id="">快速資訊與導覽</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 快速資訊與導覽"></a>
+  <p>快速資訊功能讓您將滑鼠懸停在元件、指令和模組上，以查看它們的來源。
+然後，您可以按一下「前往定義」或按 F12 直接前往定義。</p>
+<img alt="navigation" src="https://angular.dev/assets/images/guide/language-service/language-navigation.gif">
+
+
+  <h2 id="-angular-">編輯器中的 Angular 語言服務</h2>
+  <a href="#-angular-" class="docs-anchor" tabindex="-1" aria-label="Link to 編輯器中的 Angular 語言服務"></a>
+  <p>html</p>
+<p>
+  The Angular Language Service provides a number of features that make it easier to develop Angular applications in your editor. These features include:
+</p>
+<ul>
+  <li>Autocompletion</li>
+  <li>Syntax highlighting</li>
+  <li>Error checking</li>
+  <li>Navigation</li>
+  <li>Refactoring</li>
+</ul>
+<p>
+  To use the Angular Language Service, you need to install the Angular extension for your editor. The extension is available for a variety of editors, including Visual Studio Code, Atom, and Sublime Text.
+</p>
+<p>
+  Once you have installed the extension, you can enable the Angular Language Service by opening the settings for your editor and selecting the "Angular" checkbox.
+</p>
+<p>
+  The Angular Language Service will then be available in your editor. You can use the features of the service by typing in your Angular code.
+</p>
+
+<p>Angular 語言服務目前可作為 <a href="https://code.visualstudio.com" target="_blank">Visual Studio Code</a>、<a href="https://www.jetbrains.com/webstorm" target="_blank">WebStorm</a>、<a href="https://www.sublimetext.com" target="_blank">Sublime Text</a> 和 <a href="https://www.eclipse.org/eclipseide" target="_blank">Eclipse IDE</a> 的擴充功能。</p>
+
+  <h3 id="visual-studio-code">Visual Studio Code</h3>
+  <a href="#visual-studio-code" class="docs-anchor" tabindex="-1" aria-label="Link to Visual Studio Code"></a>
+  <p>在 <a href="https://code.visualstudio.com" target="_blank">Visual Studio Code</a> 中，從 <a href="https://marketplace.visualstudio.com/items?itemName=Angular.ng-template" target="_blank">擴充功能：市集</a> 安裝擴充功能。
+使用左側功能表窗格上的擴充功能圖示，或使用 VS 快速開啟（Mac 上的 ⌘+P，Windows 上的 CTRL+P），然後輸入「? ext」來從編輯器開啟市集。
+在市集中搜尋 Angular 語言服務擴充功能，然後按一下 <strong>安裝</strong> 按鈕。</p>
+<p>Visual Studio Code 與 Angular 語言服務的整合是由 Angular 團隊維護和分發。</p>
+
+  <h3 id="visual-studio">Visual Studio</h3>
+  <a href="#visual-studio" class="docs-anchor" tabindex="-1" aria-label="Link to Visual Studio"></a>
+  <p>在 <a href="https://visualstudio.microsoft.com" target="_blank">Visual Studio</a> 中，從 <a href="https://marketplace.visualstudio.com/items?itemName=TypeScriptTeam.AngularLanguageService" target="_blank">擴充功能：市集</a> 安裝擴充功能。
+從頂端功能表窗格選擇擴充功能，然後選擇管理擴充功能，即可從編輯器開啟市集。
+在市集中，搜尋 Angular 語言服務擴充功能，然後按一下 <strong>安裝</strong> 按鈕。</p>
+<p>Visual Studio 與 Angular 語言服務的整合由 Microsoft 與 Angular 團隊共同維護和發行。
+查看<a href="https://github.com/microsoft/vs-ng-language-service" target="_blank">此處</a>的專案。</p>
+
+  <h3 id="webstorm">WebStorm</h3>
+  <a href="#webstorm" class="docs-anchor" tabindex="-1" aria-label="Link to WebStorm"></a>
+  <p>在 <a href="https://www.jetbrains.com/webstorm" target="_blank">WebStorm</a> 中，啟用外掛程式 <a href="https://plugins.jetbrains.com/plugin/6971-angular-and-angularjs" target="_blank">Angular and AngularJS</a>。</p>
+<p>自 WebStorm 2019.1 起，不再需要 <code>@angular/language-service</code>，並應從 <code>package.json</code> 中移除它。</p>
+
+  <h3 id="sublime-text">Sublime Text</h3>
+  <a href="#sublime-text" class="docs-anchor" tabindex="-1" aria-label="Link to Sublime Text"></a>
+  <p>在 <a href="https://www.sublimetext.com" target="_blank">Sublime Text</a> 中，當作為外掛安裝時，語言服務僅支援內聯範本。
+您需要一個自訂 Sublime 外掛（或對目前外掛的修改）才能在 HTML 檔案中完成。</p>
+<p>若要使用內嵌範本的語言服務，您必須先新增一個擴充功能來允許 TypeScript，然後安裝 Angular 語言服務外掛程式。</p>
+<p>從 TypeScript 2.3 開始，TypeScript 具備語言服務可使用的外掛程式模型。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>在本機 <code>node_modules</code> 目錄中安裝最新版本的 TypeScript：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">npm install --save-dev typescript</div></code>
+    </pre>
+  </div></li>
+<li><p>在相同的位置安裝 Angular 語言服務套件：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">npm install --save-dev @angular/language-service</div></code>
+    </pre>
+  </div></li>
+<li><p>套件安裝完成後，將下列內容新增到專案 <code>tsconfig.json</code> 的 <code>&quot;compilerOptions&quot;</code> 區段。</p>
+<div class="docs-code" header="tsconfig.json">
+    <div class="docs-code-header"><h3>tsconfig.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"plugins"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">     <span class="hljs-punctuation">{</span><span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular/language-service"</span><span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"> <span class="hljs-punctuation">]</span></div></code>
+    </pre>
+  </div></li>
+<li><p>在編輯器的使用者偏好設定中(<code>Cmd+,</code> 或 <code>Ctrl+,</code>)，新增下列內容：</p>
+<div class="docs-code" header="Sublime Text 使用者偏好設定">
+    <div class="docs-code-header"><h3>Sublime Text 使用者偏好設定</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"typescript-tsdk"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"&lt;路徑至您的資料夾&gt;/node_modules/typescript/lib"</span></div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    <p>這讓 Angular Language Service 能在 <code>.ts</code> 檔案中提供診斷和補全。</p>
+
+  <h3 id="eclipse-ide">Eclipse IDE</h3>
+  <a href="#eclipse-ide" class="docs-anchor" tabindex="-1" aria-label="Link to Eclipse IDE"></a>
+  <p>可以直接安裝附帶 Angular 語言伺服器的「Eclipse IDE for Web and JavaScript developers」套件，或從其他 Eclipse IDE 套件中使用「說明」&gt;「Eclipse Marketplace」尋找並安裝 <a href="https://marketplace.eclipse.org/content/wild-web-developer-html-css-javascript-typescript-nodejs-angular-json-yaml-kubernetes-xml" target="_blank">Eclipse Wild Web Developer</a>。</p>
+
+  <h2 id="">語言服務如何運作</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 語言服務如何運作"></a>
+  <p>當您使用具有語言服務的編輯器時，編輯器會啟動一個獨立的語言服務程序，並透過 <a href="https://en.wikipedia.org/wiki/Remote_procedure_call" target="_blank">RPC</a> 使用 <a href="https://microsoft.github.io/language-server-protocol" target="_blank">語言伺服器協定</a> 與之通訊。
+當您在編輯器中輸入時，編輯器會將資訊傳送給語言服務程序來追蹤專案狀態。</p>
+<p>當你在範本中觸發完成清單時，編輯器會先將範本解析成 HTML <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank">抽象語法樹 (AST)</a>。
+Angular 編譯器會解譯該樹以判斷內容：範本屬於哪個模組、目前的範圍、元件選擇器，以及你的遊標在範本 AST 中的位置。
+然後，它可以判斷可能在該位置的符號。</p>
+<p>如果您在內插法中，這會涉及更多內容。
+如果在 <code>div</code> 內部有 <code>{{data.---}}</code> 的內插法，並且需要在 <code>data.---</code> 之後顯示完成清單，編譯器無法使用 HTML AST 來尋找答案。
+HTML AST 只會告訴編譯器，有一些文字包含字元 &quot;<code>{{data.---}}</code>&quot;。
+這是範本解析器產生表達式 AST 的時候，它位於範本 AST 內部。
+然後 Angular 語言服務會在自己的內容中查看 <code>data.---</code>，詢問 TypeScript 語言服務 <code>data</code> 的成員是什麼，並傳回可能性清單。</p>
+
+  <h2 id="">更多資訊</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 更多資訊"></a>
+  
+  <ul class="docs-list">
+    <li>如需有關實作的更深入資訊，請參閱 <a href="https://github.com/angular/angular/blob/main/packages/language-service/src" target="_blank">Angular Language Service 來源</a></li>
+<li>如需有關設計考量和意圖的更多資訊，請參閱 <a href="https://github.com/angular/vscode-ng-language-service/wiki/Design" target="_blank">此處的設計文件</a></li>
+
+  </ul>
+  

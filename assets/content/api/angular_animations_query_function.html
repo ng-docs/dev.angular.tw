@@ -1,0 +1,27 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/animations</span><div class="docs-reference-title"><div><h1>query</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div></div><p class="docs-reference-description"><p>Finds one or more inner elements within the current element that is
+being animated within a sequence. Use with <code>animate()</code>.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">query</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">selector</span>: <span class="hljs-built_in">string</span>,</div><div class="hljs-ln-line ">  <span class="hljs-attr">animation</span>: <span class="hljs-title class_">AnimationMetadata</span> | <span class="hljs-title class_">AnimationMetadata</span>[],</div><div class="hljs-ln-line ">  options?: <span class="hljs-title class_">AnimationQueryOptions</span></div><div class="hljs-ln-line ">): <span class="hljs-title class_">AnimationQueryMetadata</span>;</div></code></pre></div></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><h3>Multiple Tokens</h3>
+<p>Tokens can be merged into a combined query selector string. For example:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"> <span class="hljs-title function_">query</span>(<span class="hljs-string">&#x27;:self, .record:enter, .record:leave,</span></span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>query</h3><div><code>AnimationQueryMetadata</code></div></div><span></span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Finds one or more inner elements within the current element that is
+being animated within a sequence. Use with <code>animate()</code>.</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">selector</span><code>string</code><div class="docs-parameter-description"><p>The element to query, or a set of elements that contain Angular-specific
+characteristics, specified with one or more of the following tokens.</p>
+
+    <ul class="docs-list">
+      <li><code>query(&quot;:enter&quot;)</code> or <code>query(&quot;:leave&quot;)</code> : Query for newly inserted/removed elements (not
+all elements can be queried via these tokens, see
+<a href="">Entering and Leaving Elements</a>)</li>
+<li><code>query(&quot;:animating&quot;)</code> : Query all currently animating elements.</li>
+<li><code>query(&quot;@triggerName&quot;)</code> : Query elements that contain an animation trigger.</li>
+<li><code>query(&quot;@*&quot;)</code> : Query all elements that contain an animation triggers.</li>
+<li><code>query(&quot;:self&quot;)</code> : Include the current element into the animation sequence.</li>
+
+    </ul></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">animation</span><code>AnimationMetadata | AnimationMetadata[]</code><div class="docs-parameter-description"><p>One or more animation steps to apply to the queried element or elements.
+An array is treated as an animation sequence.</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">options</span><code>AnimationQueryOptions</code><div class="docs-parameter-description"><p>An options object. Use the &#39;limit&#39; field to limit the total number of
+items to collect.</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>AnimationQueryMetadata</code></div></div></div></div></div></div></div>

@@ -1,0 +1,49 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>NgSwitch</h1><div class="docs-api-item-label" data-mode="full" data-type="directive">directive</div></div></div><p class="docs-reference-description"><p>The <code>[ngSwitch]</code> directive on a container specifies an expression to match against.
+The expressions to match are provided by <code>ngSwitchCase</code> directives on views within the container.</p>
+
+    <ul class="docs-list">
+      <li>Every view that matches is rendered.</li>
+<li>If there are no matches, a view with the <code>ngSwitchDefault</code> directive is rendered.</li>
+<li>Elements within the <code>[NgSwitch]</code> statement but outside of any <code>NgSwitchCase</code>
+or <code>ngSwitchDefault</code> directive are preserved at the location.</li>
+
+    </ul></p><nav class="docs-pill-row"><a class="docs-pill" href="api/common/NgSwitchCase">NgSwitchCase</a><a class="docs-pill" href="api/common/NgSwitchDefault">NgSwitchDefault</a><a class="docs-pill" href="guide/directives/structural-directives">Structural Directives</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">NgSwitch</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngSwitch">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">ngSwitch</span>(<span class="hljs-params">value: <span class="hljs-built_in">any</span></span>);</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>Define a container element for the directive, and specify the switch expression
+to match against as an attribute:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;container-element [ngSwitch]<span class="hljs-operator">=</span><span class="hljs-string">&quot;switch_expression&quot;</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p>Within the container, <code>*ngSwitchCase</code> statements specify the match expressions
+as attributes. Include <code>*ngSwitchDefault</code> as the final case.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">container-element</span> [<span class="hljs-attr">ngSwitch</span>]=<span class="hljs-string">&quot;switch_expression&quot;</span>&gt;</span></span><span class="hljs-ln-line">   <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">&quot;match_expression_1&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line">...</span><span class="hljs-ln-line">   <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchDefault</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">container-element</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <h3>Usage Examples</h3>
+<p>The following example shows how to use more than one case to display the same view:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">container-element</span> [<span class="hljs-attr">ngSwitch</span>]=<span class="hljs-string">&quot;switch_expression&quot;</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-comment">&lt;!-- the same view can be shown in more than one case --&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">&quot;match_expression_1&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">&quot;match_expression_2&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">some-other-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">&quot;match_expression_3&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-other-element</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-comment">&lt;!--default case when there are no matches --&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchDefault</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">container-element</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p>The following example shows how cases can be nested:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">container-element</span> [<span class="hljs-attr">ngSwitch</span>]=<span class="hljs-string">&quot;switch_expression&quot;</span>&gt;</span></span><span class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">&quot;match_expression_1&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">&quot;match_expression_2&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">some-other-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">&quot;match_expression_3&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-other-element</span>&gt;</span></span><span class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">&quot;match_expression_3&quot;</span>&gt;</span></span><span class="hljs-ln-line">        <span class="hljs-comment">&lt;!-- use a ng-container to group multiple root nodes --&gt;</span></span><span class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">inner-element</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">inner-element</span>&gt;</span></span><span class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">inner-other-element</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">inner-other-element</span>&gt;</span></span><span class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></span><span class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchDefault</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">container-element</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="ngSwitch" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngSwitch</h3><div><code>any</code></div></div></header></div></div></div></div>

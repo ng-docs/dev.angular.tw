@@ -1,0 +1,146 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">Server-side rendering</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ssr.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>伺服器端渲染 (SSR) 是在伺服器上呈現頁面的過程，會產生包含初始頁面狀態的初始 HTML 內容。HTML 內容傳送至瀏覽器後，Angular 會初始化應用程式並使用 HTML 中包含的資料。</p>
+
+  <h2 id="-ssr">為什麼要使用 SSR?</h2>
+  <a href="#-ssr" class="docs-anchor" tabindex="-1" aria-label="Link to 為什麼要使用 SSR?"></a>
+  <p>SSR 與用戶端渲染 (CSR) 相比的主要優勢有：</p>
+
+  <ul class="docs-list">
+    <li><strong>改善效能</strong>：SSR 可以藉由將完全呈現的 HTML 傳遞給用戶端來改善網路應用程式的效能，瀏覽器可以在下載應用程式 JavaScript 之前就解析和顯示它。這對頻寬較低或使用行動裝置的用戶來說特別有益。</li>
+<li><strong>改善核心網路指標</strong>：SSR 會帶來效能改善，可以用 <a href="https://web.dev/learn-core-web-vitals/" target="_blank">核心網路指標 (CWV)</a> 統計數據來衡量，例如縮短首次內容繪製 (<a href="https://developer.chrome.com/en/docs/lighthouse/performance/first-contentful-paint/" target="_blank">FCP</a>) 和最大內容繪製 (<a href="https://web.dev/lcp/" target="_blank">LCP</a>) 時間，以及累計版面配置變更 (<a href="https://web.dev/cls/" target="_blank">CLS</a>)。</li>
+<li><strong>更好的 SEO</strong>：SSR 可以改善網路應用程式的搜尋引擎最佳化 (SEO)，讓搜尋引擎更容易抓取並索引應用程式的內容。</li>
+
+  </ul>
+  
+  <h2 id="">啟用伺服器端呈現</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 啟用伺服器端呈現"></a>
+  <p>建立具有 SSR 的<strong>新</strong>專案，請執行：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng new --ssr</div></code>
+    </pre>
+  </div><p>若要將 SSR 新增至<strong>現有</strong>專案，請使用 Angular CLI <code>ng add</code> 指令。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng add @angular/ssr</div></code>
+    </pre>
+  </div><p>這些指令會建立並更新應用程式程式碼以啟用 SSR，並將額外檔案加入專案結構。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">my-app</div><div class="hljs-ln-line">|-- server.ts                       # application server</div><div class="hljs-ln-line">└── src</div><div class="hljs-ln-line">    |-- app</div><div class="hljs-ln-line">    |   └── app.config.server.ts    # server application configuration</div><div class="hljs-ln-line">    └── main.server.ts              # main server application bootstrapping</div></code>
+    </pre>
+  </div><p>若要驗證應用程式是伺服器端呈示的，請使用 <code>ng serve</code> 在本地端執行它。初始 HTML 要求應包含應用程式內容。</p>
+
+  <h2 id="">設定伺服器端渲染</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 設定伺服器端渲染"></a>
+  <p><code>server.ts</code> 檔案設定了 Node.js Express 伺服器和 Angular 伺服器端渲染。<code>CommonEngine</code> 用於渲染 Angular 應用程式。</p>
+<div class="docs-code" path="adev/src/content/examples/ssr/server.ts" visiblelines="30,31,32,33,34,35,36,37,38,39,40,41,42,43,44">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-variable constant_">APP_BASE_HREF</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CommonEngine</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/ssr'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">'express'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { fileURLToPath } <span class="hljs-keyword">from</span> <span class="hljs-string">'node:url'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { dirname, join, resolve } <span class="hljs-keyword">from</span> <span class="hljs-string">'node:path'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> bootstrap <span class="hljs-keyword">from</span> <span class="hljs-string">'./src/main.server'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// The Express app is exported so that it can be used by serverless Functions.</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">app</span>(<span class="hljs-params"></span>): express.<span class="hljs-property">Express</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> server = <span class="hljs-title function_">express</span>();</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> serverDistFolder = <span class="hljs-title function_">dirname</span>(<span class="hljs-title function_">fileURLToPath</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>));</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> browserDistFolder = <span class="hljs-title function_">resolve</span>(serverDistFolder, <span class="hljs-string">'../browser'</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> indexHtml = <span class="hljs-title function_">join</span>(serverDistFolder, <span class="hljs-string">'index.server.html'</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> commonEngine = <span class="hljs-keyword">new</span> <span class="hljs-title class_">CommonEngine</span>();</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  server.<span class="hljs-title function_">set</span>(<span class="hljs-string">'view engine'</span>, <span class="hljs-string">'html'</span>);</div><div class="hljs-ln-line">  server.<span class="hljs-title function_">set</span>(<span class="hljs-string">'views'</span>, browserDistFolder);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> implement data requests securely</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// Serve data from URLS that begin "/api/"</span></div><div class="hljs-ln-line">  server.<span class="hljs-title function_">get</span>(<span class="hljs-string">'/api/**'</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {</div><div class="hljs-ln-line">    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">send</span>(<span class="hljs-string">'data requests are not yet supported'</span>);</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line">  <span class="hljs-comment">// Serve static files from /browser</span></div><div class="hljs-ln-line">  server.<span class="hljs-title function_">get</span>(<span class="hljs-string">'*.*'</span>, express.<span class="hljs-title function_">static</span>(browserDistFolder, {</div><div class="hljs-ln-line">    <span class="hljs-attr">maxAge</span>: <span class="hljs-string">'1y'</span></div><div class="hljs-ln-line">  }));</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// All regular routes use the Angular engine</span></div><div class="hljs-ln-line">  server.<span class="hljs-title function_">get</span>(<span class="hljs-string">'*'</span>, <span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> { protocol, originalUrl, baseUrl, headers } = req;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    commonEngine</div><div class="hljs-ln-line">      .<span class="hljs-title function_">render</span>({</div><div class="hljs-ln-line">        bootstrap,</div><div class="hljs-ln-line">        <span class="hljs-attr">documentFilePath</span>: indexHtml,</div><div class="hljs-ln-line">        <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${protocol}</span>://<span class="hljs-subst">${headers.host}</span><span class="hljs-subst">${originalUrl}</span>`</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">publicPath</span>: browserDistFolder,</div><div class="hljs-ln-line">        <span class="hljs-attr">providers</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">APP_BASE_HREF</span>, <span class="hljs-attr">useValue</span>: req.<span class="hljs-property">baseUrl</span> }],</div><div class="hljs-ln-line">      })</div><div class="hljs-ln-line">      .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">html</span>) =&gt;</span> res.<span class="hljs-title function_">send</span>(html))</div><div class="hljs-ln-line">      .<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> <span class="hljs-title function_">next</span>(err));</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> server;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">run</span>(<span class="hljs-params"></span>): <span class="hljs-keyword">void</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> port = process.<span class="hljs-property">env</span>[<span class="hljs-string">'PORT'</span>] || <span class="hljs-number">4000</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// Start up the Node server</span></div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> server = <span class="hljs-title function_">app</span>();</div><div class="hljs-ln-line">  server.<span class="hljs-title function_">listen</span>(port, <span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Node Express server listening on http://localhost:<span class="hljs-subst">${port}</span>`</span>);</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">run</span>();</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p><code>CommonEngine</code> 的 <code>render</code> 方法接受一個具有下列屬性的物件：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th>屬性</th>
+<th>詳細資訊</th>
+<th>預設值</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td><code>bootstrap</code></td>
+<td>一種方法，可以傳回 <code>NgModule</code> 或承諾解析為 <code>ApplicationRef</code>。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>providers</code></td>
+<td>目前要求的平臺層級提供者陣列。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>要呈現的頁面網址。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>inlineCriticalCss</code></td>
+<td>是否要透過內嵌關鍵 CSS 來減少阻礙呈現的請求。</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>publicPath</code></td>
+<td>瀏覽器檔案和資產的基本路徑。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>document</code></td>
+<td>用於引導伺服器應用程式的初始 DOM。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>documentFilePath</code></td>
+<td>用於引導伺服器應用程式的初始 DOM 的檔案路徑。</td>
+<td></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>Angular CLI 將會建立一個專注於伺服器端渲染你的 Angular 應用程式的初始伺服器實作。此伺服器可以擴充以支援其他功能，例如 API 路由、重新導向、靜態資源等等。請參閱 <a href="https://expressjs.com/" target="_blank">Express 文件</a> 以了解更多詳細資訊。</p>
+
+  <h2 id="hydration">Hydration</h2>
+  <a href="#hydration" class="docs-anchor" tabindex="-1" aria-label="Link to Hydration"></a>
+  <p>Hydration是將伺服器端呈現的應用程式還原至用戶端上的程序。這包括重用伺服器呈現的 DOM 結構、保留應用程式狀態、傳輸伺服器已擷取的應用程式資料以及其他程序。當你使用 SSR 時，Hydration會預設啟用。你可以在 <a href="guide/hydration">Hydration指南</a> 中找到更多資訊。</p>
+
+  <h2 id="-httpclient-">使用 HttpClient 時快取資料</h2>
+  <a href="#-httpclient-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 HttpClient 時快取資料"></a>
+  <p>在伺服器上執行時，<a href="api/common/http/HttpClient"><code>HttpClient</code></a> 會快取傳出的網路要求。此資訊會序列化並作為從伺服器傳送的初始 HTML 的一部分傳送到瀏覽器。在瀏覽器中，<code>HttpClient</code> 會檢查快取中是否有資料，如果有，則會在初始應用程式呈示期間重複使用它，而不是建立新的 HTTP 要求。<code>HttpClient</code> 在應用程式在瀏覽器中執行時變得 <a href="api/core/ApplicationRef#isStable">穩定</a> 後，便會停止使用快取。</p>
+<p><code>HttpClient</code> 預設會快取所有 <code>HEAD</code> 和 <code>GET</code> 要求。您可以在提供水合時，使用 <a href="/api/platform-browser/withHttpTransferCacheOptions"><code>withHttpTransferCacheOptions</code></a> 來設定快取。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">AppComponent</span>, {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideClientHydration</span>(<span class="hljs-title function_">withHttpTransferCacheOptions</span>({</div><div class="hljs-ln-line">      <span class="hljs-attr">includePostRequests</span>: <span class="hljs-literal">true</span></div><div class="hljs-ln-line">    }))</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+  <h2 id="">撰寫伺服器相容元件</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 撰寫伺服器相容元件"></a>
+  <p>伺服器上可能無法使用某些常見的瀏覽器 API 和功能。應用程式無法使用特定瀏覽器提供的全域物件，例如 <code>window</code>、<code>document</code>、<code>navigator</code> 或 <code>location</code>，也無法使用 <code>HTMLElement</code> 的某些屬性。</p>
+<p>一般而言，依賴瀏覽器特定符號的程式碼應該只在瀏覽器執行，而非伺服器上。這可透過 <a href="api/core/afterRender"><code>afterRender</code></a> 和 <a href="api/core/afterNextRender"><code>afterNextRender</code></a> 生命週期掛鉤來執行。這些掛鉤只在瀏覽器上執行，並在伺服器上略過。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">ViewChild</span>, afterNextRender } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-cmp'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;span #content&gt;{{ ... }}&lt;/span&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'content'</span>) <span class="hljs-attr">contentRef</span>: <span class="hljs-title class_">ElementRef</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-title function_">afterNextRender</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-comment">// Safe to check `scrollHeight` because this will only run in the browser, not the server.</span></div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'content height: '</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">contentRef</span>.<span class="hljs-property">nativeElement</span>.<span class="hljs-property">scrollHeight</span>);</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="-angular-">使用 Angular 服務工作器</h2>
+  <a href="#-angular-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 Angular 服務工作器"></a>
+  <p>html</p>
+<script>
+  // 註冊服務工作器。
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js').then(registration => {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }, err => {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
+</script>
+
+<p>如果您在伺服器上使用 Angular 並搭配 Angular 服務工作者，行為會偏離正常的伺服器端呈現行為。初始伺服器要求會如預期般在伺服器上呈現。然而，在那次初始要求之後，後續要求會由服務工作者處理，並始終在用戶端呈現。</p>

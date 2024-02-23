@@ -1,0 +1,12 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common/http</span><div class="docs-reference-title"><div><h1>HttpHandlerFn</h1><div class="docs-api-item-label" data-mode="full" data-type="type_alias">Type Alias</div></div></div><p class="docs-reference-description"><p>Represents the next interceptor in an interceptor chain, or the real backend if there are no
+further interceptors.</p></p><nav class="docs-pill-row"><a class="docs-pill" href="guide/http/interceptors">HTTP Guide</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">type</span> <span class="hljs-title class_">HttpHandlerFn</span> = <span class="hljs-function">(<span class="hljs-params">req: HttpRequest&lt;<span class="hljs-built_in">unknown</span>&gt;</span>) =&gt;</span> <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-title class_">HttpEvent</span>&lt;<span class="hljs-built_in">unknown</span>&gt;&gt;</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>Represents the next interceptor in an interceptor chain, or the real backend if there are no
+further interceptors.</p>
+<p>Most interceptors will delegate to this function, and either modify the outgoing request or the
+response when it arrives. Within the scope of the current request, however, this function may be
+called any number of times, for any number of downstream requests. Such downstream requests need
+not be to the same URL or even the same origin as the current request. It is also valid to not
+call the downstream handler at all, and process the current request entirely within the
+interceptor.</p>
+<p>This function should only be called within the scope of the request that&#39;s currently being
+intercepted. Once that request is complete, this downstream handler function should not be
+called.</p></div></div></div>

@@ -1,0 +1,351 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">撰寫原理圖</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/schematics-authoring.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>您可以建立自己的範本來操作 Angular 專案。
+程式庫開發人員通常會將範本封裝到他們的程式庫中，以將它們與 Angular CLI 整合。
+您也可以建立獨立的範本來處理 Angular 應用程式中的檔案和結構，以便為您的開發環境自訂它們，並使它們符合您的標準和約束。
+範本可以串聯，執行其他範本來執行複雜的操作。</p>
+<p>操作應用程式中的程式碼有潛在的強大功能，相應地也具有危險性。
+例如，建立一個已經存在的檔案會是錯誤的，如果它立即套用，它會捨棄到目前為止套用過的所有其他變更。
+Angular Schematics 工具透過建立虛擬檔案系統來防止副作用和錯誤。
+示意圖描述可以套用至虛擬檔案系統的轉換管線。
+當示意圖執行時，這些轉換會記錄在記憶體中，並且只在確認它們有效後才在真實檔案系統中套用。</p>
+
+  <h2 id="">電路圖概念</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 電路圖概念"></a>
+  <p>schematics 的公開 API 定義代表基本概念的類別。</p>
+
+  <ul class="docs-list">
+    <li><p>虛擬檔案系統由 <code>Tree</code> 表示。
+  <code>Tree</code> 資料結構包含一個 <em>基本值</em>（一組已存在的檔案）和一個 <em>暫存區</em>（要套用到基本值的一系列變更）。
+  當進行修改時，您並未實際變更基本值，而是將這些修改新增到暫存區。</p>
+</li>
+<li><p><code>Rule</code> 物件定義一個函式，該函式會採用 <code>Tree</code>，套用轉換，並傳回新的 <code>Tree</code>。
+  架構的 main 檔案 <code>index.ts</code> 定義了一組規則，這些規則會實作架構的邏輯。</p>
+</li>
+<li><p>轉換以 <code>Action</code> 表示。
+  有四種類型的動作：<code>Create</code>、<code>Rename</code>、<code>Overwrite</code> 和 <code>Delete</code>。</p>
+</li>
+<li><p>每個架構都會在由 <code>SchematicContext</code> 物件表示的內容中執行。</p>
+</li>
+
+  </ul>
+  <p>傳遞到規則的內容物件提供存取實用程式功能和可能需要搭配 Schematic 使用的元資料，包括有助於除錯的記錄 API。</p>
+<p>內容也定義 <em>合併策略</em>，用於決定如何將變更從暫存樹合併到基礎樹。</p>
+<p>變更可以被接受或忽略，或擲出例外。</p>
+
+  <h3 id="">定義規則和動作</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 定義規則和動作"></a>
+  <p>當您使用 <a href="#cli">Schematics CLI</a> 建立新的空白示意圖時，產生的輸入函式是一個 <em>規則工廠</em>。
+<code>RuleFactory</code> 物件定義一個建立 <code>Rule</code> 的高階函式。</p>
+<div class="docs-code" header="index.ts">
+    <div class="docs-code-header"><h3>index.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Rule</span>, <span class="hljs-title class_">SchematicContext</span>, <span class="hljs-title class_">Tree</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/schematics'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// You don't have to export the function as default.</span></div><div class="hljs-ln-line"><span class="hljs-comment">// You can also have more than one rule factory per file.</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">helloWorld</span>(<span class="hljs-params">_options: <span class="hljs-built_in">any</span></span>): <span class="hljs-title class_">Rule</span> {</div><div class="hljs-ln-line"> <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">tree: Tree,_context: SchematicContext</span>) =&gt;</span> {</div><div class="hljs-ln-line">   <span class="hljs-keyword">return</span> tree;</div><div class="hljs-ln-line"> };</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>您的規則可以透過呼叫外部工具和實作邏輯來對專案進行變更。
+例如，您需要一個規則來定義如何將原理圖中的範本併入主機專案。</p>
+<p>規則可以利用 <code>@schematics/angular</code> 套件提供的實用工具。
+尋找可協助處理模組、相依性、TypeScript、AST、JSON、Angular CLI 工作區和專案等等的輔助函式。</p>
+<div class="docs-code" header="index.ts">
+    <div class="docs-code-header"><h3>index.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {</div><div class="hljs-ln-line">  <span class="hljs-title class_">JsonAstObject</span>,</div><div class="hljs-ln-line">  <span class="hljs-title class_">JsonObject</span>,</div><div class="hljs-ln-line">  <span class="hljs-title class_">JsonValue</span>,</div><div class="hljs-ln-line">  <span class="hljs-title class_">Path</span>,</div><div class="hljs-ln-line">  normalize,</div><div class="hljs-ln-line">  parseJsonAst,</div><div class="hljs-ln-line">  strings,</div><div class="hljs-ln-line">} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/core'</span>;</div></code>
+    </pre>
+  </div>
+  <h3 id="-schema-">使用 schema 和介面定義輸入選項</h3>
+  <a href="#-schema-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 schema 和介面定義輸入選項"></a>
+  <p>規則可以從呼叫者收集選項值並將其注入範本中。
+規則可用的選項及其允許值和預設值，定義在範本的 JSON schema 檔案 <code>&lt;schematic&gt;/schema.json</code> 中。
+使用 TypeScript 介面為 schema 定義變數或列舉資料類型。</p>
+<p>該架構定義了在原理圖中使用的變數類型和預設值。
+例如，假設的「Hello World」原理圖可能具有以下架構。</p>
+<div class="docs-code" header="src/hello-world/schema.json">
+    <div class="docs-code-header"><h3>src/hello-world/schema.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"properties"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"minLength"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"default"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"world"</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"useColor"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"boolean"</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>有關 Angular CLI 命令 schematics 的範例檔案，請參閱 <a href="https://github.com/angular/angular-cli/blob/main/packages/schematics/angular/application/schema.json" target="_blank"><code>@schematics/angular</code></a>。</p>
+
+  <h3 id="">示意圖提示</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 示意圖提示"></a>
+  <p>示意圖 <em>提示</em> 將使用者互動引入示意圖執行。
+配置示意圖選項以顯示使用者可自訂的問題。
+提示會在示意圖執行前顯示，然後使用回應做為選項的值。
+這讓使用者可以引導示意圖的運作，而不需要深入了解所有可用選項。</p>
+<p>「Hello World」範例可能會要求使用者輸入其名稱，並將該名稱顯示在預設名稱「world」的位置。
+若要定義此提示，請將 <code>x-prompt</code> 屬性新增至 <code>name</code> 變數的範例。</p>
+<p>同樣地，您可以新增提示，讓使用者決定在執行 hello 動作時，是否使用彩色圖表。
+具有這兩個提示的範例如下。</p>
+<div class="docs-code" header="src/hello-world/schema.json">
+    <div class="docs-code-header"><h3>src/hello-world/schema.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"properties"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"minLength"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"default"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"world"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"x-prompt"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"What is your name?"</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"useColor"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"boolean"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"x-prompt"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Would you like the response in color?"</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <h4 id="">提示簡短語法</h4>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 提示簡短語法"></a>
+  <p>以下範例使用提示語法的簡寫形式，僅提供問題文字。
+在多數情況下，這就足夠了。
+然而，請注意，這兩個提示語法預期有不同類型的輸入。
+當使用簡寫形式時，系統會根據該屬性的結構自動選擇最合適的類型。
+在範例中，<code>name</code> 提示語法使用 <code>input</code> 類型，因為它是一個字串屬性。
+<code>useColor</code> 提示語法使用 <code>confirmation</code> 類型，因為它是一個布林值屬性。
+在此情況下，「是」對應到 <code>true</code>，而「否」對應到 <code>false</code>。</p>
+<p>支援三種輸入類型。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">輸入類型</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">確認</td>
+<td align="left">是或否的問題；最適合布林選項。</td>
+</tr>
+<tr>
+<td align="left">輸入</td>
+<td align="left">文字輸入；最適合字串或數字選項。</td>
+</tr>
+<tr>
+<td align="left">清單</td>
+<td align="left">一組預先定義的允許值。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>在簡短形式中，類型會從屬性的類型和約束推斷出來。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">屬性模式</th>
+<th align="left">提示類型</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">&quot;type&quot;: &quot;boolean&quot;</td>
+<td align="left">確認 (&quot;yes&quot;=<code>true</code>, &quot;no&quot;=<code>false</code>)</td>
+</tr>
+<tr>
+<td align="left">&quot;type&quot;: &quot;string&quot;</td>
+<td align="left">輸入</td>
+</tr>
+<tr>
+<td align="left">&quot;type&quot;: &quot;number&quot;</td>
+<td align="left">輸入 (僅接受有效的數字)</td>
+</tr>
+<tr>
+<td align="left">&quot;type&quot;: &quot;integer&quot;</td>
+<td align="left">輸入 (僅接受有效的數字)</td>
+</tr>
+<tr>
+<td align="left">&quot;enum&quot;: [&hellip;]</td>
+<td align="left">清單 (列舉成員變成清單選項)</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>在以下範例中，屬性採用列舉值，因此示意圖會自動選擇清單類型，並從可能值中建立選單。</p>
+<div class="docs-code" header="schema.json">
+    <div class="docs-code-header"><h3>schema.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"style"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"description"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"The file extension or preprocessor to use for style files."</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"default"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"css"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"enum"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">    <span class="hljs-string">"css"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"scss"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"sass"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"less"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"styl"</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"x-prompt"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Which stylesheet format would you like to use?"</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>提示執行階段會根據 JSON 架構中提供的約束自動驗證提供的回應。
+如果該值不可接受，系統會提示使用者輸入新的值。
+這可確保傳遞至示意圖的任何值都符合示意圖實作的預期，因此您不需要在示意圖的程式碼中新增其他檢查。</p>
+
+  <h4 id="">提示長格式語法</h4>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 提示長格式語法"></a>
+  <p><code>x-prompt</code> 欄位語法支援長格式，適用於需要額外自訂和控制提示的情況。
+在此格式中，<code>x-prompt</code> 欄位值是一個 JSON 物件，其中包含自訂提示行為的子欄位。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">欄位</th>
+<th align="left">資料值</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">type</td>
+<td align="left"><code>confirmation</code>, <code>input</code>, 或 <code>list</code> (在短表單中自動選取)</td>
+</tr>
+<tr>
+<td align="left">message</td>
+<td align="left">字串 (必填)</td>
+</tr>
+<tr>
+<td align="left">items</td>
+<td align="left">字串和/或標籤/值物件配對 (僅在 type 為 <code>list</code> 時有效)</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>以下長格式範例取自用於 <a href="https://github.com/angular/angular-cli/blob/ba8a6ea59983bb52a6f1e66d105c5a77517f062e/packages/schematics/angular/application/schema.json#L56" target="_blank">產生應用程式</a> 的示意圖的 JSON 架構。
+它定義了提示，讓使用者選擇要為所建立的應用程式使用的樣式預處理器。
+透過使用長格式，示意圖可以提供選單選項更明確的格式。</p>
+<div class="docs-code" header="package/schematics/angular/application/schema.json">
+    <div class="docs-code-header"><h3>package/schematics/angular/application/schema.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"style"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"description"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"The file extension or preprocessor to use for style files."</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"default"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"css"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"enum"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">    <span class="hljs-string">"css"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"scss"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"sass"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"less"</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"x-prompt"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Which stylesheet format would you like to use?"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"list"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"items"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">{</span> <span class="hljs-attr">"value"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"css"</span><span class="hljs-punctuation">,</span>  <span class="hljs-attr">"label"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"CSS"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">{</span> <span class="hljs-attr">"value"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"scss"</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"label"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SCSS   [ https://sass-lang.com/documentation/syntax#scss                ]"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">{</span> <span class="hljs-attr">"value"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"sass"</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"label"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Sass   [ https://sass-lang.com/documentation/syntax#the-indented-syntax ]"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">{</span> <span class="hljs-attr">"value"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"less"</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"label"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Less   [ https://lesscss.org/                                            ]"</span> <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div></code>
+    </pre>
+  </div>
+  <h4 id="x-prompt-">x-prompt 架構</h4>
+  <a href="#x-prompt-" class="docs-anchor" tabindex="-1" aria-label="Link to x-prompt 架構"></a>
+  <p>定義示意圖選項的 JSON 架構支援擴充功能，允許宣告式定義提示及其各自的行為。
+不需要對示意圖的程式碼進行額外邏輯或變更，即可支援提示。
+下列 JSON 架構是 <code>x-prompt</code> 欄位的長格式語法的完整說明。</p>
+<div class="docs-code" header="x-prompt schema">
+    <div class="docs-code-header"><h3>x-prompt schema</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"oneOf"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">{</span> <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"object"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"properties"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">                <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                <span class="hljs-attr">"items"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">                    <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"array"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                    <span class="hljs-attr">"items"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">                        <span class="hljs-attr">"oneOf"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">                            <span class="hljs-punctuation">{</span> <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                            <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">                                <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"object"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                                <span class="hljs-attr">"properties"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">                                    <span class="hljs-attr">"label"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                                    <span class="hljs-attr">"value"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">                                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                                <span class="hljs-attr">"required"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> <span class="hljs-string">"value"</span> <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line">                            <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">                        <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line">                    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">                <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"required"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> <span class="hljs-string">"message"</span> <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <h2 id="schematics-cli">Schematics CLI</h2>
+  <a href="#schematics-cli" class="docs-anchor" tabindex="-1" aria-label="Link to Schematics CLI"></a>
+  <p>Schematics 附帶自己的命令列工具。
+使用 Node 6.9 或更新版本，請在全球安裝 Schematics 命令列工具：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">npm install -g @angular-devkit/schematics-cli</div></code>
+    </pre>
+  </div><p>這會安裝 <code>schematics</code> 可執行檔，您可以使用它在自己的專案資料夾中建立新的 schematics 集合，將新的 schematic 加入現有的集合，或延伸現有的 schematic。</p>
+<p>在以下各節中，您將使用 CLI 建立新的範本集合，以介紹檔案和檔案結構，以及一些基本概念。</p>
+<p>然而，示意圖最常見的用途是將 Angular 函式庫與 Angular CLI 整合。
+透過在 Angular 工作區中直接建立示意圖檔案來執行此操作，而無需使用 Schematics CLI。
+請參閱 <a href="tools/cli/schematics-for-libraries">函式庫的示意圖</a>。</p>
+
+  <h3 id="">建立範本集</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 建立範本集"></a>
+  <p>以下指令會在同名的專案資料夾中建立一個名為 <code>hello-world</code> 的新圖表。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">schematics blank --name=hello-world</div></code>
+    </pre>
+  </div><p>Schematics CLI 提供了 <code>blank</code> 範例。
+指令會建立新的專案資料夾（此為範例的根資料夾）和範例中的初始命名範例。</p>
+<p>前往 collection 資料夾，安裝您的 npm 相依性，並在您最愛的編輯器中開啟您的新 collection，以檢視產生的檔案。
+例如，如果您正在使用 VS Code：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">cd hello-world</div><div class="hljs-ln-line">npm install</div><div class="hljs-ln-line">npm run build</div><div class="hljs-ln-line">code .</div></code>
+    </pre>
+  </div><p>初始示意圖會採用與專案資料夾相同的名稱，並產生於 <code>src/hello-world</code>。
+將相關示意圖新增至該集合，並修改產生的範本程式碼來定義您的示意圖功能。
+每個示意圖名稱在集合中必須是獨一無二的。</p>
+
+  <h3 id="">運行一個示意圖</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 運行一個示意圖"></a>
+  <p>使用 <code>schematics</code> 指令來執行指定的名稱指令。
+請以以下格式提供專案資料夾路徑、指令名稱和任何強制選項。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">schematics &lt;path-to-schematics-project&gt;:&lt;schematics-name&gt; --&lt;required-option&gt;=&lt;value&gt;</div></code>
+    </pre>
+  </div><p>路徑可以是絕對路徑或相對路徑，取決於執行指令的目前工作目錄。
+例如，要執行您剛才產生的原理圖（沒有任何必要選項），請使用以下指令。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">schematics .:hello-world</div></code>
+    </pre>
+  </div>
+  <h3 id="">將原理圖加入至集合中</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 將原理圖加入至集合中"></a>
+  <p>若要將示意圖新增至現有合輯，請使用與您用來開始新的示意圖專案相同的指令，但請在專案資料夾中執行指令。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">cd hello-world</div><div class="hljs-ln-line">schematics blank --name=goodbye-world</div></code>
+    </pre>
+  </div><p>此指令會在您的集合中產生新的命名示意圖，包含一個主 <code>index.ts</code> 檔案及其相關測試規範。
+它也會將新示意圖的名稱、說明和工廠函式新增到 <code>collection.json</code> 檔案中的集合架構。</p>
+
+  <h2 id="">收藏內容</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 收藏內容"></a>
+  <p>根專案資料夾的頂層包含組態檔、<code>node_modules</code> 資料夾和 <code>src/</code> 資料夾。
+<code>src/</code> 資料夾包含該組合中命名範例的子資料夾，以及描述收集到的範例的結構 <code>collection.json</code>。
+每個範例都建立名稱、說明和工廠函式。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"$schema"</span><span class="hljs-punctuation">:</span></div><div class="hljs-ln-line">     <span class="hljs-string">"../node_modules/@angular-devkit/schematics/collection-schema.json"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"schematics"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"hello-world"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"description"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"A blank schematic."</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"factory"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"./hello-world/index#helloWorld"</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <ul class="docs-list">
+    <li><p><code>$schema</code> 屬性指定 CLI 用於驗證的架構。</p>
+</li>
+<li><p><code>schematics</code> 屬性列出屬於此集合的已命名架構。
+  每個架構都有純文字說明，並指向主檔案中的已自動建立的輸入函式。</p>
+</li>
+<li><p><code>factory</code> 屬性指向已產生的輸入函式。
+  在此範例中，您可以透過呼叫 <code>helloWorld()</code> 工廠函式來呼叫 <code>hello-world</code> 架構。</p>
+</li>
+<li><p>選擇性的 <code>schema</code> 屬性指向定義架構可用的命令列選項的 JSON 架構檔案。</p>
+</li>
+<li><p>選擇性的 <code>aliases</code> 陣列指定一個或多個可被用來呼叫架構的字串。
+  例如，Angular CLI「產生」指令的架構有一個別名「g」，讓您可以使用指令 <code>ng g</code>。</p>
+</li>
+
+  </ul>
+  
+  <h3 id="-schematics">指定的 Schematics</h3>
+  <a href="#-schematics" class="docs-anchor" tabindex="-1" aria-label="Link to 指定的 Schematics"></a>
+  <p>當您使用 Schematics CLI 建立一個空白的 schematics 專案時，新的空白 schematic 是該集合的第一個成員，並與該集合擁有相同的名稱。
+當您將一個新的命名 schematic 新增到這個集合時，它會自動新增到 <code>collection.json</code> schema 中。</p>
+<p>除了名稱和說明以外，每個示意圖都有一個 <code>factory</code> 屬性，用來識別示意圖的進入點。
+在範例中，您可以呼叫主檔案 <code>hello-world/index.ts</code> 中的 <code>helloWorld()</code> 函式，來呼叫示意圖的已定義功能。</p>
+<img alt="overview" src="https://angular.dev/assets/images/guide/schematics/collection-files.gif">
+
+<p>每個在集合中命名的原理圖都有以下主要部分。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">部件</th>
+<th align="left">詳細</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>index.ts</code></td>
+<td align="left">為指定圖式定義轉換邏輯的程式碼。</td>
+</tr>
+<tr>
+<td align="left"><code>schema.json</code></td>
+<td align="left">圖式變數定義。</td>
+</tr>
+<tr>
+<td align="left"><code>schema.d.ts</code></td>
+<td align="left">圖式變數。</td>
+</tr>
+<tr>
+<td align="left"><code>files/</code></td>
+<td align="left">要複製的選用元件/範本檔案。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>原理圖有可能在 <code>index.ts</code> 檔案中提供所有邏輯，而不需要額外的範本。
+不過，您可以透過在 <code>files</code> 資料夾中提供元件和範本，像是在獨立的 Angular 專案中一樣，來建立 Angular 的動態原理圖。
+索引檔案中的邏輯會透過定義注入資料和修改變數的規則來配置這些範本。</p>

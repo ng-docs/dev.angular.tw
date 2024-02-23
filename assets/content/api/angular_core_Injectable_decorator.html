@@ -1,0 +1,28 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>Injectable</h1><div class="docs-api-item-label" data-mode="full" data-type="decorator">decorator</div></div></div><p class="docs-reference-description"><p>Decorator that marks a class as available to be
+provided and injected as a dependency.</p></p><nav class="docs-pill-row"><a class="docs-pill" href="guide/di">Introduction to Services and DI</a><a class="docs-pill" href="guide/di/dependency-injection">Dependency Injection Guide</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">Injectable</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="providedIn">  providedIn?: <span class="hljs-title class_">Type</span>&lt;<span class="hljs-built_in">any</span>&gt; | <span class="hljs-string">&quot;root&quot;</span> | <span class="hljs-string">&quot;platform&quot;</span> | <span class="hljs-string">&quot;any&quot;</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>Marking a class with <code>@Injectable</code> ensures that the compiler
+will generate the necessary metadata to create the class&#39;s
+dependencies when the class is injected.</p>
+<p>The following example shows how a service class is properly
+ marked so that a supporting service can be injected upon creation.</p>
+<p><code-example path="core/di/ts/metadata_spec.ts" region="Injectable"></code-example></p>
+</div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="providedIn" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>providedIn</h3><div><code>Type&lt;any> | &quot;root&quot; | &quot;platform&quot; | &quot;any&quot;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Determines which injectors will provide the injectable.</p>
+
+    <ul class="docs-list">
+      <li><code>Type&lt;any&gt;</code> - associates the injectable with an <code>@NgModule</code> or other <code>InjectorType</code>. This
+option is DEPRECATED.</li>
+<li>&#39;null&#39; : Equivalent to <code>undefined</code>. The injectable is not provided in any scope automatically
+and must be added to a <code>providers</code> array of an <a href="api/core/NgModule">@NgModule</a>,
+<a href="api/core/Directive">@Component</a> or <a href="api/core/Directive">@Directive</a>.</li>
+
+    </ul>
+    <p>The following options specify that this injectable should be provided in one of the following
+injectors:</p>
+
+    <ul class="docs-list">
+      <li>&#39;root&#39; : The application-level injector in most apps.</li>
+<li>&#39;platform&#39; : A special singleton platform injector shared by all
+applications on the page.</li>
+<li>&#39;any&#39; : Provides a unique instance in each lazy loaded module while all eagerly loaded
+modules share one instance. This option is DEPRECATED.</li>
+
+    </ul></div></div></div></div></div></div></div>

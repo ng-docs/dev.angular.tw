@@ -1,0 +1,26 @@
+<p>@name 子項查詢結果是必需的，但沒有可用的值。
+@category runtime
+@shortDescription 在計算查詢結果之前存取了必需的子項查詢結果，或查詢沒有任何符合的結果。</p>
+<p>@description
+必須的子查詢 (<code>contentChild.required</code> 或 <code>viewChild.required</code>) 結果在查詢結果計算之前被存取，或查詢沒有任何配對。</p>
+<p>這可能發生在兩種不同的情況：</p>
+
+  <ul class="docs-list">
+    <li>在特定查詢可以收集結果之前，就已存取查詢結果；</li>
+<li>執行查詢，但沒有任何節點符合查詢條件，因此沒有結果。</li>
+
+  </ul>
+  <p>內容查詢和檢視查詢各自在不同的時間點計算其結果：</p>
+
+  <ul class="docs-list">
+    <li><code>contentChild</code> 結果在建立_主機_檢視（使用宣告查詢的範本）後可用；</li>
+<li><code>viewChild</code> 結果在建立宣告查詢的元件範本後可用。</li>
+
+  </ul>
+  <p>在查詢結果可用之前存取會導致此頁面中所述的錯誤。最值得注意的是，查詢結果在宣告查詢的元件或指令的建構函式中_永遠_不會可用。</p>
+
+  <h2 id="">修正錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 修正錯誤"></a>
+  <p><code>contentChild</code> 查詢結果可以在 <code>AfterContentChecked</code> 生命週期掛勾中存取，或之後存取。
+<code>viewChild</code> 查詢結果可以在 <code>AfterViewChecked</code> 生命週期掛勾中存取，或之後存取。</p>
+<p>請確定必要的查詢至少與一個節點相符，而且在所有情況下都有結果。您可以透過存取上述生命週期掛鉤的查詢結果來驗證這一點。</p>

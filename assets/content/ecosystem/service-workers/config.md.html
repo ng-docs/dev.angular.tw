@@ -1,0 +1,545 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">Service Worker 組態檔案</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/ecosystem/service-workers/config.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>此主題說明服務工作者設定檔的屬性。</p>
+
+  <h2 id="">修改設定</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 修改設定"></a>
+  <p><code>ngsw-config.json</code> JSON 組態檔案指定 Angular 服務工作者應快取哪些檔案和資料 URL，以及它應如何更新快取的檔案和資料。
+<a href="tools/cli">Angular CLI</a> 會在 <code>ng build</code> 期間處理此組態檔案。</p>
+<p>所有檔案路徑必須以 <code>/</code> 開頭，它對應到部署目錄 &mdash; 在 CLI 專案中通常是 <code>dist/&lt;project-name&gt;</code>。</p>
+<p>除非另有註解，否則樣式使用<strong>限制性的</strong>*glob格式，它在內部將轉換為正規表示法：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">全域比對格式</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>**</code></td>
+<td align="left">符合 0 或更多路徑區段</td>
+</tr>
+<tr>
+<td align="left"><code>*</code></td>
+<td align="left">符合 0 或更多字元（不包括 <code>/</code>）</td>
+</tr>
+<tr>
+<td align="left"><code>?</code></td>
+<td align="left">符合 1 個字元（不包括 <code>/</code>）</td>
+</tr>
+<tr>
+<td align="left"><code>!</code> 前置詞</td>
+<td align="left">將樣式標記為反向，意即僅包含與樣式不符的檔案</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-callout docs-callout-important">
+      <h3>特殊字元需要跳脫</h3>
+      <p>請注意，某些字元在正規表示式中具有特殊含義，在內部 glob 轉換為正規表示式時未跳脫，且該模式未包含在 <code>^</code>/<code>$</code> 中。</p>
+<p><code>$</code> 在正規表示式中是一個特殊字元，用來匹配字串的結尾，在將 glob 模式轉換為正規表示式時，不會自動跳脫。</p>
+<p>如果您想匹配 <code>$</code> 字元，您必須自行跳脫它 (使用 <code>\\$</code>)。例如，glob 模式 <code>/foo/bar/$value</code> 會導致無法匹配的表達式，因為不可能有字串在結束後還有任何字元。</p>
+<p>將模式轉換為正規表示式時，它不會自動以 <code>^</code> 和 <code>$</code> 包裹。因此，這些模式會部分匹配要求的 URL。</p>
+<p>如果要讓樣式符合網址的開頭和/或結尾，您可以自行新增 <code>^</code>/<code>$</code>。例如，glob 樣式 <code>/foo/bar/*.js</code> 會符合 <code>.js</code> 和 <code>.json</code> 檔案。如果您只想符合 <code>.js</code> 檔案，請使用 <code>/foo/bar/*.js$</code>。</p>
+
+    </div>
+    <p>範例模式：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">模式</th>
+<th align="left">細節</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>/**/*.html</code></td>
+<td align="left">指定所有 HTML 檔案</td>
+</tr>
+<tr>
+<td align="left"><code>/*.html</code></td>
+<td align="left">僅指定根目錄中的 HTML 檔案</td>
+</tr>
+<tr>
+<td align="left"><code>!/**/*.map</code></td>
+<td align="left">排除所有來源地圖</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">服務工作者組態屬性</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 服務工作者組態屬性"></a>
+  <p>以下各節說明組態檔案的各個屬性。</p>
+
+  <h3 id="appdata"><code>appData</code>`</h3>
+  <a href="#appdata" class="docs-anchor" tabindex="-1" aria-label="Link to <code>appData</code>`"></a>
+  <p>本部分讓您傳遞任何您想要的資料，以描述這個特定版本的應用程式。
+<code>SwUpdate</code> 服務會在更新通知中包含該資料。
+許多應用程式使用本部分提供額外的資訊，以顯示 UI 快顯視窗，通知使用者有可用的更新。</p>
+
+  <h3 id="index"><code>index</code></h3>
+  <a href="#index" class="docs-anchor" tabindex="-1" aria-label="Link to <code>index</code>"></a>
+  <p>指定用於滿足導覽請求的檔案作為索引頁面。
+通常是 <code>/index.html</code>。</p>
+
+  <h3 id="assetgroups"><code>assetGroups</code></h3>
+  <a href="#assetgroups" class="docs-anchor" tabindex="-1" aria-label="Link to <code>assetGroups</code>"></a>
+  <p><em>資產</em> 是應用程式版本的一部分的資源，會與應用程式一起更新。
+它們可能包括從頁面來源載入的資源，以及從 CDN 和其他外部 URL 載入的第三方資源。
+由於在建置時可能不知道所有此類外部 URL，因此可以比對 URL 模式。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 讓服務工作者處理從不同來源載入的資源，請確保在每個來源的伺服器上正確設定 <a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS" target="_blank">CORS</a>。</p>
+
+    </div>
+    <p>此欄位包含資產群組陣列，每個資產群組定義一組資產資源和快取其資源的政策。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"assetGroups"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      …</div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      …</div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>HELPFUL：當 ServiceWorker 處理請求時，它會按照它們在 <code>ngsw-config.json</code> 中出現的順序來檢查資產群組。
+第一個與請求的資源相符的資產群組將會處理請求。</p>
+<p>建議您將較具體的資產群組放在清單中較高的位置。
+例如，與 <code>/foo.js</code> 相符的資產群組應出現在與 <code>*.js</code> 相符的資產群組之前。</p>
+<p>每個資產群組都指定資源群組和管理該群組的政策。
+此政策決定何時擷取資源以及在偵測到變更時會發生什麼情況。</p>
+<p>資產群組遵循這裡顯示的 Typescript 介面：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">AssetGroup</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  installMode?: <span class="hljs-string">'prefetch'</span> | <span class="hljs-string">'lazy'</span>;</div><div class="hljs-ln-line">  updateMode?: <span class="hljs-string">'prefetch'</span> | <span class="hljs-string">'lazy'</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">resources</span>: {</div><div class="hljs-ln-line">    files?: <span class="hljs-built_in">string</span>[];</div><div class="hljs-ln-line">    urls?: <span class="hljs-built_in">string</span>[];</div><div class="hljs-ln-line">  };</div><div class="hljs-ln-line">  cacheQueryOptions?: {</div><div class="hljs-ln-line">    ignoreSearch?: <span class="hljs-built_in">boolean</span>;</div><div class="hljs-ln-line">  };</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>每個 <code>AssetGroup</code> 由以下資產群組屬性定義。</p>
+
+  <h4 id="name"><code>name</code></h4>
+  <a href="#name" class="docs-anchor" tabindex="-1" aria-label="Link to <code>name</code>"></a>
+  <p><code>name</code> 是強制性的。
+它識別配置版本之間的這特定資產群組。</p>
+
+  <h4 id="installmode"><code>installMode</code></h4>
+  <a href="#installmode" class="docs-anchor" tabindex="-1" aria-label="Link to <code>installMode</code>"></a>
+  <p><code>installMode</code> 決定這些資源如何最初快取。
+<code>installMode</code> 可以是兩個值之一：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">值</th>
+<th align="left">詳細資訊</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>prefetch</code></td>
+<td align="left">告訴 Angular 服務工作者在快取目前的應用程式版本時擷取每個已列出的資源。這會消耗大量頻寬，但可確保在需要時資源會隨時可用，即使瀏覽器目前處於離線狀態。</td>
+</tr>
+<tr>
+<td align="left"><code>lazy</code></td>
+<td align="left">沒有預先快取任何資源。相反地，Angular 服務工作者僅快取它收到請求的資源。這是一種依需求快取模式。從未請求的資源不會快取。這對於不同解析度的圖片很有用，因此服務工作者僅快取特定螢幕和方向的正確資產。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>預設為 <code>prefetch</code>。</p>
+
+  <h4 id="updatemode"><code>updateMode</code></h4>
+  <a href="#updatemode" class="docs-anchor" tabindex="-1" aria-label="Link to <code>updateMode</code>"></a>
+  <p>對於快取中既有的資源，當發現應用程式的最新版本時，<code>updateMode</code> 會決定快取行為。
+群組中自上一個版本變更的所有資源會根據 <code>updateMode</code> 更新。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">值</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>prefetch</code></td>
+<td align="left">告訴服務工作者立即下載並快取變更的資源。</td>
+</tr>
+<tr>
+<td align="left"><code>lazy</code></td>
+<td align="left">告訴服務工作者不要快取那些資源。相反地，它將它們視為未請求的資源，並等到再次請求它們時才更新它們。只有在 <code>installMode</code> 也為 <code>lazy</code> 時，<code>lazy</code> 的 <code>updateMode</code> 才有效。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>預設值為 <code>installMode</code> 設定的值。</p>
+
+  <h4 id="resources"><code>resources</code></h4>
+  <a href="#resources" class="docs-anchor" tabindex="-1" aria-label="Link to <code>resources</code>"></a>
+  <p>此部分說明要快取的資源，分為以下群組：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">資源群組</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>files</code></td>
+<td align="left">列出與 distribution 目錄中的檔案相符的模式。這些可以是單一檔案或與多個檔案相符的 glob 類似模式。</td>
+</tr>
+<tr>
+<td align="left"><code>urls</code></td>
+<td align="left">包含在執行階段配對的 URL 和 URL 模式。這些資源不會直接擷取，也沒有內容雜湊，但會根據其 HTTP 標頭進行快取。這最適合 CDN，例如 Google Fonts 服務。<br />  <em>(不支援負面 glob 模式，而 <code>?</code> 會以字面意思配對；亦即，它不會與 <code>?</code> 以外的任何字元配對。)</em></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h4 id="cachequeryoptions"><code>cacheQueryOptions</code></h4>
+  <a href="#cachequeryoptions" class="docs-anchor" tabindex="-1" aria-label="Link to <code>cacheQueryOptions</code>"></a>
+  <p>這些選項用於修改要求的配對行為。
+它們傳遞給瀏覽器的 <code>Cache#match</code> 函式。
+有關詳細資訊，請參閱 <a href="https://developer.mozilla.org/docs/Web/API/Cache/match" target="_blank">MDN</a>。
+目前，僅支援以下選項：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">選項</th>
+<th align="left">詳細</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>ignoreSearch</code></td>
+<td align="left">忽略查詢參數。預設為 <code>false</code>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="datagroups"><code>dataGroups</code></h3>
+  <a href="#datagroups" class="docs-anchor" tabindex="-1" aria-label="Link to <code>dataGroups</code>"></a>
+  <p>與資產資源不同，資料請求不會與應用程式一起建立版本。
+它們會根據手動配置的政策進行快取，這些政策對於 API 請求和其他資料相依關係等情況更有用。</p>
+<p>此欄位包含資料群組陣列，每個陣列定義一組資料資源及其快取政策。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"dataGroups"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      …</div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      …</div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 當 ServiceWorker 處理請求時，它會按照其在 <code>ngsw-config.json</code> 中出現的順序檢查資料群組。</p>
+
+    </div>
+    <p>第一個與所請求資源相符的資料群組會處理該請求。</p>
+<p>建議您將較具體的資料群組放在清單中較高的位置。
+例如，符合 <code>/api/foo.json</code> 的資料群組應該出現在符合 <code>/api/*.json</code> 的資料群組之前。</p>
+<p>Data 群組遵循此 Typescript 介面：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">DataGroup</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">urls</span>: <span class="hljs-built_in">string</span>[];</div><div class="hljs-ln-line">  version?: <span class="hljs-built_in">number</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">cacheConfig</span>: {</div><div class="hljs-ln-line">    <span class="hljs-attr">maxSize</span>: <span class="hljs-built_in">number</span>;</div><div class="hljs-ln-line">    <span class="hljs-attr">maxAge</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">    timeout?: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">    strategy?: <span class="hljs-string">'freshness'</span> | <span class="hljs-string">'performance'</span>;</div><div class="hljs-ln-line">  };</div><div class="hljs-ln-line">  cacheQueryOptions?: {</div><div class="hljs-ln-line">    ignoreSearch?: <span class="hljs-built_in">boolean</span>;</div><div class="hljs-ln-line">  };</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>每個 <code>DataGroup</code> 由下列資料群組屬性定義。</p>
+
+  <h4 id="name-1"><code>name</code></h4>
+  <a href="#name-1" class="docs-anchor" tabindex="-1" aria-label="Link to <code>name</code>"></a>
+  <p>與 <code>assetGroups</code> 相似，每個數據群組都有唯一識別它的 <code>name</code>。</p>
+
+  <h4 id="urls"><code>urls</code></h4>
+  <a href="#urls" class="docs-anchor" tabindex="-1" aria-label="Link to <code>urls</code>"></a>
+  <p>URL 模式清單。
+與這些模式相符的 URL 依照此資料群組的政策進行快取。
+僅快取非變更請求 (GET 和 HEAD)。</p>
+
+  <ul class="docs-list">
+    <li>否定 glob 模式不受支援</li>
+<li><code>?</code> 會以字面意義進行比對；亦即，它只能比對字元 <code>?</code></li>
+
+  </ul>
+  
+  <h4 id="version"><code>version</code></h4>
+  <a href="#version" class="docs-anchor" tabindex="-1" aria-label="Link to <code>version</code>"></a>
+  <p>偶爾 API 會以非向後兼容的方式變更格式。
+新版本的應用程式可能與舊的 API 格式不兼容，因此可能與該 API 的現有快取資源不兼容。</p>
+<p><code>version</code> 提供一個機制，用來指示快取中的資源已以向後不相容的方式更新，並且舊的快取項目（來自先前版本的項目）應予以捨棄。</p>
+<p><code>version</code> 是整數欄位，預設為 <code>1</code>。</p>
+
+  <h4 id="cacheconfig"><code>cacheConfig</code></h4>
+  <a href="#cacheconfig" class="docs-anchor" tabindex="-1" aria-label="Link to <code>cacheConfig</code>"></a>
+  <p>以下屬性定義快取符合要求的政策。</p>
+
+  <h5 id="maxsize"><code>maxSize</code></h5>
+  <a href="#maxsize" class="docs-anchor" tabindex="-1" aria-label="Link to <code>maxSize</code>"></a>
+  <p>快取中條目的最大數目或回應。</p>
+<p>CRITICAL：開放式快取可能會以不受限的方式增長，最終超過儲存配額，導致驅逐。</p>
+
+  <h5 id="maxage"><code>maxAge</code></h5>
+  <a href="#maxage" class="docs-anchor" tabindex="-1" aria-label="Link to <code>maxAge</code>"></a>
+  <p><code>maxAge</code> 參數表示允許回應在快取中保留多久，然後才視為無效並予以移除。<code>maxAge</code> 是持續時間字串，使用下列單位字尾：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">字尾</th>
+<th align="left">詳細</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>d</code></td>
+<td align="left">天</td>
+</tr>
+<tr>
+<td align="left"><code>h</code></td>
+<td align="left">小時</td>
+</tr>
+<tr>
+<td align="left"><code>m</code></td>
+<td align="left">分鐘</td>
+</tr>
+<tr>
+<td align="left"><code>s</code></td>
+<td align="left">秒</td>
+</tr>
+<tr>
+<td align="left"><code>u</code></td>
+<td align="left">毫秒</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>例如，字串 <code>3d12h</code> 將內容快取最長三天半。</p>
+
+  <h5 id="timeout"><code>timeout</code></h5>
+  <a href="#timeout" class="docs-anchor" tabindex="-1" aria-label="Link to <code>timeout</code>"></a>
+  <p>此持續時間字串指定網路逾時。
+網路逾時是指 Angular 服務工作者在使用快取回應之前等待網路回應的時間，如果已將其設定為執行此操作。
+<code>timeout</code> 是持續時間字串，使用下列單位字尾：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">字尾</th>
+<th align="left">詳細</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>d</code></td>
+<td align="left">天</td>
+</tr>
+<tr>
+<td align="left"><code>h</code></td>
+<td align="left">小時</td>
+</tr>
+<tr>
+<td align="left"><code>m</code></td>
+<td align="left">分鐘</td>
+</tr>
+<tr>
+<td align="left"><code>s</code></td>
+<td align="left">秒</td>
+</tr>
+<tr>
+<td align="left"><code>u</code></td>
+<td align="left">毫秒</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>例如，字串 <code>5s30u</code> 轉換為五秒和 30 毫秒的網路逾時。</p>
+
+  <h5 id="strategy"><code>strategy</code></h5>
+  <a href="#strategy" class="docs-anchor" tabindex="-1" aria-label="Link to <code>strategy</code>"></a>
+  <p>Angular 服務工作者可以使用兩種快取策略之一來處理資料資源。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">快取策略</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>performance</code></td>
+<td align="left">預設值，針對以最快的速度提供回應進行最佳化。如果快取中存在資源，則使用快取版本，且不會提出網路要求。這會造成一些陳舊資料，視 <code>maxAge</code> 而定，以換取更好的效能。這適合不常變更的資源，例如使用者頭像圖片。</td>
+</tr>
+<tr>
+<td align="left"><code>freshness</code></td>
+<td align="left">針對資料貨幣進行最佳化，優先從網路擷取要求的資料。僅當網路逾時（根據 <code>timeout</code>）時，要求才會退回至快取。這對於經常變更的資源很有用，例如帳戶餘額。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 您也可以模擬第三種策略 <a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#stale-while-revalidate" target="_blank">staleWhileRevalidate</a>，如果快取資料可用，則會傳回快取資料，但也會在背景中從網路擷取最新資料以供下次使用。</p>
+
+    </div>
+    <p>要使用此策略，請將 <code>strategy</code> 設為 <code>freshness</code>，並將 <code>timeout</code> 設為 <code>cacheConfig</code> 中的 <code>0u</code>。</p>
+<p>這基本上會執行以下操作：</p>
+
+    <ol class="docs-ordered-list">
+      <li>首先嘗試從網路取回。</li>
+<li>如果網路要求沒有立即完成，即在 0 毫秒的逾時後，忽視快取年齡並回到快取值。</li>
+<li>網路要求完成後，更新快取以供將來要求使用。</li>
+<li>如果資源不在快取中，無論如何都要等待網路要求。</li>
+
+    </ol>
+    
+  <h5 id="cacheopaqueresponses"><code>cacheOpaqueResponses</code></h5>
+  <a href="#cacheopaqueresponses" class="docs-anchor" tabindex="-1" aria-label="Link to <code>cacheOpaqueResponses</code>"></a>
+  <p>Angular 服務工作者是否應快取不透明的回應。</p>
+<p>如果未指定，預設值取決於資料群組的已配置策略：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">策略</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">具有 <code>freshness</code> 策略的群組</td>
+<td align="left">預設值為 <code>true</code>，服務工作者快取不透明回應。這些群組將每次請求資料，並且僅在離線或網路速度慢時回退到快取回應。因此，服務工作者快取錯誤回應並不重要。</td>
+</tr>
+<tr>
+<td align="left">具有 <code>performance</code> 策略的群組</td>
+<td align="left">預設值為 <code>false</code>，服務工作者不快取不透明回應。這些群組會繼續傳回快取回應，直到 <code>maxAge</code> 過期，即使錯誤是因暫時網路或伺服器問題所致。因此，服務工作者快取錯誤回應會造成問題。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-callout docs-callout-helpful">
+      <h3>評論不透明回應</h3>
+      <p>如果您不熟悉，[不透明回應][<a href="https://fetch.spec.whatwg.org#concept-filtered-response-opaque]" target="_blank">https://fetch.spec.whatwg.org#concept-filtered-response-opaque]</a> 是在要求位於不同來源且不回傳 CORS 標頭的資源時回傳的特殊回應類型。
+不透明回應的其中一個特徵是服務工作者不被允許讀取其狀態，這意味著它無法檢查要求是否成功。
+有關更多詳細資訊，請參閱[fetch 介紹][<a href="https://developers.google.com/web/updates/2015/03/introduction-to-fetch#response_types]。" target="_blank">https://developers.google.com/web/updates/2015/03/introduction-to-fetch#response_types]。</a></p>
+<p>如果無法實施 CORS &mdash; 例如，如果您無法控制來源 &mdash; 最好對導致不透明回應的資源使用 <code>freshness</code> 策略。</p>
+
+    </div>
+    
+  <h4 id="cachequeryoptions-1"><code>cacheQueryOptions</code></h4>
+  <a href="#cachequeryoptions-1" class="docs-anchor" tabindex="-1" aria-label="Link to <code>cacheQueryOptions</code>"></a>
+  <p>有關詳細資訊，請參閱 <a href="#assetgroups">assetGroups</a>。</p>
+
+  <h3 id="navigationurls"><code>navigationUrls</code></h3>
+  <a href="#navigationurls" class="docs-anchor" tabindex="-1" aria-label="Link to <code>navigationUrls</code>"></a>
+  <p>此選用區段讓您可以指定將重新導向至索引檔案的網址清單。</p>
+
+  <h4 id="">處理導航請求</h4>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 處理導航請求"></a>
+  <p>ServiceWorker 將與任何 <code>asset</code> 或 <code>data</code> 群組不匹配的導覽請求重新導向到指定的 <a href="#index">index file</a>。
+如果請求符合下列條件，則視為導覽請求：</p>
+
+  <ul class="docs-list">
+    <li>它的 <a href="https://developer.mozilla.org/docs/Web/API/Request/method" target="_blank">方法</a> 是 <code>GET</code></li>
+<li>它的 <a href="https://developer.mozilla.org/docs/Web/API/Request/mode" target="_blank">模式</a> 是 <code>navigation</code></li>
+<li>它接受 <code>text/html</code> 回應，由 <code>Accept</code> 標頭的值決定</li>
+<li>它的 URL 符合下列條件：
+  <ul class="docs-list">
+    <li>URL 最後路徑區段不可包含檔案副檔名（即 <code>.</code>）</li>
+<li>URL 不可包含 <code>__</code></li>
+
+  </ul>
+  </li>
+
+  </ul>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 若要設定是否透過網路傳送導覽要求，請參閱 <a href="#navigationrequeststrategy">navigationRequestStrategy</a> 區段。</p>
+
+    </div>
+    
+  <h4 id="">匹配導航請求網址</h4>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 匹配導航請求網址"></a>
+  <p>儘管這些預設準則在大部分情況下都很好用，但有時還是希望設定不同的規則。
+例如，您可能想忽略特定路由，例如那些不屬於 Angular 應用程式的一部分，並將它們傳遞到伺服器。</p>
+<p>此欄位包含在執行期間比對的網址和 <a href="#modifying-the-configuration">glob-like</a> 網址模式陣列。
+它可以包含否定模式（即以 <code>!</code> 開頭的模式）和非否定模式和網址。</p>
+<p>只有 URL 與 <em>任何</em> 非負面 URL/模式相符，且 <em>沒有任何</em> 負面 URL/模式相符的要求，才會被視為導航要求。
+在進行比對時，會忽略 URL 查詢。</p>
+<p>如果省略欄位，它預設為：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">[</div><div class="hljs-ln-line">  <span class="hljs-string">'/**'</span>,           <span class="hljs-comment">// Include all URLs.</span></div><div class="hljs-ln-line">  <span class="hljs-string">'!/**/*.*'</span>,      <span class="hljs-comment">// Exclude URLs to files.</span></div><div class="hljs-ln-line">  <span class="hljs-string">'!/**/****'</span>,     <span class="hljs-comment">// Exclude URLs containing `**` in the last segment.</span></div><div class="hljs-ln-line">  <span class="hljs-string">'!/**/****/**'</span>,  <span class="hljs-comment">// Exclude URLs containing `**` in any other segment.</span></div><div class="hljs-ln-line">]</div></code>
+    </pre>
+  </div>
+  <h3 id="navigationrequeststrategy">`navigationRequestStrategy</h3>
+  <a href="#navigationrequeststrategy" class="docs-anchor" tabindex="-1" aria-label="Link to `navigationRequestStrategy"></a>
+  <p>此選擇性屬性讓您可以設定服務工作者如何處理導覽要求：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"navigationRequestStrategy"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"freshness"</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">可能值</th>
+<th align="left">詳細資訊</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>&#39;performance&#39;</code></td>
+<td align="left">預設設定。提供指定的 <a href="#索引檔案">索引檔案</a>，通常會快取。</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;freshness&#39;</code></td>
+<td align="left">將要求傳遞到網路，並在離線時改回 <code>performance</code> 行為。當伺服器使用 <code>3xx</code> HTTP 重新導向狀態碼將導覽要求重新導向到其他地方時，此值很有用。使用此值的原因包括：<ul> <li>在應用程式不處理驗證時重新導向到驗證網站 </li> <li>重新導向特定 URL，以避免在網站重新設計後中斷現有連結/書籤 </li> <li>在頁面暫時停用時重新導向到其他網站，例如伺服器狀態頁面 </li> </ul></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>重要：<code>freshness</code> 策略通常會導致向伺服器發出更多請求，這可能會增加回應延遲。建議您盡可能使用預設效能策略。</p>

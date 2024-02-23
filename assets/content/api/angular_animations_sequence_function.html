@@ -1,0 +1,25 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/animations</span><div class="docs-reference-title"><div><h1>sequence</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div></div><p class="docs-reference-description"><p>Defines a list of animation steps to be run sequentially, one by one.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">sequence</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">steps</span>: <span class="hljs-title class_">AnimationMetadata</span>[],</div><div class="hljs-ln-line ">  options?: <span class="hljs-title class_">AnimationOptions</span></div><div class="hljs-ln-line ">): <span class="hljs-title class_">AnimationSequenceMetadata</span>;</div></code></pre></div></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>When you pass an array of steps to a
+<code>transition()</code> call, the steps run sequentially by default.
+Compare this to the <code>{@link animations/group group()}</code> call, which runs animation steps in
+parallel.</p>
+<p>When a sequence is used within a <code>{@link animations/group group()}</code> or a <code>transition()</code> call,
+execution continues to the next instruction only after each of the inner animation
+steps have completed.</p>
+</div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>sequence</h3><div><code>AnimationSequenceMetadata</code></div></div><span></span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Defines a list of animation steps to be run sequentially, one by one.</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">steps</span><code>AnimationMetadata[]</code><div class="docs-parameter-description"><p>An array of animation step objects.</p>
+
+    <ul class="docs-list">
+      <li>Steps defined by <code>style()</code> calls apply the styling data immediately.</li>
+<li>Steps defined by <code>animate()</code> calls apply the styling data over time
+as specified by the timing data.</li>
+
+    </ul>
+    
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">sequence</span>([</span><span class="hljs-ln-line"><span class="hljs-title function_">style</span>({ <span class="hljs-attr">opacity</span>: <span class="hljs-number">0</span> }),</span><span class="hljs-ln-line"><span class="hljs-title function_">animate</span>(<span class="hljs-string">&quot;1s&quot;</span>, <span class="hljs-title function_">style</span>({ <span class="hljs-attr">opacity</span>: <span class="hljs-number">1</span> }))</span><span class="hljs-ln-line">])</span>
+          </code>
+        </pre>
+      </div></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">options</span><code>AnimationOptions</code><div class="docs-parameter-description"><p>An options object containing a delay and
+developer-defined parameters that provide styling defaults and
+can be overridden on invocation.</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>AnimationSequenceMetadata</code></div></div></div></div></div></div></div>

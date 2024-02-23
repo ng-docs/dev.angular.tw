@@ -1,0 +1,91 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">JavaScript 模組與 NgModules</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/vs-jsmodule.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>JavaScript 模組和 NgModules 能幫助你模組化你的程式碼，但它們非常不同。
+Angular 應用程式仰賴兩種模組。</p>
+
+  <h2 id="javascript-">JavaScript 模組：公開程式碼的檔案</h2>
+  <a href="#javascript-" class="docs-anchor" tabindex="-1" aria-label="Link to JavaScript 模組：公開程式碼的檔案"></a>
+  <p><a href="https://javascript.info/modules" title=JavaScript.Info - 模組 target="_blank">JavaScript 模組</a> 是包含 JavaScript 程式碼的個別檔案，通常包含一個類別或函式庫，以在應用程式中達成特定目的。
+JavaScript 模組讓您可在多個檔案中散佈您的工作。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 若要深入瞭解 JavaScript 模組，請參閱 <a href="https://hacks.mozilla.org/2015/08/es6-in-depth-modules" target="_blank">深入探討 ES6：模組</a>。</p>
+
+    </div>
+    <p>有關模組規格，請參閱 <a href="https://www.ecma-international.org/ecma-262/6.0/#sec-modules" target="_blank">ECMAScript 標準第 6 版</a>。</p>
+<p>要使 JavaScript 模組中的程式碼可供其他模組使用，請在模組中相關程式碼的結尾處使用 <code>export</code> 陳述式，例如以下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> { … }</div></code>
+    </pre>
+  </div><p>當你在其他模組中需要該模組的程式碼時，請使用 <code>import</code> 陳述式，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;</div></code>
+    </pre>
+  </div><p>每個模組都有自己的頂級範圍。
+換句話說，模組中的頂級變數和函式在其他腳本或模組中看不到。</p>
+
+  <h2 id="ngmodules">NgModules：具有用於編譯的元數據的類別</h2>
+  <a href="#ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to NgModules：具有用於編譯的元數據的類別"></a>
+  <p><code>@NgModule</code> 裝飾器標記的類別，其元資料物件描述應用程式特定部分如何與其他部分配合。
+<code>NgModules</code> 是 Angular 特有的。
+雖然具有 <code>@NgModule</code> 裝飾器的類別依慣例保存在自己的檔案中，但它們與 JavaScript 模組不同，因為它們包含此元資料。</p>
+<p><code>@NgModule</code> 元數據在引導 Angular 編譯過程中扮演重要角色，此過程將您編寫的應用程式程式碼轉換為高性能 JavaScript 程式碼。
+元數據描述如何編譯元件範本，以及如何在執行階段建立注入器。
+它識別 NgModule 的元件、指令和管道，並透過 <code>exports</code> 屬性公開其中一些，以便外部元件可以使用它們。
+您也可以使用 NgModule 來新增服務的提供者，以便在您的應用程式其他地方使用這些服務。</p>
+<p>與其在一個巨大的檔案中定義所有成員類別作為 JavaScript 模組，請在 <code>@NgModule.declarations</code> 清單中宣告哪些元件、指令及管道屬於 NgModule。
+這些類別稱為可宣告類別。
+NgModule 只能匯出它擁有或從其他 NgModule 匯入的可宣告類別。
+它不會宣告或匯出任何其他類別。
+可宣告類別是 Angular 編譯程序中唯一重要的類別。</p>
+<p>有關 NgModule 元數據屬性的完整說明，請參閱 <a href="/guide/ngmodules/api" title=Using the NgModule metadata>使用 NgModule 元數據</a>。</p>
+
+  <h2 id="">一個同時使用兩種格式的範例</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 一個同時使用兩種格式的範例"></a>
+  <p><a href="/tools/cli">Angular CLI</a> 為新應用程式專案產生的根 NgModule <code>AppModule</code> 說明您如何同時使用這兩種模組：</p>
+<div class="docs-code" header="src/app/app.module.ts">
+    <div class="docs-code-header"><h3>src/app/app.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { BrowserModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { NgModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { AppComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@NgModule({</div><div class="hljs-ln-line">  declarations: [AppComponent],</div><div class="hljs-ln-line">  imports: [BrowserModule],</div><div class="hljs-ln-line">  providers: [],</div><div class="hljs-ln-line">  bootstrap: [AppComponent]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> {}</div></code>
+    </pre>
+  </div><p>根 NgModule 以 <code>import</code> 陳述句開始，用於匯入 JavaScript 模組。
+然後以以下陣列設定 <code>@NgModule</code>：</p>
+
+  <ul class="docs-list">
+    <li><p><code>declarations</code>: 屬於 NgModule 的元件、指令和管道。
+新的應用程式專案的根 NgModule 僅有一個元件，稱為 <code>AppComponent</code>。</p>
+</li>
+<li><p><code>imports</code>: 其他您正在使用的 NgModule，以便您可以使用它們的可宣告項目。
+新產生的根 NgModule 匯入 <a href="api/platform-browser/BrowserModule" title=BrowserModule NgModule><code>BrowserModule</code></a> 以便使用瀏覽器專屬服務，例如 <a href="https://www.w3.org/TR/DOM-Level-2-Core/introduction.html" title=Definition of Document Object Model target="_blank">DOM</a> 呈現、消毒和位置。</p>
+</li>
+<li><p><code>providers</code>: 其他 NgModule 中的元件可以使用之服務的提供者。
+新產生的根 NgModule 中沒有提供者。</p>
+</li>
+<li><p><code>bootstrap</code>: Angular 建立並插入至 <code>index.html</code> 主機網頁的元件，因而引導應用程式。
+此元件 <code>AppComponent</code> 出現在 <code>declarations</code> 和 <code>bootstrap</code> 陣列中。</p>
+</li>
+
+  </ul>
+  
+  <h2 id="">後續步驟</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 後續步驟"></a>
+  
+  <ul class="docs-list">
+    <li>若要深入了解根 NgModule，請參閱 <a href="/guide/ngmodules/bootstrapping" title=以根 NgModule 啟動應用程式>以根 NgModule 啟動應用程式</a>。</li>
+<li>若要了解常用 Angular NgModules 以及如何將它們匯入應用程式，請參閱 <a href="/guide/ngmodules/frequent" title=常用模組>常用模組</a>。</li>
+
+  </ul>
+  

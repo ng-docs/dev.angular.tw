@@ -1,0 +1,12 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>contentChild</h1><div class="docs-api-item-label" data-mode="full" data-type="constant">constant</div></div></div><p class="docs-reference-description"><p>Initializes a content child query. Consider using <code>contentChild.required</code> for queries that should
+always match.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">const</span> <span class="hljs-attr">contentChild</span>: <span class="hljs-title class_">ContentChildFunction</span>;</div></code></pre></div></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>Create a child query in your component by declaring a
+class field and initializing it with the <code>contentChild()</code> function.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</span><span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestComponent</span> {</span><span class="hljs-ln-line">  headerEl = contentChild&lt;<span class="hljs-title class_">ElementRef</span>&gt;(<span class="hljs-string">&#x27;h&#x27;</span>);                    <span class="hljs-comment">// Signal&lt;ElementRef|undefined&gt;</span></span><span class="hljs-ln-line">  headerElElRequired = contentChild.<span class="hljs-property">required</span>&lt;<span class="hljs-title class_">ElementRef</span>&gt;(<span class="hljs-string">&#x27;h&#x27;</span>); <span class="hljs-comment">// Signal&lt;ElementRef&gt;</span></span><span class="hljs-ln-line">  header = <span class="hljs-title function_">contentChild</span>(<span class="hljs-title class_">MyHeader</span>);                             <span class="hljs-comment">// Signal&lt;MyHeader|undefined&gt;</span></span><span class="hljs-ln-line">  headerRequired = contentChild.required(<span class="hljs-title class_">MyHeader</span>);            <span class="hljs-comment">// Signal&lt;MyHeader&gt;</span></span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div>

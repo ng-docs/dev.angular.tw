@@ -1,0 +1,25 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/animations</span><div class="docs-reference-title"><div><h1>group</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div></div><p class="docs-reference-description"><p>Defines a list of animation steps to be run in parallel.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">group</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">steps</span>: <span class="hljs-title class_">AnimationMetadata</span>[],</div><div class="hljs-ln-line ">  options?: <span class="hljs-title class_">AnimationOptions</span></div><div class="hljs-ln-line ">): <span class="hljs-title class_">AnimationGroupMetadata</span>;</div></code></pre></div></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>Grouped animations are useful when a series of styles must be
+animated at different starting times and closed off at different ending times.</p>
+<p>When called within a <code>sequence()</code> or a
+<code>transition()</code> call, does not continue to the next
+instruction until all of the inner animation steps have completed.</p>
+</div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>group</h3><div><code>AnimationGroupMetadata</code></div></div><span></span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Defines a list of animation steps to be run in parallel.</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">steps</span><code>AnimationMetadata[]</code><div class="docs-parameter-description"><p>An array of animation step objects.</p>
+
+    <ul class="docs-list">
+      <li>When steps are defined by <code>style()</code> or <code>animate()</code>
+function calls, each call within the group is executed instantly.</li>
+<li>To specify offset styles to be applied at a later time, define steps with
+<code>keyframes()</code>, or use <code>animate()</code> calls with a delay value.
+For example:</li>
+
+    </ul>
+    
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">group</span>([</span><span class="hljs-ln-line"><span class="hljs-title function_">animate</span>(<span class="hljs-string">&quot;1s&quot;</span>, <span class="hljs-title function_">style</span>({ <span class="hljs-attr">background</span>: <span class="hljs-string">&quot;black&quot;</span> })),</span><span class="hljs-ln-line"><span class="hljs-title function_">animate</span>(<span class="hljs-string">&quot;2s&quot;</span>, <span class="hljs-title function_">style</span>({ <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;white&quot;</span> }))</span><span class="hljs-ln-line">])</span>
+          </code>
+        </pre>
+      </div></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">options</span><code>AnimationOptions</code><div class="docs-parameter-description"><p>An options object containing a delay and
+developer-defined parameters that provide styling defaults and
+can be overridden on invocation.</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>AnimationGroupMetadata</code></div></div></div></div></div></div></div>

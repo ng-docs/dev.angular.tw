@@ -1,0 +1,143 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">內建控制流程</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/templates/control-flow.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>Angular 模板支援 <em>控制流程區塊</em>，讓你可以有條件地顯示、隱藏和重複元素。</p>
+<p>重要提示：Angular 內建控制流程目前仍處於 <a href="reference/releases#developer-preview">開發人員預覽</a> 階段。它已經可以試用，但在穩定之前可能會有所變更。</p>
+
+  <h2 id="if-"><code>@if</code> 區塊條件</h2>
+  <a href="#if-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@if</code> 區塊條件"></a>
+  <p>當其條件表達式為真值時，<code>@if</code> 區塊會條件式顯示其內容：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@if (a &gt; b) {</div><div class="hljs-ln-line">   {{a}} is greater than {{b}}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><code>@if</code> 區塊可能有一個或多個關聯的 <code>@else</code> 區塊。在 <code>@if</code> 區塊之後，您可以選擇指定任意數量的 <code>@else if</code> 區塊和一個 <code>@else</code> 區塊：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@if (a &gt; b) {</div><div class="hljs-ln-line">  {{a}} is greater than {{b}}</div><div class="hljs-ln-line">} @else if (b &gt; a) {</div><div class="hljs-ln-line">  {{a}} is less than {{b}}</div><div class="hljs-ln-line">} @else {</div><div class="hljs-ln-line">  {{a}} is equal to {{b}}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="">參照條件式運算式的結果</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 參照條件式運算式的結果"></a>
+  <p>新的內建 <code>@if</code> 條件式支援參照表達式結果以保持常見編碼模式的解決方案：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@if (users$ | async; as users) {</div><div class="hljs-ln-line">  {{ users.length }}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="for----"><code>@for</code> 區塊 - 重複器</h2>
+  <a href="#for----" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@for</code> 區塊 - 重複器"></a>
+  <p><code>@for</code> 重複呈現區塊中的內容，以供集合中的每個項目使用。集合可以表示為任何 JavaScript <a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Iteration_protocols" target="_blank">可叠代</a> 項目，但使用常規 <code>Array</code> 會有性能優勢。基本的 <code>@for</code> 循環如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@for (item of items; track item.id) {</div><div class="hljs-ln-line">  {{ item.name }}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="track-"><code>track</code> 用於計算兩個集合的差異</h3>
+  <a href="#track-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>track</code> 用於計算兩個集合的差異"></a>
+  <p><code>track</code> 表達式的值決定用於將陣列項目與 DOM 中的檢視關聯的鍵。清楚指出項目身分，讓 Angular 能在陣列中新增、移除或移動項目時執行最少數量的 DOM 操作。</p>
+<p>在 Angular 應用程式中，重複運算不變資料而不使用 <code>trackBy</code> 是最常見的效能問題原因之一。由於效能不佳的可能性，<code>@for</code> 迴圈需要 <code>track</code> 表達式。有疑問時，使用 <code>track $index</code> 是個不錯的預設值。</p>
+
+  <h3 id="index-"><code>$index</code> 和其他情境變數</h3>
+  <a href="#index-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>$index</code> 和其他情境變數"></a>
+  <p>在 <code>@for</code> 內容中，數個隱含變數永遠可用：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th>變數</th>
+<th>意義</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td><code>$count</code></td>
+<td>反覆運算的集合中的項目數目</td>
+</tr>
+<tr>
+<td><code>$index</code></td>
+<td>目前列的索引</td>
+</tr>
+<tr>
+<td><code>$first</code></td>
+<td>目前列是否為第一列</td>
+</tr>
+<tr>
+<td><code>$last</code></td>
+<td>目前列是否為最後一列</td>
+</tr>
+<tr>
+<td><code>$even</code></td>
+<td>目前列索引是否為偶數</td>
+</tr>
+<tr>
+<td><code>$odd</code></td>
+<td>目前列索引是否為奇數</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>這些變數總是使用這些名稱，但可透過 <code>let</code> 片段別名：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@for (item of items; track item.id; let idx = $index, e = $even) {</div><div class="hljs-ln-line">  Item #{{ idx }}: {{ item.name }}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>在使用嵌套的 <code>@for</code> 區塊時別名特別有用，因為上下文變數名稱可能會發生衝突。</p>
+
+  <h3 id="empty-"><code>empty</code> 區塊</h3>
+  <a href="#empty-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>empty</code> 區塊"></a>
+  <p>您也可以在 <code>@for</code> 區塊內容之後立即包含 <code>@empty</code> 區段。當沒有項目時，<code>@empty</code> 區塊的內容會顯示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@for (item of items; track item.name) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span> {{ item.name }} <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">} @empty {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span> There are no items. <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="switch----"><code>@switch</code> 區塊 - 選擇</h2>
+  <a href="#switch----" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@switch</code> 區塊 - 選擇"></a>
+  <p><code>switch</code> 的語法和 <code>if</code> 非常相似，並受到 JavaScript <code>switch</code> 語句的啟發：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@switch (condition) {</div><div class="hljs-ln-line">  @case (caseA) {</div><div class="hljs-ln-line">    Case A.</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  @case (caseB) {</div><div class="hljs-ln-line">    Case B.</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  @default {</div><div class="hljs-ln-line">    Default case.</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>條件式的值使用 <code>===</code> 運算子與案例式進行比較。</p>
+<p><strong><code>@switch</code> 沒有穿透執行</strong>，因此您不需要等同於 <code>break</code> 或 <code>return</code> 語句。</p>
+<p><code>@default</code> 區塊是可選的，可以省略。如果沒有 <code>@case</code> 與表達式相符，也沒有 <code>@default</code> 區塊，則不會顯示任何內容。</p>
+
+  <h2 id="-ngifngswitch--ngfor-">內建控制流程和 <code>NgIf</code>、<code>NgSwitch</code> 和 <code>NgFor</code> 結構型指令</h2>
+  <a href="#-ngifngswitch--ngfor-" class="docs-anchor" tabindex="-1" aria-label="Link to 內建控制流程和 <code>NgIf</code>、<code>NgSwitch</code> 和 <code>NgFor</code> 結構型指令"></a>
+  <p><code>@if</code> 區塊取代 <code>*ngIf</code>，用於表達 UI 的條件部分。</p>
+<p><code>@switch</code> 區塊取代 <code>ngSwitch</code>，具有以下主要優點：</p>
+
+  <ul class="docs-list">
+    <li>它不需要容器元素來保存條件表達式或每個條件範本；</li>
+<li>它支援範本類型檢查，包括每個分支中的類型縮小。</li>
+
+  </ul>
+  <p>@for<code>區塊取代</code>*ngFor<code>進行反覆，與其結構型指令</code>NgFor` 前身相比有幾個差異：</p>
+
+  <ul class="docs-list">
+    <li>追蹤表達式（計算與物件識別對應的鍵）是強制性的，但具有更好的便利性（只需寫一個表達式即可，而不是建立 <code>trackBy</code> 方法）；</li>
+<li>使用新的最佳化演算法計算最少數量的 DOM 操作，以響應集合的變更，而不是 Angular 的可自定義比較實作（<code>IterableDiffer</code>）；</li>
+<li>支援 <code>@empty</code> 區塊。</li>
+
+  </ul>
+  <p><code>track</code> 設定取代了 <code>NgFor</code> 的 <code>trackBy</code> 函式概念。由於 <code>@for</code> 是內建的，因此我們可以提供比傳遞 <code>trackBy</code> 函式更好的體驗，並直接使用代表鍵的表達式。可以透過呼叫 <code>trackBy</code> 函式，從 <code>trackBy</code> 遷移到 <code>track</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@for (item of items; track itemId($index, item)) {</div><div class="hljs-ln-line">  {{ item.name }}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

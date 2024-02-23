@@ -1,0 +1,329 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">路由參考</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/routing/router-reference.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>以下各節重點介紹一些核心路由器概念。</p>
+
+  <h2 id="">路由器匯入</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 路由器匯入"></a>
+  <p>Angular Router 是一個可選服務，可為給定的 URL 呈現特定元件檢視。
+它不是 Angular 核心的一部分，因此位於自己的程式庫套件 <code>@angular/router</code> 中。</p>
+<p>從中匯入您需要的項目，就像您從任何其他 Angular 套件匯入一樣。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { provideRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 有關更多瀏覽器 URL 樣式的資訊，請參閱 <a href="guide/routing/common-router-tasks#browser-url-styles"><code>LocationStrategy</code> 和瀏覽器 URL 樣式</a>。</p>
+
+    </div>
+    
+  <h2 id="">配置</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 配置"></a>
+  <p>路由的 Angular 應用程式有一個 <code>Router</code> 服務的單一例項。
+當瀏覽器的 URL 變更時，該路由器會尋找對應的 <code>Route</code>，以決定要顯示的元件。</p>
+<p>路由器在您配置它之前沒有路由。
+以下範例建立五個路由定義，透過 <code>provideRouter</code> 方法配置路由器，並將結果新增到 <code>ApplicationConfig</code>&#39; 的 <code>providers</code> 陣列。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">appRoutes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'crisis-center'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">CrisisListComponent</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'hero/:id'</span>,      <span class="hljs-attr">component</span>: <span class="hljs-title class_">HeroDetailComponent</span> },</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'heroes'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">HeroListComponent</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">data</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">'Heroes List'</span> }</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">redirectTo</span>: <span class="hljs-string">'/heroes'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">pathMatch</span>: <span class="hljs-string">'full'</span></div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'**'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">PageNotFoundComponent</span> }</div><div class="hljs-ln-line">];</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">    <span class="hljs-attr">providers</span>: [<span class="hljs-title function_">provideRouter</span>(routes, <span class="hljs-title function_">withDebugTracing</span>())]</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><code>routes</code> 路線陣列說明如何導航。
+將其傳遞給 <code>ApplicationConfig</code> <code>providers</code> 中的 <code>provideRouter</code> 方法，以配置路由器。</p>
+<p>每個 <code>Route</code> 將 URL <code>路徑</code> 映射到一個元件。
+路徑中沒有前導斜線。
+路由器為你解析和建構最終 URL，這使你可以在應用程式視圖之間導航時使用相對路徑和絕對路徑。</p>
+<p>第二個路由中的 <code>:id</code> 是路由參數的令牌。
+在 <code>/hero/42</code> 等 URL 中，「42」是 <code>id</code> 參數的值。
+對應的 <code>HeroDetailComponent</code> 使用該值來尋找並顯示 <code>id</code> 等於 42 的英雄。</p>
+<p>第三個路由中的 <code>data</code> 屬性是儲存與這個特定路由關聯的任意資料的地方。
+資料屬性可在每個已啟用的路由中存取。
+使用它來儲存項目，例如頁面標題、麵包屑文字，以及其他唯讀的靜態資料。
+使用解析防護來擷取動態資料。</p>
+<p>第四條路由中的空路徑代表應用程式的預設路徑 &mdash; 當 URL 中的路徑為空時要前往的地方，在開始時通常是這樣。
+此預設路由會重新導向到 <code>/heroes</code> URL 的路由，因此會顯示 <code>HeroesListComponent</code>。</p>
+<p>如果您需要查看在導覽生命週期中發生哪些事件，可以使用 <code>withDebugTracing</code> 功能。
+這會將在每個導覽生命週期期間發生的每個路由器事件輸出到瀏覽器主控台。
+僅在除錯目的時使用 <code>withDebugTracing</code>。
+您在傳遞給 <code>provideRouter</code> 方法的第二個參數的物件中設定 <code>withDebugTracing</code> 選項。</p>
+
+  <h2 id="">路由插座</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 路由插座"></a>
+  <p><code>RouterOutlet</code> 是路由器庫中的指令，使用方式類似於元件。
+它扮演標記模板中路由器應顯示該出口的元件位置的預留位置。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Routed components go here --&gt;</span></div></code>
+    </pre>
+  </div><p>在給予前述設定後，當該應用程式的瀏覽器網址變成 <code>/heroes</code> 時，路由器會將該網址比對至路由路徑 <code>/heroes</code>，並在您放置於主機元件範本中的 <code>RouterOutlet</code> 旁顯示 <code>HeroListComponent</code> 作為兄弟元素。</p>
+
+  <h2 id="router-">Router 連結</h2>
+  <a href="#router-" class="docs-anchor" tabindex="-1" aria-label="Link to Router 連結"></a>
+  <p>若要導航至某些使用者動作的結果，例如點擊錨點標籤，請使用 <code>RouterLink</code>。</p>
+<p>考慮以下範本：</p>
+<div class="docs-code" path="adev/src/content/examples/router/src/app/app.component.1.html" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Angular Router<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/crisis-center"</span> <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"active"</span> <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</span>Crisis Center<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/heroes"</span> <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"active"</span> <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</span>Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div></code>
+    </pre>
+  </div><p>錨點標籤上的 <code>RouterLink</code> 指令讓路由器可以控制這些元素。
+導覽路徑是固定的，所以你可以將字串指定為 <code>routerLink</code> 的一次性繫結。</p>
+<p>如果導覽路徑更動態，您可以繫結到傳回路徑連結參數陣列的範本表達式；也就是說，<a href="guide/routing/common-router-tasks#link-parameters-array">連結參數陣列</a>。
+路由器將該陣列解析為完整的 URL。</p>
+
+  <h2 id="">活動路由鏈接</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 活動路由鏈接"></a>
+  <p><code>RouterLinkActive</code> 指令根據目前的 <code>RouterState</code>，為活躍的 <code>RouterLink</code> 繫結切換 CSS 類別。</p>
+<p>在每個錨點標記上，您會看到一個指向 <code>RouterLinkActive</code> 指令的 <a href="guide/templates/property-binding">屬性繫結</a>，如下所示</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">routerLinkActive="..."</div></code>
+    </pre>
+  </div><p>等號右邊的範本運算式 <code>=</code> 包含一個以空格分隔的 CSS 類別字串，當連結處於啟用狀態時，路由器會新增此字串，而當連結處於停用狀態時，路由器會移除此字串。
+您可以將 <code>RouterLinkActive</code> 指令設定為一組類別，例如 <code>routerLinkActive=&quot;active fluffy&quot;</code> 或將其繫結至會傳回此類別字串的元件屬性。
+例如，</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">[routerLinkActive]=<span class="hljs-string">"someStringProperty"</span></div></code>
+    </pre>
+  </div><p>活動路由連結會向下串聯到路由樹的每個層級，因此父項和子項的路由器連結可以同時處於活動狀態。
+若要覆寫此行為，請使用 <code>{ exact: true }</code> 表達式繫結到 <code>[routerLinkActiveOptions]</code> 輸入繫結。
+透過使用 <code>{ exact: true }</code>，只有當 <code>RouterLink</code> 的網址與目前的網址完全相符時，它才會處於活動狀態。</p>
+<p>RouterLinkActive 亦允許您輕鬆地將 <code>aria-current</code> 屬性套用至活動元素，因而為所有使用者提供更易於存取的體驗。如需更多資訊，請參閱 <a href="/best-practices/a11y">無障礙最佳實務</a> 的 <a href="/#active-links-identification">活動連結識別區段</a>。</p>
+
+  <h2 id="">路由狀態</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 路由狀態"></a>
+  <p>在每個成功的導航生命週期結束後，路由器會建立一個由 <code>ActivatedRoute</code> 物件組成的樹狀結構，以構成路由器的當前狀態。
+您可以使用 <code>Router</code> 服務和 <code>routerState</code> 屬性，在應用程式中的任何位置存取目前的 <code>RouterState</code>。</p>
+<p><code>RouterState</code> 中的每個 <code>ActivatedRoute</code> 提供方法來遍歷路由樹的上下，以從父、子、兄弟路由獲取資訊。</p>
+
+  <h2 id="">已啟用路由</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 已啟用路由"></a>
+  <p>路由路徑和參數可透過注入的路由器服務 <a href="api/router/ActivatedRoute">ActivatedRoute</a> 使用。
+它有很多有用的資訊，包括：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">屬性</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>url</code></td>
+<td align="left">路徑的每個部分表示為字串陣列的路由路徑的 <code>Observable</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>data</code></td>
+<td align="left">包含為路由提供的 <code>data</code> 物件的 <code>Observable</code>。也包含解析防護的任何已解析值。</td>
+</tr>
+<tr>
+<td align="left"><code>params</code></td>
+<td align="left">包含特定於路由的必要和選用參數的 <code>Observable</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>paramMap</code></td>
+<td align="left">包含特定於路由的必要和選用參數的 <a href="api/router/ParamMap">map</a> 的 <code>Observable</code>。該地圖支援從同一個參數中擷取單一和多個值。</td>
+</tr>
+<tr>
+<td align="left"><code>queryParamMap</code></td>
+<td align="left">包含所有路由可用的查詢參數的 <a href="api/router/ParamMap">map</a> 的 <code>Observable</code>。該地圖支援從查詢參數中擷取單一和多個值。</td>
+</tr>
+<tr>
+<td align="left"><code>queryParams</code></td>
+<td align="left">包含所有路由可用的查詢參數的 <code>Observable</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>fragment</code></td>
+<td align="left">所有路由可用的 URL 片段的 <code>Observable</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>outlet</code></td>
+<td align="left">用於呈現路由的 <code>RouterOutlet</code> 的名稱。對於未命名出口，出口名稱是主要出口。</td>
+</tr>
+<tr>
+<td align="left"><code>routeConfig</code></td>
+<td align="left">包含原始路徑的路由的路由設定。</td>
+</tr>
+<tr>
+<td align="left"><code>parent</code></td>
+<td align="left">當此路由是子路由時，路由的父 <code>ActivatedRoute</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>firstChild</code></td>
+<td align="left">包含此路由子路由清單中的第一個 <code>ActivatedRoute</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>children</code></td>
+<td align="left">包含在目前路由下啟用的所有子路由。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">路由事件</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 路由事件"></a>
+  <p>在每次導航期間，<code>Router</code> 會透過 <code>Router.events</code> 屬性發出導航事件。
+這些事件顯示在以下表格中。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">路由事件</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><a href="api/router/NavigationStart"><code>NavigationStart</code></a></td>
+<td align="left">觸發於導航開始時。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/RouteConfigLoadStart"><code>RouteConfigLoadStart</code></a></td>
+<td align="left">在 <code>Router</code> 延遲載入路由設定之前觸發。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/RouteConfigLoadEnd"><code>RouteConfigLoadEnd</code></a></td>
+<td align="left">路由延遲載入後觸發。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/RoutesRecognized"><code>RoutesRecognized</code></a></td>
+<td align="left">當路由器解析 URL 且路由被辨識時觸發。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/GuardsCheckStart"><code>GuardsCheckStart</code></a></td>
+<td align="left">當路由器開始路由的 Guards 階段時觸發。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/ChildActivationStart"><code>ChildActivationStart</code></a></td>
+<td align="left">當路由器開始啟動路由的子項目時觸發。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/ActivationStart"><code>ActivationStart</code></a></td>
+<td align="left">當路由器開始啟動路由時觸發。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/GuardsCheckEnd"><code>GuardsCheckEnd</code></a></td>
+<td align="left">當路由器成功完成路由的 Guards 階段時觸發。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/ResolveStart"><code>ResolveStart</code></a></td>
+<td align="left">當路由器開始路由的 Resolve 階段時觸發。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/ResolveEnd"><code>ResolveEnd</code></a></td>
+<td align="left">當路由器成功完成路由的 Resolve 階段時觸發。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/ChildActivationEnd"><code>ChildActivationEnd</code></a></td>
+<td align="left">當路由器完成啟動路由的子項目時觸發。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/ActivationEnd"><code>ActivationEnd</code></a></td>
+<td align="left">當路由器完成啟動路由時觸發。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/NavigationEnd"><code>NavigationEnd</code></a></td>
+<td align="left">當導航成功完成時觸發。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/NavigationCancel"><code>NavigationCancel</code></a></td>
+<td align="left">當導航被取消時觸發。這可能會在路由防護在導航期間回傳 false，或透過回傳 <code>UrlTree</code> 來重新導向時發生。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/NavigationError"><code>NavigationError</code></a></td>
+<td align="left">當導航因意外錯誤而失敗時觸發。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/Scroll"><code>Scroll</code></a></td>
+<td align="left">代表一個捲動事件。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>當您啟用 <code>withDebugTracing</code> 功能時，Angular 會將這些事件記錄到主控台。</p>
+
+  <h2 id="">路由器術語</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 路由器術語"></a>
+  <p>以下為 <code>Router</code> 的關鍵術語及其含義：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">路由器部分</th>
+<th align="left">細節</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>Router</code></td>
+<td align="left">顯示活躍 URL 的應用程式元件。管理從一個元件導覽到另一個元件。</td>
+</tr>
+<tr>
+<td align="left"><code>provideRouter</code></td>
+<td align="left">提供必要的服務提供者，以便導覽應用程式檢視。</td>
+</tr>
+<tr>
+<td align="left"><code>RouterModule</code></td>
+<td align="left">一個獨立的 NgModule，提供必要的服務提供者和指令，以便導覽應用程式檢視。</td>
+</tr>
+<tr>
+<td align="left"><code>Routes</code></td>
+<td align="left">定義一個路由陣列，每個路由都將 URL 路徑對應到一個元件。</td>
+</tr>
+<tr>
+<td align="left"><code>Route</code></td>
+<td align="left">定義路由器應如何根據 URL 模式導覽到元件。大多數路由都包括路徑和元件類型。</td>
+</tr>
+<tr>
+<td align="left"><code>RouterOutlet</code></td>
+<td align="left">指令（<code>&lt;router-outlet&gt;</code>）標記路由器顯示檢視的位置。</td>
+</tr>
+<tr>
+<td align="left"><code>RouterLink</code></td>
+<td align="left">將可點擊的 HTML 元素繫結到路由的指令。點擊繫結到 <em>字串</em> 或 <em>連結參數陣列</em> 的 <code>routerLink</code> 指令的元素會觸發導覽。</td>
+</tr>
+<tr>
+<td align="left"><code>RouterLinkActive</code></td>
+<td align="left">在與元素相關聯的 <code>routerLink</code> 位於元素內部或上面時，新增/移除 HTML 元素類別的指令。它還可以設定活躍連結的 <code>aria-current</code> 以提高輔助使用。</td>
+</tr>
+<tr>
+<td align="left"><code>ActivatedRoute</code></td>
+<td align="left">提供給每個路由元件的服務，包含路由特定資訊，例如路由參數、靜態資料、解析資料、全域查詢參數和全域片段。</td>
+</tr>
+<tr>
+<td align="left"><code>RouterState</code></td>
+<td align="left">路由器的目前狀態，包括目前已啟用的路由樹，以及用於遍歷路由樹的便利方法。</td>
+</tr>
+<tr>
+<td align="left">連結參數陣列</td>
+<td align="left">路由器解釋為路由指令的陣列。您可以將該陣列繫結到 <code>RouterLink</code> 或將陣列作為參數傳遞給 <code>Router.navigate</code> 方法。</td>
+</tr>
+<tr>
+<td align="left">路由元件</td>
+<td align="left">具有 <code>RouterOutlet</code> 的 Angular 元件，根據路由導覽顯示檢視。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  

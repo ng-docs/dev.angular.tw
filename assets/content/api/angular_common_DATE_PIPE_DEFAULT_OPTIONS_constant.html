@@ -1,0 +1,31 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>DATE_PIPE_DEFAULT_OPTIONS</h1><div class="docs-api-item-label" data-mode="full" data-type="constant">constant</div></div></div><p class="docs-reference-description"><p>DI token that allows to provide default configuration for the <code>DatePipe</code> instances in an
+application. The value is an object which can include the following fields:</p>
+
+    <ul class="docs-list">
+      <li><code>dateFormat</code>: configures the default date format. If not provided, the <code>DatePipe</code>
+will use the &#39;mediumDate&#39; as a value.</li>
+<li><code>timezone</code>: configures the default timezone. If not provided, the <code>DatePipe</code> will
+use the end-user&#39;s local system timezone.</li>
+
+    </ul></p><nav class="docs-pill-row"><a class="docs-pill" href="api/common/DatePipeConfig">DatePipeConfig</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">const</span> <span class="hljs-attr">DATE_PIPE_DEFAULT_OPTIONS</span>: <span class="hljs-title class_">InjectionToken</span>&lt;<span class="hljs-title class_">DatePipeConfig</span>&gt;;</div></code></pre></div></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>Various date pipe default values can be overwritten by providing this token with
+the value that has this interface.</p>
+<p>For example:</p>
+<p>Override the default date format by providing a value using the token:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">  {<span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">DATE_PIPE_DEFAULT_OPTIONS</span>, <span class="hljs-attr">useValue</span>: {<span class="hljs-attr">dateFormat</span>: <span class="hljs-string">&#x27;shortDate&#x27;</span>}}</span><span class="hljs-ln-line">]</span>
+          </code>
+        </pre>
+      </div>
+    <p>Override the default timezone by providing a value using the token:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">  {<span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">DATE_PIPE_DEFAULT_OPTIONS</span>, <span class="hljs-attr">useValue</span>: {<span class="hljs-attr">timezone</span>: <span class="hljs-string">&#x27;-1200&#x27;</span>}}</span><span class="hljs-ln-line">]</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div>

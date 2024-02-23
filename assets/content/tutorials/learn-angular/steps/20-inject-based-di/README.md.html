@@ -1,0 +1,69 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">基於注入的依賴性注入</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/20-inject-based-di/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>建立可注入服務是 Angular 中相依性注入 (DI) 系統的第一部分。如何將服務注入元件？Angular 有個方便的功能稱為 <code>inject()</code>，可以在適當的語境中使用。</p>
+<p>註解：注入內容不在本教學的範圍內，但如果您想了解更多，可以在 <a href="guide/di/dependency-injection-context">Angular 文件</a> 中找到更多資訊。</p>
+<p>在這個活動中，您將學習如何注入服務並在元件中使用它。</p>
+<hr>
+
+<p>初始化類別屬性，使用 DI 系統提供的數值，通常很有幫助。以下是一個範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">PetCareDashboardComponent</span> {</div><div class="hljs-ln-line highlighted">    petRosterService = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">PetRosterService</span>);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-carservice">注入 <code>CarService</code></h3>
+  <a href="#-carservice" class="docs-anchor" tabindex="-1" aria-label="Link to 注入 <code>CarService</code>"></a>
+  
+      <p>在 <code>app.component.ts</code> 中，使用 <code>inject()</code> 函式注入 <code>CarService</code> 並將其指定給名為 <code>carService</code> 的屬性</p>
+<p>注意：注意屬性 <code>carService</code> 和類別 <code>CarService</code> 之間的差異。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-carservice-">使用 <code>carService</code> 實例</h3>
+  <a href="#-carservice-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 <code>carService</code> 實例"></a>
+  
+      <p>呼叫 <code>inject(CarService)</code> 為您提供了 <code>CarService</code> 的實例，您可以在應用程式中使用它，並儲存在 <code>carService</code> 屬性中。</p>
+<p>在 <code>AppComponent</code> 的 <code>constructor</code> 函式中，加入以下實作：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">display</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">carService</span>.<span class="hljs-title function_">getCars</span>().<span class="hljs-title function_">join</span>(<span class="hljs-string">' ⭐️ '</span>);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-appcomponent-">更新 <code>AppComponent</code> 範本</h3>
+  <a href="#-appcomponent-" class="docs-anchor" tabindex="-1" aria-label="Link to 更新 <code>AppComponent</code> 範本"></a>
+  
+      <p>在 <code>app.component.ts</code> 中更新元件範本，使用以下程式碼：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;p&gt;Car Listing: {{ display }}&lt;/p&gt;`</span>,</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p>你剛在元件中注入第一個服務 - 真是太棒了。在你完成 DI 這部分之前，你會學到一種注入資源到元件中的替代語法。</p>

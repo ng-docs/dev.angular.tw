@@ -1,0 +1,67 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">驗證表單</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/18-forms-validation/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>在使用表單時，另一個常見情境是需要驗證輸入以確保提交正確資料。</p>
+<p>在這個活動中，您將學習如何使用響應式表單驗證表單。</p>
+<hr>
+
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">匯入驗證程式</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 匯入驗證程式"></a>
+  
+      <p>Angular 提供了一組驗證工具。若要使用這些工具，請先將元件更新為從 <code>@angular/forms</code> 匯入 <code>Validators</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">ReactiveFormsModule</span>, <span class="hljs-title class_">Validators</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">加入驗證至表單</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 加入驗證至表單"></a>
+  
+      <p>每個 <code>FormControl</code> 都可以傳入您要使用以驗證 <code>FormControl</code> 值的 <code>Validators</code>。例如，如果您想要讓 <code>profileForm</code> 的欄位為必填，請使用 <code>Validators.required</code>。更新 <code>name</code> 和 <code>email</code> <code>FormControl</code> 為必填：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">profileForm = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormGroup</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>, <span class="hljs-title class_">Validators</span>.<span class="hljs-property">required</span>),</div><div class="hljs-ln-line">  <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>, <span class="hljs-title class_">Validators</span>.<span class="hljs-property">required</span>),</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">在範本中檢查表單驗證</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 在範本中檢查表單驗證"></a>
+  
+      <p>要判斷表單是否有效，<code>FormGroup</code> 類別有一個 <code>valid</code> 屬性。
+您可以使用這個屬性動態繫結屬性。根據表單的有效性來更新提交 <code>button</code> 以啟用。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> [<span class="hljs-attr">disabled</span>]=<span class="hljs-string">"!profileForm.valid"</span>&gt;</span>Submit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p>現在您知道驗證是如何與響應式表單一起運作的基本知識。</p>
+<p>在 Angular 中使用表單這些核心概念的學習成果很好。如果您想了解更多資訊，務必參考 <a href="guide/forms/form-validation">Angular 表單文件</a>。</p>

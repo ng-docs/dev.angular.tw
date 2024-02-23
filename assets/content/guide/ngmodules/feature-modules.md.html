@@ -1,0 +1,127 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">功能模組</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/feature-modules.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>功能模組是 NgModules，用於組織程式碼。</p>
+<p>隨著應用程式的增長，您可以整理與特定功能相關的程式碼。
+這有助於為功能應用明確的界限。
+使用功能模組，您可以將與特定功能或特性相關的程式碼與其他程式碼分開。
+劃分應用程式區域有助於開發人員和團隊之間的協作、分隔指令以及管理根模組的大小。</p>
+
+  <h2 id="">功能模組與根模組</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 功能模組與根模組"></a>
+  <p>功能模組是一種組織最佳實務，而不是核心 Angular API 的概念。
+功能模組提供一組凝聚的功能，專注於特定應用程式需求，例如使用者工作流程、路由或表單。
+雖然您可以在根模組中完成所有操作，但功能模組可協助您將應用程式分區成焦點區域。
+功能模組透過它提供的服務，以及它共用的元件、指令及管道，與根模組和其他模組合作。</p>
+
+  <h2 id="">如何建立一個功能模組</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 如何建立一個功能模組"></a>
+  <p>html</p>
+<p>要建立一個功能模組，請執行以下步驟：</p>
+<ol>
+  <li>在您的專案中建立一個新的資料夾。</li>
+  <li>在資料夾中建立一個新的 JavaScript 檔案。</li>
+  <li>在 JavaScript 檔案中，定義一個新的 Angular 模組。</li>
+  <li>在模組中，定義一個新的控制器。</li>
+  <li>在控制器中，定義一個新的函式。</li>
+  <li>在函式中，執行您要執行的程式碼。</li>
+</ol>
+
+<p>假設您已經有一個使用 <a href="/tools/cli">Angular CLI</a> 建立的應用程式，請在根專案目錄中輸入以下指令，使用 CLI 建立功能模組。
+您可以從名稱中省略「Module」字尾，因為 CLI 會自動加入：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate module CustomerDashboard</div></code>
+    </pre>
+  </div><p>這會導致 CLI 建立一個名為 <code>customer-dashboard</code> 的資料夾，裡面有一個名為 <code>customer-dashboard.module.ts</code> 的檔案，其內容如下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CommonModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">CommonModule</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: []</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomerDashboardModule</span> { }</div></code>
+    </pre>
+  </div><p>NgModule 的結構不論是根模組或功能模組都相同。
+在 CLI 產生的功能模組中，檔案最上方有兩個 JavaScript 匯入陳述式：第一個匯入 <code>NgModule</code>，與根模組類似，它讓您可以使用 <code>@NgModule</code> 裝飾器；第二個匯入 <code>CommonModule</code>，它提供了許多常見的指令，例如 <code>ngIf</code> 和 <code>ngFor</code>。</p>
+<p>備註：功能模組匯入 <code>CommonModule</code> 而非 <code>BrowserModule</code>，後者僅在根模組中匯入一次。
+<code>CommonModule</code> 只包含資訊，用於大多數範本中所需的常見指令，例如 <code>ngIf</code> 和 <code>ngFor</code>，而 <code>BrowserModule</code> 則為瀏覽器設定 Angular 應用程式，這只需要執行一次。</p>
+<p><code>declarations</code> 陣列讓您可以新增聲明，它是專屬於此特定模組的元件、指令和管道。
+若要新增元件，請在命令列輸入以下指令，其中 <code>customer-dashboard</code> 是 CLI 產生功能模組的目錄，而 <code>CustomerDashboard</code> 是元件的名稱：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate component customer-dashboard/CustomerDashboard</div></code>
+    </pre>
+  </div><p>這會在 <code>customer-dashboard</code> 資料夾中為新元件產生一個資料夾，並更新 <code>CustomerDashboardModule</code>。</p>
+<div class="docs-code" header="src/app/customer-dashboard/customer-dashboard.module.ts">
+    <div class="docs-code-header"><h3>src/app/customer-dashboard/customer-dashboard.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { NgModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { CommonModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> { CustomerDashboardComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./customer-dashboard/customer-dashboard.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@NgModule({</div><div class="hljs-ln-line">  imports: [</div><div class="hljs-ln-line">    CommonModule</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  declarations: [</div><div class="hljs-ln-line highlighted">    CustomerDashboardComponent</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  exports: [</div><div class="hljs-ln-line highlighted">    CustomerDashboardComponent</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomerDashboardModule</span> { }</div></code>
+    </pre>
+  </div><p><code>CustomerDashboardComponent</code> 現在位於頂部的 JavaScript 匯入清單中，並新增至 <code>declarations</code> 陣列，這讓 Angular 知道將此新元件與此功能模組關聯。</p>
+
+  <h2 id="">匯入功能模組</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 匯入功能模組"></a>
+  <p>若要將功能模組納入您的應用程式，您必須讓根模組 <code>app.module.ts</code> 知道它。
+請注意 <code>customer-dashboard.module.ts</code> 底部的 <code>CustomerDashboardModule</code> 匯出。
+這會將其公開，以便其他模組可以存取它。
+若要將它匯入 <code>AppModule</code>，請將它新增至 <code>app.module.ts</code> 中的匯入項目和 <code>imports</code> 陣列：</p>
+<div class="docs-code" header="src/app/app.module.ts">
+    <div class="docs-code-header"><h3>src/app/app.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">BrowserModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-comment">// import the feature module here so you can add it to the imports array below</span></div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CustomerDashboardModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./customer-dashboard/customer-dashboard.module'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">AppComponent</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">BrowserModule</span>,</div><div class="hljs-ln-line highlighted">    <span class="hljs-title class_">CustomerDashboardModule</span> <span class="hljs-comment">// add the feature module here</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [],</div><div class="hljs-ln-line">  <span class="hljs-attr">bootstrap</span>: [<span class="hljs-title class_">AppComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> { }</div></code>
+    </pre>
+  </div><p>現在 <code>AppModule</code> 知道功能模組和 <code>AppComponent</code> 能夠使用客戶儀表板元件。
+以下部分有更多詳細資料。</p>
+<p>如果您要將任何服務提供者加入功能模組，<code>AppModule</code> 也會知道這些服務提供者，其他任何匯入的功能模組也是如此。</p>
+
+  <h2 id="">呈現功能模組的元件範本</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 呈現功能模組的元件範本"></a>
+  <p>html</p>
+<!-- 此範例假設元件名稱為 `my-component`。 -->
+<p><my-component></my-component></p>
+<p>當 CLI 為功能模組產生 <code>CustomerDashboardComponent</code> 時，它包含一個範本，<code>customer-dashboard.component.html</code>，其中包含以下標記：</p>
+<div class="docs-code" header="src/app/customer-dashboard/customer-dashboard/customer-dashboard.component.html">
+    <div class="docs-code-header"><h3>src/app/customer-dashboard/customer-dashboard/customer-dashboard.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">  customer-dashboard works!</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
+    </pre>
+  </div><p>若要在 <code>AppComponent</code> 中看到此 HTML，必須先在 <code>CustomerDashboardModule</code> 中匯出 <code>CustomerDashboardComponent</code>。
+在 <code>customer-dashboard.module.ts</code> 中，在 <code>declarations</code> 陣列正下方，新增一個包含 <code>CustomerDashboardComponent</code> 的 <code>exports</code> 陣列：</p>
+<div class="docs-code" header="src/app/customer-dashboard/customer-dashboard.module.ts">
+    <div class="docs-code-header"><h3>src/app/customer-dashboard/customer-dashboard.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attribute">exports</span>:<span class="hljs-meta"> [</span></div><div class="hljs-ln-line highlighted">    CustomerDashboardComponent</div><div class="hljs-ln-line">  ]</div></code>
+    </pre>
+  </div><p>接著，在 <code>AppComponent</code>，<code>app.component.html</code>，新增標籤 <code>&lt;app-customer-dashboard&gt;</code>：</p>
+<div class="docs-code" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line">  {{title}}</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">app-customer-dashboard</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-customer-dashboard</span>&gt;</span></div></code>
+    </pre>
+  </div><p>現在，除了預設呈現的標題外，<code>CustomerDashboardComponent</code> 範本也會呈現：</p>
+<img alt="功能模組元件" src="https://angular.dev/assets/images/guide/ngmodules/feature-module.png">
+
+
+  <h2 id="-ngmodules">更多有關 NgModules</h2>
+  <a href="#-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to 更多有關 NgModules"></a>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="/guide/ngmodules/lazy-loading">
+      使用 Angular 路由器延遲載入模組
+    </a>
+    
+    <a class="docs-pill" href="/guide/ngmodules/providers">
+      提供者
+    </a>
+    
+    <a class="docs-pill" href="/guide/ngmodules/module-types">
+      功能模組類型
+    </a>
+    
+
+    </nav>
+    

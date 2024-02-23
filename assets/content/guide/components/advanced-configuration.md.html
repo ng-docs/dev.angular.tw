@@ -1,0 +1,44 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">進階元件配置</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/advanced-configuration.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>提示：本指南假設您已經閱讀過 <a href="essentials">精華指南</a>。如果您是 Angular 新手，請先閱讀該指南。</p>
+
+  <h2 id="changedetectionstrategy">ChangeDetectionStrategy</h2>
+  <a href="#changedetectionstrategy" class="docs-anchor" tabindex="-1" aria-label="Link to ChangeDetectionStrategy"></a>
+  <p><code>@Component</code> 裝飾器接受控制元件 <strong>變更偵測模式</strong> 的 <code>changeDetection</code> 選項。有兩種變更偵測模式選項。</p>
+<p><strong><code>ChangeDetectionStrategy.Default</code></strong> 是預設策略，這一點毫不令人意外。
+在此模式中，Angular 檢查元件的 DOM 是否需要更新，只要任何活動可能已經在全應用程式範圍內發生。
+觸發此檢查的活動包括使用者互動、網路回應、計時器等等。</p>
+<p><strong><code>ChangeDetectionStrategy.OnPush</code></strong> 是一種可減少 Angular 需要執行的檢查數量的選用模式。在此模式中，框架僅在以下情況檢查元件的 DOM 是否需要更新：</p>
+
+  <ul class="docs-list">
+    <li>元件輸入已因範本中的繫結而變更，或</li>
+<li>此元件中的事件監聽器正在執行</li>
+<li>元件明確標記為檢查，透過 <code>ChangeDetectorRef.markForCheck</code> 或包裝它的某些內容，例如 <code>AsyncPipe</code>。</li>
+
+  </ul>
+  <p>此外，當檢查 OnPush 元件時，Angular <em>也</em> 會檢查其所有祖先元件，從應用程式樹向上遞迴。</p>
+
+  <h2 id="preservewhitespace">PreserveWhitespace</h2>
+  <a href="#preservewhitespace" class="docs-anchor" tabindex="-1" aria-label="Link to PreserveWhitespace"></a>
+  <p>預設情況下，Angular 會移除並摺疊範本中的多餘空白，通常來自換行符號和縮排。您可以透過在元件的元資料中明確設定 <code>preserveWhitespace</code> 為 false 來變更此設定。</p>
+
+  <h2 id="">自訂元素綱要</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 自訂元素綱要"></a>
+  <p>預設情況下，Angular 在遇到未知 HTML 元素時會擲回錯誤。您可以透過在元件的 <code>schemas</code> 屬性中包含 <code>CUSTOM_ELEMENTS_SCHEMA</code> 來停用元件的此行為。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, <span class="hljs-variable constant_">CUSTOM_ELEMENTS_SCHEMA</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-attr">schemas</span>: [<span class="hljs-variable constant_">CUSTOM_ELEMENTS_SCHEMA</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;some-unknown-component&gt;&lt;/some-unknown-component&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ComponentWithCustomElements</span> { }</div></code>
+    </pre>
+  </div><p>Angular 目前不支援其他任何架構。</p>

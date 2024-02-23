@@ -1,0 +1,57 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">基於建構函式的相依性注入</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/21-constructor-based-di/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>在先前的活動中，您使用 <code>inject()</code> 函式來提供資源，並將它們「提供」給您的元件。 <code>inject()</code> 函式是一種模式，知道還存在另一種模式可注入資源，稱為建構函式為基礎的相依性注入，這一點非常有用。</p>
+<p>您可以將資源指定為元件的 <code>constructor</code> 函式的參數。Angular 會讓您的元件可以使用這些資源。
+<br><br>
+在本活動中，您將學習如何使用基於建構函式的依賴性注入。</p>
+<hr>
+
+<p>若要將服務或其他可注入資源注入元件，請使用下列語法：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">PetCarDashboardComponent</span> {</div><div class="hljs-ln-line highlighted">    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> petCareService: PetCareService</span>) {</div><div class="hljs-ln-line">        ...</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>這裡有幾件事需要注意：</p>
+
+  <ul class="docs-list">
+    <li>使用 <code>private</code> 關鍵字</li>
+<li><code>petCareService</code> 變成一個可以在類別中使用的屬性</li>
+<li><code>PetCareService</code> 類別是注入的類別</li>
+
+  </ul>
+  <p>好的，現在你試著這樣做：</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-di">更新程式碼以使用基於建構函式的 DI</h3>
+  <a href="#-di" class="docs-anchor" tabindex="-1" aria-label="Link to 更新程式碼以使用基於建構函式的 DI"></a>
+  
+      <p>在 <code>app.component.ts</code> 中，更新建構函式程式碼以符合以下程式碼：</p>
+<p>提示：請記住，如果您遇到困難，請參閱此活動頁面上的範例。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> carService: CarService</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">display</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">carService</span>.<span class="hljs-title function_">getCars</span>().<span class="hljs-title function_">join</span>(<span class="hljs-string">' ⭐️ '</span>);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p>恭喜您完成此活動。範例程式碼與使用 <code>inject</code> 函式相同。雖然這兩種方法大致相同，但存在一些超出本教學範圍的細微差異。</p>
+<br>
+
+<p>您可以在 <a href="guide/di">Angular 文件</a> 中找到有關相依性注入的更多資訊。</p>

@@ -1,0 +1,52 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">獲取表單控制項值</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/16-form-control-values/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>現在您的表單已使用 Angular 設定好，下一步是從表單控制項存取值。</p>
+<p>在這個活動中，你將學習如何從你的表單輸入中獲取數值。</p>
+<hr>
+
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">在範本中顯示輸入欄位的值</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 在範本中顯示輸入欄位的值"></a>
+  
+      <p>要在範本中顯示輸入值，您可以像使用元件的任何其他類別屬性一樣，使用插補語法 <code>{{}}</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-user'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line highlighted">    &lt;p&gt;Framework: {{ favoriteFramework }}&lt;/p&gt;</div><div class="hljs-ln-line">    &lt;label for="framework"&gt;</div><div class="hljs-ln-line">      Favorite Framework:</div><div class="hljs-ln-line">      &lt;input id="framework" type="text" [(ngModel)]="favoriteFramework" /&gt;</div><div class="hljs-ln-line">    &lt;/label&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserComponent</span> {</div><div class="hljs-ln-line">  favoriteFramework = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">擷取輸入欄位的值</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 擷取輸入欄位的值"></a>
+  
+      <p>當您需要在元件類別中參考輸入欄位值時，您可以透過 <code>this</code> 語法存取類別屬性來做到。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-user'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line">    &lt;button (click)="showFramework()"&gt;Show Framework&lt;/button&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserComponent</span> {</div><div class="hljs-ln-line">  favoriteFramework = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">showFramework</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-title function_">alert</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">favoriteFramework</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p>在範本中顯示輸入值並以程式方式存取它們，做得很好。</p>
+<p>時間繼續進入下一個使用 Angular 管理表單的方法：響應式表單。如果您想進一步了解範本驅動的表單，請參閱 <a href="guide/forms/reactive-forms">Angular 表單文件</a>。</p>

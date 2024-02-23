@@ -1,0 +1,18 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>OnSameUrlNavigation</h1><div class="docs-api-item-label" data-mode="full" data-type="type_alias">Type Alias</div></div></div><p class="docs-reference-description"><p>How to handle a navigation request to the current URL. One of:</p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/router/RouteReuseStrategy">RouteReuseStrategy</a><a class="docs-pill" href="api/router/RunGuardsAndResolvers">RunGuardsAndResolvers</a><a class="docs-pill" href="api/router/NavigationBehaviorOptions">NavigationBehaviorOptions</a><a class="docs-pill" href="api/router/RouterConfigOptions">RouterConfigOptions</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">type</span> <span class="hljs-title class_">OnSameUrlNavigation</span> = <span class="hljs-string">&#x27;reload&#x27;</span> | <span class="hljs-string">&#x27;ignore&#x27;</span></div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>How to handle a navigation request to the current URL. One of:</p>
+
+    <ul class="docs-list">
+      <li><code>&#39;ignore&#39;</code> :  The router ignores the request it is the same as the current state.</li>
+<li><code>&#39;reload&#39;</code> : The router processes the URL even if it is not different from the current state.
+One example of when you might want this option is if a <code>canMatch</code> guard depends on
+application state and initially rejects navigation to a route. After fixing the state, you want
+to re-navigate to the same URL so the route with the <code>canMatch</code> guard can activate.</li>
+
+    </ul>
+    <p>Note that this only configures whether the Route reprocesses the URL and triggers related
+action and events like redirects, guards, and resolvers. By default, the router re-uses a
+component instance when it re-navigates to the same component type without visiting a different
+component first. This behavior is configured by the <code>RouteReuseStrategy</code>. In order to reload
+routed components on same url navigation, you need to set <code>onSameUrlNavigation</code> to <code>&#39;reload&#39;</code>
+<em>and</em> provide a <code>RouteReuseStrategy</code> which returns <code>false</code> for <code>shouldReuseRoute</code>. Additionally,
+resolvers and most guards for routes do not run unless the path or path params changed
+(configured by <code>runGuardsAndResolvers</code>).</p></div></div></div>

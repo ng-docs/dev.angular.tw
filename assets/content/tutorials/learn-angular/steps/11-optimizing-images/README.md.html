@@ -1,0 +1,97 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">優化圖片</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/11-optimizing-images/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>圖片是許多應用程式的重要部分，也可能是造成應用程式效能問題的主要原因，包括 <a href="https://web.dev/explore/learn-core-web-vitals" target="_blank">核心網路指標</a> 分數低。</p>
+<p>影像優化可能是一個複雜的主題，但 Angular 可以透過 <code>NgOptimizedImage</code> 指令為您處理大部分內容。在此活動中，您將學習如何使用 <code>NgOptimizedImage</code> 來確保影像以有效率的方式載入。</p>
+<hr>
+
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-ngoptimizedimage-">匯入 NgOptimizedImage 指令</h3>
+  <a href="#-ngoptimizedimage-" class="docs-anchor" tabindex="-1" aria-label="Link to 匯入 NgOptimizedImage 指令"></a>
+  
+      <p>為了利用 <code>NgOptimizedImage</code> 指令，首先從 <code>@angular/common</code> 函式庫匯入它並將它新增到元件 <code>imports</code> 陣列。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgOptimizedImage</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">NgOptimizedImage</span>],</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-src--ngsrc">將 src 屬性更新為 ngSrc</h3>
+  <a href="#-src--ngsrc" class="docs-anchor" tabindex="-1" aria-label="Link to 將 src 屬性更新為 ngSrc"></a>
+  
+      <p>若要啟用 <code>NgOptimizedImage</code> 指令，請將 <code>src</code> 屬性替換為 <code>ngSrc</code>。這適用於靜態圖片來源（即 <code>src</code>）和動態圖片來源（即 <code>[src]</code>）。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgOptimizedImage</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line">    &lt;li&gt;</div><div class="hljs-ln-line">      Static Image:</div><div class="hljs-ln-line highlighted">      &lt;img ngSrc="/assets/logo.svg" alt="Angular logo" width="32" height="32" /&gt;</div><div class="hljs-ln-line">    &lt;/li&gt;</div><div class="hljs-ln-line">    &lt;li&gt;</div><div class="hljs-ln-line">      Dynamic Image:</div><div class="hljs-ln-line highlighted">      &lt;img [ngSrc]="logoUrl" [alt]="logoAlt" width="32" height="32" /&gt;</div><div class="hljs-ln-line">    &lt;/li&gt;`,</div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line">  <span class="hljs-string">`,</span></div><div class="hljs-ln-line">  imports: [NgOptimizedImage],</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">加入寬度和高度屬性</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 加入寬度和高度屬性"></a>
+  
+      <p>注意在以上的程式碼範例中，每個圖片都有 <code>width</code> 和 <code>height</code> 屬性。為了防止 <a href="https://web.dev/articles/cls" target="_blank">版面變形</a>，<code>NgOptimizedImage</code> 指令需要每個圖片都有這兩個尺寸屬性。</p>
+<p>在無法或不想為圖像指定靜態 <code>height</code> 和 <code>width</code> 的情況下，您可以使用 <a href="https://web.dev/articles/cls" target="_blank">the <code>fill</code> attribute</a> 告訴圖像像「背景圖像」一樣，填滿其包含的元素：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;div <span class="hljs-keyword">class</span>=<span class="hljs-string">"image-container"</span>&gt; <span class="hljs-comment">//Container div has 'position: "relative"'</span></div><div class="hljs-ln-line">  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">ngSrc</span>=<span class="hljs-string">"www.example.com/image.png"</span> <span class="hljs-attr">fill</span> /&gt;</span></span></div><div class="hljs-ln-line">&lt;/div&gt;</div></code>
+    </pre>
+  </div><p>注：為使 <code>fill</code> 圖像正確呈現，其父元素必須以 <code>position: &quot;relative&quot;</code>、<code>position: &quot;fixed&quot;</code> 或 <code>position: &quot;absolute&quot;</code> 進行樣式設定。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">優先處理重要圖像</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 優先處理重要圖像"></a>
+  
+      <p>載入效能最重要的最佳化之一是優先處理任何可能成為 <a href="https://web.dev/articles/optimize-lcp" target="_blank">&quot;LCP 元素&quot;</a> 的圖像，這是頁面載入時螢幕上最大的圖形元素。若要最佳化您的載入時間，請務必將 <code>priority</code> 屬性新增至您的「英雄圖像」或您認為可能是 LCP 元素的任何其他圖像。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;img ngSrc=<span class="hljs-string">"www.example.com/image.png"</span> height=<span class="hljs-string">"600"</span> width=<span class="hljs-string">"800"</span> priority /&gt;</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">選用：使用影像載入器</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 選用：使用影像載入器"></a>
+  
+      <p><code>NgOptimizedImage</code> 允許你指定一個 <a href="guide/image-optimization#configuring-an-image-loader-for-ngoptimizedimage">影像載入器</a>，它會告訴指令如何為你的影像格式化 URL。使用載入器允許你使用簡短的相對 URL 來定義你的影像：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  <span class="hljs-title function_">provideImgixLoader</span>(<span class="hljs-string">'https://my.base.url/'</span>),</div><div class="hljs-ln-line">]</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// ...</span></div><div class="hljs-ln-line"><span class="hljs-comment">// Final URL will be 'https://my.base.url/image.png'</span></div><div class="hljs-ln-line">&lt;img ngSrc=<span class="hljs-string">"image.png"</span> height=<span class="hljs-string">"600"</span> width=<span class="hljs-string">"800"</span> /&gt;</div></code>
+    </pre>
+  </div><p>影像載入器不只是為了方便，它們允許您使用 <code>NgOptimizedImage</code> 的全部功能。在此處瞭解更多關於這些優化和內建的流行 CDN 載入器 <a href="guide/image-optimization#configuring-an-image-loader-for-ngoptimizedimage">here</a>。</p>
+
+    </li>
+    
+    </ol>
+    <p><span class="docs-emoji">將此指令新增至工作流程後，您的圖片現在會在 Angular 🎉 的協助下使用最佳實務來載入</span></p>
+<p>如果您想了解更多資訊，請查看 <a href="guide/image-optimization"><code>NgOptimizedImage</code></a> 的文件。繼續努力，讓我們接著來了解路由。</p>

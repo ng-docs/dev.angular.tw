@@ -1,0 +1,123 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/upgrade/static</span><div class="docs-reference-title"><div><h1>downgradeModule</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div></div><p class="docs-reference-description"><p>A helper function for creating an AngularJS module that can bootstrap an Angular module
+&quot;on-demand&quot; (possibly lazily) when a {@link downgradeComponent downgraded component} needs to be
+instantiated.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line hljs-ln-line-deprecated"><span class="hljs-title function_">downgradeModule</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">moduleOrBootstrapFn</span>: <span class="hljs-title class_">NgModuleFactory</span>&lt;T&gt;</div><div class="hljs-ln-line ">): <span class="hljs-built_in">string</span>;</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>A helper function for creating an AngularJS module that can bootstrap an Angular module
+&quot;on-demand&quot; (possibly lazily) when a {@link downgradeComponent downgraded component} needs to be
+instantiated.</p>
+<p><em>Part of the <a href="api?query=upgrade/static">upgrade/static</a> library for hybrid upgrade apps that
+support AOT compilation.</em></p>
+<p>It allows loading/bootstrapping the Angular part of a hybrid application lazily and not having to
+pay the cost up-front. For example, you can have an AngularJS application that uses Angular for
+specific routes and only instantiate the Angular modules if/when the user visits one of these
+routes.</p>
+<p>The Angular module will be bootstrapped once (when requested for the first time) and the same
+reference will be used from that point onwards.</p>
+<p><code>downgradeModule()</code> requires either an <code>NgModuleFactory</code>, <code>NgModule</code> class or a function:</p>
+
+    <ul class="docs-list">
+      <li><code>NgModuleFactory</code>: If you pass an <code>NgModuleFactory</code>, it will be used to instantiate a module
+using <code>platformBrowser</code>&#39;s {@link PlatformRefbootstrapModuleFactory bootstrapModuleFactory()}.
+NOTE: this type of the argument is deprecated. Please either provide an <code>NgModule</code> class or a
+bootstrap function instead.</li>
+<li><code>NgModule</code> class: If you pass an NgModule class, it will be used to instantiate a module
+using <code>platformBrowser</code>&#39;s {@link PlatformRefbootstrapModule bootstrapModule()}.</li>
+<li><code>Function</code>: If you pass a function, it is expected to return a promise resolving to an
+<code>NgModuleRef</code>. The function is called with an array of extra {@link StaticProvider Providers}  that are expected to be available from the returned <code>NgModuleRef</code>&#39;s <code>Injector</code>.</li>
+
+    </ul>
+    <p><code>downgradeModule()</code> returns the name of the created AngularJS wrapper module. You can use it to
+declare a dependency in your main AngularJS module.</p>
+<p>{@example upgrade/static/ts/lite/module.ts region=&quot;basic-how-to&quot;}</p>
+<p>For more details on how to use <code>downgradeModule()</code> see
+<a href="https://angular.io/guide/upgrade">Upgrading for Performance</a>.</p></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>Apart from <code>UpgradeModule</code>, you can use the rest of the <code>upgrade/static</code> helpers as usual to
+build a hybrid application. Note that the Angular pieces (e.g. downgraded services) will not be
+available until the downgraded module has been bootstrapped, i.e. by instantiating a downgraded
+component.</p>
+<div class="alert is-important">
+
+<p>  You cannot use <code>downgradeModule()</code> and <code>UpgradeModule</code> in the same hybrid application.<br />
+  Use one or the other.</p>
+</div>
+
+<h3>Differences with <code>UpgradeModule</code></h3>
+<p>Besides their different API, there are two important internal differences between
+<code>downgradeModule()</code> and <code>UpgradeModule</code> that affect the behavior of hybrid applications:</p>
+
+      <ol class="docs-ordered-list">
+        <li>Unlike <code>UpgradeModule</code>, <code>downgradeModule()</code> does not bootstrap the main AngularJS module
+inside the {@link NgZone Angular zone}.</li>
+<li>Unlike <code>UpgradeModule</code>, <code>downgradeModule()</code> does not automatically run a
+<a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope">$digest()</a> when changes are
+detected in the Angular part of the application.</li>
+
+      </ol>
+      <p>What this means is that applications using <code>UpgradeModule</code> will run change detection more
+frequently in order to ensure that both frameworks are properly notified about possible changes.
+This will inevitably result in more change detection runs than necessary.</p>
+<p><code>downgradeModule()</code>, on the other side, does not try to tie the two change detection systems as
+tightly, restricting the explicit change detection runs only to cases where it knows it is
+necessary (e.g. when the inputs of a downgraded component change). This improves performance,
+especially in change-detection-heavy applications, but leaves it up to the developer to manually
+notify each framework as needed.</p>
+<p>For a more detailed discussion of the differences and their implications, see
+<a href="https://angular.io/guide/upgrade">Upgrading for Performance</a>.</p>
+<div class="alert is-helpful">
+
+<p>  You can manually trigger a change detection run in AngularJS using
+  <a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope">scope.$apply(...)</a> or
+  <a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope">$rootScope.$digest()</a>.</p>
+<p>  You can manually trigger a change detection run in Angular using {@link NgZonerun *   ngZone.run(...)}.</p>
+</div>
+
+<h3>Downgrading multiple modules</h3>
+<p>It is possible to downgrade multiple modules and include them in an AngularJS application. In
+that case, each downgraded module will be bootstrapped when an associated downgraded component or
+injectable needs to be instantiated.</p>
+<p>Things to keep in mind, when downgrading multiple modules:</p>
+
+    <ul class="docs-list">
+      <li><p>Each downgraded component/injectable needs to be explicitly associated with a downgraded
+module. See <code>downgradeComponent()</code> and <code>downgradeInjectable()</code> for more details.</p>
+</li>
+<li><p>If you want some injectables to be shared among all downgraded modules, you can provide them as
+<code>StaticProvider</code>s, when creating the <code>PlatformRef</code> (e.g. via <code>platformBrowser</code> or
+<code>platformBrowserDynamic</code>).</p>
+</li>
+<li><p>When using {@link PlatformRefbootstrapmodule <code>bootstrapModule()</code>} or
+{@link PlatformRefbootstrapmodulefactory <code>bootstrapModuleFactory()</code>} to bootstrap the
+downgraded modules, each one is considered a &quot;root&quot; module. As a consequence, a new instance
+will be created for every injectable provided in <code>&quot;root&quot;</code> (via
+{@link InjectableprovidedIn <code>providedIn</code>}).
+If this is not your intention, you can have a shared module (that will act as act as the &quot;root&quot;
+module) and create all downgraded modules using that module&#39;s injector:</p>
+<code-example path="upgrade/static/ts/lite-multi-shared/module.ts" region="shared-root-module" /></li>
+
+    </ul>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>downgradeModule</h3><div><code>string</code></div></div><span></span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item docs-reference-card-item-deprecated"><div class="docs-function-definition"><p>A helper function for creating an AngularJS module that can bootstrap an Angular module
+&quot;on-demand&quot; (possibly lazily) when a {@link downgradeComponent downgraded component} needs to be
+instantiated.</p>
+<p><em>Part of the <a href="api?query=upgrade/static">upgrade/static</a> library for hybrid upgrade apps that
+support AOT compilation.</em></p>
+<p>It allows loading/bootstrapping the Angular part of a hybrid application lazily and not having to
+pay the cost up-front. For example, you can have an AngularJS application that uses Angular for
+specific routes and only instantiate the Angular modules if/when the user visits one of these
+routes.</p>
+<p>The Angular module will be bootstrapped once (when requested for the first time) and the same
+reference will be used from that point onwards.</p>
+<p><code>downgradeModule()</code> requires either an <code>NgModuleFactory</code>, <code>NgModule</code> class or a function:</p>
+
+    <ul class="docs-list">
+      <li><code>NgModuleFactory</code>: If you pass an <code>NgModuleFactory</code>, it will be used to instantiate a module
+using <code>platformBrowser</code>&#39;s {@link PlatformRefbootstrapModuleFactory bootstrapModuleFactory()}.
+NOTE: this type of the argument is deprecated. Please either provide an <code>NgModule</code> class or a
+bootstrap function instead.</li>
+<li><code>NgModule</code> class: If you pass an NgModule class, it will be used to instantiate a module
+using <code>platformBrowser</code>&#39;s {@link PlatformRefbootstrapModule bootstrapModule()}.</li>
+<li><code>Function</code>: If you pass a function, it is expected to return a promise resolving to an
+<code>NgModuleRef</code>. The function is called with an array of extra {@link StaticProvider Providers}  that are expected to be available from the returned <code>NgModuleRef</code>&#39;s <code>Injector</code>.</li>
+
+    </ul>
+    <p><code>downgradeModule()</code> returns the name of the created AngularJS wrapper module. You can use it to
+declare a dependency in your main AngularJS module.</p>
+<p>{@example upgrade/static/ts/lite/module.ts region=&quot;basic-how-to&quot;}</p>
+<p>For more details on how to use <code>downgradeModule()</code> see
+<a href="https://angular.io/guide/upgrade">Upgrading for Performance</a>.</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">moduleOrBootstrapFn</span><code>NgModuleFactory&lt;T></code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>string</code></div></div></div></div></div></div></div>

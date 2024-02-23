@@ -1,0 +1,26 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">Hydration 不支援 DOM 節點的投影</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0503.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>此錯誤表示在伺服器端序列化過程中，Angular 遇到在 Angular 的內容之外建立的節點（即使用原生 DOM API），並發現這些節點提供為可投影節點。它們可能使用 <code>ViewContainerRef.createComponent</code> 或 <code>createComponent</code> API 提供。Angular 內容注入不支援此使用案例。</p>
+<p>有關水分補充的更多資訊，請參閱 <a href="guide/hydration">本指南</a>。</p>
+<p>以下範例會觸發錯誤。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'dynamic'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">  &lt;ng-content /&gt;</div><div class="hljs-ln-line">`,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">DynamicComponent</span> {</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div #target&gt;&lt;/div&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'target'</span>, {<span class="hljs-attr">read</span>: <span class="hljs-title class_">ViewContainerRef</span>}) vcr!: <span class="hljs-title class_">ViewContainerRef</span>;</div><div class="hljs-ln-line">  envInjector = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">EnvironmentInjector</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">ngAfterViewInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> div = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">'div'</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> p = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">'p'</span>);</div><div class="hljs-ln-line">    <span class="hljs-comment">// In this test we create DOM nodes outside of Angular context</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// (i.e. not using Angular APIs) and try to content-project them.</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// This is an unsupported pattern and an exception will be thrown.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> compRef = <span class="hljs-title function_">createComponent</span>(<span class="hljs-title class_">DynamicComponent</span>, {</div><div class="hljs-ln-line">      <span class="hljs-attr">environmentInjector</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">envInjector</span>,</div><div class="hljs-ln-line">      <span class="hljs-attr">projectableNodes</span>: [[div, p]]</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>開發人員主控台中的錯誤訊息應包含有關應用程式 DOM 結構中導致問題的特定部分資訊。檢閱應用程式的那一部分以尋找與Hydration相關的錯誤，例如使用原生 API 直接操作 DOM。</p>
+<p>您可將 <code>ngSkipHydration</code> 屬性新增至您的元件主機節點，作為可能的解決方法。</p>

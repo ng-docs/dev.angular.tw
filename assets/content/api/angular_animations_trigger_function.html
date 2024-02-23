@@ -1,0 +1,87 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/animations</span><div class="docs-reference-title"><div><h1>trigger</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div></div><p class="docs-reference-description"><p>Creates a named animation trigger, containing a  list of <a href="api/animations/state"><code>state()</code></a>
+and <code>transition()</code> entries to be evaluated when the expression
+bound to the trigger changes.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">trigger</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>,</div><div class="hljs-ln-line ">  <span class="hljs-attr">definitions</span>: <span class="hljs-title class_">AnimationMetadata</span>[]</div><div class="hljs-ln-line ">): <span class="hljs-title class_">AnimationTriggerMetadata</span>;</div></code></pre></div></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>Define an animation trigger in the <code>animations</code> section of <code>@Component</code> metadata.
+In the template, reference the trigger by name and bind it to a trigger expression that
+evaluates to a defined animation state, using the following format:</p>
+<p><code>[@triggerName]=&quot;expression&quot;</code></p>
+<p>Animation trigger bindings convert all values to strings, and then match the
+previous and current values against any linked transitions.
+Booleans can be specified as <code>1</code> or <code>true</code> and <code>0</code> or <code>false</code>.</p>
+<h3>Usage Example</h3>
+<p>The following example creates an animation trigger reference based on the provided
+name value.
+The provided animation value is expected to be an array consisting of state and
+transition declarations.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">&quot;my-component&quot;</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">&quot;my-component-tpl.html&quot;</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">animations</span>: [</span><span class="hljs-ln-line">    <span class="hljs-title function_">trigger</span>(<span class="hljs-string">&quot;myAnimationTrigger&quot;</span>, [</span><span class="hljs-ln-line">      <span class="hljs-title function_">state</span>(...),</span><span class="hljs-ln-line">      <span class="hljs-title function_">state</span>(...),</span><span class="hljs-ln-line">      <span class="hljs-title function_">transition</span>(...),</span><span class="hljs-ln-line">      <span class="hljs-title function_">transition</span>(...)</span><span class="hljs-ln-line">    ])</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</span><span class="hljs-ln-line">  myStatusExp = <span class="hljs-string">&quot;something&quot;</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p>The template associated with this component makes use of the defined trigger
+by binding to an element within its template code.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">&lt;!-- somewhere inside of my-component-tpl.html --&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> [@<span class="hljs-attr">myAnimationTrigger</span>]=<span class="hljs-string">&quot;myStatusExp&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <h3>Using an inline function</h3>
+<p>The <code>transition</code> animation method also supports reading an inline function which can decide
+if its associated animation should be run.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// this method is run each time the `myAnimationTrigger` trigger value changes.</span></span><span class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">myInlineMatcherFn</span>(<span class="hljs-params">fromState: <span class="hljs-built_in">string</span>, toState: <span class="hljs-built_in">string</span>, element: <span class="hljs-built_in">any</span>, params: {[key:</span><span class="hljs-ln-line"><span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>}</span>): <span class="hljs-built_in">boolean</span> {</span><span class="hljs-ln-line">  <span class="hljs-comment">// notice that `element` and `params` are also available here</span></span><span class="hljs-ln-line">  <span class="hljs-keyword">return</span> toState == <span class="hljs-string">&#x27;yes-please-animate&#x27;</span>;</span><span class="hljs-ln-line">}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">&#x27;my-component&#x27;</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">&#x27;my-component-tpl.html&#x27;</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">animations</span>: [</span><span class="hljs-ln-line">    <span class="hljs-title function_">trigger</span>(<span class="hljs-string">&#x27;myAnimationTrigger&#x27;</span>, [</span><span class="hljs-ln-line">      <span class="hljs-title function_">transition</span>(myInlineMatcherFn, [</span><span class="hljs-ln-line">        <span class="hljs-comment">// the animation sequence code</span></span><span class="hljs-ln-line">      ]),</span><span class="hljs-ln-line">    ])</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</span><span class="hljs-ln-line">  myStatusExp = <span class="hljs-string">&quot;yes-please-animate&quot;</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <h3>Disabling Animations</h3>
+<p>When true, the special animation control binding <code>@.disabled</code> binding prevents
+all animations from rendering.
+Place the  <code>@.disabled</code> binding on an element to disable
+animations on the element itself, as well as any inner animation triggers
+within the element.</p>
+<p>The following example shows how to use this feature:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">&#x27;my-component&#x27;</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span><span class="hljs-ln-line">    &lt;div [@.disabled]=&quot;isDisabled&quot;&gt;</span><span class="hljs-ln-line">      &lt;div [@childAnimation]=&quot;exp&quot;&gt;&lt;/div&gt;</span><span class="hljs-ln-line">    &lt;/div&gt;</span><span class="hljs-ln-line">  `</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">animations</span>: [</span><span class="hljs-ln-line">    <span class="hljs-title function_">trigger</span>(<span class="hljs-string">&quot;childAnimation&quot;</span>, [</span><span class="hljs-ln-line">      <span class="hljs-comment">// ...</span></span><span class="hljs-ln-line">    ])</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</span><span class="hljs-ln-line">  isDisabled = <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">  exp = <span class="hljs-string">&#x27;...&#x27;</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p>When <code>@.disabled</code> is true, it prevents the <code>@childAnimation</code> trigger from animating,
+along with any inner animations.</p>
+<h3>Disable animations application-wide</h3>
+<p>When an area of the template is set to have animations disabled,
+<strong>all</strong> inner components have their animations disabled as well.
+This means that you can disable all animations for an app
+by placing a host binding set on <code>@.disabled</code> on the topmost Angular component.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, <span class="hljs-title class_">HostBinding</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">&#x27;app-component&#x27;</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">&#x27;app.component.html&#x27;</span>,</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</span><span class="hljs-ln-line">  <span class="hljs-meta">@HostBinding</span>(<span class="hljs-string">&#x27;@.disabled&#x27;</span>)</span><span class="hljs-ln-line">  <span class="hljs-keyword">public</span> animationsDisabled = <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <h3>Overriding disablement of inner animations</h3>
+<p>Despite inner animations being disabled, a parent animation can <code>query()</code>
+for inner elements located in disabled areas of the template and still animate
+them if needed. This is also the case for when a sub animation is
+queried by a parent and then later animated using <code>animateChild()</code>.</p>
+<h3>Detecting when an animation is disabled</h3>
+<p>If a region of the DOM (or the entire application) has its animations disabled, the animation
+trigger callbacks still fire, but for zero seconds. When the callback fires, it provides
+an instance of an <code>AnimationEvent</code>. If animations are disabled,
+the <code>.disabled</code> flag on the event is true.</p>
+</div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>trigger</h3><div><code>AnimationTriggerMetadata</code></div></div><span></span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Creates a named animation trigger, containing a  list of <a href="api/animations/state"><code>state()</code></a>
+and <code>transition()</code> entries to be evaluated when the expression
+bound to the trigger changes.</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">name</span><code>string</code><div class="docs-parameter-description"><p>An identifying string.</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">definitions</span><code>AnimationMetadata[]</code><div class="docs-parameter-description"><p>An animation definition object, containing an array of
+<a href="api/animations/state"><code>state()</code></a> and <code>transition()</code> declarations.</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>AnimationTriggerMetadata</code></div></div></div></div></div></div></div>

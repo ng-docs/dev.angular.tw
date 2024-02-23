@@ -1,0 +1,80 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">導覽概述</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/12-enable-routing/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>對於大多數應用程式，會遇到應用程式需要多於一個頁面的情況。當這情況不可避免地發生時，路由就成為使用者效能故事的重要元素。</p>
+<p>在這個活動中，您將學習如何設定和配置您的應用程式以使用 Angular Router。</p>
+<hr>
+
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-approutets-">建立 app.route.ts 檔案</h3>
+  <a href="#-approutets-" class="docs-anchor" tabindex="-1" aria-label="Link to 建立 app.route.ts 檔案"></a>
+  
+      <p>在 <code>app.routes.ts</code> 內，做出以下變更：</p>
+
+    <ol class="docs-ordered-list">
+      <li>從 <code>@angular/router</code> 套件匯入 <code>Routes</code>。</li>
+<li>匯出一個名為 <code>routes</code> 的常數，類型為 <code>Routes</code>，將 <code>[]</code> 指定為值。</li>
+
+    </ol>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Routes</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [];</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">將路由新增至提供者</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 將路由新增至提供者"></a>
+  
+      <p>在 <code>app.config.ts</code> 中，以下列步驟將應用程式設定為 Angular Router：</p>
+
+    <ol class="docs-ordered-list">
+      <li>從 <code>@angular/router</code> 匯入 <code>provideRouter</code> 函式。</li>
+<li>從 <code>./app.routes.ts</code> 匯入 <code>routes</code>。</li>
+<li>在 <code>providers</code> 陣列中呼叫 <code>provideRouter</code> 函式，並將 <code>routes</code> 傳入作為參數。</li>
+
+    </ol>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">ApplicationConfig</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> {provideRouter} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> {routes} <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.routes'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [<span class="hljs-title function_">provideRouter</span>(routes)],</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-routeroutlet">在元件中匯入 <code>RouterOutlet</code></h3>
+  <a href="#-routeroutlet" class="docs-anchor" tabindex="-1" aria-label="Link to 在元件中匯入 <code>RouterOutlet</code>"></a>
+  
+      <p>最後，為了確保您的應用程式已準備好使用 Angular Router，您需要告訴應用程式您預期路由器會在哪裡顯示所需的內容。使用 <code>@angular/router</code> 中的 <code>RouterOutlet</code> 指令來完成此操作。</p>
+<p>透過添加 <code>&lt;router-outlet /&gt;</code> 來更新 <code>AppComponent</code> 的範本`</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">RouterOutlet</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;nav&gt;</div><div class="hljs-ln-line">      &lt;a href="/"&gt;Home&lt;/a&gt;</div><div class="hljs-ln-line">      |</div><div class="hljs-ln-line">      &lt;a href="/user"&gt;User&lt;/a&gt;</div><div class="hljs-ln-line">    &lt;/nav&gt;</div><div class="hljs-ln-line highlighted">    &lt;router-outlet /&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">RouterOutlet</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p><span class="docs-emoji">您的應用程式現在已設定好使用 Angular Router。幹得好！ 🙌</span></p>
+<p>保持動力，學習為我們的應用程式定義路由的下一步。</p>

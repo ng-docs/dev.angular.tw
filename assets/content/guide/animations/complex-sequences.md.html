@@ -1,0 +1,250 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">複雜動畫序列</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/animations/complex-sequences.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>到目前為止，我們已經學習了單一 HTML 元素的簡單動畫。
+Angular 也讓您可以對協調的順序進行動畫處理，例如當整個網格或元素清單進入和離開頁面時。
+您可以選擇同時執行多個動畫，或按順序執行離散動畫，一個接一個。</p>
+<p>控制複雜動畫序列的函式為：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">功能</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>query()</code></td>
+<td align="left">尋找一個或多個內部 HTML 元素。</td>
+</tr>
+<tr>
+<td align="left"><code>stagger()</code></td>
+<td align="left">對多個元素的動畫套用層疊延遲。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/animations/group"><code>group()</code></a></td>
+<td align="left">並行執行多個動畫步驟。</td>
+</tr>
+<tr>
+<td align="left"><code>sequence()</code></td>
+<td align="left">依序執行動畫步驟。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="query-">query() 函式</h2>
+  <a href="#query-" class="docs-anchor" tabindex="-1" aria-label="Link to query() 函式"></a>
+  <p>最複雜的動畫仰賴 <code>query()</code> 函式來尋找子元素並對其套用動畫，以下是此類動畫的基本範例：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">範例</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>query()</code> 接著 <code>animate()</code></td>
+<td align="left">用於查詢簡單 HTML 元素，並直接套用動畫。</td>
+</tr>
+<tr>
+<td align="left"><code>query()</code> 接著 <code>animateChild()</code></td>
+<td align="left">用於查詢子元素，這些子元素本身套用了動畫的元資料，並觸發此動畫（否則會被當前/父元素的動畫所阻擋）。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p><code>query()</code> 的第一個參數是一個 <a href="https://developer.mozilla.org/docs/Web/CSS/CSS_Selectors" target="_blank">css selector</a> 字串，它也可以包含以下 Angular 特有的標記：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">令牌</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>:enter</code> <br /> <code>:leave</code></td>
+<td align="left">用於進入/離開元素。</td>
+</tr>
+<tr>
+<td align="left"><code>:animating</code></td>
+<td align="left">用於目前正在動畫化的元素。</td>
+</tr>
+<tr>
+<td align="left"><code>@*</code> <br /> <code>@triggerName</code></td>
+<td align="left">用於具有任何—或特定—觸發器的元素。</td>
+</tr>
+<tr>
+<td align="left"><code>:self</code></td>
+<td align="left">動畫化元素本身。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-callout docs-callout-helpful">
+      <h3>進入和離開元素</h3>
+      <p>並不是所有子元素都被視為進入/離開；這有時可能違反直覺且令人困惑。請參閱 <a href="api/animations/query#entering-and-leaving-elements">query api 文件</a> 以了解更多資訊。</p>
+<p>您還可以在動畫範例中看到此說明 (在動畫 <a href="guide/animations#about-this-guide">介紹區段</a> 中介紹) 的查詢標籤下。</p>
+
+    </div>
+    
+  <h2 id="-query--stagger-">使用 query() 和 stagger() 函式動畫多個元素</h2>
+  <a href="#-query--stagger-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 query() 和 stagger() 函式動畫多個元素"></a>
+  <p>在透過 <code>query()</code> 查詢子元素後，<code>stagger()</code> 函式可讓您定義每個查詢項目之間的定時間隔，並以延遲方式為元素添加動畫效果。</p>
+<p>以下範例示範如何使用 <code>query()</code> 和 <code>stagger()</code> 函式，以動畫方式加入清單 (英雄) 並逐一顯示，並以些微延遲，由上至下。</p>
+
+  <ul class="docs-list">
+    <li><p>使用 <code>query()</code> 來尋找符合特定標準的進入頁面的元素</p>
+</li>
+<li><p>對於這些元素的每個元素，使用 <code>style()</code> 來設定元素的相同初始樣式。
+  使其透明並使用 <code>transform</code> 將其移出位置，以便它可以滑入到位。</p>
+</li>
+<li><p>使用 <code>stagger()</code> 將每個動畫延遲 30 毫秒</p>
+</li>
+<li><p>使用自定義的緩和曲線在螢幕上為每個元素動畫化 0.5 秒，同時淡入並取消轉換</p>
+</li>
+
+  </ul>
+  <div class="docs-code" path="adev/src/content/examples/animations/src/app/hero-list-page.component.ts" visiblelines="12,13,14,15,16,17,18,19,20,21,22,23" header="src/app/hero-list-page.component.ts">
+    <div class="docs-code-header"><h3>src/app/hero-list-page.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component, HostBinding, OnInit } from <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { trigger, transition, animate, style, query, stagger } from <span class="hljs-string">'@angular/animations'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { HEROES } from <span class="hljs-string">'./mock-heroes'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Hero } from <span class="hljs-string">'./hero'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { NgFor } from <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component({</span></div><div class="hljs-ln-line">  standalone: true,</div><div class="hljs-ln-line">  imports: [NgFor],</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-hero-list-page'</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'hero-list-page.component.html'</span>,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'hero-list-page.component.css'</span>],</div><div class="hljs-ln-line">  animations: [</div><div class="hljs-ln-line">    trigger(<span class="hljs-string">'pageAnimations'</span>, [</div><div class="hljs-ln-line">      transition(<span class="hljs-string">':enter'</span>, [</div><div class="hljs-ln-line">        query(<span class="hljs-string">'.hero'</span>, [</div><div class="hljs-ln-line">          style({opacity: 0, transform: <span class="hljs-string">'translateY(-100px)'</span>}),</div><div class="hljs-ln-line">          stagger(30, [</div><div class="hljs-ln-line">            animate(<span class="hljs-string">'500ms cubic-bezier(0.35, 0, 0.25, 1)'</span>,</div><div class="hljs-ln-line">            style({ opacity: 1, transform: <span class="hljs-string">'none'</span> }))</div><div class="hljs-ln-line">          ])</div><div class="hljs-ln-line">        ])</div><div class="hljs-ln-line">      ])</div><div class="hljs-ln-line">    ]),</div><div class="hljs-ln-line">    trigger(<span class="hljs-string">'filterAnimation'</span>, [</div><div class="hljs-ln-line">      transition(<span class="hljs-string">':enter, * =&gt; 0, * =&gt; -1'</span>, []),</div><div class="hljs-ln-line">      transition(<span class="hljs-string">':increment'</span>, [</div><div class="hljs-ln-line">        query(<span class="hljs-string">':enter'</span>, [</div><div class="hljs-ln-line">          style({ opacity: 0, width: 0 }),</div><div class="hljs-ln-line">          stagger(50, [</div><div class="hljs-ln-line">            animate(<span class="hljs-string">'300ms ease-out'</span>, style({ opacity: 1, width: <span class="hljs-string">'*'</span> })),</div><div class="hljs-ln-line">          ]),</div><div class="hljs-ln-line">        ], { optional: true })</div><div class="hljs-ln-line">      ]),</div><div class="hljs-ln-line">      transition(<span class="hljs-string">':decrement'</span>, [</div><div class="hljs-ln-line">        query(<span class="hljs-string">':leave'</span>, [</div><div class="hljs-ln-line">          stagger(50, [</div><div class="hljs-ln-line">            animate(<span class="hljs-string">'300ms ease-out'</span>, style({ opacity: 0, width: 0 })),</div><div class="hljs-ln-line">          ]),</div><div class="hljs-ln-line">        ])</div><div class="hljs-ln-line">      ]),</div><div class="hljs-ln-line">    ]),</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroListPageComponent</span> <span class="hljs-title">implements</span> <span class="hljs-title">OnInit</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@HostBinding(<span class="hljs-string">'@pageAnimations'</span>)</span></div><div class="hljs-ln-line">  <span class="hljs-keyword">public</span> animatePage = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  heroesTotal = -<span class="hljs-number">1</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">get</span> heroes() { <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._heroes; }</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> _heroes: Hero[] = [];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  ngOnInit() {</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>._heroes = HEROES;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  updateCriteria(criteria: string) {</div><div class="hljs-ln-line">    criteria = criteria ? criteria.trim() : <span class="hljs-string">''</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>._heroes = HEROES.filter(hero =&gt; hero.name.toLowerCase().includes(criteria.toLowerCase()));</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> newTotal = <span class="hljs-keyword">this</span>.heroes.length;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.heroesTotal !== newTotal) {</div><div class="hljs-ln-line">      <span class="hljs-keyword">this</span>.heroesTotal = newTotal;</div><div class="hljs-ln-line">    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!criteria) {</div><div class="hljs-ln-line">      <span class="hljs-keyword">this</span>.heroesTotal = -<span class="hljs-number">1</span>;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h2 id="-group-">平行動畫使用 group() 函式</h2>
+  <a href="#-group-" class="docs-anchor" tabindex="-1" aria-label="Link to 平行動畫使用 group() 函式"></a>
+  <p>你已經看過如何在每個連續動畫之間加入延遲。
+但你可能也想設定同時發生的動畫。
+例如，你可能想對同一個元素的兩個 CSS 屬性做動畫，但對每個屬性使用不同的 <code>easing</code> 函式。
+針對這種情況，你可以使用動畫 <a href="api/animations/group"><code>group()</code></a> 函式。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <a href="api/animations/group"><code>group()</code></a> 函式用於將動畫 <em>步驟</em> 分組，而不是動畫元素。</p>
+
+    </div>
+    <p>以下範例在 <code>:enter</code> 和 <code>:leave</code> 中同時使用 <a href="api/animations/group"><code>group()</code></a>，以取得兩種不同的計時設定，因此可以同時對同一個元素套用兩個獨立的動畫。</p>
+<div class="docs-code" path="adev/src/content/examples/animations/src/app/hero-list-groups.component.ts" visiblelines="35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65" header="src/app/hero-list-groups.component.ts (excerpt)">
+    <div class="docs-code-header"><h3>src/app/hero-list-groups.component.ts (excerpt)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {</div><div class="hljs-ln-line">  Component,</div><div class="hljs-ln-line">  Input,</div><div class="hljs-ln-line">  Output,</div><div class="hljs-ln-line">  EventEmitter</div><div class="hljs-ln-line">} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {</div><div class="hljs-ln-line">  trigger,</div><div class="hljs-ln-line">  state,</div><div class="hljs-ln-line">  style,</div><div class="hljs-ln-line">  animate,</div><div class="hljs-ln-line">  transition,</div><div class="hljs-ln-line">  group</div><div class="hljs-ln-line">} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/animations'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Hero } <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { NgFor } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component(<span class="hljs-params">{</span></span></div><div class="hljs-ln-line">  standalone: true,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-hero-list-groups'</span>,</div><div class="hljs-ln-line">  template: `</div><div class="hljs-ln-line">    &lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"heroes"</span>&gt;</div><div class="hljs-ln-line">      @<span class="hljs-keyword">for</span> (<span class="hljs-params">hero of heroes; track hero</span>) {</div><div class="hljs-ln-line">        &lt;li [@flyInOut]=<span class="hljs-string">"'in'"</span>&gt;</div><div class="hljs-ln-line">          &lt;button <span class="hljs-keyword">class</span>=<span class="hljs-string">"inner"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-params">click</span>)=<span class="hljs-string">"removeHero(hero.id)"</span>&gt;</div><div class="hljs-ln-line">            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"badge"</span>&gt;{{ hero.<span class="hljs-built_in">id</span> }}&lt;/span&gt;</div><div class="hljs-ln-line">            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"name"</span>&gt;{{ hero.name }}&lt;/span&gt;</div><div class="hljs-ln-line">          &lt;/button&gt;</div><div class="hljs-ln-line">        &lt;/li&gt;</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    &lt;/ul&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./hero-list-page.component.css'</span>],</div><div class="hljs-ln-line">  imports: [NgFor],</div><div class="hljs-ln-line">  animations: [</div><div class="hljs-ln-line">    trigger(<span class="hljs-params"><span class="hljs-string">'flyInOut'</span>, [</span></div><div class="hljs-ln-line">      state(<span class="hljs-params"><span class="hljs-string">'in'</span>, style(<span class="hljs-params">{</span></span></div><div class="hljs-ln-line">        width: <span class="hljs-string">'*'</span>,</div><div class="hljs-ln-line">        transform: <span class="hljs-string">'translateX(0)'</span>, opacity: <span class="hljs-number">1</span></div><div class="hljs-ln-line">      })),</div><div class="hljs-ln-line">      transition(<span class="hljs-params"><span class="hljs-string">':enter'</span>, [</span></div><div class="hljs-ln-line">        style(<span class="hljs-params">{ width: <span class="hljs-number">10</span>, transform: <span class="hljs-string">'translateX(50px)'</span>, opacity: <span class="hljs-number">0</span> }</span>),</div><div class="hljs-ln-line">        group(<span class="hljs-params">[</span></div><div class="hljs-ln-line">          animate(<span class="hljs-params"><span class="hljs-string">'0.3s 0.1s ease'</span>, style(<span class="hljs-params">{</span></span></div><div class="hljs-ln-line">            transform: <span class="hljs-string">'translateX(0)'</span>,</div><div class="hljs-ln-line">            width: <span class="hljs-string">'*'</span></div><div class="hljs-ln-line">          })),</div><div class="hljs-ln-line">          animate(<span class="hljs-params"><span class="hljs-string">'0.3s ease'</span>, style(<span class="hljs-params">{</span></span></div><div class="hljs-ln-line">            opacity: <span class="hljs-number">1</span></div><div class="hljs-ln-line">          }))</div><div class="hljs-ln-line">        ])</div><div class="hljs-ln-line">      ]),</div><div class="hljs-ln-line">      transition(<span class="hljs-params"><span class="hljs-string">':leave'</span>, [</span></div><div class="hljs-ln-line">        group(<span class="hljs-params">[</span></div><div class="hljs-ln-line">          animate(<span class="hljs-params"><span class="hljs-string">'0.3s ease'</span>, style(<span class="hljs-params">{</span></span></div><div class="hljs-ln-line">            transform: <span class="hljs-string">'translateX(50px)'</span>,</div><div class="hljs-ln-line">            width: <span class="hljs-number">10</span></div><div class="hljs-ln-line">          })),</div><div class="hljs-ln-line">          animate(<span class="hljs-params"><span class="hljs-string">'0.3s 0.2s ease'</span>, style(<span class="hljs-params">{</span></span></div><div class="hljs-ln-line">            opacity: <span class="hljs-number">0</span></div><div class="hljs-ln-line">          }))</div><div class="hljs-ln-line">        ])</div><div class="hljs-ln-line">      ])</div><div class="hljs-ln-line">    ])</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroListGroupsComponent</span> {</div><div class="hljs-ln-line"><span class="hljs-meta">   @Input() heroes: Hero[] = [];</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">   @Output() remove = new EventEmitter&lt;number&gt;();</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">   removeHero(<span class="hljs-built_in">id</span>: number) {</div><div class="hljs-ln-line">     this.remove.emit(<span class="hljs-built_in">id</span>);</div><div class="hljs-ln-line">   }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h2 id="-vs-">順序 vs. 平行動畫</h2>
+  <a href="#-vs-" class="docs-anchor" tabindex="-1" aria-label="Link to 順序 vs. 平行動畫"></a>
+  <p>複雜的動畫可以同時執行很多事情。
+但如果你想要建立一個涉及多個動畫、一個接一個發生的動畫，該怎麼辦？先前你使用 <a href="api/animations/group"><code>group()</code></a> 在同一時間執行多個動畫，平行執行。</p>
+<p>另一個名為 <code>sequence()</code> 的函式可讓您依序執行這些動畫。
+在 <code>sequence()</code> 內，動畫步驟包含 <code>style()</code> 或 <code>animate()</code> 函式呼叫。</p>
+
+  <ul class="docs-list">
+    <li>使用 <code>style()</code> 立即套用提供的造型資料。</li>
+<li>使用 <code>animate()</code> 在給定的時間間隔內套用造型資料。</li>
+
+  </ul>
+  
+  <h2 id="">動畫範例過濾</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 動畫範例過濾"></a>
+  <p>請在範例頁面中看看另一個動畫。
+在「Filter/Stagger」標籤下，在 <strong>搜尋英雄</strong> 文字方塊中輸入一些文字，例如 <code>Magnet</code> 或 <code>tornado</code>。</p>
+<p>當您輸入時，篩選器以即時方式運作。
+當您輸入每個新字母時，元素會離開頁面，而篩選器會逐漸變得更嚴格。
+當您刪除篩選框中的每個字母時，英雄列表會逐漸重新進入頁面。</p>
+<p>HTML 範本包含一個稱為 <code>filterAnimation</code> 的觸發器。</p>
+<div class="docs-code" path="adev/src/content/examples/animations/src/app/hero-list-page.component.html" visiblelines="2,3,4,5,6,7,8,9,10,11,12,13,14,15,16" header="src/app/hero-list-page.component.html">
+    <div class="docs-code-header"><h3>src/app/hero-list-page.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Filter/Stagger<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"search"</span>&gt;</span>Search heroes: <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"search"</span> #<span class="hljs-attr">criteria</span></span></div><div class="hljs-ln-line">       (<span class="hljs-attr">input</span>)=<span class="hljs-string">"updateCriteria(criteria.value)"</span></div><div class="hljs-ln-line">       <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Search heroes"</span>&gt;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heroes"</span> [@<span class="hljs-attr">filterAnimation</span>]=<span class="hljs-string">"heroesTotal"</span>&gt;</span></div><div class="hljs-ln-line">  @for (hero of heroes; track hero) {</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"hero"</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"inner"</span>&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge"</span>&gt;</span><span class="hljs-template-variable">{{ <span class="hljs-name">hero.id</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"name"</span>&gt;</span><span class="hljs-template-variable">{{ <span class="hljs-name">hero.name</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>元件裝飾器中的 <code>filterAnimation</code> 包含三個轉換。</p>
+<div class="docs-code" path="adev/src/content/examples/animations/src/app/hero-list-page.component.ts" visiblelines="6,12,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69" header="src/app/hero-list-page.component.ts">
+    <div class="docs-code-header"><h3>src/app/hero-list-page.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component, HostBinding, OnInit } from <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { trigger, transition, animate, style, query, stagger } from <span class="hljs-string">'@angular/animations'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { HEROES } from <span class="hljs-string">'./mock-heroes'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Hero } from <span class="hljs-string">'./hero'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { NgFor } from <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component({</span></div><div class="hljs-ln-line">  standalone: true,</div><div class="hljs-ln-line">  imports: [NgFor],</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-hero-list-page'</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'hero-list-page.component.html'</span>,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'hero-list-page.component.css'</span>],</div><div class="hljs-ln-line">  animations: [</div><div class="hljs-ln-line">    trigger(<span class="hljs-string">'pageAnimations'</span>, [</div><div class="hljs-ln-line">      transition(<span class="hljs-string">':enter'</span>, [</div><div class="hljs-ln-line">        query(<span class="hljs-string">'.hero'</span>, [</div><div class="hljs-ln-line">          style({opacity: 0, transform: <span class="hljs-string">'translateY(-100px)'</span>}),</div><div class="hljs-ln-line">          stagger(30, [</div><div class="hljs-ln-line">            animate(<span class="hljs-string">'500ms cubic-bezier(0.35, 0, 0.25, 1)'</span>,</div><div class="hljs-ln-line">            style({ opacity: 1, transform: <span class="hljs-string">'none'</span> }))</div><div class="hljs-ln-line">          ])</div><div class="hljs-ln-line">        ])</div><div class="hljs-ln-line">      ])</div><div class="hljs-ln-line">    ]),</div><div class="hljs-ln-line">    trigger(<span class="hljs-string">'filterAnimation'</span>, [</div><div class="hljs-ln-line">      transition(<span class="hljs-string">':enter, * =&gt; 0, * =&gt; -1'</span>, []),</div><div class="hljs-ln-line">      transition(<span class="hljs-string">':increment'</span>, [</div><div class="hljs-ln-line">        query(<span class="hljs-string">':enter'</span>, [</div><div class="hljs-ln-line">          style({ opacity: 0, width: 0 }),</div><div class="hljs-ln-line">          stagger(50, [</div><div class="hljs-ln-line">            animate(<span class="hljs-string">'300ms ease-out'</span>, style({ opacity: 1, width: <span class="hljs-string">'*'</span> })),</div><div class="hljs-ln-line">          ]),</div><div class="hljs-ln-line">        ], { optional: true })</div><div class="hljs-ln-line">      ]),</div><div class="hljs-ln-line">      transition(<span class="hljs-string">':decrement'</span>, [</div><div class="hljs-ln-line">        query(<span class="hljs-string">':leave'</span>, [</div><div class="hljs-ln-line">          stagger(50, [</div><div class="hljs-ln-line">            animate(<span class="hljs-string">'300ms ease-out'</span>, style({ opacity: 0, width: 0 })),</div><div class="hljs-ln-line">          ]),</div><div class="hljs-ln-line">        ])</div><div class="hljs-ln-line">      ]),</div><div class="hljs-ln-line">    ]),</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroListPageComponent</span> <span class="hljs-title">implements</span> <span class="hljs-title">OnInit</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@HostBinding(<span class="hljs-string">'@pageAnimations'</span>)</span></div><div class="hljs-ln-line">  <span class="hljs-keyword">public</span> animatePage = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  heroesTotal = -<span class="hljs-number">1</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">get</span> heroes() { <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._heroes; }</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> _heroes: Hero[] = [];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  ngOnInit() {</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>._heroes = HEROES;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  updateCriteria(criteria: string) {</div><div class="hljs-ln-line">    criteria = criteria ? criteria.trim() : <span class="hljs-string">''</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>._heroes = HEROES.filter(hero =&gt; hero.name.toLowerCase().includes(criteria.toLowerCase()));</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> newTotal = <span class="hljs-keyword">this</span>.heroes.length;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.heroesTotal !== newTotal) {</div><div class="hljs-ln-line">      <span class="hljs-keyword">this</span>.heroesTotal = newTotal;</div><div class="hljs-ln-line">    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!criteria) {</div><div class="hljs-ln-line">      <span class="hljs-keyword">this</span>.heroesTotal = -<span class="hljs-number">1</span>;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>這個範例中的程式碼執行下列工作：</p>
+
+  <ul class="docs-list">
+    <li>當使用者首次開啟或導覽至此頁面時，略過動畫(過濾動畫會縮小已存在內容，因此它僅適用於已存在於 DOM 中的元素)</li>
+<li>依照搜尋輸入值過濾英雄</li>
+
+  </ul>
+  <p>針對每個變更：</p>
+
+  <ul class="docs-list">
+    <li><p>透過將元素的不透明度和寬度設為 0，來隱藏元素，同時讓它保留在 DOM 中</p>
+</li>
+<li><p>元素進入 DOM 時，以 300 毫秒的動畫顯示。
+  在動畫期間，元素假設其預設寬度和不透明度。</p>
+</li>
+<li><p>如果有多個元素進入或離開 DOM，則從頁面頂端開始，以 50 毫秒的延遲，交錯執行每個動畫</p>
+</li>
+
+  </ul>
+  
+  <h2 id="">重新排序清單的動畫項目</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 重新排序清單的動畫項目"></a>
+  <p>雖然 Angular 可以正確地為 <code>*ngFor</code> 清單項目執行動畫，但如果這些項目順序變更，它將無法執行動畫。
+這是因為它將無法追蹤哪個元素是哪個元素，導致動畫中斷。
+幫助 Angular 追蹤這些元素的唯一方法是將 <code>TrackByFunction</code> 指定給 <code>NgForOf</code> 指令。
+這可確保 Angular 始終知道哪個元素是哪個元素，因此可以隨時將正確的動畫套用至正確的元素。</p>
+<p>重要：
+如果您需要為 <code>*ngFor</code> 清單中的項目加入動畫，並且在執行期間有可能會變更這些項目的順序，請務必使用 <code>TrackByFunction</code>。</p>
+
+  <h2 id="">動畫和元件檢視封裝</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 動畫和元件檢視封裝"></a>
+  <p>Angular 動畫基於元件 DOM 結構，並不直接考慮 <a href="/guide/components/styling#style-scoping">檢視封裝</a>，這表示使用 <code>ViewEncapsulation.Emulated</code> 的元件行為完全如同使用 <code>ViewEncapsulation.None</code> 一樣（我們稍後會討論 <code>ViewEncapsulation.ShadowDom</code> 行為不同）。</p>
+<p>例如，如果在使用模擬檢視封裝的元件樹最上層套用 <code>query()</code> 函式（您會在動畫指南的其餘部分看到更多內容），此查詢就能識別（並因此動畫化）樹的任何深度上的 DOM 元素。</p>
+<p>另一方面，<code>ViewEncapsulation.ShadowDom</code> 透過將 DOM 元素「隱藏」在 <a href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot" target="_blank"><code>ShadowRoot</code></a> 元素內來改變元件的 DOM 結構。此類 DOM 操作確實會阻止某些動畫實作正常運作，因為它依賴簡單的 DOM 結構，而且不會考慮 <code>ShadowRoot</code> 元素。因此，建議避免將動畫套用到使用 ShadowDom 視圖封裝(ViewEncapsulation)的元件的視圖。</p>
+
+  <h2 id="">動畫序列摘要</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 動畫序列摘要"></a>
+  <p>Angular 用於多個元素動畫的函式以 <code>query()</code> 開始，用於尋找內部元素；例如，收集 <code>&lt;div&gt;</code> 中的所有圖像。
+其餘函式 <code>stagger()</code>, <a href="api/animations/group"><code>group()</code></a> 和 <code>sequence()</code>，應用級聯或讓您控制多個動畫步驟的應用方式。</p>
+
+  <h2 id="-angular-">更多關於 Angular 動畫</h2>
+  <a href="#-angular-" class="docs-anchor" tabindex="-1" aria-label="Link to 更多關於 Angular 動畫"></a>
+  <p>您可能也有興趣：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="guide/animations">
+      Angular 動畫簡介
+    </a>
+    
+    <a class="docs-pill" href="guide/animations/transition-and-triggers">
+      轉場和觸發器
+    </a>
+    
+    <a class="docs-pill" href="guide/animations/reusable-animations">
+      可重複使用的動畫
+    </a>
+    
+    <a class="docs-pill" href="guide/animations/route-animations">
+      路由轉場動畫
+    </a>
+    
+
+    </nav>
+    

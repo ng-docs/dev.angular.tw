@@ -1,0 +1,72 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">樣式元件</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/styling.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>提示：本指南假設您已經閱讀過 <a href="essentials">精華指南</a>。如果您是 Angular 新手，請先閱讀該指南。</p>
+<p>元件可以選擇包含套用至該元件的 DOM 的 CSS 樣式：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'profile-photo'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;img src="profile-photo.jpg" alt="Your profile photo"&gt;`</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">styles</span>: <span class="hljs-string">` img { border-radius: 50%; } `</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfilePhoto</span> { }</div></code>
+    </pre>
+  </div><p>您可以選擇在不同的檔案中撰寫您的樣式：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'profile-photo'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'profile-photo.html'</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">styleUrl</span>: <span class="hljs-string">'profile-photo.css'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfilePhoto</span> { }</div></code>
+    </pre>
+  </div><p>當 Angular 編譯您的元件時，這些樣式會與元件的 JavaScript 輸出一起發出。這表示元件樣式參與 JavaScript 模組系統。當您呈現 Angular 元件時，即使是延遲載入元件，框架也會自動包含其關聯的樣式。</p>
+<p>Angular 與任何輸出 CSS 的工具均可搭配使用，
+包括 <a href="https://sass-lang.com" target="_blank">Sass</a>、<a href="https://lesscss.org" target="_blank">less</a>
+和 <a href="https://stylus-lang.com" target="_blank">stylus</a>。</p>
+
+  <h2 id="">風格範圍</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 風格範圍"></a>
+  <p>每個元件都有 <strong>檢視封裝</strong> 設定，用於決定框架如何設定元件樣式的範圍。檢視封裝模式有三個：<code>Emulated</code>、<code>ShadowDom</code> 和 <code>None</code>。你可以在 <code>@Component</code> 裝飾器中指定模式：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">encapsulation</span>: <span class="hljs-title class_">ViewEncapsulation</span>.<span class="hljs-property">None</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfilePhoto</span> { }</div></code>
+    </pre>
+  </div>
+  <h3 id="viewencapsulationemulated">ViewEncapsulation.Emulated</h3>
+  <a href="#viewencapsulationemulated" class="docs-anchor" tabindex="-1" aria-label="Link to ViewEncapsulation.Emulated"></a>
+  <p>預設情況下，Angular 使用模擬封裝，以便元件的樣式僅套用至在該元件範本中定義的元素。在此模式中，框架會為每個元件實例產生一個唯一的 HTML 屬性，將該屬性新增至元件範本中的元素，並將該屬性插入至在您的元件樣式中定義的 CSS 選擇器。</p>
+<p>此模式可確保元件的樣式不會外洩並影響其他元件。然而，在元件外部定義的全域樣式仍可能影響具有仿冒封裝的元件內的元素。</p>
+<p>在模擬模式中，Angular 支援
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:host" target="_blank"><code>:host</code></a>
+和 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:host-context" target="_blank"><code>:host-context</code></a> 偽類別，而不使用 <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM" target="_blank">Shadow DOM</a>。
+在編譯期間，框架會將這些偽類別轉換為屬性。Angular 的模擬封裝模式不支援任何其他與 Shadow DOM 相關的偽類別，例如 <code>::shadow</code> 或 <code>::part</code>。</p>
+
+  <h4 id="ng-deep"><code>::ng-deep</code></h4>
+  <a href="#ng-deep" class="docs-anchor" tabindex="-1" aria-label="Link to <code>::ng-deep</code>"></a>
+  <p>Angular 模擬封裝模式支援自訂偽類別 <code>:ng-deep</code>。將此偽類別套用到 CSS 規則會停用該規則的封裝，有效地將其轉換為全域樣式。<strong>Angular 團隊強烈不建議新使用 <code>::ng-deep</code></strong>。這些 API 僅供向後相容性使用。</p>
+
+  <h3 id="viewencapsulationshadowdom">ViewEncapsulation.ShadowDom</h3>
+  <a href="#viewencapsulationshadowdom" class="docs-anchor" tabindex="-1" aria-label="Link to ViewEncapsulation.ShadowDom"></a>
+  <p>此模式會透過使用 <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM" target="_blank">Web 標準 Shadow DOM API</a> 在元件內取用樣式。在啟用此模式時，Angular 會將 shadow root 附加到元件的主機元素，並將元件的範本與樣式呈現到對應的 shadow tree 中。</p>
+<p>此模式嚴格保證 <em>僅</em> 該元件的樣式套用至元件範本中的元素。全域樣式無法影響陰影樹中的元素，而陰影樹內的樣式也無法影響該陰影樹外的元素。</p>
+<p>啟用 <code>ShadowDom</code> 封裝後，影響的範圍不僅止於樣式範圍。在陰影樹中渲染元件會影響事件傳播、與 <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots" target="_blank"><code>&lt;slot&gt;</code> API</a> 的互動，以及瀏覽器開發人員工具顯示元素的方式。在應用程式中啟用此選項之前，務必先了解使用 Shadow DOM 的全部含義。</p>
+
+  <h3 id="viewencapsulationnone">ViewEncapsulation.None</h3>
+  <a href="#viewencapsulationnone" class="docs-anchor" tabindex="-1" aria-label="Link to ViewEncapsulation.None"></a>
+  <p>此模式停用元件的所有樣式封裝。與元件相關的任何樣式均會表現為全域樣式。</p>
+
+  <h2 id="">在範本中定義樣式</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 在範本中定義樣式"></a>
+  <p>您可以在元件的範本中使用 <code>&lt;style&gt;</code> 元素來定義額外的樣式。
+元件的檢視封裝模式適用于以此方式定義的樣式。</p>
+<p>Angular 不支援在 style 元素內繫結。</p>
+
+  <h2 id="">參閱外部樣式檔案</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 參閱外部樣式檔案"></a>
+  <p>元件範本可以使用 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link" target="_blank"><code>&lt;link&gt;</code> 元素</a> 來
+參照 CSS 檔案。此外，您的 CSS 可以使用 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@import" target="_blank"><code>@import</code> at 規則</a> 來參照
+CSS 檔案。Angular 將這些參照視為 <em>外部</em> 樣式。外部樣式不受模擬檢視封裝的影響。</p>

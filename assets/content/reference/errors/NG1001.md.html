@@ -1,0 +1,31 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">參數非文字</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG1001.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>為了讓 Angular 編譯器中的元數據萃取速度更快，以下裝飾器 <code>@NgModule</code>、 <code>@Pipe</code>、<code>@Component</code>、<code>@Directive</code> 和 <code>@Injectable</code> 只接受物件字面量(object literal)作為參數。</p>
+<p>這是一個 <a href="https://github.com/angular/angular/issues/30840#issuecomment-498869540" target="_blank">Ivy 中的故意變更</a>，它對裝飾器的參數要求比 View Engine 更嚴格。
+Ivy 採用這種方法是因為它會編譯裝飾器，將表達式移至類別輸出中的其他位置。</p>
+
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>移動所有宣告：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> moduleDefinition = {…}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>(moduleDefinition)</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> {</div><div class="hljs-ln-line">    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>into the decorator:</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({…})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> {</div><div class="hljs-ln-line">    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

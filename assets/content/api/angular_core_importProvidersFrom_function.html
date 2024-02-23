@@ -1,0 +1,33 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>importProvidersFrom</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div></div><p class="docs-reference-description"><p>Collects providers from all NgModules and standalone components, including transitively imported
+ones.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line ">importProvidersFrom(</div><div class="hljs-ln-line ">  ...<span class="hljs-attr">sources</span>: <span class="hljs-title class_">ImportProvidersSource</span>[]</div><div class="hljs-ln-line ">): <span class="hljs-title class_">EnvironmentProviders</span>;</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>Collects providers from all NgModules and standalone components, including transitively imported
+ones.</p>
+<p>Providers extracted via <code>importProvidersFrom</code> are only usable in an application injector or
+another environment injector (such as a route injector). They should not be used in component
+providers.</p>
+<p>More information about standalone components can be found in <a href="guide/components/importing">this
+guide</a>.</p></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>The results of the <code>importProvidersFrom</code> call can be used in the <code>bootstrapApplication</code> call:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">await</span> <span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">RootComponent</span>, {</span><span class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">    importProvidersFrom(<span class="hljs-title class_">NgModuleOne</span>, <span class="hljs-title class_">NgModuleTwo</span>)</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">});</span>
+          </code>
+        </pre>
+      </div>
+    <p>You can also use the <code>importProvidersFrom</code> results in the <code>providers</code> field of a route, when a
+standalone component is used:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">ROUTES</span>: <span class="hljs-title class_">Route</span>[] = [</span><span class="hljs-ln-line">  {</span><span class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;foo&#x27;</span>,</span><span class="hljs-ln-line">    <span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">      importProvidersFrom(<span class="hljs-title class_">NgModuleOne</span>, <span class="hljs-title class_">NgModuleTwo</span>)</span><span class="hljs-ln-line">    ],</span><span class="hljs-ln-line">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">YourStandaloneComponent</span></span><span class="hljs-ln-line">  }</span><span class="hljs-ln-line">];</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>importProvidersFrom</h3><div><code>EnvironmentProviders</code></div></div><span></span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Collects providers from all NgModules and standalone components, including transitively imported
+ones.</p>
+<p>Providers extracted via <code>importProvidersFrom</code> are only usable in an application injector or
+another environment injector (such as a route injector). They should not be used in component
+providers.</p>
+<p>More information about standalone components can be found in <a href="guide/components/importing">this
+guide</a>.</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">sources</span><code>ImportProvidersSource[]</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>EnvironmentProviders</code></div></div></div></div></div></div></div>

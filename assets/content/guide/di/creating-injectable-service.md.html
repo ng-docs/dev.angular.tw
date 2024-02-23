@@ -1,0 +1,203 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">建立可注入服務</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/di/creating-injectable-service.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>服務是廣泛的類別，包含應用程式所需的任何值、函式或功能。
+服務通常是具有狹隘、定義完善的目的的類別。
+元件是可使用 DI 的類別類型之一。</p>
+<p>Angular 將元件與服務區分開來，以提高模組化和可重複使用性。
+藉由將元件的檢視相關功能與其他類型的處理分開，您可以讓您的元件類別精簡且有效率。</p>
+<p>理想情況下，元件的工作是啟用使用者體驗，僅此而已。
+元件應該提供資料繫結的屬性和方法，在檢視（由範本呈現）和應用程式邏輯（通常包含某些模型概念）之間進行協調。</p>
+<p>元件可以將某些任務委派給服務，例如從伺服器擷取資料、驗證使用者輸入或直接記錄到主控台。
+透過在可注入服務類別中定義此類處理任務，您可以讓任何元件都能使用這些任務。
+您也可以透過在不同情況下配置相同類型服務的不同提供者，讓您的應用程式更具適應性。</p>
+<p>Angular 沒有強制這些原則。
+Angular 讓您可以輕鬆地將應用程式邏輯分解成服務，並透過 DI 讓這些服務可供元件使用，進而幫助您遵循這些原則。</p>
+
+  <h2 id="">服務範例</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 服務範例"></a>
+  <p>以下是一個服務類別的範例，會記錄到瀏覽器主控台。</p>
+<div class="docs-code" header="src/app/logger.service.ts (class)">
+    <div class="docs-code-header"><h3>src/app/logger.service.ts (class)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Logger</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">log</span>(<span class="hljs-params">msg: <span class="hljs-built_in">unknown</span></span>) { <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(msg); }</div><div class="hljs-ln-line">  <span class="hljs-title function_">error</span>(<span class="hljs-params">msg: <span class="hljs-built_in">unknown</span></span>) { <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(msg); }</div><div class="hljs-ln-line">  <span class="hljs-title function_">warn</span>(<span class="hljs-params">msg: <span class="hljs-built_in">unknown</span></span>) { <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(msg); }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>服務可以依賴其他服務。
+例如，以下是一個依賴 <code>Logger</code> 服務的 <code>HeroService</code>，它也使用 <code>BackendService</code> 來取得英雄。
+而那個服務可能會依賴 <code>HttpClient</code> 服務來非同步地從伺服器取得英雄。</p>
+<div class="docs-code" header="src/app/hero.service.ts (class)">
+    <div class="docs-code-header"><h3>src/app/hero.service.ts (class)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> <span class="hljs-attr">heroes</span>: <span class="hljs-title class_">Hero</span>[] = [];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line highlighted">    <span class="hljs-keyword">private</span> backend: BackendService,</div><div class="hljs-ln-line highlighted">    <span class="hljs-keyword">private</span> logger: Logger) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">async</span> <span class="hljs-title function_">getHeroes</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Fetch</span></div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span> = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">backend</span>.<span class="hljs-title function_">getAll</span>(<span class="hljs-title class_">Hero</span>);</div><div class="hljs-ln-line">    <span class="hljs-comment">// Log</span></div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">logger</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Fetched <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.heroes.length}</span> heroes.`</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">建立可注入服務</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 建立可注入服務"></a>
+  <p>Angular CLI 提供一個指令來建立新的服務。在以下範例中，您將一個新的服務新增到您的應用程式中，該應用程式早先使用 <code>ng new</code> 指令建立。</p>
+<p>要產生一個新的 <code>HeroService</code> 類別在 <code>src/app/heroes</code> 資料夾中，請依照以下步驟：</p>
+
+    <ol class="docs-ordered-list">
+      <li>執行此 <a href="/tools/cli">Angular CLI</a> 指令：</li>
+
+    </ol>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate service heroes/hero</div></code>
+    </pre>
+  </div><p>這個命令會建立以下預設的 <code>HeroService</code>。</p>
+<div class="docs-code" header="src/app/heroes/hero.service.ts (CLI-generated)">
+    <div class="docs-code-header"><h3>src/app/heroes/hero.service.ts (CLI-generated)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {}</div></code>
+    </pre>
+  </div><p><code>@Injectable()</code> 裝飾器指定 Angular 可以在此 DI 系統中使用此類別。
+<code>providedIn: &#39;root&#39;</code> 元數據表示 <code>HeroService</code> 在整個應用程式中提供。</p>
+<p>加入一個 <code>getHeroes()</code> 方法，該方法會回傳 <code>mock.heroes.ts</code> 中的英雄，以取得英雄模擬資料：</p>
+<div class="docs-code" header="src/app/heroes/hero.service.ts">
+    <div class="docs-code-header"><h3>src/app/heroes/hero.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-variable constant_">HEROES</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./mock-heroes'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">// declares that this service should be created</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// by the root application injector.</span></div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">getHeroes</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable constant_">HEROES</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>為了清晰度和可維護性，建議您在獨立檔案中定義元件和服務。</p>
+
+  <h2 id="">服務注入</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 服務注入"></a>
+  
+  <h2 id="-1">服務注入</h2>
+  <a href="#-1" class="docs-anchor" tabindex="-1" aria-label="Link to 服務注入"></a>
+  <p>服務注入是將依賴項傳遞給類別的過程。這允許類別鬆散耦合，並且更容易測試。</p>
+<p>在 Angular 中，您可以透過以下幾種方式來注入服務：</p>
+
+  <ul class="docs-list">
+    <li>使用建構函式注入</li>
+<li>使用屬性注入</li>
+<li>使用方法注入</li>
+
+  </ul>
+  
+  <h3 id="">建構函式注入</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 建構函式注入"></a>
+  <p>建構函式注入是最常見的注入方式。在建構函式中，您可以指定要注入的服務。例如：</p>
+<p>typescript
+export class MyComponent {
+  constructor(private myService: MyService) {}
+}
+在這個例子中，<code>MyComponent</code> 的建構函式接受一個 <code>MyService</code> 的參數。這意味著當 <code>MyComponent</code> 被建立時，Angular 會自動將一個 <code>MyService</code> 的實例注入到 <code>myService</code> 參數中。</p>
+
+  <h3 id="">屬性注入</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 屬性注入"></a>
+  <p>屬性注入允許您在類別的屬性中注入服務。例如：</p>
+<p>typescript
+export class MyComponent {
+  @Inject(MyService) private myService: MyService;
+}
+在這個例子中，<code>MyComponent</code> 的 <code>myService</code> 屬性被注入了一個 <code>MyService</code> 的實例。</p>
+
+  <h3 id="">方法注入</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 方法注入"></a>
+  <p>方法注入允許您在類別的方法中注入服務。例如：</p>
+<p>typescript
+export class MyComponent {
+  constructor() {}</p>
+<p>  @Inject(MyService)
+  public myMethod(myService: MyService) {
+    // 使用 myService
+  }
+}
+在這個例子中，<code>MyComponent</code> 的 <code>myMethod</code> 方法被注入了一個 <code>MyService</code> 的實例。</p>
+
+  <h3 id="">服務注入的優點</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 服務注入的優點"></a>
+  <p>服務注入有以下幾個優點：</p>
+
+  <ul class="docs-list">
+    <li>鬆散耦合：服務注入允許類別鬆散耦合，這意味著類別不需要知道具體的依賴項是如何實現的。</li>
+<li>可測試性：服務注入使類別更容易測試，因為您可以輕鬆地模擬依賴項。</li>
+<li>可重用性：服務注入允許您在多個類別中重用服務。</li>
+
+  </ul>
+  
+  <h3 id="">服務注入的缺點</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 服務注入的缺點"></a>
+  <p>服務注入也有一些缺點：</p>
+
+  <ul class="docs-list">
+    <li>複雜性：服務注入可能會使您的程式碼更複雜，尤其是當您有多個依賴項時。</li>
+<li>性能：服務注入可能會降低您的應用程式的性能，因為它需要在運行時解析依賴項。</li>
+
+  </ul>
+  
+  <h3 id="">總結</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 總結"></a>
+  <p>服務注入是一種將依賴項傳遞給類別的過程。它允許類別鬆散耦合，並且更容易測試。在 Angular 中，您可以透過以下幾種方式來注入服務：</p>
+
+  <ul class="docs-list">
+    <li>使用建構函式注入</li>
+<li>使用屬性注入</li>
+<li>使用方法注入</li>
+
+  </ul>
+  <p>服務注入有以下幾個優點：</p>
+
+  <ul class="docs-list">
+    <li>鬆散耦合</li>
+<li>可測試性</li>
+<li>可重用性</li>
+
+  </ul>
+  <p>服務注入也有一些缺點：</p>
+
+  <ul class="docs-list">
+    <li>複雜性</li>
+<li>性能</li>
+
+  </ul>
+  <p>總體而言，服務注入是一種非常有用的技術，可以讓您的程式碼更鬆散耦合、更容易測試和更可重用。</p>
+<p>若要將服務注入為元件的相依性，您可以使用元件的 <code>constructor()</code>，並提供具有相依性類型的建構函式參數。</p>
+<p>以下範例在 <code>HeroListComponent</code> 建構函式中指定 <code>HeroService</code>。
+<code>heroService</code> 的類型是 <code>HeroService</code>。
+Angular 將 <code>HeroService</code> 類型識別為相依性，因為該類別先前已使用 <code>@Injectable</code> 裝飾器進行註解。</p>
+<div class="docs-code" header="src/app/heroes/hero-list.component (constructor signature)">
+    <div class="docs-code-header"><h3>src/app/heroes/hero-list.component (constructor signature)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params">heroService: HeroService</span>)</div></code>
+    </pre>
+  </div>
+  <h2 id="">在其他服務中注入服務</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 在其他服務中注入服務"></a>
+  <p>當某項服務依賴於另一項服務時，請遵循與注入元件相同的模式。
+在下列範例中，<code>HeroService</code> 依賴 <code>Logger</code> 服務來報告其活動。</p>
+
+    <ol class="docs-ordered-list">
+      <li>匯入 <code>Logger</code> 服務。</li>
+<li>接著在 <code>HeroService</code> 的 <code>constructor()</code> 中注入 <code>Logger</code> 服務，指定 <code>private logger: Logger</code>。</li>
+
+    </ol>
+    <div class="docs-code" header="src/app/heroes/hero.service.ts">
+    <div class="docs-code-header"><h3>src/app/heroes/hero.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-variable constant_">HEROES</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./mock-heroes'</span>;</div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Logger</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'../logger.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> logger: Logger</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">getHeroes</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">logger</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Getting heroes.'</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable constant_">HEROES</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>在這個範例中，<code>getHeroes()</code> 方法使用 <code>Logger</code> 服務，在擷取英雄時記錄訊息。</p>
+
+  <h2 id="">接下來</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 接下來"></a>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="/guide/di/dependency-injection-providers">
+      配置相依性
+    </a>
+    
+    <a class="docs-pill" href="/guide/di/dependency-injection-providers#using-an-injectiontoken-object">
+      <code>InjectionTokens</code>
+    </a>
+    
+
+    </nav>
+    

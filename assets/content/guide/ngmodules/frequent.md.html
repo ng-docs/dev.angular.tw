@@ -1,0 +1,81 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">常用模組</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/frequent.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>Angular 應用程式至少需要一個作為根模組的模組。
+當您為應用程式新增功能時，您可以將它們新增在模組中。
+以下是經常使用的 Angular 模組，其中包含一些它們所包含的範例：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">NgModule</th>
+<th align="left">從此處匯入</th>
+<th align="left">用途</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>BrowserModule</code></td>
+<td align="left"><code>@angular/platform-browser</code></td>
+<td align="left">在瀏覽器中執行應用程式。</td>
+</tr>
+<tr>
+<td align="left"><code>CommonModule</code></td>
+<td align="left"><code>@angular/common</code></td>
+<td align="left">使用 <code>NgIf</code> 和 <code>NgFor</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>FormsModule</code></td>
+<td align="left"><code>@angular/forms</code></td>
+<td align="left">建立範本驅動的表單(<code>NgModel</code>)。</td>
+</tr>
+<tr>
+<td align="left"><code>ReactiveFormsModule</code></td>
+<td align="left"><code>@angular/forms</code></td>
+<td align="left">建立響應式表單。</td>
+</tr>
+<tr>
+<td align="left"><code>RouterModule</code></td>
+<td align="left"><code>@angular/router</code></td>
+<td align="left">使用 <code>RouterLink</code>、<code>.forRoot()</code> 和 <code>.forChild()</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>HttpClientModule</code></td>
+<td align="left"><code>@angular/common/http</code></td>
+<td align="left">使用 HTTP 協定與伺服器通訊。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">匯入模組</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 匯入模組"></a>
+  <p>當您使用這些 Angular 模組時，請將它們匯入 <code>AppModule</code> 或適當的功能模組中，並將它們列在 <code>@NgModule</code> <code>imports</code> 陣列中。</p>
+<p>例如，在 <a href="/tools/cli">Angular CLI</a> 產生的應用程式中，<code>BrowserModule</code> 會匯入至 <code>AppModule</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">BrowserModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">AppComponent</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line highlighted">    <span class="hljs-comment">/* add modules here so Angular knows to use them */</span></div><div class="hljs-ln-line highlighted">    <span class="hljs-title class_">BrowserModule</span>,</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [],</div><div class="hljs-ln-line">  <span class="hljs-attr">bootstrap</span>: [<span class="hljs-title class_">AppComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> { }</div></code>
+    </pre>
+  </div><p>陣列頂端的匯入是 JavaScript 匯入語法，而 <code>@NgModule</code> 內的 <code>imports</code> 陣列則是 Angular 特有的。
+有關兩者的差異，請參閱 <a href="/guide/ngmodules/vs-jsmodule">JavaScript 模組與 NgModules</a>。</p>
+
+  <h2 id="browsermodule--commonmodule"><code>BrowserModule</code> 和 <code>CommonModule</code></h2>
+  <a href="#browsermodule--commonmodule" class="docs-anchor" tabindex="-1" aria-label="Link to <code>BrowserModule</code> 和 <code>CommonModule</code>"></a>
+  <p><code>BrowserModule</code> 重新匯出 <code>CommonModule</code>，它公開許多常見指令，例如 <code>ngIf</code> 和 <code>ngFor</code>。
+由於重新匯出，這些指令可供任何匯入瀏覽器模組的模組使用。</p>
+<p>對於在瀏覽器中執行的應用程式，請在根 <code>AppModule</code> 中匯入 <code>BrowserModule</code>，因為它提供在瀏覽器中啟動和呈現應用程式所必需的服務。</p>
+<p>注意：<code>BrowserModule</code> 的提供者是針對整個應用程式，因此它只應該在根模組中，而不是在功能模組中。功能模組只需要 <code>CommonModule</code> 中的常見指令；不需要重新安裝應用程式範圍的提供者。</p>

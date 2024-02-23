@@ -1,0 +1,98 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">雙向繫結</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/templates/two-way-binding.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>雙向繫結為應用程式中的元件提供一種共享數據的方式。
+使用雙向繫結來偵聽事件，並在父元件和子元件之間同時更新值。</p>
+<p>雙向繫結結合了 <a href="guide/templates/property-binding">屬性繫結</a> 與事件繫結：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">繫結</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><a href="guide/templates/property-binding">屬性繫結</a></td>
+<td align="left">設定特定元素屬性。</td>
+</tr>
+<tr>
+<td align="left"><a href="guide/templates/event-binding">事件繫結</a></td>
+<td align="left">監聽元素變更事件。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">新增雙向資料繫結</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 新增雙向資料繫結"></a>
+  <p>Angular 的雙向繫結語法是方括號和圓括號的組合，<code>[()]</code>。
+<code>[()]</code> 語法結合屬性繫結的方括號，<code>[]</code>，與事件繫結的圓括號，<code>()</code>，如下所示：</p>
+<div class="docs-code" path="adev/src/content/examples/two-way-binding/src/app/app.component.html" visiblelines="2" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"two-way"</span>&gt;</span>Two-way Binding<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"two-way-1"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">app-sizer</span> [(<span class="hljs-attr">size</span>)]=<span class="hljs-string">"fontSizePx"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-sizer</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> [<span class="hljs-attr">style.font-size.px</span>]=<span class="hljs-string">"fontSizePx"</span>&gt;</span>Resizable Text<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"font-size"</span>&gt;</span>FontSize (px): <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"font-size"</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"fontSizePx"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"two-way-2"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>De-sugared two-way binding<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">app-sizer</span> [<span class="hljs-attr">size</span>]=<span class="hljs-string">"fontSizePx"</span> (<span class="hljs-attr">sizeChange</span>)=<span class="hljs-string">"fontSizePx=$event"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-sizer</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h2 id="">雙向繫結是如何運作的</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 雙向繫結是如何運作的"></a>
+  <p>要讓雙向資料繫結運作，<code>@Output()</code> 屬性必須使用模式，<code>inputChange</code>，其中 <code>input</code> 是 <code>@Input()</code> 屬性的名稱。
+舉例來說，如果 <code>@Input()</code> 屬性是 <code>size</code>，<code>@Output()</code> 屬性必須是 <code>sizeChange</code>。</p>
+<p>以下 <code>sizerComponent</code> 具有 <code>size</code> 值屬性和 <code>sizeChange</code> 事件。
+<code>size</code> 屬性是 <code>@Input()</code>，因此資料可以流入 <code>sizerComponent</code>。
+<code>sizeChange</code> 事件是 <code>@Output()</code>，它讓資料從 <code>sizerComponent</code> 流出到父元件。</p>
+<p>接下來，有兩種方法，<code>dec()</code> 用於減小字體大小，<code>inc()</code> 用於增大字體大小。
+這兩種方法使用 <code>resize()</code> 來更改 <code>size</code> 屬性的值，但須在最小/最大值約束內，並發出傳達新 <code>size</code> 值的事件。</p>
+<div class="docs-code" path="adev/src/content/examples/two-way-binding/src/app/sizer/sizer.component.ts" visiblelines="8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23" header="src/app/sizer.component.ts">
+    <div class="docs-code-header"><h3>src/app/sizer.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, <span class="hljs-title class_">Input</span>, <span class="hljs-title class_">Output</span>, <span class="hljs-title class_">EventEmitter</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-sizer'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./sizer.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./sizer.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SizerComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() size!: <span class="hljs-built_in">number</span> | <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  <span class="hljs-meta">@Output</span>() sizeChange = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">number</span>&gt;();</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">dec</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">resize</span>(-<span class="hljs-number">1</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  <span class="hljs-title function_">inc</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">resize</span>(+<span class="hljs-number">1</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">resize</span>(<span class="hljs-params">delta: <span class="hljs-built_in">number</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">size</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(<span class="hljs-number">40</span>, <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(<span class="hljs-number">8</span>, +<span class="hljs-variable language_">this</span>.<span class="hljs-property">size</span> + delta));</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">sizeChange</span>.<span class="hljs-title function_">emit</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">size</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p><code>sizerComponent</code> 範本有兩個按鈕，每個按鈕都會將 click 事件繫結到 <code>inc()</code> 和 <code>dec()</code> 方法。
+當使用者點擊其中一個按鈕時，<code>sizerComponent</code> 會呼叫對應的方法。
+<code>inc()</code> 和 <code>dec()</code> 這兩個方法都會呼叫 <code>resize()</code> 方法，並傳入 <code>+1</code> 或 <code>-1</code>，這將會觸發 <code>sizeChange</code> 事件，並傳入新的尺寸值。</p>
+<div class="docs-code" path="adev/src/content/examples/two-way-binding/src/app/sizer/sizer.component.html" header="src/app/sizer.component.html">
+    <div class="docs-code-header"><h3>src/app/sizer.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"dec()"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"smaller"</span>&gt;</span>-<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"inc()"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"bigger"</span>&gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> [<span class="hljs-attr">style.font-size.px</span>]=<span class="hljs-string">"size"</span>&gt;</span>FontSize: <span class="hljs-template-variable">{{<span class="hljs-name">size</span>}}</span><span class="language-xml">px<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>在 <code>AppComponent</code> 範本中，<code>fontSizePx</code> 與 <code>SizerComponent</code> 雙向繫結。</p>
+<div class="docs-code" path="adev/src/content/examples/two-way-binding/src/app/app.component.html" visiblelines="2,3" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"two-way"</span>&gt;</span>Two-way Binding<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"two-way-1"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">app-sizer</span> [(<span class="hljs-attr">size</span>)]=<span class="hljs-string">"fontSizePx"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-sizer</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> [<span class="hljs-attr">style.font-size.px</span>]=<span class="hljs-string">"fontSizePx"</span>&gt;</span>Resizable Text<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"font-size"</span>&gt;</span>FontSize (px): <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"font-size"</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"fontSizePx"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"two-way-2"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>De-sugared two-way binding<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">app-sizer</span> [<span class="hljs-attr">size</span>]=<span class="hljs-string">"fontSizePx"</span> (<span class="hljs-attr">sizeChange</span>)=<span class="hljs-string">"fontSizePx=$event"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-sizer</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>在 <code>AppComponent</code> 中，<code>fontSizePx</code> 透過將值設定為 <code>16</code> 來建立初始的 <code>SizerComponent.size</code> 值。</p>
+<div class="docs-code" path="adev/src/content/examples/two-way-binding/src/app/app.component.ts" visiblelines="12" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {SizerComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./sizer/sizer.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {FormsModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'./app.component.html'</span>,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./app.component.css'</span>],</div><div class="hljs-ln-line">  imports: [FormsModule, SizerComponent],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  fontSizePx = <span class="hljs-number">16</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>點擊按鈕會更新 <code>AppComponent.fontSizePx</code>。
+經過修正的 <code>AppComponent.fontSizePx</code> 值會更新樣式繫結，這會讓顯示的文字變大或變小。</p>
+<p>雙向繫結語法是屬性繫結和事件繫結組合的簡寫。
+<code>SizerComponent</code> 繫結作為單獨的屬性繫結和事件繫結如下。</p>
+<div class="docs-code" path="adev/src/content/examples/two-way-binding/src/app/app.component.html" visiblelines="9" header="src/app/app.component.html (expanded)">
+    <div class="docs-code-header"><h3>src/app/app.component.html (expanded)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"two-way"</span>&gt;</span>Two-way Binding<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"two-way-1"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">app-sizer</span> [(<span class="hljs-attr">size</span>)]=<span class="hljs-string">"fontSizePx"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-sizer</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> [<span class="hljs-attr">style.font-size.px</span>]=<span class="hljs-string">"fontSizePx"</span>&gt;</span>Resizable Text<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"font-size"</span>&gt;</span>FontSize (px): <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"font-size"</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"fontSizePx"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"two-way-2"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>De-sugared two-way binding<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">app-sizer</span> [<span class="hljs-attr">size</span>]=<span class="hljs-string">"fontSizePx"</span> (<span class="hljs-attr">sizeChange</span>)=<span class="hljs-string">"fontSizePx=$event"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-sizer</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p><code>$event</code> 變數包含 <code>SizerComponent.sizeChange</code> 事件的資料。
+當使用者按下按鈕時，Angular 會將 <code>$event</code> 值指派給 <code>AppComponent.fontSizePx</code>。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3>表單中的雙向繫結</h3>
+      <p>由於沒有內建的 HTML 元素遵循 <code>x</code> 值和 <code>xChange</code> 事件模式，因此表單元素的雙向繫結需要 <code>NgModel</code>。
+如需有關如何使用表單中的雙向繫結的詳細資訊，請參閱 Angular <a href="guide/directives#ngModel">NgModel</a>。</p>
+
+    </div>
+    

@@ -1,0 +1,22 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>UrlMatcher</h1><div class="docs-api-item-label" data-mode="full" data-type="type_alias">Type Alias</div></div></div><p class="docs-reference-description"><p>A function for matching a route against URLs. Implement a custom URL matcher
+for <code>Route.matcher</code> when a combination of <code>path</code> and <code>pathMatch</code>
+is not expressive enough. Cannot be used together with <code>path</code> and <code>pathMatch</code>.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">type</span> <span class="hljs-title class_">UrlMatcher</span> = <span class="hljs-function">(<span class="hljs-params"></div><div class="hljs-ln-line ">  segments: UrlSegment[],</div><div class="hljs-ln-line ">  group: UrlSegmentGroup,</div><div class="hljs-ln-line ">  route: Route,</div><div class="hljs-ln-line "></span>) =&gt;</span> <span class="hljs-title class_">UrlMatchResult</span> | <span class="hljs-literal">null</span></div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>A function for matching a route against URLs. Implement a custom URL matcher
+for <code>Route.matcher</code> when a combination of <code>path</code> and <code>pathMatch</code>
+is not expressive enough. Cannot be used together with <code>path</code> and <code>pathMatch</code>.</p>
+<p>The function takes the following arguments and returns a <code>UrlMatchResult</code> object.</p>
+
+    <ul class="docs-list">
+      <li><em>segments</em> : An array of URL segments.</li>
+<li><em>group</em> : A segment group.</li>
+<li><em>route</em> : The route to match against.</li>
+
+    </ul>
+    <p>The following example implementation matches HTML files.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">htmlFiles</span>(<span class="hljs-params">url: UrlSegment[]</span>) </span>{</span><span class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-built_in">url</span>.length === <span class="hljs-number">1</span> &amp;&amp; <span class="hljs-built_in">url</span>[<span class="hljs-number">0</span>].path.endsWith(<span class="hljs-string">&#x27;.html&#x27;</span>) ? ({<span class="hljs-attribute">consumed</span>: <span class="hljs-built_in">url</span>}) : <span class="hljs-literal">null</span>;</span><span class="hljs-ln-line">}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> routes = [{ <span class="hljs-attribute">matcher</span>: htmlFiles, <span class="hljs-attribute">component</span>: AnyComponent }];</span>
+          </code>
+        </pre>
+      </div></div></div></div>

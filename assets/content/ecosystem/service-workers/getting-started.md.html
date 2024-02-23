@@ -1,0 +1,188 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">使用服務工作人員入門</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/ecosystem/service-workers/getting-started.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>這份文件說明如何啟用您使用 <a href="tools/cli">Angular CLI</a> 建立的專案中的 Angular 服務工作者支援。然後使用一個範例向您展示服務工作者執行中的情況，展示載入和基本快取。</p>
+
+  <h2 id="-service-worker">為您的專案新增 service worker</h2>
+  <a href="#-service-worker" class="docs-anchor" tabindex="-1" aria-label="Link to 為您的專案新增 service worker"></a>
+  <p>要設定專案中的 Angular 服務工作者，請執行下列 CLI 指令：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng add @angular/pwa</div></code>
+    </pre>
+  </div><p>CLI 使用下列動作將您的應用程式設定為使用服務工作者：</p>
+
+    <ol class="docs-ordered-list">
+      <li>將 <code>@angular/service-worker</code> 套件新增到您的專案。</li>
+<li>在 CLI 中啟用 Service Worker 建置支援。</li>
+<li>匯入 Service Worker 並將其註冊至應用程式的根提供者。</li>
+<li>更新 <code>index.html</code> 檔案：
+  <ul class="docs-list">
+    <li>包括新增 <code>manifest.webmanifest</code> 檔案的連結</li>
+<li>新增 <code>theme-color</code> 的 meta 標籤</li>
+
+  </ul>
+  </li>
+<li>安裝圖示檔案以支援已安裝的漸進式網路應用程式 (PWA)。</li>
+<li>建立名為 <a href="ecosystem/service-workers/config"><code>ngsw-config.json</code></a> 的 Service Worker 組態檔案，其中指定快取行為和其他設定。</li>
+
+    </ol>
+    <p>現在，建構專案：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build</div></code>
+    </pre>
+  </div><p>CLI 專案現已設定好使用 Angular 服務工作者。</p>
+
+  <h2 id="">服務工作者實戰：導覽</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 服務工作者實戰：導覽"></a>
+  <p>此部分示範一個實際運作的服務工作者，
+使用一個範例應用程式。</p>
+
+  <h3 id="">初始載入</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 初始載入"></a>
+  <p>伺服器在埠 <code>8080</code> 上執行，請將您的瀏覽器指向 <code>http://localhost:8080</code>。
+您的應用程式應該會正常載入。</p>
+<p>提示：在測試 Angular 服務工作執行緒時，最好在瀏覽器中使用無痕或私人視窗，以確保服務工作執行緒不會讀取先前剩餘的狀態，這可能會導致意外行為。</p>
+<p>HELPFUL：如果您不使用 HTTPS，則服務工作者只有在 <code>localhost</code> 上存取應用程式時才會被註冊。</p>
+
+  <h3 id="">模擬網路問題</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 模擬網路問題"></a>
+  <p>若要模擬網路問題，請停用應用程式的網路互動。</p>
+<p>在 Chrome 中：</p>
+
+    <ol class="docs-ordered-list">
+      <li>選取 <strong>工具</strong> &gt; <strong>開發人員工具</strong>（位於右上角的 Chrome 功能表中）。</li>
+<li>前往 <strong>網路</strong> 標籤。</li>
+<li>在 <strong>限制速度</strong> 下拉式功能表中選取 <strong>離線</strong>。</li>
+
+    </ol>
+    <img alt="在「網路」標籤中選取「離線」選項" src="https://angular.dev/assets/images/guide/service-worker/offline-option.png">
+
+<p>現在應用程式無法訪問網路互動。</p>
+<p>對於不使用 Angular 服務工作者的應用程式，現在重新整理會顯示 Chrome 的網際網路中斷頁面，其中寫著「沒有網際網路連線」。</p>
+<p>加入 Angular 服務工作程序後，應用程式行為會有所改變。
+重新整理時，頁面會正常載入。</p>
+<p>請查看 Network 標籤以驗證服務工作者是否處於活動狀態。</p>
+<img alt="請求標記為來自 ServiceWorker" src="https://angular.dev/assets/images/guide/service-worker/sw-active.png">
+
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 在「大小」欄位中，要求狀態為 <code>(ServiceWorker)</code>。</p>
+
+    </div>
+    <p>這表示資源並未從網路載入。
+而是從 Service Worker 快取中載入。</p>
+
+  <h3 id="">正在快取什麼？</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 正在快取什麼？"></a>
+  <p>請注意，瀏覽器需要的所有檔案才能呈現這個應用程式都是快取的。
+<code>ngsw-config.json</code> 樣板設定被設定成快取 CLI 使用的特定資源：</p>
+
+  <ul class="docs-list">
+    <li><code>index.html</code></li>
+<li><code>favicon.ico</code></li>
+<li>建置產出 (JS 和 CSS 捆綁)</li>
+<li><code>assets</code> 下的所有內容</li>
+<li>直接位於已設定的 <code>outputPath</code> (預設為 <code>./dist/&lt;project-name&gt;/</code>) 或 <code>resourcesOutputPath</code> 下的圖片和字體。
+如需瞭解這些選項的更多資訊，請參閱 <code>ng build</code> 的文件。</li>
+
+  </ul>
+  <p>重要事項：所產生的 <code>ngsw-config.json</code> 包含可快取字型和圖像擴充功能的清單。在某些情況下，您可能想修改 glob 模式以符合您的需求。</p>
+<p>重要：如果在產生設定檔之後修改了 <code>resourcesOutputPath</code> 或 <code>assets</code> 路徑，您需要手動在 <code>ngsw-config.json</code> 中變更路徑。</p>
+
+  <h3 id="">對您的應用程式進行變更</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 對您的應用程式進行變更"></a>
+  <p>現在您已瞭解服務工作者如何快取您的應用程式，下一步是瞭解更新如何運作。
+變更應用程式，然後觀察服務工作者安裝更新：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>如果你在無痕視窗中測試，請開啟第二個空白分頁。
+ 這會在測試期間保持無痕視窗和快取狀態。</p>
+</li>
+<li><p>關閉應用程式分頁，但不要關閉視窗。
+ 這也應該會關閉開發人員工具。</p>
+</li>
+<li><p>關閉 <code>http-server</code>（Ctrl-c）。</p>
+</li>
+<li><p>開啟 <code>src/app/app.component.html</code> 以進行編輯。</p>
+</li>
+<li><p>將文字 <code>Welcome to {{title}}!</code> 更改為 <code>Bienvenue à {{title}}!</code>。</p>
+</li>
+<li><p>再次建置並執行伺服器：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build</div><div class="hljs-ln-line"> npx http-server -p 8080 -c-1 dist/&lt;project-name&gt;/browser</div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    
+  <h3 id="">在瀏覽器中更新你的應用程式</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 在瀏覽器中更新你的應用程式"></a>
+  <p>現在看看瀏覽器和服務工作者如何處理更新的應用程式。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>在同個視窗中再次開啟 <a href="http://localhost:8080" target="_blank">http://localhost:8080</a>。
+ 會發生什麼事？</p>
+ <img alt="仍然顯示歡迎使用 Service Workers！" src="https://angular.dev/assets/images/guide/service-worker/welcome-msg-en.png">
+
+<p> 哪裡出錯了？
+ <em>其實，什麼問題也沒有！</em>
+ Angular 服務工作者正在執行工作，提供它已<strong>安裝</strong>的應用程式版本，即使有可用的更新。
+ 為了速度，服務工作者不會等到檢查更新後才提供它已快取的應用程式。</p>
+<p> 查看 <code>http-server</code> 記錄，以查看服務工作者要求 <code>/ngsw.json</code>。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">[2023-09-07T00:37:24.372Z]  "GET /ngsw.json?ngsw-cache-bust=0.9365263935102124" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"</div></code>
+    </pre>
+  </div><p> 服務工作者就是這樣檢查更新。</p>
+</li>
+<li><p>更新頁面。</p>
+ <img alt="文字已變更為 Bienvenue à app！" src="https://angular.dev/assets/images/guide/service-worker/welcome-msg-fr.png">
+
+<p> 服務工作者在<strong>背景中</strong>安裝了更新版本的應用程式，在下一次載入或重新載入頁面時，服務工作者就會切換到最新版本。</p>
+</li>
+
+    </ol>
+    
+  <h2 id="-angular-">更深入了解 Angular 服務工作者</h2>
+  <a href="#-angular-" class="docs-anchor" tabindex="-1" aria-label="Link to 更深入了解 Angular 服務工作者"></a>
+  <p>您可能也有興趣：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="ecosystem/service-workers/config">
+      設定檔
+    </a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/communications">
+      與 Service Worker 通訊
+    </a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/push-notifications">
+      推播通知
+    </a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/devops">
+      Service Worker devops
+    </a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/app-shell">
+      App shell 模式
+    </a>
+    
+
+    </nav>
+    

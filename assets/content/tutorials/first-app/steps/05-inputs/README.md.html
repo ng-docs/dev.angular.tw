@@ -1,0 +1,105 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">在元件中新增輸入參數</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/first-app/steps/05-inputs/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>這節教學課程示範如何建立一個元件 <code>@Input()</code> 並使用它將資料傳遞給一個元件以進行客製化。</p>
+
+    <div class="docs-video-container">
+      <iframe
+      class="docs-video"
+      src="https://www.youtube.com/embed/eM3zi_n7lNs?si=WvRGFSkW_7_zDIFD&amp;start=241"
+      
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      credentialless
+      title="Video player"
+      ></iframe>
+    </div>
+    
+  <h2 id="">你將會學到</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 你將會學到"></a>
+  <p>您的應用程式 <code>HousingLocationComponent</code> 範本有一個 <code>HousingLocation</code> 屬性來接收輸入。</p>
+
+  <h2 id="">輸入的概念性預覽</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 輸入的概念性預覽"></a>
+  <p><a href="api/core/Input">輸入</a> 允許元件共享資料。資料共享的方向從父元件到子元件。</p>
+<p>在這個課程中，您將在 <code>HousingLocationComponent</code> 元件中定義 <code>@Input()</code> 屬性，這將讓您自訂在元件中顯示的資料。</p>
+<p>在<a href="guide/components/inputs">接受具有輸入屬性的資料</a>和<a href="guide/components/outputs">具有輸出項的自訂事件</a>指南中了解更多。</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-input-">匯入 Input 裝飾器</h3>
+  <a href="#-input-" class="docs-anchor" tabindex="-1" aria-label="Link to 匯入 Input 裝飾器"></a>
+  
+      <p>此步驟將 <code>Input</code> 裝飾器匯入至類別中。</p>
+<p>在程式碼編輯器中：</p>
+
+    <ol class="docs-ordered-list">
+      <li>導覽至 <code>src/app/housing-location/housing-location.component.ts</code></li>
+<li>更新檔案匯入，以納入 <code>Input</code> 和 <code>HousingLocation</code>：<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/housing-location/housing-location.component.ts" visiblelines="0,1,2" header="在 src/app/housing-location/housing-location.component.ts 中匯入 HousingLocationComponent 和 Input">
+    <div class="docs-code-header"><h3>在 src/app/housing-location/housing-location.component.ts 中匯入 HousingLocationComponent 和 Input</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component, Input} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {CommonModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocation} <span class="hljs-keyword">from</span> <span class="hljs-string">'../housinglocation'</span>;</div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-housing-location'</span>,</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  imports: [CommonModule],</div><div class="hljs-ln-line">  template: `<span class="language-javascript"></span></div><div class="hljs-ln-line">    &lt;p&gt;housing-location works!&lt;/p&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./housing-location.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HousingLocationComponent</span> {</div><div class="hljs-ln-line">  @Input() housingLocation!: HousingLocation;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-input-">新增 Input 屬性</h3>
+  <a href="#-input-" class="docs-anchor" tabindex="-1" aria-label="Link to 新增 Input 屬性"></a>
+  
+      
+    <ol class="docs-ordered-list">
+      <li><p>在同一個檔案中，在 <code>HousingLocationComponent</code> 類別中新增一個 <code>housingLocation</code> 屬性，類型為 <code>HousingLocation</code>。在屬性名稱後加一個 <code>!</code> 並加上 <code>@Input()</code> 裝飾器：</p>
+<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/housing-location/housing-location.component.ts" visiblelines="15,16,17" header="Import HousingLocationComponent and Input in src/app/housing-location/housing-location.component.ts">
+    <div class="docs-code-header"><h3>Import HousingLocationComponent and Input in src/app/housing-location/housing-location.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component, Input} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {CommonModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocation} <span class="hljs-keyword">from</span> <span class="hljs-string">'../housinglocation'</span>;</div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-housing-location'</span>,</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  imports: [CommonModule],</div><div class="hljs-ln-line">  template: `<span class="language-javascript"></span></div><div class="hljs-ln-line">    &lt;p&gt;housing-location works!&lt;/p&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./housing-location.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HousingLocationComponent</span> {</div><div class="hljs-ln-line">  @Input() housingLocation!: HousingLocation;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>You have to add the <code>!</code> because the input is expecting the value to be passed. In this case, there is no default value. In our example application case we know that the value will be passed in - this is by design. The exclamation point is called the non-null assertion operator and it tells the TypeScript compiler that the value of this property won&#39;t be null or undefined.</p>
+</li>
+<li><p>Save your changes and confirm the app does not have any errors.</p>
+</li>
+<li><p>Correct any errors before you continue to the next step.</p>
+</li>
+
+    </ol>
+    
+    </li>
+    
+    </ol>
+    
+    <div class="docs-alert docs-alert-summary">
+    <p><strong>Summary:</strong> In this lesson, you created a new property decorated with the <code>@Input()</code> decorator. You also used the non-null assertion operator to notify the compiler that the value of the new property won&#39;t be <code>null</code> or <code>undefined</code>.</p>
+
+    </div>
+    
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="guide/components/inputs">
+      Accepting data with input properties
+    </a>
+    
+    <a class="docs-pill" href="guide/components/outputs">
+      Custom events with outputs
+    </a>
+    
+
+    </nav>
+    

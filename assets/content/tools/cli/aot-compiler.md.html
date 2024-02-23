@@ -1,0 +1,574 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">即時 (AOT) 編譯</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/aot-compiler.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>Angular 應用程式主要由元件及其 HTML 範本組成。
+由於 Angular 提供的元件與範本無法直接被瀏覽器理解，因此 Angular 應用程式在瀏覽器中執行之前需要一個編譯程序。</p>
+<p>Angular 即時 (AOT) 編譯器會在瀏覽器下載並執行該程式碼 <em>之前</em> 的建置階段，將你的 Angular HTML 和 TypeScript 程式碼轉換成有效的 JavaScript 程式碼。
+在建置過程中編譯你的應用程式，可提供更快的瀏覽器呈現速度。</p>
+<p>此指南說明如何指定元數據和套用可用的編譯器選項，以使用 AOT 編譯器有效編譯您的應用程式。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <a href="https://www.youtube.com/watch?v=anphffaCZrQ" target="_blank">觀看 Alex Rickabaugh 在 AngularConnect 2019 解釋 Angular 編譯器</a>。</p>
+
+    </div>
+    <p>以下是一些您可能要使用 AOT 的原因。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">原因</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">更快的渲染</td>
+<td align="left">使用 AOT 時，瀏覽器會下載應用程式的預先編譯版本。瀏覽器載入可執行程式碼，因此它可以立即渲染應用程式，而無需等待先編譯應用程式。</td>
+</tr>
+<tr>
+<td align="left">較少的非同步要求</td>
+<td align="left">編譯器將外部 HTML 範本和 CSS 樣式表<em>內嵌</em>在應用程式 JavaScript 中，從而消除對這些原始檔的個別 ajax 要求。</td>
+</tr>
+<tr>
+<td align="left">較小的 Angular 架構下載大小</td>
+<td align="left">如果應用程式已編譯，則無需下載 Angular 編譯器。編譯器大約是 Angular 本身的一半，因此省略它可大幅減少應用程式的負載。</td>
+</tr>
+<tr>
+<td align="left">更早偵測範本錯誤</td>
+<td align="left">AOT 編譯器在建置步驟中偵測並報告範本繫結錯誤，讓使用者在看到錯誤之前就能發現。</td>
+</tr>
+<tr>
+<td align="left">更佳的安全性</td>
+<td align="left">AOT 在將 HTML 範本和元件提供給用戶端之前，會將它們編譯成 JavaScript 檔案。由於沒有要讀取的範本，也沒有有風險的用戶端 HTML 或 JavaScript 評估，因此注入攻擊的機會較少。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">選擇一個編譯器</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 選擇一個編譯器"></a>
+  <p>Angular 提供了兩種編譯應用程式的方法：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">Angular 編譯</th>
+<th align="left">詳細資訊</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">即時編譯 (JIT)</td>
+<td align="left">在運行時於瀏覽器中編譯您的應用程式。這是 Angular 8 之前的預設值。</td>
+</tr>
+<tr>
+<td align="left">預先編譯 (AOT)</td>
+<td align="left">在建置時編譯您的應用程式和程式庫。這是 Angular 9 中的預設值。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>當你執行 <a href="cli/build"><code>ng build</code></a>（僅建置）或 <a href="cli/serve"><code>ng serve</code></a>（建置並在本地端提供服務）CLI 指令時，編譯類型（JIT 或 AOT）取決於 <code>angular.json</code> 中指定的建置組態中 <code>aot</code> 屬性的值。
+預設情況下，<code>aot</code> 會設定為 <code>true</code> 以適用於新的 CLI 應用程式。</p>
+<p>詳情請參閱 <a href="cli">CLI 命令參考</a> 和 <a href="tools/cli/build">建置和服務 Angular 應用程式</a>。</p>
+
+  <h2 id="aot-">AOT 工作原理</h2>
+  <a href="#aot-" class="docs-anchor" tabindex="-1" aria-label="Link to AOT 工作原理"></a>
+  <p>AOT 編譯器將你的應用程式程式碼轉換為機器碼，以便在瀏覽器中執行。這與 JIT（即時編譯器）編譯器不同，JIT 編譯器會在瀏覽器中執行時將你的應用程式程式碼轉換為機器碼。</p>
+<p>AOT 編譯器的主要優點是它可以提高應用程式的啟動速度。這是因為機器碼比應用程式程式碼更容易被瀏覽器理解，因此瀏覽器可以更快地載入並執行應用程式。</p>
+<p>AOT 編譯器的另一個優點是它可以提高應用程式的安全性。這是因為機器碼比應用程式程式碼更難被逆向工程，因此攻擊者更難找到應用程式中的漏洞。</p>
+<p>AOT 編譯器的主要缺點是它會增加應用程式的建構時間。這是因為 AOT 編譯器需要在瀏覽器中執行之前將你的應用程式程式碼轉換為機器碼，而這可能需要一些時間。</p>
+<p>總體而言，AOT 編譯器是一種提高應用程式啟動速度和安全性的好方法。但是，它也會增加應用程式的建構時間。因此，在決定是否使用 AOT 編譯器時，你需要權衡利弊。</p>
+<p>Angular AOT 編譯器提取 <strong>元數據</strong> 來解釋 Angular 應該管理的應用程式部分。
+您可以在 <strong>裝飾器</strong>（例如 <code>@Component()</code> 和 <code>@Input()</code>) 中明確指定元數據，或者在已裝飾類別的建構函式宣告中隱含指定元數據。
+元數據會告訴 Angular 如何建構應用程式類別的執行個體，以及在執行階段與它們互動。</p>
+<p>在以下範例中，<code>@Component()</code> 元資料物件和類別建構函式會告知 Angular 如何建立和顯示 <code>TypicalComponent</code> 的執行個體。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-typical'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div&gt;A typical component for {{data.name}}&lt;/div&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">data</span>: <span class="hljs-title class_">TypicalData</span>;</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> someService: SomeService</span>) { … }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>Angular 編譯器會萃取一次元資料，並為 <code>TypicalComponent</code> 產生一個工廠。
+當需要建立 <code>TypicalComponent</code> 實例時，Angular 會呼叫工廠，工廠會產生一個新的視覺元素，並繫結到元件類別的新實例，以及其注入的相依性。</p>
+
+  <h3 id="">編譯階段</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 編譯階段"></a>
+  <p>AOT 編譯有三個階段。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left"></th>
+<th align="left">階段</th>
+<th align="left">詳細</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">1</td>
+<td align="left">程式碼分析</td>
+<td align="left">在此階段，TypeScript 編譯器和 <em>AOT 收集器</em> 會建立來源的表示形式。收集器不會嘗試解釋它收集的元資料。它會盡可能地表示元資料，並在偵測到元資料語法違規時記錄錯誤。</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">程式碼產生</td>
+<td align="left">在此階段，編譯器的 <code>StaticReflector</code> 會解譯在階段 1 中收集的元資料，執行元資料的其他驗證，如果偵測到元資料限制違規，則會擲回錯誤。</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">範本類型檢查</td>
+<td align="left">在此選擇性階段，Angular <em>範本編譯器</em> 會使用 TypeScript 編譯器驗證範本中的繫結表達式。您可以透過設定 <code>strictTemplates</code> 組態選項，明確啟用此階段；請參閱 <a href="reference/configs/angular-compiler-options">Angular 編譯器選項</a>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="">元數據限制</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 元數據限制"></a>
+  <p>您使用 TypeScript 的 <em>子集</em> 編寫元資料，該子集必須符合下列一般限制：</p>
+
+  <ul class="docs-list">
+    <li>將 <a href="#expression-syntax">expression syntax</a> 限制為 JavaScript 支援的子集</li>
+<li>在 <a href="#code-folding">code folding</a> 之後僅參照已匯出的符號</li>
+<li>僅呼叫編譯器 <a href="#supported-functions">supported-functions</a> 支援的函式</li>
+<li>輸入/輸出和資料繫結類別成員必須是公開的或受保護的。如需準備應用程式進行 AOT 編譯的其他準則和說明，請參閱 <a href="https://medium.com/sparkles-blog/angular-writing-aot-friendly-applications-7b64c8afbe3f" target="_blank">Angular:撰寫 AOT 友善應用程式</a>。</li>
+
+  </ul>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> AOT 編譯中的錯誤通常是由於元數據不符合編譯器需求 (如下更詳細說明) 所造成。</p>
+
+    </div>
+    <p>若要了解並解決這些問題，請參閱 <a href="tools/cli/aot-metadata-errors">AOT 元數據錯誤</a>。</p>
+
+  <h3 id="-aot-">設定 AOT 編譯</h3>
+  <a href="#-aot-" class="docs-anchor" tabindex="-1" aria-label="Link to 設定 AOT 編譯"></a>
+  <p>您可以在控制編譯程序的 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 設定檔</a> 中提供選項。
+請參閱 <a href="reference/configs/angular-compiler-options">Angular 編譯器選項</a> 以取得可用選項的完整清單。</p>
+
+  <h2 id="">第一階段：程式碼分析</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 第一階段：程式碼分析"></a>
+  <p>TypeScript 編譯器會執行第一階段的一些分析工作。
+它會發出具有 AOT 編譯器產生應用程式程式碼所需的類型資訊的 <code>.d.ts</code> <em>類型定義檔案</em>。
+同時，AOT <strong>收集器</strong> 會分析記錄在 Angular 裝飾器中的元資料，並在 <strong><code>.metadata.json</code></strong> 檔案中輸出元資料資訊，每個 <code>.d.ts</code> 檔案一個。</p>
+<p>你可以將 <code>.metadata.json</code> 視為裝飾器之整體結構圖示，以 <a href="https://zh.wikipedia.org/wiki/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%A8%99%E6%A0%91" target="_blank">抽象語法樹 (AST)</a> 表示。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> Angular 的 <a href="https://github.com/angular/angular/blob/main/packages/compiler-cli/src/metadata/schema.ts" target="_blank">schema.ts</a> 以 TypeScript 介面集合的形式描述 JSON 格式。</p>
+
+    </div>
+    
+  <h3 id="">表達式語法限制</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 表達式語法限制"></a>
+  <p>AOT 收集器只能理解 JavaScript 的子集。
+使用以下有限語法定義元數據物件：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">語法</th>
+<th align="left">範例</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">文字物件</td>
+<td align="left"><code>{cherry: true, apple: true, mincemeat: false}</code></td>
+</tr>
+<tr>
+<td align="left">文字陣列</td>
+<td align="left"><code>[&#39;cherries&#39;, &#39;flour&#39;, &#39;sugar&#39;]</code></td>
+</tr>
+<tr>
+<td align="left">文字陣列中散佈</td>
+<td align="left"><code>[&#39;apples&#39;, &#39;flour&#39;, ...]</code></td>
+</tr>
+<tr>
+<td align="left">呼叫</td>
+<td align="left"><code>bake(ingredients)</code></td>
+</tr>
+<tr>
+<td align="left">新的</td>
+<td align="left"><code>new Oven()</code></td>
+</tr>
+<tr>
+<td align="left">屬性訪問</td>
+<td align="left"><code>pie.slice</code></td>
+</tr>
+<tr>
+<td align="left">陣列索引</td>
+<td align="left"><code>ingredients[0]</code></td>
+</tr>
+<tr>
+<td align="left">身分參考</td>
+<td align="left"><code>Component</code></td>
+</tr>
+<tr>
+<td align="left">樣板字串</td>
+<td align="left">&grave;pie is &dollar;{multiplier} times better than cake&grave;</td>
+</tr>
+<tr>
+<td align="left">文字字串</td>
+<td align="left"><code>&#39;pi&#39;</code></td>
+</tr>
+<tr>
+<td align="left">文字數字</td>
+<td align="left"><code>3.14153265</code></td>
+</tr>
+<tr>
+<td align="left">文字布林</td>
+<td align="left"><code>true</code></td>
+</tr>
+<tr>
+<td align="left">文字 null</td>
+<td align="left"><code>null</code></td>
+</tr>
+<tr>
+<td align="left">支援的前置運算子</td>
+<td align="left"><code>!cake</code></td>
+</tr>
+<tr>
+<td align="left">支援的二元運算子</td>
+<td align="left"><code>a+b</code></td>
+</tr>
+<tr>
+<td align="left">條件運算子</td>
+<td align="left"><code>a ? b : c</code></td>
+</tr>
+<tr>
+<td align="left">括號</td>
+<td align="left"><code>(a+b)</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>如果表達式使用不支援的語法，收集器會將錯誤節點寫入 <code>.metadata.json</code> 檔案。
+如果編譯器需要該部分的元資料來產生應用程式程式碼，則稍後會報告錯誤。</p>
+<p>HELPFUL：如果您希望 <code>ngc</code> 立即報告語法錯誤，而不是產生包含錯誤的 <code>.metadata.json</code> 檔案，請在 TypeScript 組態檔案中設定 <code>strictMetadataEmit</code> 選項。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"angularCompilerOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">"strictMetadataEmit"</span> <span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>Angular 函式庫有這個選項可以確保所有的 Angular <code>.metadata.json</code> 檔案都是乾淨的，在建立您自己的函式庫時，最好也這麼做。</p>
+
+  <h3 id="">沒有箭頭函式</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 沒有箭頭函式"></a>
+  <p>AOT 編譯器不支援 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/function" target="_blank">函式表達式</a>
+和 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank">箭頭函式</a>，又稱為 <em>lambda</em> 函式。</p>
+<p>考慮以下元件裝飾器：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{<span class="hljs-attr">provide</span>: server, <span class="hljs-attr">useFactory</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Server</span>()}]</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p>AOT 蒐集器不支援在元資料表達式中使用箭頭函式 <code>() =&gt; new Server()</code>。
+它會在函式所在的位置產生一個錯誤節點。
+當編譯器稍後解釋這個節點時，它會回報一個錯誤，建議您將箭頭函式轉換成「已匯出的函式」。</p>
+<p>您可以透過轉換成以下內容來修正錯誤：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">serverFactory</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Server</span>();</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{<span class="hljs-attr">provide</span>: server, <span class="hljs-attr">useFactory</span>: serverFactory}]</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p>在版本 5 和更高版本中，編譯器在發出 <code>.js</code> 檔案時會自動執行此重寫。</p>
+
+  <h3 id="">程式碼折疊</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 程式碼折疊"></a>
+  <p>編譯器只能解析對 <em><strong>外銷</strong></em> 符號的參照。
+然而，收集器可以在收集期間評估運算式，並將結果記錄在 <code>.metadata.json</code> 中，而不是原始運算式。
+這允許您在運算式中有限地使用非外銷符號。</p>
+<p>例如，收集器可以評估表達式 <code>1 + 2 + 3 + 4</code> 並將其替換為結果 <code>10</code>。
+此程序稱為 <em>摺疊</em>。
+可以透過這種方式簡化的表達式是 <em>可摺疊的</em>。</p>
+<p>收集器可以評估對模組內部 <code>const</code> 宣告和初始化 <code>var</code> 與 <code>let</code> 宣告的參照，有效地將它們從 <code>.metadata.json</code> 檔案中移除。</p>
+<p>考慮以下元件定義：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> template = <span class="hljs-string">'&lt;div&gt;{{hero.name}}&lt;/div&gt;'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-hero'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: template</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">hero</span>: <span class="hljs-title class_">Hero</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>編譯器無法參照 <code>template</code> 常數，因為它未匯出。
+然而，收集器可以透過內嵌其內容將 <code>template</code> 常數摺疊到元數據定義中。
+效果與您寫入以下內容相同：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-hero'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div&gt;{{hero.name}}&lt;/div&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">hero</span>: <span class="hljs-title class_">Hero</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>不再有對 <code>template</code> 的參照，因此，當編譯器稍後在 <code>.metadata.json</code> 中解釋 <em>收集器</em> 輸出時，沒有任何東西會造成困擾。</p>
+<p>您可以透過在另一個表達式中包含 <code>template</code> 常數，進一步採取此範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> template = <span class="hljs-string">'&lt;div&gt;{{hero.name}}&lt;/div&gt;'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-hero'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: template + <span class="hljs-string">'&lt;div&gt;{{hero.title}}&lt;/div&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">hero</span>: <span class="hljs-title class_">Hero</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>收集器將此表達式簡化為等效的 <em>摺疊</em> 字串：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-string">'&lt;div&gt;{{hero.name}}&lt;/div&gt;&lt;div&gt;{{hero.title}}&lt;/div&gt;'</span></div></code>
+    </pre>
+  </div>
+  <h4 id="">可摺疊語法</h4>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 可摺疊語法"></a>
+  <p>以下表格說明收集器可以和不可以折疊的表達式：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">語法</th>
+<th align="left">可摺疊</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">文字物件</td>
+<td align="left">是</td>
+</tr>
+<tr>
+<td align="left">文字陣列</td>
+<td align="left">是</td>
+</tr>
+<tr>
+<td align="left">文字陣列中的展開</td>
+<td align="left">否</td>
+</tr>
+<tr>
+<td align="left">呼叫</td>
+<td align="left">否</td>
+</tr>
+<tr>
+<td align="left">新</td>
+<td align="left">否</td>
+</tr>
+<tr>
+<td align="left">屬性存取</td>
+<td align="left">是，如果目標可摺疊</td>
+</tr>
+<tr>
+<td align="left">陣列索引</td>
+<td align="left">是，如果目標和索引可摺疊</td>
+</tr>
+<tr>
+<td align="left">識別參考</td>
+<td align="left">是，如果它是對本地的一個參考</td>
+</tr>
+<tr>
+<td align="left">沒有替換的範本</td>
+<td align="left">是</td>
+</tr>
+<tr>
+<td align="left">帶有替換的範本</td>
+<td align="left">是，如果替換可摺疊</td>
+</tr>
+<tr>
+<td align="left">文字字串</td>
+<td align="left">是</td>
+</tr>
+<tr>
+<td align="left">文字數字</td>
+<td align="left">是</td>
+</tr>
+<tr>
+<td align="left">文字布林</td>
+<td align="left">是</td>
+</tr>
+<tr>
+<td align="left">文字 null</td>
+<td align="left">是</td>
+</tr>
+<tr>
+<td align="left">支援的前置運算子</td>
+<td align="left">是，如果操作數可摺疊</td>
+</tr>
+<tr>
+<td align="left">支援的二元運算子</td>
+<td align="left">是，如果左右兩邊都可摺疊</td>
+</tr>
+<tr>
+<td align="left">條件運算子</td>
+<td align="left">是，如果條件可摺疊</td>
+</tr>
+<tr>
+<td align="left">括號</td>
+<td align="left">是，如果表達式可摺疊</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>如果一個表達式無法摺疊，收集器會將它寫入 <code>.metadata.json</code> 作為 <a href="https://en.wikipedia.org/wiki/Abstract*syntax*tree" target="_blank">AST</a> 供編譯器解析。</p>
+
+  <h2 id="">第二階段：程式碼產生</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 第二階段：程式碼產生"></a>
+  <p>收集器不會嘗試了解它收集並輸出至 <code>.metadata.json</code> 的元數據。
+它盡可能地呈現元數據，並在偵測到元數據語法違規時記錄錯誤。
+在程式碼產生階段，編譯器的工作就是解釋 <code>.metadata.json</code>。</p>
+<p>編譯器了解收集器所支援的所有語法形式，但如果 <em>語義</em> 違反編譯器規則，則它可能會拒絕 <em>語法上</em> 正確的元資料。</p>
+
+  <h3 id="">公用或受保護的符號</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 公用或受保護的符號"></a>
+  <p>編譯器只能參考 <em>外傳符號</em>。</p>
+
+  <ul class="docs-list">
+    <li><p>修飾的元件類別成員必須是公開或受保護的。
+  您無法將 <code>@Input()</code> 屬性設為私有。</p>
+</li>
+<li><p>資料繫結屬性也必須是公開或受保護的</p>
+</li>
+
+  </ul>
+  
+  <h3 id="">支援的類別和函式</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 支援的類別和函式"></a>
+  <p>只要語法有效，收集器可以表示函式呼叫或使用 <code>new</code> 建立物件。
+然而，編譯器之後可能會拒絕產生呼叫 <em>特定</em> 函式或建立 <em>特定</em> 物件。</p>
+<p>編譯器只能建立某些類別的實例，只支援核心裝飾器，而且只支援呼叫會傳回表達式的巨集（函式或靜態方法）。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">編譯器動作</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">新實例</td>
+<td align="left">編譯器僅允許建立 <code>InjectionToken</code> 類別實例的元資料，這些實例來自 <code>@angular/core</code>。</td>
+</tr>
+<tr>
+<td align="left">支援的裝飾器</td>
+<td align="left">編譯器僅支援 <a href="api/core#decorators"><code>@angular/core</code> 模組中 Angular 裝飾器</a> 的元資料。</td>
+</tr>
+<tr>
+<td align="left">函式呼叫</td>
+<td align="left">工廠函式必須是已匯出的命名函式。AOT 編譯器不支援工廠函式的 lambda 運算式（「箭頭函式」）。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="">函式和靜態方法呼叫</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 函式和靜態方法呼叫"></a>
+  <p>收集器接受任何包含單一 <code>return</code> 語句的函式或靜態方法。
+然而，編譯器僅支援函式或靜態方法形式的巨集，這些函式或靜態方法會傳回一個 <em>表達式</em>。</p>
+<p>例如，考慮以下函式：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> wrapInArray&lt;T&gt;(<span class="hljs-attr">value</span>: T): T[] {</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> [value];</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>你可以在元數據定義中呼叫 <code>wrapInArray</code>，因為它會傳回符合編譯器嚴格 JavaScript 子集的表達式值。</p>
+<p>您可以像這樣使用 <code>wrapInArray()</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: <span class="hljs-title function_">wrapInArray</span>(<span class="hljs-title class_">TypicalComponent</span>)</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalModule</span> {}</div></code>
+    </pre>
+  </div><p>編譯器將此用法視為您已撰寫：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [<span class="hljs-title class_">TypicalComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalModule</span> {}</div></code>
+    </pre>
+  </div><p>Angular <a href="api/router/RouterModule"><code>RouterModule</code></a> 匯出兩個巨集靜態方法 <code>forRoot</code> 和 <code>forChild</code>，以協助宣告根路由和子路由。
+檢閱這些方法的 <a href="https://github.com/angular/angular/blob/main/packages/router/src/router_module.ts#L139" title=RouterModule.forRoot 原始程式碼 target="_blank">原始程式碼</a>，以瞭解巨集如何簡化複雜 <a href="guide/ngmodules">NgModules</a> 的組態。</p>
+
+  <h3 id="">元數據改寫</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 元數據改寫"></a>
+  <p>編譯器會特別處理包含 <code>useClass</code>、<code>useValue</code>、<code>useFactory</code> 和 <code>data</code> 欄位的物件文字，將初始化這些欄位之一的表達式轉換成取代表達式的匯出變數。
+重寫這些表達式的程序會移除所有對表達式內容的限制，因為
+編譯器不需要知道表達式的值，它只需要能夠產生對該值的參考。</p>
+<p>您可能會寫一些像：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalServer</span> {</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{<span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">SERVER</span>, <span class="hljs-attr">useFactory</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">TypicalServer</span>}]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalModule</span> {}</div></code>
+    </pre>
+  </div><p>不重寫的話，這會無效，因為 lambda 不受支援，而 <code>TypicalServer</code> 沒有匯出。
+為了允許這項操作，編譯器會自動將它重寫為類似以下的內容：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalServer</span> {</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> θ<span class="hljs-number">0</span> = <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypicalServer</span>();</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{<span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">SERVER</span>, <span class="hljs-attr">useFactory</span>: θ<span class="hljs-number">0</span>}]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalModule</span> {}</div></code>
+    </pre>
+  </div><p>這允許編譯器在工廠中產生對 <code>θ0</code> 的參照，而不必知道 <code>θ0</code> 的值包含什麼。</p>
+<p>編譯器在 <code>.js</code> 檔的發射期間進行重寫。
+然而，它不會重寫 <code>.d.ts</code> 檔，因此 TypeScript 不會將其識別為匯出。
+而且它不會干擾 ES 模組的匯出 API。</p>
+
+  <h2 id="">第三階段：樣板類型檢查</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 第三階段：樣板類型檢查"></a>
+  <p>Angular 編譯器最實用的功能之一是能夠類型檢查範本內的表達式，並在它們在執行階段造成崩潰之前先捕獲任何錯誤。
+在範本類型檢查階段，Angular 範本編譯器會使用 TypeScript 編譯器來驗證範本中的繫結表達式。</p>
+<p>在專案的 TypeScript 設定檔案的 <code>&quot;angularCompilerOptions&quot;</code> 中加入編譯器選項 <code>&quot;fullTemplateTypeCheck&quot;</code>，以明確啟用此階段
+（請參閱 <a href="reference/configs/angular-compiler-options">Angular 編譯器選項</a>）。</p>
+<p>當在範本繫結表達式中偵測到類型錯誤時，範本驗證會產生錯誤訊息，類似於 TypeScript 編譯器如何針對 <code>.ts</code> 檔案中的程式碼報告類型錯誤。</p>
+<p>例如，請考慮下列元件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'{{person.addresss.street}}'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  person?: <span class="hljs-title class_">Person</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>這會產生下列錯誤：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">my.component.ts.MyComponent.html(1,1): : Property 'addresss' does not exist on type 'Person'. Did you mean 'address'?</div></code>
+    </pre>
+  </div><p>錯誤訊息中報告的文件名稱 <code>my.component.ts.MyComponent.html</code> 是範本編譯器產生的一個合成檔案，其中包含 <code>MyComponent</code> 類別範本的內容。
+編譯器絕不會將此檔案寫入磁碟中。
+行號和欄號是相對於 <code>@Component</code> 註解中的範本字串，在本例中為 <code>MyComponent</code>。
+如果元件使用 <code>templateUrl</code> 而不是 <code>template</code>，則錯誤會報告在 <code>templateUrl</code> 參照的 HTML 檔案中，而不是合成檔案中。</p>
+<p>錯誤位置是包含有錯誤內插表達式的文字節點的開頭。
+如果錯誤在屬性繫結中，例如 <code>[value]=&quot;person.address.street&quot;</code>, 錯誤位置會是包含錯誤的屬性的位置。</p>
+<p>驗證使用 TypeScript 類型檢查器和提供給 TypeScript 編譯器的選項來控制類型驗證的詳細程度。
+例如，如果指定了 <code>strictTypeChecks</code>，則錯誤</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">my.component.ts.MyComponent.html(1,1): : Object is possibly 'undefined'</div></code>
+    </pre>
+  </div><p>也回報了以上錯誤訊息。</p>
+
+  <h3 id="">類型縮小</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 類型縮小"></a>
+  <p>在 Angular 模板編譯器中，<code>ngIf</code> 指令中使用的表達式用於縮小類型聯集，就像 TypeScript 中的 <code>if</code> 表達式一樣。
+例如，要避免在上面的模板中出現 <code>Object is possibly &#39;undefined&#39;</code> 錯誤，請修改它以僅在 <code>person</code> 的值已初始化時才發出插值，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;span *ngIf="person"&gt; {{person.address.street}} &lt;/span&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  person?: <span class="hljs-title class_">Person</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>使用 <code>*ngIf</code> 允許 TypeScript 編譯器推斷繫結表達式中使用的 <code>person</code> 永遠不會是 <code>undefined</code>。</p>
+<p>有關輸入類型縮小的更多資訊，請參閱 <a href="guide/directives/structural-directives#directive-type-checks">改善自訂指令的範本類型檢查</a>。</p>
+
+  <h3 id="">非空類型斷言運算子</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 非空類型斷言運算子"></a>
+  <p>當使用 <code>*ngIf</code> 不方便，或元件中的某些約束可確保繫結運算式內插時運算式永遠非 <code>null</code> 時，使用非 <code>null</code> 類型斷言運算子來壓制 <code>Object is possibly &#39;undefined&#39;</code> 錯誤。</p>
+<p>在以下範例中，<code>person</code> 和 <code>address</code> 屬性總是同時設定，暗示如果 <code>person</code> 為非 null，則 <code>address</code> 始終為非 null。
+沒有便捷的方法可以向 TypeScript 和範本編譯器描述這個約束，但範例中透過使用 <code>address!.street</code> 來抑制錯誤。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;span *ngIf="person"&gt; {{person.name}} lives on {{address!.street}} &lt;/span&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  person?: <span class="hljs-title class_">Person</span>;</div><div class="hljs-ln-line">  address?: <span class="hljs-title class_">Address</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">setData</span>(<span class="hljs-params">person: Person, address: Address</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">person</span> = person;</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">address</span> = address;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>非空斷言運算子應謹慎使用，因為元件重構可能會破壞此約束。</p>
+<p>在這個範例中建議在 <code>*ngIf</code> 中包含 <code>address</code> 的檢查，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;span *ngIf="person &amp;&amp; address"&gt; {{person.name}} lives on {{address.street}} &lt;/span&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  person?: <span class="hljs-title class_">Person</span>;</div><div class="hljs-ln-line">  address?: <span class="hljs-title class_">Address</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">setData</span>(<span class="hljs-params">person: Person, address: Address</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">person</span> = person;</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">address</span> = address;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

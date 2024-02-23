@@ -1,0 +1,117 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">推播通知</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/ecosystem/service-workers/push-notifications.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>推送通知是一種吸引用戶的有效方法。
+透過服務工作者的力量，即使您的應用程式不在焦點上，通知也能傳送到裝置。</p>
+<p>Angular 服務工作者能夠顯示推播通知並處理通知點擊事件。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 當使用 Angular 服務工作者時，推播通知互動會使用 <code>SwPush</code> 服務處理。</p>
+
+    </div>
+    <p>如需進一步瞭解相關的瀏覽器 API，請參閱 <a href="https://developer.mozilla.org/docs/Web/API/Push_API" target="_blank">推播 API</a> 和 <a href="https://developer.mozilla.org/docs/Web/API/Notifications_API/Using_the_Notifications_API" target="_blank">使用「通知」API</a>。</p>
+
+  <h2 id="-payload">通知 payload</h2>
+  <a href="#-payload" class="docs-anchor" tabindex="-1" aria-label="Link to 通知 payload"></a>
+  <p>使用有效載荷推播訊息來呼叫推播通知。
+請參閱 <code>SwPush</code> 以取得說明。</p>
+<p>HELPFUL：在 Chrome 中，您可以在沒有後端的情況下測試推播通知。
+開啟 Devtools -&gt; 應用程式 -&gt; 服務工作者，並使用 <code>Push</code> 輸入來發送 JSON 通知有效負載。</p>
+
+  <h2 id="">通知點擊處理</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 通知點擊處理"></a>
+  <p>html</p>
+<script>
+  // This function is called when a notification is clicked
+  self.addEventListener('notificationclick', function(event) {
+    // Android doesn’t allow notification clicks to
+    // open the app, so we’ll log the notification title
+    // instead.
+    console.log('Notification clicked: ', event.notification.title);
+  });
+</script>
+
+<p><code>notificationclick</code> 事件的預設行為是關閉通知並通知 <code>SwPush.notificationClicks</code>。</p>
+<p>您可以透過將 <code>onActionClick</code> 屬性新增到 <code>data</code> 物件，並提供 <code>default</code> 項目，來指定在 <code>notificationclick</code> 上執行的其他操作。
+這在當沒有開啟的用戶端時通知被點擊時特別有用。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"notification"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"title"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"New Notification!"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"onActionClick"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"default"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"operation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"openWindow"</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"foo"</span><span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <h3 id="">操作</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 操作"></a>
+  <p>Angular 服務工作人員支援下列操作：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">操作</th>
+<th align="left">詳細</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>openWindow</code></td>
+<td align="left">在指定的 URL 開啟新分頁。</td>
+</tr>
+<tr>
+<td align="left"><code>focusLastFocusedOrOpen</code></td>
+<td align="left">聚焦最後聚焦的客戶端。如果沒有開啟的客戶端，則在指定的 URL 開啟新分頁。</td>
+</tr>
+<tr>
+<td align="left"><code>navigateLastFocusedOrOpen</code></td>
+<td align="left">聚焦最後聚焦的客戶端，並將其導航到指定的 URL。如果沒有開啟的客戶端，則在指定的 URL 開啟新分頁。</td>
+</tr>
+<tr>
+<td align="left"><code>sendRequest</code></td>
+<td align="left">將簡單的 GET 要求傳送至指定的 URL。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>重要提示：網址會相對於服務工作者的註冊範圍解析。<br />如果 <code>onActionClick</code> 項目未定義 <code>url</code>，則會使用服務工作者的註冊範圍。</p>
+
+  <h3 id="">動作</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 動作"></a>
+  <p>動作提供一種自訂方式，讓使用者能與通知互動。</p>
+<p>使用 <code>actions</code> 屬性，您可以定義一組可用的動作。
+每個動作都以動作按鈕的形式呈現，使用者可以點擊該按鈕與通知互動。</p>
+<p>此外，使用 <code>data</code> 物件上的 <code>onActionClick</code> 屬性，您可以將每個動作與在對應動作按鈕按一下時要執行的操作連結：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{</div><div class="hljs-ln-line">  <span class="hljs-string">"notification"</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">"title"</span>: <span class="hljs-string">"New Notification!"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"actions"</span>: [</div><div class="hljs-ln-line">      {<span class="hljs-string">"action"</span>: <span class="hljs-string">"foo"</span>, <span class="hljs-string">"title"</span>: <span class="hljs-string">"Open new tab"</span>},</div><div class="hljs-ln-line">      {<span class="hljs-string">"action"</span>: <span class="hljs-string">"bar"</span>, <span class="hljs-string">"title"</span>: <span class="hljs-string">"Focus last"</span>},</div><div class="hljs-ln-line">      {<span class="hljs-string">"action"</span>: <span class="hljs-string">"baz"</span>, <span class="hljs-string">"title"</span>: <span class="hljs-string">"Navigate last"</span>},</div><div class="hljs-ln-line">      {<span class="hljs-string">"action"</span>: <span class="hljs-string">"qux"</span>, <span class="hljs-string">"title"</span>: <span class="hljs-string">"Send request in the background"</span>}</div><div class="hljs-ln-line">      {<span class="hljs-string">"action"</span>: <span class="hljs-string">"other"</span>, <span class="hljs-string">"title"</span>: <span class="hljs-string">"Just notify existing clients"</span>}</div><div class="hljs-ln-line">    ],</div><div class="hljs-ln-line">    <span class="hljs-string">"data"</span>: {</div><div class="hljs-ln-line">      <span class="hljs-string">"onActionClick"</span>: {</div><div class="hljs-ln-line">        <span class="hljs-string">"default"</span>: {<span class="hljs-string">"operation"</span>: <span class="hljs-string">"openWindow"</span>},</div><div class="hljs-ln-line">        <span class="hljs-string">"foo"</span>: {<span class="hljs-string">"operation"</span>: <span class="hljs-string">"openWindow"</span>, <span class="hljs-string">"url"</span>: <span class="hljs-string">"/absolute/path"</span>},</div><div class="hljs-ln-line">        <span class="hljs-string">"bar"</span>: {<span class="hljs-string">"operation"</span>: <span class="hljs-string">"focusLastFocusedOrOpen"</span>, <span class="hljs-string">"url"</span>: <span class="hljs-string">"relative/path"</span>},</div><div class="hljs-ln-line">        <span class="hljs-string">"baz"</span>: {<span class="hljs-string">"operation"</span>: <span class="hljs-string">"navigateLastFocusedOrOpen"</span>, <span class="hljs-string">"url"</span>: <span class="hljs-string">"https://other.domain.com/"</span>},</div><div class="hljs-ln-line">        <span class="hljs-string">"qux"</span>: {<span class="hljs-string">"operation"</span>: <span class="hljs-string">"sendRequest"</span>, <span class="hljs-string">"url"</span>: <span class="hljs-string">"https://yet.another.domain.com/"</span>}</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>重要：如果動作沒有對應的 <code>onActionClick</code> 項目，則通知會關閉，並在現有客戶端上通知 <code>SwPush.notificationClicks</code>。</p>
+
+  <h2 id="-angular-">更深入了解 Angular 服務工作者</h2>
+  <a href="#-angular-" class="docs-anchor" tabindex="-1" aria-label="Link to 更深入了解 Angular 服務工作者"></a>
+  <p>您可能也有興趣：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="ecosystem/service-workers/communications">
+      與服務工作者溝通
+    </a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/devops">
+      服務工作者 devops
+    </a>
+    
+
+    </nav>
+    

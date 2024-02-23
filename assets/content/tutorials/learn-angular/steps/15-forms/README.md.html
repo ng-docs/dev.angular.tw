@@ -1,0 +1,71 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">表單總覽</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/15-forms/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>表單是許多應用程式的重要部分，因為它們使你的應用程式能夠接受使用者輸入。讓我們來瞭解 Angular 如何處理表單。</p>
+<p>在 Angular 中，有兩種表單：模板驅動和響應式。您將在接下來的幾個活動中了解這兩種表單。</p>
+<p>在這個活動中，您將會學習如何使用範本驅動方式設定表單。</p>
+<hr>
+
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">建立輸入欄位</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 建立輸入欄位"></a>
+  
+      <p>在 <code>user.component.ts</code> 中，透過新增文字輸入，將範本更新，將 <code>id</code> 設為 <code>framework</code>，類型設為 <code>text</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"framework"</span>&gt;</span></div><div class="hljs-ln-line">  Favorite Framework:</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"framework"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> /&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-formsmodule">匯入 <code>FormsModule</code></h3>
+  <a href="#-formsmodule" class="docs-anchor" tabindex="-1" aria-label="Link to 匯入 <code>FormsModule</code>"></a>
+  
+      <p>要讓這個表單使用啟用資料繫結至表單的 Angular 功能，您必須匯入 <code>FormsModule</code>。</p>
+<p>從 <code>@angular/forms</code> 匯入 <code>FormsModule</code> 並將它加入 <code>UserComponent</code> 的 <code>imports</code> 陣列中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">FormsModule</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;</div><div class="hljs-ln-line highlighted"></div><div class="hljs-ln-line highlighted"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line highlighted">  ...</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">FormsModule</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserComponent</span> {}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">將繫結新增至輸入值</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 將繫結新增至輸入值"></a>
+  
+      <p><code>FormsModule</code> 有個指令叫做 <code>ngModel</code>，它會將輸入的值繫結到類別中的屬性。</p>
+<p>更新輸入以使用 <code>ngModel</code> 指令，特別是具有以下語法的 <code>[(ngModel)]=&quot;favoriteFramework&quot;</code> 來繫結到 <code>favoriteFramework</code> 屬性。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"framework"</span>&gt;</span></div><div class="hljs-ln-line">  Favorite Framework:</div><div class="hljs-ln-line highlighted">  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"framework"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"favoriteFramework"</span> /&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></div></code>
+    </pre>
+  </div><p>在您進行變更後，請嘗試在輸入欄位中輸入值。注意它如何更新畫面（是的，非常酷）。</p>
+<p>備註：語法 <code>[()]</code> 稱為「香蕉在盒子中」，但它代表雙向繫結：屬性繫結和事件繫結。在 <a href="guide/templates/two-way-binding">Angular 文件中瞭解更多關於雙向資料繫結</a>。</p>
+
+    </li>
+    
+    </ol>
+    <p>您現在已邁出使用 Angular 建立表單的重要第一步。</p>
+<p>好棒喔，繼續保持這個氣勢！</p>

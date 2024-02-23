@@ -1,0 +1,160 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">配置依賴提供者</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/di/dependency-injection-providers.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>上述章節描述如何將類別實例視為相依性。
+除了類別之外，您也可以將值（例如 <code>boolean</code>、<code>string</code>、<code>Date</code> 和物件）視為相依性。
+Angular 提供必要的 API 來讓相依性設定更彈性，因此您可以讓這些值在 DI 中可用。</p>
+
+  <h2 id="">指定提供者權杖</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 指定提供者權杖"></a>
+  <p>如果您將服務類別指定為提供者程式碼，則預設行為是注入器使用 <code>new</code> 運算子來實例化該類別。</p>
+<p>在以下範例中，應用程式元件提供 <code>Logger</code> 實例。</p>
+<div class="docs-code" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [<span class="hljs-title class_">Logger</span>],</div></code>
+    </pre>
+  </div><p>然而，您可以設定 DI 以將 <code>Logger</code> 提供者代幣與不同的類別或任何其他值關聯。
+因此，當注入 <code>Logger</code> 時，將改用已設定的值。</p>
+<p>事實上，類別提供者語法是一種簡寫表達式，它會擴充到由 <code>Provider</code> 介面定義的提供者設定。
+Angular 在這種情況下將 <code>providers</code> 值擴充為完整的提供者物件，如下所示：</p>
+<div class="docs-code" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">[{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">Logger</span>, <span class="hljs-attr">useClass</span>: <span class="hljs-title class_">Logger</span> }]</div></code>
+    </pre>
+  </div><p>擴充的提供者配置是一個擁有兩個屬性的物件文字：</p>
+
+  <ul class="docs-list">
+    <li><code>provide</code> 屬性持有作為使用相依性值之金鑰的權杖。</li>
+<li>第二個屬性是提供者定義物件，它告訴注入器<strong>如何</strong>建立相依性值。提供者定義可以是下列其中一項：
+  <ul class="docs-list">
+    <li><code>useClass</code> - 此選項告訴 Angular DI 在注入相依性時，要實例化一個已提供的類別。</li>
+<li><code>useExisting</code> - 允許您建立權杖別名並參照任何現有的權杖。</li>
+<li><code>useFactory</code> - 允許您定義一個建立相依性的函式。</li>
+<li><code>useValue</code> - 提供應當作為相依性使用的靜態值。</li>
+
+  </ul>
+  </li>
+
+  </ul>
+  <p>以下章節描述如何使用不同的提供者定義。</p>
+
+  <h3 id="useclass">類別提供者：useClass</h3>
+  <a href="#useclass" class="docs-anchor" tabindex="-1" aria-label="Link to 類別提供者：useClass"></a>
+  <p><code>useClass</code> 提供者金鑰讓您可以建立並傳回指定類別的新執行個體。</p>
+<p>您可以使用此類型的提供者來替換常見或預設類別的替代實作。
+替代實作可以例如實作不同的策略、延伸預設類別或在測試案例中模擬真實類別的行為。</p>
+<p>在以下範例中，當在元件或任何其他類別中要求 <code>Logger</code> 相依項時，會實例化 <code>BetterLogger</code>。</p>
+<div class="docs-code" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">[{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">Logger</span>, <span class="hljs-attr">useClass</span>: <span class="hljs-title class_">BetterLogger</span> }]</div></code>
+    </pre>
+  </div><p>如果替代類別提供者有其自己的依賴項，請在父模組或元件的提供者元資料屬性中指定兩個提供者。</p>
+<div class="docs-code" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">[</div><div class="hljs-ln-line">  <span class="hljs-title class_">UserService</span>, <span class="hljs-comment">// dependency needed in `EvenBetterLogger`.</span></div><div class="hljs-ln-line">  { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">Logger</span>, <span class="hljs-attr">useClass</span>: <span class="hljs-title class_">EvenBetterLogger</span> },</div><div class="hljs-ln-line">]</div></code>
+    </pre>
+  </div><p>在此範例中，<code>EvenBetterLogger</code> 在記錄訊息中顯示使用者名稱。此記錄器從注入的 <code>UserService</code> 實例取得使用者。</p>
+<div class="docs-code" header="src/app/even-better-logger.component.ts">
+    <div class="docs-code-header"><h3>src/app/even-better-logger.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>()</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EvenBetterLogger</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Logger</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> userService: UserService</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">override</span> <span class="hljs-title function_">log</span>(<span class="hljs-params">message: <span class="hljs-built_in">string</span></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-keyword">const</span> name = <span class="hljs-variable language_">this</span>.<span class="hljs-property">userService</span>.<span class="hljs-property">user</span>.<span class="hljs-property">name</span>;</div><div class="hljs-ln-line">    <span class="hljs-variable language_">super</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Message to <span class="hljs-subst">${name}</span>: <span class="hljs-subst">${message}</span>`</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>Angular DI 知道如何建構 <code>UserService</code> 依賴項，因為它已在上方配置，並且在注入器中可用。</p>
+
+  <h3 id="useexisting">別名提供者：useExisting</h3>
+  <a href="#useexisting" class="docs-anchor" tabindex="-1" aria-label="Link to 別名提供者：useExisting"></a>
+  <p><code>useExisting</code> 提供者金鑰讓您可以將一個代幣對應到另一個代幣。
+實際上，第一個代幣是與第二個代幣相關聯的服務的別名，創造了存取相同服務物件的兩種方式。</p>
+<p>在以下範例中，注入器在元件要求新的或舊的記錄器時，會注入 <code>NewLogger</code> 的單例執行個體。
+這樣一來，<code>OldLogger</code> 就是 <code>NewLogger</code> 的別名。</p>
+<div class="docs-code" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">[</div><div class="hljs-ln-line">  <span class="hljs-title class_">NewLogger</span>,</div><div class="hljs-ln-line">  <span class="hljs-comment">// Alias OldLogger w/ reference to NewLogger</span></div><div class="hljs-ln-line highlighted">  { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">OldLogger</span>, <span class="hljs-attr">useExisting</span>: <span class="hljs-title class_">NewLogger</span>},</div><div class="hljs-ln-line">]</div></code>
+    </pre>
+  </div><p>註解：請勿使用 <code>useClass</code> 將 <code>OldLogger</code> 別名設為 <code>NewLogger</code>，因為這會建立兩個不同的 <code>NewLogger</code> 實例。</p>
+
+  <h3 id="usefactory">工廠提供者：useFactory</h3>
+  <a href="#usefactory" class="docs-anchor" tabindex="-1" aria-label="Link to 工廠提供者：useFactory"></a>
+  <p><code>useFactory</code> 提供者金鑰讓您可以透過呼叫工廠函式來建立依賴項物件。
+透過此方法，您可以基於 DI 和應用程式其他位置中可用的資訊來建立動態值。</p>
+<p>在以下範例中，只有經過授權的使用者才能在 <code>HeroService</code> 中看到秘密英雄。
+授權可以在單一應用程式階段期間變更，例如當不同的使用者登入時。</p>
+<p>要讓 <code>UserService</code> 保有安全性敏感資訊，並將其排除在 <code>HeroService</code> 之外，請給予 <code>HeroService</code> 建構函式一個布林旗標來控制秘密英雄的顯示。</p>
+<div class="docs-code" header="src/app/heroes/hero.service.ts">
+    <div class="docs-code-header"><h3>src/app/heroes/hero.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line">    <span class="hljs-keyword">private</span> logger: Logger,</div><div class="hljs-ln-line highlighted">    <span class="hljs-keyword">private</span> isAuthorized: <span class="hljs-built_in">boolean</span>) { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">getHeroes</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-keyword">const</span> auth = <span class="hljs-variable language_">this</span>.<span class="hljs-property">isAuthorized</span> ? <span class="hljs-string">'authorized '</span> : <span class="hljs-string">'unauthorized'</span>;</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">logger</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Getting heroes for <span class="hljs-subst">${auth}</span> user.`</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable constant_">HEROES</span>.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">hero</span> =&gt;</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">isAuthorized</span> || !hero.<span class="hljs-property">isSecret</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>若要實作 <code>isAuthorized</code> 旗標，請使用工廠提供者為 <code>HeroService</code> 建立新的記錄器執行個體。
+這是必要的，因為我們在建構英雄服務時需要手動傳遞 <code>Logger</code>。</p>
+<div class="docs-code" header="src/app/heroes/hero.service.provider.ts">
+    <div class="docs-code-header"><h3>src/app/heroes/hero.service.provider.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-title function_">heroServiceFactory</span> = (<span class="hljs-params">logger: Logger, userService: UserService</span>) =&gt;</div><div class="hljs-ln-line">  <span class="hljs-keyword">new</span> <span class="hljs-title class_">HeroService</span>(logger, userService.<span class="hljs-property">user</span>.<span class="hljs-property">isAuthorized</span>);</div></code>
+    </pre>
+  </div><p>工廠函式可存取 <code>UserService</code>。
+您將 <code>Logger</code> 和 <code>UserService</code> 都注入到工廠提供者中，以便注入器可以將它們傳遞給工廠函式。</p>
+<div class="docs-code" header="src/app/heroes/hero.service.provider.ts">
+    <div class="docs-code-header"><h3>src/app/heroes/hero.service.provider.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> heroServiceProvider = {</div><div class="hljs-ln-line">  <span class="hljs-attr">provide</span>: <span class="hljs-title class_">HeroService</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">useFactory</span>: heroServiceFactory,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">deps</span>: [<span class="hljs-title class_">Logger</span>, <span class="hljs-title class_">UserService</span>]</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div>
+  <ul class="docs-list">
+    <li><code>useFactory</code> 欄位指定提供者是一個工廠函式，其實作為 <code>heroServiceFactory</code>。</li>
+<li><code>deps</code> 屬性是一個提供者權杖陣列。
+<code>Logger</code> 和 <code>UserService</code> 類別作為它們自己的類別提供者的權杖。
+注入器解析這些權杖，並根據指定的順序將對應的服務注入到匹配的 <code>heroServiceFactory</code> 工廠函式參數中。</li>
+
+  </ul>
+  <p>將工廠提供者捕獲到匯出的變數 <code>heroServiceProvider</code> 中，使工廠提供者可重複使用。</p>
+
+  <h3 id="usevalue">值提供者：useValue</h3>
+  <a href="#usevalue" class="docs-anchor" tabindex="-1" aria-label="Link to 值提供者：useValue"></a>
+  <p><code>useValue</code> 鍵讓你可以將靜態值與 DI 標記關聯。</p>
+<p>使用此技術提供執行階段組態常數，例如網站基本位址和功能標誌。
+您也可以在單元測試中使用值提供者，以提供模擬資料來取代生產資料服務。</p>
+<p>下一個區段提供有關 <code>useValue</code> 鍵的更多資訊。</p>
+
+  <h2 id="-injectiontoken-">使用 <code>InjectionToken</code> 物件</h2>
+  <a href="#-injectiontoken-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 <code>InjectionToken</code> 物件"></a>
+  <p>使用 <code>InjectionToken</code> 物件作為提供者代號以供非類別相依性使用。
+以下範例定義了一個代號 <code>APP_CONFIG</code>，其類型為 <code>InjectionToken</code>。</p>
+<div class="docs-code" header="src/app/app.config.ts">
+    <div class="docs-code-header"><h3>src/app/app.config.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">InjectionToken</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">APP_CONFIG</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">InjectionToken</span>&lt;<span class="hljs-title class_">AppConfig</span>&gt;(<span class="hljs-string">'app.config description'</span>);</div></code>
+    </pre>
+  </div><p>選用的類型參數「<AppConfig>」和權杖描述「app.config description」指定權杖的目的。</p>
+<p>接下來，使用 <code>APP_CONFIG</code> 的 <code>InjectionToken</code> 物件在元件中註冊相依項提供者。</p>
+<div class="docs-code" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">APP_CONFIG</span>, <span class="hljs-attr">useValue</span>: <span class="hljs-variable constant_">MY_APP_CONFIG_VARIABLE</span> }]</div></code>
+    </pre>
+  </div><p>現在，使用 <code>@Inject()</code> 參數裝飾器將組態物件注入建構函式中。</p>
+<div class="docs-code" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Inject</span>(APP_CONFIG) config: AppConfig</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">title</span> = config.<span class="hljs-property">title</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="-di">介面和 DI</h3>
+  <a href="#-di" class="docs-anchor" tabindex="-1" aria-label="Link to 介面和 DI"></a>
+  <p>儘管 TypeScript <code>AppConfig</code> 介面支援類別內的分型，但 <code>AppConfig</code> 介面在 DI 中沒有任何作用。
+在 TypeScript 中，介面是設計時間的產物，沒有 DI 架構可以使用的執行時間表示法或令牌。</p>
+<p>當轉譯器將 TypeScript 轉換為 JavaScript 時，介面會消失，因為 JavaScript 沒有介面。
+由於 Angular 在執行時找不到介面，因此介面無法成為令牌，也無法注入。</p>
+<div class="docs-code" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// Can't use interface as provider token</span></div><div class="hljs-ln-line">[{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">AppConfig</span>, <span class="hljs-attr">useValue</span>: <span class="hljs-variable constant_">MY_APP_CONFIG_VARIABLE</span> })]</div></code>
+    </pre>
+  </div><div class="docs-code" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// Can't inject using the interface as the parameter type</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> config: AppConfig</span>) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

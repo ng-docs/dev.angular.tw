@@ -1,0 +1,39 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>Navigation</h1><div class="docs-api-item-label" data-mode="full" data-type="interface">interface</div></div></div><p class="docs-reference-description"><p>Information about a navigation operation.
+Retrieve the most recent navigation object with the
+<a href="api/router/Router">Router.getCurrentNavigation() method</a> .</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Navigation</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="id">  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="initialUrl">  <span class="hljs-attr">initialUrl</span>: <span class="hljs-title class_">UrlTree</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="extractedUrl">  <span class="hljs-attr">extractedUrl</span>: <span class="hljs-title class_">UrlTree</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="finalUrl">  finalUrl?: <span class="hljs-title class_">UrlTree</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="targetRouterState">  targetRouterState?: <span class="hljs-title class_">RouterState</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="trigger">  <span class="hljs-attr">trigger</span>: <span class="hljs-string">&quot;imperative&quot;</span> | <span class="hljs-string">&quot;popstate&quot;</span> | <span class="hljs-string">&quot;hashchange&quot;</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="extras">  <span class="hljs-attr">extras</span>: <span class="hljs-title class_">NavigationExtras</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="previousNavigation">  <span class="hljs-attr">previousNavigation</span>: <span class="hljs-title class_">Navigation</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>Information about a navigation operation.
+Retrieve the most recent navigation object with the
+<a href="api/router/Router">Router.getCurrentNavigation() method</a> .</p>
+
+    <ul class="docs-list">
+      <li><em>id</em> : The unique identifier of the current navigation.</li>
+<li><em>initialUrl</em> : The target URL passed into the <code>Router#navigateByUrl()</code> call before navigation.
+This is the value before the router has parsed or applied redirects to it.</li>
+<li><em>extractedUrl</em> : The initial target URL after being parsed with <code>UrlSerializer.extract()</code>.</li>
+<li><em>finalUrl</em> : The extracted URL after redirects have been applied.
+This URL may not be available immediately, therefore this property can be <code>undefined</code>.
+It is guaranteed to be set after the <code>RoutesRecognized</code> event fires.</li>
+<li><em>trigger</em> : Identifies how this navigation was triggered.
+-- &#39;imperative&#39;--Triggered by <code>router.navigateByUrl</code> or <code>router.navigate</code>.
+-- &#39;popstate&#39;--Triggered by a popstate event.
+-- &#39;hashchange&#39;--Triggered by a hashchange event.</li>
+<li><em>extras</em> : A <code>NavigationExtras</code> options object that controlled the strategy used for this
+navigation.</li>
+<li><em>previousNavigation</em> : The previously successful <code>Navigation</code> object. Only one previous
+navigation is available, therefore this previous <code>Navigation</code> object has a <code>null</code> value for its
+own <code>previousNavigation</code>.</li>
+
+    </ul></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="id" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>id</h3><div><code>number</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>The unique identifier of the current navigation.</p></div></div></div></div><div id="initialUrl" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>initialUrl</h3><div><code>UrlTree</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>The target URL passed into the <code>Router#navigateByUrl()</code> call before navigation. This is
+the value before the router has parsed or applied redirects to it.</p></div></div></div></div><div id="extractedUrl" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>extractedUrl</h3><div><code>UrlTree</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>The initial target URL after being parsed with <code>UrlHandlingStrategy.extract()</code>.</p></div></div></div></div><div id="finalUrl" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>finalUrl</h3><div><code>UrlTree</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>The extracted URL after redirects have been applied.
+This URL may not be available immediately, therefore this property can be <code>undefined</code>.
+It is guaranteed to be set after the <code>RoutesRecognized</code> event fires.</p></div></div></div></div><div id="targetRouterState" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>targetRouterState</h3><div><code>RouterState</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>TODO(atscott): If we want to make StateManager public, they will need access to this. Note that
+it&#39;s already eventually exposed through router.routerState.</p></div></div></div></div><div id="trigger" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>trigger</h3><div><code>&quot;imperative&quot; | &quot;popstate&quot; | &quot;hashchange&quot;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Identifies how this navigation was triggered.</p>
+
+    <ul class="docs-list">
+      <li>&#39;imperative&#39;--Triggered by <code>router.navigateByUrl</code> or <code>router.navigate</code>.</li>
+<li>&#39;popstate&#39;--Triggered by a popstate event.</li>
+<li>&#39;hashchange&#39;--Triggered by a hashchange event.</li>
+
+    </ul></div></div></div></div><div id="extras" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>extras</h3><div><code>NavigationExtras</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Options that controlled the strategy used for this navigation.
+See <code>NavigationExtras</code>.</p></div></div></div></div><div id="previousNavigation" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>previousNavigation</h3><div><code>Navigation</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>The previously successful <code>Navigation</code> object. Only one previous navigation
+is available, therefore this previous <code>Navigation</code> object has a <code>null</code> value
+for its own <code>previousNavigation</code>.</p></div></div></div></div></div></div></div>

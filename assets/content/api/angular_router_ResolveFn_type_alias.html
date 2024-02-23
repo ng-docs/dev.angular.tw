@@ -1,0 +1,20 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>ResolveFn</h1><div class="docs-api-item-label" data-mode="full" data-type="type_alias">Type Alias</div></div></div><p class="docs-reference-description"><p>Function type definition for a data provider.</p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/router/Route">Route</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">type</span> <span class="hljs-title class_">ResolveFn</span> = <span class="hljs-function">(<span class="hljs-params"></div><div class="hljs-ln-line ">  route: ActivatedRouteSnapshot,</div><div class="hljs-ln-line ">  state: RouterStateSnapshot,</div><div class="hljs-ln-line "></span>) =&gt;</span> <span class="hljs-title class_">Observable</span>&lt;T&gt; | <span class="hljs-title class_">Promise</span>&lt;T&gt; | T</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>Function type definition for a data provider.</p>
+<p>A data provider can be used with the router to resolve data during navigation.
+The router waits for the data to be resolved before the route is finally activated.</p>
+<p>The following example implements a function that retrieves the data
+needed to activate the requested route.</p>
+<p>{@example router/route_functional_guards.ts region=&quot;ResolveFn&quot;}</p>
+<p>And you can access to your resolved data from <code>HeroComponent</code>:</p>
+<p>{@example router/route_functional_guards.ts region=&quot;ResolveDataUse&quot;}</p></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>When both guard and resolvers are specified, the resolvers are not executed until
+all guards have run and succeeded.
+For example, consider the following route configuration:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">{</span><span class="hljs-ln-line"> <span class="hljs-attr">path:</span> <span class="hljs-string">&#x27;base&#x27;</span></span><span class="hljs-ln-line"> <span class="hljs-attr">canActivate:</span> [<span class="hljs-string">baseGuard</span>],</span><span class="hljs-ln-line"> <span class="hljs-attr">resolve:</span> {<span class="hljs-attr">data:</span> <span class="hljs-string">baseDataResolver</span>}</span><span class="hljs-ln-line"> <span class="hljs-attr">children:</span> [</span><span class="hljs-ln-line">  {</span><span class="hljs-ln-line">    <span class="hljs-attr">path:</span> <span class="hljs-string">&#x27;child&#x27;</span>,</span><span class="hljs-ln-line">    <span class="hljs-attr">canActivate:</span> [<span class="hljs-string">childGuard</span>],</span><span class="hljs-ln-line">    <span class="hljs-attr">component:</span> <span class="hljs-string">ChildComponent</span>,</span><span class="hljs-ln-line">    <span class="hljs-attr">resolve:</span> {<span class="hljs-attr">childData:</span> <span class="hljs-string">childDataResolver</span>}</span><span class="hljs-ln-line">   }</span><span class="hljs-ln-line"> ]</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p>The order of execution is: baseGuard, childGuard, baseDataResolver, childDataResolver.</p>
+</div></div></div>

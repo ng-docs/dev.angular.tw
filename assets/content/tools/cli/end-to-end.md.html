@@ -1,0 +1,73 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">端到端測試</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/end-to-end.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>端到端或 (E2E) 測試是一種用於斷言您的整個應用程式從頭到尾或「端到端」都能如預期般運作的測試形式。E2E 測試不同於單元測試，在於它與程式碼的底層實作細節完全無關。它通常用於以模擬使用者與應用程式互動的方式來驗證應用程式。此頁面可作為使用 Angular CLI 在 Angular 中開始進行端到端測試的指南。</p>
+
+  <h2 id="-e2e-">設定 E2E 測試</h2>
+  <a href="#-e2e-" class="docs-anchor" tabindex="-1" aria-label="Link to 設定 E2E 測試"></a>
+  <p>Angular CLI 下載並安裝您執行 Angular 應用程式端到端測試所需的所有內容。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng e2e</div></code>
+    </pre>
+  </div><p><code>ng e2e</code> 命令會首先檢查專案的「e2e」目標。如果找不到，CLI 將會提示您想使用的 e2e 套件，並引導您完成設定。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Cannot find "e2e" target for the specified project.</div><div class="hljs-ln-line">You can add a package that implements these capabilities.</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">For example:</div><div class="hljs-ln-line">Cypress: ng add @cypress/schematic</div><div class="hljs-ln-line">Nightwatch: ng add @nightwatch/schematics</div><div class="hljs-ln-line">WebdriverIO: ng add @wdio/schematics</div><div class="hljs-ln-line">Puppeteer: ng add @puppeteer/ng-schematics</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Would you like to add a package with "e2e" capabilities now?</div><div class="hljs-ln-line">No</div><div class="hljs-ln-line">❯ Cypress</div><div class="hljs-ln-line">Nightwatch</div><div class="hljs-ln-line">WebdriverIO</div><div class="hljs-ln-line">Puppeteer</div></code>
+    </pre>
+  </div><p>如果您在上述清單中找不到您想使用的測試執行器，您可以使用 <code>ng add</code> 手動新增套件。</p>
+
+  <h2 id="-e2e-">執行 E2E 測試</h2>
+  <a href="#-e2e-" class="docs-anchor" tabindex="-1" aria-label="Link to 執行 E2E 測試"></a>
+  <p>現在您的應用程式已針對端對端測試進行設定，我們現在可以執行相同的指令來執行您的測試。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng e2e</div></code>
+    </pre>
+  </div><p>注意，使用任何整合 e2e 套件執行測試並沒有任何「特殊」之處。 <code>ng e2e</code> 指令實際上只是在後台執行 <code>e2e</code> 建構器。您隨時可以 <a href="tools/cli/cli-builder#creating-a-builder">建立自己的自訂建構器</a>命名為 <code>e2e</code>，並使用 <code>ng e2e</code> 執行它。</p>
+
+  <h2 id="">有關端到端測試工具的更多資訊</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 有關端到端測試工具的更多資訊"></a>
+  
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">測試工具</th>
+<th align="left">詳細訊息</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">Cypress</td>
+<td align="left"><a href="https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test" target="_blank">開始使用 Cypress</a></td>
+</tr>
+<tr>
+<td align="left">Nightwatch</td>
+<td align="left"><a href="https://nightwatchjs.org/guide/writing-tests/introduction.html" target="_blank">開始使用 Nightwatch</a></td>
+</tr>
+<tr>
+<td align="left">WebdriverIO</td>
+<td align="left"><a href="https://webdriver.io/docs/gettingstarted" target="_blank">開始使用 Webdriver.io</a></td>
+</tr>
+<tr>
+<td align="left">Puppeteer</td>
+<td align="left"><a href="https://pptr.dev" target="_blank">開始使用 Puppeteer</a></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,0 +1,77 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">加入 localize 套件</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/i18n/add-package.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>若要利用 Angular 的在地化功能，請使用 [Angular CLI][AioCliMain] 將 <code>@angular/localize</code> 套件新增至專案。</p>
+<p>如要新增 <code>@angular/localize</code> 套件，請使用下列指令更新專案中的 <code>package.json</code> 與 TypeScript 組態檔案。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/doc-files/commands.sh" visiblelines="0">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng <span class="hljs-built_in">add</span> @angular/localize</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng extract-i18n</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng extract-i18n --output-path src/locale</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng extract-i18n <span class="hljs-attribute">--format</span>=xlf</div><div class="hljs-ln-line">ng extract-i18n <span class="hljs-attribute">--format</span>=xlf2</div><div class="hljs-ln-line">ng extract-i18n <span class="hljs-attribute">--format</span>=xmb</div><div class="hljs-ln-line">ng extract-i18n <span class="hljs-attribute">--format</span>=json</div><div class="hljs-ln-line">ng extract-i18n <span class="hljs-attribute">--format</span>=arb</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng extract-i18n --out-file source.xlf</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng build --localize</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng serve <span class="hljs-attribute">--configuration</span>=fr</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng build <span class="hljs-attribute">--configuration</span>=production,fr</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>它在 TypeScript 組態檔中加入 <code>types: [&quot;@angular/localize&quot;]</code>，並在 <code>main.ts</code> 檔案的頂端加入 <code>@angular/localize</code> 的類型定義參考。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 有關 <code>package.json</code> 和 <code>tsconfig.json</code> 檔案的更多資訊，請參閱 [Workspace npm 相依性][AioGuideNpmPackages] 和 [TypeScript 設定][AioGuideTsConfig]。</p>
+
+    </div>
+    <p>如果未安裝 <code>@angular/localize</code>，而您嘗試建置專案的在地化版本（例如，在範本中使用 <code>i18n</code> 屬性的同時），[Angular CLI][AioCliMain] 會產生錯誤，其中包含您可採取的步驟來為專案啟用 i18n。</p>
+
+  <h2 id="">選項</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 選項"></a>
+  
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">選項</th>
+<th align="left">說明</th>
+<th align="left">值類型</th>
+<th align="left">預設值</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>--project</code></td>
+<td align="left">專案名稱</td>
+<td align="left"><code>string</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>--use-at-runtime</code></td>
+<td align="left">如果設定，則 <code>$localize</code> 可以於執行期間使用。另外，<code>@angular/localize</code> 會包含在 <code>package.json</code> 的 <code>dependencies</code> 區段，而不是預設的 <code>devDependencies</code>。</td>
+<td align="left"><code>boolean</code></td>
+<td align="left"><code>false</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>有關更多可用選項，請參閱 [Angular CLI][AioCliMain] 中的 <code>ng add</code>。</p>
+
+  <h2 id="">接下來</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 接下來"></a>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="api/localize">
+      @angular/localize API
+    </a>
+    
+    <a class="docs-pill" href="guide/i18n/locale-id">
+      依 ID 參照區域設定
+    </a>
+    
+
+    </nav>
+    <p>{{ 無法處理文件最後的 LinkReferenceDefinitionGroup 部分，需手動更新！ }}</p>

@@ -1,0 +1,28 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">NgModule.id 設定為 module.id 反模式</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG6100.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>使用 <code>module.id</code> 作為 NgModule 的 <code>id</code> 是常見的反模式，而且不太可能在您的程式碼中發揮有用的作用。</p>
+<p>NgModules 可以宣告一個 <code>id</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">id</span>: <span class="hljs-string">'my_module'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyModule</span> {}</div></code>
+    </pre>
+  </div><p>宣告 <code>id</code> 使得 NgModule 可透過 <code>getNgModuleById()</code> 操作來查詢。此功能很少使用，主要用於非常特定的綑綁情境，在延遲載入 NgModules 時，而不取得對它們的直接參考。在大部分的 Angular 程式碼中，應該改用 ES 動態 <code>import()</code> (<code>import(&#39;./path/to/module&#39;)</code>)，因為這會提供對正在載入的 NgModule 的直接參考，而不需要產生全域註冊的副作用。</p>
+<p>如果您沒有使用 <code>getNgModuleById</code>，您不需要為您的 NgModules 提供 <code>id</code>。提供一個 <code>id</code> 有很大的缺點：它會使 NgModule 無法進行樹狀搖動，這可能會影響您的套件大小。</p>
+<p>特別是，指定 <code>id: module.id</code> 的模式源自對 <code>@NgModule.id</code> 的誤解。在早期版本的 Angular 中，有時需要在 <code>@Component</code> 元數據中包含 <code>moduleId: module.id</code> 屬性。</p>
+<p>使用 <code>module.id</code> 作為 <code>@NgModule.id</code> 可能來自於 <code>@Component.moduleId</code> 和 <code>@NgModule.id</code> 之間的混淆。<code>module.id</code> 通常不會對 <code>getNgModuleById()</code> 操作有用，因為 <code>id</code> 需要是眾所周知的字串，而 <code>module.id</code> 通常對消費者來說是不透明的。</p>
+
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>您可以在 NgModules 中移除 <code>id: module.id</code> 宣告。編譯器會忽略此宣告並改為發出此警告。</p>

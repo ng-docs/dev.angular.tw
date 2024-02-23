@@ -1,0 +1,140 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>Directive</h1><div class="docs-api-item-label" data-mode="full" data-type="decorator">decorator</div></div></div><p class="docs-reference-description"><p>Decorator that marks a class as an Angular directive.
+You can define your own directives to attach custom behavior to elements in the DOM.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">Directive</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="selector">  selector?: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="inputs">  inputs?: (<span class="hljs-built_in">string</span> | { <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>; alias?: <span class="hljs-built_in">string</span>; required?: <span class="hljs-built_in">boolean</span>; transform?: <span class="hljs-function">(<span class="hljs-params">value: <span class="hljs-built_in">any</span></span>) =&gt;</span> <span class="hljs-built_in">any</span>; })[];</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="outputs">  outputs?: <span class="hljs-built_in">string</span>[];</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="providers">  providers?: <span class="hljs-title class_">Provider</span>[];</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="exportAs">  exportAs?: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="queries">  queries?: { [<span class="hljs-attr">key</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>; };</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="host">  host?: { [<span class="hljs-attr">key</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">string</span>; };</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="jit">  jit?: <span class="hljs-literal">true</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="standalone">  standalone?: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="signals">  signals?: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="hostDirectives">  hostDirectives?: (<span class="hljs-title class_">Type</span>&lt;<span class="hljs-built_in">unknown</span>&gt; | { <span class="hljs-attr">directive</span>: <span class="hljs-title class_">Type</span>&lt;<span class="hljs-built_in">unknown</span>&gt;; inputs?: <span class="hljs-built_in">string</span>[]; outputs?: <span class="hljs-built_in">string</span>[]; })[];</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>Decorator that marks a class as an Angular directive.
+You can define your own directives to attach custom behavior to elements in the DOM.</p>
+<p>The options provide configuration metadata that determines
+how the directive should be processed, instantiated and used at
+runtime.</p>
+<p>Directive classes, like component classes, can implement
+<a href="guide/components/lifecycle">life-cycle hooks</a> to influence their configuration and behavior.</p></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>To define a directive, mark the class with the decorator and provide metadata.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Directive</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">&#x27;my-directive&#x27;</span>,</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDirective</span> {</span><span class="hljs-ln-line">...</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <h3>Declaring directives</h3>
+<p>In order to make a directive available to other components in your application, you should do
+one of the following:</p>
+
+    <ul class="docs-list">
+      <li>either mark the directive as <a href="guide/components/importing">standalone</a>,</li>
+<li>or declare it in an NgModule by adding it to the <code>declarations</code> and <code>exports</code> fields.</li>
+
+    </ul>
+    <p>** Marking a directive as standalone **</p>
+<p>You can add the <code>standalone: true</code> flag to the Directive decorator metadata to declare it as
+<a href="guide/components/importing">standalone</a>:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">&#x27;my-directive&#x27;</span>,</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDirective</span> {}</span>
+          </code>
+        </pre>
+      </div>
+    <p>When marking a directive as standalone, please make sure that the directive is not already
+declared in an NgModule.</p>
+<p>** Declaring a directive in an NgModule **</p>
+<p>Another approach is to declare a directive in an NgModule:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">&#x27;my-directive&#x27;</span>,</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDirective</span> {}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [<span class="hljs-title class_">MyDirective</span>, <span class="hljs-title class_">SomeComponent</span>],</span><span class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [<span class="hljs-title class_">MyDirective</span>], <span class="hljs-comment">// making it available outside of this module</span></span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SomeNgModule</span> {}</span>
+          </code>
+        </pre>
+      </div>
+    <p>When declaring a directive in an NgModule, please make sure that:</p>
+
+    <ul class="docs-list">
+      <li>the directive is declared in exactly one NgModule.</li>
+<li>the directive is not standalone.</li>
+<li>you do not re-declare a directive imported from another module.</li>
+<li>the directive is included into the <code>exports</code> field as well if you want this directive to be
+accessible for components outside of the NgModule.</li>
+
+    </ul>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="selector" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>selector</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>The CSS selector that identifies this directive in a template
+and triggers instantiation of the directive.</p>
+<p>Declare as one of the following:</p>
+
+    <ul class="docs-list">
+      <li><code>element-name</code>: Select by element name.</li>
+<li><code>.class</code>: Select by class name.</li>
+<li><code>[attribute]</code>: Select by attribute name.</li>
+<li><code>[attribute=value]</code>: Select by attribute name and value.</li>
+<li><code>:not(sub_selector)</code>: Select only if the element does not match the <code>sub_selector</code>.</li>
+<li><code>selector1, selector2</code>: Select if either <code>selector1</code> or <code>selector2</code> matches.</li>
+
+    </ul>
+    <p>Angular only allows directives to apply on CSS selectors that do not cross
+element boundaries.</p>
+<p>For the following template HTML, a directive with an <code>input[type=text]</code> selector,
+would be instantiated only on the <code>&lt;input type=&quot;text&quot;&gt;</code> element.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;radio&quot;</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="inputs" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>inputs</h3><div><code>(string | { name: string; alias?: string; required?: boolean; transform?: (value: any) => any; })[]</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Enumerates the set of data-bound input properties for a directive</p>
+<p>Angular automatically updates input properties during change detection.
+The <code>inputs</code> property accepts either strings or object literals that configure the directive
+properties that should be exposed as inputs.</p>
+<p>When an object literal is passed in, the <code>name</code> property indicates which property on the
+class the input should write to, while the <code>alias</code> determines the name under
+which the input will be available in template bindings. The <code>required</code> property indicates that
+the input is required which will trigger a compile-time error if it isn&#39;t passed in when the
+directive is used.</p>
+<p>When a string is passed into the <code>inputs</code> array, it can have a format of <code>&#39;name&#39;</code> or
+<code>&#39;name: alias&#39;</code> where <code>name</code> is the property on the class that the directive should write
+to, while the <code>alias</code> determines the name under which the input will be available in
+template bindings. String-based input definitions are assumed to be optional.</p></div></div></div></div><div id="outputs" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>outputs</h3><div><code>string[]</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Enumerates the set of event-bound output properties.</p>
+<p>When an output property emits an event, an event handler attached to that event
+in the template is invoked.</p>
+<p>The <code>outputs</code> property defines a set of <code>directiveProperty</code> to <code>alias</code>
+configuration:</p>
+
+    <ul class="docs-list">
+      <li><code>directiveProperty</code> specifies the component property that emits events.</li>
+<li><code>alias</code> specifies the DOM property the event handler is attached to.</li>
+
+    </ul></div></div></div></div><div id="providers" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>providers</h3><div><code>Provider[]</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Configures the <a href="docs">injector</a> of this
+directive or component with a <a href="docs">token</a>
+that maps to a <a href="docs">provider</a> of a dependency.</p></div></div></div></div><div id="exportAs" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>exportAs</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Defines the name that can be used in the template to assign this directive to a variable.</p></div></div></div></div><div id="queries" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>queries</h3><div><code>{ [key: string]: any; }</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Configures the queries that will be injected into the directive.</p>
+<p>Content queries are set before the <code>ngAfterContentInit</code> callback is called.
+View queries are set before the <code>ngAfterViewInit</code> callback is called.</p></div></div></div></div><div id="host" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>host</h3><div><code>{ [key: string]: string; }</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Maps class properties to host element bindings for properties,
+attributes, and events, using a set of key-value pairs.</p>
+<p>Angular automatically checks host property bindings during change detection.
+If a binding changes, Angular updates the directive&#39;s host element.</p>
+<p>When the key is a property of the host element, the property value is
+propagated to the specified DOM property.</p>
+<p>When the key is a static attribute in the DOM, the attribute value
+is propagated to the specified property in the host element.</p>
+<p>For event handling:</p>
+
+    <ul class="docs-list">
+      <li>The key is the DOM event that the directive listens to.
+To listen to global events, add the target to the event name.
+The target can be <code>window</code>, <code>document</code> or <code>body</code>.</li>
+<li>The value is the statement to execute when the event occurs. If the
+statement evaluates to <code>false</code>, then <code>preventDefault</code> is applied on the DOM
+event. A handler method can refer to the <code>$event</code> local variable.</li>
+
+    </ul></div></div></div></div><div id="jit" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>jit</h3><div><code>true</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>When present, this directive/component is ignored by the AOT compiler.
+It remains in distributed code, and the JIT compiler attempts to compile it
+at run time, in the browser.
+To ensure the correct behavior, the app must import <code>@angular/compiler</code>.</p></div></div></div></div><div id="standalone" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>standalone</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Angular directives marked as <code>standalone</code> do not need to be declared in an NgModule. Such
+directives don&#39;t depend on any &quot;intermediate context&quot; of an NgModule (ex. configured
+providers).</p>
+<p>More information about standalone components, directives, and pipes can be found in <a href="guide/components/importing">this
+guide</a>.</p></div></div></div></div><div id="signals" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>signals</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>// TODO(signals): Remove internal and add public documentation</p></div></div></div></div><div id="hostDirectives" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>hostDirectives</h3><div><code>(Type&lt;unknown> | { directive: Type&lt;unknown>; inputs?: string[]; outputs?: string[]; })[]</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Standalone directives that should be applied to the host whenever the directive is matched.
+By default, none of the inputs or outputs of the host directives will be available on the host,
+unless they are specified in the <code>inputs</code> or <code>outputs</code> properties.</p>
+<p>You can additionally alias inputs and outputs by putting a colon and the alias after the
+original input or output name. For example, if a directive applied via <code>hostDirectives</code>
+defines an input named <code>menuDisabled</code>, you can alias this to <code>disabled</code> by adding
+<code>&#39;menuDisabled: disabled&#39;</code> as an entry to <code>inputs</code>.</p></div></div></div></div></div></div></div>

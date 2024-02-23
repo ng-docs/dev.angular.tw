@@ -1,0 +1,232 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">Angular 編譯器選項</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/configs/angular-compiler-options.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>當您使用 <a href="tools/cli/aot-compiler">即時編譯 (AOT)</a>，您可以透過在 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 設定檔</a>中指定 Angular 編譯器選項來控制您的應用程式編譯方式。</p>
+<p>Angular 選項物件 <code>angularCompilerOptions</code> 是 <code>compilerOptions</code> 物件的兄弟物件，它提供標準選項給 TypeScript 編譯器。</p>
+<div class="docs-code" path="adev/src/content/examples/angular-compiler-options/tsconfig.json" visiblelines="1,2,3,4,24,25,26,27,30,31" header="tsconfig.json">
+    <div class="docs-code-header"><h3>tsconfig.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">/* To learn more about this file see: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */</div><div class="hljs-ln-line">{</div><div class="hljs-ln-line">  <span class="hljs-string">"compileOnSave"</span>:<span class="hljs-built_in"> false</span>,</div><div class="hljs-ln-line">  <span class="hljs-string">"compilerOptions"</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">"baseUrl"</span>: <span class="hljs-string">"./"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"outDir"</span>: <span class="hljs-string">"./dist/out-tsc"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"forceConsistentCasingInFileNames"</span>:<span class="hljs-built_in"> true</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"strict"</span>:<span class="hljs-built_in"> true</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"noImplicitOverride"</span>:<span class="hljs-built_in"> true</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"noPropertyAccessFromIndexSignature"</span>:<span class="hljs-built_in"> true</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"noImplicitReturns"</span>:<span class="hljs-built_in"> true</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"noFallthroughCasesInSwitch"</span>:<span class="hljs-built_in"> true</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"sourceMap"</span>:<span class="hljs-built_in"> true</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"declaration"</span>:<span class="hljs-built_in"> false</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"downlevelIteration"</span>:<span class="hljs-built_in"> true</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"experimentalDecorators"</span>:<span class="hljs-built_in"> true</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"moduleResolution"</span>: <span class="hljs-string">"node"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"importHelpers"</span>:<span class="hljs-built_in"> true</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"target"</span>: <span class="hljs-string">"es2020"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"module"</span>: <span class="hljs-string">"es2020"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"lib"</span>: [</div><div class="hljs-ln-line">      <span class="hljs-string">"es2020"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"dom"</span></div><div class="hljs-ln-line">    ]</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  <span class="hljs-string">"angularCompilerOptions"</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">"enableI18nLegacyMessageIdFormat"</span>:<span class="hljs-built_in"> false</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"strictInjectionParameters"</span>:<span class="hljs-built_in"> true</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"strictInputAccessModifiers"</span>:<span class="hljs-built_in"> true</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"strictTemplates"</span>:<span class="hljs-built_in"> true</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h2 id="-extends-">透過 <code>extends</code> 繼承設定`</h2>
+  <a href="#-extends-" class="docs-anchor" tabindex="-1" aria-label="Link to 透過 <code>extends</code> 繼承設定`"></a>
+  <p>如同 TypeScript 編譯器，Angular AOT 編譯器也支援 TypeScript 組態檔案的 <code>angularCompilerOptions</code> 區段中的 <code>extends</code>。
+<code>extends</code> 屬性位於頂層，與 <code>compilerOptions</code> 和 <code>angularCompilerOptions</code> 平行。</p>
+<p>TypeScript 組態可以使用 <code>extends</code> 屬性從另一個檔案繼承設定。
+基本檔案的組態選項會先載入，然後被繼承組態檔案中的選項覆寫。</p>
+<p>例如：</p>
+<div class="docs-code" path="adev/src/content/examples/angular-compiler-options/tsconfig.app.json" visiblelines="1,2,3,4,6,29,30,31,34,35" header="tsconfig.app.json">
+    <div class="docs-code-header"><h3>tsconfig.app.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">/* To learn more about this file see: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */</span></div><div class="hljs-ln-line">{</div><div class="hljs-ln-line">    <span class="hljs-string">"extends"</span>: <span class="hljs-string">"./tsconfig.json"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"compilerOptions"</span>: {</div><div class="hljs-ln-line">      <span class="hljs-string">"outDir"</span>: <span class="hljs-string">"./out-tsc/app"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"types"</span>: []</div><div class="hljs-ln-line">    },</div><div class="hljs-ln-line">    <span class="hljs-string">"files"</span>: [</div><div class="hljs-ln-line">      <span class="hljs-string">"src/main.ts"</span></div><div class="hljs-ln-line">    ],</div><div class="hljs-ln-line">    <span class="hljs-string">"include"</span>: [</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/*.d.ts"</span></div><div class="hljs-ln-line">    ],</div><div class="hljs-ln-line">    <span class="hljs-string">"exclude"</span>: [</div><div class="hljs-ln-line">      <span class="hljs-string">"src/test.ts"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/*.spec.ts"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/*-specs.ts"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/*.avoid.ts"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/*.0.ts"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/*.1.ts"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/*.1b.ts"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/*.2.ts"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/*.3.ts"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/*.4.ts"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/*.5.ts"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/*.6.ts"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/*.7.ts"</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"src/**/testing"</span></div><div class="hljs-ln-line">    ],</div><div class="hljs-ln-line">    <span class="hljs-string">"angularCompilerOptions"</span>: {</div><div class="hljs-ln-line">      <span class="hljs-string">"strictTemplates"</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"preserveWhitespaces"</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"sourceMap"</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">      <span class="hljs-string">"declaration"</span>: <span class="hljs-literal">false</span></div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>如需了解更多資訊，請參閱 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 手冊</a>。</p>
+
+  <h2 id="">範本選項</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 範本選項"></a>
+  <p>以下選項可供設定 Angular AOT 編譯器。</p>
+
+  <h3 id="annotationsas"><code>annotationsAs</code></h3>
+  <a href="#annotationsas" class="docs-anchor" tabindex="-1" aria-label="Link to <code>annotationsAs</code>"></a>
+  <p>修改 Angular 特定註解的發射方式以改善樹狀搖晃。
+非 Angular 註解不受影響。
+<code>static fields</code> 或 <code>decorators</code> 之一。預設值為 <code>static fields</code>。</p>
+
+  <ul class="docs-list">
+    <li><p>預設情況下，編譯器會使用類別中的靜態欄位取代裝飾器，這允許進階樹狀搖晃器 (例如 <a href="https://github.com/google/closure-compiler" target="_blank">Closure compiler</a>) 移除未使用的類別</p>
+</li>
+<li><p><code>decorators</code> 值會保留裝飾器，這可以加快編譯速度。
+  TypeScript 會呼叫 <code>__decorate</code> 輔助函式。
+  使用 <code>--emitDecoratorMetadata</code> 以進行執行時期反射。</p>
+<p>  有用的：產生的程式碼無法正確地進行樹狀搖晃。</p>
+</li>
+
+  </ul>
+  
+  <h3 id="annotateforclosurecompiler"><code>annotateForClosureCompiler</code></h3>
+  <a href="#annotateforclosurecompiler" class="docs-anchor" tabindex="-1" aria-label="Link to <code>annotateForClosureCompiler</code>"></a>
+  <!-- vale Angular.Angular_Spelling = NO -->
+
+<p>當值為 <code>true</code> 時，使用 <a href="https://github.com/angular/tsickle" target="_blank">Tsickle</a> 為發出的 JavaScript 加上 <a href="https://jsdoc.app" target="_blank">JSDoc</a> 註解，<a href="https://github.com/google/closure-compiler" target="_blank">Closure Compiler</a> 需要這些註解。
+預設值為 <code>false</code>。</p>
+<!-- vale Angular.Angular_Spelling = YES -->
+
+
+  <h3 id="compilationmode"><code>compilationMode</code></h3>
+  <a href="#compilationmode" class="docs-anchor" tabindex="-1" aria-label="Link to <code>compilationMode</code>"></a>
+  <p>指定要使用的編譯模式。
+以下模式可用：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">模式</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>&#39;full&#39;</code></td>
+<td align="left">根據當前使用的 Angular 版本，自動建立完全 AOT 編譯的程式碼。</td>
+</tr>
+<tr>
+<td align="left"><code>&#39;partial&#39;</code></td>
+<td align="left">以穩定但中間的形式產生程式碼，適合公開的程式庫。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>預設值為 <code>&#39;full&#39;</code>。</p>
+<p>對於大多數應用程式，<code>&#39;full&#39;</code> 是正確的編譯模式。</p>
+<p>對於獨立發布的程式庫（例如 NPM 套件），請使用 <code>&#39;partial&#39;</code>。
+<code>&#39;partial&#39;</code> 編譯會輸出一個穩定的中間格式，它可以更好地支援不同 Angular 版本的應用程式使用該程式庫。
+在「HEAD」上與其應用程式一起建置並使用相同版本的 Angular 的程式庫（例如在單一儲存庫中）可以使用 <code>&#39;full&#39;</code>，因為沒有版本偏差的風險。</p>
+
+  <h3 id="disableexpressionlowering"><code>disableExpressionLowering</code></h3>
+  <a href="#disableexpressionlowering" class="docs-anchor" tabindex="-1" aria-label="Link to <code>disableExpressionLowering</code>"></a>
+  <p>當為 <code>true</code>（預設值）時，會轉換註解中使用或可能使用的程式碼，以允許從範本工廠模組匯入。
+請參閱 <a href="tools/cli/aot-compiler#metadata-rewriting">元資料改寫</a>以了解更多資訊。</p>
+<p>當為 <code>false</code> 時，停用此改寫，需要手動完成改寫。</p>
+
+  <h3 id="disabletypescriptversioncheck"><code>disableTypeScriptVersionCheck</code>`</h3>
+  <a href="#disabletypescriptversioncheck" class="docs-anchor" tabindex="-1" aria-label="Link to <code>disableTypeScriptVersionCheck</code>`"></a>
+  <p>當 <code>true</code> 時，編譯器不會查看 TypeScript 版本，也不會在使用不受支援的 TypeScript 版本時報告錯誤。
+不建議這樣做，因為不受支援的 TypeScript 版本可能會出現未定義的行為。
+預設為 <code>false</code>。</p>
+
+  <h3 id="enablei18nlegacymessageidformat"><code>enableI18nLegacyMessageIdFormat</code></h3>
+  <a href="#enablei18nlegacymessageidformat" class="docs-anchor" tabindex="-1" aria-label="Link to <code>enableI18nLegacyMessageIdFormat</code>"></a>
+  <p>指示 Angular 範本編譯器為在範本中以 <code>i18n</code> 屬性標記的訊息建立舊版識別碼。
+請參閱 [將文字標記為翻譯][AioGuideI18nCommonPrepareMarkTextInComponentTemplate] 以取得有關標記訊息以進行在地化的更多資訊。</p>
+<p>除非您的專案仰賴使用舊式 ID 建立的翻譯，否則將此選項設定為「false」。
+預設為「true」。</p>
+<p>Ivy 訊息擷取工具在先前建立了多種舊版格式用於擷取訊息 ID。
+這些訊息格式有一些問題，例如空白處理和依賴範本原始 HTML 內部資訊。</p>
+<p>新的訊息格式更能抵抗空白的更動，在所有翻譯檔案格式中皆相同，並且可以直接從對 <code>$localize</code> 的呼叫中建立。
+這允許應用程式程式碼中的 <code>$localize</code> 訊息使用與元件範本中相同的 <code>i18n</code> 訊息作為 ID。</p>
+
+  <h3 id="enableresourceinlining"><code>enableResourceInlining</code></h3>
+  <a href="#enableresourceinlining" class="docs-anchor" tabindex="-1" aria-label="Link to <code>enableResourceInlining</code>"></a>
+  <p>當為 <code>true</code> 時，會以 <code>template</code> 和 <code>styles</code> 屬性中的內聯內容取代所有 <code>@Component</code> 裝飾器中的 <code>templateUrl</code> 和 <code>styleUrls</code> 屬性。</p>
+<p>如果啟用，<code>ngc</code> 的 <code>.js</code> 輸出不包含任何延遲載入的範本或樣式網址。</p>
+<p>對於使用 Angular CLI 建立的程式庫專案，開發配置預設為 <code>true</code>。</p>
+
+  <h3 id="enablelegacytemplate"><code>enableLegacyTemplate</code></h3>
+  <a href="#enablelegacytemplate" class="docs-anchor" tabindex="-1" aria-label="Link to <code>enableLegacyTemplate</code>"></a>
+  <p>當為 <code>true</code> 時，啟用已棄用的 <code>&lt;template&gt;</code> 元素取代 <code>&lt;ng-template&gt;</code>。
+預設為 <code>false</code>。
+可能為某些第三方 Angular 函式庫所要求。</p>
+
+  <h3 id="flatmoduleid"><code>flatModuleId</code></h3>
+  <a href="#flatmoduleid" class="docs-anchor" tabindex="-1" aria-label="Link to <code>flatModuleId</code>"></a>
+  <p>用於匯入平面模組的模組 ID（當 <code>flatModuleOutFile</code> 為 <code>true</code> 時）。
+由範本編譯器建立的參考在從平面模組匯入符號時使用這個模組名稱。
+如果 <code>flatModuleOutFile</code> 為 <code>false</code>，則忽略。</p>
+
+  <h3 id="flatmoduleoutfile"><code>flatModuleOutFile</code></h3>
+  <a href="#flatmoduleoutfile" class="docs-anchor" tabindex="-1" aria-label="Link to <code>flatModuleOutFile</code>"></a>
+  <p>當 <code>true</code> 時，產生給定檔案名稱的扁平模組索引和對應的扁平模組中繼資料。
+用於建立封裝方式類似於 <code>@angular/core</code> 和 <code>@angular/common</code> 的扁平模組。
+當使用此選項時，函式庫的 <code>package.json</code> 應參照建立的扁平模組索引，而不是函式庫索引檔案。</p>
+<p>僅產生一個 <code>.metadata.json</code> 檔案，其中包含從函式庫索引匯出的符號的所有必要資訊。
+在建立的 <code>.ngfactory.js</code> 檔案中，扁平模組索引用於匯入符號。符號包括函式庫索引的公共 API 和隱藏的內部符號。</p>
+<p>預設情況下，假設 <code>files</code> 欄位中提供的 <code>.ts</code> 檔案是函式庫索引。
+如果指定多個 <code>.ts</code> 檔案，則使用 <code>libraryIndex</code> 選擇要使用的檔案。
+如果提供多個 <code>.ts</code> 檔案而沒有 <code>libraryIndex</code>，則會產生錯誤。</p>
+<p>平面模組索引 <code>.d.ts</code> 和 <code>.js</code> 會在與程式庫索引 <code>.d.ts</code> 檔案相同的位址中，以指定的 <code>flatModuleOutFile</code> 名稱建立。</p>
+<p>例如，如果某個函式庫使用 <code>public_api.ts</code> 檔案作為模組的函式庫索引，<code>tsconfig.json</code> <code>files</code> 欄位會是 <code>[&quot;public_api.ts&quot;]</code>。
+然後可以設定 <code>flatModuleOutFile</code> 選項，例如，設定為 <code>&quot;index.js&quot;</code>, 它會產生 <code>index.d.ts</code> 和 <code>index.metadata.json</code> 檔案。
+函式庫的 <code>package.json</code> 的 <code>module</code> 欄位會是 <code>&quot;index.js&quot;</code>，而 <code>typings</code> 欄位會是 <code>&quot;index.d.ts&quot;</code>。</p>
+
+  <h3 id="fulltemplatetypecheck"><code>fullTemplateTypeCheck</code></h3>
+  <a href="#fulltemplatetypecheck" class="docs-anchor" tabindex="-1" aria-label="Link to <code>fullTemplateTypeCheck</code>"></a>
+  <p>當 <code>true</code> 時，建議值，啟用範本編譯器的 <a href="tools/cli/aot-compiler#binding-expression-validation">繫結表達式驗證</a> 階段。此階段使用 TypeScript 驗證繫結表達式。
+如需更多資訊，請參閱 <a href="tools/cli/template-typecheck">範本類型檢查</a>。</p>
+<p>預設為 <code>false</code>，但當您使用 Angular CLI 命令 <code>ng new --strict</code> 時，它會在新專案的設定中設為 <code>true</code>。</p>
+<p>重要：<code>fullTemplateTypeCheck</code> 選項已在 Angular 13 中棄用，取而代之的是 <code>strictTemplates</code> 編譯器選項家族。</p>
+
+  <h3 id="generatecodeforlibraries"><code>generateCodeForLibraries</code></h3>
+  <a href="#generatecodeforlibraries" class="docs-anchor" tabindex="-1" aria-label="Link to <code>generateCodeForLibraries</code>"></a>
+  <p>當 <code>true</code> 時，為具有對應 <code>.metadata.json</code> 檔案的 <code>.d.ts</code> 檔案建立工廠檔案 (<code>.ngfactory.js</code> 和 <code>.ngstyle.js</code>)。預設值為 <code>true</code>。</p>
+<p>當為 <code>false</code> 時，工廠檔案只會針對 <code>.ts</code> 檔案建立。
+在使用工廠摘要時執行此操作。</p>
+
+  <h3 id="preservewhitespaces"><code>preserveWhitespaces</code></h3>
+  <a href="#preservewhitespaces" class="docs-anchor" tabindex="-1" aria-label="Link to <code>preserveWhitespaces</code>"></a>
+  <p>當為 <code>false</code>（預設），會從編譯的範本中移除空白文字節點，這會產生較小的已發射範本工廠模組。
+設為 <code>true</code> 以保留空白文字節點。</p>
+<p>有用的：在使用水合時，建議您使用 <code>preserveWhitespaces: false</code>，這是預設值。如果您選擇透過在 tsconfig 中加入 <code>preserveWhitespaces: true</code> 來啟用保留空白，您可能會遇到水合問題。這還不是完全受支援的設定。請確保這在伺服器和客戶端 tsconfig 檔案之間也一致設定。請參閱 <a href="guide/hydration#preserve-whitespaces">水合指南</a>以了解更多詳情。</p>
+
+  <h3 id="skipmetadataemit"><code>skipMetadataEmit</code></h3>
+  <a href="#skipmetadataemit" class="docs-anchor" tabindex="-1" aria-label="Link to <code>skipMetadataEmit</code>"></a>
+  <p>當 <code>true</code> 時，不產生 <code>.metadata.json</code> 檔案。
+預設值為 <code>false</code>。</p>
+<p><code>.metadata.json</code> 檔案包含範本編譯器從 <code>.ts</code> 檔案中需要的資訊，這些資訊未包含在 TypeScript 編譯器產生的 <code>.d.ts</code> 檔案中。
+此資訊包括範例內容，例如元件範本，TypeScript 會將它發送到 <code>.js</code> 檔案，但不會發送到 <code>.d.ts</code> 檔案。</p>
+<p>使用工廠摘要時，你可以設定為「true」，因為工廠摘要包含 <code>.metadata.json</code> 檔案中的資訊副本。</p>
+<p>如果使用 TypeScript 的 <code>--outFile</code> 選項，請設定為 <code>true</code>，因為此類型的 TypeScript 輸出對元資料檔案無效。
+Angular 社群不建議將 <code>--outFile</code> 與 Angular 搭配使用。
+請改用打包器，例如 <a href="https://webpack.js.org" target="_blank">webpack</a>。</p>
+
+  <h3 id="skiptemplatecodegen"><code>skipTemplateCodegen</code></h3>
+  <a href="#skiptemplatecodegen" class="docs-anchor" tabindex="-1" aria-label="Link to <code>skipTemplateCodegen</code>"></a>
+  <p>當 <code>true</code> 時，不發出 <code>.ngfactory.js</code> 和 <code>.ngstyle.js</code> 檔案。
+這會關閉大部分的範本編譯器並停用範本診斷報告。</p>
+<p>可用於指示範本編譯器為 <code>npm</code> 套件分發產生 <code>.metadata.json</code> 檔案。這可避免產生無法分發到 <code>npm</code> 的 <code>.ngfactory.js</code> 和 <code>.ngstyle.js</code> 檔案。</p>
+<p>對於使用 Angular CLI 建立的程式庫專案，開發配置預設為 <code>true</code>。</p>
+
+  <h3 id="strictmetadataemit"><code>strictMetadataEmit</code></h3>
+  <a href="#strictmetadataemit" class="docs-anchor" tabindex="-1" aria-label="Link to <code>strictMetadataEmit</code>"></a>
+  <p>當 <code>true</code> 時，如果 <code>&quot;skipMetadataEmit&quot;</code> 為 <code>false</code>，則會向 <code>.metadata.json</code> 檔案報告錯誤。
+預設為 <code>false</code>。
+僅在 <code>&quot;skipMetadataEmit&quot;</code> 為 <code>false</code> 且 <code>&quot;skipTemplateCodegen&quot;</code> 為 <code>true</code> 時使用。</p>
+<p>此選項用於驗證針對與 <code>npm</code> 套件綑綁而發出的 <code>.metadata.json</code> 檔案。
+驗證很嚴格，可能會針對模板編譯器使用時絕不會產生錯誤的元資料發出錯誤。
+您可以選擇透過在記錄符號的註解中加入 <code>@dynamic</code> 來禁止此選項發出的錯誤。</p>
+<p><code>.metadata.json</code> 檔案包含錯誤是有效的。
+如果使用元資料來決定註解的內容，範本編譯器會報告這些錯誤。
+元資料收集器無法預測設計用於註解中的符號。它預先在匯出的符號的元資料中包含錯誤節點。
+然後，範本編譯器可以使用錯誤節點來報告使用這些符號時的錯誤。</p>
+<p>如果函式庫用戶打算在註解中使用符號，範本編譯器通常不會報告此情況。在用戶實際使用符號後才會報告。
+這個選項允許在函式庫的建置階段偵測這些錯誤，例如，在製作 Angular 函式庫時使用。</p>
+<p>對於使用 Angular CLI 建立的程式庫專案，開發配置預設為 <code>true</code>。</p>
+
+  <h3 id="strictinjectionparameters"><code>strictInjectionParameters</code></h3>
+  <a href="#strictinjectionparameters" class="docs-anchor" tabindex="-1" aria-label="Link to <code>strictInjectionParameters</code>"></a>
+  <p>當為 <code>true</code> 時，會針對無法判斷插入類型的提供的參數報告錯誤。
+當為 <code>false</code> 時，無法解析其類型的已標記為 <code>@Injectable</code> 類別的建構函式參數會產生警告。
+建議的值為 <code>true</code>，但預設值為 <code>false</code>。</p>
+<p>當您使用 Angular CLI 指令 <code>ng new --strict</code> 時，它會在建立的專案設定中設為 <code>true</code>。</p>
+
+  <h3 id="stricttemplates"><code>strictTemplates</code></h3>
+  <a href="#stricttemplates" class="docs-anchor" tabindex="-1" aria-label="Link to <code>strictTemplates</code>"></a>
+  <p>如果 <code>true</code>，則啟用 <a href="tools/cli/template-typecheck#strict-mode">嚴格的範本類型檢查</a>。</p>
+<p>此選項啟用的嚴格性旗標允許您開啟和關閉特定類型的嚴格範本類型檢查。
+請參閱 <a href="tools/cli/template-typecheck#troubleshooting-template-errors">排除範本錯誤</a>。</p>
+<p>當您使用 Angular CLI 指令 <code>ng new --strict</code> 時，它會在新的專案設定中被設為 <code>true</code>。</p>
+
+  <h3 id="trace"><code>trace</code></h3>
+  <a href="#trace" class="docs-anchor" tabindex="-1" aria-label="Link to <code>trace</code>"></a>
+  <p>當為 <code>true</code> 時，在編譯範本時會印出額外資訊。
+預設為 <code>false</code>。</p>
+
+  <h2 id="">命令列選項</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 命令列選項"></a>
+  <p>在多數情況下，您會使用 <a href="reference/configs/angular-compiler-options">Angular CLI</a> 間接與 Angular 編譯器互動。在除錯某些問題時，您可能會發現直接呼叫 Angular 編譯器很有用。
+您可以使用 <code>@angular/compiler-cli</code> npm 套件提供的 <code>ngc</code> 指令，從命令列呼叫編譯器。</p>
+<p><code>ngc</code> 命令是 TypeScript 的 <code>tsc</code> 編譯器命令的包裝器。Angular 編譯器主要透過 <code>tsconfig.json</code> 組態，而 Angular CLI 則主要透過 <code>angular.json</code> 組態。</p>
+<p>除了設定檔，您也可以使用 <a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html" target="_blank"><code>tsc</code> 命令列選項</a> 來設定 <code>ngc</code>。</p>
+<p>{{ 無法處理文件最後的 LinkReferenceDefinitionGroup 部分，需手動更新！ }}</p>

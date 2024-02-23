@@ -1,0 +1,98 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">將屬性繫結新增至元件的範本</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/first-app/steps/06-property-binding/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>本教學課程示範如何將屬性繫結新增到範本，並使用它將動態資料傳遞給元件。</p>
+
+    <div class="docs-video-container">
+      <iframe
+      class="docs-video"
+      src="https://www.youtube.com/embed/eM3zi_n7lNs?si=AsiczpWnMz5HhJqB&amp;start=599"
+      
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      credentialless
+      title="Video player"
+      ></iframe>
+    </div>
+    
+  <h2 id="">你將會學到</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 你將會學到"></a>
+  
+  <ul class="docs-list">
+    <li>您的應用程式在 <code>HomeComponent</code> 範本中具有資料繫結。</li>
+<li>您的應用程式將資料從 <code>HomeComponent</code> 傳送至 <code>HousingLocationComponent</code>。</li>
+
+  </ul>
+  
+  <h2 id="">輸入的概念性預覽</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 輸入的概念性預覽"></a>
+  <p>在這個課程中，您將繼續將資料從父元件分享給子元件的程序，方法是使用屬性繫結在範本中將資料繫結到那些屬性。</p>
+<p>屬性繫結可讓您將變數連接至 Angular 範本中的 <code>Input</code>。然後，資料會動態繫結至 <code>Input</code>。</p>
+<p>如需更深入的說明，請參閱 <a href="guide/templates/property-binding">屬性繫結</a> 指南。</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-homecomponent-">更新 <code>HomeComponent</code> 範本</h3>
+  <a href="#-homecomponent-" class="docs-anchor" tabindex="-1" aria-label="Link to 更新 <code>HomeComponent</code> 範本"></a>
+  
+      <p>此步驟將屬性繫結新增至 <code>&lt;app-housing-location&gt;</code> 標籤。</p>
+<p>在程式碼編輯器中：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>導航至 <code>src/app/home/home.component.ts</code></p>
+</li>
+<li><p>在 <code>@Component</code> 裝飾器的範本屬性中，更新程式碼以符合以下程式碼：</p>
+<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/07-dynamic-template-values/src/app/home/home.component.ts" visiblelines="20" header="新增 housingLocation 屬性繫結">
+    <div class="docs-code-header"><h3>新增 housingLocation 屬性繫結</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {CommonModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocationComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'../housing-location/housing-location.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocation} <span class="hljs-keyword">from</span> <span class="hljs-string">'../housinglocation'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-home'</span>,</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  imports: [CommonModule, HousingLocationComponent],</div><div class="hljs-ln-line">  template: `<span class="language-javascript"></span></div><div class="hljs-ln-line">    &lt;section&gt;</div><div class="hljs-ln-line">      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span></span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Filter by city"</span> /&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"primary"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span>&gt;</span>Search<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></div><div class="hljs-ln-line">    &lt;/section&gt;</div><div class="hljs-ln-line">    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"results"</span>&gt;</span></span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">app-housing-location</span> [<span class="hljs-attr">housingLocation</span>]=<span class="hljs-string">"housingLocation"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-housing-location</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span></div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./home.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HomeComponent</span> {</div><div class="hljs-ln-line">  readonly baseUrl = <span class="hljs-string">'https://angular.dev/assets/tutorials/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  housingLocation: HousingLocation = {</div><div class="hljs-ln-line">    id: <span class="hljs-number">9999</span>,</div><div class="hljs-ln-line">    name: <span class="hljs-string">'Test Home'</span>,</div><div class="hljs-ln-line">    city: <span class="hljs-string">'Test city'</span>,</div><div class="hljs-ln-line">    state: <span class="hljs-string">'ST'</span>,</div><div class="hljs-ln-line">    photo: `<span class="language-javascript">${<span class="hljs-variable language_">this</span>.<span class="hljs-property">baseUrl</span>}/example-house.<span class="hljs-property">jpg</span></span>`,</div><div class="hljs-ln-line">    availableUnits: <span class="hljs-number">99</span>,</div><div class="hljs-ln-line">    wifi: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">    laundry: <span class="hljs-literal">false</span>,</div><div class="hljs-ln-line">  };</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p> 當新增屬性繫結至元件標籤時，我們使用 <code>[attribute] = &quot;value&quot;</code> 語法來通知 Angular，指派的值應視為元件類別的屬性，而不是字串值。</p>
+<p> 右手邊的值是 <code>HomeComponent</code> 的屬性名稱。</p>
+</li>
+
+    </ol>
+    
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">確認程式碼仍然有效</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 確認程式碼仍然有效"></a>
+  
+      
+    <ol class="docs-ordered-list">
+      <li>儲存變更並確認應用程式沒有任何錯誤。</li>
+<li>在繼續執行下一個步驟前，請更正任何錯誤。</li>
+
+    </ol>
+    
+    </li>
+    
+    </ol>
+    <p>摘要：在本課程中，您新增了新的屬性繫結，並傳遞了對類別屬性的參照。現在，<code>HousingLocationComponent</code> 可以存取資料，用於自訂元件的顯示。</p>
+<p>有關本課程中涵蓋的主題的更多資訊，請造訪：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="guide/templates/property-binding">
+      屬性繫結
+    </a>
+    
+
+    </nav>
+    

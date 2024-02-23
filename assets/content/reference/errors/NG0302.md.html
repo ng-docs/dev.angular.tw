@@ -1,0 +1,48 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">管道找不到</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0302.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-video-container">
+      <iframe
+      class="docs-video"
+      src="https://www.youtube.com/embed/maI2u6Sxk9M"
+      
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      credentialless
+      title="Video player"
+      ></iframe>
+    </div>
+    <p>Angular 找不到具有此名稱的管道。</p>
+<p>範本中參照的 <a href="guide/pipes">pipe</a> 尚未命名或正確宣告。</p>
+<p>要使用管道：</p>
+
+  <ul class="docs-list">
+    <li>確保在範本中使用的名稱與在 pipe 裝飾器中定義的名稱相符。</li>
+<li>透過將 <code>standalone: true</code> 旗標新增到 pipe 的裝飾器，將其標記為獨立，或透過將其新增至該模組的宣告陣列，將其宣告為 <code>NgModule</code> 的一部分。</li>
+<li>在獨立元件和/或需要它的 <code>NgModules</code> 中匯入它。</li>
+
+  </ul>
+  
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>使用管線名稱追蹤管線在何處宣告和使用。</p>
+<p>要解決這個錯誤：</p>
+
+  <ul class="docs-list">
+    <li>如果管線是 <code>NgModule</code> 的本機，請在管線的裝飾器中給予它一個唯一名稱，並在 <code>NgModule</code> 中宣告它。</li>
+<li>如果管線是獨立的或是在另一個 <code>NgModule</code> 中宣告，請將它加入獨立元件或目前 <code>NgModule</code> 的 <code>imports</code> 欄位中。</li>
+
+  </ul>
+  <p>如果您最近新增一個匯入或宣告，您可能需要重新啟動您的伺服器來檢視這些變更。</p>

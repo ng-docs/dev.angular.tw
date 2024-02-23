@@ -1,0 +1,37 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core/testing</span><div class="docs-reference-title"><div><h1>tick</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div></div><p class="docs-reference-description"><p>Simulates the asynchronous passage of time for the timers in the <code>fakeAsync</code> zone.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">tick</span>(</div><div class="hljs-ln-line ">  millis?: <span class="hljs-built_in">number</span>,</div><div class="hljs-ln-line ">  tickOptions?: { <span class="hljs-attr">processNewMacroTasksSynchronously</span>: <span class="hljs-built_in">boolean</span>; }</div><div class="hljs-ln-line ">): <span class="hljs-built_in">void</span>;</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>Simulates the asynchronous passage of time for the timers in the <code>fakeAsync</code> zone.</p>
+<p>The microtasks queue is drained at the very start of this function and after any timer callback
+has been executed.</p></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>The <code>tick()</code> option is a flag called <code>processNewMacroTasksSynchronously</code>,
+which determines whether or not to invoke new macroTasks.</p>
+<p>If you provide a <code>tickOptions</code> object, but do not specify a
+<code>processNewMacroTasksSynchronously</code> property (<code>tick(100, {})</code>),
+then <code>processNewMacroTasksSynchronously</code> defaults to true.</p>
+<p>If you omit the <code>tickOptions</code> parameter (<code>tick(100))</code>), then
+<code>tickOptions</code> defaults to <code>{processNewMacroTasksSynchronously: true}</code>.</p>
+<h3>Example</h3>
+<code-example path="core/testing/ts/fake_async.ts" region="basic" />
+
+<p>The following example includes a nested timeout (new macroTask), and
+the <code>tickOptions</code> parameter is allowed to default. In this case,
+<code>processNewMacroTasksSynchronously</code> defaults to true, and the nested
+function is executed on each tick.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">it (<span class="hljs-string">&#x27;test with nested setTimeout&#x27;</span>, fakeAsync(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><span class="hljs-ln-line">  let nestedTimeoutInvoked = <span class="hljs-literal">false</span>;</span><span class="hljs-ln-line">  function funcWithNestedTimeout() {</span><span class="hljs-ln-line">    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><span class="hljs-ln-line">      nestedTimeoutInvoked = <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">    });</span><span class="hljs-ln-line">  };</span><span class="hljs-ln-line">  <span class="hljs-built_in">setTimeout</span>(funcWithNestedTimeout);</span><span class="hljs-ln-line">  tick();</span><span class="hljs-ln-line">  expect(nestedTimeoutInvoked).toBe(<span class="hljs-literal">true</span>);</span><span class="hljs-ln-line">}));</span>
+          </code>
+        </pre>
+      </div>
+    <p>In the following case, <code>processNewMacroTasksSynchronously</code> is explicitly
+set to false, so the nested timeout function is not invoked.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">it (<span class="hljs-string">&#x27;test with nested setTimeout&#x27;</span>, fakeAsync(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><span class="hljs-ln-line">  let nestedTimeoutInvoked = <span class="hljs-literal">false</span>;</span><span class="hljs-ln-line">  function funcWithNestedTimeout() {</span><span class="hljs-ln-line">    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><span class="hljs-ln-line">      nestedTimeoutInvoked = <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">    });</span><span class="hljs-ln-line">  };</span><span class="hljs-ln-line">  <span class="hljs-built_in">setTimeout</span>(funcWithNestedTimeout);</span><span class="hljs-ln-line">  tick(<span class="hljs-number">0</span>, {processNewMacroTasksSynchronously: <span class="hljs-literal">false</span>});</span><span class="hljs-ln-line">  expect(nestedTimeoutInvoked).toBe(<span class="hljs-literal">false</span>);</span><span class="hljs-ln-line">}));</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>tick</h3><div><code>void</code></div></div><span></span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Simulates the asynchronous passage of time for the timers in the <code>fakeAsync</code> zone.</p>
+<p>The microtasks queue is drained at the very start of this function and after any timer callback
+has been executed.</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">millis</span><code>number</code><div class="docs-parameter-description"><p>The number of milliseconds to advance the virtual timer.</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">tickOptions</span><code>{ processNewMacroTasksSynchronously: boolean; }</code><div class="docs-parameter-description"><p>The options to pass to the <code>tick()</code> function.</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>void</code></div></div></div></div></div></div></div>

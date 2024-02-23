@@ -1,0 +1,124 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">理解相依性注入</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/di/dependency-injection.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>相依性注入，或 DI，是 Angular 中的基本概念之一。DI 已連接到 Angular 框架中，並允許具有 Angular 裝飾器的類，例如元件、指令、管道和可注入項目，配置他們所需的依賴項。</p>
+<p>DI 系統中有兩個主要角色：相依項消費者和相依項提供者。</p>
+<p>Angular 使用稱為 <code>Injector</code> 的抽象，來促進依賴項使用者和依賴項提供者之間的互動。當要求依賴項時，Injector 會檢查其登錄，看看是否有已可用的執行個體。如果沒有，則會建立新的執行個體並將其儲存在登錄中。Angular 會在應用程式引導程序期間建立一個應用程式範圍的 Injector（也稱為「根」Injector）。在大部分情況下，您不需要手動建立 Injector，但您應該知道有一個連接提供者和使用者的層級。</p>
+<p>本主題涵蓋類別如何充當相依項的基本情境。Angular 也允許您使用函式、物件、原始類型（例如字串或布林值）或任何其他類型作為相依項。如需更多資訊，請參閱 <a href="/guide/di/dependency-injection-providers">相依項提供者</a>。</p>
+
+  <h2 id="">提供依賴性</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 提供依賴性"></a>
+  <p>考慮到有一個類別稱為 <code>HeroService</code>，需要在元件中做為相依性。</p>
+<p>第一步是新增 <code>@Injectable</code> 裝飾器來顯示該類別可以被注入。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line highlighted"><span class="hljs-meta">@Injectable</span>()</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {}</div></code>
+    </pre>
+  </div><p>下一步是透過提供它來使其在 DI 中可用。
+依賴關係可以在多個地方提供：</p>
+
+  <ul class="docs-list">
+    <li><a href="#preferred-at-the-application-root-level-using-providedin"><strong>首選：在應用程式根級別使用 <code>providedIn</code>。</strong></a></li>
+<li><a href="#at-the-component-level">在元件級別。</a></li>
+<li><a href="#at-application-root-level-using-applicationconfig">在應用程式根級別使用 <code>ApplicationConfig</code>。</a></li>
+<li><a href="#ngmodule-based-applications"><code>NgModule</code> 基礎的應用程式。</a></li>
+
+  </ul>
+  
+  <h3 id="--providedin"><strong>建議</strong>: 在應用程式根目錄層級使用 <code>providedIn</code></h3>
+  <a href="#--providedin" class="docs-anchor" tabindex="-1" aria-label="Link to <strong>建議</strong>: 在應用程式根目錄層級使用 <code>providedIn</code>"></a>
+  <p>在應用程式根層級使用 <code>providedIn</code> 提供服務，允許將服務注入到所有其他類別。
+使用 <code>providedIn</code> 可讓 Angular 和 JavaScript 程式碼最佳化器有效移除未使用的服務（稱為樹狀搖動）。</p>
+<p>您可以透過在 <code>@Injectable</code> 裝飾器中使用 <code>providedIn: &#39;root&#39;</code> 來提供服務：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {}</div></code>
+    </pre>
+  </div><p>當您在根層級提供服務時，Angular 會建立一個 <code>HeroService</code> 的單一共用實例，並將其注入任何要求它的類別。</p>
+
+  <h3 id="">在元件層級</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 在元件層級"></a>
+  <p>您可以在 <code>@Component</code> 層級，透過使用 <code>@Component</code> 裝飾器的 <code>providers</code> 欄位，來提供服務。
+在這種情況下，<code>HeroService</code> 會提供給此元件的所有實例，以及範本中使用的其他元件和指令。</p>
+<p>例如：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'hero-list'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'...'</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [<span class="hljs-title class_">HeroService</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroListComponent</span> {}</div></code>
+    </pre>
+  </div><p>當您在元件層級註冊供應商時，您會在每個新元件實例中取得服務的新實例。</p>
+<p>註解：宣告像這樣的服務會導致 <code>HeroService</code> 一直包含在您的應用程式中，即使該服務未使用。</p>
+
+  <h3 id="-applicationconfig">在應用程式根級別使用 <code>ApplicationConfig</code></h3>
+  <a href="#-applicationconfig" class="docs-anchor" tabindex="-1" aria-label="Link to 在應用程式根級別使用 <code>ApplicationConfig</code>"></a>
+  <p>您可以在 <code>ApplicationConfig</code> 的 <code>providers</code> 欄位中（傳遞給 <code>bootstrapApplication</code> 函式）提供服務或其他在應用程式層級的 <code>Injectable</code>。</p>
+<p>在以下範例中，<code>HeroService</code> 可供所有元件、指令和管道使用。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">    <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line highlighted">      { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">HeroService</span> },</div><div class="hljs-ln-line">    ]</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div><p>然後，在 <code>main.ts</code> 中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">AppComponent</span>, appConfig)</div></code>
+    </pre>
+  </div><p>註解：宣告像這樣的服務會導致 <code>HeroService</code> 一直包含在您的應用程式中，即使該服務未使用。</p>
+
+  <h3 id="-ngmodule-">基於 <code>NgModule</code> 的應用程式</h3>
+  <a href="#-ngmodule-" class="docs-anchor" tabindex="-1" aria-label="Link to 基於 <code>NgModule</code> 的應用程式"></a>
+  <p>基於 <code>@NgModule</code> 的應用程式使用 <code>@NgModule</code> 裝飾器的 <code>providers</code> 欄位，以提供應用程式層級可用的服務或其他 <code>Injectable</code>。</p>
+<p>模組中提供的服務可供模組的所有宣告使用，或是供共用相同 <code>ModuleInjector</code> 的任何其他模組使用。
+若要了解所有邊緣案例，請參閱<a href="/guide/di/hierarchical-dependency-injection">階層式注入器</a>。</p>
+<p>註：使用 <code>providers</code> 宣告服務會導致服務包含在您的應用程式中，即使該服務未使用。</p>
+
+  <h2 id="-">注入/使用依賴項</h2>
+  <a href="#-" class="docs-anchor" tabindex="-1" aria-label="Link to 注入/使用依賴項"></a>
+  <p>注入依賴項最常見的方式是在類別建構函式中宣告它。當 Angular 建立一個元件、指令或管線類別的新執行個體時，它會藉由檢視建構函式參數類型來判斷該類別需要哪些服務或其他依賴項。例如，如果 <code>HeroListComponent</code> 需要 <code>HeroService</code>，則建構函式可以像這樣：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ … })</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroListComponent</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> service: HeroService</span>) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>另一個選項是使用 <a href="api/core/inject">inject</a> 方法：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ … })</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroListComponent</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-keyword">private</span> service = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">HeroService</span>);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>當 Angular 發現某個元件依賴於某個服務時，它會先檢查注入器是否有該服務的任何現有實例。如果請求的服務實例尚未存在，則注入器會使用已註冊的提供者建立一個，並在將服務傳回 Angular 之前將其新增到注入器中。</p>
+<p>當所有請求的服務都已解析並回傳，Angular 可以使用那些服務作為參數，來呼叫元件的建構函式。</p>
+<!-- TODO(josephperrott): enable this mermaid chart -->
+
+<pre><code>graph TD;
+subgraph Injector
+serviceA[Service A]
+heroService[HeroService]
+serviceC[Service C]
+serviceD[Service D]
+end
+direction TB
+componentConstructor[&quot;Component\nconstructor(HeroService)&quot;]
+heroService--&gt;componentConstructor
+style componentConstructor text-align: left
+</code></pre>
+
+  <h2 id="">接下來</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 接下來"></a>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="/guide/di/creating-injectable-service">
+      建立並注入服務
+    </a>
+    
+
+    </nav>
+    

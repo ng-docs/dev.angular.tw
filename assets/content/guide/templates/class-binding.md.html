@@ -1,0 +1,190 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">Class 和 style 繫結</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/templates/class-binding.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>使用類別和樣式繫結來新增和移除 CSS 類別名稱，從元素的 <code>class</code> 屬性中新增和移除，並動態設定樣式。</p>
+
+  <h2 id="-css-class">繫結到單一 CSS <code>class</code></h2>
+  <a href="#-css-class" class="docs-anchor" tabindex="-1" aria-label="Link to 繫結到單一 CSS <code>class</code>"></a>
+  <p>若要建立單一類別繫結，請鍵入下列內容：</p>
+<p><code>[class.sale]=&quot;onSale&quot;</code></p>
+<p>Angular 在繫結表達式 <code>onSale</code> 為真時加入類別，並在表達式為假時移除類別，但 <code>undefined</code> 除外。</p>
+
+  <h2 id="-css-">繫結到多個 CSS 類別</h2>
+  <a href="#-css-" class="docs-anchor" tabindex="-1" aria-label="Link to 繫結到多個 CSS 類別"></a>
+  <p>若要繫結到多個類別，輸入下列內容：</p>
+<p><code>[class]=&quot;classExpression&quot;</code></p>
+<p>表達式可以是其中之一：</p>
+
+  <ul class="docs-list">
+    <li>以空格分隔的類別名稱字串。</li>
+<li>以類別名稱為鍵值，以真或假表達式為值的物件。</li>
+<li>類別名稱陣列。</li>
+
+  </ul>
+  <p>使用物件格式時，Angular 僅在關聯值為真時才新增類別。</p>
+
+    <div class="docs-alert docs-alert-important">
+    <p><strong>IMPORTANT:</strong> 對於任何物件的表達式，例如 <code>object</code>、<code>Array</code>、<code>Map</code> 或 <code>Set</code>，物件的身份必須改變才能讓 Angular 更新類別清單。</p>
+
+    </div>
+    <p>更新屬性而不改變物件的身份不會有任何效果。</p>
+<p>如果有多個繫結至相同類別名稱，Angular 使用樣式優先權來決定要使用哪一個繫結。</p>
+<p>下表總結了類別繫結語法。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">繫結類型</th>
+<th align="left">語法</th>
+<th align="left">輸入類型</th>
+<th align="left">範例輸入值</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">單一類別繫結</td>
+<td align="left"><code>[class.sale]=&quot;onSale&quot;</code></td>
+<td align="left">boolean &verbar; undefined &verbar; null</td>
+<td align="left"><code>true</code>, <code>false</code></td>
+</tr>
+<tr>
+<td align="left">多重類別繫結</td>
+<td align="left"><code>[class]=&quot;classExpression&quot;</code></td>
+<td align="left"><code>string</code></td>
+<td align="left"><code>&quot;my-class-1 my-class-2 my-class-3&quot;</code></td>
+</tr>
+<tr>
+<td align="left">多重類別繫結</td>
+<td align="left"><code>[class]=&quot;classExpression&quot;</code></td>
+<td align="left">Record&lt;string, boolean &verbar; undefined &verbar; null&gt;</td>
+<td align="left"><code>{foo: true, bar: false}</code></td>
+</tr>
+<tr>
+<td align="left">多重類別繫結</td>
+<td align="left"><code>[class]=&quot;classExpression&quot;</code></td>
+<td align="left">Array&lt;string&gt;</td>
+<td align="left"><code>[&#39;foo&#39;, &#39;bar&#39;]</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">繫結至單一樣式</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 繫結至單一樣式"></a>
+  <p>若要建立單一樣式繫結，請使用前綴 <code>style</code>，後接一個句點和 CSS 樣式的名稱。</p>
+<p>例如，要設定 <code>width</code> 樣式，請輸入以下內容：<code>[style.width]=&quot;width&quot;</code></p>
+<p>Angular 將屬性設定為繫結表達式的值，該值通常是字串。您也可以選擇性地新增像 <code>em</code> 或 <code>%</code> 之類的單位延伸，這需要數字類型。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>若要以 dash-case 撰寫樣式，請鍵入以下內容：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span> [<span class="hljs-attr">style.background-color</span>]=<span class="hljs-string">"expression"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div></code>
+    </pre>
+  </div></li>
+<li><p>若要以 camelCase 撰寫樣式，請鍵入以下內容：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span> [<span class="hljs-attr">style.backgroundColor</span>]=<span class="hljs-string">"expression"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    
+  <h2 id="">繫結到多種樣式</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 繫結到多種樣式"></a>
+  <p>若要切換多種樣式，請繫結至 <code>[style]</code> 屬性，例如 <code>[style]=&quot;styleExpression&quot;</code>。<code>styleExpression</code> 可以是下列其中之一：</p>
+
+  <ul class="docs-list">
+    <li>一個樣式的字串清單，例如 <code>&quot;width: 100px; height: 100px; background-color: cornflowerblue;&quot;</code>。</li>
+<li>一個物件，樣式名稱為鍵，樣式值為值，例如 <code>{width: &#39;100px&#39;, height: &#39;100px&#39;, backgroundColor: &#39;cornflowerblue&#39;}</code>。</li>
+
+  </ul>
+  <p>請注意，不支援將陣列繫結至 <code>[style]</code>。</p>
+<p>重要：當將 <code>[style]</code> 繫結至物件表達式時，物件識別碼必須變更，Angular 才能更新類別清單。
+更新屬性但不變更物件識別碼沒有任何作用。</p>
+
+  <h3 id="">單一和多重樣式繫結範例</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 單一和多重樣式繫結範例"></a>
+  <div class="docs-code" path="adev/src/content/examples/attribute-binding/src/app/single-and-multiple-style-binding.component.ts" header="nav-bar.component.ts">
+    <div class="docs-code-header"><h3>nav-bar.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> "@angular/core";</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-keyword">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-nav-bar'</span>,</div><div class="hljs-ln-line">  <span class="hljs-keyword">template</span>: ` &lt;nav [style]="navStyle"&gt;</div><div class="hljs-ln-line">    &lt;a [style.text-decoration]="activeLinkStyle"&gt;Home Page&lt;/a&gt;</div><div class="hljs-ln-line">    &lt;a [style.text-decoration]="linkStyle"&gt;<span class="hljs-keyword">Login</span>&lt;/a&gt;</div><div class="hljs-ln-line">  &lt;/nav&gt;`,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> NavBarComponent {</div><div class="hljs-ln-line">  navStyle = <span class="hljs-string">'font-size: 1.2rem; color: cornflowerblue;'</span>;</div><div class="hljs-ln-line">  linkStyle = <span class="hljs-string">'underline'</span>;</div><div class="hljs-ln-line">  activeLinkStyle = <span class="hljs-string">'overline'</span>;</div><div class="hljs-ln-line">  <span class="hljs-comment">/* . . . */</span></div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>如果存在多個繫結到相同樣式屬性的情況，Angular 會使用樣式優先順序來決定要使用哪個繫結。</p>
+<p>下表總結樣式繫結語法。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">繫結類型</th>
+<th align="left">語法</th>
+<th align="left">輸入類型</th>
+<th align="left">範例輸入值</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">單一樣式繫結</td>
+<td align="left"><code>[style.width]=&quot;width&quot;</code></td>
+<td align="left">字串 &verbar; 未定義 &verbar; null</td>
+<td align="left"><code>&quot;100px&quot;</code></td>
+</tr>
+<tr>
+<td align="left">帶單位的單一樣式繫結</td>
+<td align="left"><code>[style.width.px]=&quot;width&quot;</code></td>
+<td align="left">數字 &verbar; 未定義 &verbar; null</td>
+<td align="left"><code>100</code></td>
+</tr>
+<tr>
+<td align="left">多重樣式繫結</td>
+<td align="left"><code>[style]=&quot;styleExpression&quot;</code></td>
+<td align="left"><code>字串</code></td>
+<td align="left"><code>&quot;width: 100px; height: 100px&quot;</code></td>
+</tr>
+<tr>
+<td align="left">多重樣式繫結</td>
+<td align="left"><code>[style]=&quot;styleExpression&quot;</code></td>
+<td align="left">記錄&lt;字串, 字串 &verbar; 未定義 &verbar; null&gt;</td>
+<td align="left"><code>{width: &#39;100px&#39;, height: &#39;100px&#39;}</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">樣式優先權</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 樣式優先權"></a>
+  <p>單一 HTML 元素可以讓其 CSS 類別清單和樣式值繫結至多個來源（例如，來自多個指令的主機繫結）。</p>
+
+  <h2 id="">接下來</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 接下來"></a>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="/guide/components/styling">
+      元件造型
+    </a>
+    
+    <a class="docs-pill" href="/guide/animations">
+      Angular 動畫簡介
+    </a>
+    
+
+    </nav>
+    

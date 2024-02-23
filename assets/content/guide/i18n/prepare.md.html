@@ -1,0 +1,545 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">準備元件以進行翻譯</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/i18n/prepare.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>為翻譯專案做準備，請完成以下動作。</p>
+
+  <ul class="docs-list">
+    <li>使用 <code>i18n</code> 屬性來標記元件範本中的文字</li>
+<li>使用 <code>i18n-</code> 屬性來標記元件範本中的屬性文字字串</li>
+<li>使用 <code>$localize</code> 標記訊息字串來標記元件程式碼中的文字字串</li>
+
+  </ul>
+  
+  <h2 id="">標記元件範本中的文字</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 標記元件範本中的文字"></a>
+  <p>在元件範本中，i18n 元數據是 <code>i18n</code> 屬性的值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">element</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"{i18n_metadata}"</span>&gt;</span>{string_to_translate}<span class="hljs-tag">&lt;/<span class="hljs-name">element</span>&gt;</span></div></code>
+    </pre>
+  </div><p>使用 <code>i18n</code> 屬性來標記元件範本中要翻譯的靜態文字訊息。
+將它放在包含要翻譯的固定文字的每個元素標籤上。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <code>i18n</code> 屬性是 Angular 工具和編譯器識別的客製屬性。</p>
+
+    </div>
+    
+  <h3 id="i18n-"><code>i18n</code> 範例</h3>
+  <a href="#i18n-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>i18n</code> 範例"></a>
+  <p>以下 <code>&lt;h1&gt;</code> 標籤顯示簡單的英文問候語，「Hello i18n!」</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/doc-files/app.component.html" visiblelines="0" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"An introduction header for this sample"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"site header|An introduction header for this sample"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"An introduction header for this sample@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"site header|An introduction header for this sample@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"logo"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Angular logo"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Angular logo"</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@myId"</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- ... --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@myId"</span>&gt;</span>Good bye<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>要標記要翻譯的問候語，請將 <code>i18n</code> 屬性新增到 <code>&lt;h1&gt;</code> 標籤。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/doc-files/app.component.html" visiblelines="2" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"An introduction header for this sample"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"site header|An introduction header for this sample"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"An introduction header for this sample@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"site header|An introduction header for this sample@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"logo"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Angular logo"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Angular logo"</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@myId"</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- ... --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@myId"</span>&gt;</span>Good bye<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="-html-">在沒有 HTML 元素的情況下翻譯內嵌文字</h3>
+  <a href="#-html-" class="docs-anchor" tabindex="-1" aria-label="Link to 在沒有 HTML 元素的情況下翻譯內嵌文字"></a>
+  <p>使用 <code>&lt;ng-container&gt;</code> 元素來將翻譯行為與特定文字關聯，而不改變文字的顯示方式。</p>
+<p>HELPFUL：每個 HTML 元素都會建立一個新的 DOM 元素。
+若要避免建立新的 DOM 元素，請將文字包在 <code>&lt;ng-container&gt;</code> 元素內。
+以下範例顯示 <code>&lt;ng-container&gt;</code> 元素轉換成未顯示的 HTML 註解。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/src/app/app.component.html" visiblelines="4">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"User welcome|An introduction header for this sample@@introductionHeader"</span>&gt;</span></span></div><div class="hljs-ln-line">  Hello i18n!</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> <span class="hljs-attr">i18n</span>&gt;</span>I don't output any element<span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"logo"</span> <span class="hljs-attr">i18n-title</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Angular logo"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Angular logo"</span>/&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"inc(1)"</span>&gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"inc(-1)"</span>&gt;</span>-<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">i18n</span>&gt;</span>Updated {minutes, plural, =0 {just now} =1 {one minute ago} other <span class="hljs-template-variable">{{{ <span class="hljs-name">minutes</span> }} <span class="hljs-name">minutes</span> ago}}&lt;<span class="hljs-name">/span</span>&gt;</span></div><div class="hljs-ln-line">({{ <span class="hljs-name">minutes</span> }})</div><div class="hljs-ln-line">&lt;br&gt;&lt;br&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"male()"</span>&gt;♂&lt;/button&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"female()"</span>&gt;♀&lt;/button&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"other()"</span>&gt;⚧&lt;/button&gt;</div><div class="hljs-ln-line">&lt;span i18n&gt;The author is {gender, select, male {male} female {female} other {other}}&lt;<span class="hljs-name">/span</span>&gt;</div><div class="hljs-ln-line">&lt;br&gt;&lt;br&gt;</div><div class="hljs-ln-line">&lt;span i18n&gt;Updated: {minutes, plural,</div><div class="hljs-ln-line">  =<span class="hljs-number">0</span> {just now}</div><div class="hljs-ln-line">  =<span class="hljs-number">1</span> {one minute ago}</div><div class="hljs-ln-line">  other {{{ minutes }} <span class="hljs-name">minutes</span> ago by {gender, select, male {male} female {female} other {other}}}<span class="language-xml">}</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h2 id="">標記元素屬性以利翻譯</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 標記元素屬性以利翻譯"></a>
+  <p>在元件範本中，<code>i18n-{attribute_name}</code> 屬性的值是 i18n 元資料。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">element</span> <span class="hljs-attr">i18n-</span>{<span class="hljs-attr">attribute_name</span>}=<span class="hljs-string">"{i18n_metadata}"</span> {<span class="hljs-attr">attribute_name</span>}=<span class="hljs-string">"{attribute_value}"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p>HTML 元素的屬性包含應與元件範本中顯示文字的其他部分一起翻譯的文字。</p>
+<p>使用任何元素的任何屬性中的 <code>i18n-{attribute_name}</code> 並將 <code>{attribute_name}</code> 替換為屬性的名稱。
+使用下列語法來指定意義、說明和自訂 ID。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">i18n-{attribute_name}="{meaning}|{description}@@{id}"</div></code>
+    </pre>
+  </div>
+  <h3 id="i18n-title-"><code>i18n-title</code> 範例</h3>
+  <a href="#i18n-title-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>i18n-title</code> 範例"></a>
+  <p>若要翻譯圖片的標題，請檢閱此範例。
+以下範例顯示具有 <code>title</code> 屬性的圖片。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/doc-files/app.component.html" visiblelines="14" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"An introduction header for this sample"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"site header|An introduction header for this sample"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"An introduction header for this sample@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"site header|An introduction header for this sample@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"logo"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Angular logo"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Angular logo"</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@myId"</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- ... --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@myId"</span>&gt;</span>Good bye<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>若要標記標題屬性以進行翻譯，請完成下列動作。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>新增 <code>i18n-title</code> 屬性</p>
+<p> 以下範例顯示如何透過新增 <code>i18n-title</code> 來標示 <code>img</code> 標籤上的 <code>title</code> 屬性。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/src/app/app.component.html" visiblelines="8" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"User welcome|An introduction header for this sample@@introductionHeader"</span>&gt;</span></span></div><div class="hljs-ln-line">  Hello i18n!</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> <span class="hljs-attr">i18n</span>&gt;</span>I don't output any element<span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"logo"</span> <span class="hljs-attr">i18n-title</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Angular logo"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Angular logo"</span>/&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"inc(1)"</span>&gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"inc(-1)"</span>&gt;</span>-<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">i18n</span>&gt;</span>Updated {minutes, plural, =0 {just now} =1 {one minute ago} other <span class="hljs-template-variable">{{{ <span class="hljs-name">minutes</span> }} <span class="hljs-name">minutes</span> ago}}&lt;<span class="hljs-name">/span</span>&gt;</span></div><div class="hljs-ln-line">({{ <span class="hljs-name">minutes</span> }})</div><div class="hljs-ln-line">&lt;br&gt;&lt;br&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"male()"</span>&gt;♂&lt;/button&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"female()"</span>&gt;♀&lt;/button&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"other()"</span>&gt;⚧&lt;/button&gt;</div><div class="hljs-ln-line">&lt;span i18n&gt;The author is {gender, select, male {male} female {female} other {other}}&lt;<span class="hljs-name">/span</span>&gt;</div><div class="hljs-ln-line">&lt;br&gt;&lt;br&gt;</div><div class="hljs-ln-line">&lt;span i18n&gt;Updated: {minutes, plural,</div><div class="hljs-ln-line">  =<span class="hljs-number">0</span> {just now}</div><div class="hljs-ln-line">  =<span class="hljs-number">1</span> {one minute ago}</div><div class="hljs-ln-line">  other {{{ minutes }} <span class="hljs-name">minutes</span> ago by {gender, select, male {male} female {female} other {other}}}<span class="language-xml">}</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    
+  <h2 id="">在元件程式碼中標記文字</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 在元件程式碼中標記文字"></a>
+  <p>在元件程式碼中，翻譯的原始文字和元資料以反引號 (&#96;) 字元包圍。</p>
+<p>使用 [<code>$localize</code>][AioApiLocalizeInitLocalize] 標記訊息字串，以將程式碼中的字串標記為翻譯。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">$localize <span class="hljs-string">`string_to_translate`</span>;</div></code>
+    </pre>
+  </div><p>i18n 的元數據以冒號 (<code>:</code>) 字元包圍，並置於翻譯原始文字之前。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">$localize <span class="hljs-string">`:{i18n_metadata}:string_to_translate`</span></div></code>
+    </pre>
+  </div>
+  <h3 id="">包含內插文字</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 包含內插文字"></a>
+  <p>在 [<code>$localize</code>][AioApiLocalizeInitLocalize] 標記訊息字串中包含 <a href="guide/templates/interpolation">插補</a>。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">$localize <span class="hljs-string">`string_to_translate <span class="hljs-subst">${variable_name}</span>`</span>;</div></code>
+    </pre>
+  </div>
+  <h3 id="">命名插值預留位置</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 命名插值預留位置"></a>
+  <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">$localize <span class="hljs-string">`string_to_translate <span class="hljs-subst">${variable_name}</span>:placeholder_name:`</span>;</div></code>
+    </pre>
+  </div>
+  <h2 id="-i18n-">翻譯的 i18n 元數據</h2>
+  <a href="#-i18n-" class="docs-anchor" tabindex="-1" aria-label="Link to 翻譯的 i18n 元數據"></a>
+  <!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{meaning}|{description}@@{custom_id}</div></code>
+    </pre>
+  </div><p>以下參數提供背景和額外資訊，以減少翻譯人員的混淆。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">元數據參數</th>
+<th align="left">詳細資訊</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">自訂 ID</td>
+<td align="left">提供自訂識別碼</td>
+</tr>
+<tr>
+<td align="left">說明</td>
+<td align="left">提供額外資訊或內容</td>
+</tr>
+<tr>
+<td align="left">意義</td>
+<td align="left">提供特定內容中的文字含義或意圖</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>如需有關自訂 ID 的更多資訊，請參閱 [使用自訂 ID 管理標記文字][AioGuideI18nOptionalManageMarkedText]。</p>
+
+  <h3 id="">新增有用的描述及意義</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 新增有用的描述及意義"></a>
+  <p>要準確翻譯簡訊，請提供額外的資訊或背景給翻譯者。</p>
+<p>將文字訊息的「說明」加入 <code>i18n</code> 屬性的值或 [<code>$localize</code>][AioApiLocalizeInitLocalize] 標記的訊息字串。</p>
+<p>以下範例顯示 <code>i18n</code> 屬性的值。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/doc-files/app.component.html" visiblelines="4" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"An introduction header for this sample"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"site header|An introduction header for this sample"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"An introduction header for this sample@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"site header|An introduction header for this sample@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"logo"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Angular logo"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Angular logo"</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@myId"</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- ... --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@myId"</span>&gt;</span>Good bye<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>以下範例顯示標記訊息字串 [<code>$localize</code>][AioApiLocalizeInitLocalize] 的值，並附有說明。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">$localize <span class="hljs-string">`:An introduction header for this sample:Hello i18n!`</span>;</div></code>
+    </pre>
+  </div><p>翻譯人員可能還需要知道此特定應用程式語境中文字訊息的含義或目的，才能將其翻譯成與具有相同含義的其他文字相同的方式。
+以 <em>含義</em> 開頭的 <code>i18n</code> 屬性值，並使用 <code>|</code> 字元將其與 <em>描述</em> 分隔：<code>{含義}|{描述}</code>。</p>
+
+  <h4 id="h1-"><code>h1</code> 範例</h4>
+  <a href="#h1-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>h1</code> 範例"></a>
+  <p>例如，您可能想要指定 <code>&lt;h1&gt;</code> 標記是一個網站標題，您需要以相同的方式翻譯它，無論它用作標題還是參考於文本的另一部分。</p>
+<p>以下範例顯示如何指定 <code>&lt;h1&gt;</code> 標籤必須翻譯為標題或在其他地方參照。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/doc-files/app.component.html" visiblelines="6" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"An introduction header for this sample"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"site header|An introduction header for this sample"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"An introduction header for this sample@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"site header|An introduction header for this sample@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@introductionHeader"</span>&gt;</span>Hello i18n!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"logo"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Angular logo"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Angular logo"</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@myId"</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- ... --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"@@myId"</span>&gt;</span>Good bye<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>結果是任何標記為 <code>site header</code> 的文字，因為 <em>意義</em> 的翻譯方式完全相同。</p>
+<p>以下程式碼範例顯示 [<code>$localize</code>][AioApiLocalizeInitLocalize] 標記訊息字串的值，並附有意義和說明。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">$localize <span class="hljs-string">`:site header|An introduction header for this sample:Hello i18n!`</span>;</div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-helpful">
+      <h3>意義如何控制文字擷取及合併</h3>
+      <p>Angular 提取工具會為範本中的每個 <code>i18n</code> 屬性產生一個翻譯單元項目。
+Angular 提取工具會根據 <em>意義</em> 和 <em>說明</em> 為每個翻譯單元指定一個唯一 ID。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 有關 Angular 萃取工具的更多資訊，請參閱 <a href="guide/i18n/translation-files">使用翻譯檔案</a>。</p>
+
+    </div>
+    <p>具有不同 <em>含義</em> 的相同文字元素會以不同的 ID 提取出來。
+例如，如果文字「right」在兩個不同位置使用以下兩個定義，則文字會以不同的方式翻譯，然後以不同的翻譯項目合併回應用程式中。</p>
+
+  <ul class="docs-list">
+    <li><code>correct</code> 如同「你說得對」</li>
+<li><code>direction</code> 如同「向右轉」</li>
+
+  </ul>
+  <p>如果相同的文字元素符合下列條件，則僅擷取一次文字元素並使用相同的 ID。</p>
+
+  <ul class="docs-list">
+    <li>相同的意義或定義</li>
+<li>不同的描述</li>
+
+  </ul>
+  <p>那一個翻譯條目會合併回應用程式，無論相同的文字元素出現在哪裡。</p>
+
+    </div>
+    
+  <h2 id="icu-">ICU 表達式</h2>
+  <a href="#icu-" class="docs-anchor" tabindex="-1" aria-label="Link to ICU 表達式"></a>
+  <p>ICU 表達式可協助您在元件範本中標記交替文字，以符合條件。
+ICU 表達式包含元件屬性、ICU 子句，以及用開大括弧 (<code>{</code>) 和閉大括弧 (<code>}</code>) 字元圍起來的案例陳述。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{ component_property, icu_clause, case_statements }</div></code>
+    </pre>
+  </div><p>元件屬性定義變數
+ICU 子句定義條件文字的類型。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">ICU 子句</th>
+<th align="left">詳細資訊</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">[<code>plural</code>][AioGuideI18nCommonPrepareMarkPlurals]</td>
+<td align="left">標記使用複數數字</td>
+</tr>
+<tr>
+<td align="left">[<code>select</code>][AioGuideI18nCommonPrepareMarkAlternatesAndNestedExpressions]</td>
+<td align="left">標記基於定義的字串值選擇替代文字</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>為了簡化翻譯，請將具有正規表達式的國際元件統一碼子句（ICU 子句）用於</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> ICU 條款遵守 [CLDR 複數形式規則][UnicodeCldrIndexCldrSpecPluralRules] 中指定的 [ICU 訊息格式][GithubUnicodeOrgIcuUserguideFormatParseMessages]。</p>
+
+    </div>
+    
+  <h3 id="">標記複數</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 標記複數"></a>
+  <p>不同的語言有不同的複數規則，這增加了翻譯的難度。
+由於其他地區以不同的方式表達基數，你可能需要設定與英文不一致的複數類別。
+使用 <code>plural</code> 子句來標記可能無法逐字翻譯成有意義的表達式。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{ component_property, plural, pluralization_categories }</div></code>
+    </pre>
+  </div><p>在複數類別之後，輸入預設文字(英文)，並以左大括號 (<code>{</code>) 和右大括號 (<code>}</code>) 字元括住。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">pluralization_category { }</div></code>
+    </pre>
+  </div><p>以下複數形式類別適用於英文，並可能根據語言環境而有所變更。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">複數型別</th>
+<th align="left">詳細資料</th>
+<th align="left">範例</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>zero</code></td>
+<td align="left">數量為零</td>
+<td align="left"><code>=0 { }</code> <br /> <code>zero { }</code></td>
+</tr>
+<tr>
+<td align="left"><code>one</code></td>
+<td align="left">數量為 1</td>
+<td align="left"><code>=1 { }</code> <br /> <code>one { }</code></td>
+</tr>
+<tr>
+<td align="left"><code>two</code></td>
+<td align="left">數量為 2</td>
+<td align="left"><code>=2 { }</code> <br /> <code>two { }</code></td>
+</tr>
+<tr>
+<td align="left"><code>few</code></td>
+<td align="left">數量為 2 或更多</td>
+<td align="left"><code>few { }</code></td>
+</tr>
+<tr>
+<td align="left"><code>many</code></td>
+<td align="left">數量為大量</td>
+<td align="left"><code>many { }</code></td>
+</tr>
+<tr>
+<td align="left"><code>other</code></td>
+<td align="left">預設數量</td>
+<td align="left"><code>other { }</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>如果沒有任何複數形式類別符合，Angular 會使用 <code>other</code> 來符合遺漏類別的標準後設。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">other { default_quantity }</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 有關複數類別的更多資訊，請參閱 [UnicodeCldrIndexCldrSpecPluralRulesTocChoosingPluralCategoryNames][CLDR - Unicode Common Locale Data Repository][UnicodeCldrMain] 中的 [選擇複數類別名稱]。</p>
+
+    </div>
+    
+    <div class="docs-callout docs-callout-helpful">
+      <h3></h3>
+      <p>許多地區設定不支援部分複數型態類別。
+預設地區設定 (<code>en-US</code>) 使用非常簡單的 <code>plural()</code> 函式，而不支援 <code>few</code> 複數型態類別。
+另一個具有簡單 <code>plural()</code> 函式的地區設定是 <code>es</code>。
+以下程式碼範例顯示 [en-US <code>plural()</code>][GithubAngularAngularBlobEcffc3557fe1bff9718c01277498e877ca44588dPackagesCoreSrcI18nLocaleEnTsL14L18] 函式。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/doc-files/locale_plural_function.ts">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">plural</span>(<span class="hljs-params">n: number</span>): <span class="hljs-title function_">number</span> {</div><div class="hljs-ln-line">  let i = Math.<span class="hljs-built_in">floor</span>(Math.<span class="hljs-built_in">abs</span>(n)), v = n.toString().<span class="hljs-built_in">replace</span>(<span class="hljs-regexp">/^[^.]*\.?/</span>, <span class="hljs-string">''</span>).<span class="hljs-built_in">length</span>;</div><div class="hljs-ln-line">  <span class="hljs-keyword">if</span> (i === <span class="hljs-number">1</span> &amp;&amp; v === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-number">5</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p><code>plural()</code> 函式僅回傳 1（<code>one</code>）或 5（<code>other</code>）。
+<code>few</code> 類別從不匹配。</p>
+
+    </div>
+    
+  <h4 id="minutes-"><code>minutes</code> 範例</h4>
+  <a href="#minutes-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>minutes</code> 範例"></a>
+  <p>如果您想顯示以下句子，其中 <code>x</code> 是數字。</p>
+<!--todo: replace output docs-code with screen capture image --->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">updated x minutes ago</div></code>
+    </pre>
+  </div><p>而且您還想根據 <code>x</code> 的基數顯示以下短語。</p>
+<!--todo: replace output docs-code with screen capture image --->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">updated just now</div></code>
+    </pre>
+  </div><!--todo: replace output docs-code with screen capture image --->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">updated one minute ago</div></code>
+    </pre>
+  </div><p>使用 HTML 標記和 <a href="guide/templates/interpolation">內插法</a>。
+以下程式碼範例顯示如何使用 <code>plural</code> 子句在 <code>&lt;span&gt;</code> 元素中表達前三個情況。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/src/app/app.component.html" visiblelines="11" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"User welcome|An introduction header for this sample@@introductionHeader"</span>&gt;</span></span></div><div class="hljs-ln-line">  Hello i18n!</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> <span class="hljs-attr">i18n</span>&gt;</span>I don't output any element<span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"logo"</span> <span class="hljs-attr">i18n-title</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Angular logo"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Angular logo"</span>/&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"inc(1)"</span>&gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"inc(-1)"</span>&gt;</span>-<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">i18n</span>&gt;</span>Updated {minutes, plural, =0 {just now} =1 {one minute ago} other <span class="hljs-template-variable">{{{ <span class="hljs-name">minutes</span> }} <span class="hljs-name">minutes</span> ago}}&lt;<span class="hljs-name">/span</span>&gt;</span></div><div class="hljs-ln-line">({{ <span class="hljs-name">minutes</span> }})</div><div class="hljs-ln-line">&lt;br&gt;&lt;br&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"male()"</span>&gt;♂&lt;/button&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"female()"</span>&gt;♀&lt;/button&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"other()"</span>&gt;⚧&lt;/button&gt;</div><div class="hljs-ln-line">&lt;span i18n&gt;The author is {gender, select, male {male} female {female} other {other}}&lt;<span class="hljs-name">/span</span>&gt;</div><div class="hljs-ln-line">&lt;br&gt;&lt;br&gt;</div><div class="hljs-ln-line">&lt;span i18n&gt;Updated: {minutes, plural,</div><div class="hljs-ln-line">  =<span class="hljs-number">0</span> {just now}</div><div class="hljs-ln-line">  =<span class="hljs-number">1</span> {one minute ago}</div><div class="hljs-ln-line">  other {{{ minutes }} <span class="hljs-name">minutes</span> ago by {gender, select, male {male} female {female} other {other}}}<span class="language-xml">}</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>檢閱先前程式範例中的以下詳細資料。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">參數</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>minutes</code></td>
+<td align="left">第一個參數指定元件屬性為 <code>minutes</code>，並決定分鐘數。</td>
+</tr>
+<tr>
+<td align="left"><code>plural</code></td>
+<td align="left">第二個參數指定 ICU 子句為 <code>plural</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>=0 {just now}</code></td>
+<td align="left">對於零分鐘，複數形式類別為 <code>=0</code>。值為 <code>just now</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>=1 {one minute}</code></td>
+<td align="left">對於一分鐘，複數形式類別為 <code>=1</code>。值為 <code>one minute</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>other {{{minutes}} minutes ago}</code></td>
+<td align="left">對於任何不匹配的基數，預設複數形式類別為 <code>other</code>。值為 <code>{{minutes}} minutes ago</code>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p><code>{{minutes}}</code> 是 <a href="guide/templates/interpolation">插入法</a>。</p>
+
+  <h3 id="">標記替換和巢狀表達式</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 標記替換和巢狀表達式"></a>
+  <p><code>select</code> 子句根據您定義的字串值標記替代文字的選項。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{ component_property, select, selection_categories }</div></code>
+    </pre>
+  </div><p>Translate all of the alternates to display alternate text based on the value of a variable.</p>
+<p>翻譯所有替換文字以根據變數值顯示替換文字。</p>
+<p>在選取類別後，輸入以開括號 (<code>{</code>) 和閉括號 (<code>}</code>) 字元包圍的文字 (英文)。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">selection_category { text }</div></code>
+    </pre>
+  </div><p>不同的地區具有不同的語法結構，這增加了翻譯的難度。
+使用 HTML 標記。
+如果沒有任何選項類別相符，Angular 會使用 <code>other</code> 來比對缺少類別的標準後備。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">other { default_value }</div></code>
+    </pre>
+  </div>
+  <h4 id="gender-"><code>gender</code> 範例</h4>
+  <a href="#gender-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>gender</code> 範例"></a>
+  <p>如果您想以英文顯示以下詞組。</p>
+<!--todo: replace output docs-code with screen capture image --->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">The author is other</div></code>
+    </pre>
+  </div><p>並且你還想要根據元件的 <code>gender</code> 屬性來顯示以下短語。</p>
+<!--todo: replace output docs-code with screen capture image --->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">The author is female</div></code>
+    </pre>
+  </div><!--todo: replace output docs-code with screen capture image --->
+
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">The author is male</div></code>
+    </pre>
+  </div><p>以下程式碼範例顯示如何繫結元件的 <code>gender</code> 屬性，並使用 <code>select</code> 子句在 <code>&lt;span&gt;</code> 元素中表達前述三種情況。</p>
+<p><code>gender</code> 屬性會將輸出繫結到下列字串值。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">值</th>
+<th align="left">英文值</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">女性</td>
+<td align="left"><code>female</code></td>
+</tr>
+<tr>
+<td align="left">男性</td>
+<td align="left"><code>male</code></td>
+</tr>
+<tr>
+<td align="left">其他</td>
+<td align="left"><code>other</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p><code>select</code> 子句將值映射到適當的翻譯。
+以下程式碼範例顯示與 <code>select</code> 子句一起使用的 <code>gender</code> 屬性。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/src/app/app.component.html" visiblelines="17" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"User welcome|An introduction header for this sample@@introductionHeader"</span>&gt;</span></span></div><div class="hljs-ln-line">  Hello i18n!</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> <span class="hljs-attr">i18n</span>&gt;</span>I don't output any element<span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"logo"</span> <span class="hljs-attr">i18n-title</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Angular logo"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Angular logo"</span>/&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"inc(1)"</span>&gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"inc(-1)"</span>&gt;</span>-<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">i18n</span>&gt;</span>Updated {minutes, plural, =0 {just now} =1 {one minute ago} other <span class="hljs-template-variable">{{{ <span class="hljs-name">minutes</span> }} <span class="hljs-name">minutes</span> ago}}&lt;<span class="hljs-name">/span</span>&gt;</span></div><div class="hljs-ln-line">({{ <span class="hljs-name">minutes</span> }})</div><div class="hljs-ln-line">&lt;br&gt;&lt;br&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"male()"</span>&gt;♂&lt;/button&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"female()"</span>&gt;♀&lt;/button&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"other()"</span>&gt;⚧&lt;/button&gt;</div><div class="hljs-ln-line">&lt;span i18n&gt;The author is {gender, select, male {male} female {female} other {other}}&lt;<span class="hljs-name">/span</span>&gt;</div><div class="hljs-ln-line">&lt;br&gt;&lt;br&gt;</div><div class="hljs-ln-line">&lt;span i18n&gt;Updated: {minutes, plural,</div><div class="hljs-ln-line">  =<span class="hljs-number">0</span> {just now}</div><div class="hljs-ln-line">  =<span class="hljs-number">1</span> {one minute ago}</div><div class="hljs-ln-line">  other {{{ minutes }} <span class="hljs-name">minutes</span> ago by {gender, select, male {male} female {female} other {other}}}<span class="language-xml">}</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h4 id="gender--minutes-"><code>gender</code> 和 <code>minutes</code> 範例</h4>
+  <a href="#gender--minutes-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>gender</code> 和 <code>minutes</code> 範例"></a>
+  <p>結合不同的子句，例如 <code>plural</code> 子句和 <code>select</code> 子句。
+以下程式碼範例顯示基於 <code>gender</code> 和 <code>minutes</code> 範例的巢狀子句。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/src/app/app.component.html" visiblelines="19,20,21,22,23" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">i18n</span>=<span class="hljs-string">"User welcome|An introduction header for this sample@@introductionHeader"</span>&gt;</span></span></div><div class="hljs-ln-line">  Hello i18n!</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> <span class="hljs-attr">i18n</span>&gt;</span>I don't output any element<span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"logo"</span> <span class="hljs-attr">i18n-title</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Angular logo"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Angular logo"</span>/&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"inc(1)"</span>&gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"inc(-1)"</span>&gt;</span>-<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">i18n</span>&gt;</span>Updated {minutes, plural, =0 {just now} =1 {one minute ago} other <span class="hljs-template-variable">{{{ <span class="hljs-name">minutes</span> }} <span class="hljs-name">minutes</span> ago}}&lt;<span class="hljs-name">/span</span>&gt;</span></div><div class="hljs-ln-line">({{ <span class="hljs-name">minutes</span> }})</div><div class="hljs-ln-line">&lt;br&gt;&lt;br&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"male()"</span>&gt;♂&lt;/button&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"female()"</span>&gt;♀&lt;/button&gt;</div><div class="hljs-ln-line">&lt;button <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-name">click</span>)=<span class="hljs-string">"other()"</span>&gt;⚧&lt;/button&gt;</div><div class="hljs-ln-line">&lt;span i18n&gt;The author is {gender, select, male {male} female {female} other {other}}&lt;<span class="hljs-name">/span</span>&gt;</div><div class="hljs-ln-line">&lt;br&gt;&lt;br&gt;</div><div class="hljs-ln-line">&lt;span i18n&gt;Updated: {minutes, plural,</div><div class="hljs-ln-line">  =<span class="hljs-number">0</span> {just now}</div><div class="hljs-ln-line">  =<span class="hljs-number">1</span> {one minute ago}</div><div class="hljs-ln-line">  other {{{ minutes }} <span class="hljs-name">minutes</span> ago by {gender, select, male {male} female {female} other {other}}}<span class="language-xml">}</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h2 id="">接下來</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 接下來"></a>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="guide/i18n/translation-files">
+      使用翻譯檔案
+    </a>
+    
+
+    </nav>
+    <p>{{ 無法處理文件最後的 LinkReferenceDefinitionGroup 部分，需手動更新！ }}</p>

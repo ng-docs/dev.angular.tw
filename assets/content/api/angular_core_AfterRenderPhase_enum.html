@@ -1,0 +1,34 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>AfterRenderPhase</h1><div class="docs-api-item-label" data-mode="full" data-type="enum">enum</div></div></div><p class="docs-reference-description"><p>The phase to run an <code>afterRender</code> or <code>afterNextRender</code> callback in.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">enum</span> <span class="hljs-title class_">AfterRenderPhase</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="EarlyRead">  <span class="hljs-title class_">EarlyRead</span>: <span class="hljs-title class_">AfterRenderPhase</span>.<span class="hljs-property">EarlyRead</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="Write">  <span class="hljs-title class_">Write</span>: <span class="hljs-title class_">AfterRenderPhase</span>.<span class="hljs-property">Write</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="MixedReadWrite">  <span class="hljs-title class_">MixedReadWrite</span>: <span class="hljs-title class_">AfterRenderPhase</span>.<span class="hljs-property">MixedReadWrite</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="Read">  <span class="hljs-title class_">Read</span>: <span class="hljs-title class_">AfterRenderPhase</span>.<span class="hljs-property">Read</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>The phase to run an <code>afterRender</code> or <code>afterNextRender</code> callback in.</p>
+<p>Callbacks in the same phase run in the order they are registered. Phases run in the
+following order after each render:</p>
+
+      <ol class="docs-ordered-list">
+        <li><code>AfterRenderPhase.EarlyRead</code></li>
+<li><code>AfterRenderPhase.Write</code></li>
+<li><code>AfterRenderPhase.MixedReadWrite</code></li>
+<li><code>AfterRenderPhase.Read</code></li>
+
+      </ol>
+      <p>Angular is unable to verify or enforce that phases are used correctly, and instead
+relies on each developer to follow the guidelines documented for each value and
+carefully choose the appropriate one, refactoring their code if necessary. By doing
+so, Angular is better able to minimize the performance degradation associated with
+manual DOM access, ensuring the best experience for the end users of your application
+or library.</p></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="EarlyRead" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>EarlyRead</h3><div></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Use <code>AfterRenderPhase.EarlyRead</code> for callbacks that only need to <strong>read</strong> from the
+DOM before a subsequent <code>AfterRenderPhase.Write</code> callback, for example to perform
+custom layout that the browser doesn&#39;t natively support. <strong>Never</strong> use this phase
+for callbacks that can write to the DOM or when <code>AfterRenderPhase.Read</code> is adequate.</p>
+<div class="alert is-important">
+
+<p>Using this value can degrade performance.
+Instead, prefer using built-in browser functionality when possible.</p>
+</div></div></div></div></div><div id="Write" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>Write</h3><div></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Use <code>AfterRenderPhase.Write</code> for callbacks that only <strong>write</strong> to the DOM. <strong>Never</strong>
+use this phase for callbacks that can read from the DOM.</p></div></div></div></div><div id="MixedReadWrite" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>MixedReadWrite</h3><div></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Use <code>AfterRenderPhase.MixedReadWrite</code> for callbacks that read from or write to the
+DOM, that haven&#39;t been refactored to use a different phase. <strong>Never</strong> use this phase
+for callbacks that can use a different phase instead.</p>
+<div class="alert is-critical">
+
+<p>Using this value can <strong>significantly</strong> degrade performance.
+Instead, prefer refactoring into multiple callbacks using a more specific phase.</p>
+</div></div></div></div></div><div id="Read" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>Read</h3><div></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Use <code>AfterRenderPhase.Read</code> for callbacks that only <strong>read</strong> from the DOM. <strong>Never</strong>
+use this phase for callbacks that can write to the DOM.</p></div></div></div></div></div></div></div>

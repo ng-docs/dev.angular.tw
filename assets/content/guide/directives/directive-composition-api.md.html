@@ -1,0 +1,124 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">指令組合 API</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/directives/directive-composition-api.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>Angular 指令提供了一個封裝可重複使用的行為的絕佳方法 - 指令可以將
+屬性、CSS 類別和事件偵聽器應用到元素。</p>
+<p><em>指令組合 API</em> 讓您從 <em>內部</em> 元件 TypeScript 類別將指令套用至元件的宿主元素。</p>
+
+  <h2 id="">在元件中新增指令</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 在元件中新增指令"></a>
+  <p>您可以透過將 <code>hostDirectives</code> 屬性新增至元件的裝飾器來將指令套用至元件。我們稱此類指令為 <em>主機指令</em>。</p>
+<p>在此範例中，我們將指令 <code>MenuBehavior</code> 套用至 <code>AdminMenu</code> 的主機元素。這類似於在範本中將 <code>MenuBehavior</code> 套用至 <code>&lt;admin-menu&gt;</code> 元素。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'admin-menu'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'admin-menu.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">hostDirectives</span>: [<span class="hljs-title class_">MenuBehavior</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AdminMenu</span> { }</div></code>
+    </pre>
+  </div><p>當框架呈現元件時，Angular 也會為每個主機指令建立一個實例。
+指令的主機繫結套用至元件的主機元素。
+預設情況下，主機指令輸入和輸出不會公開為元件的公開 API 的一部分。
+請參閱以下 <a href="#including-inputs-and-outputs">包括輸入和輸出</a> 以獲取更多資訊。</p>
+<p>**Angular 在編譯時以靜態方式套用主機指令。**您無法在執行階段動態新增指令。</p>
+<p><strong>在 <code>hostDirectives</code> 中使用的指令必須為 <code>standalone: true</code>。</strong></p>
+<p><strong>Angular 會忽略應用在 <code>hostDirectives</code> 屬性中的指令的 <code>selector</code>。</strong></p>
+
+  <h2 id="">包括輸入和輸出</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 包括輸入和輸出"></a>
+  <p>當你將 <code>hostDirectives</code> 套用至元件時，預設情況下，主機指令的輸入和輸出不會包含在元件的 API 中。你可以透過擴充 <code>hostDirectives</code> 中的項目，將輸入和輸出明確包含在元件的 API 中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'admin-menu'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'admin-menu.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">hostDirectives</span>: [{</div><div class="hljs-ln-line">    <span class="hljs-attr">directive</span>: <span class="hljs-title class_">MenuBehavior</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">inputs</span>: [<span class="hljs-string">'menuId'</span>],</div><div class="hljs-ln-line">    <span class="hljs-attr">outputs</span>: [<span class="hljs-string">'menuClosed'</span>],</div><div class="hljs-ln-line">  }],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AdminMenu</span> { }</div></code>
+    </pre>
+  </div><p>透過明確指定輸入和輸出，使用者可使用 <code>hostDirective</code> 將元件繫結在範本中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">admin-menu</span> <span class="hljs-attr">menuId</span>=<span class="hljs-string">"top-menu"</span> (<span class="hljs-attr">menuClosed</span>)=<span class="hljs-string">"logMenuClosed()"</span>&gt;</span></div></code>
+    </pre>
+  </div><p>此外，您可以從 <code>hostDirective</code> 別名輸入和輸出以自訂您的元件 API：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'admin-menu'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'admin-menu.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">hostDirectives</span>: [{</div><div class="hljs-ln-line">    <span class="hljs-attr">directive</span>: <span class="hljs-title class_">MenuBehavior</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">inputs</span>: [<span class="hljs-string">'menuId: id'</span>],</div><div class="hljs-ln-line">    <span class="hljs-attr">outputs</span>: [<span class="hljs-string">'menuClosed: closed'</span>],</div><div class="hljs-ln-line">  }],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AdminMenu</span> { }</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">admin-menu</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"top-menu"</span> (<span class="hljs-attr">closed</span>)=<span class="hljs-string">"logMenuClosed()"</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <h2 id="">在另一指令添加指令</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 在另一指令添加指令"></a>
+  <p>你也可以將 <code>hostDirectives</code> 新增至其他指令，除了元件之外。這啟用了多個行為的遞移聚合。</p>
+<p>在以下範例中，我們定義兩個指令，<code>Menu</code> 和 <code>Tooltip</code>。然後我們在 <code>MenuWithTooltip</code> 中組合這兩個指令的行為。最後，我們將 <code>MenuWithTooltip</code> 套用至 <code>SpecializedMenuWithTooltip</code>。</p>
+<p>當在範本中使用 <code>SpecializedMenuWithTooltip</code> 時，它會建立所有 <code>Menu</code>、<code>Tooltip</code> 和 <code>MenuWithTooltip</code> 的執行個體。這些指令的每個主機繫結套用到 <code>SpecializedMenuWithTooltip</code> 的主機元素。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Menu</span> { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Tooltip</span> { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// MenuWithTooltip can compose behaviors from multiple other directives</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">hostDirectives</span>: [<span class="hljs-title class_">Tooltip</span>, <span class="hljs-title class_">Menu</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MenuWithTooltip</span> { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// CustomWidget can apply the already-composed behaviors from MenuWithTooltip</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">hostDirectives</span>: [<span class="hljs-title class_">MenuWithTooltip</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpecializedMenuWithTooltip</span> { }</div></code>
+    </pre>
+  </div>
+  <h2 id="">主機指令語義</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 主機指令語義"></a>
+  
+  <h3 id="">指令執行順序</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 指令執行順序"></a>
+  <p>主機指令的運作週期與直接在範本中使用的元件及指令相同。然而，主機指令總是會先執行他們的建構函式、生命週期掛鉤和繫結，然後才會執行他們所套用的元件或指令。</p>
+<p>以下範例顯示主機指令的最低限度使用：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'admin-menu'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'admin-menu.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">hostDirectives</span>: [<span class="hljs-title class_">MenuBehavior</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AdminMenu</span> { }</div></code>
+    </pre>
+  </div><p>這裡的執行順序是：</p>
+
+    <ol class="docs-ordered-list">
+      <li><code>MenuBehavior</code> 實例化</li>
+<li><code>AdminMenu</code> 實例化</li>
+<li><code>MenuBehavior</code> 接收輸入 (<code>ngOnInit</code>)</li>
+<li><code>AdminMenu</code> 接收輸入 (<code>ngOnInit</code>)</li>
+<li><code>MenuBehavior</code> 套用主機繫結</li>
+<li><code>AdminMenu</code> 套用主機繫結</li>
+
+    </ol>
+    <p>這個運算順序表示具有 <code>hostDirectives</code> 的元件可以覆寫由主機指令指定的任何主機繫結。</p>
+<p>這項運算順序延伸到主機指令的巢狀鏈，如下例所示。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Tooltip</span> { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">hostDirectives</span>: [<span class="hljs-title class_">Tooltip</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomTooltip</span> { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">hostDirectives</span>: [<span class="hljs-title class_">CustomTooltip</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EvenMoreCustomTooltip</span> { }</div></code>
+    </pre>
+  </div><p>在上面的範例中，執行的順序是：</p>
+
+    <ol class="docs-ordered-list">
+      <li><code>Tooltip</code> 實例化</li>
+<li><code>CustomTooltip</code> 實例化</li>
+<li><code>EvenMoreCustomTooltip</code> 實例化</li>
+<li><code>Tooltip</code> 接收輸入 (<code>ngOnInit</code>)</li>
+<li><code>CustomTooltip</code> 接收輸入 (<code>ngOnInit</code>)</li>
+<li><code>EvenMoreCustomTooltip</code> 接收輸入 (<code>ngOnInit</code>)</li>
+<li><code>Tooltip</code> 套用主機繫結</li>
+<li><code>CustomTooltip</code> 套用主機繫結</li>
+<li><code>EvenMoreCustomTooltip</code> 套用主機繫結</li>
+
+    </ol>
+    
+  <h3 id="">相依性注入</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 相依性注入"></a>
+  <p>指定 <code>hostDirectives</code> 的元件或指令可以注入這些主機指令的執行個體，反之亦然。</p>
+<p>在將主機指令套用至元件時，元件和主機指令都能定義提供者。</p>
+<p>如果一個元件或指令具備 <code>hostDirectives</code>，且這些主機指令都提供相同的注入權杖，由具備 <code>hostDirectives</code> 的類別定義的提供者優先於由主機指令定義的提供者。</p>
+
+  <h3 id="">效能</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 效能"></a>
+  <p>雖然指令組合 API 提供了重用常見行為的強大工具，但過度使用主機指令可能會影響應用程式的記憶體使用。如果您建立了使用 <em>大量</em> 主機指令的元件或指令，您可能會無意中增加應用程式使用的記憶體。</p>
+<p>以下範例顯示套用多個主機指令的元件。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">hostDirectives</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">DisabledState</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">RequiredState</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">ValidationState</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">ColorState</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">RippleBehavior</span>,</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCheckbox</span> { }</div></code>
+    </pre>
+  </div><p>以下範例宣告一個自訂核取方塊元件，其中包含五個主機指令。這表示 Angular 會在每次 <code>CustomCheckbox</code> 呈現時建立六個物件，其中一個是元件，其餘則分別對應每個主機指令。如果頁面上只有幾個核取方塊，這不會造成任何重大問題。不過，如果您的頁面會呈現數百個核取方塊，例如在表格中，那麼您可能會開始看到額外物件配置所造成的影響。務必剖析您的應用程式，以確定最適合您使用案例的組合模式。</p>

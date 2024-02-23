@@ -1,0 +1,151 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">型別表單</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/forms/typed-forms.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>自 Angular 14 開始，預設嚴格類型化響應式表單。</p>
+<p>作為本指南的背景知識，您應該已經熟悉 <a href="guide/forms/reactive-forms">Angular Reactive Forms</a>。</p>
+
+  <h2 id="">輸入表單概述</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 輸入表單概述"></a>
+  
+    <div class="docs-video-container">
+      <iframe
+      class="docs-video"
+      src="https://www.youtube.com/embed/L-odCf4MfJc"
+      
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      credentialless
+      title="Video player"
+      ></iframe>
+    </div>
+    <p>使用 Angular 響應式表單，您可以明確指定 <em>表單模型</em>。以下是一個簡單的使用者登入表單範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> login = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormGroup</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">    <span class="hljs-attr">password</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p>Angular 提供許多 API 來與此 <code>FormGroup</code> 進行互動。例如，您可以呼叫 <code>login.value</code>、<code>login.controls</code>、<code>login.patchValue</code> 等。（如需完整的 API 參考，請參閱 <a href="api/forms/FormGroup">API 文件</a>）。</p>
+<p>在以前的 Angular 版本中，這些 API 大多在類型中包含某個位置的 <code>any</code>，而與控制項的結構或值本身進行互動並不是類型安全的。例如：您可以撰寫以下無效程式碼：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> emailDomain = login.<span class="hljs-property">value</span>.<span class="hljs-property">email</span>.<span class="hljs-property">domain</span>;</div></code>
+    </pre>
+  </div><p>由於嚴格類型化的反應表單，以上的程式碼無法編譯，因為 <code>email</code> 上沒有 <code>domain</code> 屬性。</p>
+<p>除了增強安全性外，類型還能提供多種其他改進，例如 IDE 中更好的自動完成，以及明確指定表單結構的方法。</p>
+<p>這些改進目前僅適用於 <em>reactive</em> 表單（而非 <a href="guide/forms/template-driven-forms"><em>template-driven</em> 表單</a>）。</p>
+
+  <h2 id="">未類型化表單</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 未類型化表單"></a>
+  <p>仍支援非類型化表單，且會繼續像以前一樣運作。若要使用它們，您必須從 <code>@angular/forms</code> 匯入 <code>Untyped</code> 符號：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> login = <span class="hljs-keyword">new</span> <span class="hljs-title class_">UntypedFormGroup</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">UntypedFormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">    <span class="hljs-attr">password</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">UntypedFormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p>每個 <code>Untyped</code> 符號的語意與之前的 Angular 版本完全相同。透過移除 <code>Untyped</code> 前綴，您可以逐步啟用類型。</p>
+
+  <h2 id="formcontrol"><code>FormControl</code>：開始使用</h2>
+  <a href="#formcontrol" class="docs-anchor" tabindex="-1" aria-label="Link to <code>FormControl</code>：開始使用"></a>
+  <p>最簡單可能的形式包含單一控制項：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> email = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">'angularrox@gmail.com'</span>);</div></code>
+    </pre>
+  </div><p>這個控制項將自動推斷為擁有類型 <code>FormControl&lt;string|null&gt;</code>。TypeScript 將在整個 <a href="api/forms/FormControl"><code>FormControl</code> API</a> 中自動強制執行此類型，例如 <code>email.value</code>、<code>email.valueChanges</code>、<code>email.setValue(...)</code> 等。</p>
+
+  <h3 id="">可為空值</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 可為空值"></a>
+  <p>你可能會想：為什麼這個控制項的類型包含 <code>null</code>？這是因為這個控制項在任何時候都可能變成 <code>null</code>，方法是呼叫 reset：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> email = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">'angularrox@gmail.com'</span>);</div><div class="hljs-ln-line">email.<span class="hljs-title function_">reset</span>();</div><div class="hljs-ln-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(email.<span class="hljs-property">value</span>); <span class="hljs-comment">// null</span></div></code>
+    </pre>
+  </div><p>TypeScript 將強制要求您始終處理控制項已變為 <code>null</code> 的可能性。如果您想讓此控制項為非可為空，您可以使用 <code>nonNullable</code> 選項。這將導致控制項重設為其初始值，而不是 <code>null</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> email = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">'angularrox@gmail.com'</span>, {<span class="hljs-attr">nonNullable</span>: <span class="hljs-literal">true</span>});</div><div class="hljs-ln-line">email.<span class="hljs-title function_">reset</span>();</div><div class="hljs-ln-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(email.<span class="hljs-property">value</span>); <span class="hljs-comment">// angularrox@gmail.com</span></div></code>
+    </pre>
+  </div><p>重申一下，此選項會影響表單在呼叫 <code>.reset()</code> 時的執行時間行為，應謹慎切換。</p>
+
+  <h3 id="">指定明確的類型</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 指定明確的類型"></a>
+  <p>可以指定類型，而不是依賴推斷。考慮初始化為 <code>null</code> 的控制項。因為初始值是 <code>null</code>，所以 TypeScript 會推斷 <code>FormControl&lt;null&gt;</code>，這比我們想要的還要窄。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> email = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-literal">null</span>);</div><div class="hljs-ln-line">email.<span class="hljs-title function_">setValue</span>(<span class="hljs-string">'angularrox@gmail.com'</span>); <span class="hljs-comment">// Error!</span></div></code>
+    </pre>
+  </div><p>為防止此情況，我們明確指定類型為 <code>string|null</code>:</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> email = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>&lt;<span class="hljs-built_in">string</span>|<span class="hljs-literal">null</span>&gt;(<span class="hljs-literal">null</span>);</div><div class="hljs-ln-line">email.<span class="hljs-title function_">setValue</span>(<span class="hljs-string">'angularrox@gmail.com'</span>);</div></code>
+    </pre>
+  </div>
+  <h2 id="formarray"><code>FormArray</code>：動態、同質集合</h2>
+  <a href="#formarray" class="docs-anchor" tabindex="-1" aria-label="Link to <code>FormArray</code>：動態、同質集合"></a>
+  <p><code>FormArray</code> 包含一個開放式的控制項列表。類型參數對應到每個內部控制項的類型：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> names = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormArray</span>([<span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">'Alex'</span>)]);</div><div class="hljs-ln-line">names.<span class="hljs-title function_">push</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">'Jess'</span>));</div></code>
+    </pre>
+  </div><p>這個 <code>FormArray</code> 的內部控制類型將是 <code>FormControl&lt;string|null&gt;</code>。</p>
+<p>如果您想在陣列中擁有多個不同的元素類型，您必須使用 <code>UntypedFormArray</code>，因為 TypeScript 無法推斷哪個元素類型會出現在哪個位置。</p>
+
+  <h2 id="formgroup--formrecord"><code>FormGroup</code> 和 <code>FormRecord</code></h2>
+  <a href="#formgroup--formrecord" class="docs-anchor" tabindex="-1" aria-label="Link to <code>FormGroup</code> 和 <code>FormRecord</code>"></a>
+  <p>Angular 提供 <code>FormGroup</code> 類型，適用於具有列舉一組金鑰的表單，以及一個稱為 <code>FormRecord</code> 的類型，適用於開放式或動態群組。</p>
+
+  <h3 id="">部分值</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 部分值"></a>
+  <p>再考慮一個登入表單：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> login = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormGroup</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>, {<span class="hljs-attr">nonNullable</span>: <span class="hljs-literal">true</span>}),</div><div class="hljs-ln-line">    <span class="hljs-attr">password</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>, {<span class="hljs-attr">nonNullable</span>: <span class="hljs-literal">true</span>}),</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p>在任何 <code>FormGroup</code> 中，<a href="api/forms/FormGroup">都可以停用控制項</a>。任何已停用的控制項都不會出現在群組的值中。</p>
+<p>因此，<code>login.value</code> 的類型是 <code>Partial&lt;{email: string, password: string}&gt;</code>。此類型中的 <code>Partial</code> 表示每個成員可能未定義。</p>
+<p>更具體地說，<code>login.value.email</code> 的類型是 <code>string|undefined</code>，TypeScript 將強制您處理可能 <code>undefined</code> 的值（如果您啟用了 <code>strictNullChecks</code>）。</p>
+<p>如果你想存取包含已停用控制項的值，並因此繞過可能的 <code>undefined</code> 欄位，你可以使用 <code>login.getRawValue()</code>。</p>
+
+  <h3 id="">選用控制項和動態群組</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 選用控制項和動態群組"></a>
+  <p>有些表單包含可能存在或不存在的控制項，這些控制項可以在執行階段新增和移除。你可以使用 <em>選用欄位</em> 來表示這些控制項：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">LoginForm</span> {</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-title class_">FormControl</span>&lt;<span class="hljs-built_in">string</span>&gt;;</div><div class="hljs-ln-line">    password?: <span class="hljs-title class_">FormControl</span>&lt;<span class="hljs-built_in">string</span>&gt;;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> login = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormGroup</span>&lt;<span class="hljs-title class_">LoginForm</span>&gt;({</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>, {<span class="hljs-attr">nonNullable</span>: <span class="hljs-literal">true</span>}),</div><div class="hljs-ln-line">    <span class="hljs-attr">password</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>, {<span class="hljs-attr">nonNullable</span>: <span class="hljs-literal">true</span>}),</div><div class="hljs-ln-line">});</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">login.<span class="hljs-title function_">removeControl</span>(<span class="hljs-string">'password'</span>);</div></code>
+    </pre>
+  </div><p>在此表單中，我們明確指定類型，這讓我們可以讓 <code>password</code> 控制項為選用。TypeScript 將強制執行，只有選用控制項可以新增或移除。</p>
+
+  <h3 id="formrecord"><code>FormRecord</code></h3>
+  <a href="#formrecord" class="docs-anchor" tabindex="-1" aria-label="Link to <code>FormRecord</code>"></a>
+  <p>有些 <code>FormGroup</code> 用法不符合上述模式，因為金鑰事先不知道。<code>FormRecord</code> 類別是為這種情況設計的：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> addresses = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormRecord</span>&lt;<span class="hljs-title class_">FormControl</span>&lt;<span class="hljs-built_in">string</span>|<span class="hljs-literal">null</span>&gt;&gt;({});</div><div class="hljs-ln-line">addresses.<span class="hljs-title function_">addControl</span>(<span class="hljs-string">'Andrew'</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">'2340 Folsom St'</span>));</div></code>
+    </pre>
+  </div><p>任何類型為 <code>string|null</code> 的控制項都可以加入此 <code>FormRecord</code>。</p>
+<p>如果您需要一個既動態（開放式）又異質的 <code>FormGroup</code>（控制項類型不同），則無法改進類型安全性，您應該使用 <code>UntypedFormGroup</code>。</p>
+<p><code>FormRecord</code> 也可以使用 <code>FormBuilder</code> 建立：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> addresses = fb.<span class="hljs-title function_">record</span>({<span class="hljs-string">'Andrew'</span>: <span class="hljs-string">'2340 Folsom St'</span>});</div></code>
+    </pre>
+  </div>
+  <h2 id="formbuilder--nonnullableformbuilder"><code>FormBuilder</code> 和 <code>NonNullableFormBuilder</code></h2>
+  <a href="#formbuilder--nonnullableformbuilder" class="docs-anchor" tabindex="-1" aria-label="Link to <code>FormBuilder</code> 和 <code>NonNullableFormBuilder</code>"></a>
+  <p><code>FormBuilder</code> 類別也已升級以支援新的類型，方式與以上範例相同。</p>
+<p>此外，還提供了一個額外的建構器：<code>NonNullableFormBuilder</code>。此類型是指定每個控制項 <code>{nonNullable: true}</code> 的簡寫，可以消除大型非空表單中大量的樣板。您可以使用 <code>FormBuilder</code> 上的 <code>nonNullable</code> 屬性來訪問它：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> fb = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormBuilder</span>();</div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> login = fb.<span class="hljs-property">nonNullable</span>.<span class="hljs-title function_">group</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">password</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p>在以上範例中，內部控制項皆為不可為空 (即會設定 <code>nonNullable</code>)。</p>
+<p>您也可以使用名稱 <code>NonNullableFormBuilder</code> 來注入它。</p>

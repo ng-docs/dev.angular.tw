@@ -1,0 +1,65 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">元件中的控制流程 - <code>@for</code></h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/5-control-flow-for/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>在建立網頁應用程式時，您經常需要重複一些程式碼數次 - 例如，給定一個陣列名稱，您可能想要在 <code>&lt;p&gt;</code> 標籤中顯示每個名稱。</p>
+<p>在這個活動中，您將學習如何使用 <code>@for</code> 在範本中重複元素。</p>
+<hr/>
+
+<p>讓範本中元素可重複的語法是 <code>@for</code>。</p>
+<p>以下是如何在元件中使用 <code>@for</code> 語法的範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    @for (os of operatingSystems; track os.id) {</div><div class="hljs-ln-line">      {{ os.name }}</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  operatingSystems = [{<span class="hljs-attr">id</span>: <span class="hljs-string">'win'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Windows'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-string">'osx'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'MacOS'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-string">'linux'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Linux'</span>}];</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>兩件事需要注意：</p>
+
+  <ul class="docs-list">
+    <li><code>for</code> 前面有 <code>@</code> 前綴，因為它是一種特殊語法，稱為 <a href="guide/templates">Angular 範本語法</a></li>
+<li>對於使用 v16 及以下版本的應用程式，請參閱 <a href="guide/directives/structural-directives">Angular 說明文件以取得 NgFor</a></li>
+
+  </ul>
+  
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-users-">加入 <code>users</code> 屬性</h3>
+  <a href="#-users-" class="docs-anchor" tabindex="-1" aria-label="Link to 加入 <code>users</code> 屬性"></a>
+  
+      <p>在 <code>AppComponent</code> 類別中，加入一個名為 <code>users</code> 且包含使用者及其名稱的屬性。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">[{<span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Sarah'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Amy'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Rachel'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Jessica'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Poornima'</span>}]</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">更新範本</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 更新範本"></a>
+  
+      <p>使用 <code>@for</code> 範本語法將每個使用者名稱顯示在 <code>p</code> 元素中，以更新範本。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@for</span> (user <span class="hljs-keyword">of</span> users; track user.<span class="hljs-property">id</span>) {</div><div class="hljs-ln-line">  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ user.name }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>注意: 使用 <code>track</code> 是必要的，你可以使用 <code>id</code> 或其他唯一的識別符號。</p>
+
+    </li>
+    
+    </ol>
+    <p>這種功能稱為控制流程。接下來，您將學習自訂和與元件溝通 - 順便說一下，到目前為止您做得很好。</p>

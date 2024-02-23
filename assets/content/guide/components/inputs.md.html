@@ -1,0 +1,126 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">使用輸入屬性接受資料</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/inputs.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>提示：本指南假設您已經閱讀過 <a href="essentials">精華指南</a>。如果您是 Angular 新手，請先閱讀該指南。</p>
+<p>提示：如果你熟悉其他網路框架，輸入屬性類似於 <em>props</em>。</p>
+<p>當建立一個元件時，你可以透過在屬性上加上 <code>@Input</code> 裝飾器，將特定的類別屬性標記為 <strong>可繫結</strong>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@Input</span>() value = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>這讓您可以繫結到範本中的屬性：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-slider</span> [<span class="hljs-attr">value</span>]=<span class="hljs-string">"50"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p>Angular 將標記有 <code>@Input</code> 裝飾器的屬性稱為 <strong>輸入</strong>。在使用元件時，您可以透過設定其輸入來將資料傳遞給它。</p>
+<p><strong>Angular 在編譯時靜態記錄輸入值</strong>. 輸入值無法在執行時新增或移除。</p>
+<p>當擴充一個元件類別時，<strong>輸入項目會被子類別繼承。</strong></p>
+<p><strong>輸入名稱區分大小寫。</strong></p>
+
+  <h2 id="">自訂輸入</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 自訂輸入"></a>
+  <p><code>@Input</code> 裝飾器接受一個設定物件，讓您可以變更輸入運作的方式。</p>
+
+  <h3 id="">必填輸入</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 必填輸入"></a>
+  <p>您可以指定 <code>required</code> 選項以強制執行給定輸入必須始終具備值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>}) value = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>如果你嘗試使用某個元件，但未指定所有必要的輸入，Angular 會在建置時報告錯誤。</p>
+
+  <h3 id="">輸入轉換</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 輸入轉換"></a>
+  <p>您可以指定一個 <code>transform</code> 函式，在 Angular 設定輸入值時變更該值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-slider'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">transform</span>: trimString}) label = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">trimString</span>(<span class="hljs-params">value: <span class="hljs-built_in">string</span> | <span class="hljs-literal">undefined</span></span>) {</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> value?.<span class="hljs-title function_">trim</span>() ?? <span class="hljs-string">''</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-slider</span> [<span class="hljs-attr">label</span>]=<span class="hljs-string">"systemVolume"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p>在上面的範例中，每當 <code>systemVolume</code> 的值變更時，Angular 會執行 <code>trimString</code> 並將 <code>label</code> 設為結果。</p>
+<p>輸入轉換最常見的使用案例是接受範本中更廣泛的值類型，通常包括 <code>null</code> 和 <code>undefined</code>。</p>
+<p>**輸入轉換函式在建置時必須可以靜態分析。**您無法有條件地或作為表達式評估的結果來設定轉換函式。</p>
+<p>**輸入轉換函式應始終為 <a href="https://en.wikipedia.org/wiki/Pure_function" target="_blank">純函式</a>。**依賴於轉換函式之外的狀態可能會導致行為無法預測。</p>
+
+  <h4 id="">類型檢查</h4>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 類型檢查"></a>
+  <p>當您指定輸入轉換時，轉換函式參數的類型決定了可以在範本中設定為輸入的值的類型。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">transform</span>: appendPx}) <span class="hljs-attr">widthPx</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">appendPx</span>(<span class="hljs-params">value: <span class="hljs-built_in">number</span></span>) {</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${value}</span>px`</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>在上面的範例中，<code>widthPx</code> 輸入接受 <code>number</code>，而類別上的屬性是一個 <code>string</code>。</p>
+
+  <h4 id="">內建轉換</h4>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 內建轉換"></a>
+  <p>Angular 包含兩種內建的轉換函式，適用於兩個最常見的場景：將值強制轉換為布林值和數字。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, <span class="hljs-title class_">Input</span>, booleanAttribute, numberAttribute} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">transform</span>: booleanAttribute}) disabled = <span class="hljs-literal">false</span>;</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">transform</span>: numberAttribute}) <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><code>booleanAttribute</code> 模仿標準 HTML <a href="https://developer.mozilla.org/en-US/docs/Glossary/Boolean/HTML" target="_blank">布林屬性</a> 的行為，其中屬性的 <em>存在</em> 表示「true」值。但是，Angular 的 <code>booleanAttribute</code> 將字串 <code>&quot;false&quot;</code> 當作布林 <code>false</code>。</p>
+<p><code>numberAttribute</code> 嘗試解析給定的值成數字，如果解析失敗則產生 <code>NaN</code>。</p>
+
+  <h3 id="">輸入別名</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 輸入別名"></a>
+  <p>您可以指定 <code>alias</code> 選項來變更範本中輸入的名稱。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">alias</span>: <span class="hljs-string">'sliderValue'</span>}) value = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-slider</span> [<span class="hljs-attr">sliderValue</span>]=<span class="hljs-string">"50"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p>此別名不影響 TypeScript 程式碼中屬性的使用方式。</p>
+<p>雖然您通常應該避免別名輸入元件，但此功能可協助您重新命名屬性，同時保留原始名稱的別名，或避免與原生 DOM 元素屬性名稱發生衝突。</p>
+<p><code>@Input</code> 裝飾器也可以接受別名作為第一個參數，而不是配置物件。</p>
+
+  <h2 id="-getter--setter-">具有 getter 和 setter 的輸入</h2>
+  <a href="#-getter--setter-" class="docs-anchor" tabindex="-1" aria-label="Link to 具有 getter 和 setter 的輸入"></a>
+  <p>一個使用 getter 和 setter 實作的屬性可以是輸入：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>()</div><div class="hljs-ln-line">  <span class="hljs-keyword">get</span> <span class="hljs-title function_">value</span>(): <span class="hljs-built_in">number</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">internalValue</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">set</span> <span class="hljs-title function_">value</span>(<span class="hljs-params">newValue: <span class="hljs-built_in">number</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">internalValue</span> = newValue;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">private</span> internalValue = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>您可以僅定義一個公共設定器來建立一個 <em>寫入專用</em> 輸入：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>()</div><div class="hljs-ln-line">  <span class="hljs-keyword">set</span> <span class="hljs-title function_">value</span>(<span class="hljs-params">newValue: <span class="hljs-built_in">number</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">internalValue</span> = newValue;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">private</span> internalValue = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>如果可能的話，儘量使用<span style="text-decoration:underline;">輸入轉換</span>，而不是 getter 和 setter。</p>
+<p>避免使用複雜或昂貴的 getter 和 setter。Angular 可能會多次呼叫輸入的 setter，如果 setter 執行任何昂貴的行為，例如 DOM 操作，可能會對應用程式的效能產生負面影響。</p>
+
+  <h2 id="-component-">在 <code>@Component</code> 裝飾器中指定輸入</h2>
+  <a href="#-component-" class="docs-anchor" tabindex="-1" aria-label="Link to 在 <code>@Component</code> 裝飾器中指定輸入"></a>
+  <p>除了 <code>@Input</code> 裝飾器，您也可以在 <code>@Component</code> 裝飾器中使用 <code>inputs</code> 屬性來指定元件的輸入。這在元件從基類繼承屬性時很有用：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// `CustomSlider` inherits the `disabled` property from `BaseSlider`.</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">inputs</span>: [<span class="hljs-string">'disabled'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">BaseSlider</span> { }</div></code>
+    </pre>
+  </div><p>您也可以在 <code>inputs</code> 清單中指定輸入別名，方法是在字串中於冒號之後輸入別名：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// `CustomSlider` inherits the `disabled` property from `BaseSlider`.</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">inputs</span>: [<span class="hljs-string">'disabled: sliderDisabled'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">BaseSlider</span> { }</div></code>
+    </pre>
+  </div>
+  <h2 id="">選擇輸入名稱</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 選擇輸入名稱"></a>
+  <p>避免選擇與 DOM 元素上的屬性相衝突的輸入名稱，例如 HTMLElement。名稱衝突會造成混淆，讓人難以判斷繫結的屬性是屬於元件還是 DOM 元素。</p>
+<p>避免為元件輸入新增前綴，就像您使用元件選擇器時一樣。由於給定的元素只能 hosting 一個元件，因此可以假設任何自訂屬性都屬於該元件。</p>

@@ -1,0 +1,35 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">範本表達式中的管線優先順序</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/pipes/precedence.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>有時您想在將選擇傳遞至管線之前，根據某些條件在兩個值之間進行選擇。
+您可以在範本中使用 JavaScript 三元運算子 (<code>?:</code>) 來做出該選擇。</p>
+<p>小心！管線運算子的優先權高於 JavaScript 三元運算子 (<code>?:</code>)。</p>
+<p>如果您只是按照從左到右的順序來撰寫表達式，您可能會對結果感到驚訝。例如，</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">condition ? a : b | pipe</div></code>
+    </pre>
+  </div><p>以下文字為 HTML 與 Markdown 文件的混合。請將文字翻譯成正體中文，並保持格式原樣。</p>
+<p>is parsed as</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">condition ? a : (b | pipe)</div></code>
+    </pre>
+  </div><p><code>b</code> 的值透過 <code>pipe</code>；<code>a</code> 的值 <em>不會</em>。</p>
+<p>如果你想讓 pipe 套用至三元運算式的結果，請將整個運算式用括號括起來。例如，</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">(condition ? a : b) | pipe</div></code>
+    </pre>
+  </div><p>一般來說，您應該始終使用括弧，以確保 Angular 按照您的意圖評估表達式。</p>

@@ -1,0 +1,62 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">Injection context</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/di/dependency-injection-context.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>相依性注入 (DI) 系統在內部依賴於執行時間環境，在該環境中可取得目前的注入器。
+這表示注入器只有在程式碼在此環境中執行時才能運作。</p>
+<p>注入內容在下列情況下可用：</p>
+
+  <ul class="docs-list">
+    <li>建構函式（透過 <code>constructor</code>）建立一個由相依性注入系統實例化的類別，例如 <code>@Injectable</code> 或 <code>@Component</code>。</li>
+<li>在此類別的欄位初始化項中。</li>
+<li>在 <code>Provider</code> 或 <code>@Injectable</code> 的 <code>useFactory</code> 指定的工廠函式中。</li>
+<li>在 <code>InjectionToken</code> 指定的 <code>factory</code> 函式中。</li>
+<li>在注入內容中執行的堆疊框架中。</li>
+
+  </ul>
+  <p>了解何時處於注入環境中，將允許您使用 <a href="api/core/inject"><code>inject</code></a> 函式來注入執行個體。</p>
+
+  <h2 id="">類別建構函式</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 類別建構函式"></a>
+  <p>每次 DI 系統實例化一個類別時，這會在注入內容中完成。這由架構本身處理。類別的建構函式在該執行階段內容中執行，因此允許使用 <a href="api/core/inject"><code>inject</code></a> 函式注入令牌。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span>  {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> <span class="hljs-attr">service1</span>: <span class="hljs-title class_">Service1</span>;</div><div class="hljs-ln-line highlighted">  <span class="hljs-keyword">private</span> <span class="hljs-attr">service2</span>: <span class="hljs-title class_">Service2</span> = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">Service2</span>); <span class="hljs-comment">// In context</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">service1</span> = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">HeroService</span>) <span class="hljs-comment">// In context</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">上下文中堆疊的框架</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 上下文中堆疊的框架"></a>
+  <p>有些 API 是設計用於在注入的內容中執行。例如，路由防護就是如此。它允許使用 <a href="api/core/inject"><code>inject</code></a> 存取防護函式中的服務。</p>
+<p>以下是一個 <code>CanActivateFn</code> 的範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">canActivateTeam</span>: <span class="hljs-title class_">CanActivateFn</span> =</div><div class="hljs-ln-line">    <span class="hljs-function">(<span class="hljs-params">route: ActivatedRouteSnapshot, state: RouterStateSnapshot</span>) =&gt;</span> {</div><div class="hljs-ln-line highlighted">      <span class="hljs-keyword">return</span> <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">PermissionsService</span>).<span class="hljs-title function_">canActivate</span>(<span class="hljs-title function_">inject</span>(<span class="hljs-title class_">UserToken</span>), route.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);</div><div class="hljs-ln-line">    };</div></code>
+    </pre>
+  </div>
+  <h2 id="">在注入內容中執行</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 在注入內容中執行"></a>
+  <p>當您想在不在注入內容中執行給定函式時，您可以使用 <code>runInInjectionContext</code> 來執行。
+這需要訪問給定的注入器，例如 <code>EnvironmentInjector</code>。</p>
+<div class="docs-code" header="src/app/heroes/hero.service.ts">
+    <div class="docs-code-header"><h3>src/app/heroes/hero.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> environmentInjector = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">EnvironmentInjector</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">someMethod</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-title function_">runInInjectionContext</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">environmentInjector</span>, <span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line highlighted">      <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">SomeService</span>); <span class="hljs-comment">// Do what you need with the injected service</span></div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>注意，僅當注入器可以解決所需的令牌時，<code>inject</code> 才會傳回一個實例。</p>
+
+  <h2 id="">斷言上下文</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 斷言上下文"></a>
+  <p>Angular 提供 <code>assertInInjectionContext</code> 輔助函式，用以斷言目前的情境是注入的情境。</p>
+
+  <h2 id="-di">在背景之外使用 DI</h2>
+  <a href="#-di" class="docs-anchor" tabindex="-1" aria-label="Link to 在背景之外使用 DI"></a>
+  <p>呼叫 <a href="api/core/inject"><code>inject</code></a> 或在注入內容外呼叫 <code>assertInInjectionContext</code> 會擲出 <a href="/errors/NG0203">錯誤 NG0203</a>。</p>

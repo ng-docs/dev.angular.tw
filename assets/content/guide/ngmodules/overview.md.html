@@ -1,0 +1,75 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">NgModules</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/overview.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p><strong>NgModules</strong> 配置注入器、編譯器，並協助將相關事物組織在一起。</p>
+<p><code>NgModule</code> 是由 <code>@NgModule</code> 裝飾器標記的類別。
+<code>@NgModule</code> 會採用描述如何編譯元件範本以及如何在執行階段建立注入器的資訊物件。
+它會識別模組本身的元件、指令和管道，並透過 <code>exports</code> 屬性使其中一些元件公開，以便外部元件可以使用它們。
+<code>@NgModule</code> 也可將服務提供者新增到應用程式相依性注入器。</p>
+
+  <h2 id="angular-">Angular 模組性</h2>
+  <a href="#angular-" class="docs-anchor" tabindex="-1" aria-label="Link to Angular 模組性"></a>
+  <p>模組是整理應用程式和使用外部函式庫功能來延伸應用程式的好方法。</p>
+<p>Angular 函式庫是 NgModules，例如 <code>FormsModule</code>、<code>HttpClientModule</code> 和 <code>RouterModule</code>。
+很多第三方函式庫都可用作 NgModules，例如 <a href="https://material.angular.io" target="_blank">Material Design 元件函式庫</a>、<a href="https://ionicframework.com" target="_blank">Ionic</a> 或 <a href="https://github.com/angular/angularfire" target="_blank">Angular 的 Firebase 整合</a>。</p>
+<p>NgModules 將元件、指令和管線整合到功能緊密的區塊中，每個都專注於功能區域、應用程式業務範疇、工作流程或常見的實用程式集合。</p>
+<p>模組也可以將服務加入應用程式。
+此類服務可能是內部開發的，例如您自己開發的服務，也可能是來自外部來源的，例如 Angular 路由器和 HTTP 客戶端。</p>
+<p>模組可以在應用程式啟動時立即載入，或由路由器非同步延遲載入。</p>
+<p>NgModule 元數據執行下列動作：</p>
+
+  <ul class="docs-list">
+    <li>宣告哪些元件、指令和管道屬於這個模組</li>
+<li>使其中一些元件、指令和管道公開，以便其他模組的元件範本可以使用它們</li>
+<li>匯入其他具有元件、指令和管道的模組，以便當前模組中的元件需要它們</li>
+<li>提供其他應用程式元件可以使用之服務</li>
+
+  </ul>
+  <p>每個 Angular 應用程式至少有一個模組，即根模組。
+您會 <a href="/guide/ngmodules/bootstrapping">bootstrap</a> 該模組來啟動應用程式。</p>
+<p>根模組是您在具有少數元件的應用程式中唯一需要的。
+隨著應用程式成長，您將根模組重構為 <a href="/guide/ngmodules/feature-modules">功能模組</a>，代表相關功能的集合。
+然後，您將這些模組匯入根模組。</p>
+
+  <h2 id="-ngmodule">基本的 NgModule</h2>
+  <a href="#-ngmodule" class="docs-anchor" tabindex="-1" aria-label="Link to 基本的 NgModule"></a>
+  <p>建立新應用程式時，<a href="/tools/cli">Angular CLI</a> 會產生下列基本 <code>AppModule</code>。</p>
+<div class="docs-code" header="src/app/app.module.ts">
+    <div class="docs-code-header"><h3>src/app/app.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { BrowserModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { NgModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { AppComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@NgModule({</div><div class="hljs-ln-line">  declarations: [AppComponent],</div><div class="hljs-ln-line">  imports: [BrowserModule],</div><div class="hljs-ln-line">  providers: [],</div><div class="hljs-ln-line">  bootstrap: [AppComponent]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> {}</div></code>
+    </pre>
+  </div><p>最上面是匯入陳述式。
+下一個區段是您透過聲明哪些元件和指令屬於它 (<code>declarations</code>) 以及它使用哪些其他模組 (<code>imports</code>) 來配置 <code>@NgModule</code> 的位置。
+如需有關 <code>@NgModule</code> 結構的更多資訊，務必閱讀 <a href="/guide/ngmodules/bootstrapping">Bootstrapping</a>。</p>
+
+  <h2 id="-ngmodules">更多有關 NgModules</h2>
+  <a href="#-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to 更多有關 NgModules"></a>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="/guide/ngmodules/feature-modules">
+      功能模組
+    </a>
+    
+    <a class="docs-pill" href="/guide/ngmodules/providers">
+      提供者
+    </a>
+    
+    <a class="docs-pill" href="/guide/ngmodules/module-types">
+      NgModules 類型
+    </a>
+    
+
+    </nav>
+    

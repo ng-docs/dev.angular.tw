@@ -1,0 +1,38 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">無效 Shadow DOM 選擇器</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG2009.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>使用 <code>ViewEncapsulation.ShadowDom</code> 的元件選取器不符合自訂元素標記名稱需求。</p>
+<p>要讓標籤名稱被視為有效的自訂元素名稱，它必須：</p>
+
+  <ul class="docs-list">
+    <li>以小寫字母表示。</li>
+<li>包含連接字元。</li>
+<li>以字母 (a-z) 開頭。</li>
+
+  </ul>
+  
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>重命名元件選擇器，讓它符合需求。</p>
+<p><strong>之前：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'comp'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">encapsulation</span>: <span class="hljs-title class_">ViewEncapsulation</span>.<span class="hljs-property">ShadowDom</span></div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p><strong>之後：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-comp'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">encapsulation</span>: <span class="hljs-title class_">ViewEncapsulation</span>.<span class="hljs-property">ShadowDom</span></div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div>

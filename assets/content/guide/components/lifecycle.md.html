@@ -1,0 +1,254 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">元件生命週期</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/lifecycle.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>提示：本指南假設您已經閱讀過 <a href="essentials">精華指南</a>。如果您是 Angular 新手，請先閱讀該指南。</p>
+<p>元件的 <strong>生命週期</strong> 是發生在元件建立與銷毀之間的一系列步驟。每個步驟都代表了 Angular 渲染元件和隨時間檢查它們以進行更新的不同部分的過程。</p>
+<p>在您的元件中，您可以實作 <strong>生命週期掛勾</strong> 來在這些步驟中執行程式碼。
+與特定元件實例相關的生命週期掛勾實作為您的元件類別上的方法。與整個 Angular 應用程式相關的生命週期掛勾實作為接受回呼的函式。</p>
+<p>元件的生命週期與 Angular 如何隨著時間檢查元件變化緊密相關。為了理解這個生命週期，您只需要知道 Angular 從上到下巡覽您的應用程式樹狀結構，檢查範本繫結的變化。當 Angular 執行此巡覽時，下列所述的生命週期掛勾會執行。此巡覽會精確地拜訪每個元件一次，因此您應始終避免在處理過程中對狀態做進一步的變更。</p>
+
+  <h2 id="">摘要</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 摘要"></a>
+  <div class="docs-table docs-scroll-track-transparent">
+  <table>
+    <tr>
+      <td><strong>階段</strong></td>
+      <td><strong>方法</strong></td>
+      <td><strong>摘要</strong></td>
+    </tr>
+    <tr>
+      <td>建立</td>
+      <td>constructor</td>
+      <td>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor" target="_blank">
+          標準 JavaScript 類別建構函式
+        </a>。在 Angular 實例化元件時執行。
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="7">變更<p>偵測</td>
+      <td>ngOnInit
+      </td>
+      <td>在 Angular 初始化元件的所有輸入後執行一次。</td>
+    </tr>
+    <tr>
+      <td>ngOnChanges</td>
+      <td>在元件的輸入每次變更時執行。</td>
+    </tr>
+    <tr>
+      <td>ngDoCheck</td>
+      <td>每次檢查此元件是否有變更時執行。</td>
+    </tr>
+    <tr>
+      <td>ngAfterViewInit</td>
+      <td>在元件的<em>檢視</em>初始化後執行一次。</td>
+    </tr>
+    <tr>
+      <td>ngAfterContentInit</td>
+      <td>在元件的<em>內容</em>初始化後執行一次。</td>
+    </tr>
+    <tr>
+      <td>ngAfterViewChecked</td>
+      <td>每次檢查元件的檢視是否有變更時執行。</td>
+    </tr>
+    <tr>
+      <td>ngAfterContentChecked</td>
+      <td>每次檢查此元件內容是否有變更時執行。</td>
+    </tr>
+    <tr>
+      <td rowspan="2">呈現</td>
+      <td>afterNextRender</td>
+      <td>在下次<strong>所有</strong>元件都已呈現到 DOM 時執行一次。</td>
+    </tr>
+    <tr>
+      <td>afterRender</td>
+      <td>每次<strong>所有</strong>元件都已呈現到 DOM 時執行。</td>
+    </tr>
+    <tr>
+      <td>銷毀</td>
+      <td>ngOnDestroy</td>
+      <td>在銷毀元件前執行一次。</td>
+    </tr>
+  </table>
+</div>
+
+
+  <h3 id="ngoninit">ngOnInit</h3>
+  <a href="#ngoninit" class="docs-anchor" tabindex="-1" aria-label="Link to ngOnInit"></a>
+  <p><code>ngOnInit</code> 方法在 Angular 以其初始值初始化所有元件輸入之後執行。元件的 <code>ngOnInit</code> 僅執行一次。</p>
+<p>此步驟發生在元件自己的範本初始化 <em>之前</em>。這表示您可以根據元件的初始輸入值來更新元件的狀態。</p>
+
+  <h3 id="ngonchanges">ngOnChanges</h3>
+  <a href="#ngonchanges" class="docs-anchor" tabindex="-1" aria-label="Link to ngOnChanges"></a>
+  <p><code>ngOnChanges</code> 方法在任何元件輸入變更後執行。</p>
+<p>此步驟發生在元件自己的範本被檢查_之前_。這表示你可以根據元件的初始輸入值來更新元件的狀態。</p>
+<p>在初始化期間，第一個 <code>ngOnChanges</code> 會在 <code>ngOnInit</code> 之前執行。</p>
+
+  <h4 id="">檢查變更</h4>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 檢查變更"></a>
+  <p><code>ngOnChanges</code> 方法接受一個 <code>SimpleChanges</code> 參數。這個物件是
+<a href="https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type" target="_blank"><code>Record</code></a>
+將每個元件輸入名稱對應到 <code>SimpleChange</code> 物件。每個 <code>SimpleChange</code> 包含輸入的先前值、目前值，以及輸入是否為第一次變更的旗標。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">/* ... */</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserProfile</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnChanges</span>(<span class="hljs-params">changes: SimpleChanges</span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> inputName <span class="hljs-keyword">in</span> changes) {</div><div class="hljs-ln-line">      <span class="hljs-keyword">const</span> inputValues = changes[inputName];</div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Previous <span class="hljs-subst">${inputName}</span> == <span class="hljs-subst">${inputValues.previousValue}</span>`</span>);</div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Current <span class="hljs-subst">${inputName}</span> == <span class="hljs-subst">${inputValues.currentValue}</span>`</span>);</div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Is first <span class="hljs-subst">${inputName}</span> change == <span class="hljs-subst">${inputValues.firstChange}</span>`</span>);</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>如果您為任何輸入屬性提供 <code>alias</code>，<code>SimpleChanges</code> Record 仍然會使用 TypeScript 屬性名稱作為鍵，而不是別名。</p>
+
+  <h3 id="ngondestroy">ngOnDestroy</h3>
+  <a href="#ngondestroy" class="docs-anchor" tabindex="-1" aria-label="Link to ngOnDestroy"></a>
+  <p><code>ngOnDestroy</code> 方法在元件被銷毀之前僅執行一次。Angular 會在頁面上不再顯示元件時銷毀它，例如被 <code>NgIf</code> 隱藏或導航到另一個頁面時。</p>
+
+  <h4 id="destroyref">DestroyRef</h4>
+  <a href="#destroyref" class="docs-anchor" tabindex="-1" aria-label="Link to DestroyRef"></a>
+  <p>作為 <code>ngOnDestroy</code> 方法的替代方案，您可以注入 <code>DestroyRef</code> 的實例。您可以透過呼叫 <code>DestroyRef</code> 的 <code>onDestroy</code> 方法來註冊一個在元件毀損時呼叫的回呼。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">/* ... */</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserProfile</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> destroyRef: DestroyRef</span>) {</div><div class="hljs-ln-line">    destroyRef.<span class="hljs-title function_">onDestroy</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'UserProfile destruction'</span>);</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>您可以將 <code>DestroyRef</code> 實例傳遞給元件外部的函式或類別。如果您有其他程式碼應該在元件被銷毀時執行一些清理行為時，請使用此模式。</p>
+<p>您也可以使用 <code>DestroyRef</code> 將設定程式碼放在靠近清理程式碼的位置，而非將所有清理程式碼放入 <code>ngOnDestroy</code> 方法。</p>
+
+  <h3 id="ngdocheck">ngDoCheck</h3>
+  <a href="#ngdocheck" class="docs-anchor" tabindex="-1" aria-label="Link to ngDoCheck"></a>
+  <p><code>ngDoCheck</code> 方法在 Angular 每一次檢查元件範本是否有變更之前執行。</p>
+<p>您可以使用這個生命週期掛鉤手動檢查 Angular 正常變更偵測之外的狀態變更，手動更新元件的狀態。</p>
+<p>此方法執行非常頻繁，可能會大幅影響您的頁面效能。請盡可能避免定義此掛鉤，僅在沒有其他替代方案時才使用它。</p>
+<p>在初始化期間，第一個 <code>ngDoCheck</code> 在 <code>ngOnInit</code> 之後執行。</p>
+
+  <h3 id="ngafterviewinit">ngAfterViewInit</h3>
+  <a href="#ngafterviewinit" class="docs-anchor" tabindex="-1" aria-label="Link to ngAfterViewInit"></a>
+  <p><code>ngAfterViewInit</code> 方法在元件範本 (其 <em>檢視</em>) 中的所有子項初始化之後執行一次。</p>
+<p>您可使用此生命週期掛鉤來讀取 <a href="guide/components/queries#view-queries">檢視查詢</a> 的結果。雖然您可以存取這些查詢的初始化狀態，但嘗試在此方法中變更任何狀態會導致 <a href="errors/NG0100">ExpressionChangedAfterItHasBeenCheckedError</a></p>
+
+  <h3 id="ngaftercontentinit">ngAfterContentInit</h3>
+  <a href="#ngaftercontentinit" class="docs-anchor" tabindex="-1" aria-label="Link to ngAfterContentInit"></a>
+  <p><code>ngAfterContentInit</code> 方法在元件內嵌套的所有子代 (其 <em>內容</em>) 初始化後執行一次。</p>
+<p>您可以在此生命週期掛勾中讀取
+<a href="guide/components/queries#content-queries">內容查詢</a> 的結果。雖然您可以存取這些查詢的初始化狀態，但嘗試在此方法中變更任何狀態會導致
+<a href="errors/NG0100">ExpressionChangedAfterItHasBeenCheckedError</a></p>
+
+  <h3 id="ngafterviewchecked">ngAfterViewChecked</h3>
+  <a href="#ngafterviewchecked" class="docs-anchor" tabindex="-1" aria-label="Link to ngAfterViewChecked"></a>
+  <p><code>ngAfterViewChecked</code> 方法會在元件範本中的子項 (其 <em>檢視</em>) 已檢查變更時每次執行。</p>
+<p>此方法執行非常頻繁，可能會大幅影響您的頁面效能。請盡可能避免定義此掛鉤，僅在沒有其他替代方案時才使用它。</p>
+<p>雖然您可以訪問 <a href="guide/components/queries#view-queries">檢視查詢</a> 的更新狀態，
+但在這個方法中嘗試更改任何狀態都會導致
+<a href="errors/NG0100">ExpressionChangedAfterItHasBeenCheckedError</a>。</p>
+
+  <h3 id="ngaftercontentchecked">ngAfterContentChecked</h3>
+  <a href="#ngaftercontentchecked" class="docs-anchor" tabindex="-1" aria-label="Link to ngAfterContentChecked"></a>
+  <p><code>ngAfterContentChecked</code> 方法會在嵌套在元件內的所有子項 (其
+<em>內容</em>) 都已檢查是否有變更時每次執行。</p>
+<p>此方法執行非常頻繁，可能會大幅影響您的頁面效能。請盡可能避免定義此掛鉤，僅在沒有其他替代方案時才使用它。</p>
+<p>雖然您可以在此處存取 <a href="guide/components/queries#content-queries">內容查詢</a> 的更新狀態，但嘗試在此方法中變更任何狀態會導致 <a href="errors/NG0100">ExpressionChangedAfterItHasBeenCheckedError</a>。</p>
+
+  <h3 id="afterrender--afternextrender">afterRender 和 afterNextRender</h3>
+  <a href="#afterrender--afternextrender" class="docs-anchor" tabindex="-1" aria-label="Link to afterRender 和 afterNextRender"></a>
+  <p><code>afterRender</code> 和 <code>afterNextRender</code> 函式讓您註冊 <strong>渲染回呼</strong>，以便在 Angular 將 <em>所有元件</em> 渲染到 DOM 中之後執行。</p>
+<p>這些函式與本指南中描述的其他生命週期掛勾不同。它們不是類別方法，而是接受回呼的獨立函式。render 回呼的執行未繫結到任何特定元件實體，而是一個應用程式範圍的掛勾。</p>
+<p><code>afterRender</code> 和 <code>afterNextRender</code> 必須在 <a href="guide/di/dependency-injection-context">注入內容</a> 中呼叫，通常是元件的建構函式。</p>
+<p>您可以使用渲染回呼來執行手動 DOM 操作。
+請參閱 <a href="guide/components/dom-apis">使用 DOM API</a> 以獲得有關在 Angular 中使用 DOM 的指導。</p>
+<p>Render 回呼不會在伺服器端渲染或建置期間預先渲染時執行。</p>
+
+  <h4 id="afterrender-">afterRender 階段</h4>
+  <a href="#afterrender-" class="docs-anchor" tabindex="-1" aria-label="Link to afterRender 階段"></a>
+  <p>在使用 <code>afterRender</code> 或 <code>afterNextRender</code> 時，你可以選擇性地指定一個 <code>phase</code>。這個 <code>phase</code> 能讓你控制 DOM 操作的順序，讓你可以在 <em>讀取</em> 操作之前先執行 <em>寫入</em> 操作以減少
+<a href="https://web.dev/avoid-large-complex-layouts-and-layout-thrashing" target="_blank">版面重排</a>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, <span class="hljs-title class_">ElementRef</span>, afterNextRender, <span class="hljs-title class_">AfterRenderPhase</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserProfile</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> elementHeight = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">elementRef: ElementRef</span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> nativeElement = elementRef.<span class="hljs-property">nativeElement</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// Use the `Write` phase to write to a geometric property.</span></div><div class="hljs-ln-line">    <span class="hljs-title function_">afterNextRender</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">      nativeElement.<span class="hljs-property">style</span>.<span class="hljs-property">padding</span> = <span class="hljs-title function_">computePadding</span>();</div><div class="hljs-ln-line">    }, {<span class="hljs-attr">phase</span>: <span class="hljs-title class_">AfterRenderPhase</span>.<span class="hljs-property">Write</span>});</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// Use the `Read` phase to read geometric properties after all writes have occurred.</span></div><div class="hljs-ln-line">    <span class="hljs-title function_">afterNextRender</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">elementHeight</span> = nativeElement.<span class="hljs-title function_">getBoundingClientRect</span>().<span class="hljs-property">height</span>;</div><div class="hljs-ln-line">    }, {<span class="hljs-attr">phase</span>: <span class="hljs-title class_">AfterRenderPhase</span>.<span class="hljs-property">Read</span>});</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>有四個階段，按以下順序運行：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th>階段</th>
+<th>說明</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td><code>EarlyRead</code></td>
+<td>使用此階段來讀取任何佈局影響的 DOM 屬性和樣式，這些屬性和樣式對於後續計算是絕對必要的。如果可能，請避免此階段，優先使用 <code>Write</code> 和 <code>Read</code> 階段。</td>
+</tr>
+<tr>
+<td><code>MixedReadWrite</code></td>
+<td>預設階段。用於任何需要同時讀取和寫入佈局影響屬性和樣式的操作。如果可能，請避免此階段，優先使用明確的 <code>Write</code> 和 <code>Read</code> 階段。</td>
+</tr>
+<tr>
+<td><code>Write</code></td>
+<td>使用此階段來寫入佈局影響的 DOM 屬性和樣式。</td>
+</tr>
+<tr>
+<td><code>Read</code></td>
+<td>使用此階段來讀取任何佈局影響的 DOM 屬性。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="lifecycle-interfaces">Lifecycle interfaces</h2>
+  <a href="#lifecycle-interfaces" class="docs-anchor" tabindex="-1" aria-label="Link to Lifecycle interfaces"></a>
+  <p>Angular 為每個生命週期方法提供 TypeScript 介面。您可以選擇性地匯入並實作這些介面，以確保您的實作沒有任何錯字或拼寫錯誤。</p>
+<p>每個介面都有與對應方法相同的名稱，但沒有 <code>ng</code> 前綴。例如，<code>ngOnInit</code> 的介面是 <code>OnInit</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">/* ... */</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserProfile</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OnInit</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">/* ... */</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">執行順序</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 執行順序"></a>
+  <p>以下圖表顯示 Angular 生命周期掛鉤的執行順序。</p>
+
+  <h3 id="">初始化期間</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 初始化期間"></a>
+  <!-- TODO(josephperrott): enable this mermaid chart -->
+
+<pre><code>graph TD;
+id[constructor]--&gt;CHANGE;
+subgraph CHANGE [Change detection]
+direction TB
+ngOnChanges--&gt;ngOnInit;
+ngOnInit--&gt;ngDoCheck;
+ngDoCheck--&gt;ngAfterContentInit;
+ngDoCheck--&gt;ngAfterViewInit
+ngAfterContentInit--&gt;ngAfterContentChecked
+ngAfterViewInit--&gt;ngAfterViewChecked
+end
+CHANGE--Rendering--&gt;afterRender
+</code></pre>
+
+  <h3 id="">後續更新</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 後續更新"></a>
+  <!-- TODO(josephperrott): enable this mermaid chart -->
+
+<pre><code>graph TD;
+subgraph CHANGE [Change detection]
+direction TB
+ngOnChanges--&gt;ngDoCheck
+ngDoCheck--&gt;ngAfterContentChecked;
+ngDoCheck--&gt;ngAfterViewChecked
+end
+CHANGE--Rendering--&gt;afterRender
+</code></pre>
+
+  <h3 id="">使用指令訂購</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 使用指令訂購"></a>
+  <p>當你在同一個元素上放置一個或多個指令，無論是在範本中還是使用 <code>hostDirectives</code> 屬性，框架不保證在單個元素上元件和指令之間給定生命週期掛鉤的任何順序。永遠不要依賴觀察到的順序，因為這可能會在 Angular 的後續版本中發生變化。</p>

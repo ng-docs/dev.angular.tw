@@ -1,0 +1,217 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">開始使用 Angular CLI 的新建置系統</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/esbuild.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>在 v17 及更高版本中，新的建置系統提供了建置 Angular 應用程式的新方法。這個新的建置系統包含：</p>
+
+  <ul class="docs-list">
+    <li>使用 ESM 的現代輸出格式，具有動態匯入表達式來支援延遲模組載入。</li>
+<li>對於初始建構和增量重建，都有更快的建構時間效能。</li>
+<li>更新的 JavaScript 生態系統工具，例如 <a href="https://esbuild.github.io/" target="_blank">esbuild</a> 和 <a href="https://vitejs.dev/" target="_blank">Vite</a>。</li>
+<li>整合的 SSR 和預先渲染功能。</li>
+
+  </ul>
+  <p>這個新的建置系統穩定且完全支援供 Angular 應用程式使用。
+您可以將使用 <code>browser</code> 建置器的應用程式遷移至新的建置系統。
+如果使用自訂建置器，請參閱該建置器的文件以了解可能的遷移選項。</p>
+<p>重要：現有的基於 Webpack 的建置系統仍被視為穩定且獲得完全支援。
+應用程式可以繼續使用 <code>browser</code> 建置器，並且在更新時不會自動遷移。</p>
+
+  <h2 id="">針對新應用程式</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 針對新應用程式"></a>
+  <p>新的應用程式會透過 <code>application</code> 建構器預設使用此新的建構系統。</p>
+
+  <h2 id="">對於現有應用程式</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 對於現有應用程式"></a>
+  <p>對於現有的專案，您可以選擇使用兩個不同的選項，以逐個應用程式的方式使用新的建構器。
+Angular 團隊認為這兩個選項都很穩定，並提供完整的支援。
+選擇使用哪個選項取決於您在遷移時需要進行多少變更，以及您想在專案中使用哪些新功能。</p>
+
+  <ul class="docs-list">
+    <li><code>browser-esbuild</code> 建構器僅建構應用程式的用戶端套件，設計上與現有 <code>browser</code> 建構器相容，該建構器提供既有的建構系統。它可作為現有 <code>browser</code> 應用程式的簡易替換。</li>
+<li><code>application</code> 建構器涵蓋整個應用程式，例如用戶端套件，以及選擇性地建構一個用於伺服器端渲染的伺服器，並執行靜態頁面的建構時間預先渲染。</li>
+
+  </ul>
+  <p>一般來說建議使用 <code>application</code> 建構器，因為它可以改進伺服器端渲染 (SSR) 建置，並且讓客戶端渲染專案在將來更容易採用 SSR。
+然而，它需要一點額外的遷移工作，尤其是現有的 SSR 應用程式。
+如果專案難以採用 <code>application</code> 建構器，<code>browser-esbuild</code> 可以是一個較簡單的解決方案，它可以提供大部分的建置效能優勢，而且變更較少。</p>
+
+  <h3 id="-browser-esbuild-builder">使用 <code>browser-esbuild</code> builder</h3>
+  <a href="#-browser-esbuild-builder" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 <code>browser-esbuild</code> builder"></a>
+  <p>在 Angular CLI 產生的應用程式中，<code>@angular-devkit/build-angular</code> 套件內提供一個名為 <code>browser-esbuild</code> 的建構工具。
+您可以針對使用 <code>browser</code> 建構工具的應用程式嘗試新的建構系統。
+如果使用自訂建構工具，請參閱該建構工具的文件，以了解可能的遷移選項。</p>
+<p>相容性選項是為了最小化應用程式在最初遷移時必要的變更量而實作的。
+這透過備用建構器 (<code>browser-esbuild</code>) 提供。
+您可以更新任何應用程式目標的 <code>build</code> 目標，以遷移至新的建構系統。</p>
+<p>以下是在 <code>angular.json</code> 中通常會找到的應用程式範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"><span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:browser"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">...</div></code>
+    </pre>
+  </div><p>更改 <code>builder</code> 欄位是您唯一需要做的變更。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"><span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:browser-esbuild"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">...</div></code>
+    </pre>
+  </div>
+  <h3 id="-application-">使用 <code>application</code> 建構函式</h3>
+  <a href="#-application-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 <code>application</code> 建構函式"></a>
+  <p>在 Angular CLI 產生的應用程式中，<code>@angular-devkit/build-angular</code> 套件中也有一個名為 <code>application</code> 的建構器。
+這個建構器是所有透過 <code>ng new</code> 建立的新應用程式的預設建構器。</p>
+<p>以下是在 <code>angular.json</code> 中通常會找到的應用程式範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"><span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:browser"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">...</div></code>
+    </pre>
+  </div><p>更改 <code>builder</code> 欄位是您需要做的第一個變更。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"><span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:application"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">...</div></code>
+    </pre>
+  </div><p>一旦變更建構器名稱，<code>build</code> 目標中的選項就需要更新。
+下列清單討論所有需要調整的 <code>browser</code> 建構器選項。</p>
+
+  <ul class="docs-list">
+    <li><code>main</code> 應重新命名為 <code>browser</code>。</li>
+<li><code>polyfills</code> 應為陣列，而非單一檔案。</li>
+<li>應移除 <code>buildOptimizer</code>，因為這已涵蓋在 <code>optimization</code> 選項中。</li>
+<li>應移除 <code>resourcesOutputPath</code>，這現在總是 <code>media</code>。</li>
+<li>應移除 <code>vendorChunk</code>，因為這是一項效能最佳化，現在已不再需要。</li>
+<li>應移除 <code>commonChunk</code>，因為這是一項效能最佳化，現在已不再需要。</li>
+<li>應移除 <code>deployUrl</code>，且不支援。請改用 <a href="guide/routing/common-router-tasks"><code>&lt;base href&gt;</code></a>。請參閱 <a href="tools/cli/deployment#--deploy-url">佈署文件</a>以取得更多資訊。</li>
+<li>應將 <code>ngswConfigPath</code> 重新命名為 <code>serviceWorker</code>。</li>
+
+  </ul>
+  <p>如果應用程式目前未使用 SSR，這應是最後一個步驟，以允許 <code>ng build</code> 發揮作用。
+首次執行 <code>ng build</code> 之後，可能會出現新的警告或錯誤，這些警告或錯誤是基於行為差異或應用程式使用 Webpack 特定功能而來。
+許多警告會提供有關如何解決該問題的建議。
+如果警告看來不正確，或解決方案不明顯，請在 <a href="https://github.com/angular/angular-cli/issues" target="_blank">GitHub</a> 上開啟一個問題。
+此外，本指南的後續章節提供了有關多個特定案例以及目前已知問題的其他資訊。</p>
+<p>對於新的 SSR 應用程式，<a href="guide/ssr">Angular SSR 指南</a> 提供有關將 SSR 新增到應用程式的設定程序的其他資訊。</p>
+<p>對於已經使用 SSR 的應用程式，需要額外調整以更新應用程式伺服器，以支援新的整合 SSR 功能。
+<code>application</code> 建構函式現在為所有下列預先存在的建構函式提供整合功能：</p>
+
+  <ul class="docs-list">
+    <li><code>app-shell</code></li>
+<li><code>prerender</code></li>
+<li><code>server</code></li>
+<li><code>ssr-dev-server</code></li>
+
+  </ul>
+  <p><code>ng update</code> 程序會自動移除 <code>@nguniversal</code> 範圍套件的使用，這些建構器先前位於其中。
+新的 <code>@angular/ssr</code> 套件也會自動新增，並在更新期間調整設定和程式碼。
+<code>@angular/ssr</code> 套件支援 <code>browser</code> 建構器和 <code>application</code> 建構器。
+若要從個別 SSR 建構器轉換成 <code>application</code> 建構器的整合功能，請執行實驗性質的 <code>use-application-builder</code> 移轉。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng update @angular/cli --name use-application-builder</div></code>
+    </pre>
+  </div><p>遷移執行下列動作：</p>
+
+  <ul class="docs-list">
+    <li>將現有的 <code>browser</code> 或 <code>browser-esbuild</code> 目標轉換為 <code>application</code></li>
+<li>移除任何之前的 SSR 建構器（因為 <code>application</code> 現在會執行此操作）。</li>
+<li>相應地更新配置。</li>
+<li>將 <code>tsconfig.server.json</code> 與 <code>tsconfig.app.json</code> 合併，並添加 TypeScript 選項 <code>&quot;esModuleInterop&quot;: true</code> 以確保 <code>express</code> 匯入與 <a href="#esm-default-imports-vs-namespace-imports">ESM 相容</a>。</li>
+<li>更新應用程式伺服器程式碼以使用新的引導和輸出目錄結構。</li>
+
+  </ul>
+  <p>HELPFUL：請記得移除應用程式伺服器程式碼中的任何 CommonJS 假設，例如 <code>require</code>、<code>__filename</code>、<code>__dirname</code> 或 <a href="https://nodejs.org/api/modules.html#the-module-scope" target="_blank">CommonJS 模組範圍</a> 中的其他結構。所有應用程式程式碼都應該與 ESM 相容。這不適用於第三方依賴項。</p>
+
+  <h2 id="">執行建置</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 執行建置"></a>
+  <p>一旦您更新應用程式設定，即可使用 <code>ng build</code> 來執行建置，如同先前所做的一樣。
+根據建置器遷移的選擇，某些命令列選項可能會有所不同。
+如果建置指令包含在任何 <code>npm</code> 或其他指令碼中，請確定已檢閱並更新。
+對於已遷移至 <code>application</code> 建置器且使用 SSR 和/或預先渲染的應用程式，您現在也可以從指令碼中移除額外的 <code>ng run</code> 指令，因為 <code>ng build</code> 已整合 SSR 支援。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build</div></code>
+    </pre>
+  </div>
+  <h2 id="">啟動開發伺服器</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 啟動開發伺服器"></a>
+  <p>開發伺服器會自動偵測新的建置系統，並使用該系統來建置應用程式。
+要啟動開發伺服器，無需對 <code>dev-server</code> 建置工具配置或命令列進行任何變更。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng serve</div></code>
+    </pre>
+  </div><p>您可以繼續使用過去在開發伺服器中使用過的 <a href="/cli/serve">命令列選項</a>。</p>
+
+  <h2 id="">熱模組更換</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 熱模組更換"></a>
+  <p>基於 JavaScript 的熱模組替換 (HMR) 目前不支援。
+然而，預設啟用並提供全域樣式表 (<code>styles</code> 建置選項) HMR。
+目前已規劃 Angular 重點 HMR 功能，並會在未來版本中推出。</p>
+
+  <h2 id="">未實現的選項和行為</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 未實現的選項和行為"></a>
+  <p>多種建置選項尚未實作，但會在建置系統趨於穩定狀態時於未來加入。如果您的應用程式使用這些選項，您仍然可以在不移除它們的情況下測試建置系統。系統會針對任何未實作的選項發出警告，但否則會忽略它們。不過，如果您的應用程式仰賴其中任何一個選項才能運作，您可能需要等到測試。</p>
+
+  <ul class="docs-list">
+    <li><a href="https://github.com/angular/angular-cli/issues/25102" target="_blank">WASM 匯入</a> -- WASM 仍可透過 <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Loading_and_running" target="_blank">標準網路 API</a> 手動載入。</li>
+
+  </ul>
+  
+  <h2 id="esm-">ESM 預設匯入與命名空間匯入的比較</h2>
+  <a href="#esm-" class="docs-anchor" tabindex="-1" aria-label="Link to ESM 預設匯入與命名空間匯入的比較"></a>
+  <p>TypeScript 預設允許將預設匯出作為命名空間匯入，然後在呼叫表達式中使用。
+很不幸地，這偏離了 ECMAScript 規範。
+新建置系統中的底層套件組合器 (<code>esbuild</code>) 預期 ESM 程式碼會符合規範。
+如果您的應用程式使用錯誤的套件匯入類型，建置系統現在會產生警告。
+但是，為了讓 TypeScript 接受正確的用法，必須在應用程式的 <code>tsconfig</code> 檔案中啟用 TypeScript 選項。
+啟用後，<a href="https://www.typescriptlang.org/tsconfig#esModuleInterop" target="_blank"><code>esModuleInterop</code></a> 選項會提供與 ECMAScript 規範更好的對齊，TypeScript 團隊也建議啟用此選項。
+啟用後，您可以將適用的套件匯入更新為符合 ECMAScript 的格式。</p>
+<p>使用 <a href="https://npmjs.com/package/moment" target="_blank"><code>moment</code></a> 套件為例，以下應用程式碼會造成執行時期錯誤：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> moment <span class="hljs-keyword">from</span> <span class="hljs-string">'moment'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">moment</span>().<span class="hljs-title function_">format</span>());</div></code>
+    </pre>
+  </div><p>建置會產生警告，通知您有潛在問題。警告會類似於：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">▲ [WARNING] Calling "moment" will crash at run-time because it's an import namespace object, not a function [call-import-namespace]</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    src/main.ts:2:12:</div><div class="hljs-ln-line">      2 │ console.log(moment().format());</div><div class="hljs-ln-line">        ╵             ~~~~~~</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Consider changing "moment" to a default import instead:</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    src/main.ts:1:7:</div><div class="hljs-ln-line">      1 │ import * as moment from 'moment';</div><div class="hljs-ln-line">        │        ~~~~~~~~~~~</div><div class="hljs-ln-line">        ╵        moment</div></code>
+    </pre>
+  </div><p>不過，你可以透過為應用程式啟用 <code>esModuleInterop</code> TypeScript 選項，並將匯入變更為下列內容來避免執行時期錯誤和警告：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> moment <span class="hljs-keyword">from</span> <span class="hljs-string">'moment'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">moment</span>().<span class="hljs-title function_">format</span>());</div></code>
+    </pre>
+  </div>
+  <h2 id="vite-">Vite 作為開發伺服器</h2>
+  <a href="#vite-" class="docs-anchor" tabindex="-1" aria-label="Link to Vite 作為開發伺服器"></a>
+  <p>Vite 在 Angular CLI 中的使用目前僅限於 <em>開發伺服器容量</em>。即使不使用底層的 Vite 建構系統，Vite 也提供了一個功能齊全的開發伺服器，並具有已捆綁到低依賴 npm 套件中的客戶端側支援。這使其成為提供全面的開發伺服器功能的理想候選者。當前的開發伺服器程序使用新的建構系統在記憶體中自動建立應用程式的開發建構，並將結果傳遞給 Vite 以服務應用程式。Vite 的使用與基於 Webpack 的開發伺服器非常相似，被封裝在 Angular CLI <code>dev-server</code> 建構器中，目前無法直接配置。</p>
+
+  <h2 id="">已知問題</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 已知問題"></a>
+  <p>當您嘗試新的建置系統時，目前會遇到幾個已知問題。此清單將會更新以保持最新狀態。如果您目前因為任何這些問題而無法嘗試新的建置系統，請在未來再次查看，因為問題可能已經解決。</p>
+
+  <h3 id="web-worker--web-worker">Web Worker 程式碼的類型檢查和處理嵌套的 Web Worker</h3>
+  <a href="#web-worker--web-worker" class="docs-anchor" tabindex="-1" aria-label="Link to Web Worker 程式碼的類型檢查和處理嵌套的 Web Worker"></a>
+  <p>Web Workers 可使用與 <code>browser</code> 建構函式支援的相同語法 (<code>new Worker(new URL(&#39;&lt;workerfile&gt;&#39;, import.meta.url))</code>) 在應用程式程式碼中使用。
+但是，Worker 中的程式碼目前不會由 TypeScript 編譯器進行類型檢查。TypeScript 程式碼受支援，只是不會進行類型檢查。
+此外，任何巢狀 worker 都不會由建構系統處理。巢狀 worker 是另一個 Worker 檔案中的 Worker 實例化。</p>
+
+  <h3 id="">延遲載入模組中的順序依賴副作用匯入</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 延遲載入模組中的順序依賴副作用匯入"></a>
+  <p>依賴特定順序的 Import 陳述式且在多個延遲模組中使用，可能會導致頂層陳述式以不正確的順序執行。
+這並不常見，因為這取決於副作用模組的使用，而且不適用於 <code>polyfills</code> 選項。
+這是由於底層打包工具的一個 <a href="https://github.com/evanw/esbuild/issues/399" target="_blank">缺陷</a>，但將會在未來的更新中修復。</p>
+<p>重要：強烈建議盡可能避免使用具有非本地副作用的模組（多重填充之外），無論使用哪種建構系統，都能避免這個特定問題。具有非本地副作用的模組會對應用程式大小和執行階段效能造成負面影響。</p>
+
+  <h2 id="">錯誤回報</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 錯誤回報"></a>
+  <p>在 <a href="https://github.com/angular/angular-cli/issues" target="_blank">GitHub</a> 上報告問題和功能請求。</p>
+<p>如有可能，請提供一個最小的重現範例，以幫助團隊解決問題。</p>

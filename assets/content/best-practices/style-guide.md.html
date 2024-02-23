@@ -1,0 +1,991 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">Angular 程式碼風格指南</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/best-practices/style-guide.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>正在尋找有關 Angular 語法、慣例和應用結構的意見指南？
+請立即進入。
+此風格指南提供了首選慣例，更重要的是，解釋了原因。</p>
+
+  <h2 id="">風格詞彙</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 風格詞彙"></a>
+  <p>每個準則皆說明良好或不良的做法，且皆具有一致性的呈現方式。</p>
+<p>每項指引的措辭都說明了建議的強烈程度。</p>
+<p><strong>Do</strong> 是應該永遠遵循的。
+<em>Always</em> 可能是一個太強烈的詞。
+字面上應該永遠遵循的準則極為罕見。
+另一方面，你需要一個非常特殊的情況來打破一個 <em>Do</em> 準則。</p>
+<p><strong>考慮</strong>指南應普遍遵循。
+如果你完全理解指南背後的含義並且有很好的理由偏離，那就這麼做。
+目標是一致。</p>
+<p><strong>避免</strong>表示您幾乎永遠不應該做的事情。
+要<em>避免</em>的程式碼範例具有無法錯認的紅色標頭。</p>
+<p><strong>為什麼</strong>？<br />
+提供理由，說明為何要遵循前面的建議。</p>
+
+  <h2 id="">檔案結構慣例</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 檔案結構慣例"></a>
+  <p>一些程式碼範例顯示一個具有多個類似名稱的伴生檔案的檔案。
+例如，<code>hero.component.ts</code> 和 <code>hero.component.html</code>。</p>
+<p>指南使用捷徑 <code>hero.component.ts|html|css|spec</code> 來表示這些不同的檔案。
+使用這個捷徑讓本指南的檔案結構更容易閱讀且更簡潔。</p>
+
+  <h2 id="">單一職責</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 單一職責"></a>
+  <p>將 <a href="https://wikipedia.org/wiki/Single_responsibility_principle" target="_blank"><em>單一職責原則 (SRP)</em></a> 套用到所有元件、服務和其他符號。
+這有助於讓應用程式更乾淨、更容易閱讀和維護，且更具可測試性。</p>
+
+  <h3 id="">一的規則</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 一的規則"></a>
+  
+  <h4 id="-01-01">風格 01-01</h4>
+  <a href="#-01-01" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 01-01"></a>
+  <p><strong>做</strong>每檔案定義一件事，例如服務或元件。</p>
+<p><strong>考慮</strong>將檔案限制在 400 行程式碼。</p>
+<p><strong>為什麼</strong>？ <br />
+每個檔案一個元件，讓閱讀、維護和避免與來源控制中的團隊發生衝突變得更輕鬆。</p>
+<p><strong>為什麼</strong>？<br />
+每個檔案一個元件可避免在一個檔案中組合元件時經常出現的隱藏錯誤，在該檔案中元件可能會共用變數、建立不需要的閉包或與依賴項建立不需要的關聯。</p>
+<p><strong>為什麼</strong>？<br />
+單一元件可以是其檔案的預設匯出，這有利於路由器的延遲載入。</p>
+<p>關鍵在於使程式碼更具可重複使用性、更容易閱讀且減少錯誤。</p>
+<p>以下 <em>負面</em> 範例定義了 <code>AppComponent</code>，引導程式，定義 <code>Hero</code> 模型物件，並從伺服器載入英雄，所有操作都在同一個檔案中進行。
+<em>不要這樣做</em>。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/01-01/app/heroes/hero.component.avoid.ts" header="app/heroes/hero.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/hero.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">/* avoid */</span></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">NgModule</span>, <span class="hljs-title class_">OnInit</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">BrowserModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { platformBrowserDynamic } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser-dynamic'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Hero</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">      &lt;h1&gt;{{title}}&lt;/h1&gt;</div><div class="hljs-ln-line">      &lt;pre&gt;{{heroes | json}}&lt;/pre&gt;</div><div class="hljs-ln-line">    `,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'../app.component.css'</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OnInit</span> {</div><div class="hljs-ln-line">  title = <span class="hljs-string">'Tour of Heroes'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-attr">heroes</span>: <span class="hljs-title class_">Hero</span>[] = [];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-title function_">getHeroes</span>().<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">heroes</span> =&gt;</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span> = heroes));</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">BrowserModule</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [<span class="hljs-title class_">AppComponent</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [<span class="hljs-title class_">AppComponent</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">bootstrap</span>: [<span class="hljs-title class_">AppComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">platformBrowserDynamic</span>().<span class="hljs-title function_">bootstrapModule</span>(<span class="hljs-title class_">AppModule</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">HEROES</span>: <span class="hljs-title class_">Hero</span>[] = [</div><div class="hljs-ln-line">  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Bombasto'</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Tornado'</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Magneta'</span> }</div><div class="hljs-ln-line">];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">getHeroes</span>(<span class="hljs-params"></span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">Hero</span>[]&gt; {</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>(<span class="hljs-variable constant_">HEROES</span>); <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> get hero data from the server;</span></div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>將元件及其支援類別重新分配到其專用檔案中是一種更好的做法。</p>
+<div class="docs-code-multifile">
+    <div class="docs-code" path="adev/src/content/examples/styleguide/src/01-01/main.ts" header="main.ts">
+    <div class="docs-code-header"><h3>main.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { platformBrowserDynamic } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser-dynamic'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { AppModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app/app.module'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">platformBrowserDynamic().bootstrapModule(AppModule);</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/01-01/app/app.module.ts" header="app/app.module.ts">
+    <div class="docs-code-header"><h3>app/app.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { NgModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { BrowserModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { RouterModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { AppComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { HeroesComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./heroes/heroes.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@NgModule({</div><div class="hljs-ln-line">  imports: [</div><div class="hljs-ln-line">    BrowserModule,</div><div class="hljs-ln-line">    RouterModule.forChild([{ path: <span class="hljs-string">'01-01'</span>, component: AppComponent }])</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  declarations: [</div><div class="hljs-ln-line">    AppComponent,</div><div class="hljs-ln-line">    HeroesComponent</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  exports: [ AppComponent ],</div><div class="hljs-ln-line">  bootstrap: [ AppComponent ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/01-01/app/app.component.ts" header="app/app.component.ts">
+    <div class="docs-code-header"><h3>app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { HeroService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./heroes'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'toh-app'</span>,</div><div class="hljs-ln-line">  template: `<span class="language-javascript"></span></div><div class="hljs-ln-line">      &lt;toh-heroes&gt;&lt;/toh-heroes&gt;</div><div class="hljs-ln-line">    `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./app.component.css'</span>],</div><div class="hljs-ln-line">  providers: [HeroService]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/01-01/app/heroes/heroes.component.ts" header="app/heroes/heroes.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/heroes.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">OnInit</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Hero</span>, <span class="hljs-title class_">HeroService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./shared'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-heroes'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">      &lt;pre&gt;{{heroes | json}}&lt;/pre&gt;</div><div class="hljs-ln-line">    `</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroesComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OnInit</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">heroes</span>: <span class="hljs-title class_">Hero</span>[] = [];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> heroService: HeroService</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroService</span>.<span class="hljs-title function_">getHeroes</span>()</div><div class="hljs-ln-line">      .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">heroes</span> =&gt;</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span> = heroes);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/01-01/app/heroes/shared/hero.service.ts" header="app/heroes/shared/hero.service.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-variable constant_">HEROES</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./mock-heroes'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>()</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">getHeroes</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>(<span class="hljs-variable constant_">HEROES</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/01-01/app/heroes/shared/hero.model.ts" header="app/heroes/shared/hero.model.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero.model.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> interface <span class="hljs-title">Hero</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">id:</span><span class="hljs-string"> number</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">name</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/01-01/app/heroes/shared/mock-heroes.ts" header="app/heroes/shared/mock-heroes.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/mock-heroes.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title">import</span> { Hero } from <span class="hljs-string">'./hero.model'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attribute">HEROES</span>: Hero[] = [</div><div class="hljs-ln-line">  { <span class="hljs-attribute">id:</span><span class="hljs-string"> 1, name</span>: <span class="hljs-string">'Bombasto'</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attribute">id:</span><span class="hljs-string"> 2, name</span>: <span class="hljs-string">'Tornado'</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attribute">id:</span><span class="hljs-string"> 3, name</span>: <span class="hljs-string">'Magneta'</span> }</div><div class="hljs-ln-line">];</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    </div><p>隨著應用程式的發展，此規則變得更加重要。</p>
+
+  <h2 id="">命名</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 命名"></a>
+  <p>命名慣例對於可維護性和可讀性非常重要。
+本指南建議檔案名稱和符號名稱的命名慣例。</p>
+
+  <h3 id="">一般命名準則</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 一般命名準則"></a>
+  
+  <h4 id="-02-01">風格 02-01</h4>
+  <a href="#-02-01" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 02-01"></a>
+  <p><strong>做</strong>對所有符號使用一致的名稱。</p>
+<p><strong>請</strong>遵循一種描述符號特徵然後是其類型的模式。
+建議的模式是 <code>feature.type.ts</code>。</p>
+<p><strong>為什麼</strong>？<br />
+命名慣例有助於提供一致的方式，以便快速找到內容。
+專案內的一致性至關重要。
+與團隊的一致性很重要。
+整個公司的一致性可提供極高的效率。</p>
+<p><strong>為什麼</strong>？<br />
+命名慣例應有助於更快找到所需的程式碼，並讓其更易於理解。</p>
+<p><strong>為什麼</strong>？<br />
+資料夾與檔案的名稱應該清楚傳達它們的意圖。
+例如，<code>app/heroes/hero-list.component.ts</code> 可能包含管理英雄清單的元件。</p>
+
+  <h3 id="">使用點號和連接字元將檔案名稱分開</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 使用點號和連接字元將檔案名稱分開"></a>
+  
+  <h4 id="style-02-02">Style 02-02</h4>
+  <a href="#style-02-02" class="docs-anchor" tabindex="-1" aria-label="Link to Style 02-02"></a>
+  <p><strong>請</strong>用破折號分隔描述性名稱中的字詞。</p>
+<p><strong>請</strong>使用點來區分說明性名稱與類型。</p>
+<p><strong>請</strong>為所有元件使用一致的類型名稱，遵循描述元件功能的模式，然後是類型。
+建議的模式是 <code>feature.type.ts</code>。</p>
+<p><strong>請</strong>使用包含 <code>.service</code>、<code>.component</code>、<code>.pipe</code>、<code>.module</code> 和 <code>.directive</code> 的慣用類型名稱。
+若有必要，可以發明其他類型名稱，但請注意不要建立太多。</p>
+<p><strong>為什麼</strong>？<br />
+類型名稱提供一致的方法來快速識別檔案中的內容。</p>
+<p><strong>為什麼</strong>？ <br />
+類型名稱使您可以使用編輯器或 IDE 的模糊搜尋技巧輕鬆找到特定檔案類型。</p>
+<p><strong>為什麼</strong>？<br />
+未縮寫的類型名稱，例如 <code>.service</code>，具有描述性和無歧義性。
+縮寫，例如 <code>.srv</code>、<code>.svc</code> 和 <code>.serv</code>，可能會令人混淆。</p>
+<p><strong>為什麼</strong>？<br />
+類型名稱提供任何自動化任務的模式比對。</p>
+
+  <h3 id="">符號和檔案名稱</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 符號和檔案名稱"></a>
+  
+  <h4 id="-02-03">風格 02-03</h4>
+  <a href="#-02-03" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 02-03"></a>
+  <p><strong>做</strong>對所有資產使用一致的名稱，以它們代表的名稱命名。</p>
+<p><strong>Do</strong> 使用大寫駝峰式命名法作為類別名稱。</p>
+<p><strong>請</strong>將符號的名稱與檔案名稱相符。</p>
+<p><strong>請</strong>為該類型的事物附加慣例字尾（例如 <code>Component</code>、<code>Directive</code>、<code>Module</code>、<code>Pipe</code> 或 <code>Service</code>）至符號名稱。</p>
+<p><strong>請</strong>為該類型檔案提供慣例字尾（例如 <code>.component.ts</code>、<code>.directive.ts</code>、<code>.module.ts</code>、<code>.pipe.ts</code> 或 <code>.service.ts</code>）。</p>
+<p><strong>為什麼</strong>？ <br />
+一致的慣例使快速識別和參照不同類型的資產變得容易。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">符號名稱</th>
+<th align="left">檔案名稱</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><docs-code hideCopy language="typescript"> &commat;Component({ &hellip; }) &NewLine;export class AppComponent { } </docs-code></td>
+<td align="left">app.component.ts</td>
+</tr>
+<tr>
+<td align="left"><docs-code hideCopy language="typescript"> &commat;Component({ &hellip; }) &NewLine;export class HeroesComponent { } </docs-code></td>
+<td align="left">heroes.component.ts</td>
+</tr>
+<tr>
+<td align="left"><docs-code hideCopy language="typescript"> &commat;Component({ &hellip; }) &NewLine;export class HeroListComponent { } </docs-code></td>
+<td align="left">hero-list.component.ts</td>
+</tr>
+<tr>
+<td align="left"><docs-code hideCopy language="typescript"> &commat;Component({ &hellip; }) &NewLine;export class HeroDetailComponent { } </docs-code></td>
+<td align="left">hero-detail.component.ts</td>
+</tr>
+<tr>
+<td align="left"><docs-code hideCopy language="typescript"> &commat;Directive({ &hellip; }) &NewLine;export class ValidationDirective { } </docs-code></td>
+<td align="left">validation.directive.ts</td>
+</tr>
+<tr>
+<td align="left"><docs-code hideCopy language="typescript"> &commat;NgModule({ &hellip; }) &NewLine;export class AppModule </docs-code></td>
+<td align="left">app.module.ts</td>
+</tr>
+<tr>
+<td align="left"><docs-code hideCopy language="typescript"> &commat;Pipe({ name: &#39;initCaps&#39; }) &NewLine;export class InitCapsPipe implements PipeTransform { } </docs-code></td>
+<td align="left">init-caps.pipe.ts</td>
+</tr>
+<tr>
+<td align="left"><docs-code hideCopy language="typescript"> &commat;Injectable() &NewLine;export class UserProfileService { } </docs-code></td>
+<td align="left">user-profile.service.ts</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="">服務名稱</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 服務名稱"></a>
+  
+  <h4 id="-02-04">風格 02-04</h4>
+  <a href="#-02-04" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 02-04"></a>
+  <p><strong>請</strong>對所有以其功能命名的服務使用一致的名稱。</p>
+<p><strong>請</strong>以 <code>Service</code> 為字尾來為服務類別命名。
+例如，用於取得資料或英雄的類別應稱為 <code>DataService</code> 或 <code>HeroService</code>。</p>
+<p>以下幾個術語明確是服務。
+它們通常以「-er」結尾，表示代理。
+您可能比較喜歡將記錄訊息的服務命名為 <code>Logger</code>，而不是 <code>LoggerService</code>。
+決定這個例外是否可以接受。
+一如往常，力求一致。</p>
+<p><strong>為什麼</strong>？<br />
+提供一致的方法來快速識別和參考服務。</p>
+<p><strong>為什麼</strong>？<br />
+像 <code>Logger</code> 這樣明確的服務名稱不需要字尾。</p>
+<p><strong>為什麼</strong>？<br />
+服務名稱例如 <code>Credit</code> 是名詞，需要一個字尾，並且當它是否是一個服務或其他東西不顯而易見時，應該使用字尾來命名。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">符號名稱</th>
+<th align="left">檔案名稱</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><docs-code hideCopy language="typescript"> &commat;Injectable() &NewLine;export class HeroDataService { } </docs-code></td>
+<td align="left">hero-data.service.ts</td>
+</tr>
+<tr>
+<td align="left"><docs-code hideCopy language="typescript"> &commat;Injectable() &NewLine;export class CreditService { } </docs-code></td>
+<td align="left">credit.service.ts</td>
+</tr>
+<tr>
+<td align="left"><docs-code hideCopy language="typescript"> &commat;Injectable() &NewLine;export class Logger { } </docs-code></td>
+<td align="left">logger.service.ts</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="bootstrapping">Bootstrapping</h3>
+  <a href="#bootstrapping" class="docs-anchor" tabindex="-1" aria-label="Link to Bootstrapping"></a>
+  
+  <h4 id="-02-05">風格 02-05</h4>
+  <a href="#-02-05" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 02-05"></a>
+  <p><strong>請</strong>將應用程式的自舉程序和平台邏輯放在名為 <code>main.ts</code> 的檔案中。</p>
+<p><strong>請</strong>在引導邏輯中包含錯誤處理。</p>
+<p><strong>避免</strong>在 <code>main.ts</code> 中放置應用程式邏輯。
+相反，考慮將其放在元件或服務中。</p>
+<p><strong>為什麼</strong>？<br />
+遵循應用程式啟動邏輯的一致慣例。</p>
+<p><strong>為什麼</strong>？<br />
+遵循其他技術平台的慣常約定。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/02-05/main.ts" header="main.ts">
+    <div class="docs-code-header"><h3>main.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { AppComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app/app.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { bootstrapApplication } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">bootstrapApplication(AppComponent);</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="">元件選擇器</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 元件選擇器"></a>
+  
+  <h4 id="style-05-02">Style 05-02</h4>
+  <a href="#style-05-02" class="docs-anchor" tabindex="-1" aria-label="Link to Style 05-02"></a>
+  <p><strong>做</strong> 使用 <em>dashed-case</em> 或 <em>kebab-case</em> 命名元件的元素選擇器。</p>
+<p><strong>為什麼</strong>？<br />
+讓元素名稱與 <a href="https://www.w3.org/TR/custom-elements" target="_blank">自訂元素</a> 規範保持一致。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/05-02/app/heroes/shared/hero-button/hero-button.component.avoid.ts" visiblelines="1,2,3,4,5,6,7,8" header="app/heroes/shared/hero-button/hero-button.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero-button/hero-button.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-comment">/* avoid */</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'tohHeroButton'</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'./hero-button.component.html'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroButtonComponent</span> { }</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code-multifile">
+    <div class="docs-code" path="adev/src/content/examples/styleguide/src/05-02/app/heroes/shared/hero-button/hero-button.component.ts" visiblelines="2,3,4,5,6,7" header="app/heroes/shared/hero-button/hero-button.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero-button/hero-button.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'toh-hero-button'</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'./hero-button.component.html'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroButtonComponent</span> { }</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/05-02/app/app.component.html" header="app/app.component.html">
+    <div class="docs-code-header"><h3>app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-section">&lt;toh-hero-button&gt;</span><span class="hljs-section">&lt;/toh-hero-button&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    </div>
+  <h3 id="">元件自訂前綴</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 元件自訂前綴"></a>
+  
+  <h4 id="-02-07">風格 02-07</h4>
+  <a href="#-02-07" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 02-07"></a>
+  <p><strong>請</strong>使用連字號、小寫的元素選擇器值；例如，<code>admin-users</code>。</p>
+<p><strong>請</strong>使用識別功能區域或應用程式本身的前綴。</p>
+<p><strong>為什麼</strong>？<br />
+防止元素名稱與其他應用程式中的元件和原生 HTML 元素發生碰撞。</p>
+<p><strong>為什麼</strong>？<br />
+更容易在其他應用程式中推廣和分享該元件。</p>
+<p><strong>為什麼</strong>？<br />
+元件在 DOM 中很容易識別。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/02-07/app/heroes/hero.component.avoid.ts" visiblelines="1,2,3,4,5,6,7,8,9" header="app/heroes/hero.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/hero.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">import { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-comment">/* avoid */</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// HeroComponent is in the Tour of Heroes feature</span></div><div class="hljs-ln-line">@<span class="hljs-title function_ invoke__">Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'hero'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HeroComponent</span> </span>{ }</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/02-07/app/users/users.component.avoid.ts" visiblelines="1,2,3,4,5,6,7,8,9" header="app/users/users.component.ts">
+    <div class="docs-code-header"><h3>app/users/users.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-comment">/* avoid */</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">// UsersComponent <span class="hljs-keyword">is</span> <span class="hljs-keyword">in</span> an <span class="hljs-keyword">Admin</span> feature</div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-keyword">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'users'</span>,</div><div class="hljs-ln-line">  <span class="hljs-keyword">template</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> UsersComponent { }</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/02-07/app/heroes/hero.component.ts" visiblelines="2,4,5,6,7" header="app/heroes/hero.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/hero.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  template: <span class="hljs-string">'&lt;div&gt;hero component&lt;/div&gt;'</span>,</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'toh-hero'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroComponent</span> { }</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/02-07/app/users/users.component.ts" visiblelines="2,4,5,6,7" header="app/users/users.component.ts">
+    <div class="docs-code-header"><h3>app/users/users.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  template: <span class="hljs-string">'&lt;div&gt;users component&lt;/div&gt;'</span>,</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'admin-users'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UsersComponent</span> { }</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="">指令選擇器</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 指令選擇器"></a>
+  
+  <h4 id="-02-06">風格 02-06</h4>
+  <a href="#-02-06" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 02-06"></a>
+  <p><strong>請</strong>為指令的選取器命名時使用小寫駝峰式大小寫。</p>
+<p><strong>為什麼</strong>？ <br />
+使繫結到檢視的指令中定義的屬性名稱與屬性名稱一致。</p>
+<p><strong>為什麼</strong>？<br />
+Angular HTML 解析器區分大小寫，並識別小寫駝峰式大小寫。</p>
+
+  <h3 id="">指令自訂前綴</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 指令自訂前綴"></a>
+  
+  <h4 id="-02-08">風格 02-08</h4>
+  <a href="#-02-08" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 02-08"></a>
+  <p><strong>Do</strong> 以小寫駝峰式大小寫拼寫非元素選擇器，除非選擇器用於比對原生 HTML 屬性。</p>
+<p><strong>不要</strong>在指令名稱前面加上 <code>ng</code> 前綴，因為此前綴是為 Angular 保留，使用它可能會造成難以診斷的錯誤。</p>
+<p><strong>為什麼</strong>？ <br />
+防止名稱衝突。</p>
+<p><strong>為什麼</strong>？ <br />
+指令很容易識別。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/02-08/app/shared/validate.directive.avoid.ts" visiblelines="1,2,3,4,5,6,7" header="app/shared/validate.directive.ts">
+    <div class="docs-code-header"><h3>app/shared/validate.directive.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Directive } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-comment">/* avoid */</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Directive({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'[validate]'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ValidateDirective</span> { }</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/02-08/app/shared/validate.directive.ts" visiblelines="2,3,4,5,6" header="app/shared/validate.directive.ts">
+    <div class="docs-code-header"><h3>app/shared/validate.directive.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Directive } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Directive({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'[tohValidate]'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ValidateDirective</span> { }</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="">管道名稱</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 管道名稱"></a>
+  
+  <h4 id="-02-09">風格 02-09</h4>
+  <a href="#-02-09" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 02-09"></a>
+  <p><strong>請</strong>為所有管線使用一致的名稱，以其功能命名。
+管線類別名稱應使用 <code>UpperCamelCase</code>（類別名稱的通用慣例），而對應的 <code>name</code> 字串應使用 <em>lowerCamelCase</em>。
+<code>name</code> 字串不能使用連字號（「dash-case」或「kebab-case」）。</p>
+<p><strong>為什麼</strong>？ <br />
+提供一致的方式來快速識別和參照管道。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">符號名稱</th>
+<th align="left">檔案名稱</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><docs-code hideCopy language="typescript"> &commat;Pipe({ standalone: true, name: &#39;ellipsis&#39; }) &NewLine;export class EllipsisPipe implements PipeTransform { } </docs-code></td>
+<td align="left">ellipsis.pipe.ts</td>
+</tr>
+<tr>
+<td align="left"><docs-code hideCopy language="typescript"> &commat;Pipe({ standalone: true, name: &#39;initCaps&#39; }) &NewLine;export class InitCapsPipe implements PipeTransform { } </docs-code></td>
+<td align="left">init-caps.pipe.ts</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="">單元測試檔案名稱</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 單元測試檔案名稱"></a>
+  
+  <h4 id="-02-10">風格 02-10</h4>
+  <a href="#-02-10" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 02-10"></a>
+  <p><strong>做</strong> 命名測試規範檔案的名稱與它測試的元件相同。</p>
+<p><strong>做</strong>以<code>.spec</code>為字尾來命名測試規範檔案。</p>
+<p><strong>為什麼</strong>？<br />
+提供一致的方式來快速識別測試。</p>
+<p><strong>為什麼</strong>？<br />
+提供 <a href="https://karma-runner.github.io" target="_blank">karma</a> 或其他測試執行器的模式比對。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">測試類型</th>
+<th align="left">檔案名稱</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">元件</td>
+<td align="left">heroes.component.spec.ts <br /> hero-list.component.spec.ts <br /> hero-detail.component.spec.ts</td>
+</tr>
+<tr>
+<td align="left">服務</td>
+<td align="left">logger.service.spec.ts <br /> hero.service.spec.ts <br /> filter-text.service.spec.ts</td>
+</tr>
+<tr>
+<td align="left">管道</td>
+<td align="left">ellipsis.pipe.spec.ts <br /> init-caps.pipe.spec.ts</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="-ngmodules">應用程式結構和 NgModules</h2>
+  <a href="#-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to 應用程式結構和 NgModules"></a>
+  <p>實施上要有近期的觀點，也要有長期的願景。
+從小處著手，但要記住應用程式的發展方向。</p>
+<p>所有應用程式程式碼都放在一個名為 <code>src</code> 的資料夾中。
+所有功能區域都在各自的資料夾中。</p>
+<p>所有內容都是一個檔案中的一個資產。
+每個元件、服務和管道都在自己的檔案中。
+所有第三方供應商腳本都儲存在另一個資料夾中，不在 <code>src</code> 資料夾中。
+使用本指南中檔案的命名慣例。</p>
+
+  <h3 id="">整體結構指南</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 整體結構指南"></a>
+  
+  <h4 id="-04-06">風格 04-06</h4>
+  <a href="#-04-06" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 04-06"></a>
+  <p><strong>做</strong>從小處著手，但要記住應用程式將來的發展方向。</p>
+<p><strong>做</strong>有近期的實施觀點和長期的願景。</p>
+<p><strong>請</strong>將所有應用程式程式碼放入一個名為 <code>src</code> 的資料夾中。</p>
+<p>當元件有多個隨附檔案（<code>.ts</code>、<code>.html</code>、<code>.css</code> 和 <code>.spec</code>）時，<strong>考慮</strong>為元件建立一個資料夾。</p>
+<p><strong>為何</strong>？<br />
+在早期階段時，有助於讓應用程式的結構保持精簡且易於維護，同時在應用程式成長時也易於發展。</p>
+<p><strong>為什麼</strong>？<br />
+元件通常有四個檔案（例如，<code>*.html</code>、<code>*.css</code>、<code>*.ts</code> 和 <code>*.spec.ts</code>），並可能快速混亂資料夾。</p>
+<p>以下是符合規定的資料夾和檔案結構：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">project root</div><div class="hljs-ln-line">├── src</div><div class="hljs-ln-line">│ ├── app</div><div class="hljs-ln-line">│ │ ├── core</div><div class="hljs-ln-line">│ │ │ └── exception.service.ts|spec.ts</div><div class="hljs-ln-line">│ │ │ └── user-profile.service.ts|spec.ts</div><div class="hljs-ln-line">│ │ ├── heroes</div><div class="hljs-ln-line">│ │ │ ├── hero</div><div class="hljs-ln-line">│ │ │ │ └── hero.component.ts|html|css|spec.ts</div><div class="hljs-ln-line">│ │ │ ├── hero-list</div><div class="hljs-ln-line">│ │ │ │ └── hero-list.component.ts|html|css|spec.ts</div><div class="hljs-ln-line">│ │ │ ├── shared</div><div class="hljs-ln-line">│ │ │ │ └── hero-button.component.ts|html|css|spec.ts</div><div class="hljs-ln-line">│ │ │ │ └── hero.model.ts</div><div class="hljs-ln-line">│ │ │ │ └── hero.service.ts|spec.ts</div><div class="hljs-ln-line">│ │ │ └── heroes.component.ts|html|css|spec.ts</div><div class="hljs-ln-line">│ │ │ └── heroes.routes.ts</div><div class="hljs-ln-line">│ │ ├── shared</div><div class="hljs-ln-line">│ │ │ └── init-caps.pipe.ts|spec.ts</div><div class="hljs-ln-line">│ │ │ └── filter-text.component.ts|spec.ts</div><div class="hljs-ln-line">│ │ │ └── filter-text.service.ts|spec.ts</div><div class="hljs-ln-line">│ │ ├── villains</div><div class="hljs-ln-line">│ │ │ ├── villain</div><div class="hljs-ln-line">│ │ │ │ └── …</div><div class="hljs-ln-line">│ │ │ ├── villain-list</div><div class="hljs-ln-line">│ │ │ │ └── …</div><div class="hljs-ln-line">│ │ │ ├── shared</div><div class="hljs-ln-line">│ │ │ │ └── …</div><div class="hljs-ln-line">│ │ │ └── villains.component.ts|html|css|spec.ts</div><div class="hljs-ln-line">│ │ │ └── villains.module.ts</div><div class="hljs-ln-line">│ │ │ └── villains-routing.module.ts</div><div class="hljs-ln-line">│ │ └── app.component.ts|html|css|spec.ts</div><div class="hljs-ln-line">│ │ └── app.routes.ts</div><div class="hljs-ln-line">│ └── main.ts</div><div class="hljs-ln-line">│ └── index.html</div><div class="hljs-ln-line">│ └── …</div><div class="hljs-ln-line">└── node<span class="hljs-emphasis">_modules/…</span></div><div class="hljs-ln-line">└── …</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 儘管將元件放在專用資料夾中是廣泛的首選，但小型應用程式的另一種選擇是讓元件保持扁平（不在專用資料夾中）。</p>
+
+    </div>
+    <p>這會在現有資料夾中增加多達四個檔案，但也會減少資料夾的層級。
+無論您選擇哪一種，都要保持一致。</p>
+
+  <h3 id="-"><em>依據功能</em> 資料夾結構</h3>
+  <a href="#-" class="docs-anchor" tabindex="-1" aria-label="Link to <em>依據功能</em> 資料夾結構"></a>
+  
+  <h4 id="-04-07">風格 04-07</h4>
+  <a href="#-04-07" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 04-07"></a>
+  <p><strong>請</strong>為所代表的功能區建立名為資料夾的文件夾。</p>
+<p><strong>為什麼</strong>？<br />
+開發人員可以一眼就找到程式碼並識別每個檔案代表什麼。
+結構儘可能扁平，沒有重複或冗餘的名稱。</p>
+<p><strong>為什麼</strong>？<br />
+藉由組織內容，幫助減少應用程式變得雜亂。</p>
+<p><strong>為什麼</strong>？<br />
+當有大量檔案時，例如 10 個以上，使用一致的資料夾結構可以更輕鬆地找到它們，而在扁平結構中則更難找到。</p>
+<p>如需更多資訊，請參閱 <a href="#file-tree">此資料夾與檔案結構範例</a>。</p>
+
+  <h3 id="app-root-module">App <em>root module</em></h3>
+  <a href="#app-root-module" class="docs-anchor" tabindex="-1" aria-label="Link to App <em>root module</em>"></a>
+  <p>重要：以下風格指南建議適用於基於 <code>NgModule</code> 的應用程式。新的應用程式應改用獨立元件、指令和管道。</p>
+
+  <h4 id="-04-08">風格 04-08</h4>
+  <a href="#-04-08" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 04-08"></a>
+  <p><strong>請</strong>在應用程式的根目錄中建立一個 <code>NgModule</code>，例如，在 <code>/src/app</code> 中建立一個基於 <code>NgModule</code> 的應用程式。</p>
+<p><strong>為什麼</strong>？<br />
+每個基於 <code>NgModule</code> 的應用程式至少需要一個根 NgModule。</p>
+<p><strong>考慮</strong>將根模組命名為 <code>app.module.ts</code>。</p>
+<p><strong>為什麼</strong>？<br />
+讓定位和識別根模組更容易。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/04-08/app/app.module.ts" visiblelines="0,1,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18" header="app/app.module.ts">
+    <div class="docs-code-header"><h3>app/app.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">BrowserModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">RouterModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HeroesComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./heroes/heroes.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">BrowserModule</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">RouterModule</span>.<span class="hljs-title function_">forChild</span>([{ <span class="hljs-attr">path</span>: <span class="hljs-string">'04-08'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">AppComponent</span> }])</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">AppComponent</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">HeroesComponent</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [ <span class="hljs-title class_">AppComponent</span> ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> {}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="">功能模組</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 功能模組"></a>
+  
+  <h4 id="-04-09">風格 04-09</h4>
+  <a href="#-04-09" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 04-09"></a>
+  <p><strong>請</strong>為應用程式中的所有不同功能建立一個 NgModule；例如，<code>Heroes</code> 功能。</p>
+<p><strong>請</strong>將功能模組放在與功能區域同名的資料夾中；例如，在 <code>app/heroes</code> 中。</p>
+<p><strong>請</strong>依據功能區域和資料夾名稱來命名功能模組檔案；例如，<code>app/heroes/heroes.module.ts</code>。</p>
+<p><strong>請</strong>以功能區域、資料夾和檔案的名稱為功能模組符號命名，例如，<code>app/heroes/heroes.module.ts</code> 定義 <code>HeroesModule</code>。</p>
+<p><strong>為什麼</strong>？<br />
+功能模組可以公開或隱藏其實作以供其他模組使用。</p>
+<p><strong>為什麼</strong>？ <br />
+功能模組識別出組成功能區域的不同相關元件組。</p>
+<p><strong>為什麼</strong>？ <br />
+功能模組可以輕易地路由到急切和延遲。</p>
+<p><strong>為什麼</strong>？<br />
+功能模組在特定功能和其他應用程式功能之間定義明確的界線。</p>
+<p><strong>為什麼</strong>？<br/>
+功能模組有助於釐清和使開發責任更容易分配給不同的團隊。</p>
+<p><strong>為什麼</strong>？<br />
+功能模組可以輕鬆地隔離以進行測試。</p>
+
+  <h3 id="">共享功能模組</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 共享功能模組"></a>
+  
+  <h4 id="-04-10">風格 04-10</h4>
+  <a href="#-04-10" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 04-10"></a>
+  <p><strong>請</strong>在 <code>shared</code> 資料夾中建立一個名為 <code>SharedModule</code> 的功能模組；例如，<code>app/shared/shared.module.ts</code> 定義 <code>SharedModule</code>。</p>
+<p><strong>請</strong>在那些項目將會被其他功能模組中所宣告的元件所重複使用和參照時，在共享模組中宣告元件、指令和管道。</p>
+<p><strong>考慮</strong>在共享模組的內容在整個應用程式中被參照時使用 SharedModule 名稱。</p>
+<p><strong>考慮</strong> <em>不</em> 在共用模組中提供服務。
+服務通常是僅提供一次給整個應用程式或特定功能模組的單例。
+不過，也有例外。
+例如，在下列範例程式碼中，請注意 <code>SharedModule</code> 提供了 <code>FilterTextService</code>。
+這在這裡是可以接受的，因為服務是無狀態的；也就是說，服務的消費者不會受到新執行個體的影響。</p>
+<p><strong>請</strong>匯入 <code>SharedModule</code> 中的資產所需的所有模組；例如，<code>CommonModule</code> 和 <code>FormsModule</code>。</p>
+<p><strong>為什麼</strong>？ <br />
+<code>SharedModule</code> 將包含可能需要另一個共用模組的功能的元件、指令和管道；例如，<code>CommonModule</code> 中的 <code>ngFor</code>。</p>
+<p><strong>做</strong>在 <code>SharedModule</code> 中宣告所有元件、指令和管道。</p>
+<p><strong>請</strong>從 <code>SharedModule</code> 匯出其他功能模組需要使用的所有符號。</p>
+<p><strong>為什麼</strong>？<br />
+<code>SharedModule</code> 存在的目的是讓常用的元件、指令和管道可供其他多個模組的元件範本使用。</p>
+<p><strong>避免</strong>在 <code>SharedModule</code> 中指定應用程式範圍的單例提供者。
+有意的單例是可以的。
+小心。</p>
+<p><strong>為什麼</strong>？<br />
+載入延遲的功能模組匯入共用模組會建立服務的自己的副本，並可能會產生不良結果。</p>
+<p><strong>為什麼</strong>？<br />
+您不希望每個模組都有自己的單例服務實體。
+然而，如果 <code>SharedModule</code> 提供服務，就會有真正發生這種情況的危險。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">project root</div><div class="hljs-ln-line">├──src</div><div class="hljs-ln-line">├──├──app</div><div class="hljs-ln-line">├──├──├── shared</div><div class="hljs-ln-line">├──├──├──└── shared.module.ts</div><div class="hljs-ln-line">├──├──├──└── init-caps.pipe.ts|spec.ts</div><div class="hljs-ln-line">├──├──├──└── filter-text.component.ts|spec.ts</div><div class="hljs-ln-line">├──├──├──└── filter-text.service.ts|spec.ts</div><div class="hljs-ln-line">├──├──└── app.component.ts|html|css|spec.ts</div><div class="hljs-ln-line">├──├──└── app.module.ts</div><div class="hljs-ln-line">├──├──└── app-routing.module.ts</div><div class="hljs-ln-line">├──└── main.ts</div><div class="hljs-ln-line">├──└── index.html</div><div class="hljs-ln-line">└── …</div></code>
+    </pre>
+  </div><div class="docs-code-multifile">
+    <div class="docs-code" path="adev/src/content/examples/styleguide/src/04-10/app/shared/shared.module.ts" header="app/shared/shared.module.ts">
+    <div class="docs-code-header"><h3>app/shared/shared.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { NgModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { CommonModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { FormsModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { FilterTextComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./filter-text/filter-text.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { FilterTextService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./filter-text/filter-text.service'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { InitCapsPipe } <span class="hljs-keyword">from</span> <span class="hljs-string">'./init-caps.pipe'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@NgModule({</div><div class="hljs-ln-line">  imports: [CommonModule, FormsModule],</div><div class="hljs-ln-line">  declarations: [</div><div class="hljs-ln-line">    FilterTextComponent,</div><div class="hljs-ln-line">    InitCapsPipe</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  providers: [FilterTextService],</div><div class="hljs-ln-line">  exports: [</div><div class="hljs-ln-line">    CommonModule,</div><div class="hljs-ln-line">    FormsModule,</div><div class="hljs-ln-line">    FilterTextComponent,</div><div class="hljs-ln-line">    InitCapsPipe</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SharedModule</span> { }</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/04-10/app/shared/init-caps.pipe.ts" header="app/shared/init-caps.pipe.ts">
+    <div class="docs-code-header"><h3>app/shared/init-caps.pipe.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Pipe, PipeTransform } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Pipe({ name: <span class="hljs-string">'initCaps'</span> })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InitCapsPipe</span> implements PipeTransform {</div><div class="hljs-ln-line"><span class="hljs-function">  <span class="hljs-title">transform</span> = <span class="hljs-params">(value: string)</span> =&gt;</span> value;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/04-10/app/shared/filter-text/filter-text.component.ts" header="app/shared/filter-text/filter-text.component.ts">
+    <div class="docs-code-header"><h3>app/shared/filter-text/filter-text.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">EventEmitter</span>, <span class="hljs-title class_">Output</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-filter-text'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;input type="text" id="filterText" [(ngModel)]="filter" (keyup)="filterChanged($event)" /&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FilterTextComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Output</span>() <span class="hljs-attr">changed</span>: <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">string</span>&gt;;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  filter = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">changed</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">string</span>&gt;();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">clear</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">filter</span> = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">filterChanged</span>(<span class="hljs-params">event: <span class="hljs-built_in">any</span></span>) {</div><div class="hljs-ln-line">    event.<span class="hljs-title function_">preventDefault</span>();</div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Filter Changed: <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.filter}</span>`</span>);</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">changed</span>.<span class="hljs-title function_">emit</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">filter</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/04-10/app/shared/filter-text/filter-text.service.ts" header="app/shared/filter-text/filter-text.service.ts">
+    <div class="docs-code-header"><h3>app/shared/filter-text/filter-text.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>()</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FilterTextService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Created an instance of FilterTextService'</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">filter</span>(<span class="hljs-params">data: <span class="hljs-built_in">string</span>, props: <span class="hljs-built_in">Array</span>&lt;<span class="hljs-built_in">string</span>&gt;, originalList: <span class="hljs-built_in">Array</span>&lt;<span class="hljs-built_in">any</span>&gt;</span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">let</span> <span class="hljs-attr">filteredList</span>: <span class="hljs-built_in">any</span>[];</div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (data &amp;&amp; props &amp;&amp; originalList) {</div><div class="hljs-ln-line">      data = data.<span class="hljs-title function_">toLowerCase</span>();</div><div class="hljs-ln-line">      <span class="hljs-keyword">const</span> filtered = originalList.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> {</div><div class="hljs-ln-line">        <span class="hljs-keyword">let</span> match = <span class="hljs-literal">false</span>;</div><div class="hljs-ln-line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> prop <span class="hljs-keyword">of</span> props) {</div><div class="hljs-ln-line">          <span class="hljs-keyword">if</span> (item[prop].<span class="hljs-title function_">toString</span>().<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">indexOf</span>(data) &gt; -<span class="hljs-number">1</span>) {</div><div class="hljs-ln-line">            match = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">            <span class="hljs-keyword">break</span>;</div><div class="hljs-ln-line">          }</div><div class="hljs-ln-line">        }</div><div class="hljs-ln-line">        <span class="hljs-keyword">return</span> match;</div><div class="hljs-ln-line">      });</div><div class="hljs-ln-line">      filteredList = filtered;</div><div class="hljs-ln-line">    } <span class="hljs-keyword">else</span> {</div><div class="hljs-ln-line">      filteredList = originalList;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> filteredList;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/04-10/app/heroes/heroes.component.ts" header="app/heroes/heroes.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/heroes.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FilterTextService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'../shared/filter-text/filter-text.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-heroes'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./heroes.component.html'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroesComponent</span> {</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  heroes = [</div><div class="hljs-ln-line">    { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Windstorm'</span> },</div><div class="hljs-ln-line">    { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Bombasto'</span> },</div><div class="hljs-ln-line">    { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Magneta'</span> },</div><div class="hljs-ln-line">    { <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Tornado'</span> }</div><div class="hljs-ln-line">  ];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  filteredHeroes = <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> filterService: FilterTextService</span>) { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">filterChanged</span>(<span class="hljs-params">searchText: <span class="hljs-built_in">string</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">filteredHeroes</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">filterService</span>.<span class="hljs-title function_">filter</span>(searchText, [<span class="hljs-string">'id'</span>, <span class="hljs-string">'name'</span>], <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/04-10/app/heroes/heroes.component.html" header="app/heroes/heroes.component.html">
+    <div class="docs-code-header"><h3>app/heroes/heroes.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>This is heroes component<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let hero of filteredHeroes"</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-template-variable">{{ <span class="hljs-name">hero.name</span> }}</span><span class="language-xml"></span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">toh-filter-text</span> (<span class="hljs-attr">changed</span>)=<span class="hljs-string">"filterChanged($event)"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toh-filter-text</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    </div>
+  <h3 id="">延遲載入資料夾</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 延遲載入資料夾"></a>
+  
+  <h4 id="-04-11">風格 04-11</h4>
+  <a href="#-04-11" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 04-11"></a>
+  <p>一個獨特的應用程式功能或工作流程可能會在應用程式啟動時而不是 <em>延遲載入</em> 或 <em>依需求載入</em>。</p>
+<p><strong>務必</strong>將延遲載入功能的內容放在 <em>延遲載入資料夾</em> 中。
+典型的 <em>延遲載入資料夾</em> 包含一個 <em>路由元件</em>、其子元件及其相關資源。</p>
+<p><strong>為什麼</strong>？<br />
+這個資料夾讓識別及隔離功能內容變得容易。</p>
+
+  <h2 id="">元件</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 元件"></a>
+  
+  <h3 id="">元件作為元素</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 元件作為元素"></a>
+  
+  <h4 id="-05-03">風格 05-03</h4>
+  <a href="#-05-03" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 05-03"></a>
+  <p><strong>考慮</strong>給予元件一個 <em>element</em> 選擇器，而不是 <em>attribute</em> 或 <em>class</em> 選擇器。</p>
+<p><strong>為什麼</strong>？ <br />
+元件有包含 HTML 和選用 Angular 模板語法的模板。
+它們顯示內容。
+開發人員在頁面上放置元件，就像原生 HTML 元素和網路元件一樣。</p>
+<p><strong>為什麼</strong>？ <br />
+透過檢視範本的 html，更容易辨識出一個符號是一個元件。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 有好幾種情況會為元件提供屬性，例如要擴充內建元素時。</p>
+
+    </div>
+    <p>例如，<a href="https://material.angular.io/components/button/overview" target="_blank">Material Design</a> 使用此技術搭配 <code>&lt;button mat-button&gt;</code>。
+但是，您不會在自訂元素上使用此技術。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/05-03/app/heroes/shared/hero-button/hero-button.component.avoid.ts" visiblelines="1,2,3,4,5,6,7,8" header="app/heroes/hero-button/hero-button.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/hero-button/hero-button.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-comment">/* avoid */</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'[tohHeroButton]'</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'./hero-button.component.html'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroButtonComponent</span> { }</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/05-03/app/app.component.avoid.html" header="app/app.component.html">
+    <div class="docs-code-header"><h3>app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- avoid --&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">tohHeroButton</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code-multifile">
+    <div class="docs-code" path="adev/src/content/examples/styleguide/src/05-03/app/heroes/shared/hero-button/hero-button.component.ts" visiblelines="2,3,4,5,6,7" header="app/heroes/shared/hero-button/hero-button.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero-button/hero-button.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'toh-hero-button'</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'./hero-button.component.html'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroButtonComponent</span> { }</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/05-03/app/app.component.html" header="app/app.component.html">
+    <div class="docs-code-header"><h3>app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-section">&lt;toh-hero-button&gt;</span><span class="hljs-section">&lt;/toh-hero-button&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    </div>
+  <h3 id="">將範本與風格萃取到自己的檔案</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 將範本與風格萃取到自己的檔案"></a>
+  
+  <h4 id="style-05-04">Style 05-04</h4>
+  <a href="#style-05-04" class="docs-anchor" tabindex="-1" aria-label="Link to Style 05-04"></a>
+  <p><strong>做</strong>當超過 3 行時，將範本和風格提取到一個獨立檔案。</p>
+<p><strong>請</strong>將範本檔案命名為 <code>[component-name].component.html</code>，其中 [component-name] 是元件名稱。</p>
+<p><strong>請</strong>將風格檔案命名為 <code>[component-name].component.css</code>，其中 [component-name] 為元件名稱。</p>
+<p><strong>請</strong>指定以 <code>./</code> 為字首的 <em>元件相對</em> URL。</p>
+<p><strong>為什麼</strong>？<br />
+大型內嵌範本和風格會模糊元件的目的和實作，降低可讀性和可維護性。</p>
+<p><strong>為什麼</strong>？<br />
+在多數的編輯器中，當開發內嵌範本和風格時，無法使用語法提示和程式碼片段。
+Angular TypeScript 語言服務（即將推出）承諾克服這個缺陷，讓支援它的編輯器可以使用 HTML 範本；它無法幫助 CSS 風格。</p>
+<p><strong>為什麼</strong>？<br />
+只要檔案保持在一起，當您移動元件檔案時，<em>元件相對</em> URL 不需要任何變更。</p>
+<p><strong>為什麼</strong>？<br />
+<code>./</code> 前綴是相對網址的標準語法；不要依賴 Angular 目前不需要該前綴的能力。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/05-04/app/heroes/heroes.component.avoid.ts" visiblelines="6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69" header="app/heroes/heroes.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/heroes.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-string">import</span> { <span class="hljs-string">Component</span> } <span class="hljs-string">from</span> <span class="hljs-string">'@angular/core'</span><span class="hljs-string">;</span></div><div class="hljs-ln-line"><span class="hljs-string">import</span> { <span class="hljs-string">Observable</span> } <span class="hljs-string">from</span> <span class="hljs-string">'rxjs'</span><span class="hljs-string">;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-string">import</span> { <span class="hljs-string">Hero</span>, <span class="hljs-string">HeroService</span> } <span class="hljs-string">from</span> <span class="hljs-string">'./shared'</span><span class="hljs-string">;</span></div><div class="hljs-ln-line"><span class="hljs-string">import</span> { <span class="hljs-string">AsyncPipe</span>, <span class="hljs-string">NgFor</span>, <span class="hljs-string">NgIf</span>, <span class="hljs-string">UpperCasePipe</span> } <span class="hljs-string">from</span> <span class="hljs-string">'@angular/common'</span><span class="hljs-string">;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-string">/*</span> <span class="hljs-string">avoid</span> <span class="hljs-string">*/</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-string">@Component({</span></div><div class="hljs-ln-line">  <span class="hljs-attr">standalone:</span> <span class="hljs-literal">true</span><span class="hljs-string">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">selector:</span> <span class="hljs-string">'toh-heroes'</span><span class="hljs-string">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">template:</span> <span class="hljs-string">`</span></div><div class="hljs-ln-line">    <span class="hljs-string">&lt;div&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-string">&lt;h2&gt;My</span> <span class="hljs-string">Heroes&lt;/h2&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-string">&lt;ul</span> <span class="hljs-string">class="heroes"&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-string">@for</span> <span class="hljs-string">(hero</span> <span class="hljs-string">of</span> <span class="hljs-string">heroes</span> <span class="hljs-string">|</span> <span class="hljs-string">async;</span> <span class="hljs-string">track</span> <span class="hljs-string">hero)</span> {</div><div class="hljs-ln-line">          <span class="hljs-string">&lt;li</span> <span class="hljs-string">(click)="selectedHero=hero"&gt;</span></div><div class="hljs-ln-line">            <span class="hljs-string">&lt;span</span> <span class="hljs-string">class="badge"&gt;<span class="hljs-template-variable">{{hero.id}}</span></span><span class="hljs-string">&lt;/span&gt;</span> {{<span class="hljs-string">hero.name</span>}}</div><div class="hljs-ln-line">          <span class="hljs-string">&lt;/li&gt;</span></div><div class="hljs-ln-line">        }</div><div class="hljs-ln-line">      <span class="hljs-string">&lt;/ul&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-string">@if</span> <span class="hljs-string">(selectedHero)</span> {</div><div class="hljs-ln-line">        <span class="hljs-string">&lt;div&gt;</span></div><div class="hljs-ln-line">          <span class="hljs-string">&lt;h2&gt;<span class="hljs-template-variable">{{selectedHero.name | uppercase}}</span></span> <span class="hljs-string">is</span> <span class="hljs-string">my</span> <span class="hljs-string">hero&lt;/h2&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-string">&lt;/div&gt;</span></div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    <span class="hljs-string">&lt;/div&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-string">`,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">styles:</span> [<span class="hljs-string">`</span></div><div class="hljs-ln-line">    <span class="hljs-string">.heroes</span> {</div><div class="hljs-ln-line">      <span class="hljs-attr">margin:</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-string">2em</span> <span class="hljs-number">0</span><span class="hljs-string">;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">list-style-type:</span> <span class="hljs-string">none;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">padding:</span> <span class="hljs-number">0</span><span class="hljs-string">;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">width:</span> <span class="hljs-string">15em;</span></div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">    <span class="hljs-string">.heroes</span> <span class="hljs-string">li</span> {</div><div class="hljs-ln-line">      <span class="hljs-attr">cursor:</span> <span class="hljs-string">pointer;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">position:</span> <span class="hljs-string">relative;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">left:</span> <span class="hljs-number">0</span><span class="hljs-string">;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">background-color:</span> <span class="hljs-comment">#EEE;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">margin:</span> <span class="hljs-string">.5em;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">padding:</span> <span class="hljs-string">.3em</span> <span class="hljs-number">0</span><span class="hljs-string">;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">height:</span> <span class="hljs-number">1.</span><span class="hljs-string">6em;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">border-radius:</span> <span class="hljs-string">4px;</span></div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">    <span class="hljs-string">.heroes</span> <span class="hljs-string">.badge</span> {</div><div class="hljs-ln-line">      <span class="hljs-attr">display:</span> <span class="hljs-string">inline-block;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">font-size:</span> <span class="hljs-string">small;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">color:</span> <span class="hljs-string">white;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">padding:</span> <span class="hljs-number">0.</span><span class="hljs-string">8em</span> <span class="hljs-number">0.</span><span class="hljs-string">7em</span> <span class="hljs-number">0</span> <span class="hljs-number">0.</span><span class="hljs-string">7em;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">background-color:</span> <span class="hljs-comment">#607D8B;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">line-height:</span> <span class="hljs-string">1em;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">position:</span> <span class="hljs-string">relative;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">left:</span> <span class="hljs-string">-1px;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">top:</span> <span class="hljs-string">-4px;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">height:</span> <span class="hljs-number">1.</span><span class="hljs-string">8em;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">margin-right:</span> <span class="hljs-string">.8em;</span></div><div class="hljs-ln-line">      <span class="hljs-attr">border-radius:</span> <span class="hljs-string">4px</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-string">4px;</span></div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  <span class="hljs-string">`</span>]<span class="hljs-string">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">imports:</span> [<span class="hljs-string">NgFor</span>, <span class="hljs-string">NgIf</span>, <span class="hljs-string">AsyncPipe</span>, <span class="hljs-string">UpperCasePipe</span>]</div><div class="hljs-ln-line"><span class="hljs-string">})</span></div><div class="hljs-ln-line"><span class="hljs-string">export</span> <span class="hljs-string">class</span> <span class="hljs-string">HeroesComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">heroes:</span> <span class="hljs-string">Observable&lt;Hero</span>[]<span class="hljs-string">&gt;;</span></div><div class="hljs-ln-line">  <span class="hljs-string">selectedHero!:</span> <span class="hljs-string">Hero;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-string">constructor(private</span> <span class="hljs-attr">heroService:</span> <span class="hljs-string">HeroService)</span> {</div><div class="hljs-ln-line">    <span class="hljs-string">this.heroes</span> <span class="hljs-string">=</span> <span class="hljs-string">this.heroService.getHeroes();</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code-multifile">
+    <div class="docs-code" path="adev/src/content/examples/styleguide/src/05-04/app/heroes/heroes.component.ts" visiblelines="6,7,8,9,10,11,12,13,14,15,16,17,18,19,20" header="app/heroes/heroes.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/heroes.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Observable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Hero</span>, <span class="hljs-title class_">HeroService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./shared'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AsyncPipe</span>, <span class="hljs-title class_">NgFor</span>, <span class="hljs-title class_">NgIf</span>, <span class="hljs-title class_">UpperCasePipe</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-heroes'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./heroes.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./heroes.component.css'</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">NgFor</span>, <span class="hljs-title class_">NgIf</span>, <span class="hljs-title class_">AsyncPipe</span>, <span class="hljs-title class_">UpperCasePipe</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroesComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">heroes</span>: <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-title class_">Hero</span>[]&gt;;</div><div class="hljs-ln-line">  selectedHero!: <span class="hljs-title class_">Hero</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> heroService: HeroService</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroService</span>.<span class="hljs-title function_">getHeroes</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/05-04/app/heroes/heroes.component.html" header="app/heroes/heroes.component.html">
+    <div class="docs-code-header"><h3>app/heroes/heroes.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>My Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heroes"</span>&gt;</span></div><div class="hljs-ln-line">    @for (hero of heroes | async; track hero) {</div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"selectedHero=hero"</span>&gt;</span></div><div class="hljs-ln-line">          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge"</span>&gt;</span><span class="hljs-template-variable">{{ <span class="hljs-name">hero.id</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span></div><div class="hljs-ln-line">          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"name"</span>&gt;</span><span class="hljs-template-variable">{{ <span class="hljs-name">hero.name</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line">  @if (selectedHero) {</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span><span class="hljs-template-variable">{{ <span class="hljs-name">selectedHero.name</span> | uppercase }}</span><span class="language-xml"> is my hero<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/05-04/app/heroes/heroes.component.css" header="app/heroes/heroes.component.css">
+    <div class="docs-code-header"><h3>app/heroes/heroes.component.css</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-selector-class">.heroes</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">2em</span> <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">list-style-type</span>: none;</div><div class="hljs-ln-line">  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">width</span>: <span class="hljs-number">15em</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-tag">li</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">display</span>: flex;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-tag">button</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">flex</span>: <span class="hljs-number">1</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">cursor</span>: pointer;</div><div class="hljs-ln-line">  <span class="hljs-attribute">position</span>: relative;</div><div class="hljs-ln-line">  <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#EEE</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">margin</span>: .<span class="hljs-number">5em</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">display</span>: flex;</div><div class="hljs-ln-line">  <span class="hljs-attribute">align-items</span>: stretch;</div><div class="hljs-ln-line">  <span class="hljs-attribute">height</span>: <span class="hljs-number">1.8em</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-tag">button</span><span class="hljs-selector-pseudo">:hover</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">color</span>: <span class="hljs-number">#2c3a41</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#e6e6e6</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">left</span>: .<span class="hljs-number">1em</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-tag">button</span><span class="hljs-selector-pseudo">:active</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#525252</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">color</span>: <span class="hljs-number">#fafafa</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-tag">button</span><span class="hljs-selector-class">.selected</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">background-color</span>: black;</div><div class="hljs-ln-line">  <span class="hljs-attribute">color</span>: white;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-tag">button</span><span class="hljs-selector-class">.selected</span><span class="hljs-selector-pseudo">:hover</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#505050</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">color</span>: white;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-tag">button</span><span class="hljs-selector-class">.selected</span><span class="hljs-selector-pseudo">:active</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">background-color</span>: black;</div><div class="hljs-ln-line">  <span class="hljs-attribute">color</span>: white;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-class">.badge</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">display</span>: inline-block;</div><div class="hljs-ln-line">  <span class="hljs-attribute">font-size</span>: small;</div><div class="hljs-ln-line">  <span class="hljs-attribute">color</span>: white;</div><div class="hljs-ln-line">  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0.8em</span> <span class="hljs-number">0.7em</span> <span class="hljs-number">0</span> <span class="hljs-number">0.7em</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#405061</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1em</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">margin-right</span>: .<span class="hljs-number">8em</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">4px</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-class">.name</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">align-self</span>: center;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    </div>
+  <h3 id="-input--output-">裝飾 <code>input</code> 和 <code>output</code> 屬性</h3>
+  <a href="#-input--output-" class="docs-anchor" tabindex="-1" aria-label="Link to 裝飾 <code>input</code> 和 <code>output</code> 屬性"></a>
+  
+  <h4 id="-05-12">款式 05-12</h4>
+  <a href="#-05-12" class="docs-anchor" tabindex="-1" aria-label="Link to 款式 05-12"></a>
+  <p><strong>請</strong>使用 <code>@Input()</code> 和 <code>@Output()</code> 類別裝飾器，而不是 <code>@Directive</code> 和 <code>@Component</code> 元數據的 <code>inputs</code> 和 <code>outputs</code> 屬性：</p>
+<p><strong>考慮</strong>在 <code>@Input()</code> 或 <code>@Output()</code> 與它修飾的屬性放在同一行。</p>
+<p><strong>為什麼</strong>？<br />
+識別類別中的哪些屬性是輸入或輸出更容易且更具可讀性。</p>
+<p><strong>為什麼</strong>？<br />
+如果您曾經需要重新命名與 <code>@Input()</code> 或 <code>@Output()</code> 關聯的屬性或事件名稱，您可以單一位置修改。</p>
+<p><strong>為什麼</strong>？<br />
+附加至指令的元數據宣告較短，因此更具可讀性。</p>
+<p><strong>為什麼</strong>？<br />
+將裝飾器放在同一行<em>通常</em>會使程式碼更短，並且仍然可以輕鬆地將屬性識別為輸入或輸出。
+當這樣做明顯更具可讀性時，將其放在上面一行。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/05-12/app/heroes/shared/hero-button/hero-button.component.avoid.ts" visiblelines="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17" header="app/heroes/shared/hero-button/hero-button.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero-button/hero-button.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">import { Component, EventEmitter } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-comment">/* avoid */</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@<span class="hljs-title function_ invoke__">Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-hero-button'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: `&lt;button type=<span class="hljs-string">"button"</span>&gt;&lt;/button&gt;`,</div><div class="hljs-ln-line">  <span class="hljs-attr">inputs</span>: [</div><div class="hljs-ln-line">    <span class="hljs-string">'label'</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">outputs</span>: [</div><div class="hljs-ln-line">    <span class="hljs-string">'heroChange'</span></div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HeroButtonComponent</span> </span>{</div><div class="hljs-ln-line">  heroChange = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;any&gt;();</div><div class="hljs-ln-line">  label: <span class="hljs-keyword">string</span> = <span class="hljs-string">""</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/05-12/app/heroes/shared/hero-button/hero-button.component.ts" visiblelines="2,3,4,5,6,7,8,9,10" header="app/heroes/shared/hero-button/hero-button.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero-button/hero-button.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component, EventEmitter, Input, Output } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'toh-hero-button'</span>,</div><div class="hljs-ln-line">  template: `<span class="language-javascript">&lt;button type=<span class="hljs-string">"button"</span>&gt;{{label}}&lt;/button&gt;</span>`</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroButtonComponent</span> {</div><div class="hljs-ln-line">  @Output() heroChange = <span class="hljs-keyword">new</span> EventEmitter&lt;any&gt;();</div><div class="hljs-ln-line">  @Input() label = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="-inputs--outputs">避免別名 <code>inputs</code> 和 <code>outputs</code></h3>
+  <a href="#-inputs--outputs" class="docs-anchor" tabindex="-1" aria-label="Link to 避免別名 <code>inputs</code> 和 <code>outputs</code>"></a>
+  
+  <h4 id="-05-13">風格 05-13</h4>
+  <a href="#-05-13" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 05-13"></a>
+  <p><strong>避免</strong>使用 <code>input</code> 和 <code>output</code> 別名，除非它具有重要的目的。</p>
+<p><strong>為什麼</strong>？ <br />
+同一個屬性的兩個名稱（一個是私有的，一個是公有的）本質上讓人混淆。</p>
+<p><strong>為什麼</strong>？ <br />
+當指令名稱也是 <code>input</code> 屬性，而且指令名稱沒有描述該屬性時，您應該使用別名。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/05-13/app/heroes/shared/hero-button/hero-button.component.avoid.ts" visiblelines="1,2,3,4,5,6,7,8,9,10,11,12" header="app/heroes/shared/hero-button/hero-button.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero-button/hero-button.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">EventEmitter</span>, <span class="hljs-title class_">Input</span>, <span class="hljs-title class_">Output</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-comment">/* avoid pointless aliasing */</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-hero-button'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;button type="button"&gt;{{label}}&lt;/button&gt;`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroButtonComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// Pointless aliases</span></div><div class="hljs-ln-line">  <span class="hljs-meta">@Output</span>(<span class="hljs-string">'heroChangeEvent'</span>) heroChange = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">any</span>&gt;();</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>(<span class="hljs-string">'labelAttribute'</span>) label!: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/05-13/app/app.component.avoid.html" header="app/app.component.html">
+    <div class="docs-code-header"><h3>app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- avoid --&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">toh-hero-button</span> <span class="hljs-attr">labelAttribute</span>=<span class="hljs-string">"OK"</span> (<span class="hljs-attr">changeEvent</span>)=<span class="hljs-string">"doSomething()"</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">toh-hero-button</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code-multifile">
+    <div class="docs-code" path="adev/src/content/examples/styleguide/src/05-13/app/heroes/shared/hero-button/hero-button.component.ts" visiblelines="2,3,4,5,6,7,8,9,10,11" header="app/heroes/shared/hero-button/hero-button.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero-button/hero-button.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">EventEmitter</span>, <span class="hljs-title class_">Input</span>, <span class="hljs-title class_">Output</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-hero-button'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;button type="button" &gt;{{label}}&lt;/button&gt;`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroButtonComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// No aliases</span></div><div class="hljs-ln-line">  <span class="hljs-meta">@Output</span>() heroChange = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">any</span>&gt;();</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() label = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/05-13/app/heroes/shared/hero-highlight.directive.ts" header="app/heroes/shared/hero-button/hero-highlight.directive.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero-button/hero-highlight.directive.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Directive</span>, <span class="hljs-title class_">ElementRef</span>, <span class="hljs-title class_">Input</span>, <span class="hljs-title class_">OnChanges</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'[heroHighlight]'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroHighlightDirective</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OnChanges</span> {</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// Aliased because `color` is a better property name than `heroHighlight`</span></div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>(<span class="hljs-string">'heroHighlight'</span>) color = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> el: ElementRef</span>) { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnChanges</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">el</span>.<span class="hljs-property">nativeElement</span>.<span class="hljs-property">style</span>.<span class="hljs-property">backgroundColor</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">color</span> || <span class="hljs-string">'yellow'</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/05-13/app/app.component.html" header="app/app.component.html">
+    <div class="docs-code-header"><h3>app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">toh-hero-button</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"OK"</span> (<span class="hljs-attr">change</span>)=<span class="hljs-string">"doSomething()"</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">toh-hero-button</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- `heroHighlight` is both the directive name and the data-bound aliased property name --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">heroHighlight</span>=<span class="hljs-string">"skyblue"</span>&gt;</span>The Great Bombasto<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    </div>
+  <h3 id="">將複雜的元件邏輯委派給服務</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 將複雜的元件邏輯委派給服務"></a>
+  
+  <h4 id="-05-15">風格 05-15</h4>
+  <a href="#-05-15" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 05-15"></a>
+  <p><strong>Do</strong> 將元件中的邏輯限制為僅限檢視所需。
+所有其他邏輯都應委派給服務。</p>
+<p><strong>請</strong>將可重複使用的邏輯移至服務，並讓元件保持簡單，並專注於其預期目的。</p>
+<p><strong>為什麼</strong>？<br />
+當放在一個服務中並作為函式公開時，邏輯可以被多個元件重複使用。</p>
+<p><strong>為什麼</strong>？<br />
+服務中的邏輯在單元測試中可以更輕鬆地被隔離，而元件中的呼叫邏輯可以輕鬆地被模擬。</p>
+<p><strong>為什麼</strong>？<br />
+移除依賴性並隱藏元件的實作細節。</p>
+<p><strong>為什麼</strong>？<br />
+讓元件精簡、輕巧且專注。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/05-15/app/heroes/hero-list/hero-list.component.avoid.ts" header="app/heroes/hero-list/hero-list.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/hero-list/hero-list.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">/* avoid */</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">OnInit</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HttpClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common/http'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Observable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { catchError, finalize } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/operators'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Hero</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'../shared/hero.model'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> heroesUrl = <span class="hljs-string">'http://angular.io'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-hero-list'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`...`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroListComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OnInit</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">heroes</span>: <span class="hljs-title class_">Hero</span>[];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> http: HttpClient</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span> = [];</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">getHeroes</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span> = [];</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">http</span>.<span class="hljs-title function_">get</span>(heroesUrl).<span class="hljs-title function_">pipe</span>(</div><div class="hljs-ln-line">      <span class="hljs-title function_">catchError</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">catchBadResponse</span>),</div><div class="hljs-ln-line">      <span class="hljs-title function_">finalize</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">hideSpinner</span>())</div><div class="hljs-ln-line">    ).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function">(<span class="hljs-params">heroes: Hero[]</span>) =&gt;</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span> = heroes);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getHeroes</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> <span class="hljs-title function_">catchBadResponse</span>(<span class="hljs-params">err: <span class="hljs-built_in">any</span>, source: Observable&lt;<span class="hljs-built_in">any</span>&gt;</span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// log and handle the exception</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Observable</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> <span class="hljs-title function_">hideSpinner</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// hide the spinner</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/05-15/app/heroes/hero-list/hero-list.component.ts" visiblelines="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20" header="app/heroes/hero-list/hero-list.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/hero-list/hero-list.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">OnInit</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Hero</span>, <span class="hljs-title class_">HeroService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'../shared'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-hero-list'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`...`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroListComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OnInit</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">heroes</span>: <span class="hljs-title class_">Hero</span>[] = [];</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> heroService: HeroService</span>) { }</div><div class="hljs-ln-line">  <span class="hljs-title function_">getHeroes</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span> = [];</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroService</span>.<span class="hljs-title function_">getHeroes</span>()</div><div class="hljs-ln-line">      .<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">heroes</span> =&gt;</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span> = heroes);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getHeroes</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="-output-">不要為 <code>output</code> 屬性添加前綴</h3>
+  <a href="#-output-" class="docs-anchor" tabindex="-1" aria-label="Link to 不要為 <code>output</code> 屬性添加前綴"></a>
+  
+  <h4 id="-05-16">風格 05-16</h4>
+  <a href="#-05-16" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 05-16"></a>
+  <p><strong>做</strong>不帶前綴 <code>on</code> 的事件名稱。</p>
+<p><strong>請</strong>將事件處理常式方法命名為前綴 <code>on</code> 後接事件名稱。</p>
+<p><strong>為什麼</strong>？<br />
+這與內建的事件（例如按鈕點擊）一致。</p>
+<p><strong>為什麼</strong>？<br />
+Angular 允許使用 <a href="guide/templates/binding">替代語法</a> <code>on-*</code>。
+如果事件本身以 <code>on</code> 為字首，這將導致 <code>on-onEvent</code> 繫結表達式。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/05-16/app/heroes/hero.component.avoid.ts" visiblelines="1,2,3,4,5,6,7,8,9,10" header="app/heroes/hero.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/hero.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">EventEmitter</span>, <span class="hljs-title class_">Output</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-comment">/* avoid */</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-hero'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`...`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Output</span>() onSavedTheDay = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">boolean</span>&gt;();</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/05-16/app/app.component.avoid.html" header="app/app.component.html">
+    <div class="docs-code-header"><h3>app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- avoid --&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">toh-hero</span> (<span class="hljs-attr">onSavedTheDay</span>)=<span class="hljs-string">"onSavedTheDay($event)"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toh-hero</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code-multifile">
+    <div class="docs-code" path="adev/src/content/examples/styleguide/src/05-16/app/heroes/hero.component.ts" visiblelines="7,8,9" header="app/heroes/hero.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/hero.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">EventEmitter</span>, <span class="hljs-title class_">Output</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-hero'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`...`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Output</span>() savedTheDay = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">boolean</span>&gt;();</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/05-16/app/app.component.html" header="app/app.component.html">
+    <div class="docs-code-header"><h3>app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">toh-hero</span> (<span class="hljs-attr">savedTheDay</span>)=<span class="hljs-string">"onSavedTheDay($event)"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toh-hero</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    </div>
+  <h3 id="">將簡報邏輯放入元件類別中</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 將簡報邏輯放入元件類別中"></a>
+  
+  <h4 id="-05-17">風格 05-17</h4>
+  <a href="#-05-17" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 05-17"></a>
+  <p><strong>請</strong>將簡報邏輯放入元件類別中，而不是範本中。</p>
+<p><strong>為什麼</strong>？<br />
+邏輯將包含在一個地方（元件類別），而非分散在兩個地方。</p>
+<p><strong>為什麼</strong>？<br />
+將元件的呈現邏輯保留在類別中而不是範本中，可提高可測試性、可維護性和可重複使用性。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/05-17/app/heroes/hero-list/hero-list.component.avoid.ts" visiblelines="6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26" header="app/heroes/hero-list/hero-list.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/hero-list/hero-list.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Hero } <span class="hljs-keyword">from</span> <span class="hljs-string">'../shared/hero.model'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { NgFor } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { HeroComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'../hero/hero.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">/* avoid */</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'toh-hero-list'</span>,</div><div class="hljs-ln-line">  template: `</div><div class="hljs-ln-line">    &lt;section&gt;</div><div class="hljs-ln-line">      Our <span class="hljs-keyword">list</span> <span class="hljs-keyword">of</span> heroes:</div><div class="hljs-ln-line">      @for (hero <span class="hljs-keyword">of</span> heroes; track hero) {</div><div class="hljs-ln-line">        &lt;toh-hero [hero]=<span class="hljs-string">"hero"</span>&gt;&lt;/toh-hero&gt;</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">      Total powers: {{totalPowers}}&lt;br&gt;</div><div class="hljs-ln-line">      Average power: {{totalPowers / heroes.length}}</div><div class="hljs-ln-line">    &lt;/section&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  imports: [NgFor, HeroComponent]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroListComponent</span> {</div><div class="hljs-ln-line">  heroes: Hero[] = [];</div><div class="hljs-ln-line">  totalPowers: number = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/05-17/app/heroes/hero-list/hero-list.component.ts" visiblelines="5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,29,30,31,32" header="app/heroes/hero-list/hero-list.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/hero-list/hero-list.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HeroComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'../hero/hero.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Hero</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'../shared/hero.model'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgFor</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-hero-list'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;section&gt;</div><div class="hljs-ln-line">      Our list of heroes:</div><div class="hljs-ln-line">      @for (hero of heroes; track hero) {</div><div class="hljs-ln-line">        &lt;toh-hero [hero]="hero"&gt;&lt;/toh-hero&gt;</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">      Total powers: {{totalPowers}}&lt;br&gt;</div><div class="hljs-ln-line">      Average power: {{avgPower}}</div><div class="hljs-ln-line">    &lt;/section&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">NgFor</span>, <span class="hljs-title class_">HeroComponent</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroListComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">heroes</span>: <span class="hljs-title class_">Hero</span>[];</div><div class="hljs-ln-line">  totalPowers = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// testing harness</span></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span> = [];</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">get</span> <span class="hljs-title function_">avgPower</span>() {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">totalPowers</span> / <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span>.<span class="hljs-property">length</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="">初始化輸入</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 初始化輸入"></a>
+  
+  <h4 id="-05-18">風格 05-18</h4>
+  <a href="#-05-18" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 05-18"></a>
+  <p>TypeScript 的 <code>--strictPropertyInitialization</code> 編譯器選項確保類別在建構時初始化其屬性。
+啟用此選項時，如果類別沒有為任何未明確標記為可選的屬性設定值，TypeScript 編譯器就會回報錯誤。</p>
+<p>根據設計，Angular 將所有 <code>@Input</code> 屬性視為選用。
+若可行的話，您應該透過提供預設值來滿足 <code>--strictPropertyInitialization</code>。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/05-18/app/heroes/hero/hero.component.ts" visiblelines="2,3,4,5,6,7,8,9" header="app/heroes/hero/hero.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/hero/hero.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component, Input } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'toh-hero'</span>,</div><div class="hljs-ln-line">  template: `<span class="language-javascript">...</span>`</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroComponent</span> {</div><div class="hljs-ln-line">  @Input() id = <span class="hljs-string">'default_id'</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>如果屬性難以建構預設值，請使用 <code>?</code> 明確標記屬性為選項。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/05-18/app/heroes/hero/hero.component.optional.ts" visiblelines="2,3,4,5,6,7,8,9,10,11,12,13,14,15" header="app/heroes/hero/hero.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/hero/hero.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">Input</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-hero'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`...`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() id?: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">process</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">id</span>) {</div><div class="hljs-ln-line">      <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>您可能希望有一個必要的 <code>@Input</code> 欄位，表示所有您的元件使用者都必須傳遞該屬性。
+在這種情況下，請使用預設值。
+僅使用 <code>!</code> 來抑制 TypeScript 錯誤是不夠的，而且應該避免，因為它會阻止類型檢查器確保輸入值已提供。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/05-18/app/heroes/hero/hero.component.avoid.ts" visiblelines="2,3,4,5,6,7,8,9,10,11,12,13" header="app/heroes/hero/hero.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/hero/hero.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">Input</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-hero'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`...`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// The exclamation mark suppresses errors that a property is</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// not initialized.</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// Ignoring this enforcement can prevent the type checker</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// from finding potential issues.</span></div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() id!: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h2 id="">指令</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 指令"></a>
+  
+  <h3 id="">使用指令增強元素</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 使用指令增強元素"></a>
+  
+  <h4 id="-06-01">風格 06-01</h4>
+  <a href="#-06-01" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 06-01"></a>
+  <p><strong>執行</strong>當您沒有範本時，請使用屬性指令來呈現邏輯。</p>
+<p><strong>為什麼</strong>？<br />
+屬性指令沒有關聯的範本。</p>
+<p><strong>為什麼</strong>？<br />
+一個元素可能套用多個屬性指令。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/06-01/app/shared/highlight.directive.ts" visiblelines="2,3,4,5,6,7,8,9,10" header="app/shared/highlight.directive.ts">
+    <div class="docs-code-header"><h3>app/shared/highlight.directive.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Directive</span>, <span class="hljs-title class_">HostListener</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'[tohHighlight]'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HighlightDirective</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@HostListener</span>(<span class="hljs-string">'mouseover'</span>) <span class="hljs-title function_">onMouseEnter</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// do highlight work</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/06-01/app/app.component.html" header="app/app.component.html">
+    <div class="docs-code-header"><h3>app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;<span class="hljs-keyword">div</span> tohHighlight&gt;Bombasta&lt;/<span class="hljs-keyword">div</span>&gt;</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="hostlistener-hostbinding--host-"><code>HostListener</code>/<code>HostBinding</code> 裝飾器相較於 <code>host</code> 元數據</h3>
+  <a href="#hostlistener-hostbinding--host-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>HostListener</code>/<code>HostBinding</code> 裝飾器相較於 <code>host</code> 元數據"></a>
+  
+  <h4 id="-06-03">風格 06-03</h4>
+  <a href="#-06-03" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 06-03"></a>
+  <p><strong>考慮</strong>偏好 <code>@HostListener</code> 和 <code>@HostBinding</code> 勝於 <code>@Directive</code> 和 <code>@Component</code> 裝飾器的 <code>host</code> 屬性。</p>
+<p><strong>請</strong>在您的選擇中保持一致。</p>
+<p><strong>為什麼</strong>？<br />
+與 <code>@HostBinding</code> 關聯的屬性或與 <code>@HostListener</code> 關聯的方法只能在單一位置修改，即指令的類別中。
+如果您使用 <code>host</code> 元數據屬性，則必須修改指令類別中的屬性/方法聲明和與指令關聯的裝飾器中的元數據。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/06-03/app/shared/validator.directive.ts" header="app/shared/validator.directive.ts">
+    <div class="docs-code-header"><h3>app/shared/validator.directive.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Directive</span>, <span class="hljs-title class_">HostBinding</span>, <span class="hljs-title class_">HostListener</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'[tohValidator]'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ValidatorDirective</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@HostBinding</span>(<span class="hljs-string">'attr.role'</span>) role = <span class="hljs-string">'button'</span>;</div><div class="hljs-ln-line">  <span class="hljs-meta">@HostListener</span>(<span class="hljs-string">'mouseenter'</span>) <span class="hljs-title function_">onMouseEnter</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// do work</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>與較不偏好的 <code>host</code> 元數據替代方案比較。</p>
+<p><strong>為什麼</strong>？ <br />
+<code>host</code> 元數據只有一個術語要記住，且不需要額外的 ES 匯入。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/06-03/app/shared/validator2.directive.ts" header="app/shared/validator2.directive.ts">
+    <div class="docs-code-header"><h3>app/shared/validator2.directive.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Directive</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'[tohValidator2]'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">host</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">'[attr.role]'</span>: <span class="hljs-string">'role'</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">'(mouseenter)'</span>: <span class="hljs-string">'onMouseEnter()'</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Validator2Directive</span> {</div><div class="hljs-ln-line">  role = <span class="hljs-string">'button'</span>;</div><div class="hljs-ln-line">  <span class="hljs-title function_">onMouseEnter</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// do work</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h2 id="">服務</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 服務"></a>
+  
+  <h3 id="">服務是單例</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 服務是單例"></a>
+  
+  <h4 id="-07-01">風格 07-01</h4>
+  <a href="#-07-01" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 07-01"></a>
+  <p><strong>請</strong>在同一個注入器內使用服務作為單例。
+使用它們來共享資料和功能。</p>
+<p><strong>為什麼</strong>？<br />
+服務非常適合在功能區域或應用程式中共享方法。</p>
+<p><strong>為什麼</strong>？<br />
+服務是共享有狀態記憶體數據的理想選擇。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/07-01/app/heroes/shared/hero.service.ts" visiblelines="6,7,8,9,10,11,12" header="app/heroes/shared/hero.service.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HttpClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common/http'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Hero</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero.model'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>()</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> http: HttpClient</span>) { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">getHeroes</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">http</span>.<span class="hljs-property">get</span>&lt;<span class="hljs-title class_">Hero</span>[]&gt;(<span class="hljs-string">'api/heroes'</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="">提供服務</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 提供服務"></a>
+  
+  <h4 id="-07-03">風格 07-03</h4>
+  <a href="#-07-03" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 07-03"></a>
+  <p><strong>做</strong>在服務的 <code>@Injectable</code> 裝飾器中提供一個具有應用程式根注入器的服務。</p>
+<p><strong>為什麼</strong>？ <br />
+Angular 注入器是分層的。</p>
+<p><strong>為什麼</strong>？<br />
+當您將服務提供給根注入器時，該服務的實例會被共用並在需要該服務的每個類別中提供。
+當服務正在共用方法或狀態時，這是理想的。</p>
+<p><strong>為什麼</strong>？<br />
+當你在服務的 <code>@Injectable</code> 裝飾器中註冊服務時，由 <a href="cli">Angular CLI</a> 的生產建構所使用的最佳化工具可以執行樹狀搖晃，並移除你的應用程式未使用的服務。</p>
+<p><strong>為什麼</strong>？<br />
+當兩個不同的元件需要服務的不同實例時，這不是理想的。
+在這種情況下，最好在需要新實例和單獨實例的元件級別提供該服務。</p>
+<div class="docs-code" path="adev/src/content/examples/dependency-injection/src/app/tree-shaking/service.ts" header="src/app/treeshaking/service.ts">
+    <div class="docs-code-header"><h3>src/app/treeshaking/service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Injectable({</div><div class="hljs-ln-line">  providedIn: <span class="hljs-string">'root'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Service</span> {</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="-commatinjectable-">使用 &commat;Injectable() 類別裝飾器</h3>
+  <a href="#-commatinjectable-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 &commat;Injectable() 類別裝飾器"></a>
+  
+  <h4 id="style-07-04">Style 07-04</h4>
+  <a href="#style-07-04" class="docs-anchor" tabindex="-1" aria-label="Link to Style 07-04"></a>
+  <p><strong>請</strong>在使用類型作為服務依賴項的權杖時，使用 <code>@Injectable()</code> 類別裝飾器，而不是 <code>@Inject</code> 參數裝飾器。</p>
+<p><strong>為什麼</strong>？<br />
+Angular 相依性注入 (DI) 機制會根據該服務建構函式參數的宣告類型來解析服務自己的依賴關係。</p>
+<p><strong>為什麼</strong>？<br />
+當服務僅接受與類型令牌相關聯的依賴項時，與在每個個別建構函式參數上使用 <code>@Inject()</code> 相比，<code>@Injectable()</code> 語法簡潔得多。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/07-04/app/heroes/shared/hero-arena.service.avoid.ts" visiblelines="4,5,6,7,8,9,10" header="app/heroes/shared/hero-arena.service.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero-arena.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Inject</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HttpClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common/http'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HeroService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero.service'</span>;</div><div class="hljs-ln-line"><span class="hljs-comment">/* avoid */</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroArena</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line">      <span class="hljs-meta">@Inject</span>(HeroService) <span class="hljs-keyword">private</span> heroService: HeroService,</div><div class="hljs-ln-line">      <span class="hljs-meta">@Inject</span>(HttpClient) <span class="hljs-keyword">private</span> http: HttpClient) {}</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/07-04/app/heroes/shared/hero-arena.service.ts" visiblelines="5,6,7,8,9,14" header="app/heroes/shared/hero-arena.service.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero-arena.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HttpClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common/http'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HeroService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>()</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroArena</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line">    <span class="hljs-keyword">private</span> heroService: HeroService,</div><div class="hljs-ln-line">    <span class="hljs-keyword">private</span> http: HttpClient) {}</div><div class="hljs-ln-line">    <span class="hljs-comment">// test harness</span></div><div class="hljs-ln-line">    <span class="hljs-title function_">getParticipants</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroService</span>.<span class="hljs-title function_">getHeroes</span>();</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h2 id="">數據服務</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 數據服務"></a>
+  
+  <h3 id="">透過服務與伺服器通訊</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 透過服務與伺服器通訊"></a>
+  
+  <h4 id="-08-01">風格 08-01</h4>
+  <a href="#-08-01" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 08-01"></a>
+  <p><strong>做</strong>將資料操作和與資料互動的邏輯，重構為一項服務。</p>
+<p><strong>請</strong>讓數據服務負責 XHR 呼叫、本地儲存、記憶體中的暫存，或任何其他數據操作。</p>
+<p><strong>為什麼</strong>？<br />
+元件的責任在於呈現和收集檢視的資訊。
+它不應該關心如何取得資料，它只知道該向誰索取資料。
+將資料服務分開，可以將如何取得資料的邏輯移至資料服務，並讓元件更簡單、更專注於檢視。</p>
+<p><strong>為什麼</strong>？<br />
+當測試使用數據服務的元件時，這使得測試數據呼叫（模擬或真實）更容易。</p>
+<p><strong>為什麼</strong>？<br />
+資料管理的詳細資訊，例如標頭、HTTP 方法、快取、錯誤處理和重試邏輯，與元件和其他資料使用者無關。</p>
+<p>資料服務封裝了這些細節。
+在服務內部演進這些細節比較容易，而且不會影響到使用者。
+使用模擬服務實作來測試使用者也比較容易。</p>
+
+  <h2 id="">生命周期掛鉤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 生命周期掛鉤"></a>
+  <p>使用生命週期掛勾來觸發 Angular 暴露的重要事件。</p>
+
+  <h3 id="">實作生命週期掛鉤介面</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 實作生命週期掛鉤介面"></a>
+  
+  <h4 id="-09-01">風格 09-01</h4>
+  <a href="#-09-01" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 09-01"></a>
+  <p><strong>做</strong>實作生命週期掛鉤介面。</p>
+<p><strong>為什麼</strong>？ <br />
+生命週期介面規定輸入方法簽名。
+使用這些簽名標記拼寫和語法錯誤。</p>
+<div class="docs-code" path="adev/src/content/examples/styleguide/src/09-01/app/heroes/shared/hero-button/hero-button.component.avoid.ts" visiblelines="1,2,3,4,5,6,7,8,9,10,11,12" header="app/heroes/shared/hero-button/hero-button.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero-button/hero-button.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-comment">/* avoid */</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-hero-button'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;button type="button"&gt;OK&lt;/button&gt;`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroButtonComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">onInit</span>(<span class="hljs-params"></span>) { <span class="hljs-comment">// misspelled</span></div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'The component is initialized'</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/styleguide/src/09-01/app/heroes/shared/hero-button/hero-button.component.ts" visiblelines="2,3,4,5,6,7,8,9,10,11" header="app/heroes/shared/hero-button/hero-button.component.ts">
+    <div class="docs-code-header"><h3>app/heroes/shared/hero-button/hero-button.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">OnInit</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'toh-hero-button'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;button type="button"&gt;OK&lt;/button&gt;`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroButtonComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OnInit</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'The component is initialized'</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h2 id="">附錄</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 附錄"></a>
+  <p>有用的 Angular 工具和技巧。</p>
+
+  <h3 id="">檔案範本和片段</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 檔案範本和片段"></a>
+  
+  <h4 id="-a-02">風格 A-02</h4>
+  <a href="#-a-02" class="docs-anchor" tabindex="-1" aria-label="Link to 風格 A-02"></a>
+  <p><strong>請</strong>使用檔案範本或範例來幫助遵循一致的風格和模式。
+以下是一些網路開發編輯器和 IDE 的範本和/或範例。</p>
+<p><strong>考慮</strong>使用 <a href="https://code.visualstudio.com" target="_blank">Visual Studio Code</a> 的 <a href="https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2" target="_blank">片段</a>，這些片段遵循這些風格和指南。</p>
+<a href="https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2">
+
+<img alt="使用擴充功能" src="https://angular.dev/assets/images/guide/styleguide/use-extension.gif">
+
+</a>
+
+<p><strong>考慮</strong>使用 <a href="https://github.com/orizens/sublime-angular2-snippets" target="_blank">snippets</a> for <a href="https://www.sublimetext.com" target="_blank">Sublime Text</a> 遵循這些風格和準則。</p>
+<p><strong>考慮</strong>使用 <a href="https://github.com/mhartington/vim-angular2-snippets" target="_blank">snippets</a> for <a href="https://www.vim.org" target="_blank">Vim</a> 這些風格和指南。</p>

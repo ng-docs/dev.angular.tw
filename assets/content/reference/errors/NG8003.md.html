@@ -1,0 +1,44 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">遺失的參考目標</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG8003.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-video-container">
+      <iframe
+      class="docs-video"
+      src="https://www.youtube.com/embed/fUSAg4kp2WQ"
+      
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      credentialless
+      title="Video player"
+      ></iframe>
+    </div>
+    <p><code>Angular</code> 無法找到具有 <code>{{ PLACEHOLDER }}</code> 匯出名稱的指令。
+這通常是指令中遺漏匯入或遺漏 <a href="api/core/Directive#exportAs"><code>exportAs</code></a> 所導致。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 這是編譯器等同於常見執行時期錯誤 <a href="errors/NG0301">NG0301: 輸出找不到</a>。</p>
+
+    </div>
+    
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>使用找不到的匯出之字串名稱來追蹤使用此匯出的範本或模組。</p>
+<p>確保所有相依性都正確地匯入和宣告在我們的模組中。
+例如，如果找不到的匯出是 <code>ngForm</code>，我們需要匯入 <code>FormsModule</code> 並將它宣告在 <code>*.module.ts</code> 的匯入清單中，以解決遺失的匯出錯誤。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FormsModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">FormsModule</span>,</div><div class="hljs-ln-line">    …</div></code>
+    </pre>
+  </div><p>如果您最近添加了一個匯入，您將需要重新啟動伺服器才能看到這些變更。</p>

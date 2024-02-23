@@ -1,0 +1,75 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">元件主機元素</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/host-elements.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>提示：本指南假設您已經閱讀過 <a href="essentials">精華指南</a>。如果您是 Angular 新手，請先閱讀該指南。</p>
+<p>Angular 會為與元件選擇器相符的每個 HTML 元素建立元件執行個體。與元件選擇器相符的 DOM 元素是該元件的 <strong>主機元素</strong>。元件範本的內容會呈現在其主機元素內部。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// Component source</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'profile-photo'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;img src="profile-photo.jpg" alt="Your profile photo" /&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfilePhoto</span> {}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Using the component --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Your profile photo<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">profile-photo</span> /&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>Upload a new profile photo<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Rendered DOM --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Your profile photo<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">profile-photo</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"profile-photo.jpg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Your profile photo"</span> /&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">profile-photo</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>Upload a new profile photo<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div></code>
+    </pre>
+  </div><p>在上面的範例中，<code>&lt;profile-photo&gt;</code> 是 <code>ProfilePhoto</code> 元件的主機元素。</p>
+
+  <h2 id="">繫結到主機元素</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 繫結到主機元素"></a>
+  <p>元件可以將屬性、特徵和事件繫結至其主機元素。這與元件範本內元素的繫結行為相同，但改以在 <code>@Component</code> 裝飾器的 <code>host</code> 屬性中定義：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-attr">host</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">'role'</span>: <span class="hljs-string">'slider'</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">'[attr.aria-valuenow]'</span>: <span class="hljs-string">'value'</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">'[tabIndex]'</span>: <span class="hljs-string">'disabled ? -1 : 0'</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">'(keydown)'</span>: <span class="hljs-string">'updateValue($event)'</span>,</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">value</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">disabled</span>: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">updateValue</span>(<span class="hljs-params">event: KeyboardEvent</span>) { <span class="hljs-comment">/* ... */</span> }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">/* ... */</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="hostbinding--hostlistener-"><code>@HostBinding</code> 和 <code>@HostListener</code> 裝飾器</h2>
+  <a href="#hostbinding--hostlistener-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@HostBinding</code> 和 <code>@HostListener</code> 裝飾器"></a>
+  <p>您也可以透過將 <code>@HostBinding</code> 和 <code>@HostListener</code> 裝飾器套用至類別成員來繫結至主機元素。</p>
+<p><code>@HostBinding</code> 可讓您將主機屬性和屬性繫結至屬性和方法：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">/* ... */</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@HostBinding</span>(<span class="hljs-string">'attr.aria-valuenow'</span>)</div><div class="hljs-ln-line">  <span class="hljs-attr">value</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-meta">@HostBinding</span>(<span class="hljs-string">'tabIndex'</span>)</div><div class="hljs-ln-line">  <span class="hljs-title function_">getTabIndex</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">disabled</span> ? -<span class="hljs-number">1</span> : <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">/* ... */</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><code>@HostListener</code> 讓您將事件監聽器繫結到主機元素。裝飾器接受事件名稱和可選參數陣列：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@HostListener</span>(<span class="hljs-string">'keydown'</span>, [<span class="hljs-string">'$event'</span>])</div><div class="hljs-ln-line">  <span class="hljs-title function_">updateValue</span>(<span class="hljs-params">event: KeyboardEvent</span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">/* ... */</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><strong>永遠優先使用 <code>host</code> 屬性，而非 <code>@HostBinding</code> 和 <code>@HostListener</code>。</strong> 這些
+裝飾器僅存在於向後相容性。</p>
+
+  <h2 id="">繫結衝突</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 繫結衝突"></a>
+  <p>當你在範本中使用元件時，你可以新增繫結至該元件實例的元素。
+該元件也可以為相同的屬性或特徵定義主機繫結。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-attr">host</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">'role'</span>: <span class="hljs-string">'presentation'</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">'[id]'</span>: <span class="hljs-string">'id'</span>,</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfilePhoto</span> { <span class="hljs-comment">/* ... */</span> }</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">profile-photo</span> <span class="hljs-attr">role</span>=<span class="hljs-string">"group"</span> [<span class="hljs-attr">id</span>]=<span class="hljs-string">"otherId"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p>在這種情況下，以下規則決定哪個值勝出：</p>
+
+  <ul class="docs-list">
+    <li>如果兩個值都是靜態的，則實例繫結獲勝。</li>
+<li>如果一個值是靜態的，另一個是動態的，則動態值獲勝。</li>
+<li>如果兩個值都是動態的，則元件的主機繫結獲勝。</li>
+
+  </ul>
+  

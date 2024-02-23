@@ -1,0 +1,166 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">與 Service Worker 溝通</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/ecosystem/service-workers/communications.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>啟用服務工作者支援的功能不僅僅是註冊服務工作者；它還提供你可以用來與服務工作者互動並控制應用程式快取的服務。</p>
+
+  <h2 id="swupdate-"><code>SwUpdate</code> 服務</h2>
+  <a href="#swupdate-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>SwUpdate</code> 服務"></a>
+  <p><code>SwUpdate</code> 服務讓您可以存取事件，這些事件會在服務工作者偵測並安裝應用程式的可用更新時指出。</p>
+<p><code>SwUpdate</code> 服務支援三個獨立作業：</p>
+
+  <ul class="docs-list">
+    <li>在伺服器上 <em>偵測到</em> 更新版本、<em>安裝並準備好</em> 本機使用或 <em>安裝失敗</em> 時接收通知。</li>
+<li>要求服務工作者檢查伺服器是否有新的更新。</li>
+<li>要求服務工作者為當前分頁啟用最新版本的應用程式。</li>
+
+  </ul>
+  
+  <h3 id="">版本更新</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 版本更新"></a>
+  <p><code>versionUpdates</code> 是 <code>SwUpdate</code> 的 <code>Observable</code> 屬性，會發出四種事件類型：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">事件類型</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>VersionDetectedEvent</code></td>
+<td align="left">當服務工作者在伺服器上偵測到新版本的應用程式，並且即將開始下載時發出。</td>
+</tr>
+<tr>
+<td align="left"><code>NoNewVersionDetectedEvent</code></td>
+<td align="left">當服務工作者已檢查伺服器上應用程式的版本，但未找到新版本時發出。</td>
+</tr>
+<tr>
+<td align="left"><code>VersionReadyEvent</code></td>
+<td align="left">當新版本的應用程式可供用戶端啟用時發出。可用於通知用戶有可用的更新，或提示他們重新整理頁面。</td>
+</tr>
+<tr>
+<td align="left"><code>VersionInstallationFailedEvent</code></td>
+<td align="left">當安裝新版本失敗時發出。可供用於記錄/監控目的。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="docs-code" path="adev/src/content/examples/service-worker-getting-started/src/app/log-update.service.ts" visiblelines="3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22" header="log-update.service.ts">
+    <div class="docs-code-header"><h3>log-update.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">SwUpdate</span>, <span class="hljs-title class_">VersionReadyEvent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/service-worker'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({<span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LogUpdateService</span> {</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">updates: SwUpdate</span>) {</div><div class="hljs-ln-line">    updates.<span class="hljs-property">versionUpdates</span>.<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">evt</span> =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-keyword">switch</span> (evt.<span class="hljs-property">type</span>) {</div><div class="hljs-ln-line">        <span class="hljs-keyword">case</span> <span class="hljs-string">'VERSION_DETECTED'</span>:</div><div class="hljs-ln-line">          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Downloading new app version: <span class="hljs-subst">${evt.version.hash}</span>`</span>);</div><div class="hljs-ln-line">          <span class="hljs-keyword">break</span>;</div><div class="hljs-ln-line">        <span class="hljs-keyword">case</span> <span class="hljs-string">'VERSION_READY'</span>:</div><div class="hljs-ln-line">          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Current app version: <span class="hljs-subst">${evt.currentVersion.hash}</span>`</span>);</div><div class="hljs-ln-line">          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`New app version ready for use: <span class="hljs-subst">${evt.latestVersion.hash}</span>`</span>);</div><div class="hljs-ln-line">          <span class="hljs-keyword">break</span>;</div><div class="hljs-ln-line">        <span class="hljs-keyword">case</span> <span class="hljs-string">'VERSION_INSTALLATION_FAILED'</span>:</div><div class="hljs-ln-line">          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Failed to install app version '<span class="hljs-subst">${evt.version.hash}</span>': <span class="hljs-subst">${evt.error}</span>`</span>);</div><div class="hljs-ln-line">          <span class="hljs-keyword">break</span>;</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="">檢查更新</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 檢查更新"></a>
+  <p>可以要求服務人員檢查伺服器上是否已部署任何更新。
+服務人員會在初始化期間和每次導覽請求時檢查更新，也就是說，當使用者從不同的地址導覽到您的應用程式時。
+但是，如果您有經常變更的網站或希望更新按計畫發生，則可以選擇手動檢查更新。</p>
+<p>使用 <code>checkForUpdate()</code> 方法執行此操作：</p>
+<div class="docs-code" path="adev/src/content/examples/service-worker-getting-started/src/app/check-for-update.service.ts" header="check-for-update.service.ts">
+    <div class="docs-code-header"><h3>check-for-update.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ApplicationRef</span>, <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">SwUpdate</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/service-worker'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { concat, interval } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { first } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/operators'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({<span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CheckForUpdateService</span> {</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">appRef: ApplicationRef, updates: SwUpdate</span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Allow the app to stabilize first, before starting</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// polling for updates with `interval()`.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> appIsStable$ = appRef.<span class="hljs-property">isStable</span>.<span class="hljs-title function_">pipe</span>(<span class="hljs-title function_">first</span>(<span class="hljs-function"><span class="hljs-params">isStable</span> =&gt;</span> isStable === <span class="hljs-literal">true</span>));</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> everySixHours$ = <span class="hljs-title function_">interval</span>(<span class="hljs-number">6</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> everySixHoursOnceAppIsStable$ = <span class="hljs-title function_">concat</span>(appIsStable$, everySixHours$);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    everySixHoursOnceAppIsStable$.<span class="hljs-title function_">subscribe</span>(<span class="hljs-keyword">async</span> () =&gt; {</div><div class="hljs-ln-line">      <span class="hljs-keyword">try</span> {</div><div class="hljs-ln-line">        <span class="hljs-keyword">const</span> updateFound = <span class="hljs-keyword">await</span> updates.<span class="hljs-title function_">checkForUpdate</span>();</div><div class="hljs-ln-line">        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(updateFound ? <span class="hljs-string">'A new version is available.'</span> : <span class="hljs-string">'Already on the latest version.'</span>);</div><div class="hljs-ln-line">      } <span class="hljs-keyword">catch</span> (err) {</div><div class="hljs-ln-line">        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Failed to check for updates:'</span>, err);</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>此方法傳回一個 <code>Promise&lt;boolean&gt;</code> 表示是否有可啟用的更新。
+檢查可能會失敗，這將導致 <code>Promise</code> 遭到拒絕。</p>
+
+    <div class="docs-callout docs-callout-important">
+      <h3>穩定性與服務工作者註冊</h3>
+      <p>為了避免對頁面的初始呈現造成負面影響，預設情況下，Angular 服務工作者服務會等待應用程式穩定長達 30 秒，然後再註冊 ServiceWorker 腳本。</p>
+<p>例如，使用 <a href="https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/setInterval" target="_blank">setInterval()</a> 或 RxJS 的 <a href="https://rxjs.dev/api/index/function/interval" target="_blank">interval()</a> 持續輪詢更新會防止應用程式穩定，而且 ServiceWorker 腳本直到達到 30 秒的上限之前才會向瀏覽器註冊。</p>
+<p>這適用於您的應用程式執行的任何類型的輪詢。
+請查看 <a href="api/core/ApplicationRef#isStable">isStable</a> 文件以了解更多資訊。</p>
+<p>透過在開始輪詢更新之前先等待應用程式穩定下來，可以避免延遲，如前一個範例所示。
+或者，您可能想為 ServiceWorker 定義不同的 <a href="api/service-worker/SwRegistrationOptions#registrationStrategy">註冊策略</a>。</p>
+
+    </div>
+    
+  <h3 id="">更新到最新版本</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 更新到最新版本"></a>
+  <p>當新版本準備就緒時，您可以透過重新載入頁面來將現有分頁更新到最新版本。
+為了避免中斷使用者的進度，通常建議提示使用者並讓他們確認重新載入頁面和更新到最新版本是可以的：</p>
+<div class="docs-code" path="adev/src/content/examples/service-worker-getting-started/src/app/prompt-update.service.ts" visiblelines="8,9,10,11,12,13,14,15,16,17,18,19,28,29,30" header="prompt-update.service.ts">
+    <div class="docs-code-header"><h3>prompt-update.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line">    <span class="hljs-keyword">import</span> { filter, <span class="hljs-keyword">map</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/operators'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { SwUpdate, VersionReadyEvent } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/service-worker'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">function</span> promptUser(event: VersionReadyEvent): boolean {</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Injectable({providedIn: <span class="hljs-string">'root'</span>})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PromptUpdateService</span> {</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  constructor(swUpdate: SwUpdate) {</div><div class="hljs-ln-line">    swUpdate.versionUpdates</div><div class="hljs-ln-line">        .pipe(filter((evt): evt <span class="hljs-keyword">is</span> VersionReadyEvent =&gt; evt.type === <span class="hljs-string">'VERSION_READY'</span>))</div><div class="hljs-ln-line">        .subscribe(evt =&gt; {</div><div class="hljs-ln-line">          <span class="hljs-keyword">if</span> (promptUser(evt)) {</div><div class="hljs-ln-line">            <span class="hljs-regexp">// Reload the page to update to the latest version.</span></div><div class="hljs-ln-line">            document.location.reload();</div><div class="hljs-ln-line">          }</div><div class="hljs-ln-line">        });</div><div class="hljs-ln-line">    // ...</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> updatesAvailable = swUpdate.versionUpdates.pipe(</div><div class="hljs-ln-line">        filter((evt): evt <span class="hljs-keyword">is</span> VersionReadyEvent =&gt; evt.type === <span class="hljs-string">'VERSION_READY'</span>),</div><div class="hljs-ln-line">        <span class="hljs-keyword">map</span>(evt =&gt; ({</div><div class="hljs-ln-line">          type: <span class="hljs-string">'UPDATE_AVAILABLE'</span>,</div><div class="hljs-ln-line">          current: evt.currentVersion,</div><div class="hljs-ln-line">          available: evt.latestVersion,</div><div class="hljs-ln-line">        })));</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-important">
+      <h3>在不重新載入的情況下更新的安全</h3>
+      <p>呼叫 <code>activateUpdate()</code> 會將分頁更新至最新版本，而不會重新載入頁面，但這可能會損壞應用程式。</p>
+<p>不重新載入更新可能會造成應用程式殼層與其他頁面資源（例如可能會在版本之間變更檔名的延遲載入區塊）之間的版本不相符。</p>
+<p>只有在您確定它對您的特定使用案例安全時，才應使用 <code>activateUpdate()</code>。</p>
+
+    </div>
+    
+  <h3 id="">處理無法復原的狀態</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 處理無法復原的狀態"></a>
+  <p>在某些情況下，服務工作者用來為客戶端提供服務的應用程式版本可能處於無法復原的損壞狀態，除非重新載入整個頁面。</p>
+<p>例如，想像以下情境：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>用戶第一次打開應用程式，服務工作者會快取最新版本的應用程式。
+ 假設應用程式快取的資產包括 <code>index.html</code>、<code>main.&lt;main-hash-1&gt;.js</code> 和 <code>lazy-chunk.&lt;lazy-hash-1&gt;.js</code>。</p>
+</li>
+<li><p>用戶關閉應用程式，一段時間沒有打開。</p>
+</li>
+<li><p>過了一段時間後，伺服器部署了應用程式的較新版本。
+ 這個較新版本包括檔案 <code>index.html</code>、<code>main.&lt;main-hash-2&gt;.js</code> 和 <code>lazy-chunk.&lt;lazy-hash-2&gt;.js</code>。</p>
+</li>
+
+    </ol>
+    <p>重要：雜湊現在不同，因為檔案內容已變更。舊版本不再在伺服器上提供。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>與此同時，使用者的瀏覽器決定從快取中移除 <code>lazy-chunk.&lt;lazy-hash-1&gt;.js</code>。
+ 瀏覽器可能會決定從快取中移除特定（或全部）資源，以回收磁碟空間。</p>
+</li>
+<li><p>使用者再次開啟應用程式。
+ 服務工作者提供它目前已知的最新版本，亦即舊版本（<code>index.html</code> 和 <code>main.&lt;main-hash-1&gt;.js</code>）。</p>
+</li>
+<li><p>在某個稍後時間點，應用程式要求延遲載入的套件 <code>lazy-chunk.&lt;lazy-hash-1&gt;.js</code>。</p>
+</li>
+<li><p>服務工作者無法在快取中找到資產（請記住瀏覽器已將其移除）。
+ 它也無法從伺服器擷取它（因為伺服器現在只有較新版本的 <code>lazy-chunk.&lt;lazy-hash-2&gt;.js</code>）。</p>
+</li>
+
+    </ol>
+    <p>在上述情境中，服務工作者無法提供通常會快取的資產。
+那個特定應用程式版本已損壞，而且沒有辦法在不重新整理頁面的情況下修正用戶端的狀態。
+在這種情況下，服務工作者會藉由傳送 <code>UnrecoverableStateEvent</code> 事件來通知用戶端。
+請訂閱 <code>SwUpdate#unrecoverable</code> 以接收通知並處理這些錯誤。</p>
+<div class="docs-code" path="adev/src/content/examples/service-worker-getting-started/src/app/handle-unrecoverable-state.service.ts" visiblelines="5,6,7,8,9,10,11,12,13,14,15,16" header="handle-unrecoverable-state.service.ts">
+    <div class="docs-code-header"><h3>handle-unrecoverable-state.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">SwUpdate</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/service-worker'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">notifyUser</span>(<span class="hljs-params">message: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">void</span> { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({<span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HandleUnrecoverableStateService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">updates: SwUpdate</span>) {</div><div class="hljs-ln-line">    updates.<span class="hljs-property">unrecoverable</span>.<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-title function_">notifyUser</span>(</div><div class="hljs-ln-line">        <span class="hljs-string">'An error occurred that we cannot recover from:\n'</span> +</div><div class="hljs-ln-line">        event.<span class="hljs-property">reason</span> +</div><div class="hljs-ln-line">        <span class="hljs-string">'\n\nPlease reload the page.'</span></div><div class="hljs-ln-line">      );</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h2 id="-angular-">更深入了解 Angular 服務工作者</h2>
+  <a href="#-angular-" class="docs-anchor" tabindex="-1" aria-label="Link to 更深入了解 Angular 服務工作者"></a>
+  <p>您可能也有興趣：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="ecosystem/service-workers/push-notifications">
+      推播通知
+    </a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/devops">
+      Service Worker devops
+    </a>
+    
+
+    </nav>
+    

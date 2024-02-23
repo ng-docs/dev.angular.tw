@@ -1,0 +1,18 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>APP_ID</h1><div class="docs-api-item-label" data-mode="full" data-type="constant">constant</div></div></div><p class="docs-reference-description"><p>A <a href="docs">DI token</a> representing a string ID, used
+primarily for prefixing application attributes and CSS styles when
+{@link ViewEncapsulationEmulated } is being used.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">const</span> <span class="hljs-attr">APP_ID</span>: <span class="hljs-title class_">InjectionToken</span>&lt;<span class="hljs-built_in">string</span>&gt;;</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>A <a href="docs">DI token</a> representing a string ID, used
+primarily for prefixing application attributes and CSS styles when
+{@link ViewEncapsulationEmulated } is being used.</p>
+<p>The token is needed in cases when multiple applications are bootstrapped on a page
+(for example, using <code>bootstrapApplication</code> calls). In this case, ensure that those applications
+have different <code>APP_ID</code> value setup. For example:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_ invoke__">bootstrapApplication</span>(ComponentA, {</span><span class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: APP_ID, <span class="hljs-attr">useValue</span>: <span class="hljs-string">&#x27;app-a&#x27;</span> },</span><span class="hljs-ln-line">    // ... other providers ...</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">});</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-title function_ invoke__">bootstrapApplication</span>(ComponentB, {</span><span class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: APP_ID, <span class="hljs-attr">useValue</span>: <span class="hljs-string">&#x27;app-b&#x27;</span> },</span><span class="hljs-ln-line">    // ... other providers ...</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">});</span>
+          </code>
+        </pre>
+      </div>
+    <p>By default, when there is only one application bootstrapped, you don&#39;t need to provide the
+<code>APP_ID</code> token (the <code>ng</code> will be used as an app ID).</p></div></div></div>

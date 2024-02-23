@@ -1,0 +1,35 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>IsActiveMatchOptions</h1><div class="docs-api-item-label" data-mode="full" data-type="interface">interface</div></div></div><p class="docs-reference-description"><p>A set of options which specify how to determine if a <code>UrlTree</code> is active, given the <code>UrlTree</code>
+for the current router state.</p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/router/RouterisActive">RouterisActive</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">interface</span> <span class="hljs-title class_">IsActiveMatchOptions</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="matrixParams">  <span class="hljs-attr">matrixParams</span>: <span class="hljs-string">&quot;exact&quot;</span> | <span class="hljs-string">&quot;subset&quot;</span> | <span class="hljs-string">&quot;ignored&quot;</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="queryParams">  <span class="hljs-attr">queryParams</span>: <span class="hljs-string">&quot;exact&quot;</span> | <span class="hljs-string">&quot;subset&quot;</span> | <span class="hljs-string">&quot;ignored&quot;</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="paths">  <span class="hljs-attr">paths</span>: <span class="hljs-string">&quot;exact&quot;</span> | <span class="hljs-string">&quot;subset&quot;</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="fragment">  <span class="hljs-attr">fragment</span>: <span class="hljs-string">&quot;exact&quot;</span> | <span class="hljs-string">&quot;ignored&quot;</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="matrixParams" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>matrixParams</h3><div><code>&quot;exact&quot; | &quot;subset&quot; | &quot;ignored&quot;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Defines the strategy for comparing the matrix parameters of two <code>UrlTree</code>s.</p>
+<p>The matrix parameter matching is dependent on the strategy for matching the
+segments. That is, if the <code>paths</code> option is set to <code>&#39;subset&#39;</code>, only
+the matrix parameters of the matching segments will be compared.</p>
+
+    <ul class="docs-list">
+      <li><code>&#39;exact&#39;</code>: Requires that matching segments also have exact matrix parameter
+matches.</li>
+<li><code>&#39;subset&#39;</code>: The matching segments in the router&#39;s active <code>UrlTree</code> may contain
+extra matrix parameters, but those that exist in the <code>UrlTree</code> in question must match.</li>
+<li><code>&#39;ignored&#39;</code>: When comparing <code>UrlTree</code>s, matrix params will be ignored.</li>
+
+    </ul></div></div></div></div><div id="queryParams" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>queryParams</h3><div><code>&quot;exact&quot; | &quot;subset&quot; | &quot;ignored&quot;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Defines the strategy for comparing the query parameters of two <code>UrlTree</code>s.</p>
+
+    <ul class="docs-list">
+      <li><code>&#39;exact&#39;</code>: the query parameters must match exactly.</li>
+<li><code>&#39;subset&#39;</code>: the active <code>UrlTree</code> may contain extra parameters,
+but must match the key and value of any that exist in the <code>UrlTree</code> in question.</li>
+<li><code>&#39;ignored&#39;</code>: When comparing <code>UrlTree</code>s, query params will be ignored.</li>
+
+    </ul></div></div></div></div><div id="paths" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>paths</h3><div><code>&quot;exact&quot; | &quot;subset&quot;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Defines the strategy for comparing the <code>UrlSegment</code>s of the <code>UrlTree</code>s.</p>
+
+    <ul class="docs-list">
+      <li><code>&#39;exact&#39;</code>: all segments in each <code>UrlTree</code> must match.</li>
+<li><code>&#39;subset&#39;</code>: a <code>UrlTree</code> will be determined to be active if it
+is a subtree of the active route. That is, the active route may contain extra
+segments, but must at least have all the segments of the <code>UrlTree</code> in question.</li>
+
+    </ul></div></div></div></div><div id="fragment" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>fragment</h3><div><code>&quot;exact&quot; | &quot;ignored&quot;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><ul class="docs-list">
+      <li><code>&#39;exact&#39;</code>: indicates that the <code>UrlTree</code> fragments must be equal.</li>
+<li><code>&#39;ignored&#39;</code>: the fragments will not be compared when determining if a
+<code>UrlTree</code> is active.</li>
+
+    </ul></div></div></div></div></div></div></div>

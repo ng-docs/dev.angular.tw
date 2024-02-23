@@ -1,0 +1,33 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>RouterConfigOptions</h1><div class="docs-api-item-label" data-mode="full" data-type="interface">interface</div></div></div><p class="docs-reference-description"><p>Extra configuration options that can be used with the <code>withRouterConfig</code> function.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">interface</span> <span class="hljs-title class_">RouterConfigOptions</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="canceledNavigationResolution">  canceledNavigationResolution?: <span class="hljs-string">&quot;replace&quot;</span> | <span class="hljs-string">&quot;computed&quot;</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="onSameUrlNavigation">  onSameUrlNavigation?: <span class="hljs-title class_">OnSameUrlNavigation</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="paramsInheritanceStrategy">  paramsInheritanceStrategy?: <span class="hljs-string">&quot;emptyOnly&quot;</span> | <span class="hljs-string">&quot;always&quot;</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="urlUpdateStrategy">  urlUpdateStrategy?: <span class="hljs-string">&quot;deferred&quot;</span> | <span class="hljs-string">&quot;eager&quot;</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="resolveNavigationPromiseOnError">  resolveNavigationPromiseOnError?: <span class="hljs-built_in">boolean</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="canceledNavigationResolution" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>canceledNavigationResolution</h3><div><code>&quot;replace&quot; | &quot;computed&quot;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Configures how the Router attempts to restore state when a navigation is cancelled.</p>
+<p>&#39;replace&#39; - Always uses <code>location.replaceState</code> to set the browser state to the state of the
+router before the navigation started. This means that if the URL of the browser is updated
+<em>before</em> the navigation is canceled, the Router will simply replace the item in history rather
+than trying to restore to the previous location in the session history. This happens most
+frequently with <code>urlUpdateStrategy: &#39;eager&#39;</code> and navigations with the browser back/forward
+buttons.</p>
+<p>&#39;computed&#39; - Will attempt to return to the same index in the session history that corresponds
+to the Angular route when the navigation gets cancelled. For example, if the browser back
+button is clicked and the navigation is cancelled, the Router will trigger a forward navigation
+and vice versa.</p>
+<p>Note: the &#39;computed&#39; option is incompatible with any <code>UrlHandlingStrategy</code> which only
+handles a portion of the URL because the history restoration navigates to the previous place in
+the browser history rather than simply resetting a portion of the URL.</p>
+<p>The default value is <code>replace</code> when not set.</p></div></div></div></div><div id="onSameUrlNavigation" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>onSameUrlNavigation</h3><div><code>OnSameUrlNavigation</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Configures the default for handling a navigation request to the current URL.</p>
+<p>If unset, the <code>Router</code> will use <code>&#39;ignore&#39;</code>.</p></div></div></div></div><div id="paramsInheritanceStrategy" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>paramsInheritanceStrategy</h3><div><code>&quot;emptyOnly&quot; | &quot;always&quot;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Defines how the router merges parameters, data, and resolved data from parent to child
+routes.</p>
+<p>By default (&#39;emptyOnly&#39;), a route inherits the parent route&#39;s parameters when the route itself
+has an empty path (meaning its configured with path: &#39;&#39;) or when the parent route doesn&#39;t have
+any component set.</p>
+<p>Set to &#39;always&#39; to enable unconditional inheritance of parent parameters.</p>
+<p>Note that when dealing with matrix parameters, &quot;parent&quot; refers to the parent <code>Route</code>
+config which does not necessarily mean the &quot;URL segment to the left&quot;. When the <code>Route</code> <code>path</code>
+contains multiple segments, the matrix parameters must appear on the last segment. For example,
+matrix parameters for <code>{path: &#39;a/b&#39;, component: MyComp}</code> should appear as <code>a/b;foo=bar</code> and not
+<code>a;foo=bar/b</code>.</p></div></div></div></div><div id="urlUpdateStrategy" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>urlUpdateStrategy</h3><div><code>&quot;deferred&quot; | &quot;eager&quot;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Defines when the router updates the browser URL. By default (&#39;deferred&#39;),
+update after successful navigation.
+Set to &#39;eager&#39; if prefer to update the URL at the beginning of navigation.
+Updating the URL early allows you to handle a failure of navigation by
+showing an error message with the URL that failed.</p></div></div></div></div><div id="resolveNavigationPromiseOnError" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>resolveNavigationPromiseOnError</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>When <code>true</code>, the <code>Promise</code> will instead resolve with <code>false</code>, as it does with other failed
+navigations (for example, when guards are rejected).</p>
+<p>Otherwise the <code>Promise</code> returned by the Router&#39;s navigation with be rejected
+if an error occurs.</p></div></div></div></div></div></div></div>

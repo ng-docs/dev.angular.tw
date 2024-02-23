@@ -1,0 +1,60 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1"><code>HttpClient</code> 安全性</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/http/security.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p><code>HttpClient</code> 內建支援兩種常見的 HTTP 安全機制：XSSI 保護和 XSRF/CSRF 保護。</p>
+<p>提示：同時考慮為您的 API 採用 <a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Headers/Content-Security-Policy" target="_blank">內容安全性政策</a>。</p>
+
+  <h2 id="xssi-">XSSI 防護</h2>
+  <a href="#xssi-" class="docs-anchor" tabindex="-1" aria-label="Link to XSSI 防護"></a>
+  <p>跨網站腳本包含 (XSSI) 是 <a href="https://zh.wikipedia.org/wiki/%E8%B7%A8%E7%BD%91%E7%AB%99%E8%85%BE%E6%96%87" target="_blank">跨網站腳本</a> 攻擊的一種形式，攻擊者會在他們控制的頁面上，將 JSON 資料從您的 API 端點載入為 <code>&lt;script&gt;</code>。然後可以使用不同的 JavaScript 技術來存取這些資料。</p>
+<p>防止 XSSI 的常見技巧是提供具有「不可執行字首」的 JSON 回應，通常為 <code>)]}&#39;,\n</code>。此字首可防止 JSON 回應被解釋為有效的可執行 JavaScript。當 API 作為資料載入時，可以在 JSON 解析前移除字首。</p>
+<p>當從回應中解析 JSON 時，<code>HttpClient</code> 會自動移除此 XSSI 前綴（如果存在）。</p>
+
+  <h2 id="xsrf-csrf-">XSRF/CSRF 保護</h2>
+  <a href="#xsrf-csrf-" class="docs-anchor" tabindex="-1" aria-label="Link to XSRF/CSRF 保護"></a>
+  <p><a href="https://zh.wikipedia.org/wiki/%E8%B7%A8%E7%B6%B2%E9%A0%81%E8%A8%82%E6%B1%82%E7%95%A5%E5%81%87%E9%80%A0%E6%93%8D" target="_blank">跨網站請求偽造 (XSRF 或 CSRF)</a> 是一種攻擊技術，攻擊者可以誘騙已驗證的用戶在您的網站上不知不覺執行操作。</p>
+<p><code>HttpClient</code> 支援一個<a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-header_token" target="_blank">通用機制</a>用來防止 XSRF 攻擊。在執行 HTTP 請求時，一個攔截器從 cookie 中讀取一個 token，預設是 <code>XSRF-TOKEN</code>，並將它設定為 HTTP 標頭 <code>X-XSRF-TOKEN</code>。因為只有在你的網域中執行的程式碼才能讀取 cookie，所以後端可以確定 HTTP 請求是來自你的用戶端應用程式，而不是攻擊者。</p>
+<p>預設情況下，攔截器會在所有變動請求 (例如 <code>POST</code>) 上發送此標頭至相對 URL，但不會在 GET/HEAD 請求或具有絕對 URL 的請求上發送此標頭。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3>為什麼不保護 GET 要求？</h3>
+      <p>CSRF 保護僅對能夠變更後端狀態的要求是必要的。依其性質，CSRF 攻擊跨越網域邊界，而網路的 <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank">同源政策</a> 會防止攻擊頁面擷取驗證過 GET 要求的結果。</p>
+
+    </div>
+    <p>要利用這個優勢，您的伺服器需要在頁面載入或第一次 GET 要求時，將令牌設定在 JavaScript 可讀取的會話 Cookie 中，稱為 <code>XSRF-TOKEN</code>。在後續要求中，伺服器可以驗證 Cookie 是否與 <code>X-XSRF-TOKEN</code> HTTP 標頭相符，因此可以確定只有在您的網域上執行的程式碼才能傳送要求。令牌必須對每個使用者是唯一的，而且必須能被伺服器驗證；這可防止用戶端建立自己的令牌。將令牌設定為您網站驗證 Cookie 的摘要，並加入鹽以增強安全性。</p>
+<p>為了防止在多個 Angular 應用程式共用相同網域或子網域的環境中發生衝突，請為每個應用程式提供一個獨特的 cookie 名稱。</p>
+
+    <div class="docs-callout docs-callout-important">
+      <h3>HttpClient 僅支援 XSRF 保護機制的用戶端部分</h3>
+      <p>您的後端服務必須配置為為您的網頁設定 cookie，並驗證標頭出現在所有符合資格的請求上。否則，Angular 的預設保護將無效。</p>
+
+    </div>
+    
+  <h3 id="-cookie-">設定自訂 cookie/標頭名稱</h3>
+  <a href="#-cookie-" class="docs-anchor" tabindex="-1" aria-label="Link to 設定自訂 cookie/標頭名稱"></a>
+  <p>如果您的後端服務對 XSRF 令牌 Cookie 或標頭使用不同的名稱，請使用 <code>withXsrfConfiguration</code> 來覆寫預設值。</p>
+<p>將其新增到 <code>provideHttpClient</code> 呼叫，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideHttpClient</span>(</div><div class="hljs-ln-line">      <span class="hljs-title function_">withXsrfConfiguration</span>({</div><div class="hljs-ln-line">        <span class="hljs-attr">cookieName</span>: <span class="hljs-string">'CUSTOM_XSRF_TOKEN'</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">headerName</span>: <span class="hljs-string">'X-Custom-Xsrf-Header'</span>,</div><div class="hljs-ln-line">      }),</div><div class="hljs-ln-line">    ),</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div>
+  <h3 id="-xsrf-">停用 XSRF 保護</h3>
+  <a href="#-xsrf-" class="docs-anchor" tabindex="-1" aria-label="Link to 停用 XSRF 保護"></a>
+  <p>若內建的 XSRF 保護機制不適用於您的應用程式，您可以使用 <code>withNoXsrfProtection</code> 功能停用它：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideHttpClient</span>(</div><div class="hljs-ln-line">      <span class="hljs-title function_">withNoXsrfProtection</span>(),</div><div class="hljs-ln-line">    ),</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div>

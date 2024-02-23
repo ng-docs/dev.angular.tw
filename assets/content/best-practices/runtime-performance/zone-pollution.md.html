@@ -1,0 +1,72 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">解決區域汙染</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/best-practices/runtime-performance/zone-pollution.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p><strong>Zone.js</strong> 是一種信號機制，Angular 用來偵測應用程式狀態可能已變更的時間。它擷取非同步操作，例如 <code>setTimeout</code>、網路要求和事件監聽器。Angular 根據 Zone.js 的信號排程變更偵測。</p>
+<p>在某些情況下，排定的 <a href="https://developer.mozilla.org/zh-TW/docs/Web/API/HTML_DOM_API/Microtask_guide#tasks" target="_blank">任務</a> 或 <a href="https://developer.mozilla.org/zh-TW/docs/Web/API/HTML_DOM_API/Microtask_guide#microtasks" target="_blank">微任務</a> 根本不會在資料模型中進行任何變更，這使得執行變更偵測變得沒有必要。常見的範例包括：</p>
+
+  <ul class="docs-list">
+    <li><code>requestAnimationFrame</code>, <code>setTimeout</code> 或 <code>setInterval</code></li>
+<li>透過第三方程式庫排程的工作或微工作</li>
+
+  </ul>
+  <p>本節說明如何識別此類條件，以及如何在 Angular 區域外執行程式碼以避免不必要的變更偵測呼叫。</p>
+
+  <h2 id="">識別不必要的變更偵測呼叫</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 識別不必要的變更偵測呼叫"></a>
+  <p>html</p>
+<p>
+  如果變更偵測呼叫不必要，則可以透過以下方式進行優化：
+</p>
+<ul>
+  <li>使用 ChangeDetectorRef.detach() 函式來分離檢測器。</li>
+  <li>使用 ChangeDetectorRef.detectChanges() 函式手動觸發變更偵測。</li>
+  <li>使用 ChangeDetectorRef.markForCheck() 函式標記檢測器以便在下次變更偵測週期中進行檢查。</li>
+</ul>
+
+<p>您可以使用 Angular DevTools 偵測不必要的變更偵測呼叫。它們通常在 Profiler 的時間軸中以連續的長條出現，來源為 <code>setTimeout</code>、<code>setInterval</code>、<code>requestAnimationFrame</code> 或事件處理常式。當您的應用程式中對這些 API 的呼叫有限時，變更偵測呼叫通常是由第三方程式庫造成的。</p>
+<img alt="Angular DevTools profiler preview showing Zone pollution" src="https://angular.dev/assets/images/best-practices/runtime-performance/zone-pollution.png">
+
+<p>在上面的圖片中，有一系列變更偵測呼叫是由與元素關聯的事件處理常式觸發的。這是使用第三方、非原生 Angular 元件時常見的挑戰，這些元件不會變更 <code>NgZone</code> 的預設行為。</p>
+
+  <h2 id="-ngzone-">在 <code>NgZone</code> 外執行任務</h2>
+  <a href="#-ngzone-" class="docs-anchor" tabindex="-1" aria-label="Link to 在 <code>NgZone</code> 外執行任務"></a>
+  <p>html
+&lt;button (click)=&quot;runTaskOutsideNgZone()&quot;&gt;Run task outside NgZone</button></p>
+<p>typescript
+import { Component } from &#39;@angular/core&#39;;</p>
+<p>@Component({
+  selector: &#39;my-app&#39;,
+  template: <code>&lt;button (click)=&quot;runTaskOutsideNgZone()&quot;&gt;Run task outside NgZone&lt;/button&gt;</code>
+})
+export class AppComponent {
+  runTaskOutsideNgZone() {
+    // Run a task outside the Angular zone.
+    setTimeout(() =&gt; {
+      console.log(&#39;Task completed outside the Angular zone.&#39;);
+    }, 1000);
+  }
+}</p>
+<p>在這種情況下，你可以指示 Angular 使用 <a href="/api/core/NgZone">NgZone</a> 避免為由給定程式碼片段排定的任務呼叫變更偵測。</p>
+<div class="docs-code" header="Run outside of the Zone">
+    <div class="docs-code-header"><h3>Run outside of the Zone</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><span role="presentation" class="hljs-ln-number">1</span><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">NgZone</span>, <span class="hljs-title class_">OnInit</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><span role="presentation" class="hljs-ln-number">2</span><div class="hljs-ln-line"></div><span role="presentation" class="hljs-ln-number">3</span><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>(...)</div><span role="presentation" class="hljs-ln-number">4</span><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OnInit</span> {</div><span role="presentation" class="hljs-ln-number">5</span><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> ngZone: NgZone</span>) {}</div><span role="presentation" class="hljs-ln-number">6</span><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><span role="presentation" class="hljs-ln-number">7</span><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">ngZone</span>.<span class="hljs-title function_">runOutsideAngular</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">setInterval</span>(pollForUpdates), <span class="hljs-number">500</span>);</div><span role="presentation" class="hljs-ln-number">8</span><div class="hljs-ln-line">  }</div><span role="presentation" class="hljs-ln-number">9</span><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>上述程式碼片段指示 Angular 在 Angular Zone 外呼叫 <code>setInterval</code>，並在 <code>pollForUpdates</code> 執行後略過執行變更偵測。</p>
+<p>第三方程式庫通常會觸發不必要的變更偵測週期，因為它們並非以 Zone.js 為前提而編寫。透過在 Angular 區域外呼叫程式庫 API，可以避免這些額外的週期：</p>
+<div class="docs-code" header="Move the plot initialization outside of the Zone">
+    <div class="docs-code-header"><h3>Move the plot initialization outside of the Zone</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><span role="presentation" class="hljs-ln-number">1</span><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">NgZone</span>, <span class="hljs-title class_">OnInit</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><span role="presentation" class="hljs-ln-number">2</span><div class="hljs-ln-line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> <span class="hljs-title class_">Plotly</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'plotly.js-dist-min'</span>;</div><span role="presentation" class="hljs-ln-number">3</span><div class="hljs-ln-line"></div><span role="presentation" class="hljs-ln-number">4</span><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>(...)</div><span role="presentation" class="hljs-ln-number">5</span><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OnInit</span> {</div><span role="presentation" class="hljs-ln-number">6</span><div class="hljs-ln-line"></div><span role="presentation" class="hljs-ln-number">7</span><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> ngZone: NgZone</span>) {}</div><span role="presentation" class="hljs-ln-number">8</span><div class="hljs-ln-line"></div><span role="presentation" class="hljs-ln-number">9</span><div class="hljs-ln-line"><span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><span role="presentation" class="hljs-ln-number">10</span><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">ngZone</span>.<span class="hljs-title function_">runOutsideAngular</span>(<span class="hljs-function">() =&gt;</span> {</div><span role="presentation" class="hljs-ln-number">11</span><div class="hljs-ln-line">      <span class="hljs-title class_">Plotly</span>.<span class="hljs-title function_">newPlot</span>(<span class="hljs-string">'chart'</span>, data);</div><span role="presentation" class="hljs-ln-number">12</span><div class="hljs-ln-line">    });</div><span role="presentation" class="hljs-ln-number">13</span><div class="hljs-ln-line">  }</div><span role="presentation" class="hljs-ln-number">14</span><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>在 <code>runOutsideAngular</code> 內執行 <code>Plotly.newPlot(&#39;chart&#39;, data);</code> 指示框架不應在初始化邏輯預定的任務執行後執行變更偵測。</p>
+<p>例如，如果 <code>Plotly.newPlot(&#39;chart&#39;, data)</code> 將事件監聽器新增到 DOM 元素，則 Angular 在其處理程序執行後不會執行變更偵測。</p>

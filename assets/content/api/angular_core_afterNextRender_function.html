@@ -1,0 +1,51 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>afterNextRender</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div></div><p class="docs-reference-description"><p>Register a callback to be invoked the next time the application
+finishes rendering.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">afterNextRender</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">callback</span>: <span class="hljs-title class_">VoidFunction</span>,</div><div class="hljs-ln-line ">  options?: <span class="hljs-title class_">AfterRenderOptions</span></div><div class="hljs-ln-line ">): <span class="hljs-title class_">AfterRenderRef</span>;</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>Register a callback to be invoked the next time the application
+finishes rendering.</p>
+<div class="alert is-critical">
+
+<p>You should always explicitly specify a non-default <a href="api/core/AfterRenderPhase">phase</a>, or you
+risk significant performance degradation.</p>
+</div>
+
+<p>Note that the callback will run</p>
+
+    <ul class="docs-list">
+      <li>in the order it was registered</li>
+<li>on browser platforms only</li>
+
+    </ul>
+    <div class="alert is-important">
+
+<p>Components are not guaranteed to be <a href="guide/hydration">hydrated</a> before the callback runs.
+You must use caution when directly reading or writing the DOM and layout.</p>
+</div></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>Use <code>afterNextRender</code> to read or write the DOM once,
+for example to initialize a non-Angular library.</p>
+<h3>Example</h3>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">&#x27;my-chart-cmp&#x27;</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div #chart&gt;{{ ... }}&lt;/div&gt;`</span>,</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyChartCmp</span> {</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>afterNextRender</h3><div><code>AfterRenderRef</code></div></div><span></span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Register a callback to be invoked the next time the application
+finishes rendering.</p>
+<div class="alert is-critical">
+
+<p>You should always explicitly specify a non-default <a href="api/core/AfterRenderPhase">phase</a>, or you
+risk significant performance degradation.</p>
+</div>
+
+<p>Note that the callback will run</p>
+
+    <ul class="docs-list">
+      <li>in the order it was registered</li>
+<li>on browser platforms only</li>
+
+    </ul>
+    <div class="alert is-important">
+
+<p>Components are not guaranteed to be <a href="guide/hydration">hydrated</a> before the callback runs.
+You must use caution when directly reading or writing the DOM and layout.</p>
+</div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">callback</span><code>VoidFunction</code><div class="docs-parameter-description"><p>A callback function to register</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">options</span><code>AfterRenderOptions</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>AfterRenderRef</code></div></div></div></div></div></div></div>

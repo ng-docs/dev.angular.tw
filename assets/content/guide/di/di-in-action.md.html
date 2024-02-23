@@ -1,0 +1,75 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">DI 在行動</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/di/di-in-action.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>本指南探討 Angular 中相依性注入的其他功能。</p>
+
+  <h2 id="-inject-">使用 <code>@Inject</code> 的自訂供應商`</h2>
+  <a href="#-inject-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 <code>@Inject</code> 的自訂供應商`"></a>
+  <p>使用自訂提供者可讓您提供隱含依賴項的具體實作，例如內建瀏覽器 API。
+以下範例使用 <code>InjectionToken</code> 提供 <a href="https://developer.mozilla.org/docs/Web/API/Window/localStorage" target="_blank">localStorage</a> 瀏覽器 API 作為 <code>BrowserStorageService</code> 中的依賴項。</p>
+<div class="docs-code" header="src/app/storage.service.ts">
+    <div class="docs-code-header"><h3>src/app/storage.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Inject</span>, <span class="hljs-title class_">Injectable</span>, <span class="hljs-title class_">InjectionToken</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">BROWSER_STORAGE</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">InjectionToken</span>&lt;<span class="hljs-title class_">Storage</span>&gt;(<span class="hljs-string">'Browser Storage'</span>, {</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">factory</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">localStorage</span></div><div class="hljs-ln-line highlighted">});</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BrowserStorageService</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Inject</span>(BROWSER_STORAGE) <span class="hljs-keyword">public</span> storage: Storage</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">get</span>(<span class="hljs-params">key: <span class="hljs-built_in">string</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">storage</span>.<span class="hljs-title function_">getItem</span>(key);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">set</span>(<span class="hljs-params">key: <span class="hljs-built_in">string</span>, value: <span class="hljs-built_in">string</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">storage</span>.<span class="hljs-title function_">setItem</span>(key, value);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><code>factory</code> 函式傳回附加到瀏覽器視窗物件的 <code>localStorage</code> 屬性。
+<code>Inject</code> 裝飾器是建構函式參數，用於指定依賴關係的客製化提供者。</p>
+<p>這個自訂提供者現在可在測試期間被模擬 <code>localStorage</code> API 覆寫，而不會與實際瀏覽器 API 互動。</p>
+
+  <h2 id="-dom-">注入元件的 DOM 元素</h2>
+  <a href="#-dom-" class="docs-anchor" tabindex="-1" aria-label="Link to 注入元件的 DOM 元素"></a>
+  <p>儘管開發人員努力避免，有些視覺效果和第三方工具需要直接存取 DOM。
+因此，您可能需要存取元件的 DOM 元素。</p>
+<p>Angular 透過使用 <code>ElementRef</code> 注入程式碼，在注入時公開 <code>@Component</code> 或 <code>@Directive</code> 的底層元素。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Directive</span>, <span class="hljs-title class_">ElementRef</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'[appHighlight]'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HighlightDirective</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> element: ElementRef</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">update</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">element</span>.<span class="hljs-property">nativeElement</span>.<span class="hljs-property">style</span>.<span class="hljs-property">color</span> = <span class="hljs-string">'red'</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">使用前向參考解決循環依賴</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 使用前向參考解決循環依賴"></a>
+  <p>html</p>
+<!-- Import the `module` that has the circular dependency. -->
+<script src="module.js"></script>
+
+<!-- Define the `main` module, which has a circular dependency on the `module` module. -->
+<script>
+  const main = (function () {
+    // Use the `module` module.
+    const moduleValue = module.getValue();
+
+    // Return the `main` module.
+    return {
+      getValue: function () {
+        return moduleValue;
+      },
+    };
+  })();
+</script>
+
+<p>在 TypeScript 中，類別宣告的順序很重要。
+在類別定義之前，您無法直接參考它。</p>
+<p>這通常不是一個問題，尤其是當你遵守建議的「每檔案一個類別」規則時。
+但有時循環引用是不可避免的。
+例如，當類別「A」引用類別「B」，而「B」引用「A」時。
+其中之一必須先定義。</p>
+<p>Angular <code>forwardRef()</code> 函式建立一個 <em>間接</em> 參考，讓 Angular 能在稍後解析。</p>
+<p>當一個類別對 <em>它自己進行參照</em> 時，你會面臨類似的問題。
+例如在它的 <code>providers</code> 陣列中。
+<code>providers</code> 陣列是 <code>@Component()</code> 裝飾器函式的一個屬性，它必須出現在類別定義之前。
+你可以使用 <code>forwardRef</code> 來中斷這種循環參照。</p>
+<div class="docs-code" header="app.component.ts">
+    <div class="docs-code-header"><h3>app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">PARENT_MENU_ITEM</span>,</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">useExisting</span>: <span class="hljs-title function_">forwardRef</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">MenuItem</span>),</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div>

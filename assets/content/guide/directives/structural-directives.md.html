@@ -1,0 +1,278 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">結構型指令</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/directives/structural-directives.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>結構型指令是套用於 <code>&lt;ng-template&gt;</code> 元素的指令，有條件或重複地呈現該 <code>&lt;ng-template&gt;</code> 的內容。</p>
+
+  <h2 id="">範例使用案例</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 範例使用案例"></a>
+  <p>在本指南中，您將建立一個結構型指令，它會從給定的資料來源擷取資料，並在資料可用時呈現其範本。這個指令稱為 <code>SelectDirective</code>，以 SQL 關鍵字 <code>SELECT</code> 命名，並與屬性選擇器 <code>[select]</code> 匹配。</p>
+<p><code>SelectDirective</code> 將會有一個輸入，命名為要使用的資料來源，您會稱之為 <code>selectFrom</code>。此輸入的 <code>select</code> 前綴對於 <a href="#structural-directive-shorthand">簡寫語法</a> 來說很重要。指令會以提供所選資料的範本內容，實例化其 <code>&lt;ng-template&gt;</code>。</p>
+<p>以下是一個範例，說明如何直接在 <code>&lt;ng-template&gt;</code> 上使用此指令：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-template</span> <span class="hljs-attr">select</span> <span class="hljs-attr">let-data</span> [<span class="hljs-attr">selectFrom</span>]=<span class="hljs-string">"source"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The data is: {{ data }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">ng-template</span>&gt;</span></div></code>
+    </pre>
+  </div><p>結構型指令可以等待數據可用，然後呈現其 <code>&lt;ng-template&gt;</code>。</p>
+<p>HELPFUL：請注意 Angular 的 <code>&lt;ng-template&gt;</code> 元素定義了一個預設不呈現任何內容的範本，如果你只是將元素包在 <code>&lt;ng-template&gt;</code> 中而沒有套用結構型指令，這些元素將不會被呈現。</p>
+<p>如需更多資訊，請參閱 <a href="api/core/ng-template">ng-template API</a> 文件。</p>
+
+  <h2 id="">結構型指令簡寫</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 結構型指令簡寫"></a>
+  <p>Angular 支援結構型指令的簡寫語法，避免需要明確地撰寫 <code>&lt;ng-template&gt;</code> 元素。</p>
+<p>結構型指令可直接套用在元素上，方法是使用星號 (<code>*</code>) 作為指令屬性選取器的字首，例如 <code>*select</code>。Angular 會將結構型指令前面的星號轉換成一個 <code>&lt;ng-template&gt;</code>，作為指令的宿主，並包圍元素及其子代。</p>
+<p>你可以使用這個與 <code>SelectDirective</code> 如下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> *<span class="hljs-attr">select</span>=<span class="hljs-string">"let data from source"</span>&gt;</span>The data is: {{data}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
+    </pre>
+  </div><p>以下範例顯示結構型指令簡寫語法的彈性，這有時稱為「微語法」。</p>
+<p>當以這種方式使用時，只有結構型指令及其繫結套用於 <code>&lt;ng-template&gt;</code>。<code>&lt;p&gt;</code> 標籤上的任何其他屬性或繫結都會保留。例如，這兩種形式是等效的：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Shorthand syntax: --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"data-view"</span> *<span class="hljs-attr">select</span>=<span class="hljs-string">"let data from source"</span>&gt;</span>The data is: {{data}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Long-form syntax: --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-template</span> <span class="hljs-attr">select</span> <span class="hljs-attr">let-data</span> [<span class="hljs-attr">selectFrom</span>]=<span class="hljs-string">"source"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"data-view"</span>&gt;</span>The data is: {{data}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">ng-template</span>&gt;</span></div></code>
+    </pre>
+  </div><p>簡寫語法是透過一組慣例來擴充的。更詳盡的<a href="#structural-directive-syntax-reference">語法</a>定義如下，但在上述範例中，此轉換可以說明如下：</p>
+<p><code>*select</code> 運算式的第一部分是 <code>let data</code>，它宣告一個範本變數 <code>data</code>。由於沒有後續的指定，因此範本變數繫結到範本內容屬性 <code>$implicit</code>。</p>
+<p>第二個語法是關鍵字-表達式配對，<code>from source</code>。<code>from</code> 是繫結關鍵字，<code>source</code> 是常規範本表達式。繫結關鍵字會透過轉換成 PascalCase 以及在最前面加上結構型指令選擇器來對應至屬性。<code>from</code> 關鍵字會對應至 <code>selectFrom</code>，然後繫結至表達式 <code>source</code>。這就是為什麼許多結構型指令會擁有所有以結構型指令選擇器為前綴的輸入。</p>
+
+  <h2 id="">每個元素只有一個結構型指令</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 每個元素只有一個結構型指令"></a>
+  <p>使用簡寫語法時，您只能對每個元素套用一個結構型指令。這是因為只有一個 <code>&lt;ng-template&gt;</code> 元素，該指令會在該元素上展開。多個指令需要多個巢狀 <code>&lt;ng-template&gt;</code>，而應該先使用哪個指令並不清楚。當需要在同一個實體 DOM 元素或元件周圍套用多個結構型指令時，可以使用 <code>&lt;ng-container&gt;</code> 來建立包裝層，這允許使用者定義巢狀結構。</p>
+
+  <h2 id="">建立結構型指令</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 建立結構型指令"></a>
+  <p>以下章節將引導您建立 <code>SelectDirective</code>。</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">產生指令</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 產生指令"></a>
+  
+      <p>使用 Angular CLI，執行以下指令，其中 <code>select</code> 是指令的名稱：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate directive select</div></code>
+    </pre>
+  </div><p>Angular 建立指令類別，並指定 CSS 選擇器 <code>[select]</code>，以在範本中識別指令。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">使指令具有結構</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 使指令具有結構"></a>
+  
+      <p>匯入 <code>TemplateRef</code> 和 <code>ViewContainerRef</code>。在指令建構函式中注入 <code>TemplateRef</code> 和 <code>ViewContainerRef</code> 作為私人變數。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Directive</span>, <span class="hljs-title class_">TemplateRef</span>, <span class="hljs-title class_">ViewContainerRef</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'select'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SelectDirective</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> templateRef: TemplateRef, <span class="hljs-keyword">private</span> ViewContainerRef: ViewContainerRef</span>) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-selectfrom-">新增 'selectFrom' 輸入內容</h3>
+  <a href="#-selectfrom-" class="docs-anchor" tabindex="-1" aria-label="Link to 新增 'selectFrom' 輸入內容"></a>
+  
+      <p>新增一個 <code>selectFrom</code> <code>@Input()</code> 屬性。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SelectDirective</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>}) selectFrom!: <span class="hljs-title class_">DataSource</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">加入商業邏輯</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 加入商業邏輯"></a>
+  
+      <p>使用 <code>SelectDirective</code> 現在可作為結構型指令與輸入進行架構，您現在可加入邏輯以擷取資料並使用它來呈現範本：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SelectDirective</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">async</span> <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">selectFrom</span>.<span class="hljs-title function_">load</span>();</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">viewContainerRef</span>.<span class="hljs-title function_">createEmbeddedView</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">templateRef</span>, {</div><div class="hljs-ln-line">      <span class="hljs-comment">// Create the embedded view with a context object that contains</span></div><div class="hljs-ln-line">      <span class="hljs-comment">// the data via the key `$implicit`.</span></div><div class="hljs-ln-line">      <span class="hljs-attr">$implicit</span>: data,</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p>完成了 - <code>SelectDirective</code> 已經啟動並執行。後續步驟可能是 <a href="#為指令內容鍵入">新增範本類型檢查支援</a>。</p>
+
+  <h2 id="">結構型指令語法參考</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 結構型指令語法參考"></a>
+  <p>當您撰寫自己的結構型指令時，請使用下列語法：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">*:prefix=<span class="hljs-string">"( :let | :expression ) (';' | ',')? ( :let | :as | :keyExp )*"</span></div></code>
+    </pre>
+  </div><p>以下模式描述結構化指令語法的每個部分：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">as</span> = :<span class="hljs-keyword">export</span> <span class="hljs-string">"as"</span> :local <span class="hljs-string">";"</span>?</div><div class="hljs-ln-line">keyExp = :key <span class="hljs-string">":"</span>? :expression (<span class="hljs-string">"as"</span> :local)? <span class="hljs-string">";"</span>?</div><div class="hljs-ln-line"><span class="hljs-keyword">let</span> = <span class="hljs-string">"let"</span> :local <span class="hljs-string">"="</span> :<span class="hljs-keyword">export</span> <span class="hljs-string">";"</span>?</div></code>
+    </pre>
+  </div>
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">關鍵字</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>prefix</code></td>
+<td align="left">HTML 屬性鍵</td>
+</tr>
+<tr>
+<td align="left"><code>key</code></td>
+<td align="left">HTML 屬性鍵</td>
+</tr>
+<tr>
+<td align="left"><code>local</code></td>
+<td align="left">範本中使用的區域變數名稱</td>
+</tr>
+<tr>
+<td align="left"><code>export</code></td>
+<td align="left">指令在給定名稱下匯出的值</td>
+</tr>
+<tr>
+<td align="left"><code>expression</code></td>
+<td align="left">標準的 Angular 運算式</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="angular-">Angular 如何轉換簡寫</h3>
+  <a href="#angular-" class="docs-anchor" tabindex="-1" aria-label="Link to Angular 如何轉換簡寫"></a>
+  <p>Angular 將結構型指令簡寫轉換為正常的繫結語法，如下：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">簡寫</th>
+<th align="left">翻譯</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>prefix</code> 和裸 <code>expression</code></td>
+<td align="left"><code>[prefix]=&quot;expression&quot;</code></td>
+</tr>
+<tr>
+<td align="left"><code>keyExp</code></td>
+<td align="left"><code>[prefixKey]=&quot;expression&quot;</code> (<code>prefix</code> 加到 <code>key</code> 上)</td>
+</tr>
+<tr>
+<td align="left"><code>let local</code></td>
+<td align="left"><code>let-local=&quot;export&quot;</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="">簡寫範例</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 簡寫範例"></a>
+  <p>以下表格提供速記範例：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">簡寫</th>
+<th align="left">Angular 如何解釋語法</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>*ngFor=&quot;let item of [1,2,3]&quot;</code></td>
+<td align="left"><code>&lt;ng-template ngFor let-item [ngForOf]=&quot;[1, 2, 3]&quot;&gt;</code></td>
+</tr>
+<tr>
+<td align="left"><code>*ngFor=&quot;let item of [1,2,3] as items; trackBy: myTrack; index as i&quot;</code></td>
+<td align="left"><code>&lt;ng-template ngFor let-item [ngForOf]=&quot;[1,2,3]&quot; let-items=&quot;ngForOf&quot; [ngForTrackBy]=&quot;myTrack&quot; let-i=&quot;index&quot;&gt;</code></td>
+</tr>
+<tr>
+<td align="left"><code>*ngIf=&quot;exp&quot;</code></td>
+<td align="left"><code>&lt;ng-template [ngIf]=&quot;exp&quot;&gt;</code></td>
+</tr>
+<tr>
+<td align="left"><code>*ngIf=&quot;exp as value&quot;</code></td>
+<td align="left"><code>&lt;ng-template [ngIf]=&quot;exp&quot; let-value=&quot;ngIf&quot;&gt;</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">改進自訂指令的範本類型檢查</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 改進自訂指令的範本類型檢查"></a>
+  <p>您可以透過在指令定義中加入範本防護，來改善自訂指令的範本類型檢查。
+這些防護有助於 Angular 範本類型檢查器在編譯時找到範本中的錯誤，可避免執行階段錯誤。
+有兩種不同的防護類型：</p>
+
+  <ul class="docs-list">
+    <li><code>ngTemplateGuard_(input)</code> 可讓您控制如何基於特定輸入的類型來縮小輸入表達式。</li>
+<li><code>ngTemplateContextGuard</code> 用於根據指令本身的類型來決定範本的內容物件的類型。</li>
+
+  </ul>
+  <p>此區段提供兩種防護機制的範例。
+如需更多資訊，請參閱 <a href="tools/cli/template-typecheck" title=範本類型檢查指南>範本類型檢查</a>。</p>
+
+  <h3 id="">使用範本防護進行類型縮小</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 使用範本防護進行類型縮小"></a>
+  <p>範本中的結構型指令控制該範本是否在執行時期呈現。一些結構型指令想要根據輸入表達式的類型來執行類型縮小。</p>
+<p>輸入防護具中可能有兩種狹窄：</p>
+
+  <ul class="docs-list">
+    <li>根據 TypeScript 型別斷言函式縮小輸入表達式。</li>
+<li>根據其真假值縮小輸入表達式。</li>
+
+  </ul>
+  <p>要藉由定義類型斷言函式來縮小輸入表達式：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// This directive only renders its template if the actor is a user.</span></div><div class="hljs-ln-line"><span class="hljs-comment">// You want to assert that within the template, the type of the `actor`</span></div><div class="hljs-ln-line"><span class="hljs-comment">// expression is narrowed to `User`.</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>(...)</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ActorIsUser</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">actor</span>: <span class="hljs-title class_">User</span>|<span class="hljs-title class_">Robot</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">static</span> <span class="hljs-title function_">ngTemplateGuard_actor</span>(<span class="hljs-attr">dir</span>: <span class="hljs-title class_">ActorIsUser</span>, <span class="hljs-attr">expr</span>: <span class="hljs-title class_">User</span>|<span class="hljs-title class_">Robot</span>): expr is <span class="hljs-title class_">User</span> {</div><div class="hljs-ln-line">    <span class="hljs-comment">// The return statement is unnecessary in practice, but included to</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// prevent TypeScript errors.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>在範本內進行型別檢查時，會將 <code>ngTemplateGuard_actor</code> 斷言套用至輸入所繫結的表達式。</p>
+<p>某些指令僅在輸入為真時才呈現其範本。無法在類型斷言函式中捕捉到真值的完整語義，因此可以使用文字類型 <code>&#39;binding&#39;</code> 來向範本類型檢查器發出訊號，表示應該將繫結表達式本身用作防護：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>(...)</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomIf</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() condition!: <span class="hljs-built_in">any</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">static</span> <span class="hljs-attr">ngTemplateGuard_condition</span>: <span class="hljs-string">'binding'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>範本類型檢查器會像在範本中已宣告 <code>condition</code> 的繫結表達式為真一樣運作。</p>
+
+  <h3 id="">鍵入指令的內容</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 鍵入指令的內容"></a>
+  <p>如果結構型指令提供一個給實例化範本的內容，您可以透過提供靜態的 <code>ngTemplateContextGuard</code> 類型斷言函式，在範本內適當地輸入它。此函式可以使用指令的類型來推導內容的類型，這在指令的類型是泛型時非常有用。</p>
+<p>對於上面所描述的 <code>SelectDirective</code>，您可以實作一個 <code>ngTemplateContextGuard</code> 來正確指定資料類型，即使資料來源是泛型的。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// Declare an interface for the template context:</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">SelectTemplateContext</span>&lt;T&gt; {</div><div class="hljs-ln-line">  <span class="hljs-attr">$implicit</span>: T;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>(...)</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SelectDirective</span>&lt;T&gt; {</div><div class="hljs-ln-line">  <span class="hljs-comment">// The directive's generic type `T` will be inferred from the `DataSource` type</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// passed to the input.</span></div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>}) selectFrom!: <span class="hljs-title class_">DataSource</span>&lt;T&gt;;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// Narrow the type of the context using the generic type of the directive.</span></div><div class="hljs-ln-line">  <span class="hljs-keyword">static</span> ngTemplateContextGuard&lt;T&gt;(<span class="hljs-attr">dir</span>: <span class="hljs-title class_">SelectDirective</span>&lt;T&gt;, <span class="hljs-attr">ctx</span>: <span class="hljs-built_in">any</span>): ctx is <span class="hljs-title class_">SelectTemplateContext</span>&lt;T&gt; {</div><div class="hljs-ln-line">    <span class="hljs-comment">// As before the guard body is not used at runtime, and included only to avoid</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// TypeScript errors.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

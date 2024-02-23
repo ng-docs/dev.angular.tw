@@ -1,0 +1,140 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">使用根模組啟動應用程式</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/bootstrapping.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>NgModule 描述應用程式部分如何結合在一起。
+每個應用程式至少有一個 Angular 模組，即 <em>根</em> 模組，必須存在才能在啟動時引導應用程式。
+根據慣例和預設情況，此 NgModule 名稱為 <code>AppModule</code>。</p>
+<p>當您使用 <a href="/tools/cli">Angular CLI</a> <code>ng new</code> 命令來產生一個應用程式時，預設的 <code>AppModule</code> 看起來像以下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">BrowserModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">AppComponent</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">BrowserModule</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [],</div><div class="hljs-ln-line">  <span class="hljs-attr">bootstrap</span>: [<span class="hljs-title class_">AppComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> { }</div></code>
+    </pre>
+  </div><p><code>@NgModule</code> 裝飾器將 <code>AppModule</code> 標識為 <code>NgModule</code> 類別。
+<code>@NgModule</code> 採用一個元數據物件，告訴 Angular 如何編譯和啟動應用程式。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">元數據欄位</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>declarations</code></td>
+<td align="left">包括 <em>根</em> 應用程式元件。</td>
+</tr>
+<tr>
+<td align="left"><code>imports</code></td>
+<td align="left">匯入 <code>BrowserModule</code> 以啟用特定於瀏覽器的服務（例如 DOM 呈現、清理）</td>
+</tr>
+<tr>
+<td align="left"><code>providers</code></td>
+<td align="left">服務提供者。</td>
+</tr>
+<tr>
+<td align="left"><code>bootstrap</code></td>
+<td align="left">Angular 建立並插入到 <code>index.html</code> 主機網頁的 <em>根</em> 元件。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="declarations-"><code>declarations</code> 陣列</h2>
+  <a href="#declarations-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>declarations</code> 陣列"></a>
+  <p>該模組的 <code>declarations</code> 陣列告訴 Angular 哪些元件屬於該模組。
+當您建立更多元件時，將它們新增至 <code>declarations</code>。</p>
+<p><code>declarations</code> 陣列只接受可宣告項。
+可宣告項包括 <a href="/components">元件</a>、<a href="/directives">指令</a> 和 <a href="/guide/pipes">管道</a>。
+模組的所有可宣告項都必須在 <code>declarations</code> 陣列中。
+可宣告項必須只屬於一個模組。
+如果在多個模組中宣告同一個類別，編譯器會傳回錯誤。</p>
+<p>這些宣告的類別可以在模組中使用，但對其他模組中的元件是私有的，除非它們是由這個模組匯出且其他模組匯入這個模組。</p>
+<p>以下是一個宣告陣列內容的範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">declarations</span>: [</div><div class="hljs-ln-line">  <span class="hljs-title class_">YourComponent</span>,</div><div class="hljs-ln-line">  <span class="hljs-title class_">YourPipe</span>,</div><div class="hljs-ln-line">  <span class="hljs-title class_">YourDirective</span></div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div>
+  <h3 id="-ngmodule">使用指令和 <code>@NgModule</code></h3>
+  <a href="#-ngmodule" class="docs-anchor" tabindex="-1" aria-label="Link to 使用指令和 <code>@NgModule</code>"></a>
+  <p>使用 <code>declarations</code> 陣列來放指令。
+若要在模組中使用指令、元件或管道，您必須執行以下幾件事：</p>
+
+    <ol class="docs-ordered-list">
+      <li>從您編寫它的 TypeScript 檔案中匯出</li>
+<li>匯入至包含 <code>@NgModule</code> 類別的適當檔案中。</li>
+<li>在 <code>@NgModule</code> <code>declarations</code> 陣列中宣告它。</li>
+
+    </ol>
+    <p>以下三個步驟看起來像這樣。在建立指令的檔案中，將它匯出。
+以下範例顯示一個名為 <code>ItemDirective</code> 的空指令。</p>
+<div class="docs-code" header="src/app/item.directive.ts">
+    <div class="docs-code-header"><h3>src/app/item.directive.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Directive } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Directive({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'[appItem]'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ItemDirective</span> {</div><div class="hljs-ln-line">  <span class="hljs-regexp">//</span> your code here</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>這裡的重點是您必須匯出它，以便您可以在其他地方匯入它。
+接下來，將它匯入您的 <code>NgModule</code> 所在的文件。在此範例中，這是 <code>app.module.ts</code> 文件。</p>
+<div class="docs-code" header="src/app/app.module.ts">
+    <div class="docs-code-header"><h3>src/app/app.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { ItemDirective } <span class="hljs-keyword">from</span> <span class="hljs-string">'./item.directive'</span>;</div></code>
+    </pre>
+  </div><p>在同一個檔案中，將它加入 <code>@NgModule</code> 的 <code>declarations</code> 陣列：</p>
+<div class="docs-code" header="src/app/app.module.ts">
+    <div class="docs-code-header"><h3>src/app/app.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title">declarations:</span> [</div><div class="hljs-ln-line"><span class="hljs-built_in">    AppComponent,</span></div><div class="hljs-ln-line highlighted">    ItemDirective</div><div class="hljs-ln-line">  ],</div></code>
+    </pre>
+  </div><p>現在您可以在元件中使用 <code>ItemDirective</code>。
+此範例使用 <code>AppModule</code>，但您會對功能模組執行相同的步驟。
+有關指令的詳細資訊，請參閱 <a href="/guide/directives/attribute-directives">屬性指令</a> 和 <a href="/guide/directives/structural-directives">結構指令</a>。
+您也會對 <a href="/guide/pipes">管道</a> 和 <a href="/components">元件</a> 使用相同的技巧。</p>
+<p>記住，元件、指令和管道僅屬於一個模組。
+您只需在應用程式中宣告它們一次，因為您可以透過匯入必要的模組來共享它們。
+這可以節省您的時間，並有助於保持應用程式的精簡。</p>
+
+  <h2 id="imports-"><code>imports</code> 陣列</h2>
+  <a href="#imports-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>imports</code> 陣列"></a>
+  <p>模組在 <code>@NgModule</code> 元資料物件中接受 <code>imports</code> 陣列。
+它告訴 Angular 此特定模組需要正常運作的其他 NgModules。</p>
+<div class="docs-code" header="src/app/app.module.ts">
+    <div class="docs-code-header"><h3>src/app/app.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title">imports:</span> [</div><div class="hljs-ln-line"><span class="hljs-built_in">    BrowserModule,</span></div><div class="hljs-ln-line"><span class="hljs-built_in">    FormsModule,</span></div><div class="hljs-ln-line">    HttpClientModule</div><div class="hljs-ln-line">  ],</div></code>
+    </pre>
+  </div><p>這份模組清單是匯出元件、指令或管線的清單，此模組中的元件範本會參考這些清單。
+在這個案例中，元件是 <code>AppComponent</code>，它參考了 <code>BrowserModule</code>、<code>FormsModule</code> 或 <code>HttpClientModule</code> 中的元件、指令或管線。
+當被參照的類別在此模組中宣告，或該類別從其他模組匯入時，元件範本可以參考其他元件、指令或管線。</p>
+
+  <h2 id="providers-"><code>providers</code> 陣列</h2>
+  <a href="#providers-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>providers</code> 陣列"></a>
+  <p><code>providers</code> 陣列是您列出應用程式所需服務的地方。
+當您在此列出服務時，它們會在整個應用程式中可用。
+您可以在使用功能模組和延遲載入時設定它們的範圍。
+如需更多資訊，請參閱 <a href="/guide/ngmodules/providers">模組中的提供者</a>。</p>
+
+  <h2 id="bootstrap-"><code>bootstrap</code> 陣列</h2>
+  <a href="#bootstrap-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>bootstrap</code> 陣列"></a>
+  <p>應用程式透過啟動根 <code>AppModule</code> 來啟動。
+啟動程序會建立在 <code>bootstrap</code> 陣列中列出的元件，如果找到與元件的 <code>selector</code> 相符的元素，就會將每個元件插入瀏覽器 DOM 中。</p>
+<p>每個引導元件都是其元件樹的基礎。
+插入引導元件通常會觸發元件建立的連鎖反應，建立該樹。
+即使您可以在主機網頁上放置多個元件樹，但大多數應用程式只有一個元件樹，並引導單一根元件。</p>
+<p>根元件通常稱為 <code>AppComponent</code>，並位於根模組的 <code>bootstrap</code> 陣列中。</p>
+<p>在您想根據 API 回應引導元件的情況下，或您想在與元件選擇器不符的其他 DOM 節點中掛載 <code>AppComponent</code>，請參閱 <code>ApplicationRef.bootstrap()</code> 文件。</p>
+
+  <h2 id="-angular-">更多關於 Angular 模組</h2>
+  <a href="#-angular-" class="docs-anchor" tabindex="-1" aria-label="Link to 更多關於 Angular 模組"></a>
+  <p>參閱 <a href="guide/ngmodules/frequent">常用模組</a>以進一步了解您通常會在應用程式中看到的模組。</p>

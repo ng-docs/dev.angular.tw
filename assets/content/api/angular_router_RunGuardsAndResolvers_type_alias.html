@@ -1,0 +1,15 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>RunGuardsAndResolvers</h1><div class="docs-api-item-label" data-mode="full" data-type="type_alias">Type Alias</div></div></div><p class="docs-reference-description"><p>A policy for when to run guards and resolvers on a route.</p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/router/RouterunGuardsAndResolvers">RouterunGuardsAndResolvers</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">type</span> <span class="hljs-title class_">RunGuardsAndResolvers</span> = | <span class="hljs-string">&#x27;pathParamsChange&#x27;</span></div><div class="hljs-ln-line ">  | <span class="hljs-string">&#x27;pathParamsOrQueryParamsChange&#x27;</span></div><div class="hljs-ln-line ">  | <span class="hljs-string">&#x27;paramsChange&#x27;</span></div><div class="hljs-ln-line ">  | <span class="hljs-string">&#x27;paramsOrQueryParamsChange&#x27;</span></div><div class="hljs-ln-line ">  | <span class="hljs-string">&#x27;always&#x27;</span></div><div class="hljs-ln-line ">  | (<span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">from</span>: ActivatedRouteSnapshot, to: ActivatedRouteSnapshot</span>) =&gt;</span> <span class="hljs-built_in">boolean</span>)</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>A policy for when to run guards and resolvers on a route.</p>
+<p>Guards and/or resolvers will always run when a route is activated or deactivated. When a route is
+unchanged, the default behavior is the same as <code>paramsChange</code>.</p>
+<p><code>paramsChange</code> : Rerun the guards and resolvers when path or
+path param changes. This does not include query parameters. This option is the default.</p>
+
+    <ul class="docs-list">
+      <li><code>always</code> : Run on every execution.</li>
+<li><code>pathParamsChange</code> : Rerun guards and resolvers when the path params
+change. This does not compare matrix or query parameters.</li>
+<li><code>paramsOrQueryParamsChange</code> : Run when path, matrix, or query parameters change.</li>
+<li><code>pathParamsOrQueryParamsChange</code> : Rerun guards and resolvers when the path params
+change or query params have changed. This does not include matrix parameters.</li>
+
+    </ul></div></div></div>

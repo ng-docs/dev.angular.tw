@@ -1,0 +1,44 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>TrackByFunction</h1><div class="docs-api-item-label" data-mode="full" data-type="interface">interface</div></div></div><p class="docs-reference-description"><p>A function optionally passed into the <code>NgForOf</code> directive to customize how <code>NgForOf</code> uniquely
+identifies items in an iterable.</p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/common/NgForOf">`NgForOf#ngForTrackBy`</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">interface</span> <span class="hljs-title class_">TrackByFunction</span> {</div><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>A function optionally passed into the <code>NgForOf</code> directive to customize how <code>NgForOf</code> uniquely
+identifies items in an iterable.</p>
+<p><code>NgForOf</code> needs to uniquely identify items in the iterable to correctly perform DOM updates
+when items in the iterable are reordered, new items are added, or existing items are removed.</p>
+<p>In all of these scenarios it is usually desirable to only update the DOM elements associated
+with the items affected by the change. This behavior is important to:</p>
+
+    <ul class="docs-list">
+      <li>preserve any DOM-specific UI state (like cursor position, focus, text selection) when the
+iterable is modified</li>
+<li>enable animation of item addition, removal, and iterable reordering</li>
+<li>preserve the value of the <code>&lt;select&gt;</code> element when nested <code>&lt;option&gt;</code> elements are dynamically
+populated using <code>NgForOf</code> and the bound iterable is updated</li>
+
+    </ul>
+    <p>A common use for custom <code>trackBy</code> functions is when the model that <code>NgForOf</code> iterates over
+contains a property with a unique identifier. For example, given a model:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> {</span><span class="hljs-ln-line">  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;</span><span class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;</span><span class="hljs-ln-line">  ...</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p>a custom <code>trackBy</code> function could look like the following:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">userTrackBy</span>(<span class="hljs-params">index, user</span>) {</span><span class="hljs-ln-line">  <span class="hljs-keyword">return</span> user.<span class="hljs-property">id</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p>A custom <code>trackBy</code> function must have several properties:</p>
+
+    <ul class="docs-list">
+      <li>be <a href="https://en.wikipedia.org/wiki/Idempotence">idempotent</a> (be without side effects, and always
+return the same value for a given input)</li>
+<li>return unique value for all unique inputs</li>
+<li>be fast</li>
+
+    </ul></div></div></div>

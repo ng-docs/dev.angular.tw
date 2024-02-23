@@ -1,0 +1,140 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">使用查詢參照元件子項</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/queries.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>提示：本指南假設您已經閱讀過 <a href="essentials">精華指南</a>。如果您是 Angular 新手，請先閱讀該指南。</p>
+<p>元件可以定義<strong>查詢</strong>，以查找子元素並從其注入器中讀取值。</p>
+<p>開發人員最常使用查詢來擷取子元件、指令、DOM 元素等之參考。</p>
+<p>查詢分為兩類：<strong>檢視查詢</strong>和<strong>內容查詢。</strong></p>
+
+  <h2 id="">檢視查詢</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 檢視查詢"></a>
+  <p>檢視查詢會從元件的 <em>檢視</em> 中的元素擷取結果，也就是在元件本身的範本中定義的元素。您可以使用 <code>@ViewChild</code> 裝飾器查詢單一結果。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-card-header'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCardHeader</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-card'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;custom-card-header&gt;Visit sunny California!&lt;/custom-card-header&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCard</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@ViewChild</span>(<span class="hljs-title class_">CustomCardHeader</span>) <span class="hljs-attr">header</span>: <span class="hljs-title class_">CustomCardHeader</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-title function_">ngAfterViewInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">header</span>.<span class="hljs-property">text</span>);</div><div class="hljs-ln-line highlighted">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>在此範例中，<code>CustomCard</code> 元件查詢子 <code>CustomCardHeader</code> 並在 <code>ngAfterViewInit</code> 中存取結果。</p>
+<p>如果查詢沒有找到結果，其值為 <code>undefined</code>。如果目標元素被 <code>NgIf</code> 隱藏，可能會發生這種情況。Angular 會在應用程式狀態變更時保持 <code>@ViewChild</code> 的結果為最新狀態。</p>
+<p>**在 <code>ngAfterViewInit</code> 生命周期方法中，檢視查詢結果可供使用。**在此之前，值為 <code>undefined</code>。有關元件生命週期的詳細資訊，請參閱 <a href="guide/components/lifecycle">生命週期</a> 部分。</p>
+<p>你可以使用 <code>@ViewChildren</code> 裝飾器查詢多個結果。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-card-action'</span>,</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCardAction</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-card'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;custom-card-action&gt;Save&lt;/custom-card-action&gt;</div><div class="hljs-ln-line">    &lt;custom-card-action&gt;Cancel&lt;/custom-card-action&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCard</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@ViewChildren</span>(<span class="hljs-title class_">CustomCardAction</span>) <span class="hljs-attr">actions</span>: <span class="hljs-title class_">QueryList</span>&lt;<span class="hljs-title class_">CustomCardAction</span>&gt;;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-title function_">ngAfterViewInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">actions</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">action</span> =&gt;</span> {</div><div class="hljs-ln-line highlighted">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(action.<span class="hljs-property">text</span>);</div><div class="hljs-ln-line highlighted">    });</div><div class="hljs-ln-line highlighted">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><code>@ViewChildren</code> 建立一個包含查詢結果的 <code>QueryList</code> 物件。您可以透過 <code>changes</code> 屬性訂閱查詢結果的變更。</p>
+<p>**查詢絕不會穿透元件邊界。**檢視查詢只能從元件範本中擷取結果。</p>
+
+  <h2 id="">內容查詢</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 內容查詢"></a>
+  <p>html</p>
+<p>
+  <b>Content queries</b> allow you to select elements based on their
+  content. This can be useful for selecting elements that contain a
+  certain word or phrase, or elements that match a certain regular
+  expression.
+</p>
+<p>
+  To use a content query, you simply add a colon (:) to the beginning of
+  the selector, followed by the content you want to match. For example,
+  the following selector will select all elements that contain the word
+  "foo":
+</p>
+
+<p>內容查詢會從元件的 <em>content</em> 中擷取結果，也就是在模板中使用元件時，元件內部巢狀的元素。你可以使用 <code>@ContentChild</code> 裝飾器來查詢單一結果。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-toggle'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomToggle</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-expando'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomExpando</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@ContentChild</span>(<span class="hljs-title class_">CustomToggle</span>) <span class="hljs-attr">toggle</span>: <span class="hljs-title class_">CustomToggle</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-title function_">ngAfterContentInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">toggle</span>.<span class="hljs-property">text</span>);</div><div class="hljs-ln-line highlighted">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'user-profile'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;custom-expando&gt;</div><div class="hljs-ln-line highlighted">      &lt;custom-toggle&gt;Show&lt;/custom-toggle&gt;</div><div class="hljs-ln-line">    &lt;/custom-expando&gt;</div><div class="hljs-ln-line">  `</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p>在此範例中，<code>CustomExpando</code> 元件查詢子 <code>CustomToggle</code>，並在 <code>ngAfterContentInit</code> 中存取結果。</p>
+<p>如果查詢沒有找到結果，其值是 <code>undefined</code>。如果目標元素不存在或被 <code>NgIf</code> 隱藏，可能會發生這種情況。隨著應用程式狀態的改變，Angular 會保持 <code>@ContentChild</code> 的結果為最新。</p>
+<p>預設情況下，內容查詢只會尋找元件的_直接_子項，而不會深入後代。</p>
+<p><strong>內容查詢結果在 <code>ngAfterContentInit</code> 生命週期方法中可供使用</strong>。在此之前，該值為 <code>undefined</code>。有關元件生命週期的詳細資訊，請參閱 <a href="guide/components/lifecycle">生命週期</a> 部分。</p>
+<p>你也可以使用 <code>@ContentChildren</code> 裝飾器查詢多個結果。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-menu-item'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomMenuItem</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-menu'</span>,</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomMenu</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@ContentChildren</span>(<span class="hljs-title class_">CustomMenuItem</span>) <span class="hljs-attr">items</span>: <span class="hljs-title class_">QueryList</span>&lt;<span class="hljs-title class_">CustomMenuItem</span>&gt;;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-title function_">ngAfterContentInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">items</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> {</div><div class="hljs-ln-line highlighted">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(item.<span class="hljs-property">text</span>);</div><div class="hljs-ln-line highlighted">    });</div><div class="hljs-ln-line highlighted">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'user-profile'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;custom-menu&gt;</div><div class="hljs-ln-line">      &lt;custom-menu-item&gt;Cheese&lt;/custom-menu-item&gt;</div><div class="hljs-ln-line">      &lt;custom-menu-item&gt;Tomato&lt;/custom-menu-item&gt;</div><div class="hljs-ln-line">    &lt;/custom-menu&gt;</div><div class="hljs-ln-line">  `</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p><code>@ContentChildren</code> 建立一個包含查詢結果的 <code>QueryList</code> 物件。您可以透過 <code>changes</code> 屬性訂閱查詢結果的變更。</p>
+<p>**查詢絕不會透過元件邊界。**內容查詢只能從與元件相同的範本中擷取結果。</p>
+
+  <h2 id="">查詢定位器</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 查詢定位器"></a>
+  <p>每個查詢裝飾器的第一個參數是其 <strong>定位器</strong>。</p>
+<p>大多數時間，您會想使用元件或指令作為您的定位器。</p>
+<p>您也可以指定一個字串定位器，對應至
+<a href="guide/templates/reference-variables">範本參考變數</a>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;button #save&gt;Save&lt;/button&gt;</div><div class="hljs-ln-line">    &lt;button #cancel&gt;Cancel&lt;/button&gt;</div><div class="hljs-ln-line">  `</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ActionBar</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'save'</span>) <span class="hljs-attr">saveButton</span>: <span class="hljs-title class_">ElementRef</span>&lt;<span class="hljs-title class_">HTMLButtonElement</span>&gt;;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>如果有多個元素定義相同的範本參考變數，查詢會擷取第一個符合的元素。</p>
+<p>Angular 不支援 CSS 選擇器作為查詢定位器。</p>
+
+  <h3 id="">查詢和注入器樹</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 查詢和注入器樹"></a>
+  <p>提示：請參閱 <a href="guide/di">依存項注入</a> 以了解提供者和 Angular 的注入樹的背景。</p>
+<p>對於進階情況，您可以使用任何 <code>ProviderToken</code> 作為定位器。這讓您可以根據元件和指令提供者來定位元素。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">SUB_ITEM</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">InjectionToken</span>&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-string">'sub-item'</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{<span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">SUB_ITEM</span>, <span class="hljs-attr">useValue</span>: <span class="hljs-string">'special-item'</span>}],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpecialItem</span> { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomList</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@ContentChild</span>(<span class="hljs-variable constant_">SUB_ITEM</span>) <span class="hljs-attr">subItemType</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>上面的範例使用 <code>InjectionToken</code> 作為定位器，但您可以使用任何 <code>ProviderToken</code> 來定位特定元素。</p>
+
+  <h2 id="">查詢選項</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 查詢選項"></a>
+  <p>所有查詢裝飾器接受一個選項物件作為第二個參數。這些選項控制著查詢如何找到它的結果。</p>
+
+  <h3 id="">靜態查詢</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 靜態查詢"></a>
+  <p><code>@ViewChild</code> 和 <code>@ContentChild</code> 查詢接受 <code>static</code> 選項。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-card'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;custom-card-header&gt;Visit sunny California!&lt;/custom-card-header&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCard</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@ViewChild</span>(<span class="hljs-title class_">CustomCardHeader</span>, {<span class="hljs-attr">static</span>: <span class="hljs-literal">true</span>}) <span class="hljs-attr">header</span>: <span class="hljs-title class_">CustomCardHeader</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">header</span>.<span class="hljs-property">text</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>透過設定 <code>static: true</code>，您可以向 Angular 保證此查詢的目標 <em>始終</em> 存在，且不會有條件地呈現。這會讓結果更早出現在 <code>ngOnInit</code> 生命週期方法中。</p>
+<p>靜態查詢結果初始化後不會更新。</p>
+<p><code>static</code> 選項不適用於 <code>@ViewChildren</code> 和 <code>@ContentChildren</code> 查詢。</p>
+
+  <h3 id="">內容後代</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 內容後代"></a>
+  <p>預設情況下，內容查詢只會尋找元件的_直接_子項，而不會深入後代。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-expando'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomExpando</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@ContentChild</span>(<span class="hljs-title class_">CustomToggle</span>) <span class="hljs-attr">toggle</span>: <span class="hljs-title class_">CustomToggle</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'user-profile'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;custom-expando&gt;</div><div class="hljs-ln-line highlighted">      &lt;some-other-component&gt;</div><div class="hljs-ln-line highlighted">        &lt;!-- custom-toggle will not be found! --&gt;</div><div class="hljs-ln-line highlighted">        &lt;custom-toggle&gt;Show&lt;/custom-toggle&gt;</div><div class="hljs-ln-line highlighted">      &lt;/some-other-component&gt;</div><div class="hljs-ln-line">    &lt;/custom-expando&gt;</div><div class="hljs-ln-line">  `</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p>在上面的範例中，<code>CustomExpando</code> 找不到 <code>&lt;custom-toggle&gt;</code>，因為它不是 <code>&lt;custom-expando&gt;</code> 的直接子項目。藉由設定 <code>descendants: true</code>，您可以將查詢設定為橫跨同一個樣板中的所有後代。然而，查詢_永遠_不會穿透元件以橫跨其他樣板中的元素。</p>
+<p>檢視查詢沒有這個選項，因為它們_總是_會穿越到子孫。</p>
+
+  <h3 id="">從元素的注入器讀取特定值</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 從元素的注入器讀取特定值"></a>
+  <p>預設情況下，查詢定位器會指示您搜尋的元素和檢索到的值。或者，您可以指定 <code>read</code> 選項，以從與定位器匹配的元素檢索不同的值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomExpando</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@ContentChild</span>(<span class="hljs-title class_">ExpandoContent</span>, {<span class="hljs-attr">read</span>: <span class="hljs-title class_">TemplateRef</span>}) <span class="hljs-attr">toggle</span>: <span class="hljs-title class_">TemplateRef</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>上述範例，會找到一個具有指令 <code>ExpandoContent</code> 的元素並擷取與該元素關聯的 <code>TemplateRef</code>。</p>
+<p>開發人員最常使用 <code>read</code> 來擷取 <code>ElementRef</code> 和 <code>TemplateRef</code>。</p>
+
+  <h2 id="-querylist">使用 QueryList</h2>
+  <a href="#-querylist" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 QueryList"></a>
+  <p><code>@ViewChildren</code> 和 <code>@ContentChildren</code> 都提供一個 <code>QueryList</code> 物件，其中包含結果清單。</p>
+<p><code>QueryList</code> 提供一些便利的 API，可讓你以類似陣列的方式處理結果，例如 <code>map</code>、<code>reduce</code> 和 <code>forEach</code>。你可以透過呼叫 <code>toArray</code> 來取得當前結果的陣列。</p>
+<p>您可以訂閱 <code>changes</code> 屬性，以便在結果變更時執行某些操作。</p>
+
+  <h2 id="">常見查詢陷阱</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 常見查詢陷阱"></a>
+  <p>使用查詢時，常見的陷阱會讓你的程式碼更難理解和維護。</p>
+<p>始終維持多個元件之間共用狀態的單一真實來源。這可避免不同元件中的重複狀態不同步的場景。</p>
+<p>避免直接將狀態寫入子元件。此模式可能導致難以理解且容易發生 <a href="errors/NG0100">ExpressionChangedAfterItHasBeenChecked</a> 錯誤的脆弱程式碼。</p>
+<p>切勿直接將狀態寫入父級或祖先元件。這種模式可能導致難以理解且容易產生 <a href="errors/NG0100">ExpressionChangedAfterItHasBeenChecked</a> 錯誤的脆弱程式碼。</p>

@@ -1,0 +1,23 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">錯誤的非同步驗證器回傳類型</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG01101.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>非同步驗證器必須傳回一個承諾或可觀察對象，無論驗證是否失敗或成功，都必須發出/解析它們。特別是，它們必須實施 <a href="api/forms/AsyncValidator">AsyncValidatorFn API</a></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">isTenAsync</span>(<span class="hljs-params">control: AbstractControl</span>): </div><div class="hljs-ln-line">  <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-title class_">ValidationErrors</span> | <span class="hljs-literal">null</span>&gt; {</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> <span class="hljs-attr">v</span>: <span class="hljs-built_in">number</span> = control.<span class="hljs-property">value</span>;</div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (v !== <span class="hljs-number">10</span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Emit an object with a validation error.</span></div><div class="hljs-ln-line">      <span class="hljs-keyword">return</span> <span class="hljs-title function_">of</span>({ <span class="hljs-string">'notTen'</span>: <span class="hljs-literal">true</span>, <span class="hljs-string">'requiredValue'</span>: <span class="hljs-number">10</span> });</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">    <span class="hljs-comment">// Emit null, to indicate no error occurred.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-title function_">of</span>(<span class="hljs-literal">null</span>);</div><div class="hljs-ln-line">  }</div></code>
+    </pre>
+  </div>
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>您是否錯誤地使用同步驗證器代替非同步驗證器？</p>

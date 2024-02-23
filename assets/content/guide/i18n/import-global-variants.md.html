@@ -1,0 +1,39 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">匯入 locale 資料的全球變體</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/i18n/import-global-variants.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>如果您使用 <code>--localize</code> 選項執行 [<code>ng build</code>][AioCliBuild] 指令，[Angular CLI][AioCliMain] 會自動包含地區資料。</p>
+<!--todo: 用 docs-code 取代 -->
+
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build --localize</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> Angular 的初始安裝已包含美國英語的區域資料 (<code>en-US</code>)。</p>
+
+    </div>
+    <p>當您在 [<code>ng build</code>][AioCliBuild] 命令中使用 <code>--localize</code> 選項時，[Angular CLI][AioCliMain] 會自動包含區域資料並設定 <code>LOCALE_ID</code> 值。</p>
+<p>npm 上的 <code>@angular/common</code> 套件包含地區資料檔案。
+地區資料的全球變體可在 <code>@angular/common/locales/global</code> 中取得。</p>
+
+  <h2 id="import-"><code>import</code> 法語範例</h2>
+  <a href="#import-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>import</code> 法語範例"></a>
+  <p>例如，您可以在啟動應用的 <code>main.ts</code> 中匯入法文 (<code>fr</code>) 的全域變數。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/src/main.ts" visiblelines="0" header="src/main.ts (import locale)">
+    <div class="docs-code-header"><h3>src/main.ts (import locale)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> <span class="hljs-string">'@angular/common/locales/global/fr'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { provideProtractorTestingSupport } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { bootstrapApplication } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { AppComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app/app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">bootstrapApplication(AppComponent, {</div><div class="hljs-ln-line">  providers: [</div><div class="hljs-ln-line">    provideProtractorTestingSupport(), <span class="hljs-comment">// essential for e2e testing</span></div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">});</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>說明：在 <code>NgModules</code> 應用程式中，您會在 <code>app.module</code> 中匯入它。</p>
+<p>{{ 無法處理文件最後的 LinkReferenceDefinitionGroup 部分，需手動更新！ }}</p>

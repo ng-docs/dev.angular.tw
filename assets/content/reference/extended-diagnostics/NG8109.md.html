@@ -1,0 +1,46 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">信號必須在範本插補中呼叫。</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/extended-diagnostics/NG8109.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>此診斷偵測範本插補中未呼叫的訊號。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, signal, <span class="hljs-title class_">Signal</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div&gt;{{ mySignal }}/div&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">    <span class="hljs-attr">mySignal</span>: <span class="hljs-title class_">Signal</span>&lt;<span class="hljs-built_in">number</span>&gt; = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">有什麼問題？</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 有什麼問題？"></a>
+  <p>Angular Signals 是零參數函式 (<code>() =&gt; T</code>)。執行時，會傳回訊號的目前值。
+這表示它們應該在用於範本內插時呼叫，以呈現它們的值。</p>
+
+  <h2 id="">我該怎麼做？</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 我該怎麼做？"></a>
+  <p>在範本內插中使用信號以呈現其值時，請務必呼叫該信號。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, signal, <span class="hljs-title class_">Signal</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div&gt;{{ mySignal() }}/div&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">mySignal</span>: <span class="hljs-title class_">Signal</span>&lt;<span class="hljs-built_in">number</span>&gt; = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>)</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">組態需求</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 組態需求"></a>
+  <p>必須啟用 <a href="tools/cli/template-typecheck#strict-mode"><code>strictTemplates</code></a> 才能發出任何延伸診斷。
+<code>interpolatedSignalNotInvoked</code> 除了 <code>strictTemplates</code> 之外沒有其他額外需求。</p>
+
+  <h2 id="">如果我無法避免這件事怎麼辦？</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 如果我無法避免這件事怎麼辦？"></a>
+  <p>這個診斷可以透過編輯專案的 <code>tsconfig.json</code> 檔案停用：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"angularCompilerOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"extendedDiagnostics"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"checks"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"interpolatedSignalNotInvoked"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"suppress"</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>參閱 <a href="extended-diagnostics#configuration">進階診斷設定</a> 以取得更多資訊。</p>

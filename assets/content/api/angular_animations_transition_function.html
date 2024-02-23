@@ -1,0 +1,151 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/animations</span><div class="docs-reference-title"><div><h1>transition</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div></div><p class="docs-reference-description"><p>Declares an animation transition which is played when a certain specified condition is met.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">transition</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">stateChangeExpr</span>: <span class="hljs-built_in">string</span> | (<span class="hljs-function">(<span class="hljs-params">fromState: <span class="hljs-built_in">string</span>, toState: <span class="hljs-built_in">string</span>, element?: <span class="hljs-built_in">any</span>, params?: { [key: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>; }</span>) =&gt;</span> <span class="hljs-built_in">boolean</span>),</div><div class="hljs-ln-line ">  <span class="hljs-attr">steps</span>: <span class="hljs-title class_">AnimationMetadata</span> | <span class="hljs-title class_">AnimationMetadata</span>[],</div><div class="hljs-ln-line ">  options?: <span class="hljs-title class_">AnimationOptions</span></div><div class="hljs-ln-line ">): <span class="hljs-title class_">AnimationTransitionMetadata</span>;</div></code></pre></div></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><h3>State Change Expression</h3>
+<p>The State Change Expression instructs Angular when to run the transition&#39;s animations, it can
+either be</p>
+
+    <ul class="docs-list">
+      <li>a string with a specific syntax</li>
+<li>or a function that compares the previous and current state (value of the expression bound to
+the element&#39;s trigger) and returns <code>true</code> if the transition should occur or <code>false</code> otherwise</li>
+
+    </ul>
+    <p>The string format can be:</p>
+
+    <ul class="docs-list">
+      <li><p><code>fromState =&gt; toState</code>, which indicates that the transition&#39;s animations should occur then the
+expression bound to the trigger&#39;s element goes from <code>fromState</code> to <code>toState</code></p>
+<p><em>Example:</em></p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">&#x27;open =&gt; closed&#x27;</span>, <span class="hljs-title function_">animate</span>(<span class="hljs-string">&#x27;.5s ease-out&#x27;</span>, <span class="hljs-title function_">style</span>({ <span class="hljs-attr">height</span>: <span class="hljs-number">0</span> }) ))</span>
+          </code>
+        </pre>
+      </div>
+    </li>
+<li><p><code>fromState &lt;=&gt; toState</code>, which indicates that the transition&#39;s animations should occur then
+the expression bound to the trigger&#39;s element goes from <code>fromState</code> to <code>toState</code> or vice versa</p>
+<p><em>Example:</em></p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">&#x27;enabled &lt;=&gt; disabled&#x27;</span>, <span class="hljs-title function_">animate</span>(<span class="hljs-string">&#x27;1s cubic-bezier(0.8,0.3,0,1)&#x27;</span>))</span>
+          </code>
+        </pre>
+      </div>
+    </li>
+<li><p><code>:enter</code>/<code>:leave</code>, which indicates that the transition&#39;s animations should occur when the
+element enters or exists the DOM</p>
+<p><em>Example:</em></p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">&#x27;:enter&#x27;</span>, [</span><span class="hljs-ln-line">    <span class="hljs-title function_">style</span>({ <span class="hljs-attr">opacity</span>: <span class="hljs-number">0</span> }),</span><span class="hljs-ln-line">    <span class="hljs-title function_">animate</span>(<span class="hljs-string">&#x27;500ms&#x27;</span>, <span class="hljs-title function_">style</span>({ <span class="hljs-attr">opacity</span>: <span class="hljs-number">1</span> }))</span><span class="hljs-ln-line">  ])</span>
+          </code>
+        </pre>
+      </div>
+    </li>
+<li><p><code>:increment</code>/<code>:decrement</code>, which indicates that the transition&#39;s animations should occur when
+the numerical expression bound to the trigger&#39;s element has increased in value or decreased</p>
+<p><em>Example:</em></p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">&#x27;:increment&#x27;</span>, <span class="hljs-title function_">query</span>(<span class="hljs-string">&#x27;@counter&#x27;</span>, <span class="hljs-title function_">animateChild</span>()))</span>
+          </code>
+        </pre>
+      </div>
+    </li>
+<li><p>a sequence of any of the above divided by commas, which indicates that transition&#39;s animations
+should occur whenever one of the state change expressions matches</p>
+<p><em>Example:</em></p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">&#x27;:increment, * =&gt; enabled, :enter&#x27;</span>, <span class="hljs-title function_">animate</span>(<span class="hljs-string">&#x27;1s ease&#x27;</span>, <span class="hljs-title function_">keyframes</span>([</span><span class="hljs-ln-line">    <span class="hljs-title function_">style</span>({ <span class="hljs-attr">transform</span>: <span class="hljs-string">&#x27;scale(1)&#x27;</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0</span>}),</span><span class="hljs-ln-line">    <span class="hljs-title function_">style</span>({ <span class="hljs-attr">transform</span>: <span class="hljs-string">&#x27;scale(1.1)&#x27;</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0.7</span>}),</span><span class="hljs-ln-line">    <span class="hljs-title function_">style</span>({ <span class="hljs-attr">transform</span>: <span class="hljs-string">&#x27;scale(1)&#x27;</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">1</span>})</span><span class="hljs-ln-line">  ]))),</span>
+          </code>
+        </pre>
+      </div>
+    </li>
+
+    </ul>
+    <p>Also note that in such context:</p>
+
+    <ul class="docs-list">
+      <li><code>void</code> can be used to indicate the absence of the element</li>
+<li>asterisks can be used as wildcards that match any state</li>
+<li>(as a consequence of the above, <code>void =&gt; *</code> is equivalent to <code>:enter</code> and <code>* =&gt; void</code> is
+equivalent to <code>:leave</code>)</li>
+<li><code>true</code> and <code>false</code> also match expression values of <code>1</code> and <code>0</code> respectively (but do not match
+<em>truthy</em> and <em>falsy</em> values)</li>
+
+    </ul>
+    <div class="alert is-helpful">
+
+<p> Be careful about entering end leaving elements as their transitions present a common
+ pitfall for developers.</p>
+<p> Note that when an element with a trigger enters the DOM its <code>:enter</code> transition always
+ gets executed, but its <code>:leave</code> transition will not be executed if the element is removed
+ alongside its parent (as it will be removed &quot;without warning&quot; before its transition has
+ a chance to be executed, the only way that such transition can occur is if the element
+ is exiting the DOM on its own).</p>
+</div>
+
+<h3>Animating to a Final State</h3>
+<p>If the final step in a transition is a call to <code>animate()</code> that uses a timing value
+with no <code>style</code> data, that step is automatically considered the final animation arc,
+for the element to reach the final state, in such case Angular automatically adds or removes
+CSS styles to ensure that the element is in the correct final state.</p>
+<h3>Usage Examples</h3>
+
+    <ul class="docs-list">
+      <li>Transition animations applied based on
+the trigger&#39;s expression value</li>
+
+    </ul>
+    
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> [@<span class="hljs-attr">myAnimationTrigger</span>]=<span class="hljs-string">&quot;myStatusExp&quot;</span>&gt;</span></span><span class="hljs-ln-line"> ...</span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">trigger</span>(<span class="hljs-string">&quot;myAnimationTrigger&quot;</span>, [</span><span class="hljs-ln-line">  ..., <span class="hljs-comment">// states</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">&quot;on =&gt; off, open =&gt; closed&quot;</span>, <span class="hljs-title function_">animate</span>(<span class="hljs-number">500</span>)),</span><span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">&quot;* &lt;=&gt; error&quot;</span>, <span class="hljs-title function_">query</span>(<span class="hljs-string">&#x27;.indicator&#x27;</span>, <span class="hljs-title function_">animateChild</span>()))</span><span class="hljs-ln-line">])</span>
+          </code>
+        </pre>
+      </div>
+    
+    <ul class="docs-list">
+      <li><p>Transition animations applied based on custom logic dependent
+on the trigger&#39;s expression value and provided parameters</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> [@<span class="hljs-attr">myAnimationTrigger</span>]=<span class="hljs-string">&quot;{</span><span class="hljs-ln-line"> value: stepName,</span><span class="hljs-ln-line"> params: { target: currentTarget }</span><span class="hljs-ln-line">}&quot;</span>&gt;</span></span><span class="hljs-ln-line"> ...</span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">trigger</span>(<span class="hljs-string">&quot;myAnimationTrigger&quot;</span>, [</span><span class="hljs-ln-line">  ..., <span class="hljs-comment">// states</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(</span><span class="hljs-ln-line">    <span class="hljs-function">(<span class="hljs-params">fromState, toState, _element, params</span>) =&gt;</span></span><span class="hljs-ln-line">      [<span class="hljs-string">&#x27;firststep&#x27;</span>, <span class="hljs-string">&#x27;laststep&#x27;</span>].<span class="hljs-title function_">includes</span>(fromState.<span class="hljs-title function_">toLowerCase</span>())</span><span class="hljs-ln-line">      &amp;&amp; toState === params?.[<span class="hljs-string">&#x27;target&#x27;</span>],</span><span class="hljs-ln-line">    <span class="hljs-title function_">animate</span>(<span class="hljs-string">&#x27;1s&#x27;</span>)</span><span class="hljs-ln-line">  )</span><span class="hljs-ln-line">])</span>
+          </code>
+        </pre>
+      </div>
+    </li>
+
+    </ul>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>transition</h3><div><code>AnimationTransitionMetadata</code></div></div><span></span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Declares an animation transition which is played when a certain specified condition is met.</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">stateChangeExpr</span><code>string | ((fromState: string, toState: string, element?: any, params?: { [key: string]: any; }) => boolean)</code><div class="docs-parameter-description"><p>A string with a specific format or a function that specifies when the
+animation transition should occur (see <a href="">State Change Expression</a>).</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">steps</span><code>AnimationMetadata | AnimationMetadata[]</code><div class="docs-parameter-description"><p>One or more animation objects that represent the animation&#39;s instructions.</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">options</span><code>AnimationOptions</code><div class="docs-parameter-description"><p>An options object that can be used to specify a delay for the animation or provide
+custom parameters for it.</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>AnimationTransitionMetadata</code></div></div></div></div></div></div></div>

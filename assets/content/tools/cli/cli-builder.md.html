@@ -1,0 +1,384 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">Angular CLI builders</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/cli-builder.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>許多 Angular CLI 指令會對您的程式碼執行複雜的程序，例如建置、測試或提供您的應用程式。
+這些指令使用一個稱為 Architect 的內部工具來執行 <em>CLI 建構器</em>，其會呼叫另一個工具 (打包器、測試執行器、伺服器) 以完成所需的工作。
+自訂建構器可以執行一個完全新的工作，或變更現有指令使用的第三方工具。</p>
+<p>以下文件說明 CLI 建構器如何與工作區設定檔整合，並展示如何建立自己的建構器。</p>
+<p>有用的：在此處找到在範例中使用的程式碼 <a href="https://github.com/mgechev/cli-builders-demo" target="_blank">GitHub 儲存庫</a>。</p>
+
+  <h2 id="cli-">CLI 建構器</h2>
+  <a href="#cli-" class="docs-anchor" tabindex="-1" aria-label="Link to CLI 建構器"></a>
+  <p>內部 Architect 工具將工作委託給稱為「建構函式」的處理函式。
+建構函式處理函式會收到兩個引數：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">參數</th>
+<th align="left">類型</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>options</code></td>
+<td align="left"><code>JSONObject</code></td>
+</tr>
+<tr>
+<td align="left"><code>context</code></td>
+<td align="left"><code>BuilderContext</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>在這裡，區分責任與 <a href="tools/cli/schematics-authoring">schematics</a> 相同，後者用於觸及您的程式碼的其他 CLI 命令（例如 <code>ng generate</code>）。</p>
+
+  <ul class="docs-list">
+    <li><code>options</code> 物件是由 CLI 使用者選項與組態提供，而 <code>context</code> 物件則由 CLI Builder API 自動提供。</li>
+<li>除了上下文資訊之外，<code>context</code> 物件也提供存取排程方法 <code>context.scheduleTarget()</code>。
+  排程器使用指定的目標組態執行 builder 處理函式。</li>
+
+  </ul>
+  <p>建構器處理函式可以是同步（傳回值）、非同步（傳回 <code>Promise</code>）或監看並傳回多個值（傳回 <code>Observable</code>）。
+傳回值必須永遠是 <code>BuilderOutput</code> 類型。
+此物件包含一個布林 <code>success</code> 欄位和一個可以包含錯誤訊息的選用 <code>error</code> 欄位。</p>
+<p>Angular 提供了一些建構器，CLI 使用這些建構器來執行 <code>ng build</code> 和 <code>ng test</code> 等指令。
+可以在 <a href="reference/configs/workspace-config">工作區組態檔</a> <code>angular.json</code> 的「architect」區段中找到並組態這些與其他內建 CLI 建構器的預設目標組態。
+另外，您可以透過建立自己的建構器來延伸並自訂 Angular，您可以使用 <a href="cli/run"><code>ng run</code> CLI 指令</a> 直接執行這些建構器。</p>
+
+  <h3 id="">建構器項目結構</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 建構器項目結構"></a>
+  <p>建構器位於與 Angular 工作空間結構類似的「專案」資料夾中，其中頂層有全域組態檔案，在包含定義行為的程式碼檔案的來源資料夾中則有更明確的組態。
+例如，<code>myBuilder</code> 資料夾可以包含下列檔案。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">檔案</th>
+<th align="left">目的</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>src/my-builder.ts</code></td>
+<td align="left">建構器定義的主要來源檔案。</td>
+</tr>
+<tr>
+<td align="left"><code>src/my-builder.spec.ts</code></td>
+<td align="left">測試的來源檔案。</td>
+</tr>
+<tr>
+<td align="left"><code>src/schema.json</code></td>
+<td align="left">建構器輸入選項的定義。</td>
+</tr>
+<tr>
+<td align="left"><code>builders.json</code></td>
+<td align="left">建構器定義。</td>
+</tr>
+<tr>
+<td align="left"><code>package.json</code></td>
+<td align="left">相依性。請參閱 <a href="https://docs.npmjs.com/files/package.json" target="_blank">https://docs.npmjs.com/files/package.json</a>。</td>
+</tr>
+<tr>
+<td align="left"><code>tsconfig.json</code></td>
+<td align="left"><a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 組態</a>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>建造器可以發佈到 <code>npm</code>，請參閱 <a href="tools/libraries/creating-libraries">發佈您的庫</a>。</p>
+
+  <h2 id="-builder">建立一個 builder</h2>
+  <a href="#-builder" class="docs-anchor" tabindex="-1" aria-label="Link to 建立一個 builder"></a>
+  <p>作為範例，建立一個將檔案複製到新位置的建構器。
+若要建立建構器，請使用 <code>createBuilder()</code> CLI 建構器函式，並傳回 <code>Promise&lt;BuilderOutput&gt;</code> 物件。</p>
+<div class="docs-code" path="adev/src/content/examples/cli-builder/src/my-builder.ts" visiblelines="0,1,3,4,5,6,7,8,9,10,11,12,13,14,28,29" header="src/my-builder.ts (builder skeleton)">
+    <div class="docs-code-header"><h3>src/my-builder.ts (builder skeleton)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">BuilderContext</span>, <span class="hljs-title class_">BuilderOutput</span>, createBuilder } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/architect'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">JsonObject</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { promises <span class="hljs-keyword">as</span> fs } <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Options</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">JsonObject</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">source</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">destination</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">createBuilder</span>(copyFileBuilder);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">copyFileBuilder</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line">  options: Options,</div><div class="hljs-ln-line">  context: BuilderContext,</div><div class="hljs-ln-line">): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">BuilderOutput</span>&gt; {</div><div class="hljs-ln-line">  context.<span class="hljs-title function_">reportStatus</span>(<span class="hljs-string">`Copying <span class="hljs-subst">${options.source}</span> to <span class="hljs-subst">${options.destination}</span>.`</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">try</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">copyFile</span>(options.<span class="hljs-property">source</span>, options.<span class="hljs-property">destination</span>);</div><div class="hljs-ln-line">  } <span class="hljs-keyword">catch</span> (err) {</div><div class="hljs-ln-line">    context.<span class="hljs-property">logger</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Failed to copy file.'</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> {</div><div class="hljs-ln-line">      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,</div><div class="hljs-ln-line">      <span class="hljs-attr">error</span>: (err <span class="hljs-keyword">as</span> <span class="hljs-title class_">Error</span>).<span class="hljs-property">message</span>,</div><div class="hljs-ln-line">    };</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  context.<span class="hljs-title function_">reportStatus</span>(<span class="hljs-string">'Done.'</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> { <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span> };</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>現在讓我們添加一些邏輯於其中。
+以下程式碼從使用者選項中擷取來源和目的地檔案路徑，並將檔案從來源複製到目的地（使用內建 NodeJS <code>copyFile()</code> 函式的 <a href="https://nodejs.org/api/fs.html#fs_fspromises_copyfile_src_dest_mode" target="_blank">Promise 版本</a>）。
+如果複製操作失敗，它會傳回一個包含關於底層問題訊息的錯誤。</p>
+<div class="docs-code" path="adev/src/content/examples/cli-builder/src/my-builder.ts" visiblelines="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,18,20,21,22,23,24,27,28,29" header="src/my-builder.ts (builder)">
+    <div class="docs-code-header"><h3>src/my-builder.ts (builder)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">BuilderContext</span>, <span class="hljs-title class_">BuilderOutput</span>, createBuilder } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/architect'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">JsonObject</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { promises <span class="hljs-keyword">as</span> fs } <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Options</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">JsonObject</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">source</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">destination</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">createBuilder</span>(copyFileBuilder);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">copyFileBuilder</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line">  options: Options,</div><div class="hljs-ln-line">  context: BuilderContext,</div><div class="hljs-ln-line">): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">BuilderOutput</span>&gt; {</div><div class="hljs-ln-line">  context.<span class="hljs-title function_">reportStatus</span>(<span class="hljs-string">`Copying <span class="hljs-subst">${options.source}</span> to <span class="hljs-subst">${options.destination}</span>.`</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">try</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">copyFile</span>(options.<span class="hljs-property">source</span>, options.<span class="hljs-property">destination</span>);</div><div class="hljs-ln-line">  } <span class="hljs-keyword">catch</span> (err) {</div><div class="hljs-ln-line">    context.<span class="hljs-property">logger</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Failed to copy file.'</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> {</div><div class="hljs-ln-line">      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,</div><div class="hljs-ln-line">      <span class="hljs-attr">error</span>: (err <span class="hljs-keyword">as</span> <span class="hljs-title class_">Error</span>).<span class="hljs-property">message</span>,</div><div class="hljs-ln-line">    };</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  context.<span class="hljs-title function_">reportStatus</span>(<span class="hljs-string">'Done.'</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> { <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span> };</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="">處理輸出</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 處理輸出"></a>
+  <p>預設情況下，<code>copyFile()</code> 沒有將任何內容列印到程序標準輸出或錯誤。
+如果發生錯誤，可能很難確切理解在問題發生時建構器嘗試執行什麼。
+使用 <code>Logger</code> API 記錄其他資訊，以新增一些其他內容。
+這也讓建構器本身在獨立程序中執行，即使標準輸出和錯誤已停用。</p>
+<p>你可以從內容中擷取 <code>Logger</code> 實例。</p>
+<div class="docs-code" path="adev/src/content/examples/cli-builder/src/my-builder.ts" visiblelines="16,17,18,19,20,21,22,23,24" header="src/my-builder.ts (handling output)">
+    <div class="docs-code-header"><h3>src/my-builder.ts (handling output)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">BuilderContext</span>, <span class="hljs-title class_">BuilderOutput</span>, createBuilder } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/architect'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">JsonObject</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { promises <span class="hljs-keyword">as</span> fs } <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Options</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">JsonObject</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">source</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">destination</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">createBuilder</span>(copyFileBuilder);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">copyFileBuilder</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line">  options: Options,</div><div class="hljs-ln-line">  context: BuilderContext,</div><div class="hljs-ln-line">): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">BuilderOutput</span>&gt; {</div><div class="hljs-ln-line">  context.<span class="hljs-title function_">reportStatus</span>(<span class="hljs-string">`Copying <span class="hljs-subst">${options.source}</span> to <span class="hljs-subst">${options.destination}</span>.`</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">try</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">copyFile</span>(options.<span class="hljs-property">source</span>, options.<span class="hljs-property">destination</span>);</div><div class="hljs-ln-line">  } <span class="hljs-keyword">catch</span> (err) {</div><div class="hljs-ln-line">    context.<span class="hljs-property">logger</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Failed to copy file.'</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> {</div><div class="hljs-ln-line">      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,</div><div class="hljs-ln-line">      <span class="hljs-attr">error</span>: (err <span class="hljs-keyword">as</span> <span class="hljs-title class_">Error</span>).<span class="hljs-property">message</span>,</div><div class="hljs-ln-line">    };</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  context.<span class="hljs-title function_">reportStatus</span>(<span class="hljs-string">'Done.'</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> { <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span> };</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="">進度與狀態回報</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 進度與狀態回報"></a>
+  <p>CLI Builder API 包含進度和狀態報告工具，可以為某些函式和介面提供提示。</p>
+<p>要回報進度，請使用 <code>context.reportProgress()</code> 方法，它需要目前值、可選總計和狀態字串做為參數。
+總計可以是任何數字。例如，如果您知道要處理多少個檔案，總計可以是檔案數目，而目前則應該是到目前為止已處理的數目。
+除非您傳入新的字串值，否則狀態字串不變。</p>
+<p>在我們的範例中，複製作業不是已完成就是仍在執行，所以不需要進度報告，但您可以報告狀態，以便呼叫我們建構函式的父建構函式知道正在發生什麼事。
+使用 <code>context.reportStatus()</code> 方法來產生任何長度的狀態字串。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 無法保證會完整顯示長字串；它可能會被裁剪以符合顯示它的 UI。</p>
+
+    </div>
+    <p>傳遞一個空字串來移除狀態。</p>
+<div class="docs-code" path="adev/src/content/examples/cli-builder/src/my-builder.ts" visiblelines="15,16,17,18,19,20,21,22,23,24,25,26,27" header="src/my-builder.ts (progress reporting)">
+    <div class="docs-code-header"><h3>src/my-builder.ts (progress reporting)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">BuilderContext</span>, <span class="hljs-title class_">BuilderOutput</span>, createBuilder } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/architect'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">JsonObject</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { promises <span class="hljs-keyword">as</span> fs } <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Options</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">JsonObject</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">source</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">destination</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">createBuilder</span>(copyFileBuilder);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">copyFileBuilder</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line">  options: Options,</div><div class="hljs-ln-line">  context: BuilderContext,</div><div class="hljs-ln-line">): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">BuilderOutput</span>&gt; {</div><div class="hljs-ln-line">  context.<span class="hljs-title function_">reportStatus</span>(<span class="hljs-string">`Copying <span class="hljs-subst">${options.source}</span> to <span class="hljs-subst">${options.destination}</span>.`</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">try</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">copyFile</span>(options.<span class="hljs-property">source</span>, options.<span class="hljs-property">destination</span>);</div><div class="hljs-ln-line">  } <span class="hljs-keyword">catch</span> (err) {</div><div class="hljs-ln-line">    context.<span class="hljs-property">logger</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Failed to copy file.'</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> {</div><div class="hljs-ln-line">      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,</div><div class="hljs-ln-line">      <span class="hljs-attr">error</span>: (err <span class="hljs-keyword">as</span> <span class="hljs-title class_">Error</span>).<span class="hljs-property">message</span>,</div><div class="hljs-ln-line">    };</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  context.<span class="hljs-title function_">reportStatus</span>(<span class="hljs-string">'Done.'</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> { <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span> };</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h2 id="builder-">Builder 輸入</h2>
+  <a href="#builder-" class="docs-anchor" tabindex="-1" aria-label="Link to Builder 輸入"></a>
+  <p>您可以透過 CLI 指令（例如 <code>ng build</code>）或直接透過 Angular CLI <code>ng run</code> 指令間接呼叫建構器。
+無論是哪一種情況，您都必須提供必要的輸入，但可以讓其他輸入預設為針對特定 <em>目標</em> 預先設定的值，該目標由 <a href="tools/cli/environments">設定檔</a> 指定，或在命令列中設定。</p>
+
+  <h3 id="">輸入驗證</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 輸入驗證"></a>
+  <p>您在與該建構函式相關聯的 JSON 架構中定義建構函式輸入。
+類似於架構，Architect 工具將解析的輸入值收集到 <code>options</code> 物件中，並在將其傳遞給建構函式函式之前根據架構驗證其類型。</p>
+<p>對於我們的範例建構函式，<code>options</code> 應為一個具有兩個鍵值的 <code>JsonObject</code>：
+一個 <code>source</code> 和一個 <code>destination</code>，它們都是字串。</p>
+<p>您可以提供下列 schema 以對這些值的類型進行驗證。</p>
+<div class="docs-code" header="src/schema.json">
+    <div class="docs-code-header"><h3>src/schema.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"$schema"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"http://json-schema.org/schema"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"object"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"properties"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"source"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"destination"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>HELPFUL：這是一個最小的範例，但驗證架構的使用非常強大。
+欲了解更多資訊，請參閱 <a href="http://json-schema.org" target="_blank">JSON 架構網站</a>。</p>
+<p>若要將我們的建置器實作與其架構和名稱連結，您需要建立一個 <em>建置器定義</em> 檔案，您可以在 <code>package.json</code> 中指向該檔案。</p>
+<p>建立一個名為 <code>builders.json</code> 的檔案，看起來像這樣：</p>
+<div class="docs-code" header="builders.json">
+    <div class="docs-code-header"><h3>builders.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"builders"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"copy"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"implementation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"./dist/my-builder.js"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"schema"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"./src/schema.json"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"description"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Copies a file."</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>在 <code>package.json</code> 檔案中，加入一個 <code>builders</code> 鍵，告訴 Architect 工具在哪裡可以找到我們的 builder 定義檔案。</p>
+<div class="docs-code" header="package.json">
+    <div class="docs-code-header"><h3>package.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@example/copy-file"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"version"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"1.0.0"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"description"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Builder for copying files"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"builders"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"builders.json"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"dependencies"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"@angular-devkit/architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"~0.1200.0"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"@angular-devkit/core"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"^12.0.0"</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>我們的建構器的正式名稱現在是 <code>@example/copy-file:copy</code>。
+此名稱的第一部分是套件名稱，第二部分是建構器名稱，如 <code>builders.json</code> 檔案中所指定。</p>
+<p>這些值可透過 <code>options.source</code> 和 <code>options.destination</code> 存取。</p>
+<div class="docs-code" path="adev/src/content/examples/cli-builder/src/my-builder.ts" visiblelines="17" header="src/my-builder.ts (report status)">
+    <div class="docs-code-header"><h3>src/my-builder.ts (report status)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">BuilderContext</span>, <span class="hljs-title class_">BuilderOutput</span>, createBuilder } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/architect'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">JsonObject</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { promises <span class="hljs-keyword">as</span> fs } <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Options</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">JsonObject</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">source</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">destination</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">createBuilder</span>(copyFileBuilder);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">copyFileBuilder</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line">  options: Options,</div><div class="hljs-ln-line">  context: BuilderContext,</div><div class="hljs-ln-line">): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">BuilderOutput</span>&gt; {</div><div class="hljs-ln-line">  context.<span class="hljs-title function_">reportStatus</span>(<span class="hljs-string">`Copying <span class="hljs-subst">${options.source}</span> to <span class="hljs-subst">${options.destination}</span>.`</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">try</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">copyFile</span>(options.<span class="hljs-property">source</span>, options.<span class="hljs-property">destination</span>);</div><div class="hljs-ln-line">  } <span class="hljs-keyword">catch</span> (err) {</div><div class="hljs-ln-line">    context.<span class="hljs-property">logger</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Failed to copy file.'</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> {</div><div class="hljs-ln-line">      <span class="hljs-attr">success</span>: <span class="hljs-literal">false</span>,</div><div class="hljs-ln-line">      <span class="hljs-attr">error</span>: (err <span class="hljs-keyword">as</span> <span class="hljs-title class_">Error</span>).<span class="hljs-property">message</span>,</div><div class="hljs-ln-line">    };</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  context.<span class="hljs-title function_">reportStatus</span>(<span class="hljs-string">'Done.'</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> { <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span> };</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="">目標設定</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 目標設定"></a>
+  <p>建築商必須有定義的目標，將其與特定的輸入配置和專案關聯起來。</p>
+<p>目標定義在 <code>angular.json</code> <a href="reference/configs/workspace-config">CLI 組態檔</a>中。
+目標指定要使用的建構器、其預設選項組態，以及命名的替代組態。
+Angular CLI 中的 Architect 使用目標定義來解析給定執行項目的輸入選項。</p>
+<p><code>angular.json</code> 檔案對每個專案皆有一區段，且每個專案的「architect」區段會設定 CLI 命令（例如「build」、「test」和「serve」）使用的建構函式目標。
+例如，預設情況下，<code>ng build</code> 命令會執行建構函式 <code>@angular-devkit/build-angular:browser</code> 以執行建置工作，並傳入 <code>angular.json</code> 中 <code>build</code> 目標所指定的預設選項值。</p>
+<div class="docs-code" header="angular.json">
+    <div class="docs-code-header"><h3>angular.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">…</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-attr">"myApp"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:browser"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"outputPath"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"dist/myApp"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"index"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"src/index.html"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">        …</div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"configurations"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"production"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"fileReplacements"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">            <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">              <span class="hljs-attr">"replace"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"src/environments/environment.ts"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">              <span class="hljs-attr">"with"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"src/environments/environment.prod.ts"</span></div><div class="hljs-ln-line">            <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">          <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"optimization"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"outputHashing"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"all"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          …</div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    …</div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">…</div></code>
+    </pre>
+  </div><p>該命令傳遞給建構器在「選項」區段中指定的一組預設選項。
+如果您傳遞 <code>--configuration=production</code> 旗標，它會使用在 <code>production</code> 組態中指定的值來覆寫。
+在命令列中個別指定進一步的覆寫選項。</p>
+
+  <h4 id="">目標字串</h4>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 目標字串"></a>
+  <p>通用 <code>ng run</code> CLI 命令以以下形式作為第一個引數目標字串。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">project:target[:configuration]</div></code>
+    </pre>
+  </div>
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left"></th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">專案</td>
+<td align="left">與目標相關聯的 Angular CLI 專案名稱。</td>
+</tr>
+<tr>
+<td align="left">目標</td>
+<td align="left"><code>angular.json</code> 檔案 <code>architect</code> 區段中指定的名稱建構器設定。</td>
+</tr>
+<tr>
+<td align="left">設定檔</td>
+<td align="left">（選用）<code>angular.json</code> 檔案中定義的指定目標的特定設定檔覆寫名稱。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>如果您的建構器呼叫其他建構器，可能需要讀取已傳遞的 target 字串。
+使用 <code>@angular-devkit/architect</code> 中的 <code>targetFromTargetString()</code> 實用程式函式，將此字串解析成物件。</p>
+
+  <h2 id="">時間表和執行</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 時間表和執行"></a>
+  <p>Architect 非同步執行 Builder。
+若要呼叫 Builder，您必須在所有設定解析完成時安排要執行的任務。</p>
+<p>建構函式不會執行，直到排程器回傳 <code>BuilderRun</code> 控制物件。
+CLI 通常透過呼叫 <code>context.scheduleTarget()</code> 函式來排程工作，然後使用 <code>angular.json</code> 檔案中的目標定義來解析輸入選項。</p>
+<p>Architect 會透過採用預設選項物件、覆寫組態中的值，然後進一步覆寫傳遞給 <code>context.scheduleTarget()</code> 的覆寫物件，來為給定目標解析輸入選項。
+對於 Angular CLI，覆寫物件是從命令列參數建構而來。</p>
+<p>Architect 驗證產生的選項值符合建構器的架構。
+如果輸入有效，Architect 會建立內容並執行建構器。</p>
+<p>有關更多資訊，請參閱 <a href="reference/configs/workspace-config">Workspace Configuration</a>。</p>
+<p>HELPFUL：您也可以透過呼叫 <code>context.scheduleBuilder()</code> 從其他建構函式或測試直接呼叫建構函式。
+您可以直接將 <code>options</code> 物件傳遞給方法，並且這些選項值會根據建構函式的架構進行驗證，而沒有進一步調整。</p>
+<p>只有 <code>context.scheduleTarget()</code> 方法會解析設定檔並覆寫 <code>angular.json</code> 檔案。</p>
+
+  <h3 id="">預設架構配置</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 預設架構配置"></a>
+  <p>讓我們建立一個簡單的 <code>angular.json</code> 檔案，以將目標設定放入內容中。</p>
+<p>你可以將建置工具發佈到 npm（請參閱 <a href="tools/libraries/creating-libraries#publishing-your-library">發佈你的函式庫</a>），並使用以下指令進行安裝：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">npm install @example/copy-file</div></code>
+    </pre>
+  </div><p>如果你使用 <code>ng new builder-test</code> 建立新專案，產生的 <code>angular.json</code> 檔案看起來會像這樣，只有預設的建構器組態。</p>
+<div class="docs-code" header="angular.json">
+    <div class="docs-code-header"><h3>angular.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"builder-test"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:browser"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-comment">// more options...</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"outputPath"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"dist/builder-test"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"index"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"src/index.html"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"main"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"src/main.ts"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"polyfills"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"src/polyfills.ts"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"tsConfig"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"src/tsconfig.app.json"</span></div><div class="hljs-ln-line">          <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"configurations"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"production"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">              <span class="hljs-comment">// more options...</span></div><div class="hljs-ln-line">              <span class="hljs-attr">"optimization"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">              <span class="hljs-attr">"aot"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">              <span class="hljs-attr">"buildOptimizer"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span></div><div class="hljs-ln-line">            <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">          <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <h3 id="">添加目標</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 添加目標"></a>
+  <p>新增一個目標，執行我們的建構器來複製檔案。
+此目標告訴建構器複製 <code>package.json</code> 檔案。</p>
+
+  <ul class="docs-list">
+    <li>我們將為我們的專案新增一個目標區段至 <code>architect</code> 物件</li>
+<li>名稱為 <code>copy-package</code> 的目標使用我們的建構器，您已發佈至 <code>@example/copy-file</code>。</li>
+<li>選項物件提供您定義的兩個輸入的預設值。
+  <ul class="docs-list">
+    <li><code>source</code> - 您要複製的現有檔案。</li>
+<li><code>destination</code> - 您要複製到的路徑。</li>
+
+  </ul>
+  </li>
+
+  </ul>
+  <div class="docs-code" header="angular.json">
+    <div class="docs-code-header"><h3>angular.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"builder-test"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"copy-package"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@example/copy-file:copy"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"source"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"package.json"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"destination"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"package-copy.json"</span></div><div class="hljs-ln-line">          <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">        <span class="hljs-comment">// Existing targets...</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <h3 id="">運行建構器</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 運行建構器"></a>
+  <p>如要使用新的目標預設組態來執行我們的建構器，請使用下列 CLI 命令。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng run builder-test:copy-package</div></code>
+    </pre>
+  </div><p>這會將 <code>package.json</code> 檔案複製到 <code>package-copy.json</code>。</p>
+<p>使用命令列引數來覆寫已設定的預設值。
+例如，要使用不同的 <code>destination</code> 值執行，請使用以下 CLI 命令。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng run builder-test:copy-package --destination=package-other.json</div></code>
+    </pre>
+  </div><p>這樣會將檔案複製到 <code>package-other.json</code>，而不是 <code>package-copy.json</code>。
+由於你沒有覆寫 <em>來源</em> 選項，它仍會從預設的 <code>package.json</code> 檔案複製。</p>
+
+  <h2 id="">測試建構器</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 測試建構器"></a>
+  <p>為您的 Builder 使用整合測試，以便您可以使用 Architect 排程器建立一個背景，就像在這個 <a href="https://github.com/mgechev/cli-builders-demo" target="_blank">範例</a> 中一樣。
+在 builder 原始碼目錄中，建立一個新的測試檔案 <code>my-builder.spec.ts</code>。測試會建立 <code>JsonSchemaRegistry</code>（用於 schema 驗證）、<code>TestingArchitectHost</code>（<code>ArchitectHost</code> 的記憶體實作）和 <code>Architect</code> 的新執行個體。</p>
+<p>以下是一個執行複製檔案建構器的測試範例。
+測試使用建構器複製 <code>package.json</code> 檔案，並驗證複製檔案的內容與來源相同。</p>
+<div class="docs-code" path="adev/src/content/examples/cli-builder/src/my-builder.spec.ts" header="src/my-builder.spec.ts">
+    <div class="docs-code-header"><h3>src/my-builder.spec.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Architect</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/architect'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">TestingArchitectHost</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/architect/testing'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { schema } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { promises <span class="hljs-keyword">as</span> fs } <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { join } <span class="hljs-keyword">from</span> <span class="hljs-string">'path'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">describe</span>(<span class="hljs-string">'Copy File Builder'</span>, <span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">let</span> <span class="hljs-attr">architect</span>: <span class="hljs-title class_">Architect</span>;</div><div class="hljs-ln-line">  <span class="hljs-keyword">let</span> <span class="hljs-attr">architectHost</span>: <span class="hljs-title class_">TestingArchitectHost</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">beforeEach</span>(<span class="hljs-keyword">async</span> () =&gt; {</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> registry = <span class="hljs-keyword">new</span> schema.<span class="hljs-title class_">CoreSchemaRegistry</span>();</div><div class="hljs-ln-line">    registry.<span class="hljs-title function_">addPostTransform</span>(schema.<span class="hljs-property">transforms</span>.<span class="hljs-property">addUndefinedDefaults</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// TestingArchitectHost() takes workspace and current directories.</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// Since we don't use those, both are the same in this case.</span></div><div class="hljs-ln-line">    architectHost = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TestingArchitectHost</span>(__dirname, __dirname);</div><div class="hljs-ln-line">    architect = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Architect</span>(architectHost, registry);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// This will either take a Node package name, or a path to the directory</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// for the package.json file.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">await</span> architectHost.<span class="hljs-title function_">addBuilderFromPackage</span>(<span class="hljs-title function_">join</span>(__dirname, <span class="hljs-string">'..'</span>));</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">it</span>(<span class="hljs-string">'can copy files'</span>, <span class="hljs-keyword">async</span> () =&gt; {</div><div class="hljs-ln-line">    <span class="hljs-comment">// A "run" can have multiple outputs, and contains progress information.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> run = <span class="hljs-keyword">await</span> architect.<span class="hljs-title function_">scheduleBuilder</span>(<span class="hljs-string">'@example/copy-file:copy'</span>, {</div><div class="hljs-ln-line">      <span class="hljs-attr">source</span>: <span class="hljs-string">'package.json'</span>,</div><div class="hljs-ln-line">      <span class="hljs-attr">destination</span>: <span class="hljs-string">'package-copy.json'</span>,</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// The "result" member (of type BuilderOutput) is the next output.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> output = <span class="hljs-keyword">await</span> run.<span class="hljs-property">result</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// Stop the builder from running. This stops Architect from keeping</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// the builder-associated states in memory, since builders keep waiting</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// to be scheduled.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">await</span> run.<span class="hljs-title function_">stop</span>();</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// Expect that the copied file is the same as its source.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> sourceContent = <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">readFile</span>(<span class="hljs-string">'package.json'</span>, <span class="hljs-string">'utf8'</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> destinationContent = <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">readFile</span>(<span class="hljs-string">'package-copy.json'</span>, <span class="hljs-string">'utf8'</span>);</div><div class="hljs-ln-line">    <span class="hljs-title function_">expect</span>(destinationContent).<span class="hljs-title function_">toBe</span>(sourceContent);</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line">});</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>HELPFUL：在儲存庫中執行此測試時，您需要<a href="https://github.com/TypeStrong/ts-node" target="_blank"><code>ts-node</code></a> 套件。
+您可以透過將 <code>my-builder.spec.ts</code> 重新命名為 <code>my-builder.spec.js</code> 來避免此情況。</p>
+
+  <h3 id="">觀察模式</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 觀察模式"></a>
+  <p>大多數 builder 執行一次並回傳。然而，此行為與監控變更的 builder（例如 devserver）並不完全相容。
+Architect 可以支援監控模式，但有一些事項要注意。</p>
+
+  <ul class="docs-list">
+    <li><p>要與監看模式搭配使用，建構函式應該回傳一個 <code>Observable</code>。
+  Architect 會訂閱 <code>Observable</code> 直到它完成，並且如果建構函式使用相同參數再次排程，可能會重複使用它。</p>
+</li>
+<li><p>建構函式應該在每次執行後發出一個 <code>BuilderOutput</code> 物件。
+  執行後，它可以進入監看模式，由外部事件觸發。
+  如果事件觸發它重新啟動，建構函式應該執行 <code>context.reportRunning()</code> 函式，以告訴 Architect 它正在再次執行。
+  這會防止 Architect 在排程另一個執行時停止建構函式。</p>
+</li>
+
+  </ul>
+  <p>當您的建構器呼叫 <code>BuilderRun.stop()</code> 退出監控模式時，Architect 會取消訂閱建構器的 <code>Observable</code> 並呼叫建構器的清除邏輯以進行清理。
+此行為還允許停止並清理長時間執行的建構。</p>
+<p>一般來說，如果您的建置器正在監看外部事件，您應該將執行階段分成三個階段。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">階段</th>
+<th align="left">詳細</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">正在執行</td>
+<td align="left">正在執行的工作，例如呼叫編譯器。當編譯器完成且您的建構器發出 <code>BuilderOutput</code> 物件時，此階段即結束。</td>
+</tr>
+<tr>
+<td align="left">正在觀察</td>
+<td align="left">在兩次執行之間，觀察外部事件串流。例如，觀察檔案系統是否有任何變更。當編譯器重新啟動，且呼叫 <code>context.reportRunning()</code> 時，此階段即結束。</td>
+</tr>
+<tr>
+<td align="left">完成</td>
+<td align="left">工作已完全完成，例如需要執行多次的編譯器，或建構器執行已停止（使用 <code>BuilderRun.stop()</code>）。Architect 執行清除邏輯，並取消訂閱您建構器的 <code>Observable</code>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">摘要</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 摘要"></a>
+  <p>CLI Builder API 提供了一種方法，可透過使用 builder 來執行自訂邏輯，以變更 Angular CLI 的行為。</p>
+
+  <ul class="docs-list">
+    <li>建構工具可以是同步或非同步的，執行一次或監控外部事件，並且可以排程其他建構工具或目標。</li>
+<li>建構工具在 <code>angular.json</code> 設定檔中指定選項預設值，這些預設值可以被目標的替代設定覆寫，且可以進一步被命令列標記覆寫</li>
+<li>Angular 團隊建議您使用整合測試來測試 Architect 建構工具。使用單元測試來驗證建構工具執行的邏輯。</li>
+<li>如果您的建構工具傳回一個 <code>Observable</code>，它應該在該 <code>Observable</code> 的結束邏輯中清除建構工具。</li>
+
+  </ul>
+  

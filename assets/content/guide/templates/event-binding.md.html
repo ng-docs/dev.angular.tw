@@ -1,0 +1,88 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">事件繫結</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/templates/event-binding.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>事件繫結讓您可以傾聽並回應使用者的動作，例如按鍵、滑鼠移動、點擊和觸控。</p>
+
+  <h2 id="">事件繫結</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 事件繫結"></a>
+  <p>html</p>
+<div id="my-element" onclick="alert('Hello world!')">Click me!</div>
+
+<p>有用的：有關繫結至屬性的資訊，請參閱 <a href="guide/templates/property-binding">屬性繫結</a>。</p>
+<p>若要繫結至事件，請使用 Angular 事件繫結語法。
+此語法包含等號左方括弧中的目標事件名稱，以及右方引號中的範本語句。</p>
+<p>建立以下範例；目標事件名稱為 <code>click</code>，範本陳述式為 <code>onSave()</code>。</p>
+<div class="docs-code" header="Event binding syntax">
+    <div class="docs-code-header"><h3>Event binding syntax</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSave()"</span>&gt;</span>Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div></code>
+    </pre>
+  </div><p>事件繫結會偵聽按鈕的點擊事件，並在點擊發生時呼叫元件的 <code>onSave()</code> 方法。</p>
+<img src='https://angular.dev/assets/images/guide/template-syntax/syntax-diagram.svg' alt="語法圖">
+
+
+  <h3 id="">確定事件目標</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 確定事件目標"></a>
+  <p>要確定事件目標，Angular 會檢查目標事件的名稱是否符合已知指令的事件屬性。</p>
+<p>建立以下範例：(Angular 檢查 <code>myClick</code> 是否是自訂 <code>ClickDirective</code> 上的事件)</p>
+<div class="docs-code" path="adev/src/content/examples/event-binding/src/app/app.component.html" visiblelines="8,9,10" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"event-binding"</span>&gt;</span>Event Binding<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"group"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Target event<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSave($event)"</span>&gt;</span>Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">on-enter</span>=<span class="hljs-string">"onSave()"</span>&gt;</span>on-click Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>myClick is an event on the custom ClickDirective:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">myClick</span>)=<span class="hljs-string">"clickMessage=$event"</span> <span class="hljs-attr">clickable</span>&gt;</span>click with myClick<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-template-variable">{{ <span class="hljs-name">clickMessage</span> }}</span><span class="language-xml"></span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"group"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>$event and event handling statements<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Result: <span class="hljs-template-variable">{{ <span class="hljs-name">currentItem.name</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> [<span class="hljs-attr">value</span>]=<span class="hljs-string">"currentItem.name"</span></span></div><div class="hljs-ln-line">         (<span class="hljs-attr">input</span>)=<span class="hljs-string">"currentItem.name=getValue($event)"</span>&gt;</div><div class="hljs-ln-line">  without NgModel</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"group"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Binding to a nested component<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Custom events with EventEmitter<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">app-item-detail</span> (<span class="hljs-attr">deleteRequest</span>)=<span class="hljs-string">"deleteItem($event)"</span> [<span class="hljs-attr">item</span>]=<span class="hljs-string">"currentItem"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-item-detail</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Click to see event target class:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"parent-div"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onClickMe($event)"</span> <span class="hljs-attr">clickable</span>&gt;</span>Click me (parent)</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"child-div"</span>&gt;</span>Click me too! (child) <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Saves only once:<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSave()"</span> <span class="hljs-attr">clickable</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSave($event)"</span>&gt;</span>Save, no propagation<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Saves twice:<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSave()"</span> <span class="hljs-attr">clickable</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSave()"</span>&gt;</span>Save with propagation<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>如果目標事件名稱 <code>myClick</code> 無法與 <code>ClickDirective</code> 的輸出屬性相符，Angular 將會改成繫結基礎 DOM 元素上的 <code>myClick</code> 事件。</p>
+
+  <h2 id="">鍵盤事件繫結</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 鍵盤事件繫結"></a>
+  <p>您可以使用 Angular 的繫結語法來繫結至鍵盤事件。您可以指定您想要繫結至鍵盤事件的鍵或程式碼。<code>key</code> 和 <code>code</code> 欄位是瀏覽器鍵盤事件物件的原生部份。預設情況下，事件繫結假設您想要在鍵盤事件上使用 <code>key</code> 欄位。您也可以使用 <code>code</code> 欄位。</p>
+<p>鍵的組合可以使用 <code>.</code>（句點）分隔。例如，<code>keydown.enter</code> 允許您將事件繫結到 <code>enter</code> 鍵。您也可以使用修飾鍵，例如 <code>shift</code>、<code>alt</code>、<code>control</code> 和 Mac 的 <code>command</code> 鍵。以下範例顯示如何將鍵盤事件繫結到 <code>keydown.shift.t</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">   <span class="hljs-tag">&lt;<span class="hljs-name">input</span> (<span class="hljs-attr">keydown.shift.t</span>)=<span class="hljs-string">"onKeydown($event)"</span> /&gt;</span></div><div class="hljs-ln-line">   ```</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">視作業系統而定，某些鍵盤組合可能會產生特殊字元，而非您預期的鍵盤組合。例如，MacOS 在您同時使用 option 和 shift 鍵時會產生特殊字元。如果您在 macOS 上繫結到 `keydown.shift.alt.t`，則該組合會產生 `ˇ` 字元，而非 `t`，這與繫結不符，也不會觸發您的事件處理常式。若要在 macOS 上繫結到 `keydown.shift.alt.t`，請使用 `code` 鍵盤事件欄位以取得正確的行為，例如本範例中所示的 `keydown.code.shiftleft.altleft.keyt`。</div></code>
+    </pre>
+  </div><p>html
+   &lt;input (keydown.code.shiftleft.altleft.keyt)=&quot;onKeydown($event)&quot; /&gt;</p>
+<pre><code>
+`code` 欄位比 `key` 欄位更具體。`key` 欄位總是回報 `shift`，而 `code` 欄位會指定 `leftshift` 或 `rightshift`。使用 `code` 欄位時，您可能需要加入獨立的繫結來捕捉所有您要的行為。使用 `code` 欄位可以避免處理作業系統特定的行為，例如 macOS 上的 `shift + option` 行為。
+
+如需更多資訊，請參閱 [key](https://developer.mozilla.org/zh-TW/docs/Web/API/UI_Events/Keyboard_event_key_values) 和 [code](https://developer.mozilla.org/zh-TW/docs/Web/API/UI_Events/Keyboard_event_code_values) 的完整參考，以協助建立您的事件字串。
+
+## 被動事件的繫結
+
+Angular 也支援 [passive event](https://developer.chrome.com/en/docs/lighthouse/best-practices/uses-passive-event-listeners/) 監聽器。
+
+這項進階技巧對大多數應用程式而言並非必要。如果您需要最佳化造成效能問題的頻繁發生事件的處理方式，您可能會覺得這項技巧很有用。
+
+例如，請使用下列步驟讓捲動事件被動。
+
+1. 在 `src` 目錄下建立 `zone-flags.ts` 檔案。
+2. 將以下程式碼加入此檔案中。
+
+typescript
+(window as any)[&#39;__zone_symbol__PASSIVE_EVENTS&#39;] = [&#39;scroll&#39;];
+3. 在 `src/polyfills.ts` 檔案中，在匯入 zone.js 之前，匯入新建立的 `zone-flags`。
+
+typescript
+import &#39;./zone-flags&#39;;
+import &#39;zone.js&#39;;  // Included with Angular CLI.
+
+在這些步驟之後，如果您為 `scroll` 事件新增事件監聽器，監聽器將會是 `passive`。
+
+## 接下來
+
+&lt;docs-pill-row&gt;
+  &lt;docs-pill href=&quot;guide/templates/event-binding&quot; title=&quot;事件繫結如何運作&quot;/&gt;
+  &lt;docs-pill href=&quot;guide/templates/property-binding&quot; title=&quot;屬性繫結&quot;/&gt;
+  &lt;docs-pill href=&quot;guide/templates/interpolation&quot; title=&quot;文字內插&quot;/&gt;
+  &lt;docs-pill href=&quot;guide/templates/two-way-binding&quot; title=&quot;雙向繫結&quot;/&gt;
+&lt;/docs-pill-row&gt;
+</code></pre>

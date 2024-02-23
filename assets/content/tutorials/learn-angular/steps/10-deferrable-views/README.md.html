@@ -1,0 +1,113 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">可延遲檢視</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/10-deferrable-views/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>有時在應用程式開發中，您會遇到很多元件需要在應用程式中參照，但其中一些基於各種原因不必立即載入。</p>
+<p>可能它們在可見摺疊下方或是一些直到之後才會與之互動的繁重元件。在這種情況下，我們可以利用延遲檢視稍後載入一些資源。</p>
+<p>在這個活動中，您將學習如何使用可延遲檢視來延遲載入元件範本的區段。</p>
+<hr>
+
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-defer-">在評論元件周圍新增 <code>@defer</code> 區塊</h3>
+  <a href="#-defer-" class="docs-anchor" tabindex="-1" aria-label="Link to 在評論元件周圍新增 <code>@defer</code> 區塊"></a>
+  
+      <p>在您的 app 中，部落格文章頁面在文章詳細資料後有一個評論元件。</p>
+<p>將註解元件用 <code>@defer</code> 區塊包覆起來延遲載入。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">comments</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>上面的程式碼是使用基本 <code>@defer</code> 區塊的一個範例。預設 <code>@defer</code> 會在瀏覽器閒置時載入 <code>comments</code> 元件。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">添加預留位置</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 添加預留位置"></a>
+  
+      <p>在 <code>@defer</code> 區塊中新增 <code>@placeholder</code> 區塊。<code>@placeholder</code> 區塊是您放置在延遲載入開始之前要顯示的 HTML 的地方。<code>@placeholder</code> 區塊中的內容會立即載入。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">comments</span> /&gt;</span></div><div class="hljs-ln-line highlighted">} @placeholder {</div><div class="hljs-ln-line highlighted">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Future comments<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line highlighted">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">加入載入區塊</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 加入載入區塊"></a>
+  
+      <p>在 <code>@defer</code> 區塊中新增一個 <code>@loading</code> 區塊。<code>@loading</code> 區塊是您放進 <em>while</em> 遞延內容正在積極擷取，但尚未完成的 html 的位置。<code>@loading</code> 區塊中的內容是立即載入的。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">comments</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Future comments<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line highlighted">} @loading {</div><div class="hljs-ln-line highlighted">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading comments...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line highlighted">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">加入最低持續時間</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 加入最低持續時間"></a>
+  
+      <p><code>@placeholder</code> 和 <code>@loading</code> 區段都有選用參數，可在快速載入時避免閃爍。<code>@placeholder</code> 有 <code>minimum</code>，而 <code>@loading</code> 有 <code>minimum</code> 和 <code>after</code>。將 <code>minimum</code> 持續時間新增至 <code>@loading</code> 區塊，如此一來它至少會呈現 2 秒。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">comments</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Future comments<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line highlighted">} @loading (minimum 2s) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Loading comments...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-viewport-">加入 viewport 觸發器</h3>
+  <a href="#-viewport-" class="docs-anchor" tabindex="-1" aria-label="Link to 加入 viewport 觸發器"></a>
+  
+      <p>可延遲檢視有許多觸發選項。加入視窗觸發，以便內容在進入視窗後延遲載入。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line highlighted">@defer (on viewport) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">comments</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">加入內容</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 加入內容"></a>
+  
+      <p>視窗觸發器最適合用於延遲載入遠在頁面下方需要捲動才能看到的內容。因此，讓我們在部落格文章中加入一些內容。您可以自行撰寫，或者複製以下內容並將其放入 <code>&lt;article&gt;</code> 元素中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">article</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Angular is my favorite framework, and this is why. Angular has the coolest deferrable view feature that makes defer loading content the easiest and most ergonomic it could possibly be. The Angular community is also filled with amazing contributors and experts that create excellent content. The community is welcoming and friendly, and it really is the best community out there.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>I can't express enough how much I enjoy working with Angular. It offers the best developer experience I've ever had. I love that the Angular team puts their developers first and takes care to make us very happy. They genuinely want Angular to be the best framework it can be, and they're doing such an amazing job at it, too. This statement comes from my heart and is not at all copied and pasted. In fact, I think I'll say these exact same things again a few times.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Angular is my favorite framework, and this is why. Angular has the coolest deferrable view feature that makes defer loading content the easiest and most ergonomic it could possibly be. The Angular community is also filled with amazing contributors and experts that create excellent content. The community is welcoming and friendly, and it really is the best community out there.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>I can't express enough how much I enjoy working with Angular. It offers the best developer experience I've ever had. I love that the Angular team puts their developers first and takes care to make us very happy. They genuinely want Angular to be the best framework it can be, and they're doing such an amazing job at it, too. This statement comes from my heart and is not at all copied and pasted. In fact, I think I'll say these exact same things again a few times.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Angular is my favorite framework, and this is why. Angular has the coolest deferrable view feature that makes defer loading content the easiest and most ergonomic it could possibly be. The Angular community is also filled with amazing contributors and experts that create excellent content. The community is welcoming and friendly, and it really is the best community out there.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>I can't express enough how much I enjoy working with Angular. It offers the best developer experience I've ever had. I love that the Angular team puts their developers first and takes care to make us very happy. They genuinely want Angular to be the best framework it can be, and they're doing such an amazing job at it, too. This statement comes from my heart and is not at all copied and pasted.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span></div></code>
+    </pre>
+  </div><p>加入此程式碼後，現在向下捲動以查看您將其捲動至視圖後載入的遞延內容。</p>
+
+    </li>
+    
+    </ol>
+    <p><span class="docs-emoji">在活動中，您已學會如何在應用程式中使用可延遲檢視。做得好。 🙌</span></p>
+<p>你還可以對它們做更多的事，例如不同的觸發器、預先擷取和 <code>@error</code> 區塊。</p>
+<p>如果您想進一步了解，請查看 <a href="guide/defer">可延遲檢視的說明文件</a>。</p>

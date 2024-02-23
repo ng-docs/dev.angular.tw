@@ -1,0 +1,54 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">NgZone 仍然不穩定</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0506.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>當在客戶端啟用Hydration，但 NgZone 在長時間內仍不穩定，就會發生此警告。</p>
+<p><code>ApplicationRef.isStable()</code> API 使用 NgZone 來報告應用程式何時變為「穩定」和「不穩定」。當沒有待處理的微任務或巨集任務時，應用程式即被視為穩定。</p>
+<p>Angular Hydration 依賴來自 Zone.js 的信號，當它在應用程式內部變得穩定時：</p>
+
+  <ul class="docs-list">
+    <li>在伺服器端渲染 (SSR) 期間啟動序列化程序</li>
+<li>在瀏覽器中，此信號用於啟動後水合清理，以移除未宣告的 DOM 節點</li>
+
+  </ul>
+  <p>當 <code>ApplicationRef.isStable()</code> 未在 10 秒內發出 <code>true</code> 時，會顯示此警告。如果這是故意的，而您的應用程式稍後變得穩定，您可以忽略此警告。</p>
+
+  <h2 id="macrotasks">Macrotasks</h2>
+  <a href="#macrotasks" class="docs-anchor" tabindex="-1" aria-label="Link to Macrotasks"></a>
+  <p>html</p>
+<div id="demo">
+  <p>Click the button to display the date.</p>
+  <button type="button" onclick="displayDate()">Display the Date</button>
+</div>
+
+<script>
+function displayDate() {
+  document.getElementById("demo").innerHTML = Date();
+}
+</script>
+
+<p>巨觀任務包含像 <code>setInterval</code>、<code>setTimeout</code>、<code>requestAnimationFrame</code> 等函式。
+如果在應用程式的初始化階段或引導元件中呼叫了這些函式中的其中一個，那麼應用程式將會保持不穩定。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">``</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleComponent</span> {</div><div class="hljs-ln-line">    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">        <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> { ... }, <span class="hljs-number">1000</span>)</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">        <span class="hljs-comment">// or</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> { ... }, <span class="hljs-number">10_000</span>)</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>如果這些函式需要在初始化階段被呼叫，在 Angular 區域外呼叫它們可以解決該問題。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleComponent</span> {</div><div class="hljs-ln-line">    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">      <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">NgZone</span>).<span class="hljs-title function_">runOutsideAngular</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">        <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> {}, <span class="hljs-number">1000</span>);</div><div class="hljs-ln-line">      })</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>驗證您沒有任何長久存在的微任務或巨集任務。</p>

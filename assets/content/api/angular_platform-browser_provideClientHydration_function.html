@@ -1,0 +1,55 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/platform-browser</span><div class="docs-reference-title"><div><h1>provideClientHydration</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div></div><p class="docs-reference-description"><p>Sets up providers necessary to enable hydration functionality for the application.</p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/platform-browser/withNoHttpTransferCache">withNoHttpTransferCache</a><a class="docs-pill" href="api/platform-browser/withHttpTransferCacheOptions">withHttpTransferCacheOptions</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">provideClientHydration</span>(</div><div class="hljs-ln-line ">  ...<span class="hljs-attr">features</span>: <span class="hljs-title class_">HydrationFeature</span>&lt;<span class="hljs-title class_">HydrationFeatureKind</span>&gt;[]</div><div class="hljs-ln-line ">): <span class="hljs-title class_">EnvironmentProviders</span>;</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>Sets up providers necessary to enable hydration functionality for the application.</p>
+<p>By default, the function enables the recommended set of features for the optimal
+performance for most of the applications. It includes the following features:</p>
+
+    <ul class="docs-list">
+      <li>Reconciling DOM hydration. Learn more about it <a href="guide/hydration">here</a>.</li>
+<li><a href="api/common/http/HttpClient"><code>HttpClient</code></a> response caching while running on the server and
+transferring this cache to the client to avoid extra HTTP requests. Learn more about data caching
+<a href="guide/ssr">here</a>.</li>
+
+    </ul>
+    <p>These functions allow you to disable some of the default features or configure features</p>
+
+    <ul class="docs-list">
+      <li>{@link withNoHttpTransferCache } to disable HTTP transfer cache</li>
+<li>{@link withHttpTransferCacheOptions } to configure some HTTP transfer cache options</li>
+
+    </ul></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>Basic example of how you can enable hydration in your application when
+<code>bootstrapApplication</code> function is used:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">bootstrapApplication(AppComponent, {</span><span class="hljs-ln-line">  providers: [<span class="hljs-built_in">provideClientHydration</span>()]</span><span class="hljs-ln-line">});</span>
+          </code>
+        </pre>
+      </div>
+    <p>Alternatively if you are using NgModules, you would add <code>provideClientHydration</code>
+to your root app module&#39;s provider list.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-variable">@NgModule</span>({</span><span class="hljs-ln-line">  <span class="hljs-attribute">declarations</span>: [RootCmp],</span><span class="hljs-ln-line">  <span class="hljs-attribute">bootstrap</span>: [RootCmp],</span><span class="hljs-ln-line">  <span class="hljs-attribute">providers</span>: [<span class="hljs-built_in">provideClientHydration</span>()],</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line">export class AppModule {}</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>provideClientHydration</h3><div><code>EnvironmentProviders</code></div></div><span></span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Sets up providers necessary to enable hydration functionality for the application.</p>
+<p>By default, the function enables the recommended set of features for the optimal
+performance for most of the applications. It includes the following features:</p>
+
+    <ul class="docs-list">
+      <li>Reconciling DOM hydration. Learn more about it <a href="guide/hydration">here</a>.</li>
+<li><a href="api/common/http/HttpClient"><code>HttpClient</code></a> response caching while running on the server and
+transferring this cache to the client to avoid extra HTTP requests. Learn more about data caching
+<a href="guide/ssr">here</a>.</li>
+
+    </ul>
+    <p>These functions allow you to disable some of the default features or configure features</p>
+
+    <ul class="docs-list">
+      <li>{@link withNoHttpTransferCache } to disable HTTP transfer cache</li>
+<li>{@link withHttpTransferCacheOptions } to configure some HTTP transfer cache options</li>
+
+    </ul></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">features</span><code>HydrationFeature&lt;HydrationFeatureKind>[]</code><div class="docs-parameter-description"><p>Optional features to configure additional router behaviors.</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>EnvironmentProviders</code></div></div></div></div></div></div></div>

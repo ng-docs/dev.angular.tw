@@ -1,0 +1,33 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">DI 中的循環依賴</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0200.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-video-container">
+      <iframe
+      class="docs-video"
+      src="https://www.youtube.com/embed/CpLOm4o_FzM"
+      
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      credentialless
+      title="Video player"
+      ></iframe>
+    </div>
+    <p>當服務的 <a href="guide/di/hierarchical-dependency-injection">依賴</a> 直接或間接依賴服務本身時，就會產生循環依賴。例如，如果 <code>UserService</code> 依賴 <code>EmployeeService</code>，而 <code>EmployeeService</code> 也依賴 <code>UserService</code>。Angular 必須實例化 <code>EmployeeService</code> 以建立 <code>UserService</code>，而 <code>UserService</code> 本身依賴 <code>UserService</code>。</p>
+
+  <h2 id="">偵錯錯誤</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 偵錯錯誤"></a>
+  <p>使用呼叫堆疊來確定循環依賴存在的位置。
+您可以透過<a href="guide/di/di-in-action">繪製</a>元件、模組或服務的依賴關係，並識別導致問題的迴圈來查看是否有任何子依賴關係依賴原始檔案。</p>
+<p>中斷此相依性的迴圈（或循環）以解決此錯誤。這通常表示移除或重構相依性，使其不相互依賴。</p>

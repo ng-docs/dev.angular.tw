@@ -1,0 +1,73 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">元件中的控制流程 - <code>@if</code></h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/4-control-flow-if/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>決定要在螢幕上顯示什麼給使用者是應用程式開發中的一項常見任務。許多時候，這個決定會使用條件以程式化方式做出。</p>
+<p>若要表達範本中的條件式顯示，Angular 使用 <code>@if</code> 範本語法。</p>
+<p>在這個活動中，你將學習如何在範本中使用條件。</p>
+<hr/>
+
+<p>在範本中啟用元素的條件式顯示的語法是 <code>@if</code>。</p>
+<p>以下是如何在元件中使用 <code>@if</code> 語法的一個範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    @if (isLoggedIn) {</div><div class="hljs-ln-line">      &lt;p&gt;Welcome back, Friend!&lt;/p&gt;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  isLoggedIn = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>兩件事需要注意：</p>
+
+  <ul class="docs-list">
+    <li><code>if</code> 前面有 <code>@</code> 前綴，因為它是一種特殊的語法類型，稱為 <a href="guide/templates">Angular 模板語法</a></li>
+<li>對於使用 v16 及更早版本之應用程式，請參閱 <a href="guide/directives/structural-directives">Angular 文件中的 NgIf</a> 以取得更多資訊。</li>
+
+  </ul>
+  
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-isserverrunning-">建立名為 <code>isServerRunning</code> 的屬性</h3>
+  <a href="#-isserverrunning-" class="docs-anchor" tabindex="-1" aria-label="Link to 建立名為 <code>isServerRunning</code> 的屬性"></a>
+  
+      <p>在 <code>AppComponent</code> 類別中，新增一個名為 <code>isServerRunning</code> 的 <code>boolean</code> 屬性，將初始值設定為 <code>true</code>。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-if">在範本中使用 <code>@if</code></h3>
+  <a href="#-if" class="docs-anchor" tabindex="-1" aria-label="Link to 在範本中使用 <code>@if</code>"></a>
+  
+      <p>如果 <code>isServerRunning</code> 的值為 <code>true</code>，請更新範本以顯示訊息 <code>Yes, the server is running</code>。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-else">在範本中使用 <code>@else</code></h3>
+  <a href="#-else" class="docs-anchor" tabindex="-1" aria-label="Link to 在範本中使用 <code>@else</code>"></a>
+  
+      <p>現在，Angular 支援使用 <code>@else</code> 語法來定義 else 案例的原生範本語法。更新範本，以顯示訊息 <code>否，伺服器沒有執行中</code> 作為 else 案例。</p>
+<p>以下是一個範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">  @if (isServerRunning) { ... }</div><div class="hljs-ln-line">  @else { ... }</div><div class="hljs-ln-line">`;</div></code>
+    </pre>
+  </div><p>新增您的程式碼來填入遺失的標記。</p>
+
+    </li>
+    
+    </ol>
+    <p>這種功能稱為條件控制流程。接下來您將學習如何在範本中重複項目。</p>

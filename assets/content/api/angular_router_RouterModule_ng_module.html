@@ -1,0 +1,36 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>RouterModule</h1><div class="docs-api-item-label" data-mode="full" data-type="ng_module">NgModule</div></div></div><p class="docs-reference-description"><p>Adds directives and providers for in-app navigation among views defined in an application.
+Use the Angular <code>Router</code> service to declaratively specify application states and manage state
+transitions.</p></p><nav class="docs-pill-row"><a class="docs-pill" href="guide/routing/common-router-tasks">Routing and Navigation guide</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">RouterModule</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="forRoot">  <span class="hljs-keyword">static</span> <span class="hljs-title function_">forRoot</span>(<span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span>, config?: <span class="hljs-title class_">ExtraOptions</span>): <span class="hljs-title class_">ModuleWithProviders</span>&lt;<span class="hljs-title class_">RouterModule</span>&gt;;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="forChild">  <span class="hljs-keyword">static</span> <span class="hljs-title function_">forChild</span>(<span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span>): <span class="hljs-title class_">ModuleWithProviders</span>&lt;<span class="hljs-title class_">RouterModule</span>&gt;;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>Adds directives and providers for in-app navigation among views defined in an application.
+Use the Angular <code>Router</code> service to declaratively specify application states and manage state
+transitions.</p>
+<p>You can import this NgModule multiple times, once for each lazy-loaded bundle.
+However, only one <code>Router</code> service can be active.
+To ensure this, there are two ways to register routes when importing this module:</p>
+
+    <ul class="docs-list">
+      <li>The <code>forRoot()</code> method creates an <code>NgModule</code> that contains all the directives, the given
+routes, and the <code>Router</code> service itself.</li>
+<li>The <code>forChild()</code> method creates an <code>NgModule</code> that contains all the directives and the given
+routes, but does not include the <code>Router</code> service.</li>
+
+    </ul></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="forRoot" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>forRoot</h3><div><code>ModuleWithProviders&lt;RouterModule></code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Creates and configures a module with all the router providers and directives.
+Optionally sets up an application listener to perform an initial navigation.</p>
+<p>When registering the NgModule at the root, import as follows:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@NgModule({</span><span class="hljs-ln-line">  imports: [RouterModule.forRoot(ROUTES)]</span><span class="hljs-ln-line">})</span></span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyNgModule</span> {}</span>
+          </code>
+        </pre>
+      </div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">routes</span><code>Routes</code><div class="docs-parameter-description"><p>An array of <code>Route</code> objects that define the navigation paths for the application.</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">config</span><code>ExtraOptions</code><div class="docs-parameter-description"><p>An <code>ExtraOptions</code> configuration object that controls how navigation is performed.</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>ModuleWithProviders&lt;RouterModule></code></div></div></div></div><div id="forChild" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>forChild</h3><div><code>ModuleWithProviders&lt;RouterModule></code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Creates a module with all the router directives and a provider registering routes,
+without creating a new Router service.
+When registering for submodules and lazy-loaded submodules, create the NgModule as follows:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@NgModule({</span><span class="hljs-ln-line">  imports: [RouterModule.forChild(ROUTES)]</span><span class="hljs-ln-line">})</span></span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyNgModule</span> {}</span>
+          </code>
+        </pre>
+      </div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">routes</span><code>Routes</code><div class="docs-parameter-description"><p>An array of <code>Route</code> objects that define the navigation paths for the submodule.</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>ModuleWithProviders&lt;RouterModule></code></div></div></div></div></div></div></div>

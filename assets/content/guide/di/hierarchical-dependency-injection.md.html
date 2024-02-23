@@ -1,0 +1,837 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">階層式注入器</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/di/hierarchical-dependency-injection.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>Angular 中的 Injectors 有些規則，您可以利用這些規則來實現應用程式中可注入項的所需可見性。
+透過了解這些規則，您可以確定要在應用程式層級、在 Component 或在 Directive 中宣告提供者。</p>
+<p>使用 Angular 建構的應用程式可能會變得非常龐大，管理這種複雜性的方法之一是將應用程式分割成定義良好的元件樹。</p>
+<p>頁面中可以有區段以完全獨立於應用程式其他部分的方式運作，具有其服務和所需其他相依項的本地副本。
+這些應用程式區段使用的部分服務可能與應用程式其他部分或元件樹中較上層的父元件共用，而其他相依項則專為私人用途。</p>
+<p>藉由階層式相依性注入，您可以分離應用程式的區段，並提供它們自己的私人依賴項，而不會與應用程式的其他部分共享，或者讓父元件僅與其子元件共享某些依賴項，但不會與元件樹的其餘部分共享，依此類推。階層式相依性注入讓您僅在需要時，才能在應用程式的不同部分之間共享依賴項。</p>
+
+  <h2 id="">注入器層級類型</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 注入器層級類型"></a>
+  <p>Angular 有兩個注射器層級：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">注入器階層</th>
+<th align="left">詳細</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>EnvironmentInjector</code> 階層</td>
+<td align="left">在此階層中使用 <code>@Injectable()</code> 或 <code>ApplicationConfig</code> 中的 <code>providers</code> 陣列來配置 <code>ElementInjector</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>ElementInjector</code> 階層</td>
+<td align="left">在每個 DOM 元素中隱含建立。預設情況下，<code>ElementInjector</code> 為空，除非您在 <code>@Directive()</code> 或 <code>@Component()</code> 上的 <code>providers</code> 屬性中配置它。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-callout docs-callout-helpful">
+      <h3>基於 NgModule 的應用程式</h3>
+      <p>對於基於 <code>NgModule</code> 的應用程式，您可以使用 <code>@NgModule()</code> 或 <code>@Injectable()</code> 註解，透過 <code>ModuleInjector</code> 層級提供相依性。</p>
+
+    </div>
+    
+  <h3 id="environmentinjector"><code>EnvironmentInjector</code>`</h3>
+  <a href="#environmentinjector" class="docs-anchor" tabindex="-1" aria-label="Link to <code>EnvironmentInjector</code>`"></a>
+  <p>EnvironmentInjector 可使用以下兩種方式之一進行設定：</p>
+
+  <ul class="docs-list">
+    <li><code>@Injectable()</code> <code>providedIn</code> 屬性用於參照 <code>root</code> 或 <code>platform</code></li>
+<li><code>ApplicationConfig</code> <code>providers</code> 陣列</li>
+
+  </ul>
+  
+    <div class="docs-callout docs-callout-helpful">
+      <h3>Tree-shaking 和 &commat;Injectable()</h3>
+      <p>使用 <code>@Injectable()</code> <code>providedIn</code> 屬性優於使用 <code>ApplicationConfig</code> <code>providers</code> 陣列。使用 <code>@Injectable()</code> <code>providedIn</code>，最佳化工具可以執行 tree-shaking，這會移除應用程式未使用的服務。這會產生較小的捆綁大小。</p>
+<p>Tree-shaking 對於一個函式庫特別有用，因為使用該函式庫的應用程式可能不需要注入它。</p>
+
+    </div>
+    <p><code>EnvironmentInjector</code> 是由 <code>ApplicationConfig.providers</code> 配置的。</p>
+<p>提供服務使用 <code>@Injectable()</code> 的 <code>providedIn</code> 如下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>  <span class="hljs-comment">// &lt;--provides this service in the root EnvironmentInjector</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ItemService</span> {</div><div class="hljs-ln-line">  name = <span class="hljs-string">'telephone'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><code>@Injectable()</code> 裝飾器識別服務類別。
+<code>providedIn</code> 屬性配置特定的 <code>EnvironmentInjector</code>，這裡是 <code>root</code>，這會讓服務在 <code>root</code> <code>EnvironmentInjector</code> 中可用。</p>
+
+  <h3 id="moduleinjector">ModuleInjector</h3>
+  <a href="#moduleinjector" class="docs-anchor" tabindex="-1" aria-label="Link to ModuleInjector"></a>
+  <p>在基於 <code>NgModule</code> 的應用程式中，ModuleInjector 可以使用以下兩種方式之一進行配置：</p>
+
+  <ul class="docs-list">
+    <li><code>@Injectable()</code> 的 <code>providedIn</code> 屬性用來指涉 <code>root</code> 或 <code>platform</code></li>
+<li><code>@NgModule()</code> 的 <code>providers</code> 陣列</li>
+
+  </ul>
+  <p><code>ModuleInjector</code> 是由 <code>@NgModule.providers</code> 和 <code>NgModule.imports</code> 屬性配置的。<code>ModuleInjector</code> 是所有提供者陣列的扁平化，可透過遞迴追蹤 <code>NgModule.imports</code> 來取得。</p>
+<p>當延遲載入其他 <code>@NgModules</code> 時，會建立子 <code>ModuleInjector</code> 層級。</p>
+
+  <h3 id="">平臺注入器</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 平臺注入器"></a>
+  <p>在 <code>root</code> 上方還有兩個注入器，一個額外的 <code>EnvironmentInjector</code> 和 <code>NullInjector()</code>。</p>
+<p>考慮 Angular 如何在 <code>main.ts</code> 中使用以下內容引導應用程式：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">AppComponent</span>, appConfig);</div></code>
+    </pre>
+  </div><p><code>bootstrapApplication()</code> 方法會建立一個由 <code>ApplicationConfig</code> 實例配置的平台注入器的子注入器。
+這是 <code>root</code> <code>EnvironmentInjector</code>。</p>
+<p><code>platformBrowserDynamic()</code> 方法會建立由 <code>PlatformModule</code> 配置的注入器，其中包含特定於平台的相依性。
+這允許多個應用程式共用一個平台配置。
+例如，不論您執行多少個應用程式，瀏覽器只有一個 URL 列。
+您可以使用 <code>platformBrowser()</code> 函式提供 <code>extraProviders</code> 來在平台層級配置其他特定於平台的提供者。</p>
+<p>層級中的下一個父注入器是 <code>NullInjector()</code>，它是樹的頂端。
+如果您已經沿著樹向上到達頂端以致於您在 <code>NullInjector()</code> 中尋找服務，除非您使用了 <code>@Optional()</code>，否則您會收到錯誤，因為最終一切都會在 <code>NullInjector()</code> 結束，它會傳回錯誤，或者在 <code>@Optional()</code> 的情況下，傳回 <code>null</code>。
+有關 <code>@Optional()</code> 的更多資訊，請參閱本指南的 <a href="#optional"><code>@Optional()</code> 區段</a>。</p>
+<p>以下圖表描述了 <code>root</code> <code>ModuleInjector</code> 和其父注入器之間的關係，如前幾段所述。</p>
+<!-- TODO(josephperrott): enable this mermaid chart -->
+
+<pre><code>stateDiagram-v2
+    elementInjector: EnvironmentInjector\n(configured by Angular)\nhas special things like DomSanitizer =&gt; providedIn &#39;platform&#39;
+    rootInjector: root EnvironmentInjector\n(configured by AppConfig)\nhas things for your app =&gt; bootstrapApplication(..., AppConfig)
+    nullInjector: NullInjector\nalways throws an error unless\nyou use @Optional()
+
+    direction BT
+    rootInjector --&gt; elementInjector
+    elementInjector --&gt; nullInjector
+</code></pre>
+<p>雖然名稱 <code>root</code> 是特殊別名，其他 <code>EnvironmentInjector</code> 層級沒有別名。
+只要建立動態載入的元件時，您就可以選擇建立 <code>EnvironmentInjector</code> 層級，例如使用路由器，它將建立子 <code>EnvironmentInjector</code> 層級。</p>
+<p>無論您是使用傳遞給 <code>bootstrapApplication()</code> 方法的 <code>ApplicationConfig</code> 實例對其進行配置或是使用服務中的 <code>root</code> 註冊所有提供者，所有要求都會轉發至根注入器。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3>@Injectable() vs. ApplicationConfig</h3>
+      <p>如果你在 <code>bootstrapApplication</code> 的 <code>ApplicationConfig</code> 中配置一個應用程式範圍的提供者，它會覆寫在 <code>@Injectable()</code> 元資料中為 <code>root</code> 配置的提供者。
+你可以這麼做來配置一個與多個應用程式共用的服務的非預設提供者。</p>
+<p>以下是一個範例，其中元件路由器設定包含一個非預設的 <a href="/guide/routing#location-strategy">位置策略</a>，方法是將其提供者列在 <code>ApplicationConfig</code> 的 <code>providers</code> 清單中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">LocationStrategy</span>, <span class="hljs-attr">useClass</span>: <span class="hljs-title class_">HashLocationStrategy</span> }</div><div class="hljs-ln-line">]</div></code>
+    </pre>
+  </div><p>對於基於 <code>NgModule</code> 的應用程式，請在 <code>AppModule</code> <code>providers</code> 中設定應用程式範圍的提供者。</p>
+
+    </div>
+    
+  <h3 id="elementinjector"><code>ElementInjector</code>`</h3>
+  <a href="#elementinjector" class="docs-anchor" tabindex="-1" aria-label="Link to <code>ElementInjector</code>`"></a>
+  <p>Angular 為每個 DOM 元素隱含建立 <code>ElementInjector</code> 層級。</p>
+<p>在 <code>@Component()</code> 裝飾器中提供服務，使用其 <code>providers</code> 或 <code>viewProviders</code> 屬性配置 <code>ElementInjector</code>。
+例如，以下 <code>TestComponent</code> 透過提供服務配置 <code>ElementInjector</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">ItemService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">'lamp'</span> } }]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestComponent</span></div></code>
+    </pre>
+  </div><p>HELPFUL：參閱 <a href="#解析規則">解析規則</a> 部分，以了解 <code>EnvironmentInjector</code> 樹、<code>ModuleInjector</code> 和 <code>ElementInjector</code> 樹之間的關係。</p>
+<p>當您在元件中提供服務時，該服務可透過該元件實例的 <code>ElementInjector</code> 使用。
+它也可能會在子元件/指令中顯示，具體取決於 <a href="#resolution-rules">解析規則</a> 部分中描述的可見性規則。</p>
+<p>當元件實例被銷毀時，服務實例也是如此。</p>
+
+  <h4 id="directive--component"><code>@Directive()</code> 和 <code>@Component()</code></h4>
+  <a href="#directive--component" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@Directive()</code> 和 <code>@Component()</code>"></a>
+  <p>元件是特殊類型的指令，表示 <code>@Directive()</code> 具有 <code>providers</code> 屬性，<code>@Component()</code> 也有。
+這表示指令和元件都能使用 <code>providers</code> 屬性來設定提供者。
+使用 <code>providers</code> 屬性為元件或指令設定提供者時，該提供者會屬於該元件或指令的 <code>ElementInjector</code>。
+相同元素上的元件和指令共用一個注入器。</p>
+
+  <h2 id="">解析規則</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 解析規則"></a>
+  <p>在為元件/指令解析代幣時，Angular 會在兩個階段解析：</p>
+
+    <ol class="docs-ordered-list">
+      <li>針對 <code>ElementInjector</code> 層級中的父代。</li>
+<li>針對 <code>EnvironmentInjector</code> 層級中的父代。</li>
+
+    </ol>
+    <p>當元件宣告相依項時，Angular 會嘗試使用自己的 <code>ElementInjector</code> 來滿足該相依項。
+如果元件的注入器缺少提供者，則會將要求傳遞給其父元件的 <code>ElementInjector</code>。</p>
+<p>請求會一直轉發，直到 Angular 找到可以處理請求的注入器，或是用完祖先 <code>ElementInjector</code> 層級。</p>
+<p>如果 Angular 在任何 <code>ElementInjector</code> 層級中找不到提供者，它會回到提出請求的元素並在 <code>EnvironmentInjector</code> 層級中尋找。
+如果 Angular 仍然找不到提供者，它會擲回一個錯誤。</p>
+<p>如果您為不同的 DI 代幣註冊了提供者，Angular 會使用它遇到的第一個來解析依賴項。
+例如，如果在需要服務的元件中本地註冊了提供者，
+Angular 就不會尋找同一服務的另一個提供者。</p>
+<p>有用的：對於基於 <code>NgModule</code> 的應用程式，如果在 <code>ElementInjector</code> 層級中找不到提供者，Angular 將會搜尋 <code>ModuleInjector</code> 層級。</p>
+
+  <h2 id="">解析度修改器</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 解析度修改器"></a>
+  <p><code>Angular</code> 的解析行為可以使用 <code>@Optional()</code>, <code>@Self()</code>, <code>@SkipSelf()</code> 和 <code>@Host()</code> 來修改。
+從 <code>@angular/core</code> 匯入每一個，並在元件類別建構函式或注入服務時在 <code>inject</code> 組態中使用每一個。</p>
+
+  <h3 id="">修飾詞類型</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 修飾詞類型"></a>
+  <p>決議修改器分為三類：</p>
+
+  <ul class="docs-list">
+    <li>Angular 找不到你正在尋找的東西，也就是 <code>@Optional()</code></li>
+<li>從哪裡開始尋找，也就是 <code>@SkipSelf()</code></li>
+<li>在哪裡停止尋找，<code>@Host()</code> 和 <code>@Self()</code></li>
+
+  </ul>
+  <p>預設情況下，Angular 總是從當前 <code>Injector</code> 開始並一直向上搜尋。
+修改器允許您變更起始位置或 <em>self</em> 位置與結束位置。</p>
+<p>另外，您可以組合所有修飾符，但下列除外：</p>
+
+  <ul class="docs-list">
+    <li><code>@Host()</code> 與 <code>@Self()</code></li>
+<li><code>@SkipSelf()</code> 與 <code>@Self()</code>.</li>
+
+  </ul>
+  
+  <h3 id="optional"><code>@Optional()</code></h3>
+  <a href="#optional" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@Optional()</code>"></a>
+  <p><code>@Optional()</code> 允許 Angular 將您注入的服務視為可選。
+這樣，如果在執行期間無法解析服務，Angular 會將服務解析為 <code>null</code>，而不是擲回錯誤。
+在以下範例中，服務 <code>OptionalService</code> 未提供在服務、<code>ApplicationConfig</code>、<code>@NgModule()</code> 或元件類別中，因此它在應用程式中任何位置都不可用。</p>
+<div class="docs-code" header="src/app/optional/optional.component.ts">
+    <div class="docs-code-header"><h3>src/app/optional/optional.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OptionalComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Optional</span>() <span class="hljs-keyword">public</span> optional?: OptionalService</span>) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="self"><code>@Self()</code></h3>
+  <a href="#self" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@Self()</code>"></a>
+  <p>使用 <code>@Self()</code>，以便 Angular 只會查看目前元件或指令的 <code>ElementInjector</code>。</p>
+<p><code>@Self()</code> 的一個良好使用案例是注入服務，但前提是該服務僅在目前主機元素上可用。
+若要避免此情況中的錯誤，請將 <code>@Self()</code> 與 <code>@Optional()</code> 結合使用。</p>
+<p>例如，在以下的 <code>SelfComponent</code> 中，請注意建構函式中注入的 <code>LeafService</code>。</p>
+<div class="docs-code" header="src/app/self-no-data/self-no-data.component.ts">
+    <div class="docs-code-header"><h3>src/app/self-no-data/self-no-data.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-self-no-data'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./self-no-data.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./self-no-data.component.css'</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SelfNoDataComponent</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Self</span>() <span class="hljs-meta">@Optional</span>() <span class="hljs-keyword">public</span> leaf?: LeafService</span>) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>在此範例中，有一個父提供者，注入服務將會回傳值，然而，使用 <code>@Self()</code> 和 <code>@Optional()</code> 注入服務將會回傳 <code>null</code>，因為 <code>@Self()</code> 告訴注入器停止在目前主機元素中搜尋。</p>
+<p>以下範例顯示具有 <code>FlowerService</code> 提供者的元件類別。
+在這種情況下，注入器不會再進一步尋找目前的 <code>ElementInjector</code>，因為它找到了 <code>FlowerService</code><span class="docs-emoji"> 並傳回鬱金香 &#x1F337;。</span></p>
+<div class="docs-code" path="adev/src/content/examples/resolution-modifiers/src/app/self/self.component.ts" visiblelines="3,4,5,6,7,8,9,10,11,12" header="src/app/self/self.component.ts">
+    <div class="docs-code-header"><h3>src/app/self/self.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">import { Component, Self } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line">import { FlowerService } <span class="hljs-keyword">from</span> <span class="hljs-string">'../flower.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@<span class="hljs-title function_ invoke__">Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-self'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./self.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./self.component.css'</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{ <span class="hljs-attr">provide</span>: FlowerService, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🌷'</span> } }]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SelfComponent</span> </span>{</div><div class="hljs-ln-line">  <span class="hljs-title function_ invoke__">constructor</span>(@<span class="hljs-title function_ invoke__">Self</span>() <span class="hljs-keyword">public</span> <span class="hljs-attr">flower</span>: FlowerService) {}</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// This component provides the FlowerService so the injector</span></div><div class="hljs-ln-line"><span class="hljs-comment">// doesn't have to look further up the injector tree</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="skipself"><code>@SkipSelf()</code></h3>
+  <a href="#skipself" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@SkipSelf()</code>"></a>
+  <p><code>@SkipSelf()</code> 與 <code>@Self()</code> 相反。
+使用 <code>@SkipSelf()</code>，Angular 會從父 <code>ElementInjector</code> 開始搜尋服務，而非從目前的 <code>ElementInjector</code> 開始搜尋。
+因此，如果父 <code>ElementInjector</code><span class="docs-emoji"> 使用蕨類 &#x1F33F; 值作為 </span><code>emoji</code>，但您在元件的 <code>providers</code><span class="docs-emoji"> 陣列中使用楓葉 &#x1F341;，Angular 會忽略楓葉 &#x1F341; 並使用蕨類 &#x1F33F;。</span></p>
+<p>要以程式碼方式查看此內容，請假設 <code>emoji</code> 的下列值是父元件正在使用的，如同此服務：</p>
+<div class="docs-code" header="src/app/leaf.service.ts">
+    <div class="docs-code-header"><h3>src/app/leaf.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LeafService</span> {</div><div class="hljs-ln-line">  emoji = <span class="hljs-string">'🌿'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><span class="docs-emoji">想像一下在子元件中，您有一個不同的值，楓葉 &#x1F341; 但您想要使用父元件的值。
+這時您會使用 </span><code>@SkipSelf()</code>：</p>
+<div class="docs-code" header="src/app/skipself/skipself.component.ts">
+    <div class="docs-code-header"><h3>src/app/skipself/skipself.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-skipself'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./skipself.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./skipself.component.css'</span>],</div><div class="hljs-ln-line">  <span class="hljs-comment">// Angular would ignore this LeafService instance</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">LeafService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🍁'</span> } }]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SkipselfComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// Use @SkipSelf() in the constructor</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@SkipSelf</span>() <span class="hljs-keyword">public</span> leaf: LeafService</span>) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>在這種情況下，您會取得的值為 <code>emoji</code><span class="docs-emoji"> 是蕨類 &#x1F33F;，不是楓葉 &#x1F341;。</span></p>
+
+  <h4 id="skipself--optional"><code>@SkipSelf()</code> 與 <code>@Optional()</code>`</h4>
+  <a href="#skipself--optional" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@SkipSelf()</code> 與 <code>@Optional()</code>`"></a>
+  <p>使用 <code>@SkipSelf()</code> 與 <code>@Optional()</code> 可防止值為 <code>null</code> 時出現錯誤。</p>
+<p>在以下範例中，<code>Person</code> 服務會注入至建構函式中。
+<code>@SkipSelf()</code> 告訴 Angular 跳過目前的注入器，而 <code>@Optional()</code> 將防止 <code>Person</code> 服務為 <code>null</code> 時發生錯誤。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Optional</span>() <span class="hljs-meta">@SkipSelf</span>() parent?: Person</span>) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="host"><code>@Host()</code></h3>
+  <a href="#host" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@Host()</code>"></a>
+  <!-- TODO：移除 @Host 和 @Self 之間的歧義。 -->
+
+<p><code>@Host()</code> 讓您可以指定一個元件為搜尋提供者時，注入器樹的最後一站。</p>
+<p>即使樹中有更上層的服務實例，Angular 也不會繼續搜尋。
+請按照下列方式使用 <code>@Host()</code>：</p>
+<div class="docs-code" header="src/app/host/host.component.ts">
+    <div class="docs-code-header"><h3>src/app/host/host.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-host'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./host.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./host.component.css'</span>],</div><div class="hljs-ln-line">  <span class="hljs-comment">//  provide the service</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">FlowerService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🌷'</span> } }]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HostComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// use @Host() in the constructor when injecting the service</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Host</span>() <span class="hljs-meta">@Optional</span>() <span class="hljs-keyword">public</span> flower?: FlowerService</span>) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>由於 <code>HostComponent</code> 在其建構函式中具有 <code>@Host()</code>，不論 <code>HostComponent</code> 的父級可能具有什麼 <code>flower.emoji</code> 值，<code>HostComponent</code><span class="docs-emoji"> 都會使用鬱金香 &#x1F337;。</span></p>
+
+  <h2 id="">範本的邏輯結構</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 範本的邏輯結構"></a>
+  <p>當您在元件類別中提供服務時，這些服務會在相對於您提供這些服務的位置和方式的 <code>ElementInjector</code> 樹中可見。</p>
+<p>了解 Angular 範本的底層邏輯結構會為您提供配置服務的基礎，進而控制其可見性。</p>
+<p>元件可用於範本中，如下列範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span>;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p>HELPFUL：通常，您會在個別檔案中宣告元件及其範本。
+為了了解注入系統如何運作，從組合邏輯樹的角度來看它們很有用。
+術語「邏輯」將它與渲染樹（即應用程式的 DOM 樹）區分開來。
+為了標記元件範本所在的位置，本指南使用了實際上並不存在於渲染樹中，且僅出於心智模型目的而存在的偽元素 <code>&lt;#VIEW&gt;</code>。</p>
+<p>以下是在單一邏輯樹中結合 <code>&lt;app-root&gt;</code> 與 <code>&lt;app-child&gt;</code> 視圖樹的範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span>&gt;</span></div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">     &lt;#VIEW&gt;</div><div class="hljs-ln-line">       …content goes here…</div><div class="hljs-ln-line">     &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p>了解 <code>&lt;#VIEW&gt;</code> 界線的概念在您於元件類別中配置服務時特別重要。</p>
+
+  <h2 id="-component-">範例：在 <code>@Component()</code> 中提供服務`</h2>
+  <a href="#-component-" class="docs-anchor" tabindex="-1" aria-label="Link to 範例：在 <code>@Component()</code> 中提供服務`"></a>
+  <p>您使用 <code>@Component()</code>（或 <code>@Directive()</code>）裝飾器提供服務的方式決定了它們的可見性。
+以下各節說明了 <code>providers</code> 和 <code>viewProviders</code>，以及使用 <code>@SkipSelf()</code> 和 <code>@Host()</code> 修改服務可見性的方法。</p>
+<p>元件類別可以透過兩種方式提供服務：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">陣列</th>
+<th align="left">詳細</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">具有 <code>providers</code> 陣列</td>
+<td align="left"><code>@Component({ providers: [SomeService] })</code></td>
+</tr>
+<tr>
+<td align="left">具有 <code>viewProviders</code> 陣列</td>
+<td align="left"><code>@Component({ viewProviders: [SomeService] })</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>在下列範例中，您將看到 Angular 應用程式的邏輯樹狀結構。
+為了說明注入器在範本的內容中如何運作，邏輯樹狀結構將代表該應用的 HTML 結構。
+例如，邏輯樹狀結構將顯示 <code>&lt;child-component&gt;</code> 是 <code>&lt;parent-component&gt;</code> 的直接子項。</p>
+<p>在邏輯樹中，您會看到特殊屬性：<code>@Provide</code>、<code>@Inject</code> 和 <code>@ApplicationConfig</code>。
+這些都不是真正的屬性，但用來示範幕後發生的事情。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">Angular service 屬性</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>@Inject(Token)=&gt;Value</code></td>
+<td align="left">如果在邏輯樹的這個位置注入 <code>Token</code>，其值會是 <code>Value</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>@Provide(Token=Value)</code></td>
+<td align="left">表示在邏輯樹的這個位置以 <code>Value</code> 提供 <code>Token</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>@ApplicationConfig</code></td>
+<td align="left">說明應該在這個位置使用備用 <code>EnvironmentInjector</code>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="">範例應用程式結構</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 範例應用程式結構"></a>
+  <p>範例應用程式有一個在 <code>root</code> 中提供的 <code>FlowerService</code>，其 <code>emoji</code><span class="docs-emoji"> 值為紅色扶桑 &#x1F33A;。</span></p>
+<div class="docs-code" header="src/app/flower.service.ts">
+    <div class="docs-code-header"><h3>src/app/flower.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FlowerService</span> {</div><div class="hljs-ln-line">  emoji = <span class="hljs-string">'🌺'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>考慮僅具備 <code>AppComponent</code> 和 <code>ChildComponent</code> 的應用程式。
+最基本的已呈現檢視看起來會像下列的巢狀 HTML 元素：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span>&gt;</span> <span class="hljs-comment">&lt;!-- AppComponent selector --&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span> <span class="hljs-comment">&lt;!-- ChildComponent selector --&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p>然而，在幕後，Angular 在解析注入請求時會使用邏輯檢視表示，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span>&gt;</span> <span class="hljs-comment">&lt;!-- AppComponent selector --&gt;</span></div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span> <span class="hljs-comment">&lt;!-- ChildComponent selector --&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW&gt;</div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p>此處的 <code>&lt;#VIEW&gt;</code> 代表範本的實例。
+注意每個元件都有自己的 <code>&lt;#VIEW&gt;</code>。</p>
+<p>了解此結構可以讓您了解如何提供並注入您的服務，並讓您完全控制服務的可見性。</p>
+<p>現在，考慮 <code>&lt;app-root&gt;</code> 注入 <code>FlowerService</code>：</p>
+<div class="docs-code" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span>  {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">public</span> flower: FlowerService</span>) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>將繫結新增至 <code>&lt;app-root&gt;</code> 範本以視覺化結果：</p>
+<div class="docs-code" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from FlowerService: {{flower.emoji}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
+    </pre>
+  </div><p>檢視中的輸出結果會是：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Emoji from FlowerService: 🌺</div></code>
+    </pre>
+  </div><p>在邏輯樹中，這將表示如下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line highlighted">        @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">FlowerService</span>) <span class="hljs-attr">flower</span>=&gt;"🌺"&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line highlighted">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from FlowerService: {{flower.emoji}} (🌺)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW&gt;</div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p>當 <code>&lt;app-root&gt;</code> 請求 <code>FlowerService</code> 時，injector 的工作是解析 <code>FlowerService</code> 令牌。
+令牌的解析分為兩個階段：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>注入器會確定邏輯樹中的起始位置和搜尋的結束位置。
+ 注入器從起始位置開始，並在邏輯樹中的每個檢視層級尋找代號。
+ 如果找到代號，則會傳回。</p>
+</li>
+<li><p>如果找不到代號，則注入器會尋找最近的父項 <code>EnvironmentInjector</code> 來委派要求。</p>
+</li>
+
+    </ol>
+    <p>在範例案例中，約束條件為：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>從屬於 <code>&lt;app-root&gt;</code> 的 <code>&lt;#VIEW&gt;</code> 開始，以 <code>&lt;app-root&gt;</code> 結束。</p>
+
+  <ul class="docs-list">
+    <li>通常搜尋的起點是在注入點。
+  然而，在這個情況下 <code>&lt;app-root&gt;</code> 是元件。<code>@Component</code> 很特別，在於它們也包含自己的 <code>viewProviders</code>，這就是為什麼搜尋會從屬於 <code>&lt;app-root&gt;</code> 的 <code>&lt;#VIEW&gt;</code> 開始。
+  這不會是與相同位置匹配的指令的情況。</li>
+<li>結束位置碰巧與元件本身相同，因為它是此應用程式最上層的元件。</li>
+
+  </ul>
+  </li>
+<li><p>由 <code>ApplicationConfig</code> 提供的 <code>ElementInjector</code> 在無法在 <code>ElementInjector</code> 層級結構中找到注入權杖時，會充當後備注入器。</p>
+</li>
+
+    </ol>
+    
+  <h3 id="-providers-">使用 <code>providers</code> 陣列</h3>
+  <a href="#-providers-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 <code>providers</code> 陣列"></a>
+  <p>現在，在 <code>ChildComponent</code> 類別中，新增一個 <code>FlowerService</code> 的提供者來示範在即將到來的區段中更複雜的解析規則：</p>
+<div class="docs-code" header="src/app/child.component.ts">
+    <div class="docs-code-header"><h3>src/app/child.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-child'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./child.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./child.component.css'</span>],</div><div class="hljs-ln-line highlighted">  <span class="hljs-comment">// use the providers array to provide a service</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">FlowerService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🌻'</span> } }]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// inject the service</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"> <span class="hljs-keyword">public</span> flower: FlowerService</span>) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>現在 <code>FlowerService</code> 在 <code>@Component()</code> 裝飾器中提供，當 <code>&lt;app-child&gt;</code> 要求服務時，注入器只需查看 <code>&lt;app-child&gt;</code> 中的 <code>ElementInjector</code>。
+它不必繼續透過注入器樹進行搜尋。</p>
+<p>下一步是為 <code>ChildComponent</code> 範本新增一個繫結。</p>
+<div class="docs-code" header="src/app/child.component.html">
+    <div class="docs-code-header"><h3>src/app/child.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from FlowerService: {{flower.emoji}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
+    </pre>
+  </div><p>若要呈現新值，請將 <code>&lt;app-child&gt;</code> 加入 <code>AppComponent</code> 範本的底部，如此一來，檢視也會顯示向日葵：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Child Component</div><div class="hljs-ln-line">Emoji from FlowerService: 🌻</div></code>
+    </pre>
+  </div><p>在邏輯樹中，這表示如下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">        @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">FlowerService</span>) <span class="hljs-attr">flower</span>=&gt;"🌺"&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from FlowerService: {{flower.emoji}} (🌺)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span> @<span class="hljs-attr">Provide</span>(<span class="hljs-attr">FlowerService</span>=<span class="hljs-string">"🌻"</span>)</span></div><div class="hljs-ln-line">               @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">FlowerService</span>)=&gt;"🌻"&gt; <span class="hljs-comment">&lt;!-- search ends here --&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW&gt; <span class="hljs-comment">&lt;!-- search starts here --&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Child Component<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from FlowerService: {{flower.emoji}} (🌻)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p>當 <code>&lt;app-child&gt;</code> 要求 <code>FlowerService</code> 時，注入器會從屬於 <code>&lt;app-child&gt;</code> 的 <code>&lt;#VIEW&gt;</code> 開始搜尋（包含 <code>&lt;#VIEW&gt;</code>，因為它來自 <code>@Component()</code> 的注入），並以 <code>&lt;app-child&gt;</code> 結束。</p>
+<p>在這個案例中，<code>FlowerService</code> 在 <code>&lt;app-child&gt;</code> 的 <code>providers</code><span class="docs-emoji"> 陣列中以向日葵 &#x1F33B; 解析。</span></p>
+<p>注入器不需要在注入器樹中再繼續尋找。</p>
+<p>一旦它找到 <code>FlowerService</code><span class="docs-emoji">，它就會停止，而永遠不會看到紅色芙蓉 &#x1F33A;。</span></p>
+
+  <h3 id="-viewproviders-">使用 <code>viewProviders</code> 陣列</h3>
+  <a href="#-viewproviders-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 <code>viewProviders</code> 陣列"></a>
+  <p>使用 <code>viewProviders</code> 陣列作為在 <code>@Component()</code> 裝飾器中提供服務的另一種方式。
+使用 <code>viewProviders</code> 使服務在 <code>&lt;#VIEW&gt;</code> 中可見。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 步驟與使用 <code>providers</code> 陣列相同，但使用 <code>viewProviders</code> 陣列例外。</p>
+
+    </div>
+    <p>有關逐步說明，請繼續閱讀本節。
+如果您能自行設定，請跳到 <a href="#提供的權杖可見性">修改服務可用性</a>。</p>
+<p>為了示範，我們正在建立一個 <code>AnimalService</code> 來示範 <code>viewProviders</code><span class="docs-emoji">。
+首先，建立一個具有鯨魚 &#x1F433; emoji 屬性的 </span><code>AnimalService</code>：</p>
+<div class="docs-code" header="src/app/animal.service.ts">
+    <div class="docs-code-header"><h3>src/app/animal.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AnimalService</span> {</div><div class="hljs-ln-line">  emoji = <span class="hljs-string">'🐳'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>按照與 <code>FlowerService</code> 相同的模式，在 <code>AppComponent</code> 類別中注入 <code>AnimalService</code>：</p>
+<div class="docs-code" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line">    <span class="hljs-keyword">public</span> flower: FlowerService,</div><div class="hljs-ln-line highlighted">    <span class="hljs-keyword">public</span> animal: AnimalService) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>HELPFUL：您可以保留所有 <code>FlowerService</code> 相關程式碼，因為它將允許與 <code>AnimalService</code> 進行比較。</p>
+<p>加入 <code>viewProviders</code> 陣列並在 <code>&lt;app-child&gt;</code> 類別中注入 <code>AnimalService</code>，但給予 <code>emoji</code><span class="docs-emoji"> 不同的值。
+在此，值為 dog &#x1F436;。</span></p>
+<div class="docs-code" header="src/app/child.component.ts">
+    <div class="docs-code-header"><h3>src/app/child.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-child'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./child.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./child.component.css'</span>],</div><div class="hljs-ln-line">  <span class="hljs-comment">// provide services</span></div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">FlowerService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🌻'</span> } }],</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">viewProviders</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">AnimalService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🐶'</span> } }]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// inject service</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"> <span class="hljs-keyword">public</span> flower: FlowerService, <span class="hljs-keyword">public</span> animal: AnimalService</span>) { }</div><div class="hljs-ln-line">...</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>將繫結新增到 <code>ChildComponent</code> 和 <code>AppComponent</code> 範本。
+在 <code>ChildComponent</code> 範本中，新增下列繫結：</p>
+<div class="docs-code" header="src/app/child.component.html">
+    <div class="docs-code-header"><h3>src/app/child.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
+    </pre>
+  </div><p>此外，將相同內容新增到 <code>AppComponent</code> 範本：</p>
+<div class="docs-code" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>s</div></code>
+    </pre>
+  </div><p>現在您應該會在瀏覽器中看到兩個值：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">AppComponent</div><div class="hljs-ln-line">Emoji from AnimalService: 🐳</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Child Component</div><div class="hljs-ln-line">Emoji from AnimalService: 🐶</div></code>
+    </pre>
+  </div><p><code>viewProviders</code> 此範例邏輯樹如下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">         @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">AnimalService</span>) <span class="hljs-attr">animal</span>=&gt;"🐳"&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Provide(AnimalService="🐶")</div><div class="hljs-ln-line">            @Inject(AnimalService=&gt;"🐶")&gt;</div><div class="hljs-ln-line">       <span class="hljs-comment">&lt;!-- ^^using viewProviders means AnimalService is available in &lt;#VIEW&gt;--&gt;</span></div><div class="hljs-ln-line">       <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}} (🐶)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p>就像 <code>FlowerService</code> 範例中一樣，<code>AnimalService</code> 在 <code>&lt;app-child&gt;</code> <code>@Component()</code> 裝飾器中提供。
+這表示因為注入器首先在元件的 <code>ElementInjector</code> 中尋找，所以它會找到狗的 <code>AnimalService</code><span class="docs-emoji"> 值 &#x1F436;。
+它不需要繼續搜尋 </span><code>ElementInjector</code> 樹狀結構，也不需要搜尋 <code>ModuleInjector</code>。</p>
+
+  <h3 id="providers--viewproviders"><code>providers</code> 和 <code>viewProviders</code></h3>
+  <a href="#providers--viewproviders" class="docs-anchor" tabindex="-1" aria-label="Link to <code>providers</code> 和 <code>viewProviders</code>"></a>
+  <p>html
+&lt;ng-template #myTemplate&gt;
+  <app-component></app-component>
+</ng-template></p>
+<p>&lt;ng-container [ngTemplateOutlet]=&quot;myTemplate&quot;&gt;</ng-container></p>
+<p>@Component({
+  selector: &#39;app-component&#39;,
+  providers: [MyService],
+  template: <code>...</code>
+})
+export class AppComponent {}</p>
+<p>@Component({
+  selector: &#39;app-parent&#39;,
+  viewProviders: [MyService],
+  template: `&lt;ng-template #myTemplate&gt;
+                <app-component></app-component>
+              </ng-template></p>
+<pre><code>          &lt;ng-container [ngTemplateOutlet]=&quot;myTemplate&quot;&gt;&lt;/ng-container&gt;`
+</code></pre>
+<p>})
+export class AppParentComponent {}</p>
+<p>@Component({
+  selector: &#39;app-component&#39;,
+  providers: [MyService],
+  template: <code>...</code>
+})
+export class AppComponent {}</p>
+<p>@Component({
+  selector: &#39;app-parent&#39;,
+  template: `&lt;ng-template #myTemplate&gt;
+                <app-component></app-component>
+              </ng-template></p>
+<pre><code>          &lt;ng-container [ngTemplateOutlet]=&quot;myTemplate&quot;&gt;&lt;/ng-container&gt;`
+</code></pre>
+<p>})
+export class AppParentComponent {}</p>
+<p><code>viewProviders</code> 欄位在概念上與 <code>providers</code> 相似，但有一個顯著的差異。
+在 <code>viewProviders</code> 中設定的提供者對於最終成為元件邏輯子項目的投影內容不可見。</p>
+<p>要了解使用 <code>providers</code> 和 <code>viewProviders</code> 的差異，請在範例中新增另一個元件，並將其稱為 <code>InspectorComponent</code>。
+<code>InspectorComponent</code> 將會是 <code>ChildComponent</code> 的子元件。
+在 <code>inspector.component.ts</code> 中，在建構函式中注入 <code>FlowerService</code> 和 <code>AnimalService</code>：</p>
+<div class="docs-code" header="src/app/inspector/inspector.component.ts">
+    <div class="docs-code-header"><h3>src/app/inspector/inspector.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InspectorComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">public</span> flower: FlowerService, <span class="hljs-keyword">public</span> animal: AnimalService</span>) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>您不需要 <code>providers</code> 或 <code>viewProviders</code> 陣列。
+接下來，在 <code>inspector.component.html</code> 中，新增與先前元件相同的標記：</p>
+<div class="docs-code" header="src/app/inspector/inspector.component.html">
+    <div class="docs-code-header"><h3>src/app/inspector/inspector.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from FlowerService: {{flower.emoji}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
+    </pre>
+  </div><p>切記將 <code>InspectorComponent</code> 新增至 <code>ChildComponent</code> 的 <code>imports</code> 陣列中。</p>
+<div class="docs-code" header="src/app/child/child.component.ts">
+    <div class="docs-code-header"><h3>src/app/child/child.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">InspectorComponent</span>]</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p>接著，將下列內容新增至 <code>child.component.html</code>：</p>
+<div class="docs-code" header="src/app/child/child.component.html">
+    <div class="docs-code-header"><h3>src/app/child/child.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Content projection<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-tag">&lt;<span class="hljs-name">ng-content</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-content</span>&gt;</span></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Inside the view<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line highlighted"></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">app-inspector</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-inspector</span>&gt;</span></div></code>
+    </pre>
+  </div><p><code>&lt;ng-content&gt;</code> 允許您投影內容，而 <code>ChildComponent</code> 模板中的 <code>&lt;app-inspector&gt;</code> 使 <code>InspectorComponent</code> 成為 <code>ChildComponent</code> 的子元件。</p>
+<p>接下來，將下列內容新增至 <code>app.component.html</code> 以利用內容投影。</p>
+<div class="docs-code" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-tag">&lt;<span class="hljs-name">app-inspector</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-inspector</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div></code>
+    </pre>
+  </div><p>瀏覽器現在呈現以下結果，為簡潔起見，省略了之前的範例：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line">Content projection</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Emoji from FlowerService: 🌻</div><div class="hljs-ln-line">Emoji from AnimalService: 🐳</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Emoji from FlowerService: 🌻</div><div class="hljs-ln-line">Emoji from AnimalService: 🐶</div></code>
+    </pre>
+  </div><p>以下四種繫結方式展示了 <code>providers</code> 與 <code>viewProviders</code><span class="docs-emoji"> 的差異。
+請記住，狗的表情符號 &#x1F436; 是在 </span><code>ChildComponent</code> 的 <code>&lt;#VIEW&gt;</code><span class="docs-emoji"> 中宣告，並且不適用於投影內容。
+相反地，投影內容會看到鯨魚 &#x1F433;。</span></p>
+<p>然而，在下一節輸出部分中，<code>InspectorComponent</code> 是 <code>ChildComponent</code> 的實際子元件，<code>InspectorComponent</code> 位於 <code>&lt;#VIEW&gt;</code> 中，因此當它要求 <code>AnimalService</code><span class="docs-emoji"> 時，它看到狗 &#x1F436;。</span></p>
+<p>邏輯樹中的 <code>AnimalService</code> 看起來像這樣：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">         @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">AnimalService</span>) <span class="hljs-attr">animal</span>=&gt;"🐳"&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Provide(AnimalService="🐶")</div><div class="hljs-ln-line">            @Inject(AnimalService=&gt;"🐶")&gt;</div><div class="hljs-ln-line">        <span class="hljs-comment">&lt;!-- ^^using viewProviders means AnimalService is available in &lt;#VIEW&gt;--&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}} (🐶)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span></div><div class="hljs-ln-line">          <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Content projection<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line">          <span class="hljs-tag">&lt;<span class="hljs-name">app-inspector</span> @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">AnimalService</span>) <span class="hljs-attr">animal</span>=&gt;</span>"🐳"&gt;</div><div class="hljs-ln-line">            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}} (🐳)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">          <span class="hljs-tag">&lt;/<span class="hljs-name">app-inspector</span>&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">app-inspector</span>&gt;</span></div><div class="hljs-ln-line">          &lt;#VIEW @Inject(AnimalService) animal=&gt;"🐶"&gt;</div><div class="hljs-ln-line">            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}} (🐶)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">          &lt;/#VIEW&gt;</div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;/<span class="hljs-name">app-inspector</span>&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">&lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p><code>&lt;app-inspector&gt;</code><span class="docs-emoji"> 的預期內容看到鯨魚 &#x1F433;，而不是狗 &#x1F436;，因為狗 &#x1F436; 在 </span><code>&lt;app-child&gt;</code> <code>&lt;#VIEW&gt;</code> 內部。
+如果 <code>&lt;app-inspector&gt;</code> 也在 <code>&lt;#VIEW&gt;</code><span class="docs-emoji"> 內部，它才能看到狗 &#x1F436;。</span></p>
+
+  <h3 id="">提供的令牌的能見度</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 提供的令牌的能見度"></a>
+  <p>能見度裝飾器會影響在邏輯樹中搜尋注入程式碼的開始與結束位置。
+為此，請在注入點，也就是 <code>constructor()</code>，而非宣告點，放置能見度裝飾器。</p>
+<p>如要變更 injector 開始尋找 <code>FlowerService</code> 的位置，請將 <code>@SkipSelf()</code> 加入 <code>&lt;app-child&gt;</code> <code>@Inject</code> 宣告中，其中已注入 <code>FlowerService</code>。
+此宣告位於 <code>&lt;app-child&gt;</code> 建構函式中，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@SkipSelf</span>() <span class="hljs-keyword">public</span> flower: FlowerService</span>) { }</div></code>
+    </pre>
+  </div><p>使用 <code>@SkipSelf()</code>，<code>&lt;app-child&gt;</code> 注入器不會在自身尋找 <code>FlowerService</code>。
+相反地，注入器會從 <code>&lt;app-root&gt;</code> 的 <code>ElementInjector</code> 開始尋找 <code>FlowerService</code>，但找不到任何東西。
+然後，它會回溯到 <code>&lt;app-child&gt;</code> 的 <code>ModuleInjector</code><span class="docs-emoji"> 並找到紅色扶桑花 &#x1F33A; 的值，這個值可用是因為 </span><code>&lt;app-child&gt;</code> 和 <code>&lt;app-root&gt;</code> 共享同一個 <code>ModuleInjector</code>。
+使用者介面會顯示以下內容：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Emoji from FlowerService: 🌺</div></code>
+    </pre>
+  </div><p>在邏輯樹中，這個想法看起來可能是這樣：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">        @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">FlowerService</span>) <span class="hljs-attr">flower</span>=&gt;"🌺"&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span> @<span class="hljs-attr">Provide</span>(<span class="hljs-attr">FlowerService</span>=<span class="hljs-string">"🌻"</span>)&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Inject(FlowerService, SkipSelf)=&gt;"🌺"&gt;</div><div class="hljs-ln-line">        <span class="hljs-comment">&lt;!-- With SkipSelf, the injector looks to the next injector up the tree (app-root) --&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p>儘管 <code>&lt;app-child&gt;</code><span class="docs-emoji"> 提供了向日葵 &#x1F33B;，但應用程式會呈現紅色扶桑 &#x1F33A;，因為 </span><code>@SkipSelf()</code> 會導致目前的注入器 (<code>app-child</code>) 跳過它自己，並查看其父級。</p>
+<p>如果現在加入 <code>@Host()</code>（除了 <code>@SkipSelf()</code>），結果將會是 <code>null</code>。
+這是因為 <code>@Host()</code> 將搜尋的上界限制在 <code>app-child</code> <code>&lt;#VIEW&gt;</code>。
+以下是在邏輯樹中的想法：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">        @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">FlowerService</span>) <span class="hljs-attr">flower</span>=&gt;"🌺"&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt; <span class="hljs-comment">&lt;!-- end search here with null--&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span> @<span class="hljs-attr">Provide</span>(<span class="hljs-attr">FlowerService</span>=<span class="hljs-string">"🌻"</span>)&gt;</span> <span class="hljs-comment">&lt;!-- start search here --&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Inject(FlowerService, @SkipSelf, @Host, @Optional)=&gt;null&gt;</div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">app-parent</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p>在這裡，服務和其值相同，但 <code>@Host()</code> 會阻止注入器進一步在 <code>&lt;#VIEW&gt;</code> 中尋找 <code>FlowerService</code>，因此它找不到並傳回 <code>null</code>。</p>
+
+  <h3 id="skipself--viewproviders"><code>@SkipSelf()</code> 和 <code>viewProviders</code></h3>
+  <a href="#skipself--viewproviders" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@SkipSelf()</code> 和 <code>viewProviders</code>"></a>
+  <p>請記住，<code>&lt;app-child&gt;</code> 在 <code>viewProviders</code> 陣列中提供 <code>AnimalService</code><span class="docs-emoji">，其值為 dog &#x1F436;。
+由於注入器只需要在 </span><code>&lt;app-child&gt;</code> 的 <code>ElementInjector</code> 中尋找 <code>AnimalService</code><span class="docs-emoji">，因此它永遠不會看到 whale &#x1F433;。</span></p>
+<p>如在 <code>FlowerService</code> 範例中，如果在 <code>AnimalService</code> 的建構函式中加入 <code>@SkipSelf()</code>，注入器將不會在當前 <code>&lt;app-child&gt;</code> 的 <code>ElementInjector</code> 中尋找 <code>AnimalService</code>。
+相反地，注入器將從 <code>&lt;app-root&gt;</code> <code>ElementInjector</code> 開始。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-child'</span>,</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">viewProviders</span>: [</div><div class="hljs-ln-line highlighted">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">AnimalService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🐶'</span> } },</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p>當 <code>&lt;app-child&gt;</code> 中有 <code>@SkipSelf()</code> 時，邏輯樹看起來像這樣：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">          @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">AnimalService</span>=&gt;"🐳")&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;<span class="hljs-comment">&lt;!-- search begins here --&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Provide(AnimalService="🐶")</div><div class="hljs-ln-line">             @Inject(AnimalService, SkipSelf=&gt;"🐳")&gt;</div><div class="hljs-ln-line">        <span class="hljs-comment">&lt;!--Add @SkipSelf --&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p>在 <code>&lt;app-child&gt;</code> 中使用 <code>@SkipSelf()</code>，injector 開始在 <code>&lt;app-root&gt;</code> <code>ElementInjector</code> 中搜尋 <code>AnimalService</code><span class="docs-emoji">，並找到鯨魚 &#x1F433;。</span></p>
+
+  <h3 id="host--viewproviders"><code>@Host()</code> 和 <code>viewProviders</code></h3>
+  <a href="#host--viewproviders" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@Host()</code> 和 <code>viewProviders</code>"></a>
+  <p>如果你只為 <code>AnimalService</code> 的注入使用 <code>@Host()</code><span class="docs-emoji">，結果是狗 &#x1F436; 因為注入器在 </span><code>&lt;app-child&gt;</code> <code>&lt;#VIEW&gt;</code> 本身中找到 <code>AnimalService</code>。
+<code>ChildComponent</code> 設定 <code>viewProviders</code>，以便將狗的表情符號提供為 <code>AnimalService</code> 值。
+你也可以在建構函式中看到 <code>@Host()</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span></div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-child'</span>,</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">viewProviders</span>: [</div><div class="hljs-ln-line highlighted">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">AnimalService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🐶'</span> } },</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Host</span>() <span class="hljs-keyword">public</span> animal: AnimalService</span>) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><code>@Host() 會導致注入器尋找直到遇到 </code>&lt;#VIEW&gt;` 的邊緣。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">          @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">AnimalService</span>=&gt;"🐳")&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Provide(AnimalService="🐶")</div><div class="hljs-ln-line">             @Inject(AnimalService, @Host=&gt;"🐶")&gt; <span class="hljs-comment">&lt;!-- @Host stops search here --&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p><span class="docs-emoji">將包含第三種動物，刺蝟 &#x1F994; 的 </span><code>viewProviders</code> 陣列，新增至 <code>app.component.ts</code> <code>@Component()</code> 的元資料：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./app.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [ <span class="hljs-string">'./app.component.css'</span> ],</div><div class="hljs-ln-line">  <span class="hljs-attr">viewProviders</span>: [</div><div class="hljs-ln-line highlighted">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">AnimalService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🦔'</span> } },</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p>接下來，將 <code>@SkipSelf()</code> 與 <code>@Host()</code> 一起加入 <code>child.component.ts</code> 中 <code>AnimalService</code> 注入的建構函式。
+以下是在 <code>&lt;app-child&gt;</code> 建構函式中的 <code>@Host()</code> 和 <code>@SkipSelf()</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line highlighted">    <span class="hljs-meta">@Host</span>() <span class="hljs-meta">@SkipSelf</span>() <span class="hljs-keyword">public</span> animal: AnimalService) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><!-- TODO：這需要重新整理。這裡似乎沒有很好地解釋 `viewProviders`/`injectors` 是什麼，以及 `@Host()` 如何運作。
+ -->
+
+<p>當將 <code>@Host()</code> 和 <code>@SkipSelf()</code> 套用到 <code>providers</code> 陣列中的 <code>FlowerService</code> 時，結果會是 <code>null</code>，因為 <code>@SkipSelf()</code> 會從 <code>&lt;app-child&gt;</code> 注入器開始搜尋，而 <code>@Host()</code> 會在 <code>&lt;#VIEW&gt;</code> 停止搜尋，也就是沒有 <code>FlowerService</code> 的地方。在邏輯樹中，您可以看到 <code>FlowerService</code> 在 <code>&lt;app-child&gt;</code> 中可見，而非在 <code>&lt;#VIEW&gt;</code> 中可見。</p>
+<p>然而，在 <code>AppComponent</code> <code>viewProviders</code> 陣列中提供的 <code>AnimalService</code> 是可見的。</p>
+<p>邏輯樹表示法顯示原因如下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">        @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">AnimalService</span>=&gt;"🐳")&gt;</div><div class="hljs-ln-line">  &lt;#VIEW @Provide(AnimalService="🦔")</div><div class="hljs-ln-line">         @Inject(AnimalService, @Optional)=&gt;"🦔"&gt;</div><div class="hljs-ln-line">    <span class="hljs-comment">&lt;!-- ^^@SkipSelf() starts here,  @Host() stops here^^ --&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Provide(AnimalService="🐶")</div><div class="hljs-ln-line">             @Inject(AnimalService, @SkipSelf, @Host, @Optional)=&gt;"🦔"&gt;</div><div class="hljs-ln-line">               <span class="hljs-comment">&lt;!-- Add @SkipSelf ^^--&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p><code>@SkipSelf()，會讓 injector 從 </code><app-root><code>開始尋找</code>AnimalService<code>，而不是請求發出的 </code><app-child><code>，而 </code>@Host()<code>會在</code><app-root><code> </code>&lt;#VIEW&gt;` 停止搜尋。</p>
+<p>由於 <code>AnimalService</code> 是透過 <code>viewProviders</code> 陣列提供的，injector 在 <code>&lt;#VIEW&gt;</code><span class="docs-emoji"> 中找到刺蝟 &#x1F994;。</span></p>
+
+  <h2 id="elementinjector-">範例：<code>ElementInjector</code> 使用案例</h2>
+  <a href="#elementinjector-" class="docs-anchor" tabindex="-1" aria-label="Link to 範例：<code>ElementInjector</code> 使用案例"></a>
+  <p>能夠在不同層級配置一個或多個提供者，開啟了有用的可能性。</p>
+
+  <h3 id="">情境：服務隔離</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 情境：服務隔離"></a>
+  <p>基於架構的原因，可能會導致你將服務的存取權限限制在它所屬的應用程式網域。
+例如，考慮我們建立一個 <code>VillainsListComponent</code> 來顯示惡棍清單。
+它從 <code>VillainsService</code> 取得這些惡棍。</p>
+<p>如果您在根 <code>AppModule</code> 中提供 <code>VillainsService</code>，它將使 <code>VillainsService</code> 在應用程式中的任何地方都可見。
+如果您之後修改 <code>VillainsService</code>，您可能會損壞其他元件中的某些內容，這些元件開始依賴此服務而意外發生。</p>
+<p>相反，您應在 <code>VillainsListComponent</code> 的 <code>providers</code> 元數據中提供 <code>VillainsService</code>，如下所示：</p>
+<div class="docs-code" header="src/app/villains-list.component.ts (metadata)">
+    <div class="docs-code-header"><h3>src/app/villains-list.component.ts (metadata)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-villains-list'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./villains-list.component.html'</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [<span class="hljs-title class_">VillainsService</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">VillainsListComponent</span> {}</div></code>
+    </pre>
+  </div><p>在 <code>VillainsListComponent</code> 元資料中提供 <code>VillainsService</code>，而其他地方都沒有提供，此服務僅在 <code>VillainsListComponent</code> 及其子元件樹中可用。</p>
+<p><code>VillainService</code> 就 <code>VillainsListComponent</code> 而言是單例，因為這是宣告它的位置。
+只要 <code>VillainsListComponent</code> 沒有被銷毀，它就會是 <code>VillainService</code> 的同一個執行個體，但如果有多個 <code>VillainsListComponent</code> 執行個體，則 <code>VillainsListComponent</code> 的每個執行個體都會有它自己的 <code>VillainService</code> 執行個體。</p>
+
+  <h3 id="">場景：多個編輯階段</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 場景：多個編輯階段"></a>
+  <p>許多應用程式允許使用者同時處理多個開啟的工作。
+例如，在稅務申報應用程式中，申報人可以處理多份稅務申報表，並在一天內從一份切換到另一份。</p>
+<p>為了說明該情境，想像一個顯示超級英雄清單的 <code>HeroListComponent</code>。</p>
+<p>若要開啟英雄報稅表，準備人員會點擊英雄姓名，這會開啟一個用於編輯該報稅表的元件。
+每個選取的英雄報稅表都會在自己的元件中開啟，而且可以同時開啟多個報稅表。</p>
+<p>每個稅務申報元件都具有下列特徵：</p>
+
+  <ul class="docs-list">
+    <li>具有其自己的報稅申報單編輯階段</li>
+<li>可以更改報稅申報單，而不會影響另一個元件的申報單</li>
+<li>具備將變更內容儲存到其報稅申報單或取消變更的能力</li>
+
+  </ul>
+  <p>假設 <code>HeroTaxReturnComponent</code> 具有管理和還原變更的邏輯。
+這將是英雄報稅表的簡單任務。
+在現實世界中，使用豐富的報稅數據模型，變更管理會很棘手。
+您可以將該管理委派給輔助服務，如本範例所示。</p>
+<p><code>HeroTaxReturnService</code>快取單一<code>HeroTaxReturn</code>，追蹤該報稅單的變更，並可以儲存或還原它。
+它也會委派給應用程式範圍的單例<code>HeroService</code>，它會透過注入取得。</p>
+<div class="docs-code" header="src/app/hero-tax-return.service.ts">
+    <div class="docs-code-header"><h3>src/app/hero-tax-return.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HeroTaxReturn</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HeroesService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./heroes.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>()</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroTaxReturnService</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> currentTaxReturn!: <span class="hljs-title class_">HeroTaxReturn</span>;</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> originalTaxReturn!: <span class="hljs-title class_">HeroTaxReturn</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> heroService: HeroesService</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">set</span> <span class="hljs-title function_">taxReturn</span>(<span class="hljs-params">htr: HeroTaxReturn</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">originalTaxReturn</span> = htr;</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTaxReturn</span>  = htr.<span class="hljs-title function_">clone</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">get</span> <span class="hljs-title function_">taxReturn</span>(): <span class="hljs-title class_">HeroTaxReturn</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTaxReturn</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">restoreTaxReturn</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">taxReturn</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">originalTaxReturn</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">saveTaxReturn</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">taxReturn</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTaxReturn</span>;</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroService</span>.<span class="hljs-title function_">saveTaxReturn</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTaxReturn</span>).<span class="hljs-title function_">subscribe</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>以下為使用 <code>HeroTaxReturnService</code> 的 <code>HeroTaxReturnComponent</code>。</p>
+<div class="docs-code" header="src/app/hero-tax-return.component.ts">
+    <div class="docs-code-header"><h3>src/app/hero-tax-return.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">EventEmitter</span>, <span class="hljs-title class_">Input</span>, <span class="hljs-title class_">Output</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HeroTaxReturn</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HeroTaxReturnService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero-tax-return.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-hero-tax-return'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./hero-tax-return.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [ <span class="hljs-string">'./hero-tax-return.component.css'</span> ],</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [ <span class="hljs-title class_">HeroTaxReturnService</span> ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroTaxReturnComponent</span> {</div><div class="hljs-ln-line">  message = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Output</span>() close = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">void</span>&gt;();</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">get</span> <span class="hljs-title function_">taxReturn</span>(): <span class="hljs-title class_">HeroTaxReturn</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroTaxReturnService</span>.<span class="hljs-property">taxReturn</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Input</span>()</div><div class="hljs-ln-line">  <span class="hljs-keyword">set</span> <span class="hljs-title function_">taxReturn</span>(<span class="hljs-params">htr: HeroTaxReturn</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroTaxReturnService</span>.<span class="hljs-property">taxReturn</span> = htr;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> heroTaxReturnService: HeroTaxReturnService</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">onCanceled</span>(<span class="hljs-params"></span>)  {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">flashMessage</span>(<span class="hljs-string">'Canceled'</span>);</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroTaxReturnService</span>.<span class="hljs-title function_">restoreTaxReturn</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">onClose</span>(<span class="hljs-params"></span>) { <span class="hljs-variable language_">this</span>.<span class="hljs-property">close</span>.<span class="hljs-title function_">emit</span>(); }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">onSaved</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">flashMessage</span>(<span class="hljs-string">'Saved'</span>);</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroTaxReturnService</span>.<span class="hljs-title function_">saveTaxReturn</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">flashMessage</span>(<span class="hljs-params">msg: <span class="hljs-built_in">string</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">message</span> = msg;</div><div class="hljs-ln-line">    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">message</span> = <span class="hljs-string">''</span>, <span class="hljs-number">500</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><code>@Input()</code> 屬性會傳入 <em>tax-return-to-edit</em>，此屬性會以 getter 和 setter 實作。
+setter 會使用傳入的申報單初始化元件本身的 <code>HeroTaxReturnService</code> 實例。
+getter 始終會傳回該服務所述的英雄目前狀態。
+元件也會要求該服務儲存並還原此報稅申報單。</p>
+<p>如果服務是應用程式範圍的單例，則這將無法運作。
+每個元件都會共用相同的服務實例，而每個元件都會覆寫屬於另一位英雄的退稅。</p>
+<p>為防止這種情況，請使用元件資料中的 <code>providers</code> 屬性，將 <code>HeroTaxReturnComponent</code> 的元件層級注入器設定為提供服務。</p>
+<div class="docs-code" header="src/app/hero-tax-return.component.ts (providers)">
+    <div class="docs-code-header"><h3>src/app/hero-tax-return.component.ts (providers)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [<span class="hljs-title class_">HeroTaxReturnService</span>]</div></code>
+    </pre>
+  </div><p><code>HeroTaxReturnComponent</code> 有自己的 <code>HeroTaxReturnService</code> 提供者。
+請記住，每個元件_執行個體_都有自己的注入器。
+在元件層級提供服務可確保元件的_每個_執行個體都取得該服務的私人執行個體。這可確保不會覆寫任何報稅單。</p>
+<p>有用的：情境程式碼的其餘部分依賴其他 Angular 功能和技術，您可以在文件中的其他地方瞭解這些功能和技術。</p>
+
+  <h3 id="">情境：專門供應商</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 情境：專門供應商"></a>
+  <p>提供服務的另一個原因是再次在另一個層級中提供服務，以在元件樹中更深處替代該服務的_更專業_實作。</p>
+<p>例如，考慮一個包括輪胎服務資訊，並依賴其他服務來提供更多汽車詳細資訊的 <code>Car</code> 元件。</p>
+<p>根部注入器，標記為 (A)，使用 <em>generic</em> 提供者，以獲取關於 <code>CarService</code> 和 <code>EngineService</code> 的詳細資訊。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p><code>Car</code> 元件 (A)。元件 (A) 顯示汽車的輪胎服務數據，並指定一般服務以提供有關汽車的更多資訊。</p>
+</li>
+<li><p>子元件 (B)。元件 (B) 定義其自己的 <em>專業</em> 提供者，以支援 <code>CarService</code> 和 <code>EngineService</code>，這些提供者具有適合元件 (B) 中所發生事件的特殊功能。</p>
+</li>
+<li><p>子元件 (C) 作為元件 (B) 的子項。元件 (C) 定義其自己的 <em>更專業</em> 提供者，以支援 <code>CarService</code>。</p>
+</li>
+
+    </ol>
+    <!-- TODO(josephperrott): enable this mermaid chart -->
+
+<pre><code>graph TD;
+subgraph COMPONENT_A[Component A]
+subgraph COMPONENT_B[Component B]
+COMPONENT_C[Component C]
+end
+end
+
+style COMPONENT_A fill:#BDD7EE
+style COMPONENT_B fill:#FFE699
+style COMPONENT_C fill:#A9D18E,color:#000
+classDef noShadow filter:none
+class COMPONENT_A,COMPONENT_B,COMPONENT_C noShadow
+</code></pre>
+<p>在幕後，每個元件都會設定自己的注入器，其中定義了該元件本身的零個、一個或多個提供者。</p>
+<p>當你在最深層的元件 (C) 解析 <code>Car</code> 的實例時，它的注入器會產生：</p>
+
+  <ul class="docs-list">
+    <li><code>Car</code> 的一個實例由注入器解析 (C)</li>
+<li><code>Engine</code> 由注入器解析 (B)</li>
+<li>它的 <code>Tires</code> 由根注入器解析 (A)。</li>
+
+  </ul>
+  <!-- TODO(josephperrott): enable this mermaid chart -->
+
+<pre><code>graph BT;
+
+subgraph A[&quot; &quot;]
+direction LR
+RootInjector[&quot;(A) RootInjector&quot;]
+ServicesA[&quot;CarService, EngineService, TiresService&quot;]
+end
+
+subgraph B[&quot; &quot;]
+direction LR
+ParentInjector[&quot;(B) ParentInjector&quot;]
+ServicesB[&quot;CarService2, EngineService2&quot;]
+end
+
+subgraph C[&quot; &quot;]
+direction LR
+ChildInjector[&quot;(C) ChildInjector&quot;]
+ServicesC[&quot;CarService3&quot;]
+end
+
+direction LR
+car[&quot;(C) Car&quot;]
+engine[&quot;(B) Engine&quot;]
+tires[&quot;(A) Tires&quot;]
+
+direction BT
+car--&gt;ChildInjector
+ChildInjector--&gt;ParentInjector--&gt;RootInjector
+
+class car,engine,tires,RootInjector,ParentInjector,ChildInjector,ServicesA,ServicesB,ServicesC,A,B,C noShadow
+style car fill:#A9D18E,color:#000
+style ChildInjector fill:#A9D18E,color:#000
+style engine fill:#FFE699,color:#000
+style ParentInjector fill:#FFE699,color:#000
+style tires fill:#BDD7EE,color:#000
+style RootInjector fill:#BDD7EE,color:#000
+</code></pre>
+
+  <h2 id="">更多有關相依性注入的內容</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 更多有關相依性注入的內容"></a>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="/guide/di/dependency-injection-providers">
+      DI 供應商
+    </a>
+    
+
+    </nav>
+    

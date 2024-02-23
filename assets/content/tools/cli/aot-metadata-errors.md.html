@@ -1,0 +1,266 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">AOT 元數據錯誤</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/aot-metadata-errors.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>以下是你可能會遇到的元數據錯誤，以及解釋和建議的更正方法。</p>
+
+  <h2 id="">表達式表單不受支援</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 表達式表單不受支援"></a>
+  <p>HELPFUL：編譯器在評估 Angular 元數據時遇到它不理解的表達式。</p>
+<p>語言功能在編譯器的<a href="tools/cli/aot-compiler#expression-syntax">受限表達式語法</a>之外，
+可能會產生這個錯誤，如下面的範例所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Fooish</span> { … }</div><div class="hljs-ln-line">…</div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> prop = <span class="hljs-keyword">typeof</span> <span class="hljs-title class_">Fooish</span>; <span class="hljs-comment">// typeof is not valid in metadata</span></div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-comment">// bracket notation is not valid in metadata</span></div><div class="hljs-ln-line">  { <span class="hljs-attr">provide</span>: <span class="hljs-string">'token'</span>, <span class="hljs-attr">useValue</span>: { [prop]: <span class="hljs-string">'value'</span> } };</div><div class="hljs-ln-line">  …</div></code>
+    </pre>
+  </div><p>您可以在一般應用程式碼中使用 <code>typeof</code> 和方括號表示法。
+您只能在定義 Angular 元資料的表達式中使用這些功能。</p>
+<p>寫入 Angular 元數據時，請堅持使用編譯器的 <a href="tools/cli/aot-compiler#expression-syntax">受限表達式語法</a> 來避免此錯誤，並小心新的或不尋常的 TypeScript 功能。</p>
+
+  <h2 id="--">參考當地 (非匯出的) 符號</h2>
+  <a href="#--" class="docs-anchor" tabindex="-1" aria-label="Link to 參考當地 (非匯出的) 符號"></a>
+  <p>有用的：參考本地（未匯出）符號「符號名稱」。請考慮匯出符號。</p>
+<p>編譯器遇到對本地定義的符號的參考，而該符號未匯出或未初始化。</p>
+<p>以下是一個 <code>provider</code> 的問題範例。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR</span></div><div class="hljs-ln-line"><span class="hljs-keyword">let</span> <span class="hljs-attr">foo</span>: <span class="hljs-built_in">number</span>; <span class="hljs-comment">// neither exported nor initialized</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: … ,</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">Foo</span>, <span class="hljs-attr">useValue</span>: foo }</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {}</div></code>
+    </pre>
+  </div><p>編譯器會自動建立元件工廠，其中包括 <code>useValue</code> 提供者程式碼，在一個獨立的模組中。<em>該</em> 工廠模組無法回溯到 <em>這個</em> 來源模組來存取本地的（未匯出的）<code>foo</code> 變數。</p>
+<p>您可以透過初始化 <code>foo</code> 來修復此問題。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">let</span> foo = <span class="hljs-number">42</span>; <span class="hljs-comment">// initialized</span></div></code>
+    </pre>
+  </div><p>編譯器會將表達式 <a href="tools/cli/aot-compiler#code-folding">摺疊</a> 成供應者，就像您寫下這個一樣。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">Foo</span>, <span class="hljs-attr">useValue</span>: <span class="hljs-number">42</span> }</div><div class="hljs-ln-line">]</div></code>
+    </pre>
+  </div><p>或者，您可以透過匯出 <code>foo</code> 來修正它，預期在您實際知道它的值時，<code>foo</code> 將在執行階段被指定。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// CORRECTED</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> <span class="hljs-attr">foo</span>: <span class="hljs-built_in">number</span>; <span class="hljs-comment">// exported</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: … ,</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">Foo</span>, <span class="hljs-attr">useValue</span>: foo }</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {}</div></code>
+    </pre>
+  </div><p>將 <code>export</code> 加入通常適用於在元數據中引用的變數，例如 <code>providers</code> 和 <code>animations</code>，因為編譯器可以在這些表達式中產生匯出變數的 <em>參照</em>。它不需要那些變數的 <em>值</em>。</p>
+<p>當編譯器需要<em>實際值</em>來產生程式碼時，加入 <code>export</code> 不起作用。
+例如，它不適用於 <code>template</code> 屬性。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> <span class="hljs-attr">someTemplate</span>: <span class="hljs-built_in">string</span>; <span class="hljs-comment">// exported but not initialized</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: someTemplate</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {}</div></code>
+    </pre>
+  </div><p>編譯器需要 <code>template</code> 屬性的值 <em>當下</em> 來產生元件工廠。
+僅變數參照是不夠的。
+在宣告之前加上 <code>export</code> 僅會產生新的錯誤，「<a href="#only-initialized-variables"><code>Only initialized variables and constants can be referenced</code></a>」。</p>
+
+  <h2 id="">僅初始化變數和常數</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 僅初始化變數和常數"></a>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <em>只能參考已初始化的變數和常數，因為範本編譯器需要這個變數的值。</em></p>
+
+    </div>
+    <p>編譯器找到一個未初始化的已匯出變數或靜態欄位的參考。
+它需要該變數的值來產生程式碼。</p>
+<p>以下範例嘗試將元件的 <code>template</code> 屬性設定為匯出的 <code>someTemplate</code> 變數值，此變數已宣告但 <em>未指定</em>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> <span class="hljs-attr">someTemplate</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: someTemplate</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {}</div></code>
+    </pre>
+  </div><p>如果你從其他模組匯入 <code>someTemplate</code> 且忽略在那裡初始化它，你同樣會得到這個錯誤。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR - not initialized there either</span></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { someTemplate } <span class="hljs-keyword">from</span> <span class="hljs-string">'./config'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: someTemplate</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {}</div></code>
+    </pre>
+  </div><p>編譯器無法等到執行階段才能取得範本資訊。
+它必須從原始碼中靜態衍生 <code>someTemplate</code> 變數的值，以便它能產生元件工廠，其中包含根據範本建立元素的指示。</p>
+<p>若要修正此錯誤，請在初始化子句中提供變數的初始值（<em>在同一行</em>）。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// CORRECTED</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> someTemplate = <span class="hljs-string">'&lt;h1&gt;Greetings from Angular&lt;/h1&gt;'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: someTemplate</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {}</div></code>
+    </pre>
+  </div>
+  <h2 id="">參照未匯出的類別</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 參照未匯出的類別"></a>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <em>參照未匯出的類別<code>&lt;class name&gt;</code>.</em></p>
+
+    </div>
+    <p><em>考慮匯出該類別。</em></p>
+<p>Metadata 參照未匯出的類別。</p>
+<p>例如，您可能已定義一個類別並將它用作提供者陣列中的注入令牌，但忽視匯出該類別。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR</span></div><div class="hljs-ln-line"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyStrategy</span> { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">…</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">MyStrategy</span>, <span class="hljs-attr">useValue</span>: … }</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">  …</div></code>
+    </pre>
+  </div><p>Angular 在一個獨立的模組中產生一個類別工廠，而該工廠 <a href="tools/cli/aot-compiler#exported-symbols">只能存取匯出的類別</a>。
+要修正這個錯誤，請匯出所引用的類別。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// CORRECTED</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyStrategy</span> { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">…</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">MyStrategy</span>, <span class="hljs-attr">useValue</span>: … }</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">  …</div></code>
+    </pre>
+  </div>
+  <h2 id="">參照非匯出的函式</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 參照非匯出的函式"></a>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <em>Metadata 參照未匯出的函式。</em></p>
+
+    </div>
+    <p>例如，您可能已將提供者的 <code>useFactory</code> 屬性設定為您忽略匯出的本地定義函式。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR</span></div><div class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">myStrategy</span>(<span class="hljs-params"></span>) { … }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">…</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">MyStrategy</span>, <span class="hljs-attr">useFactory</span>: myStrategy }</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">  …</div></code>
+    </pre>
+  </div><p>Angular 在獨立的模組中產生類別工廠，而該工廠 <a href="tools/cli/aot-compiler#exported-symbols">只能存取匯出的函式</a>。
+若要修正此錯誤，請匯出函式。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// CORRECTED</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">myStrategy</span>(<span class="hljs-params"></span>) { … }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">…</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">MyStrategy</span>, <span class="hljs-attr">useFactory</span>: myStrategy }</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">  …</div></code>
+    </pre>
+  </div>
+  <h2 id="">函式呼叫不受支援</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 函式呼叫不受支援"></a>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <em>函式呼叫不受支援。請考慮使用參考已匯出的函式來取代函式或 lambda。</em></p>
+
+    </div>
+    <p>編譯器目前不支援 <a href="tools/cli/aot-compiler#function-expression">函式表達式或 lambda 函式</a>。
+例如，您無法將提供者的 <code>useFactory</code> 設為匿名函式或箭頭函式，如下所示。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR</span></div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">MyStrategy</span>, <span class="hljs-attr">useFactory</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) { … } },</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">OtherStrategy</span>, <span class="hljs-attr">useFactory</span>: <span class="hljs-function">() =&gt;</span> { … } }</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">  …</div></code>
+    </pre>
+  </div><p>如果您在提供者的 <code>useValue</code> 中呼叫函式或方法，也會發生這個錯誤。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR</span></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { calculateValue } <span class="hljs-keyword">from</span> <span class="hljs-string">'./utilities'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">…</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">SomeValue</span>, <span class="hljs-attr">useValue</span>: <span class="hljs-title function_">calculateValue</span>() }</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">  …</div></code>
+    </pre>
+  </div><p>若要修正此錯誤，請從模組匯出函式，並在 <code>useFactory</code> 提供者中參照該函式。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// CORRECTED</span></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { calculateValue } <span class="hljs-keyword">from</span> <span class="hljs-string">'./utilities'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">myStrategy</span>(<span class="hljs-params"></span>) { … }</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">otherStrategy</span>(<span class="hljs-params"></span>) { … }</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">someValueFactory</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-title function_">calculateValue</span>();</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">MyStrategy</span>, <span class="hljs-attr">useFactory</span>: myStrategy },</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">OtherStrategy</span>, <span class="hljs-attr">useFactory</span>: otherStrategy },</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">SomeValue</span>, <span class="hljs-attr">useFactory</span>: someValueFactory }</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">  …</div></code>
+    </pre>
+  </div>
+  <h2 id="">解構變數或常數不受支援</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 解構變數或常數不受支援"></a>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <em>範本編譯器不支援參照已匯出的解構變數或常數。請考慮簡化此範本以避免解構。</em></p>
+
+    </div>
+    <p>編譯器不支援參考由 <a href="https://www.typescriptlang.org/docs/handbook/variable-declarations.html#destructuring" target="_blank">解構</a> 指派之變數。</p>
+<p>例如，您無法寫出像這樣的內容：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR</span></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { configuration } <span class="hljs-keyword">from</span> <span class="hljs-string">'./configuration'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// destructured assignment to foo and bar</span></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> {foo, bar} = configuration;</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    {<span class="hljs-attr">provide</span>: <span class="hljs-title class_">Foo</span>, <span class="hljs-attr">useValue</span>: foo},</div><div class="hljs-ln-line">    {<span class="hljs-attr">provide</span>: <span class="hljs-title class_">Bar</span>, <span class="hljs-attr">useValue</span>: bar},</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">  …</div></code>
+    </pre>
+  </div><p>若要修正此錯誤，請參閱非結構化值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// CORRECTED</span></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { configuration } <span class="hljs-keyword">from</span> <span class="hljs-string">'./configuration'</span>;</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    {<span class="hljs-attr">provide</span>: <span class="hljs-title class_">Foo</span>, <span class="hljs-attr">useValue</span>: configuration.<span class="hljs-property">foo</span>},</div><div class="hljs-ln-line">    {<span class="hljs-attr">provide</span>: <span class="hljs-title class_">Bar</span>, <span class="hljs-attr">useValue</span>: configuration.<span class="hljs-property">bar</span>},</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">  …</div></code>
+    </pre>
+  </div>
+  <h2 id="">無法解析類型</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 無法解析類型"></a>
+  <p>有用的資訊：<em>編譯器遇到一個類型，並且無法判斷哪個模組會匯出該類型。</em></p>
+<p>這可能會在您參考環境類型時發生。
+例如，<code>Window</code> 類型是宣告在全域 <code>.d.ts</code> 檔案中的環境類型。</p>
+<p>如果您在元件建構函式中參照它，則會出現錯誤，編譯器必須靜態分析。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span> (<span class="hljs-keyword">private</span> <span class="hljs-attr">win</span>: <span class="hljs-title class_">Window</span>) { … }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>TypeScript 瞭解環境類型，因此您不必匯入它們。
+Angular 編譯器不瞭解您忽略匯入或匯出的類型。</p>
+<p>在這種情況下，編譯器無法理解如何使用 <code>Window</code> 令牌注入某些內容。</p>
+<p>不要在元數據表達式中參照環境類型。</p>
+<p>如果您必須注入一個環境類型的實例，您可以按照四個步驟來解決這個問題：</p>
+
+    <ol class="docs-ordered-list">
+      <li>為 ambient 類型的實例建立注入令牌。</li>
+<li>建立返回該實例的工廠函式。</li>
+<li>使用該工廠函式加入 <code>useFactory</code> 提供者。</li>
+<li>使用 <code>@Inject</code> 來注入實例。</li>
+
+    </ol>
+    <p>以下是一個說明性的範例。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// CORRECTED</span></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Inject</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">WINDOW</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">InjectionToken</span>(<span class="hljs-string">'Window'</span>);</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">_window</span>(<span class="hljs-params"></span>) { <span class="hljs-keyword">return</span> <span class="hljs-variable language_">window</span>; }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">WINDOW</span>, <span class="hljs-attr">useFactory</span>: _window }</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span> (<span class="hljs-meta">@Inject</span>(<span class="hljs-variable constant_">WINDOW</span>) <span class="hljs-keyword">private</span> <span class="hljs-attr">win</span>: <span class="hljs-title class_">Window</span>) { … }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>建構函式中的 <code>Window</code> 型別不再會造成編譯器問題，因為它使用 <code>@Inject(WINDOW)</code> 來產生注入程式碼。</p>
+<p>Angular 用 <code>DOCUMENT</code> 代幣執行類似的事情，因此你可以注入瀏覽器的 <code>document</code> 物件 (或依據應用程式執行的平台，注入一個抽象物件)。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Inject</span> }   <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-variable constant_">DOCUMENT</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ … })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span> (<span class="hljs-meta">@Inject</span>(<span class="hljs-variable constant_">DOCUMENT</span>) <span class="hljs-keyword">private</span> <span class="hljs-attr">doc</span>: <span class="hljs-title class_">Document</span>) { … }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">預期名稱</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 預期名稱"></a>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <em>編譯器在它正在評估的表達式中預期一個名稱。</em></p>
+
+    </div>
+    <p>如果您使用數字作為屬性名稱，就會發生這種情況，如下例所示。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR</span></div><div class="hljs-ln-line"><span class="hljs-attr">provider</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">Foo</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-number">0</span>: <span class="hljs-string">'test'</span> } }]</div></code>
+    </pre>
+  </div><p>將屬性名稱改為非數字。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// CORRECTED</span></div><div class="hljs-ln-line"><span class="hljs-attr">provider</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">Foo</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-string">'0'</span>: <span class="hljs-string">'test'</span> } }]</div></code>
+    </pre>
+  </div>
+  <h2 id="">不支援的列舉成員名稱</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 不支援的列舉成員名稱"></a>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <em>Angular 無法判定您在 metadata 中引用的 <a href="https://www.typescriptlang.org/docs/handbook/enums.html" target="_blank">枚舉成員</a> 的值。</em></p>
+
+    </div>
+    <p>編譯器可以理解簡單的列舉值，但無法理解複雜的值，例如那些源自計算屬性。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR</span></div><div class="hljs-ln-line"><span class="hljs-keyword">enum</span> <span class="hljs-title class_">Colors</span> {</div><div class="hljs-ln-line">  <span class="hljs-title class_">Red</span> = <span class="hljs-number">1</span>,</div><div class="hljs-ln-line">  <span class="hljs-title class_">White</span>,</div><div class="hljs-ln-line">  <span class="hljs-title class_">Blue</span> = <span class="hljs-string">"Blue"</span>.<span class="hljs-property">length</span> <span class="hljs-comment">// computed</span></div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">…</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">BaseColor</span>,   <span class="hljs-attr">useValue</span>: <span class="hljs-title class_">Colors</span>.<span class="hljs-property">White</span> } <span class="hljs-comment">// ok</span></div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">DangerColor</span>, <span class="hljs-attr">useValue</span>: <span class="hljs-title class_">Colors</span>.<span class="hljs-property">Red</span> }   <span class="hljs-comment">// ok</span></div><div class="hljs-ln-line">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">StrongColor</span>, <span class="hljs-attr">useValue</span>: <span class="hljs-title class_">Colors</span>.<span class="hljs-property">Blue</span> }  <span class="hljs-comment">// bad</span></div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">  …</div></code>
+    </pre>
+  </div><p>避免參照具有複雜初始化程序或計算屬性的枚舉。</p>
+
+  <h2 id="">標記模板表達式不受支援</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 標記模板表達式不受支援"></a>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <em>標記範本表達式不支援元資料。</em></p>
+
+    </div>
+    <p>編譯器遇到一個 JavaScript ES2015 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals" target="_blank">標記模板表達式</a>，如下所示。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ERROR</span></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> expression = <span class="hljs-string">'funky'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> raw = <span class="hljs-title class_">String</span>.<span class="hljs-property">raw</span><span class="hljs-string">`A tagged template <span class="hljs-subst">${expression}</span> string`</span>;</div><div class="hljs-ln-line"> …</div><div class="hljs-ln-line"> <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div&gt;'</span> + raw + <span class="hljs-string">'&lt;/div&gt;'</span></div><div class="hljs-ln-line"> …</div></code>
+    </pre>
+  </div><p><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/raw" target="_blank"><code>String.raw()</code></a> 是 JavaScript ES2015 原生的 <em>標籤函式</em>。</p>
+<p>AOT 編譯器不支援標記範本表達式；請避免在元數據表達式中使用它們。</p>
+
+  <h2 id="">符號引用預期</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 符號引用預期"></a>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <em>編譯器期望在錯誤訊息中指定的位置引用符號。</em></p>
+
+    </div>
+    <p>如果您在類別的 <code>extends</code> 子句中使用表達式，可能會發生此錯誤。</p>
+<!--todo：Chuck：檢閱你的公關評論後我仍然一頭霧水。參閱[那裡的評論](https://github.com/angular/angular/pull/17712#discussion_r132025495)。 -->

@@ -1,0 +1,52 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">在範本中使用管線</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/pipes/template.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>若要套用管線，請在範本表達式中使用管線運算子 (<code>|</code>)，如下列程式碼範例所示。</p>
+<div class="docs-code" header="app.component.html">
+    <div class="docs-code-header"><h3>app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The hero's birthday is </span><span class="hljs-template-variable">{{ <span class="hljs-name">birthday</span> | date }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div></code>
+    </pre>
+  </div><p>元件的 <code>birthday</code> 值經由管線運算子 (<code>|</code>) 傳送至 <a href="api/common/DatePipe"><code>DatePipe</code></a>，其管線名稱為 <code>date</code>。
+該管線以預設格式呈現日期，例如 <strong>2023 年 4 月 7 日</strong>。</p>
+<div class="docs-code" header="app.component.ts" preview="true">
+    <div class="docs-code-header"><h3>app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { DatePipe } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'./app.component.html'</span>,</div><div class="hljs-ln-line">  imports: [DatePipe],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  birthday = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">管道額外參數</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 管道額外參數"></a>
+  <p>管道可以採用額外參數來設定轉換。參數可以是選用或必填。</p>
+<p>例如，<code>date</code> 管道採用控制日期顯示格式的選用參數。
+若要指定參數，請在管道名稱後加上冒號 (<code>:</code>) 和參數值 (格式)。</p>
+<div class="docs-code" header="app.component.html">
+    <div class="docs-code-header"><h3>app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The hero's birthday is in </span><span class="hljs-template-variable">{{ <span class="hljs-name">birthday</span> | date:<span class="hljs-string">'yyyy'</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div></code>
+    </pre>
+  </div><p>管道也可以接受多個參數。您可以透過冒號 (<code>:</code> ) 將這些參數分隔開來傳遞多個參數。
+例如， <code>date</code> 管道接受第二個可選參數來控制時區。</p>
+<div class="docs-code" header="app.component.html">
+    <div class="docs-code-header"><h3>app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The current time is: </span><span class="hljs-template-variable">{{ <span class="hljs-name">currentTime</span> | date:<span class="hljs-string">'hh:mm'</span>:<span class="hljs-string">'UTC'</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div></code>
+    </pre>
+  </div><p>這將顯示目前時間（如 <code>10:53</code>）在 <code>UTC</code> 時區。</p>
+
+  <h2 id="">連接管道</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 連接管道"></a>
+  <p>你可以連接多個管道，以便一個管道的輸出成為下一個管道的輸入。</p>
+<p>以下範例將日期傳遞給 <code>DatePipe</code>，然後將結果轉發到 <a href="api/common/UpperCasePipe" title=API 參考><code>UpperCasePipe</code></a> 管道。</p>
+<div class="docs-code" header="app.component.html">
+    <div class="docs-code-header"><h3>app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The hero's birthday is </span><span class="hljs-template-variable">{{ <span class="hljs-name">birthday</span> | date }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The hero's birthday is in <span class="hljs-template-variable">{{ <span class="hljs-name">birthday</span> | date:<span class="hljs-string">'yyyy'</span> | uppercase }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div></code>
+    </pre>
+  </div>

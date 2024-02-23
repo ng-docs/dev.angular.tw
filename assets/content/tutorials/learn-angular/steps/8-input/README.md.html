@@ -1,0 +1,57 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">透過 <code>@Input</code> 進行元件溝通`</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/8-input/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>有時應用程式開發需要您將資料傳送至元件。此資料可讓元件自訂或將資訊從父元件傳送至子元件。</p>
+<p>Angular 使用一個名為 <code>Input</code> 的概念。這類似於其他框架中的 <code>props</code>。要建立 <code>Input</code> 屬性，請使用 <code>@Input</code> 裝飾器。</p>
+<p>在這個活動中，您將會學習如何使用 <code>@Input</code> 裝飾器將資訊傳送至元件。</p>
+<hr>
+
+<p>如要建立一個 <code>Input</code> 屬性，請將 <code>@Input</code> 裝飾器新增至元件類別的屬性：</p>
+<div class="docs-code" header="user.component.ts">
+    <div class="docs-code-header"><h3>user.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">UserComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() occupation = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>當您準備好透過 <code>Input</code> 傳遞值時，可以使用屬性語法在範本中設定值。以下是一個範例：</p>
+<div class="docs-code" header="app.component.ts">
+    <div class="docs-code-header"><h3>app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;app-user occupation="Angular Developer"&gt;&lt;app-user/&gt;`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div></code>
+    </pre>
+  </div>
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-input-">定義 <code>@Input</code> 屬性</h3>
+  <a href="#-input-" class="docs-anchor" tabindex="-1" aria-label="Link to 定義 <code>@Input</code> 屬性"></a>
+  
+      <p>更新 <code>user.component.ts</code> 中的程式碼，為 <code>UserComponent</code> 定義一個名為 <code>name</code> 的 <code>Input</code> 屬性。目前請將初始值設定為 <code>empty string</code>。務必更新範本，以便在句尾插入 <code>name</code> 屬性。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-input-">將值傳遞給 <code>@Input</code> 屬性</h3>
+  <a href="#-input-" class="docs-anchor" tabindex="-1" aria-label="Link to 將值傳遞給 <code>@Input</code> 屬性"></a>
+  
+      <p>更新 <code>app.component.ts</code> 中的程式碼，以傳送 <code>name</code> 屬性，其值為 <code>&quot;Simran&quot;</code>。
+<br></p>
+<p>當程式碼成功更新後，應用程式將會顯示 <code>使用者的名稱是 Simran</code>。</p>
+
+    </li>
+    
+    </ol>
+    <p>雖然這很好，但這只是元件通訊的一個方向。如果您想要從子元件傳送資訊和資料給父元件，該怎麼辦？檢視下一課以瞭解。</p>
+<p><span class="docs-emoji">P.S. 你做得很好 - 繼續加油 🎉</span></p>

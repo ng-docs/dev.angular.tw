@@ -1,0 +1,23 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>NgPlural</h1><div class="docs-api-item-label" data-mode="full" data-type="directive">directive</div></div></div><p class="docs-reference-description"><p>Adds / removes DOM sub-trees based on a numeric value. Tailored for pluralization.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">NgPlural</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngPlural">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">ngPlural</span>(<span class="hljs-params">value: <span class="hljs-built_in">number</span></span>);</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="addCase">  <span class="hljs-title function_">addCase</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">switchView</span>: <span class="hljs-title class_">SwitchView</span>): <span class="hljs-built_in">void</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>Adds / removes DOM sub-trees based on a numeric value. Tailored for pluralization.</p>
+<p>Displays DOM sub-trees that match the switch expression value, or failing that, DOM sub-trees
+that match the switch expression&#39;s pluralization category.</p>
+<p>To use this directive you must provide a container element that sets the <code>[ngPlural]</code> attribute
+to a switch expression. Inner elements with a <code>[ngPluralCase]</code> will display based on their
+expression:</p>
+
+    <ul class="docs-list">
+      <li>if <code>[ngPluralCase]</code> is set to a value starting with <code>=</code>, it will only display if the value
+matches the switch expression exactly,</li>
+<li>otherwise, the view will be treated as a &quot;category match&quot;, and will only display if exact
+value matches aren&#39;t found and the value maps to its category for the defined locale.</li>
+
+    </ul>
+    <p>See <a href="http://cldr.unicode.org/index/cldr-spec/plural-rules">http://cldr.unicode.org/index/cldr-spec/plural-rules</a></p></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div>
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;<span class="hljs-keyword">some</span>-element [ngPlural]=&quot;value&quot;&gt;</span><span class="hljs-ln-line">  &lt;ng-<span class="hljs-keyword">template</span> ngPluralCase=&quot;=0&quot;&gt;there <span class="hljs-keyword">is</span> <span class="hljs-keyword">nothing</span>&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span><span class="hljs-ln-line">  &lt;ng-<span class="hljs-keyword">template</span> ngPluralCase=&quot;=1&quot;&gt;there <span class="hljs-keyword">is</span> one&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span><span class="hljs-ln-line">  &lt;ng-<span class="hljs-keyword">template</span> ngPluralCase=&quot;few&quot;&gt;there are a few&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span><span class="hljs-ln-line">&lt;/<span class="hljs-keyword">some</span>-element&gt;</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="ngPlural" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngPlural</h3><div><code>number</code></div></div></header></div><div id="addCase" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>addCase</h3><div><code>void</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">value</span><code>string</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">switchView</span><code>SwitchView</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>void</code></div></div></div></div></div></div></div>

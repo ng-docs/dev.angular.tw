@@ -1,0 +1,51 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1"><code>ngSkipHydration</code> 應為靜態屬性</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/extended-diagnostics/NG8108.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p><code>ngSkipHydration</code> 是一個特殊屬性，用來向 Angular 表示特定元件應該選擇退出 <a href="guide/hydration">hydration</a>。
+這個診斷確保這個屬性 <code>ngSkipHydration</code> 是靜態設定的，而且值被設定為 <code>&quot;true&quot;</code> 或空值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;user-viewer ngSkipHydration="hasUser" /&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  hasUser = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">有什麼問題？</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 有什麼問題？"></a>
+  <p>作為 Angular 實施的特殊屬性，<code>ngSkipHydration</code> 需要可進行靜態分析，以便 Angular 在編譯時知道是否需要為元件進行水化。</p>
+
+  <h2 id="">我該怎麼做？</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 我該怎麼做？"></a>
+  <p>當使用 <code>ngSkipHydration</code> 時，請確保它被設定為靜態屬性（即您不使用 Angular 範本繫結語法）。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;user-viewer ngSkipHydration /&gt;</div><div class="hljs-ln-line">    &lt;user-viewer ngSkipHydration="true" /&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {}</div></code>
+    </pre>
+  </div><p>如果需要條件式，您可以將該元件包覆在 <code>*ngIf</code> 中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">import {Component} from '@angular/core';</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  template: `</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"hasUser; else noUser"</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">user-viewer</span> <span class="hljs-attr">ngSkipHydration</span> /&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">ng-template</span> #<span class="hljs-attr">noUser</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">user-viewer</span> /&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">ng-template</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">`,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">class MyComponent {}</div></code>
+    </pre>
+  </div>
+  <h2 id="">組態需求</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 組態需求"></a>
+  <p>必須啟用 <a href="tools/cli/template-typecheck#strict-mode"><code>strictTemplates</code></a> 才能發出任何延伸診斷。
+<code>skipHydrationNotStatic</code> 除了 <code>strictTemplates</code> 之外沒有其他額外需求。</p>
+
+  <h2 id="">如果我無法避免這件事怎麼辦？</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 如果我無法避免這件事怎麼辦？"></a>
+  <p>這個診斷可以透過編輯專案的 <code>tsconfig.json</code> 檔案停用：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"angularCompilerOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"extendedDiagnostics"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"checks"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"skipHydrationNotStatic"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"suppress"</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>參閱 <a href="extended-diagnostics#configuration">進階診斷設定</a> 以取得更多資訊。</p>

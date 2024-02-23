@@ -1,0 +1,51 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>NavigationBehaviorOptions</h1><div class="docs-api-item-label" data-mode="full" data-type="interface">interface</div></div></div><p class="docs-reference-description"><p>Options that modify the <code>Router</code> navigation strategy.
+Supply an object containing any of these properties to a <code>Router</code> navigation function to
+control how the navigation should be handled.</p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/router/Routernavigate">Routernavigate</a><a class="docs-pill" href="api/router/RouternavigateByUrl">RouternavigateByUrl</a><a class="docs-pill" href="guide/routing/common-router-tasks">Routing and Navigation guide</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">interface</span> <span class="hljs-title class_">NavigationBehaviorOptions</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="onSameUrlNavigation">  onSameUrlNavigation?: <span class="hljs-title class_">OnSameUrlNavigation</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="skipLocationChange">  skipLocationChange?: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="replaceUrl">  replaceUrl?: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="state">  state?: { [<span class="hljs-attr">k</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>; };</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="info">  <span class="hljs-keyword">readonly</span> info?: <span class="hljs-built_in">unknown</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="onSameUrlNavigation" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>onSameUrlNavigation</h3><div><code>OnSameUrlNavigation</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>How to handle a navigation request to the current URL.</p>
+<p>This value is a subset of the options available in <code>OnSameUrlNavigation</code> and
+will take precedence over the default value set for the <code>Router</code>.</p></div></div></div></div><div id="skipLocationChange" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>skipLocationChange</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>When true, navigates without pushing a new state into history.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// Navigate silently to /view</span></span><span class="hljs-ln-line"><span class="hljs-keyword">this</span>.router.navigate([<span class="hljs-string">&#x27;/view&#x27;</span>], { skipLocationChange: <span class="hljs-literal">true</span> });</span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="replaceUrl" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>replaceUrl</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>When true, navigates while replacing the current state in history.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// Navigate to /view</span></span><span class="hljs-ln-line"><span class="hljs-keyword">this</span>.router.navigate([<span class="hljs-string">&#x27;/view&#x27;</span>], { replaceUrl: <span class="hljs-literal">true</span> });</span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="state" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>state</h3><div><code>{ [k: string]: any; }</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Developer-defined state that can be passed to any navigation.
+Access this value through the <code>Navigation.extras</code> object
+returned from the <a href="api/router/Router">Router.getCurrentNavigation()
+method</a> while a navigation is executing.</p>
+<p>After a navigation completes, the router writes an object containing this
+value together with a <code>navigationId</code> to <code>history.state</code>.
+The value is written when <code>location.go()</code> or <code>location.replaceState()</code>
+is called before activating this route.</p>
+<p>Note that <code>history.state</code> does not pass an object equality test because
+the router adds the <code>navigationId</code> on each navigation.</p></div></div></div></div><div id="info" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>info</h3><div><code>unknown</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Use this to convey transient information about this particular navigation, such as how it
+happened. In this way, it&#39;s different from the persisted value <code>state</code> that will be set to
+<code>history.state</code>. This object is assigned directly to the Router&#39;s current <code>Navigation</code>
+(it is not copied or cloned), so it should be mutated with caution.</p>
+<p>One example of how this might be used is to trigger different single-page navigation animations
+depending on how a certain route was reached. For example, consider a photo gallery app, where
+you can reach the same photo URL and state via various routes:</p>
+
+    <ul class="docs-list">
+      <li>Clicking on it in a gallery view</li>
+<li>Clicking</li>
+<li>&quot;next&quot; or &quot;previous&quot; when viewing another photo in the album</li>
+<li>Etc.</li>
+
+    </ul>
+    <p>Each of these wants a different animation at navigate time. This information doesn&#39;t make sense
+to store in the persistent URL or history entry state, but it&#39;s still important to communicate
+from the rest of the application, into the router.</p>
+<p>This information could be used in coordination with the View Transitions feature and the
+<code>onViewTransitionCreated</code> callback. The information might be used in the callback to set
+classes on the document in order to control the transition animations and remove the classes
+when the transition has finished animating.</p></div></div></div></div></div></div></div>

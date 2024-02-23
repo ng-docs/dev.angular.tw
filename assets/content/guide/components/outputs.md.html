@@ -1,0 +1,79 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">自訂事件與輸出</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/outputs.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>提示：本指南假設您已經閱讀過 <a href="essentials">精華指南</a>。如果您是 Angular 新手，請先閱讀該指南。</p>
+<p>Angular 元件可透過將屬性指定給新的 <code>EventEmitter</code> 並加入 <code>@Output</code> 裝飾器來定義自訂事件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ExpandablePanel</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Output</span>() panelClosed = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">void</span>&gt;();</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">expandable-panel</span> (<span class="hljs-attr">panelClosed</span>)=<span class="hljs-string">"savePanelState()"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p>你可以透過在 <code>EventEmitter</code> 上呼叫 <code>emit</code> 方法來發出事件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-variable language_">this</span>.<span class="hljs-property">panelClosed</span>.<span class="hljs-title function_">emit</span>();</div></code>
+    </pre>
+  </div><p>Angular 將標記為 <code>@Output</code> 裝飾器的屬性稱為 <strong>輸出</strong>。您可以使用輸出將資料傳遞給其他元件，類似於 <code>click</code> 等原生瀏覽器事件。</p>
+<p><strong>Angular 客製事件不會在 DOM 中冒泡</strong></p>
+<p><strong>輸出名稱區分大小寫。</strong></p>
+<p>當擴充一個元件類別時，<strong>輸出會被子類別繼承。</strong></p>
+
+  <h2 id="">發出事件資料</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 發出事件資料"></a>
+  <p>當呼叫 <code>emit</code> 時，您可以傳遞事件資料：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// You can emit primitive values.</span></div><div class="hljs-ln-line"><span class="hljs-variable language_">this</span>.<span class="hljs-property">valueChanged</span>.<span class="hljs-title function_">emit</span>(<span class="hljs-number">7</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// You can emit custom event objects</span></div><div class="hljs-ln-line"><span class="hljs-variable language_">this</span>.<span class="hljs-property">thumbDropped</span>.<span class="hljs-title function_">emit</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">pointerX</span>: <span class="hljs-number">123</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">pointerY</span>: <span class="hljs-number">456</span>,</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p>在範本中定義事件監聽器時，您可以透過 <code>$event</code> 變數存取事件資料：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-slider</span> (<span class="hljs-attr">valueChanged</span>)=<span class="hljs-string">"logValue($event)"</span> /&gt;</span></div></code>
+    </pre>
+  </div>
+  <h2 id="">自訂輸出名稱</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 自訂輸出名稱"></a>
+  <p><code>@Output</code> 裝飾器接受一個參數，讓您可以指定範本中事件的不同名稱：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Output</span>(<span class="hljs-string">'valueChanged'</span>) changed = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">number</span>&gt;();</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-slider</span> (<span class="hljs-attr">valueChanged</span>)=<span class="hljs-string">"saveVolume()"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p>此別名不影響 TypeScript 程式碼中屬性的使用方式。</p>
+<p>雖然通常應避免對元件的輸出進行別名處理，但此功能可協助變更屬性的名稱，同時保留原始名稱的別名，或避免與原生 DOM 事件的名稱衝突。</p>
+
+  <h2 id="-component-">在 <code>@Component</code> 裝飾器中指定輸出</h2>
+  <a href="#-component-" class="docs-anchor" tabindex="-1" aria-label="Link to 在 <code>@Component</code> 裝飾器中指定輸出"></a>
+  <p>除了 <code>@Output</code> 裝飾器之外，您還可以透過 <code>@Component</code> 裝飾器中的 <code>outputs</code> 屬性來指定元件的輸出。當元件從基底類別繼承屬性時，這會很有用：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// `CustomSlider` inherits the `valueChanged` property from `BaseSlider`.</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-attr">outputs</span>: [<span class="hljs-string">'valueChanged'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">BaseSlider</span> {}</div></code>
+    </pre>
+  </div><p>您還可以在 <code>outputs</code> 清單中指定輸出別名，方法是在字串中冒號後面加上別名：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// `CustomSlider` inherits the `valueChanged` property from `BaseSlider`.</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-attr">outputs</span>: [<span class="hljs-string">'valueChanged: volumeChanged'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">BaseSlider</span> {}</div></code>
+    </pre>
+  </div>
+  <h2 id="">選擇事件名稱</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 選擇事件名稱"></a>
+  <p>避免選擇與 DOM 元素上的事件衝突的輸出名稱，例如 HTMLElement。名稱衝突會讓人混淆，不知道繫結的屬性是屬於元件還是 DOM 元素。</p>
+<p>避免為元件輸出新增前綴，就像您使用元件選擇器一樣。由於給定的元素只能建置一個元件，因此可以假設任何自訂屬性都屬於該元件。</p>
+<p>永遠使用 <a href="https://en.wikipedia.org/wiki/Camel_case" target="_blank">camelCase</a> 輸出名稱。避免在輸出名稱前加上「on」。</p>

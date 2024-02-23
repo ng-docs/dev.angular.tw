@@ -1,0 +1,44 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>ChangeDetectorRef</h1><div class="docs-api-item-label" data-mode="full" data-type="undecorated_class">Class</div></div></div><p class="docs-reference-description"><p>Base class that provides change detection functionality.
+A change-detection tree collects all views that are to be checked for changes.
+Use the methods to add and remove views from the tree, initiate change-detection,
+and explicitly mark views as <em>dirty</em>, meaning that they have changed and need to be re-rendered.</p></p><nav class="docs-pill-row"><a class="docs-pill" href="guide/components/lifecycle">Using change detection hooks</a><a class="docs-pill" href="guide/components/lifecycle">Defining custom change detection</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChangeDetectorRef</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="markForCheck">  <span class="hljs-keyword">abstract</span> <span class="hljs-title function_">markForCheck</span>(): <span class="hljs-built_in">void</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="detach">  <span class="hljs-keyword">abstract</span> <span class="hljs-title function_">detach</span>(): <span class="hljs-built_in">void</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="detectChanges">  <span class="hljs-keyword">abstract</span> <span class="hljs-title function_">detectChanges</span>(): <span class="hljs-built_in">void</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line hljs-ln-line-deprecated" member-id="checkNoChanges">  <span class="hljs-keyword">abstract</span> <span class="hljs-title function_">checkNoChanges</span>(): <span class="hljs-built_in">void</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="reattach">  <span class="hljs-keyword">abstract</span> <span class="hljs-title function_">reattach</span>(): <span class="hljs-built_in">void</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>The following examples demonstrate how to modify default change-detection behavior
+to perform explicit detection when needed.</p>
+<h3>Use <code>markForCheck()</code> with <code>CheckOnce</code> strategy</h3>
+<p>The following example sets the <code>OnPush</code> change-detection strategy for a component
+(<code>CheckOnce</code>, rather than the default <code>CheckAlways</code>), then forces a second check
+after an interval.</p>
+<p><code-example path="core/ts/change_detect/change-detection.ts"
+region="mark-for-check"></code-example></p>
+<h3>Detach change detector to limit how often check occurs</h3>
+<p>The following example defines a component with a large list of read-only data
+that is expected to change constantly, many times per second.
+To improve performance, we want to check and update the list
+less often than the changes actually occur. To do that, we detach
+the component&#39;s change detector and perform an explicit local check every five seconds.</p>
+<p><code-example path="core/ts/change_detect/change-detection.ts" region="detach"></code-example></p>
+<h3>Reattaching a detached component</h3>
+<p>The following example creates a component displaying live data.
+The component detaches its change detector from the main change detector tree
+when the <code>live</code> property is set to false, and reattaches it when the property
+becomes true.</p>
+<p><code-example path="core/ts/change_detect/change-detection.ts" region="reattach"></code-example></p>
+</div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="markForCheck" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>markForCheck</h3><div><code>void</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>When a view uses the {@link ChangeDetectionStrategyOnPush } (checkOnce)
+change detection strategy, explicitly marks the view as changed so that
+it can be checked again.</p>
+<p>Components are normally marked as dirty (in need of rerendering) when inputs
+have changed or events have fired in the view. Call this method to ensure that
+a component is checked even if these triggers have not occurred.</p>
+<!-- TODO: Add a link to a chapter on OnPush components --></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>void</code></div></div></div></div><div id="detach" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>detach</h3><div><code>void</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Detaches this view from the change-detection tree.
+A detached view is  not checked until it is reattached.
+Use in combination with <code>detectChanges()</code> to implement local change detection checks.</p>
+<p>Detached views are not checked during change detection runs until they are
+re-attached, even if they are marked as dirty.</p>
+<!-- TODO: Add a link to a chapter on detach/reattach/local digest -->
+<!-- TODO: Add a live demo once ref.detectChanges is merged into master --></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>void</code></div></div></div></div><div id="detectChanges" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>detectChanges</h3><div><code>void</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Checks this view and its children. Use in combination with {@link ChangeDetectorRefdetach }
+to implement local change detection checks.</p>
+<!-- TODO: Add a link to a chapter on detach/reattach/local digest -->
+<!-- TODO: Add a live demo once ref.detectChanges is merged into master --></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>void</code></div></div></div></div><div id="checkNoChanges" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>checkNoChanges</h3><div><code>void</code></div></div><span class="docs-param-keyword docs-deprecated">@deprecated</span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item docs-reference-card-item-deprecated"><div class="docs-function-definition"><p>Checks the change detector and its children, and throws if any changes are detected.</p>
+<p>Use in development mode to verify that running change detection doesn&#39;t introduce
+other changes. Calling it in production mode is a noop.</p></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>void</code></div></div></div></div><div id="reattach" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>reattach</h3><div><code>void</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Re-attaches the previously detached view to the change detection tree.
+Views are attached to the tree by default.</p>
+<!-- TODO: Add a link to a chapter on detach/reattach/local digest --></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>void</code></div></div></div></div></div></div></div>

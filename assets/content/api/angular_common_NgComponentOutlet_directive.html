@@ -1,0 +1,68 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>NgComponentOutlet</h1><div class="docs-api-item-label" data-mode="full" data-type="directive">directive</div></div></div><p class="docs-reference-description"><p>Instantiates a {@link Component } type and inserts its Host View into the current View.
+<code>NgComponentOutlet</code> provides a declarative approach for dynamic component creation.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">NgComponentOutlet</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngComponentOutlet">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">ngComponentOutlet</span>: <span class="hljs-title class_">Type</span>&lt;<span class="hljs-built_in">any</span>&gt;;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngComponentOutletInputs">  <span class="hljs-meta">@Input</span>() ngComponentOutletInputs?: <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">unknown</span>&gt;;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngComponentOutletInjector">  <span class="hljs-meta">@Input</span>() ngComponentOutletInjector?: <span class="hljs-title class_">Injector</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngComponentOutletContent">  <span class="hljs-meta">@Input</span>() ngComponentOutletContent?: <span class="hljs-built_in">any</span>[][];</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngComponentOutletNgModule">  <span class="hljs-meta">@Input</span>() ngComponentOutletNgModule?: <span class="hljs-title class_">Type</span>&lt;<span class="hljs-built_in">any</span>&gt;;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line hljs-ln-line-deprecated" member-id="ngComponentOutletNgModuleFactory">  <span class="hljs-meta">@Input</span>() ngComponentOutletNgModuleFactory?: <span class="hljs-title class_">NgModuleFactory</span>&lt;<span class="hljs-built_in">any</span>&gt;;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>Instantiates a {@link Component } type and inserts its Host View into the current View.
+<code>NgComponentOutlet</code> provides a declarative approach for dynamic component creation.</p>
+<p><code>NgComponentOutlet</code> requires a component type, if a falsy value is set the view will clear and
+any existing component will be destroyed.</p></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><h3>Fine tune control</h3>
+<p>You can control the component creation process by using the following optional attributes:</p>
+
+    <ul class="docs-list">
+      <li><p><code>ngComponentOutletInputs</code>: Optional component inputs object, which will be bind to the
+component.</p>
+</li>
+<li><p><code>ngComponentOutletInjector</code>: Optional custom {@link Injector } that will be used as parent for
+the Component. Defaults to the injector of the current view container.</p>
+</li>
+<li><p><code>ngComponentOutletContent</code>: Optional list of projectable nodes to insert into the content
+section of the component, if it exists.</p>
+</li>
+<li><p><code>ngComponentOutletNgModule</code>: Optional NgModule class reference to allow loading another
+module dynamically, then loading a component from that module.</p>
+</li>
+<li><p><code>ngComponentOutletNgModuleFactory</code>: Deprecated config option that allows providing optional
+NgModule factory to allow loading another module dynamically, then loading a component from that
+module. Use <code>ngComponentOutletNgModule</code> instead.</p>
+</li>
+
+    </ul>
+    <h3>Syntax</h3>
+<p>Simple</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> *<span class="hljs-attr">ngComponentOutlet</span>=<span class="hljs-string">&quot;componentTypeExpression&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p>With inputs</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> *<span class="hljs-attr">ngComponentOutlet</span>=<span class="hljs-string">&quot;componentTypeExpression;</span><span class="hljs-ln-line">                                  inputs: inputsExpression;&quot;</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p>Customized injector/content</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> *<span class="hljs-attr">ngComponentOutlet</span>=<span class="hljs-string">&quot;componentTypeExpression;</span><span class="hljs-ln-line">                                  injector: injectorExpression;</span><span class="hljs-ln-line">                                  content: contentNodesExpression;&quot;</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p>Customized NgModule reference</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> *<span class="hljs-attr">ngComponentOutlet</span>=<span class="hljs-string">&quot;componentTypeExpression;</span><span class="hljs-ln-line">                                  ngModule: ngModuleClass;&quot;</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <h3>A simple example</h3>
+<code-example path="common/ngComponentOutlet/ts/module.ts" region="SimpleExample" />
+
+<p>A more complete example with additional options:</p>
+<code-example path="common/ngComponentOutlet/ts/module.ts" region="CompleteExample" /></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="ngComponentOutlet" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngComponentOutlet</h3><div><code>Type&lt;any></code></div></div></header></div><div id="ngComponentOutletInputs" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngComponentOutletInputs</h3><div><code>Record&lt;string, unknown></code></div></div></header></div><div id="ngComponentOutletInjector" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngComponentOutletInjector</h3><div><code>Injector</code></div></div></header></div><div id="ngComponentOutletContent" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngComponentOutletContent</h3><div><code>any[][]</code></div></div></header></div><div id="ngComponentOutletNgModule" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngComponentOutletNgModule</h3><div><code>Type&lt;any></code></div></div></header></div><div id="ngComponentOutletNgModuleFactory" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngComponentOutletNgModuleFactory</h3><div><code>NgModuleFactory&lt;any></code></div></div><span class="docs-param-keyword docs-deprecated">@deprecated</span></header></div></div></div></div>

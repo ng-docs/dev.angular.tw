@@ -1,0 +1,37 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/service-worker</span><div class="docs-reference-title"><div><h1>SwRegistrationOptions</h1><div class="docs-api-item-label" data-mode="full" data-type="undecorated_class">Class</div></div></div><p class="docs-reference-description"><p>Token that can be used to provide options for <code>ServiceWorkerModule</code> outside of
+<code>ServiceWorkerModule.register()</code>.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SwRegistrationOptions</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="enabled">  enabled?: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="scope">  scope?: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="registrationStrategy">  registrationStrategy?: <span class="hljs-built_in">string</span> | (<span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-built_in">unknown</span>&gt;);</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>Token that can be used to provide options for <code>ServiceWorkerModule</code> outside of
+<code>ServiceWorkerModule.register()</code>.</p>
+<p>You can use this token to define a provider that generates the registration options at runtime,
+for example via a function call:</p>
+<p>{@example service-worker/registration-options/module.ts region=&quot;registration-options&quot;
+    header=&quot;app.module.ts&quot;}</p></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="enabled" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>enabled</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Whether the ServiceWorker will be registered and the related services (such as <code>SwPush</code> and
+<code>SwUpdate</code>) will attempt to communicate and interact with it.</p>
+<p>Default: true</p></div></div></div></div><div id="scope" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>scope</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>A URL that defines the ServiceWorker&#39;s registration scope; that is, what range of URLs it can
+control. It will be used when calling
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register">ServiceWorkerContainer#register()</a>.</p></div></div></div></div><div id="registrationStrategy" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>registrationStrategy</h3><div><code>string | (() => Observable&lt;unknown>)</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Defines the ServiceWorker registration strategy, which determines when it will be registered
+with the browser.</p>
+<p>The default behavior of registering once the application stabilizes (i.e. as soon as there are
+no pending micro- and macro-tasks) is designed to register the ServiceWorker as soon as
+possible but without affecting the application&#39;s first time load.</p>
+<p>Still, there might be cases where you want more control over when the ServiceWorker is
+registered (for example, there might be a long-running timeout or polling interval, preventing
+the app from stabilizing). The available option are:</p>
+
+    <ul class="docs-list">
+      <li><code>registerWhenStable:&lt;timeout&gt;</code>: Register as soon as the application stabilizes (no pending
+  micro-/macro-tasks) but no later than <code>&lt;timeout&gt;</code> milliseconds. If the app hasn&#39;t
+  stabilized after <code>&lt;timeout&gt;</code> milliseconds (for example, due to a recurrent asynchronous
+  task), the ServiceWorker will be registered anyway.
+  If <code>&lt;timeout&gt;</code> is omitted, the ServiceWorker will only be registered once the app
+  stabilizes.</li>
+<li><code>registerImmediately</code>: Register immediately.</li>
+<li><code>registerWithDelay:&lt;timeout&gt;</code>: Register with a delay of <code>&lt;timeout&gt;</code> milliseconds. For
+  example, use <code>registerWithDelay:5000</code> to register the ServiceWorker after 5 seconds. If
+  <code>&lt;timeout&gt;</code> is omitted, is defaults to <code>0</code>, which will register the ServiceWorker as soon
+  as possible but still asynchronously, once all pending micro-tasks are completed.</li>
+<li>An <a href="guide/pipes/unwrapping-data-observables">Observable</a> factory function: A function that returns an <code>Observable</code>.
+  The function will be used at runtime to obtain and subscribe to the <code>Observable</code> and the
+  ServiceWorker will be registered as soon as the first value is emitted.</li>
+
+    </ul>
+    <p>Default: &#39;registerWhenStable:30000&#39;</p></div></div></div></div></div></div></div>

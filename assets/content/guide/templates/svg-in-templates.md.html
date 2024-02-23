@@ -1,0 +1,31 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">SVG 作為範本</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/templates/svg-in-templates.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>您可以在 Angular 應用程式中使用 SVG 檔案作為範本。
+當您使用 SVG 作為範本時，您可以像使用 HTML 範本一樣使用指令和繫結。
+使用這些功能可動態產生互動式圖形。</p>
+
+  <h2 id="svg-">SVG 語法範例</h2>
+  <a href="#svg-" class="docs-anchor" tabindex="-1" aria-label="Link to SVG 語法範例"></a>
+  <p>以下範例顯示使用 SVG 作為範本的語法。</p>
+<div class="docs-code" path="adev/src/content/examples/template-syntax/src/app/svg.component.ts" header="src/app/svg.component.ts">
+    <div class="docs-code-header"><h3>src/app/svg.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-svg'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./svg.component.svg'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./svg.component.css'</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SvgComponent</span> {</div><div class="hljs-ln-line">  fillColor = <span class="hljs-string">'rgb(255, 0, 0)'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">changeColor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> r = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * <span class="hljs-number">256</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> g = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * <span class="hljs-number">256</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> b = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * <span class="hljs-number">256</span>);</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">fillColor</span> = <span class="hljs-string">`rgb(<span class="hljs-subst">${r}</span>, <span class="hljs-subst">${g}</span>, <span class="hljs-subst">${b}</span>)`</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>若要查看屬性與事件繫結的實際運作狀況，請將下列程式碼加入 <code>svg.component.svg</code> 檔案：</p>
+<div class="docs-code" path="adev/src/content/examples/template-syntax/src/app/svg.component.svg" header="src/app/svg.component.svg">
+    <div class="docs-code-header"><h3>src/app/svg.component.svg</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;svg&gt;</div><div class="hljs-ln-line">  &lt;g&gt;</div><div class="hljs-ln-line">    &lt;rect x=<span class="hljs-string">"0"</span> y=<span class="hljs-string">"0"</span> width=<span class="hljs-string">"100"</span> height=<span class="hljs-string">"100"</span> [attr.fill]=<span class="hljs-string">"fillColor"</span> (click)=<span class="hljs-string">"changeColor()"</span> /&gt;</div><div class="hljs-ln-line">    &lt;text x=<span class="hljs-string">"120"</span> y=<span class="hljs-string">"50"</span>&gt;click the rectangle to change the fill color&lt;/text&gt;</div><div class="hljs-ln-line">  &lt;/g&gt;</div><div class="hljs-ln-line">&lt;/svg&gt;</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>提供的範例使用了 <code>click()</code> 事件繫結和屬性繫結語法 (<code>[attr.fill]=&quot;fillColor&quot;</code>)。</p>

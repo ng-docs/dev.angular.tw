@@ -1,0 +1,203 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">建立 Home 元件</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/first-app/steps/02-HomeComponent/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>本教學課程示範如何為您的 Angular 應用程式建立新的 <a href="guide/components">元件</a>。</p>
+
+    <div class="docs-video-container">
+      <iframe
+      class="docs-video"
+      src="https://www.youtube.com/embed/R0nRX8jD2D0?si=OMVaw71EIa44yIOJ"
+      
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      credentialless
+      title="Video player"
+      ></iframe>
+    </div>
+    
+  <h2 id="">你將會學到</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 你將會學到"></a>
+  <p>您的應用程式有一個新的元件：<code>HomeComponent</code>。</p>
+
+  <h2 id="angular-">Angular 元件的概念預覽</h2>
+  <a href="#angular-" class="docs-anchor" tabindex="-1" aria-label="Link to Angular 元件的概念預覽"></a>
+  <p>Angular 應用程式圍繞著元件建構，這些元件是 Angular 的基本元素。
+元件包含程式碼、HTML 版面和 CSS 樣式資訊，提供應用程式中元素的功能和外觀。
+在 Angular 中，元件可以包含其他元件。應用程式的功能和外觀可以分隔並分割成元件。</p>
+<p>在 Angular 中，元件具備定義其屬性的元數據。
+當您建立 <code>HomeComponent</code> 時，您會使用這些屬性：</p>
+
+  <ul class="docs-list">
+    <li><code>selector</code>：說明 Angular 在範本中如何參考元件。</li>
+<li><code>standalone</code>：說明元件是否需要 <code>NgModule</code>。</li>
+<li><code>imports</code>：說明元件的相依性。</li>
+<li><code>template</code>：說明元件的 HTML 標記和版面配置。</li>
+<li><code>styleUrls</code>：以陣列形式列出元件使用的 CSS 檔案的 URL。</li>
+
+  </ul>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="api/core/Component">
+      深入了解元件
+    </a>
+    
+
+    </nav>
+    
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-homecomponent">建立 <code>HomeComponent</code></h3>
+  <a href="#-homecomponent" class="docs-anchor" tabindex="-1" aria-label="Link to 建立 <code>HomeComponent</code>"></a>
+  
+      <p>在這個步驟中，您可以為您的應用程式建立一個新的元件。</p>
+<p>在您的 IDE 的 <strong>Terminal</strong> 窗格中：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>在專案目錄中，導覽至 <code>first-app</code> 目錄。</p>
+</li>
+<li><p>執行此指令以建立新的 <code>HomeComponent</code></p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate component home</div></code>
+    </pre>
+  </div></li>
+<li><p>執行此指令以建置並服務您的應用程式。</p>
+<p> 注意：此步驟僅適用於您的本地環境！</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng serve</div></code>
+    </pre>
+  </div></li>
+<li><p>開啟瀏覽器並導覽至 <code>http://localhost:4200</code> 以尋找應用程式。</p>
+</li>
+<li><p>確認應用程式沒有錯誤地建置。</p>
+<p> 有幫助的：它應該呈現與前一堂課相同的內容，因為即使您新增一個新的元件，您尚未將它包含在任何應用程式範本中。</p>
+</li>
+<li><p>在您完成下一個步驟時，讓 <code>ng serve</code> 持續執行。</p>
+</li>
+
+    </ol>
+    
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">將新元件新增至應用程式的配置</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 將新元件新增至應用程式的配置"></a>
+  
+      <p>在此步驟中，您將新元件 <code>HomeComponent</code> 新增至應用程式的根元件 <code>AppComponent</code>，讓它顯示在應用程式的配置中。</p>
+<p>在您的 IDE 的 <strong>編輯</strong> 窗格中：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>在編輯器中開啟 <code>app.component.ts</code>。</p>
+</li>
+<li><p>在 <code>app.component.ts</code> 中，透過將此行新增至檔案層級的匯入，來匯入 <code>HomeComponent</code>。</p>
+<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/app.component.ts" visiblelines="1" header="在 src/app/app.component.ts 中匯入 HomeComponent">
+    <div class="docs-code-header"><h3>在 src/app/app.component.ts 中匯入 HomeComponent</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HomeComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./home/home.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  imports: [HomeComponent],</div><div class="hljs-ln-line">  template: `<span class="language-javascript"></span></div><div class="hljs-ln-line">    &lt;main&gt;</div><div class="hljs-ln-line">      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"brand-name"</span>&gt;</span></span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"brand-logo"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"/assets/logo.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"logo"</span> <span class="hljs-attr">aria-hidden</span>=<span class="hljs-string">"true"</span> /&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span></div><div class="hljs-ln-line">      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"content"</span>&gt;</span></span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">app-home</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-home</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span></div><div class="hljs-ln-line">    &lt;/main&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./app.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  title = <span class="hljs-string">'homes'</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+<li><p>在 <code>app.component.ts</code> 中的 <code>@Component</code> 中，更新 <code>imports</code> 陣列屬性並新增 <code>HomeComponent</code>。</p>
+<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/app.component.ts" visiblelines="6,7,8" header="在 src/app/app.component.ts 中替換">
+    <div class="docs-code-header"><h3>在 src/app/app.component.ts 中替換</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HomeComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./home/home.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  imports: [HomeComponent],</div><div class="hljs-ln-line">  template: `<span class="language-javascript"></span></div><div class="hljs-ln-line">    &lt;main&gt;</div><div class="hljs-ln-line">      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"brand-name"</span>&gt;</span></span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"brand-logo"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"/assets/logo.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"logo"</span> <span class="hljs-attr">aria-hidden</span>=<span class="hljs-string">"true"</span> /&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span></div><div class="hljs-ln-line">      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"content"</span>&gt;</span></span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">app-home</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-home</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span></div><div class="hljs-ln-line">    &lt;/main&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./app.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  title = <span class="hljs-string">'homes'</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+<li><p>在 <code>app.component.ts</code> 中的 <code>@Component</code> 中，更新 <code>template</code> 屬性以包含以下 HTML 程式碼。</p>
+<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/app.component.ts" visiblelines="9,10,11,12,13,14,15,16,17,18" header="在 src/app/app.component.ts 中替換">
+    <div class="docs-code-header"><h3>在 src/app/app.component.ts 中替換</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HomeComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./home/home.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  imports: [HomeComponent],</div><div class="hljs-ln-line">  template: `<span class="language-javascript"></span></div><div class="hljs-ln-line">    &lt;main&gt;</div><div class="hljs-ln-line">      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"brand-name"</span>&gt;</span></span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"brand-logo"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"/assets/logo.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"logo"</span> <span class="hljs-attr">aria-hidden</span>=<span class="hljs-string">"true"</span> /&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span></div><div class="hljs-ln-line">      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"content"</span>&gt;</span></span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">app-home</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-home</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span></div><div class="hljs-ln-line">    &lt;/main&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./app.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  title = <span class="hljs-string">'homes'</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+<li><p>將變更內容儲存至 <code>app.component.ts</code>。</p>
+</li>
+<li><p>如果 <code>ng serve</code> 正在執行，應用程式應該會更新。
+ 如果 <code>ng serve</code> 沒有執行，請重新啟動。
+ 應用程式中的 <em>Hello world</em> 應該從 <code>HomeComponent</code> 變更為 <em>home works!</em>。</p>
+</li>
+<li><p>檢查瀏覽器中的執行中應用程式，並確認應用程式已更新。</p>
+ <img alt="顯示文字 'home works!' 的網頁瀏覽器畫面" src="https://angular.dev/assets/images/tutorials/first-app/homes-app-lesson-02-step-2.png"></li>
+
+    </ol>
+    
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-homecomponent-">在 <code>HomeComponent</code> 中新增功能</h3>
+  <a href="#-homecomponent-" class="docs-anchor" tabindex="-1" aria-label="Link to 在 <code>HomeComponent</code> 中新增功能"></a>
+  
+      <p>在這個步驟中，您將在 <code>HomeComponent</code> 中新增功能。</p>
+<p>在上一個步驟中，您已將預設的 <code>HomeComponent</code> 新增至您的應用程式範本，因此其預設的 HTML 會顯示在應用程式中。
+在這個步驟中，您會新增一個搜尋篩選器和按鈕，稍後課程中會用到。
+目前為止，<code>HomeComponent</code> 只有這些內容。
+請注意，此步驟只是將搜尋元素新增至版面配置，但目前尚未具備任何功能。</p>
+<p>在您的 IDE 的 <strong>編輯</strong> 窗格中：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>在 <code>first-app</code> 目錄中，在編輯器中開啟 <code>home.component.ts</code>。</p>
+</li>
+<li><p>在 <code>home.component.ts</code> 中，在 <code>@Component</code> 中，使用此程式碼更新 <code>template</code> 屬性。</p>
+<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/home/home.component.ts" visiblelines="9,10,11,12,13,14,15,16" header="取代 src/app/home/home.component.ts 中的內容">
+    <div class="docs-code-header"><h3>取代 src/app/home/home.component.ts 中的內容</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {CommonModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-home'</span>,</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  imports: [CommonModule],</div><div class="hljs-ln-line">  template: `<span class="language-javascript"></span></div><div class="hljs-ln-line">    &lt;section&gt;</div><div class="hljs-ln-line">      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span></span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Filter by city"</span> /&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"primary"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span>&gt;</span>Search<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></div><div class="hljs-ln-line">    &lt;/section&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./home.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HomeComponent</span> {}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+<li><p>接著，在編輯器中開啟 <code>home.component.css</code> 並使用這些樣式更新內容。</p>
+<p> 注意：在瀏覽器中，這些可以放入 <code>src/app/home/home.component.ts</code> 中的 <code>styles</code> 陣列。</p>
+<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/home/home.component.css" header="取代 src/app/home/home.component.css 中的內容">
+    <div class="docs-code-header"><h3>取代 src/app/home/home.component.css 中的內容</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-selector-class">.results</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">display</span>: grid;</div><div class="hljs-ln-line">  <span class="hljs-attribute">column-gap</span>: <span class="hljs-number">14px</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">row-gap</span>: <span class="hljs-number">14px</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">grid-template-columns</span>: <span class="hljs-built_in">repeat</span>(auto-fill, <span class="hljs-built_in">minmax</span>(<span class="hljs-number">400px</span>, <span class="hljs-number">400px</span>));</div><div class="hljs-ln-line">  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">50px</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">justify-content</span>: space-around;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[type=<span class="hljs-string">"text"</span>]</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">border</span>: solid <span class="hljs-number">1px</span> <span class="hljs-built_in">var</span>(--primary-color);</div><div class="hljs-ln-line">  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">8px</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">4px</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">display</span>: inline-block;</div><div class="hljs-ln-line">  <span class="hljs-attribute">width</span>: <span class="hljs-number">30%</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-selector-tag">button</span> {</div><div class="hljs-ln-line">  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;</div><div class="hljs-ln-line">  <span class="hljs-attribute">border</span>: solid <span class="hljs-number">1px</span> <span class="hljs-built_in">var</span>(--primary-color);</div><div class="hljs-ln-line">  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--primary-color);</div><div class="hljs-ln-line">  <span class="hljs-attribute">color</span>: white;</div><div class="hljs-ln-line">  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">8px</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">500px</span>) <span class="hljs-keyword">and</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">768px</span>) {</div><div class="hljs-ln-line">  <span class="hljs-selector-class">.results</span> {</div><div class="hljs-ln-line">      <span class="hljs-attribute">grid-template-columns</span>: <span class="hljs-built_in">repeat</span>(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>fr);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  <span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[type=<span class="hljs-string">"text"</span>]</span> {</div><div class="hljs-ln-line">      <span class="hljs-attribute">width</span>: <span class="hljs-number">70%</span>;</div><div class="hljs-ln-line">  }   </div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">@media</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">499px</span>) {</div><div class="hljs-ln-line">  <span class="hljs-selector-class">.results</span> {</div><div class="hljs-ln-line">      <span class="hljs-attribute">grid-template-columns</span>: <span class="hljs-number">1</span>fr;</div><div class="hljs-ln-line">  }    </div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+<li><p>確認應用程式在沒有錯誤的情況下建置。
+ 您應該可以在應用程式中找到篩選查詢方塊和按鈕，而且它們應該套用樣式。
+ 在繼續執行下一個步驟之前，請修正任何錯誤。</p>
+ <img alt="顯示標誌、篩選文字輸入方塊和搜尋按鈕的 homes-app 瀏覽器畫面" src="https://angular.dev/assets/images/tutorials/first-app/homes-app-lesson-02-step-3.png"></li>
+
+    </ol>
+    
+    </li>
+    
+    </ol>
+    
+    <div class="docs-alert docs-alert-summary">
+    <p><strong>Summary:</strong> 在這個課程中，您為您的應用程式建立新的元件，並給它一個篩選器編輯控制項和按鈕。</p>
+
+    </div>
+    <p>有關本課程中涵蓋的主題的更多資訊，請造訪：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="cli/generate#component-command">
+      <code>ng generate component</code>
+    </a>
+    
+    <a class="docs-pill" href="api/core/Component">
+      <code>Component</code> 參考
+    </a>
+    
+    <a class="docs-pill" href="guide/components">
+      Angular 元件概觀
+    </a>
+    
+
+    </nav>
+    

@@ -1,0 +1,105 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>NgForOf</h1><div class="docs-api-item-label" data-mode="full" data-type="directive">directive</div></div></div><p class="docs-reference-description"><p>A <a href="guide/directives/structural-directives">structural directive</a> that renders
+a template for each item in a collection.
+The directive is placed on an element, which becomes the parent
+of the cloned templates.</p></p><nav class="docs-pill-row"><a class="docs-pill" href="guide/directives/structural-directives">Structural Directives</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">NgForOf</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngForOf">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">ngForOf</span>(<span class="hljs-params">value: U &amp; NgIterable&lt;T&gt;</span>);</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngForTrackBy">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">get</span> <span class="hljs-title function_">ngForTrackBy</span>(): <span class="hljs-title class_">TrackByFunction</span>&lt;T&gt;;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngForTemplate">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">ngForTemplate</span>(<span class="hljs-params">value: TemplateRef&lt;NgForOfContext&lt;T, U&gt;&gt;</span>);</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngTemplateContextGuard">  <span class="hljs-keyword">static</span> <span class="hljs-title function_">ngTemplateContextGuard</span>(<span class="hljs-attr">dir</span>: <span class="hljs-title class_">NgForOf</span>&lt;T, U&gt;, <span class="hljs-attr">ctx</span>: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">boolean</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>A <a href="guide/directives/structural-directives">structural directive</a> that renders
+a template for each item in a collection.
+The directive is placed on an element, which becomes the parent
+of the cloned templates.</p>
+<p>The <code>ngForOf</code> directive is generally used in the
+<a href="guide/directives/structural-directives">shorthand form</a> <code>*ngFor</code>.
+In this form, the template to be rendered for each iteration is the content
+of an anchor element containing the directive.</p>
+<p>The following example shows the shorthand syntax with some options,
+contained in an <code>&lt;li&gt;</code> element.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let item of items; index as i; trackBy: trackByFn&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p>The shorthand form expands into a long form that uses the <code>ngForOf</code> selector
+on an <code>&lt;ng-template&gt;</code> element.
+The content of the <code>&lt;ng-template&gt;</code> element is the <code>&lt;li&gt;</code> element that held the
+short-form directive.</p>
+<p>Here is the expanded version of the short-form example.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-template</span> <span class="hljs-attr">ngFor</span> <span class="hljs-attr">let-item</span> [<span class="hljs-attr">ngForOf</span>]=<span class="hljs-string">&quot;items&quot;</span> <span class="hljs-attr">let-i</span>=<span class="hljs-string">&quot;index&quot;</span> [<span class="hljs-attr">ngForTrackBy</span>]=<span class="hljs-string">&quot;trackByFn&quot;</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">ng-template</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p>Angular automatically expands the shorthand syntax as it compiles the template.
+The context for each embedded view is logically merged to the current component
+context according to its lexical position.</p>
+<p>When using the shorthand syntax, Angular allows only <a href="guide/directives/structural-directives">one structural directive
+on an element</a>.
+If you want to iterate conditionally, for example,
+put the <code>*ngIf</code> on a container element that wraps the <code>*ngFor</code> element.
+For further discussion, see
+<a href="guide/directives/structural-directives">Structural Directives</a>.</p></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><h3>Local variables</h3>
+<p><code>NgForOf</code> provides exported values that can be aliased to local variables.
+For example:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let user of users; index as i; first as isFirst&quot;</span>&gt;</span></span><span class="hljs-ln-line">  </span><span class="hljs-template-variable">{{<span class="hljs-name">i</span>}}</span><span class="language-xml">/</span><span class="hljs-template-variable">{{<span class="hljs-name">users.length</span>}}</span><span class="language-xml">. </span><span class="hljs-template-variable">{{<span class="hljs-name">user</span>}}</span><span class="language-xml"> <span class="hljs-tag">&lt;<span class="hljs-name">span</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;isFirst&quot;</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span>
+          </code>
+        </pre>
+      </div>
+    <p>The following exported values can be aliased to local variables:</p>
+
+    <ul class="docs-list">
+      <li><code>$implicit: T</code>: The value of the individual items in the iterable (<code>ngForOf</code>).</li>
+<li><code>ngForOf: NgIterable&lt;T&gt;</code>: The value of the iterable expression. Useful when the expression is
+more complex then a property access, for example when using the async pipe (<code>userStreams | async</code>).</li>
+<li><code>index: number</code>: The index of the current item in the iterable.</li>
+<li><code>count: number</code>: The length of the iterable.</li>
+<li><code>first: boolean</code>: True when the item is the first item in the iterable.</li>
+<li><code>last: boolean</code>: True when the item is the last item in the iterable.</li>
+<li><code>even: boolean</code>: True when the item has an even index in the iterable.</li>
+<li><code>odd: boolean</code>: True when the item has an odd index in the iterable.</li>
+
+    </ul>
+    <h3>Change propagation</h3>
+<p>When the contents of the iterator changes, <code>NgForOf</code> makes the corresponding changes to the DOM:</p>
+
+    <ul class="docs-list">
+      <li>When an item is added, a new instance of the template is added to the DOM.</li>
+<li>When an item is removed, its template instance is removed from the DOM.</li>
+<li>When items are reordered, their respective templates are reordered in the DOM.</li>
+
+    </ul>
+    <p>Angular uses object identity to track insertions and deletions within the iterator and reproduce
+those changes in the DOM. This has important implications for animations and any stateful
+controls that are present, such as <code>&lt;input&gt;</code> elements that accept user input. Inserted rows can
+be animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state
+such as user input.
+For more on animations, see <a href="guide/animations/transition-and-triggers">Transitions and Triggers</a>.</p>
+<p>The identities of elements in the iterator can change while the data does not.
+This can happen, for example, if the iterator is produced from an RPC to the server, and that
+RPC is re-run. Even if the data hasn&#39;t changed, the second response produces objects with
+different identities, and Angular must tear down the entire DOM and rebuild it (as if all old
+elements were deleted and all new elements inserted).</p>
+<p>To avoid this expensive operation, you can customize the default tracking algorithm.
+by supplying the <code>trackBy</code> option to <code>NgForOf</code>.
+<code>trackBy</code> takes a function that has two arguments: <code>index</code> and <code>item</code>.
+If <code>trackBy</code> is given, Angular tracks changes by the return value of the function.</p>
+</div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="ngForOf" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngForOf</h3><div><code>U &amp; NgIterable&lt;T></code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>The value of the iterable expression, which can be used as a
+<a href="guide/directives/structural-directives">template input variable</a>.</p></div></div></div></div><div id="ngForTrackBy" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngForTrackBy</h3><div><span>2 overloads</span></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Specifies a custom <code>TrackByFunction</code> to compute the identity of items in an iterable.</p>
+<p>If a custom <code>TrackByFunction</code> is not provided, <code>NgForOf</code> will use the item&#39;s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is">object
+identity</a>
+as the key.</p>
+<p><code>NgForOf</code> uses the computed key to associate items in an iterable with DOM elements
+it produces for these items.</p>
+<p>A custom <code>TrackByFunction</code> is useful to provide good user experience in cases when items in an
+iterable rendered using <code>NgForOf</code> have a natural identifier (for example, custom ID or a
+primary key), and this iterable could be updated with new object instances that still
+represent the same underlying entity (for example, when data is re-fetched from the server,
+and the iterable is recreated and re-rendered, but most of the data is still the same).</p></div></div><div class="docs-reference-card-item"><div></div></div></div></div><div id="ngForTemplate" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngForTemplate</h3><div><code>TemplateRef&lt;NgForOfContext&lt;T, U>></code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>A reference to the template that is stamped out for each item in the iterable.</p></div></div></div></div><div id="ngTemplateContextGuard" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngTemplateContextGuard</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Asserts the correct type of the context for the template that <code>NgForOf</code> will render.</p>
+<p>The presence of this method is a signal to the Ivy template type-check compiler that the
+<code>NgForOf</code> structural directive renders its template with a specific context type.</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">dir</span><code>NgForOf&lt;T, U></code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">ctx</span><code>any</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>boolean</code></div></div></div></div></div></div></div>

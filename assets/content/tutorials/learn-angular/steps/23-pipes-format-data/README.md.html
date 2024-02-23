@@ -1,0 +1,77 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">使用管線格式化資料</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/23-pipes-format-data/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>您可以透過配置來進一步使用管道。透過將選項傳遞給管道，可以配置管道。</p>
+<p>在這個活動中，您將使用一些管道和管道參數。</p>
+<hr>
+
+<p>若要將參數傳遞至管線，請使用 <code>:</code> 語法，後接參數值。以下是一個範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">template</span>: <span class="hljs-string">`{{ date | date:'medium' }}`</span>;</div></code>
+    </pre>
+  </div><p>輸出為「2015 年 6 月 15 日下午 9:43:11」。</p>
+<p>時間自訂管線輸出：</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-decimalpipe-">使用 <code>DecimalPipe</code> 格式化數字</h3>
+  <a href="#-decimalpipe-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 <code>DecimalPipe</code> 格式化數字"></a>
+  
+      <p>在 <code>app.component.ts</code> 中，更新範本以包含 <code>decimal</code> 管道的參數。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line highlighted">    &lt;li&gt;Number with "decimal" {{ num | number:"3.2-2" }}&lt;/li&gt;</div><div class="hljs-ln-line">`</div></code>
+    </pre>
+  </div><p>備註：格式是什麼？<code>DecimalPipe</code> 的參數稱為 <code>digitsInfo</code>，此參數使用格式：`{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}``</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-datepipe-">使用 <code>DatePipe</code> 格式化日期</h3>
+  <a href="#-datepipe-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 <code>DatePipe</code> 格式化日期"></a>
+  
+      <p>現在，更新範本以使用 <code>date</code> 管道。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line highlighted">    &lt;li&gt;Date with "date" {{ birthday | date: 'medium' }}&lt;/li&gt;</div><div class="hljs-ln-line">`</div></code>
+    </pre>
+  </div><p>要增添樂趣，請嘗試 <code>date</code> 的不同參數。更多資訊請參閱 <a href="/guide/pipes">Angular 文件</a>。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-currencypipe-">使用 <code>CurrencyPipe</code> 格式化貨幣</h3>
+  <a href="#-currencypipe-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 <code>CurrencyPipe</code> 格式化貨幣"></a>
+  
+      <p>對於您的最後一個任務，請更新範本以使用 <code>currency</code> 管道。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line highlighted">    &lt;li&gt;Currency with "currency" {{ cost | currency }}&lt;/li&gt;</div><div class="hljs-ln-line">`</div></code>
+    </pre>
+  </div><p>您也可以嘗試不同的參數來使用 <code>currency</code>。更多資訊請參閱 <a href="/guide/pipes">Angular 文件</a>。</p>
+
+    </li>
+    
+    </ol>
+    <p>使用管道進行了很棒的工作。到目前為止，你已經取得了一些很大的進展。</p>
+<p>您的應用程式中還可以使用的內建管線更多。您可以在 <a href="/guide/pipes">Angular 文件</a> 中找到清單。</p>
+<p>倘若內建管道無法滿足你的需求，你也可以建立自訂管道。查看下一個課程以了解更多。</p>

@@ -1,0 +1,78 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">建立自訂管線</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/24-create-a-pipe/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>您可以在 Angular 中建立自訂管道來符合您的資料轉換需求。</p>
+<p>在這個活動中，您將建立一個自訂管道，並在範本中使用它。</p>
+<hr>
+
+<p>管道是一個帶有 <code>@Pipe</code> 裝飾器的 TypeScript 類別。這是一個範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Pipe</span>, <span class="hljs-title class_">PipeTransform</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Pipe</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-string">'star'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StarPipe</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">PipeTransform</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">string</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-string">`⭐️ <span class="hljs-subst">${value}</span> ⭐️`</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>StarPipe 接受字串值，並回傳一個在字串周圍加上星號的字串。請注意：</p>
+
+  <ul class="docs-list">
+    <li><code>@Pipe</code> 裝飾器設定的名稱將會用在範本中</li>
+<li><code>transform</code> 函式是您放置邏輯的地方</li>
+
+  </ul>
+  <p>好的，現在輪到你來嘗試了——你將建立 <code>ReversePipe</code>：</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-reversepipe">建立 <code>ReversePipe</code></h3>
+  <a href="#-reversepipe" class="docs-anchor" tabindex="-1" aria-label="Link to 建立 <code>ReversePipe</code>"></a>
+  
+      <p>在 <code>reverse.pipe.ts</code> 中，將 <code>@Pipe</code> 裝飾器新增至 <code>ReversePipe</code> 類別，並提供以下設定：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Pipe</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">name</span>: <span class="hljs-string">'reverse'</span></div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-transform-">實作 <code>transform</code> 函式</h3>
+  <a href="#-transform-" class="docs-anchor" tabindex="-1" aria-label="Link to 實作 <code>transform</code> 函式"></a>
+  
+      <p>現在 <code>ReversePipe</code> 類別是一個管道。更新 <code>transform</code> 函式以新增反轉邏輯：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReversePipe</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">PipeTransform</span> {</div><div class="hljs-ln-line">    <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">string</span> {</div><div class="hljs-ln-line highlighted">        <span class="hljs-keyword">let</span> reverse = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line highlighted"></div><div class="hljs-ln-line highlighted">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = value.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {</div><div class="hljs-ln-line highlighted">            reverse += value[i];</div><div class="hljs-ln-line highlighted">        }</div><div class="hljs-ln-line highlighted"></div><div class="hljs-ln-line highlighted">        <span class="hljs-keyword">return</span> reverse;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-reversepipe">在範本中使用 <code>ReversePipe</code></h3>
+  <a href="#-reversepipe" class="docs-anchor" tabindex="-1" aria-label="Link to 在範本中使用 <code>ReversePipe</code>"></a>
+  
+      
+    </li>
+    <p>在實作管線邏輯之後，最後一個步驟是在範本中使用它。在 <code>app.component.ts</code> 中，將管線包含在範本中，並將它新增到元件匯入中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">template</span>: <span class="hljs-string">`Reverse Machine: {{ word | reverse }}`</span></div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">ReversePipe</span>]</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div>
+    </ol>
+    <p>就這樣完成了。恭喜你完成這項活動。現在你已經知道如何使用管道，甚至如何實作你自己的自訂管道。</p>

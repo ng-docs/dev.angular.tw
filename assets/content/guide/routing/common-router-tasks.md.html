@@ -1,0 +1,562 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">常見的路由任務</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/routing/common-router-tasks.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>這個主題說明如何實作許多與將 Angular 路由器新增到應用程式相關的常見任務。</p>
+
+  <h2 id="">啟用路由功能來產生應用程式</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 啟用路由功能來產生應用程式"></a>
+  <p>以下指令使用 Angular CLI 來產生一個具有應用程式路由的基本 Angular 應用程式。以下範例中的應用程式名稱為 <code>routing-app</code>。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng new routing-app</div></code>
+    </pre>
+  </div>
+  <h3 id="">加入路由元件</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 加入路由元件"></a>
+  <p>若要使用 Angular 路由器，應用程式至少需要兩個元件，以便讓您可以從一個元件導覽至另一個元件。若要使用 CLI 建立元件，請在命令列中輸入下列內容，其中 <code>first</code> 是元件的名稱：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate component first</div></code>
+    </pre>
+  </div><p>針對第二個元件重複此步驟，但給它不同的名稱。這裡，新名稱為 <code>second</code>。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate component second</div></code>
+    </pre>
+  </div><p>CLI 會自動附加 <code>Component</code>，因此如果您寫 <code>first-component</code>，您的元件將會是 <code>FirstComponentComponent</code>。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3><code>base href</code></h3>
+      <p>本指南適用於 CLI 產生的 Angular 應用程式。</p>
+
+    </div>
+    
+  <h3 id="">匯入您的新元件</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 匯入您的新元件"></a>
+  <p>如要使用您的新元件，請將其匯入 <code>app.routes.ts</code> 檔案頂端，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">FirstComponent</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'./first/first.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">SecondComponent</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'./second/second.component'</span>;</div></code>
+    </pre>
+  </div>
+  <h2 id="">定義基本路由</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 定義基本路由"></a>
+  <p>建立路線有三個基本建構模組。</p>
+<p>將路由匯入 <code>app.config.ts</code> 並將其新增至 <code>provideRouter</code> 函式。以下是在 CLI 中使用的預設 <code>ApplicationConfig</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [<span class="hljs-title function_">provideRouter</span>(routes)]</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div><p>Angular CLI 會為您執行此步驟。但是，如果您手動建立應用程式或使用現有的非 CLI 應用程式，請驗證匯入和組態是否正確。</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-routes-">為您的路由設定 <code>Routes</code> 陣列</h3>
+  <a href="#-routes-" class="docs-anchor" tabindex="-1" aria-label="Link to 為您的路由設定 <code>Routes</code> 陣列"></a>
+  
+      <p>Angular CLI 會自動執行此步驟。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Routes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [];</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-routes-">在您的 <code>Routes</code> 陣列中定義您的路由</h3>
+  <a href="#-routes-" class="docs-anchor" tabindex="-1" aria-label="Link to 在您的 <code>Routes</code> 陣列中定義您的路由"></a>
+  
+      <p>這個陣列中的每個路由都是一個包含兩個屬性的 JavaScript 物件。第一個屬性 <code>path</code> 定義路由的 URL 路徑。第二個屬性 <code>component</code> 定義 Angular 應針對對應路徑所使用的元件。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'first-component'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">FirstComponent</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'second-component'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">SecondComponent</span> },</div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">將您的路由新增至您的應用程式</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 將您的路由新增至您的應用程式"></a>
+  
+      <p>現在您已定義好路由，將其加入您的應用程式。首先，新增連結至兩個元件。將您想要加入路由的錨點標籤指定給 <code>routerLink</code> 屬性。將屬性的值設定為使用者點擊各連結時要顯示的元件。接著，更新您的元件範本，加入 <code>&lt;router-outlet&gt;</code>。此元素通知 Angular 使用所選路由的元件更新應用程式檢視。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Angular Router App<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/first-component"</span> <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"active"</span> <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</span>First Component<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/second-component"</span> <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"active"</span> <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</span>Second Component<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- The routed views render in the &lt;router-outlet&gt;--&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div></code>
+    </pre>
+  </div><p>您還需要將 <code>RouterLink</code>、<code>RouterLinkActive</code> 和 <code>RouterOutlet</code> 新增到 <code>AppComponent</code> 的 <code>imports</code> 陣列。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">CommonModule</span>, <span class="hljs-title class_">RouterOutlet</span>, <span class="hljs-title class_">RouterLink</span>, <span class="hljs-title class_">RouterLinkActive</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./app.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./app.component.css'</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  title = <span class="hljs-string">'routing-app'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    
+  <h3 id="">路線順序</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 路線順序"></a>
+  <p>路由的順序很重要，因為 <code>Router</code> 在比對路由時會採用先配對先獲勝的策略，因此較明確的路由應該放在較不明確的路由上方。
+首先列出具有靜態路徑的路由，接著是空路徑路由，它符合預設路由。
+<a href="guide/routing/common-router-tasks#setting-up-wildcard-routes">萬用字元路由</a> 排在最後，因為它符合每個 URL，而且只有在沒有其他路由先符合時，<code>Router</code> 才會選取它。</p>
+
+  <h2 id="">取得路線資訊</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 取得路線資訊"></a>
+  <p>通常，當使用者瀏覽您的應用程式時，您可能會想要將資訊從一個元件傳遞到另一個元件。
+例如，考慮一個顯示購物清單的應用程式。
+清單中的每個項目都有唯一的 <code>id</code>。
+若要編輯項目，使用者會按一下「編輯」按鈕，這會開啟 <code>EditGroceryItem</code> 元件。
+您希望該元件擷取雜貨項目的 <code>id</code>，以便向使用者顯示正確的資訊。</p>
+<p>使用路由將此類型的資訊傳遞至您的應用程式元件。
+為此，您使用 <a href="api/router/withComponentInputBinding">withComponentInputBinding</a> 功能搭配 <code>provideRouter</code> 或 <code>RouterModule.forRoot</code> 的 <code>bindToComponentInputs</code> 選項。</p>
+<p>如何從路線取得資訊：</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-withcomponentinputbinding">加入 <code>withComponentInputBinding</code></h3>
+  <a href="#-withcomponentinputbinding" class="docs-anchor" tabindex="-1" aria-label="Link to 加入 <code>withComponentInputBinding</code>"></a>
+  
+      <p>將 <code>withComponentInputBinding</code> 功能新增至 <code>provideRouter</code> 方法中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  <span class="hljs-title function_">provideRouter</span>(appRoutes, <span class="hljs-title function_">withComponentInputBinding</span>()),</div><div class="hljs-ln-line">]</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-input">在元件中新增 <code>Input</code></h3>
+  <a href="#-input" class="docs-anchor" tabindex="-1" aria-label="Link to 在元件中新增 <code>Input</code>"></a>
+  
+      <p>將該元件更新為具有與參數名稱相符的 <code>Input</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Input</span>()</div><div class="hljs-ln-line"><span class="hljs-keyword">set</span> <span class="hljs-title function_">id</span>(<span class="hljs-params">heroId: <span class="hljs-built_in">string</span></span>) {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">hero$</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">service</span>.<span class="hljs-title function_">getHero</span>(heroId);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>備註：您可以將所有路由資料與金鑰、值對繫結至元件輸入：靜態或已解析路由資料、路徑參數、矩陣參數和查詢參數。
+如果您想使用父元件的路由資訊，您需要設定路由參數繼承策略選項：withRouterConfig({paramsInheritanceStrategy: &#39;always&#39;})</p>
+
+    </li>
+    <p>備註：您可以將所有路由資料與金鑰、值對繫結至元件輸入：靜態或已解析的路由資料、路徑參數、矩陣參數和查詢參數。</p>
+<p>如果要使用父元件路由資訊，您需要設定路由器 <code>paramsInheritanceStrategy</code> 選項：
+<code>withRouterConfig({paramsInheritanceStrategy: &#39;always&#39;})</code></p>
+</docs-step>
+
+
+    </ol>
+    
+  <h2 id="">設定萬用字元路由</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 設定萬用字元路由"></a>
+  <p>運作良好的應用程式應該在使用者嘗試導覽至應用程式中不存在的部分時，以優雅的方式處理。
+若要將此功能新增至您的應用程式，請設定萬用字元路由。
+Angular 路由器會在要求的 URL 與任何路由路徑不符時，選擇此路由。</p>
+<p>若要設定萬用字元路由，請將下列程式碼新增至 <code>routes</code> 定義。</p>
+<docs-code>
+
+<p>{ path: &#39;**&#39;, component: <component-name> }</p>
+</docs-code>
+
+<p>兩個星號 <code>**</code> 告知 Angular 此 <code>routes</code> 定義為萬用字元路由。
+對於 <code>component</code> 屬性，您可以定義應用程式中的任何元件。
+常見的選擇包括應用程式專用的 <code>PageNotFoundComponent</code>，您可以定義它以 <a href="guide/routing/common-router-tasks#displaying-a-404-page">向使用者顯示 404 頁面</a>；或者重新導向至應用程式的 main 元件。
+萬用字元路由是最後一個路由，因為它會比對任何 URL。
+有關路由順序為何重要的詳細資訊，請參閱 <a href="guide/routing/common-router-tasks#route-order">路由順序</a>。</p>
+
+  <h2 id="-404-">顯示 404 頁面</h2>
+  <a href="#-404-" class="docs-anchor" tabindex="-1" aria-label="Link to 顯示 404 頁面"></a>
+  <p>html
+<!DOCTYPE html></p>
+<html>
+<head>
+  <title>404 Not Found</title>
+</head>
+<body>
+  <h1>404 Not Found</h1>
+  <p>The requested URL was not found on this server.</p>
+</body>
+</html>
+
+<p>若要顯示 404 頁面，請設定 <a href="guide/routing/common-router-tasks#setting-up-wildcard-routes">萬用字元路由</a>，其 <code>component</code> 屬性設定為您想用於 404 頁面的元件，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'first-component'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">FirstComponent</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'second-component'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">SecondComponent</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'**'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">PageNotFoundComponent</span> },  <span class="hljs-comment">// Wildcard route for a 404 page</span></div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div><p>最後一個具有 <code>path</code> 的 <code>**</code> 路由是一個萬用字元路由。
+如果請求的 URL 與清單中較早的路徑都不相符，路由器會選擇此路由，並將使用者傳送至 <code>PageNotFoundComponent</code>。</p>
+
+  <h2 id="">設定重新導向</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 設定重新導向"></a>
+  <p>要設定重新導向，請設定一條路徑，其中包含您要重新導向的 <code>path</code>、您要重新導向的 <code>component</code>，以及一個 <code>pathMatch</code> 值，用於告知路由器如何比對 URL。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'first-component'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">FirstComponent</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'second-component'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">SecondComponent</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">''</span>,   <span class="hljs-attr">redirectTo</span>: <span class="hljs-string">'/first-component'</span>, <span class="hljs-attr">pathMatch</span>: <span class="hljs-string">'full'</span> }, <span class="hljs-comment">// redirect to `first-component`</span></div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'**'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">PageNotFoundComponent</span> },  <span class="hljs-comment">// Wildcard route for a 404 page</span></div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div><p>在此範例中，第三個路由是重新導向，因此路由器預設為 <code>first-component</code> 路由。
+請注意，此重新導向位於萬用字元路由之前。
+在此，<code>path: &#39;&#39;</code> 表示使用初始相對 URL (<code>&#39;&#39;</code>)。</p>
+
+  <h2 id="">巢狀路由</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 巢狀路由"></a>
+  <p>隨著您的應用程式變得更複雜，您可能需要建立相對於根元件以外的元件的路由。
+這種類型的巢狀路由稱為子路由。
+這表示您正在將第二個 <code>&lt;router-outlet&gt;</code> 新增到您的應用程式，因為它除了 <code>AppComponent</code> 中的 <code>&lt;router-outlet&gt;</code> 之外。</p>
+<p>在此範例中，有兩個額外的子元件，<code>child-a</code> 和 <code>child-b</code>。
+在此，<code>FirstComponent</code> 除了 <code>AppComponent</code> 中的一個之外，還有它自己的 <code>&lt;nav&gt;</code> 和第二個 <code>&lt;router-outlet&gt;</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>First Component<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"child-a"</span>&gt;</span>Child A<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"child-b"</span>&gt;</span>Child B<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div></code>
+    </pre>
+  </div><p>子路由與其他路由一樣，需要 <code>path</code> 和 <code>component</code>。
+唯一的不同是，您將子路由置於父路由中的 <code>children</code> 陣列中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'first-component'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">FirstComponent</span>, <span class="hljs-comment">// this is the component with the &lt;router-outlet&gt; in the template</span></div><div class="hljs-ln-line">    <span class="hljs-attr">children</span>: [</div><div class="hljs-ln-line">      {</div><div class="hljs-ln-line">        <span class="hljs-attr">path</span>: <span class="hljs-string">'child-a'</span>, <span class="hljs-comment">// child route path</span></div><div class="hljs-ln-line">        <span class="hljs-attr">component</span>: <span class="hljs-title class_">ChildAComponent</span>, <span class="hljs-comment">// child route component that the router renders</span></div><div class="hljs-ln-line">      },</div><div class="hljs-ln-line">      {</div><div class="hljs-ln-line">        <span class="hljs-attr">path</span>: <span class="hljs-string">'child-b'</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">component</span>: <span class="hljs-title class_">ChildBComponent</span>, <span class="hljs-comment">// another child route component that the router renders</span></div><div class="hljs-ln-line">      },</div><div class="hljs-ln-line">    ],</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div>
+  <h2 id="">設定頁面標題</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 設定頁面標題"></a>
+  <p>應用程式中的每個頁面都應該有一個獨特的標題，以便在瀏覽器歷史記錄中識別它們。
+<code>Router</code> 使用 <code>Route</code> 配置中的 <code>title</code> 屬性來設定文件的標題。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'first-component'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">title</span>: <span class="hljs-string">'First component'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">FirstComponent</span>,  <span class="hljs-comment">// this is the component with the &lt;router-outlet&gt; in the template</span></div><div class="hljs-ln-line">    <span class="hljs-attr">children</span>: [</div><div class="hljs-ln-line">      {</div><div class="hljs-ln-line">        <span class="hljs-attr">path</span>: <span class="hljs-string">'child-a'</span>,  <span class="hljs-comment">// child route path</span></div><div class="hljs-ln-line">        <span class="hljs-attr">title</span>: resolvedChildATitle,</div><div class="hljs-ln-line">        <span class="hljs-attr">component</span>: <span class="hljs-title class_">ChildAComponent</span>,  <span class="hljs-comment">// child route component that the router renders</span></div><div class="hljs-ln-line">      },</div><div class="hljs-ln-line">      {</div><div class="hljs-ln-line">        <span class="hljs-attr">path</span>: <span class="hljs-string">'child-b'</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">title</span>: <span class="hljs-string">'child b'</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">component</span>: <span class="hljs-title class_">ChildBComponent</span>,  <span class="hljs-comment">// another child route component that the router renders</span></div><div class="hljs-ln-line">      },</div><div class="hljs-ln-line">    ],</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">resolvedChildATitle</span>: <span class="hljs-title class_">ResolveFn</span>&lt;<span class="hljs-built_in">string</span>&gt; = <span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>(<span class="hljs-string">'child a'</span>);</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> <code>title</code> 屬性遵循與靜態路由 <code>data</code> 和實作 <code>ResolveFn</code> 的動態值相同的規則。</p>
+
+    </div>
+    <p>您也可以透過擴充 <code>TitleStrategy</code> 來提供自訂的標題策略。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({<span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TemplatePageTitleStrategy</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">TitleStrategy</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> title: Title</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">super</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">override</span> <span class="hljs-title function_">updateTitle</span>(<span class="hljs-params">routerState: RouterStateSnapshot</span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> title = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">buildTitle</span>(routerState);</div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (title !== <span class="hljs-literal">undefined</span>) {</div><div class="hljs-ln-line">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">title</span>.<span class="hljs-title function_">setTitle</span>(<span class="hljs-string">`My Application | <span class="hljs-subst">${title}</span>`</span>);</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideRouter</span>(routes),</div><div class="hljs-ln-line">    {<span class="hljs-attr">provide</span>: <span class="hljs-title class_">TitleStrategy</span>, <span class="hljs-attr">useClass</span>: <span class="hljs-title class_">TemplatePageTitleStrategy</span>},</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div>
+  <h2 id="">使用相對路徑</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 使用相對路徑"></a>
+  <p>相對路徑可讓您定義相對於目前 URL 片段的路徑。
+以下範例顯示前往另一個元件 <code>second-component</code> 的相對路線。
+<code>FirstComponent</code> 和 <code>SecondComponent</code> 在樹狀結構中位於同一層級，不過連結到 <code>SecondComponent</code> 的連結位於 <code>FirstComponent</code> 中，這表示路由器必須往上一個層級，然後進入第二個目錄才能找到 <code>SecondComponent</code>。
+您可以使用 <code>../</code> 符號往上一個層級，而不是寫出前往 <code>SecondComponent</code> 的完整路徑。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>First Component<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"../second-component"</span>&gt;</span>Relative Route to second component<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div></code>
+    </pre>
+  </div><p>除了 <code>../</code>，使用 <code>./</code> 或不帶前置斜線來指定目前層級。</p>
+
+  <h3 id="">指定相對路徑</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 指定相對路徑"></a>
+  <p>若要指定相對路徑，請使用 <code>NavigationExtras</code> 的 <code>relativeTo</code> 屬性。
+在元件類別中，從 <code>@angular/router</code> 匯入 <code>NavigationExtras</code>。</p>
+<p>然後在導覽方法中使用 <code>relativeTo</code>。
+在連結參數陣列，這裡包含 <code>items</code>，後面新增一個物件，其 <code>relativeTo</code> 屬性設定為 <code>ActivatedRoute</code>，也就是 <code>this.route</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">goToItems</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">router</span>.<span class="hljs-title function_">navigate</span>([<span class="hljs-string">'items'</span>], { <span class="hljs-attr">relativeTo</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">route</span> });</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><code>navigate()</code> 參數將路由器設定為使用目前路由作為基礎，其上附加 <code>items</code>。</p>
+<p><code>goToItems()</code> 方法將目的地 URI 解釋為相對於已啟用路由並導航至 <code>items</code> 路由。</p>
+
+  <h2 id="">存取查詢參數和片段</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 存取查詢參數和片段"></a>
+  <p>有時，應用程式的功能需要存取路由的一部分，例如查詢參數或片段。
+英雄之旅應用程式在教學課程的這個階段使用清單檢視，您可以在其中點擊英雄以查看詳細資訊。
+路由器使用 <code>id</code> 來顯示正確的英雄詳細資訊。</p>
+<p>首先，在您要導航的元件中匯入下列成員。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ActivatedRoute</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Observable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { switchMap } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/operators'</span>;</div></code>
+    </pre>
+  </div><p>接下來注入已啟用的路由服務：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> route: ActivatedRoute</span>) {}</div></code>
+    </pre>
+  </div><p>將類別設定為具有可觀察物件 <code>heroes$</code>、<code>selectedId</code> 以保存英雄的 <code>id</code> 號碼，以及在 <code>ngOnInit()</code> 中的英雄，加入以下程式碼以取得所選英雄的 <code>id</code>。
+此程式碼片段假設您有英雄清單、英雄服務、取得英雄的函式，以及用於呈現清單和詳細資料的 HTML，就像在英雄之旅範例中一樣。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">heroes$</span>: <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-title class_">Hero</span>[]&gt;;</div><div class="hljs-ln-line"><span class="hljs-attr">selectedId</span>: <span class="hljs-built_in">number</span>;</div><div class="hljs-ln-line">heroes = <span class="hljs-variable constant_">HEROES</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes$</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">route</span>.<span class="hljs-property">paramMap</span>.<span class="hljs-title function_">pipe</span>(</div><div class="hljs-ln-line">    <span class="hljs-title function_">switchMap</span>(<span class="hljs-function"><span class="hljs-params">params</span> =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">selectedId</span> = <span class="hljs-title class_">Number</span>(params.<span class="hljs-title function_">get</span>(<span class="hljs-string">'id'</span>));</div><div class="hljs-ln-line">      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">service</span>.<span class="hljs-title function_">getHeroes</span>();</div><div class="hljs-ln-line">    })</div><div class="hljs-ln-line">  );</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>接下來，在您想要導航到的元件中，匯入下列成員。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Router</span>, <span class="hljs-title class_">ActivatedRoute</span>, <span class="hljs-title class_">ParamMap</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Observable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs'</span>;</div></code>
+    </pre>
+  </div><p>在元件類別的建構函式中注入 <code>ActivatedRoute</code> 和 <code>Router</code>，讓此元件可以使用它們：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">hero$</span>: <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-title class_">Hero</span>&gt;;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> route: ActivatedRoute,</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> router: Router  ) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> heroId = <span class="hljs-variable language_">this</span>.<span class="hljs-property">route</span>.<span class="hljs-property">snapshot</span>.<span class="hljs-property">paramMap</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">'id'</span>);</div><div class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">hero$</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">service</span>.<span class="hljs-title function_">getHero</span>(heroId);</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">gotoItems</span>(<span class="hljs-params">hero: Hero</span>) {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> heroId = hero ? hero.<span class="hljs-property">id</span> : <span class="hljs-literal">null</span>;</div><div class="hljs-ln-line">  <span class="hljs-comment">// Pass along the hero id if available</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// so that the HeroList component can select that item.</span></div><div class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">router</span>.<span class="hljs-title function_">navigate</span>([<span class="hljs-string">'/heroes'</span>, { <span class="hljs-attr">id</span>: heroId }]);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">延遲載入</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 延遲載入"></a>
+  <p>您可以將路由設定為延遲載入模組，這表示 Angular 只會在需要時載入模組，而不是在應用程式啟動時載入所有模組。
+另外，在背景預載應用程式的一部分以改善使用者體驗。</p>
+<p>有關延遲載入和預載入的詳細資訊，請參閱專屬指南 <a href="guide/ngmodules/lazy-loading">延遲載入</a>。</p>
+
+  <h2 id="">防止未經授權的存取</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 防止未經授權的存取"></a>
+  <p>使用路線守衛來防止使用者在未經授權的情況下導覽至應用程式的一部分。
+以下路線守衛在 Angular 中可用：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="api/router/CanActivateFn">
+      <code>canActivate</code>
+    </a>
+    
+    <a class="docs-pill" href="api/router/CanActivateChildFn">
+      <code>canActivateChild</code>
+    </a>
+    
+    <a class="docs-pill" href="api/router/CanDeactivateFn">
+      <code>canDeactivate</code>
+    </a>
+    
+    <a class="docs-pill" href="api/router/CanMatchFn">
+      <code>canMatch</code>
+    </a>
+    
+    <a class="docs-pill" href="api/router/ResolveFn">
+      <code>resolve</code>
+    </a>
+    
+    <a class="docs-pill" href="api/router/CanLoadFn">
+      <code>canLoad</code>
+    </a>
+    
+
+    </nav>
+    <p>若要使用路由防護，請考慮使用 <a href="api/router/Route#componentless-routes">無元件路由</a>，因為這有助於保護子路由。</p>
+<p>建立一個檔案給你的守衛：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate guard your-guard</div></code>
+    </pre>
+  </div><p>在你的 guard 檔案中，新增你想使用的 guard 函式。
+以下範例使用 <code>canActivateFn</code> 來保護路由。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">yourGuardFunction</span>: <span class="hljs-title class_">CanActivateFn</span> = <span class="hljs-function">(<span class="hljs-params"></span></span></div><div class="hljs-ln-line">    next: ActivatedRouteSnapshot,</div><div class="hljs-ln-line">    state: RouterStateSnapshot) =&gt; {</div><div class="hljs-ln-line">      <span class="hljs-comment">// your  logic goes here</span></div><div class="hljs-ln-line">  }</div></code>
+    </pre>
+  </div><p>在您的路由模組中，在您的 <code>routes</code> 配置中使用適當的屬性。
+在此，<code>canActivate</code> 告訴路由器調解導航至這個特定路由。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{</div><div class="hljs-ln-line">  <span class="hljs-attr">path</span>: <span class="hljs-string">'/your-path'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">component</span>: <span class="hljs-title class_">YourComponent</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">canActivate</span>: [yourGuardFunction],</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="">連結參數陣列</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 連結參數陣列"></a>
+  <p>連結參數陣列含有以下路由導航成分：</p>
+
+  <ul class="docs-list">
+    <li>路線到目的地元件的路徑</li>
+<li>路線 URL 中的必要和可選路線參數</li>
+
+  </ul>
+  <p>將 <code>RouterLink</code> 指令繫結至陣列，如下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"['/heroes']"</span>&gt;</span>Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div></code>
+    </pre>
+  </div><p>在指定路徑參數時，以下是一個包含兩個元素的陣列：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"['/hero', hero.id]"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge"</span>&gt;</span>{{ hero.id }}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>{{ hero.name }}</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div></code>
+    </pre>
+  </div><p>以物件提供選用路由參數，如 <code>{ foo: &#39;foo&#39; }</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"['/crisis-center', { foo: 'foo' }]"</span>&gt;</span>Crisis Center<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div></code>
+    </pre>
+  </div><p>這三個範例涵蓋了一個具有路由單層級應用程式的需求。
+然而，使用子路由器（例如危機中心），您可以建立新的連結陣列可能性。</p>
+<p>以下最小的 <code>RouterLink</code> 範例建立在危機中心的指定預設子路由上。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"['/crisis-center']"</span>&gt;</span>Crisis Center<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div></code>
+    </pre>
+  </div><p>檢視下列內容：</p>
+
+  <ul class="docs-list">
+    <li>陣列中的第一個項目識別父路由 (<code>/crisis-center</code>)</li>
+<li>這個父路由沒有參數</li>
+<li>子路由沒有預設值，所以你需要挑選一個</li>
+<li>你正在導航到 <code>CrisisListComponent</code>，其路由路徑為 <code>/</code>，但你不需要明確添加斜線</li>
+
+  </ul>
+  <p>考慮以下路由連結，它從應用程式的根目錄導航到 Dragon Crisis：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"['/crisis-center', 1]"</span>&gt;</span>Dragon Crisis<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <ul class="docs-list">
+    <li>陣列中的第一個項目識別父路由 (<code>/crisis-center</code>)</li>
+<li>這個父路由沒有參數</li>
+<li>第二個項目識別子路由，提供特定危機的詳細資訊 (<code>/:id</code>)</li>
+<li>詳細資訊子路由需要一個 <code>id</code> 路由參數</li>
+<li>你將龍危機的 <code>id</code> 新增為陣列中的第二個項目 (<code>1</code>)</li>
+<li>產生的路徑是 <code>/crisis-center/1</code></li>
+
+  </ul>
+  <p>您也可以重新定義僅包含危機中心路由的 <code>AppComponent</code> 範本：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">  &lt;h1 class="title"&gt;Angular Router&lt;/h1&gt;</div><div class="hljs-ln-line">  &lt;nav&gt;</div><div class="hljs-ln-line">    &lt;a [routerLink]="['/crisis-center']"&gt;Crisis Center&lt;/a&gt;</div><div class="hljs-ln-line">    &lt;a [routerLink]="['/crisis-center/1', { foo: 'foo' }]"&gt;Dragon Crisis&lt;/a&gt;</div><div class="hljs-ln-line">    &lt;a [routerLink]="['/crisis-center/2']"&gt;Shark Crisis&lt;/a&gt;</div><div class="hljs-ln-line">  &lt;/nav&gt;</div><div class="hljs-ln-line">  &lt;router-outlet&gt;&lt;/router-outlet&gt;</div><div class="hljs-ln-line">`</div></code>
+    </pre>
+  </div><p>總體而言，您可以使用一個、兩個或多個路由層級來撰寫應用程式。
+連結參數陣列提供了彈性，可代表任何路由深度和任何合法的路由路徑順序、(必要的) 路由器參數，以及(選用的) 路由器參數物件。</p>
+
+  <h2 id="locationstrategy-"><code>LocationStrategy</code> 與瀏覽器網址樣式</h2>
+  <a href="#locationstrategy-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>LocationStrategy</code> 與瀏覽器網址樣式"></a>
+  <p>當路由器導航到新的元件視圖時，它會使用該視圖的 URL 更新瀏覽器的位址和記錄。</p>
+<p>現代 HTML5 瀏覽器支援 <a href="https://developer.mozilla.org/docs/Web/API/History_API/Working_with_the_History_API#adding_and_modifying_history_entries" title=HTML5 瀏覽器歷史記錄推入狀態 target="_blank">history.pushState</a>，這項技術會變更瀏覽器的位置和歷史記錄，而不會觸發伺服器頁面請求。
+路由器可以組合「自然」的 URL，它與否則需要載入頁面的 URL 無法區分。</p>
+<p>以下是使用「HTML5 pushState」樣式的危機中心網址：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">localhost:3002/crisis-center</div></code>
+    </pre>
+  </div><p>較舊的瀏覽器會在位置 URL 變更時向伺服器發送頁面要求，除非變更發生在「#」之後（稱為「雜湊」）。
+路由器可以透過在應用程式路由 URL 中加入雜湊來利用此例外。
+以下是一個路由到危機中心的「雜湊 URL」。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">localhost:3002/src/#/crisis-center</div></code>
+    </pre>
+  </div><p>路由器支援兩種樣式，提供兩個 <code>LocationStrategy</code> 提供者：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">供應商</th>
+<th align="left">詳細資訊</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>PathLocationStrategy</code></td>
+<td align="left">預設的「HTML5 pushState」樣式。</td>
+</tr>
+<tr>
+<td align="left"><code>HashLocationStrategy</code></td>
+<td align="left">「雜湊 URL」樣式。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p><code>RouterModule.forRoot()</code> 函式會將 <code>LocationStrategy</code> 設為 <code>PathLocationStrategy</code>，使其成為預設策略。
+您也可以在引導程序期間以覆寫的方式切換至 <code>HashLocationStrategy</code>。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 有關提供者和引導程序的更多資訊，請參閱 <a href="guide/di/dependency-injection-providers">相依性注入</a>。</p>
+
+    </div>
+    
+  <h2 id="">選擇路由策略</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 選擇路由策略"></a>
+  <p>在項目開發早期，您必須選擇路由策略，因為一旦應用程式投入生產，網站訪客會使用並依賴應用程式網址參考。</p>
+<p>幾乎所有 Angular 專案都應該使用預設的 HTML5 風格。
+它產生的 URL 使用者更容易理解，並保留了執行伺服器端呈現的選項。</p>
+<p>在伺服器上呈現關鍵頁面是一種技術，它可以大幅改善應用程式首次載入時感受到的回應性。
+一個原本需要十秒以上才能啟動的應用程式，可以在伺服器上進行呈現，並在不到一秒的時間內傳送到使用者的裝置。</p>
+<p>如果應用程式網址看起來像沒有中間雜湊 (<code>#</code>) 字元的正常網路網址，則此選項才可用。</p>
+
+  <h2 id="base-href"><code>&lt;base href&gt;</code></h2>
+  <a href="#base-href" class="docs-anchor" tabindex="-1" aria-label="Link to <code>&lt;base href&gt;</code>"></a>
+  <p>該路由器使用瀏覽器的 <a href="https://developer.mozilla.org/docs/Web/API/History_API/Working_with_the_History_API#adding_and_modifying_history_entries" title=HTML5 瀏覽器歷史記錄 push-state target="_blank">history.pushState</a> 進行導覽。
+<code>pushState</code> 讓您可以自訂應用程式內部 URL 路徑；例如，<code>localhost:4200/crisis-center</code>。
+應用程式內部的 URL 無法與伺服器 URL 區分。</p>
+<p>現代的 HTML5 瀏覽器是第一批支援 <code>pushState</code> 的瀏覽器，這就是為什麼很多人稱呼這些網址為「HTML5 風格」網址。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> HTML5 風格導覽是路由器預設值。</p>
+
+    </div>
+    <p>在 <a href="#browser-url-styles">LocationStrategy 和瀏覽器 URL 風格</a> 部分中，瞭解為何 HTML5 風格較佳、如何調整其行為以及如何在有需要時切換至較舊的雜湊 (<code>#</code>) 風格。</p>
+<p>您必須在應用程式的 <code>index.html</code> 中加入 <a href="https://developer.mozilla.org/docs/Web/HTML/Element/base" title=base href target="_blank"><code>&lt;base href&gt;</code> 元素</a>，<code>pushState</code> 路由才能運作。
+瀏覽器使用 <code>&lt;base href&gt;</code> 值為 CSS 檔案、指令碼和圖片參照時加上相對 URL 的字首。</p>
+<p>將 <code>&lt;base&gt;</code> 元素新增到 <code>&lt;head&gt;</code> 標籤之後。
+如果 <code>app</code> 資料夾是應用程式根目錄，如這個應用程式，請在 <code>index.html</code> 中設定 <code>href</code> 值，如下所示。</p>
+<div class="docs-code" path="adev/src/content/examples/router/src/index.html" visiblelines="4" header="src/index.html (base-href)">
+    <div class="docs-code-header"><h3>src/index.html (base-href)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-comment">&lt;!-- Set the base href --&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">base</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/"</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Angular Router<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-root</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="html5--base-href">HTML5 網址和 <code>&lt;base href&gt;</code></h3>
+  <a href="#html5--base-href" class="docs-anchor" tabindex="-1" aria-label="Link to HTML5 網址和 <code>&lt;base href&gt;</code>"></a>
+  <p>以下準則將參考 URL 的不同部分。
+此圖表概述這些部分所指為何：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">foo://example.com:8042/over/there?name=ferret#nose</div><div class="hljs-ln-line">\_/   \______________/\_________/ \_________/ \__/</div><div class="hljs-ln-line"> |           |            |            |        |</div><div class="hljs-ln-line">scheme    authority      path        query   fragment</div></code>
+    </pre>
+  </div><p>雖然路由器預設使用 <a href="https://developer.mozilla.org/docs/Web/API/History_API#Adding_and_modifying_history_entries" title=瀏覽器歷史 push-state target="_blank">HTML5 pushState</a> 風格，您必須以 <code>&lt;base href&gt;</code> 配置該策略。</p>
+<p>設定策略的優先方式是在 <code>index.html</code> 的 <code>&lt;head&gt;</code> 中加入一個 <a href="https://developer.mozilla.org/docs/Web/HTML/Element/base" title=base href target="_blank"><code>&lt;base href&gt;</code> 元素</a> 標記。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">base</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/"</span>&gt;</span></div></code>
+    </pre>
+  </div><p>沒有該標籤，瀏覽器在「深度連結」到應用程式時，可能無法載入資源（圖像、CSS、腳本）。</p>
+<p>有些開發人員可能無法新增 <code>&lt;base&gt;</code> 元素，可能是因為他們無法存取 <code>&lt;head&gt;</code> 或 <code>index.html</code>。</p>
+<p>這些開發人員仍可藉由採取下列兩個步驟來使用 HTML5 URL：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p>提供路由器一個適當的 <code>APP_BASE_HREF</code> 值。</p>
+</li>
+<li><p>使用根網址 (具有「權限」的網址) 作為所有網路資源的 CSS、圖像、腳本和範本 HTML 檔案。</p>
+
+  <ul class="docs-list">
+    <li><p><code>&lt;base href&gt;</code> <code>path</code> 應以「/」結尾，因為瀏覽器會忽略 <code>path</code> 中位於最右邊「<code>/</code>」之後的字元</p>
+</li>
+<li><p>如果 <code>&lt;base href&gt;</code> 包含 <code>query</code> 部分，則僅在頁面中連結的 <code>path</code> 為空且沒有 <code>query</code> 時才會使用 <code>query</code>。
+這表示僅在使用 <code>HashLocationStrategy</code> 時才會包含 <code>&lt;base href&gt;</code> 中的 <code>query</code>。</p>
+</li>
+<li><p>如果頁面中的連結是根網址 (具有「權限」)，則不會使用 <code>&lt;base href&gt;</code>。
+如此一來，具有權限的 <code>APP_BASE_HREF</code> 會導致 Angular 建立的所有連結忽略 <code>&lt;base href&gt;</code> 值。</p>
+</li>
+<li><p><code>&lt;base href&gt;</code> 中的片段 <em>從不</em> 會被保留</p>
+</li>
+
+  </ul>
+  </li>
+
+    </ol>
+    <p>有關 <code>&lt;base href&gt;</code> 如何用於建構目標 URI 的更完整資訊，請參閱 <a href="https://tools.ietf.org/html/rfc3986#section-5.2.2" target="_blank">RFC</a> 關於轉換參考的章節。</p>
+
+  <h3 id="hashlocationstrategy"><code>HashLocationStrategy</code>`</h3>
+  <a href="#hashlocationstrategy" class="docs-anchor" tabindex="-1" aria-label="Link to <code>HashLocationStrategy</code>`"></a>
+  <p>在 <code>AppModule</code> 中的 <code>RouterModule.forRoot()</code> 的第二個參數中，提供一個物件 <code>{ useHash: true }</code>，使用 <code>HashLocationStrategy</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  <span class="hljs-title function_">provideRouter</span>(appRoutes, <span class="hljs-title function_">withHashLocation</span>())</div><div class="hljs-ln-line">]</div></code>
+    </pre>
+  </div><p>在使用 <code>RouterModule.forRoot</code> 時，這會在第二個參數中以 <code>useHash: true</code> 進行配置：<code>RouterModule.forRoot(routes, {useHash: true})</code>。</p>

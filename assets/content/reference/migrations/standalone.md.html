@@ -1,0 +1,276 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">將現有的 Angular 專案遷移至獨立</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/migrations/standalone.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p><strong>獨立元件</strong>提供一種簡化的方式來建構 Angular 應用程式。獨立元件、指令和管道旨在減少對 <code>NgModule</code> 的需求，從而簡化撰寫體驗。現有應用程式可以選擇性地逐步採用新的獨立樣式，而不會造成任何重大變更。</p>
+
+    <div class="docs-video-container">
+      <iframe
+      class="docs-video"
+      src="https://www.youtube.com/embed/x5PZwb4XurU"
+      title="Getting started with standalone components"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      credentialless
+      title="Video player"
+      ></iframe>
+    </div>
+    <p>從 15.2.0 版本開始，Angular 提供了一個 <a href="tools/cli/schematics">schematic</a> 來幫助專案作者將現有專案轉換為獨立的 API。該 schematic 旨在盡可能自動轉換程式碼，但可能需要專案作者手動修復一些程式碼。使用以下指令執行 schematic：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate @angular/core:standalone</div></code>
+    </pre>
+  </div>
+  <h2 id="">更新前</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 更新前"></a>
+  <p>在使用原理圖前，請確保專案：</p>
+
+    <ol class="docs-ordered-list">
+      <li>使用 Angular 15.2.0 或更新版本。</li>
+<li>編譯時沒有任何錯誤。</li>
+<li>在乾淨的 Git 分支上，並且已儲存所有工作。</li>
+
+    </ol>
+    
+  <h2 id="schematic-">Schematic 選項</h2>
+  <a href="#schematic-" class="docs-anchor" tabindex="-1" aria-label="Link to Schematic 選項"></a>
+  
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">選項</th>
+<th align="left">詳細資訊</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>mode</code></td>
+<td align="left">要執行的轉換。請參閱下方的 <a href="#migration-modes">遷移模式</a> 以取得可用選項的詳細資訊。</td>
+</tr>
+<tr>
+<td align="left"><code>path</code></td>
+<td align="left">要遷移的路徑，相對於專案根目錄。您可以使用這個選項逐步遷移專案的部分內容。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="">遷移步驟</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 遷移步驟"></a>
+  <p>html</p>
+<ul>
+  <li>Create a new table called users with the following columns:</li>
+  <ul>
+    <li>id (primary key)</li>
+    <li>username (unique)</li>
+    <li>password</li>
+  </ul>
+  <li>Insert some data into the users table:</li>
+  <ul>
+    <li>INSERT INTO users (username, password) VALUES ('admin', 'password')</li>
+    <li>INSERT INTO users (username, password) VALUES ('user1', 'password')</li>
+  </ul>
+  <li>Create a new table called posts with the following columns:</li>
+  <ul>
+    <li>id (primary key)</li>
+    <li>title</li>
+    <li>body</li>
+    <li>author_id (foreign key referencing the id column in the users table)</li>
+  </ul>
+  <li>Insert some data into the posts table:</li>
+  <ul>
+    <li>INSERT INTO posts (title, body, author_id) VALUES ('My first post', 'This is my first post.', 1)</li>
+    <li>INSERT INTO posts (title, body, author_id) VALUES ('My second post', 'This is my second post.', 2)</li>
+  </ul>
+</ul>
+
+<p>遷移過程由三個步驟組成。您必須多次執行它並手動檢查專案建置和行為是否如預期。</p>
+<p>注意：儘管該示意圖可以自動更新大部分程式碼，但有些極端情況需要開發人員介入。
+您應該計劃在遷移的每個步驟後套用手動修復。此外，該示意圖產生的新程式碼可能與您的程式碼格式規則不符。</p>
+<p>以列出的順序執行遷移，並在每個步驟之間驗證您的程式碼是否建置並執行：</p>
+
+    <ol class="docs-ordered-list">
+      <li>執行 <code>ng g @angular/core:standalone</code> 並選擇「將所有元件、指令和管線轉換為獨立」</li>
+<li>執行 <code>ng g @angular/core:standalone</code> 並選擇「移除不必要的 NgModule 類別」</li>
+<li>執行 <code>ng g @angular/core:standalone</code> 並選擇「使用獨立 API 引導專案」</li>
+<li>執行任何 linting 和格式檢查，修正所有失敗，並提交結果</li>
+
+    </ol>
+    
+  <h2 id="">遷移後</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 遷移後"></a>
+  <p><span class="docs-emoji">恭喜，您的應用程式已轉換成獨立應用程式 🎉。以下是一些您現在可能想要採取的選用後續步驟：</span></p>
+
+  <ul class="docs-list">
+    <li>找出並移除任何剩餘的 <code>NgModule</code> 宣告：由於「移除不必要的 NgModules」步驟無法自動移除所有模組，您可能必須手動移除剩餘的宣告。</li>
+<li>執行專案的單元測試並修正任何失敗。</li>
+<li>執行任何程式碼格式化器，如果專案使用自動格式化。</li>
+<li>在您的專案中執行任何 linter 並修正新的警告。有些 linter 支援 <code>--fix</code> 旗標，可自動解決部分警告。</li>
+
+  </ul>
+  
+  <h2 id="">遷移模式</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 遷移模式"></a>
+  <p>遷移有以下模式：</p>
+
+    <ol class="docs-ordered-list">
+      <li>將宣告轉換為獨立。</li>
+<li>移除不必要的 NgModules。</li>
+<li>切換到獨立的引導 API。
+您應該按給定的順序執行這些遷移。</li>
+
+    </ol>
+    
+  <h3 id="">將宣告轉換為獨立項目</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 將宣告轉換為獨立項目"></a>
+  <p>html</p>
+<div class="my-component">
+  <span>Hello world</span>
+  <span>Goodbye world</span>
+</div>
+
+
+<p>css
+.my-component {
+  display: flex;
+  flex-direction: column;
+}</p>
+<p>scss
+.my-component {
+  display: flex;
+  flex-direction: column;
+}</p>
+<p>.my-component span {
+  margin: 0 10px;
+}</p>
+<p>less
+.my-component {
+  display: flex;
+  flex-direction: column;
+}</p>
+<p>.my-component span {
+  margin: 0 10px;
+}</p>
+<p>stylus
+.my-component
+  display flex
+  flex-direction column</p>
+<p>.my-component span
+  margin 0 10px</p>
+<p>在此模式中，遷移會透過設定 <code>standalone: true</code> 並將依賴項新增到其 <code>imports</code> 陣列，將所有元件、指令和管道轉換為獨立。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 此範例忽略在這個步驟中引導元件的 NgModules，因為它們很可能是 <code>bootstrapModule</code> 使用的根模組，而不是與獨立相容的 <code>bootstrapApplication</code>。範例會在 <a href="#switch-to-standalone-bootstrapping-api">「切換到獨立引導 API」</a> 步驟中自動轉換這些宣告。</p>
+
+    </div>
+    <p><strong>之前：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// shared.module.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">CommonModule</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [<span class="hljs-title class_">GreeterComponent</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [<span class="hljs-title class_">GreeterComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SharedModule</span> {}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// greeter.component.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'greeter'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div *ngIf="showGreeting"&gt;Hello&lt;/div&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GreeterComponent</span> {</div><div class="hljs-ln-line">  showGreeting = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><strong>之後：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// shared.module.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">CommonModule</span>, <span class="hljs-title class_">GreeterComponent</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [<span class="hljs-title class_">GreeterComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SharedModule</span> {}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// greeter.component.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'greeter'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div *ngIf="showGreeting"&gt;Hello&lt;/div&gt;'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">NgIf</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GreeterComponent</span> {</div><div class="hljs-ln-line">  showGreeting = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="-ngmodules">移掉不必要的 NgModules</h3>
+  <a href="#-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to 移掉不必要的 NgModules"></a>
+  <p>在將所有宣告轉換為獨立之後，可以安全地移除許多 NgModules。此步驟會刪除此類模組宣告以及盡可能多的對應參考。如果遷移無法自動刪除參考，它會留下以下 TODO 註解，以便您可以手動刪除 NgModule：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">/* TODO(standalone-migration): clean up removed NgModule reference manually */</span></div></code>
+    </pre>
+  </div><p>遷移會視模組是否符合以下條件，來決定該模組是否安全可移除：</p>
+
+  <ul class="docs-list">
+    <li>沒有任何 <code>declarations</code>。</li>
+<li>沒有任何 <code>providers</code>。</li>
+<li>沒有任何 <code>bootstrap</code> 元件。</li>
+<li>沒有任何參考 <code>ModuleWithProviders</code> 符號或無法移除的模組的 <code>imports</code>。</li>
+<li>沒有任何類別成員。空建構函式會被忽略。</li>
+
+  </ul>
+  <p><strong>之前：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// importer.module.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">FooComponent</span>, <span class="hljs-title class_">BarPipe</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [<span class="hljs-title class_">FooComponent</span>, <span class="hljs-title class_">BarPipe</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ImporterModule</span> {}</div></code>
+    </pre>
+  </div><p><strong>之後：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// importer.module.ts</span></div><div class="hljs-ln-line"><span class="hljs-comment">// Does not exist!</span></div></code>
+    </pre>
+  </div>
+  <h3 id="-bootstrapping-api">轉換到獨立的 bootstrapping API</h3>
+  <a href="#-bootstrapping-api" class="docs-anchor" tabindex="-1" aria-label="Link to 轉換到獨立的 bootstrapping API"></a>
+  <p>這個步驟會將任何 <code>bootstrapModule</code> 的用法轉換為新的、基於獨立的 <code>bootstrapApplication</code>。它也會將根元件切換為 <code>standalone: true</code> 並刪除根 NgModule。如果根模組有任何 <code>providers</code> 或 <code>imports</code>，遷移會嘗試將此組態盡可能多地複製到新的 bootstrap 呼叫。</p>
+<p><strong>之前：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ./app/app.module.ts</span></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [<span class="hljs-title class_">AppComponent</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">bootstrap</span>: [<span class="hljs-title class_">AppComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> {}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ./app/app.component.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ <span class="hljs-attr">selector</span>: <span class="hljs-string">'app'</span>, <span class="hljs-attr">template</span>: <span class="hljs-string">'hello'</span> })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ./main.ts</span></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { platformBrowser } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app/app.module'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">platformBrowser</span>().<span class="hljs-title function_">bootstrapModule</span>(<span class="hljs-title class_">AppModule</span>).<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(e));</div></code>
+    </pre>
+  </div><p><strong>之後：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ./app/app.module.ts</span></div><div class="hljs-ln-line"><span class="hljs-comment">// Does not exist!</span></div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ./app/app.component.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ <span class="hljs-attr">selector</span>: <span class="hljs-string">'app'</span>, <span class="hljs-attr">template</span>: <span class="hljs-string">'hello'</span>, <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span> })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ./main.ts</span></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { bootstrapApplication } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app/app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">AppComponent</span>).<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(e));</div></code>
+    </pre>
+  </div>
+  <h2 id="">常見問題</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 常見問題"></a>
+  <p>一些可能會導致原理圖無法正常運作的常見問題包括：</p>
+
+  <ul class="docs-list">
+    <li>編譯錯誤 - 如果專案有編譯錯誤，Angular 無法正確分析並進行遷移。</li>
+<li>未包含在 tsconfig 中的檔案 - 該指令會透過分析專案的 <code>tsconfig.json</code> 檔案來決定要遷移哪些檔案。指令會排除未被 tsconfig 擷取的任何檔案。</li>
+<li>無法進行靜態分析的程式碼 - 該指令會使用靜態分析來了解程式碼，並決定在何處進行變更。遷移可能會略過任何在建置時無法進行靜態分析的具有元資料的類別。</li>
+
+  </ul>
+  
+  <h2 id="">限制</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 限制"></a>
+  <p>由於遷移的大小和複雜性，有部分情況是示意圖無法處理的：</p>
+
+  <ul class="docs-list">
+    <li>由於單元測試並非提前 (AoT) 編譯，在單元測試中新增至元件的 <code>imports</code> 可能並不完全正確。</li>
+<li>此綱要依賴直接呼叫 Angular API。此綱要無法辨識 Angular API 周圍的客製化包裝器。例如，如果在那裡定義包裝 <code>TestBed.configureTestingModule</code> 的客製化 <code>customConfigureTestModule</code> 函式，它所宣告的元件可能無法被辨識。</li>
+
+  </ul>
+  

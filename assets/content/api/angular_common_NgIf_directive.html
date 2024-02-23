@@ -1,0 +1,132 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>NgIf</h1><div class="docs-api-item-label" data-mode="full" data-type="directive">directive</div></div></div><p class="docs-reference-description"><p>A structural directive that conditionally includes a template based on the value of
+an expression coerced to Boolean.
+When the expression evaluates to true, Angular renders the template
+provided in a <code>then</code> clause, and when  false or null,
+Angular renders the template provided in an optional <code>else</code> clause. The default
+template for the <code>else</code> clause is blank.</p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">NgIf</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngIf">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">ngIf</span>(<span class="hljs-params">value: T</span>);</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngIfThen">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">ngIfThen</span>(<span class="hljs-params">value: TemplateRef&lt;NgIfContext&lt;T&gt;&gt;</span>);</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngIfElse">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">ngIfElse</span>(<span class="hljs-params">value: TemplateRef&lt;NgIfContext&lt;T&gt;&gt;</span>);</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngIfUseIfTypeGuard">  <span class="hljs-keyword">static</span> <span class="hljs-attr">ngIfUseIfTypeGuard</span>: <span class="hljs-built_in">void</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngTemplateGuard_ngIf">  <span class="hljs-keyword">static</span> <span class="hljs-attr">ngTemplateGuard_ngIf</span>: <span class="hljs-string">&quot;binding&quot;</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngTemplateContextGuard">  <span class="hljs-keyword">static</span> <span class="hljs-title function_">ngTemplateContextGuard</span>(<span class="hljs-attr">dir</span>: <span class="hljs-title class_">NgIf</span>&lt;T&gt;, <span class="hljs-attr">ctx</span>: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">boolean</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="Description" data-tab-url="description"><div><p>A structural directive that conditionally includes a template based on the value of
+an expression coerced to Boolean.
+When the expression evaluates to true, Angular renders the template
+provided in a <code>then</code> clause, and when  false or null,
+Angular renders the template provided in an optional <code>else</code> clause. The default
+template for the <code>else</code> clause is blank.</p>
+<p>A <a href="guide/directives/structural-directives">shorthand form</a> of the directive,
+<code>*ngIf=&quot;condition&quot;</code>, is generally used, provided
+as an attribute of the anchor element for the inserted template.
+Angular expands this into a more explicit version, in which the anchor element
+is contained in an <code>&lt;ng-template&gt;</code> element.</p>
+<p>Simple form with shorthand syntax:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;<span class="hljs-keyword">div</span> *ngIf=<span class="hljs-string">&quot;condition&quot;</span>&gt;Content <span class="hljs-keyword">to</span> render when condition <span class="hljs-keyword">is</span> <span class="hljs-literal">true</span>.&lt;/<span class="hljs-keyword">div</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p>Simple form with expanded syntax:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> [ngIf]=<span class="hljs-string">&quot;condition&quot;</span>&gt;&lt;<span class="hljs-keyword">div</span>&gt;<span class="hljs-type">Content</span> to render <span class="hljs-keyword">when</span> condition <span class="hljs-keyword">is</span></span><span class="hljs-ln-line"><span class="hljs-literal">true</span>.&lt;/<span class="hljs-keyword">div</span>&gt;&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p>Form with an &quot;else&quot; block:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;div *ngIf=&quot;condition; else elseBlock&quot;&gt;Content <span class="hljs-keyword">to</span> render <span class="hljs-keyword">when</span> condition <span class="hljs-keyword">is</span> <span class="hljs-keyword">true</span>.&lt;/div&gt;</span><span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> #elseBlock&gt;Content <span class="hljs-keyword">to</span> render <span class="hljs-keyword">when</span> condition <span class="hljs-keyword">is</span> <span class="hljs-keyword">false</span>.&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p>Shorthand form with &quot;then&quot; and &quot;else&quot; blocks:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;div *ngIf=&quot;condition; then thenBlock else elseBlock&quot;&gt;&lt;/div&gt;</span><span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> #thenBlock&gt;Content <span class="hljs-keyword">to</span> render <span class="hljs-keyword">when</span> condition <span class="hljs-keyword">is</span> <span class="hljs-keyword">true</span>.&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span><span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> #elseBlock&gt;Content <span class="hljs-keyword">to</span> render <span class="hljs-keyword">when</span> condition <span class="hljs-keyword">is</span> <span class="hljs-keyword">false</span>.&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p>Form with storing the value locally:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;condition as value; else elseBlock&quot;</span>&gt;</span></span><span class="hljs-template-variable">{{<span class="hljs-name">value</span>}}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-template</span> #<span class="hljs-attr">elseBlock</span>&gt;</span>Content to render when value is null.<span class="hljs-tag">&lt;/<span class="hljs-name">ng-template</span>&gt;</span></span></span>
+          </code>
+        </pre>
+      </div></div></div><div data-tab="Usage Notes" data-tab-url="usage-notes"><div><p>The <code>*ngIf</code> directive is most commonly used to conditionally show an inline template,
+as seen in the following  example.
+The default <code>else</code> template is blank.</p>
+<code-example path="common/ngIf/ts/module.ts" region="NgIfSimple" />
+
+<h3>Showing an alternative template using <code>else</code></h3>
+<p>To display a template when <code>expression</code> evaluates to false, use an <code>else</code> template
+binding as shown in the following example.
+The <code>else</code> binding points to an <code>&lt;ng-template&gt;</code>  element labeled <code>#elseBlock</code>.
+The template can be defined anywhere in the component view, but is typically placed right after
+<code>ngIf</code> for readability.</p>
+<code-example path="common/ngIf/ts/module.ts" region="NgIfElse" />
+
+<h3>Using an external <code>then</code> template</h3>
+<p>In the previous example, the then-clause template is specified inline, as the content of the
+tag that contains the <code>ngIf</code> directive. You can also specify a template that is defined
+externally, by referencing a labeled <code>&lt;ng-template&gt;</code> element. When you do this, you can
+change which template to use at runtime, as shown in the following example.</p>
+<code-example path="common/ngIf/ts/module.ts" region="NgIfThenElse" />
+
+<h3>Storing a conditional result in a variable</h3>
+<p>You might want to show a set of properties from the same object. If you are waiting
+for asynchronous data, the object can be undefined.
+In this case, you can use <code>ngIf</code> and store the result of the condition in a local
+variable as shown in the following example.</p>
+<code-example path="common/ngIf/ts/module.ts" region="NgIfAs" />
+
+<p>This code uses only one <code>AsyncPipe</code>, so only one subscription is created.
+The conditional statement stores the result of <code>userStream|async</code> in the local variable <code>user</code>.
+You can then bind the local <code>user</code> repeatedly.</p>
+<p>The conditional displays the data only if <code>userStream</code> returns a value,
+so you don&#39;t need to use the
+safe-navigation-operator (<code>?.</code>)
+to guard against null values when accessing properties.
+You can display an alternative template while waiting for the data.</p>
+<h3>Shorthand syntax</h3>
+<p>The shorthand syntax <code>*ngIf</code> expands into two separate template specifications
+for the &quot;then&quot; and &quot;else&quot; clauses. For example, consider the following shorthand statement,
+that is meant to show a loading page while waiting for data to be loaded.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;<span class="hljs-keyword">div</span> class=<span class="hljs-string">&quot;hero-list&quot;</span> *ngIf=<span class="hljs-string">&quot;heroes else loading&quot;</span>&gt;</span><span class="hljs-ln-line"> ...</span><span class="hljs-ln-line">&lt;/<span class="hljs-keyword">div</span>&gt;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> <span class="hljs-comment">#loading&gt;</span></span><span class="hljs-ln-line"> &lt;<span class="hljs-keyword">div</span>&gt;<span class="hljs-type">Loading</span>...&lt;/<span class="hljs-keyword">div</span>&gt;</span><span class="hljs-ln-line">&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p>You can see that the &quot;else&quot; clause references the <code>&lt;ng-template&gt;</code>
+with the <code>#loading</code> label, and the template for the &quot;then&quot; clause
+is provided as the content of the anchor element.</p>
+<p>However, when Angular expands the shorthand syntax, it creates
+another <code>&lt;ng-template&gt;</code> tag, with <code>ngIf</code> and <code>ngIfElse</code> directives.
+The anchor element containing the template for the &quot;then&quot; clause becomes
+the content of this unlabeled <code>&lt;ng-template&gt;</code> tag.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> [ngIf]=<span class="hljs-string">&quot;heroes&quot;</span> [ngIfElse]=<span class="hljs-string">&quot;loading&quot;</span>&gt;</span><span class="hljs-ln-line"> &lt;<span class="hljs-keyword">div</span> class=<span class="hljs-string">&quot;hero-list&quot;</span>&gt;</span><span class="hljs-ln-line">  ...</span><span class="hljs-ln-line"> &lt;/<span class="hljs-keyword">div</span>&gt;</span><span class="hljs-ln-line">&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> <span class="hljs-comment">#loading&gt;</span></span><span class="hljs-ln-line"> &lt;<span class="hljs-keyword">div</span>&gt;<span class="hljs-type">Loading</span>...&lt;/<span class="hljs-keyword">div</span>&gt;</span><span class="hljs-ln-line">&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p>The presence of the implicit template object has implications for the nesting of
+structural directives. For more on this subject, see
+<a href="guide/directives/structural-directives">Structural Directives</a>.</p>
+</div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="ngIf" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngIf</h3><div><code>T</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>The Boolean expression to evaluate as the condition for showing a template.</p></div></div></div></div><div id="ngIfThen" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngIfThen</h3><div><code>TemplateRef&lt;NgIfContext&lt;T>></code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>A template to show if the condition expression evaluates to true.</p></div></div></div></div><div id="ngIfElse" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngIfElse</h3><div><code>TemplateRef&lt;NgIfContext&lt;T>></code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>A template to show if the condition expression evaluates to false.</p></div></div></div></div><div id="ngIfUseIfTypeGuard" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngIfUseIfTypeGuard</h3><div><code>void</code></div></div></header></div><div id="ngTemplateGuard_ngIf" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngTemplateGuard_ngIf</h3><div><code>&quot;binding&quot;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Assert the correct type of the expression bound to the <code>ngIf</code> input within the template.</p>
+<p>The presence of this static field is a signal to the Ivy template type check compiler that
+when the <code>NgIf</code> structural directive renders its template, the type of the expression bound
+to <code>ngIf</code> should be narrowed in some way. For <code>NgIf</code>, the binding expression itself is used to
+narrow its type, which allows the strictNullChecks feature of TypeScript to work with <code>NgIf</code>.</p></div></div></div></div><div id="ngTemplateContextGuard" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngTemplateContextGuard</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>Asserts the correct type of the context for the template that <code>NgIf</code> will render.</p>
+<p>The presence of this method is a signal to the Ivy template type-check compiler that the
+<code>NgIf</code> structural directive renders its template with a specific context type.</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">dir</span><code>NgIf&lt;T></code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">ctx</span><code>any</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>boolean</code></div></div></div></div></div></div></div>

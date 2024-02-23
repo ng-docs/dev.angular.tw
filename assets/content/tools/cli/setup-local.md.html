@@ -1,0 +1,141 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">設定本地環境和工作區</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/setup-local.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>本指南說明如何使用 <a href="cli" title=CLI 命令參考>Angular CLI</a> 設定您的 Angular 開發環境。
+其中包含關於安裝 CLI、建立初始工作區和入門應用程式，以及在本地端執行該應用程式以驗證您的設定的資訊。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3>在沒有本地端設定的情況下嘗試 Angular</h3>
+      <p>如果您是 Angular 新手，您可能想要從 <a href="tutorials/learn-angular">立即試用！</a> 開始，它在您的瀏覽器中介紹了 Angular 的基本知識。
+此獨立教學利用互動式 <a href="https://stackblitz.com" target="_blank">StackBlitz</a> 環境進行線上開發。
+您無需設定您的本地環境，直到您準備就緒。</p>
+
+    </div>
+    
+  <h2 id="">開始之前</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 開始之前"></a>
+  <p>如要使用 Angular CLI，您應熟悉下列事項：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="https://developer.mozilla.org/docs/Web/JavaScript/A_re-introduction_to_JavaScript" target="_blank">
+      JavaScript<docs-icon class="docs-icon-small">open_in_new</docs-icon>
+    </a>
+    
+    <a class="docs-pill" href="https://developer.mozilla.org/docs/Learn/HTML/Introduction_to_HTML" target="_blank">
+      HTML<docs-icon class="docs-icon-small">open_in_new</docs-icon>
+    </a>
+    
+    <a class="docs-pill" href="https://developer.mozilla.org/docs/Learn/CSS/First_steps" target="_blank">
+      CSS<docs-icon class="docs-icon-small">open_in_new</docs-icon>
+    </a>
+    
+
+    </nav>
+    <p>您還應熟悉命令列介面 (CLI) 工具的使用方式，並對命令殼牌具有一般瞭解。
+瞭解 <a href="https://www.typescriptlang.org" target="_blank">TypeScript</a> 有助益，但不是必要的。</p>
+
+  <h2 id="">依賴</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 依賴"></a>
+  <p>若要將 Angular CLI 安裝至您的本地端系統，您需要安裝 <a href="https://nodejs.org/" target="_blank">Node.js</a>。
+Angular CLI 使用 Node 及其關聯的套件管理員 npm，來安裝和執行瀏覽器以外的 JavaScript 工具。</p>
+<p><a href="https://nodejs.org/en/download" target="_blank">下載並安裝 Node.js</a>，其中也會包含 <code>npm</code> CLI。
+Angular 需要一個 <a href="https://nodejs.org/about/releases" target="_blank">active LTS 或 maintenance LTS</a> 版本的 Node.js。
+請參閱 <a href="reference/versions">Angular 的版本相容性</a> 指南以了解更多資訊。</p>
+
+  <h2 id="-angular-cli">安裝 Angular CLI</h2>
+  <a href="#-angular-cli" class="docs-anchor" tabindex="-1" aria-label="Link to 安裝 Angular CLI"></a>
+  <p>若要安裝 Angular CLI，請開啟終端機視窗並執行下列指令：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">npm install -g @angular/cli</div></code>
+    </pre>
+  </div>
+  <h3 id="powershell-">Powershell 執行政策</h3>
+  <a href="#powershell-" class="docs-anchor" tabindex="-1" aria-label="Link to Powershell 執行政策"></a>
+  <p>在 Windows 客戶端電腦上，PowerShell 腳本的執行預設為停用，因此上述指令可能會因錯誤而失敗。
+若要允許執行 PowerShell 腳本（npm 全域二進位檔案所需要），您必須設定下列 <a href="https://docs.microsoft.com/zh-tw/powershell/module/microsoft.powershell.core/about/about_execution_policies">執行原則</a>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</div></code>
+    </pre>
+  </div><p>請仔細閱讀執行指令後顯示的訊息，並依照指示進行操作。請務必了解設定執行政策的意義。</p>
+
+  <h3 id="unix-">Unix 權限</h3>
+  <a href="#unix-" class="docs-anchor" tabindex="-1" aria-label="Link to Unix 權限"></a>
+  <p>在某些類 Unix 的設定中，全域 npm 腳本可能由 root 用戶擁有，因此上述指令可能會因權限錯誤而失敗。
+使用 <code>sudo</code> 以 root 用戶身分執行指令，並在提示時輸入您的密碼：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">sudo npm install -g @angular/cli</div></code>
+    </pre>
+  </div><p>請務必了解以 root 身份執行命令的含義。</p>
+
+  <h2 id="">建立工作空間和初始應用程式</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 建立工作空間和初始應用程式"></a>
+  <p>您在 Angular <strong>工作區</strong>的背景下開發應用程式。</p>
+<p>若要建立新的工作區和初始的入門應用程式，執行 CLI 指令 <code>ng new</code> 並提供名稱 <code>my-app</code>，如下所示，然後回答關於要包含的功能的提示：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng new my-app</div></code>
+    </pre>
+  </div><p>Angular CLI 安裝必要的 Angular npm 套件和其他相依性。
+這可能需要幾分鐘時間。</p>
+<p>CLI 在一個與工作空間同名的目錄中建立一個新的工作空間和一個小型歡迎應用程式，準備運行。
+導航到新的目錄，以便後續命令使用此工作空間。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">cd my-app</div></code>
+    </pre>
+  </div>
+  <h2 id="">執行應用程式</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 執行應用程式"></a>
+  <p>Angular CLI 包含一個開發伺服器，供您在本地端建置和服務您的應用程式。執行以下指令：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng serve --open</div></code>
+    </pre>
+  </div><p><code>ng serve</code> 命令啟動伺服器，監控您的檔案，並在您對那些檔案進行變更時重新建置應用程式和重新載入瀏覽器。</p>
+<p><code>--open</code> (或僅 <code>-o</code>) 選項會自動開啟您的瀏覽器至 <code>http://localhost:4200/</code> 以檢視產生的應用程式。</p>
+
+  <h2 id="">工作空間和專案檔案</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 工作空間和專案檔案"></a>
+  <p><a href="cli/new"><code>ng new</code></a> 指令會建立一個 <a href="reference/configs/workspace-config">Angular 工作區</a> 資料夾，並在其中產生一個新的應用程式。
+一個工作區可以包含多個應用程式和函式庫。
+<a href="cli/new"><code>ng new</code></a> 指令建立的初始應用程式位於工作區的根目錄中。
+當您在現有工作區中產生一個額外的應用程式或函式庫時，它預設會進入 <code>projects/</code> 子資料夾。</p>
+<p>新產生的應用程式包含根元件和範本的原始檔。
+每個應用程式都有 <code>src</code> 資料夾，其中包含其元件、資料和資產。</p>
+<p>您可以直接編輯產生的檔案，或使用 CLI 指令新增及修改檔案。
+使用 <a href="cli/generate"><code>ng generate</code></a> 指令新增其他元件、指令、管道、服務等的新檔案。
+<a href="cli/add"><code>ng add</code></a> 和 <a href="cli/generate"><code>ng generate</code></a> 等指令（用於建立或操作應用程式和程式庫）必須在工作區中執行。
+相反地，<code>ng new</code> 等指令必須在工作區 <em>外部</em> 執行，因為它們會建立新的工作區。</p>
+
+  <h2 id="">後續步驟</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 後續步驟"></a>
+  
+  <ul class="docs-list">
+    <li><p>瞭解有關 <a href="reference/configs/file-structure">檔案結構</a> 和 <a href="reference/configs/workspace-config">設定</a> 的更多資訊，以產生工作區。</p>
+</li>
+<li><p>使用 <a href="cli/test"><code>ng test</code></a> 測試您的新應用程式。</p>
+</li>
+<li><p>使用 <a href="cli/generate"><code>ng generate</code></a> 產生樣板，例如元件、指令和管線。</p>
+</li>
+<li><p>使用 <a href="cli/deploy"><code>ng deploy</code></a> 部署您的新應用程式，並使其可供實際使用者使用。</p>
+</li>
+<li><p>使用 <a href="cli/e2e"><code>ng e2e</code></a> 設定並執行應用程式的端到端測試。</p>
+</li>
+
+  </ul>
+  

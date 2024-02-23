@@ -1,0 +1,191 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">NgModules 建立指南</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/module-types.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>本主題提供 NgModules 不同類別的概念概述，以便您可以將程式碼整理成模組化結構。
+這些類別並非一成不變&mdash;它們是建議。
+您可能想為其他目的建立 NgModules，或結合某些這些類別的特徵。</p>
+<p>NgModules 是整理應用程式和讓與特定功能或特性相關的程式碼與其他程式碼分開的絕佳方式。
+使用 NgModules 將元件、指令和管道整併成具凝聚力的功能區塊。
+將每個區塊聚焦於功能或業務領域、工作流程或導覽流程、公用的工具集合，或一個或多個服務提供者。</p>
+
+  <h2 id="ngmodule-">NgModule 類別摘要</h2>
+  <a href="#ngmodule-" class="docs-anchor" tabindex="-1" aria-label="Link to NgModule 類別摘要"></a>
+  <p>所有應用程式會先透過 <a href="/guide/ngmodules/bootstrapping" title=以根 NgModule 啟動應用程式>引導根 NgModule</a> 開始。
+您可以依自己的喜好來組織其他 NgModule。</p>
+<p>此主題提供下列 NgModules 一般類別的一些準則：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">類別</th>
+<th align="left">詳細資訊</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><a href="#domain-ngmodules">網域</a></td>
+<td align="left">圍繞著功能、業務領域或使用者體驗而組織。</td>
+</tr>
+<tr>
+<td align="left"><a href="#routing-ngmodules">路由</a></td>
+<td align="left">提供另一個 NgModule 的路由設定。</td>
+</tr>
+<tr>
+<td align="left"><a href="#service-ngmodules">服務</a></td>
+<td align="left">提供數據訪問和訊息傳遞等實用程式服務。</td>
+</tr>
+<tr>
+<td align="left"><a href="#widget-ngmodules">小工具</a></td>
+<td align="left">使元件、指令或管線可供其他 NgModules 使用。</td>
+</tr>
+<tr>
+<td align="left"><a href="#shared-ngmodules">共用</a></td>
+<td align="left">使一組元件、指令和管線可供其他 NgModules 使用。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>以下表格總結了每個類別的主要特徵。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">NgModule</th>
+<th align="left">Declarations</th>
+<th align="left">Providers</th>
+<th align="left">Exports</th>
+<th align="left">Imported by</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">Domain</td>
+<td align="left">是</td>
+<td align="left">罕見</td>
+<td align="left">頂層元件</td>
+<td align="left">其他網域、<code>AppModule</code></td>
+</tr>
+<tr>
+<td align="left">Routed</td>
+<td align="left">是</td>
+<td align="left">罕見</td>
+<td align="left">否</td>
+<td align="left">無</td>
+</tr>
+<tr>
+<td align="left">Routing</td>
+<td align="left">否</td>
+<td align="left">是 (Guards)</td>
+<td align="left">RouterModule</td>
+<td align="left">其他網域 (用於路由)</td>
+</tr>
+<tr>
+<td align="left">Service</td>
+<td align="left">否</td>
+<td align="left">是</td>
+<td align="left">否</td>
+<td align="left"><code>AppModule</code></td>
+</tr>
+<tr>
+<td align="left">Widget</td>
+<td align="left">是</td>
+<td align="left">罕見</td>
+<td align="left">是</td>
+<td align="left">其他網域</td>
+</tr>
+<tr>
+<td align="left">Shared</td>
+<td align="left">是</td>
+<td align="left">否</td>
+<td align="left">是</td>
+<td align="left">其他網域</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="domain-ngmodules">Domain NgModules</h2>
+  <a href="#domain-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to Domain NgModules"></a>
+  <p>使用網域 NgModule 提供專門針對特定功能或應用程式網域的使用者體驗，例如編輯客戶或下訂單。</p>
+<p>網域 NgModule 組織與某項功能相關的程式碼，包含組成該功能的所有元件、路由和範本。
+網域 NgModule 中的頂層元件充當功能或網域的根，而且是唯一會匯出的元件。
+私人的支援子元件會從它衍生。</p>
+<p>將某個網域 NgModule 準確地匯入另一個 NgModule 一次，例如網域 NgModule，或僅包含少數 NgModules 的應用程式的根 NgModule (<code>AppModule</code>)。</p>
+<p>Domain NgModules 大多包含宣告。
+您很少包含提供者。
+如果您有，所提供服務的生命週期應與 NgModule 的生命週期相同。</p>
+
+  <h2 id="routing-ngmodules">Routing NgModules</h2>
+  <a href="#routing-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to Routing NgModules"></a>
+  <p>使用路由 NgModule 來提供網域 NgModule 的路由配置，從而將路由問題與其伴隨的網域 NgModule 分離。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p><strong>HELPFUL:</strong> 有關路由概述和詳細資訊，請參閱 <a href="/guide/routing" title=應用程式內導覽：導覽至檢視>應用程式內導覽：導覽至檢視</a>。</p>
+
+    </div>
+    <p>使用路由 NgModule 來執行下列任務：</p>
+
+  <ul class="docs-list">
+    <li>定義路由</li>
+<li>透過 <code>imports</code> 將路由器設定新增到 NgModule</li>
+<li>將防護和解析器服務提供者新增到 NgModule 的提供者</li>
+
+  </ul>
+  <p>路由 NgModule 的名稱應與其伴生 NgModule 的名稱相符，並使用後綴 <code>Routing</code>。
+例如，假設 <code>contact.module.ts</code> 中的 <code>ContactModule</code> 有一個名為 <code>ContactRoutingModule</code> 的路由 NgModule，位於 <code>contact-routing.module.ts</code> 中。</p>
+<p>僅將路由 NgModule 匯入其伴隨的 NgModule。
+如果伴隨的 NgModule 是根 <code>AppModule</code>，則 <code>AppRoutingModule</code> 會以 <code>RouterModule.forRoot(routes)</code> 將路由器設定新增到其匯入中。
+所有其他路由 NgModules 都是使用 <code>RouterModule.forChild(routes)</code> 匯入的子項。</p>
+<p>在您的路由 NgModule 中，重新匯出 <code>RouterModule</code> 作為一種便利，以便伴隨的 NgModule 的元件可以存取路由指令，例如 <code>RouterLink</code> 和 <code>RouterOutlet</code>。</p>
+<p>不要在路由 NgModule 中使用聲明。
+元件、指令和管道是 companion 領域 NgModule 的責任，而不是路由 NgModule 的責任。</p>
+
+  <h2 id="-ngmodules">服務 NgModules</h2>
+  <a href="#-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to 服務 NgModules"></a>
+  <p>使用服務 NgModule 提供數據訪問或訊息傳遞等實用服務。
+理想的服務 NgModule 完全由提供者組成，並且沒有聲明。
+Angular 的 <code>HttpClientModule</code> 是服務 NgModule 的一個好例子。</p>
+<p>僅使用根 <code>AppModule</code> 來匯入服務 NgModules。</p>
+
+  <h2 id="widget-ngmodules">Widget NgModules</h2>
+  <a href="#widget-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to Widget NgModules"></a>
+  <p>使用 widget NgModule 使元件、指令或導管可供外部 NgModules 使用。
+將 widget NgModules 匯入任何需要在其範本中使用 widget 的 NgModules。
+許多第三方 UI 元件庫都以 widget NgModules 的形式提供。</p>
+<p>小工具 NgModule 應完全由宣告組成，其中大部分都已匯出。它很少會有提供者。</p>
+
+  <h2 id="-ngmodules">共用 NgModules</h2>
+  <a href="#-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to 共用 NgModules"></a>
+  <p>將常用的指令、管道和元件放入一個 NgModule，通常命名為 <code>SharedModule</code>，然後在應用程式的其他部分需要時匯入該 NgModule。
+可以在網域 NgModule 中匯入共用 NgModule，包括 <a href="/guide/ngmodules/lazy-loading" title=延遲載入 NgModule>延遲載入的 NgModule</a>。</p>
+<p>注意：共用的 NgModules 不應包含提供者，其匯入或重新匯出的任何 NgModules 也不應包含提供者。</p>
+<p>如要了解如何使用共用模組來組織和簡化您的程式碼，請參閱 <a href="/guide/ngmodules/sharing" title=應用程式中的共用 NgModules>應用程式中的共用 NgModules</a>。</p>
+
+  <h2 id="">後續步驟</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 後續步驟"></a>
+  <p>如果您想管理 NgModule 載入以及依賴項和服務的使用，請參閱以下內容：</p>
+
+  <ul class="docs-list">
+    <li>如要瞭解如何在應用程式啟動時急切載入 NgModules，或路由器非同步延遲載入 NgModules，請參閱 <a href="/guide/ngmodules/lazy-loading">延遲載入功能模組</a></li>
+<li>如要瞭解如何為您的應用程式提供服務或其他相依性，請參閱 <a href="/guide/ngmodules/providers" title=為 NgModule 提供相依性>為 NgModule 提供相依性</a></li>
+<li>如要瞭解如何在 NgModules 中使用建立單例服務，請參閱 <a href="/guide/ngmodules/singleton-services" title=建立單例服務>建立單例服務</a></li>
+
+  </ul>
+  

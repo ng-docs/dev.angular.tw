@@ -1,0 +1,435 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">開始使用 NgOptimizedImage</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/image-optimization.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p><code>NgOptimizedImage</code> 指令讓採用最佳效能做法來載入圖片變得容易。</p>
+<p>該指令可確保以下項目優先載入 <a href="http://web.dev/lcp" target="_blank">最大內容繪製 (LCP)</a> 影像：</p>
+
+  <ul class="docs-list">
+    <li>自動在 <code>&lt;img&gt;</code> 標籤上設定 <code>fetchpriority</code> 屬性</li>
+<li>預設延遲載入其他圖像</li>
+<li>斷言文件開頭有一個對應的 preconnect 連結標籤</li>
+<li>自動產生 <code>srcset</code> 屬性</li>
+<li>如果應用程式使用 SSR，則產生 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/preload" target="_blank">預載提示</a></li>
+
+  </ul>
+  <p>除了最佳化 LCP 影像的載入外，<code>NgOptimizedImage</code> 亦強制執行多項影像最佳實務，例如：</p>
+
+  <ul class="docs-list">
+    <li>使用 <a href="https://web.dev/image-cdns/#how-image-cdns-use-urls-to-indicate-optimization-options" target="_blank">圖像 CDN URL 套用圖像最佳化</a></li>
+<li>要求 <code>width</code> 和 <code>height</code> 以防止佈局位移</li>
+<li>如果 <code>width</code> 或 <code>height</code> 設定不正確，則發出警告</li>
+<li>如果渲染時圖像在視覺上會失真，則發出警告</li>
+
+  </ul>
+  <p><strong>注意：雖然 <code>NgOptimizedImage</code> 指令在 Angular 版本 15 中成為穩定功能，但它已反向移植，並在版本 13.4.0 和 14.3.0 中作為穩定功能提供。</strong></p>
+
+  <h2 id="">開始使用</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 開始使用"></a>
+  
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-ngoptimizedimage-">匯入 <code>NgOptimizedImage</code> 指令</h3>
+  <a href="#-ngoptimizedimage-" class="docs-anchor" tabindex="-1" aria-label="Link to 匯入 <code>NgOptimizedImage</code> 指令"></a>
+  
+      <p>從 <code>@angular/common</code> 匯入 <code>NgOptimizedImage</code> 指令：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgOptimizedImage</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span></div></code>
+    </pre>
+  </div><p>並將其包含在獨立元件或 NgModule 的 <code>imports</code> 陣列中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">  <span class="hljs-title class_">NgOptimizedImage</span>,</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="optional-set-up-a-loader">(Optional) Set up a Loader</h3>
+  <a href="#optional-set-up-a-loader" class="docs-anchor" tabindex="-1" aria-label="Link to (Optional) Set up a Loader"></a>
+  
+      <p>An image loader is not <strong>required</strong> in order to use NgOptimizedImage, but using one with an image CDN enables powerful performance features, including automatic <code>srcset</code>s for your images.</p>
+<p>A brief guide for setting up a loader can be found in the <a href="#configuring-an-image-loader-for-ngoptimizedimage">Configuring an Image Loader</a> section at the end of this page.</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="enable-the-directive">Enable the directive</h3>
+  <a href="#enable-the-directive" class="docs-anchor" tabindex="-1" aria-label="Link to Enable the directive"></a>
+  
+      <p>To activate the <code>NgOptimizedImage</code> directive, replace your image&#39;s <code>src</code> attribute with <code>ngSrc</code>.</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;img ngSrc=<span class="hljs-string">"cat.jpg"</span>&gt;</div></code>
+    </pre>
+  </div><p>若您使用的是 <a href="#built-in-loaders">內建第三方載入器</a>，請務必從 <code>src</code> 中省略基本網址路徑，因為載入器會自動在前面加上此路徑。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="-priority">將圖片標記為 <code>priority</code></h3>
+  <a href="#-priority" class="docs-anchor" tabindex="-1" aria-label="Link to 將圖片標記為 <code>priority</code>"></a>
+  
+      <p>務必將頁面上的 <a href="https://web.dev/lcp/#what-elements-are-considered" target="_blank">LCP 圖片</a> 標記為 <code>priority</code>，以優先載入該圖片。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;img ngSrc=<span class="hljs-string">"cat.jpg"</span> width=<span class="hljs-string">"400"</span> height=<span class="hljs-string">"200"</span> priority&gt;</div></code>
+    </pre>
+  </div><p>將影像標記為 <code>priority</code> 會套用下列最佳化：</p>
+
+  <ul class="docs-list">
+    <li>設定 <code>fetchpriority=high</code>（<a href="https://web.dev/priority-hints" target="_blank">在此處</a>進一步瞭解優先提示）</li>
+<li>設定 <code>loading=eager</code>（<a href="https://web.dev/browser-level-image-lazy-loading" target="_blank">在此處</a>進一步瞭解原生延遲載入）</li>
+<li>如果 <a href="/guide/ssr">在伺服器上進行呈現</a>，會自動產生 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/preload" target="_blank">預載連結元素</a>。</li>
+
+  </ul>
+  <p>在開發期間，如果 LCP 元素是沒有 <code>priority</code> 屬性的影像，Angular 會顯示警告。頁面的 LCP 元素會根據多項因素而有所不同，例如使用者的螢幕尺寸，因此頁面可能有多個影像應該標記為 <code>priority</code>。請參閱 <a href="https://web.dev/css-web-vitals/#images-and-largest-contentful-paint-lcp" target="_blank">CSS for Web Vitals</a> 以進一步了解詳細資訊。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="">包含寬度和高度</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 包含寬度和高度"></a>
+  
+      <p>為了防止 <a href="https://web.dev/css-web-vitals/#images-and-layout-shifts" target="_blank">與影像相關的配置轉移</a>，NgOptimizedImage 要求您為影像指定高度和寬度，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;img ngSrc=<span class="hljs-string">"cat.jpg"</span> width=<span class="hljs-string">"400"</span> height=<span class="hljs-string">"200"</span>&gt;</div></code>
+    </pre>
+  </div><p>對於<strong>回應式圖像</strong>（您已設定其樣式，可以相對於視窗大小放大或縮小），<code>width</code> 和 <code>height</code> 屬性應為圖像檔案的內在大小。對於回應式圖像，設定 <code>sizes</code> 的值也很重要。(#responsive-images)</p>
+<p>對於<strong>固定大小的圖片</strong>，<code>width</code> 和 <code>height</code> 屬性應反映圖片的所需呈現大小。這些屬性的長寬比應始終與圖片的固有長寬比相符。</p>
+<p>備註：如果您不知道圖片大小，請考慮使用「填滿模式」來繼承父容器的大小，如以下所述。</p>
+
+    </li>
+    
+    </ol>
+    
+  <h2 id="-fill-">使用 <code>fill</code> 模式</h2>
+  <a href="#-fill-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 <code>fill</code> 模式"></a>
+  <p>html</p>
+<p>
+  fill 模式會在容器內填滿內容，如果內容的寬度或高度比容器大，則內容會被裁切。
+</p>
+
+<p>在您想讓圖片填滿容器元素的情況下，您可以使用 <code>fill</code> 屬性。當您希望達成「背景圖片」行為時，這通常很有用。當您不知道圖片的精確寬度和高度，但您有一個已知大小的父容器，您希望將圖片放入其中時，這也可能很有用（請參閱下方的「object-fit」）。</p>
+<p>當您將 <code>fill</code> 屬性新增到您的圖片時，您不需要也不應該包含 <code>width</code> 和 <code>height</code>，如下例所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;img ngSrc=<span class="hljs-string">"cat.jpg"</span> fill&gt;</div></code>
+    </pre>
+  </div><p>您可以使用 <a href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/object-fit" target="_blank">object-fit</a> CSS 屬性來變更影像將如何填滿其容器。如果您使用 <code>object-fit: &quot;contain&quot;</code> 來設定影像樣式，則該影像將維持其縱橫比，並以「信箱模式」來符合元素。如果您設定 <code>object-fit: &quot;cover&quot;</code>，則該元素將保留其縱橫比、完全填滿元素，且部分內容可能會被「裁切」掉。</p>
+<p>有關上述內容的視覺範例，請參閱 <a href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/object-fit" target="_blank">MDN object-fit 文件。</a></p>
+<p>你也可以使用 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-position" target="_blank">object-position property</a> 調整圖片在它所包含的元素中的位置，來為你的圖片添加樣式。</p>
+<p>重要：要正確地呈現「填滿」圖片，其父元素<strong>必須</strong>套用樣式 <code>position: &quot;relative&quot;</code>, <code>position: &quot;fixed&quot;</code>, 或 <code>position: &quot;absolute&quot;</code>。</p>
+
+  <h2 id="-placeholder">使用 placeholder</h2>
+  <a href="#-placeholder" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 placeholder"></a>
+  <input type="text" placeholder="請輸入您的姓名">
+
+
+  <h3 id="">自動預留位置</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 自動預留位置"></a>
+  <p>如果使用提供自動圖片調整大小的 CDN 或圖片主機，<code>NgOptimizedImage</code> 可以為您的圖片顯示自動的低解析度預留位置。透過將 <code>placeholder</code> 屬性新增到圖片，來利用此功能：</p>
+<code-example format="typescript" language="typescript">
+
+<p>&lt;img ngSrc=&quot;cat.jpg&quot; width=&quot;400&quot; height=&quot;200&quot; placeholder&gt;</p>
+</code-example>
+
+<p>加入這個屬性會自動使用您指定的圖片載入器請求第二個較小的圖片版本。這張小圖片會以 CSS 模糊的形式套用為 <code>background-image</code> 風格，同時載入您的圖片。如果沒有提供圖片載入器，就無法產生佔位圖片，並且會擲回錯誤。</p>
+<p>預設產生的預留位置大小為寬 30 像素。您可以透過在 <code>IMAGE_CONFIG</code> 提供者中指定像素值來變更此大小，如下所示：</p>
+<code-example format="typescript" language="typescript">
+providers: [
+  {
+    provide: IMAGE_CONFIG,
+    useValue: {
+      placeholderResolution: 40
+    }
+  },
+],
+</code-example>
+
+<p>如果你想讓模糊預留位置邊緣銳利，你可以將圖片包覆在一個包含的 <code>&lt;div&gt;</code> 中，並套用 <code>overflow: hidden</code> 樣式。只要 <code>&lt;div&gt;</code> 與圖片大小相同（例如使用 <code>width: fit-content</code> 樣式），預留位置的「模糊邊緣」就會被隱藏。</p>
+
+  <h3 id="-url-">數據 URL 預留位置</h3>
+  <a href="#-url-" class="docs-anchor" tabindex="-1" aria-label="Link to 數據 URL 預留位置"></a>
+  <p>您也可以使用 base64 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs" target="_blank">資料 URL</a>指定一個預留位置，而不需要影像載入器。資料網址格式為 <code>data:image/[imagetype];[data]</code>，其中 <code>[imagetype]</code> 是影像格式，例如 <code>png</code>，而 <code>[data]</code> 是影像的 base64 編碼。該編碼可以使用命令列或 JavaScript 執行。有關特定命令，請參閱 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs#encoding_data_into_base64_format" target="_blank">MDN 文件</a>。以下顯示一個資料 URL 預留位置的範例，其中包含截斷的資料：</p>
+<code-example format="typescript" language="typescript">
+
+<p>&lt;img ngSrc=&quot;cat.jpg&quot; width=&quot;400&quot; height=&quot;200&quot; placeholder=&quot;data:image/png;base64,iVBORw0K...&quot;&gt;</p>
+</code-example>
+
+<p>然而，大型資料 URL 會增加 Angular 捆綁程式的大小並降低頁面載入速度。如果您無法使用影像載入器，Angular 團隊建議將 base64 預留位置影像保持在 4KB 以下，並僅將它們用於重要影像。除了減少預留位置尺寸，請考慮在儲存影像時變更影像格式或參數。在非常低的解析度下，這些參數可能會對檔案大小產生很大的影響。</p>
+
+  <h3 id="">非模糊的預留位置</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 非模糊的預留位置"></a>
+  <p>預設情況下，NgOptimizedImage 會對圖片預留位置套用 CSS 模糊效果。若要呈現沒有模糊效果的預留位置，請提供一個包含 <code>blur</code> 屬性的物件作為 <code>placeholderConfig</code> 參數，並將其設定為 false。例如：</p>
+<code-example format="typescript" language="typescript">
+
+<p>&lt;img ngSrc=&quot;cat.jpg&quot; width=&quot;400&quot; height=&quot;200&quot; placeholder [placeholderConfig]=&quot;{blur: false}&quot;&gt;</p>
+</code-example>
+
+
+  <h2 id="">調整圖片樣式</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 調整圖片樣式"></a>
+  <p>根據圖片的樣式，添加 <code>width</code> 和 <code>height</code> 屬性可能導致圖片呈現方式不同。如果您的圖片樣式以失真的長寬比呈現圖片，<code>NgOptimizedImage</code> 會警告您。</p>
+<p>您通常可以透過將 <code>height: auto</code> 或 <code>width: auto</code> 新增至您的圖片樣式來修復此問題。如需更多資訊，請參閱 <a href="https://web.dev/patterns/web-vitals-patterns/images/img-tag" target="_blank">web.dev 文章</a>中關於 <code>&lt;img&gt;</code> 標籤的內容。</p>
+<p>如果圖像上的 <code>width</code> 和 <code>height</code> 屬性妨礙您使用 CSS 調整圖像大小，請考慮改用 <code>fill</code> 模式，並調整圖像父元素的樣式。</p>
+
+  <h2 id="">效能特點</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 效能特點"></a>
+  <p>NgOptimizedImage 包含許多旨在改善應用程式載入效能的功能。本節將說明這些功能。</p>
+
+  <h3 id="">加入資源提示</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 加入資源提示"></a>
+  <p>您可以為圖片來源新增 <a href="https://web.dev/preconnect-and-dns-prefetch" target="_blank"><code>preconnect</code> 資源提示</a>，以確保 LCP 圖片能盡快載入。資源提示務必放在文件 <code>&lt;head&gt;</code> 中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"preconnect"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://my.cdn.origin"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p>預設情況下，如果您使用協力廠商圖像服務的載入器，則當 <code>NgOptimizedImage</code> 指令偵測到服務 LCP 影像的來源沒有 <code>preconnect</code> 資源提示時，會在開發期間發出警告。</p>
+<p>若要停用這些警告，注入 <code>PRECONNECT_CHECK_BLOCKLIST</code> 令牌：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  {<span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">PRECONNECT_CHECK_BLOCKLIST</span>, <span class="hljs-attr">useValue</span>: <span class="hljs-string">'https://your-domain.com'</span>}</div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div>
+  <h3 id="-srcset-">使用自動 <code>srcset</code> 以正確尺寸要求影像</h3>
+  <a href="#-srcset-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用自動 <code>srcset</code> 以正確尺寸要求影像"></a>
+  <p>定義 <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset" target="_blank"><code>srcset</code> 屬性</a> 可確保瀏覽器會根據使用者的視窗要求正確尺寸的圖片，因此不會浪費時間下載尺寸過大的圖片。<code>NgOptimizedImage</code> 會根據圖片標籤上 <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes" target="_blank"><code>sizes</code> 屬性</a> 的存在與值，為圖片產生適當的 <code>srcset</code>。</p>
+
+  <h4 id="">固定大小的圖片</h4>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 固定大小的圖片"></a>
+  <p>如果您的圖像大小應為「固定」(亦即在不同裝置上具有相同大小，像素密度除外 (<a href="https://web.dev/codelab-density-descriptors/))，則不需要設定" target="_blank">https://web.dev/codelab-density-descriptors/))，則不需要設定</a> <code>sizes</code> 屬性。可以從圖像的寬度和高度屬性自動產生 <code>srcset</code>，無需進一步輸入。</p>
+<p>範例 srcset 產生：<code>&lt;img ... srcset=&quot;image-400w.jpg 1x, image-800w.jpg 2x&quot;&gt;</code></p>
+
+  <h4 id="">響應式圖片</h4>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 響應式圖片"></a>
+  <p>如果您的圖像應具有響應性（即根據視窗大小縮放），那麼您將需要定義<a href="https://developer.mozilla.org/zh-TW/docs/Web/API/HTMLImageElement/sizes" target="_blank"><code>sizes</code> 屬性</a>來產生 <code>srcset</code>。</p>
+<p>如果您之前沒有使用過 <code>sizes</code>，一個好的開始做法是根據視窗寬度設定。例如，如果您的 CSS 導致圖像填滿視窗寬度的 100%，請將 <code>sizes</code> 設定為 <code>100vw</code>，瀏覽器會在 <code>srcset</code> 中選擇最接近視窗寬度的圖像（在考量像素密度之後）。如果您的圖像可能只佔螢幕的一半（例如：在側邊欄中），請將 <code>sizes</code> 設定為 <code>50vw</code>，以確保瀏覽器選擇較小的圖像。以此類推。</p>
+<p>如果您發現以上內容未涵蓋您想要的圖片行為，請參閱 <a href="#進階大小值">進階大小值</a> 文件。</p>
+<p>預設情況下，響應式中斷點為：</p>
+<p><code>[16, 32, 48, 64, 96, 128, 256, 384, 640, 750, 828, 1080, 1200, 1920, 2048, 3840]</code></p>
+<p>如果您想自訂這些斷點，您可以使用 <code>IMAGE_CONFIG</code> 提供者來執行此操作：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">IMAGE_CONFIG</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">useValue</span>: {</div><div class="hljs-ln-line">      <span class="hljs-attr">breakpoints</span>: [<span class="hljs-number">16</span>, <span class="hljs-number">48</span>, <span class="hljs-number">96</span>, <span class="hljs-number">128</span>, <span class="hljs-number">384</span>, <span class="hljs-number">640</span>, <span class="hljs-number">750</span>, <span class="hljs-number">828</span>, <span class="hljs-number">1080</span>, <span class="hljs-number">1200</span>, <span class="hljs-number">1920</span>]</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div><p>如果您想手動定義一個 <code>srcset</code> 屬性，您可以使用 <code>ngSrcset</code> 屬性提供您自己的屬性：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">ngSrc</span>=<span class="hljs-string">"hero.jpg"</span> <span class="hljs-attr">ngSrcset</span>=<span class="hljs-string">"100w, 200w, 300w"</span>&gt;</span></div></code>
+    </pre>
+  </div><p>如果存在 <code>ngSrcset</code> 屬性，<code>NgOptimizedImage</code> 會根據所包含的尺寸來產生並設定 <code>srcset</code>。請勿在 <code>ngSrcset</code> 中包含影像檔案名稱 - 指令會從 <code>ngSrc</code> 推斷此資訊。此指令同時支援寬度描述符 (例如 <code>100w</code>) 和密度描述符 (例如 <code>1x</code>)。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">ngSrc</span>=<span class="hljs-string">"hero.jpg"</span> <span class="hljs-attr">ngSrcset</span>=<span class="hljs-string">"100w, 200w, 300w"</span> <span class="hljs-attr">sizes</span>=<span class="hljs-string">"50vw"</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <h3 id="-srcset-">停用自動 srcset 自動建立</h3>
+  <a href="#-srcset-" class="docs-anchor" tabindex="-1" aria-label="Link to 停用自動 srcset 自動建立"></a>
+  <p>若要停用單一圖片的 srcset 產生，您可以在圖片上新增 <code>disableOptimizedSrcset</code> 屬性：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">ngSrc</span>=<span class="hljs-string">"about.jpg"</span> <span class="hljs-attr">disableOptimizedSrcset</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <h3 id="">停用圖片延遲載入</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 停用圖片延遲載入"></a>
+  <p>預設情況下，<code>NgOptimizedImage</code> 會為所有未標記為 <code>priority</code> 的圖片設定 <code>loading=lazy</code>。您可以透過設定 <code>loading</code> 屬性來停用非優先圖片的此行為。此屬性接受的值為：<code>eager</code>、<code>auto</code> 和 <code>lazy</code>。<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading#value" target="_blank">請參閱標準圖片 <code>loading</code> 屬性的文件，以取得詳細資訊</a>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">ngSrc</span>=<span class="hljs-string">"cat.jpg"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"400"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"200"</span> <span class="hljs-attr">loading</span>=<span class="hljs-string">"eager"</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <h3 id="-sizes-">進階的 &#39;sizes&#39; 值</h3>
+  <a href="#-sizes-" class="docs-anchor" tabindex="-1" aria-label="Link to 進階的 &#39;sizes&#39; 值"></a>
+  <p>你可能希望在不同大小的螢幕上以不同寬度顯示圖像。這種模式的常見範例是基於網格或欄位的版面配置，在行動裝置上呈現單欄，在較大的裝置上則呈現兩欄。你可以使用「媒體查詢」語法在 <code>sizes</code> 屬性中擷取此行為，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">ngSrc</span>=<span class="hljs-string">"cat.jpg"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"400"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"200"</span> <span class="hljs-attr">sizes</span>=<span class="hljs-string">"(max-width: 768px) 100vw, 50vw"</span>&gt;</span></div></code>
+    </pre>
+  </div><p>在上面的範例中，<code>sizes</code> 屬性表示「我希望這張圖片在螢幕寬度小於 768px 的裝置上為螢幕寬度的 100%。否則，我希望它為螢幕寬度的 50%。</p>
+<p>有關 <code>sizes</code> 屬性的更多資訊，請參閱 <a href="https://web.dev/learn/design/responsive-images/#sizes" target="_blank">web.dev</a> 或 <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes" target="_blank">mdn</a>。</p>
+
+  <h2 id="-ngoptimizedimage-">為 <code>NgOptimizedImage</code> 配置影像載入器</h2>
+  <a href="#-ngoptimizedimage-" class="docs-anchor" tabindex="-1" aria-label="Link to 為 <code>NgOptimizedImage</code> 配置影像載入器"></a>
+  <p>html</p>
+<script type="module">
+  import {NgOptimizedImage} from '@angular/common';
+  import {defineCustomElements} from '@angular/elements';
+
+  defineCustomElements(window, [
+    NgOptimizedImage,
+  ]);
+</script>
+
+<p>「載入器」是一個函式，可為特定影像檔案產生 <a href="https://web.dev/image-cdns/#how-image-cdns-use-urls-to-indicate-optimization-options" target="_blank">影像轉換網址</a>。當適當時，<code>NgOptimizedImage</code> 會設定影像的尺寸、格式和影像品質轉換。</p>
+<p><code>NgOptimizedImage</code> 提供了一個套用沒有轉換的通用載入器，以及各種第三方圖像服務的載入器。它還支援撰寫您自己的客製化載入器。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">載入器類型</th>
+<th align="left">行為</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">通用載入器</td>
+<td align="left">通用載入器傳回的 URL 將永遠與 <code>src</code> 的值相符。換句話說，此載入器不套用任何轉換。將 Angular 用於提供圖片的網站是此載入器的主要預期使用案例。</td>
+</tr>
+<tr>
+<td align="left">第三方圖片服務的載入器</td>
+<td align="left">第三方圖片服務的載入器傳回的 URL 將遵循該特定圖片服務使用的 API 慣例。</td>
+</tr>
+<tr>
+<td align="left">自訂載入器</td>
+<td align="left">自訂載入器的行為由其開發人員定義。如果你的圖片服務不受 <code>NgOptimizedImage</code> 預先配置的載入器支援，你應該使用自訂載入器。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p><code>NgOptimizedImage</code> 基於與 Angular 應用程式常用的圖片服務，提供預先配置的載入器，以便搭配下列圖片服務使用：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">影像服務</th>
+<th align="left">Angular API</th>
+<th align="left">文件</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">Cloudflare 影像調整大小</td>
+<td align="left"><code>provideCloudflareLoader</code></td>
+<td align="left"><a href="https://developers.cloudflare.com/images/image-resizing/" target="_blank">文件</a></td>
+</tr>
+<tr>
+<td align="left">Cloudinary</td>
+<td align="left"><code>provideCloudinaryLoader</code></td>
+<td align="left"><a href="https://cloudinary.com/documentation/resizing_and_cropping" target="_blank">文件</a></td>
+</tr>
+<tr>
+<td align="left">ImageKit</td>
+<td align="left"><code>provideImageKitLoader</code></td>
+<td align="left"><a href="https://docs.imagekit.io/" target="_blank">文件</a></td>
+</tr>
+<tr>
+<td align="left">Imgix</td>
+<td align="left"><code>provideImgixLoader</code></td>
+<td align="left"><a href="https://docs.imgix.com/" target="_blank">文件</a></td>
+</tr>
+<tr>
+<td align="left">Netlify</td>
+<td align="left"><code>provideNetlifyLoader</code></td>
+<td align="left"><a href="https://docs.netlify.com/image-cdn/overview/" target="_blank">文件</a></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>要使用 <strong>通用載入器</strong> 無需額外的程式碼更改。這是預設行為。</p>
+
+  <h3 id="">內建載入器</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 內建載入器"></a>
+  <p>要為<strong>第三方圖像服務</strong>使用現有載入器，請將您選擇的服務的提供者工廠新增至 <code>providers</code> 陣列。在以下範例中，使用 Imgix 載入器：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  <span class="hljs-title function_">provideImgixLoader</span>(<span class="hljs-string">'https://my.base.url/'</span>),</div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div><p>應該將圖像資產的基本 URL 作為參數傳遞給提供者工廠。對於大多數網站，此基本 URL 應符合下列模式之一：</p>
+
+  <ul class="docs-list">
+    <li><a href="https://yoursite.yourcdn.com" target="_blank">https://yoursite.yourcdn.com</a></li>
+<li><a href="https://subdomain.yoursite.com" target="_blank">https://subdomain.yoursite.com</a></li>
+<li><a href="https://subdomain.yourcdn.com/yoursite" target="_blank">https://subdomain.yourcdn.com/yoursite</a></li>
+
+  </ul>
+  <p>您可以在對應的 CDN 提供商的文件中瞭解更多關於基本 URL 結構的資訊。</p>
+
+  <h3 id="">自訂載入器</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 自訂載入器"></a>
+  <p>若要使用<strong>自訂載入器</strong>，請將載入器函式提供為 <code>IMAGE_LOADER</code> DI 程式碼的數值。在以下範例中，自訂載入器函式傳回以 <code>https://example.com</code> 開頭的 URL，其中包含 <code>src</code> 和 <code>width</code> 作為 URL 參數。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">IMAGE_LOADER</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">useValue</span>: <span class="hljs-function">(<span class="hljs-params">config: ImageLoaderConfig</span>) =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-keyword">return</span> <span class="hljs-string">`https://example.com/images?src=<span class="hljs-subst">${config.src}</span>&amp;width=<span class="hljs-subst">${config.width}</span>`</span>;</div><div class="hljs-ln-line">    },</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div><p><code>NgOptimizedImage</code> 指令的載入器函式需要一個物件，其型別為 <code>ImageLoaderConfig</code>（來自 <code>@angular/common</code>），作為其引數，並傳回影像資源的絕對 URL。<code>ImageLoaderConfig</code> 物件包含 <code>src</code> 屬性，以及選用的 <code>width</code> 和 <code>loaderParams</code> 屬性。</p>
+<p>注意：即使可能並不總是存在 <code>width</code> 屬性，自訂載入器必須使用它來支援以各種寬度要求影像，才能讓 <code>ngSrcset</code> 正常運作。</p>
+
+  <h3 id="loaderparams-"><code>loaderParams</code> 屬性</h3>
+  <a href="#loaderparams-" class="docs-anchor" tabindex="-1" aria-label="Link to <code>loaderParams</code> 屬性"></a>
+  <p><code>NgOptimizedImage</code> 指令支援一個額外的屬性，稱為 <code>loaderParams</code>，專門設計來支援使用自訂載入器。<code>loaderParams</code> 屬性取得一個物件，其任何屬性皆為值，且本身不執行任何動作。<code>loaderParams</code> 中的資料會新增到傳遞給自訂載入器的 <code>ImageLoaderConfig</code> 物件，且可拿來控制載入器的行為。</p>
+<p><code>loaderParams</code> 的常見用途是控制進階的圖片 CDN 功能。</p>
+
+  <h3 id="">範例自訂載入器</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 範例自訂載入器"></a>
+  <p>以下顯示自訂載入器函式的範例。此範例函式會連結 <code>src</code> 和 <code>width</code>，並使用 <code>loaderParams</code> 來控制圓角的客製 CDN 功能：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-title function_">myCustomLoader</span> = (<span class="hljs-params">config: ImageLoaderConfig</span>) =&gt; {</div><div class="hljs-ln-line">  <span class="hljs-keyword">let</span> url = <span class="hljs-string">`https://example.com/images/<span class="hljs-subst">${config.src}</span>?`</span>;</div><div class="hljs-ln-line">  <span class="hljs-keyword">let</span> queryParams = [];</div><div class="hljs-ln-line">  <span class="hljs-keyword">if</span> (config.<span class="hljs-property">width</span>) {</div><div class="hljs-ln-line">    queryParams.<span class="hljs-title function_">push</span>(<span class="hljs-string">`w=<span class="hljs-subst">${config.width}</span>`</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  <span class="hljs-keyword">if</span> (config.<span class="hljs-property">loaderParams</span>?.<span class="hljs-property">roundedCorners</span>) {</div><div class="hljs-ln-line">    queryParams.<span class="hljs-title function_">push</span>(<span class="hljs-string">'mask=corners&amp;corner-radius=5'</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> url + queryParams.<span class="hljs-title function_">join</span>(<span class="hljs-string">'&amp;'</span>);</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div><p>請注意，在上面的範例中，我們發明了「roundedCorners」屬性名稱，以控制我們的自訂載入器的功能。然後，我們可以在建立影像時使用此功能，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">ngSrc</span>=<span class="hljs-string">"profile.jpg"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"300"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"300"</span> [<span class="hljs-attr">loaderParams</span>]=<span class="hljs-string">"{roundedCorners: true}"</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <h2 id="">常見問題</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 常見問題"></a>
+  
+  <h3 id="ngoptimizedimage--background-image-css-">NgOptimizedImage 是否支援 <code>background-image</code> css 屬性？</h3>
+  <a href="#ngoptimizedimage--background-image-css-" class="docs-anchor" tabindex="-1" aria-label="Link to NgOptimizedImage 是否支援 <code>background-image</code> css 屬性？"></a>
+  <p>NgOptimizedImage 不直接支援 <code>background-image</code> css 屬性，但它被設計成可以輕鬆支援將圖片作為另一個元素背景的使用案例。</p>
+<p>以下是一份從 <code>background-image</code> 遷移到 <code>NgOptimizedImage</code> 的簡單分步流程。在這些步驟中，我們將把具有圖像背景的元素稱為「包含元素」：</p>
+
+    <ol class="docs-ordered-list">
+      <li>從包含元素中移除 <code>background-image</code> 樣式。</li>
+<li>確保包含元素具有 <code>position: &quot;relative&quot;</code>, <code>position: &quot;fixed&quot;</code>, 或 <code>position: &quot;absolute&quot;</code>。</li>
+<li>建立一個新的影像元素作為包含元素的子元素，使用 <code>ngSrc</code> 以啟用 <code>NgOptimizedImage</code> 指令。</li>
+<li>給予該元素 <code>fill</code> 屬性。請勿包含 <code>height</code> 和 <code>width</code>。</li>
+<li>如果您認為此影像可能是您的 <a href="https://web.dev/lcp/" target="_blank">LCP 元素</a>，請將 <code>priority</code> 屬性新增至影像元素。</li>
+
+    </ol>
+    <p>您可以調整背景圖片填滿容器的方式，如 <a href="#using-fill-mode">使用填滿模式</a> 區段所述。</p>
+
+  <h3 id="-ngoptimizedimage--src">為什麼我無法在 <code>NgOptimizedImage</code> 中使用 <code>src</code>？</h3>
+  <a href="#-ngoptimizedimage--src" class="docs-anchor" tabindex="-1" aria-label="Link to 為什麼我無法在 <code>NgOptimizedImage</code> 中使用 <code>src</code>？"></a>
+  <p>由於關於瀏覽器如何載入影像的技術考量，選擇 <code>ngSrc</code> 屬性作為 NgOptimizedImage 的觸發器。NgOptimizedImage 對 <code>loading</code> 屬性進行程式化變更 -- 如果瀏覽器在這些變更完成之前看到 <code>src</code> 屬性，它將開始急切下載影像檔案，而載入變更將被忽略。</p>
+
+  <h3 id="">我可以在同一頁面中使用兩個不同的圖片網域嗎？</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 我可以在同一頁面中使用兩個不同的圖片網域嗎？"></a>
+  <p><a href="#configuring-an-image-loader-for-ngoptimizedimage">影像載入器</a> 提供者模式的設計儘可能簡單，適用於在元件中僅使用單一影像 CDN 的常見使用案例。但是，使用單一提供者來管理多個影像 CDN 仍然非常可行。</p>
+<p>為此，我們建議撰寫一個 <a href="#custom-loaders">自訂圖像載入器</a>，該載入器使用 <a href="#the-loaderparams-property"><code>loaderParams</code> 屬性</a> 來傳遞指定應使用哪個圖像 CDN 的旗標，然後根據該旗標呼叫適當的載入器。</p>
+
+  <h3 id="-cdn-">是否可以為我喜好的 CDN 新增內建載入器？</h3>
+  <a href="#-cdn-" class="docs-anchor" tabindex="-1" aria-label="Link to 是否可以為我喜好的 CDN 新增內建載入器？"></a>
+  <p>出於維護原因，我們目前不打算在 Angular 儲存庫中支援額外內建的載入器。相反的，我們鼓勵開發人員將任何額外的影像載入器發佈為第三方套件。</p>

@@ -1,0 +1,124 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>NavigationExtras</h1><div class="docs-api-item-label" data-mode="full" data-type="interface">interface</div></div></div><p class="docs-reference-description"><p>Options that modify the <code>Router</code> navigation strategy.
+Supply an object containing any of these properties to a <code>Router</code> navigation function to
+control how the target URL should be constructed or interpreted.</p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/router/Routernavigate">Routernavigate</a><a class="docs-pill" href="api/router/RouternavigateByUrl">RouternavigateByUrl</a><a class="docs-pill" href="api/router/Routercreateurltree">Routercreateurltree</a><a class="docs-pill" href="guide/routing/common-router-tasks">Routing and Navigation guide</a><a class="docs-pill" href="api/router/UrlCreationOptions">UrlCreationOptions</a><a class="docs-pill" href="api/router/NavigationBehaviorOptions">NavigationBehaviorOptions</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">interface</span> <span class="hljs-title class_">NavigationExtras</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="relativeTo">  <span class="hljs-keyword">override</span> relativeTo?: <span class="hljs-title class_">ActivatedRoute</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="queryParams">  <span class="hljs-keyword">override</span> queryParams?: <span class="hljs-title class_">Params</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="fragment">  <span class="hljs-keyword">override</span> fragment?: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="queryParamsHandling">  <span class="hljs-keyword">override</span> queryParamsHandling?: <span class="hljs-title class_">QueryParamsHandling</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="preserveFragment">  <span class="hljs-keyword">override</span> preserveFragment?: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="onSameUrlNavigation">  <span class="hljs-keyword">override</span> onSameUrlNavigation?: <span class="hljs-title class_">OnSameUrlNavigation</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="skipLocationChange">  <span class="hljs-keyword">override</span> skipLocationChange?: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="replaceUrl">  <span class="hljs-keyword">override</span> replaceUrl?: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="state">  <span class="hljs-keyword">override</span> state?: { [<span class="hljs-attr">k</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>; };</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="info">  <span class="hljs-keyword">readonly</span> <span class="hljs-keyword">override</span> info?: <span class="hljs-built_in">unknown</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="relativeTo" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>relativeTo</h3><div><code>ActivatedRoute</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Specifies a root URI to use for relative navigation.</p>
+<p>For example, consider the following route configuration where the parent route
+has two children.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">[{</span><span class="hljs-ln-line">  path: <span class="hljs-symbol">&#x27;parent</span>&#x27;,</span><span class="hljs-ln-line">  component: ParentComponent,</span><span class="hljs-ln-line">  children: [{</span><span class="hljs-ln-line">    path: <span class="hljs-symbol">&#x27;list</span>&#x27;,</span><span class="hljs-ln-line">    component: ListComponent</span><span class="hljs-ln-line">  },{</span><span class="hljs-ln-line">    path: <span class="hljs-symbol">&#x27;child</span>&#x27;,</span><span class="hljs-ln-line">    component: ChildComponent</span><span class="hljs-ln-line">  }]</span><span class="hljs-ln-line">}]</span>
+          </code>
+        </pre>
+      </div>
+    <p>The following <code>go()</code> function navigates to the <code>list</code> route by
+interpreting the destination URI as relative to the activated <code>child</code>  route</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"> <span class="hljs-meta">@Component({...})</span></span><span class="hljs-ln-line"> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</span><span class="hljs-ln-line">   <span class="hljs-keyword">constructor</span>(<span class="hljs-keyword">private</span> router: Router, <span class="hljs-keyword">private</span> route: ActivatedRoute) {}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line">   go() {</span><span class="hljs-ln-line">     router.navigate([<span class="hljs-string">&#x27;../list&#x27;</span>], { relativeTo: <span class="hljs-keyword">this</span>.route });</span><span class="hljs-ln-line">   }</span><span class="hljs-ln-line"> }</span>
+          </code>
+        </pre>
+      </div>
+    <p>A value of <code>null</code> or <code>undefined</code> indicates that the navigation commands should be applied
+relative to the root.</p></div></div></div></div><div id="queryParams" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>queryParams</h3><div><code>Params</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Sets query parameters to the URL.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// Navigate to /results?page=1</span></span><span class="hljs-ln-line">router.<span class="hljs-title function_ invoke__">navigate</span>([<span class="hljs-string">&#x27;/results&#x27;</span>], { <span class="hljs-attr">queryParams</span>: { <span class="hljs-attr">page</span>: <span class="hljs-number">1</span> } });</span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="fragment" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>fragment</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Sets the hash fragment for the URL.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">// Navigate <span class="hljs-selector-tag">to</span> /results<span class="hljs-selector-id">#top</span></span><span class="hljs-ln-line">router<span class="hljs-selector-class">.navigate</span>(<span class="hljs-selector-attr">[<span class="hljs-string">&#x27;/results&#x27;</span>]</span>, { fragment: <span class="hljs-string">&#x27;top&#x27;</span> });</span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="queryParamsHandling" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>queryParamsHandling</h3><div><code>QueryParamsHandling</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>How to handle query parameters in the router link for the next navigation.
+One of:</p>
+
+    <ul class="docs-list">
+      <li><code>preserve</code> : Preserve current parameters.</li>
+<li><code>merge</code> : Merge new with current parameters.</li>
+
+    </ul>
+    <p>The &quot;preserve&quot; option discards any new query params:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// from /view1?page=1 to/view2?page=1</span></span><span class="hljs-ln-line">router.<span class="hljs-title function_ invoke__">navigate</span>([<span class="hljs-string">&#x27;/view2&#x27;</span>], { <span class="hljs-attr">queryParams</span>: { <span class="hljs-attr">page</span>: <span class="hljs-number">2</span> },  <span class="hljs-attr">queryParamsHandling</span>: <span class="hljs-string">&quot;preserve&quot;</span></span><span class="hljs-ln-line">});</span>
+          </code>
+        </pre>
+      </div>
+    <p>The &quot;merge&quot; option appends new query params to the params from the current URL:</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// from /view1?page=1 to/view2?page=1&amp;otherKey=2</span></span><span class="hljs-ln-line">router.<span class="hljs-title function_ invoke__">navigate</span>([<span class="hljs-string">&#x27;/view2&#x27;</span>], { <span class="hljs-attr">queryParams</span>: { <span class="hljs-attr">otherKey</span>: <span class="hljs-number">2</span> },  <span class="hljs-attr">queryParamsHandling</span>: <span class="hljs-string">&quot;merge&quot;</span></span><span class="hljs-ln-line">});</span>
+          </code>
+        </pre>
+      </div>
+    <p>In case of a key collision between current parameters and those in the <code>queryParams</code> object,
+the new value is used.</p></div></div></div></div><div id="preserveFragment" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>preserveFragment</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>When true, preserves the URL fragment for the next navigation</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">// Preserve fragment <span class="hljs-selector-tag">from</span> /results<span class="hljs-selector-id">#top</span> <span class="hljs-selector-tag">to</span> /view<span class="hljs-selector-id">#top</span></span><span class="hljs-ln-line">router<span class="hljs-selector-class">.navigate</span>(<span class="hljs-selector-attr">[<span class="hljs-string">&#x27;/view&#x27;</span>]</span>, { preserveFragment: true });</span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="onSameUrlNavigation" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>onSameUrlNavigation</h3><div><code>OnSameUrlNavigation</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>How to handle a navigation request to the current URL.</p>
+<p>This value is a subset of the options available in <code>OnSameUrlNavigation</code> and
+will take precedence over the default value set for the <code>Router</code>.</p></div></div></div></div><div id="skipLocationChange" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>skipLocationChange</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>When true, navigates without pushing a new state into history.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// Navigate silently to /view</span></span><span class="hljs-ln-line"><span class="hljs-keyword">this</span>.router.navigate([<span class="hljs-string">&#x27;/view&#x27;</span>], { skipLocationChange: <span class="hljs-literal">true</span> });</span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="replaceUrl" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>replaceUrl</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>When true, navigates while replacing the current state in history.</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// Navigate to /view</span></span><span class="hljs-ln-line"><span class="hljs-keyword">this</span>.router.navigate([<span class="hljs-string">&#x27;/view&#x27;</span>], { replaceUrl: <span class="hljs-literal">true</span> });</span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="state" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>state</h3><div><code>{ [k: string]: any; }</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Developer-defined state that can be passed to any navigation.
+Access this value through the <code>Navigation.extras</code> object
+returned from the <a href="api/router/Router">Router.getCurrentNavigation()
+method</a> while a navigation is executing.</p>
+<p>After a navigation completes, the router writes an object containing this
+value together with a <code>navigationId</code> to <code>history.state</code>.
+The value is written when <code>location.go()</code> or <code>location.replaceState()</code>
+is called before activating this route.</p>
+<p>Note that <code>history.state</code> does not pass an object equality test because
+the router adds the <code>navigationId</code> on each navigation.</p></div></div></div></div><div id="info" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>info</h3><div><code>unknown</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>Use this to convey transient information about this particular navigation, such as how it
+happened. In this way, it&#39;s different from the persisted value <code>state</code> that will be set to
+<code>history.state</code>. This object is assigned directly to the Router&#39;s current <code>Navigation</code>
+(it is not copied or cloned), so it should be mutated with caution.</p>
+<p>One example of how this might be used is to trigger different single-page navigation animations
+depending on how a certain route was reached. For example, consider a photo gallery app, where
+you can reach the same photo URL and state via various routes:</p>
+
+    <ul class="docs-list">
+      <li>Clicking on it in a gallery view</li>
+<li>Clicking</li>
+<li>&quot;next&quot; or &quot;previous&quot; when viewing another photo in the album</li>
+<li>Etc.</li>
+
+    </ul>
+    <p>Each of these wants a different animation at navigate time. This information doesn&#39;t make sense
+to store in the persistent URL or history entry state, but it&#39;s still important to communicate
+from the rest of the application, into the router.</p>
+<p>This information could be used in coordination with the View Transitions feature and the
+<code>onViewTransitionCreated</code> callback. The information might be used in the callback to set
+classes on the document in order to control the transition animations and remove the classes
+when the transition has finished animating.</p></div></div></div></div></div></div></div>

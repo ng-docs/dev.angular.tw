@@ -1,0 +1,372 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">安全</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/security.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>本主題說明 Angular 內建的防護措施，可防止常見的網路應用程式漏洞和攻擊，例如跨網站指令碼攻擊。
+它不涵蓋應用程式層級安全性，例如驗證和授權。</p>
+<p>有關以下所述的攻擊和緩解措施的更多資訊，請參閱 <a href="https://www.owasp.org/index.php/Category:OWASP_Guide_Project" target="_blank">開放式 Web 應用程式安全專案 (OWASP) 指南</a>。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3>報告漏洞</h3>
+      <p>Angular 是 Google <a href="https://bughunters.google.com/about/rules/6521337925468160/google-open-source-software-vulnerability-reward-program-rules" target="_blank">開放原始碼軟體漏洞獎勵計畫</a> 的一部分。<a href="https://bughunters.google.com/report" target="_blank">針對 Angular 中的漏洞，請在 https://bughunters.google.com 提交您的報告</a>。</p>
+<p>有關 Google 如何處理安全問題的更多資訊，請參閱 <a href="https://www.google.com/about/appsecurity" target="_blank">Google 的安全哲學</a>。</p>
+
+    </div>
+    
+  <h2 id="">最佳實務範例</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 最佳實務範例"></a>
+  <p>以下是一些最佳實務，用於確保您的 Angular 應用程式是安全的。</p>
+
+    <ol class="docs-ordered-list">
+      <li><strong>持續掌握最新的 Angular 函式庫版本</strong> - Angular 函式庫會定期更新，而這些更新可能會修復在先前版本中發現的安全漏洞。請查看 Angular <a href="https://github.com/angular/angular/blob/main/CHANGELOG.md" target="_blank">變更日誌</a>以取得與安全性相關的更新。</li>
+<li><strong>請勿變更您的 Angular 副本</strong> - 私人、自訂的 Angular 版本往往會落後於目前的版本，而且可能不包含重要的安全性修正和增強功能。您可以改為與社群分享您的 Angular 改進，並提出プルリクエスト。</li>
+<li><strong>避免使用在文件中標記為「<em>安全性風險</em>」的 Angular API</strong> - 如需更多資訊，請參閱本頁的 <a href="#信任安全值">信任安全值</a> 部分。</li>
+
+    </ol>
+    
+  <h2 id="-xss">防止跨網站指令碼 (XSS)</h2>
+  <a href="#-xss" class="docs-anchor" tabindex="-1" aria-label="Link to 防止跨網站指令碼 (XSS)"></a>
+  <p><a href="https://zh.wikipedia.org/wiki/%E8%B7%A8%E7%BD%91%E7%AB%99%E6%93%8D%E4%BB%B6" target="_blank">跨網站指令碼 (XSS)</a> 使攻擊者能夠將惡意程式碼注入網頁。
+此類程式碼之後可以，例如，竊取使用者和登入資料，或執行冒充使用者的動作。
+這是網路上最常見的攻擊之一。</p>
+<p>若要封鎖 XSS 攻擊，您必須防止惡意程式碼進入文件物件模型 (DOM)。
+例如，如果攻擊者可以誘騙您在 DOM 中插入 <code>&lt;script&gt;</code> 標籤，他們就可以在您的網站上執行任意程式碼。
+攻擊不限於 <code>&lt;script&gt;</code> 標籤，DOM 中的許多元素和屬性允許執行程式碼，例如，<code>&lt;img alt=&quot;&quot; onerror=&quot;...&quot;&gt;</code> 和 <code>&lt;a href=&quot;javascript:...&quot;&gt;</code>。
+如果攻擊者控制的數據進入 DOM，則會出現安全性漏洞。</p>
+
+  <h3 id="angular-">Angular 的跨網站腳本安全性模型</h3>
+  <a href="#angular-" class="docs-anchor" tabindex="-1" aria-label="Link to Angular 的跨網站腳本安全性模型"></a>
+  <p>為了系統性地阻止 XSS 漏洞，Angular 預設將所有值視為不可信。
+當將值從範本繫結或插補插入到 DOM 中時，Angular 會清除並轉譯不可信的值。
+如果值已在 Angular 之外清除過且被視為安全，請透過將 <a href="#trusting-safe-values">值標記為可信</a>來將此訊息傳達給 Angular。</p>
+<p>與用於渲染的值不同，Angular 範本預設被視為可信賴，應視為可執行程式碼。
+絕不要透過串接使用者輸入和範本語法來建立範本。
+這麼做會讓攻擊者能夠將 <a href="https://zh.wikipedia.org/wiki/%E7%A0%81%E7%94%A8%E5%85%A5%E5%87%BA" target="_blank">任意程式碼</a> 注入您的應用程式。
+為防止這些漏洞，在生產部署中務必始終使用預設的 <a href="#use-the-aot-template-compiler">Ahead-Of-Time (AOT) 範本編譯器</a>。</p>
+<p>可透過使用內容安全政策和信任的類型提供額外的防護層級。
+這些網路平台功能在 DOM 層級運作，這是防止 XSS 問題最有效的地方。在這裡，它們無法使用其他較低層級的 API 繞過。
+因此，強烈建議您充分利用這些功能。若要執行此操作，請為應用程式設定 <a href="#content-security-policy">內容安全政策</a> 並啟用 <a href="#enforcing-trusted-types">信任的類型強制執行</a>。</p>
+
+  <h3 id="">清理和安全性內容</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 清理和安全性內容"></a>
+  <p><em>消毒</em> 是對不受信任的數值進行檢查，將其轉換為可以安全插入 DOM 的數值。
+在許多情況下，消毒根本不會改變數值。
+消毒取決於上下文：
+在 CSS 中無害的數值在 URL 中可能很危險。</p>
+<p>Angular 定義以下安全內容：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">安全性內容</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">HTML</td>
+<td align="left">用於將值解釋為 HTML，例如，繫結到 <code>innerHtml</code> 時。</td>
+</tr>
+<tr>
+<td align="left">Style</td>
+<td align="left">用於將 CSS 繫結到 <code>style</code> 屬性時。</td>
+</tr>
+<tr>
+<td align="left">URL</td>
+<td align="left">用於 URL 屬性，例如 <code>&lt;a href&gt;</code>.</td>
+</tr>
+<tr>
+<td align="left">Resource URL</td>
+<td align="left">作為程式碼載入並執行的 URL，例如，在 <code>&lt;script src&gt;</code> 中。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>Angular 會清除 HTML、樣式和 URL 的不受信任值。清除資源 URL 不可能，因為它們包含任意程式碼。
+在開發模式中，當 Angular 在清除期間必須變更值時，它會印出主控台警告。</p>
+
+  <h3 id="">清理範例</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 清理範例"></a>
+  <p>以下範本繫結 <code>htmlSnippet</code> 的值。一次是透過將其內插到元素的內容中，另一次是透過將其繫結到元素的 <code>innerHTML</code> 屬性：</p>
+<div class="docs-code" path="adev/src/content/examples/security/src/app/inner-html-binding.component.html" header="src/app/inner-html-binding.component.html">
+    <div class="docs-code-header"><h3>src/app/inner-html-binding.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Binding innerHTML<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Bound value:<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-inner-html-interpolated"</span>&gt;</span><span class="hljs-template-variable">{{ <span class="hljs-name">htmlSnippet</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Result of binding to innerHTML:<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-inner-html-bound"</span> [<span class="hljs-attr">innerHTML</span>]=<span class="hljs-string">"htmlSnippet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>內插內容永遠是經過轉義的 &mdash;HTML 沒有被解釋，瀏覽器會在元素的文字內容中顯示尖括號。</p>
+<p>若要解釋 HTML，請將它繫結到 HTML 屬性，例如 <code>innerHTML</code>。
+請注意，將攻擊者可能會控制的值繫結到 <code>innerHTML</code> 通常會造成 XSS 漏洞。
+例如，可以透過下列方式執行 JavaScript：</p>
+<div class="docs-code" path="adev/src/content/examples/security/src/app/inner-html-binding.component.ts" visiblelines="7,8,9,10,11,12" header="src/app/inner-html-binding.component.ts (class)">
+    <div class="docs-code-header"><h3>src/app/inner-html-binding.component.ts (class)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-inner-html-binding'</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'./inner-html-binding.component.html'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InnerHtmlBindingComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-regexp">//</span> For example, a user/attacker-controlled value <span class="hljs-keyword">from</span> a URL.</div><div class="hljs-ln-line">  htmlSnippet = <span class="hljs-string">'Template &lt;script&gt;alert("0wned")&lt;/script&gt; &lt;b&gt;Syntax&lt;/b&gt;'</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>Angular 辨識值為不安全並自動清除它，這會移除 <code>script</code> 元素，但保留安全的內容，例如 <code>&lt;b&gt;</code> 元素。</p>
+<img alt="螢幕截圖顯示內插和繫結的 HTML 值" src="https://angular.dev/assets/images/guide/security/binding-inner-html.png#small">
+
+
+  <h3 id="-dom-api--sanitization-">直接使用 DOM API 和明確的 sanitization 呼叫</h3>
+  <a href="#-dom-api--sanitization-" class="docs-anchor" tabindex="-1" aria-label="Link to 直接使用 DOM API 和明確的 sanitization 呼叫"></a>
+  <p>除非您強制執行信賴類型，內建瀏覽器 DOM API 不會自動保護您免於安全漏洞。
+例如，<code>document</code>，可透過 <code>ElementRef</code> 存取的節點，以及許多第三方 API 包含不安全的函式。
+同樣地，如果您與操作 DOM 的其他函式庫互動，您可能不會具備與 Angular 插補相同的自動防護。
+避免直接與 DOM 互動，而改在可能的情況下使用 Angular 範本。</p>
+<p>對於無法避免此情況，請使用內建的 Angular 清理功能。
+使用 <a href="api/platform-browser/DomSanitizer#sanitize">DomSanitizer.sanitize</a> 方法和適當的 <code>SecurityContext</code> 清理不受信任的值。
+該函式也接受使用 <code>bypassSecurityTrust</code> &hellip; 函式標記為可信任的值，並且不會清理它們，如 <a href="#trusting-safe-values">以下所述</a>。</p>
+
+  <h3 id="">信任安全值</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 信任安全值"></a>
+  <p>有時應用程式確實需要包含可執行程式碼、顯示來自某些 URL 的 <code>&lt;iframe&gt;</code> 或建構潛在危險的 URL。
+為防止在這些情況下自動清除，請告知 Angular 您已檢查值、檢查其建立方式，並確保其安全。
+請務必小心。
+如果您信任可能惡意的值，則您會在應用程式中引入安全性漏洞。
+如有疑問，請尋求專業安全審查員。</p>
+<p>要將值標記為可信賴，請注入 <code>DomSanitizer</code> 並呼叫下列其中一個方法：</p>
+
+  <ul class="docs-list">
+    <li><code>bypassSecurityTrustHtml</code></li>
+<li><code>bypassSecurityTrustScript</code></li>
+<li><code>bypassSecurityTrustStyle</code></li>
+<li><code>bypassSecurityTrustUrl</code></li>
+<li><code>bypassSecurityTrustResourceUrl</code></li>
+
+  </ul>
+  <p>請記住，值是否安全取決於上下文，因此請選擇適合您預期值用途的正確上下文。
+想像一下，以下範本需要將網址繫結至 <code>javascript:alert(...)</code> 呼叫：</p>
+<div class="docs-code" path="adev/src/content/examples/security/src/app/bypass-security.component.html" visiblelines="2,3,4,5" header="src/app/bypass-security.component.html (URL)">
+    <div class="docs-code-header"><h3>src/app/bypass-security.component.html (URL)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Bypass Security Component<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>An untrusted URL:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-dangerous-url"</span> [<span class="hljs-attr">href</span>]=<span class="hljs-string">"dangerousUrl"</span>&gt;</span>Click me<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>A trusted URL:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-trusted-url"</span> [<span class="hljs-attr">href</span>]=<span class="hljs-string">"trustedUrl"</span>&gt;</span>Click me<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Resource URL:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Showing: <span class="hljs-template-variable">{{ <span class="hljs-name">dangerousVideoUrl</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Trusted:<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-iframe-trusted-src"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"640"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"390"</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"videoUrl"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"trusted video url"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Untrusted:<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-iframe-untrusted-src"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"640"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"390"</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"dangerousVideoUrl"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"unTrusted video url"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p>通常，Angular 會自動清除 URL、停用危險的程式碼，並在開發模式下將此動作記錄到主控台。
+若要防止此情況，請使用 <code>bypassSecurityTrustUrl</code> 呼叫將 URL 值標記為可信賴的 URL：</p>
+<div class="docs-code" path="adev/src/content/examples/security/src/app/bypass-security.component.ts" visiblelines="14,15,16,17,18,19" header="src/app/bypass-security.component.ts (trust-url)">
+    <div class="docs-code-header"><h3>src/app/bypass-security.component.ts (trust-url)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} from <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {DomSanitizer, SafeResourceUrl, SafeUrl} from <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component({</span></div><div class="hljs-ln-line">  standalone: true,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-bypass-security'</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'./bypass-security.component.html'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> <span class="hljs-title class_">BypassSecurityComponent</span> {</div><div class="hljs-ln-line">  dangerousUrl: string;</div><div class="hljs-ln-line">  trustedUrl: SafeUrl;</div><div class="hljs-ln-line">  dangerousVideoUrl!: string;</div><div class="hljs-ln-line">  videoUrl!: SafeResourceUrl;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">constructor</span>(<span class="hljs-keyword">private</span> sanitizer: DomSanitizer) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// javascript: URLs are dangerous if attacker controlled.</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// Angular sanitizes them in data binding, but you can</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// explicitly tell Angular to trust this value:</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.dangerousUrl = <span class="hljs-string">'javascript:alert("Hi there")'</span>;</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.trustedUrl = sanitizer.bypassSecurityTrustUrl(<span class="hljs-keyword">this</span>.dangerousUrl);</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.updateVideoUrl(<span class="hljs-string">'PUBnlbjZFAI'</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  updateVideoUrl(id: string) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Appending an ID to a YouTube URL is safe.</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// Always make sure to construct SafeValue objects as</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// close as possible to the input data so</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// that it's easier to check if the value is safe.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.dangerousVideoUrl = <span class="hljs-string">'https://www.youtube.com/embed/'</span> + id;</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.videoUrl = <span class="hljs-keyword">this</span>.sanitizer.bypassSecurityTrustResourceUrl(<span class="hljs-keyword">this</span>.dangerousVideoUrl);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><img alt="截圖顯示從可信賴網址建立的警示框" src="https://angular.dev/assets/images/guide/security/bypass-security-component.png#medium">
+
+<p>如果您需要將使用者輸入轉換為可信賴值，請使用元件方法。
+下列範本讓使用者輸入 YouTube 影片 ID 並在 <code>&lt;iframe&gt;</code> 中載入對應的影片。
+<code>&lt;iframe src&gt;</code> 屬性為資源 URL 安全性內容，因為不可信賴的來源可以，例如，偷渡使用者可能不知情執行的檔案下載。
+為防止此狀況，請在元件上呼叫方法來建構可信賴的影片網址，這會讓 Angular 允許繫結到 <code>&lt;iframe src&gt;</code>:</p>
+<div class="docs-code" path="adev/src/content/examples/security/src/app/bypass-security.component.html" visiblelines="7,8,9,10,11,12,13,14" header="src/app/bypass-security.component.html (iframe)">
+    <div class="docs-code-header"><h3>src/app/bypass-security.component.html (iframe)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Bypass Security Component<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>An untrusted URL:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-dangerous-url"</span> [<span class="hljs-attr">href</span>]=<span class="hljs-string">"dangerousUrl"</span>&gt;</span>Click me<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>A trusted URL:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-trusted-url"</span> [<span class="hljs-attr">href</span>]=<span class="hljs-string">"trustedUrl"</span>&gt;</span>Click me<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Resource URL:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Showing: <span class="hljs-template-variable">{{ <span class="hljs-name">dangerousVideoUrl</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Trusted:<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-iframe-trusted-src"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"640"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"390"</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"videoUrl"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"trusted video url"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Untrusted:<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-iframe-untrusted-src"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"640"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"390"</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"dangerousVideoUrl"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"unTrusted video url"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/security/src/app/bypass-security.component.ts" visiblelines="23,24,25,26,27,28,29,30" header="src/app/bypass-security.component.ts (trust-video-url)">
+    <div class="docs-code-header"><h3>src/app/bypass-security.component.ts (trust-video-url)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} from <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {DomSanitizer, SafeResourceUrl, SafeUrl} from <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component({</span></div><div class="hljs-ln-line">  standalone: true,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-bypass-security'</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'./bypass-security.component.html'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> <span class="hljs-title class_">BypassSecurityComponent</span> {</div><div class="hljs-ln-line">  dangerousUrl: string;</div><div class="hljs-ln-line">  trustedUrl: SafeUrl;</div><div class="hljs-ln-line">  dangerousVideoUrl!: string;</div><div class="hljs-ln-line">  videoUrl!: SafeResourceUrl;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">constructor</span>(<span class="hljs-keyword">private</span> sanitizer: DomSanitizer) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// javascript: URLs are dangerous if attacker controlled.</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// Angular sanitizes them in data binding, but you can</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// explicitly tell Angular to trust this value:</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.dangerousUrl = <span class="hljs-string">'javascript:alert("Hi there")'</span>;</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.trustedUrl = sanitizer.bypassSecurityTrustUrl(<span class="hljs-keyword">this</span>.dangerousUrl);</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.updateVideoUrl(<span class="hljs-string">'PUBnlbjZFAI'</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  updateVideoUrl(id: string) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Appending an ID to a YouTube URL is safe.</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// Always make sure to construct SafeValue objects as</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// close as possible to the input data so</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// that it's easier to check if the value is safe.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.dangerousVideoUrl = <span class="hljs-string">'https://www.youtube.com/embed/'</span> + id;</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.videoUrl = <span class="hljs-keyword">this</span>.sanitizer.bypassSecurityTrustResourceUrl(<span class="hljs-keyword">this</span>.dangerousVideoUrl);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="">內容安全性政策</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 內容安全性政策"></a>
+  <p>內容安全性政策 (CSP) 是一種防禦深度技術，用於防止 XSS。
+若要啟用 CSP，請將您的網路伺服器設定為傳回適當的 <code>Content-Security-Policy</code> HTTP 標頭。
+在 Google Developers 網站上閱讀 <a href="https://developers.google.com/web/fundamentals/security/csp" target="_blank">Web Fundamentals 指南</a> 以進一步瞭解內容安全性政策。</p>
+<p>新 Angular 應用程式所需的最小政策是：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">default-src 'self'; style-src 'self' 'nonce-randomNonceGoesHere'; script-src 'self' 'nonce-randomNonceGoesHere';</div></code>
+    </pre>
+  </div><p>在提供 Angular 應用程式時，伺服器應在每個要求的 HTTP 標頭中隨機產生一個一次性密碼。
+您必須將此一次性密碼提供給 Angular，以便架構可以呈現 <code>&lt;style&gt;</code> 元素。
+您可以透過下列兩種方式之一為 Angular 設定一次性密碼：</p>
+
+    <ol class="docs-ordered-list">
+      <li>在根應用程式元素上設定 <code>ngCspNonce</code> 屬性，例如 <code>&lt;app ngCspNonce=&quot;randomNonceGoesHere&quot;&gt;&lt;/app&gt;</code>. 如果您可以使用伺服器端範本，則在建構回應時，可以在標頭和 <code>index.html</code> 中新增雜湊值，請採用此方法。</li>
+<li>使用 <code>CSP_NONCE</code> 注入程式碼提供雜湊值。如果您在執行階段可以存取雜湊值，而且想要快取 <code>index.html</code>，請採用此方法。</li>
+
+    </ol>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {bootstrapApplication, <span class="hljs-variable constant_">CSP_NONCE</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">AppComponent</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'./app/app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">AppComponent</span>, {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{</div><div class="hljs-ln-line">    <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">CSP_NONCE</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">useValue</span>: globalThis.<span class="hljs-property">myRandomNonceValue</span></div><div class="hljs-ln-line">  }]</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-helpful">
+      <h3>獨特的 nonce</h3>
+      <p>請務必確保您提供的權杖是<strong>每個請求唯一</strong>，且無法預測或猜測。
+如果攻擊者可以預測未來的權杖，他們就可以規避 CSP 提供的防護。</p>
+
+    </div>
+    <p>如果您無法在專案中產生雜湊值，您可以透過將 <code>&#39;unsafe-inline&#39;</code> 新增至 CSP 標頭的 <code>style-src</code> 區段，來允許內嵌樣式。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">段落</th>
+<th align="left">詳細資料</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>default-src &#39;self&#39;;</code></td>
+<td align="left">允許頁面從相同的來源載入所有必要的資源。</td>
+</tr>
+<tr>
+<td align="left"><code>style-src &#39;self&#39; &#39;nonce-randomNonceGoesHere&#39;;</code></td>
+<td align="left">允許頁面從相同的來源 (<code>&#39;self&#39;</code>) 載入全域樣式，並使用 <code>nonce-randomNonceGoesHere</code> 載入 Angular 插入的樣式。</td>
+</tr>
+<tr>
+<td align="left"><code>script-src &#39;self&#39; &#39;nonce-randomNonceGoesHere&#39;;</code></td>
+<td align="left">允許頁面從相同的來源 (<code>&#39;self&#39;</code>) 載入 JavaScript，並使用 <code>nonce-randomNonceGoesHere</code> 載入 Angular CLI 插入的腳本。僅在您使用關鍵 CSS 內聯時需要。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>Angular 本身僅需要這些設定即可正確運作。</p>
+<p>隨著專案成長，您可能需要擴充 CSP 設定以容納應用程式特有的額外功能。</p>
+
+  <h3 id="">強制執行信任的類型</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 強制執行信任的類型"></a>
+  <p>建議您使用 <a href="https://w3c.github.io/trusted-types/dist/spec/" target="_blank">Trusted Types</a> 作為保護您的應用程式免受跨網站指令碼攻擊的一種方式。
+Trusted Types 是 <a href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E7%AB%99%E5%B9%B3%E5%8F%B0" target="_blank">網頁平台</a> 功能，可透過強制執行更安全的編碼實務來幫助您防止跨網站指令碼攻擊。
+Trusted Types 亦可協助簡化應用程式程式碼的稽核。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3>可信類型</h3>
+      <p>Trusted Types 可能尚未在您的應用程式所鎖定的所有瀏覽器中提供。
+如果您的啟用 Trusted-Types 的應用程式在不支援 Trusted Types 的瀏覽器中執行，應用程式的功能會被保留。您的應用程式會透過 Angular 的 DomSanitizer 來防範 XSS。
+請參閱 <a href="https://caniuse.com/trusted-types" target="_blank">caniuse.com/trusted-types</a> 以了解目前的瀏覽器支援狀況。</p>
+
+    </div>
+    <p>若要為您的應用程式強制執行信任的類型，您必須將應用程式的網路伺服器設定為發出具有下列其中一個 Angular 政策的 HTTP 標頭：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">政策</th>
+<th align="left">詳細</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>angular</code></td>
+<td align="left">此政策用於 Angular 內部的安全性審核程式碼，並且在強制執行受信任類型時，Angular 需要此政策才能運作。Angular 消毒的任何內聯範本值或內容都視為此政策的安全。</td>
+</tr>
+<tr>
+<td align="left"><code>angular#unsafe-bypass</code></td>
+<td align="left">此政策用於使用 Angular 的 <a href="api/platform-browser/DomSanitizer">DomSanitizer</a> 中任何會繞過安全性方法的應用程式，例如 <code>bypassSecurityTrustHtml</code>。任何使用這些方法的應用程式都必須啟用此政策。</td>
+</tr>
+<tr>
+<td align="left"><code>angular#unsafe-jit</code></td>
+<td align="left">此政策由 <a href="api/core/Compiler">即時 (JIT) 編譯器</a> 使用。如果您的應用程式直接與 JIT 編譯器互動，或是使用 <a href="api/platform-browser-dynamic/platformBrowserDynamic">動態平台瀏覽器</a> 在 JIT 模式下執行，則必須啟用此政策。</td>
+</tr>
+<tr>
+<td align="left"><code>angular#bundler</code></td>
+<td align="left">建立延遲區塊檔案時，Angular CLI 捆綁器會使用此政策。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p>你應該在以下位置設定 Trusted Types 的 HTTP 標頭：</p>
+
+  <ul class="docs-list">
+    <li>生產服務基礎架構</li>
+<li>Angular CLI (<code>ng serve</code>)，使用 <code>angular.json</code> 檔案中的 <code>headers</code> 屬性，用於本地端開發和端對端測試</li>
+<li>Karma (<code>ng test</code>)，使用 <code>karma.config.js</code> 檔案中的 <code>customHeaders</code> 屬性，用於單元測試</li>
+
+  </ul>
+  <p>以下是一個特別為 Trusted Types 和 Angular 所配置的標題範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Content-Security-Policy: trusted-types angular; require-trusted-types-for 'script';</div></code>
+    </pre>
+  </div><p>一個特別為 Trusted Types 和使用任何 Angular 方法的 Angular 應用程式配置的標題範例，這些方法在 <a href="api/platform-browser/DomSanitizer">DomSanitizer</a> 中並繞過安全性：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Content-Security-Policy: trusted-types angular angular#unsafe-bypass; require-trusted-types-for 'script';</div></code>
+    </pre>
+  </div><p>以下是一個專門為使用 JIT 的 Trusted Types 和 Angular 應用程式設定的標頭範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Content-Security-Policy: trusted-types angular angular#unsafe-jit; require-trusted-types-for 'script';</div></code>
+    </pre>
+  </div><p>以下是一個專為 Trusted Types 和使用模組延遲載入的 Angular 應用程式所配置的標頭範例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Content-Security-Policy: trusted-types angular angular#bundler; require-trusted-types-for 'script';</div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-helpful">
+      <h3>社群貢獻</h3>
+      <p>若要進一步了解 Trusted Type 組態的疑難排解，下列資源可能會有幫助：</p>
+<p><a href="https://web.dev/trusted-types/#how-to-use-trusted-types" target="_blank">防止使用值得信賴的類型來進行基於 DOM 的跨網站腳本漏洞</a></p>
+
+    </div>
+    
+  <h3 id="-aot-">使用 AOT 範本編譯器</h3>
+  <a href="#-aot-" class="docs-anchor" tabindex="-1" aria-label="Link to 使用 AOT 範本編譯器"></a>
+  <p>AOT 模板編譯器可防止稱為模板注入的各種漏洞，並大幅提升應用程式效能。
+AOT 模板編譯器是 Angular CLI 應用程式使用的預設編譯器，您應在所有製作部署中使用它。</p>
+<p>AOT 編譯器的另一種選擇是 JIT 編譯器，它會在瀏覽器中於執行階段將範本編譯成可執行範本程式碼。
+Angular 信任範本程式碼，因此動態產生範本並編譯它們，尤其是包含使用者資料的範本，會迴避 Angular 的內建防護。這是一種安全性反樣式。
+如需有關以安全方式動態建構表單的資訊，請參閱 <a href="guide/forms/dynamic-forms">動態表單</a> 指南。</p>
+
+  <h3 id="-xss-">伺服器端 XSS 保護</h3>
+  <a href="#-xss-" class="docs-anchor" tabindex="-1" aria-label="Link to 伺服器端 XSS 保護"></a>
+  <p>HTML 在伺服器上建構容易受到注入攻擊。
+將範本程式碼注入 Angular 應用程式等同於將可執行程式碼注入應用程式：
+這會讓攻擊者完全控制應用程式。
+為了防止這種情況，請使用會自動跳脫值以防止伺服器上的 XSS 弱點的範本語言。
+請勿使用範本語言在伺服器端建立 Angular 範本。這會帶來引入範本注入弱點的高風險。</p>
+
+  <h2 id="http-">HTTP 層級漏洞</h2>
+  <a href="#http-" class="docs-anchor" tabindex="-1" aria-label="Link to HTTP 層級漏洞"></a>
+  <p>Angular 具備內建支援，可協助防止兩種常見的 HTTP 弱點，包括跨網站請求偽造 (CSRF 或 XSRF) 與跨網站指令碼包含 (XSSI)。
+這兩種問題都必須主要在伺服器端減輕，但 Angular 提供了輔助工具，讓用戶端更容易整合。</p>
+
+  <h3 id="">跨網站請求偽造</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 跨網站請求偽造"></a>
+  <p>在跨網站請求偽造 (CSRF 或 XSRF) 中，攻擊者誘騙使用者造訪包含惡意程式碼的不同網頁 (例如 <code>evil.com</code>)。此網頁秘密地將惡意要求傳送至應用程式的網路伺服器 (例如 <code>example-bank.com</code>)。</p>
+<p>假設使用者已登入 <code>example-bank.com</code> 的應用程式。
+使用者開啟一封電子郵件，並點擊連結至 <code>evil.com</code>，它會在新分頁中開啟。</p>
+<p><code>evil.com</code> 頁面立即將惡意要求傳送至 <code>example-bank.com</code>。
+這可能是一筆要求將款項從使用者帳戶轉移至攻擊者帳戶。
+瀏覽器會自動將 <code>example-bank.com</code> Cookie (包括驗證 Cookie) 與此要求一同傳送。</p>
+<p>如果 <code>example-bank.com</code> 伺服器缺乏 XSRF 保護，它就無法辨別來自應用程式的合法請求與來自 <code>evil.com</code> 的偽造請求之間的差異。</p>
+<p>為防止此情況，應用程式必須確保使用者要求來自真實應用程式，而非其他網站。
+伺服器和用戶端必須合作以阻止此攻擊。</p>
+<p>在常見的反 XSRF 技術中，應用程式伺服器會在 cookie 中傳送一個隨機建立的驗證權杖。
+用戶端程式碼會讀取 cookie，並在所有後續請求中加入一個含有權杖的客製化請求標頭。
+伺服器會將接收到的 cookie 值與請求標頭值進行比對，如果值遺失或不匹配，則拒絕請求。</p>
+<p>此技術有效，因為所有瀏覽器都實施「同源政策」。
+只有設定 Cookie 的網站上的程式碼才能讀取該網站的 Cookie，並在對該網站的請求上設定自訂標頭。
+這表示只有您的應用程式可以讀取此 Cookie 令牌並設定自訂標頭。<code>evil.com</code> 上的惡意程式碼無法做到這一點。</p>
+<p>Angular 的 <code>HttpClient</code> 內建支援此技巧的用戶端端。
+在 <a href="/guide/http/security#xsrf-csrf-protection">HttpClient 指南</a> 中閱讀更多相關資訊。</p>
+<p>有關開放網路應用程式安全專案 (OWASP) 中的 CSRF 資訊，請參閱 <a href="https://owasp.org/www-community/attacks/csrf" target="_blank">跨網站要求偽造 (CSRF)</a> 和 <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html" target="_blank">跨網站要求偽造 (CSRF) 防護備忘清單</a>。
+史丹佛大學論文 <a href="https://seclab.stanford.edu/websec/csrf/csrf.pdf" target="_blank">跨網站要求偽造的強大防禦</a> 是豐富的詳細資訊來源。</p>
+<p>另請參閱 Dave Smith 在 AngularConnect 2016 上的 XSRF 演講 (<a href="https://www.youtube.com/watch?v=9inczw6qtpY" target="_blank">https://www.youtube.com/watch?v=9inczw6qtpY</a> &quot;跨網站請求偽造保護您的 Angular 應用免受惡意攻擊&quot;)。</p>
+
+  <h3 id="-xssi">跨網站腳本包含 (XSSI)</h3>
+  <a href="#-xssi" class="docs-anchor" tabindex="-1" aria-label="Link to 跨網站腳本包含 (XSSI)"></a>
+  <p>跨網站指令碼包含，也稱為 JSON 漏洞，允許攻擊者的網站從 JSON API 讀取資料。
+此攻擊適用於舊版瀏覽器，方法是覆寫內建的 JavaScript 物件建構函式，然後使用 <code>&lt;script&gt;</code> 標籤包含 API URL。</p>
+<p>只有當回傳的 JSON 可用 JavaScript 執行時，此攻擊才會成功。
+伺服器可以透過加入字首至所有 JSON 回應，以使其無法執行，依慣例，使用廣為人知的字串 <code>&quot;)]}&#39;,\n&quot;</code> 來防止攻擊。</p>
+<p>Angular 的 <code>HttpClient</code> 函式庫辨識此慣例，並在進一步剖析之前，自動將字串 <code>&quot;)]}&#39;,\n&quot;</code> 從所有回應中移除。</p>
+<p>更多資訊，請參閱此 <a href="https://security.googleblog.com/2011/05/website-security-for-webmasters.html" target="_blank">Google 網路安全網誌文章</a> 的 XSSI 部分。</p>
+
+  <h2 id="-angular-">稽核 Angular 應用程式</h2>
+  <a href="#-angular-" class="docs-anchor" tabindex="-1" aria-label="Link to 稽核 Angular 應用程式"></a>
+  <p>Angular 應用程式必須遵循與一般網路應用程式相同的安全性原則，並必須以這種方式進行稽核。
+在安全性檢閱中應該稽核的 Angular 特定 API，例如 <a href="#trusting-safe-values"><em>bypassSecurityTrust</em></a> 方法，在文件中標記為安全性敏感。</p>

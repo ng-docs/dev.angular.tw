@@ -1,0 +1,85 @@
+
+    <header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+      
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">預先渲染 (SSG)</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/prerendering.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p>預先渲染，通常稱為靜態網站產生 (SSG)，代表在建置過程中將頁面渲染成靜態 HTML 檔案的方法。</p>
+<p>預先渲染維持與 <a href="guide/ssr#why-use-server-side-rendering">伺服器端渲染 (SSR)</a> 相同的效能優勢，但減少了首次位元組時間 (TTFB)，最終提升使用者體驗。其關鍵區別在於它的方法，頁面以靜態內容提供，且沒有基於要求的渲染。</p>
+<p>當伺服器端渲染所需要的資料在所有使用者間保持一致時，預先渲染的策略便成為有價值的替代方案。預先渲染採取主動方式，在每個使用者要求之前就先渲染頁面，而不是動態地渲染。</p>
+
+  <h2 id="">如何預先呈示頁面</h2>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 如何預先呈示頁面"></a>
+  <p>若要預先呈現靜態頁面，請使用以下 Angular CLI 指令為應用程式新增 SSR 功能：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng add @angular/ssr</div></code>
+    </pre>
+  </div><div class="alert is-helpful">
+
+<p>要從一開始就建立具有預先呈現功能的應用程式，請使用 <a href="tools/cli/setup-local"><code>ng new --ssr</code></a> 指令。</p>
+</div>
+
+<p>一旦加入 SSR，您可以藉由執行建置指令來產生靜態頁面：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build</div></code>
+    </pre>
+  </div>
+  <h3 id="prerender-">Prerender 的建置選項</h3>
+  <a href="#prerender-" class="docs-anchor" tabindex="-1" aria-label="Link to Prerender 的建置選項"></a>
+  <p>應用程式建構器 <code>prerender</code> 選項可以是布林值或用於更精細調整設定的物件。
+當選項為 <code>false</code> 時，不會進行任何預先渲染。當選項為 <code>true</code> 時，所有選項都使用預設值。當選項為物件時，每個選項都可以個別設定。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">選項</th>
+<th align="left">詳細資料</th>
+<th align="left">預設值</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>discoverRoutes</code></td>
+<td align="left">是否由 Builder 處理 Angular Router 組態，以尋找所有未參數化的路徑並預先呈現。</td>
+<td align="left"><code>true</code></td>
+</tr>
+<tr>
+<td align="left"><code>routesFile</code></td>
+<td align="left">包含所有要預先呈現的路徑清單之檔案路徑，以換行符號分隔。此選項適用於要預先呈現具有參數化 URL 的路徑。</td>
+<td align="left"></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"my-app"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:application"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"prerender"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">              <span class="hljs-attr">"discoverRoutes"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span></div><div class="hljs-ln-line">            <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">          <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <h3 id="">預先渲染參數化路由</h3>
+  <a href="#" class="docs-anchor" tabindex="-1" aria-label="Link to 預先渲染參數化路由"></a>
+  <p>你可以使用 <code>routesFile</code> 選項預先呈現參數化的路由。參數化路由的範例為 <code>product/:id</code>，其中 <code>id</code> 是動態提供的。若要指定這些路由，應將它們列在文字檔案中，每條路由佔一行。</p>
+<p>對於具有大量參數化路由的應用程式，請考慮在執行 <code>ng build</code> 之前使用腳本來產生此檔案。</p>
+<div class="docs-code" header="routes.txt">
+    <div class="docs-code-header"><h3>routes.txt</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">/products/1</div><div class="hljs-ln-line">/products/555</div></code>
+    </pre>
+  </div><p>使用 <code>routes.txt</code> 檔案中指定的路由，使用 <code>routesFile</code> 選項來設定建構器以預先呈現產品路由。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"my-app"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:application"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"prerender"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">              <span class="hljs-attr">"routesFile"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"routes.txt"</span></div><div class="hljs-ln-line">            <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">          <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p>這會將 <code>ng build</code> 配置為在建置時預先呈現 <code>/products/1</code> 和 <code>/products/555</code>。</p>
