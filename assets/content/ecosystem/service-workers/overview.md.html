@@ -1,0 +1,125 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="rqki0i3nijwhr2jschzkatxv">Angular Service Worker 概述</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/ecosystem/service-workers/overview.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="345y1fx62req4thhssylossjs">Service Worker 增强了传统的 Web 部署模型，使应用能够提供媲美操作系统和硬件上运行的代码的可靠性和性能。 添加 Service Worker 到 Angular 应用是将应用变成
+<a href="https://web.dev/progressive-web-apps/" target="_blank">渐进式 Web 应用</a>（也称为 PWA）的步骤之一。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7lz37fhq89j237yc6b926q0m6">简单来说，Service Worker 就是一段运行在 Web 浏览器中，并为应用管理缓存的脚本。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="edo9cfg6asy9ob8mg81himybi">Service Worker 的功能就像一个网络代理。它们会拦截所有由应用发出的 HTTP 请求，并选择如何给出响应。比如，它们可以查询局部缓存，如果有缓存的响应数据，就用它做出响应。这种代理行为不会局限于通过程序调用 API（比如 <code>fetch</code>）发起的请求，还包括 HTML 中对资源的引用，甚至对 <code>index.html</code> 的首次请求。基于 Service Worker 的缓存是完全可编程的，并且不依赖于服务端指定的那些控制缓存策略的头。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bothubejt9fayj1j0mhdsukqh">不像应用中的其它脚本（如 Angular 的应用包），Service Worker 在用户关闭浏览器页标签时仍然会被保留。下次浏览器加载本应用时，Service Worker 会首先加载，然后拦截加载本应用时的对每一项资源的请求。如果这个 Service Worker 就是为此而设计的，它就能<em>完全满足应用加载时的需求，而不需要依赖网络</em>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6zj6vrzlpjw01kuqje20lpo41">即使在快速可靠的网络中，往返延迟也可能在加载应用程序时产生显著的延迟。使用 Service Worker 来减少对网络的依赖可以显著改善用户体验。</p>
+
+  <h2 id="service-workers-in-angular">
+    <a href="#service-workers-in-angular" class="docs-anchor" tabindex="-1" aria-label="Link to Service workers in Angular" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="710ds2h0tru0c4kiixhs9s64b">Angular 中的 Service Worker</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1l3payu6l7knmg5ox63cy06ov">作为单页面应用程序，Angular 应用程序处于服务工作者优势的最佳位置。Angular 随附有服务工作者实现。Angular 开发人员可以利用这个服务工作者，从中获得提高的可靠性和性能，而无需编写针对底层 API 的代码。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9oy05jvwnfpr6arldgeokhrh2">Angular 的 Service Worker 的设计目标是优化那些使用慢速、不可靠网络的最终用户的体验，同时还要尽可能减小提供过期内容的风险。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4c5jvhj821vgpitgtw0iu8w5a">为了达成此目标，Angular Service Worker 的行为遵循下列设计原则：</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_ref_id="bw0kq13yawd00x03m071khbw4">缓存应用程序就像安装本机应用程序一样。 应用程序作为一个单位进行缓存，所有文件一起更新。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="8x8cclk6rrcntz6ssu00dlyfo">运行中的应用程序将继续以相同版本的所有文件运行。 它不会突然开始接收来自更新版本的缓存文件，这些文件可能是不兼容的。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="azk9pwpldcexirvdzb91hvy6t">当用户刷新应用程序时，他们会看到最新的完全缓存的版本。 新标签页加载最新的缓存代码。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="t1qlfzv19xoezy5bh6ax3g4w">更新在发布更改后相对快速地在后台进行。 在安装并准备好更新之前，应用程序的先前版本将被提供。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="cfmzjvpsfe51xpzvtikg81g4g">服务工作者尽可能节省带宽。 只有在资源发生更改时才会下载资源。</p>
+</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4kubu6c70z3szhjji9lcg8lwb">为了支持这些行为，Angular service worker 从服务器加载一个
+<em>清单</em>文件。该文件名为 
+<code>ngsw.json</code>（不要与 
+<a href="https://developer.mozilla.org/docs/Web/Manifest" target="_blank">web 应用清单</a> 混淆），描述了要缓存的资源并包括每个文件内容的哈希。当应用的更新被部署时，清单的内容会发生变化，通知 service worker 应下载并缓存应用的新版本。此清单是从名为 
+<code>ngsw-config.json</code> 的 CLI 生成的配置文件生成的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="191w7b67hqu66gjuxejflx86f">安装 Angular service worker 就像
+<a href="ecosystem/service-workers/getting-started#adding-a-service-worker-to-your-project">运行一个 Angular CLI 命令</a>一样简单。除了向浏览器注册 Angular service worker 外，这还会使一些可注入的服务可用，这些服务与 service worker 交互，并可用于控制它。例如，应用可以请求在有新更新可用时通知，或应用可以请求 service worker 检查服务器是否有可用的更新。</p>
+
+  <h2 id="before-you-start">
+    <a href="#before-you-start" class="docs-anchor" tabindex="-1" aria-label="Link to Before you start" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bbossh7vx2ror6vc5vf0vmw5a">开始之前</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8i78bp4fy6080w75unob0fid6">要充分利用 Angular 服务工作者的所有功能，请使用最新版本的 Angular 和 
+<a href="tools/cli">Angular CLI</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="baidqwaylokdfppqusuwn04zz">要注册 Service Worker，必须通过 HTTPS 而非 HTTP 访问该应用程序。浏览器会忽略通过不安全连接访问的页面上的 Service Worker。原因是 Service Worker 非常强大，因此需要格外小心，以确保 Service Worker 的脚本未被篡改。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1nxs7o2r5dtov15vcy2yjr9ip">这条规则有一个例外：为了方便本地开发，当访问 <code>localhost</code> 上的应用时，浏览器<em>不</em>要求安全连接。</p>
+
+  <h3 id="browser-support">
+    <a href="#browser-support" class="docs-anchor" tabindex="-1" aria-label="Link to Browser support" data-ng_translator_product="100" data-ng_translator_ref_id="4kdi5razdf2rr2s146m9cpxqe">浏览器支持</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f1geu4xsjg9juavguha1ya06c">要从 Angular Service Worker 中受益，你的应用必须在支持 Service Worker 的 Web 浏览器中运行。当前，最新版本的 Chrome，Firefox，Edge，Safari，Opera，UC 浏览器（Android 版）和 Samsung Internet 支持 Service Worker。而 IE 和 Opera Mini 等浏览器不支持 Service Worker。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1ko25vlaz56idtdbtyhtm742a">如果用户通过不支持 Service Worker 的浏览器访问你的应用程序，则该 Service Worker 不会注册，并且不会发生相关行为，比如脱机缓存管理和推送通知。进一步来说：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="azmreq7rov08wecnek7j2t634">浏览器不会下载 Service Worker 脚本和 <code>ngsw.json</code> 清单文件。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="3en1fstbwhcdbnnt69thi5fd2">与服务工作者进行交互的主动尝试，例如调用 
+<code>SwUpdate.checkForUpdate()</code>，会返回拒绝的承诺</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="7zgaxraj7wtqw8qp6vs7khkeh">相关服务的可观察事件，例如 
+<code>SwUpdate.available</code>，不会触发</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ep7bh74g6ceaqfffe2dg7h6h0">强烈建议确保即使在浏览器不支持服务工作者的情况下，应用程序仍能正常运行。 尽管不受支持的浏览器会忽略服务工作者缓存，但如果应用程序尝试与服务工作者交互，它仍会报告错误。 例如，调用 
+<code>SwUpdate.checkForUpdate()</code> 会返回拒绝的承诺。 为了避免这种错误，请使用 
+<code>SwUpdate.isEnabled</code> 检查 Angular 服务工作者是否已启用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="52qd2v6cwatyv48ftob3zifnk">要了解其他支持服务工作者的浏览器，请参阅 
+<a href="https://caniuse.com/#feat=serviceworkers" target="_blank">Can I Use</a> 页面和 
+<a href="https://developer.mozilla.org/docs/Web/API/Service_Worker_API" target="_blank">MDN 文档</a>。</p>
+
+  <h2 id="related-resources">
+    <a href="#related-resources" class="docs-anchor" tabindex="-1" aria-label="Link to Related resources" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e69igq8a2xsab77xsoqacateg">相关资源</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8wtp2ock1z28kah31dhqr03o9">本节中的其余文章专门针对 Service Worker 的 Angular 实现。</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="ecosystem/service-workers/config" data-ng_translator_product="100" data-ng_translator_ref_id="eecazk2kc60u3i9t9iml06tlw">配置文件</a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/communications" data-ng_translator_product="100" data-ng_translator_ref_id="8yc3zafldwi6g1hcldyi9y5j4">与 Service Worker 通信</a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/push-notifications" data-ng_translator_product="100" data-ng_translator_ref_id="b1fmcvag2ldn478spoka7jbb3">推送通知</a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/devops" data-ng_translator_product="100" data-ng_translator_ref_id="7q4y6g2v52ulz6wah6v8ethrc">Service Worker 运维</a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/app-shell" data-ng_translator_product="100" data-ng_translator_ref_id="e7neo7hglt9vgfi3n26lq7t9b">应用外壳模式</a>
+    
+
+    </nav>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7axdbi8u4344bggxe22iv2kab">有关服务工作者的更多信息，请参阅 
+<a href="https://developers.google.com/web/fundamentals/primers/service-workers" target="_blank">Service Workers: an Introduction</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3c8pz5kazbo5wfupddbp07ciq">有关浏览器支持的更多信息，请参见
+<a href="https://developers.google.com/web/fundamentals/primers/service-workers/#browser_support" target="_blank">浏览器支持</a>部分的
+<a href="https://developers.google.com/web/fundamentals/primers/service-workers" target="_blank">Service Workers: an Introduction</a>，Jake Archibald 的
+<a href="https://jakearchibald.github.io/isserviceworkerready" target="_blank">Is Serviceworker ready?</a>和
+<a href="https://caniuse.com/serviceworkers" target="_blank">Can I Use</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="45u3qlmptdvepsf3s5wqucnpw">关于其它建议和范例，请参阅：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="https://web.dev/precaching-with-the-angular-service-worker" target="_blank" data-ng_translator_product="100" data-ng_translator_ref_id="4cjqrpkzmwptptdv3njeovko5">使用 Angular Service Worker 进行预缓存
+<docs-icon class="docs-icon-small">
+ open_in_new
+</docs-icon></a>
+    
+    <a class="docs-pill" href="https://web.dev/creating-pwa-with-angular-cli" target="_blank" data-ng_translator_product="100" data-ng_translator_ref_id="5cza1x0lji109853h72pnx48d">使用 Angular CLI 创建 PWA
+<docs-icon class="docs-icon-small">
+ open_in_new
+</docs-icon></a>
+    
+
+    </nav>
+    
+  <h2 id="next-step">
+    <a href="#next-step" class="docs-anchor" tabindex="-1" aria-label="Link to Next step" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bio9f6q0dnpxej0ntev8d0cqg">下一步</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dxumjz2q2u5xds3gaxvp7gngb">使用 Angular 服务工作者的开始，请参见 
+<a href="ecosystem/service-workers/getting-started">开始使用服务工作者</a>。</p>

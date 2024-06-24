@@ -1,0 +1,153 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/animations</span><div class="docs-reference-title"><div><h1>trigger</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/animations/src/animation_metadata.ts#L610-L612" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="agqnc4sc5ns3mj9fv5hre74a8">创建一个命名的动画触发器，其中包含一些 
+<a href="api/animations/state"><code>state()</code></a> 和 
+<code>transition()</code> 条目，当绑定到触发器的表达式发生变化时，这些条目将被求值。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">trigger</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>,</div><div class="hljs-ln-line ">  <span class="hljs-attr">definitions</span>: <span class="hljs-title class_">AnimationMetadata</span>[]</div><div class="hljs-ln-line ">): <span class="hljs-title class_">AnimationTriggerMetadata</span>;</div></code></pre></div></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="3l2u8utvlb2k58v31752gb92c">在 
+<code>@Component</code> 元数据的 
+<code>animations</code> 部分定义一个动画触发器。在模板中，通过名称引用此触发器，并将其绑定到一个触发器表达式，该表达式求解为定义的动画状态，使用以下格式：</p>
+<p><code>[@triggerName]="expression"</code></p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bq52lypv18l59za2o8vmoesc2">动画触发器绑定会将所有值转换为字符串，然后将前后的值与任何关联的过渡进行匹配。布尔值可以指定为 
+<code>1</code> 或 
+<code>true</code> 和 
+<code>0</code> 或 
+<code>false</code>。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bd3vd8vxy41v7yl7s57o2kdph">使用示例</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6xc6tsd37suwobck5u1tvbcbs">下面的例子使用指定的名字创建了一个动画触发器的引用。
+此动画的值应该是一个由状态声明和转场声明组成的数组。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">"my-component"</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">"my-component-tpl.html"</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">animations</span>: [</span><span class="hljs-ln-line">    <span class="hljs-title function_">trigger</span>(<span class="hljs-string">"myAnimationTrigger"</span>, [</span><span class="hljs-ln-line">      <span class="hljs-title function_">state</span>(...),</span><span class="hljs-ln-line">      <span class="hljs-title function_">state</span>(...),</span><span class="hljs-ln-line">      <span class="hljs-title function_">transition</span>(...),</span><span class="hljs-ln-line">      <span class="hljs-title function_">transition</span>(...)</span><span class="hljs-ln-line">    ])</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</span><span class="hljs-ln-line">  myStatusExp = <span class="hljs-string">"something"</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3pcqbp1osz3ognqro5fb452zn">该组件的相关模板通过在代码中把一个已定义的触发器绑定到一个元素上来使用此动画。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">&lt;!-- somewhere inside of my-component-tpl.html --&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> [@<span class="hljs-attr">myAnimationTrigger</span>]=<span class="hljs-string">"myStatusExp"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3dwbzubroeblpy8bj0nq6drt8">使用内联函数</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2g879f9e4kujpsvool8k544uk"><code>transition</code> 动画方法还支持读取一个内联函数，该函数可以决定其关联的动画是否应该运行。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// this method is run each time the `myAnimationTrigger` trigger value changes.</span></span><span class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">myInlineMatcherFn</span>(<span class="hljs-params">fromState: <span class="hljs-built_in">string</span>, toState: <span class="hljs-built_in">string</span>, element: <span class="hljs-built_in">any</span>, params: {[key:</span><span class="hljs-ln-line"><span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>}</span>): <span class="hljs-built_in">boolean</span> {</span><span class="hljs-ln-line">  <span class="hljs-comment">// notice that `element` and `params` are also available here</span></span><span class="hljs-ln-line">  <span class="hljs-keyword">return</span> toState == <span class="hljs-string">'yes-please-animate'</span>;</span><span class="hljs-ln-line">}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'my-component-tpl.html'</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">animations</span>: [</span><span class="hljs-ln-line">    <span class="hljs-title function_">trigger</span>(<span class="hljs-string">'myAnimationTrigger'</span>, [</span><span class="hljs-ln-line">      <span class="hljs-title function_">transition</span>(myInlineMatcherFn, [</span><span class="hljs-ln-line">        <span class="hljs-comment">// the animation sequence code</span></span><span class="hljs-ln-line">      ]),</span><span class="hljs-ln-line">    ])</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</span><span class="hljs-ln-line">  myStatusExp = <span class="hljs-string">"yes-please-animate"</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3rhdfpc9uhouv4q2pwy2a6ctv">禁用动画</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bsz1soespce6mwdeqd8yzxcbi">当为真时，则一个特殊的动画控制绑定 <code>@.disabled</code> 将会在渲染时阻止所有动画。
+把 <code>@.disabled</code> 绑定放在元素上可以防止触发该元素自身的动画，及其子元素上的所有动画触发器。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dgbckvyob5lrha6rebwzf4lml">下面的例子展示了如何使用此特性：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span><span class="hljs-ln-line">    &lt;div [@.disabled]="isDisabled"&gt;</span><span class="hljs-ln-line">      &lt;div [@childAnimation]="exp"&gt;&lt;/div&gt;</span><span class="hljs-ln-line">    &lt;/div&gt;</span><span class="hljs-ln-line">  `</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">animations</span>: [</span><span class="hljs-ln-line">    <span class="hljs-title function_">trigger</span>(<span class="hljs-string">"childAnimation"</span>, [</span><span class="hljs-ln-line">      <span class="hljs-comment">// ...</span></span><span class="hljs-ln-line">    ])</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</span><span class="hljs-ln-line">  isDisabled = <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">  exp = <span class="hljs-string">'...'</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="c4dlas485zi7hyv1pg65hq815">当 
+<code>@.disabled</code> 为 true 时，它会阻止 
+<code>@childAnimation</code> 触发器以及任何内部动画。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ndvzgub1cr4mr3j2ty0jd82z">在整个应用中禁用动画</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e06g34tx8bgelq02yv7qibcir">当模板中的一个区域设置为禁用动画时，其<strong>所有</strong>内部组件上的动画也会禁用。
+也就是说，只要你把 Angular 根组件上放一个 <code>@.disabled</code> 的宿主绑定即可。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, <span class="hljs-title class_">HostBinding</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-component'</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'app.component.html'</span>,</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</span><span class="hljs-ln-line">  <span class="hljs-meta">@HostBinding</span>(<span class="hljs-string">'@.disabled'</span>)</span><span class="hljs-ln-line">  <span class="hljs-keyword">public</span> animationsDisabled = <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cdrhbzbabsrldbrfkje1x3qcj">改写内部动画的禁用状态</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cuej23ivxbnmbpq0di4olnozn">尽管内部动画被禁用，父动画仍然可以 
+<code>query()</code> 位于模板禁用区域中的内部元素，并在需要时对它们进行动画处理。当父动画查询子动画并随后使用 
+<code>animateChild()</code> 对其进行动画处理时，也是这种情况。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="61fe8sbsri0zmizefqsj5kx2e">检测某个动画何时被禁用</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="b3orpe3cote6x813t4rszlwqs">如果 DOM 的某个区域（或整个应用）禁用了动画，动画触发器回调仍会触发，但持续时间为零秒。当回调触发时，它会提供一个 
+<code>AnimationEvent</code> 实例。如果动画被禁用，事件上的 
+<code>.disabled</code> 标志为真。</p>
+</div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>trigger</h3><div><code>AnimationTriggerMetadata</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="agqnc4sc5ns3mj9fv5hre74a8">创建一个命名的动画触发器，其中包含一些 
+<a href="api/animations/state"><code>state()</code></a> 和 
+<code>transition()</code> 条目，当绑定到触发器的表达式发生变化时，这些条目将被求值。</p></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">name</span><code>string</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8cz0223yh0h0qclhnoi194393">一个标识字符串。</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">definitions</span><code>AnimationMetadata[]</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="xrgykp2fuka2uiruurqf12q7">一个动画定义对象，包含一些 
+<a href="api/animations/state"><code>state()</code></a> 和 
+<code>transition()</code> 声明。</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>AnimationTriggerMetadata</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><p data-ng_translator_product="100" data-ng_translator_ref_id="3l2u8utvlb2k58v31752gb92c">在 
+<code>@Component</code> 元数据的 
+<code>animations</code> 部分定义一个动画触发器。在模板中，通过名称引用此触发器，并将其绑定到一个触发器表达式，该表达式求解为定义的动画状态，使用以下格式：</p>
+<p><code>[@triggerName]="expression"</code></p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bq52lypv18l59za2o8vmoesc2">动画触发器绑定会将所有值转换为字符串，然后将前后的值与任何关联的过渡进行匹配。布尔值可以指定为 
+<code>1</code> 或 
+<code>true</code> 和 
+<code>0</code> 或 
+<code>false</code>。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bd3vd8vxy41v7yl7s57o2kdph">使用示例</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6xc6tsd37suwobck5u1tvbcbs">下面的例子使用指定的名字创建了一个动画触发器的引用。
+此动画的值应该是一个由状态声明和转场声明组成的数组。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">"my-component"</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">"my-component-tpl.html"</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">animations</span>: [</span><span class="hljs-ln-line">    <span class="hljs-title function_">trigger</span>(<span class="hljs-string">"myAnimationTrigger"</span>, [</span><span class="hljs-ln-line">      <span class="hljs-title function_">state</span>(...),</span><span class="hljs-ln-line">      <span class="hljs-title function_">state</span>(...),</span><span class="hljs-ln-line">      <span class="hljs-title function_">transition</span>(...),</span><span class="hljs-ln-line">      <span class="hljs-title function_">transition</span>(...)</span><span class="hljs-ln-line">    ])</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</span><span class="hljs-ln-line">  myStatusExp = <span class="hljs-string">"something"</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3pcqbp1osz3ognqro5fb452zn">该组件的相关模板通过在代码中把一个已定义的触发器绑定到一个元素上来使用此动画。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">&lt;!-- somewhere inside of my-component-tpl.html --&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> [@<span class="hljs-attr">myAnimationTrigger</span>]=<span class="hljs-string">"myStatusExp"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3dwbzubroeblpy8bj0nq6drt8">使用内联函数</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2g879f9e4kujpsvool8k544uk"><code>transition</code> 动画方法还支持读取一个内联函数，该函数可以决定其关联的动画是否应该运行。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// this method is run each time the `myAnimationTrigger` trigger value changes.</span></span><span class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">myInlineMatcherFn</span>(<span class="hljs-params">fromState: <span class="hljs-built_in">string</span>, toState: <span class="hljs-built_in">string</span>, element: <span class="hljs-built_in">any</span>, params: {[key:</span><span class="hljs-ln-line"><span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>}</span>): <span class="hljs-built_in">boolean</span> {</span><span class="hljs-ln-line">  <span class="hljs-comment">// notice that `element` and `params` are also available here</span></span><span class="hljs-ln-line">  <span class="hljs-keyword">return</span> toState == <span class="hljs-string">'yes-please-animate'</span>;</span><span class="hljs-ln-line">}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'my-component-tpl.html'</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">animations</span>: [</span><span class="hljs-ln-line">    <span class="hljs-title function_">trigger</span>(<span class="hljs-string">'myAnimationTrigger'</span>, [</span><span class="hljs-ln-line">      <span class="hljs-title function_">transition</span>(myInlineMatcherFn, [</span><span class="hljs-ln-line">        <span class="hljs-comment">// the animation sequence code</span></span><span class="hljs-ln-line">      ]),</span><span class="hljs-ln-line">    ])</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</span><span class="hljs-ln-line">  myStatusExp = <span class="hljs-string">"yes-please-animate"</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3rhdfpc9uhouv4q2pwy2a6ctv">禁用动画</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bsz1soespce6mwdeqd8yzxcbi">当为真时，则一个特殊的动画控制绑定 <code>@.disabled</code> 将会在渲染时阻止所有动画。
+把 <code>@.disabled</code> 绑定放在元素上可以防止触发该元素自身的动画，及其子元素上的所有动画触发器。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dgbckvyob5lrha6rebwzf4lml">下面的例子展示了如何使用此特性：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span><span class="hljs-ln-line">    &lt;div [@.disabled]="isDisabled"&gt;</span><span class="hljs-ln-line">      &lt;div [@childAnimation]="exp"&gt;&lt;/div&gt;</span><span class="hljs-ln-line">    &lt;/div&gt;</span><span class="hljs-ln-line">  `</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">animations</span>: [</span><span class="hljs-ln-line">    <span class="hljs-title function_">trigger</span>(<span class="hljs-string">"childAnimation"</span>, [</span><span class="hljs-ln-line">      <span class="hljs-comment">// ...</span></span><span class="hljs-ln-line">    ])</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</span><span class="hljs-ln-line">  isDisabled = <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">  exp = <span class="hljs-string">'...'</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="c4dlas485zi7hyv1pg65hq815">当 
+<code>@.disabled</code> 为 true 时，它会阻止 
+<code>@childAnimation</code> 触发器以及任何内部动画。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ndvzgub1cr4mr3j2ty0jd82z">在整个应用中禁用动画</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e06g34tx8bgelq02yv7qibcir">当模板中的一个区域设置为禁用动画时，其<strong>所有</strong>内部组件上的动画也会禁用。
+也就是说，只要你把 Angular 根组件上放一个 <code>@.disabled</code> 的宿主绑定即可。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, <span class="hljs-title class_">HostBinding</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-component'</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'app.component.html'</span>,</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</span><span class="hljs-ln-line">  <span class="hljs-meta">@HostBinding</span>(<span class="hljs-string">'@.disabled'</span>)</span><span class="hljs-ln-line">  <span class="hljs-keyword">public</span> animationsDisabled = <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cdrhbzbabsrldbrfkje1x3qcj">改写内部动画的禁用状态</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cuej23ivxbnmbpq0di4olnozn">尽管内部动画被禁用，父动画仍然可以 
+<code>query()</code> 位于模板禁用区域中的内部元素，并在需要时对它们进行动画处理。当父动画查询子动画并随后使用 
+<code>animateChild()</code> 对其进行动画处理时，也是这种情况。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="61fe8sbsri0zmizefqsj5kx2e">检测某个动画何时被禁用</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="b3orpe3cote6x813t4rszlwqs">如果 DOM 的某个区域（或整个应用）禁用了动画，动画触发器回调仍会触发，但持续时间为零秒。当回调触发时，它会提供一个 
+<code>AnimationEvent</code> 实例。如果动画被禁用，事件上的 
+<code>.disabled</code> 标志为真。</p>
+</div></div></div></div></div></div></div></div>

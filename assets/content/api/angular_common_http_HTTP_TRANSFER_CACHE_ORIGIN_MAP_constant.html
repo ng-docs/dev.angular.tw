@@ -1,0 +1,23 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common/http</span><div class="docs-reference-title"><div><h1>HTTP_TRANSFER_CACHE_ORIGIN_MAP</h1><div class="docs-api-item-label" data-mode="full" data-type="constant">constant</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/common/http/src/transfer_cache.ts#L84-L86" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="e26yee22ow0cg5r24tzfrv2u5">如果你的应用在服务器和客户端（通过 
+<code>HttpClient</code>）使用不同的 HTTP 源来进行 API 调用，
+<code>HTTP_TRANSFER_CACHE_ORIGIN_MAP</code> 令牌允许你在这些源之间建立一个映射表，以便 
+<code>HttpTransferCache</code> 特性能将这些请求识别为相同的请求，并在客户端水合期间复用服务器上缓存的数据。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">const</span> <span class="hljs-attr">HTTP_TRANSFER_CACHE_ORIGIN_MAP</span>: <span class="hljs-title class_">InjectionToken</span>&lt;<span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt;&gt;;</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="e26yee22ow0cg5r24tzfrv2u5">如果你的应用在服务器和客户端（通过 
+<code>HttpClient</code>）使用不同的 HTTP 源来进行 API 调用，
+<code>HTTP_TRANSFER_CACHE_ORIGIN_MAP</code> 令牌允许你在这些源之间建立一个映射表，以便 
+<code>HttpTransferCache</code> 特性能将这些请求识别为相同的请求，并在客户端水合期间复用服务器上缓存的数据。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2zbzjhclesuuz4v7fzdi4jkwi"><strong>重要提示</strong>：
+<code>HTTP_TRANSFER_CACHE_ORIGIN_MAP</code> 令牌
+<em>仅</em>应在应用的
+<em>服务器</em>代码中提供（通常在 
+<code>app.server.config.ts</code> 脚本中）。如果 Angular 检测到该令牌在客户端运行时被定义，会抛出一个错误。</p></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="5fb1pji53dem5nd1uypzvuba8">当同一个 API 端点在服务器上通过 
+<code>http://internal-domain.com:8080</code> 访问，并在客户端通过 
+<code>https://external-domain.com</code> 访问时，可以使用以下配置：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// in app.server.config.ts</span></span><span class="hljs-ln-line">{</span><span class="hljs-ln-line">    <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">HTTP_TRANSFER_CACHE_ORIGIN_MAP</span>,</span><span class="hljs-ln-line">    <span class="hljs-attr">useValue</span>: {</span><span class="hljs-ln-line">        <span class="hljs-string">'http://internal-domain.com:8080'</span>: <span class="hljs-string">'https://external-domain.com'</span></span><span class="hljs-ln-line">    }</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div>

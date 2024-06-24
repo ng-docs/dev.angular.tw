@@ -1,0 +1,46 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>BootstrapOptions</h1><div class="docs-api-item-label" data-mode="full" data-type="interface">interface</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/core/src/application/application_ref.ts#L102-L168" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="culhhzk2nlc0zp78n1120o3nl">为引导过程提供其他选项。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">interface</span> <span class="hljs-title class_">BootstrapOptions</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngZone">  ngZone?: <span class="hljs-title class_">NgZone</span> | <span class="hljs-string">"zone.js"</span> | <span class="hljs-string">"noop"</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngZoneEventCoalescing">  ngZoneEventCoalescing?: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngZoneRunCoalescing">  ngZoneRunCoalescing?: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ignoreChangesOutsideZone">  ignoreChangesOutsideZone?: <span class="hljs-built_in">boolean</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="ngZone" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngZone</h3><div><code>NgZone | "zone.js" | "noop"</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="co3i9k78xcn4xs8ad6j2hw2tk">可选地指定应使用哪个 
+<code>NgZone</code>。</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="cl545499nee1x2jdofk4eg0wa">提供你自己的 
+<code>NgZone</code> 实例。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="ao9de1gfosxmansvyvufbh576"><code>zone.js</code> - 使用需要 
+<code>Zone.js</code> 的默认 
+<code>NgZone</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5dy0r3ue6s5d79kt9f1vah29p"><code>noop</code> - 使用什么都不做的 <code>NoopNgZone</code>。</li>
+
+    </ul></div></div></div></div><div id="ngZoneEventCoalescing" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngZoneEventCoalescing</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="esm6cbgiipquc96c0k267fuje">（可选）指定或不指定合并事件变更检测。考虑以下情况。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"doSomething()"</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"doSomethingElse()"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1esyzsczi1ptbepxoj3p0lgvg">单击按钮时，由于事件冒泡，将调用两个事件处理程序，并触发 2 次变更检测。我们可以合并此类事件以仅触发变更检测一次。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="opuxkb1tam7k3oo5xjsad5su">默认情况下，此选项将是 false。因此，事件将不会被合并，并且变更检测将被触发多次。如果此选项设置为 true，则变更检测将通过调度动画帧来异步触发。因此在上面的情况下，变更检测将只会触发一次。</p></div></div></div></div><div id="ngZoneRunCoalescing" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngZoneRunCoalescing</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="281m51mdiacybvicoc4tcc9d7">可选地指定是否应将 
+<code>NgZone#run()</code> 方法调用合并为单个变更检测。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="czk3su6u1np51ws2huk6ihka0">考虑以下情况。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">for (let i <span class="hljs-operator">=</span> <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; 10; i ++) {</span></span><span class="hljs-ln-line">  ngZone.run(() <span class="hljs-operator">=</span>&gt; {</span><span class="hljs-ln-line">    // do something</span><span class="hljs-ln-line">  })<span class="hljs-comment">;</span></span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1vof025w3hjhzx8xsfhd8810d">这种情况会多次触发变更检测。使用 ngZoneRunCoalescing 选项，事件循环中的所有变更检测只会触发一次。此外，变更检测是在 requestAnimation 中执行的。</p></div></div></div></div><div id="ignoreChangesOutsideZone" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ignoreChangesOutsideZone</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="cqinv6anm6qdiwyczv4bks0lq">当为 false 时，当 Angular 接收到需要刷新模板的明确指示时，会调度变更检测。这包括：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="891reb0qslkm8hni1ggjql9al">调用 
+<code>ChangeDetectorRef.markForCheck</code></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="b69fow17ikpsn2d8b9ils0ces">调用 
+<code>ComponentRef.setInput</code></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="bu2khzowt1o07nkwrqahbp19i">更新在模板中读取的信号</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="22fh7so57tjdq9rtwg3hokck2">当绑定的宿主或模板监听器被触发时</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="7r23wjmusk44zxjv2jnhrlaue">附着一个被标记为脏的视图</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="4g0w3lce1xhemhocxf3ti4htg">移除视图</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="cq2u25s1qzs4p54cw3xps7y2m">注册渲染钩子（模板仅在渲染钩子执行上述之一时才会刷新）</li>
+
+    </ul></div></div></div></div></div></div></div>

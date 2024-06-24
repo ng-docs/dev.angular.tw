@@ -1,0 +1,97 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>NgFor</h1><div class="docs-api-item-label" data-mode="full" data-type="directive">directive</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/common/src/directives/ng_for_of.ts#L153-L318" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="2e3wdm0g7j4ywjhyhusv09i46"><a href="guide/directives/structural-directives">结构型指令</a>，为集合中的每个条目渲染一个模板。此指令附着在一个元素上，该元素成为克隆模板的父元素。</p><p></p><nav class="docs-pill-row"><a class="docs-pill" href="guide/directives/structural-directives" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4tqmaa9erzhna8poqylp51a6p">结构型指令</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">NgFor</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngForOf">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">ngForOf</span>(<span class="hljs-params">value: U &amp; NgIterable&lt;T&gt;</span>);</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngForTrackBy">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">get</span> <span class="hljs-title function_">ngForTrackBy</span>(): <span class="hljs-title class_">TrackByFunction</span>&lt;T&gt;;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngForTemplate">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">ngForTemplate</span>(<span class="hljs-params">value: TemplateRef&lt;NgForOfContext&lt;T, U&gt;&gt;</span>);</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngTemplateContextGuard">  <span class="hljs-keyword">static</span> <span class="hljs-title function_">ngTemplateContextGuard</span>(<span class="hljs-attr">dir</span>: <span class="hljs-title class_">NgForOf</span>&lt;T, U&gt;, <span class="hljs-attr">ctx</span>: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">boolean</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="2e3wdm0g7j4ywjhyhusv09i46"><a href="guide/directives/structural-directives">结构型指令</a>，为集合中的每个条目渲染一个模板。此指令附着在一个元素上，该元素成为克隆模板的父元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eucircjuucb3tn3kr6dexm4q7"><code>ngForOf</code> 指令通常以
+<a href="guide/directives/structural-directives#asterisk">简写形式</a> 
+<code>*ngFor</code> 使用。在这种形式中，每次迭代要渲染的模板是包含该指令的锚元素的内容。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8ovfnspqjhnfdh5cadedsshxd"><code>&lt;li&gt;</code> 元素中包含一些选项的简写语法。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let item of items; index as i; trackBy: trackByFn"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="a6erpkjyi6ndg5r4p67dp1odh">简写形式会扩展成使用 
+<code>ngForOf</code> 选择器的长形式，放在 
+<code>&lt;ng-template&gt;</code> 元素上。
+<code>&lt;ng-template&gt;</code> 元素的内容是包含简写指令的 
+<code>&lt;li&gt;</code> 元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1pzruz1974q4b2bhashcezlxp">这是简写形式示例的扩展版本。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-template</span> <span class="hljs-attr">ngFor</span> <span class="hljs-attr">let-item</span> [<span class="hljs-attr">ngForOf</span>]=<span class="hljs-string">"items"</span> <span class="hljs-attr">let-i</span>=<span class="hljs-string">"index"</span> [<span class="hljs-attr">ngForTrackBy</span>]=<span class="hljs-string">"trackByFn"</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">ng-template</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bdrvn1fo9dnl7d6k1khlkbgxw">Angular
+在编译模板时会自动扩展简写语法。每个嵌入式视图的上下文都会根据其词法位置在逻辑上合并到当前组件上下文。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7mrvirjk1fhacxnm2qm8xzr04">使用简写语法时，Angular 只允许
+<a href="guide/directives/structural-directives#one-per-element">一个结构型指令附着在一个元素上</a>。如果你想要有条件地迭代，例如，将 
+<code>*ngIf</code> 放在一个包裹 
+<code>*ngFor</code> 元素的容器元素上。有关进一步讨论，请参阅
+<a href="guide/directives/structural-directives#one-per-element">结构型指令</a>。</p></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f1wux8pbiiaw8gt9kr8fv0zvx">局部变量</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8mour4pkv22hvb5ersjag6f31"><code>NgForOf</code> 提供了可以别名化为局部变量的输出值。例如：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let user of users; index as i; first as isFirst"</span>&gt;</span></span><span class="hljs-ln-line">  </span><span class="hljs-template-variable">{{<span class="hljs-name">i</span>}}</span><span class="language-xml">/</span><span class="hljs-template-variable">{{<span class="hljs-name">users.length</span>}}</span><span class="language-xml">. </span><span class="hljs-template-variable">{{<span class="hljs-name">user</span>}}</span><span class="language-xml"> <span class="hljs-tag">&lt;<span class="hljs-name">span</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"isFirst"</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7me21t0dedu052vqx23khk9mg">以下导出的值可以别名化为局部变量：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="96b59q8772g6b30o6da1n53vx"><code>$implicit: T</code>：可迭代者 (
+<code>ngForOf</code>) 中每个条目的值。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="7clrl7t08a6akzfjp63ddwye4"><code>ngForOf: NgIterable&lt;T&gt;</code>：可迭代表达式的值。当表达式比属性访问更复杂时（例如使用异步管道 
+<code>userStreams | async</code>），很有用。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="r79y976vpanavpvkszrzx3e8"><code>index: number</code>：可迭代者中当前条目的索引。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cyoaexkfyainhoq13qoiloe9k"><code>count: number</code>：可迭代者的长度。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="4nb37vjhxzqw30vro2iscpazw"><code>first: boolean</code>：当条目是可迭代者中的第一个条目时为 True。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="1ysdfbmqoa5jm1jnlilt0m9z8"><code>last: boolean</code>：当条目是可迭代者中的最后一个条目时为 True。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="efkm1b1ttmiowv1a6djbbdpde"><code>even: boolean</code>：当条目在可迭代者中具有偶数索引时为 True。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="bwscerqsihrec3co8gr9k67k1"><code>odd: boolean</code>：当条目在可迭代者中具有奇数索引时为 True。</li>
+
+    </ul>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7y66ev8o8qvzxdbdgg2rbqu9u">变更的传导机制</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8f4dl7oej2zcs4wkjspamacok">当迭代器的内容发生变化时，
+<code>NgForOf</code> 会对 DOM 进行相应的更改：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3lyzn09wzn0u58vgxsd9wu9cb">当新增条目时，就会往 DOM 中添加一个模板实例。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="crf5o9r1ln5di7yhm9r6p3th0">当移除条目时，其对应的模板实例也会被从 DOM 中移除。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="afbwhe36yhh9v96bs0ccr0hs8">当条目集被重新排序时，他们对应的模板实例也会在 DOM 中重新排序。</li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="5pq0vm664jp3kpggtnq3d6ro7">Angular 使用对象标识来跟踪迭代器中的插入和删除，并在 DOM 中重现这些更改。这对动画和任何有状态控件（如接受用户输入的 
+<code>&lt;input&gt;</code> 元素）有重要影响。插入的行可以动画化，删除的行可以动画化，而未更改的行保留任何未保存的状态，例如用户输入。有关动画的更多信息，请参阅
+<a href="guide/animations/transition-and-triggers">过渡和触发器</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="75zo6lr9ooq4ehwluornjucpb">即使数据没有变化，迭代器中的元素标识符也可能会发生变化。比如，如果迭代器处理的目标是通过 RPC
+从服务器取来的，而 RPC
+又重新执行了一次。那么即使数据没有变化，第二次的响应体还是会生成一些具有不同标识符的对象。Angular
+将会清除整个 DOM，
+并重建它（就仿佛把所有老的元素都删除，并插入所有新元素）。这是很昂贵的操作，应该尽力避免。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1n0hf3te60pu8aiza67wg4xnc">为避免这种昂贵的操作，你可以通过为 
+<code>NgForOf</code> 提供 
+<code>trackBy</code> 选项来定制默认的跟踪算法。
+<code>trackBy</code> 接受一个有两个参数的函数：
+<code>index</code> 和 
+<code>item</code>。如果提供了 
+<code>trackBy</code>，Angular 会通过该函数的返回值来跟踪更改。</p>
+</div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="ngForOf" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngForOf</h3><div><code>U &amp; NgIterable&lt;T&gt;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="c1mf3gficddsaymo6f9eugo8c">可迭代表达式的值，可以用作
+<a href="guide/directives/structural-directives#shorthand">模板输入变量</a>。</p></div></div></div></div><div id="ngForTrackBy" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngForTrackBy</h3><div><span>2 overloads</span></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="4hdvj2aou2hx759mljy3zwm1o">指定一个自定义 
+<code>TrackByFunction</code> 来计算可迭代者中条目的标识。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4oza2urhccrnxsza2m0tufeea">如果未提供自定义 
+<code>TrackByFunction</code>，
+<code>NgForOf</code> 将使用条目的
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is">对象标识</a>作为键。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1fy27sw3ytmel1hodh4wfkkz8"><code>NgForOf</code> 使用计算出的键将可迭代者中的条目与为这些条目生成的 DOM 元素关联起来。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="litvt7tst32fj11eapmksfjf">自定义 
+<code>TrackByFunction</code> 在以下情况下有助于提供良好的用户体验：使用 
+<code>NgForOf</code> 渲染的可迭代者中的条目有自然标识符（例如自定义 ID 或主键），并且此可迭代者可能会用新的对象实例更新，但仍然代表相同的底层实体（例如，当从服务器重新获取数据时，可迭代者被重新创建和重新渲染，但大部分数据仍然相同）。</p></div></div><div class="docs-reference-card-item"><div></div></div></div></div><div id="ngForTemplate" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngForTemplate</h3><div><code>TemplateRef&lt;NgForOfContext&lt;T, U&gt;&gt;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1vq2vpco3z5o8zoothwma2l6s">此模板引用用来为 iterable 中的生成每个条目。</p></div></div></div></div><div id="ngTemplateContextGuard" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngTemplateContextGuard</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="78gn01c1r0xphx47c5on47d5t">断言 
+<code>NgForOf</code> 将要渲染的模板的上下文类型。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eftt4qgfiw8158dwkop6izq0i">此方法的存在向 Ivy 模板类型检查编译器发出信号，表明 
+<code>NgForOf</code> 结构型指令使用特定的上下文类型渲染其模板。</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">dir</span><code>NgForOf&lt;T, U&gt;</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">ctx</span><code>any</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>boolean</code></div></div></div></div></div></div></div>

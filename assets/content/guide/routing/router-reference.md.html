@@ -1,0 +1,382 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8nm57pkx5kpvbovblew31w06l">路由器参考手册</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/routing/router-reference.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ekfwr3603fb4d6aripvvq21j">下面的部分重点介绍了一些路由器的核心概念。</p>
+
+  <h2 id="router-imports">
+    <a href="#router-imports" class="docs-anchor" tabindex="-1" aria-label="Link to Router imports" data-ng_translator_product="100" data-ng_translator_ref_id="44j9cw82n6ad0j7wpukoji4rx">路由器导入</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e6gns62o9o4laixseoc5ycgpz">Angular 的 Router 是一个可选服务，它为指定的 URL 提供特定的组件视图。它不是 Angular 核心的一部分，因此它位于自己的包 <code>@angular/router</code> 中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="yj41jb80wvk97ft1gm5cqbx3">从任何其它的 Angular 包中导入你需要的东西。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { provideRouter } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="6v0pt2g2cqd8bymyb6ni94afi"><strong>有用：</strong>要了解更多关于浏览器 URL 样式的信息，请查看
+<a href="guide/routing/common-router-tasks#browser-url-styles"><code>LocationStrategy</code>和浏览器 URL 样式</a>。</p>
+
+    </div>
+    
+  <h2 id="configuration">
+    <a href="#configuration" class="docs-anchor" tabindex="-1" aria-label="Link to Configuration" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="27io2zcn0syxgd4dfu8paj1a1">配置</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1oo69jbbbzcm31nu5r18kqphd">路由的 Angular 应用程序有一个
+<code>Router</code>服务的单例实例。 当浏览器的 URL 发生变化时，该路由器会查找相应的
+<code>Route</code>，以确定要显示的组件。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2pnauzpwhefw78klktxsuwtne">在配置路由之前，路由器没有路由。 以下示例创建了五个路由定义，通过
+<code>provideRouter</code>方法配置路由器，并将结果添加到
+<code>ApplicationConfig</code>的
+<code>providers</code>数组中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">appRoutes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'crisis-center'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">CrisisListComponent</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'hero/:id'</span>,      <span class="hljs-attr">component</span>: <span class="hljs-title class_">HeroDetailComponent</span> },</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'heroes'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">HeroListComponent</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">data</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">'Heroes List'</span> }</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">redirectTo</span>: <span class="hljs-string">'/heroes'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">pathMatch</span>: <span class="hljs-string">'full'</span></div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'**'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">PageNotFoundComponent</span> }</div><div class="hljs-ln-line">];</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">    <span class="hljs-attr">providers</span>: [<span class="hljs-title function_">provideRouter</span>(routes, <span class="hljs-title function_">withDebugTracing</span>())]</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="75xmkc0jqq02f5lyiihgv7m15"><code>routes</code>数组描述了如何进行导航。 将其传递给
+<code>ApplicationConfig</code>的
+<code>providers</code>中的
+<code>provideRouter</code>方法以配置路由器。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8evon8ih9v4iutbvqcomaiaod">每个
+<code>Route</code>将一个 URL 
+<code>path</code>映射到一个组件。 路径中没有前导斜杠。 路由器会解析和构建最终的 URL，这使你可以在应用程序视图之间导航时使用相对路径和绝对路径。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7v0kd6zwxhbgy33x2rzcjl2iu">第二个路由中的 <code>:id</code> 是路由参数的标记。在像 <code>/hero/42</code> 这样的 URL 中，“42”是 <code>id</code> 参数的值。相应的 <code>HeroDetailComponent</code> 用这个值来查找并显示 <code>id</code> 为 42 的英雄。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4tbx3i5w8cc1oguljdf5sdsmp">第三个路由中的
+<code>data</code>属性是存储与该特定路由相关的任意数据的地方。 该数据属性可以在每个激活的路由中访问。 使用它来存储诸如页面标题、面包屑文本和其他只读、静态数据等项目。 使用 resolve 守卫来检索动态数据。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9h9yxxyqtkvd0bvzjnu1dsb4p">第四个路由中的空路径表示该应用的默认路径 - 当 URL 中的路径为空时通常要去的地方，就像它在刚进来时一样。这个默认路由重定向到了 <code>/heroes</code> 这个 URL 的路由，因此会显示 <code>HeroesListComponent</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="x0w6gd09ej3frc53ccanfza">如果你需要查看导航生命周期中发生的事件，可以使用
+<code>withDebugTracing</code>功能。 这会将每个导航生命周期中发生的每个路由器事件输出到浏览器控制台。 仅出于调试目的使用
+<code>withDebugTracing</code>。 你可以在传递给
+<code>provideRouter</code>方法的第二个参数中设置
+<code>withDebugTracing</code>选项。</p>
+
+  <h2 id="router-outlet">
+    <a href="#router-outlet" class="docs-anchor" tabindex="-1" aria-label="Link to Router outlet" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="p01zmizatizt251ebpyqzn4d">路由出口</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="285c6vpw01tltzlak6aekowbe"><code>RouterOutlet</code>是来自路由库的指令，类似于组件。 它充当一个占位符，标记模板中路由器应该显示该出口的组件的位置。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Routed components go here --&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="bntyhrloepqkplbkqqxno4jf7">根据前面的配置，当此应用程序的浏览器 URL 变为
+<code>/heroes</code>时，路由器将该 URL 与路由路径
+<code>/heroes</code>匹配，并将
+<code>HeroListComponent</code>显示为放置在宿主组件模板中的
+<code>RouterOutlet</code>的兄弟元素。</p>
+
+  <h2 id="router-links">
+    <a href="#router-links" class="docs-anchor" tabindex="-1" aria-label="Link to Router links" data-ng_translator_product="100" data-ng_translator_ref_id="9b6a5vfqpm56qb9fftnpq4w6i">路由链接</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5232ztqz1f89z95rwtr10igfc">为了响应用户操作（如单击锚标签）进行导航，请使用
+<code>RouterLink</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4tjq16ubd93jbvnn36swd8ja0">考虑下面的模板：</p>
+<div class="docs-code" path="adev/src/content/examples/router/src/app/app.component.1.html" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Angular Router<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/crisis-center"</span> <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"active"</span> <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</span>Crisis Center<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/heroes"</span> <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"active"</span> <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</span>Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dnw0km3owaz27otu97mogab0k">锚标签上的
+<code>RouterLink</code>指令使路由器控制这些元素。 导航路径是固定的，因此你可以将字符串分配为
+<code>routerLink</code>的一次性绑定。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="yybgep6i233pxfijslteth04">如果导航路径更动态，你可以绑定到返回路由链接参数数组的模板表达式；即，
+<a href="guide/routing/common-router-tasks#link-parameters-array">链接参数数组</a>。 路由器将该数组解析为完整的 URL。</p>
+
+  <h2 id="active-router-links">
+    <a href="#active-router-links" class="docs-anchor" tabindex="-1" aria-label="Link to Active router links" data-ng_translator_product="100" data-ng_translator_ref_id="6z1vbsmbbcid5o4r6dkpan17k">活动路由链接</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="12gpf75z6566hn3e07jn5h3uv"><code>RouterLinkActive</code> 指令根据当前 
+<code>RouterState</code> 的状态切换活动的 
+<code>RouterLink</code> 绑定的 CSS 类。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="aov61xbp000q6hwkl2jlj2zpe">在每个锚点标签上，你会看到一个到 
+<code>RouterLinkActive</code> 指令的
+<a href="guide/templates/property-binding">属性绑定</a>，格式如下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">routerLinkActive="..."</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="96f8lexu0saqscgyfjfgmofwe">等号（<code>=</code>）右边的模板表达式包含一个由空格分隔的 CSS 类字符串，当此链接处于活动状态时，Router 会添加这些类，链接不活动时则移除这些类。 你可以将 
+<code>RouterLinkActive</code> 指令设置为一个类字符串，例如 
+<code>routerLinkActive="active fluffy"</code>，或将其绑定到返回此类字符串的组件属性。 例如：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">[routerLinkActive]=<span class="hljs-string">"someStringProperty"</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="d6mvuy2x8676qusbr11slfs9j">活动路由链接会沿着路由树的每个层级级联，因此父级和子级路由链接可以同时处于活动状态。 要覆盖此行为，可以将 
+<code>[routerLinkActiveOptions]</code> 输入绑定绑定到 
+<code>{ exact: true }</code> 表达式。 通过使用 
+<code>{ exact: true }</code>，给定的 
+<code>RouterLink</code> 只有在其 URL 与当前 URL 完全匹配时才会处于活动状态。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="azi7e45g7iifzwbhodp09bc1c"><code>RouterLinkActive</code> 还允许你轻松地向活动元素应用 
+<code>aria-current</code> 属性，从而为所有用户提供更具可访问性的体验。更多信息请参阅《无障碍性最佳实践》
+<a href="/best-practices/a11y#active-links-identification">活动链接标识部分</a>。</p>
+
+  <h2 id="router-state">
+    <a href="#router-state" class="docs-anchor" tabindex="-1" aria-label="Link to Router state" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8p2wpt8cwmiohk3f63viw4sx1">路由器状态</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="64313gylscts0jqbp0knnwoxo">在每次成功导航生命周期结束后，路由器会构建一个包含当前路由器状态的 
+<code>ActivatedRoute</code> 对象树。 你可以使用 
+<code>Router</code> 服务的 
+<code>routerState</code> 属性从应用程序的任何位置访问当前的 
+<code>RouterState</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bmy99wb0pf202bh1qyd70cj59"><code>RouterState</code> 中的每个 
+<code>ActivatedRoute</code> 都提供了用于沿着路由树向上和向下遍历以从父级、子级和兄弟级路由获取信息的方法。</p>
+
+  <h2 id="activated-route">
+    <a href="#activated-route" class="docs-anchor" tabindex="-1" aria-label="Link to Activated route" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4vgh82bolzbnfk6kgkj7jbh4n">激活路由</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="elzcn74g0fl9u5hwylxu7iviw">路由的路径和参数可以通过注入名为 <a href="api/router/ActivatedRoute">ActivatedRoute</a> 的路由服务获得。它提供了大量有用的信息，包括：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5dkddoxcqk28ajo52wkpdu2by">属性</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>url</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ednm618iv4q9zk8z8aj3ywpk4">一个路由路径的 
+<code>Observable</code>，表示为路由路径的各部分的字符串数组。</td>
+</tr>
+<tr>
+<td align="left"><code>data</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2ulsipeethlshc4zxxdk4g6lq">一个包含为该路由提供的 
+<code>data</code> 对象的 
+<code>Observable</code>。还包含来自解析守卫的任何解析值。</td>
+</tr>
+<tr>
+<td align="left"><code>params</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="b8buo1b2bm56psslvdzmii87n">一个包含特定路由的必需和可选参数的 
+<code>Observable</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>paramMap</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="43isz6q71rwoasazlny40nle3">一个包含特定路由的必需和可选参数的 
+<a href="api/router/ParamMap">映射</a> 的 
+<code>Observable</code>。该映射支持从同一参数中检索单个值和多个值。</td>
+</tr>
+<tr>
+<td align="left"><code>queryParamMap</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bswrmsl75lvkwb9uxazzfpls9">一个包含所有路由可用查询参数的 
+<a href="api/router/ParamMap">映射</a> 的 
+<code>Observable</code>。该映射支持从查询参数中检索单个值和多个值。</td>
+</tr>
+<tr>
+<td align="left"><code>queryParams</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="c7y679pqvc6ojn945zv3pa6cd">一个包含所有路由可用查询参数的 
+<code>Observable</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>fragment</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3ywpy3twlnm8ugs7rr407d1dx">所有路由可用的 URL 片段的 
+<code>Observable</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>outlet</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="xtu6gxrwnkl5g205l1xnp6n8">用于渲染路由的 
+<code>RouterOutlet</code> 的名称。对于未命名的出口，出口名称是 primary。</td>
+</tr>
+<tr>
+<td align="left"><code>routeConfig</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bpzgrgmjfy8fn5ct9400b4v0">用于包含原始路径的路由的路由配置。</td>
+</tr>
+<tr>
+<td align="left"><code>parent</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3jbwqkehqn2lhkqijldfiikwp">当此路由是子路由时，该路由的父级 
+<code>ActivatedRoute</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>firstChild</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8sazyaw4ylb6sblk46j3dvp49">包含此路由的子路由列表中的第一个
+<code>ActivatedRoute</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>children</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="42p6n57cfdogib6so6k5ti0f">包含当前路由下激活的所有子路由。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="router-events">
+    <a href="#router-events" class="docs-anchor" tabindex="-1" aria-label="Link to Router events" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1std7a1yl6ex1nlazpex83j65">路由器事件</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9m14x0y3j5tqhxgym2xke2p5i">在每次导航期间，
+<code>Router</code>通过
+<code>Router.events</code>属性发出导航事件。 这些事件显示在下表中。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dmnzgh3867d4zluu3jy79p3jo">路由器事件</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><a href="api/router/NavigationStart"><code>NavigationStart</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="be70q9497muloayifia3sxlpl">当导航开始时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/RouteConfigLoadStart"><code>RouteConfigLoadStart</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5nl6341vyh3kgn7em8e2zneoa">在
+<code>Router</code>延迟加载路由配置之前触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/RouteConfigLoadEnd"><code>RouteConfigLoadEnd</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cifm59i0r3uoyhp7j9qvd277o">在路由已被延迟加载后触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/RoutesRecognized"><code>RoutesRecognized</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="e378wprlmye24debx6sycb1wy">当路由器解析URL并识别路由时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/GuardsCheckStart"><code>GuardsCheckStart</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="frej8oxcnf9puqc09n2wzny8">当路由器开始路由守卫阶段时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/ChildActivationStart"><code>ChildActivationStart</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3jjvlvkaj32i49hpaa0o9sr6">当路由器开始激活路由的子级时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/ActivationStart"><code>ActivationStart</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="asn8ztfevud3u0an217kfk8tl">当路由器开始激活路由时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/GuardsCheckEnd"><code>GuardsCheckEnd</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="epnou3enputytj947cj6l9cfx">当路由器成功完成路由守卫阶段时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/ResolveStart"><code>ResolveStart</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="e3pciogtvl2fl9gbve7qf2wjh">当路由器开始路由解析阶段时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/ResolveEnd"><code>ResolveEnd</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="909hhv6401ee6oa5f7710q02b">当路由器成功完成路由解析阶段时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/ChildActivationEnd"><code>ChildActivationEnd</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2frc2yzr14ndizt3g5u6fkzph">当路由器成功完成激活路由的子级时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/ActivationEnd"><code>ActivationEnd</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="am6ogqkbckpe7k0yyveugi1ix">当路由器成功完成激活路由时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/NavigationEnd"><code>NavigationEnd</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="72axjebud9r3buqcyw58hlrqa">当导航成功结束时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/NavigationCancel"><code>NavigationCancel</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9lihamkafl3vlcpwyr5sxd6wd">当导航被取消时触发。这可能发生在导航期间路由守卫返回false，或通过返回
+<code>UrlTree</code>或
+<code>RedirectCommand</code>进行重定向时。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/NavigationError"><code>NavigationError</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7fg9t0kbjjkjq5l7yy6flhsxc">由于意外错误导致导航失败时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="api/router/Scroll"><code>Scroll</code></a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="534i0u18kxc9877ybpyc8oxwi">表示滚动事件。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="69linz9uyh8yqyb8jasfb5kt0">当你启用 
+<code>withDebugTracing</code> 功能时，Angular 会将这些事件记录到控制台中。</p>
+
+  <h2 id="router-terminology">
+    <a href="#router-terminology" class="docs-anchor" tabindex="-1" aria-label="Link to Router terminology" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4c1dgxzohet4s5onvtpt5f0sl">路由器术语</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2z8s2adv157kyu2b2w325pq2j">以下是关键的 
+<code>Router</code> 术语及其含义：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cpf28ky1gvkamj1vok186i01q">路由器部分</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>Router</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4lclpj84odq7n9fdmivqpmz1i">显示当前 URL 对应的应用程序组件。管理从一个组件到下一个组件的导航。</td>
+</tr>
+<tr>
+<td align="left"><code>provideRouter</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="aseqqdv4ngw5futakkhyj8w5o">为浏览应用视图提供必要的服务提供者。</td>
+</tr>
+<tr>
+<td align="left"><code>RouterModule</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="d2anm0f6cxpbko0l22f42z8wn">一个单独的 NgModule，为浏览应用视图提供必要的服务提供者和指令。</td>
+</tr>
+<tr>
+<td align="left"><code>Routes</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7a53skgwk7nfcqhp1xmgy8k81">定义一组路由，每个路由将 URL 路径映射到一个组件。</td>
+</tr>
+<tr>
+<td align="left"><code>Route</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="af8ivwqonx3191njn7fr1gvs0">根据 URL 模式定义路由器如何导航到组件。大多数路由包含路径和组件类型。</td>
+</tr>
+<tr>
+<td align="left"><code>RouterOutlet</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="77zko2boqi1xb5b9rrnikf2ef">指示路由器显示视图的指令（
+<code>&lt;router-outlet&gt;</code>）。</td>
+</tr>
+<tr>
+<td align="left"><code>RouterLink</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="e5xct2kasaxbvwl62qb1gd6ak">用于将可点击的 HTML 元素绑定到路由的指令。单击带有绑定到 
+<em>字符串</em> 或 
+<em>链接参数数组</em> 的 
+<code>routerLink</code> 指令的元素会触发导航。</td>
+</tr>
+<tr>
+<td align="left"><code>RouterLinkActive</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="auyjlg30dbt1o5cukxbnvb2jr">用于在相关的 
+<code>routerLink</code> 处于活动状态/非活动状态时向 HTML 元素添加/移除类。它还可以为更好的无障碍性设置活动链接的 
+<code>aria-current</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>ActivatedRoute</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2vg2zf1fl5tdb6vu3t1idre1n">为每个路由组件提供的服务，包含路由特定信息，如路由参数、静态数据、解析数据、全局查询参数和全局片段。</td>
+</tr>
+<tr>
+<td align="left"><code>RouterState</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ajirk2d7ybc1jb56ou7zgaw96">路由器的当前状态，包括当前激活路由的树，以及用于遍历路由树的便捷方法。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9qhfopo4d1pfnp4w8mtuqehr0">链接参数数组</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bxzln173kt7tl9thc6b3rlv8m">路由器将解释为路由指令的数组。你可以将该数组绑定到 
+<code>RouterLink</code> 或将数组作为参数传递给 
+<code>Router.navigate</code> 方法。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9u7mq4pbjyv40jwu8gjh18zum">路由组件</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cb4rdtbt11tn176o7c8xn9m5l">一个包含 
+<code>RouterOutlet</code> 的 Angular 组件，根据路由导航显示视图。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  

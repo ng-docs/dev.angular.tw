@@ -1,0 +1,130 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="73vqgm889le9bm3ea1ocj783t">使用 ng-content 进行内容投影</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/content-projection.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dgm70qgb782h0hajisr0uqi7a"><strong>提示：</strong>本指南假定你已经阅读了
+<a href="essentials">基本指南</a>。如果你是 Angular 的新手，请先阅读该指南。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="ts2vp5p533h8iw1pj09t5ul1">你经常需要创建组件来作为不同类型内容的容器。例如，你可能想要创建一个自定义的卡片组件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-card'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div class="card-shadow"&gt; &lt;!-- card content goes here --&gt; &lt;/div&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCard</span> {<span class="hljs-comment">/* ... */</span>}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="cja71ovrkl7qrkixv9yvi1f1e"><strong>你可以使用 <code>&lt;ng-content&gt;</code> 元素作为占位符以标记内容应该放置的位置</strong>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-card'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div class="card-shadow"&gt; &lt;ng-content&gt;&lt;/ng-content&gt; &lt;/div&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCard</span> {<span class="hljs-comment">/* ... */</span>}</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="3jda649fxhn7dqlew1yiafmnj"><strong>提示：</strong> 
+<code>&lt;ng-content&gt;</code> 与
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot" target="_blank">原生 <code>&lt;slot&gt;</code> 元素</a>类似，但具有一些特定于 Angular 的功能。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="c8qx1oo8g3j9pyaqc6xkec0u5">当你使用带有 
+<code>&lt;ng-content&gt;</code> 的组件时，该组件宿主元素的任何子元素都会在 
+<code>&lt;ng-content&gt;</code> 的位置被渲染，或
+<strong>投影</strong>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// Component source</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-card'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;div class="card-shadow"&gt;</div><div class="hljs-ln-line">      &lt;ng-content /&gt;</div><div class="hljs-ln-line">    &lt;/div&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCard</span> {<span class="hljs-comment">/* ... */</span>}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Using the component --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-card</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is the projected content<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">custom-card</span>&gt;</span></div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- The rendered DOM --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-card</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card-shadow"</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is the projected content<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">custom-card</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2kcs04mqdef5jk6yy6tfwe03q">Angular 将通过这种方式传递给组件的任何子元素称为该组件的
+<strong>内容</strong>。这与组件的
+<strong>视图</strong>（即模板中定义的元素）是不同的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9mnlkd6a4icmzupmo49c4d3wx"><strong><code>&lt;ng-content&gt;</code> 元素既不是组件也不是 DOM 元素</strong>。相反，它是一个特殊的占位符，用于告诉 Angular 在哪里渲染内容。Angular 的编译器在构建时会处理所有 
+<code>&lt;ng-content&gt;</code> 元素。你不能在运行时插入、删除或修改 
+<code>&lt;ng-content&gt;</code>。你不能向 
+<code>&lt;ng-content&gt;</code> 添加
+<strong><span style="text-decoration:underline;">指令</span></strong>、样式或任意属性。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4u2ckjvsk2dbsevknn6ugrfbp">你不应该使用 
+<code>ngIf</code>、
+<code>ngFor</code> 或 
+<code>ngSwitch</code> 有条件地包含 
+<code>&lt;ng-content&gt;</code>。有关组件内容的条件渲染，请参阅
+<a href="api/core/ng-template">模板片段</a>。</p>
+
+  <h2 id="multiple-content-placeholders">
+    <a href="#multiple-content-placeholders" class="docs-anchor" tabindex="-1" aria-label="Link to Multiple content placeholders" data-ng_translator_product="100" data-ng_translator_ref_id="ee70r42rqwoo6u7mhu2h8uibv">多个内容占位符</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="d9wtyu9hammlb8dui68ikiieb">Angular 支持基于 CSS 选择器将多个不同的元素投影到不同的 
+<code>&lt;ng-content&gt;</code> 占位符中。扩展上面的卡片示例，你可以使用 
+<code>select</code> 属性为卡片标题和卡片正文创建两个占位符：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Component template --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card-shadow"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ng-content</span> <span class="hljs-attr">select</span>=<span class="hljs-string">"card-title"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-content</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card-divider"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ng-content</span> <span class="hljs-attr">select</span>=<span class="hljs-string">"card-body"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-content</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Using the component --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-card</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">card-title</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">card-title</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">card-body</span>&gt;</span>Welcome to the example<span class="hljs-tag">&lt;/<span class="hljs-name">card-body</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">custom-card</span>&gt;</span></div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Rendered DOM --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-card</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card-shadow"</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">card-title</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">card-title</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card-divider"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">card-body</span>&gt;</span>Welcome to the example<span class="hljs-tag">&lt;/<span class="hljs-name">card-body</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">custom-card</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="c2ysrobw7ljc5tasp90b2rkri"><code>&lt;ng-content&gt;</code> 占位符支持与
+<a href="guide/components/selectors">组件选择器</a>相同的 CSS 选择器。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="122sd6elxgey4d8prqdkp1nj5">如果你包含一个或多个带有 
+<code>select</code> 属性的 
+<code>&lt;ng-content&gt;</code> 占位符和一个没有 
+<code>select</code> 属性的 
+<code>&lt;ng-content&gt;</code> 占位符，后者将捕获所有未匹配 
+<code>select</code> 属性的元素：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Component template --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card-shadow"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ng-content</span> <span class="hljs-attr">select</span>=<span class="hljs-string">"card-title"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-content</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card-divider"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-comment">&lt;!-- capture anything except "card-title" --&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ng-content</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-content</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Using the component --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-card</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">card-title</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">card-title</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span> /&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Welcome to the example<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">custom-card</span>&gt;</span></div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Rendered DOM --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-card</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card-shadow"</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">card-title</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">card-title</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card-divider"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span> /&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Welcome to the example&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">custom-card</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="cpp58nbvju36i04xnfw3q5uv">如果一个组件不包含没有 
+<code>select</code> 属性的 
+<code>&lt;ng-content&gt;</code> 占位符，则任何不匹配该组件占位符的元素将不会被渲染到 DOM 中。</p>
+
+  <h2 id="aliasing-content-for-projection">
+    <a href="#aliasing-content-for-projection" class="docs-anchor" tabindex="-1" aria-label="Link to Aliasing content for projection" data-ng_translator_product="100" data-ng_translator_ref_id="bwwz1gajzng2mn0cc3sz9rn82">内容投影的别名</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="48gx595en1szxfb8wfidc65nx">Angular 支持一个特殊属性 
+<code>ngProjectAs</code>，允许你在任何元素上指定一个 CSS 选择器。每当带有 
+<code>ngProjectAs</code> 的元素与 
+<code>&lt;ng-content&gt;</code> 占位符进行匹配时，Angular 将会对比 
+<code>ngProjectAs</code> 的值而不是元素本身的身份：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Component template --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card-shadow"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ng-content</span> <span class="hljs-attr">select</span>=<span class="hljs-string">"card-title"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-content</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card-divider"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ng-content</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-content</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Using the component --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-card</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">ngProjectAs</span>=<span class="hljs-string">"card-title"</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Welcome to the example<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">custom-card</span>&gt;</span></div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Rendered DOM --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-card</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card-shadow"</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"card-divider"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Welcome to the example&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">custom-card</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="6kygi82gtvfplpn735f2y1boa"><code>ngProjectAs</code> 仅支持静态值，不能绑定到动态表达式。</p>

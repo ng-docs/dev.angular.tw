@@ -1,0 +1,76 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="5uy16g4r61gw7wufrm98xuqom">Angular 中的属性绑定</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/6-property-binding/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7tdij8iolh67tepz0q349w2gh">Angular 中的属性绑定使你可以为 HTML 元素、Angular 组件等的属性设置值。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="emhuc3a7ehdjasf4qwd4zioq3">使用属性绑定可以动态设置属性和属性的值。你可以做到诸如切换按钮特性、以编程方式设置图像路径以及在组件之间共享值等操作。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8ich8pq0ctkrxg4kotdrb698s">在此活动中，你将学习如何在模板中使用属性绑定。</p>
+<hr>
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="71qakttdjc872yzj6i046jbyd">要绑定到元素的属性，请将属性名称用方括号括起来。以下是一个示例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;img alt=<span class="hljs-string">"photo"</span> [src]=<span class="hljs-string">"imageURL"</span>&gt;</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="58a48eu6jedkdow55elad2ii4">在此示例中，
+<code>src</code> 属性的值将绑定到类属性 
+<code>imageURL</code>。
+<code>imageURL</code> 的任何值都将设置为 
+<code>img</code> 标签的 
+<code>src</code> 属性。</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="add-a-property-called-iseditable">
+    <a href="#add-a-property-called-iseditable" class="docs-anchor" tabindex="-1" aria-label="Link to Add a property called <code>isEditable</code>" data-ng_translator_product="100" data-ng_translator_ref_id="elfeajvb3yu6gv1axioobq1t5">添加一个名为 
+<code>isEditable</code> 的属性</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="4oz9yl7clnu06po7i0r6qw0qd">通过在 
+<code>app.component.ts</code> 中添加一个名为 
+<code>isEditable</code> 的属性，并将初始值设置为 
+<code>true</code>，来更新 
+<code>AppComponent</code> 类中的代码。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line highlighted">    isEditable = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="bind-to-contenteditable">
+    <a href="#bind-to-contenteditable" class="docs-anchor" tabindex="-1" aria-label="Link to Bind to <code>contentEditable</code>" data-ng_translator_product="100" data-ng_translator_ref_id="ats7pjqvwebpfcwxaxm6r4ybu">绑定到 
+<code>contentEditable</code></a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="4kippfo6g1ne0i0dm5sw1gkgq">接下来，使用 
+<code aria-label="方括号">[]</code> 语法将 
+<code>div</code> 的 
+<code>contentEditable</code> 属性绑定到 
+<code>isEditable</code> 属性。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@<span class="hljs-type">Component</span>({</div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line highlighted">    <span class="hljs-keyword">template</span>: `&lt;<span class="hljs-keyword">div</span> [contentEditable]=<span class="hljs-string">"isEditable"</span>&gt;&lt;/<span class="hljs-keyword">div</span>&gt;`,</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p><span class="docs-emoji" data-ng_translator_product="100" data-ng_translator_ref_id="124lbwwesikmf6rphisd3kh4b">此 div 现在是可编辑的。干得好 👍</span></p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="48wugovywu18i49v52wdwvje6">属性绑定是 Angular 的众多强大特性之一。如果你想了解更多，请查看 
+<a href="guide/templates/property-binding">Angular 文档</a>。</p>

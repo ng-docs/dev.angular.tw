@@ -1,0 +1,42 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>DecimalPipe</h1><div class="docs-api-item-label" data-mode="full" data-type="pipe">pipe</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/common/src/pipes/number_pipe.ts#L79-L116" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6q7lp98brzwjyz110d58ohdr7">根据数字选项和区域设置规则格式化值。区域设置确定组的大小和分隔符、小数点字符和其他特定于区域设置的配置。</p><p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/common/formatNumber">formatNumber</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">DecimalPipe</span> {</div><div class="hljs-ln-group"><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="transform">  <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span>, digitsInfo?: <span class="hljs-built_in">string</span>, locale?: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="transform">  <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-literal">null</span>, digitsInfo?: <span class="hljs-built_in">string</span>, locale?: <span class="hljs-built_in">string</span>): <span class="hljs-literal">null</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="transform">  <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span>, digitsInfo?: <span class="hljs-built_in">string</span>, locale?: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">string</span>;</button></div><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><h3>digitsInfo</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2oydhq72qx0rw96vlmha34buk">该值的十进制表示由 
+<code>digitsInfo</code> 参数指定，格式如下：
+<br></p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-template-variable">{minIntegerDigits}</span><span class="language-xml">.</span><span class="hljs-template-variable">{minFractionDigits}</span><span class="language-xml">-</span><span class="hljs-template-variable">{maxFractionDigits}</span></span>
+          </code>
+        </pre>
+      </div>
+    
+    <ul class="docs-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cp6owspo9pyv9nfkc8p2n8qtp"><code>minIntegerDigits</code>：小数点前的最小整数位数。默认值为 1。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ptlzwh6h1j788iljfqz7ow5u"><code>minFractionDigits</code>：小数点后的最小位数。默认值为 0。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="asm2eia7nnw9gihhyz216n80e"><code>maxFractionDigits</code>：小数点后的最大位数。默认值为 3。</p>
+</li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c3w3n9vz21nrc5jp6ugxw3n3w">如果格式化的值被截断，将使用“to-nearest”方法将其四舍五入：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-template-variable">{{<span class="hljs-name">3.6</span> | number: <span class="hljs-string">'1.0-0'</span>}}</span><span class="language-xml"></span><span class="hljs-ln-line"><span class="hljs-comment">&lt;!--will output '4'--&gt;</span></span><span class="hljs-ln-line"></span><span class="hljs-ln-line"></span><span class="hljs-template-variable">{{<span class="hljs-name">-3.6</span> | number:<span class="hljs-string">'1.0-0'</span>}}</span><span class="language-xml"></span><span class="hljs-ln-line"><span class="hljs-comment">&lt;!--will output '-4'--&gt;</span></span></span>
+          </code>
+        </pre>
+      </div>
+    <h3>locale</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="als34rn2w0eo8t1p1o32bz8k5"><code>locale</code> 将根据区域设置规则格式化值。区域设置确定组的大小和分隔符、小数点字符和其他特定于区域设置的配置。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6f1i5royszxw0k5knm8an7a05">如果未提供，使用 
+<code>LOCALE_ID</code> 的值，默认是 
+<code>en-US</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9pdfvhe64ozprehb8s4pgolxh">参见 
+<a href="guide/i18n/locale-id">设置你的应用语言环境</a>。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="lzz2v4ucg07faxnpe2bu1wa1">范例</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="arq3ogilf21v0jkpvh0i4h92g">以下代码显示了管道如何根据各种格式规范转换值，其中调用者的默认区域设置是 <code>en-US</code>。</p>
+<p><code-example path="common/pipes/ts/number_pipe.ts" region="NumberPipe"></code-example></p>
+</div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="transform" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>transform</h3><div><span>3 overloads</span></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">value</span><code>string | number</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">digitsInfo</span><code>string</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">locale</span><code>string</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>string</code></div></div><div class="docs-reference-card-item "><div class="docs-function-definition"></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">value</span><code>null</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">digitsInfo</span><code>string</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">locale</span><code>string</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>null</code></div></div><div class="docs-reference-card-item "><div class="docs-function-definition"></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">value</span><code>string | number</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">digitsInfo</span><code>string</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">locale</span><code>string</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>string</code></div></div></div></div></div></div></div>

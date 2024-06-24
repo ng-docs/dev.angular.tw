@@ -1,0 +1,52 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="cdfcsxskn8g706qx9g3zslhw0">后缀不支持</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/extended-diagnostics/NG8106.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="777kn15j26utzca187jy8zckm">此诊断检测在属性绑定中使用 
+<code>.px</code>、
+<code>.%</code> 和 
+<code>.em</code> 后缀的情况。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> [<span class="hljs-attr">attr.width.px</span>]=<span class="hljs-string">"5"</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <h2 id="whats-wrong-with-that">
+    <a href="#whats-wrong-with-that" class="docs-anchor" tabindex="-1" aria-label="Link to What's wrong with that?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dyj3fm6hh05czc2euad3kejpb">那有什么问题？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1x6hj64vxxfprxv8vqmwbrx5n">这些后缀仅适用于样式绑定。在绑定到属性时，它们没有任何意义。</p>
+
+  <h2 id="what-should-i-do-instead">
+    <a href="#what-should-i-do-instead" class="docs-anchor" tabindex="-1" aria-label="Link to What should I do instead?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7bicb9bjjdedhs8bfd5vdiby7">我该怎么办？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6nafvmbmee0iglt9hm8ffsxw">与其使用只能在样式绑定中受支持的 <code>.px</code> 、 <code>.%</code> 或 <code>.em</code> 后缀，不如将其移动到对绑定进行赋值的表达式中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> [<span class="hljs-attr">attr.width</span>]=<span class="hljs-string">"'5px'"</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <h2 id="configuration-requirements">
+    <a href="#configuration-requirements" class="docs-anchor" tabindex="-1" aria-label="Link to Configuration requirements" data-ng_translator_product="100" data-ng_translator_ref_id="bwdhyfdm5yb1t69cyimmn0hs0">配置要求</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="d1v72tc11hinkl563m25t7jt8"><a href="tools/cli/template-typecheck#strict-mode"><code>strictTemplates</code></a> 必须启用，才能发出任何扩展诊断。 
+<code>invalidBananaInBox</code> 除了 
+<code>strictTemplates</code> 之外没有其他要求。</p>
+
+  <h2 id="what-if-i-cant-avoid-this">
+    <a href="#what-if-i-cant-avoid-this" class="docs-anchor" tabindex="-1" aria-label="Link to What if I can't avoid this?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="duupn560xw3oqrkqmgen1ccwo">如果我无法避免这种情况怎么办？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bzu6yb6isvsmddbdryz1qwy7l">可以通过编辑项目的 <code>tsconfig.json</code> 文件来禁用此诊断：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"angularCompilerOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"extendedDiagnostics"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"checks"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"suffixNotSupported"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"suppress"</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1tl6suaasu3xo2b1onvdft0o9">有关更多信息，请参阅<a href="extended-diagnostics#configuration">扩展诊断配置</a>。</p>

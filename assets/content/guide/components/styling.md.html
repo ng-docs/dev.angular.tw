@@ -1,0 +1,98 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="60b91ffna5xifftr675ttud2j">样式化组件</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/styling.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dgm70qgb782h0hajisr0uqi7a"><strong>提示：</strong>本指南假定你已经阅读了
+<a href="essentials">基本指南</a>。如果你是 Angular 的新手，请先阅读该指南。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="3q2j8q3qd6thonl2a40emwqbf">组件可以选择性地包含适用于该组件 DOM 的 CSS 样式：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'profile-photo'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;img src="profile-photo.jpg" alt="Your profile photo"&gt;`</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">styles</span>: <span class="hljs-string">` img { border-radius: 50%; } `</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfilePhoto</span> { }</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="b7ubqt3ly12dm11vvtbit4b40">你也可以选择将样式写在单独的文件中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'profile-photo'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'profile-photo.html'</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">styleUrl</span>: <span class="hljs-string">'profile-photo.css'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfilePhoto</span> { }</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="du1vzrnqbj1jfs4m6tp5nqgvg">当 Angular 编译你的组件时，这些样式会与该组件的 JavaScript 输出一起生成。这意味着组件样式参与了 JavaScript 模块体系。当你渲染一个 Angular 组件时，即使是在延迟加载组件时，框架也会自动包含其关联的样式。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="e73s97isoze09wdauslm9ifh5">Angular 可以和任何输出 CSS 的工具配合使用，包括 
+<a href="https://sass-lang.com" target="_blank">Sass</a>、
+<a href="https://lesscss.org" target="_blank">Less</a> 和 
+<a href="https://stylus-lang.com" target="_blank">Stylus</a>。</p>
+
+  <h2 id="style-scoping">
+    <a href="#style-scoping" class="docs-anchor" tabindex="-1" aria-label="Link to Style scoping" data-ng_translator_product="100" data-ng_translator_ref_id="1w5mqt2r87bcmj4qdqfxxaq4e">样式作用域</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="383u4id83i2xxgjyj53n6f4g1">每个组件都有一个
+<strong>视图封装</strong>设置，这个设置决定了框架如何限定组件的样式作用域。有三种视图封装模式：
+<code>Emulated</code>、
+<code>ShadowDom</code> 和 
+<code>None</code>。你可以在 
+<code>@Component</code> 装饰器中指定模式：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">encapsulation</span>: <span class="hljs-title class_">ViewEncapsulation</span>.<span class="hljs-property">None</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfilePhoto</span> { }</div></code>
+    </pre>
+  </div>
+  <h3 id="viewencapsulationemulated">
+    <a href="#viewencapsulationemulated" class="docs-anchor" tabindex="-1" aria-label="Link to ViewEncapsulation.Emulated">ViewEncapsulation.Emulated</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bwm1bxonyftd2aglq2kxzv7gl">默认情况下，Angular 使用模拟封装，这样组件的样式只会应用于该组件模板中定义的元素。在这种模式下，框架为每个组件实例生成一个唯一的 HTML 属性，将该属性添加到组件模板中的元素，并将该属性插入到组件样式定义的 CSS 选择器中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3wwlva60iwh2dlr7pxz4kokww">这种模式确保了组件的样式不会泄漏并影响其他组件。然而，定义在组件外部的全局样式仍可能影响带有模拟封装的组件内部的元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eq15i71am7ujv8jj8w4t87hsc">在模拟封装模式下，Angular 支持 
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:host" target="_blank"><code>:host</code></a> 和 
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:host-context" target="_blank"><code>:host-context()</code></a> 伪类，而无需使用 
+<a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM" target="_blank">Shadow DOM</a>。在编译期间，框架将这些伪类转换为属性，因此在运行时不遵循这些本地伪类的规则（例如浏览器兼容性、特异性）。Angular 的模拟封装模式不支持与 Shadow DOM 相关的任何其他伪类，例如 
+<code>::shadow</code> 或 
+<code>::part</code>。</p>
+
+  <h4 id="ng-deep">
+    <a href="#ng-deep" class="docs-anchor" tabindex="-1" aria-label="Link to <code>::ng-deep</code>"><code>::ng-deep</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="c0g0dzp9crne4hjcliqko1qrz">Angular 的模拟封装模式支持自定义伪类 
+<code>::ng-deep</code>。将此伪类应用于 CSS 规则会禁用该规则的封装，实际上将其变为全局样式。
+<strong>Angular 团队强烈建议不要再使用 <code>::ng-deep</code></strong>。这些 API 仅为向后兼容而保留。</p>
+
+  <h3 id="viewencapsulationshadowdom">
+    <a href="#viewencapsulationshadowdom" class="docs-anchor" tabindex="-1" aria-label="Link to ViewEncapsulation.ShadowDom">ViewEncapsulation.ShadowDom</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9tuyklspit54oss5xxoe8rkih">这种模式通过使用 
+<a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM" target="_blank">Web 标准 Shadow DOM API</a> 来限定组件内的样式作用域。启用这种模式时，Angular 会将一个 shadow root 附着到组件的宿主元素，并将组件的模板和样式渲染到对应的 shadow 树中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="qskgzatdq06fe2drs4oqeodx">此模式严格保证
+<em>只有</em>该组件的样式适用于组件模板中的元素。全局样式不能影响影子树中的元素，影子树中的样式也不能影响影子树外的元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eqeiu4zo5qslo8k1buufiank8">然而，启用 
+<code>ShadowDom</code> 封装不仅仅影响样式作用域。在 shadow 树中渲染组件会影响事件传播、与 
+<a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots" target="_blank"><code>&lt;slot&gt;</code> API</a> 的交互，以及浏览器开发者工具显示元素的方式。在启用此选项之前，务必理解在你的应用中使用 Shadow DOM 的全部影响。</p>
+
+  <h3 id="viewencapsulationnone">
+    <a href="#viewencapsulationnone" class="docs-anchor" tabindex="-1" aria-label="Link to ViewEncapsulation.None">ViewEncapsulation.None</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3y5q7tusjguhhpujxt7b5hhvg">这种模式会禁用组件的所有样式封装。任何与组件关联的样式都会作为全局样式来处理。</p>
+
+  <h2 id="defining-styles-in-templates">
+    <a href="#defining-styles-in-templates" class="docs-anchor" tabindex="-1" aria-label="Link to Defining styles in templates" data-ng_translator_product="100" data-ng_translator_ref_id="4ip3pl6b8byedyqq6bpxu0o5d">在模板中定义样式</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="t24zcput5wnctooi6ebdl1i3">你可以在组件的模板中使用 
+<code>&lt;style&gt;</code> 元素来定义额外样式。组件的视图封装模式会应用于这种方式定义的样式。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4dcfobv197ycv9w6jbbzk1hpw">Angular 不支持在样式元素内部进行绑定。</p>
+
+  <h2 id="referencing-external-style-files">
+    <a href="#referencing-external-style-files" class="docs-anchor" tabindex="-1" aria-label="Link to Referencing external style files" data-ng_translator_product="100" data-ng_translator_ref_id="2yo7gdsdgjpfnp6jxa1xrlb25">引用外部样式文件</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1t5y53hik89wqkgjybb0yj3vq">组件模板可以使用 
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link" target="_blank"><code>&lt;link&gt;</code> 元素</a> 来引用 CSS 文件。除此之外，你的 CSS 可能会使用 
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@import" target="_blank"><code>@import</code> 规则</a> 来引用 CSS 文件。Angular 将这些引用视为 
+<em>外部</em> 样式。外部样式不受模拟视图封装的影响。</p>

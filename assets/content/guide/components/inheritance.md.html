@@ -1,0 +1,68 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="dhyyqjnd8e0b0rjstlbi82vga">继承</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/inheritance.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dgm70qgb782h0hajisr0uqi7a"><strong>提示：</strong>本指南假定你已经阅读了
+<a href="essentials">基本指南</a>。如果你是 Angular 的新手，请先阅读该指南。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cr0aot17fvncxslqy3mtti1g1">Angular 组件是 TypeScript 类，并参与标准 JavaScript 继承语义。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="b8bkq1a8d5axvp1p8wcv8z3rv">组件可以扩展任何基类：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ListboxBase</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ ... })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomListbox</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">ListboxBase</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// CustomListbox inherits the `value` property.</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="extending-other-components-and-directives">
+    <a href="#extending-other-components-and-directives" class="docs-anchor" tabindex="-1" aria-label="Link to Extending other components and directives" data-ng_translator_product="100" data-ng_translator_ref_id="9hnb4hstk8hxqbjmm80w81l23">扩展其他组件和指令</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="47fcl3uyex43heipl9qlgpvfp">当组件扩展另一个组件或指令时，它继承了基类装饰器中定义的所有元数据以及基类装饰器的装饰成员。这包括选择器、模板、样式、宿主绑定、输入、输出、生命周期方法和任何其他设置。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'base-listbox'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  <span class="hljs-attr">host</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">'(keydown)'</span>: <span class="hljs-string">'handleKey($event)'</span>,</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ListboxBase</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  <span class="hljs-title function_">handleKey</span>(<span class="hljs-params">event: KeyboardEvent</span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">/* ... */</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-listbox'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  <span class="hljs-attr">host</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">'(click)'</span>: <span class="hljs-string">'focusActiveOption()'</span>,</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomListbox</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">ListboxBase</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() disabled = <span class="hljs-literal">false</span>;</div><div class="hljs-ln-line">  <span class="hljs-title function_">focusActiveOption</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">/* ... */</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="3k65pmuedy8mdqb8onig6njy1">在上面的例子中，
+<code>CustomListbox</code> 继承了与 
+<code>ListboxBase</code> 相关的所有信息，用自己的值覆盖了选择器和模板。
+<code>CustomListbox</code> 有两个输入（
+<code>value</code> 和 
+<code>disabled</code>）和两个事件监听器（
+<code>keydown</code> 和 
+<code>click</code>）。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="f3k55cw6ajjjdcoevb6jrulw6">子类最终拥有所有祖先的输入、输出和宿主绑定以及自己的 
+<em>并集</em>。</p>
+
+  <h3 id="forwarding-injected-dependencies">
+    <a href="#forwarding-injected-dependencies" class="docs-anchor" tabindex="-1" aria-label="Link to Forwarding injected dependencies" data-ng_translator_product="100" data-ng_translator_ref_id="742xlx19q460rbaar63554is2">转发注入的依赖项</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="clitw71zlf5rly7m0qktkvvi0">如果基类依赖于依赖注入，子类必须显式将这些依赖项传递给 
+<code>super</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ ... })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ListboxBase</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> element: ElementRef</span>) { }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ ... })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomListbox</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">ListboxBase</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">element: ElementRef</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">super</span>(element);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="overriding-lifecycle-methods">
+    <a href="#overriding-lifecycle-methods" class="docs-anchor" tabindex="-1" aria-label="Link to Overriding lifecycle methods" data-ng_translator_product="100" data-ng_translator_ref_id="6hf7c1bwabh137uwa6ozsjkd1">重写生命周期方法</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="49euae82j4y9mhrklebsupn85">如果基类定义了一个生命周期方法，比如 
+<code>ngOnInit</code>，子类也实现了 
+<code>ngOnInit</code>，则子类 
+<em>覆盖</em> 基类的实现。如果要保留基类的生命周期方法，请显式使用 
+<code>super</code> 调用该方法：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ ... })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ListboxBase</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">protected</span> isInitialized = <span class="hljs-literal">false</span>;</div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">isInitialized</span> = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ ... })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomListbox</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">ListboxBase</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">override</span> <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">super</span>.<span class="hljs-title function_">ngOnInit</span>();</div><div class="hljs-ln-line">    <span class="hljs-comment">/* ... */</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

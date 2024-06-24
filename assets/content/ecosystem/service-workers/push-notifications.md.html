@@ -1,0 +1,123 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="4s3hnc47zgnjnfombsgaya3bf">推送通知</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/ecosystem/service-workers/push-notifications.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8n3fgpbcuttxdfewfe6hzext7">推送通知是吸引用户的一种引人注目的方式。通过 Service Worker 的强大功能，即使你的应用程序不在焦点上，也可以将通知发送到设备。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1dgan5411psr5pmwmukuffg4y">Angular Service Worker 支持显示推送通知和处理通知点击事件。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bzmkxf7dfa6zjk05xq2a7ufj6"><strong>提示：</strong>在使用 Angular 服务工作者时，推送通知交互是使用 
+<code>SwPush</code> 服务处理的。 要了解涉及的浏览器API，请参见 
+<a href="https://developer.mozilla.org/docs/Web/API/Push_API" target="_blank">推送API</a> 和 
+<a href="https://developer.mozilla.org/docs/Web/API/Notifications_API/Using_the_Notifications_API" target="_blank">使用通知API</a>。</p>
+
+    </div>
+    
+  <h2 id="notification-payload">
+    <a href="#notification-payload" class="docs-anchor" tabindex="-1" aria-label="Link to Notification payload" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2ybf21q7lftkui34yvk01dvmd">通知负载</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5rhyou8sl1fnl5vma3jder8da">通过推送带有有效负载的消息来调用推送通知。 查看 
+<code>SwPush</code> 以获得指导。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2ldkh4xj86uws3d2q68qzupv6"><strong>提示：</strong>在 Chrome 中，你可以在没有后端的情况下测试推送通知。 打开 Devtools -&gt; 应用程序 -&gt; 服务工作者，使用 
+<code>Push</code> 输入发送JSON通知负载。</p>
+
+    </div>
+    
+  <h2 id="notification-click-handling">
+    <a href="#notification-click-handling" class="docs-anchor" tabindex="-1" aria-label="Link to Notification click handling" data-ng_translator_product="100" data-ng_translator_ref_id="ct5cw2oc54wz7da93hr8jbqq0">通知点击处理</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9d6lca3b7rdy0i5mzxehq296t"><code>notificationclick</code> 事件的默认行为是关闭通知并通知 
+<code>SwPush.notificationClicks</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9kqbmnkfdelq5cgmc8fwx2k2y">你可以通过向 <code>data</code> 对象添加 <code>onActionClick</code> 属性并提供 <code>default</code> 条目来指定要在 <code>notificationclick</code> 上执行的附加操作。当单击通知时没有打开的客户端时，这尤其有用。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"notification"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"title"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"New Notification!"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"onActionClick"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"default"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"operation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"openWindow"</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"foo"</span><span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <h3 id="operations">
+    <a href="#operations" class="docs-anchor" tabindex="-1" aria-label="Link to Operations" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="43ysvljbqsi9gnznk2qix8ai5">操作</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="62u3uylahxsgru8u22cbazp7c">Angular Service Worker 支持以下操作：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="43ysvljbqsi9gnznk2qix8ai5">操作</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>openWindow</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="b78fdzbklfm5ferz4g7r6yzs2">在指定的URL上打开一个新标签页。</td>
+</tr>
+<tr>
+<td align="left"><code>focusLastFocusedOrOpen</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2ghj48k4ycr4nifndk85wwk37">将焦点放在最后一个聚焦的客户端上。如果没有客户端打开，则在指定的URL上打开一个新标签页。</td>
+</tr>
+<tr>
+<td align="left"><code>navigateLastFocusedOrOpen</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8xf1ic7be4jf4yf75n2iwzcr2">将焦点放在最后一个聚焦的客户端上，并将其导航到指定的URL。如果没有客户端打开，则在指定的URL上打开一个新标签页。</td>
+</tr>
+<tr>
+<td align="left"><code>sendRequest</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8boncr73a5g4zc4z0r96emd3p">向指定的URL发送一个简单的GET请求。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="56x0pkkn8bxw0qitu18s2vqww"><strong>重要：</strong>URL相对于服务工作者的注册范围进行解析。
+<br>如果一个 
+<code>onActionClick</code> 条目没有定义 
+<code>url</code>，则使用服务工作者的注册范围。</p>
+
+    </div>
+    
+  <h3 id="actions">
+    <a href="#actions" class="docs-anchor" tabindex="-1" aria-label="Link to Actions" data-ng_translator_product="100" data-ng_translator_ref_id="en94m4p3a09fuw01gjhg0giy">操作</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5qzssaubky5od20arsr6wofnq">操作提供了一种自定义用户如何与通知交互的方法。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6n1810kuarf3yqdta7ld6rtg2">使用 <code>actions</code> 属性，你可以定义一组可用的操作。每个动作都表示为一个动作按钮，用户可以单击该按钮与通知进行交互。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a2v87a61xvgmz3k4mglarg6az">此外，使用 <code>data</code> 对象上的 <code>onActionClick</code> 属性，你可以将每个操作与单击相应操作按钮时要执行的操作联系起来：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{</div><div class="hljs-ln-line">  <span class="hljs-string">"notification"</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">"title"</span>: <span class="hljs-string">"New Notification!"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"actions"</span>: [</div><div class="hljs-ln-line">      {<span class="hljs-string">"action"</span>: <span class="hljs-string">"foo"</span>, <span class="hljs-string">"title"</span>: <span class="hljs-string">"Open new tab"</span>},</div><div class="hljs-ln-line">      {<span class="hljs-string">"action"</span>: <span class="hljs-string">"bar"</span>, <span class="hljs-string">"title"</span>: <span class="hljs-string">"Focus last"</span>},</div><div class="hljs-ln-line">      {<span class="hljs-string">"action"</span>: <span class="hljs-string">"baz"</span>, <span class="hljs-string">"title"</span>: <span class="hljs-string">"Navigate last"</span>},</div><div class="hljs-ln-line">      {<span class="hljs-string">"action"</span>: <span class="hljs-string">"qux"</span>, <span class="hljs-string">"title"</span>: <span class="hljs-string">"Send request in the background"</span>}</div><div class="hljs-ln-line">      {<span class="hljs-string">"action"</span>: <span class="hljs-string">"other"</span>, <span class="hljs-string">"title"</span>: <span class="hljs-string">"Just notify existing clients"</span>}</div><div class="hljs-ln-line">    ],</div><div class="hljs-ln-line">    <span class="hljs-string">"data"</span>: {</div><div class="hljs-ln-line">      <span class="hljs-string">"onActionClick"</span>: {</div><div class="hljs-ln-line">        <span class="hljs-string">"default"</span>: {<span class="hljs-string">"operation"</span>: <span class="hljs-string">"openWindow"</span>},</div><div class="hljs-ln-line">        <span class="hljs-string">"foo"</span>: {<span class="hljs-string">"operation"</span>: <span class="hljs-string">"openWindow"</span>, <span class="hljs-string">"url"</span>: <span class="hljs-string">"/absolute/path"</span>},</div><div class="hljs-ln-line">        <span class="hljs-string">"bar"</span>: {<span class="hljs-string">"operation"</span>: <span class="hljs-string">"focusLastFocusedOrOpen"</span>, <span class="hljs-string">"url"</span>: <span class="hljs-string">"relative/path"</span>},</div><div class="hljs-ln-line">        <span class="hljs-string">"baz"</span>: {<span class="hljs-string">"operation"</span>: <span class="hljs-string">"navigateLastFocusedOrOpen"</span>, <span class="hljs-string">"url"</span>: <span class="hljs-string">"https://other.domain.com/"</span>},</div><div class="hljs-ln-line">        <span class="hljs-string">"qux"</span>: {<span class="hljs-string">"operation"</span>: <span class="hljs-string">"sendRequest"</span>, <span class="hljs-string">"url"</span>: <span class="hljs-string">"https://yet.another.domain.com/"</span>}</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bo7wrn8ho19it2aq82wcdk4v3"><strong>重要：</strong>如果一个操作没有相应的 
+<code>onActionClick</code> 条目，通知将关闭，并在现有客户端上通知 
+<code>SwPush.notificationClicks</code>。</p>
+
+    </div>
+    
+  <h2 id="more-on-angular-service-workers">
+    <a href="#more-on-angular-service-workers" class="docs-anchor" tabindex="-1" aria-label="Link to More on Angular service workers" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e9jl51v338pdg88lkv1cl8f1i">关于 Angular Service Worker 的更多信息</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1oolgylns9kaynftarwog49tq">你可能还对下列内容感兴趣：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="ecosystem/service-workers/communications" data-ng_translator_product="100" data-ng_translator_ref_id="8yc3zafldwi6g1hcldyi9y5j4">与 Service Worker 通信</a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/devops" data-ng_translator_product="100" data-ng_translator_ref_id="7q4y6g2v52ulz6wah6v8ethrc">Service Worker 运维</a>
+    
+
+    </nav>
+    

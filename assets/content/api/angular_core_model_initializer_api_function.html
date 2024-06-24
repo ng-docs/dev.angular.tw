@@ -1,0 +1,51 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>model</h1><div class="docs-api-item-label" data-mode="full" data-type="initializer_api_function">Initializer API</div><div class="docs-api-item-label" data-mode="full" data-type="developer_preview">Developer preview</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/core/src/authoring/model/model.ts#L104-L110" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="80ubdmej5qduz840tluiaimow"><code>model</code> 声明了一个可写信号，该信号作为输入/输出对暴露在包含的指令中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ek7u2fg926u9pmakikksra6lu">输入名称取自类成员或 
+<code>alias</code> 选项。输出名称通过取输入名称并附加 
+<code>Change</code> 来生成。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="model_0">model&lt;T&gt;();</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="model_1">model&lt;T&gt;(initialValue, opts?);</button><div class="hljs-ln-line "></div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="model_required_0">model.<span class="hljs-property">required</span>&lt;T&gt;(opts?);</button></code></pre></div></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="90bqcojkihmdsv1vamuii0tm2">要使用 
+<code>model()</code>，从 
+<code>@angular/core</code> 导入该函数。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {model} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core`;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4f718s5s79pkiybexxpo0kwqp">在你的组件中，引入一个新的类成员，并使用 
+<code>model</code> 或 
+<code>model.required</code> 进行初始化。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</span><span class="hljs-ln-line">  ...</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDir</span> {</span><span class="hljs-ln-line">  firstName = model&lt;<span class="hljs-built_in">string</span>&gt;();            <span class="hljs-comment">// ModelSignal&lt;string|undefined&gt;</span></span><span class="hljs-ln-line">  lastName  = model.<span class="hljs-property">required</span>&lt;<span class="hljs-built_in">string</span>&gt;();   <span class="hljs-comment">// ModelSignal&lt;string&gt;</span></span><span class="hljs-ln-line">  age       = <span class="hljs-title function_">model</span>(<span class="hljs-number">0</span>);                   <span class="hljs-comment">// ModelSignal&lt;number&gt;</span></span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="72v8bxa0cl1rqb81xejgykpjh">在你的组件模板中，可以通过调用信号来显示 
+<code>model</code> 的值。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{{firstName()}}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="359xzi0bj81cjdu1euxuol4e9">更新 
+<code>model</code> 等同于更新一个可写信号。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">updateName</span>(<span class="hljs-attr">newFirstName</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> {</span><span class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">firstName</span>.<span class="hljs-title function_">set</span>(newFirstName);</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card" id="model_0" tabindex="-1"><header><code><div>model&lt;T&gt;(): <span class="hljs-title class_">ModelSignal</span>&lt;T&gt;;</div></code></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="14s2a8x74w3p4p56oq9ez4wax">使用初始值 
+<code>undefined</code> 来初始化一个类型为 
+<code>T</code> 的模型。Angular 将隐式地使用 
+<code>undefined</code> 作为初始值。</p></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>ModelSignal&lt;T&gt;</code></div></div></div></div><div class="docs-reference-member-card" id="model_1" tabindex="-1"><header><code><div>model&lt;T&gt;(<span class="hljs-attr">initialValue</span>: T, opts?: <span class="hljs-title class_">ModelOptions</span>): <span class="hljs-title class_">ModelSignal</span>&lt;T&gt;;</div></code></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="3z8tj66hnmun4h8zrbc7s2sd5">使用给定的初始值初始化一个类型为 
+<code>T</code> 的模型。</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">initialValue</span><code>T</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">opts</span><code>ModelOptions</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>ModelSignal&lt;T&gt;</code></div></div></div></div><div class="docs-reference-member-card" id="model_required_0" tabindex="-1"><header><code><div>model.<span class="hljs-property">required</span>&lt;T&gt;(opts?: <span class="hljs-title class_">ModelOptions</span>): <span class="hljs-title class_">ModelSignal</span>&lt;T&gt;;</div></code></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="2hoieoy1t4oeq2o1yc39yvowd">初始化一个必要的模型。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9rblwrm949atfiqdf8tuadmso">你的指令/组件的用户需要绑定到模型的输入端。如果未设置，将报告编译时错误。</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">opts</span><code>ModelOptions</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>ModelSignal&lt;T&gt;</code></div></div></div></div></div></div></div>

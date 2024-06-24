@@ -1,0 +1,86 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="1kho6ycshvduoom6xwl5epptf">使用 
+<code>@Input</code> 进行组件通信</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/8-input/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cf019epbgz1snok943msf9p7y">有时，应用开发需要你向组件传递数据。这些数据可以用来定制组件，或将信息从父组件传递到子组件。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="52iiu9rhtb07gh0g21qx4mmfm">Angular 使用一个称为 
+<code>Input</code> 的概念。这类似于其他框架中的 
+<code>props</code>。要创建一个 
+<code>Input</code> 属性，使用 
+<code>@Input</code> 装饰器。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6zc5j2vzloa4tk5sw36aqij5g">在这个活动中，你将学习如何使用 
+<code>@Input</code> 装饰器向组件传递信息。</p>
+<hr>
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a7sa1w3zjkg4ubgj3fhsu7qh6">要创建一个 
+<code>Input</code> 属性，将 
+<code>@Input</code> 装饰器添加到组件类的某个属性上：</p>
+<div class="docs-code" header="user.component.ts">
+    <div class="docs-code-header"><h3>user.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">UserComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() occupation = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="6hzp6rnuy217rc6rhrbhlawk7">当你准备好通过 
+<code>Input</code> 传入一个值时，可以在模板中使用属性语法设置值。以下是示例：</p>
+<div class="docs-code" header="app.component.ts">
+    <div class="docs-code-header"><h3>app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;app-user occupation="Angular Developer"&gt;&lt;app-user/&gt;`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9w3zq3kn0xelrlwmyrajaeuj">确保你在 
+<code>UserComponent</code> 中绑定属性 
+<code>occupation</code>。</p>
+<div class="docs-code" header="user.component.ts">
+    <div class="docs-code-header"><h3>user.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;p&gt;The user's name is {{occupation}}&lt;/p&gt;`</span></div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div>
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="define-an-input-property">
+    <a href="#define-an-input-property" class="docs-anchor" tabindex="-1" aria-label="Link to Define an <code>@Input</code> property" data-ng_translator_product="100" data-ng_translator_ref_id="9n82b3hkhv848fciepf4lhtpb">定义一个 
+<code>@Input</code> 属性</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="88y6qhb7y32pe6q25ke8moz57">更新 
+<code>user.component.ts</code> 中的代码，在 
+<code>UserComponent</code> 上定义一个名为 
+<code>name</code> 的 
+<code>Input</code> 属性。目前，将初始值设置为 
+<code>空字符串</code>。务必更新模板，在句子的末尾插值 
+<code>name</code> 属性。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="pass-a-value-to-the-input-property">
+    <a href="#pass-a-value-to-the-input-property" class="docs-anchor" tabindex="-1" aria-label="Link to Pass a value to the <code>@Input</code> property" data-ng_translator_product="100" data-ng_translator_ref_id="64jl1h6q6gl18c75xleffpmv3">向 
+<code>@Input</code> 属性传递一个值</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="339u2my7m4zp9kyf0tqeh66zj">更新 
+<code>app.component.ts</code> 中的代码，传入值为 
+<code>"Simran"</code> 的 
+<code>name</code> 属性。 
+<br></p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="d9razif9nhsftecu56uz6btnu">当代码成功更新后，应用将显示 
+<code>The user's name is Simran</code>。</p>
+
+    </li>
+    
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4bm9yckxcgkljgdd8bjbkj1p7">虽然这很好，但这只是组件通信的一个方向。如果你想从子组件向父组件发送信息和数据怎么办？查看下一课来了解。</p>
+<p><span class="docs-emoji" data-ng_translator_product="100" data-ng_translator_ref_id="3db1sxqnvzogmsvq49awx1rnt">顺便说一句，你做得很好 — 继续加油 🎉</span></p>

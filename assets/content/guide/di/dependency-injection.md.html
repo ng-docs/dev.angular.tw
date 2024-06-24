@@ -1,0 +1,154 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6yvsg1jhbulx35x6m8zucrwf0">Angular 依赖注入</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/di/dependency-injection.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6zjxl5047vqan63tsqmml1nap">依赖注入（DI）是 Angular 中的基本概念之一。DI 被装配进 Angular 框架，并允许带有 Angular 装饰器的类（例如组件、指令、管道和可注入对象）配置它们所需的依赖项。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="10zmj1k71qzkpzhrs1rw6dvpb">DI 系统中存在两个主要角色：依赖使用者和依赖提供者。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1hulgx2py2dfbh8ky46vn20om">Angular 使用一个称为 
+<code>Injector</code> 的抽象来简化依赖消费者和依赖提供者之间的交互。当请求一个依赖时，注入器会检查其注册表中是否已有可用实例。如果没有，则创建一个新实例并存储在注册表中。Angular 在应用启动过程（也称为「根」注入器）中创建一个应用范围的注入器。在大多数情况下，你不需要手动创建注入器，但应该知道有一个连接提供者和消费者的层。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="d59y1h8h6dlgvg4j8rswkx8yk">本主题涵盖了类作为依赖的基本场景。Angular 还允许你使用函数、对象、字符串或布尔值等原语类型，或任何其他类型作为依赖。有关更多信息，请参见 
+<a href="guide/di/dependency-injection-providers">依赖提供者</a>。</p>
+
+  <h2 id="providing-a-dependency">
+    <a href="#providing-a-dependency" class="docs-anchor" tabindex="-1" aria-label="Link to Providing a dependency" data-ng_translator_product="100" data-ng_translator_ref_id="5t5wddtjly5ll100oegl2g6pu">提供依赖</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3pxqsebzfgtkoz14leoksxqc2">考虑一个名为 
+<code>HeroService</code> 的类，需要在组件中作为依赖。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="19oen7sizcxyrt9pznsifxvnm">第一步是添加 
+<code>@Injectable</code> 装饰器，以表明该类可以被注入。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line highlighted"><span class="hljs-meta">@Injectable</span>()</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ec6jubwooc8xnr9vdk23gntic">下一步是在 DI 中提供它，使其可用。 可以在多个位置提供依赖：</p>
+
+  <ul class="docs-list">
+    <li><a href="#preferred-at-the-application-root-level-using-providedin" data-ng_translator_product="100" data-ng_translator_ref_id="erh0w0cx10yv0gj7bs0e6l1qw"><strong>首选</strong>：在应用根级别使用 <code>providedIn</code>。</a></li>
+<li><a href="#at-the-component-level" data-ng_translator_product="100" data-ng_translator_ref_id="6gux6mzmj9hnlov14gkwizejv">在组件级别。</a></li>
+<li><a href="#at-the-application-root-level-using-applicationconfig" data-ng_translator_product="100" data-ng_translator_ref_id="gvx5go69nfxnamcsy21w4ncc">在应用根级别使用 <code>ApplicationConfig</code>。</a></li>
+<li><a href="#ngmodule-based-applications" data-ng_translator_product="100" data-ng_translator_ref_id="5w35jzcvsbo897kw59dbf74ac">基于 <code>NgModule</code> 的应用。</a></li>
+
+  </ul>
+  
+  <h3 id="preferred-at-the-application-root-level-using-providedin">
+    <a href="#preferred-at-the-application-root-level-using-providedin" class="docs-anchor" tabindex="-1" aria-label="Link to <strong>Preferred</strong>: At the application root level using <code>providedIn</code>" data-ng_translator_product="100" data-ng_translator_ref_id="55jfvt6rkauxcgva39t2voi18"><strong>首选</strong>：在应用的根级别使用 
+<code>providedIn</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="60eqd2pxr7tis50s1nxpdjqke">在应用根级别使用 
+<code>providedIn</code> 提供服务可以将该服务注入到所有其他类中。 使用 
+<code>providedIn</code> 使 Angular 和 JavaScript 代码优化器能够有效移除未使用的服务（称为摇树优化）。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5is2om47mfim71jiibbhy8cdd">你可以在 
+<code>@Injectable</code> 装饰器中使用 
+<code>providedIn: 'root'</code> 来提供一个服务：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ckdw6h06sx3iqugtqzsgnhwjn">当你在根级别提供服务时，Angular 会创建一个 
+<code>HeroService</code> 的单一共享实例，并将其注入到任何请求它的类中。</p>
+
+  <h3 id="at-the-component-level">
+    <a href="#at-the-component-level" class="docs-anchor" tabindex="-1" aria-label="Link to At the Component level" data-ng_translator_product="100" data-ng_translator_ref_id="3lvvknpe8vfk3kckunui3xk0z">在组件级别</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6haxuzlmp0mfhgv7up9wxzu4n">你可以通过使用 
+<code>@Component</code> 装饰器的 
+<code>providers</code> 字段在 
+<code>@Component</code> 级别提供服务。在这种情况下，
+<code>HeroService</code> 可以被此组件的所有实例以及模板中使用的其他组件和指令访问。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4reizjf10jcs1ftw359bt1ndz">比如：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'hero-list'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'...'</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [<span class="hljs-title class_">HeroService</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroListComponent</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dkvq95hir8daqe6pnzudkd34o">当你在组件级别注册提供者时，该组件的每个新实例都会获得一个新的服务实例。</p>
+
+    <div class="docs-alert docs-alert-note">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9jq8hxgmz26585x8k9tauykzo"><strong>注意：</strong> 这样声明一个服务会导致 
+<code>HeroService</code> 始终包含在你的应用中——即使该服务未被使用。</p>
+
+    </div>
+    
+  <h3 id="at-the-application-root-level-using-applicationconfig">
+    <a href="#at-the-application-root-level-using-applicationconfig" class="docs-anchor" tabindex="-1" aria-label="Link to At the application root level using <code>ApplicationConfig</code>" data-ng_translator_product="100" data-ng_translator_ref_id="9x00g3auw5elhptlrwoosz46n">在应用的根级别使用 
+<code>ApplicationConfig</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="74brw8vy9fyyy73xzb8acxm47">你可以使用 
+<code>ApplicationConfig</code>（传递给 
+<code>bootstrapApplication</code> 函数）的 
+<code>providers</code> 字段在应用级别提供服务或其他 
+<code>Injectable</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bu636gn3cgxe6e3bun1djrhrn">在下面的示例中，
+<code>HeroService</code> 可用于所有组件、指令和管道：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">    <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line highlighted">      { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">HeroService</span> },</div><div class="hljs-ln-line">    ]</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="agpobxv8lir1uch5wtlu18h4e">然后，在 
+<code>main.ts</code> 中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">AppComponent</span>, appConfig)</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-note">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9jq8hxgmz26585x8k9tauykzo"><strong>注意：</strong> 这样声明一个服务会导致 
+<code>HeroService</code> 始终包含在你的应用中——即使该服务未被使用。</p>
+
+    </div>
+    
+  <h3 id="ngmodule-based-applications">
+    <a href="#ngmodule-based-applications" class="docs-anchor" tabindex="-1" aria-label="Link to <code>NgModule</code> based applications" data-ng_translator_product="100" data-ng_translator_ref_id="6rfrikernulwy2y6nuzczw9e9">基于 
+<code>NgModule</code> 的应用</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="15ltksgr9py988mna02d03kfj">基于 
+<code>@NgModule</code> 的应用使用 
+<code>@NgModule</code> 装饰器的 
+<code>providers</code> 字段在应用级别提供服务或其他 
+<code>Injectable</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="vykiv04p0348kqppo8czbzh0">在模块中提供的服务对该模块的所有声明或共享相同 
+<code>ModuleInjector</code> 的任何其他模块可用。 要了解所有边界情况，请参阅 
+<a href="guide/di/hierarchical-dependency-injection">分层注入器</a>。</p>
+
+    <div class="docs-alert docs-alert-note">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dro6psmtlbz7qy13oenhb5qr6"><strong>注意：</strong> 使用 
+<code>providers</code> 声明服务会导致该服务包含在你的应用中——即使该服务未被使用。</p>
+
+    </div>
+    
+  <h2 id="injecting-consuming-a-dependency">
+    <a href="#injecting-consuming-a-dependency" class="docs-anchor" tabindex="-1" aria-label="Link to Injecting/consuming a dependency" data-ng_translator_product="100" data-ng_translator_ref_id="25g3ol6lru3vgew6je5zn6qg4">注入/消费依赖</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7gu8tb6h3onxb9106ao5akw9b">注入依赖项的最常见方法是在类的构造函数中声明它。当 Angular 创建组件、指令或管道类的新实例时，它会通过查看构造函数的参数类型来确定该类需要哪些服务或其他依赖项。例如，如果 <code>HeroListComponent</code> 要用 <code>HeroService</code>，则构造函数可以如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ … })</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroListComponent</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> service: HeroService</span>) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="cl3jju4iuom2umkvzg03756ii">另一种选择是使用 
+<a href="api/core/inject">inject</a> 方法：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ … })</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroListComponent</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-keyword">private</span> service = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">HeroService</span>);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7bi3l0p4trrdrv57wv5fdv0jg">当 Angular 发现一个组件依赖于一项服务时，它会首先检查注入器中是否已有该服务的任何现有实例。如果所请求的服务实例尚不存在，注入器就会使用注册的提供者创建一个，并在将服务返回给 Angular 之前将其添加到注入器中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="azi8pf0rs679xrhdnc8oegqwv">当所有请求的服务都已解析并返回时，Angular 就可以用这些服务实例为参数，调用该组件的构造函数。</p>
+<svg aria-roledescription="flowchart-v2" role="graphics-document document" viewbox="-8 -8 590.34375 200" style="max-width: 590.34375px;" xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid-generated-diagram"><style>#mermaid-generated-diagram{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#mermaid-generated-diagram .error-icon{fill:hsl(220.5882352941, 100%, 98.3333333333%);}#mermaid-generated-diagram .error-text{fill:rgb(8.5000000002, 5.7500000001, 0);stroke:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram .edge-thickness-normal{stroke-width:2px;}#mermaid-generated-diagram .edge-thickness-thick{stroke-width:3.5px;}#mermaid-generated-diagram .edge-pattern-solid{stroke-dasharray:0;}#mermaid-generated-diagram .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-generated-diagram .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-generated-diagram .marker{fill:#0b0b0b;stroke:#0b0b0b;}#mermaid-generated-diagram .marker.cross{stroke:#0b0b0b;}#mermaid-generated-diagram svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-generated-diagram .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#mermaid-generated-diagram .cluster-label text{fill:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram .cluster-label span,#mermaid-generated-diagram p{color:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram .label text,#mermaid-generated-diagram span,#mermaid-generated-diagram p{fill:#333;color:#333;}#mermaid-generated-diagram .node rect,#mermaid-generated-diagram .node circle,#mermaid-generated-diagram .node ellipse,#mermaid-generated-diagram .node polygon,#mermaid-generated-diagram .node path{fill:#fff4dd;stroke:hsl(40.5882352941, 60%, 83.3333333333%);stroke-width:1px;}#mermaid-generated-diagram .flowchart-label text{text-anchor:middle;}#mermaid-generated-diagram .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-generated-diagram .node .label{text-align:center;}#mermaid-generated-diagram .node.clickable{cursor:pointer;}#mermaid-generated-diagram .arrowheadPath{fill:#0b0b0b;}#mermaid-generated-diagram .edgePath .path{stroke:#0b0b0b;stroke-width:2.0px;}#mermaid-generated-diagram .flowchart-link{stroke:#0b0b0b;fill:none;}#mermaid-generated-diagram .edgeLabel{background-color:hsl(-79.4117647059, 100%, 93.3333333333%);text-align:center;}#mermaid-generated-diagram .edgeLabel rect{opacity:0.5;background-color:hsl(-79.4117647059, 100%, 93.3333333333%);fill:hsl(-79.4117647059, 100%, 93.3333333333%);}#mermaid-generated-diagram .labelBkg{background-color:rgba(243.9999999999, 220.9999999998, 255, 0.5);}#mermaid-generated-diagram .cluster rect{fill:hsl(220.5882352941, 100%, 98.3333333333%);stroke:hsl(220.5882352941, 60%, 88.3333333333%);stroke-width:1px;}#mermaid-generated-diagram .cluster text{fill:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram .cluster span,#mermaid-generated-diagram p{color:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(220.5882352941, 100%, 98.3333333333%);border:1px solid hsl(220.5882352941, 60%, 88.3333333333%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-generated-diagram .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#mermaid-generated-diagram :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker orient="auto" markerheight="12" markerwidth="12" markerunits="userSpaceOnUse" refy="5" refx="6" viewbox="0 0 10 10" class="marker flowchart" id="mermaid-generated-diagram_flowchart-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerheight="12" markerwidth="12" markerunits="userSpaceOnUse" refy="5" refx="4.5" viewbox="0 0 10 10" class="marker flowchart" id="mermaid-generated-diagram_flowchart-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5" refx="11" viewbox="0 0 10 10" class="marker flowchart" id="mermaid-generated-diagram_flowchart-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5" refx="-1" viewbox="0 0 10 10" class="marker flowchart" id="mermaid-generated-diagram_flowchart-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5.2" refx="12" viewbox="0 0 11 11" class="marker cross flowchart" id="mermaid-generated-diagram_flowchart-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5.2" refx="-1" viewbox="0 0 11 11" class="marker cross flowchart" id="mermaid-generated-diagram_flowchart-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"><g id="Injector" class="cluster default flowchart-label"><rect height="83" width="574.34375" y="0" x="0" ry="0" rx="0" style=""></rect><g transform="translate(260.9375, 0)" class="cluster-label"><foreignobject height="18" width="52.46875"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">Injector</span></div></foreignobject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid-generated-diagram_flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-heroService LE-componentConstructor" id="L-heroService-componentConstructor-0" d="M219.109,58L219.109,62.167C219.109,66.333,219.109,74.667,219.109,83C219.109,91.333,219.109,99.667,219.109,107.117C219.109,114.567,219.109,121.133,219.109,124.417L219.109,127.7"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignobject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignobject></g></g></g><g class="nodes"><g transform="translate(76.296875, 41.5)" data-id="serviceA" data-node="true" id="flowchart-serviceA-0" class="node default default flowchart-label"><rect height="33" width="82.59375" y="-16.5" x="-41.296875" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-33.796875, -9)" style="" class="label"><rect></rect><foreignobject height="18" width="67.59375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">Service A</span></div></foreignobject></g></g><g transform="translate(219.109375, 41.5)" data-id="heroService" data-node="true" id="flowchart-heroService-1" class="node default default flowchart-label"><rect height="33" width="103.03125" y="-16.5" x="-51.515625" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-44.015625, -9)" style="" class="label"><rect></rect><foreignobject height="18" width="88.03125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">HeroService</span></div></foreignobject></g></g><g transform="translate(362.8046875, 41.5)" data-id="serviceC" data-node="true" id="flowchart-serviceC-2" class="node default default flowchart-label"><rect height="33" width="84.359375" y="-16.5" x="-42.1796875" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-34.6796875, -9)" style="" class="label"><rect></rect><foreignobject height="18" width="69.359375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">Service C</span></div></foreignobject></g></g><g transform="translate(497.1640625, 41.5)" data-id="serviceD" data-node="true" id="flowchart-serviceD-3" class="node default default flowchart-label"><rect height="33" width="84.359375" y="-16.5" x="-42.1796875" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-34.6796875, -9)" style="" class="label"><rect></rect><foreignobject height="18" width="69.359375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">Service D</span></div></foreignobject></g></g><g transform="translate(219.109375, 158.5)" data-id="componentConstructor" data-node="true" id="flowchart-componentConstructor-4" class="node default default flowchart-label"><rect height="51" width="192.828125" y="-25.5" x="-96.4140625" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-88.9140625, -18)" style="text-align: left;" class="label"><rect></rect><foreignobject height="36" width="177.828125"><div xmlns="http://www.w3.org/1999/xhtml" style="text-align: left; display: inline-block; white-space: nowrap;"><span style="text-align: left;" class="nodeLabel">Component<br>constructor(HeroService)</span></div></foreignobject></g></g></g></g></g></svg>
+  <h2 id="whats-next">
+    <a href="#whats-next" class="docs-anchor" tabindex="-1" aria-label="Link to What's next" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="407r2fj2mi5kvg7imj9zdcpe">下一步呢？</a>
+  </h2>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="/guide/di/creating-injectable-service" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2ozvddgoyzehzuiwkx7jxoo1j">创建可注入服务</a>
+    
+
+    </nav>
+    

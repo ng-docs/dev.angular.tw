@@ -1,0 +1,30 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>CanActivateFn</h1><div class="docs-api-item-label" data-mode="full" data-type="type_alias">Type Alias</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/router/src/models.ts#L867-L870" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="75vumjzj7m6kqql3oswuqq9f5">用作
+<code>canActivate</code>守卫在
+<code>Route</code>上的函数签名。</p><p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/router/Route" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8rh8481e3bmuscr7m1ntnghjw">路由</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">type</span> <span class="hljs-title class_">CanActivateFn</span> = <span class="hljs-function">(<span class="hljs-params"></span></span></div><div class="hljs-ln-line ">  route: ActivatedRouteSnapshot,</div><div class="hljs-ln-line ">  state: RouterStateSnapshot,</div><div class="hljs-ln-line ">) =&gt; <span class="hljs-title class_">MaybeAsync</span>&lt;<span class="hljs-title class_">GuardResult</span>&gt;</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="75vumjzj7m6kqql3oswuqq9f5">用作
+<code>canActivate</code>守卫在
+<code>Route</code>上的函数签名。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7s9njumu91b3tazrqsca6dbua">如果所有守卫都返回
+<code>true</code>，导航继续。如果任何一个守卫返回
+<code>false</code>，导航取消。如果任何一个守卫返回
+<code>UrlTree</code>，当前导航取消，并开始一个新的导航到该守卫返回的
+<code>UrlTree</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="c22yr2y0kyxp7vcnh7gm1n9ll">下面的示例实现并使用了一个
+<code>CanActivateFn</code>，该函数检查当前用户是否有权限激活请求的路由。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>()</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">UserToken</span> {}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>()</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">PermissionsService</span> {</span><span class="hljs-ln-line">  <span class="hljs-title function_">canActivate</span>(<span class="hljs-attr">currentUser</span>: <span class="hljs-title class_">UserToken</span>, <span class="hljs-attr">userId</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">boolean</span> {</span><span class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">  }</span><span class="hljs-ln-line">  <span class="hljs-title function_">canMatch</span>(<span class="hljs-attr">currentUser</span>: <span class="hljs-title class_">UserToken</span>): <span class="hljs-built_in">boolean</span> {</span><span class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">  }</span><span class="hljs-ln-line">}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">canActivateTeam</span>: <span class="hljs-title class_">CanActivateFn</span> = <span class="hljs-function">(<span class="hljs-params"></span><span class="hljs-ln-line">  route: ActivatedRouteSnapshot,</span><span class="hljs-ln-line">  state: RouterStateSnapshot,</span><span class="hljs-ln-line"></span>) =&gt;</span> {</span><span class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">PermissionsService</span>).<span class="hljs-title function_">canActivate</span>(<span class="hljs-title function_">inject</span>(<span class="hljs-title class_">UserToken</span>), route.<span class="hljs-property">params</span>[<span class="hljs-string">'id'</span>]);</span><span class="hljs-ln-line">};</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="55ivjcxpdplw5402f6jf2045o">在这里，定义的守卫函数作为
+<code>Route</code>对象的一部分提供，在路由器配置中：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">App</span>, {</span><span class="hljs-ln-line">   <span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">     <span class="hljs-title function_">provideRouter</span>([</span><span class="hljs-ln-line">       {</span><span class="hljs-ln-line">         <span class="hljs-attr">path</span>: <span class="hljs-string">'team/:id'</span>,</span><span class="hljs-ln-line">         <span class="hljs-attr">component</span>: <span class="hljs-title class_">TeamComponent</span>,</span><span class="hljs-ln-line">         <span class="hljs-attr">canActivate</span>: [canActivateTeam],</span><span class="hljs-ln-line">       },</span><span class="hljs-ln-line">     ]),</span><span class="hljs-ln-line">   ],</span><span class="hljs-ln-line"> });</span>
+          </code>
+        </pre>
+      </div></div></div></div>

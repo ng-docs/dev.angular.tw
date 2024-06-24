@@ -1,0 +1,56 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="7r3dthygxysqu32sgfrepgf2p"><code>*ngFor</code> 表达式中缺少 
+<code>let</code> 关键字</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/extended-diagnostics/NG8105.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9w0eaevdbgmzjrbswnhncl1bw">当 
+<code>*ngFor</code> 中使用的表达式缺少 
+<code>let</code> 关键字时，会发出此诊断。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">// The `let` keyword is missing in the `*ngFor` expression.</span></div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div *ngFor="item of items"&gt;{{ item }}&lt;/div&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  items = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="whats-wrong-with-that">
+    <a href="#whats-wrong-with-that" class="docs-anchor" tabindex="-1" aria-label="Link to What's wrong with that?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dyj3fm6hh05czc2euad3kejpb">那有什么问题？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="et1ahl0uwzh462cdv7if9zwv2">缺少 
+<code>let</code> 表示 
+<code>*ngFor</code> 字符串中存在语法错误。这也意味着 
+<code>item</code> 不会被正确地引入作用域，
+<code>{{ item }}</code> 也不会正确求解。</p>
+
+  <h2 id="what-should-i-do-instead">
+    <a href="#what-should-i-do-instead" class="docs-anchor" tabindex="-1" aria-label="Link to What should I do instead?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7bicb9bjjdedhs8bfd5vdiby7">我该怎么办？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7hp287vz91txv6hqmw3878ofs">添加缺失的 <code>let</code> 关键字。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">// The `let` keyword is now present in the `*ngFor` expression,</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// no diagnostic messages are emitted in this case.</span></div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div *ngFor="let item of items"&gt;{{ item }}&lt;/div&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  items = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="configuration-requirements">
+    <a href="#configuration-requirements" class="docs-anchor" tabindex="-1" aria-label="Link to Configuration requirements" data-ng_translator_product="100" data-ng_translator_ref_id="bwdhyfdm5yb1t69cyimmn0hs0">配置要求</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="33iuwp9tlj6sx7e8wkrplba42"><a href="tools/cli/template-typecheck#strict-mode"><code>strictTemplates</code></a> 必须启用，任何扩展诊断才会发出。
+<code>missingNgForOfLet</code> 除了 
+<code>strictTemplates</code> 之外没有其他要求。</p>
+
+  <h2 id="what-if-i-cant-avoid-this">
+    <a href="#what-if-i-cant-avoid-this" class="docs-anchor" tabindex="-1" aria-label="Link to What if I can't avoid this?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="duupn560xw3oqrkqmgen1ccwo">如果我无法避免这种情况怎么办？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bzu6yb6isvsmddbdryz1qwy7l">可以通过编辑项目的 <code>tsconfig.json</code> 文件来禁用此诊断：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"angularCompilerOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"extendedDiagnostics"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"checks"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"missingNgForOfLet"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"suppress"</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1tl6suaasu3xo2b1onvdft0o9">有关更多信息，请参阅<a href="extended-diagnostics#configuration">扩展诊断配置</a>。</p>

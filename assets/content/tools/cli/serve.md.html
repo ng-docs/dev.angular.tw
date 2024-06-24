@@ -1,0 +1,77 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="cggj094o2k5zw1jyp2wr0ettv">为开发提供 Angular 应用</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/serve.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9ovzvddbevojlvtra8jk6vwbf">你可以使用 
+<code>ng serve</code> 命令为 Angular CLI 应用提供服务。 这将编译你的应用程序，跳过不必要的优化，启动一个开发服务器，并自动重建和实时重新加载任何后续更改。 你可以通过按下 
+<code>Ctrl+C</code> 来停止服务器。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8r8i23r2b7nyybdjepozqvfff"><code>ng serve</code> 仅在 
+<code>angular.json</code> 中指定的默认项目中执行 
+<code>serve</code> 目标的构建器。 虽然任何构建器都可以在这里使用，但最常见（也是默认）的构建器是 
+<code>@angular-devkit/build-angular:dev-server</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a6qbvvwgws3ws0trusqn3tl5x">你可以通过查找该项目的 
+<code>serve</code> 目标来确定特定项目正在使用哪个构建器。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"my-app"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-comment">// `ng serve` invokes the Architect target named `serve`.</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"serve"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:dev-server"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-comment">/* ... */</span> <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"test"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-comment">/* ... */</span> <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="78b6tvlvz7ry89ob5uhwcv0h1">本页面讨论了 
+<code>@angular-devkit/build-angular:dev-server</code> 的用法和选项。</p>
+
+  <h2 id="proxying-to-a-backend-server">
+    <a href="#proxying-to-a-backend-server" class="docs-anchor" tabindex="-1" aria-label="Link to Proxying to a backend server" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="as1sui53pjttfayo0ymkbvaia">代理到后端服务器</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3mfgktqa7lti0nsya0ukmr2ln">使用 
+<a href="https://webpack.js.org/configuration/dev-server/#devserverproxy" target="_blank">代理支持</a> 将特定 URL 重定向到后端服务器，通过将文件传递给 
+<code>--proxy-config</code> 构建选项。 例如，为了将所有对 
+<code>http://localhost:4200/api</code> 的调用重定向到运行在 
+<code>http://localhost:3000/api</code> 上的服务器，请按照以下步骤操作。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4v0ny4ddq71j1v23062jxnham">在项目的 <code>src/</code> 目录下创建一个 <code>proxy.conf.json</code> 文件。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eobya4dqv87s2iodonvi2nl3q">往这个新的代理配置文件中添加如下内容：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">   <span class="hljs-attr">"/api"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">     <span class="hljs-attr">"target"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"http://localhost:3000"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">     <span class="hljs-attr">"secure"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span></div><div class="hljs-ln-line">   <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"> <span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="crcv8lvhyn4co7pfoqwxt0fp5">在 CLI 配置文件 <code>angular.json</code> 中为 <code>serve</code> 目标添加 <code>proxyConfig</code> 选项：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">   <span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">     <span class="hljs-attr">"my-app"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">       <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">         <span class="hljs-attr">"serve"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">           <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:dev-server"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">           <span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">             <span class="hljs-attr">"proxyConfig"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"src/proxy.conf.json"</span></div><div class="hljs-ln-line">           <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">         <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">       <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">     <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">   <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"> <span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dsbqe3h7rf5wssumy8yz33bxx">要使用这个代理选项启动开发服务器，请运行 <code>ng serve</code> 命令。</p>
+</li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="ek614wubvhaw8zi6mj34dzvps">编辑代理配置文件以添加配置选项；以下是一些示例。 有关所有选项的描述，请参阅 
+<a href="https://webpack.js.org/configuration/dev-server/#devserverproxy" target="_blank">webpack DevServer 文档</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5b8wp786fuqaiejlfuxvom19c">注意：如果编辑代理配置文件，则必须重新启动 
+<code>ng serve</code> 进程以使更改生效。</p>
+
+  <h2 id="localhost-resolution">
+    <a href="#localhost-resolution" class="docs-anchor" tabindex="-1" aria-label="Link to <code>localhost</code> resolution" data-ng_translator_product="100" data-ng_translator_ref_id="5o3na82pjlkhuv7tyuqjk8svx"><code>localhost</code> 求解</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4o4jcgvvp66tc4to3xtxtrqjy">截至 Node 版本 17，Node 将根据每台机器的配置，
+<em>不会</em>总是将 
+<code>http://localhost:&lt;port&gt;</code> 解析为 
+<code>http://127.0.0.1:&lt;port&gt;</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="248cvkxolsmh4khk8my176ai1">如果你使用代理指向 
+<code>localhost</code> URL 时遇到 
+<code>ECONNREFUSED</code> 错误，你可以通过将目标从 
+<code>http://localhost:&lt;port&gt;</code> 更新为 
+<code>http://127.0.0.1:&lt;port&gt;</code> 来解决这个问题。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="c2o9keqwcgx5cxvfq78rktr0c">查看 
+<a href="https://github.com/chimurai/http-proxy-middleware#nodejs-17-econnrefused-issue-with-ipv6-and-localhost-705" target="_blank">这里</a> 了解更多信息关于 
+<code>http-proxy-middleware</code> 文档。</p>

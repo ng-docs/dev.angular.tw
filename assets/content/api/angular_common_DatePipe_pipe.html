@@ -1,0 +1,523 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>DatePipe</h1><div class="docs-api-item-label" data-mode="full" data-type="pipe">pipe</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/common/src/pipes/date_pipe.ts#L219-L279" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1akl69rz8a1me49o5ehugw0lu">根据区域设置规则格式化日期值。</p><p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/common/formatDate">formatDate</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">DatePipe</span> {</div><div class="hljs-ln-group"><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="transform">  <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span> | <span class="hljs-title class_">Date</span>, format?: <span class="hljs-built_in">string</span>, timezone?: <span class="hljs-built_in">string</span>, locale?: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="transform">  <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-literal">null</span>, format?: <span class="hljs-built_in">string</span>, timezone?: <span class="hljs-built_in">string</span>, locale?: <span class="hljs-built_in">string</span>): <span class="hljs-literal">null</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="transform">  <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span> | <span class="hljs-title class_">Date</span>, format?: <span class="hljs-built_in">string</span>, timezone?: <span class="hljs-built_in">string</span>, locale?: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">string</span>;</button></div><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1akl69rz8a1me49o5ehugw0lu">根据区域设置规则格式化日期值。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="66hgb2qaed3cgm7lpwy66bscn"><code>DatePipe</code> 仅在检测到输入值的纯变化时执行。纯变化是指对原语输入值（如 
+<code>String</code>、
+<code>Number</code>、
+<code>Boolean</code> 或 
+<code>Symbol</code>）的变化，或对象引用的变化（如 
+<code>Date</code>、
+<code>Array</code>、
+<code>Function</code> 或 
+<code>Object</code>）。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ynxcfqnwgcyjldio7rsfe93d">请注意，更改 <code>Date</code> 对象不会导致管道再次渲染。为确保管道被执行，你必须创建一个新的 <code>Date</code> 对象。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dvczmxg0espp1e8zk76yb64iu">Angular 仅带有 
+<code>en-US</code> 语言环境数据。要在另一种语言中本地化日期，你必须导入相应的语言环境数据。有关更多信息，请参阅 
+<a href="guide/i18n/format-data-locale">I18n 指南</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="b9rfjndo3nfdvsu1r9d54fxzh">格式化值的时区可以通过两种方式指定：作为管道的第二个参数传入，或者通过设置 
+<code>DATE_PIPE_DEFAULT_OPTIONS</code> 依赖注入令牌来指定默认值。传入作为第二个参数的值优先于使用依赖注入令牌定义的值。</p></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="v4v54qs92su30zy3ppws9r3q">当输入值发生变化时，该管道的结果并不会改变。如果不想在每个变更检测周期中都强制重新格式化该日期，请把日期看做一个不可变对象，
+当需要让该管道重新运行时，请赋给它一个新的对象，以更改它的引用。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dr3c7pnkmukzaj8hdc6zodmet">预定义的格式选项</h3>
+
+      <div class="docs-table docs-scroll-track-transparent">
+        <table>
+          <thead>
+            <tr>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="ba7axgt6bldn3wzg2te3xd6f">选项</th>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="d8amom1kj9q9f670p3yfcl0iq">等效于</th>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="9m8lpsbyd3fk05bf2odgjqgzw">示例（在 
+<code>en-US</code> 语言环境中）</th>
+</tr>
+
+          </thead>
+          <tbody>
+            <tr>
+<td><code>'short'</code></td>
+<td><code>'M/d/yy, h:mm a'</code></td>
+<td><code>6/15/15, 9:03 AM</code></td>
+</tr>
+<tr>
+<td><code>'medium'</code></td>
+<td><code>'MMM d, y, h:mm:ss a'</code></td>
+<td><code>Jun 15, 2015, 9:03:01 AM</code></td>
+</tr>
+<tr>
+<td><code>'long'</code></td>
+<td><code>'MMMM d, y, h:mm:ss a z'</code></td>
+<td><code>June 15, 2015 at 9:03:01 AM GMT+1</code></td>
+</tr>
+<tr>
+<td><code>'full'</code></td>
+<td><code>'EEEE, MMMM d, y, h:mm:ss a zzzz'</code></td>
+<td><code>Monday, June 15, 2015 at 9:03:01 AM GMT+01:00</code></td>
+</tr>
+<tr>
+<td><code>'shortDate'</code></td>
+<td><code>'M/d/yy'</code></td>
+<td><code>6/15/15</code></td>
+</tr>
+<tr>
+<td><code>'mediumDate'</code></td>
+<td><code>'MMM d, y'</code></td>
+<td><code>Jun 15, 2015</code></td>
+</tr>
+<tr>
+<td><code>'longDate'</code></td>
+<td><code>'MMMM d, y'</code></td>
+<td><code>June 15, 2015</code></td>
+</tr>
+<tr>
+<td><code>'fullDate'</code></td>
+<td><code>'EEEE, MMMM d, y'</code></td>
+<td><code>Monday, June 15, 2015</code></td>
+</tr>
+<tr>
+<td><code>'shortTime'</code></td>
+<td><code>'h:mm a'</code></td>
+<td><code>9:03 AM</code></td>
+</tr>
+<tr>
+<td><code>'mediumTime'</code></td>
+<td><code>'h:mm:ss a'</code></td>
+<td><code>9:03:01 AM</code></td>
+</tr>
+<tr>
+<td><code>'longTime'</code></td>
+<td><code>'h:mm:ss a z'</code></td>
+<td><code>9:03:01 AM GMT+1</code></td>
+</tr>
+<tr>
+<td><code>'fullTime'</code></td>
+<td><code>'h:mm:ss a zzzz'</code></td>
+<td><code>9:03:01 AM GMT+01:00</code></td>
+</tr>
+
+          </tbody>
+        </table>
+      </div>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a2wc7aojkv1t9fwbgag6dp0qc">自定义格式选项</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dh8oenoguvsdq5ealb7vhd4d7">你可以用符号构造格式字符串来指定日期时间值的组成部分，如下表所述。格式详细信息取决于区域设置。标有 (*) 的字段仅在给定区域设置的额外数据集中可用。</p>
+
+      <div class="docs-table docs-scroll-track-transparent">
+        <table>
+          <thead>
+            <tr>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="cqs6iv56jdsyhyl57ftganbcr">字段类型</th>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="4uvgzl2k23283xyd24z7o5r57">格式</th>
+<th data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ar5q09mdsagdppsbze96eagxl">说明</th>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="bma9zdiza5y0x6ciuuzlsymov">示例值</th>
+</tr>
+
+          </thead>
+          <tbody>
+            <tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="2bi4b43l1jfwtmbth8mpms657">纪元</td>
+<td>G, GG &amp; GGG</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="9qymjx9pmk7yvx78thliwtb32">缩写</td>
+<td>AD</td>
+</tr>
+<tr>
+<td></td>
+<td>GGGG</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="dpzk3nqolvofffsrvggnjwywx">宽</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="b2f9x3l4m73oou86l5d6s8cso">公元</td>
+</tr>
+<tr>
+<td></td>
+<td>GGGGG</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4eqiufrrauhsw578zc9k1mo55">窄化</td>
+<td>A</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4xxkjcs9k5kkw4593k3ti7mya">年份</td>
+<td>y</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="3tucba99wy6x3wa4wedaaj1x9">数值型：最少位数</td>
+<td>2, 20, 201, 2017, 20173</td>
+</tr>
+<tr>
+<td></td>
+<td>yy</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="anpfh27hud7lkm5cb9gpigxj5">数值型：2 位数 + 补零</td>
+<td>02, 20, 01, 17, 73</td>
+</tr>
+<tr>
+<td></td>
+<td>yyy</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="8baqjcxwglfaaovzlttn8ehgg">数值型：3 位数 + 补零</td>
+<td>002, 020, 201, 2017, 20173</td>
+</tr>
+<tr>
+<td></td>
+<td>yyyy</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="1ny6en4bnicofxe67h94v60b2">数值型：4 位数或更多 + 补零</td>
+<td>0002, 0020, 0201, 2017, 20173</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="ef7fk8ube22phg6kfo6bggz7s">ISO 周数年份</td>
+<td>Y</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="3tucba99wy6x3wa4wedaaj1x9">数值型：最少位数</td>
+<td>2, 20, 201, 2017, 20173</td>
+</tr>
+<tr>
+<td></td>
+<td>YY</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="anpfh27hud7lkm5cb9gpigxj5">数值型：2 位数 + 补零</td>
+<td>02, 20, 01, 17, 73</td>
+</tr>
+<tr>
+<td></td>
+<td>YYY</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="8baqjcxwglfaaovzlttn8ehgg">数值型：3 位数 + 补零</td>
+<td>002, 020, 201, 2017, 20173</td>
+</tr>
+<tr>
+<td></td>
+<td>YYYY</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="1ny6en4bnicofxe67h94v60b2">数值型：4 位数或更多 + 补零</td>
+<td>0002, 0020, 0201, 2017, 20173</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="7du9ry9a3k9j836jhlngl9rf6">月份</td>
+<td>M</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4fcrds3h0mer1zrj1tju2tobu">数值型：1 位数</td>
+<td>9, 12</td>
+</tr>
+<tr>
+<td></td>
+<td>MM</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="anpfh27hud7lkm5cb9gpigxj5">数值型：2 位数 + 补零</td>
+<td>09, 12</td>
+</tr>
+<tr>
+<td></td>
+<td>MMM</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="9qymjx9pmk7yvx78thliwtb32">缩写</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="e84p0qo9e4gng20h85o1fbmtz">九月</td>
+</tr>
+<tr>
+<td></td>
+<td>MMMM</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="dpzk3nqolvofffsrvggnjwywx">宽</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="c3k7qi0rsb3nj7rwa9ckj7gc4">九月份</td>
+</tr>
+<tr>
+<td></td>
+<td>MMMMM</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4eqiufrrauhsw578zc9k1mo55">窄化</td>
+<td>S</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="b7q1h6gu7u9xzwjln4c22esim">独立的月份</td>
+<td>L</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4fcrds3h0mer1zrj1tju2tobu">数值型：1 位数</td>
+<td>9, 12</td>
+</tr>
+<tr>
+<td></td>
+<td>LL</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="anpfh27hud7lkm5cb9gpigxj5">数值型：2 位数 + 补零</td>
+<td>09, 12</td>
+</tr>
+<tr>
+<td></td>
+<td>LLL</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="9qymjx9pmk7yvx78thliwtb32">缩写</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="e84p0qo9e4gng20h85o1fbmtz">九月</td>
+</tr>
+<tr>
+<td></td>
+<td>LLLL</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="dpzk3nqolvofffsrvggnjwywx">宽</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="c3k7qi0rsb3nj7rwa9ckj7gc4">九月份</td>
+</tr>
+<tr>
+<td></td>
+<td>LLLLL</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4eqiufrrauhsw578zc9k1mo55">窄化</td>
+<td>S</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="d5vtrs8wu9lzln274dkaukt5e">ISO 年周</td>
+<td>w</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="3tucba99wy6x3wa4wedaaj1x9">数值型：最少位数</td>
+<td>1... 53</td>
+</tr>
+<tr>
+<td></td>
+<td>ww</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="anpfh27hud7lkm5cb9gpigxj5">数值型：2 位数 + 补零</td>
+<td>01... 53</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="6ku7z6f85htok4eg474rxc5up">月份的周</td>
+<td>W</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4fcrds3h0mer1zrj1tju2tobu">数值型：1 位数</td>
+<td>1... 5</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="824cn90ilyqfazxspivvgm2c0">月份的天</td>
+<td>d</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="3tucba99wy6x3wa4wedaaj1x9">数值型：最少位数</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>dd</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="anpfh27hud7lkm5cb9gpigxj5">数值型：2 位数 + 补零</td>
+<td>01</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="qqi35lo594ekisvllrmz14xl">周几</td>
+<td>E, EE &amp; EEE</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="9qymjx9pmk7yvx78thliwtb32">缩写</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="2prgn6njzz3agcucl5mdtlx0y">周二</td>
+</tr>
+<tr>
+<td></td>
+<td>EEEE</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="dpzk3nqolvofffsrvggnjwywx">宽</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="56n09641ugipljbairvf165xb">星期二</td>
+</tr>
+<tr>
+<td></td>
+<td>EEEEE</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4eqiufrrauhsw578zc9k1mo55">窄化</td>
+<td>T</td>
+</tr>
+<tr>
+<td></td>
+<td>EEEEEE</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="2vv1ok0u18abuz3xrcqx5ryjx">短</td>
+<td>Tu</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="asbyxiw1i9sbbdqn32jwuhnvs">独立的周几</td>
+<td>c, cc</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4fcrds3h0mer1zrj1tju2tobu">数值型：1 位数</td>
+<td>2</td>
+</tr>
+<tr>
+<td></td>
+<td>ccc</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="9qymjx9pmk7yvx78thliwtb32">缩写</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="2prgn6njzz3agcucl5mdtlx0y">周二</td>
+</tr>
+<tr>
+<td></td>
+<td>cccc</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="dpzk3nqolvofffsrvggnjwywx">宽</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="56n09641ugipljbairvf165xb">星期二</td>
+</tr>
+<tr>
+<td></td>
+<td>ccccc</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4eqiufrrauhsw578zc9k1mo55">窄化</td>
+<td>T</td>
+</tr>
+<tr>
+<td></td>
+<td>cccccc</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="2vv1ok0u18abuz3xrcqx5ryjx">短</td>
+<td>Tu</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="1hakk1rnhdu6ubady8j0bkvve">时间段</td>
+<td>a, aa &amp; aaa</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="9qymjx9pmk7yvx78thliwtb32">缩写</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="dv084747x0mtk3ya8pkrtuwpf">上午/下午 或 AM/PM</td>
+</tr>
+<tr>
+<td></td>
+<td>aaaa</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="g98fn1zn71sr6zewk9tk4o6q">宽（缺失时回退到 
+<code>a</code>）</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="ezlar9odrcnmgwo4468t3pxe0">上午/下午（拉丁文）</td>
+</tr>
+<tr>
+<td></td>
+<td>aaaaa</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4eqiufrrauhsw578zc9k1mo55">窄化</td>
+<td>a/p</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="6clacio2556perykt6alu1afw">时间段*</td>
+<td>B, BB &amp; BBB</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="9qymjx9pmk7yvx78thliwtb32">缩写</td>
+<td>mid.</td>
+</tr>
+<tr>
+<td></td>
+<td>BBBB</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="dpzk3nqolvofffsrvggnjwywx">宽</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="26st74z76n4bdgzjy16h7z7z1">上午, 下午, 午夜, 中午, 早晨, 下午, 傍晚, 夜晚</td>
+</tr>
+<tr>
+<td></td>
+<td>BBBBB</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4eqiufrrauhsw578zc9k1mo55">窄化</td>
+<td>md</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="cn7gn97bh8uejik2nyha0zma9">独立的时间段*</td>
+<td>b, bb &amp; bbb</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="9qymjx9pmk7yvx78thliwtb32">缩写</td>
+<td>mid.</td>
+</tr>
+<tr>
+<td></td>
+<td>bbbb</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="dpzk3nqolvofffsrvggnjwywx">宽</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="26st74z76n4bdgzjy16h7z7z1">上午, 下午, 午夜, 中午, 早晨, 下午, 傍晚, 夜晚</td>
+</tr>
+<tr>
+<td></td>
+<td>bbbbb</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4eqiufrrauhsw578zc9k1mo55">窄化</td>
+<td>md</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="1xokkstltcxj7zd8sgvu89v8i">小时 1-12</td>
+<td>h</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="3tucba99wy6x3wa4wedaaj1x9">数值型：最少位数</td>
+<td>1, 12</td>
+</tr>
+<tr>
+<td></td>
+<td>hh</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="anpfh27hud7lkm5cb9gpigxj5">数值型：2 位数 + 补零</td>
+<td>01, 12</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="7aupujp3tf63fjno86i0j26yv">小时 0-23</td>
+<td>H</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="3tucba99wy6x3wa4wedaaj1x9">数值型：最少位数</td>
+<td>0, 23</td>
+</tr>
+<tr>
+<td></td>
+<td>HH</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="anpfh27hud7lkm5cb9gpigxj5">数值型：2 位数 + 补零</td>
+<td>00, 23</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="5u2du3u75swxvf3703hbnhvs4">分钟</td>
+<td>m</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="3tucba99wy6x3wa4wedaaj1x9">数值型：最少位数</td>
+<td>8, 59</td>
+</tr>
+<tr>
+<td></td>
+<td>mm</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="anpfh27hud7lkm5cb9gpigxj5">数值型：2 位数 + 补零</td>
+<td>08, 59</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="bhudxv4t6llo3eulhcat0lh1j">秒</td>
+<td>s</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="3tucba99wy6x3wa4wedaaj1x9">数值型：最少位数</td>
+<td>0... 59</td>
+</tr>
+<tr>
+<td></td>
+<td>ss</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="anpfh27hud7lkm5cb9gpigxj5">数值型：2 位数 + 补零</td>
+<td>00... 59</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="7h5tw41dbuz4pk14kw5zdfyx8">分秒</td>
+<td>S</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4fcrds3h0mer1zrj1tju2tobu">数值型：1 位数</td>
+<td>0... 9</td>
+</tr>
+<tr>
+<td></td>
+<td>SS</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="anpfh27hud7lkm5cb9gpigxj5">数值型：2 位数 + 补零</td>
+<td>00... 99</td>
+</tr>
+<tr>
+<td></td>
+<td>SSS</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="d4yu3lelo3x66r7hawmd5wygf">数字：3 位数字 + 补零（= 毫秒）</td>
+<td>000... 999</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="anmmc6pxjxdunosxhmapd4md4">时区</td>
+<td>z, zz &amp; zzz</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="dxefs4oau7hrxy13neeo1qspw">短格式的特定非位置格式（回退到 O）</td>
+<td>GMT-8</td>
+</tr>
+<tr>
+<td></td>
+<td>zzzz</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="9mo42pf1u5kukw2wcxemynjik">长格式的特定非位置格式（回退到 OOOO）</td>
+<td>GMT-08:00</td>
+</tr>
+<tr>
+<td></td>
+<td>Z, ZZ &amp; ZZZ</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="da3phkxcf166ik1q1sh5pb7vt">ISO8601 基本格式</td>
+<td>-0800</td>
+</tr>
+<tr>
+<td></td>
+<td>ZZZZ</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="75bg648shmd3pwb2htxzjzm3o">本地化的长 GMT 格式</td>
+<td>GMT-8:00</td>
+</tr>
+<tr>
+<td></td>
+<td>ZZZZZ</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="5x006lrbpthgovqdxeqdivlsd">ISO8601 扩展格式 + 偏移量为 0 的 Z 指示符（= XXXXX）</td>
+<td>-08:00</td>
+</tr>
+<tr>
+<td></td>
+<td>O, OO &amp; OOO</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="e2fym9518tvk8lrlm2740ijf3">本地化的短 GMT 格式</td>
+<td>GMT-8</td>
+</tr>
+<tr>
+<td></td>
+<td>OOOO</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="75bg648shmd3pwb2htxzjzm3o">本地化的长 GMT 格式</td>
+<td>GMT-08:00</td>
+</tr>
+
+          </tbody>
+        </table>
+      </div>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aveqzsz2soajgeolkxys3r6o4">格式范例</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2aa6yzmbbqfdd6c0pgwqa44gl">下面这些例子会把日期转换成多种格式。
+这里假设 <code>dateObj</code> 是个 JavaScript 的 <code>Date</code> 对象：2015 年 6 月 15 日 21 时 43 分 11 秒，
+使用的是 <code>en-US</code> 区域的当地时间。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-template-variable">{{ <span class="hljs-name">dateObj</span> | date }}</span><span class="language-xml">               // output is 'Jun 15, 2015'</span><span class="hljs-ln-line"></span><span class="hljs-template-variable">{{ <span class="hljs-name">dateObj</span> | date:<span class="hljs-string">'medium'</span> }}</span><span class="language-xml">      // output is 'Jun 15, 2015, 9:43:11 PM'</span><span class="hljs-ln-line"></span><span class="hljs-template-variable">{{ <span class="hljs-name">dateObj</span> | date:<span class="hljs-string">'shortTime'</span> }}</span><span class="language-xml">   // output is '9:43 PM'</span><span class="hljs-ln-line"></span><span class="hljs-template-variable">{{ <span class="hljs-name">dateObj</span> | date:<span class="hljs-string">'mm:ss'</span> }}</span><span class="language-xml">       // output is '43:11'</span><span class="hljs-ln-line"></span><span class="hljs-template-variable">{{ <span class="hljs-name">dateObj</span> | date:<span class="hljs-string">"MMM dd, yyyy 'at' hh:mm a"</span> }}</span><span class="language-xml">  // output is 'Jun 15, 2015 at 09:43 PM'</span></span>
+          </code>
+        </pre>
+      </div>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="67yol20345c2rh8uwqlzarnrq">使用范例</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="vntp6qe9c150nfod91p154g8">下列组件借助一个日期管道来以不同的格式显示当前日期。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="language-xml">@Component({</span><span class="hljs-ln-line"> selector: 'date-pipe',</span><span class="hljs-ln-line"> template: `<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><span class="hljs-ln-line">   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Today is </span><span class="hljs-template-variable">{{<span class="hljs-name">today</span> | date}}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><span class="hljs-ln-line">   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Or if you prefer, </span><span class="hljs-template-variable">{{<span class="hljs-name">today</span> | date:<span class="hljs-string">'fullDate'</span>}}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><span class="hljs-ln-line">   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The time is </span><span class="hljs-template-variable">{{<span class="hljs-name">today</span> | date:<span class="hljs-string">'h:mm a z'</span>}}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><span class="hljs-ln-line"> <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>`</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line">// Get the current date and time as a date-time value.</span><span class="hljs-ln-line">export class DatePipeComponent {</span><span class="hljs-ln-line">  today: number = Date.now();</span><span class="hljs-ln-line">}</span></span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="transform" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>transform</h3><div><span>3 overloads</span></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">value</span><code>string | number | Date</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="8y67a060oaz4imorpjyxmgwfw">日期表达式：一个 
+<code>Date</code> 对象，一个数字（自 UTC 纪元以来的毫秒数），或一个 ISO 字符串（
+<a href="https://www.w3.org/TR/NOTE-datetime">https://www.w3.org/TR/NOTE-datetime</a>）。</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">format</span><code>string</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="4i6537ge75s2pa4uzqsbo8e70">要包含的日期/时间组件，使用预定义选项或自定义格式字符串。如果未提供，
+<code>DatePipe</code> 会使用 
+<code>DATE_PIPE_DEFAULT_OPTIONS</code> 注入令牌查找值（并读取 
+<code>dateFormat</code> 属性）。如果未配置该令牌，则使用 
+<code>mediumDate</code> 作为值。</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">timezone</span><code>string</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="2vzswqw51zw5kwbbjrb3eef8d">一个时区偏移量（例如 
+<code>'+0430'</code>），或标准的 UTC/GMT，或美国大陆时区缩写。如果未提供，
+<code>DatePipe</code> 会使用 
+<code>DATE_PIPE_DEFAULT_OPTIONS</code> 注入令牌查找值（并读取 
+<code>timezone</code> 属性）。如果未配置该令牌，则使用终端用户的本地系统时区作为值。</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">locale</span><code>string</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="1a4b5xa8ems9e6xyz7g3py1vq">用于语言环境格式规则的语言环境代码。如果未提供，使用 
+<code>LOCALE_ID</code> 的值，默认是 
+<code>en-US</code>。参见 
+<a href="guide/i18n/locale-id">设置你的应用语言环境</a>。</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>string</code></div></div><div class="docs-reference-card-item "><div class="docs-function-definition"></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">value</span><code>null</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">format</span><code>string</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">timezone</span><code>string</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">locale</span><code>string</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>null</code></div></div><div class="docs-reference-card-item "><div class="docs-function-definition"></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">value</span><code>string | number | Date</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">format</span><code>string</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">timezone</span><code>string</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">locale</span><code>string</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>string</code></div></div></div></div></div></div></div>

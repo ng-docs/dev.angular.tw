@@ -1,0 +1,104 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/upgrade/static</span><div class="docs-reference-title"><div><h1>UpgradeModule</h1><div class="docs-api-item-label" data-mode="full" data-type="ng_module">NgModule</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/upgrade/static/src/upgrade_module.ts#L141-L346" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="6de62dbf2t8awe0rsbkubrqpx">你导入的 
+<code>NgModule</code> 用来提供 AngularJS 核心服务，并且有一个实例方法用于启动混合升级应用。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">UpgradeModule</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="$injector">  <span class="hljs-attr">$injector</span>: <span class="hljs-built_in">any</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="injector">  <span class="hljs-attr">injector</span>: <span class="hljs-title class_">Injector</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="bootstrap">  <span class="hljs-title function_">bootstrap</span>(<span class="hljs-attr">element</span>: <span class="hljs-title class_">Element</span>, modules?: <span class="hljs-built_in">string</span>[], config?: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">any</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="6de62dbf2t8awe0rsbkubrqpx">你导入的 
+<code>NgModule</code> 用来提供 AngularJS 核心服务，并且有一个实例方法用于启动混合升级应用。</p>
+<p><em data-ng_translator_product="100" data-ng_translator_ref_id="p8vjyg1ceaudurd43retigad">支持 AOT 编译的混合升级应用的 
+<a href="api?query=upgrade%2Fstatic">upgrade/static</a> 库的一部分</em></p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="45fwr2cl6k3mc7k2x0aq8worr"><code>upgrade/static</code> 包含一些辅助工具，它们允许在混合升级应用中一起使用 AngularJS 和 Angular 组件，并且支持 AOT 编译。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2ktblkvusf8h98wvtk7k2bbkn">具体来说，
+<code>upgrade/static</code> 模块中的类和函数允许以下操作：</p>
+
+      <ol class="docs-ordered-list">
+        <li data-ng_translator_product="100" data-ng_translator_ref_id="d8kmdlsy91cqpjj0l4j8rxbh7">创建一个 Angular 指令，该指令包装并暴露一个 AngularJS 组件，以便在 Angular 模板中使用。参见 
+<code>UpgradeComponent</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="4rob2yzb3elga4ygnmi7v8xfr">创建一个 AngularJS 指令，该指令包装并暴露一个 Angular 组件，以便在 AngularJS 模板中使用。参见 
+<code>downgradeComponent</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="b4jipvvx514pv9as3xgrif072">创建一个 Angular 根注入器提供者，该提供者包装并暴露一个 AngularJS 服务，以便将其注入到 Angular 环境中。参见下文 
+<a href="api/upgrade/static/UpgradeModuleupgrading-an-angular-1-service Upgrading an AngularJS service"><code>UpgradeModuleupgrading-an-angular-1-service Upgrading an AngularJS service</code></a>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="9whmengjsp8zwbshsbkfjqzhd">创建一个 AngularJS 服务，该服务包装并暴露一个 Angular 可注入对象，以便将其注入到 AngularJS 环境中。参见 
+<code>downgradeInjectable</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dqqinnlzgekuqarb7donpplmp">混合 Angular 应用程序的引导，该应用程序包含在单个应用程序中共存的两个框架。</li>
+
+      </ol></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div>
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">UpgradeModule</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/upgrade/static'</span>;</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="66xuxk9w6yuskrkvj2q12h5o9">另见下文的 {@link UpgradeModuleexamples 示例}。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6vtkv13e1pzp7s84dv6xy0vzc">心理模型</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8ngenqmeaov43gu5hpg8syap4">在推理混合应用程序的工作方式时，有一个心智模型会很有用，它可以描述正在发生的事情并在最低级别解释正在发生的事情。</p>
+
+      <ol class="docs-ordered-list">
+        <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="87im8nbyy8wpshz9p3hc6g0u5">在单个应用程序中运行有两个独立的框架，每个框架都将另一个框架视为黑盒。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cyhmb0xnpf0fx97at4zbxz0bb">页面上的每个 DOM 元素都归一个框架所有。无论哪个框架实例化此元素，都是所有者。每个框架都只更新自己的 DOM 元素/交互，而忽略其他框架。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8tpzaara93zkwgmmcfxt8lqwp">AngularJS 指令始终在 AngularJS 框架代码库中执行，无论它们在何处实例化。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dvexfdswmur1zzi385hd1jcot">Angular 组件始终在 Angular 框架代码库中执行，无论它们在何处实例化。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="e88s0om7xto290j9xyt4hvyo">可以将一个 AngularJS 组件“升级”为 Angular 组件。这是通过定义一个 Angular 指令来实现的，该指令在其位于 DOM 中的位置启动 AngularJS 组件。参见 
+<code>UpgradeComponent</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="340ppbeh38u16z7e2rws2g6bt">可以将一个 Angular 组件“降级”为 AngularJS 组件。这是通过定义一个 AngularJS 指令来实现的，该指令在其位于 DOM 中的位置启动 Angular 组件。参见 
+<code>downgradeComponent</code>。</li>
+<li>Whenever an "upgraded"/"downgraded" component is instantiated the host element is owned by
+the framework doing the instantiation. The other framework then instantiates and owns the
+view for that component.
+      <ol class="docs-ordered-list">
+        <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5xl30c4qgj7m2wafio9b8uihr">这意味着组件绑定将始终遵循实例化框架的语义。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="14gwamz8qvoez1ooyom5h9oie">DOM 属性由拥有当前模板的框架解析。所以 AngularJS 模板中的属性必须使用 kebab-case，而 AngularJS 模板必须使用 camelCase。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="77mzpe6iqmj924s9c64kgnt8u">然而，模板绑定语法将始终使用 Angular 样式，例如用于属性绑定的方括号 ( <code>[...]</code> )。</li>
+
+      </ol>
+      </li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ajazvou359qv1fsg1veplwm40">Angular 首先被引导； AngularJS 是第二个引导程序。AngularJS 始终拥有应用程序的根组件。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="esgzt519p6h1bijspfljf8ts2">新应用程序在 Angular 区域中运行，因此它不再需要调用 <code>$apply()</code>。</li>
+
+      </ol>
+      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="ehqx2jghf8t6zcxrpmdmj74hx"><code>UpgradeModule</code> 类</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8ej3vqag33zov4luen6qyxccc">此类是一个 
+<code>NgModule</code>，你导入它来提供 AngularJS 核心服务，并且有一个实例方法用于启动混合升级应用。</p>
+
+    <ul class="docs-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="cg991ujedc8h24wgym7ocwppv">核心 AngularJS 服务
+<br> 导入此 
+<code>NgModule</code> 将为根注入器添加核心 
+<a href="https://docs.angularjs.org/api/ng/service">AngularJS 服务</a>的提供者。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="2nwn9xt7tfov0305jtrhfthix">引导
+<br> 此类的运行时实例包含一个 {@link UpgradeModulebootstrap 
+<code>bootstrap()</code>} 方法，你可以使用它将顶级 AngularJS 模块引导到 DOM 中的某个元素上，以进行混合升级应用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3yiq07hwvwbe0wj8lknok7wmc">它还包含一些属性，用于访问 {@link UpgradeModuleinjector 根注入器}、 引导 
+<code>NgZone</code> 和 
+<a href="https://docs.angularjs.org/api/auto/service/$injector">AngularJS $injector</a>。</p>
+</li>
+
+    </ul>
+    <h3 data-ng_translator_product="100" data-ng_translator_ref_id="f4iecnoqh39op5dvxqr6b3gip">例子</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8id61ql2ldsv09hesov38c3eh">将 
+<code>UpgradeModule</code> 导入到你的顶级 {@link NgModule Angular 
+<code>NgModule</code>} 中。</p>
+<code-example path="upgrade/static/ts/full/module.ts" region="ng2-module" />
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="aao027tii67fb1n289onv1a5q">然后将 
+<code>UpgradeModule</code> 注入到你的 Angular 
+<code>NgModule</code> 中，并在 
+<code>ngDoBootstrap()</code> 方法中使用它来引导顶级 
+<a href="https://docs.angularjs.org/api/ng/type/angular.Module">AngularJS 模块</a>。</p>
+<code-example path="upgrade/static/ts/full/module.ts" region="bootstrap-ng1" />
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8tyr7o40dr17xj85w8vaqo9oy">最后，通过引导你的顶级 Angular 
+<code>NgModule</code> 来启动整个过程。</p>
+<code-example path="upgrade/static/ts/full/module.ts" region="bootstrap-ng2" />
+
+<p>{@a upgrading-an-angular-1-service}</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="xutt3epiwx2304yjjl9n35xt">升级 AngularJS 服务</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1se4npg4xkoz96eoanyv9grce">没有用于升级 AngularJS 服务的特定 API。相反，你应该遵循以下食谱：</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7vcwcahuomg448e18e2egx30n">假设你有一个 AngularJS 服务：</p>
+<code-example path="upgrade/static/ts/full/module.ts" region="ng1-text-formatter-service" />
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="b2gtx5dwn5lxoj711u9smlk6y">然后你应该定义一个 Angular 提供者，以包含在你的 
+<code>NgModule</code> 的 
+<code>providers</code> 属性中。</p>
+<code-example path="upgrade/static/ts/full/module.ts" region="upgrade-ng1-service" />
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4273c99ss5cyudey6g8j2kzkx">然后，你可以通过将“升级后的”AngularJS 服务注入到 Angular 组件或服务中来使用它。</p>
+<code-example path="upgrade/static/ts/full/module.ts" region="use-ng1-upgraded-service" /></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="$injector" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>$injector</h3><div><code>any</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="48ihpr67xx17qa7hcyct3xmh2">升级应用程序的 AngularJS <code>$injector</code>。</p></div></div></div></div><div id="injector" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>injector</h3><div><code>Injector</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="2c70x7mtfo9oj8f7awuflsbcf">Angular 注入器 *</p></div></div></div></div><div id="bootstrap" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>bootstrap</h3><div><code>any</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9fl1t125u8s1rivrvz4rk60bq">从此 NgModule 引导 AngularJS 应用程序</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">element</span><code>Element</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="615s8b5t3ougrq5d3u7mp2kr1">要引导 AngularJS 应用程序的元素</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">modules</span><code>string[]</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="7a4h023305kq8uop16wzbtqi">此应用要引导的 AngularJS 模块</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">config</span><code>any</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="7felk4prlkant1ed79q0tf3zl">可选的额外 AngularJS 引导配置</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>any</code></div></div></div></div></div></div></div>

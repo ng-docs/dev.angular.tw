@@ -1,0 +1,59 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="qml4d6jqps2ovy8a1uwovyg8"><code>ngSkipHydration</code> 应该是一个静态属性</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/extended-diagnostics/NG8108.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="74169y0cftya1ols7ejiqun4h"><code>ngSkipHydration</code> 是一个特殊属性，指示 Angular 某个组件应选择退出 
+<a href="guide/hydration">水合</a>。 此诊断确保此属性 
+<code>ngSkipHydration</code> 被静态设置，且值设为 
+<code>"true"</code> 或为空值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;user-viewer ngSkipHydration="hasUser" /&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  hasUser = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="whats-wrong-with-that">
+    <a href="#whats-wrong-with-that" class="docs-anchor" tabindex="-1" aria-label="Link to What's wrong with that?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dyj3fm6hh05czc2euad3kejpb">那有什么问题？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="vqenlzrnpvr07z0e8ag0vp4u">作为 Angular 实现的一个特殊属性，
+<code>ngSkipHydration</code> 需要是可静态分析的，以便 Angular 在编译时知道某个组件是否需要水合。</p>
+
+  <h2 id="what-should-i-do-instead">
+    <a href="#what-should-i-do-instead" class="docs-anchor" tabindex="-1" aria-label="Link to What should I do instead?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7bicb9bjjdedhs8bfd5vdiby7">我该怎么办？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5asoo4uj1e3frmkyw1lh0nidx">使用 <code>ngSkipHydration</code> 时，请确保将其设置为静态属性（即不要使用 Angular 模板绑定语法）。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;user-viewer ngSkipHydration /&gt;</div><div class="hljs-ln-line">    &lt;user-viewer ngSkipHydration="true" /&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dpiizzmgaqadyho3lfe4vndu3">如果需要条件判断，可以将组件包裹在 
+<code>*ngIf</code> 中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">import {Component} from '@angular/core';</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  template: `</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"hasUser; else noUser"</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">user-viewer</span> <span class="hljs-attr">ngSkipHydration</span> /&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">ng-template</span> #<span class="hljs-attr">noUser</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">user-viewer</span> /&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">ng-template</span>&gt;</span></div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">class MyComponent {}</div></code>
+    </pre>
+  </div>
+  <h2 id="configuration-requirements">
+    <a href="#configuration-requirements" class="docs-anchor" tabindex="-1" aria-label="Link to Configuration requirements" data-ng_translator_product="100" data-ng_translator_ref_id="bwdhyfdm5yb1t69cyimmn0hs0">配置要求</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1m4l3dq4enen78ip8iyhuqwdl"><a href="tools/cli/template-typecheck#strict-mode"><code>strictTemplates</code></a> 必须启用，才能发出任何扩展诊断。 
+<code>skipHydrationNotStatic</code> 除了 
+<code>strictTemplates</code> 之外没有其他附加要求。</p>
+
+  <h2 id="what-if-i-cant-avoid-this">
+    <a href="#what-if-i-cant-avoid-this" class="docs-anchor" tabindex="-1" aria-label="Link to What if I can't avoid this?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="duupn560xw3oqrkqmgen1ccwo">如果我无法避免这种情况怎么办？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bzu6yb6isvsmddbdryz1qwy7l">可以通过编辑项目的 <code>tsconfig.json</code> 文件来禁用此诊断：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"angularCompilerOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"extendedDiagnostics"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"checks"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"skipHydrationNotStatic"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"suppress"</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1tl6suaasu3xo2b1onvdft0o9">有关更多信息，请参阅<a href="extended-diagnostics#configuration">扩展诊断配置</a>。</p>

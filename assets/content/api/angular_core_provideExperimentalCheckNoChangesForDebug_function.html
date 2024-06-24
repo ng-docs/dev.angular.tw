@@ -1,0 +1,23 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>provideExperimentalCheckNoChangesForDebug</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div><div class="docs-api-item-label" data-mode="full" data-type="experimental">Experimental</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/core/src/change_detection/scheduling/exhaustive_check_no_changes.ts#L42-L80" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="cky05x0qiiaud27lcxcq42gyc">用于周期性地验证在检查后没有表达式发生变化。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">provideExperimentalCheckNoChangesForDebug</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">options</span>: { interval?: <span class="hljs-built_in">number</span>; useNgZoneOnStable?: <span class="hljs-built_in">boolean</span>; exhaustive?: <span class="hljs-built_in">boolean</span>; }</div><div class="hljs-ln-line ">): <span class="hljs-title class_">EnvironmentProviders</span>;</div></code></pre></div></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>provideExperimentalCheckNoChangesForDebug</h3><div><code>EnvironmentProviders</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="cky05x0qiiaud27lcxcq42gyc">用于周期性地验证在检查后没有表达式发生变化。</p></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">options</span><code>{ interval?: number; useNgZoneOnStable?: boolean; exhaustive?: boolean; }</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="drjzkkg5p82otvmroa1dm4ko0">用于配置检查何时执行。</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="bzz20qelzio5d2ojpd5xorhkd"><code>interval</code> 将周期性地对应用视图运行全面的 
+<code>checkNoChanges</code></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="dv916e0eah1ffw6srhb9tnkjk"><code>useNgZoneOnStable</code> 将使用 ZoneJS 来确定何时在使用 ZoneJS 驱动变更检测的应用中可能运行了变更检测。当 
+<code>NgZone.onStable</code> 会发出事件时，所有附着到 
+<code>ApplicationRef</code> 的视图都会检查变更。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="crkamnqgxgpy75xmwjidsbzsa">「全面」的意思是所有附着到 
+<code>ApplicationRef</code> 的视图及其所有后代视图都会检查变更（排除那些通过 
+<code>ChangeDetectorRef.detach()</code> 分离的子树）。这是有用的，因为在常规变更检测后运行的检查对使用 
+<code>ChangeDetectionStrategy.OnPush</code> 的组件不起作用。此检查将揭示任何被 
+<code>OnPush</code> 组件隐藏的现有错误。默认情况下，此检查是全面的，并且会始终检查所有视图，无论其「脏」状态和 
+<code>ChangeDetectionStrategy</code> 如何。</li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9fyfy1mdsdoiyehbvqyt7qf0z">当 
+<code>useNgZoneOnStable</code> 选项为 
+<code>true</code> 时，此函数将提供其自己的 
+<code>NgZone</code> 实现，并需要在任何其他 
+<code>NgZone</code> 提供者之后，包括 
+<code>provideZoneChangeDetection()</code> 和 
+<code>provideExperimentalZonelessChangeDetection()</code>。</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>EnvironmentProviders</code></div></div></div></div></div></div></div>

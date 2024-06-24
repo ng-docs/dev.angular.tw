@@ -1,0 +1,166 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="70vwf79cqe87pphkxcutgjrtw">Angular 元素（Elements）概览</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/elements.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8l3j1lokhtpgee37s02emi8gr"><em>Angular 元素</em>就是打包成<em>自定义元素</em>的 Angular 组件。所谓自定义元素就是一套与具体框架无关的用于定义新 HTML 元素的 Web 标准。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="aaa5ms5fgkmqlkucz3fn4x76y"><a href="https://developer.mozilla.org/docs/Web/Web_Components/Using_custom_elements" target="_blank">自定义元素</a> 是在 Angular 支持的所有浏览器上都可用的 Web 平台特性。 自定义元素通过允许你定义一个由 JavaScript 代码创建和控制其内容的标签来扩展 HTML。 浏览器维护一个 
+<code>CustomElementRegistry</code> 已定义自定义元素的注册表，它将一个可实例化的 JavaScript 类映射到一个 HTML 标签。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6583xjkn1grfatki7yh1pg9d0"><code>@angular/elements</code> 包导出了一个 
+<code>createCustomElement()</code> API，为 Angular 的组件接口和变更检测功能提供了一个桥接到内置 DOM API 的桥梁。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="85w94gk0jsyzaofnae91mvlxr">将组件转换为自定义元素使所有必要的 Angular 基础设施都可用于浏览器。创建自定义元素既简单又直接，并会自动将你组件定义的视图与变更检测和数据绑定连接起来，将 Angular 功能映射到相应的内置 HTML 等价物。</p>
+
+  <h2 id="using-custom-elements">
+    <a href="#using-custom-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Using custom elements" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="21rx1tlx2girh9z5jm06b0eb1">使用自定义元素</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6ipjiw97csbid88uklajk4g2s">自定义元素自启动 —— 它们在被添加到 DOM 时启动，并在从 DOM 中移除时销毁。一旦自定义元素被添加到任何页面的 DOM 中，它看起来和行为都像任何其他 HTML 元素，不需要任何关于 Angular 术语或使用惯例的特殊知识。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5kav18i9k6z7ols7u6mvkeuhn">要往工作空间中添加 <code>@angular/elements</code> 包，请运行如下命令：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">npm install @angular/elements --save</div></code>
+    </pre>
+  </div>
+  <h3 id="how-it-works">
+    <a href="#how-it-works" class="docs-anchor" tabindex="-1" aria-label="Link to How it works" data-ng_translator_product="100" data-ng_translator_ref_id="9gzj52d14rjscz4pktlc7xfw0">工作原理</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="62hpg3jv0xxyphuqxe9qc5qix"><code>createCustomElement()</code> 函数将一个组件转换为一个类，可以将其注册为自定义元素到浏览器中。在你将配置好的类注册到浏览器的自定义元素注册表后，可以像内置 HTML 元素一样使用这个新元素，直接添加到 DOM 的内容中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">my-popup</span> <span class="hljs-attr">message</span>=<span class="hljs-string">"Use Angular!"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">my-popup</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="27u90t0fvqrg488eri8zh3nz5">当你的自定义元素放进页面中时，浏览器会创建一个已注册类的实例。其内容是由组件模板提供的，它使用 Angular 模板语法，并且使用组件和 DOM 数据进行渲染。组件的输入属性（Property）对应于该元素的输入属性（Attribute）。</p>
+
+  <h2 id="transforming-components-to-custom-elements">
+    <a href="#transforming-components-to-custom-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Transforming components to custom elements" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4va7o1np5cx88w5ozgr69qosq">把组件转换成自定义元素</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6brm2r3dz83iu98rjef7m729m">Angular 提供了 
+<code>createCustomElement()</code> 函数，用于将一个 Angular 组件及其依赖项转换为自定义元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="14e8a3vw9l8qdey880hy0tnh">转换过程实现了 
+<code>NgElementConstructor</code> 接口，并创建了一个构造函数类，该类被配置为生成组件的自启动实例。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="89dl5w46dcnpi8lpgg3xs8qgc">使用浏览器的原生 
+<a href="https://developer.mozilla.org/docs/Web/API/CustomElementRegistry/define" target="_blank"><code>customElements.define()</code></a> 函数将配置好的构造函数及其关联的自定义元素标签注册到浏览器的 
+<a href="https://developer.mozilla.org/docs/Web/API/CustomElementRegistry" target="_blank"><code>CustomElementRegistry</code></a> 中。当浏览器遇到注册元素的标签时，使用构造函数创建一个自定义元素实例。</p>
+
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="aqs0cgavkfwuocqk7hyv6yybl"><strong>重要：</strong>避免使用组件的选择器作为自定义元素标签名称。这可能会导致意外行为，因为 Angular 会为单个 DOM 元素创建两个组件实例：一个常规的 Angular 组件和一个使用自定义元素的组件。</p>
+
+    </div>
+    
+  <h3 id="mapping">
+    <a href="#mapping" class="docs-anchor" tabindex="-1" aria-label="Link to Mapping" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6a9xgezps7x9ff84vnbvslw">映射</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="gi57842xewk851g0vrg8ubnh"><em>寄宿</em>着 Angular 组件的自定义元素在组件中定义的"数据及逻辑"和标准的 DOM API 之间建立了一座桥梁。组件的属性和逻辑会直接映射到 HTML 属性和浏览器的事件系统中。</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_ref_id="bowyj7v87a2uc9i5ickm1mdgc">创建 API 解析组件以查找输入属性，并定义相应的自定义元素属性。它会转换属性名称，使其与不区分大小写的自定义元素兼容。生成的属性名称使用连字符分隔的小写形式。例如，对于具有 
+<code>@Input('myInputProp') inputProp</code> 的组件，相应的自定义元素定义了一个属性 
+<code>my-input-prop</code>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="bfsn9tk6hzuung0ix33wux0c8">组件输出作为 HTML 
+<a href="https://developer.mozilla.org/docs/Web/API/CustomEvent" target="_blank">自定义事件</a> 派发，且自定义事件的名称与输出名称匹配。例如，对于具有 
+<code>@Output() valueChanged = new EventEmitter()</code> 的组件，相应的自定义元素派发名称为 "valueChanged" 的事件，发出的数据存储在事件的 
+<code>detail</code> 属性中。如果你提供了一个别名，则使用该值；例如，
+<code>@Output('myClick') clicks = new EventEmitter&lt;string&gt;();</code> 会派发名称为 "myClick" 的事件。</p>
+</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="br1q3wb8ndv8sf52bohda5tg4">欲了解更多信息，请参见 Web 组件文档中的 
+<a href="https://developer.mozilla.org/docs/Web/Guide/Events/Creating_and_triggering_events#Creating_custom_events" target="_blank">创建自定义事件</a>。</p>
+
+  <h2 id="example-a-popup-service">
+    <a href="#example-a-popup-service" class="docs-anchor" tabindex="-1" aria-label="Link to Example: A Popup Service" data-ng_translator_product="100" data-ng_translator_ref_id="dco0arv9fa8a5aza7j2wybkja">范例：弹窗服务</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="eb5mz7zlp0mdszuev75p29ov7">以前，当你想在运行时将组件添加到应用时，必须定义一个
+<em>动态组件</em>，然后加载它，附着到 DOM 中的某个元素，并连接所有的依赖项、变更检测和事件处理。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7fm82zapzoatfzaq8r8cxsr6c">使用 Angular 自定义元素使这一过程更简单、更透明，自动提供所有基础设施和框架 —— 你只需定义所需的事件处理类型（如果不打算在应用中使用它，还需要将组件从编译中排除）。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8w71ljxnsbefcaje6ig7syib6">这个弹窗服务的范例应用（见后面）定义了一个组件，你可以动态加载它也可以把它转换成自定义组件。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8n2c7wfntpyw9gnmnqx5bqxht">文件</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>popup.component.ts</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ewhg0sd0f0aekiu0wfh9qb9ik">定义了一个简单的弹出元素，显示输入消息，并带有一些动画和样式。</td>
+</tr>
+<tr>
+<td align="left"><code>popup.service.ts</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="au427cfsvdrto4q6jsc2zt7cf">创建一个可注入的服务，此服务提供了两种不同的方式来调用
+<code>PopupComponent</code>：作为动态组件或作为自定义元素。注意，为动态加载方法所需的设置更多。</td>
+</tr>
+<tr>
+<td align="left"><code>app.component.ts</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8w1b6ebdzlb9e8hnxpt8pjf70">定义应用的根组件，此组件使用
+<code>PopupService</code>在运行时将弹出窗口添加到 DOM 中。当应用运行时，根组件的构造函数将
+<code>PopupComponent</code>转换为自定义元素。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7qytxkxqdaac73wwhlkaepma7">为了对比，演示中展示了这两种方法。一个按钮使用动态加载方法添加弹出窗口，另一个按钮使用自定义元素。结果是一样的，但准备过程不同。</p>
+<div class="docs-code-multifile">
+    <div class="docs-code" path="adev/src/content/examples/elements/src/app/popup.component.ts" header="popup.component.ts">
+    <div class="docs-code-header"><h3>popup.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component, EventEmitter, HostBinding, Input, Output} from <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {animate, state, style, transition, trigger} from <span class="hljs-string">'@angular/animations'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component({</span></div><div class="hljs-ln-line">  standalone: true,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'my-popup'</span>,</div><div class="hljs-ln-line">  template: `</div><div class="hljs-ln-line">    &lt;span&gt;Popup: {{ message }}&lt;/span&gt;</div><div class="hljs-ln-line">    &lt;button type=<span class="hljs-string">"button"</span> (click)=<span class="hljs-string">"closed.next()"</span>&gt;✖&lt;/button&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  animations: [</div><div class="hljs-ln-line">    trigger(<span class="hljs-string">'state'</span>, [</div><div class="hljs-ln-line">      state(<span class="hljs-string">'opened'</span>, style({transform: <span class="hljs-string">'translateY(0%)'</span>})),</div><div class="hljs-ln-line">      state(<span class="hljs-string">'void, closed'</span>, style({transform: <span class="hljs-string">'translateY(100%)'</span>, opacity: 0})),</div><div class="hljs-ln-line">      transition(<span class="hljs-string">'* =&gt; *'</span>, animate(<span class="hljs-string">'100ms ease-in'</span>)),</div><div class="hljs-ln-line">    ]),</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  styles: [</div><div class="hljs-ln-line">    `</div><div class="hljs-ln-line">      :host {</div><div class="hljs-ln-line">        position: absolute;</div><div class="hljs-ln-line">        bottom: 0;</div><div class="hljs-ln-line">        left: 0;</div><div class="hljs-ln-line">        right: 0;</div><div class="hljs-ln-line">        background: #009cff;</div><div class="hljs-ln-line">        height: 48px;</div><div class="hljs-ln-line">        padding: 16px;</div><div class="hljs-ln-line">        display: flex;</div><div class="hljs-ln-line">        justify-content: space-between;</div><div class="hljs-ln-line">        align-items: center;</div><div class="hljs-ln-line">        border-top: 1px solid black;</div><div class="hljs-ln-line">        font-size: 24px;</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">      button {</div><div class="hljs-ln-line">        border-radius: 50%;</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    `,</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> <span class="hljs-title class_">PopupComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@HostBinding(<span class="hljs-string">'@state'</span>)</span></div><div class="hljs-ln-line">  state: <span class="hljs-string">'opened'</span> | <span class="hljs-string">'closed'</span> = <span class="hljs-string">'closed'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-meta">@Input()</span></div><div class="hljs-ln-line">  <span class="hljs-keyword">get</span> message(): string {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._message;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  <span class="hljs-keyword">set</span> message(message: string) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>._message = message;</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.state = <span class="hljs-string">'opened'</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> _message = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-meta">@Output()</span></div><div class="hljs-ln-line">  closed = new EventEmitter&lt;void&gt;();</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/elements/src/app/popup.service.ts" header="popup.service.ts">
+    <div class="docs-code-header"><h3>popup.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">ApplicationRef</span>, createComponent, <span class="hljs-title class_">EnvironmentInjector</span>, <span class="hljs-title class_">Injectable</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">NgElement</span>, <span class="hljs-title class_">WithProperties</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/elements'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">PopupComponent</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'./popup.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>()</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PopupService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line">    <span class="hljs-keyword">private</span> injector: EnvironmentInjector,</div><div class="hljs-ln-line">    <span class="hljs-keyword">private</span> applicationRef: ApplicationRef,</div><div class="hljs-ln-line">  ) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// Previous dynamic-loading method required you to set up infrastructure</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// before adding the popup to the DOM.</span></div><div class="hljs-ln-line">  <span class="hljs-title function_">showAsComponent</span>(<span class="hljs-params">message: <span class="hljs-built_in">string</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Create element</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> popup = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">'popup-component'</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// Create the component and wire it up with the element</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> popupComponentRef = <span class="hljs-title function_">createComponent</span>(<span class="hljs-title class_">PopupComponent</span>, {</div><div class="hljs-ln-line">      <span class="hljs-attr">environmentInjector</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">injector</span>,</div><div class="hljs-ln-line">      <span class="hljs-attr">hostElement</span>: popup,</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// Attach to the view so that the change detector knows to run</span></div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">applicationRef</span>.<span class="hljs-title function_">attachView</span>(popupComponentRef.<span class="hljs-property">hostView</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// Listen to the close event</span></div><div class="hljs-ln-line">    popupComponentRef.<span class="hljs-property">instance</span>.<span class="hljs-property">closed</span>.<span class="hljs-title function_">subscribe</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">removeChild</span>(popup);</div><div class="hljs-ln-line">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">applicationRef</span>.<span class="hljs-title function_">detachView</span>(popupComponentRef.<span class="hljs-property">hostView</span>);</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// Set the message</span></div><div class="hljs-ln-line">    popupComponentRef.<span class="hljs-property">instance</span>.<span class="hljs-property">message</span> = message;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// Add to the DOM</span></div><div class="hljs-ln-line">    <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">appendChild</span>(popup);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// This uses the new custom-element method to add the popup to the DOM.</span></div><div class="hljs-ln-line">  <span class="hljs-title function_">showAsElement</span>(<span class="hljs-params">message: <span class="hljs-built_in">string</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Create element</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> <span class="hljs-attr">popupEl</span>: <span class="hljs-title class_">NgElement</span> &amp; <span class="hljs-title class_">WithProperties</span>&lt;<span class="hljs-title class_">PopupComponent</span>&gt; = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(</div><div class="hljs-ln-line">      <span class="hljs-string">'popup-element'</span>,</div><div class="hljs-ln-line">    ) <span class="hljs-keyword">as</span> <span class="hljs-built_in">any</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// Listen to the close event</span></div><div class="hljs-ln-line">    popupEl.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'closed'</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">removeChild</span>(popupEl));</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// Set the message</span></div><div class="hljs-ln-line">    popupEl.<span class="hljs-property">message</span> = message;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// Add to the DOM</span></div><div class="hljs-ln-line">    <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">appendChild</span>(popupEl);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/elements/src/app/app.component.ts" header="app.component.ts">
+    <div class="docs-code-header"><h3>app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component, Injector} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {createCustomElement} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/elements'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {PopupComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./popup.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {PopupService} <span class="hljs-keyword">from</span> <span class="hljs-string">'./popup.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-keyword">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  <span class="hljs-keyword">template</span>: `</div><div class="hljs-ln-line">    &lt;<span class="hljs-keyword">input</span> #<span class="hljs-keyword">input</span> <span class="hljs-keyword">value</span>="Message" /&gt;</div><div class="hljs-ln-line">    &lt;button <span class="hljs-keyword">type</span>="button" (click)="popup.showAsComponent(input.value)"&gt;<span class="hljs-keyword">Show</span> <span class="hljs-keyword">as</span> component&lt;/button&gt;</div><div class="hljs-ln-line">    &lt;button <span class="hljs-keyword">type</span>="button" (click)="popup.showAsElement(input.value)"&gt;<span class="hljs-keyword">Show</span> <span class="hljs-keyword">as</span> element&lt;/button&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  providers: [PopupService],</div><div class="hljs-ln-line">  imports: [PopupComponent],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> AppComponent {</div><div class="hljs-ln-line">  constructor(</div><div class="hljs-ln-line">    injector: Injector,</div><div class="hljs-ln-line">    <span class="hljs-built_in">public</span> popup: PopupService,</div><div class="hljs-ln-line">  ) {</div><div class="hljs-ln-line">    // Convert `PopupComponent` <span class="hljs-keyword">to</span> a custom element.</div><div class="hljs-ln-line">    const PopupElement = createCustomElement(PopupComponent, {injector});</div><div class="hljs-ln-line">    // Register the custom element <span class="hljs-keyword">with</span> the browser.</div><div class="hljs-ln-line">    customElements.define(<span class="hljs-string">'popup-element'</span>, PopupElement);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    </div>
+  <h2 id="typings-for-custom-elements">
+    <a href="#typings-for-custom-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Typings for custom elements" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a7evs83p2945tqfgqihtzvqop">为自定义元素添加类型支持</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a0m9u7hryyjmnqk09gzfpwsxo">一般的 DOM API，比如 <code>document.createElement()</code> 或 <code>document.querySelector()</code>，会返回一个与指定的参数相匹配的元素类型。比如，调用 <code>document.createElement('a')</code> 会返回 <code>HTMLAnchorElement</code>，这样 TypeScript 就会知道它有一个 <code>href</code> 属性，而 <code>document.createElement('div')</code> 会返回 <code>HTMLDivElement</code>，这样 TypeScript 就会知道它没有 <code>href</code> 属性。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="l4z5xvdkd9jly6jr07o83py1">当调用未知元素（比如自定义的元素名 <code>popup-element</code>）时，该方法会返回泛化类型，比如 <code>HTMLELement</code>，这时候 TypeScript 就无法推断出所返回元素的正确类型。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ncovzta6bwekt2oklqvfvbn7">用 Angular 创建的自定义元素扩展了
+<code>NgElement</code>（它又扩展了
+<code>HTMLElement</code>）。此外，这些自定义元素将为对应组件的每个输入属性提供一个属性。例如，我们的
+<code>popup-element</code>有一个类型为
+<code>string</code>的
+<code>message</code>属性。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d89tq0q8md70oy75mrn7q089e">如果你要让你的自定义元素获得正确的类型，还可使用一些选项。假设你要创建一个基于下列组件的自定义元素 <code>my-dialog</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>(…)</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDialog</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">content</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2snn9wmcnqfy8y9bgfdlg8p09">获取准确类型定义的最直接方法是将相关 DOM 方法的返回值转换为正确的类型。为此，请使用
+<code>NgElement</code>和
+<code>WithProperties</code>类型（两者都从
+<code>@angular/elements</code>导出）：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> aDialog = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">'my-dialog'</span>) <span class="hljs-keyword">as</span> <span class="hljs-title class_">NgElement</span> &amp; <span class="hljs-title class_">WithProperties</span>&lt;{<span class="hljs-attr">content</span>: <span class="hljs-built_in">string</span>}&gt;;</div><div class="hljs-ln-line">aDialog.<span class="hljs-property">content</span> = <span class="hljs-string">'Hello, world!'</span>;</div><div class="hljs-ln-line">aDialog.<span class="hljs-property">content</span> = <span class="hljs-number">123</span>;  <span class="hljs-comment">// &lt;-- ERROR: TypeScript knows this should be a string.</span></div><div class="hljs-ln-line">aDialog.<span class="hljs-property">body</span> = <span class="hljs-string">'News'</span>;  <span class="hljs-comment">// &lt;-- ERROR: TypeScript knows there is no `body` property on `aDialog`.</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5smjiuwg87d82g5doga81v992">这是一种让你的自定义元素快速获得 TypeScript 特性（比如类型检查和自动完成支持）的好办法，不过如果你要在多个地方使用它，可能会有点啰嗦，因为不得不在每个地方对返回类型做转换。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eoq9iw164ki4e6ty7dooie4jk">另一种方式可以对每个自定义元素的类型只声明一次。你可以扩展 <code>HTMLElementTagNameMap</code>，TypeScript 会在 DOM 方法（如 <code>document.createElement()</code>、<code>document.querySelector()</code> 等）中用它来根据标签名推断返回元素的类型。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">declare</span> <span class="hljs-variable language_">global</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">interface</span> <span class="hljs-title class_">HTMLElementTagNameMap</span> {</div><div class="hljs-ln-line">    <span class="hljs-string">'my-dialog'</span>: <span class="hljs-title class_">NgElement</span> &amp; <span class="hljs-title class_">WithProperties</span>&lt;{<span class="hljs-attr">content</span>: <span class="hljs-built_in">string</span>}&gt;;</div><div class="hljs-ln-line">    <span class="hljs-string">'my-other-element'</span>: <span class="hljs-title class_">NgElement</span> &amp; <span class="hljs-title class_">WithProperties</span>&lt;{<span class="hljs-attr">foo</span>: <span class="hljs-string">'bar'</span>}&gt;;</div><div class="hljs-ln-line">    …</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cz0ofhglq2ev850d5tlg2n16">现在，TypeScript 就可以像内置元素一样推断出它的正确类型了：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">'div'</span>)               <span class="hljs-comment">//--&gt; HTMLDivElement (built-in element)</span></div><div class="hljs-ln-line"><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'foo'</span>)               <span class="hljs-comment">//--&gt; Element        (unknown element)</span></div><div class="hljs-ln-line"><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">'my-dialog'</span>)         <span class="hljs-comment">//--&gt; NgElement &amp; WithProperties&lt;{content: string}&gt; (custom element)</span></div><div class="hljs-ln-line"><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'my-other-element'</span>)  <span class="hljs-comment">//--&gt; NgElement &amp; WithProperties&lt;{foo: 'bar'}&gt;      (custom element)</span></div></code>
+    </pre>
+  </div>

@@ -1,0 +1,176 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3o6dxjrxpcmlv2twyi7p6362m">Angular 中的无障碍功能</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/best-practices/a11y.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dw9owvzecnpn6vjm5g4h2wu6c">Web 会被各种各样的人使用，包括有视觉或运动障碍的人。有多种辅助技术能使这些人更轻松地和基于 Web 的软件应用进行交互。另外，将应用设计得更易于访问通常也能改善所有用户的体验。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="b6yofydx4idib1qx6i8cb5wb7">有关设计无障碍应用问题和技术的深入介绍，请参阅 Google 的 web.dev 
+<a href="https://web.dev/learn/accessibility/" target="_blank">Learn Accessibility</a> 课程。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b7k7kubpe7kbrhdrtcm2cnczv">本页讨论了设计 Angular 应用的最佳实践，这些实践对所有用户（包括依赖辅助技术的用户）都适用。</p>
+
+  <h2 id="accessibility-attributes">
+    <a href="#accessibility-attributes" class="docs-anchor" tabindex="-1" aria-label="Link to Accessibility attributes" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2ync61i3srqq9dfgzy5fav4qe">无障碍属性（Attribute）</a>
+  </h2>
+  <!-- TODO: add link once attribute binding guide is implemented -->
+<p data-ng_translator_product="100" data-ng_translator_ref_id="65oackyjzu2eono95akeipbh1">构建无障碍的 Web 体验通常需要设置 
+<a href="https://web.dev/learn/accessibility/aria-html/" target="_blank">无障碍富互联网应用（ARIA）属性</a>，以提供可能缺失的语义意义。 使用属性绑定模板语法来控制与无障碍相关的属性值。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="agi98vg7nyn9bhwx2cxjj259u">在 Angular 中绑定 ARIA 属性（Attribute）时，必须使用 <code>attr.</code> 前缀。ARIA 规范针对的是 HTML 属性（Attribute），而不是 DOM 元素的属性（Property）。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Use attr. when binding to an ARIA attribute --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> [<span class="hljs-attr">attr.aria-label</span>]=<span class="hljs-string">"myActionLabel"</span>&gt;</span>…<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-note">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dui5ftlquhscubmgxpxdbhlc"><strong>注意：</strong> 这种语法仅对属性
+<em>绑定</em>是必须的。 静态 ARIA 属性不需要额外语法。</p>
+
+    </div>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- Static ARIA attributes require no extra syntax --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">"Save document"</span>&gt;</span>…<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9odpap66yrtf34tldn2srfadt"><strong>有帮助的：</strong> 按约定，HTML 属性使用小写名称（
+<code>tabindex</code>），而属性使用 camelCase 名称（
+<code>tabIndex</code>）。</p>
+
+    </div>
+    <!-- TODO: add link once attribute binding guide implemented -->
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a9d9kucuhwhucapx8cnnf349i">有关属性和属性（Property）之间差异的更多背景信息，请参阅
+<a href="guide/templates">绑定语法指南</a>。</p>
+
+  <h2 id="angular-ui-components">
+    <a href="#angular-ui-components" class="docs-anchor" tabindex="-1" aria-label="Link to Angular UI components" data-ng_translator_product="100" data-ng_translator_ref_id="80sqwpowzhumn2usdk1eueq6t">Angular UI 组件</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="cqxtsomvr5odwmmgwe2igruv9">由 Angular 团队维护的
+<a href="https://material.angular.io" target="_blank">Angular Material</a>库是一套可复用的 UI 组件，旨在完全实现无障碍功能。
+<a href="https://material.angular.io/cdk/categories" target="_blank">组件开发工具包（CDK）</a>包括
+<code>a11y</code>包，提供了支持各种无障碍功能的工具。例如：</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_ref_id="cefww7r1ppe2ol0epitictf55"><code>LiveAnnouncer</code> 用于通过 
+<code>aria-live</code> 区域为屏幕阅读器用户播报消息。有关更多信息，请参阅 W3C 文档 
+<a href="https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-live" target="_blank">aria-live regions</a>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="5afe48d9t6zuziz9r5qtzfuvm"><code>cdkTrapFocus</code>指令会将 Tab 键的焦点限制在某个元素内。使用它可以为模态对话框等组件创建无障碍体验，确保焦点必须被限制。</p>
+</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="c0oyhj6amyav7dwb3b02vsi82">有关这些和其他工具的详细信息，请参阅
+<a href="https://material.angular.io/cdk/a11y/overview" target="_blank">Angular CDK 无障碍性概述</a>。</p>
+
+  <h3 id="augmenting-native-elements">
+    <a href="#augmenting-native-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Augmenting native elements" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="16yu8z8az1b6le9a72crw7rjo">增强原生元素</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a1dv8dptnym79096mn23an02o">原生 HTML 元素捕获了一些对无障碍性很重要的标准交互模式。在制作 Angular 组件时，应尽可能直接复用这些原生元素，而不是重新实现已获良好支持的行为。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="vpeabjcj4nwz1l98zbo3xy2l">比如，你可以创建一个组件，它使用属性（Attribute）选择器指向原生 <code>&lt;button&gt;</code> 元素，而不是为各种新按钮创建自定义元素。通常这适用于 <code>&lt;button&gt;</code> 和 <code>&lt;a&gt;</code>，但也可以用于许多其它类型的元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6xn1u9jgd6q6skd1bvu721ke">你可以在 Angular Material 中看到这种模式的示例：
+<a href="https://github.com/angular/components/blob/main/src/material/button/button.ts#L33C3-L36C5" target="_blank"><code>MatButton</code></a>、
+<a href="https://github.com/angular/components/blob/main/src/material/tabs/tab-nav-bar/tab-nav-bar.ts#L62" target="_blank"><code>MatTabNav</code></a>和
+<a href="https://github.com/angular/components/blob/main/src/material/table/table.ts#L40" target="_blank"><code>MatTable</code></a>。</p>
+
+  <h3 id="using-containers-for-native-elements">
+    <a href="#using-containers-for-native-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Using containers for native elements" data-ng_translator_product="100" data-ng_translator_ref_id="40sbaqnio0eq5lr6q4eszog1i">将容器用于原生元素</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eynjjv3xz1wyyf5kjxihjosps">有时要使用的原生元素需要一个容器元素。比如，原生 <code>&lt;input&gt;</code> 元素不能有子元素，因此任何自定义的文本输入组件都需要用额外的元素来包装 <code>&lt;input&gt;</code>。如果只在自定义组件的模板中包含 <code>&lt;input&gt;</code>，该组件的将用户无法为 <code>input</code> 元素设置任意 Property 和 Attribute。相反，你应该创建一个使用内容投影的容器组件，以将原生控件包含在组件的 API 中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="aec0d5z3th7vxydatgccmlef4">你可以将
+<a href="https://material.angular.io/components/form-field/overview" target="_blank"><code>MatFormField</code></a>作为这种模式的示例。</p>
+
+  <h2 id="case-study-building-a-custom-progress-bar">
+    <a href="#case-study-building-a-custom-progress-bar" class="docs-anchor" tabindex="-1" aria-label="Link to Case study: Building a custom progress bar" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7r9wg666rehjwuwy7dhwxjllt">案例研究：构建自定义进度条</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2x2svkp0qtg74slaho7mil5r5">以下范例显示如何通过使用宿主（host）绑定来控制与无障碍性相关的属性（Attribute），来把进度条无障碍化。</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="chdfnd9rggyygegq5zjw35alq">该组件定义了一个带有标准 HTML 属性
+<code>role</code>和 ARIA 属性的无障碍元素。ARIA 属性
+<code>aria-valuenow</code>绑定到用户的输入。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2hq73m7gf0nq7rxj5ecl7mtb3">在模板中，<code>aria-label</code> 属性（Attribute）可以确保屏幕阅读器能访问该控件。</li>
+
+  </ul>
+  <div class="docs-code-multifile">
+    <div class="docs-code" path="adev/src/content/examples/accessibility/src/app/progress-bar.component.ts">
+    
+    <pre class="docs-mini-scroll-track">      <code><span role="presentation" class="hljs-ln-number">1</span><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, <span class="hljs-title class_">Input</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><span role="presentation" class="hljs-ln-number">2</span><div class="hljs-ln-line"></div><span role="presentation" class="hljs-ln-number">3</span><div class="hljs-ln-line"><span class="hljs-comment">/**</span></div><span role="presentation" class="hljs-ln-number">4</span><div class="hljs-ln-line"> * Example progressbar component.</div><span role="presentation" class="hljs-ln-number">5</span><div class="hljs-ln-line"> */</div><span role="presentation" class="hljs-ln-number">6</span><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><span role="presentation" class="hljs-ln-number">7</span><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><span role="presentation" class="hljs-ln-number">8</span><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-example-progressbar'</span>,</div><span role="presentation" class="hljs-ln-number">9</span><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div class="bar" [style.width.%]="value"&gt;&lt;/div&gt;'</span>,</div><span role="presentation" class="hljs-ln-number">10</span><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./progress-bar.component.css'</span>],</div><span role="presentation" class="hljs-ln-number">11</span><div class="hljs-ln-line">  <span class="hljs-attr">host</span>: {</div><span role="presentation" class="hljs-ln-number highlighted">12</span><div class="hljs-ln-line highlighted">    <span class="hljs-comment">// Sets the role for this component to "progressbar"</span></div><span role="presentation" class="hljs-ln-number highlighted">13</span><div class="hljs-ln-line highlighted">    <span class="hljs-attr">role</span>: <span class="hljs-string">'progressbar'</span>,</div><span role="presentation" class="hljs-ln-number highlighted">14</span><div class="hljs-ln-line highlighted"></div><span role="presentation" class="hljs-ln-number highlighted">15</span><div class="hljs-ln-line highlighted">    <span class="hljs-comment">// Sets the minimum and maximum values for the progressbar role.</span></div><span role="presentation" class="hljs-ln-number highlighted">16</span><div class="hljs-ln-line highlighted">    <span class="hljs-string">'aria-valuemin'</span>: <span class="hljs-string">'0'</span>,</div><span role="presentation" class="hljs-ln-number highlighted">17</span><div class="hljs-ln-line highlighted">    <span class="hljs-string">'aria-valuemax'</span>: <span class="hljs-string">'100'</span>,</div><span role="presentation" class="hljs-ln-number highlighted">18</span><div class="hljs-ln-line highlighted"></div><span role="presentation" class="hljs-ln-number highlighted">19</span><div class="hljs-ln-line highlighted">    <span class="hljs-comment">// Binding that updates the current value of the progressbar.</span></div><span role="presentation" class="hljs-ln-number highlighted">20</span><div class="hljs-ln-line highlighted">    <span class="hljs-string">'[attr.aria-valuenow]'</span>: <span class="hljs-string">'value'</span>,</div><span role="presentation" class="hljs-ln-number">21</span><div class="hljs-ln-line">  },</div><span role="presentation" class="hljs-ln-number">22</span><div class="hljs-ln-line">})</div><span role="presentation" class="hljs-ln-number">23</span><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ExampleProgressbarComponent</span> {</div><span role="presentation" class="hljs-ln-number">24</span><div class="hljs-ln-line">  <span class="hljs-comment">/** Current value of the progressbar. */</span></div><span role="presentation" class="hljs-ln-number">25</span><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() value = <span class="hljs-number">0</span>;</div><span role="presentation" class="hljs-ln-number">26</span><div class="hljs-ln-line">}</div><span role="presentation" class="hljs-ln-number">27</span><div class="hljs-ln-line"></div><span role="presentation" class="hljs-ln-number">28</span><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/accessibility/src/app/app.component.html">
+    
+    <pre class="docs-mini-scroll-track">      <code><span role="presentation" class="hljs-ln-number">1</span><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Accessibility Example<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><span role="presentation" class="hljs-ln-number">2</span><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"progress-value"</span>&gt;</span></div><span role="presentation" class="hljs-ln-number">3</span><div class="hljs-ln-line">  Enter an example progress value</div><span role="presentation" class="hljs-ln-number">4</span><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"progress-value"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"number"</span> <span class="hljs-attr">min</span>=<span class="hljs-string">"0"</span> <span class="hljs-attr">max</span>=<span class="hljs-string">"100"</span></span></div><span role="presentation" class="hljs-ln-number">5</span><div class="hljs-ln-line">      [<span class="hljs-attr">value</span>]=<span class="hljs-string">"progress"</span> (<span class="hljs-attr">input</span>)=<span class="hljs-string">"setProgress($event)"</span>&gt;</div><span role="presentation" class="hljs-ln-number">6</span><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></div><span role="presentation" class="hljs-ln-number">7</span><div class="hljs-ln-line"></div><span role="presentation" class="hljs-ln-number highlighted">8</span><div class="hljs-ln-line highlighted"><span class="hljs-comment">&lt;!-- The user of the progressbar sets an aria-label to communicate what the progress means. --&gt;</span></div><span role="presentation" class="hljs-ln-number highlighted">9</span><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">app-example-progressbar</span> [<span class="hljs-attr">value</span>]=<span class="hljs-string">"progress"</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">"进度条范例"</span>&gt;</span></div><span role="presentation" class="hljs-ln-number">10</span><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-example-progressbar</span>&gt;</span></div><span role="presentation" class="hljs-ln-number">11</span><div class="hljs-ln-line"></div><span role="presentation" class="hljs-ln-number">12</span><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    </div>
+  <h2 id="routing">
+    <a href="#routing" class="docs-anchor" tabindex="-1" aria-label="Link to Routing" data-ng_translator_product="100" data-ng_translator_ref_id="74nlsxkr1xp06lifpm36dhjjp">路由</a>
+  </h2>
+  
+  <h3 id="focus-management-after-navigation">
+    <a href="#focus-management-after-navigation" class="docs-anchor" tabindex="-1" aria-label="Link to Focus management after navigation" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="s0u4q1vpb0rnra84slimyj4g">导航后的焦点管理</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4ze5c20kwbe0djb1628wx43jj">在 UI 中跟踪和控制
+<a href="https://web.dev/learn/accessibility/focus/" target="_blank">焦点</a>是无障碍设计中的一个重要考虑因素。在使用 Angular 路由时，你应该决定导航后页面的焦点位置。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="c2jrfo7yfthi02rsvoym392h7">为了避免仅依赖视觉提示，你需要确保在页面导航后路由代码更新焦点。使用
+<code>Router</code>服务的
+<code>NavigationEnd</code>事件来知道何时更新焦点。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8u0f11p1a31ku2htebopprg1m">以下范例显示了导航后如何在 DOM 中查找并把焦点移动到主体内容的头部。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">router.<span class="hljs-property">events</span>.<span class="hljs-title function_">pipe</span>(<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> e <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">NavigationEnd</span>)).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> mainHeader = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#main-content-header'</span>)</div><div class="hljs-ln-line">  <span class="hljs-keyword">if</span> (mainHeader) {</div><div class="hljs-ln-line">    mainHeader.<span class="hljs-title function_">focus</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="chyg00as3j0r927wtwzl17tx0">在实际的应用程序中，哪些元素会获得焦点取决于该应用特有的结构和布局。获得焦点的元素应使用户能够立即移动到刚刚进入视野的主要内容。你应该避免当路由变化后焦点重新回到 <code>body</code> 元素的情况。</p>
+
+  <h3 id="active-links-identification">
+    <a href="#active-links-identification" class="docs-anchor" tabindex="-1" aria-label="Link to Active links identification" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="73qjvuir25sjc793zmbmqjuhl">活跃链接识别</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8aj13hg528fthn63hcuohzud4">应用于活跃的
+<code>RouterLink</code>元素的 CSS 类，例如
+<code>RouterLinkActive</code>，提供了一个视觉提示来识别活跃链接。不幸的是，视觉提示对盲人或视力障碍用户没有帮助。将
+<code>aria-current</code>属性应用于元素可以帮助识别活跃链接。有关更多信息，请参阅
+<a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current" target="_blank">Mozilla 开发者网络（MDN）aria-current</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="72jggpag0frvhb0wha9aw1p7r"><code>RouterLinkActive</code>指令提供了
+<code>ariaCurrentWhenActive</code>输入，当链接变为活跃状态时，设置
+<code>aria-current</code>为指定值。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="15mien5sj6iere4uwp53wqljs">以下示例展示了如何将 <code>active-page</code> 类应用于活跃链接，以及如何在它们处于活跃状态时将它们的 <code>aria-current</code> 属性设置为 <code>"page"</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"home"</span></span></div><div class="hljs-ln-line">         <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"active-page"</span></div><div class="hljs-ln-line">         <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</div><div class="hljs-ln-line">        Home</div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"about"</span></span></div><div class="hljs-ln-line">         <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"active-page"</span></div><div class="hljs-ln-line">         <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</div><div class="hljs-ln-line">        About</div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"shop"</span></span></div><div class="hljs-ln-line">         <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"active-page"</span></div><div class="hljs-ln-line">         <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</div><div class="hljs-ln-line">        Shop</div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div></code>
+    </pre>
+  </div><!-- vale Angular.Angular_Spelling = NO -->
+
+
+  <h2 id="more-information">
+    <a href="#more-information" class="docs-anchor" tabindex="-1" aria-label="Link to More information" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a4i4l0z1p0mxth3he9lk6m2op">更多信息</a>
+  </h2>
+  
+  <ul class="docs-list">
+    <li><a href="https://developers.google.com/web/fundamentals/accessibility" target="_blank" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3cyow76uiskkk1zpzx6g1al52">无障碍性 - Google Web 基础知识</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria" target="_blank" data-ng_translator_product="100" data-ng_translator_ref_id="8v8d2y8hzml3c0lftl5ole5hr">ARIA 规范和编写惯例</a></li>
+<li><a href="https://material.io/design/usability/accessibility.html" target="_blank" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7h1uyepqdpkml7htzpvctsnot">Material Design - 无障碍功能</a></li>
+<li><a href="https://www.smashingmagazine.com/search/?q=accessibility" target="_blank" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1glbglnek4csu6c4ybjqiwprq">Smashing 杂志</a></li>
+<li><a href="https://inclusive-components.design" target="_blank" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="592eh6s3qc3ah22gvut32tckg">包容性组件</a></li>
+<li><a href="https://dequeuniversity.com/resources" target="_blank" data-ng_translator_product="100" data-ng_translator_ref_id="ddgnlhd3g5wounwsiopskrsmu">无障碍资源和代码示例</a></li>
+<li><a href="https://www.w3.org/WAI/people-use-web" target="_blank" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b2sowhb4nlg7d0jh4bm7engfb">W3C - 网络无障碍倡议</a></li>
+<li><a href="https://www.youtube.com/watch?v=HtTyRajRuyY" target="_blank" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bybq0q7l8khop95czrewpt63a">Rob Dodson 的 A11y 播客</a></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="eflb2mqi5p93nwdkp3k67oqa3"><a href="https://github.com/angular-eslint/angular-eslint#functionality" target="_blank">Angular ESLint</a> 提供了可以帮助你确保代码符合无障碍标准的 lint 规则。</li>
+
+  </ul>
+  <!-- vale Angular.Angular_Spelling = YES -->
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5t6jngyrv5ar7fimler5o7gq2">图书</p>
+<!-- vale Angular.Google_Quotes = NO -->
+
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9g4ucqe2mthkhyqpc7bnyktsg">“适合所有人的网络：设计无障碍的用户体验”，莎拉·霍顿和惠特尼·奎森伯里</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8a643oypio5vtetxl4eh3u4bp">“包容性设计模式”，Heydon Pickering</li>
+
+  </ul>
+  <!-- vale Angular.Google_Quotes = YES -->

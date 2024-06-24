@@ -1,0 +1,220 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="86y6pv1oqw8p08wwnkal59gkx">构建 Angular 应用</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/build.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="5ix5mzbozfupftgjllv98d2p3">你可以使用 
+<code>ng build</code> 命令构建你的 Angular CLI 应用或库。此命令会将 TypeScript 代码编译为 JavaScript，同时根据需要进行优化、打捆和最小化输出。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1ngsy7k6k5d3qg7uv9p2gw7cf"><code>ng build</code> 仅执行 
+<code>angular.json</code> 中默认项目的 
+<code>build</code> 目标的构建器。Angular CLI 通常会包含四个作为 
+<code>build</code> 目标使用的构建器：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="2leyr3qep6ef1mnw2agtncsxm">构建器</th>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="297niinze7mn1fnajtyjcs0tb">目的</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td><code>@angular-devkit/build-angular:browser</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="7yrcri88in8rmv5dwqmvktiqz">使用 
+<a href="https://webpack.js.org/" target="_blank">Webpack</a> 为在浏览器中使用的客户端应用打捆。</td>
+</tr>
+<tr>
+<td><code>@angular-devkit/build-angular:browser-esbuild</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="adb6g4jtzbohxhpbps6e9xaxj">使用 
+<a href="https://esbuild.github.io/" target="_blank">esbuild</a> 为在浏览器中使用的客户端应用打捆。更多信息请参见 
+<a href="tools/cli/build-system-migration#manual-migration-to-the-compatibility-builder"><code>browser-esbuild</code> 文档</a>。</td>
+</tr>
+<tr>
+<td><code>@angular-devkit/build-angular:application</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="aq6vwok7b4tbxkbcbep224s3i">使用 
+<a href="https://esbuild.github.io/" target="_blank">esbuild</a> 构建一个具有客户端捆绑包、Node 服务器和构建时预渲染路由的应用。</td>
+</tr>
+<tr>
+<td><code>@angular-devkit/build-angular:ng-packagr</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="499f1mnmu4z5oh2ypkvxwsze4">构建符合 
+<a href="tools/libraries/angular-package-format">Angular 包格式</a> 的 Angular 库。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dq1i0e0mmfmfr8msd5oa15mgt">通过 
+<code>ng new</code> 生成的应用默认使用 
+<code>@angular-devkit/build-angular:application</code>。通过 
+<code>ng generate library</code> 生成的库默认使用 
+<code>@angular-devkit/build-angular:ng-packagr</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="267nc76azjsbe0psvjklr0q7z">你可以通过查找某个项目的 
+<code>build</code> 目标来确定该项目使用的构建器。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"my-app"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-comment">// `ng build` invokes the Architect target named `build`.</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:application"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          …</div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"serve"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> … <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"test"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> … <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">        …</div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="caekmtb2phi7b5bcf0kjzydjx">本页面讨论 
+<code>@angular-devkit/build-angular:application</code> 的使用和选项。</p>
+
+  <h2 id="output-directory">
+    <a href="#output-directory" class="docs-anchor" tabindex="-1" aria-label="Link to Output directory" data-ng_translator_product="100" data-ng_translator_ref_id="6265k1urapyn17x6nee3qok6a">输出目录</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1isjeu65zsovqk0vquzqw4x32">此构建过程的结果输出到一个目录（默认情况下为 
+<code>dist/${PROJECT_NAME}</code>）。</p>
+
+  <h2 id="configuring-size-budgets">
+    <a href="#configuring-size-budgets" class="docs-anchor" tabindex="-1" aria-label="Link to Configuring size budgets" data-ng_translator_product="100" data-ng_translator_ref_id="3hx5ugdfaz1upcjjlktn9xiha">配置文件大小预算</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c9i8aki2fcslj3ijkrj32e6ar">当应用的功能不断增长时，其文件大小也会同步增长。CLI 允许你通过配置项来限制文件大小，以确保应用的各个部分都处于你定义的大小范围内。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="beni1a6er6ou4pf08x4u4c6d">在 CLI 配置文件 
+<code>angular.json</code> 中，为每个
+<a href="tools/cli/environments">配置的环境</a>在 
+<code>budgets</code> 部分定义你的大小边界。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">"configurations"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"production"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      …</div><div class="hljs-ln-line">      <span class="hljs-attr">"budgets"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"initial"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"maximumWarning"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"250kb"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"maximumError"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"500kb"</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3z2ssvoxs1756k992nomfgcjz">你可以为整个应用指定大小范围，也可以为特定部分。每个条目会为一种特定的类型配置大小范围。用下列各式来指定大小的值：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="f39e1sxuw8gilo5hjvhhep4dy">大小值</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1mrn2snrolso1n9jjtrigmf7u"><code>123</code> 或 
+<code>123b</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3r30dd191rd2w0bey9q4q6bkb">以字节为单位的大小。</td>
+</tr>
+<tr>
+<td align="left"><code>123kb</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5k6j2vwd86pxs3mbj1efnhpf">以千字节为单位的大小。</td>
+</tr>
+<tr>
+<td align="left"><code>123mb</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ac6e9w1d42rlexbzf3296np80">以兆字节为单位的大小。</td>
+</tr>
+<tr>
+<td align="left"><code>12%</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="e11g16jg0k83x5ns0585fd5s3">相对于基线的大小百分比（对基线值无效）。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="c9u266sto6u03at3gkkgmo8tc">当你配置一个预算时，构建器会在应用的某个部分达到或超过你设定的边界大小时发出警告或报告错误。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="r1yblry1oaoj120b94avnusx">每个范围条目是一个 JSON 对象，它具有下列属性：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5dkddoxcqk28ajo52wkpdu2by">属性</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="66vasbp44yre2dcyqjx64g0vw">值</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">type</td>
+<td align="left">The type of budget. One of: <table> <thead> <tr> <th data-ng_translator_product="100" data-ng_translator_ref_id="f5hi6fx5hpdr89gqwsxztq1jc">值</th> <th data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="40zskny0031m998f20foy4oiv">详情</th> </tr> </thead> <tbody> <tr> <td> <code>bundle</code> </td> <td data-ng_translator_product="100" data-ng_translator_ref_id="8ay8unomh4ixl3q5sicb16t0d">某个特定捆绑包的大小。</td> </tr> <tr> <td> <code>initial</code> </td> <td data-ng_translator_product="100" data-ng_translator_ref_id="3f8c091389hbhuz88bienbo0r">引导应用所需的 JavaScript 大小。默认情况下，会在 500kb 时发出警告，在 1mb 时报告错误。</td> </tr> <tr> <td> <code>allScript</code> </td> <td data-ng_translator_product="100" data-ng_translator_ref_id="9g2flta1848jigu01i46uo1tx">所有脚本的大小。</td> </tr> <tr> <td> <code>all</code> </td> <td data-ng_translator_product="100" data-ng_translator_ref_id="4f6t8v7672wlybjs905m7nesc">整个应用的大小。</td> </tr> <tr> <td> <code>anyComponentStyle</code> </td> <td data-ng_translator_product="100" data-ng_translator_ref_id="921ale2pm55jedpwmnr0nwo4t">任意一个组件样式表的大小。默认为 2kb 时警告，4kb 时报错。</td> </tr> <tr> <td> <code>anyScript</code> </td> <td data-ng_translator_product="100" data-ng_translator_ref_id="d3crns90xctd9o8bg3cjt3sx3">任意一个脚本的大小。</td> </tr> <tr> <td> <code>any</code> </td> <td data-ng_translator_product="100" data-ng_translator_ref_id="f4n8vb9e842dxtf91av6syk0n">任何文件的大小。</td> </tr> </tbody> </table></td>
+</tr>
+<tr>
+<td align="left">name</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2jd7cr5m6proql0afx8o0cya3">捆绑包的名称（对于 
+<code>type=bundle</code>）。</td>
+</tr>
+<tr>
+<td align="left">baseline</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1epv53086i1a3zu49n418dtkb">用于比较的基线大小。</td>
+</tr>
+<tr>
+<td align="left">maximumWarning</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="14v0v2trrr6l9yp6tnhdqfaqd">相对于基线的警告最大阈值。</td>
+</tr>
+<tr>
+<td align="left">maximumError</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="at72xfo9mcoc9zrpz2e23gesg">相对于基线的错误最大阈值。</td>
+</tr>
+<tr>
+<td align="left">minimumWarning</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dla2chntl6cza6knr6hkhy79b">相对于基线的警告最小阈值。</td>
+</tr>
+<tr>
+<td align="left">minimumError</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7ffjzvk8mmmuvjevi8owmrs78">相对于基线的错误最小阈值。</td>
+</tr>
+<tr>
+<td align="left">warning</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="97be9epj15cieph3z6j1i8rvi">相对于基线的警告阈值（最小 &amp; 最大）。</td>
+</tr>
+<tr>
+<td align="left">error</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="d9chm0twsg8aquavd8woiyftw">相对于基线的错误阈值（最小 &amp; 最大）。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="configuring-commonjs-dependencies">
+    <a href="#configuring-commonjs-dependencies" class="docs-anchor" tabindex="-1" aria-label="Link to Configuring CommonJS dependencies" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dtt5cni4eitwlf9yrurqvqjgf">配置 CommonJS 依赖项</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="drlo780d8317yk7umrj7ozycv">始终在你的应用及其依赖项中优先使用本机 
+<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import" target="_blank">ECMAScript 模块</a>（ESM）。 ESM 是一个完全指定的 Web 标准和 JavaScript 语言特性，具有强大的静态分析支持。与其他模块格式相比，这使得捆绑包优化更加强大。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dk2bd4suhjcfe3lx2rfcq04ms">Angular CLI 还支持将 
+<a href="https://nodejs.org/api/modules.html" target="_blank">CommonJS</a> 依赖项导入到你的项目中，并将自动捆绑这些依赖项。 然而，CommonJS 模块可能会阻止捆绑器和最小化器有效地优化这些模块，导致捆绑包大小更大。 欲了解更多信息，请参阅 
+<a href="https://web.dev/commonjs-larger-bundles" target="_blank">CommonJS 如何使你的捆绑包变大</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="axuq8wb0tydcjjoh7wc742bgd">如果 Angular CLI 检测到你的浏览器应用依赖于 CommonJS 模块，它会输出警告。 当你遇到 CommonJS 依赖项时，可以考虑要求维护者支持 ECMAScript 模块，自己贡献该支持，或使用满足你需求的替代依赖项。 如果最佳选项是使用 CommonJS 依赖项，可以通过将 CommonJS 模块名称添加到 
+<code>angular.json</code> 中 
+<code>build</code> 选项的 
+<code>allowedCommonJsDependencies</code> 选项来禁用这些警告。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:browser"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">     <span class="hljs-attr">"allowedCommonJsDependencies"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">        <span class="hljs-string">"lodash"</span></div><div class="hljs-ln-line">     <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line">     …</div><div class="hljs-ln-line">   <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">   …</div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div></code>
+    </pre>
+  </div>
+  <h2 id="configuring-browser-compatibility">
+    <a href="#configuring-browser-compatibility" class="docs-anchor" tabindex="-1" aria-label="Link to Configuring browser compatibility" data-ng_translator_product="100" data-ng_translator_ref_id="9bbvdhz7f1axeulwv1ynf76v8">配置浏览器兼容性</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="28j0i3w9nhdkz389fstgbvzd2">Angular CLI 使用 
+<a href="https://github.com/browserslist/browserslist" target="_blank">Browserslist</a> 来确保与不同浏览器版本的兼容性。 根据支持的浏览器，Angular 将自动转换某些 JavaScript 和 CSS 特性，以确保构建的应用不使用未被支持浏览器实现的特性。然而，Angular CLI 不会自动添加腻子脚本以补充缺失的 Web API。使用 
+<code>angular.json</code> 中的 
+<code>polyfills</code> 选项来添加腻子脚本。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6eqvbn4tptznp8v2l389tvuag">在内部，Angular CLI 使用以下默认的 
+<code>browserslist</code> 配置，这与 Angular 支持的 
+<a href="reference/versions#browser-support">浏览器</a> 相匹配。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">last 2 Chrome versions</div><div class="hljs-ln-line">last 1 Firefox version</div><div class="hljs-ln-line">last 2 Edge major versions</div><div class="hljs-ln-line">last 2 Safari major versions</div><div class="hljs-ln-line">last 2 iOS major versions</div><div class="hljs-ln-line">Firefox ESR</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dd560jolz5d81kgemwylbhahd">要覆盖内部配置，请运行 
+<a href="cli/generate#config-command"><code>ng generate config browserslist</code></a>，它会在项目目录中生成一个 
+<code>.browserslistrc</code> 配置文件。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3xtwakpkzkznb8jcxm9q3w94t">请参阅 
+<a href="https://github.com/browserslist/browserslist" target="_blank">browserslist 仓库</a>，了解更多关于如何定位特定浏览器和版本的示例。 避免将此列表扩展到更多的浏览器。即使你的应用代码更广泛兼容，Angular 本身可能并不兼容。 你应该只 
+<em>减少</em> 此列表中的浏览器或版本集合。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="28vp9u79gs6cs1vwnj6ywzb73"><strong>有用提示：</strong> 使用 
+<a href="https://browsersl.ist" target="_blank">browsersl.ist</a> 显示 
+<code>browserslist</code> 查询的兼容浏览器。</p>
+
+    </div>
+    

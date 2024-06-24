@@ -1,0 +1,37 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="1eq7bpgkpay7s8b3usp6wbcci">未找到根元素</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG05104.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4p03exf0j91j3i1ul2xv9srnq">引导的组件定义在 
+<code>@NgModule</code> 装饰器的 
+<code>bootstrap</code> 属性中，或作为独立组件的 
+<code>bootstrapApplication</code> 的第一个参数。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6fjpjxpunpko35e678rgkwqp6">当 Angular 尝试引导这些组件之一但无法在 DOM 中找到其对应节点时，会发生此错误。</p>
+
+  <h2 id="debugging-the-error">
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7rkvhzslmzlb5vunxputl5z9u">此问题发生在选择器与标签不匹配时</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-app'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-root</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span> <span class="hljs-comment">&lt;!-- Doesn't match the selector --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9ga4lx02xbk8up7wqyymp0tds">将标签替换为正确的：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">my-app</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">my-app</span>&gt;</span> <span class="hljs-comment">&lt;!-- OK --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></div></code>
+    </pre>
+  </div>

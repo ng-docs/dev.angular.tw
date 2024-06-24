@@ -1,0 +1,48 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/animations</span><div class="docs-reference-title"><div><h1>keyframes</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/animations/src/animation_metadata.ts#L886-L888" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4rkq8p7gg6shjqoxc5l8eymf1">可定义一组动画样式，每个样式都关联着一个可选的 <code>offset</code> 值。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">keyframes</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">steps</span>: <span class="hljs-title class_">AnimationStyleMetadata</span>[]</div><div class="hljs-ln-line ">): <span class="hljs-title class_">AnimationKeyframesSequenceMetadata</span>;</div></code></pre></div></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="c5vgfh76f0f0u7r16bn2gabiq">与 
+<code>animate()</code> 调用一起使用。与从当前状态到目标状态应用动画不同，关键帧描述了每个样式条目如何应用以及在动画弧中的哪个点应用。比较 
+<a href="https://www.w3schools.com/css/css3_animations.asp">CSS 关键帧动画</a>。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bqkiuc1612srggyr16nss2hrq">用法</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7s886bu3uny97widvazwhy65d">下面的例子中，偏移值描述了每个 <code>backgroundColor</code>
+值应该何时应用上去。开始时的颜色是红色，在总时间的 20% 处变为蓝色。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// the provided offset values</span></span><span class="hljs-ln-line"><span class="hljs-title function_">animate</span>(<span class="hljs-string">"5s"</span>, <span class="hljs-title function_">keyframes</span>([</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"red"</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0</span> }),</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"blue"</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0.2</span> }),</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"orange"</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0.3</span> }),</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"black"</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">1</span> })</span><span class="hljs-ln-line">]))</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dfn3thdc8kioqx6ypc95wbqss">如果没有指定 <code>offset</code> 值，则会自动计算偏移量。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">animate</span>(<span class="hljs-string">"5s"</span>, <span class="hljs-title function_">keyframes</span>([</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"red"</span> }) <span class="hljs-comment">// offset = 0</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"blue"</span> }) <span class="hljs-comment">// offset = 0.33</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"orange"</span> }) <span class="hljs-comment">// offset = 0.66</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"black"</span> }) <span class="hljs-comment">// offset = 1</span></span><span class="hljs-ln-line">]))</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>keyframes</h3><div><code>AnimationKeyframesSequenceMetadata</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4rkq8p7gg6shjqoxc5l8eymf1">可定义一组动画样式，每个样式都关联着一个可选的 <code>offset</code> 值。</p></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">steps</span><code>AnimationStyleMetadata[]</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2fdzk1invp9odgjgdg02gce0k">一组带有可选的偏移（offset）数据的动画样式。
+这个可选的 <code>offset</code> 值为相应的样式指定一个相对于总体动画时间的百分比，决定何时应用此样式。</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>AnimationKeyframesSequenceMetadata</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><p data-ng_translator_product="100" data-ng_translator_ref_id="c5vgfh76f0f0u7r16bn2gabiq">与 
+<code>animate()</code> 调用一起使用。与从当前状态到目标状态应用动画不同，关键帧描述了每个样式条目如何应用以及在动画弧中的哪个点应用。比较 
+<a href="https://www.w3schools.com/css/css3_animations.asp">CSS 关键帧动画</a>。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bqkiuc1612srggyr16nss2hrq">用法</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7s886bu3uny97widvazwhy65d">下面的例子中，偏移值描述了每个 <code>backgroundColor</code>
+值应该何时应用上去。开始时的颜色是红色，在总时间的 20% 处变为蓝色。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// the provided offset values</span></span><span class="hljs-ln-line"><span class="hljs-title function_">animate</span>(<span class="hljs-string">"5s"</span>, <span class="hljs-title function_">keyframes</span>([</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"red"</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0</span> }),</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"blue"</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0.2</span> }),</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"orange"</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0.3</span> }),</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"black"</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">1</span> })</span><span class="hljs-ln-line">]))</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dfn3thdc8kioqx6ypc95wbqss">如果没有指定 <code>offset</code> 值，则会自动计算偏移量。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">animate</span>(<span class="hljs-string">"5s"</span>, <span class="hljs-title function_">keyframes</span>([</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"red"</span> }) <span class="hljs-comment">// offset = 0</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"blue"</span> }) <span class="hljs-comment">// offset = 0.33</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"orange"</span> }) <span class="hljs-comment">// offset = 0.66</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"black"</span> }) <span class="hljs-comment">// offset = 1</span></span><span class="hljs-ln-line">]))</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div></div></div></div></div></div>

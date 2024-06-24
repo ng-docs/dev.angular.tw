@@ -1,0 +1,320 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="4h13lcumyzrpixeauyo0drqch">Service Worker 运维</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/ecosystem/service-workers/devops.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2nut8sqkdh8ijfnscfqwssc4n">本页讲的是如何使用 Angular Service Worker 发布和支持生产环境下的应用。它解释了 Angular Service Worker 如何满足大规模生产环境的需求、Service Worker 在多种条件下有哪些行为以及有哪些可用的资源和故障保护机制。</p>
+
+  <h2 id="service-worker-and-caching-of-application-resources">
+    <a href="#service-worker-and-caching-of-application-resources" class="docs-anchor" tabindex="-1" aria-label="Link to Service worker and caching of application resources" data-ng_translator_product="100" data-ng_translator_ref_id="60bp6ioemxve2wjs5d5a13us9">Service Worker 与应用资源的缓存</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cxf5dcd2pgbixx6wzngoe5tn1">你可以把 Angular Service Worker 想象成一个转发式缓存或装在最终用户浏览器中的 CDN（内容分发网络）边缘。Service Worker 的工作是从本地缓存中响应 Angular 应用对资源或数据的请求，而不用等待网络。和所有缓存一样，它有一些规则来决定内容该如何过期或更新。</p>
+
+  <h3 id="application-versions">
+    <a href="#application-versions" class="docs-anchor" tabindex="-1" aria-label="Link to Application versions" data-ng_translator_product="100" data-ng_translator_ref_id="5bwh5dyy4nlq80szbp7ebk8w6">应用的版本</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7xfupzosi5cmey7nmo661tlrm">在 Angular Service Worker 的语境中，「版本」是代表 Angular 应用特定构建的一组资源。 每当部署新的应用构建时，Service Worker 会将该构建视为应用的新版本。 即使只更新了单个文件，这也是适用的。 在任何特定时间点，Service Worker 可能在其缓存中拥有多个应用版本，并可能同时提供这些版本。 更多信息，请参见
+<a href="#application-tabs">应用标签页</a>部分。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eji39uaj2ce87zeib1eesww5s">为了保持应用的完整性，Angular service worker 将所有文件分组到一个版本中。分组到一个版本中的文件通常包括 HTML、JS 和 CSS 文件。对这些文件进行分组对于完整性至关重要，因为 HTML、JS 和 CSS 文件经常相互引用并依赖特定的内容。例如，一个 
+<code>index.html</code> 文件可能有一个 
+<code>&lt;script&gt;</code> 标签引用 
+<code>bundle.js</code>，并可能尝试在该脚本中调用函数 
+<code>startApp()</code>。每次提供此版本的 
+<code>index.html</code> 时，必须同时提供相应的 
+<code>bundle.js</code>。例如，假设 
+<code>startApp()</code> 函数在两个文件中都重命名为 
+<code>runApp()</code>。在这种情况下，将旧的 
+<code>index.html</code>（调用 
+<code>startApp()</code>）与定义 
+<code>runApp()</code> 的新捆绑包一起提供是无效的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ekhitpa1fzjbzdytid7gb98om">在延迟加载时，此文件完整性尤为重要。 一个 JS 捆绑包可能引用许多延迟块，而延迟块的文件名是该应用特定构建唯一的。 如果运行中的版本
+<code>X</code>的应用尝试加载延迟块，但服务器已更新到版本
+<code>X + 1</code>，延迟加载操作将失败。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1x5qfpzcbbo2wkbjj87kit9jc">本应用的版本标识符由其所有资源的内容决定，如果它们中的任何一个发生了变化，则版本标识符也随之改变。实际上，版本是由 <code>ngsw.json</code> 文件的内容决定的，包含了所有已知内容的哈希值。如果任何一个被缓存的文件发生了变化，则该文件的哈希也将在 <code>ngsw.json</code> 中随之变化，从而导致 Angular Service Worker 将这个活动文件的集合视为一个新版本。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9p6oxaacwul5dtgin2boqzrjb"><strong>有用：</strong>构建过程使用
+<code>ngsw-config.json</code>中的信息创建清单文件
+<code>ngsw.json</code>。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bls3y9r1imwjqjug9hoh2frf4">借助 Angular Service Worker 的这种版本控制行为，应用服务器就可以确保这个 Angular 应用中的这组文件始终保持一致。</p>
+
+  <h4 id="update-checks">
+    <a href="#update-checks" class="docs-anchor" tabindex="-1" aria-label="Link to Update checks" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="amysa1zxmz0ft7ifyf5l96ut3">更新检测</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="29lpwacx0axhk1sdw93aznodk">每当用户打开或刷新应用时，Angular service worker 会通过查找 
+<code>ngsw.json</code> 清单的更新来检查应用的更新。如果找到更新，它将自动下载并缓存，并在下次加载应用时提供。</p>
+
+  <h3 id="resource-integrity">
+    <a href="#resource-integrity" class="docs-anchor" tabindex="-1" aria-label="Link to Resource integrity" data-ng_translator_product="100" data-ng_translator_ref_id="37obfigzne4rvau7emo7yv3um">资源完整性</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="54g5h7y5d6khm86qi1cujiyps">长周期缓存的潜在副作用之一就是可能无意中缓存了无效的资源。在普通的 HTTP 缓存中，硬刷新或缓存过期限制了缓存这种无效文件导致的负面影响。而 Service Worker 会忽略这样的约束，事实上会对整个应用程序进行长期缓存。因此，让 Service Worker 获得正确的内容就显得至关重要，所以它会保持这些资源的哈希值，以维护其完整性。</p>
+
+  <h4 id="hashed-content">
+    <a href="#hashed-content" class="docs-anchor" tabindex="-1" aria-label="Link to Hashed content" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="62mx63wzetwa3e760dpyby3ng">哈希内容</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="b8mfvwnrzao4apd806euiwx57">为确保资源完整性，Angular Service Worker 验证其拥有哈希值的所有资源的哈希值。 对于使用
+<a href="tools/cli">Angular CLI</a>创建的应用，这包括用户
+<code>src/ngsw-config.json</code>配置中覆盖的
+<code>dist</code>目录中的所有内容。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2pfui98zyd8pvmpseuodfuhdi">如果某个特定的文件未能通过验证，Angular Service Worker 就会尝试用 “cache-busting” URL 为参数重新获取内容，以消除浏览器或中间缓存的影响。如果该内容也未能通过验证，则 Service Worker 会认为该应用的整个版本都无效，并停止用它提供服务。如有必要，Service Worker 会进入安全模式，这些请求将退化为直接访问网络。如果服务无效、损坏或内容过期的风险很高，则会选择不使用缓存。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3ngjch7l61brixh4x67t8vr9q">导致哈希值不匹配的原因有很多：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f1el3650tjyallh2pv4iylg8u">在源服务器和最终用户之间缓存图层可能会提供陈旧的内容。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="788ey3fnj9f5youijeqcffk2u">非原子化的部署可能会导致 Angular Service Worker 看到部分更新后的内容。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="djeiug335ngs2c9734658h8cv">构建过程中的错误可能导致资源更新而
+<code>ngsw.json</code>未更新。 反之亦然，可能会导致
+<code>ngsw.json</code>更新而资源未更新。</li>
+
+  </ul>
+  
+  <h4 id="unhashed-content">
+    <a href="#unhashed-content" class="docs-anchor" tabindex="-1" aria-label="Link to Unhashed content" data-ng_translator_product="100" data-ng_translator_ref_id="1culj5eol0vjvud0cudv1zdh9">不带哈希的内容</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eivxj3ykt5hdpwhf3n2x1n56l"><code>ngsw.json</code> 清单中唯一带哈希值的资源就是构建清单时 <code>dist</code> 目录中的资源。而其它资源，特别是从 CDN 加载的资源，其内容在构建时是未知的，或者会比应用程序部署得更频繁。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3rb4c6badvcc8swk2sxlluynw">如果 Angular service worker 没有哈希来验证资源是否有效，它仍会缓存其内容。同时，它通过使用
+<em>陈旧但重新验证</em>策略来遵守 HTTP 缓存标头。Angular service worker 会继续提供资源，即使其 HTTP 缓存标头表明它不再有效。同时，它会尝试在后台刷新已过期的资源。这样，损坏的未哈希资源不会在缓存中保留超出其配置的生命周期。</p>
+
+  <h3 id="application-tabs">
+    <a href="#application-tabs" class="docs-anchor" tabindex="-1" aria-label="Link to Application tabs" data-ng_translator_product="100" data-ng_translator_ref_id="eb2lzfyktm15fy79whjs7htz2">应用的标签页</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2bubv3mrhpoc6li399c3b4g4i">如果应用接收到的资源版本突然或毫无预警地发生变化，可能会出现问题。 参见
+<a href="#application-versions">应用版本</a>部分了解此类问题的描述。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bfoxra5xa9e5ecx6nx535avul">Angular Service Worker 会保证：正在运行的应用程序会继续运行和当前应用相同的版本。而如果在新的 Web 浏览器选项卡中打开了该应用的另一个实例，则会提供该应用的最新版本。因此，这个新标签可以和原始标签同时运行不同版本的应用。</p>
+
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7cwn0w4bhhoa9gtpcxo58xrsg"><strong>重要：</strong>这种保障比正常的 Web 部署模型提供的保障
+<strong>更强</strong>。没有 Service Worker，就无法保证延迟加载的代码与应用的初始代码来自同一版本。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="60bi1xqzndwtiylhjqgwlzzkh">Angular Service Worker 可能会在错误条件下更改正在运行的应用程序的版本，例如：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="1uoxohqci6mpc1hl4jqy2kni1">当前版本由于哈希校验失败而变为无效。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="zdzjqb4pxby5yijthkziju5h">无关错误导致 Service Worker 进入安全模式并暂时停用。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="24pj7doswjjwns7r5xnhou9dn">当没有标签页使用它们时，Angular Service Worker 会清理应用版本。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ap7gxcxdx3jcnvq05xo2e2f35">另一些可能导致 Angular Service Worker 在运行期间改变版本的因素是一些正常事件：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="96rp6ni9ycdkxw59789su38rv">页面重新加载/刷新。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="cpnqgxmed18cv4eneq4ddcf1i">页面请求使用 
+<code>SwUpdate</code> 服务立即激活更新。</li>
+
+  </ul>
+  
+  <h3 id="service-worker-updates">
+    <a href="#service-worker-updates" class="docs-anchor" tabindex="-1" aria-label="Link to Service worker updates" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6sx4vyva0fc0p8re7jk9uad10">Service Worker 更新</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3jfjkrf61e3dvv83q5x3ce1b">Angular Service Worker 是一个运行在 Web 浏览器中的小脚本。有时，这个 Service Worker 也可能会需要更新，以修复错误和增强特性。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="edloa4899bhpdja1pairbefw3">首次打开应用时或在一段非活动时间之后再访问应用程序时，就会下载 Angular Service Worker。如果 Service Worker 发生了变化，就会在后台进行更新。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="45qcmbeys80prtogd0tmzip1b">Angular Service Worker 的大部分更新对应用程序来说都是透明的。旧缓存仍然有效，其内容仍然能正常使用。但是，在 Angular Service Worker 中可能偶尔会有错误修复或新功能，需要让旧的缓存失效。这时，应用程序就从会网络上透明地进行刷新。</p>
+
+  <h3 id="bypassing-the-service-worker">
+    <a href="#bypassing-the-service-worker" class="docs-anchor" tabindex="-1" aria-label="Link to Bypassing the service worker" data-ng_translator_product="100" data-ng_translator_ref_id="dlscbyq8xt6wiw0bvkid6bdmb">绕过 Service Worker</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="b098a2h2ef6du2fchex0naixg">在某些情况下，你可能希望完全绕过 Service Worker，让浏览器处理请求。 例如，当你依赖 Service Worker 当前不支持的某个特性时，比如
+<a href="https://github.com/w3c/ServiceWorker/issues/1141" target="_blank">上传文件时报告进度</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6thahpmuztjjgqszqz5kcbozs">要想绕过 Service Worker，你可以设置一个名叫 <code>ngsw-bypass</code> 的请求头或查询参数。这个请求头或查询参数的值会被忽略，可以把它设为空字符串或略去。</p>
+
+  <h3 id="service-worker-requests-when-the-server-cant-be-reached">
+    <a href="#service-worker-requests-when-the-server-cant-be-reached" class="docs-anchor" tabindex="-1" aria-label="Link to Service worker requests when the server can't be reached" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f2zpu2tasz7l8u2arh9btwxst">无法访问服务器时的 Service Worker 请求</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1jcj2xr1zvyrqfogy7c6rchfo">除非
+<a href="#bypassing-the-service-worker">明确绕过 Service Worker</a>，否则 Service Worker 会处理所有请求。 Service Worker 根据缓存的状态和配置返回缓存响应或发送请求到服务器。 Service Worker 仅缓存非变更请求的响应，比如 
+<code>GET</code> 和 
+<code>HEAD</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6g0f7yi6wzawqjvkcxj4d8gwr">如果 Service Worker 从服务器收到错误或未收到响应，它会返回一个指示调用结果的错误状态。 例如，如果 Service Worker 未收到响应，它会创建一个
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504" target="_blank">504 Gateway Timeout</a> 状态返回。在这个例子中，
+<code>504</code> 状态可能是因为服务器离线或客户端断开连接。</p>
+
+  <h2 id="debugging-the-angular-service-worker">
+    <a href="#debugging-the-angular-service-worker" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the Angular service worker" data-ng_translator_product="100" data-ng_translator_ref_id="6u0i3eftdh5oi2q2ijmw3e42q">调试 Angular Service Worker</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ckpc2ojdshiscgt81nf017ivr">偶尔，可能会需要检查运行中的 Angular Service Worker，以调查问题或确保它在按设计运行。浏览器提供了用于调试 Service Worker 的内置工具，而且 Angular Service Worker 本身也包含了一些有用的调试功能。</p>
+
+  <h3 id="locating-and-analyzing-debugging-information">
+    <a href="#locating-and-analyzing-debugging-information" class="docs-anchor" tabindex="-1" aria-label="Link to Locating and analyzing debugging information" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b988j1j9ijm47m2mi2amln092">定位并分析调试信息</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ekvfdwysq6429q1jxlw6ie5zf">Angular Service Worker 会在虚拟目录 <code>ngsw/</code> 下暴露出调试信息。目前，它暴露的唯一的 URL 是 <code>ngsw/state</code>。下面是这个调试页面中的一段范例内容：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">NGSW Debug Info:</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Driver version: 13.3.7</div><div class="hljs-ln-line">Driver state: NORMAL ((nominal))</div><div class="hljs-ln-line">Latest manifest hash: eea7f5f464f90789b621170af5a569d6be077e5c</div><div class="hljs-ln-line">Last update check: never</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">=== Version eea7f5f464f90789b621170af5a569d6be077e5c ===</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Clients: 7b79a015-69af-4d3d-9ae6-95ba90c79486, 5bc08295-aaf2-42f3-a4cc-9e4ef9100f65</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">=== Idle Task Queue ===</div><div class="hljs-ln-line">Last update tick: 1s496u</div><div class="hljs-ln-line">Last update run: never</div><div class="hljs-ln-line">Task queue:</div><div class="hljs-ln-line"> * init post-load (update, cleanup)</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Debug log:</div></code>
+    </pre>
+  </div>
+  <h4 id="driver-state">
+    <a href="#driver-state" class="docs-anchor" tabindex="-1" aria-label="Link to Driver state" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bomzqghnmiehvwbxvqttt7oew">驱动程序的状态</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9yzpxr71wv90tigp1uxbqdn1z">第一行表示驱动程序的状态：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Driver state: NORMAL ((nominal))</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="354s9jzrr6zr9t9m9tni4w4is"><code>NORMAL</code> 表示这个 Service Worker 正在正常运行，并且没有处于降级运行的状态。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c9l2u9xclnaj8zhfl0ntbbpep">有两种可能的降级状态：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="29b4zobe0ssxocv4xdr7c5fra">降级状态</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>EXISTING_CLIENTS_ONLY</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5fb9izaboy7mf8gx80lo49626">Service Worker 没有最新已知版本的干净副本。旧的缓存版本是安全的，所以现有的标签页继续从缓存运行，但新加载的应用将从网络获取。Service Worker 会在检测到并安装新版本应用时尝试恢复这种状态。这发生在有新的 
+<code>ngsw.json</code> 可用时。</td>
+</tr>
+<tr>
+<td align="left"><code>SAFE_MODE</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8cix4yskjcuex0o8496i2nh94">Service Worker 不能保证使用缓存数据的安全。要么出现了意外错误，要么所有缓存版本无效。所有流量将从网络获取，尽可能少地运行 Service Worker 代码。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eqgsnca502c193rd8jevbyz37">在这两种情况下，后面的括号注解中都会提供导致 Service Worker 进入降级状态的错误信息。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="agpt2r89377lm2watd04s5j4p">这两种状态都是暂时的；它们仅在 
+<a href="https://developer.mozilla.org/docs/Web/API/ServiceWorkerGlobalScope" target="_blank">ServiceWorker 实例</a>的生命周期内保存。 浏览器有时会终止空闲的 Service Worker 以节省内存和处理器资源，并在响应网络事件时创建一个新的 Service Worker 实例。 新的实例在 
+<code>NORMAL</code> 模式下启动，无论前一个实例的状态如何。</p>
+
+  <h4 id="latest-manifest-hash">
+    <a href="#latest-manifest-hash" class="docs-anchor" tabindex="-1" aria-label="Link to Latest manifest hash" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a5hghq674h9y5e7ohjd20hfbk">最新清单的哈希</a>
+  </h4>
+  <div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Latest manifest hash: eea7f5f464f90789b621170af5a569d6be077e5c</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="81c64p9oyyholr6uj0p7n4mpr">这是 Service Worker 所知道的应用最新版本的 SHA1 哈希值。</p>
+
+  <h4 id="last-update-check">
+    <a href="#last-update-check" class="docs-anchor" tabindex="-1" aria-label="Link to Last update check" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7f04u1t9zipd9uxpg0ffm6te0">最后一次更新检查</a>
+  </h4>
+  <div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Last update check: never</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9t9t8q5g5kerc7w6pmcf81btr">这表示 service worker 上次检查应用的新版本或更新的时间。
+<code>never</code> 表示 service worker 从未检查过更新。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ay3br0epdnf9ohvaz5edxpb7n">在这个调试文件范例中，这次更新检查目前是已排期的，如下一节所述。</p>
+
+  <h4 id="version">
+    <a href="#version" class="docs-anchor" tabindex="-1" aria-label="Link to Version" data-ng_translator_product="100" data-ng_translator_ref_id="34ck2qsr4jsfv24ims2mht0vy">版本</a>
+  </h4>
+  <div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">=== Version eea7f5f464f90789b621170af5a569d6be077e5c ===</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Clients: 7b79a015-69af-4d3d-9ae6-95ba90c79486, 5bc08295-aaf2-42f3-a4cc-9e4ef9100f65</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aphwoh8vnyio1yhwi5e3uqaxa">在这个例子中，Service Worker 拥有一个版本的应用程序缓存并用它服务于两个不同的选项卡。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7ul1c1yhqasmjgb6tv48v4cj4"><strong>有帮助的:</strong> 此版本哈希是上面列出的“最新清单哈希”。两个客户端都在最新版本上。每个客户端通过浏览器中的 
+<code>Clients</code> API 按其 ID 列出。</p>
+
+    </div>
+    
+  <h4 id="idle-task-queue">
+    <a href="#idle-task-queue" class="docs-anchor" tabindex="-1" aria-label="Link to Idle task queue" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="71baiwjkvpc4nrgobmsyrhrcx">空闲任务队列</a>
+  </h4>
+  <div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">=== Idle Task Queue ===</div><div class="hljs-ln-line">Last update tick: 1s496u</div><div class="hljs-ln-line">Last update run: never</div><div class="hljs-ln-line">Task queue:</div><div class="hljs-ln-line"> * init post-load (update, cleanup)</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="rxwd7o3r9p6dhm0u1cb1zm9j">空闲任务队列是 Service Worker 中所有在后台发生的未决任务的队列。如果这个队列中存在任何任务，则列出它们的描述。在这个例子中，Service Worker 安排的任务是一个用于更新检查和清除过期缓存的后期初始化操作。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b69sp4apt3ay41fqw1bogbdv2">最后的 tick/run 计数器给出了与特定事件发生有关的空闲队列中的时间。“Last update run” 计数器显示的是上次执行空闲任务的时间。“Last update tick” 显示的是自上次事件以来可能要处理的队列的时间。</p>
+
+  <h4 id="debug-log">
+    <a href="#debug-log" class="docs-anchor" tabindex="-1" aria-label="Link to Debug log" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c64x6ha0w0v4d8hpdaq2k3sjc">调试日志</a>
+  </h4>
+  <div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Debug log:</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dpz0h3xxnn2s8scsfpm601ck1">Service Worker 中发生的错误会记录在此。</p>
+
+  <h3 id="developer-tools">
+    <a href="#developer-tools" class="docs-anchor" tabindex="-1" aria-label="Link to Developer tools" data-ng_translator_product="100" data-ng_translator_ref_id="e9wabhoy9semoioyr50kpqp69">开发者工具</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9du9akc46lt4t4jrgyax2k7ku">Chrome 等浏览器提供了能与 Service Worker 交互的开发者工具。这些工具在使用得当时非常强大，但也要牢记一些事情。</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_ref_id="4yz31254hso4iqongnt63rp28">使用开发者工具时，Service Worker 会在后台持续运行且从不重启。 这可能导致打开开发者工具时的行为与用户体验的行为不同。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="2f3z1o375grbvgc6iz0gg69xp">如果你查看缓存存储查看器，缓存经常是过时的。 右键单击缓存存储标题并刷新缓存。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="csdsdzqtn3gsu3svd4ewhiye">在 Service Worker 页停止并重新启动这个 Service Worker 将会触发一次更新检查。</p>
+</li>
+
+  </ul>
+  
+  <h2 id="service-worker-safety">
+    <a href="#service-worker-safety" class="docs-anchor" tabindex="-1" aria-label="Link to Service worker safety" data-ng_translator_product="100" data-ng_translator_ref_id="f2wcvq0zgf6gnorhl2xjppiqo">Service Worker 的安全性</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3c5nixhjx6bt2tntujmzb26t7">错误或损坏的配置可能会导致 Angular Service Worker 以不可预知的方式工作。如果出现了这种情况，管理员需要快速停用 Service Worker，Angular Service Worker 也包含多种故障保护机制。</p>
+
+  <h3 id="fail-safe">
+    <a href="#fail-safe" class="docs-anchor" tabindex="-1" aria-label="Link to Fail-safe" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9e3cv7qzw4kfkak3n0fd0n7dt">故障保护机制</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2jtrkva4c05fnmfyexcy7cdkh">要停用 Service Worker，请删除或重命名 <code>ngsw.json</code> 文件。当 Service Worker 对 <code>ngsw.json</code> 的请求返回 <code>404</code> 时，Service Worker 就会删除它的所有缓存并注销自己，本质上就是自毁。</p>
+
+  <h3 id="safety-worker">
+    <a href="#safety-worker" class="docs-anchor" tabindex="-1" aria-label="Link to Safety worker" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2hn87j75ffkjo5kwzpu6pxnym">安全工作线程</a>
+  </h3>
+  <!-- vale Angular.Google_Acronyms = NO -->
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="31r75x479qx62mov2qeviuw7y"><code>@angular/service-worker</code> NPM 包中还包含一个小脚本 <code>safety-worker.js</code>。当加载它时，就会把它从浏览器中注销，并移除此 Service Worker 的缓存。这个脚本可以作为终极武器来摆脱那些已经安装在客户端页面上的不想要的 Service Worker。</p>
+<!-- vale Angular.Google_Acronyms = YES -->
+
+
+    <div class="docs-alert docs-alert-critical">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="a4icjter77utpflinjh5vq3zf"><strong>关键的:</strong> 你不能直接注册此工作线程，因为具有缓存状态的旧客户端可能看不到安装不同工作线程脚本的新 
+<code>index.html</code>。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9tu5dcdyw425bxnqhwlsqzv76">你必须在想要注销的 Service Worker 脚本的 URL 中提供 <code>safety-worker.js</code> 的内容，
+而且必须持续这样做，直到确定所有用户都已成功注销了原有的 Worker。
+对大多数网站而言，这意味着你应该永远为旧的 Service Worker URL 提供 这个 Safety Worker。
+这个脚本可以用来停用 <code>@angular/service-worker</code>（并移除相应的缓存）以及任何其它曾在你的站点上提供过的 Service Worker。</p>
+
+  <h3 id="changing-your-applications-location">
+    <a href="#changing-your-applications-location" class="docs-anchor" tabindex="-1" aria-label="Link to Changing your application's location" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3z4xrnvkw00kzjimjbv8nwy7w">更改应用的位置</a>
+  </h3>
+  
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="eeti445clfbgs15rtuy47wzok"><strong>重要的:</strong> Service Worker 在重定向后无法工作。 你可能已经遇到错误 
+<code>The script resource is behind a redirect, which is disallowed</code>。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5ucc7qbcpk4uf4alxzt6y2ga1">如果你不得不更改应用的位置，就可能会出现问题。如果你设置了从旧位置（比如 <code>example.com</code>）到新位置（比如 <code>www.example.com</code>）的重定向，则 Service Worker 将停止工作。同样，对于完全从 Service Worker 加载该网站的用户，甚至都不会触发重定向。老的 Worker（注册在 <code>example.com</code>）会尝试更新并将请求发送到原来的位置 <code>example.com</code>，该位置重定向到新位置 <code>www.example.com</code> 就会导致错误 <code>The script resource is behind a redirect, which is disallowed</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3hw4hcz4mh0vo2v5y8a69ra57">为了解决这个问题，你可能需要使用前述的技术之一停用旧工作线程：
+<a href="#fail-safe">故障安全</a> 或 
+<a href="#safety-worker">安全工作线程</a>。</p>
+
+  <h2 id="more-on-angular-service-workers">
+    <a href="#more-on-angular-service-workers" class="docs-anchor" tabindex="-1" aria-label="Link to More on Angular service workers" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e9jl51v338pdg88lkv1cl8f1i">关于 Angular Service Worker 的更多信息</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1oolgylns9kaynftarwog49tq">你可能还对下列内容感兴趣：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="ecosystem/service-workers/config" data-ng_translator_product="100" data-ng_translator_ref_id="eecazk2kc60u3i9t9iml06tlw">配置文件</a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/communications" data-ng_translator_product="100" data-ng_translator_ref_id="8yc3zafldwi6g1hcldyi9y5j4">与 Service Worker 通信</a>
+    
+
+    </nav>
+    

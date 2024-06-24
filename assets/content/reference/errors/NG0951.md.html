@@ -1,0 +1,42 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="55va48ifmllolbd1jh8cozgm8">需要子查询结果但没有可用的值。</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0951.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="1d8fzmc096lo9enovww6zqfoe">访问了必要的子查询（
+<code>contentChild.required</code> 或 
+<code>viewChild.required</code>）结果，但在查询结果被计算之前或查询没有匹配项。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ar6utgjlu5a9qt6y89fv64vn9">这可能发生在两种不同的情况下：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="f3m90o1tm4nxiq047ke0ufxvo">在给定查询收集结果之前访问了查询结果；</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="11gb7sh4od5ysb050hgf6csl">查询已执行但没有匹配任何节点，因此没有结果。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4hy7lu5kftbw16or8y6dwjdsl">内容查询和视图查询在不同的时间点计算其结果：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="bee955ovm4u30ruom62wx97xm"><code>contentChild</code> 结果在
+<em>宿主</em>视图（声明查询的指令所在的模板）创建之后可用；</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="7tmalt34cmxncvovrcz4dydsw"><code>viewChild</code> 结果在创建声明查询的组件模板之后可用。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1h4rj0mgy01ji95thnca121dc">在查询结果可用之前访问它们会导致本页面描述的错误。最值得注意的是，查询结果
+<em>从未</em>在声明查询的组件或指令的构造函数中可用。</p>
+
+  <h2 id="fixing-the-error">
+    <a href="#fixing-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Fixing the error" data-ng_translator_product="100" data-ng_translator_ref_id="63eun1v9nz40i6edbyrmabm2e">修复错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2pxzupghf4mz66w39il5ardw6"><code>contentChild</code> 查询结果可以在 
+<code>AfterContentChecked</code> 生命周期钩子中访问，或在之后。
+<code>viewChild</code> 查询结果可以在 
+<code>AfterViewChecked</code> 生命周期钩子中访问，或在之后。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="70cc0to3341e6o3gx1akofsvv">确保必要的查询至少匹配一个节点并有结果。你可以通过在上述生命周期钩子中访问查询结果来验证这一点。</p>

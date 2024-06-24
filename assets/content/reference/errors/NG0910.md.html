@@ -1,0 +1,59 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="5379qgudm2u359t4eyael3emn">iframe 元素上的不安全绑定</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0910.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="46tod3g7w7c8l8sd9xgv0sxf3">当 Angular 检测到 <code>&lt;iframe&gt;</code> 元素上的 Attribute 绑定或 Property 绑定是如下名称时，你会看到此错误：</p>
+
+  <ul class="docs-list">
+    <li>sandbox</li>
+<li>allow</li>
+<li>allowFullscreen</li>
+<li>referrerPolicy</li>
+<li>csp</li>
+<li>fetchPriority</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dq7wg2srdblqmt3wwfqdyh4k">上面提到的这些属性会影响 <code>&lt;iframe&gt;</code> 的安全模型设置，并且要在设置 <code>src</code> 或 <code>srcdoc</code> 属性之前先应用它们，这很重要。为了确保这一点，Angular 要求在 <code>&lt;iframe&gt;</code> 上将这些属性设置为静态属性，因此这些值都是在元素创建时设置的，并且它们在 <code>&lt;iframe&gt;</code> 实例的整个生命周期中要保持不变。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bl5n6efww6x9win51kqd7lfc0">使用具有上述名称之一的 Property 绑定时，会抛出此错误：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> [<span class="hljs-attr">sandbox</span>]=<span class="hljs-string">"'allow-scripts'"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4f3av1fst8uxe6znuubfumem9">或者当它是 Attribute 绑定时：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> [<span class="hljs-attr">attr.sandbox</span>]=<span class="hljs-string">"'allow-scripts'"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3b2lzklfm24rzc1748wd7xfbs">此外，当在指令的宿主绑定中使用类似模式时，会抛出错误：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'iframe'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">host</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">'[sandbox]'</span>: <span class="hljs-string">`'allow-scripts'`</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">'[attr.sandbox]'</span>: <span class="hljs-string">`'allow-scripts'`</span>,</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">IframeDirective</span> {}</div></code>
+    </pre>
+  </div>
+  <h2 id="debugging-the-error">
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4t7tqsi9b4oez6svshi4gzjd8">此错误消息包含具有不安全绑定的 <code>&lt;iframe&gt;</code> 元素所在模板的组件名称。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6j1joll6dzt9v747np0v4y9q3">推荐的解决方案是把上述属性都用作静态属性，例如：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">sandbox</span>=<span class="hljs-string">"allow-scripts"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5kk0azqv3xrbxbdvfgldyania">如果你需要根据各种条件为这些属性提供不同的值， 你可以在 
+<code>&lt;iframe&gt;</code> 元素上使用 
+<code>*ngIf</code> 或 
+<code>*ngSwitch</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"someConditionA"</span> <span class="hljs-attr">sandbox</span>=<span class="hljs-string">"allow-scripts"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"someConditionB"</span> <span class="hljs-attr">sandbox</span>=<span class="hljs-string">"allow-forms"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"someConditionC"</span> <span class="hljs-attr">sandbox</span>=<span class="hljs-string">"allow-popups"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"..."</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div></code>
+    </pre>
+  </div>

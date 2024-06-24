@@ -1,0 +1,112 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5hlwfvf8kqawvgz32yf8ufn92">创建可注入服务</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/di/creating-injectable-service.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="l6jeaxlk511mpnspfjouyepc">服务是一个广泛的类别，包含应用需要的任何值、函数或特性。服务通常是一个具有狭窄且定义明确目的的类。组件是可以使用依赖注入（DI）的一种类。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bnj079g6uoyrmteum8io1nncy">Angular 将组件与服务区分开来以提高模块化和可复用性。通过将组件的视图相关特性与其他类型的处理分离，可以使组件类保持简洁高效。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6nq1md6wr335sphxwr1ukiky8">理想情况下，组件的职责是实现用户体验，仅此而已。组件应当提供用于数据绑定的属性和方法，以在视图（由模板渲染）和应用逻辑（通常包含某种模型的概念）之间进行调解。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1f2du4vpl5sj3t6oa47ukuv2e">组件可以将某些任务委托给服务，例如从服务器获取数据、验证用户输入或直接记录到控制台中。通过在可注入的服务类中定义这些处理任务，可以使这些任务可用于任何组件。还可以通过配置不同的同类服务提供者，使应用在不同情况下更具适应性。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6l059b3p08d6ix7e4mkam7ig0">Angular 不强制执行这些原则。Angular 通过使应用逻辑易于分解为服务，并使这些服务通过 DI 可用于组件，来帮助你遵循这些原则。</p>
+
+  <h2 id="service-examples">
+    <a href="#service-examples" class="docs-anchor" tabindex="-1" aria-label="Link to Service examples" data-ng_translator_product="100" data-ng_translator_ref_id="a8bl73lz949i79hn8v0p6tzjx">服务范例</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="25uczcza1f33ahtrcp7qkih0x">以下是一个将日志记录到浏览器控制台的服务类示例：</p>
+<div class="docs-code" header="src/app/logger.service.ts (class)">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="bzs7oefggadss01zep5jvfnk1">src/app/logger.service.ts（类）</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Logger</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">log</span>(<span class="hljs-params">msg: <span class="hljs-built_in">unknown</span></span>) { <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(msg); }</div><div class="hljs-ln-line">  <span class="hljs-title function_">error</span>(<span class="hljs-params">msg: <span class="hljs-built_in">unknown</span></span>) { <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(msg); }</div><div class="hljs-ln-line">  <span class="hljs-title function_">warn</span>(<span class="hljs-params">msg: <span class="hljs-built_in">unknown</span></span>) { <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">warn</span>(msg); }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5j9l2kbvuu2z5lrpz09c01kvz">服务可以依赖于其他服务。例如，以下是一个依赖于 
+<code>Logger</code> 服务的 
+<code>HeroService</code>，还使用 
+<code>BackendService</code> 获取英雄。该服务可能依赖于 
+<code>HttpClient</code> 服务以从服务器异步获取英雄：</p>
+<div class="docs-code" header="src/app/hero.service.ts (class)">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="15l0w6dvuz6n4r2apj8kz56g8">src/app/hero.service.ts（类）</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> <span class="hljs-attr">heroes</span>: <span class="hljs-title class_">Hero</span>[] = [];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line highlighted">    <span class="hljs-keyword">private</span> backend: BackendService,</div><div class="hljs-ln-line highlighted">    <span class="hljs-keyword">private</span> logger: Logger) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">async</span> <span class="hljs-title function_">getHeroes</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Fetch</span></div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span> = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">backend</span>.<span class="hljs-title function_">getAll</span>(<span class="hljs-title class_">Hero</span>);</div><div class="hljs-ln-line">    <span class="hljs-comment">// Log</span></div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">logger</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Fetched <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.heroes.length}</span> heroes.`</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="creating-an-injectable-service">
+    <a href="#creating-an-injectable-service" class="docs-anchor" tabindex="-1" aria-label="Link to Creating an injectable service" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5hlwfvf8kqawvgz32yf8ufn92">创建可注入服务</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2wspdyq8rzhpdm5e8oa499o00">Angular CLI 提供了一个命令用于创建新服务。在以下示例中，你将向现有应用添加一个新服务。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6hmeyjyi405p7xjwr9ci21mmj">要在 <code>src/app/heroes</code> 文件夹中生成新的 <code>HeroService</code> 类，请按照以下步骤操作：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="2icf7x2551cf5ktnto63qcpqs">运行此 
+<a href="/tools/cli">Angular CLI</a> 命令：</li>
+
+    </ol>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate service heroes/hero</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="clcmr1ql032k4df69vjwgaomm">此命令创建了以下默认的 
+<code>HeroService</code>：</p>
+<div class="docs-code" header="src/app/heroes/hero.service.ts (CLI-generated)">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="7dwl6fni402poqaf3zbvkk1q7">src/app/heroes/hero.service.ts (由 CLI 生成)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9rpuvc4qpw44ncs6ss3es45ua"><code>@Injectable()</code> 装饰器指定了 Angular 可以在依赖注入（DI）体系中使用此类。元数据 
+<code>providedIn: 'root'</code> 表示 
+<code>HeroService</code> 在整个应用中提供。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bl8ldkqncmm0l406yf1hc2kpk">添加一个 <code>getHeroes()</code> 方法，该方法会返回来自 <code>mock.heroes.ts</code> 的英雄列表，以获取英雄的模拟数据：</p>
+<div class="docs-code" header="src/app/heroes/hero.service.ts">
+    <div class="docs-code-header"><h3>src/app/heroes/hero.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-variable constant_">HEROES</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./mock-heroes'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">// declares that this service should be created</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// by the root application injector.</span></div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">getHeroes</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable constant_">HEROES</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5sjbf2n3ukxwynzq7mqkjo0r7">为了清晰和可维护性，建议你在单独的文件中定义组件和服务。</p>
+
+  <h2 id="injecting-services">
+    <a href="#injecting-services" class="docs-anchor" tabindex="-1" aria-label="Link to Injecting services" data-ng_translator_product="100" data-ng_translator_ref_id="6zsg3eji6vwfde37rihuvbo9o">注入服务</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3h122v0t5527y5orb8cgvwyuo">要将服务作为依赖项注入组件，你可以使用组件的 
+<code>constructor()</code> 并在构造函数参数中提供依赖项类型。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7heh1qucad3h2ndvjng7qik26">以下示例在 
+<code>HeroListComponent</code> 构造函数中指定了 
+<code>HeroService</code>。
+<code>heroService</code> 的类型是 
+<code>HeroService</code>。因为该类之前已用 
+<code>@Injectable</code> 装饰器注解，Angular 将 
+<code>HeroService</code> 类型识别为依赖项：</p>
+<div class="docs-code" header="src/app/heroes/hero-list.component (constructor signature)">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="5qqjawrhzz86s5erpk5r2y7d6">src/app/heroes/hero-list.component (构造函数签名)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params">heroService: HeroService</span>)</div></code>
+    </pre>
+  </div>
+  <h2 id="injecting-services-in-other-services">
+    <a href="#injecting-services-in-other-services" class="docs-anchor" tabindex="-1" aria-label="Link to Injecting services in other services" data-ng_translator_product="100" data-ng_translator_ref_id="60y1lurrzupg08j5d2imrdmjf">在其他服务中注入服务</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2qih1vo7jqth43o301ytm9n4s">当一个服务依赖于另一个服务时，遵循与注入组件相同的模式。在以下示例中，
+<code>HeroService</code> 依赖于 
+<code>Logger</code> 服务来报告其活动：</p>
+<div class="docs-code" header="src/app/heroes/hero.service.ts">
+    <div class="docs-code-header"><h3>src/app/heroes/hero.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-variable constant_">HEROES</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./mock-heroes'</span>;</div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Logger</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'../logger.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> logger: Logger</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">getHeroes</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">logger</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Getting heroes.'</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable constant_">HEROES</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6xz5qs8vghivu327gppq57uwe">在这个例子中，<code>getHeroes()</code> 方法在获取英雄时就会借助 <code>Logger</code> 记录一条消息。</p>
+
+  <h2 id="whats-next">
+    <a href="#whats-next" class="docs-anchor" tabindex="-1" aria-label="Link to What's next" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="407r2fj2mi5kvg7imj9zdcpe">下一步呢？</a>
+  </h2>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="/guide/di/dependency-injection-providers" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1qsbanbgflyx5lglz8u5wpfnh">配置依赖提供者</a>
+    
+    <a class="docs-pill" href="/guide/di/dependency-injection-providers#using-an-injectiontoken-object">
+      <code>InjectionTokens</code>
+    </a>
+    
+
+    </nav>
+    

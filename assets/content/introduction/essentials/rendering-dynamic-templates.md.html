@@ -1,0 +1,118 @@
+<div class="docs-decorative-header-container">
+      <div class="docs-decorative-header">
+        <div class="docs-header-content">
+          <docs-breadcrumb></docs-breadcrumb>
+
+          
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="dgthj4143hij98ovk3qpgcmu6">渲染动态模板</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/introduction/essentials/rendering-dynamic-templates.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+
+          <p data-ng_translator_product="100" data-ng_translator_ref_id="5f648jrhnbjt388qxad4yrphe">使用 Angular 的模板语法创建动态 HTML。</p>
+        </div>
+
+        <!-- illustration -->
+        <svg width="207" height="243" viewbox="0 0 207 243" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <path d="M175.344 68.2852H32.0263C29.1795 68.2852 26.8717 70.5929 26.8717 73.4398V162.375C26.8717 165.222 29.1795 167.53 32.0263 167.53H175.344C178.191 167.53 180.499 165.222 180.499 162.375V73.4398C180.499 70.5929 178.191 68.2852 175.344 68.2852Z" fill="var(--senary-contrast)" style="mix-blend-mode: multiply; transition: opacity 0.3s ease;" opacity=".7" />
+  </g>
+  <g style="mix-blend-mode: color-burn;">
+    <path d="M165.96 47.1982H7.96734C4.11939 47.1982 1 50.3176 1 54.1656V235.773C1 239.621 4.11939 242.74 7.96734 242.74H165.96C169.807 242.74 172.927 239.621 172.927 235.773V54.1656C172.927 50.3176 169.807 47.1982 165.96 47.1982Z" stroke="var(--primary-contrast)" stroke-width="0.36" stroke-miterlimit="10" />
+  </g>
+  <path d="M160.398 180.441H13.5535C13.322 180.441 13.1343 180.629 13.1343 180.86V196.756C13.1343 196.987 13.322 197.175 13.5535 197.175H160.398C160.63 197.175 160.817 196.987 160.817 196.756V180.86C160.817 180.629 160.63 180.441 160.398 180.441Z" stroke="var(--primary-contrast)" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M160.398 209.901H13.5535C13.322 209.901 13.1343 210.089 13.1343 210.32V226.216C13.1343 226.447 13.322 226.635 13.5535 226.635H160.398C160.63 226.635 160.817 226.447 160.817 226.216V210.32C160.817 210.089 160.63 209.901 160.398 209.901Z" stroke="var(--primary-contrast)" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M163.604 175.286H20.6073C19.3133 175.286 18.2643 176.335 18.2643 177.629V189.677C18.2643 190.971 19.3133 192.02 20.6073 192.02H163.604C164.898 192.02 165.947 190.971 165.947 189.677V177.629C165.947 176.335 164.898 175.286 163.604 175.286Z" fill="#F637E3" stroke="black" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M163.604 204.746H20.6073C19.3133 204.746 18.2643 205.795 18.2643 207.089V219.137C18.2643 220.431 19.3133 221.48 20.6073 221.48H163.604C164.898 221.48 165.947 220.431 165.947 219.137V207.089C165.947 205.795 164.898 204.746 163.604 204.746Z" fill="#F11653" stroke="black" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M37.5631 18.7H29.6832V26.5798H37.5631V18.7Z" stroke="var(--primary-contrast)" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M22.457 0.362793H18.2643V4.55553H22.457V0.362793Z" stroke="var(--primary-contrast)" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M1 60.0847H172.915" stroke="var(--primary-contrast)" stroke-width="0.38" stroke-miterlimit="10" />
+
+  <path d="M157.266 73.9371H16.6858C14.7243 73.9371 13.1343 75.5271 13.1343 77.4886V156.953C13.1343 158.915 14.7243 160.505 16.6858 160.505H157.266C159.227 160.505 160.817 158.915 160.817 156.953V77.4886C160.817 75.5271 159.227 73.9371 157.266 73.9371Z" stroke="var(--primary-contrast)" stroke-width="0.46" stroke-miterlimit="10" />
+
+  <path d="M188.021 34.6692H51.8307C48.657 34.6692 46.0842 37.242 46.0842 40.4157V129.265C46.0842 132.438 48.657 135.011 51.8307 135.011H188.021C191.194 135.011 193.767 132.438 193.767 129.265V40.4157C193.767 37.242 191.194 34.6692 188.021 34.6692Z" fill="#8514F5" stroke="black" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M192.694 141.017L206.111 139.981L181.423 126.342L188.243 153.718L192.694 141.017Z" fill="white" stroke="black" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M60.0066 108.757L89.6517 73.2176L111.232 97.4985L141.506 61.0957L179.857 108.757H60.0066Z" fill="white" />
+  <path d="M141.506 61.5769L179.216 108.449H60.6725L89.6517 73.6865L110.763 97.4371L111.244 97.9673L111.701 97.4124L141.506 61.5645M141.506 60.5903L111.22 97.0178L89.6394 72.7369L59.353 109.053H180.498L141.506 60.5903Z" fill="black" />
+  <path d="M46.0842 108.733H193.767" stroke="black" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M77.7147 48.3081C88.0872 48.3081 96.4957 39.8995 96.4957 29.5271C96.4957 19.1546 88.0872 10.7461 77.7147 10.7461C67.3422 10.7461 58.9337 19.1546 58.9337 29.5271C58.9337 39.8995 67.3422 48.3081 77.7147 48.3081Z" fill="#F637E3" stroke="black" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M77.7147 32.2647C81.4197 32.2647 84.4231 29.2612 84.4231 25.5563C84.4231 21.8513 81.4197 18.8479 77.7147 18.8479C74.0098 18.8479 71.0063 21.8513 71.0063 25.5563C71.0063 29.2612 74.0098 32.2647 77.7147 32.2647Z" fill="white" stroke="black" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M77.7147 36.519C73.4726 36.519 65.2598 38.7264 64.3843 42.7588C67.7878 46.187 72.4985 48.3204 77.7147 48.3204C82.931 48.3204 87.6416 46.1993 91.0451 42.7588C90.1696 38.7264 81.9444 36.519 77.7147 36.519Z" fill="white" stroke="black" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M9.86641 55.5465C10.7245 55.5465 11.4202 54.8509 11.4202 53.9927C11.4202 53.1346 10.7245 52.439 9.86641 52.439C9.00828 52.439 8.31262 53.1346 8.31262 53.9927C8.31262 54.8509 9.00828 55.5465 9.86641 55.5465Z" stroke="var(--primary-contrast)" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M15.7979 55.5465C16.6561 55.5465 17.3517 54.8509 17.3517 53.9927C17.3517 53.1346 16.6561 52.439 15.7979 52.439C14.9398 52.439 14.2441 53.1346 14.2441 53.9927C14.2441 54.8509 14.9398 55.5465 15.7979 55.5465Z" stroke="var(--primary-contrast)" stroke-width="0.5" stroke-miterlimit="10" />
+  <path d="M21.7294 55.5465C22.5876 55.5465 23.2832 54.8509 23.2832 53.9927C23.2832 53.1346 22.5876 52.439 21.7294 52.439C20.8713 52.439 20.1757 53.1346 20.1757 53.9927C20.1757 54.8509 20.8713 55.5465 21.7294 55.5465Z" stroke="var(--primary-contrast)" stroke-width="0.5" stroke-miterlimit="10" />
+</svg>
+
+      </div>
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="324plszrq195nb9odzlv766s1">到目前为止，你学到的内容使你可以将应用拆分为 HTML 组件，但这限制了你只能使用静态模板（即内容不变）。下一步是学习如何使用 Angular 的模板语法来创建动态 HTML。</p>
+
+  <h2 id="rendering-dynamic-data">
+    <a href="#rendering-dynamic-data" class="docs-anchor" tabindex="-1" aria-label="Link to Rendering Dynamic Data" data-ng_translator_product="100" data-ng_translator_ref_id="82xp9e76cuq26iwv22awk32gp">渲染动态数据</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="b1dyw7u83c8pd7e2cc0udsjsu">当你需要在模板中显示动态内容时，Angular 使用双花括号语法来区分静态和动态内容。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="asl6g4rrbpeoux9dooejevkv7">这是一个 
+<code>TodoListItem</code> 组件的简化示例。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'todo-list-item'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;p&gt;Title: {{ taskTitle }}&lt;/p&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TodoListItem</span> {</div><div class="hljs-ln-line">  taskTitle = <span class="hljs-string">'Read cup of coffee'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="areawinhfdannjlbpon7shuvq">当 Angular 渲染该组件时，你会看到输出：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Title: Read cup of coffee<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4lurptqmmrm7ptu1tf5t3gu80">这种语法声明了 HTML 内部动态数据属性之间的
+<strong>插值</strong>。因此，每当数据变化时，Angular 会自动更新 DOM，以反映该属性的新值。</p>
+
+  <h2 id="dynamic-properties">
+    <a href="#dynamic-properties" class="docs-anchor" tabindex="-1" aria-label="Link to Dynamic Properties" data-ng_translator_product="100" data-ng_translator_ref_id="115t1h79vd07qgxct24k66ujs">动态属性</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5tvi2ibdtostqphtqd1bkggbi">当你需要在 HTML 元素上动态设置标准 DOM 属性的值时，该属性会用方括号包裹，以通知 Angular 声明的值应被解释为类似 JavaScript 的语句（
+<a href="guide/templates/interpolation">带有一些 Angular 增强功能</a>），而不是纯字符串。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="56xibecepxbkmv88ozgwcyp04">例如，在你的 HTML 中动态更新属性的一个常见例子是，根据表单是否有效来确定是否应禁用表单提交按钮。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="anzko9uwyqyssyb3byzivkq4l">将所需的属性用方括号括起来，告诉 Angular 分配的值是动态的（即不是静态字符串）。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'sign-up-form'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;button type="submit" [disabled]="formIsInvalid"&gt;Submit&lt;/button&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SignUpForm</span> {</div><div class="hljs-ln-line">  formIsInvalid = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5bn4jbf266p7wfz6l8ewx5oj1">在这个例子中，因为 
+<code>formIsInvalid</code> 是 true，渲染的 HTML 将会是：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">disabled</span>&gt;</span>Submit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <h2 id="dynamic-attributes">
+    <a href="#dynamic-attributes" class="docs-anchor" tabindex="-1" aria-label="Link to Dynamic Attributes" data-ng_translator_product="100" data-ng_translator_ref_id="cm2dwgs5uf6lb71drgnsd2839">动态属性</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7srr6mjlaenanrrzyw4zeok7l">如果你想动态绑定自定义的 HTML 属性（例如，
+<code>aria-</code>，
+<code>data-</code> 等），你可能会倾向于用相同的方括号包裹自定义属性。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;button [data-test-id]="testId"&gt;Primary CTA&lt;/button&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppBanner</span> {</div><div class="hljs-ln-line">  testId = <span class="hljs-string">'main-cta'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7pdv2t73n5ndd95dgc5sakold">不幸的是，这样做是无效的，因为自定义的 HTML 属性不是标准的 DOM 属性。为使其按预期工作，我们需要用 
+<code>attr.</code> 前缀来修饰自定义的 HTML 属性。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;button [attr.data-test-id]="testId"&gt;Primary CTA&lt;/button&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppBanner</span> {</div><div class="hljs-ln-line">  testId = <span class="hljs-string">'main-cta'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="next-step">
+    <a href="#next-step" class="docs-anchor" tabindex="-1" aria-label="Link to Next Step" data-ng_translator_product="100" data-ng_translator_ref_id="2l5f3azlyjj3uq6olo97wdjkv">下一步</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="329awcb292nez5qxabdj2zgx4">现在你的应用中有动态数据和模板，是时候学习如何通过条件隐藏或显示某些元素，循环遍历元素等来增强模板了。</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="essentials/conditionals-and-loops" data-ng_translator_product="100" data-ng_translator_ref_id="e1wnh1d5177cp2e9l5srmahy0">条件和循环</a>
+    
+
+    </nav>
+    

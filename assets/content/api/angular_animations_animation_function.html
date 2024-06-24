@@ -1,0 +1,47 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/animations</span><div class="docs-reference-title"><div><h1>animation</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/animations/src/animation_metadata.ts#L1096-L1101" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="8j6szm26ofl3nnxxgma00yjqf">通过调用 
+<code>useAnimation()</code> 函数生成可重用动画，可以在另一个动画或序列中调用。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">animation</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">steps</span>: <span class="hljs-title class_">AnimationMetadata</span> | <span class="hljs-title class_">AnimationMetadata</span>[],</div><div class="hljs-ln-line ">  options?: <span class="hljs-title class_">AnimationOptions</span></div><div class="hljs-ln-line ">): <span class="hljs-title class_">AnimationReferenceMetadata</span>;</div></code></pre></div></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4n47wc3j7ar98nhp72ou9ki5z">下面的例子定义了一个可复用的动画，提供了一些默认的参数值。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">var</span> fadeAnimation = <span class="hljs-title function_">animation</span>([</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">opacity</span>: <span class="hljs-string">'{{ start }}'</span> }),</span><span class="hljs-ln-line">  <span class="hljs-title function_">animate</span>(<span class="hljs-string">'{{ time }}'</span>,</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">opacity</span>: <span class="hljs-string">'{{ end }}'</span>}))</span><span class="hljs-ln-line">  ],</span><span class="hljs-ln-line">  { <span class="hljs-attr">params</span>: { <span class="hljs-attr">time</span>: <span class="hljs-string">'1000ms'</span>, <span class="hljs-attr">start</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">end</span>: <span class="hljs-number">1</span> }});</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="973fzii6zc0acanysi5wcaq02">以下调用 
+<code>useAnimation()</code> 所定义的动画，并传入覆盖参数值。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">useAnimation</span>(fadeAnimation, {</span><span class="hljs-ln-line">  <span class="hljs-attr">params</span>: {</span><span class="hljs-ln-line">    <span class="hljs-attr">time</span>: <span class="hljs-string">'2s'</span>,</span><span class="hljs-ln-line">    <span class="hljs-attr">start</span>: <span class="hljs-number">1</span>,</span><span class="hljs-ln-line">    <span class="hljs-attr">end</span>: <span class="hljs-number">0</span></span><span class="hljs-ln-line">  }</span><span class="hljs-ln-line">})</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="28npbv6zd03je7saqq7mv8506">如果此调用中缺少任何传入的参数值，将使用默认值。如果在某个步骤动画之前缺少一个或多个参数值，
+<code>useAnimation()</code> 将抛出错误。</p>
+</div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>animation</h3><div><code>AnimationReferenceMetadata</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="8j6szm26ofl3nnxxgma00yjqf">通过调用 
+<code>useAnimation()</code> 函数生成可重用动画，可以在另一个动画或序列中调用。</p></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">steps</span><code>AnimationMetadata | AnimationMetadata[]</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="4t9lrc6ipcol0tk1hmxtw9ao5">一个或多个动画对象（由 
+<code>animate()</code> 或 
+<code>sequence()</code> 函数返回），形成从一个状态到另一个状态的转换。默认情况下，当你传入一个数组时，会使用一个序列。</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">options</span><code>AnimationOptions</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="aznkqp0cn7vehdznfaz9ybpj">一个选项对象，可以包含动画开始的延迟值，以及开发人员定义的参数的额外重写值。为额外参数提供的值作为默认值，重写值可以在调用时传递给调用者。</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>AnimationReferenceMetadata</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4n47wc3j7ar98nhp72ou9ki5z">下面的例子定义了一个可复用的动画，提供了一些默认的参数值。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">var</span> fadeAnimation = <span class="hljs-title function_">animation</span>([</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">opacity</span>: <span class="hljs-string">'{{ start }}'</span> }),</span><span class="hljs-ln-line">  <span class="hljs-title function_">animate</span>(<span class="hljs-string">'{{ time }}'</span>,</span><span class="hljs-ln-line">  <span class="hljs-title function_">style</span>({ <span class="hljs-attr">opacity</span>: <span class="hljs-string">'{{ end }}'</span>}))</span><span class="hljs-ln-line">  ],</span><span class="hljs-ln-line">  { <span class="hljs-attr">params</span>: { <span class="hljs-attr">time</span>: <span class="hljs-string">'1000ms'</span>, <span class="hljs-attr">start</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">end</span>: <span class="hljs-number">1</span> }});</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="973fzii6zc0acanysi5wcaq02">以下调用 
+<code>useAnimation()</code> 所定义的动画，并传入覆盖参数值。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">useAnimation</span>(fadeAnimation, {</span><span class="hljs-ln-line">  <span class="hljs-attr">params</span>: {</span><span class="hljs-ln-line">    <span class="hljs-attr">time</span>: <span class="hljs-string">'2s'</span>,</span><span class="hljs-ln-line">    <span class="hljs-attr">start</span>: <span class="hljs-number">1</span>,</span><span class="hljs-ln-line">    <span class="hljs-attr">end</span>: <span class="hljs-number">0</span></span><span class="hljs-ln-line">  }</span><span class="hljs-ln-line">})</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="28npbv6zd03je7saqq7mv8506">如果此调用中缺少任何传入的参数值，将使用默认值。如果在某个步骤动画之前缺少一个或多个参数值，
+<code>useAnimation()</code> 将抛出错误。</p>
+</div></div></div></div></div></div></div></div>

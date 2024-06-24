@@ -1,0 +1,1094 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e6yphfmrifb6ds59qqo0a9znw">分层注入器</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/di/hierarchical-dependency-injection.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4mvhqli3hcj0msfoybs8cpjmh">Angular 中的注入器有一些规则，你可以利用这些规则在应用中实现所需的注入可见性。通过理解这些规则，你可以决定在应用级别、组件中或指令中声明提供者。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bhdnjf6jsuuk7wu96mx8i6e6z">你用 Angular 构建的应用可能会变得非常庞大，管理这种复杂性的一种方法是将应用拆分成一个定义明确的组件树。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="866nr13pzlr0m4hlc01g0pq6u">你页面的某些部分可能以完全独立于应用其他部分的方式工作，拥有其所需服务和其他依赖项的本地副本。应用的这些部分使用的某些服务可能会与应用的其他部分或组件树中更高层的父组件共享，而其他依赖项是私有的。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cjnms1omfip2i3zih7y7y8rvg">使用多级依赖注入，你可以隔离应用程序的各个部分，并允许它们保有自己的私有依赖项，不与应用程序的其余部分共享，或者让父组件仅与其子组件共享某些依赖项，而不与组件树的其余部分共享等。多级依赖注入能让你仅在需要时才在应用程序的不同部分之间共享依赖项。</p>
+
+  <h2 id="types-of-injector-hierarchies">
+    <a href="#types-of-injector-hierarchies" class="docs-anchor" tabindex="-1" aria-label="Link to Types of injector hierarchies" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="abke1sabu5s1osm2c3ltpb08a">注入器层次结构的类型</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3cu6l3znx4o88dedsdfsfdh0t">Angular 中有两个注入器层次结构：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="147s1t1d0pdjqv8azitzj5b7p">注入器层级</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="44ew77vh5vk540vwr0u3tczfg"><code>EnvironmentInjector</code> 层级</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="67o3nbsh1zxhf68k8ey1553ml">在该层级中使用 
+<code>@Injectable()</code> 或 
+<code>ApplicationConfig</code> 中的 
+<code>providers</code> 数组配置 
+<code>ElementInjector</code>。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="95m6e9joifb3a1tjcoebp7o92"><code>ElementInjector</code> 层级</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5u94ygqkplvykm4q289g866ue">在每个 DOM 元素上隐式创建。默认情况下，
+<code>ElementInjector</code> 是空的，除非你在 
+<code>@Directive()</code> 或 
+<code>@Component()</code> 的 
+<code>providers</code> 属性中配置它。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-callout docs-callout-helpful">
+      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="2ayw1p46ddubfv9yb4na44vxb">基于 NgModule 的应用</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="728ipz3vywmo7sbpco5isl4ap">对于基于 
+<code>NgModule</code> 的应用，你可以使用 
+<code>@NgModule()</code> 或 
+<code>@Injectable()</code> 注解通过 
+<code>ModuleInjector</code> 层级提供依赖项。</p>
+
+    </div>
+    
+  <h3 id="environmentinjector">
+    <a href="#environmentinjector" class="docs-anchor" tabindex="-1" aria-label="Link to <code>EnvironmentInjector</code>"><code>EnvironmentInjector</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2fcsjcan2dfv6si12ru7r4z9u">可以通过以下两种方式之一配置 
+<code>EnvironmentInjector</code>：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="afwggi06xl9ce7rq7k7491hzj">使用 
+<code>@Injectable()</code> 的 
+<code>providedIn</code> 属性来引用 
+<code>root</code> 或 
+<code>platform</code></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="5f6aalyimk7de8tx6k7d0o6q8"><code>ApplicationConfig</code> 的 
+<code>providers</code> 数组</li>
+
+  </ul>
+  
+    <div class="docs-callout docs-callout-helpful">
+      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="9lvx26izqcfou6urvubwlgen7">摇树优化和 @Injectable()</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="3qxbf4lwb3zya7k5kie40gcar">使用 
+<code>@Injectable()</code> 的 
+<code>providedIn</code> 属性比使用 
+<code>ApplicationConfig</code> 的 
+<code>providers</code> 数组更好。通过 
+<code>@Injectable()</code> 的 
+<code>providedIn</code> 属性，优化工具可以执行摇树优化，从而移除你的应用未使用的服务。这将导致更小的捆绑包体积。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1ecmjr04rwvgci1waevc8r9bj">摇树优化对库尤其有用，因为使用此库的应用可能不需要注入它。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bbt6u77mhv7784dyoucoyds1u"><code>EnvironmentInjector</code> 由 
+<code>ApplicationConfig.providers</code> 配置。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="air8atfwc5ltj2z0kywwk1f2m">使用 
+<code>@Injectable()</code> 的 
+<code>providedIn</code> 提供服务，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>  <span class="hljs-comment">// &lt;--provides this service in the root EnvironmentInjector</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ItemService</span> {</div><div class="hljs-ln-line">  name = <span class="hljs-string">'telephone'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="6gl4ubpqqcou2gpyoon20frp2"><code>@Injectable()</code> 装饰器标识一个服务类。
+<code>providedIn</code> 属性配置某个特定的 
+<code>EnvironmentInjector</code>（此处为 
+<code>root</code>），使服务在 
+<code>root</code> 
+<code>EnvironmentInjector</code> 中可用。</p>
+
+  <h3 id="moduleinjector">
+    <a href="#moduleinjector" class="docs-anchor" tabindex="-1" aria-label="Link to ModuleInjector">ModuleInjector</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="a64ik8yi2t9lkg2xfg2zljljg">对于基于 
+<code>NgModule</code> 的应用，可以通过以下两种方式配置 ModuleInjector：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="afwggi06xl9ce7rq7k7491hzj">使用 
+<code>@Injectable()</code> 的 
+<code>providedIn</code> 属性来引用 
+<code>root</code> 或 
+<code>platform</code></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="f3jipuzz15an3kt0qm1n1hljh"><code>@NgModule()</code> 的 
+<code>providers</code> 数组</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="emppg5jsc19bqrq9l19yjzfua"><code>ModuleInjector</code> 由 
+<code>@NgModule.providers</code> 和 
+<code>NgModule.imports</code> 属性配置。
+<code>ModuleInjector</code> 是所有通过递归跟踪 
+<code>NgModule.imports</code> 能够到达的提供者数组的平铺。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="321q4ih7v41sghhcteop9j2qb">子 <code>ModuleInjector</code> 是在惰性加载其它 <code>@NgModules</code> 时创建的。</p>
+
+  <h3 id="platform-injector">
+    <a href="#platform-injector" class="docs-anchor" tabindex="-1" aria-label="Link to Platform injector" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7lwh9pmy89yjbcfaleq60cn9l">平台注入器</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="c5ikjk8sanodhm82jr3ubz3yx">在 
+<code>root</code> 之上还有两个注入器，分别是另一个 
+<code>EnvironmentInjector</code> 和 
+<code>NullInjector()</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8jh7pyzmyolyhbp3sncv709s0">思考下 Angular 要如何通过 <code>main.ts</code> 中的如下代码引导应用程序：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">AppComponent</span>, appConfig);</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5uysijtepg58qitu897bg78j6"><code>bootstrapApplication()</code> 方法创建一个由 
+<code>ApplicationConfig</code> 实例配置的平台注入器的子注入器。这就是 
+<code>root</code> 
+<code>EnvironmentInjector</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a695fja7o6popli29ik842use"><code>platformBrowserDynamic()</code> 方法创建一个由 
+<code>PlatformModule</code> 配置的注入器，其中包含平台特定的依赖项。这允许多个应用共享一个平台配置。例如，无论你运行多少个应用，浏览器只有一个地址栏。你可以通过 
+<code>platformBrowser()</code> 函数提供 
+<code>extraProviders</code> 来在平台级别配置额外的特定提供者。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4f6ggdiafs324kjwmqzf8oj61">层次结构中的下一个父注入器是 
+<code>NullInjector()</code>，它是树的顶端。如果你已经走到了树的顶部，并且在 
+<code>NullInjector()</code> 中查找服务，你将会得到一个错误，除非你使用了 
+<code>@Optional()</code>，因为最终一切都终止于 
+<code>NullInjector()</code>，它返回一个错误或在 
+<code>@Optional()</code> 的情况下返回 
+<code>null</code>。有关 
+<code>@Optional()</code> 的更多信息，请参见本指南的 
+<a href="#optional"><code>@Optional()</code> 部分</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9d730tax9wit37t8tpmp9l8ss">下图展示了前面各段落描述的 <code>root</code> <code>ModuleInjector</code> 及其父注入器之间的关系。</p>
+<svg aria-roledescription="stateDiagram" role="graphics-document document" viewbox="0 0 473.046875 323" style="max-width: 473.046875px;" class="statediagram" xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid-generated-diagram"><style>#mermaid-generated-diagram{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#mermaid-generated-diagram .error-icon{fill:hsl(220.5882352941, 100%, 98.3333333333%);}#mermaid-generated-diagram .error-text{fill:rgb(8.5000000002, 5.7500000001, 0);stroke:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram .edge-thickness-normal{stroke-width:2px;}#mermaid-generated-diagram .edge-thickness-thick{stroke-width:3.5px;}#mermaid-generated-diagram .edge-pattern-solid{stroke-dasharray:0;}#mermaid-generated-diagram .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-generated-diagram .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-generated-diagram .marker{fill:#0b0b0b;stroke:#0b0b0b;}#mermaid-generated-diagram .marker.cross{stroke:#0b0b0b;}#mermaid-generated-diagram svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-generated-diagram defs #statediagram-barbEnd{fill:#0b0b0b;stroke:#0b0b0b;}#mermaid-generated-diagram g.stateGroup text{fill:hsl(40.5882352941, 60%, 83.3333333333%);stroke:none;font-size:10px;}#mermaid-generated-diagram g.stateGroup text{fill:#333;stroke:none;font-size:10px;}#mermaid-generated-diagram g.stateGroup .state-title{font-weight:bolder;fill:#333;}#mermaid-generated-diagram g.stateGroup rect{fill:#fff4dd;stroke:hsl(40.5882352941, 60%, 83.3333333333%);}#mermaid-generated-diagram g.stateGroup line{stroke:#0b0b0b;stroke-width:1;}#mermaid-generated-diagram .transition{stroke:#0b0b0b;stroke-width:1;fill:none;}#mermaid-generated-diagram .stateGroup .composit{fill:#f4f4f4;border-bottom:1px;}#mermaid-generated-diagram .stateGroup .alt-composit{fill:#e0e0e0;border-bottom:1px;}#mermaid-generated-diagram .state-note{stroke:hsl(52.6829268293, 60%, 73.9215686275%);fill:#fff5ad;}#mermaid-generated-diagram .state-note text{fill:#333;stroke:none;font-size:10px;}#mermaid-generated-diagram .stateLabel .box{stroke:none;stroke-width:0;fill:#fff4dd;opacity:0.5;}#mermaid-generated-diagram .edgeLabel .label rect{fill:#fff4dd;opacity:0.5;}#mermaid-generated-diagram .edgeLabel .label text{fill:#333;}#mermaid-generated-diagram .label div .edgeLabel{color:#333;}#mermaid-generated-diagram .stateLabel text{fill:#333;font-size:10px;font-weight:bold;}#mermaid-generated-diagram .node circle.state-start{fill:#0b0b0b;stroke:#0b0b0b;}#mermaid-generated-diagram .node .fork-join{fill:#0b0b0b;stroke:#0b0b0b;}#mermaid-generated-diagram .node circle.state-end{fill:hsl(40.5882352941, 60%, 83.3333333333%);stroke:#f4f4f4;stroke-width:1.5;}#mermaid-generated-diagram .end-state-inner{fill:#f4f4f4;stroke-width:1.5;}#mermaid-generated-diagram .node rect{fill:#fff4dd;stroke:hsl(40.5882352941, 60%, 83.3333333333%);stroke-width:1px;}#mermaid-generated-diagram .node polygon{fill:#fff4dd;stroke:hsl(40.5882352941, 60%, 83.3333333333%);stroke-width:1px;}#mermaid-generated-diagram #statediagram-barbEnd{fill:#0b0b0b;}#mermaid-generated-diagram .statediagram-cluster rect{fill:#fff4dd;stroke:hsl(40.5882352941, 60%, 83.3333333333%);stroke-width:1px;}#mermaid-generated-diagram .cluster-label,#mermaid-generated-diagram .nodeLabel{color:#333;}#mermaid-generated-diagram .statediagram-cluster rect.outer{rx:5px;ry:5px;}#mermaid-generated-diagram .statediagram-state .divider{stroke:hsl(40.5882352941, 60%, 83.3333333333%);}#mermaid-generated-diagram .statediagram-state .title-state{rx:5px;ry:5px;}#mermaid-generated-diagram .statediagram-cluster.statediagram-cluster .inner{fill:#f4f4f4;}#mermaid-generated-diagram .statediagram-cluster.statediagram-cluster-alt .inner{fill:hsl(220.5882352941, 100%, 98.3333333333%);}#mermaid-generated-diagram .statediagram-cluster .inner{rx:0;ry:0;}#mermaid-generated-diagram .statediagram-state rect.basic{rx:5px;ry:5px;}#mermaid-generated-diagram .statediagram-state rect.divider{stroke-dasharray:10,10;fill:hsl(220.5882352941, 100%, 98.3333333333%);}#mermaid-generated-diagram .note-edge{stroke-dasharray:5;}#mermaid-generated-diagram .statediagram-note rect{fill:#fff5ad;stroke:hsl(52.6829268293, 60%, 73.9215686275%);stroke-width:1px;rx:0;ry:0;}#mermaid-generated-diagram .statediagram-note rect{fill:#fff5ad;stroke:hsl(52.6829268293, 60%, 73.9215686275%);stroke-width:1px;rx:0;ry:0;}#mermaid-generated-diagram .statediagram-note text{fill:#333;}#mermaid-generated-diagram .statediagram-note .nodeLabel{color:#333;}#mermaid-generated-diagram .statediagram .edgeLabel{color:red;}#mermaid-generated-diagram #dependencyStart,#mermaid-generated-diagram #dependencyEnd{fill:#0b0b0b;stroke:#0b0b0b;stroke-width:1;}#mermaid-generated-diagram .statediagramTitleText{text-anchor:middle;font-size:18px;fill:#333;}#mermaid-generated-diagram :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><defs><marker orient="auto" markerunits="strokeWidth" markerheight="14" markerwidth="20" refy="7" refx="19" id="mermaid-generated-diagram_statediagram-barbEnd"><path d="M 19,7 L9,13 L14,7 L9,1 Z"></path></marker></defs><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#mermaid-generated-diagram_statediagram-barbEnd)" style="fill:none" class="edge-thickness-normal transition" id="edge0" d="M236.523,246L236.523,241.833C236.523,237.667,236.523,229.333,236.523,221C236.523,212.667,236.523,204.333,236.523,200.167L236.523,196"></path><path marker-end="url(#mermaid-generated-diagram_statediagram-barbEnd)" style="fill:none" class="edge-thickness-normal transition" id="edge1" d="M236.523,127L236.523,122.833C236.523,118.667,236.523,110.333,236.523,102C236.523,93.667,236.523,85.333,236.523,81.167L236.523,77"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><rect height="0" width="0" ry="0" rx="0"></rect><foreignobject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignobject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><rect height="0" width="0" ry="0" rx="0"></rect><foreignobject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignobject></g></g></g><g class="nodes"><g transform="translate(236.5234375, 161.5)" data-id="elementInjector" data-node="true" id="state-elementInjector-1" class="node  statediagram-state undefined"><rect height="69" width="441.765625" y="-34.5" x="-220.8828125" style="" class="basic label-container"></rect><g transform="translate(-213.3828125, -27)" style="" class="label"><rect></rect><foreignobject height="54" width="426.765625"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">EnvironmentInjector<br>(configured by Angular)<br>has special things like DomSanitizer =&gt; providedIn 'platform'</span></div></foreignobject></g></g><g transform="translate(236.5234375, 280.5)" data-id="rootInjector" data-node="true" id="state-rootInjector-0" class="node  statediagram-state undefined"><rect height="69" width="457.046875" y="-34.5" x="-228.5234375" style="" class="basic label-container"></rect><g transform="translate(-221.0234375, -27)" style="" class="label"><rect></rect><foreignobject height="54" width="442.046875"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">root EnvironmentInjector<br>(configured by AppConfig)<br>has things for your app =&gt; bootstrapApplication(..., AppConfig)</span></div></foreignobject></g></g><g transform="translate(236.5234375, 42.5)" data-id="nullInjector" data-node="true" id="state-nullInjector-1" class="node  statediagram-state undefined"><rect height="69" width="226.640625" y="-34.5" x="-113.3203125" style="" class="basic label-container"></rect><g transform="translate(-105.8203125, -27)" style="" class="label"><rect></rect><foreignobject height="54" width="211.640625"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">NullInjector<br>always throws an error unless<br>you use @Optional()</span></div></foreignobject></g></g></g></g></g></svg><p data-ng_translator_product="100" data-ng_translator_ref_id="82sgdp44xwkvx9r9z3tfmt81d">虽然 
+<code>root</code> 是一个特殊的别名，但其他 
+<code>EnvironmentInjector</code> 层次结构没有别名。你可以选择在创建动态加载的组件时创建 
+<code>EnvironmentInjector</code> 层次结构，例如使用 Router 时，它将创建子 
+<code>EnvironmentInjector</code> 层次结构。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6wq4vdvyy3ytur4tvqxnub5ov">所有请求都会转发到根注入器，无论你是通过传递给 
+<code>bootstrapApplication()</code> 方法的 
+<code>ApplicationConfig</code> 实例配置它，还是在各自的服务中使用 
+<code>root</code> 注册所有提供者。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3>@Injectable() vs. ApplicationConfig</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="doojeuq0ebjncz4ge4dejahju">如果你在 
+<code>bootstrapApplication</code> 的 
+<code>ApplicationConfig</code> 中配置了一个应用范围的提供者，它将覆盖在 
+<code>@Injectable()</code> 元数据中为 
+<code>root</code> 配置的提供者。你可以这样做来配置一个与多个应用共享的非默认提供者。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="x2vck056i7mllug4xqw2yq9">以下是一个示例，其中组件路由器配置包括一个非默认的
+<a href="guide/routing#location-strategy">位置策略</a>，通过在 
+<code>ApplicationConfig</code> 的 
+<code>providers</code> 列表中列出其提供者。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">LocationStrategy</span>, <span class="hljs-attr">useClass</span>: <span class="hljs-title class_">HashLocationStrategy</span> }</div><div class="hljs-ln-line">]</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7zr1jldjjgquu5ko3qyp5mosi">对于基于 
+<code>NgModule</code> 的应用，在 
+<code>AppModule</code> 的 
+<code>providers</code> 中配置应用范围的提供者。</p>
+
+    </div>
+    
+  <h3 id="elementinjector">
+    <a href="#elementinjector" class="docs-anchor" tabindex="-1" aria-label="Link to <code>ElementInjector</code>"><code>ElementInjector</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="22vhtza02ni75us0mojxcajg2">Angular 会为每个 DOM 元素隐式创建 <code>ElementInjector</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8lqpgzq6vfn1qm7we5gvhshzs">在 
+<code>@Component()</code> 装饰器中使用其 
+<code>providers</code> 或 
+<code>viewProviders</code> 属性提供服务时，会配置一个 
+<code>ElementInjector</code>。 例如，以下 
+<code>TestComponent</code> 通过提供服务来配置 
+<code>ElementInjector</code>，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">ItemService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">'lamp'</span> } }]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestComponent</span></div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="ce9ayzttiq8pwo19kv96sqxhc"><strong>有帮助：</strong>请参阅 
+<a href="#resolution-rules">解析规则</a> 部分，以了解 
+<code>EnvironmentInjector</code> 树、
+<code>ModuleInjector</code> 和 
+<code>ElementInjector</code> 树之间的关系。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8yx8ieae5v54i0k8vjo1ifphl">当你在组件中提供服务时，该服务通过该组件实例的 
+<code>ElementInjector</code> 可用。 它也可能在子组件/指令中可见，具体取决于 
+<a href="#resolution-rules">解析规则</a> 部分中描述的可见性规则。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4tysuedslm2l4w68j5swxun4g">当组件实例被销毁时，该服务实例也将被销毁。</p>
+
+  <h4 id="directive-and-component">
+    <a href="#directive-and-component" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@Directive()</code> and <code>@Component()</code>" data-ng_translator_product="100" data-ng_translator_ref_id="c5fxv0222372qgq6no2lpc3u6"><code>@Directive()</code> 和 
+<code>@Component()</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6fqw9ki29tp0yh6hplo1mslia">组件是一种特殊类型的指令，这意味着正如 
+<code>@Directive()</code> 有 
+<code>providers</code> 属性一样，
+<code>@Component()</code> 也有。 这意味着指令和组件都可以使用 
+<code>providers</code> 属性配置提供者。 当你使用 
+<code>providers</code> 属性为组件或指令配置提供者时，该提供者属于该组件或指令的 
+<code>ElementInjector</code>。 同一元素上的组件和指令共享一个注入器。</p>
+
+  <h2 id="resolution-rules">
+    <a href="#resolution-rules" class="docs-anchor" tabindex="-1" aria-label="Link to Resolution rules" data-ng_translator_product="100" data-ng_translator_ref_id="cfqi97toy3b7sthtizne81hmg">解析规则</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="365hmeplasc3zt4k2k8s7zo2n">当为组件/指令解析令牌时，Angular 分为两个阶段来解析它：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="44b7elj19k46pi6f0qow2mq2c">针对 <code>ElementInjector</code> 层次结构中它的父级。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="epyrwoauh4z0khjgbnh982w6f">在 
+<code>EnvironmentInjector</code> 层次结构中的父级。</li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4dlytnr99pknem077cwt4i4tt">当组件声明依赖项时，Angular 会尝试使用它自己的 <code>ElementInjector</code> 来满足该依赖。如果组件的注入器缺少提供者，它将把请求传给其父组件的 <code>ElementInjector</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2a7lm5xtwo0vcfhylzkextn10">这些请求将继续转发，直到 Angular 找到可以处理该请求的注入器或用完祖先 <code>ElementInjector</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ajjaw6oe492fsf7ftji20eiuk">如果 Angular 在任何 
+<code>ElementInjector</code> 层次结构中找不到提供者，它会返回到请求发起的元素并在 
+<code>EnvironmentInjector</code> 层次结构中查找。 如果 Angular 仍然找不到提供者，它会抛出一个错误。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6u8ue1zvljbvrw8ctkuuiz5rq">如果你已在不同级别注册了相同 DI 令牌的提供者，则 Angular 会用遇到的第一个来解析该依赖。比如，如果提供者已经在需要此服务的组件中本地注册了，则 Angular 不会再寻找同一服务的其它提供者。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="1wk27syllsj6jnzj3og00nd9p"><strong>有帮助：</strong>对于基于 
+<code>NgModule</code> 的应用，Angular 会在 
+<code>ElementInjector</code> 层次结构中找不到提供者时搜索 
+<code>ModuleInjector</code> 层次结构。</p>
+
+    </div>
+    
+  <h2 id="resolution-modifiers">
+    <a href="#resolution-modifiers" class="docs-anchor" tabindex="-1" aria-label="Link to Resolution modifiers" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2egzmhelxn2j75or0a9ugv7zb">解析修饰符</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1503mywupm6psy8d6siu8nf7z">Angular 的解析行为可以使用 
+<code>@Optional()</code>、
+<code>@Self()</code>、
+<code>@SkipSelf()</code> 和 
+<code>@Host()</code> 进行修改。 从 
+<code>@angular/core</code> 导入它们，并在组件类构造函数中或在注入服务时使用 
+<code>inject</code> 配置。</p>
+
+  <h3 id="types-of-modifiers">
+    <a href="#types-of-modifiers" class="docs-anchor" tabindex="-1" aria-label="Link to Types of modifiers" data-ng_translator_product="100" data-ng_translator_ref_id="7gbas207ptpw5a39uac5bfzux">修饰符类型</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7b516yfeyfj8b0k0f367u1syt">解析修饰符分为三类：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="d7ohxlcs2mpuhtcaakw07rc60">如果 Angular 找不到你要找的内容，可以使用 
+<code>@Optional()</code></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="975layp4p8675y0jwynw4s2x7">开始查找的位置，可以使用 
+<code>@SkipSelf()</code></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="73xv2f00ly2s0s2s2vid3lowf">停止查找的位置，使用 
+<code>@Host()</code> 和 
+<code>@Self()</code></li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="cmlmf9hx6qxkn98nssmr18nd1">默认情况下，Angular 总是从当前 
+<code>Injector</code> 开始，一直向上查找。 修饰符允许你更改起始位置（即 
+<em>self</em> 位置）和结束位置。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5tnfazf26dpqz2d9v8a8c71ag">此外，你可以组合所有修饰符，除了：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="7479b50hvvk0kzitkna8kxca1"><code>@Host()</code> 和 
+<code>@Self()</code></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="ex0bvpyequkg6pwqqtw7skzr4"><code>@SkipSelf()</code> 和 
+<code>@Self()</code>。</li>
+
+  </ul>
+  
+  <h3 id="optional">
+    <a href="#optional" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@Optional()</code>"><code>@Optional()</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8d0e9mmcomczscgub9gk3kpr3"><code>@Optional()</code> 允许 Angular 将你注入的服务视为可选项。 这样，如果它在运行时无法求解，Angular 会将该服务求解为 
+<code>null</code>，而不会抛出错误。 在下面的示例中，服务 
+<code>OptionalService</code> 没有在服务 
+<code>ApplicationConfig</code>、
+<code>@NgModule()</code> 或组件类中提供，所以在应用的任何地方都不可用。</p>
+<div class="docs-code" header="src/app/optional/optional.component.ts">
+    <div class="docs-code-header"><h3>src/app/optional/optional.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OptionalComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Optional</span>() <span class="hljs-keyword">public</span> optional?: OptionalService</span>) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="self">
+    <a href="#self" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@Self()</code>"><code>@Self()</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8yamxipr36zm79mg4vdrdpyz5">使用 
+<code>@Self()</code> 使 Angular 只在当前组件或指令的 
+<code>ElementInjector</code> 中查找。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2yc8fwg6ht5hw6tn0xdxc1v9h">一个好的使用 
+<code>@Self()</code> 的用例是注入服务，但仅当它在当前宿主元素上可用时。 为了避免这种情况下的错误，将 
+<code>@Self()</code> 与 
+<code>@Optional()</code> 结合使用。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5v22t5f0gxhczx1bhe9svo9ih">比如，在下面的 <code>SelfComponent</code> 中。请注意在构造函数中注入的 <code>LeafService</code>。</p>
+<div class="docs-code" header="src/app/self-no-data/self-no-data.component.ts">
+    <div class="docs-code-header"><h3>src/app/self-no-data/self-no-data.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-self-no-data'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./self-no-data.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./self-no-data.component.css'</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SelfNoDataComponent</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Self</span>() <span class="hljs-meta">@Optional</span>() <span class="hljs-keyword">public</span> leaf?: LeafService</span>) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4iqoovs1t58t4pteh8mu23q0h">在这个示例中，有一个父级提供者，注入该服务会返回值，然而，使用 
+<code>@Self()</code> 和 
+<code>@Optional()</code> 注入该服务会返回 
+<code>null</code>，因为 
+<code>@Self()</code> 告诉注入器在当前宿主元素中停止查找。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7ntza686iww8atm5bo85rc0on">另一个示例展示了带有 
+<code>FlowerService</code> 提供者的组件类。在这种情况下，注入器不会再查找当前 
+<code>ElementInjector</code> 之外的内容，因为它找到了 
+<code>FlowerService</code> 并返回了郁金香 
+<code><span class="docs-emoji">🌷</span></code>。</p>
+<div class="docs-code" path="adev/src/content/examples/resolution-modifiers/src/app/self/self.component.ts" visiblelines="3,4,5,6,7,8,9,10,11,12" header="src/app/self/self.component.ts">
+    <div class="docs-code-header"><h3>src/app/self/self.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">import {Component, Self} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line">import {FlowerService} <span class="hljs-keyword">from</span> <span class="hljs-string">'../flower.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@<span class="hljs-title function_ invoke__">Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-self'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./self.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./self.component.css'</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{<span class="hljs-attr">provide</span>: FlowerService, <span class="hljs-attr">useValue</span>: {<span class="hljs-attr">emoji</span>: <span class="hljs-string">'🌷'</span>}}],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SelfComponent</span> </span>{</div><div class="hljs-ln-line">  <span class="hljs-title function_ invoke__">constructor</span>(@<span class="hljs-title function_ invoke__">Self</span>() <span class="hljs-keyword">public</span> <span class="hljs-attr">flower</span>: FlowerService) {}</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// This component provides the FlowerService so the injector</span></div><div class="hljs-ln-line"><span class="hljs-comment">// doesn't have to look further up the injector tree</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="skipself">
+    <a href="#skipself" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@SkipSelf()</code>"><code>@SkipSelf()</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1oatshj6kasct2b1v1rwdlhz4"><code>@SkipSelf()</code> 与 
+<code>@Self()</code> 相反。 使用 
+<code>@SkipSelf()</code> 时，Angular 从父级 
+<code>ElementInjector</code> 开始查找服务，而不是当前的。 所以，如果父级 
+<code>ElementInjector</code> 使用了蕨类植物 
+<code><span class="docs-emoji">🌿</span></code> 作为 
+<code>emoji</code> 的值，但你在组件的 
+<code>providers</code> 数组中有枫叶 
+<code><span class="docs-emoji">🍁</span></code>，Angular 会忽略枫叶 
+<code><span class="docs-emoji">🍁</span></code> 而使用蕨类植物 
+<code><span class="docs-emoji">🌿</span></code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1ogx2jk8qq2cgv329aqesf47s">要在代码中看到这一点，请先假定 <code>emoji</code> 的以下值就是父组件正在使用的值，如本服务所示：</p>
+<div class="docs-code" header="src/app/leaf.service.ts">
+    <div class="docs-code-header"><h3>src/app/leaf.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LeafService</span> {</div><div class="hljs-ln-line">  emoji = <span class="hljs-string">'🌿'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="31x2y6em8ir5vl5idsywmsmgp">假设在子组件中，你有一个不同的值，枫叶 
+<code><span class="docs-emoji">🍁</span></code>，但你想使用父级的值。 这时你会使用 
+<code>@SkipSelf()</code>：</p>
+<div class="docs-code" header="src/app/skipself/skipself.component.ts">
+    <div class="docs-code-header"><h3>src/app/skipself/skipself.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-skipself'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./skipself.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./skipself.component.css'</span>],</div><div class="hljs-ln-line">  <span class="hljs-comment">// Angular would ignore this LeafService instance</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">LeafService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🍁'</span> } }]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SkipselfComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// Use @SkipSelf() in the constructor</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@SkipSelf</span>() <span class="hljs-keyword">public</span> leaf: LeafService</span>) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2exva1ifyruxbu2nnbc3s7j55">在这种情况下，你得到的 
+<code>emoji</code> 值将是蕨类植物 
+<code><span class="docs-emoji">🌿</span></code>，而不是枫叶 
+<code><span class="docs-emoji">🍁</span></code>。</p>
+
+  <h4 id="skipself-with-optional">
+    <a href="#skipself-with-optional" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@SkipSelf()</code> with <code>@Optional()</code>" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eqpa5ldlqu2hb5v3jb4wsobrz"><code>@SkipSelf()</code> 与 <code>@Optional()</code> 合用</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5iapucos5ezd8jaf1xc40ou94">将 
+<code>@SkipSelf()</code> 与 
+<code>@Optional()</code> 结合使用，以防止值为 
+<code>null</code> 时出现错误。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1873bjekuqzja5sk6qga43llg">在下面的示例中，
+<code>Person</code> 服务被注入到构造函数中。 
+<code>@SkipSelf()</code> 告诉 Angular 跳过当前注入器，而 
+<code>@Optional()</code> 会在 
+<code>Person</code> 服务为 
+<code>null</code> 时防止错误。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Optional</span>() <span class="hljs-meta">@SkipSelf</span>() parent?: Person</span>) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="host">
+    <a href="#host" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@Host()</code>"><code>@Host()</code></a>
+  </h3>
+  <!-- TODO: Remove ambiguity between @Host and @Self. -->
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6aw4dhyxq5qsn7d95yudvau8l"><code>@Host()</code> 允许你将组件指定为注入器树中的最后一站，用于查找提供者。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="29gtr6fw387tc4upaocdkphx6">即使树上有更高的服务实例，Angular 也不会继续查找。 按如下方式使用 
+<code>@Host()</code>：</p>
+<div class="docs-code" header="src/app/host/host.component.ts">
+    <div class="docs-code-header"><h3>src/app/host/host.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-host'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./host.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./host.component.css'</span>],</div><div class="hljs-ln-line">  <span class="hljs-comment">//  provide the service</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">FlowerService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🌷'</span> } }]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HostComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// use @Host() in the constructor when injecting the service</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Host</span>() <span class="hljs-meta">@Optional</span>() <span class="hljs-keyword">public</span> flower?: FlowerService</span>) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="d40rczj6qpjskflxfwpss9yx0">由于 
+<code>HostComponent</code> 在其构造函数中使用了 
+<code>@Host()</code>，无论 
+<code>HostComponent</code> 的父级可能有的 
+<code>flower.emoji</code> 值是什么，
+<code>HostComponent</code> 都将使用郁金香 
+<code><span class="docs-emoji">🌷</span></code>。</p>
+
+  <h2 id="logical-structure-of-the-template">
+    <a href="#logical-structure-of-the-template" class="docs-anchor" tabindex="-1" aria-label="Link to Logical structure of the template" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="59jb04926ftj097fcn21102gb">模板的逻辑结构</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="egl038v92wl5n9erjp6q55bcg">在组件类中提供服务时，服务在 <code>ElementInjector</code> 树中的可见性是取决于你在何处以及如何提供这些服务。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ao0qeldylpzesvtx55qeb1i7d">了解 Angular 模板的基础逻辑结构将为你配置服务并进而控制其可见性奠定基础。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2gtada0qe7otax7diplqq7grg">组件在模板中使用，如以下范例所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span>;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dvg3p11t78x8kg66oxy43bw9e"><strong>提示：</strong> 通常，你会在单独的文件中声明组件及其模板。 为了理解注入体系如何工作，从组合的逻辑树的角度来看它们是有用的。 术语 
+<em>逻辑</em> 区分了它与渲染树，后者是你的应用的 DOM 树。 为了标记组件模板所在的位置，本指南使用 
+<code>&lt;#VIEW&gt;</code> 伪元素，它实际上不存在于渲染树中，仅用于构建思维模型。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8kb99dke0crhah203e5cenn63">下面是如何将 <code>&lt;app-root&gt;</code> 和 <code>&lt;app-child&gt;</code> 视图树组合为单个逻辑树的范例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span>&gt;</span></div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">     &lt;#VIEW&gt;</div><div class="hljs-ln-line">       …content goes here…</div><div class="hljs-ln-line">     &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6s70mba7nvrspr2jog1pykqf9">当你在组件类中配置服务时，了解这种 <code>&lt;#VIEW&gt;</code> 划界的思想尤其重要。</p>
+
+  <h2 id="example-providing-services-in-component">
+    <a href="#example-providing-services-in-component" class="docs-anchor" tabindex="-1" aria-label="Link to Example: Providing services in <code>@Component()</code>" data-ng_translator_product="100" data-ng_translator_ref_id="edzuij8it92x5sew27rzyr5y5">示例：在 
+<code>@Component()</code> 中提供服务</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="75ht834ej8hx9lj5xg0s4w8os">你如何使用 
+<code>@Component()</code>（或 
+<code>@Directive()</code>）装饰器提供服务，决定了它们的可见性。 以下部分演示了 
+<code>providers</code> 和 
+<code>viewProviders</code>，以及使用 
+<code>@SkipSelf()</code> 和 
+<code>@Host()</code> 修改服务可见性的方法。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ae30ufymtxpbzttemvnq7fg1n">组件类可以通过两种方式提供服务：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="f41igu4yqvhd69slfy59wpgem">数组</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ab9knis0b0ql98g4fw7g9a8ds">使用 
+<code>providers</code> 数组</td>
+<td align="left"><code>@Component({ providers: [SomeService] })</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ccu3xwpusklj1em7xe65gl9of">使用 
+<code>viewProviders</code> 数组</td>
+<td align="left"><code>@Component({ viewProviders: [SomeService] })</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="41zgkuwetaahhx62ogz9awhhq">在下面的示例中，你将看到一个 Angular 应用的逻辑树。 为了阐明注入器在模板上下文中的工作方式，逻辑树将表示应用的 HTML 结构。 例如，逻辑树将显示 
+<code>&lt;child-component&gt;</code> 是 
+<code>&lt;parent-component&gt;</code> 的直接子元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a8gkma8m2j83ll1tu79z9p0y9">在逻辑树中，你会看到特殊的属性：
+<code>@Provide</code>、
+<code>@Inject</code> 和 
+<code>@ApplicationConfig</code>。 这些不是真实的属性，而是用来展示底层发生的事情。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="14g9m4gnywr411lz3b95ozfy1">Angular 服务属性</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>@Inject(Token)=&gt;Value</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5sqgabu7luin7yovklea9rb2">如果在逻辑树的这个位置注入 
+<code>Token</code>，其值将是 
+<code>Value</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>@Provide(Token=Value)</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="97bi3sn8hyn3wxihdxwrplah5">表示在逻辑树的这个位置以 
+<code>Value</code> 提供了 
+<code>Token</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>@ApplicationConfig</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4itettknifixdp2727v4awql1">展示了在这个位置应使用一个备用的 
+<code>EnvironmentInjector</code>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="example-app-structure">
+    <a href="#example-app-structure" class="docs-anchor" tabindex="-1" aria-label="Link to Example app structure" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="axj3kp7kglb9ewex3242edste">应用程序结构范例</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ay3kaevvlr0u774e4zzgbue0b">示例应用在 
+<code>root</code> 中提供了一个 
+<code>FlowerService</code>，其 
+<code>emoji</code> 值为红色木槿花 
+<code><span class="docs-emoji">🌺</span></code>。</p>
+<div class="docs-code" header="src/app/flower.service.ts">
+    <div class="docs-code-header"><h3>src/app/flower.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FlowerService</span> {</div><div class="hljs-ln-line">  emoji = <span class="hljs-string">'🌺'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="95nz0yhmomd9rl39fadk1j1an">考虑一个只有 <code>AppComponent</code> 和 <code>ChildComponent</code> 的简单应用程序。最基本的渲染视图看起来就像嵌套的 HTML 元素，比如：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span>&gt;</span> <span class="hljs-comment">&lt;!-- AppComponent selector --&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span> <span class="hljs-comment">&lt;!-- ChildComponent selector --&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f3l40g3o9pzua8wk1j8m6k9sb">但是，在幕后，Angular 在解析注入请求时使用如下逻辑视图表示形式：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span>&gt;</span> <span class="hljs-comment">&lt;!-- AppComponent selector --&gt;</span></div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span> <span class="hljs-comment">&lt;!-- ChildComponent selector --&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW&gt;</div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="efh86lmqxrx3csf06nx2qrhek">此处的 <code>&lt;#VIEW&gt;</code> 表示模板的实例。请注意，每个组件都有自己的 <code>&lt;#VIEW&gt;</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="beqmqzrflgw2dx82ui9fh3bzt">了解此结构可以告知你如何提供和注入服务，并完全控制服务的可见性。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9gcmfz84wsmia7x3vl2s7m9dm">现在，考虑 <code>&lt;app-root&gt;</code> 只注入了 <code>FlowerService</code>：</p>
+<div class="docs-code" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span>  {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">public</span> flower: FlowerService</span>) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dxcfosl5qixut93xvefzt1uuk">将绑定添加到 <code>&lt;app-root&gt;</code> 模板来将结果可视化：</p>
+<div class="docs-code" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from FlowerService: {{flower.emoji}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ujblhupw1ch9kvbiy3xu92p">该视图中的输出为：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Emoji from FlowerService: 🌺</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8h064awkt70nktzbn249fj9qa">在逻辑树中，可以把它表示成这样：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line highlighted">        @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">FlowerService</span>) <span class="hljs-attr">flower</span>=&gt;"🌺"&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line highlighted">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from FlowerService: {{flower.emoji}} (🌺)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW&gt;</div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d167fmz2nalsyon68lcxkvrj5">当 <code>&lt;app-root&gt;</code> 请求 <code>FlowerService</code> 时，注入器的工作就是解析 <code>FlowerService</code> 令牌。令牌的解析分为两个阶段：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="aseqzyxvxnl140tmes22zc24u">注入器确定逻辑树中的起始位置和搜索的结束位置。 注入器从起始位置开始，并在逻辑树的每个视图级别查找令牌。 如果找到令牌，则返回它。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="chto864n7jxjfs1nljtws549j">如果未找到令牌，注入器会查找最近的父 
+<code>EnvironmentInjector</code> 以委托请求。</p>
+</li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9hzn7jm4g6nquqetgpinc867s">在这个例子中，约束为：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="709jw0ps3c2n0htgj7z01m83p">从属于 <code>&lt;app-root&gt;</code> 的 <code>&lt;#VIEW&gt;</code> 开始，并结束于 <code>&lt;app-root&gt;</code>。</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="ix684szwc3e93g5jfvr7qjd9">通常，搜索的起点是注入点。 然而，在这种情况下 
+<code>&lt;app-root&gt;</code> 是一个组件。
+<code>@Component</code> 很特别，因为它们还包括自己的 
+<code>viewProviders</code>，这就是为什么搜索从属于 
+<code>&lt;app-root&gt;</code> 的 
+<code>&lt;#VIEW&gt;</code> 开始。 对于在同一位置匹配的指令则不会这样。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="379sq2qa92gc7s1vpo5r7jopr">结束位置恰好与组件本身相同，因为它就是此应用程序中最顶层的组件。</li>
+
+  </ul>
+  </li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="7a1040h0ll9q6k59fdg8ptc8w">由 
+<code>ApplicationConfig</code> 提供的 
+<code>ElementInjector</code> 作为当在 
+<code>ElementInjector</code> 层级中找不到注入令牌时的备用注入器。</p>
+</li>
+
+    </ol>
+    
+  <h3 id="using-the-providers-array">
+    <a href="#using-the-providers-array" class="docs-anchor" tabindex="-1" aria-label="Link to Using the <code>providers</code> array" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="tjga6cybgglm6ep9b4d5o8p5">使用 <code>providers</code> 数组</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d2ostbk69ynjnpd3fejxqo206">现在，在 <code>ChildComponent</code> 类中，为 <code>FlowerService</code> 添加一个提供者，以便在接下来的小节中演示更复杂的解析规则：</p>
+<div class="docs-code" header="src/app/child.component.ts">
+    <div class="docs-code-header"><h3>src/app/child.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-child'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./child.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./child.component.css'</span>],</div><div class="hljs-ln-line highlighted">  <span class="hljs-comment">// use the providers array to provide a service</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">FlowerService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🌻'</span> } }]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// inject the service</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"> <span class="hljs-keyword">public</span> flower: FlowerService</span>) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="anwkvkzxb3smdg8vykfkakysd">现在 
+<code>FlowerService</code> 是在 
+<code>@Component()</code> 装饰器中提供的，当 
+<code>&lt;app-child&gt;</code> 请求该服务时，注入器只需查找到 
+<code>&lt;app-child&gt;</code> 中的 
+<code>ElementInjector</code>。 它不需要继续在注入器树中进一步查找。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8wy87z139ugroav4ghnh6594m">下一步是将绑定添加到 <code>ChildComponent</code> 模板。</p>
+<div class="docs-code" header="src/app/child.component.html">
+    <div class="docs-code-header"><h3>src/app/child.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from FlowerService: {{flower.emoji}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="77odpuxoaj8rk1u2nljuj2rn3">要渲染新的值，请在 <code>AppComponent</code> 模板的底部添加 <code>&lt;app-child&gt;</code>，以便其视图也显示向日葵：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Child Component</div><div class="hljs-ln-line">Emoji from FlowerService: 🌻</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d8j8apvu9jv5e8hqx01fod7a2">在逻辑树中，可以把它表示成这样：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">        @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">FlowerService</span>) <span class="hljs-attr">flower</span>=&gt;"🌺"&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from FlowerService: {{flower.emoji}} (🌺)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span> @<span class="hljs-attr">Provide</span>(<span class="hljs-attr">FlowerService</span>=<span class="hljs-string">"🌻"</span>)</span></div><div class="hljs-ln-line">               @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">FlowerService</span>)=&gt;"🌻"&gt; <span class="hljs-comment">&lt;!-- search ends here --&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW&gt; <span class="hljs-comment">&lt;!-- search starts here --&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Child Component<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from FlowerService: {{flower.emoji}} (🌻)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="a98n5s4cozer19rzzem0n8x4j">当 
+<code>&lt;app-child&gt;</code> 请求 
+<code>FlowerService</code> 时，注入器从属于 
+<code>&lt;app-child&gt;</code> 的 
+<code>&lt;#VIEW&gt;</code> 开始搜索（包括 
+<code>&lt;#VIEW&gt;</code>，因为它是从 
+<code>@Component()</code> 注入的），并在 
+<code>&lt;app-child&gt;</code> 结束。 在这种情况下，
+<code>FlowerService</code> 在 
+<code>providers</code> 数组中求解为 
+<code>&lt;app-child&gt;</code> 的向日葵 
+<code><span class="docs-emoji">🌻</span></code>。 注入器不需要在注入器树中进一步查找。 它一旦找到 
+<code>FlowerService</code> 就停止，不会看到红色木槿花 
+<code><span class="docs-emoji">🌺</span></code>。</p>
+
+  <h3 id="using-the-viewproviders-array">
+    <a href="#using-the-viewproviders-array" class="docs-anchor" tabindex="-1" aria-label="Link to Using the <code>viewProviders</code> array" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dg3ozvt1tncll2jzb76aag02h">使用 <code>viewProviders</code> 数组</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="duiognhc0fjoabflaed440lye">使用 
+<code>viewProviders</code> 数组作为在 
+<code>@Component()</code> 装饰器中提供服务的另一种方式。使用 
+<code>viewProviders</code> 使服务在 
+<code>&lt;#VIEW&gt;</code> 中可见。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="1gbavo9bik7ntle2ht99nzpao"><strong>提示：</strong> 步骤与使用 
+<code>providers</code> 数组相同，不同之处在于使用 
+<code>viewProviders</code> 数组。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cna0fpt431y4xbogg3xqlxhd0">有关分步说明，请继续阅读本节。如果你能自己设置，请跳到 
+<a href="#visibility-of-provided-tokens">修改服务可用性</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dxnrp4kgtzrtbrtrfo66mk5l5">为了演示，我们正在构建一个 
+<code>AnimalService</code> 来展示 
+<code>viewProviders</code>。首先，创建一个带有鲸鱼 
+<code><span class="docs-emoji">🐳</span></code> 表情符号的 
+<code>emoji</code> 属性的 
+<code>AnimalService</code>：</p>
+<div class="docs-code" header="src/app/animal.service.ts">
+    <div class="docs-code-header"><h3>src/app/animal.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AnimalService</span> {</div><div class="hljs-ln-line">  emoji = <span class="hljs-string">'🐳'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6azw4saubnmwone3xhnrk1a2k">遵循与 <code>FlowerService</code> 相同的模式，将 <code>AnimalService</code> 注入 <code>AppComponent</code> 类：</p>
+<div class="docs-code" header="src/app/app.component.ts">
+    <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line">    <span class="hljs-keyword">public</span> flower: FlowerService,</div><div class="hljs-ln-line highlighted">    <span class="hljs-keyword">public</span> animal: AnimalService) {}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8160rultrakv2vmk2vuwml9eb"><strong>提示：</strong>你可以保留所有与 
+<code>FlowerService</code> 相关的代码，这样可以与 
+<code>AnimalService</code> 进行比较。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="1r2ykgremws7e0eg7bu1kbc1z">添加一个 
+<code>viewProviders</code> 数组，并在 
+<code>&lt;app-child&gt;</code> 类中注入 
+<code>AnimalService</code>，但给 
+<code>emoji</code> 赋予一个不同的值。这里，它的值是狗 
+<code><span class="docs-emoji">🐶</span></code>。</p>
+<div class="docs-code" header="src/app/child.component.ts">
+    <div class="docs-code-header"><h3>src/app/child.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-child'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./child.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./child.component.css'</span>],</div><div class="hljs-ln-line">  <span class="hljs-comment">// provide services</span></div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">FlowerService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🌻'</span> } }],</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">viewProviders</span>: [{ <span class="hljs-attr">provide</span>: <span class="hljs-title class_">AnimalService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🐶'</span> } }]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// inject service</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"> <span class="hljs-keyword">public</span> flower: FlowerService, <span class="hljs-keyword">public</span> animal: AnimalService</span>) { }</div><div class="hljs-ln-line">...</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="61w7c0vinswzp37hff2f2ybqc">将绑定添加到 <code>ChildComponent</code> 和 <code>AppComponent</code> 模板。在 <code>ChildComponent</code> 模板中，添加以下绑定：</p>
+<div class="docs-code" header="src/app/child.component.html">
+    <div class="docs-code-header"><h3>src/app/child.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4ns17ixqm3pu2n0en131nqwkn">此外，将其添加到 <code>AppComponent</code> 模板：</p>
+<div class="docs-code" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>s</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="chidgxebxzzvcjir6nnfpi6e1">现在，你应该在浏览器中看到两个值：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">AppComponent</div><div class="hljs-ln-line">Emoji from AnimalService: 🐳</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Child Component</div><div class="hljs-ln-line">Emoji from AnimalService: 🐶</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a01qvqeypeglznyuxz1f35x93">此 <code>viewProviders</code> 范例的逻辑树如下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">         @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">AnimalService</span>) <span class="hljs-attr">animal</span>=&gt;"🐳"&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Provide(AnimalService="🐶")</div><div class="hljs-ln-line">            @Inject(AnimalService=&gt;"🐶")&gt;</div><div class="hljs-ln-line">       <span class="hljs-comment">&lt;!-- ^^using viewProviders means AnimalService is available in &lt;#VIEW&gt;--&gt;</span></div><div class="hljs-ln-line">       <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}} (🐶)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="d8sqsz2004346fu21mbhpz5j7">就像 
+<code>FlowerService</code> 示例一样，
+<code>AnimalService</code> 是在 
+<code>&lt;app-child&gt;</code> 的 
+<code>@Component()</code> 装饰器中提供的。这意味着注入器首先在组件的 
+<code>ElementInjector</code> 中查找，找到狗 
+<code><span class="docs-emoji">🐶</span></code> 的 
+<code>AnimalService</code> 值。它不需要继续搜索 
+<code>ElementInjector</code> 树，也不需要搜索 
+<code>ModuleInjector</code>。</p>
+
+  <h3 id="providers-vs-viewproviders">
+    <a href="#providers-vs-viewproviders" class="docs-anchor" tabindex="-1" aria-label="Link to <code>providers</code> vs. <code>viewProviders</code>" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7qjctl6lnzlrfuyi6i9npkg2v"><code>providers</code> 与 <code>viewProviders</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="a0o02939xhj0819uujxqw4m9d"><code>viewProviders</code> 字段在概念上类似于 
+<code>providers</code>，但有一个显著的区别。
+<code>viewProviders</code> 中配置的提供者对最终成为组件逻辑子内容的投影内容不可见。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a1ky7c6vaedf4m7z1navsgsdl">为了看到使用 
+<code>providers</code> 和 
+<code>viewProviders</code> 的区别，向示例中添加另一个组件并称之为 
+<code>InspectorComponent</code>。
+<code>InspectorComponent</code> 将是 
+<code>ChildComponent</code> 的子组件。在 
+<code>inspector.component.ts</code> 文件中，在构造函数中注入 
+<code>FlowerService</code> 和 
+<code>AnimalService</code>：</p>
+<div class="docs-code" header="src/app/inspector/inspector.component.ts">
+    <div class="docs-code-header"><h3>src/app/inspector/inspector.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InspectorComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">public</span> flower: FlowerService, <span class="hljs-keyword">public</span> animal: AnimalService</span>) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="22r9e1l5677k596gssrn9bdx4">你不需要 <code>providers</code> 或 <code>viewProviders</code> 数组。接下来，在 <code>inspector.component.html</code> 中，从以前的组件中添加相同的 html：</p>
+<div class="docs-code" header="src/app/inspector/inspector.component.html">
+    <div class="docs-code-header"><h3>src/app/inspector/inspector.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from FlowerService: {{flower.emoji}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ehbggvrs3db6m0tiw3c6nvxl5">记得将 
+<code>InspectorComponent</code> 添加到 
+<code>ChildComponent</code> 的 
+<code>imports</code> 数组中。</p>
+<div class="docs-code" header="src/app/child/child.component.ts">
+    <div class="docs-code-header"><h3>src/app/child/child.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">InspectorComponent</span>]</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1pgstykexybvpcinfvzqbmsuq">接下来，将以下内容添加到 
+<code>child.component.html</code>：</p>
+<div class="docs-code" header="src/app/child/child.component.html">
+    <div class="docs-code-header"><h3>src/app/child/child.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Content projection<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-tag">&lt;<span class="hljs-name">ng-content</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-content</span>&gt;</span></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Inside the view<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line highlighted"></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">app-inspector</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-inspector</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="3cstgz3a10z98mgg989z026bx"><code>&lt;ng-content&gt;</code> 允许你投影内容，而 
+<code>ChildComponent</code> 模板中的 
+<code>&lt;app-inspector&gt;</code> 使得 
+<code>InspectorComponent</code> 成为 
+<code>ChildComponent</code> 的子组件。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2ymrwkr8bl93hja9oykh5ua32">接下来，将以下内容添加到 <code>app.component.html</code> 中以利用内容投影的优势。</p>
+<div class="docs-code" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line highlighted">  <span class="hljs-tag">&lt;<span class="hljs-name">app-inspector</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-inspector</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b3452aiazomml6yumsa9j6qza">现在，浏览器将渲染以下内容，为简洁起见，省略了前面的范例：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line">Content projection</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Emoji from FlowerService: 🌻</div><div class="hljs-ln-line">Emoji from AnimalService: 🐳</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Emoji from FlowerService: 🌻</div><div class="hljs-ln-line">Emoji from AnimalService: 🐶</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="b1acxumy326cfd60hy1ws1b4h">这四个绑定演示了 
+<code>providers</code> 与 
+<code>viewProviders</code> 之间的区别。记住狗 emoji 
+<code><span class="docs-emoji">🐶</span></code> 是在 
+<code>ChildComponent</code> 的 
+<code>&lt;#VIEW&gt;</code> 内声明的，对投影内容不可见。相反，投影内容看到的是鲸鱼 
+<code><span class="docs-emoji">🐳</span></code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cq1s22wgirb9h2majj4590k09">然而，在后面的输出部分中，尽管 
+<code>InspectorComponent</code> 是 
+<code>ChildComponent</code> 的实际子组件，但因为 
+<code>InspectorComponent</code> 位于 
+<code>&lt;#VIEW&gt;</code> 内，所以当它请求 
+<code>AnimalService</code> 时，它看到的是狗 
+<code><span class="docs-emoji">🐶</span></code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c1natcajzie2d80jkp3v443c1">逻辑树中的 <code>AnimalService</code> 如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">         @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">AnimalService</span>) <span class="hljs-attr">animal</span>=&gt;"🐳"&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Provide(AnimalService="🐶")</div><div class="hljs-ln-line">            @Inject(AnimalService=&gt;"🐶")&gt;</div><div class="hljs-ln-line">        <span class="hljs-comment">&lt;!-- ^^using viewProviders means AnimalService is available in &lt;#VIEW&gt;--&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}} (🐶)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span></div><div class="hljs-ln-line">          <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Content projection<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line">          <span class="hljs-tag">&lt;<span class="hljs-name">app-inspector</span> @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">AnimalService</span>) <span class="hljs-attr">animal</span>=&gt;</span>"🐳"&gt;</div><div class="hljs-ln-line">            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}} (🐳)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">          <span class="hljs-tag">&lt;/<span class="hljs-name">app-inspector</span>&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">app-inspector</span>&gt;</span></div><div class="hljs-ln-line">          &lt;#VIEW @Inject(AnimalService) animal=&gt;"🐶"&gt;</div><div class="hljs-ln-line">            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Emoji from AnimalService: {{animal.emoji}} (🐶)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">          &lt;/#VIEW&gt;</div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;/<span class="hljs-name">app-inspector</span>&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="pjpb2s37qv76vmmry201ng4z"><code>&lt;app-inspector&gt;</code> 的投影内容看到的是鲸鱼 
+<code><span class="docs-emoji">🐳</span></code>，而不是狗 
+<code><span class="docs-emoji">🐶</span></code>，因为狗 
+<code><span class="docs-emoji">🐶</span></code> 在 
+<code>&lt;app-child&gt;</code> 的 
+<code>&lt;#VIEW&gt;</code> 内。只有当 
+<code>&lt;app-inspector&gt;</code> 也在 
+<code>&lt;#VIEW&gt;</code> 内时，才可以看到狗 
+<code><span class="docs-emoji">🐶</span></code>。</p>
+
+  <h3 id="visibility-of-provided-tokens">
+    <a href="#visibility-of-provided-tokens" class="docs-anchor" tabindex="-1" aria-label="Link to Visibility of provided tokens" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ex6tc2q4qxk7vmjzdkfljlbtn">提供者令牌的可见性</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="asr3qhgc3dt76emc8k3asyr1o">可见性装饰器影响搜索注入令牌时在逻辑树中开始和结束的位置。为此，要将可见性装饰器放置在注入点，即 <code>constructor()</code>，而不是在声明点。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ehge8dot93s9k6pegrplkq1vs">要改变注入器开始查找 
+<code>FlowerService</code> 的位置，在注入 
+<code>FlowerService</code> 的 
+<code>&lt;app-child&gt;</code> 的 
+<code>@Inject</code> 声明中添加 
+<code>@SkipSelf()</code>。这个声明在 
+<code>child.component.ts</code> 的 
+<code>&lt;app-child&gt;</code> 构造函数中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@SkipSelf</span>() <span class="hljs-keyword">public</span> flower: FlowerService</span>) { }</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="6cr5pbewi8cnbq0wi3y92dgh7">使用 
+<code>@SkipSelf()</code>，
+<code>&lt;app-child&gt;</code> 注入器不会查找自身的 
+<code>FlowerService</code>。相反，注入器从 
+<code>&lt;app-root&gt;</code> 的 
+<code>ElementInjector</code> 开始查找 
+<code>FlowerService</code>，未找到任何东西。然后，它回到 
+<code>&lt;app-child&gt;</code> 的 
+<code>ModuleInjector</code>，找到了红色木槿花 
+<code><span class="docs-emoji">🌺</span></code> 的值，该值可用，因为 
+<code>&lt;app-child&gt;</code> 和 
+<code>&lt;app-root&gt;</code> 共享相同的 
+<code>ModuleInjector</code>。UI 渲染如下：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Emoji from FlowerService: 🌺</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aul9cnhxvks7ck1a0klacyr4g">在逻辑树中，这种情况可能如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">        @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">FlowerService</span>) <span class="hljs-attr">flower</span>=&gt;"🌺"&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span> @<span class="hljs-attr">Provide</span>(<span class="hljs-attr">FlowerService</span>=<span class="hljs-string">"🌻"</span>)&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Inject(FlowerService, SkipSelf)=&gt;"🌺"&gt;</div><div class="hljs-ln-line">        <span class="hljs-comment">&lt;!-- With SkipSelf, the injector looks to the next injector up the tree (app-root) --&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="wz527ta2nxoasvxj2rgaihqk">虽然 
+<code>&lt;app-child&gt;</code> 提供向日葵 
+<code><span class="docs-emoji">🌻</span></code>，应用却渲染红色木槿花 
+<code><span class="docs-emoji">🌺</span></code>，因为 
+<code>@SkipSelf()</code> 导致当前注入器（
+<code>app-child</code>）跳过自身并查找其父级。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9ynwmj9ehho21chmxbkpl9kzl">如果你现在添加 
+<code>@Host()</code>（除了 
+<code>@SkipSelf()</code>），结果将是 
+<code>null</code>。这是因为 
+<code>@Host()</code> 将查找范围限制在 
+<code>app-child</code> 的 
+<code>&lt;#VIEW&gt;</code>。逻辑树中的想法如下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">        @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">FlowerService</span>) <span class="hljs-attr">flower</span>=&gt;"🌺"&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt; <span class="hljs-comment">&lt;!-- end search here with null--&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span> @<span class="hljs-attr">Provide</span>(<span class="hljs-attr">FlowerService</span>=<span class="hljs-string">"🌻"</span>)&gt;</span> <span class="hljs-comment">&lt;!-- start search here --&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Inject(FlowerService, @SkipSelf, @Host, @Optional)=&gt;null&gt;</div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">app-parent</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4h2nogzfgavv224fbr7ovzhdq">此处，服务及其值相同，但 
+<code>@Host()</code> 阻止注入器查找超出 
+<code>&lt;#VIEW&gt;</code> 的 
+<code>FlowerService</code>，因此找不到并返回 
+<code>null</code>。</p>
+
+  <h3 id="skipself-and-viewproviders">
+    <a href="#skipself-and-viewproviders" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@SkipSelf()</code> and <code>viewProviders</code>" data-ng_translator_product="100" data-ng_translator_ref_id="4ofneamx5qqh6om9wenqefxnp"><code>@SkipSelf()</code> 和 
+<code>viewProviders</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5lcv2fsf643zr5rczkfto8lme">记住，
+<code>&lt;app-child&gt;</code> 在 
+<code>viewProviders</code> 数组中提供了带有狗 
+<code><span class="docs-emoji">🐶</span></code> 值的 
+<code>AnimalService</code>。因为注入器只需要查看 
+<code>&lt;app-child&gt;</code> 的 
+<code>ElementInjector</code> 中的 
+<code>AnimalService</code>，所以它永远不会看到鲸鱼 
+<code><span class="docs-emoji">🐳</span></code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="n8udpryhp9ehp51ie5ivwe5a">如同 
+<code>FlowerService</code> 示例，如果在 
+<code>AnimalService</code> 的构造函数中添加 
+<code>@SkipSelf()</code>，注入器不会在当前 
+<code>&lt;app-child&gt;</code> 的 
+<code>ElementInjector</code> 中查找 
+<code>AnimalService</code>。相反，注入器将从 
+<code>&lt;app-root&gt;</code> 的 
+<code>ElementInjector</code> 开始查找。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-child'</span>,</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">viewProviders</span>: [</div><div class="hljs-ln-line highlighted">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">AnimalService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🐶'</span> } },</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="29tlf3cio0pfv2n4v7ohaqci4">逻辑树在 
+<code>&lt;app-child&gt;</code> 中使用 
+<code>@SkipSelf()</code> 时看起来像这样：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">          @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">AnimalService</span>=&gt;"🐳")&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;<span class="hljs-comment">&lt;!-- search begins here --&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Provide(AnimalService="🐶")</div><div class="hljs-ln-line">             @Inject(AnimalService, SkipSelf=&gt;"🐳")&gt;</div><div class="hljs-ln-line">        <span class="hljs-comment">&lt;!--Add @SkipSelf --&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7afjbatkorxnmvzwnqfzyfziy">在 
+<code>&lt;app-child&gt;</code> 中使用 
+<code>@SkipSelf()</code> 时，注入器从 
+<code>&lt;app-root&gt;</code> 的 
+<code>ElementInjector</code> 开始查找 
+<code>AnimalService</code>，并找到鲸鱼 
+<code><span class="docs-emoji">🐳</span></code>。</p>
+
+  <h3 id="host-and-viewproviders">
+    <a href="#host-and-viewproviders" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@Host()</code> and <code>viewProviders</code>" data-ng_translator_product="100" data-ng_translator_ref_id="8vk2g9ueugly89ptrqld8cq9e"><code>@Host()</code> 和 
+<code>viewProviders</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="c040h8d96vuo2bbt4eivdyz8f">如果只是使用 
+<code>@Host()</code> 注入 
+<code>AnimalService</code>，结果是狗 
+<code><span class="docs-emoji">🐶</span></code>，因为注入器在 
+<code>&lt;app-child&gt;</code> 的 
+<code>&lt;#VIEW&gt;</code> 本身中找到了 
+<code>AnimalService</code>。
+<code>ChildComponent</code> 配置了 
+<code>viewProviders</code>，因此狗表情符号作为 
+<code>AnimalService</code> 值提供。你也可以在构造函数中看到 
+<code>@Host()</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span></div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-child'</span>,</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">viewProviders</span>: [</div><div class="hljs-ln-line highlighted">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">AnimalService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🐶'</span> } },</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Host</span>() <span class="hljs-keyword">public</span> animal: AnimalService</span>) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7n6wqaaume3zmd594i75di3s"><code>@Host()</code> 使注入器查找直到遇到 
+<code>&lt;#VIEW&gt;</code> 的边界。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">          @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">AnimalService</span>=&gt;"🐳")&gt;</div><div class="hljs-ln-line">  &lt;#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Provide(AnimalService="🐶")</div><div class="hljs-ln-line">             @Inject(AnimalService, @Host=&gt;"🐶")&gt; <span class="hljs-comment">&lt;!-- @Host stops search here --&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="bzzum757vq5aii1o202qjn916">在 
+<code>app.component.ts</code> 的 
+<code>@Component()</code> 元数据中添加一个包含第三种动物——刺猬 
+<code><span class="docs-emoji">🦔</span></code> 的 
+<code>viewProviders</code> 数组：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./app.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [ <span class="hljs-string">'./app.component.css'</span> ],</div><div class="hljs-ln-line">  <span class="hljs-attr">viewProviders</span>: [</div><div class="hljs-ln-line highlighted">    { <span class="hljs-attr">provide</span>: <span class="hljs-title class_">AnimalService</span>, <span class="hljs-attr">useValue</span>: { <span class="hljs-attr">emoji</span>: <span class="hljs-string">'🦔'</span> } },</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1rou4faloxk5xetccnc974mzz">接下来，添加 
+<code>@SkipSelf()</code> 和 
+<code>@Host()</code> 到 
+<code>child.component.ts</code> 中 
+<code>AnimalService</code> 注入的构造函数中。以下是 
+<code>@Host()</code> 和 
+<code>@SkipSelf()</code> 在 
+<code>&lt;app-child&gt;</code> 构造函数中的示例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line highlighted">    <span class="hljs-meta">@Host</span>() <span class="hljs-meta">@SkipSelf</span>() <span class="hljs-keyword">public</span> animal: AnimalService) { }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><!-- TODO: This requires a rework. It seems not well explained what `viewProviders`/`injectors` is here
+  and how `@Host()` works.
+ -->
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3iwi0w2kgbhxm744nyzmnzl58">当 
+<code>@Host()</code> 和 
+<code>@SkipSelf()</code> 应用于 
+<code>FlowerService</code>（位于 
+<code>providers</code> 数组中）时，结果是 
+<code>null</code>，因为 
+<code>@SkipSelf()</code> 从 
+<code>&lt;app-child&gt;</code> 注入器开始查找，而 
+<code>@Host()</code> 在 
+<code>&lt;#VIEW&gt;</code> 停止查找——在那里没有 
+<code>FlowerService</code>。在逻辑树中，你可以看到 
+<code>FlowerService</code> 在 
+<code>&lt;app-child&gt;</code> 中可见，而不是在其 
+<code>&lt;#VIEW&gt;</code> 中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="16ks27n97zbbhjlft8st8g4vg">不过，提供在 <code>AppComponent</code> 的 <code>viewProviders</code> 数组中的 <code>AnimalService</code>，是可见的。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="89c01wc1vq67185ooyeuh6mb2">逻辑树表示法说明了为何如此：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-root</span> @<span class="hljs-attr">ApplicationConfig</span></span></div><div class="hljs-ln-line">        @<span class="hljs-attr">Inject</span>(<span class="hljs-attr">AnimalService</span>=&gt;"🐳")&gt;</div><div class="hljs-ln-line">  &lt;#VIEW @Provide(AnimalService="🦔")</div><div class="hljs-ln-line">         @Inject(AnimalService, @Optional)=&gt;"🦔"&gt;</div><div class="hljs-ln-line">    <span class="hljs-comment">&lt;!-- ^^@SkipSelf() starts here,  @Host() stops here^^ --&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">      &lt;#VIEW @Provide(AnimalService="🐶")</div><div class="hljs-ln-line">             @Inject(AnimalService, @SkipSelf, @Host, @Optional)=&gt;"🦔"&gt;</div><div class="hljs-ln-line">               <span class="hljs-comment">&lt;!-- Add @SkipSelf ^^--&gt;</span></div><div class="hljs-ln-line">      &lt;/#VIEW&gt;</div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">app-child</span>&gt;</span></div><div class="hljs-ln-line">  &lt;/#VIEW&gt;</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="c0rcmiwfmg33ozguquvomf565"><code>@SkipSelf()</code> 使注入器从 
+<code>&lt;app-root&gt;</code> 开始查找 
+<code>AnimalService</code>，而不是从请求发起的 
+<code>&lt;app-child&gt;</code> 开始，并且 
+<code>@Host()</code> 在 
+<code>&lt;app-root&gt;</code> 的 
+<code>&lt;#VIEW&gt;</code> 停止查找。由于 
+<code>AnimalService</code> 通过 
+<code>viewProviders</code> 数组提供，注入器在 
+<code>&lt;#VIEW&gt;</code> 中找到了刺猬 
+<code><span class="docs-emoji">🦔</span></code>。</p>
+
+  <h2 id="example-elementinjector-use-cases">
+    <a href="#example-elementinjector-use-cases" class="docs-anchor" tabindex="-1" aria-label="Link to Example: <code>ElementInjector</code> use cases" data-ng_translator_product="100" data-ng_translator_ref_id="10gt6bby73c3ejsjgmvynpxfo">示例：
+<code>ElementInjector</code> 的使用场景</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="eykr2403bp4gtt4oh6y9sqy5y">在不同层级配置一个或多个提供者的能力带来了很多有用的可能性。</p>
+
+  <h3 id="scenario-service-isolation">
+    <a href="#scenario-service-isolation" class="docs-anchor" tabindex="-1" aria-label="Link to Scenario: service isolation" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aobumz97mlirkdbbqpjdtzt4j">场景：服务隔离</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="cwq6qa99l20hb0sad2b13kp7f">出于架构原因，你可能需要将服务的访问限制在其所属的应用领域。例如，考虑我们构建了一个 
+<code>VillainsListComponent</code> 来显示反派列表。它从 
+<code>VillainsService</code> 获取这些反派。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bhlsnir42qewfilllo4de7gsk">如果在根 
+<code>AppModule</code> 中提供 
+<code>VillainsService</code>，它将使 
+<code>VillainsService</code> 在应用的所有地方可见。如果你稍后修改 
+<code>VillainsService</code>，可能会破坏其他开始依赖此服务的组件。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eh5ywqb8p2c4f6toud022yt9h">相反，你应该在 
+<code>VillainsListComponent</code> 的 
+<code>providers</code> 元数据中提供 
+<code>VillainsService</code>，如下所示：</p>
+<div class="docs-code" header="src/app/villains-list.component.ts (metadata)">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="2s7pjui4nqj4pykrway9jem38">src/app/villains-list.component.ts (元数据)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-villains-list'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./villains-list.component.html'</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [<span class="hljs-title class_">VillainsService</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">VillainsListComponent</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d2a35ndxs17hkqjz5du7zsv02">在 <code>VillainsListComponent</code> 的元数据中而不是其它地方提供 <code>VillainsService</code> 服务，该服务就会只在 <code>VillainsListComponent</code> 及其子组件树中可用。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9q7dzv7qwd9xouq48sgg0yogx"><code>VillainService</code> 对于 <code>VillainsListComponent</code> 来说是单例的，因为它就是在这里声明的。只要 <code>VillainsListComponent</code> 没有销毁，它就始终是 <code>VillainService</code> 的同一个实例。但是对于 <code>VillainsListComponent</code> 的多个实例，每个 <code>VillainsListComponent</code> 的实例都会有自己的 <code>VillainService</code> 实例。</p>
+
+  <h3 id="scenario-multiple-edit-sessions">
+    <a href="#scenario-multiple-edit-sessions" class="docs-anchor" tabindex="-1" aria-label="Link to Scenario: multiple edit sessions" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2w92sf2uzrfd7wgusr5x22bfo">场景：多重编辑会话</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="820kruu1nf6ae68tg6qgoc13u">很多应用允许用户同时进行多个任务。比如，在纳税申报应用中，申报人可以打开多个报税单，随时可能从一个切换到另一个。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6f5yie9ot0xk6syeb8zel7wo9">为了演示这个场景，假设有一个 
+<code>HeroListComponent</code> 显示一组超级英雄。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2i9h71u2uocfeu4xzpx4khswy">要打开一个英雄的报税单，申报者点击英雄名，它就会打开一个组件来编辑那个申报单。每个选中的申报单都会在自己的组件中打开，并且可以同时打开多个申报单。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a7mhq0qmq3dndr8qhu8rnkjj3">每个报税单组件都有下列特征：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6nj47t1poyo0mbdehfkpdyzs3">属于它自己的报税单会话</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dgqm8tnjpbn0cy508zcfenlw2">可以修改一个报税单，而不会影响另一个组件中的申报单</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ttabqgzlwasvqzmnqiyuoqll">能把所做的修改保存到它的报税单中，或者放弃它们</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="697lr9cgkwtk703e66lvksg4t">假设 <code>HeroTaxReturnComponent</code> 还有一些管理并还原这些更改的逻辑。这对于简单的报税单来说是很容易的。不过，在现实世界中，报税单的数据模型非常复杂，对这些修改的管理可能不得不投机取巧。你可以把这种管理任务委托给一个辅助服务，就像这个例子中所做的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2x4sodg66dyahxaeerxpcs4wj"><code>HeroTaxReturnService</code> 缓存一个 
+<code>HeroTaxReturn</code>，跟踪此退税的更改，并可以保存或恢复它。它还委托给应用范围内的单例 
+<code>HeroService</code>，该服务通过注入获取。</p>
+<div class="docs-code" header="src/app/hero-tax-return.service.ts">
+    <div class="docs-code-header"><h3>src/app/hero-tax-return.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Injectable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HeroTaxReturn</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HeroesService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./heroes.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>()</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroTaxReturnService</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> currentTaxReturn!: <span class="hljs-title class_">HeroTaxReturn</span>;</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> originalTaxReturn!: <span class="hljs-title class_">HeroTaxReturn</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> heroService: HeroesService</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">set</span> <span class="hljs-title function_">taxReturn</span>(<span class="hljs-params">htr: HeroTaxReturn</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">originalTaxReturn</span> = htr;</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTaxReturn</span>  = htr.<span class="hljs-title function_">clone</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">get</span> <span class="hljs-title function_">taxReturn</span>(): <span class="hljs-title class_">HeroTaxReturn</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTaxReturn</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">restoreTaxReturn</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">taxReturn</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">originalTaxReturn</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">saveTaxReturn</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">taxReturn</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTaxReturn</span>;</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroService</span>.<span class="hljs-title function_">saveTaxReturn</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">currentTaxReturn</span>).<span class="hljs-title function_">subscribe</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b2h1war6f33s9aepvoko7kwy7">下面是正在使用 <code>HeroTaxReturnService</code> 的 <code>HeroTaxReturnComponent</code> 组件。</p>
+<div class="docs-code" header="src/app/hero-tax-return.component.ts">
+    <div class="docs-code-header"><h3>src/app/hero-tax-return.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">EventEmitter</span>, <span class="hljs-title class_">Input</span>, <span class="hljs-title class_">Output</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HeroTaxReturn</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HeroTaxReturnService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero-tax-return.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-hero-tax-return'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./hero-tax-return.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [ <span class="hljs-string">'./hero-tax-return.component.css'</span> ],</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [ <span class="hljs-title class_">HeroTaxReturnService</span> ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroTaxReturnComponent</span> {</div><div class="hljs-ln-line">  message = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-meta">@Output</span>() close = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">void</span>&gt;();</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">get</span> <span class="hljs-title function_">taxReturn</span>(): <span class="hljs-title class_">HeroTaxReturn</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroTaxReturnService</span>.<span class="hljs-property">taxReturn</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>()</div><div class="hljs-ln-line">  <span class="hljs-keyword">set</span> <span class="hljs-title function_">taxReturn</span>(<span class="hljs-params">htr: HeroTaxReturn</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroTaxReturnService</span>.<span class="hljs-property">taxReturn</span> = htr;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> heroTaxReturnService: HeroTaxReturnService</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">onCanceled</span>(<span class="hljs-params"></span>)  {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">flashMessage</span>(<span class="hljs-string">'Canceled'</span>);</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroTaxReturnService</span>.<span class="hljs-title function_">restoreTaxReturn</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">onClose</span>(<span class="hljs-params"></span>) { <span class="hljs-variable language_">this</span>.<span class="hljs-property">close</span>.<span class="hljs-title function_">emit</span>(); }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">onSaved</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">flashMessage</span>(<span class="hljs-string">'Saved'</span>);</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroTaxReturnService</span>.<span class="hljs-title function_">saveTaxReturn</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">flashMessage</span>(<span class="hljs-params">msg: <span class="hljs-built_in">string</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">message</span> = msg;</div><div class="hljs-ln-line">    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">message</span> = <span class="hljs-string">''</span>, <span class="hljs-number">500</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="cgt2tw8cay52srv9d4rbfqcs2"><em>tax-return-to-edit</em> 通过 
+<code>@Input()</code> 属性传入，该属性通过 getter 和 setter 实现。 setter 使用传入的报税表初始化组件自身的 
+<code>HeroTaxReturnService</code> 实例。 getter 总是返回该服务所说的当前英雄状态。 组件还会要求服务保存和恢复这个报税表。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a2kkssg3617r4icsro99enq2y">但如果该服务是一个全应用范围的单例就不行了。每个组件就都会共享同一个服务实例，每个组件也都会覆盖属于其它英雄的报税单。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cxi5ufskbtb214jcnzdfleh41">为了防止这种情况，配置 
+<code>HeroTaxReturnComponent</code> 的组件级注入器，通过组件元数据中的 
+<code>providers</code> 属性提供该服务。</p>
+<div class="docs-code" header="src/app/hero-tax-return.component.ts (providers)">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="1ksb25el5ogip3s9pi61lcsck">src/app/hero-tax-return.component.ts (提供者)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [<span class="hljs-title class_">HeroTaxReturnService</span>]</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ddsnvowdgdnyjfxyhp91ji0es"><code>HeroTaxReturnComponent</code> 有它自己的 <code>HeroTaxReturnService</code> 提供者。
+回忆一下，每个组件的<em>实例</em>都有它自己的注入器。
+在组件级提供服务可以确保组件的<em>每个</em>实例都得到一个自己的、私有的服务实例。这可以确保报税单不会被意外覆盖。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7sa0j78ds4i07ijabg932c1sn"><strong>提示：</strong>场景代码的其余部分依赖于其他 Angular 特性和技术，你可以在文档的其他地方学习这些内容。</p>
+
+    </div>
+    
+  <h3 id="scenario-specialized-providers">
+    <a href="#scenario-specialized-providers" class="docs-anchor" tabindex="-1" aria-label="Link to Scenario: specialized providers" data-ng_translator_product="100" data-ng_translator_ref_id="bu80yjgzs1u1i4uljokemu1j1">场景：专用提供者</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="arr0fm3ajeat8lz75cjdzynn2">在其它层级重新提供服务的另一个理由，是在组件树的深层中把该服务替换为一个<em>更专门化的</em>实现。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6zuytvfcjc56r2ppjp943a2h6">例如，考虑一个包含轮胎服务信息并依赖其它服务来提供有关汽车的更多详细信息的 <code>Car</code> 组件。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1tpvxgjgyyvzawpq2ydp8wl7v">标记为 （A） 的根注入器使用<em>通用</em>提供者来获取有关 <code>CarService</code> 和 <code>EngineService</code> 的详细信息。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="auowlkicmf2u5ycgaz1d6me5j"><code>Car</code> 组件（A）。组件 （A） 显示有关汽车的轮胎服务数据，并指定通用服务以提供有关汽车的更多信息。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a4az5ykiohmgidwj4tzuq3v9y">子组件（B）。组件（B）为 <code>CarService</code> 和 <code>EngineService</code> 定义了自己的<em>特化的</em>提供者，它们具有适合组件 （B） 中发生的事情的特殊能力。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7kbvdey8i2i8oo27tl426l3wh">子组件（C）作为组件（B）的子组件。组件 （C） 为 <code>CarService</code> 定义了自己的、<em>更加特化</em>的提供者。</p>
+</li>
+
+    </ol>
+    <svg aria-roledescription="flowchart-v2" role="graphics-document document" viewbox="-7.5 -8 249.71875 169" style="max-width: 249.71875px;" xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid-generated-diagram"><style>#mermaid-generated-diagram{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#mermaid-generated-diagram .error-icon{fill:hsl(220.5882352941, 100%, 98.3333333333%);}#mermaid-generated-diagram .error-text{fill:rgb(8.5000000002, 5.7500000001, 0);stroke:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram .edge-thickness-normal{stroke-width:2px;}#mermaid-generated-diagram .edge-thickness-thick{stroke-width:3.5px;}#mermaid-generated-diagram .edge-pattern-solid{stroke-dasharray:0;}#mermaid-generated-diagram .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-generated-diagram .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-generated-diagram .marker{fill:#0b0b0b;stroke:#0b0b0b;}#mermaid-generated-diagram .marker.cross{stroke:#0b0b0b;}#mermaid-generated-diagram svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-generated-diagram .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#mermaid-generated-diagram .cluster-label text{fill:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram .cluster-label span,#mermaid-generated-diagram p{color:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram .label text,#mermaid-generated-diagram span,#mermaid-generated-diagram p{fill:#333;color:#333;}#mermaid-generated-diagram .node rect,#mermaid-generated-diagram .node circle,#mermaid-generated-diagram .node ellipse,#mermaid-generated-diagram .node polygon,#mermaid-generated-diagram .node path{fill:#fff4dd;stroke:hsl(40.5882352941, 60%, 83.3333333333%);stroke-width:1px;}#mermaid-generated-diagram .flowchart-label text{text-anchor:middle;}#mermaid-generated-diagram .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-generated-diagram .node .label{text-align:center;}#mermaid-generated-diagram .node.clickable{cursor:pointer;}#mermaid-generated-diagram .arrowheadPath{fill:#0b0b0b;}#mermaid-generated-diagram .edgePath .path{stroke:#0b0b0b;stroke-width:2.0px;}#mermaid-generated-diagram .flowchart-link{stroke:#0b0b0b;fill:none;}#mermaid-generated-diagram .edgeLabel{background-color:hsl(-79.4117647059, 100%, 93.3333333333%);text-align:center;}#mermaid-generated-diagram .edgeLabel rect{opacity:0.5;background-color:hsl(-79.4117647059, 100%, 93.3333333333%);fill:hsl(-79.4117647059, 100%, 93.3333333333%);}#mermaid-generated-diagram .labelBkg{background-color:rgba(243.9999999999, 220.9999999998, 255, 0.5);}#mermaid-generated-diagram .cluster rect{fill:hsl(220.5882352941, 100%, 98.3333333333%);stroke:hsl(220.5882352941, 60%, 88.3333333333%);stroke-width:1px;}#mermaid-generated-diagram .cluster text{fill:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram .cluster span,#mermaid-generated-diagram p{color:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(220.5882352941, 100%, 98.3333333333%);border:1px solid hsl(220.5882352941, 60%, 88.3333333333%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-generated-diagram .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#mermaid-generated-diagram :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#mermaid-generated-diagram .noShadow&gt;*{filter:none!important;}#mermaid-generated-diagram .noShadow span{filter:none!important;}</style><g><marker orient="auto" markerheight="12" markerwidth="12" markerunits="userSpaceOnUse" refy="5" refx="6" viewbox="0 0 10 10" class="marker flowchart" id="mermaid-generated-diagram_flowchart-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerheight="12" markerwidth="12" markerunits="userSpaceOnUse" refy="5" refx="4.5" viewbox="0 0 10 10" class="marker flowchart" id="mermaid-generated-diagram_flowchart-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5" refx="11" viewbox="0 0 10 10" class="marker flowchart" id="mermaid-generated-diagram_flowchart-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5" refx="-1" viewbox="0 0 10 10" class="marker flowchart" id="mermaid-generated-diagram_flowchart-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5.2" refx="12" viewbox="0 0 11 11" class="marker cross flowchart" id="mermaid-generated-diagram_flowchart-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5.2" refx="-1" viewbox="0 0 11 11" class="marker cross flowchart" id="mermaid-generated-diagram_flowchart-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(-7.5, -8)" class="root"><g class="clusters"><g id="COMPONENT_A" class="cluster noShadow noShadow flowchart-label"><rect height="153" width="233.71875" y="8" x="8" ry="0" rx="0" style="fill:#BDD7EE;"></rect><g transform="translate(76.3828125, 8)" class="cluster-label"><foreignobject height="18" width="96.953125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">Component A</span></div></foreignobject></g></g></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(35.5, 25)" class="root"><g class="clusters"><g id="COMPONENT_B" class="cluster noShadow noShadow flowchart-label"><rect height="103" width="163.71875" y="8" x="8" ry="0" rx="0" style="fill:#FFE699;"></rect><g transform="translate(40.9375, 8)" class="cluster-label"><foreignobject height="18" width="97.84375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">Component B</span></div></foreignobject></g></g></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(89.859375, 59.5)" data-id="COMPONENT_C" data-node="true" id="flowchart-COMPONENT_C-0" class="node default noShadow flowchart-label"><rect height="33" width="113.71875" y="-16.5" x="-56.859375" ry="0" rx="0" style="fill:#A9D18E;" class="basic label-container"></rect><g transform="translate(-49.359375, -9)" style="color:#000;" class="label"><rect></rect><foreignobject height="18" width="98.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="color: rgb(0, 0, 0); display: inline-block; white-space: nowrap;"><span style="color:#000;" class="nodeLabel">Component C</span></div></foreignobject></g></g></g></g></g></g></g></g></g></svg><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d3e7wcdupc8jgdgeojkhgbedf">在幕后，每个组件都有自己的注入器，这个注入器带有为组件本身准备的 0 个、1 个或多个提供者。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="22yep9bjdvt45m4qpuqqquvau">当你在最深的组件 （C） 处解析 <code>Car</code> 实例时，其注入器会生成：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e7uir5v27f1uvu9jy5wtgkupe">由注入器 （C） 解析的 <code>Car</code> 实例</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="er92vwvtvfe726tg4sb9mbn9y">由注入器 （B） 解析的 <code>Engine</code></li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9h7bk7bbjsm9nbyq9vjjf50wt">它的 <code>Tires</code> 由根注入器 （A） 解析。</li>
+
+  </ul>
+  <svg aria-roledescription="flowchart-v2" role="graphics-document document" viewbox="-8 -8 572.828125 448" style="max-width: 572.828125px;" xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid-generated-diagram"><style>#mermaid-generated-diagram{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#mermaid-generated-diagram .error-icon{fill:hsl(220.5882352941, 100%, 98.3333333333%);}#mermaid-generated-diagram .error-text{fill:rgb(8.5000000002, 5.7500000001, 0);stroke:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram .edge-thickness-normal{stroke-width:2px;}#mermaid-generated-diagram .edge-thickness-thick{stroke-width:3.5px;}#mermaid-generated-diagram .edge-pattern-solid{stroke-dasharray:0;}#mermaid-generated-diagram .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-generated-diagram .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-generated-diagram .marker{fill:#0b0b0b;stroke:#0b0b0b;}#mermaid-generated-diagram .marker.cross{stroke:#0b0b0b;}#mermaid-generated-diagram svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-generated-diagram .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#mermaid-generated-diagram .cluster-label text{fill:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram .cluster-label span,#mermaid-generated-diagram p{color:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram .label text,#mermaid-generated-diagram span,#mermaid-generated-diagram p{fill:#333;color:#333;}#mermaid-generated-diagram .node rect,#mermaid-generated-diagram .node circle,#mermaid-generated-diagram .node ellipse,#mermaid-generated-diagram .node polygon,#mermaid-generated-diagram .node path{fill:#fff4dd;stroke:hsl(40.5882352941, 60%, 83.3333333333%);stroke-width:1px;}#mermaid-generated-diagram .flowchart-label text{text-anchor:middle;}#mermaid-generated-diagram .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-generated-diagram .node .label{text-align:center;}#mermaid-generated-diagram .node.clickable{cursor:pointer;}#mermaid-generated-diagram .arrowheadPath{fill:#0b0b0b;}#mermaid-generated-diagram .edgePath .path{stroke:#0b0b0b;stroke-width:2.0px;}#mermaid-generated-diagram .flowchart-link{stroke:#0b0b0b;fill:none;}#mermaid-generated-diagram .edgeLabel{background-color:hsl(-79.4117647059, 100%, 93.3333333333%);text-align:center;}#mermaid-generated-diagram .edgeLabel rect{opacity:0.5;background-color:hsl(-79.4117647059, 100%, 93.3333333333%);fill:hsl(-79.4117647059, 100%, 93.3333333333%);}#mermaid-generated-diagram .labelBkg{background-color:rgba(243.9999999999, 220.9999999998, 255, 0.5);}#mermaid-generated-diagram .cluster rect{fill:hsl(220.5882352941, 100%, 98.3333333333%);stroke:hsl(220.5882352941, 60%, 88.3333333333%);stroke-width:1px;}#mermaid-generated-diagram .cluster text{fill:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram .cluster span,#mermaid-generated-diagram p{color:rgb(8.5000000002, 5.7500000001, 0);}#mermaid-generated-diagram div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(220.5882352941, 100%, 98.3333333333%);border:1px solid hsl(220.5882352941, 60%, 88.3333333333%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-generated-diagram .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#mermaid-generated-diagram :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker orient="auto" markerheight="12" markerwidth="12" markerunits="userSpaceOnUse" refy="5" refx="6" viewbox="0 0 10 10" class="marker flowchart" id="mermaid-generated-diagram_flowchart-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerheight="12" markerwidth="12" markerunits="userSpaceOnUse" refy="5" refx="4.5" viewbox="0 0 10 10" class="marker flowchart" id="mermaid-generated-diagram_flowchart-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5" refx="11" viewbox="0 0 10 10" class="marker flowchart" id="mermaid-generated-diagram_flowchart-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5" refx="-1" viewbox="0 0 10 10" class="marker flowchart" id="mermaid-generated-diagram_flowchart-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5.2" refx="12" viewbox="0 0 11 11" class="marker cross flowchart" id="mermaid-generated-diagram_flowchart-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerheight="11" markerwidth="11" markerunits="userSpaceOnUse" refy="5.2" refx="-1" viewbox="0 0 11 11" class="marker cross flowchart" id="mermaid-generated-diagram_flowchart-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"><g id="C" class="cluster noShadow flowchart-label"><rect height="83" width="353.625" y="266" x="4.8984375" ry="0" rx="0" style=""></rect><g transform="translate(181.7109375, 266)" class="cluster-label"><foreignobject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"></span></div></foreignobject></g></g><g id="B" class="cluster noShadow flowchart-label"><rect height="83" width="484.390625" y="133" x="0" ry="0" rx="0" style=""></rect><g transform="translate(242.1953125, 133)" class="cluster-label"><foreignobject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"></span></div></foreignobject></g></g><g id="A" class="cluster noShadow flowchart-label"><rect height="83" width="550.15625" y="0" x="6.671875" ry="0" rx="0" style=""></rect><g transform="translate(281.75, 0)" class="cluster-label"><foreignobject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"></span></div></foreignobject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid-generated-diagram_flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-car LE-ChildInjector" id="L-car-ChildInjector-0" d="M105.195,399L105.195,394.833C105.195,390.667,105.195,382.333,105.195,374C105.195,365.667,105.195,357.333,105.195,349.883C105.195,342.433,105.195,335.867,105.195,332.583L105.195,329.3"></path><path marker-end="url(#mermaid-generated-diagram_flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-ChildInjector LE-ParentInjector" id="L-ChildInjector-ParentInjector-0" d="M105.195,291L105.195,286.833C105.195,282.667,105.195,274.333,105.195,266C105.195,257.667,105.195,249.333,105.195,241C105.195,232.667,105.195,224.333,105.195,216.883C105.195,209.433,105.195,202.867,105.195,199.583L105.195,196.3"></path><path marker-end="url(#mermaid-generated-diagram_flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-ParentInjector LE-RootInjector" id="L-ParentInjector-RootInjector-0" d="M105.195,158L105.195,153.833C105.195,149.667,105.195,141.333,105.195,133C105.195,124.667,105.195,116.333,105.195,108C105.195,99.667,105.195,91.333,105.195,83.883C105.195,76.433,105.195,69.867,105.195,66.583L105.195,63.3"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignobject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignobject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignobject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignobject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignobject height="0" width="0"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignobject></g></g></g><g class="nodes"><g transform="translate(105.1953125, 307.5)" data-id="ChildInjector" data-node="true" id="flowchart-ChildInjector-4" class="node default noShadow flowchart-label"><rect height="33" width="130.59375" y="-16.5" x="-65.296875" ry="0" rx="0" style="fill:#A9D18E;" class="basic label-container"></rect><g transform="translate(-57.796875, -9)" style="color:#000;" class="label"><rect></rect><foreignobject height="18" width="115.59375"><div xmlns="http://www.w3.org/1999/xhtml" style="color: rgb(0, 0, 0); display: inline-block; white-space: nowrap;"><span style="color:#000;" class="nodeLabel">(C) ChildInjector</span></div></foreignobject></g></g><g transform="translate(272.0078125, 307.5)" data-id="ServicesC" data-node="true" id="flowchart-ServicesC-5" class="node default noShadow flowchart-label"><rect height="33" width="103.03125" y="-16.5" x="-51.515625" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-44.015625, -9)" style="" class="label"><rect></rect><foreignobject height="18" width="88.03125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">CarService3</span></div></foreignobject></g></g><g transform="translate(105.1953125, 174.5)" data-id="ParentInjector" data-node="true" id="flowchart-ParentInjector-2" class="node default noShadow flowchart-label"><rect height="33" width="140.390625" y="-16.5" x="-70.1953125" ry="0" rx="0" style="fill:#FFE699;" class="basic label-container"></rect><g transform="translate(-62.6953125, -9)" style="color:#000;" class="label"><rect></rect><foreignobject height="18" width="125.390625"><div xmlns="http://www.w3.org/1999/xhtml" style="color: rgb(0, 0, 0); display: inline-block; white-space: nowrap;"><span style="color:#000;" class="nodeLabel">(B) ParentInjector</span></div></foreignobject></g></g><g transform="translate(337.390625, 174.5)" data-id="ServicesB" data-node="true" id="flowchart-ServicesB-3" class="node default noShadow flowchart-label"><rect height="33" width="224" y="-16.5" x="-112" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-104.5, -9)" style="" class="label"><rect></rect><foreignobject height="18" width="209"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">CarService2, EngineService2</span></div></foreignobject></g></g><g transform="translate(105.1953125, 41.5)" data-id="RootInjector" data-node="true" id="flowchart-RootInjector-0" class="node default noShadow flowchart-label"><rect height="33" width="127.046875" y="-16.5" x="-63.5234375" ry="0" rx="0" style="fill:#BDD7EE;" class="basic label-container"></rect><g transform="translate(-56.0234375, -9)" style="color:#000;" class="label"><rect></rect><foreignobject height="18" width="112.046875"><div xmlns="http://www.w3.org/1999/xhtml" style="color: rgb(0, 0, 0); display: inline-block; white-space: nowrap;"><span style="color:#000;" class="nodeLabel">(A) RootInjector</span></div></foreignobject></g></g><g transform="translate(370.2734375, 41.5)" data-id="ServicesA" data-node="true" id="flowchart-ServicesA-1" class="node default noShadow flowchart-label"><rect height="33" width="303.109375" y="-16.5" x="-151.5546875" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-144.0546875, -9)" style="" class="label"><rect></rect><foreignobject height="18" width="288.109375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">CarService, EngineService, TiresService</span></div></foreignobject></g></g><g transform="translate(105.1953125, 415.5)" data-id="car" data-node="true" id="flowchart-car-6" class="node default noShadow flowchart-label"><rect height="33" width="67.4375" y="-16.5" x="-33.71875" ry="0" rx="0" style="fill:#A9D18E;" class="basic label-container"></rect><g transform="translate(-26.21875, -9)" style="color:#000;" class="label"><rect></rect><foreignobject height="18" width="52.4375"><div xmlns="http://www.w3.org/1999/xhtml" style="color: rgb(0, 0, 0); display: inline-block; white-space: nowrap;"><span style="color:#000;" class="nodeLabel">(C) Car</span></div></foreignobject></g></g><g transform="translate(234.2109375, 415.5)" data-id="engine" data-node="true" id="flowchart-engine-7" class="node default noShadow flowchart-label"><rect height="33" width="90.59375" y="-16.5" x="-45.296875" ry="0" rx="0" style="fill:#FFE699;" class="basic label-container"></rect><g transform="translate(-37.796875, -9)" style="color:#000;" class="label"><rect></rect><foreignobject height="18" width="75.59375"><div xmlns="http://www.w3.org/1999/xhtml" style="color: rgb(0, 0, 0); display: inline-block; white-space: nowrap;"><span style="color:#000;" class="nodeLabel">(B) Engine</span></div></foreignobject></g></g><g transform="translate(367.234375, 415.5)" data-id="tires" data-node="true" id="flowchart-tires-8" class="node default noShadow flowchart-label"><rect height="33" width="75.453125" y="-16.5" x="-37.7265625" ry="0" rx="0" style="fill:#BDD7EE;" class="basic label-container"></rect><g transform="translate(-30.2265625, -9)" style="color:#000;" class="label"><rect></rect><foreignobject height="18" width="60.453125"><div xmlns="http://www.w3.org/1999/xhtml" style="color: rgb(0, 0, 0); display: inline-block; white-space: nowrap;"><span style="color:#000;" class="nodeLabel">(A) Tires</span></div></foreignobject></g></g></g></g></g></svg>
+  <h2 id="more-on-dependency-injection">
+    <a href="#more-on-dependency-injection" class="docs-anchor" tabindex="-1" aria-label="Link to More on dependency injection" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4r394oxtaippr99nlg58bkq34">关于依赖注入的更多知识</a>
+  </h2>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="/guide/di/dependency-injection-providers" data-ng_translator_product="100" data-ng_translator_ref_id="2dz733alb8lh45mk0fp25y3wz">依赖注入提供者</a>
+    
+
+    </nav>
+    

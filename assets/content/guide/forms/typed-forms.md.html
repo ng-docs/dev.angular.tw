@@ -1,0 +1,200 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="175jtor9ctchmei8ajglnlv07">类型化表单</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/forms/typed-forms.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6hurgupejyhzz46qvyddgx6ws">从 Angular 14 开始，响应式表单默认是严格类型的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="exr17xo3whrrc1zamhjbdp5m1">作为本指南的背景知识，你应当已经熟悉
+<a href="guide/forms/reactive-forms">Angular 响应式表单</a>。</p>
+
+  <h2 id="overview-of-typed-forms">
+    <a href="#overview-of-typed-forms" class="docs-anchor" tabindex="-1" aria-label="Link to Overview of Typed Forms" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="egd6w8t4042jhomymsq925emk">类型化表单概览</a>
+  </h2>
+  
+    <div class="docs-video-container">
+      <iframe class="docs-video" src="https://www.youtube.com/embed/L-odCf4MfJc" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless title="Video player"></iframe>
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="24orea3n2d4rbjpod82jdhr2o">使用 Angular 响应式表单，你可以显式指定<em>表单模型</em>。作为一个简单的例子，考虑这个基本的用户登录表单：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> login = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormGroup</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">    <span class="hljs-attr">password</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="346ofdya06d28jgndh6dh6cb">Angular 提供了许多与此 
+<code>FormGroup</code> 交互的 API。例如，你可以调用 
+<code>login.value</code>、
+<code>login.controls</code>、
+<code>login.patchValue</code> 等等。（完整的 API 参考请参见 
+<a href="api/forms/FormGroup">API 文档</a>。）</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ws75x6np47xa9xau00oabh4w">在以前的 Angular 版本中，这些 API 中的大多数都在其类型中的某处包含 <code>any</code>，并且与控件结构或值本身的交互不是类型安全的。例如：你可以编写以下无效代码：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> emailDomain = login.<span class="hljs-property">value</span>.<span class="hljs-property">email</span>.<span class="hljs-property">domain</span>;</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5ebvj7vqya8rakkieqveo0l5q">对于严格类型的响应式表单，上述代码无法编译，因为 
+<code>email</code> 上没有 
+<code>domain</code> 属性。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="alecsnckuqbm49g8okmssvfe0">除了增加安全性之外，这些类型还支持各种其他改进，例如 IDE 中更好的自动完成，以及显式指定表单结构的方式。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9jvm3ml9gyxbpmggorv575en8">这些改进目前仅适用于
+<em>响应式</em>表单（不适用于 
+<a href="guide/forms/template-driven-forms"><em>模板驱动</em>表单</a>）。</p>
+
+  <h2 id="untyped-forms">
+    <a href="#untyped-forms" class="docs-anchor" tabindex="-1" aria-label="Link to Untyped Forms" data-ng_translator_product="100" data-ng_translator_ref_id="4vy5x9oo09wbhen037yqsm1lz">非类型化表单</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="aphfm9g8d4opyxbdgjsle1dht">非类型化表单仍然受支持，并且会继续如往常一样工作。要使用它们，你必须从 
+<code>@angular/forms</code> 中导入 
+<code>Untyped</code> 符号：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> login = <span class="hljs-keyword">new</span> <span class="hljs-title class_">UntypedFormGroup</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">UntypedFormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">    <span class="hljs-attr">password</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">UntypedFormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="by56v1paj93np8jdhu7zcl55e">每个 
+<code>Untyped</code> 符号的语义与之前的 Angular 版本完全相同。通过去掉 
+<code>Untyped</code> 前缀，你可以逐步启用这些类型。</p>
+
+  <h2 id="formcontrol-getting-started">
+    <a href="#formcontrol-getting-started" class="docs-anchor" tabindex="-1" aria-label="Link to <code>FormControl</code>: Getting Started" data-ng_translator_product="100" data-ng_translator_ref_id="3fdab8ldgcg5oj9noug2yhvwt"><code>FormControl</code>：快速入门</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dkz3b24otzsfp6qqc6iuo6gox">最简单的表单由单个控件组成：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> email = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">'angularrox@gmail.com'</span>);</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="8dht8dvg9sngj65tdttsjuhoy">此控件将被自动推断为类型 
+<code>FormControl&lt;string|null&gt;</code>。TypeScript 将在整个 
+<a href="api/forms/FormControl"><code>FormControl</code> API</a> 中自动强制执行此类型，例如 
+<code>email.value</code>、
+<code>email.valueChanges</code>、
+<code>email.setValue(...)</code> 等等。</p>
+
+  <h3 id="nullability">
+    <a href="#nullability" class="docs-anchor" tabindex="-1" aria-label="Link to Nullability" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="kgd2h0rvg7onaehvqwmq765e">可空性</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3b1au1jeo6zyq1oicup9gafo3">你可能想知道：为什么此控件的类型包含 <code>null</code> ？这是因为控件可以随时通过调用 reset 变为 <code>null</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> email = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">'angularrox@gmail.com'</span>);</div><div class="hljs-ln-line">email.<span class="hljs-title function_">reset</span>();</div><div class="hljs-ln-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(email.<span class="hljs-property">value</span>); <span class="hljs-comment">// null</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="am8asgd58iggyemxg21p4f0mp">TypeScript 将强制你始终处理控件已变为 <code>null</code> 的可能性。如果要使此控件不可为空，可以用 <code>nonNullable</code> 选项。这将导致控件重置为其初始值，而不是 <code>null</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> email = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">'angularrox@gmail.com'</span>, {<span class="hljs-attr">nonNullable</span>: <span class="hljs-literal">true</span>});</div><div class="hljs-ln-line">email.<span class="hljs-title function_">reset</span>();</div><div class="hljs-ln-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(email.<span class="hljs-property">value</span>); <span class="hljs-comment">// angularrox@gmail.com</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2dek6ampjj0jd5hi0ge9nm18g">重申一下，此选项会在调用 <code>.reset()</code> 时影响表单的运行时行为，应小心翻转。</p>
+
+  <h3 id="specifying-an-explicit-type">
+    <a href="#specifying-an-explicit-type" class="docs-anchor" tabindex="-1" aria-label="Link to Specifying an Explicit Type" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="arg7huqkaaqwn04mks3v9gi93">指定显式类型</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="985h29hxk3wflohgn8zny2y48">可以指定类型，而不是依赖推断。考虑一个初始化为 
+<code>null</code> 的控件。因为初始值是 
+<code>null</code>，TypeScript 会推断为 
+<code>FormControl&lt;null&gt;</code>，这比我们想要的更狭窄。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> email = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-literal">null</span>);</div><div class="hljs-ln-line">email.<span class="hljs-title function_">setValue</span>(<span class="hljs-string">'angularrox@gmail.com'</span>); <span class="hljs-comment">// Error!</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="46ne9y7d11p72svkeyq5lhig8">为防止这种情况，我们将类型显式指定为 <code>string|null</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> email = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>&lt;<span class="hljs-built_in">string</span>|<span class="hljs-literal">null</span>&gt;(<span class="hljs-literal">null</span>);</div><div class="hljs-ln-line">email.<span class="hljs-title function_">setValue</span>(<span class="hljs-string">'angularrox@gmail.com'</span>);</div></code>
+    </pre>
+  </div>
+  <h2 id="formarray-dynamic-homogenous-collections">
+    <a href="#formarray-dynamic-homogenous-collections" class="docs-anchor" tabindex="-1" aria-label="Link to <code>FormArray</code>: Dynamic, Homogenous Collections" data-ng_translator_product="100" data-ng_translator_ref_id="9u3wj00lb49nsqrrdzej7brtz"><code>FormArray</code>：动态、同质集合</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="abohyybwqdubaqk0zcstr3p6t">一个 
+<code>FormArray</code> 包含一个开放式的控件列表。类型参数对应于每个内部控件的类型：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> names = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormArray</span>([<span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">'Alex'</span>)]);</div><div class="hljs-ln-line">names.<span class="hljs-title function_">push</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">'Jess'</span>));</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1rtqz9rbgqoebk8feipjajz5r">此 
+<code>FormArray</code> 将具有内部控件类型 
+<code>FormControl&lt;string|null&gt;</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dj7b17j6pae4pcyfkufnqvt1h">如果你想在数组中包含多种不同的元素类型，必须使用 
+<code>UntypedFormArray</code>，因为 TypeScript 无法推断哪个元素类型将出现在哪个位置。</p>
+
+  <h2 id="formgroup-and-formrecord">
+    <a href="#formgroup-and-formrecord" class="docs-anchor" tabindex="-1" aria-label="Link to <code>FormGroup</code> and <code>FormRecord</code>" data-ng_translator_product="100" data-ng_translator_ref_id="4bjjy7o34sr969e7dnjcu2snn"><code>FormGroup</code> 和 
+<code>FormRecord</code></a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5zx5s62qizj7bd2kn0sdk00pa">Angular 提供了 
+<code>FormGroup</code> 类型用于具有枚举键的表单，以及一种称为 
+<code>FormRecord</code> 的类型，用于开放式或动态组。</p>
+
+  <h3 id="partial-values">
+    <a href="#partial-values" class="docs-anchor" tabindex="-1" aria-label="Link to Partial Values" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eo94hfug64lgcdlxirspew51e">部分值</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9wb9lhqxsaqprpj7k22w60yup">再次考虑一个登录表单：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> login = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormGroup</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>, {<span class="hljs-attr">nonNullable</span>: <span class="hljs-literal">true</span>}),</div><div class="hljs-ln-line">    <span class="hljs-attr">password</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>, {<span class="hljs-attr">nonNullable</span>: <span class="hljs-literal">true</span>}),</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dfbl7cmlayylfundzqu4pbq2r">在任何 
+<code>FormGroup</code> 上，
+<a href="api/forms/FormGroup">可以禁用控件</a>。任何已禁用的控件将不会出现在该组的值中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4ewechzftbcr3xlldogiv24vf">因此，
+<code>login.value</code> 的类型是 
+<code>Partial&lt;{email: string, password: string}&gt;</code>。此类型中的 
+<code>Partial</code> 意味着每个成员可能是未定义的。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bntzykgi9khu0gafgp04fsv43">更具体地说，<code>login.value.email</code> 的类型是 <code>string|undefined</code>，TypeScript 将强制你处理可能 <code>undefined</code> 的值（如果你启用了 <code>strictNullChecks</code>）。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4bhwsth85m6s8lwqzgl4p5zku">如果你想访问<em>包括</em>禁用控件的值，从而绕过可能的 <code>undefined</code> 字段，可以用 <code>login.getRawValue()</code>。</p>
+
+  <h3 id="optional-controls-and-dynamic-groups">
+    <a href="#optional-controls-and-dynamic-groups" class="docs-anchor" tabindex="-1" aria-label="Link to Optional Controls and Dynamic Groups" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c8m7j56pql33ve8v3d3pkcycv">可选控件和动态组</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d40wzg1mqx54rrg56zm7wlsmg">某些表单的控件可能存在也可能不存在，可以在运行时添加和删除。你可以用<em>可选字段</em>来表示这些控件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">LoginForm</span> {</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-title class_">FormControl</span>&lt;<span class="hljs-built_in">string</span>&gt;;</div><div class="hljs-ln-line">    password?: <span class="hljs-title class_">FormControl</span>&lt;<span class="hljs-built_in">string</span>&gt;;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> login = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormGroup</span>&lt;<span class="hljs-title class_">LoginForm</span>&gt;({</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>, {<span class="hljs-attr">nonNullable</span>: <span class="hljs-literal">true</span>}),</div><div class="hljs-ln-line">    <span class="hljs-attr">password</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>, {<span class="hljs-attr">nonNullable</span>: <span class="hljs-literal">true</span>}),</div><div class="hljs-ln-line">});</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">login.<span class="hljs-title function_">removeControl</span>(<span class="hljs-string">'password'</span>);</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="14tbqevg6im62b7apyos0g1dg">在这个表单中，我们明确地指定了类型，这使我们可以将 <code>password</code> 控件设为可选的。TypeScript 会强制只有可选控件才能被添加或删除。</p>
+
+  <h3 id="formrecord">
+    <a href="#formrecord" class="docs-anchor" tabindex="-1" aria-label="Link to <code>FormRecord</code>"><code>FormRecord</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="cwgg7y4szcprjboeqpvgnav58">某些 
+<code>FormGroup</code> 的使用不符合上述模式，因为键是事先未知的。
+<code>FormRecord</code> 类是为这种情况设计的：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> addresses = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormRecord</span>&lt;<span class="hljs-title class_">FormControl</span>&lt;<span class="hljs-built_in">string</span>|<span class="hljs-literal">null</span>&gt;&gt;({});</div><div class="hljs-ln-line">addresses.<span class="hljs-title function_">addControl</span>(<span class="hljs-string">'Andrew'</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">'2340 Folsom St'</span>));</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4plaede9zzdava6jj3psoqmnl">任何类型为 
+<code>string|null</code> 的控件都可以添加到此 
+<code>FormRecord</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2ufvehf70do2wmnklqoxo2mam">如果你需要一个既是动态的（开放式的）又是异构的（控件类型不同）
+<code>FormGroup</code>，则无法实现改进的类型安全，你应使用 
+<code>UntypedFormGroup</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5m31xko4j3e9ru34jni0ofxa1"><code>FormRecord</code> 也可以通过 
+<code>FormBuilder</code> 构建：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> addresses = fb.<span class="hljs-title function_">record</span>({<span class="hljs-string">'Andrew'</span>: <span class="hljs-string">'2340 Folsom St'</span>});</div></code>
+    </pre>
+  </div>
+  <h2 id="formbuilder-and-nonnullableformbuilder">
+    <a href="#formbuilder-and-nonnullableformbuilder" class="docs-anchor" tabindex="-1" aria-label="Link to <code>FormBuilder</code> and <code>NonNullableFormBuilder</code>" data-ng_translator_product="100" data-ng_translator_ref_id="47ft74hgibyumfblg7kmptalz"><code>FormBuilder</code> 和 
+<code>NonNullableFormBuilder</code></a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="19ryrh1g64zvftv5c76m8ly1g"><code>FormBuilder</code> 类也已升级以支持新类型，与上述示例的方式相同。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a3ba89tmf8buwbuk33ejt1fng">此外，还有一个额外的构建器：
+<code>NonNullableFormBuilder</code>。此类型是为每个控件指定 
+<code>{nonNullable: true}</code> 的简写，可以消除大型非空表单中的大量样板代码。你可以使用 
+<code>FormBuilder</code> 上的 
+<code>nonNullable</code> 属性来访问它：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> fb = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormBuilder</span>();</div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> login = fb.<span class="hljs-property">nonNullable</span>.<span class="hljs-title function_">group</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">password</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d2qaqdmxvxdznbj529lslrq4a">在上面的示例中，两个内部控件都将不可为空（即将设置 <code>nonNullable</code>）。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9myacqeq0ncx4y73in33fgc81">你也可以使用名称 
+<code>NonNullableFormBuilder</code> 注入它。</p>

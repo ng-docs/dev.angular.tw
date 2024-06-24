@@ -1,0 +1,55 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="f0nqitsuiwu5k089cri90pfda">类型化表单迁移</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/migrations/typed-forms.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6hurgupejyhzz46qvyddgx6ws">从 Angular 14 开始，响应式表单默认是严格类型的。</p>
+
+  <h2 id="overview-of-typed-forms">
+    <a href="#overview-of-typed-forms" class="docs-anchor" tabindex="-1" aria-label="Link to Overview of Typed Forms" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="egd6w8t4042jhomymsq925emk">类型化表单概览</a>
+  </h2>
+  
+    <div class="docs-video-container">
+      <iframe class="docs-video" src="https://www.youtube.com/embed/L-odCf4MfJc" title="Video player" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless></iframe>
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="24orea3n2d4rbjpod82jdhr2o">使用 Angular 响应式表单，你可以显式指定<em>表单模型</em>。作为一个简单的例子，考虑这个基本的用户登录表单：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> login = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormGroup</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">    <span class="hljs-attr">password</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="346ofdya06d28jgndh6dh6cb">Angular 提供了许多与此 
+<code>FormGroup</code> 交互的 API。例如，你可以调用 
+<code>login.value</code>、
+<code>login.controls</code>、
+<code>login.patchValue</code> 等等。（完整的 API 参考请参见 
+<a href="api/forms/FormGroup">API 文档</a>。）</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ws75x6np47xa9xau00oabh4w">在以前的 Angular 版本中，这些 API 中的大多数都在其类型中的某处包含 <code>any</code>，并且与控件结构或值本身的交互不是类型安全的。例如：你可以编写以下无效代码：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> emailDomain = login.<span class="hljs-property">value</span>.<span class="hljs-property">email</span>.<span class="hljs-property">domain</span>;</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5ebvj7vqya8rakkieqveo0l5q">对于严格类型的响应式表单，上述代码无法编译，因为 
+<code>email</code> 上没有 
+<code>domain</code> 属性。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="alecsnckuqbm49g8okmssvfe0">除了增加安全性之外，这些类型还支持各种其他改进，例如 IDE 中更好的自动完成，以及显式指定表单结构的方式。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9jvm3ml9gyxbpmggorv575en8">这些改进目前仅适用于
+<em>响应式</em>表单（不适用于 
+<a href="guide/forms/template-driven-forms"><em>模板驱动</em>表单</a>）。</p>
+
+  <h2 id="automated-untyped-forms-migration">
+    <a href="#automated-untyped-forms-migration" class="docs-anchor" tabindex="-1" aria-label="Link to Automated Untyped Forms Migration" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="l8wid60gzsixhmk18c9vf8tp">自动无类型表单迁移</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="21wuc7wqq3uhnw352x48ih6m6">升级到 Angular 14 时，包含的迁移将自动使用相应的无类型版本替换代码中的所有表单类。例如，上面的代码段将变为：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> login = <span class="hljs-keyword">new</span> <span class="hljs-title class_">UntypedFormGroup</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">UntypedFormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">    <span class="hljs-attr">password</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">UntypedFormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dwpukcmne5ptnw88m9klu7euo">每个 <code>Untyped</code> 符号都与以前的 Angular 版本具有完全相同的语义，因此你的应用程序应该像以前一样继续编译。通过删除 <code>Untyped</code> 前缀，你可以增量启用这些类型。</p>

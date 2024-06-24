@@ -1,0 +1,73 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core/testing</span><div class="docs-reference-title"><div><h1>tick</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/core/testing/src/fake_async.ts#L127-L137" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="7pf5ifxuvqhu54o2u95tz1r5p">模拟 
+<code>fakeAsync</code> Zone 中计时器的异步时间流逝。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">tick</span>(</div><div class="hljs-ln-line ">  millis?: <span class="hljs-built_in">number</span>,</div><div class="hljs-ln-line ">  tickOptions?: { <span class="hljs-attr">processNewMacroTasksSynchronously</span>: <span class="hljs-built_in">boolean</span>; }</div><div class="hljs-ln-line ">): <span class="hljs-built_in">void</span>;</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="7pf5ifxuvqhu54o2u95tz1r5p">模拟 
+<code>fakeAsync</code> Zone 中计时器的异步时间流逝。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3egjwnhlybneo0emr3vuzhfg0">在此函数开始时以及执行任何计时器回调之后，微任务队列就会耗尽。</p></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="exe63clzfw2joff6bxrrps55g"><code>tick()</code> 选项是一个名为 
+<code>processNewMacroTasksSynchronously</code> 的标志，决定是否调用新的宏任务。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4rr4lw4u83y4nk0xntewdwll7">如果你提供一个 
+<code>tickOptions</code> 对象，但未指定 
+<code>processNewMacroTasksSynchronously</code> 属性（
+<code>tick(100, {})</code>），那么 
+<code>processNewMacroTasksSynchronously</code> 默认为 true。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5slqw13hznf1vksetlen1ocat">如果省略
+<code>tickOptions</code>参数（
+<code>tick(100))</code>），则
+<code>tickOptions</code>默认为
+<code>{processNewMacroTasksSynchronously: true}</code>。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="lzz2v4ucg07faxnpe2bu1wa1">范例</h3>
+<code-example path="core/testing/ts/fake_async.ts" region="basic" />
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="568gfkpgkbvvswsmjptq20gbq">下面的示例包含一个嵌套超时（新的 macroTask），并且 <code>tickOptions</code> 参数允许默认。在这种情况下，<code>processNewMacroTasksSynchronously</code> 默认为 true，嵌套函数在每个 tick 上执行。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">it (<span class="hljs-string">'test with nested setTimeout'</span>, fakeAsync(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><span class="hljs-ln-line">  let nestedTimeoutInvoked = <span class="hljs-literal">false</span>;</span><span class="hljs-ln-line">  function funcWithNestedTimeout() {</span><span class="hljs-ln-line">    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><span class="hljs-ln-line">      nestedTimeoutInvoked = <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">    });</span><span class="hljs-ln-line">  };</span><span class="hljs-ln-line">  <span class="hljs-built_in">setTimeout</span>(funcWithNestedTimeout);</span><span class="hljs-ln-line">  tick();</span><span class="hljs-ln-line">  expect(nestedTimeoutInvoked).toBe(<span class="hljs-literal">true</span>);</span><span class="hljs-ln-line">}));</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="misvpx0shwlduhtkdkgw879l">在以下情况下，<code>processNewMacroTasksSynchronously</code> 显式设置为 false，因此不会调用嵌套超时函数。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">it (<span class="hljs-string">'test with nested setTimeout'</span>, fakeAsync(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><span class="hljs-ln-line">  let nestedTimeoutInvoked = <span class="hljs-literal">false</span>;</span><span class="hljs-ln-line">  function funcWithNestedTimeout() {</span><span class="hljs-ln-line">    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><span class="hljs-ln-line">      nestedTimeoutInvoked = <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">    });</span><span class="hljs-ln-line">  };</span><span class="hljs-ln-line">  <span class="hljs-built_in">setTimeout</span>(funcWithNestedTimeout);</span><span class="hljs-ln-line">  tick(<span class="hljs-number">0</span>, {processNewMacroTasksSynchronously: <span class="hljs-literal">false</span>});</span><span class="hljs-ln-line">  expect(nestedTimeoutInvoked).toBe(<span class="hljs-literal">false</span>);</span><span class="hljs-ln-line">}));</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>tick</h3><div><code>void</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="7pf5ifxuvqhu54o2u95tz1r5p">模拟 
+<code>fakeAsync</code> Zone 中计时器的异步时间流逝。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3egjwnhlybneo0emr3vuzhfg0">在此函数开始时以及执行任何计时器回调之后，微任务队列就会耗尽。</p></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">millis</span><code>number</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="1cpz2z6srk1rqhn5q03tob86u">前进虚拟计时器的毫秒数。</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">tickOptions</span><code>{ processNewMacroTasksSynchronously: boolean; }</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="a4xwuuuasa6k7jw7mcr638lpk">传递给
+<code>tick()</code>函数的选项。</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>void</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><p data-ng_translator_product="100" data-ng_translator_ref_id="exe63clzfw2joff6bxrrps55g"><code>tick()</code> 选项是一个名为 
+<code>processNewMacroTasksSynchronously</code> 的标志，决定是否调用新的宏任务。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4rr4lw4u83y4nk0xntewdwll7">如果你提供一个 
+<code>tickOptions</code> 对象，但未指定 
+<code>processNewMacroTasksSynchronously</code> 属性（
+<code>tick(100, {})</code>），那么 
+<code>processNewMacroTasksSynchronously</code> 默认为 true。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5slqw13hznf1vksetlen1ocat">如果省略
+<code>tickOptions</code>参数（
+<code>tick(100))</code>），则
+<code>tickOptions</code>默认为
+<code>{processNewMacroTasksSynchronously: true}</code>。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="lzz2v4ucg07faxnpe2bu1wa1">范例</h3>
+<code-example path="core/testing/ts/fake_async.ts" region="basic" />
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="568gfkpgkbvvswsmjptq20gbq">下面的示例包含一个嵌套超时（新的 macroTask），并且 <code>tickOptions</code> 参数允许默认。在这种情况下，<code>processNewMacroTasksSynchronously</code> 默认为 true，嵌套函数在每个 tick 上执行。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">it (<span class="hljs-string">'test with nested setTimeout'</span>, fakeAsync(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><span class="hljs-ln-line">  let nestedTimeoutInvoked = <span class="hljs-literal">false</span>;</span><span class="hljs-ln-line">  function funcWithNestedTimeout() {</span><span class="hljs-ln-line">    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><span class="hljs-ln-line">      nestedTimeoutInvoked = <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">    });</span><span class="hljs-ln-line">  };</span><span class="hljs-ln-line">  <span class="hljs-built_in">setTimeout</span>(funcWithNestedTimeout);</span><span class="hljs-ln-line">  tick();</span><span class="hljs-ln-line">  expect(nestedTimeoutInvoked).toBe(<span class="hljs-literal">true</span>);</span><span class="hljs-ln-line">}));</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="misvpx0shwlduhtkdkgw879l">在以下情况下，<code>processNewMacroTasksSynchronously</code> 显式设置为 false，因此不会调用嵌套超时函数。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">it (<span class="hljs-string">'test with nested setTimeout'</span>, fakeAsync(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><span class="hljs-ln-line">  let nestedTimeoutInvoked = <span class="hljs-literal">false</span>;</span><span class="hljs-ln-line">  function funcWithNestedTimeout() {</span><span class="hljs-ln-line">    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><span class="hljs-ln-line">      nestedTimeoutInvoked = <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">    });</span><span class="hljs-ln-line">  };</span><span class="hljs-ln-line">  <span class="hljs-built_in">setTimeout</span>(funcWithNestedTimeout);</span><span class="hljs-ln-line">  tick(<span class="hljs-number">0</span>, {processNewMacroTasksSynchronously: <span class="hljs-literal">false</span>});</span><span class="hljs-ln-line">  expect(nestedTimeoutInvoked).toBe(<span class="hljs-literal">false</span>);</span><span class="hljs-ln-line">}));</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div></div></div></div></div></div>

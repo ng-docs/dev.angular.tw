@@ -1,0 +1,67 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="5kkgrl4rmq6spo3fywh368ph2">在响应式上下文中禁止调用函数</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0602.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9pam5wxdc2m4p8re71imfjv0g">在响应式上下文中调用了不允许运行的函数。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6990liqip1alu882fyow8p74y">例如，
+<code>effect</code> 不能在 
+<code>computed</code> 或正在执行的 effect 中调度。避免在模板表达式中调用 
+<code>effect</code> 等函数，因为它们会在自己的响应式上下文中执行。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9uflfhg1zot0j7xis69cl9yfl">计算表达式应当是纯的。 纯表示表达式不会触发任何副作用。 副作用是像调度 
+<code>afterRender</code>、创建一个新的 
+<code>effect</code> 或订阅一些可观察者这样的操作。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ab1c5o2az1ms5am6mykjfv5p3">为了避免常见的陷阱，在响应式上下文中某些操作被明确禁止。 例如，在 
+<code>computed</code> 中使用 
+<code>afterRender</code> 会在每次计算表达式求值时调度新的渲染钩子。 这可能不是你想要的，并且会降低应用性能。</p>
+
+  <h3 id="fixing-the-error">
+    <a href="#fixing-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Fixing the error" data-ng_translator_product="100" data-ng_translator_ref_id="63eun1v9nz40i6edbyrmabm2e">修复错误</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="16b1mfr1vgvjz7tjnztvr4iea">这个错误指南并不详尽。 它捕捉了一些常见场景以及如何解决这些错误。</p>
+
+  <h4 id="afterrender">
+    <a href="#afterrender" class="docs-anchor" tabindex="-1" aria-label="Link to <code>afterRender</code>"><code>afterRender</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9rvhyprl4lqmozbhej1p0zqxv">将 
+<code>afterRender</code> 的调用移到响应式上下文之外。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4ctm8zabr33weaqoq0askubo1">在组件的类构造函数中调度 afterRender 钩子是个不错的选择。 或者，使用 
+<code>untracked</code> 离开响应式上下文，并显式选择不触发这个错误。</p>
+
+  <h4 id="effect">
+    <a href="#effect" class="docs-anchor" tabindex="-1" aria-label="Link to <code>effect</code>"><code>effect</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9om8tsrwi0cdvk3c5qptkvwn8">将 
+<code>effect</code> 的调用移到响应式上下文之外。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2ejnj984a0p29zfrxlr1xzd9u">在 
+<code>@Component</code> 的类构造函数中调度 effect 是个不错的选择。</p>
+
+  <h4 id="tosignal">
+    <a href="#tosignal" class="docs-anchor" tabindex="-1" aria-label="Link to <code>toSignal</code>"><code>toSignal</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="c6f4pt10jhm0hvcwmq3fbraip">将 
+<code>toSignal</code> 的调用移到响应式上下文之外。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">result = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> dataSignal = <span class="hljs-title function_">toSignal</span>(dataObservable$);</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-title function_">doSomething</span>(<span class="hljs-title function_">dataSignal</span>());</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="12gs1qq8sy4ccwssejcrw5e4y">可以重构为：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">dataSignal = <span class="hljs-title function_">toSignal</span>(dataObservable$);</div><div class="hljs-ln-line">result = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">doSomething</span>(<span class="hljs-title function_">dataSignal</span>()));</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="40vl0y6em77e07afanx74y6q0">或者，如果这不可能，考虑手动订阅该可观察者。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="szihrlzahgrtox6rwgfjlli0">最后的手段是使用 
+<code>untracked</code> 离开响应式上下文。 要小心，因为离开响应式上下文可能导致在 
+<code>untracked</code> 中读信号被忽略。</p>
+<p>@debugging</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="22u056v1y0s4usgkbmhmvfhny">错误消息提到了意外调用的函数。 在你的应用代码中寻找这个函数调用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="b3v3z4cwwod12pagcp4m9ayuo">或者，你浏览器中的堆栈跟踪会显示该函数被调用的位置及其所在位置。</p>

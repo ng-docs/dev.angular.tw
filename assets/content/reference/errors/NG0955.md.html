@@ -1,0 +1,38 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="5dw9ji4opfa48sanm3ikw33sf">跟踪表达式导致给定集合中出现重复的键。</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0955.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2ms58quknbh30wlzi21689du">在 
+<code>@for</code> 循环中指定的跟踪表达式求值为给定集合的重复键，例如：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">template</span>: <span class="hljs-string">`@for (item of items; track item.value) {{{item.value}}}`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestComponent</span> {</div><div class="hljs-ln-line">    items = [{<span class="hljs-attr">key</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'a'</span>}, {<span class="hljs-attr">key</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'b'</span>}, {<span class="hljs-attr">key</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'a'</span>}];</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="3tfe52ps9lc0r4gs2eqdek7d6">在提供的示例中，此 
+<code>item.key</code> 跟踪表达式会发现两个重复的键 
+<code>a</code>（分别在索引 0 和 2 处）。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="f29e6b3r238kiwlbm2exklkgz">重复的键在正确性方面是有问题的：由于 
+<code>@for</code> 循环无法唯一标识条目，可能会在执行 DOM 移动或销毁时选择对应于
+<em>另一个</em>条目的 DOM 节点（具有相同的键）。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="516g32pchqn4qvlfdf358qcuo">重复键还会带来性能损失 —— Angular 在内部必须使用更复杂且较慢的数据结构来重复遍历具有重复键的集合。</p>
+
+  <h2 id="fixing-the-error">
+    <a href="#fixing-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Fixing the error" data-ng_translator_product="100" data-ng_translator_ref_id="63eun1v9nz40i6edbyrmabm2e">修复错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3y57kz80049cj5krsgri1hpz9">更改跟踪表达式，使其唯一标识集合中的某个条目。在讨论的示例中，正确的跟踪表达式应使用唯一的 
+<code>key</code> 属性（
+<code>item.key</code>）：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">template</span>: <span class="hljs-string">`@for (item of items; track item.key) {{{item.value}}}`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestComponent</span> {</div><div class="hljs-ln-line">    items = [{<span class="hljs-attr">key</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'a'</span>}, {<span class="hljs-attr">key</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'b'</span>}, {<span class="hljs-attr">key</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'a'</span>}];</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

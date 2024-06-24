@@ -1,0 +1,56 @@
+<div class="cli"><div class="docs-reference-cli-content"><header class="docs-reference-header"><span class="docs-reference-category">CLI</span><div class="docs-reference-title"><div><h1> completion</h1><div class="docs-api-item-label" data-mode="full" data-type="command">Command</div></div></div></header><div class="docs-code docs-reference-cli-toc"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line">ng completion<button member-id="Options" class="hljs-ln-line-option">[options]</button></div></code></pre></div><div><p data-ng_translator_product="100" data-ng_translator_ref_id="am8jzgaxzmtinersvj93noptm">设置自动补全功能会配置你的终端，这样在输入过程中按下 
+<code>&lt;TAB&gt;</code> 键时会显示各种可用的命令和选项。这使得用户在不需要大量记忆的情况下，可以非常容易地发现和使用 CLI 命令。</p>
+<p>
+    <img src="assets/images/guide/cli/completion.gif" alt="A demo of Angular CLI autocompletion in a terminal. The user types several partial `ng` commands,
+using autocompletion to finish several arguments and list contextual options.
+" title="null" class="docs-image">
+    </p>
+<h2 data-ng_translator_product="100" data-ng_translator_ref_id="52pyxp9di576d86bo99mloic5">自动化设置</h2>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bjqy62na1eq1t3nvyw5b0kyxv">CLI 在你第一次使用它时（v14+），应该会提示并询问是否为你设置自动补全。只需回答『是』，CLI 会处理好剩下的部分。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">$ ng serve</span><span class="hljs-ln-line">? Would you like <span class="hljs-keyword">to</span> enable autocompletion? This will <span class="hljs-keyword">set</span> <span class="hljs-keyword">up</span> your terminal <span class="hljs-keyword">so</span> pressing TAB <span class="hljs-keyword">while</span> typing Angular CLI commands will show possible <span class="hljs-keyword">options</span> <span class="hljs-built_in">and</span> autocomplete arguments. (Enabling autocompletion will modify configuration <span class="hljs-keyword">files</span> in your home directory.) Yes</span><span class="hljs-ln-line">Appended `<span class="hljs-keyword">source</span> &lt;(ng completion script)` <span class="hljs-keyword">to</span> `/home/my-username/.bashrc`. Restart your terminal <span class="hljs-built_in">or</span> run:</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-keyword">source</span> &lt;(ng completion script)</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-keyword">to</span> autocomplete `ng` commands.</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"># Serve output...</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="x2lw5zdgckcep7w8oub911p7">如果你已经拒绝了提示，它将不会再询问。但你可以运行 
+<code>ng completion</code> 来自动完成同样的操作。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="pfwx1jhmp0fygf3e07kcwyta">这会修改你的终端环境以加载 Angular CLI 自动补全，但不能更新当前终端会话。要么重启它，要么直接运行 
+<code>source &lt;(ng completion script)</code> 以在当前会话中启用自动补全。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ds11t9b7uyfzy8un5y6nf1eet">通过输入 
+<code>ng ser&lt;TAB&gt;</code> 来测试一下，它应该会自动补全为 
+<code>ng serve</code>。对于模糊参数，会显示所有可能的选项及其文档，例如 
+<code>ng generate &lt;TAB&gt;</code>。</p>
+<h2 data-ng_translator_product="100" data-ng_translator_ref_id="cwskaymivwdmfpq9dmjlfmk1k">手动设置</h2>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1yzd5s9qhjfr4lct203xjlpsa">一些用户可能有高度自定义的终端设置，可能有配置文件被检入源代码控制并具有特定结构。
+<code>ng completion</code> 只会将 Angular 的设置附加到当前 shell 的现有配置文件中，或者如果不存在则创建一个。如果你想更精确地控制此配置的存放位置，可以通过在 shell 启动时运行以下命令手动设置：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-built_in">source</span> &lt;(ng completion script)</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="87os128ji9mkenl5lhvmaac3p">这相当于 
+<code>ng completion</code> 自动设置的内容，并在需要时为高级用户在其环境中提供更多灵活性。</p>
+<h2 data-ng_translator_product="100" data-ng_translator_ref_id="4lactszu3ajd0km167hytvba6">平台支持</h2>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="d1x8w6mlgzo8gk7qbjgm1qt51">Angular CLI 支持在 MacOS 和 Linux 操作系统上的 Bash 和 Zsh shell 自动补全。在 Windows 上，支持 Git Bash 和 
+<a href="https://docs.microsoft.com/en-us/windows/wsl/">Windows Subsystem for Linux</a> 使用 Bash 或 Zsh。</p>
+<h2 data-ng_translator_product="100" data-ng_translator_ref_id="1q7q9lmqozt8xzh7q6lau3825">全局安装</h2>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ewyezml9pkc6rr68l4r8afcrd">自动补全通过配置你的终端在启动时调用 Angular CLI 来加载设置脚本。这意味着终端必须能够找到并执行 Angular CLI，通常通过全局安装将二进制文件放在用户的 
+<code>$PATH</code> 中。如果你收到 
+<code>command not found: ng</code> 错误，请确保 CLI 已全局安装，你可以使用 
+<code>-g</code> 标志来进行安装：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">npm install -g @angular/cli</span>
+          </code>
+        </pre>
+      </div>
+    </div><h3 data-ng_translator_product="100" data-ng_translator_ref_id="5qi73tckmyguoolfm8ybo6w1y">子命令</h3><p data-ng_translator_product="100" data-ng_translator_ref_id="1j3l4y797uv34qe3kepzmbipm">此命令有以下子命令</p><ul><li><a href="cli/completion/script">script</a></li></ul></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="Options" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-card-ref-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="cyk2rtnidu0xcswyg7218m57s">选项</h3></div></header><div class="docs-reference-card-body"><div class="docs-ref-content"><div class="docs-ref-option-and-description"><div class="docs-reference-option"><code>help</code></div><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5ziwpescwgmf61892apmzsy97">在控制台显示关于本命令的帮助信息。</p>
+</div></div><div class="docs-reference-type-and-default"><span>Value Type</span><code>boolean</code></div></div></div></div></div></div></div>

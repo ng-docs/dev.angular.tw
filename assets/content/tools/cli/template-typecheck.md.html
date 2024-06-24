@@ -1,0 +1,376 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ae2ql03yh3m1g6p8o3z98c0yz">模板类型检查</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/template-typecheck.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+  <h2 id="overview-of-template-type-checking">
+    <a href="#overview-of-template-type-checking" class="docs-anchor" tabindex="-1" aria-label="Link to Overview of template type checking" data-ng_translator_product="100" data-ng_translator_ref_id="ccrmp1us4ib7oej01wq9j4cgb">模板类型检查概览</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5df7avliedd919p9v7101quvv">就像 TypeScript 捕获代码中的类型错误一样，Angular 检查应用程序模板中的表达式和绑定，并可以报告它发现的任何类型错误。目前，Angular 有三种模式来实现这一点，这取决于 
+<a href="reference/configs/angular-compiler-options">Angular编译器选项</a> 中的 
+<code>fullTemplateTypeCheck</code> 和 
+<code>strictTemplates</code> 标志的值。</p>
+
+  <h3 id="basic-mode">
+    <a href="#basic-mode" class="docs-anchor" tabindex="-1" aria-label="Link to Basic mode" data-ng_translator_product="100" data-ng_translator_ref_id="cyewkm4rocs0snob14hk7566w">基本模式</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bzszy8rq5pda9y7q4g98d65iu">在最基本的类型检查模式下，将 <code>fullTemplateTypeCheck</code> 标志设置为 <code>false</code>，Angular 仅验证模板中的顶层表达式。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b8zfrc5ym2zi9ccdyr0zn7vlv">如果编写 <code>&lt;map [city]="user.address.city"&gt;</code>，则编译器将验证以下内容：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cgpbccl8ga8uj4z6h4c4qn843"><code>user</code> 是该组件类的属性</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="c10cgfmktwyxu118h3agftmpa"><code>user</code> 是一个带有 address 属性的对象</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="8iyuur9xlazu7xt7i5buikqvn"><code>user.address</code> 是一个带有 city 属性的对象</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="88beer3go9y6gy0cry49s839p">编译器不会验证 
+<code>user.address.city</code> 的值是否可以赋值给 
+<code>&lt;map&gt;</code> 组件的 city 输入。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d104ccviuf2hkkvjfga0wdnh">编译器在此模式下也有一些主要限制：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="36570sfhcqn42htqohyoxc4wk">重要的是，它不会检查嵌入视图，如 
+<code>*ngIf</code>、
+<code>*ngFor</code> 和其他 
+<code>&lt;ng-template&gt;</code> 嵌入视图。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4tlq0s0139oihb23d10ty7b8a">它无法弄清 <code>#refs</code> 的类型、管道的结果、事件绑定中 <code>$event</code> 的类型等等。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="68i73heuucc85x2qryea5yogc">在许多情况下，这些东西最终都以 <code>any</code> 类型结束，这可能导致表达式的后续部分不受检查。</p>
+
+  <h3 id="full-mode">
+    <a href="#full-mode" class="docs-anchor" tabindex="-1" aria-label="Link to Full mode" data-ng_translator_product="100" data-ng_translator_ref_id="ep3onowtdv4457ibrlrzo1r0j">完全模式</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b4ibznyb1ulyg7uj83bxikoah">如果将 <code>fullTemplateTypeCheck</code> 标志设置为 <code>true</code>，则 Angular 在模板中进行类型检查时会更加主动。特别是：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="8bacl6eqdsbj9vp6p9ridyvw1">嵌入视图（如 
+<code>*ngIf</code> 或 
+<code>*ngFor</code> 中的视图）会被检查。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5v1l7wk3iweefhcnvri13lch6">管道具有正确的返回类型</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cdoqx26e5w03c9x37u6rohoz">对指令和管道的本地引用具有正确的类型（any 泛型参数除外，该通用参数将是 <code>any</code>）</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2cdgo07ojrwlmtmoli07ou3y0">以下仍然具有 <code>any</code> 类型。</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1f6y0a85e0ebohg1wijpm7itw">对 DOM 元素的本地引用。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4yyh849rstt1c6uwkt726i8f0"><code>$event</code> 对象</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="68mzejgvn5qzi8jda1znixmjs">安全导航表达式</li>
+
+  </ul>
+  
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="a0un6w6p7yxgg7le4269d705l"><strong>重要提示：</strong> 
+<code>fullTemplateTypeCheck</code> 标志在 Angular 13 中已被弃用。应改用 
+<code>strictTemplates</code> 系列的编译器选项。</p>
+
+    </div>
+    
+  <h3 id="strict-mode">
+    <a href="#strict-mode" class="docs-anchor" tabindex="-1" aria-label="Link to Strict mode" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ueri0caon87o1dinr48blf5">严格模式</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2hi47yaz3t1iv3s4ghggxk2xi">Angular 维护了
+<code>fullTemplateTypeCheck</code>标记的行为，并引入了第三种「严格模式」。 严格模式是全模式的超集，通过将
+<code>strictTemplates</code>标记设置为true来访问。 此标记取代了
+<code>fullTemplateTypeCheck</code>标记。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dsmp4dnofr93b622u8bro5yvf">除了完全模式的行为之外，Angular 还会：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="6ratkx4im1jzpg50tj2fsifs8">验证组件/指令绑定是否可分配给它们的
+<code>@Input()</code></li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4l1xbmixinwlt5c9e2hseys4">验证以上模式时，会遵守 TypeScript 的 <code>strictNullChecks</code> 标志</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cy98cenvbu6cs7v46e7vpzu01">推断组件/指令的正确类型，包括泛型</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="85po32kl8f6q44uju10p8iy7z">推断模板上下文类型的配置（例如，允许正确检查
+<code>NgFor</code>）</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b65hnlxihwiie8y63pmvqb62x">在组件/指令、DOM 和动画事件绑定中推断 <code>$event</code> 的正确类型</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6pies7nhoqif6jzz3rd8l94je">根据标签（tag）名称（比如，<code>document.createElement</code> 将为该标签返回正确的类型），推断出对 DOM 元素的局部引用的正确类型</li>
+
+  </ul>
+  
+  <h2 id="checking-of-ngfor">
+    <a href="#checking-of-ngfor" class="docs-anchor" tabindex="-1" aria-label="Link to Checking of <code>*ngFor</code>" data-ng_translator_product="100" data-ng_translator_ref_id="1cikjuddfni3vgbgm96lue44p">检查 
+<code>*ngFor</code></a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7e8rxpg2aah1gv9vpx4mcxttx">类型检查的三种模式对嵌入式视图的处理方式不同。考虑以下范例。</p>
+<div class="docs-code" header="User interface">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="1yz36m7brgm8uw12gh62glhaz">用户界面</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">User</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">address</span>: {</div><div class="hljs-ln-line">    <span class="hljs-attr">city</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">    <span class="hljs-attr">state</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let user of users"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>{{config.title}}<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>City: {{user.address.city}}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="66x9n4cw2458d4b6x7d28nyb6"><code>&lt;h2&gt;</code>和
+<code>&lt;span&gt;</code>在
+<code>*ngFor</code>嵌入视图中。 在基本模式下，Angular 不会检查它们中的任何一个。 然而，在全模式下，Angular 会检查
+<code>config</code>和
+<code>user</code>是否存在，并假定类型为
+<code>any</code>。 在严格模式下，Angular 知道
+<code>&lt;span&gt;</code>中的
+<code>user</code>的类型为
+<code>User</code>，并且
+<code>address</code>是具有
+<code>string</code>类型的
+<code>city</code>属性的对象。</p>
+
+  <h2 id="troubleshooting-template-errors">
+    <a href="#troubleshooting-template-errors" class="docs-anchor" tabindex="-1" aria-label="Link to Troubleshooting template errors" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2f34q6agg26vapj70i4bteqdi">排查模板错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="89fgkjqg6umxgi8xclz87xpli">使用严格模式，你可能会遇到在以前的两种模式下都没有出现过的模板错误。这些错误通常表示模板中的真正类型不匹配，而以前的工具并未捕获这些错误。在这种情况下，该错误消息会使该问题在模板中的位置清晰可见。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="934kapgavdr0z06mo6mkyzg3z">当 Angular 库的类型不完整或不正确，或者在以下情况下类型与预期不完全一致时，也可能存在误报。</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4ce2pf65wabhh94sapzjyg1un">当库的类型错误或不完整时（比如，如果编写库的时候没有注意 <code>strictNullChecks</code>，则可能缺少 <code>null | undefined</code>）</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="5op0nw1bpfg24v6y21k40g86k">当库的输入类型太窄且库未为Angular添加适当的元数据以解决此问题时。 通常发生在使用作为属性的禁用或其他常用布尔输入时，例如，
+<code>&lt;input disabled&gt;</code>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8eyfcc7rvqywg4loiygtin4je">在将 <code>$event.target</code> 用于 DOM 事件时（由于事件冒泡的可能性，DOM 类型中的 <code>$event.target</code> 不具有你可能期望的类型）</p>
+</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ccfruo19sk260pxkapwx1p8su">如果发生此类误报，则有以下几种选择：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="4jdsxr248d5r9irq5thxyw2ba">在某些上下文中使用
+<code>$any()</code>类型转换函数，以免对表达式的一部分进行类型检查</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3vkckts49xsaabphmv9j2gby7">你可以通过在应用程序的 TypeScript 配置文件 <code>tsconfig.json</code> 中设置 <code>strictTemplates: false</code> 来完全禁用严格检查</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cq09iconm1089gd2x3mb1m7j2">通过将<em>严格性标志</em>设置为 <code>false</code>，可以在保持其它方面的严格性的同时，单独禁用某些特定的类型检查操作</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="el71ubisc6vp6j0g7de1p5tyj">如果要一起使用 <code>strictTemplates</code> 和 <code>strictNullChecks</code>，则可以通过 <code>strictNullInputTypes</code> 来选择性排除专门用于输入绑定的严格空类型检查</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dw38tbepm5dlzg59i3hnpwvvn">除非另有注释，否则以下各选项都设置为 
+<code>strictTemplates</code> 的值（当 
+<code>strictTemplates</code> 为 
+<code>true</code> 时为 
+<code>true</code>，反之亦然）。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bw50he656l7aqzh1r0sscuay3">严格标记</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9u63kthtcirgqptp4sb36r3ei">效果</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>strictInputTypes</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9q011faoovhc17sinp6qf2885">检查绑定表达式是否可分配给
+<code>@Input()</code>字段。还会影响指令泛型类型的推断。</td>
+</tr>
+<tr>
+<td align="left"><code>strictInputAccessModifiers</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1wr0xg7rse5gv0uk3a67kpwrb">在将绑定表达式赋值给
+<code>@Input()</code>时，是否遵守访问修饰符（如
+<code>private</code>/
+<code>protected</code>/
+<code>readonly</code>）。如果禁用，将忽略
+<code>@Input</code>的访问修饰符；只检查类型。默认情况下，即使将
+<code>strictTemplates</code>设置为
+<code>true</code>，此选项也为
+<code>false</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>strictNullInputTypes</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dwpwn0778yyc187g0a9yunne0">在检查
+<code>@Input()</code>绑定时是否遵守
+<code>strictNullChecks</code>（按
+<code>strictInputTypes</code>）。关闭此选项可在使用未考虑
+<code>strictNullChecks</code>的库时很有用。</td>
+</tr>
+<tr>
+<td align="left"><code>strictAttributeTypes</code></td>
+<td align="left">Whether to check <code>@Input()</code> bindings that are made using text attributes. For example, <docs-code hidecopy language="html"> <input matInput disabled="true"> </docs-code> (setting the <code>disabled</code> property to the string <code>'true'</code>) vs <docs-code hidecopy language="html"> &lt;input matInput [disabled]="true"&gt; </docs-code> (setting the <code>disabled</code> property to the boolean <code>true</code>).</td>
+</tr>
+<tr>
+<td align="left"><code>strictSafeNavigationTypes</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dokhw7xgu0yhsebvo374ixjxa">是否根据
+<code>user</code>的类型正确推断安全导航操作（例如，
+<code>user?.name</code>的返回类型）。如果禁用，
+<code>user?.name</code>的类型将为
+<code>any</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>strictDomLocalRefTypes</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="20v2t38xwbz18jtcy4y4pshl1">是否为DOM元素的本地引用提供正确的类型。如果禁用，对于
+<code>&lt;input #ref&gt;</code>，
+<code>ref</code>的类型将为
+<code>any</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>strictOutputEventTypes</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="vydk7s0smaa5bu2uvx6qn4o3">事件绑定到组件/指令的
+<code>@Output()</code>或动画事件时，
+<code>$event</code>是否具有正确的类型。如果禁用，它将为
+<code>any</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>strictDomEventTypes</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="b5e22q6wtlu0s8vgkf521s3m3">事件绑定到DOM事件时，
+<code>$event</code>是否具有正确的类型。如果禁用，它将为
+<code>any</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>strictContextGenerics</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="c56hcawau3hcsqm40y4khpljq">是否正确推断泛型组件的类型参数（包括任何泛型边界）。如果禁用，任何类型参数将为
+<code>any</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>strictLiteralTypes</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2jsry7pbbp6pzgputxlu7n3ih">是否在模板中声明的对象和数组字面量会自动推断其类型。如果禁用，此类字面量的类型将为 
+<code>any</code>。当 
+<code>fullTemplateTypeCheck</code> 或 
+<code>strictTemplates</code> <em>之一</em>设置为 
+<code>true</code> 时，此标志为 
+<code>true</code>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ab1qazpp3d3bhllo71n81u57">如果使用这些标志进行故障排除后仍然存在问题，可以通过禁用 <code>strictTemplates</code> 退回到完全模式。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ckrvuqtkb3u3l5ed49w4c6n8y">如果这不起作用，则最后一种选择是完全关闭 full 模式，并使用 <code>fullTemplateTypeCheck: false</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="asll6m5z9evr9uvi4rtaxjfl2">使用任何推荐方法都无法解决的类型检查错误可能是模板类型检查器本身的错误。 如果出现需要退回到基本模式的错误，很可能是这种错误。 如果发生这种情况，请
+<a href="https://github.com/angular/angular/issues" target="_blank">提交问题</a>，以便团队处理。</p>
+
+  <h2 id="inputs-and-type-checking">
+    <a href="#inputs-and-type-checking" class="docs-anchor" tabindex="-1" aria-label="Link to Inputs and type-checking" data-ng_translator_product="100" data-ng_translator_ref_id="7jzxluh9x4fz2i4iyesygqqbw">输入属性与类型检查</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2bciajnxqgrlcrf8dmc3tced6">模板类型检查器会检查绑定表达式的类型是否与相应指令输入的类型兼容。比如，请考虑以下组件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">User</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'user-detail'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'{{ user.name }}'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserDetailComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">user</span>: <span class="hljs-title class_">User</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cjynqbahxovk7xtcn81jjag87"><code>AppComponent</code> 模板按以下方式使用此组件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;user-detail [user]="selectedUser"&gt;&lt;/user-detail&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">selectedUser</span>: <span class="hljs-title class_">User</span> | <span class="hljs-literal">null</span> = <span class="hljs-literal">null</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="44pycudzjxpmhae289b4uj0ym">这里，在检查 <code>AppComponent</code> 的模板期间，<code>[user]="selectedUser"</code> 绑定与 <code>UserDetailComponent.user</code> 输入属性相对应。因此，Angular 会将 <code>selectedUser</code> 属性赋值给 <code>UserDetailComponent.user</code>，如果它们的类型不兼容，则将导致错误。TypeScript 会根据其类型系统进行赋值检查，并遵循在应用程序中配置的标志（比如 <code>strictNullChecks</code>）。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cb8xc9iyt1g3b84e4zsgncmr3">通过为模板类型检查器提供更具体的模板类型要求，避免运行时类型错误。 通过在指令定义中提供模板保护函数，使自定义指令的输入类型要求尽可能具体。 查看本指南中的
+<a href="guide/directives/structural-directives#directive-type-checks">改进自定义指令的模板类型检查</a>。</p>
+
+  <h3 id="strict-null-checks">
+    <a href="#strict-null-checks" class="docs-anchor" tabindex="-1" aria-label="Link to Strict null checks" data-ng_translator_product="100" data-ng_translator_ref_id="19vfvznrdzmgd4rxncylpunf4">严格的空值检查</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="arlqbru4wbbtxslhgmf3019kc">当你启用 <code>strictTemplates</code> 和 TypeScript 标志 <code>strictNullChecks</code>，在某些情况下可能会发生类型检查错误，这些情况很难避免。比如：</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7i6c6xnp3stz4mw7dj9ttgqvy">一个可空值，该值绑定到未启用 <code>strictNullChecks</code> 的库中的指令。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="b1kv2pa1d78u3sdspiupjgbqc">对于没有使用
+<code>strictNullChecks</code>编译的库，其声明文件不会指示字段是否可以为
+<code>null</code>。 对于库正确处理
+<code>null</code>的情况，这是有问题的，因为编译器将根据省略
+<code>null</code>类型的声明文件检查可为空值。 因此，编译器会产生类型检查错误，因为它遵循
+<code>strictNullChecks</code>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="dtlauvueb6srecf7xh0qzv93g">使用
+<code>async</code>管道与你知道会同步发出的Observable。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="lv8ebpnbjdfhrwxoouk1uxt8"><code>async</code>管道当前假设它订阅的Observable可以是异步的，这意味着可能尚无可用值。 在这种情况下，它仍然必须返回一些 —— 即
+<code>null</code>。 换句话说，
+<code>async</code>管道的返回类型包括
+<code>null</code>，这可能导致在已知Observable同步发出非空值的情况下出现错误。</p>
+</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="54es7c2rgcymkqr9rfh05p9x0">对于上述问题，有两种潜在的解决方法：</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="alt5eu3j4swtcwvvst24ld3f2">在模板中，包括非空断言运算符 <code>!</code> 用在可为空的表达式的末尾，比如</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">user-detail</span> [<span class="hljs-attr">user</span>]=<span class="hljs-string">"user!"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">user-detail</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="befhase9t2f2ooqa7t0t83qiu">在这个例子中，编译器忽略了与可空性不兼容的类型，就像在TypeScript代码中一样。 在
+<code>async</code>管道的情况下，请注意表达式需要用括号括起来，如</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">user-detail</span> [<span class="hljs-attr">user</span>]=<span class="hljs-string">"(user$ | async)!"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">user-detail</span>&gt;</span></div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eyhczgdt8m5g8h33cex9x7crk">完全禁用 Angular 模板中的严格空值检查。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2ymm1fah99g05td8nbp96uuwy">当启用
+<code>strictTemplates</code>时，仍然可以禁用类型检查的某些方面。 将选项
+<code>strictNullInputTypes</code>设置为
+<code>false</code>可以在Angular模板中禁用严格的空值检查。 该标志适用于应用程序中的所有组件。</p>
+</li>
+
+  </ul>
+  
+  <h3 id="advice-for-library-authors">
+    <a href="#advice-for-library-authors" class="docs-anchor" tabindex="-1" aria-label="Link to Advice for library authors" data-ng_translator_product="100" data-ng_translator_ref_id="douurwqg9us4hxg5ygyczmlmq">给库作者的建议</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="e7zerx0tleauloo4y9y0gbgq2">作为库作者，你可以采取几项措施为用户提供最佳体验。 首先，通过启用
+<code>strictNullChecks</code>并根据需要在输入类型中包含
+<code>null</code>，向用户传达他们是否可以提供可空值。 此外，还可以提供特定于模板类型检查器的类型提示。 查看
+<a href="guide/directives/structural-directives#directive-type-checks">改进自定义指令的模板类型检查</a>和
+<a href="#input-setter-coercion">输入设置强制转换</a>。</p>
+
+  <h2 id="input-setter-coercion">
+    <a href="#input-setter-coercion" class="docs-anchor" tabindex="-1" aria-label="Link to Input setter coercion" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8zqnny1rhvxbdlmwt1hxevutl">输入 setter 强制类型转换</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bl2hxspb5f4hcc1e40rd1g86f">有时，希望指令或组件的
+<code>@Input()</code>改变其绑定值，通常使用输入的getter/setter对。 例如，考虑这个自定义按钮组件：</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d73vg8grv6l21gyaq6z003qsq">考虑以下指令：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'submit-button'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;div class="wrapper"&gt;</div><div class="hljs-ln-line">      &lt;button [disabled]="disabled"&gt;Submit&lt;/button&gt;</div><div class="hljs-ln-line">    &lt;/div&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SubmitButton</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> <span class="hljs-attr">_disabled</span>: <span class="hljs-built_in">boolean</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>()</div><div class="hljs-ln-line">  <span class="hljs-keyword">get</span> <span class="hljs-title function_">disabled</span>(): <span class="hljs-built_in">boolean</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">_disabled</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">set</span> <span class="hljs-title function_">disabled</span>(<span class="hljs-params">value: <span class="hljs-built_in">boolean</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">_disabled</span> = value;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5sb2k3pibgdmawslyhxogl8ls">在这里，组件的输入 <code>disabled</code> 将传给模板中的 <code>&lt;button&gt;</code>。只要将 <code>boolean</code> 值绑定到输入，所有这些工作都可以按预期进行。但是，假设使用者使用模板中的这个输入作为属性：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">submit-button</span> <span class="hljs-attr">disabled</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">submit-button</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5l4t8li6ctx9un463jtio0w6s">这与绑定具有相同的效果：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">submit-button</span> [<span class="hljs-attr">disabled</span>]=<span class="hljs-string">"''"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">submit-button</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5z8qppa5kwqqpr9qxtd9sngl2">在运行时，输入将设置为空字符串，这不是 <code>boolean</code> 值。处理此问题的 Angular 组件库通常将值“强制转换”到 setter 中的正确类型中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">set</span> <span class="hljs-title function_">disabled</span>(<span class="hljs-params">value: <span class="hljs-built_in">boolean</span></span>) {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">_disabled</span> = (value === <span class="hljs-string">''</span>) || value;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6zac9zts80jqtoc7nlnfa2g5l">最好在这里将 <code>value</code> 的类型从 <code>boolean</code> 更改为 <code>boolean|''</code> 以匹配 setter 实际会接受的一组值。TypeScript 4.3 之前的版本要求 getter 和 setter 的类型相同，因此，如果 getter 要返回 <code>boolean</code> 则 setter 会卡在较窄的类型上。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="65yssidyasqhuv2vigsa2hof2">如果消费者对模板启用了 Angular 的最严格的类型检查功能，则会产生一个问题：空字符串 <code>''</code> 实际上无法赋值给 <code>disabled</code> 字段，使用属性格式写会产生类型错误。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="39vdejmif13t0kvuangenbgzx">作为解决此问题的方法，Angular支持检查
+<code>@Input()</code>的更广泛、更宽松类型，而不是为输入字段本身声明的类型。 通过在组件类中添加具有
+<code>ngAcceptInputType_</code>前缀的静态属性来启用此功能：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SubmitButton</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> <span class="hljs-attr">_disabled</span>: <span class="hljs-built_in">boolean</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>()</div><div class="hljs-ln-line">  <span class="hljs-keyword">get</span> <span class="hljs-title function_">disabled</span>(): <span class="hljs-built_in">boolean</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">_disabled</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">set</span> <span class="hljs-title function_">disabled</span>(<span class="hljs-params">value: <span class="hljs-built_in">boolean</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">_disabled</span> = (value === <span class="hljs-string">''</span>) || value;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">static</span> <span class="hljs-attr">ngAcceptInputType_disabled</span>: <span class="hljs-built_in">boolean</span>|<span class="hljs-string">''</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3dyxqvwaurp5zgjwkm3izu29a">从 TypeScript 4.3 开始，setter 能够声明为接受 <code>boolean|''</code> 类型，这就让输入属性 setter 强制类型转换字段过时了。因此，输入属性 setter 强制类型转换字段也就弃用了。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="z9o6e3qwkgsl264f8q307msi">该字段不需要具有值。 其存在通知Angular类型检查器，
+<code>disabled</code>输入应被视为接受与类型
+<code>boolean|''</code>匹配的绑定。 后缀应为
+<code>@Input</code> 
+<em>字段</em>名称。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9mtm7uwh7yv4bsa8qnufjwxyn">请注意，如果给定输入存在 <code>ngAcceptInputType_</code> 覆盖，则设置器应能够处理任何覆盖类型的值。</p>
+
+  <h2 id="disabling-type-checking-using-any">
+    <a href="#disabling-type-checking-using-any" class="docs-anchor" tabindex="-1" aria-label="Link to Disabling type checking using <code>$any()</code>" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bldjm4zyg5yaly0v6npnm5j8e">使用 <code>$any()</code> 禁用类型检查</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9erazjy7igx5dzt77i3hj1o9f">通过将绑定表达式括在调用
+<code>$any()</code>转换伪函数中来禁用绑定表达式的检查。 编译器将其视为对
+<code>any</code>类型的转换，就像在TypeScript中使用
+<code>&lt;any&gt;</code>或
+<code>as any</code>转换时一样。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b488m88d8qs2pcr8cyesamynd">在以下范例中，将 <code>person</code> 强制转换为 <code>any</code> 类型可以压制错误 <code>Property address does not exist</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'{{$any(person).address.street}}'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  person?: <span class="hljs-title class_">Person</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

@@ -1,0 +1,64 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dfs8xgtee8br2hsr8dat5a984">在模板中使用管道</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/pipes/template.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2syj6pzq0tf15h3sj3hip8ucv">要应用一个 pipe，请在模板表达式中使用 pipe 操作符（
+<code>|</code>），如下列代码示例所示。</p>
+<div class="docs-code" header="app.component.html">
+    <div class="docs-code-header"><h3>app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The hero's birthday is </span><span class="hljs-template-variable">{{ <span class="hljs-name">birthday</span> | date }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ab6ffzs7ne3p3m8p5pbqsorft">组件的 
+<code>birthday</code> 值通过 pipe 操作符（
+<code>|</code>）传递给 
+<a href="api/common/DatePipe"><code>DatePipe</code></a>，其 pipe 名称为 
+<code>date</code>。此 pipe 以默认格式渲染日期，如 
+<strong>2023 年 4 月 07 日</strong>。</p>
+<div class="docs-code" header="app.component.ts" preview="true">
+    <div class="docs-code-header"><h3>app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { DatePipe } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'./app.component.html'</span>,</div><div class="hljs-ln-line">  imports: [DatePipe],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  birthday = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="additional-parameters-for-pipes">
+    <a href="#additional-parameters-for-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Additional parameters for pipes" data-ng_translator_product="100" data-ng_translator_ref_id="59rz6y5mmm1070wes98eazacf">Pipe 的附加参数</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6i8adzudry48lftrchrhx26vq">Pipe 可以接收附加参数来配置转换。参数可以是可选的或必要的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="86fgqz7suyizakq09yv9pwb2t">例如，
+<code>date</code> pipe 接受控制日期显示格式的可选参数。要指定参数，请在 pipe 名称后加上冒号（
+<code>:</code>）和参数值（格式）。</p>
+<div class="docs-code" header="app.component.html">
+    <div class="docs-code-header"><h3>app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The hero's birthday is in </span><span class="hljs-template-variable">{{ <span class="hljs-name">birthday</span> | date:<span class="hljs-string">'yyyy'</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="86frililfepua2bonxskvx9sy">Pipe 也可以接收多个参数。你可以通过冒号（
+<code>:</code>）分隔这些参数来传递多个参数。例如，
+<code>date</code> pipe 接受第二个可选参数来控制时区。</p>
+<div class="docs-code" header="app.component.html">
+    <div class="docs-code-header"><h3>app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The current time is: </span><span class="hljs-template-variable">{{ <span class="hljs-name">currentTime</span> | date:<span class="hljs-string">'hh:mm'</span>:<span class="hljs-string">'UTC'</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="3v60qzye7wajb3pnz0lmsmb66">这将以 
+<code>UTC</code> 时区显示当前时间（如 
+<code>10:53</code>）。</p>
+
+  <h2 id="chaining-pipes">
+    <a href="#chaining-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Chaining pipes" data-ng_translator_product="100" data-ng_translator_ref_id="4moqu4t0qd1qz7njd7uhnqluc">链式调用 pipe</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="aajhozv5faeenemi12d8w6vf">你可以连接多个 pipe，使一个 pipe 的输出成为下一个 pipe 的输入。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2oizjdvcz9esp2jgti0of1i1s">以下示例将日期传递给 
+<code>DatePipe</code>，然后将结果传递给 
+<a href="api/common/UpperCasePipe" title="API" reference><code>UpperCasePipe</code></a> pipe。</p>
+<div class="docs-code" header="app.component.html">
+    <div class="docs-code-header"><h3>app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The hero's birthday is </span><span class="hljs-template-variable">{{ <span class="hljs-name">birthday</span> | date }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The hero's birthday is in <span class="hljs-template-variable">{{ <span class="hljs-name">birthday</span> | date:<span class="hljs-string">'yyyy'</span> | uppercase }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div></code>
+    </pre>
+  </div>

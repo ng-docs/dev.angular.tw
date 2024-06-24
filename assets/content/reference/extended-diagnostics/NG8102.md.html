@@ -1,0 +1,55 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="63sz2csa8drvyhsjwhnz0q28b">空合并不为空</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/extended-diagnostics/NG8102.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="all8c7xq5q130p957tl5xz9wh">此诊断会在 Angular 模板中检测到无用的空值合并运算符（<code>??</code>）字符。具体来说，它会查找输入不可“为空”的操作，这意味着其类型不包括 <code>null</code> 或 <code>undefined</code>。对于这样的值，<code>??</code> 的右侧永远不会被使用。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">// Template displays `username` if present, falls back to 'root' if it is</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// `null` or `undefined`.</span></div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div&gt;{{ username ?? 'root' }}&lt;/div&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// `username` is declared as a `string` which *cannot* be `null` or</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// `undefined`.</span></div><div class="hljs-ln-line">  <span class="hljs-attr">username</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">'Angelino'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="whats-wrong-with-that">
+    <a href="#whats-wrong-with-that" class="docs-anchor" tabindex="-1" aria-label="Link to What's wrong with that?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dyj3fm6hh05czc2euad3kejpb">那有什么问题？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ac8oecznz7xzqv0bto9lsclig">将空值合并运算符与不可为空的输入一起使用没有任何效果，并且揭示出允许的值类型与它在模板中的渲染方式之间可能存在差异。开发人员可能会合理地假定在某些情况下会显示空值合并运算符的右侧，但它永远不会真正显示出来。这可能会导致对程序的预期输出感到困惑。</p>
+
+  <h2 id="what-should-i-do-instead">
+    <a href="#what-should-i-do-instead" class="docs-anchor" tabindex="-1" aria-label="Link to What should I do instead?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7bicb9bjjdedhs8bfd5vdiby7">我该怎么办？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5z5levvvnvph5qw6f6d8hzs0v">更新模板和声明的类型以同步两者。仔细检查输入的类型，并确认它是否真是可空的。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2dpiewxoav4u6u8ff050fmbu3">如果输入应该是可空的，请在其类型中添加 <code>null</code> 或 <code>undefined</code> 以表明这一点。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div&gt;{{ username ?? 'root' }}&lt;/div&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// `username` is now nullable. If it is ever set to `null`, 'root' will be</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// displayed.</span></div><div class="hljs-ln-line">  <span class="hljs-attr">username</span>: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span> = <span class="hljs-string">'Angelino'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4br0x5ql1lj3fk54rk29l4q1y">如果输入<em>不</em>应该为空，请删除 <code>??</code> 运算符及其右操作数，因为 TypeScript 会保证该值始终不可为空。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">// Template always displays `username`, which is guaranteed to never be `null`</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// or `undefined`.</span></div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div&gt;{{ username }}&lt;/div&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">username</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">'Angelino'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="configuration-requirements">
+    <a href="#configuration-requirements" class="docs-anchor" tabindex="-1" aria-label="Link to Configuration requirements" data-ng_translator_product="100" data-ng_translator_ref_id="bwdhyfdm5yb1t69cyimmn0hs0">配置要求</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1qijyem9mq2xsw60sc6rsqpmx"><a href="tools/cli/template-typecheck#strict-mode"><code>strictTemplates</code></a> 必须启用，才能发出任何扩展诊断。 
+<a href="tools/cli/template-typecheck#strict-null-checks"><code>strictNullChecks</code></a> 也必须启用，才能发出 
+<code>nullishCoalescingNotNullable</code> 诊断。</p>
+
+  <h2 id="what-if-i-cant-avoid-this">
+    <a href="#what-if-i-cant-avoid-this" class="docs-anchor" tabindex="-1" aria-label="Link to What if I can't avoid this?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="duupn560xw3oqrkqmgen1ccwo">如果我无法避免这种情况怎么办？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bzu6yb6isvsmddbdryz1qwy7l">可以通过编辑项目的 <code>tsconfig.json</code> 文件来禁用此诊断：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"angularCompilerOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"extendedDiagnostics"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"checks"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"nullishCoalescingNotNullable"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"suppress"</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1tl6suaasu3xo2b1onvdft0o9">有关更多信息，请参阅<a href="extended-diagnostics#configuration">扩展诊断配置</a>。</p>

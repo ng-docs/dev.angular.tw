@@ -1,0 +1,58 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="dkq04m352k4pbpuqvbtljcyxo">组件 ID 生成冲突</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0912.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b6ia6kyxbbkk9dsztyhh55gm6">在创建组件时，Angular 会为每个组件生成一个唯一的组件 ID。这是根据 Angular 组件的元数据生成的，包括但不限于：选择器、宿主绑定的数量、类属性名称、视图和内容查询。当两个组件元数据相同时（通常会共享相同的选择器），将发生 ID 生成冲突。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="am4noxyja3ucy2mzp5c2k0sor">组件 ID 会在 Angular 内部使用：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="p2hhsl3hh52euuqs6ltjyzsm">用于在样式封装时生成 DOM 节点的额外注解</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="7m71ighujxc17iegibgv6mbap">在 
+<a href="guide/hydration">水合</a> 过程中，以在 
+<a href="guide/ssr">服务器端渲染</a> 后恢复应用状态。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="mpkjgeuvrm0muvqfkkjx04mt">为避免可能由组件 ID 冲突引起的问题，建议按如下方式解决这些问题。</p>
+
+  <h2 id="example-of-a-component-id-collision">
+    <a href="#example-of-a-component-id-collision" class="docs-anchor" tabindex="-1" aria-label="Link to Example of a Component ID collision" data-ng_translator_product="100" data-ng_translator_ref_id="5iyra3m1qyklbpx4dvbc1k8m">组件 ID 冲突示例</a>
+  </h2>
+  <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'complex-template'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SomeComponent</span> {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'empty-template'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SomeMockedComponent</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ezmhmlpm6cgnq5ttaqthsncp">如果定义这样两个组件将引发 ID 生成冲突，并且在开发过程中将显示警告。</p>
+
+  <h2 id="debugging-the-error">
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="207fz22uthqig82fqplpjje5o">警告消息包括 ID 冲突的两个组件的类名。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4ylk8dny09fq1hkttibgcxdcr">可以使用以下解决方案之一解决该问题：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="amdsyao1wr7ymlcuhiw19030i">更改两个组件之一的选择器。例如，通过使用像 <code>:not()</code> 这样没有效果的伪选择器和不同的标签名称。</li>
+
+    </ol>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component:not(p)'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'empty-template'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SomeMockedComponent</span> {}</div></code>
+    </pre>
+  </div>
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a8v99msff7mzuf65wjh1wddp9">向两个组件之一添加额外的宿主属性。</li>
+
+    </ol>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'complex-template'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">host</span>: {<span class="hljs-string">'some-binding'</span>: <span class="hljs-string">'some-value'</span>},</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SomeComponent</span> {}</div></code>
+    </pre>
+  </div>

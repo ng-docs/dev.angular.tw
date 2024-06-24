@@ -1,0 +1,360 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c3ld6e883qix0bihtoqbgyk8c">Angular 的版本与发布</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/releases.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cy83zuk3a460sz7yu8japcgo7">你肯定希望 Angular 框架具有稳定性（stability）。稳定性可以确保组件与库、教程、工具和现有实践不会突然被弃用。稳定性是让基于 Angular 的生态系统变得繁荣的基石。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5avzuqkdpbpzuninnv273hnme">我们也和你一样希望 Angular 能持续演进。我们会努力确保这些你用于构建应用的基础能得到持续的改进，并让你能及时同步到 Web 生态系统的其它部分的最新进展，用户需求也是一样。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="apvem3rl32aoiyo2qax09rn6z">本文档包含一些我们所遵循的实践，它让我们能为你提供一个前沿的应用开发平台，同时兼顾稳定性。我们会努力确保将来的变化总是以一种可预期的方式引入。我们希望每个 Angular 用户都明白我们将在何时添加以及如何添加新特性，并且为那些将要移除的、准备弃用的特性提前做好准备。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="z1jmfes95oc5iwdau40ahm9i">有时，诸如移除 API 或特性等
+<em>重大变更</em>是必要的，以便创新并跟上不断发展的最佳实践、变化的依赖项或 Web 平台的变迁。这些重大变更会经过弃用流程，详见我们的
+<a href="#deprecation-policy">弃用策略</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9hk1ff7p46s95bhlewsxhao3t">为了使这些过渡尽可能简单，Angular 团队做出了以下承诺：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="41loqtiorvoz1boi2ryxvrmcv">我们会尽量减少重大变更的数量，并尽可能提供迁移工具。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4mi1423iv84fkkn8ontr8mj85">我们会遵循这里所讲的弃用策略，让你有时间把应用升级到最新的 API 和最佳实践。</li>
+
+  </ul>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="5xjm3dy60ebp0vasy8h3wk4sc"><strong>有帮助的：</strong>本文档中描述的实践适用于 Angular 2.0 及更高版本。如果你当前使用的是 AngularJS，请参阅
+<a href="https://angular.io/guide/upgrade" title="Upgrading from AngularJS" target="_blank">从 AngularJS 升级</a>。
+<em>AngularJS</em> 是所有 v1.x 版本的名称。</p>
+
+    </div>
+    
+  <h2 id="angular-versioning">
+    <a href="#angular-versioning" class="docs-anchor" tabindex="-1" aria-label="Link to Angular versioning" data-ng_translator_product="100" data-ng_translator_ref_id="89yqzhd1rxfz4d4ovjc69ex7e">Angular 版本控制</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5nrgt8txgx248gitjaenfqxx9">Angular 版本号表示发布引入的变更级别。这种使用
+<a href="https://semver.org/" title="Semantic versioning specification" target="_blank">语义化版本控制</a>有助于你了解升级到新版本的潜在影响。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8jz7uundtj4qczkcylv49obc7">Angular 的版本号包括三个部分：<code>major.minor.patch</code>。比如，版本 7.2.11 表示主版本号是 7，小版本号是 2，补丁版本号是 11。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2u4o1yy2hywqz8x9lmwp1tcdn">版本号是根据本次发布中包含的变更的级别进行递增的。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="acvgva7a0957wimydoa97z1wa">变更级别</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5u1ptvdkviqqzqfttt0n3azbt">主要版本发布</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="adjhtnt5be8efyy24oy3wrvbm">包含重要的新特性，更新过程中预计需要一些但很少的开发者协助。在更新到新主要版本时，你可能需要运行更新脚本、重构代码、运行额外测试并学习新 API。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="d99yqz79k92axfrqm62qpzc63">次要版本发布</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="75iwbgstvha4xqllm40uh7hix">包含某些新的小特性。次要版本发布完全向后兼容；在更新时不需要开发者协助，但你可以选择性地修改你的应用和库，以开始使用版本中新增的 API、特性和功能。我们在次要版本中通过扩展支持的版本来更新对等依赖项，但不要求项目更新这些依赖项。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="6jhrdzlof63u3tdq8s9ypxg3n">补丁版本发布</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3zm6ww5rw9fsrx5643z60r4ti">低风险的 bug 修复版本发布。在更新时不需要开发者协助。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="1vpth5q3g32yibptuagmrbpgr"><strong>有帮助的提示：</strong>从 Angular 版本 7 开始，Angular 核心和 CLI 的主要版本是对齐的。这意味着为了在开发 Angular 应用时使用 CLI，
+<code>@angular/core</code> 和 CLI 的版本需要保持一致。</p>
+
+    </div>
+    
+  <h3 id="preview-releases">
+    <a href="#preview-releases" class="docs-anchor" tabindex="-1" aria-label="Link to Preview releases" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8mdd9l1ijgmgulqf1p2swoaqq">预览版本</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="14d35wk6dh6496nks334cmbmt">我们通过提供每个主要和次要版本的 "Next" 和候选发布版本 (
+<code>rc</code>) 预发布来让你预览即将到来的内容：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="df3pw2gcycpwxjgglchy3sqi0">预发布类型</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="zj8rcpj7rqd02tctwgihx4d1">下一个</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="c8voc5w4ezkt8cj5cxkr4mp9r">正在积极开发和测试的版本。Next 版本以附加 
+<code>-next</code> 标识的版本标签表示，例如 
+<code>8.1.0-next.0</code>。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="b3foe96g43bc4dvfieshfxm0o">候选发布</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4jdqg29poht08zo3ncvruzb9i">特性完整并在最终测试中的版本。候选发布以附加 
+<code>-rc</code> 标识的版本标签表示，例如版本 
+<code>8.1.0-rc.0</code>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4bwznxriel4pp37gse5sypcpd">最新的 
+<code>next</code> 或 
+<code>rc</code> 预发布版本的文档可在 
+<a href="https://next.angular.dev" target="_blank">next.angular.dev</a> 获取。</p>
+
+  <h2 id="release-frequency">
+    <a href="#release-frequency" class="docs-anchor" tabindex="-1" aria-label="Link to Release frequency" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="77cj23ztmeidjvbme90mimgy1">发布频率</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b4ed7dl2braavzasdvbn4sndn">我们会定期发布新版本，以便随着 Angular 的不断演进，你可以提前计划并协调这些升级工作。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8y6aa1o0p2chzr77m8cg7gl2h"><strong>有帮助的提示：</strong>日期仅作为一般指导，可能会有所变动。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ahhnfbxd1hn5nhxv9uugvuvh">通常的发布周期如下：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d0xoagdx9cdpxhyy3haxbhaqf">每 6 个月一个主版本</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5k0ov5mp2773rs5ioa6j2iy40">每个主版本中包含 1~3 个小版本</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b537csxit5bp6n22gyqq2ezkn">差不多每周一个发行版或预发行版（<code>next</code> 或 <code>rc</code>）的补丁版本</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4t9w0mq6z27lv3eau3redq7re">这种发布的节奏能让渴望新功能的开发者在这些功能开发开发完成并通过我们的代码审查和集成测试流程后立即就可以使用，同时为那些喜欢在新功能经过 Google 和其他使用预发布版本的开发人员的验证后才采纳的生产环境用户，保持平台的稳定性和可靠性。</p>
+
+  <h2 id="support-policy-and-schedule">
+    <a href="#support-policy-and-schedule" class="docs-anchor" tabindex="-1" aria-label="Link to Support policy and schedule" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8icstc7fr1ormstt9br0fhylg">支持策略与计划</a>
+  </h2>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bd6u14g0y5c0w712tn3xgbr0k"><strong>有帮助的提示：</strong>提供的日期仅作为一般指导，可能会有所变动。</p>
+
+    </div>
+    
+  <h3 id="release-schedule">
+    <a href="#release-schedule" class="docs-anchor" tabindex="-1" aria-label="Link to Release schedule" data-ng_translator_product="100" data-ng_translator_ref_id="46uj6l0fwk75w67wm6vaufa3f">发布计划</a>
+  </h3>
+  
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="34ck2qsr4jsfv24ims2mht0vy">版本</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="41wc1cuthcz6gxexi14m9pirl">日期</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">v17.1</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="35g336r80zlydqkkxcefzmn7i">2024-01-15 当周</td>
+</tr>
+<tr>
+<td align="left">v17.2</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="e2ragprjatbxgdvywr5cb8toe">2024-02-12 当周</td>
+</tr>
+<tr>
+<td align="left">v17.3</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dkpuc8vs6hfn9g7kgfkvrrv28">2024-03-11 这一周</td>
+</tr>
+<tr>
+<td align="left">v18.0</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="13xcle7mv3kd59az996epsnxh">2024-05-20 这一周</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="support-window">
+    <a href="#support-window" class="docs-anchor" tabindex="-1" aria-label="Link to Support window" data-ng_translator_product="100" data-ng_translator_ref_id="drxfg0tekbmj5v1byvp3zemm6">支持窗口期</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ds69ese3uouxlbuvn4uf5ezf2">所有主版本的典型支持周期都是 18 个月。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7cqitl0idzcs08b7d6bolm4f9">支持阶段</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cnu4n11sq5c82z7m9slc7ghst">支持时间</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4kmcklhz9tpybitftvzfhzwvh">活跃期</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9fw9025ph5g2ownnl4vn8sxkh">6 个月</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7y9xfirfpwxseh192c7eju9y5">定期发布更新和补丁</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dnms3u215c6hug0ymnf1dcfre">长期支持 (LTS)</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dhaf7kuxosg4xie2iq03cexap">12 个月</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4ww46vlto50w3rgcrqhi6svf7">仅发布
+<a href="#lts-fixes">关键修复和安全补丁</a></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="actively-supported-versions">
+    <a href="#actively-supported-versions" class="docs-anchor" tabindex="-1" aria-label="Link to Actively supported versions" data-ng_translator_product="100" data-ng_translator_ref_id="9lsy5vso2g8f712gew2np6ei3">活跃支持版</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bmg9vyn63nzhjezjhl004s1eo">下表中提供了目前受支持的 Angular 版本的状态。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="34ck2qsr4jsfv24ims2mht0vy">版本</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dzohlxi4m6r11ra54ouqpmym6">状态</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="duz0jqs4340wk31t82ziwdgyi">已发布</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="79nrx9tk38mdttksajq75bnn3">活跃期结束</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ej4nrltixi5pdu0kz0jyrrljg">LTS 结束</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">^18.0.0</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4kmcklhz9tpybitftvzfhzwvh">活跃期</td>
+<td align="left">2024-05-22</td>
+<td align="left">2024-11-xx</td>
+<td align="left">2025-11-xx</td>
+</tr>
+<tr>
+<td align="left">^17.0.0</td>
+<td align="left">LTS</td>
+<td align="left">2023-11-08</td>
+<td align="left">2024-05-08</td>
+<td align="left">2025-05-15</td>
+</tr>
+<tr>
+<td align="left">^16.0.0</td>
+<td align="left">LTS</td>
+<td align="left">2023-05-03</td>
+<td align="left">2023-11-08</td>
+<td align="left">2024-11-08</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="62b24drggaq9leodr9hd3xls3">Angular 版本 v2 到 v15 已不再受支持。</p>
+
+  <h3 id="lts-fixes">
+    <a href="#lts-fixes" class="docs-anchor" tabindex="-1" aria-label="Link to LTS fixes" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3mlhl7057gqsj0pji66jzgbiv">LTS 修复</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="du80s9jjrg2tg0htykhye63zf">作为一个通用的规则，如果解决了下列问题之一，就会考虑对 LTS 版本进行修复：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3gem6lryd77q5x2mo6a3zno98">一个新发现的安全漏洞。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3lrqe42imrmpzzhx6uvp5o4j3">LTS 发布以后，由于第三方更改引起的回归性问题，比如浏览器的新版本。</li>
+
+  </ul>
+  
+  <h2 id="deprecation-policy">
+    <a href="#deprecation-policy" class="docs-anchor" tabindex="-1" aria-label="Link to Deprecation policy" data-ng_translator_product="100" data-ng_translator_ref_id="19uev1qhtoc7treii6vboztq9">弃用政策</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="58164ulnedbe95y63la4vr03t">当 Angular 团队计划移除某个 API 或特性时，会将其标记为
+<em>已弃用</em>。这是因为某个 API 已过时，被另一个 API 取代，或因其他原因停用。已弃用的 API 会在其弃用阶段继续保留，最短持续两个主要版本（大约一年）。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5f54lwhuz9z40k9ii5mpry1w8">为了保证你能有充足的时间和清晰的路径进行升级，我们制定了如下弃用策略：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1ehchv1utecd2c2di901s4m6r">弃用阶段</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="f2uon821g88wzo9cvlm1dwbj3">公告</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2fqtekwzbvl95upn0k4gflupj">我们在
+<a href="https://github.com/angular/angular/blob/main/CHANGELOG.md" title="Angular" change log target="_blank">变更日志</a>中宣布弃用的 API 和特性。弃用的 API 会在
+<a href="api?status=deprecated">文档</a>中以
+<del>删除线</del>显示。当我们宣布弃用时，我们还会宣布一个推荐的更新路径。此外，所有弃用的 API 都会在相应的文档中添加
+<code>@deprecated</code>注解，这样如果你的项目依赖于这些 API，文本编辑器和 IDE 就能提供提示。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="abgsrrxogroq92lrxz1fn4ih4">弃用周期</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="37gidc0rj6u8i1y8zswpfehmy">当某个 API 或特性被弃用时，它至少会在接下来的两个主要版本中（至少 12 个月内）保留。在此之后，弃用的 API 和特性会被列为移除候选对象。弃用可以在任何版本中宣布，但弃用的 API 或特性只有在主要版本中才会移除。在弃用的 API 或特性被移除之前，它会根据 LTS 支持策略进行维护，这意味着只有关键和安全问题会被修复。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e5ecwu11ko1qwcmg6nrxjzqjm">npm 依赖项</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8d367xl93op01tzr1dh81e3mq">我们只在主要版本中进行需要对你的应用进行更改的 npm 依赖更新。在次要版本中，我们通过扩展支持的版本来更新 peer 依赖，但我们不会要求项目在未来主要版本之前更新这些依赖。这意味着在次要 Angular 版本发布期间，Angular 应用和库中的 npm 依赖更新是可选的。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="compatibility-policy">
+    <a href="#compatibility-policy" class="docs-anchor" tabindex="-1" aria-label="Link to Compatibility policy" data-ng_translator_product="100" data-ng_translator_ref_id="bl63t6jdulbet7na0u20fyp56">兼容性政策</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dtxk47anohmp1c5xk41zwzmvl">Angular 是许多包、子项目和工具的集合。为了防止意外使用私有 API，并让你能清楚地了解哪些内容包含在这里描述的实践中 —— 我们记录了哪些内容被视为我们的公共 API 表面。详情请参见
+<a href="https://github.com/angular/angular/blob/main/docs/PUBLIC_API.md" title="Supported" public api surface of angular target="_blank">Angular 的支持公共 API 表面</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8ggmttb2w2uao0lr2arta631k">为了保证 Angular 的向后兼容性，我们在合并任何更改之前进行一系列检查：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="9s0pky435hndmqx0fw7m0ldmu">单元测试和集成测试</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="dox08am87tqppfhlgf5kakhhk">比较更改前后的公共 API 表面的类型定义</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="b7l7dfyn571seemdx8azqts0t">运行所有依赖 Angular 的 Google 应用的测试</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="96d9m20ncfgfz3qp0oz13etzy">对公共 API 表面的任何更改都按照之前描述的版本控制、支持和弃用政策进行。在特殊情况下，如关键安全补丁，修复可能会引入向后不兼容的更改。此类特殊情况会通过框架的官方沟通渠道发布明确通知。</p>
+
+  <h2 id="breaking-change-policy-and-update-paths">
+    <a href="#breaking-change-policy-and-update-paths" class="docs-anchor" tabindex="-1" aria-label="Link to Breaking change policy and update paths" data-ng_translator_product="100" data-ng_translator_ref_id="dassoatk4r0krcvl2yhr4zgkq">重大更改政策和更新路径</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dcv2bl577joxz96upyc6u2nt1">重大更改要求你进行调整，因为更改后的状态与更改前的状态不兼容。你可以在
+<a href="#compatibility-policy">兼容性政策</a>中找到此规则的罕见例外。重大更改的例子包括移除公共 API 或更改 Angular 的类型定义、更改调用的时间点，或更新到包含重大更改的 Angular 依赖的新版本。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bq1n0ahiw4vmkzjomtrx54fxd">为了在 Angular 中支持你应对重大更改：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="85kpstbd1ibct8avvz2hxf8md">我们在移除公共 API 之前遵循我们的
+<a href="#deprecation-policy">弃用政策</a></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="a1fm1t8e5tob4uhqgrdy6hlru">通过
+<code>ng update</code>命令支持更新自动化。它提供代码转换，我们通常会在 Google 的数十万个项目中提前进行测试</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="6v4xg6nboxcyn5uni6tfaueor">逐步说明如何从一个主要版本更新到另一个版本，请参见
+<a href="update-guide">"Angular 更新指南"</a></li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="66kz1pwdyha3bsu8cx0o2yi6t">你可以 <code>ng update</code> 到任何版本的 Angular，前提是满足以下条件：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5ie0yc8obnb8f8i9f2gccpqe7">你要更新<em>到</em>的版本是受支持的。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="6tnglgdismsvjigni1qfx24gc">你想要更新的版本
+<em>从</em>你想要升级到的版本中不超过一个主要版本。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9tfwe8g5p4d8or5i6l0lsjttx">比如，你可以从版本 11 更新到版本 12，前提是版本 12 仍受支持。如果要跨多个主要版本进行更新，请每次更新一个主要版本。比如，要从版本 10 更新到版本 12 时：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5es8i6trgkpevsnzb27l19h3k">从版本 10 更新到版本 11。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8hbcg40vfinqpe9hxt94h6s1w">从版本 11 更新到版本 12。</li>
+
+    </ol>
+    
+  <h2 id="developer-preview">
+    <a href="#developer-preview" class="docs-anchor" tabindex="-1" aria-label="Link to Developer Preview" data-ng_translator_product="100" data-ng_translator_ref_id="86n9q9u2d801xkymqduknpfoc">开发者预览</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dzqe5h98e46pvxs52tio1x2mo">有时我们会在“开发者预览”标签下介绍新的 API。这些是功能齐全且经过优化的 API，但我们还没有准备好根据正常的弃用政策来稳定它们。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bjrdcss7z3pos5fcpi76cvhq9">这可能是因为我们希望在稳定之前从真实应用程序收集反馈，或者因为相关的文档或迁移工具不完全完整。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a5tqb0f7251s5kkoc62r7gpzc">本文档中描述的政策和实践不适用于标记为 Developer Preview 的 API。此类 API 可以随时更改，即使在框架的新补丁版本中也是如此。团队应该自己决定使用开发者预览版 API 的好处是否值得冒险破坏我们正常使用语义版本控制之外的更改。</p>
+
+  <h2 id="experimental">
+    <a href="#experimental" class="docs-anchor" tabindex="-1" aria-label="Link to Experimental" data-ng_translator_product="100" data-ng_translator_ref_id="6nbxesf9yedq2v91fpv66jmd1">实验性</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2u68pz5t0hi5q91ntlezikzus">这些 API 可能永远不会变得稳定，或者在变得稳定之前会有重大变化。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="c332xs5jzyltwkgr8yr2u4zv9">本文档中描述的政策和做法不适用于标记为实验性的 API。此类 API 可能随时更改，即使在框架的新补丁版本中也是如此。团队应自行决定使用实验性 API 的好处是否值得在我们通常使用的语义化版本控制之外承受破坏性更改的风险。</p>

@@ -1,0 +1,177 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="dr0vcdnen5sx7s3ycj8h8wqw0">与 Service Worker 通信</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/ecosystem/service-workers/communications.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="63q73dcyovfih3r9qbgkuvqba">启用 service worker 支持不仅仅是注册 service worker；它还提供了可用于与 service worker 交互并控制应用程序缓存的服务。</p>
+
+  <h2 id="swupdate-service">
+    <a href="#swupdate-service" class="docs-anchor" tabindex="-1" aria-label="Link to <code>SwUpdate</code> service" data-ng_translator_product="100" data-ng_translator_ref_id="7w5p5qw5pcra31y0gtc43vbze"><code>SwUpdate</code> 服务</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ak70rgoqn43sm2lhj68gfqcc5"><code>SwUpdate</code> 服务使你能够访问指示 service worker 发现并安装可用更新的事件。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="j3w1m765tjxzx2kdnasx7s31"><code>SwUpdate</code> 服务支持三种不同的操作：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="9fhdql30b5ekx4iaktiqu6zu8">当在服务器上<em>检测到</em>更新版本时，接收通知，更新版本已
+<em>安装并准备</em>在本地使用，或当
+<em>安装失败</em>时。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="78k1ael42rawv8yjuyyp92pyf">要求 service worker 检查服务器上的新更新。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="tuzozdly4sfnsput2nl6dtuh">要求 service worker 激活当前标签页的最新应用程序版本。</li>
+
+  </ul>
+  
+  <h3 id="version-updates">
+    <a href="#version-updates" class="docs-anchor" tabindex="-1" aria-label="Link to Version updates" data-ng_translator_product="100" data-ng_translator_ref_id="43bbcswvupxp65jclq9u7c8h">版本更新</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ezrs7f7436irmx4suh6ahouyf"><code>versionUpdates</code> 是 
+<code>SwUpdate</code> 的一个 
+<code>Observable</code> 属性，它发出四种事件类型：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="83ew77hqwxy9jnfn8ivgnfi9y">事件类型</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>VersionDetectedEvent</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ls6m4q7zon819ceagdw5foct">当 service worker 检测到服务器上的应用的新版本并即将开始下载时发出。</td>
+</tr>
+<tr>
+<td align="left"><code>NoNewVersionDetectedEvent</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bo346pa8qr8vntyqfhkpl0vlq">当 service worker 检查服务器上的应用版本并未找到新版本时发出。</td>
+</tr>
+<tr>
+<td align="left"><code>VersionReadyEvent</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ml98u0w9226w7enestefmd1c">当应用的新版本可供客户端激活时发出。它可用于通知用户有可用更新或提示他们刷新页面。</td>
+</tr>
+<tr>
+<td align="left"><code>VersionInstallationFailedEvent</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="edlf6qfttb5nk9viyo5f34xrj">新版本安装失败时发出。它可用于记录/监控目的。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="docs-code" path="adev/src/content/examples/service-worker-getting-started/src/app/log-update.service.ts" visiblelines="3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21" header="log-update.service.ts">
+    <div class="docs-code-header"><h3>log-update.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Injectable</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">SwUpdate</span>, <span class="hljs-title class_">VersionReadyEvent</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/service-worker'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({<span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LogUpdateService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">updates: SwUpdate</span>) {</div><div class="hljs-ln-line">    updates.<span class="hljs-property">versionUpdates</span>.<span class="hljs-title function_">subscribe</span>(<span class="hljs-function">(<span class="hljs-params">evt</span>) =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-keyword">switch</span> (evt.<span class="hljs-property">type</span>) {</div><div class="hljs-ln-line">        <span class="hljs-keyword">case</span> <span class="hljs-string">'VERSION_DETECTED'</span>:</div><div class="hljs-ln-line">          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Downloading new app version: <span class="hljs-subst">${evt.version.hash}</span>`</span>);</div><div class="hljs-ln-line">          <span class="hljs-keyword">break</span>;</div><div class="hljs-ln-line">        <span class="hljs-keyword">case</span> <span class="hljs-string">'VERSION_READY'</span>:</div><div class="hljs-ln-line">          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Current app version: <span class="hljs-subst">${evt.currentVersion.hash}</span>`</span>);</div><div class="hljs-ln-line">          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`New app version ready for use: <span class="hljs-subst">${evt.latestVersion.hash}</span>`</span>);</div><div class="hljs-ln-line">          <span class="hljs-keyword">break</span>;</div><div class="hljs-ln-line">        <span class="hljs-keyword">case</span> <span class="hljs-string">'VERSION_INSTALLATION_FAILED'</span>:</div><div class="hljs-ln-line">          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Failed to install app version '<span class="hljs-subst">${evt.version.hash}</span>': <span class="hljs-subst">${evt.error}</span>`</span>);</div><div class="hljs-ln-line">          <span class="hljs-keyword">break</span>;</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="checking-for-updates">
+    <a href="#checking-for-updates" class="docs-anchor" tabindex="-1" aria-label="Link to Checking for updates" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="br7lytwh2mmd44y1dbrfrfrbm">检查更新</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7cgjqiri6c5q4f7b2u3cvo03p">可以要求 Service Worker 检查是否有任何更新已经发布到了服务器上。Service Worker 会在初始化和每次导航请求（也就是用户导航到应用中的另一个地址）时检查更新。不过，如果你的站点更新非常频繁，或者需要按计划进行更新，你可能会选择手动检查更新。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eqxqfrgt6wk0zkwxv71wfporm">通过调用 <code>checkForUpdate()</code> 方法来实现：</p>
+<div class="docs-code" path="adev/src/content/examples/service-worker-getting-started/src/app/check-for-update.service.ts" header="check-for-update.service.ts">
+    <div class="docs-code-header"><h3>check-for-update.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">ApplicationRef</span>, <span class="hljs-title class_">Injectable</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">SwUpdate</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/service-worker'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {concat, interval} <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {first} <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/operators'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({<span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CheckForUpdateService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">appRef: ApplicationRef, updates: SwUpdate</span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Allow the app to stabilize first, before starting</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// polling for updates with `interval()`.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> appIsStable$ = appRef.<span class="hljs-property">isStable</span>.<span class="hljs-title function_">pipe</span>(<span class="hljs-title function_">first</span>(<span class="hljs-function">(<span class="hljs-params">isStable</span>) =&gt;</span> isStable === <span class="hljs-literal">true</span>));</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> everySixHours$ = <span class="hljs-title function_">interval</span>(<span class="hljs-number">6</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>);</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> everySixHoursOnceAppIsStable$ = <span class="hljs-title function_">concat</span>(appIsStable$, everySixHours$);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    everySixHoursOnceAppIsStable$.<span class="hljs-title function_">subscribe</span>(<span class="hljs-keyword">async</span> () =&gt; {</div><div class="hljs-ln-line">      <span class="hljs-keyword">try</span> {</div><div class="hljs-ln-line">        <span class="hljs-keyword">const</span> updateFound = <span class="hljs-keyword">await</span> updates.<span class="hljs-title function_">checkForUpdate</span>();</div><div class="hljs-ln-line">        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(updateFound ? <span class="hljs-string">'A new version is available.'</span> : <span class="hljs-string">'Already on the latest version.'</span>);</div><div class="hljs-ln-line">      } <span class="hljs-keyword">catch</span> (err) {</div><div class="hljs-ln-line">        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">'Failed to check for updates:'</span>, err);</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b9d8ys7r2ku82gmgyimtssxqc">该方法返回一个用来表示检查更新已经成功完成的 <code>Promise&lt;boolean&gt;</code>。这种检查可能会失败，它会导致此 <code>Promise</code> 被拒绝（reject）。</p>
+
+    <div class="docs-callout docs-callout-important">
+      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="5ybv4tnt8b7hsk7dcfkvic4k7">稳定化和 service worker 注册</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="bgr54g9q2jptq9rk03faeslq8">为了避免对页面的初始渲染产生负面影响，默认情况下 Angular service worker 服务在注册 ServiceWorker 脚本之前会等待应用程序稳定化最多 30 秒。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cy6khty6mqsohxftskeia5nve">持续轮询更新，例如使用 
+<a href="https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/setInterval" target="_blank">setInterval()</a> 或 RxJS 的 
+<a href="https://rxjs.dev/api/index/function/interval" target="_blank">interval()</a>，会阻止应用程序稳定化，直到达到 30 秒的上限，ServiceWorker 脚本才会注册到浏览器中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="aba5teaftdh55hdedvfrp8zra">对于应用程序执行的任何轮询都是如此。 查看 
+<a href="api/core/ApplicationRef#isStable">isStable</a> 文档以获取更多信息。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="59n0wdezy0hceclajldh3xiiv">可以通过在开始轮询更新之前先等应用达到稳定态来消除这种延迟，如上述例子所示。另外，你还可以为 ServiceWorker 定义不一样的 <a href="api/service-worker/SwRegistrationOptions#registrationStrategy">注册策略</a>。</p>
+
+    </div>
+    
+  <h3 id="updating-to-the-latest-version">
+    <a href="#updating-to-the-latest-version" class="docs-anchor" tabindex="-1" aria-label="Link to Updating to the latest version" data-ng_translator_product="100" data-ng_translator_ref_id="6uakk7yr0psl3m27onmqr7tj1">升级到最新版本</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9sq3nztzoz1d1pvcfrg7tomha">你可以通过在新版本就绪后立即重新加载页面来将现有选项卡更新到最新版本。为避免中断用户的进度，一般来说最好提示用户并让他们确认可以重新加载页面并更新到最新版本：</p>
+<div class="docs-code" path="adev/src/content/examples/service-worker-getting-started/src/app/prompt-update.service.ts" visiblelines="8,9,10,11,12,13,14,15,16,17,18,28,29" header="prompt-update.service.ts">
+    <div class="docs-code-header"><h3>prompt-update.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Injectable</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {filter, map} <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/operators'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">SwUpdate</span>, <span class="hljs-title class_">VersionReadyEvent</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/service-worker'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">promptUser</span>(<span class="hljs-params">event: VersionReadyEvent</span>): <span class="hljs-built_in">boolean</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({<span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PromptUpdateService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">swUpdate: SwUpdate</span>) {</div><div class="hljs-ln-line">    swUpdate.<span class="hljs-property">versionUpdates</span></div><div class="hljs-ln-line">      .<span class="hljs-title function_">pipe</span>(<span class="hljs-title function_">filter</span>((evt): evt is <span class="hljs-title class_">VersionReadyEvent</span> =&gt; evt.<span class="hljs-property">type</span> === <span class="hljs-string">'VERSION_READY'</span>))</div><div class="hljs-ln-line">      .<span class="hljs-title function_">subscribe</span>(<span class="hljs-function">(<span class="hljs-params">evt</span>) =&gt;</span> {</div><div class="hljs-ln-line">        <span class="hljs-keyword">if</span> (<span class="hljs-title function_">promptUser</span>(evt)) {</div><div class="hljs-ln-line">          <span class="hljs-comment">// Reload the page to update to the latest version.</span></div><div class="hljs-ln-line">          <span class="hljs-variable language_">document</span>.<span class="hljs-property">location</span>.<span class="hljs-title function_">reload</span>();</div><div class="hljs-ln-line">        }</div><div class="hljs-ln-line">      });</div><div class="hljs-ln-line">    <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> updatesAvailable = swUpdate.<span class="hljs-property">versionUpdates</span>.<span class="hljs-title function_">pipe</span>(</div><div class="hljs-ln-line">      <span class="hljs-title function_">filter</span>((evt): evt is <span class="hljs-title class_">VersionReadyEvent</span> =&gt; evt.<span class="hljs-property">type</span> === <span class="hljs-string">'VERSION_READY'</span>),</div><div class="hljs-ln-line">      <span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">evt</span>) =&gt;</span> ({</div><div class="hljs-ln-line">        <span class="hljs-attr">type</span>: <span class="hljs-string">'UPDATE_AVAILABLE'</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">current</span>: evt.<span class="hljs-property">currentVersion</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">available</span>: evt.<span class="hljs-property">latestVersion</span>,</div><div class="hljs-ln-line">      })),</div><div class="hljs-ln-line">    );</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-important">
+      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="e7v8n5xk3qp506ma8szhq5c4u">无需重新加载即可安全更新</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="5xsfbkrzqapf92y2uhtl329pq">调用 
+<code>activateUpdate()</code> 可以将标签页更新到最新版本而无需重新加载页面，但这可能会破坏应用程序。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dgriydphcvlkf4004bvzf9tdi">在无需重新加载的情况下进行更新可能会导致应用外壳与其他页面资源之间出现版本不匹配，例如惰性加载的块，它们的文件名可能会在不同版本之间发生变化。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6dkewm3gpr2emirrdoy6ijyi9">如果你确信对于你的特定用例，这种情况是安全的，你可以只用 <code>activateUpdate()</code>。</p>
+
+    </div>
+    
+  <h3 id="handling-an-unrecoverable-state">
+    <a href="#handling-an-unrecoverable-state" class="docs-anchor" tabindex="-1" aria-label="Link to Handling an unrecoverable state" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1mcushj1a5m9bft1zxj8gtnsv">处理不可恢复的状态</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bclhvimq0gw2z5fntxyydrma3">在某些情况下，Service Worker 用来为客户端提供服务的应用版本可能处于损坏状态，如果不重新加载整个页面，则无法恢复该状态。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cvqxtkpv55gz65evfq9k5h0x8">比如，设想以下情形：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="9pb05hefx4fu0jy4wnchlgfy7">用户首次打开应用时，服务工作者会缓存应用的最新版本。假设应用的缓存资产包括 
+<code>index.html</code>、
+<code>main.&lt;main-hash-1&gt;.js</code> 和 
+<code>lazy-chunk.&lt;lazy-hash-1&gt;.js</code>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e1jg94blk7kidx8jya9e567mr">用户关闭该应用程序，并且有一段时间没有打开它。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="70xxhhnjd9ic6kg2mzkazeb9g">一段时间后，新版本应用部署到服务器。这个更新的版本包括文件 
+<code>index.html</code>、
+<code>main.&lt;main-hash-2&gt;.js</code> 和 
+<code>lazy-chunk.&lt;lazy-hash-2&gt;.js</code>。</p>
+</li>
+
+    </ol>
+    
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="a3kcgh9pm6qlvn4145l28zdcn"><strong>重要：</strong> 现在哈希值不同了，因为文件内容有变化。旧版本不再在服务器上可用。</p>
+
+    </div>
+    
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="8tlh8aiwfjv4zf6h7hk8g9mg9">与此同时，用户的浏览器决定从缓存中清除 
+<code>lazy-chunk.&lt;lazy-hash-1&gt;.js</code>。浏览器可能决定从缓存中清除特定（或所有）资源以回收磁盘空间。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="f3flglsrzeoot3bxyeedoi3w9">用户再次打开应用。服务工作者提供其现在已知的最新版本，即旧版本（
+<code>index.html</code> 和 
+<code>main.&lt;main-hash-1&gt;.js</code>）。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a4qewpliybiqa2rzigei49jd2">在稍后的某个时刻，该应用程序请求惰性捆绑包 <code>lazy-chunk.&lt;lazy-hash-1&gt;.js</code>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="cxiwld4653vycue99trz2z7t9">服务工作者无法在缓存中找到该资源（请记住浏览器将其清除）。也无法从服务器检索（因为服务器现在只有来自新版本的 
+<code>lazy-chunk.&lt;lazy-hash-2&gt;.js</code>）。</p>
+</li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bgzm7q34dawnl2us97fuk467l">在上述情况下，服务工作者无法提供通常会被缓存的资源。特定应用版本已损坏，没有办法在不重新加载页面的情况下修复客户端状态。在这种情况下，服务工作者通过发送 
+<code>UnrecoverableStateEvent</code> 事件来通知客户端。订阅 
+<code>SwUpdate#unrecoverable</code> 来接收通知并处理这些错误。</p>
+<div class="docs-code" path="adev/src/content/examples/service-worker-getting-started/src/app/handle-unrecoverable-state.service.ts" visiblelines="5,6,7,8,9,10,11,12,13,14,15,16" header="handle-unrecoverable-state.service.ts">
+    <div class="docs-code-header"><h3>handle-unrecoverable-state.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Injectable</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">SwUpdate</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/service-worker'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">notifyUser</span>(<span class="hljs-params">message: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">void</span> {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({<span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HandleUnrecoverableStateService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">updates: SwUpdate</span>) {</div><div class="hljs-ln-line">    updates.<span class="hljs-property">unrecoverable</span>.<span class="hljs-title function_">subscribe</span>(<span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-title function_">notifyUser</span>(</div><div class="hljs-ln-line">        <span class="hljs-string">'An error occurred that we cannot recover from:\n'</span> +</div><div class="hljs-ln-line">          event.<span class="hljs-property">reason</span> +</div><div class="hljs-ln-line">          <span class="hljs-string">'\n\nPlease reload the page.'</span>,</div><div class="hljs-ln-line">      );</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h2 id="more-on-angular-service-workers">
+    <a href="#more-on-angular-service-workers" class="docs-anchor" tabindex="-1" aria-label="Link to More on Angular service workers" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e9jl51v338pdg88lkv1cl8f1i">关于 Angular Service Worker 的更多信息</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1oolgylns9kaynftarwog49tq">你可能还对下列内容感兴趣：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="ecosystem/service-workers/push-notifications" data-ng_translator_product="100" data-ng_translator_ref_id="b1fmcvag2ldn478spoka7jbb3">推送通知</a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/devops" data-ng_translator_product="100" data-ng_translator_ref_id="7q4y6g2v52ulz6wah6v8ethrc">Service Worker 运维</a>
+    
+
+    </nav>
+    

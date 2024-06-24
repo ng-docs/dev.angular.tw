@@ -1,0 +1,653 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6yfs1kmhiyiv4r32nvdu0rsmc">常见路由任务</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/routing/common-router-tasks.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="471orehxuzjoyjiw7uznv54jh">本主题讲述当把 Angular 路由器添加到应用中时，如何实现多种常见路由任务。</p>
+
+  <h2 id="generate-an-application-with-routing-enabled">
+    <a href="#generate-an-application-with-routing-enabled" class="docs-anchor" tabindex="-1" aria-label="Link to Generate an application with routing enabled" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bcca0m2mdm6ycaa2y19mcgxgt">生成一个支持路由的应用</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="b4krzt4kvaasas6wsbmwse5y2">以下命令使用 Angular CLI 生成一个带有应用路由的基础 Angular 应用。以下示例中的应用名称是 
+<code>routing-app</code>。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng new routing-app</div></code>
+    </pre>
+  </div>
+  <h3 id="adding-components-for-routing">
+    <a href="#adding-components-for-routing" class="docs-anchor" tabindex="-1" aria-label="Link to Adding components for routing" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8w9g3cq2flvfgre7s43wf229h">添加用于路由的组件</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9et4e7474ccc0j14it0id3t0">要使用 Angular 路由器，应用需要至少有两个组件，以便它可以从一个导航到另一个。要使用 CLI 创建一个组件，请在命令行中输入以下内容，其中 
+<code>first</code> 是你的组件名称：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate component first</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ag186so3e9bxzfham6kg0vudf">对第二个组件重复此步骤，但给它一个不同的名称。这里，新的名称是 
+<code>second</code>。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate component second</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="euisgy5e8h0cld8145i9hfnpv">CLI 会自动附加 
+<code>Component</code>，因此如果你写 
+<code>first-component</code>，你的组件将是 
+<code>FirstComponentComponent</code>。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3><code>base href</code></h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="1wuom04mycej8w87t6ibtuy7o">本指南适用于 CLI 生成的 Angular 应用。</p>
+
+    </div>
+    
+  <h3 id="importing-your-new-components">
+    <a href="#importing-your-new-components" class="docs-anchor" tabindex="-1" aria-label="Link to Importing your new components" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="754j9wgphjoioo84434yj84i0">导入这些新组件</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="emfitcsv6d9vjtuis4kljkzhm">要使用你的新组件，在文件顶部将它们导入 
+<code>app.routes.ts</code>，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">FirstComponent</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'./first/first.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">SecondComponent</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'./second/second.component'</span>;</div></code>
+    </pre>
+  </div>
+  <h2 id="defining-a-basic-route">
+    <a href="#defining-a-basic-route" class="docs-anchor" tabindex="-1" aria-label="Link to Defining a basic route" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5nwyz52auwe1skyafrmu7vnr8">定义一个基本路由</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f0x03vm9rom9nwtyeyrhbptzw">创建路由有三个基本的构建块。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dw4dpzf0qlzqgml9hupc3hsri">将路由导入 
+<code>app.config.ts</code> 并添加到 
+<code>provideRouter</code> 函数中。以下是使用 CLI 的默认 
+<code>ApplicationConfig</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [<span class="hljs-title function_">provideRouter</span>(routes)]</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dnrbi08yzwoi13vkvo8jsc3xe">Angular CLI 会为你执行此步骤。但是，如果你手动创建应用或处理现有的非 CLI 应用，请验证导入和配置是否正确。</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="set-up-a-routes-array-for-your-routes">
+    <a href="#set-up-a-routes-array-for-your-routes" class="docs-anchor" tabindex="-1" aria-label="Link to Set up a <code>Routes</code> array for your routes" data-ng_translator_product="100" data-ng_translator_ref_id="1kgrdmp75zipak7hnapxmmnm2">为你的路由设置一个 
+<code>Routes</code> 数组</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="6jg88x9c0ezaovg51z5qvarmj">Angular CLI 会自动执行此步骤。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Routes</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [];</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="define-your-routes-in-your-routes-array">
+    <a href="#define-your-routes-in-your-routes-array" class="docs-anchor" tabindex="-1" aria-label="Link to Define your routes in your <code>Routes</code> array" data-ng_translator_product="100" data-ng_translator_ref_id="8f24g52gjlrt71lilud7ug4ti">在你的 
+<code>Routes</code> 数组中定义你的路由</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="dce5isg4d7dzpqrgilu4oa827">此数组中的每个路由都是一个包含两个属性的 JavaScript 对象。第一个属性 
+<code>path</code> 定义了路由的 URL 路径。第二个属性 
+<code>component</code> 定义了 Angular 应该为相应路径使用的组件。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'first-component'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">FirstComponent</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'second-component'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">SecondComponent</span> },</div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="add-your-routes-to-your-application">
+    <a href="#add-your-routes-to-your-application" class="docs-anchor" tabindex="-1" aria-label="Link to Add your routes to your application" data-ng_translator_product="100" data-ng_translator_ref_id="6stct5w8pr963nyd8h69n8uz4">将你的路由添加到应用中</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="a0d4092efk1g2x4zliiwerona">现在你已经定义了路由，将它们添加到你的应用中。首先，为两个组件添加链接。将要添加路由的锚点标签赋予 
+<code>routerLink</code> 属性。设置此属性的值为用户点击每个链接时要显示的组件。接下来，更新你的组件模板以包含 
+<code>&lt;router-outlet&gt;</code>。此元素通知 Angular 更新应用视图为所选路由的组件。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Angular Router App<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/first-component"</span> <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"active"</span> <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</span>First Component<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/second-component"</span> <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"active"</span> <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</span>Second Component<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- The routed views render in the &lt;router-outlet&gt;--&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9zqdz96o338i0j6afowcbxpni">你还需要将 
+<code>RouterLink</code>、
+<code>RouterLinkActive</code> 和 
+<code>RouterOutlet</code> 添加到 
+<code>AppComponent</code> 的 
+<code>imports</code> 数组中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">CommonModule</span>, <span class="hljs-title class_">RouterOutlet</span>, <span class="hljs-title class_">RouterLink</span>, <span class="hljs-title class_">RouterLinkActive</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">'./app.component.html'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">'./app.component.css'</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  title = <span class="hljs-string">'routing-app'</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    
+  <h3 id="route-order">
+    <a href="#route-order" class="docs-anchor" tabindex="-1" aria-label="Link to Route order" data-ng_translator_product="100" data-ng_translator_ref_id="b07tqkuaeqbu6ftd6hesx7p5o">路由顺序</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9970omghqcj6ve1a2lq7yku79">路由的顺序很重要，因为 
+<code>Router</code> 使用先匹配先赢策略来匹配路由，因此更具体的路由应放在不太具体的路由上方。 优先列出具有静态路径的路由，然后是空路径路由（匹配默认路由）。 
+<a href="guide/routing/common-router-tasks#setting-up-wildcard-routes">通配符路由</a> 放在最后，因为它匹配每个 URL，且 
+<code>Router</code> 仅在没有其他路由匹配时才选择它。</p>
+
+  <h2 id="getting-route-information">
+    <a href="#getting-route-information" class="docs-anchor" tabindex="-1" aria-label="Link to Getting route information" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="20n06h04ms112eszs2htisb5t">获取路由信息</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8gbgunblsv82f0o9um1jnuzti">通常，当用户导航你的应用时，你会希望把信息从一个组件传递到另一个组件。比如，考虑一个显示杂货商品购物清单的应用。列表中的每一项都有一个唯一的 <code>id</code>。要想编辑某个项目，用户需要单击“编辑”按钮，打开一个 <code>EditGroceryItem</code> 组件。你希望该组件得到该商品的 <code>id</code>，以便它能向用户显示正确的信息。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="em0cb9ush4n7hxxfr1s94fj1r">使用路由将此类信息传递给你的应用组件。 为此，你可以使用 
+<a href="api/router/withComponentInputBinding">withComponentInputBinding</a> 特性与 
+<code>provideRouter</code> 或 
+<code>RouterModule.forRoot</code> 的 
+<code>bindToComponentInputs</code> 选项。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9s0zx5vtxhcv71rdgzry41uow">要从路由中获取信息：</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="add-withcomponentinputbinding">
+    <a href="#add-withcomponentinputbinding" class="docs-anchor" tabindex="-1" aria-label="Link to Add <code>withComponentInputBinding</code>" data-ng_translator_product="100" data-ng_translator_ref_id="31s2xkp48o1u8iqjtdb1yb7kx">添加 
+<code>withComponentInputBinding</code></a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="d11y170t8qi03kml8wdtqojkf">将 
+<code>withComponentInputBinding</code> 特性添加到 
+<code>provideRouter</code> 方法中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  <span class="hljs-title function_">provideRouter</span>(appRoutes, <span class="hljs-title function_">withComponentInputBinding</span>()),</div><div class="hljs-ln-line">]</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="add-an-input-to-the-component">
+    <a href="#add-an-input-to-the-component" class="docs-anchor" tabindex="-1" aria-label="Link to Add an <code>Input</code> to the component" data-ng_translator_product="100" data-ng_translator_ref_id="pwxht3jxyuzjrnxh0umembqw">给组件添加一个 
+<code>Input</code></a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="ddz4ykfhl2s304e3c21poziit">更新组件以具有与该参数名称匹配的 
+<code>Input</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Input</span>()</div><div class="hljs-ln-line"><span class="hljs-keyword">set</span> <span class="hljs-title function_">id</span>(<span class="hljs-params">heroId: <span class="hljs-built_in">string</span></span>) {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">hero$</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">service</span>.<span class="hljs-title function_">getHero</span>(heroId);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="bul844h4o80v2mlx4kwzs2miw">注意：你可以将所有路由数据（包括键值对）绑定到组件输入：静态或已求解的路由数据、路径参数、矩阵参数和查询参数。 如果你想使用父组件的路由信息，需要设置路由器的 
+<code>paramsInheritanceStrategy</code> 选项： 
+<code>withRouterConfig({paramsInheritanceStrategy: 'always'})</code></p>
+
+    </li>
+    
+    </ol>
+    
+  <h2 id="setting-up-wildcard-routes">
+    <a href="#setting-up-wildcard-routes" class="docs-anchor" tabindex="-1" aria-label="Link to Setting up wildcard routes" data-ng_translator_product="100" data-ng_translator_ref_id="9e4a1c9rr4vmzwir1gb1m8qbl">设置通配符路由</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="627vznnx5nmk45r4bc5olwo5z">当用户试图导航到那些不存在的应用部件时，在正常的应用中应该能得到很好的处理。要在应用中添加此功能，需要设置通配符路由。当所请求的 URL 与任何路由器路径都不匹配时，Angular 路由器就会选择这个路由。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e0fqm7j4zfxxemzxykonjwsde">要设置通配符路由，请在 <code>routes</code> 定义中添加以下代码。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{ <span class="hljs-attr">path</span>: <span class="hljs-string">'\*\*'</span>, <span class="hljs-attr">component</span>: &lt;component-name&gt; }</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4ahabn4zuzqixbd6ubue0wqz8">两个星号 
+<code>**</code> 表示 Angular 这个 
+<code>routes</code> 定义是一个通配符路由。 对于 component 属性，你可以定义应用中的任何组件。 常见选择包括一个特定于应用的 
+<code>PageNotFoundComponent</code>，你可以定义它来向用户 
+<a href="guide/routing/common-router-tasks#displaying-a-404-page">显示 404 页面</a>；或者重定向到应用的主组件。 通配符路由是最后一个路由，因为它匹配任何 URL。 有关路由顺序为何重要的更多详细信息，请参见 
+<a href="guide/routing/common-router-tasks#route-order">路由顺序</a>。</p>
+
+  <h2 id="displaying-a-404-page">
+    <a href="#displaying-a-404-page" class="docs-anchor" tabindex="-1" aria-label="Link to Displaying a 404 page" data-ng_translator_product="100" data-ng_translator_ref_id="4fom1klv8evh3gy16gkcga42v">显示 404 页面</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="455govvbw57v32gdi3q9o33v3">要显示 404 页面，请设置一个 
+<a href="guide/routing/common-router-tasks#setting-up-wildcard-routes">通配符路由</a>，并将 
+<code>component</code> 属性设置为你想用于 404 页面的组件，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'first-component'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">FirstComponent</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'second-component'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">SecondComponent</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'**'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">PageNotFoundComponent</span> },  <span class="hljs-comment">// Wildcard route for a 404 page</span></div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9t1fbzeofx78mtwhhdunj5oju"><code>path</code> 为 <code>**</code> 的最后一条路由是通配符路由。如果请求的 URL 与前面列出的路径不匹配，路由器会选择这个路由，并把该用户送到 <code>PageNotFoundComponent</code>。</p>
+
+  <h2 id="setting-up-redirects">
+    <a href="#setting-up-redirects" class="docs-anchor" tabindex="-1" aria-label="Link to Setting up redirects" data-ng_translator_product="100" data-ng_translator_ref_id="bziljukomircsk5ev5roy3zqv">设置重定向</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="62kbtaguk0jicwzogg4ncrqpc">要设置重定向，请使用重定向源的 <code>path</code>、要重定向目标的 <code>component</code> 和一个 <code>pathMatch</code> 值来配置路由，以告诉路由器该如何匹配 URL。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'first-component'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">FirstComponent</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'second-component'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">SecondComponent</span> },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">''</span>,   <span class="hljs-attr">redirectTo</span>: <span class="hljs-string">'/first-component'</span>, <span class="hljs-attr">pathMatch</span>: <span class="hljs-string">'full'</span> }, <span class="hljs-comment">// redirect to `first-component`</span></div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">'**'</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">PageNotFoundComponent</span> },  <span class="hljs-comment">// Wildcard route for a 404 page</span></div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3bv856oml03gltbzx0ijzwubj">在这个例子中，第三个路由是重定向路由，所以路由器会默认跳到 <code>first-component</code> 路由。注意，这个重定向路由位于通配符路由之前。这里的 <code>path: ''</code> 表示使用初始的相对 URL（<code>''</code>）。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="agvw8l57dep6vnlkc25jq88mk">有时候，重定向并不是一个简单的静态重定向。
+<code>redirectTo</code> 属性也可以是一个包含更复杂逻辑的函数，该函数返回一个字符串或 
+<code>UrlTree</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">"first-component"</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">FirstComponent</span> },</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">"old-user-page"</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">redirectTo</span>: <span class="hljs-function">(<span class="hljs-params">{ queryParams }</span>) =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-keyword">const</span> errorHandler = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">ErrorHandler</span>);</div><div class="hljs-ln-line">      <span class="hljs-keyword">const</span> userIdParam = queryParams[<span class="hljs-string">'userId'</span>];</div><div class="hljs-ln-line">      <span class="hljs-keyword">if</span> (userIdParam !== <span class="hljs-literal">undefined</span>) {</div><div class="hljs-ln-line">        <span class="hljs-keyword">return</span> <span class="hljs-string">`/user/<span class="hljs-subst">${userIdParam}</span>`</span>;</div><div class="hljs-ln-line">      } <span class="hljs-keyword">else</span> {</div><div class="hljs-ln-line">        errorHandler.<span class="hljs-title function_">handleError</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">'Attempted navigation to user page without user ID.'</span>));</div><div class="hljs-ln-line">        <span class="hljs-keyword">return</span> <span class="hljs-string">`/not-found`</span>;</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    },</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  { <span class="hljs-attr">path</span>: <span class="hljs-string">"user/:userId"</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">OtherComponent</span> },</div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div>
+  <h2 id="nesting-routes">
+    <a href="#nesting-routes" class="docs-anchor" tabindex="-1" aria-label="Link to Nesting routes" data-ng_translator_product="100" data-ng_translator_ref_id="35sbodgukx4kf7s4hhy1y9vbf">嵌套路由</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1b60ao9c48war01qn77rfgk8g">随着你的应用变得更加复杂，你可能希望创建相对于某个组件（而不是根组件）的路由。这些类型的嵌套路由称为子路由。这意味着你需要在应用中添加第二个 
+<code>&lt;router-outlet&gt;</code>，因为它是 
+<code>AppComponent</code> 中的 
+<code>&lt;router-outlet&gt;</code> 之外的另一个。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1qrsygxis9ctqr6hxeuwnjf6m">在这个示例中，有两个额外的子组件，
+<code>child-a</code> 和 
+<code>child-b</code>。这里，
+<code>FirstComponent</code> 有它自己的 
+<code>&lt;nav&gt;</code> 和一个第二个 
+<code>&lt;router-outlet&gt;</code>，这是在 
+<code>AppComponent</code> 之外的另一个。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>First Component<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"child-a"</span>&gt;</span>Child A<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"child-b"</span>&gt;</span>Child B<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="efde84adlxsrwbhinlgvflx38">子路由和其它路由一样，同时需要 <code>path</code> 和 <code>component</code>。唯一的区别是你要把子路由放在父路由的 <code>children</code> 数组中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'first-component'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">FirstComponent</span>, <span class="hljs-comment">// this is the component with the &lt;router-outlet&gt; in the template</span></div><div class="hljs-ln-line">    <span class="hljs-attr">children</span>: [</div><div class="hljs-ln-line">      {</div><div class="hljs-ln-line">        <span class="hljs-attr">path</span>: <span class="hljs-string">'child-a'</span>, <span class="hljs-comment">// child route path</span></div><div class="hljs-ln-line">        <span class="hljs-attr">component</span>: <span class="hljs-title class_">ChildAComponent</span>, <span class="hljs-comment">// child route component that the router renders</span></div><div class="hljs-ln-line">      },</div><div class="hljs-ln-line">      {</div><div class="hljs-ln-line">        <span class="hljs-attr">path</span>: <span class="hljs-string">'child-b'</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">component</span>: <span class="hljs-title class_">ChildBComponent</span>, <span class="hljs-comment">// another child route component that the router renders</span></div><div class="hljs-ln-line">      },</div><div class="hljs-ln-line">    ],</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">];</div></code>
+    </pre>
+  </div>
+  <h2 id="setting-the-page-title">
+    <a href="#setting-the-page-title" class="docs-anchor" tabindex="-1" aria-label="Link to Setting the page title" data-ng_translator_product="100" data-ng_translator_ref_id="d1y3f1ogu3i7n1ywbvjgh1xb3">设置页面标题</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="f14ogd9nv0jd4bri9mbab3w3i">应用中的每个页面都应该有一个唯一的标题，以便在浏览器历史记录中识别它们。 
+<code>Router</code> 使用来自
+<code>Route</code>配置的
+<code>title</code>属性设置文档标题。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'first-component'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">title</span>: <span class="hljs-string">'First component'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">FirstComponent</span>,  <span class="hljs-comment">// this is the component with the &lt;router-outlet&gt; in the template</span></div><div class="hljs-ln-line">    <span class="hljs-attr">children</span>: [</div><div class="hljs-ln-line">      {</div><div class="hljs-ln-line">        <span class="hljs-attr">path</span>: <span class="hljs-string">'child-a'</span>,  <span class="hljs-comment">// child route path</span></div><div class="hljs-ln-line">        <span class="hljs-attr">title</span>: resolvedChildATitle,</div><div class="hljs-ln-line">        <span class="hljs-attr">component</span>: <span class="hljs-title class_">ChildAComponent</span>,  <span class="hljs-comment">// child route component that the router renders</span></div><div class="hljs-ln-line">      },</div><div class="hljs-ln-line">      {</div><div class="hljs-ln-line">        <span class="hljs-attr">path</span>: <span class="hljs-string">'child-b'</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">title</span>: <span class="hljs-string">'child b'</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">component</span>: <span class="hljs-title class_">ChildBComponent</span>,  <span class="hljs-comment">// another child route component that the router renders</span></div><div class="hljs-ln-line">      },</div><div class="hljs-ln-line">    ],</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">resolvedChildATitle</span>: <span class="hljs-title class_">ResolveFn</span>&lt;<span class="hljs-built_in">string</span>&gt; = <span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>(<span class="hljs-string">'child a'</span>);</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="ao1srpavelwscgi4chw7xyjzp"><strong>提示：</strong> 
+<code>title</code>属性遵循与静态路由
+<code>data</code>和实现
+<code>ResolveFn</code>的动态值相同的规则。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="d04l9kgcmnsu57ldj26xjciqi">你还可以通过扩展
+<code>TitleStrategy</code>提供自定义标题策略。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({<span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TemplatePageTitleStrategy</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">TitleStrategy</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> title: Title</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">super</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">override</span> <span class="hljs-title function_">updateTitle</span>(<span class="hljs-params">routerState: RouterStateSnapshot</span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> title = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">buildTitle</span>(routerState);</div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (title !== <span class="hljs-literal">undefined</span>) {</div><div class="hljs-ln-line">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">title</span>.<span class="hljs-title function_">setTitle</span>(<span class="hljs-string">`My Application | <span class="hljs-subst">${title}</span>`</span>);</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideRouter</span>(routes),</div><div class="hljs-ln-line">    {<span class="hljs-attr">provide</span>: <span class="hljs-title class_">TitleStrategy</span>, <span class="hljs-attr">useClass</span>: <span class="hljs-title class_">TemplatePageTitleStrategy</span>},</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div>
+  <h2 id="using-relative-paths">
+    <a href="#using-relative-paths" class="docs-anchor" tabindex="-1" aria-label="Link to Using relative paths" data-ng_translator_product="100" data-ng_translator_ref_id="3kxeqse99fu3esa2cetfbrm6c">使用相对路径</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9mug18rwyhrpcxgnifc2mroz0">相对路径允许你定义相对于当前 URL 段的路径。下面的例子展示了到另一个组件 <code>second-component</code> 的相对路由。<code>FirstComponent</code> 和 <code>SecondComponent</code> 在树中处于同一级别，但是，指向 <code>SecondComponent</code> 的链接位于 <code>FirstComponent</code> 中，这意味着路由器必须先上升一个级别，然后进入二级目录才能找到 <code>SecondComponent</code>。可以用 <code>../</code> 符号来上升一个级别，而不用写出到 <code>SecondComponent</code> 的完整路径。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>First Component<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"../second-component"</span>&gt;</span>Relative Route to second component<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5vhb6zw0xe82g7mflcdutpput">除了 <code>../</code>，还可以使用 <code>./</code> 或者不带前导斜杠来指定当前级别。</p>
+
+  <h3 id="specifying-a-relative-route">
+    <a href="#specifying-a-relative-route" class="docs-anchor" tabindex="-1" aria-label="Link to Specifying a relative route" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3v5degv9d4glv5pbv8mgsavye">指定相对路由</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9bre2383h97v9qrgmr5gomv2x">要指定相对路由，请使用
+<code>NavigationExtras</code>的
+<code>relativeTo</code>属性。 在组件类中，从
+<code>@angular/router</code>导入
+<code>NavigationExtras</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cpp0swk0b76cukzis1xcl3uui">然后在你的导航方法中使用
+<code>relativeTo</code>。 在链接参数数组之后，这里包含
+<code>items</code>，添加一个对象，其中
+<code>relativeTo</code>属性设置为
+<code>ActivatedRoute</code>，即
+<code>this.route</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">goToItems</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">router</span>.<span class="hljs-title function_">navigate</span>([<span class="hljs-string">'items'</span>], { <span class="hljs-attr">relativeTo</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">route</span> });</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="d19iez766q0fk9qzpsyo5wbbt"><code>navigate()</code>参数配置路由器使用当前路由作为基础，以便附加
+<code>items</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="32vmbb75tl2t6jne0luifr1g2"><code>goToItems()</code> 方法会把目标 URI 解释为相对于当前路由的，并导航到 <code>items</code> 路由。</p>
+
+  <h2 id="accessing-query-parameters-and-fragments">
+    <a href="#accessing-query-parameters-and-fragments" class="docs-anchor" tabindex="-1" aria-label="Link to Accessing query parameters and fragments" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7cjhpl67y8pn71ai51me94x47">访问查询参数和片段</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a4yydgmyf2ih20co40p8wop36">有时，应用中的某个特性需要访问路由的部件，比如查询参数或片段（fragment）。本教程的这个阶段使用了一个“英雄之旅”中的列表视图，你可以在其中点击一个英雄来查看详情。路由器使用 <code>id</code> 来显示正确的英雄的详情。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a9p3lfvp2y0ijnfbqxnl79b9a">首先，在要导航的组件中导入以下成员。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ActivatedRoute</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Observable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { switchMap } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/operators'</span>;</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9km5lkql8tgnkdar4caw0vin7">接下来，注入当前路由（ActivatedRoute）服务：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> route: ActivatedRoute</span>) {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3idekcxmw3bu8ut9ff1ndsx1b">配置这个类，让你有一个可观察者 <code>heroes$</code>、一个用来保存英雄的 <code>id</code> 号的 <code>selectedId</code>，以及 <code>ngOnInit()</code> 中的英雄们，添加下面的代码来获取所选英雄的 <code>id</code>。这个代码片段假设你有一个英雄列表、一个英雄服务、一个能获取你的英雄的函数，以及用来渲染你的列表和细节的 HTML，就像在《英雄之旅》例子中一样。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">heroes$</span>: <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-title class_">Hero</span>[]&gt;;</div><div class="hljs-ln-line"><span class="hljs-attr">selectedId</span>: <span class="hljs-built_in">number</span>;</div><div class="hljs-ln-line">heroes = <span class="hljs-variable constant_">HEROES</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">heroes$</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">route</span>.<span class="hljs-property">paramMap</span>.<span class="hljs-title function_">pipe</span>(</div><div class="hljs-ln-line">    <span class="hljs-title function_">switchMap</span>(<span class="hljs-function"><span class="hljs-params">params</span> =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">selectedId</span> = <span class="hljs-title class_">Number</span>(params.<span class="hljs-title function_">get</span>(<span class="hljs-string">'id'</span>));</div><div class="hljs-ln-line">      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">service</span>.<span class="hljs-title function_">getHeroes</span>();</div><div class="hljs-ln-line">    })</div><div class="hljs-ln-line">  );</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="64fzmc7ivi3e9ygu3toa90kcg">接下来，在要导航到的组件中，导入以下成员。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Router</span>, <span class="hljs-title class_">ActivatedRoute</span>, <span class="hljs-title class_">ParamMap</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Observable</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs'</span>;</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ejr4gilzc1xqugmb9s7d4xrxu">在组件类的构造函数中注入
+<code>ActivatedRoute</code>和
+<code>Router</code>，以便它们对该组件可用：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">hero$</span>: <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-title class_">Hero</span>&gt;;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span></div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> route: ActivatedRoute,</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> router: Router  ) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> heroId = <span class="hljs-variable language_">this</span>.<span class="hljs-property">route</span>.<span class="hljs-property">snapshot</span>.<span class="hljs-property">paramMap</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">'id'</span>);</div><div class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">hero$</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">service</span>.<span class="hljs-title function_">getHero</span>(heroId);</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">gotoItems</span>(<span class="hljs-params">hero: Hero</span>) {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> heroId = hero ? hero.<span class="hljs-property">id</span> : <span class="hljs-literal">null</span>;</div><div class="hljs-ln-line">  <span class="hljs-comment">// Pass along the hero id if available</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// so that the HeroList component can select that item.</span></div><div class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">router</span>.<span class="hljs-title function_">navigate</span>([<span class="hljs-string">'/heroes'</span>, { <span class="hljs-attr">id</span>: heroId }]);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="lazy-loading">
+    <a href="#lazy-loading" class="docs-anchor" tabindex="-1" aria-label="Link to Lazy loading" data-ng_translator_product="100" data-ng_translator_ref_id="506o9p6ll5bmk3b4fpor3jq4e">惰性加载</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="pih7fm60fqubkfpur0sh59n5">你可以配置路由定义来实现惰性加载模块，这意味着 Angular 只会在需要时才加载这些模块，而不是在应用启动时就加载全部。另外，你可以在后台预加载一些应用部件来改善用户体验。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="kxjgvwgt9tgni158g1nhu4cf">有关惰性加载和预加载的更多信息，请参阅专门的指南
+<a href="guide/ngmodules/lazy-loading">惰性加载</a>。</p>
+
+  <h2 id="preventing-unauthorized-access">
+    <a href="#preventing-unauthorized-access" class="docs-anchor" tabindex="-1" aria-label="Link to Preventing unauthorized access" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3ei2rfgcc8x8hiwt9b2graywc">防止未经授权的访问</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c5qoxeu7cqgnio8r9kvkhnto9">使用路由守卫来防止用户未经授权就导航到应用的某些部分。Angular 中提供了以下路由守卫：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="api/router/CanActivateFn">
+      <code>canActivate</code>
+    </a>
+    
+    <a class="docs-pill" href="api/router/CanActivateChildFn">
+      <code>canActivateChild</code>
+    </a>
+    
+    <a class="docs-pill" href="api/router/CanDeactivateFn">
+      <code>canDeactivate</code>
+    </a>
+    
+    <a class="docs-pill" href="api/router/CanMatchFn">
+      <code>canMatch</code>
+    </a>
+    
+    <a class="docs-pill" href="api/router/ResolveFn">
+      <code>resolve</code>
+    </a>
+    
+    <a class="docs-pill" href="api/router/CanLoadFn">
+      <code>canLoad</code>
+    </a>
+    
+
+    </nav>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3ppq3clpcfvs2b5nokaa1fa9b">要想使用路由守卫，可以考虑使用<a href="api/router/Route#componentless-routes">无组件路由</a>，因为这对于保护子路由很方便。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2a7u1upe2l2ojpmojzcbgo15c">为你的守卫创建一个文件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate guard your-guard</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1hp5y38ugifuqrx6por3mwiqi">请在守卫文件里添加你要用到的守卫函数。下面的例子使用 <code>canActivateFn</code> 来保护该路由。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">yourGuardFunction</span>: <span class="hljs-title class_">CanActivateFn</span> = <span class="hljs-function">(<span class="hljs-params"></span></span></div><div class="hljs-ln-line">    next: ActivatedRouteSnapshot,</div><div class="hljs-ln-line">    state: RouterStateSnapshot) =&gt; {</div><div class="hljs-ln-line">      <span class="hljs-comment">// your  logic goes here</span></div><div class="hljs-ln-line">  }</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="35opl5xzt4zzvh58ghu0a5ggy">在路由模块中，在 <code>routes</code> 配置中使用相应的属性。这里的 <code>canActivate</code> 会告诉路由器它要协调到这个特定路由的导航。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{</div><div class="hljs-ln-line">  <span class="hljs-attr">path</span>: <span class="hljs-string">'/your-path'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">component</span>: <span class="hljs-title class_">YourComponent</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">canActivate</span>: [yourGuardFunction],</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="link-parameters-array">
+    <a href="#link-parameters-array" class="docs-anchor" tabindex="-1" aria-label="Link to Link parameters array" data-ng_translator_product="100" data-ng_translator_ref_id="9qhfopo4d1pfnp4w8mtuqehr0">链接参数数组</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="evbclmqfvqfon90lxyuyum14d">链接参数数组保存路由导航时所需的成分：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="33wxmaradgce7bffv1e1pek8d">指向目标组件的那个路由的路径（path）</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7gqcsyzzhvrymhyafuxkfkvjj">必备路由参数和可选路由参数，它们将进入该路由的 URL</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3qyz5t4drjwhy1vw49tk91bya">将
+<code>RouterLink</code>指令绑定到这样的数组：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"['/heroes']"</span>&gt;</span>Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="33n81j9lw6irz9n29skso5k27">在指定路由参数时，使用如下的两元素数组：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"['/hero', hero.id]"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge"</span>&gt;</span>{{ hero.id }}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>{{ hero.name }}</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bs1i3madz2neak3wnzoz3pz8n">可以在对象中提供可选的路由参数，比如 <code>{ foo: 'foo' }</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"['/crisis-center', { foo: 'foo' }]"</span>&gt;</span>Crisis Center<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="58l933w6gvk8vtzhqatqmdbp4">这三个示例涵盖了具有一级路由的应用的需求。然而，通过子路由器，例如在危机中心，你可以创建新的链接数组可能性。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9gwza007vc6p45lcmi79eumew">以下最小
+<code>RouterLink</code>示例基于为危机中心指定的默认子路由。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"['/crisis-center']"</span>&gt;</span>Crisis Center<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dw3gep3o5uu2nccniutl4eb8l">查看以下内容：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="14v844p57a6d1hesukcf58zkx">数组中的第一个条目标记出了父路由（<code>/crisis-center</code>）。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4menlzs1x8a46oaoca0zlry62">这个父路由没有参数。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1oy2dptjfswqve88cwifxwpti">没有默认的子路由，因此你得选取一个。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="4xgix5bu7xu8otfnsngq6zda7">你正在导航到路由路径为
+<code>/</code>的
+<code>CrisisListComponent</code>，但你不需要显式添加斜杠。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="94d9ugd7vtavija8vkz4qdfa5">考虑以下路由器链接，它将从应用的根目录导航到巨龙危机（Dragon Crisis）：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"['/crisis-center', 1]"</span>&gt;</span>Dragon Crisis<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="14v844p57a6d1hesukcf58zkx">数组中的第一个条目标记出了父路由（<code>/crisis-center</code>）。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4menlzs1x8a46oaoca0zlry62">这个父路由没有参数。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="eyftcw0jps0myf5dovp114rk">第二条目标识特定危机的子路由详情（
+<code>/:id</code>）。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d5o46pycfga8ab4pq9mhi42tf">详细的子路由需要一个 <code>id</code> 路由参数。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="evo115ml1m7441zrqsgxj811p">你将龙危机的
+<code>id</code>添加为数组中的第二条目（
+<code>1</code>）。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8pu83mo4kqx0h561lh4hz6gl1">最终生成的路径是 <code>/crisis-center/1</code>。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cjo5k45qqwzgm6yd88zpeyumv">你也可以把危机中心的路由单独重新定义为 <code>AppComponent</code> 的模板：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">  &lt;h1 class="title"&gt;Angular Router&lt;/h1&gt;</div><div class="hljs-ln-line">  &lt;nav&gt;</div><div class="hljs-ln-line">    &lt;a [routerLink]="['/crisis-center']"&gt;Crisis Center&lt;/a&gt;</div><div class="hljs-ln-line">    &lt;a [routerLink]="['/crisis-center/1', { foo: 'foo' }]"&gt;Dragon Crisis&lt;/a&gt;</div><div class="hljs-ln-line">    &lt;a [routerLink]="['/crisis-center/2']"&gt;Shark Crisis&lt;/a&gt;</div><div class="hljs-ln-line">  &lt;/nav&gt;</div><div class="hljs-ln-line">  &lt;router-outlet&gt;&lt;/router-outlet&gt;</div><div class="hljs-ln-line">`</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8ahvg02mj2tn4tyzqccx8a87a">总之，你可以用一级、两级或多级路由来写应用程序。链接参数数组提供了用来表示任意深度路由的链接参数数组以及任意合法的路由参数序列、必须的路由器参数以及可选的路由参数对象。</p>
+
+  <h2 id="locationstrategy-and-browser-url-styles">
+    <a href="#locationstrategy-and-browser-url-styles" class="docs-anchor" tabindex="-1" aria-label="Link to <code>LocationStrategy</code> and browser URL styles" data-ng_translator_product="100" data-ng_translator_ref_id="csre4rugdki9njwgrzxhd4l6h"><code>LocationStrategy</code> 和浏览器 URL 样式</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6s61h5xbvew5jc762pdjcb4hy">当路由器导航到一个新的组件视图时，它会用该视图的 URL 来更新浏览器的当前地址以及历史。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4jnotv6dfb50bzy6zuv0mrro5">现代 HTML5 浏览器支持
+<a href="https://developer.mozilla.org/docs/Web/API/History_API/Working_with_the_History_API#adding_and_modifying_history_entries" title="HTML5" browser history push-state target="_blank">history.pushState</a>，这是一种在不触发服务器页面请求的情况下更改浏览器位置和历史记录的技术。 路由器可以组合一个“自然”的URL，这个URL和需要加载页面的URL没有区别。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f4dh0kfeiun7dkerxczd3y4je">下面是危机中心的 URL 在“HTML 5 pushState”风格下的样子：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">localhost:3002/crisis-center</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dwqo1nqf1au2vrpcueobugmv7">旧版浏览器在位置 URL 更改时向服务器发送页面请求，除非更改发生在「#」之后（称为「哈希」）。路由器可以通过使用哈希组成应用内路由 URL 来利用此例外。以下是一个路由到危机中心的「哈希 URL」。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">localhost:3002/src/#/crisis-center</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="z7tc2b2v4sjgj09rdoe1wtln">路由器支持两种样式，有两个
+<code>LocationStrategy</code>提供者：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dycvc6pm27ridqfrosy8bqn88">提供者</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>PathLocationStrategy</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="do0sjf8p9zrdj6d4amndzj1hd">默认的「HTML5 pushState」样式。</td>
+</tr>
+<tr>
+<td align="left"><code>HashLocationStrategy</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cy8rdsta6w5a8u4tkxlaqptju">「哈希 URL」样式。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8ok1oqqyeeo3cct8k2b9g7alj"><code>RouterModule.forRoot()</code> 函数将 
+<code>LocationStrategy</code> 设置为 
+<code>PathLocationStrategy</code>，这使其成为默认策略。 你也可以选择在引导过程中切换到 
+<code>HashLocationStrategy</code>。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="6y93v9h8wkm6rfjrk8qh94aq"><strong>提示：</strong>有关提供者和引导过程的更多信息，请参阅
+<a href="guide/di/dependency-injection-providers">依赖注入</a>。</p>
+
+    </div>
+    
+  <h2 id="choosing-a-routing-strategy">
+    <a href="#choosing-a-routing-strategy" class="docs-anchor" tabindex="-1" aria-label="Link to Choosing a routing strategy" data-ng_translator_product="100" data-ng_translator_ref_id="ej3pzfpo7xmt0kdqp0h9yx5z0">选择路由策略</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9rr2d8kwrqpjo53y345wa07pn">你必须在开发项目的早期就选择一种路由策略，因为一旦该应用进入了生产阶段，你网站的访问者就会使用并依赖应用的这些 URL 引用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5yi9kbns1m38wqqt3godx64r2">几乎所有的 Angular 项目都应使用默认的 HTML5 样式。它生成的 URL 更易于用户理解，并保留了服务器端渲染的选项。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8t9bg5um8bka6n185ug7sb6nl">在服务端渲染指定的页面，是一项可以在该应用首次加载时大幅提升响应速度的技术。那些原本需要十秒甚至更长时间加载的应用，可以预先在服务端渲染好，并在少于一秒的时间内完整渲染在用户的设备上。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5xoymk6rz6xvdh637yl039ucn">只有当应用的 URL 看起来像是标准的 Web URL，中间没有 hash（<code>#</code>）时，这个选项才能生效。</p>
+
+  <h2 id="base-href">
+    <a href="#base-href" class="docs-anchor" tabindex="-1" aria-label="Link to <code><base href></code>"><code>&lt;base href&gt;</code></a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3yfx8jh0ygk02hdgrn3kp3r5j">路由器使用浏览器的 
+<a href="https://developer.mozilla.org/docs/Web/API/History_API/Working_with_the_History_API#adding_and_modifying_history_entries" title="HTML5" browser history push-state target="_blank">history.pushState</a> 进行导航。 
+<code>pushState</code> 允许你自定义应用内的 URL 路径；例如，
+<code>localhost:4200/crisis-center</code>。 应用内的 URL 可以和服务器的 URL 一样。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c344vyfg5qxgl6s7b2wszhsa2">现代的 HTML5 浏览器都支持 <code>pushState</code>，这也就是为什么很多人把这种 URL 形式称为 "HTML 5" 风格的 URL。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="5pzw3t3o2stderh23o72iyo2"><strong>提示：</strong>HTML5 样式导航是路由器的默认样式。 在
+<a href="#browser-url-styles">LocationStrategy 和浏览器 URL 样式</a>部分，了解为什么 HTML5 样式更可取，如何调整其行为，以及在必要时如何切换到较旧的哈希（
+<code>#</code>）样式。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="ed88bxbbqu60kom96ewk5hlyn">你必须向应用的 
+<code>index.html</code> 添加一个 
+<a href title="base" target="_blank"><code>&lt;base href&gt;</code> 元素</a>，以使 
+<code>pushState</code> 路由正常工作。 浏览器使用 
+<code>&lt;base href&gt;</code> 的值来为引用 CSS 文件、脚本和图像的相对 URL 添加前缀。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7gf7xyg0qzoktfhjizt9eyvyb">在
+<code>&lt;head&gt;</code>标签之后添加
+<code>&lt;base&gt;</code>元素。如果
+<code>app</code>文件夹是应用的根目录，就像此应用一样，请在
+<code>index.html</code>中设置如下所示的
+<code>href</code>值。</p>
+<div class="docs-code" path="adev/src/content/examples/router/src/index.html" visiblelines="4" header="src/index.html (base-href)">
+    <div class="docs-code-header"><h3>src/index.html (base-href)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-comment">&lt;!-- Set the base href --&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">base</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/"</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Angular Router<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-root</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="html5-urls-and-the-base-href">
+    <a href="#html5-urls-and-the-base-href" class="docs-anchor" tabindex="-1" aria-label="Link to HTML5 URLs and the <code><base href></code>" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2kkgb5ctubnqc3ngr7sfds9ml">HTML5 网址和 <code>&lt;base href&gt;</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="38shco0l5o43d5z8n1xpn4f9m">后面的指南中会引用 URL 的不同部分。下图是这些部分所指内容的梗概：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">foo://example.com:8042/over/there?name=ferret#nose</div><div class="hljs-ln-line">\_/   \______________/\_________/ \_________/ \__/</div><div class="hljs-ln-line"> |           |            |            |        |</div><div class="hljs-ln-line">scheme    authority      path        query   fragment</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1j9i7vgxnmtl6g0yvn597fodn">虽然路由器默认使用 
+<a href="https://developer.mozilla.org/docs/Web/API/History_API#Adding_and_modifying_history_entries" title="浏览器" history push-state target="_blank">HTML5 pushState</a> 样式，但你必须通过 
+<code>&lt;base href&gt;</code> 配置该策略。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="e81s5gf1l8onmqjnonr5ym101">配置策略的首选方法是在 
+<code>index.html</code> 的 
+<code>&lt;head&gt;</code> 中添加一个 
+<a href title="base" target="_blank"><code>&lt;base href&gt;</code> 元素</a> 标签。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">base</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/"</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4uon5zk1acdjc23g9yu4z4oy0">如果没有该标记，浏览器就可能无法在“深度链接”进入应用时加载资源（图片，CSS，脚本）。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2plx9vbry3sg9d8xdw0nzo35k">有些开发人员可能无法添加 <code>&lt;base&gt;</code> 元素，这可能是因为它们没有访问 <code>&lt;head&gt;</code> 或 <code>index.html</code> 的权限。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="40bkngqtv5m7preip5ei35cai">它们仍然可以使用 HTML 5 格式的 URL，但要采取如下步骤进行补救：</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="e12xxep9wcr9obbrwq93ud49r">为路由器提供适当的 
+<code>APP_BASE_HREF</code> 值。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="3eiiqryiowehbhxm4lzs322vg">为所有 Web 资源使用根 URL（带有
+<code>authority</code>的 URL）：CSS、图像、脚本和模板 HTML 文件。</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3178c2anupeamlmu0szd5d5bm"><code>&lt;base href&gt;</code> <code>path</code> 应该以“/”结尾，因为浏览器会忽略 <code>path</code> 中最右边的“ <code>/</code> ”后面的字符</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="vf27hz8enp3q9zctfvilpgpv">如果 
+<code>&lt;base href&gt;</code> 包含 
+<code>query</code> 部分，则只有在页面中的链接的 
+<code>path</code> 为空且没有 
+<code>query</code> 时才会使用 
+<code>query</code>。 这意味着只有在使用 
+<code>HashLocationStrategy</code> 时，
+<code>&lt;base href&gt;</code> 中的 
+<code>query</code> 才会包含在内。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="9j7m5tu293sarokbud1878jdk">如果页面中的链接为根 URL（具有 
+<code>authority</code>），则不使用 
+<code>&lt;base href&gt;</code>。 这样，带有权限的 
+<code>APP_BASE_HREF</code> 将导致 Angular 创建的所有链接忽略 
+<code>&lt;base href&gt;</code> 值。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1uo4h7pbiljj2xdlflt3f9b2d"><code>&lt;base href&gt;</code> 中的片段（#后面的部分）<em>永远不会</em>被使用</p>
+</li>
+
+  </ul>
+  </li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2u70bjywd1yrq7qf11c4tsr6p">有关如何使用 
+<code>&lt;base href&gt;</code> 构建目标 URI 的更完整信息，请参阅关于转换引用的
+<a href="https://tools.ietf.org/html/rfc3986#section-5.2.2" target="_blank">RFC</a>部分。</p>
+
+  <h3 id="hashlocationstrategy">
+    <a href="#hashlocationstrategy" class="docs-anchor" tabindex="-1" aria-label="Link to <code>HashLocationStrategy</code>"><code>HashLocationStrategy</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="cjam8cpndt768mypmmq6t9kgy">通过在 
+<code>AppModule</code> 的 
+<code>RouterModule.forRoot()</code> 的第二个参数中提供 
+<code>useHash: true</code>，来使用 
+<code>HashLocationStrategy</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  <span class="hljs-title function_">provideRouter</span>(appRoutes, <span class="hljs-title function_">withHashLocation</span>())</div><div class="hljs-ln-line">]</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dtmsidtovqp61x6kmw10f2u12">在使用 
+<code>RouterModule.forRoot</code> 时，通过在第二个参数中配置 
+<code>useHash: true</code> 来实现： 
+<code>RouterModule.forRoot(routes, {useHash: true})</code>。</p>

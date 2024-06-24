@@ -1,0 +1,336 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="902h3rxpd8dmw5gd7f4sqa9xt">创作原理图</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/schematics-authoring.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e5huitr1bvst5in25qnel5yn6">你可以创建自己的原理图来对 Angular 项目进行操作。库开发人员通常会把这些原理图与他们的库打包在一起，以便把它们与 Angular CLI 集成在一起。你也可以创建独立的原理图来操作 Angular 应用中的文件和目录结构，以便为你的开发环境定制它们，并让它们符合你的标准和约束。多个原理图还可以串联起来，通过运行其它原理图来完成复杂的操作。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1bfdb9wnkxzrnwqmd4v7wmds4">在应用程序中操作代码可能既强大又危险。比如，创建一个已存在的文件会出错，如果出现这种情况，就应该放弃已应用的所有其它更改。Angular 原理图工具通过创建虚拟文件系统来防止副作用和错误。原理图描述了一个可应用于虚拟文件系统的转换管道。当原理图运行时，转换就会被记录在内存中，只有当这些更改被确认有效时，才会应用到实际的文件系统中。</p>
+
+  <h2 id="schematics-concepts">
+    <a href="#schematics-concepts" class="docs-anchor" tabindex="-1" aria-label="Link to Schematics concepts" data-ng_translator_product="100" data-ng_translator_ref_id="cv0hcgf02fxt9br52s8p7e0br">原理图的概念</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ey2icut1bcadpns7c4j835hhz">原理图的公共 API 定义了表达其基本概念的类。</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_ref_id="8rebz4g5q56gkg4htvjihe6i2">虚拟文件系统由一个 
+<code>Tree</code> 表示。 
+<code>Tree</code> 数据结构包含一个 
+<em>基础</em>（已存在的文件集）和一个 
+<em>暂存区</em>（要应用于基础的更改列表）。进行修改时，实际上不会更改基础，而是将这些修改添加到暂存区。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="52ct06x75ubmv1u1pqlmf0t9b">一个 
+<code>Rule</code> 对象定义一个接受 
+<code>Tree</code>、应用转换并返回新 
+<code>Tree</code> 的函数。原理图的主文件 
+<code>index.ts</code> 定义了一组实现原理图逻辑的规则。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="dhumji5i5jqh6j8nre0ax1qww">转换由一个 
+<code>Action</code> 表示。有四种动作类型： 
+<code>Create</code>、
+<code>Rename</code>、
+<code>Overwrite</code> 和 
+<code>Delete</code>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dj6re0g2uzfjqhe1ucl20bgzu">每个原理图都在一个上下文中运行，上下文由一个 <code>SchematicContext</code> 对象表示。</p>
+</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ec7sxn393gmvhxe5gecf41e3q">传给规则的上下文对象可以访问该原理图可能会用到的工具函数和元数据，包括一个帮助调试的日志 API。上下文还定义了一个<em>合并策略</em>，用于确定如何将这些更改从暂存树合并到基础树中。可以接受或忽略某个更改，也可以抛出异常。</p>
+
+  <h3 id="defining-rules-and-actions">
+    <a href="#defining-rules-and-actions" class="docs-anchor" tabindex="-1" aria-label="Link to Defining rules and actions" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="83yzjik5tbk497lpgcnh2dg13">定义规则和操作</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9oj6e1iakmixxkl2szdld7qa8">当你使用 
+<a href="#schematics-cli">Schematics CLI</a> 创建一个新的空白原理图时，生成的入口函数是一个
+<em>规则工厂</em>。 一个 
+<code>RuleFactory</code> 对象定义了一个创建 
+<code>Rule</code> 的高阶函数。</p>
+<div class="docs-code" header="index.ts">
+    <div class="docs-code-header"><h3>index.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Rule</span>, <span class="hljs-title class_">SchematicContext</span>, <span class="hljs-title class_">Tree</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/schematics'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// You don't have to export the function as default.</span></div><div class="hljs-ln-line"><span class="hljs-comment">// You can also have more than one rule factory per file.</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">helloWorld</span>(<span class="hljs-params">_options: <span class="hljs-built_in">any</span></span>): <span class="hljs-title class_">Rule</span> {</div><div class="hljs-ln-line"> <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">tree: Tree,_context: SchematicContext</span>) =&gt;</span> {</div><div class="hljs-ln-line">   <span class="hljs-keyword">return</span> tree;</div><div class="hljs-ln-line"> };</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a9rlswe22w7o3gpobdlw0iehy">你的这些规则可以通过调用外部工具和实现逻辑来修改你的项目。比如，你需要一个规则来定义如何将原理图中的模板合并到宿主项目中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1zrvhpzfskprohydxphfahoh8">规则可以利用 <code>@schematics/angular</code> 包提供的实用工具。寻求辅助函数来处理模块、依赖、TypeScript、AST、JSON、Angular CLI 工作区和项目等等。</p>
+<div class="docs-code" header="index.ts">
+    <div class="docs-code-header"><h3>index.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {</div><div class="hljs-ln-line">  <span class="hljs-title class_">JsonAstObject</span>,</div><div class="hljs-ln-line">  <span class="hljs-title class_">JsonObject</span>,</div><div class="hljs-ln-line">  <span class="hljs-title class_">JsonValue</span>,</div><div class="hljs-ln-line">  <span class="hljs-title class_">Path</span>,</div><div class="hljs-ln-line">  normalize,</div><div class="hljs-ln-line">  parseJsonAst,</div><div class="hljs-ln-line">  strings,</div><div class="hljs-ln-line">} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular-devkit/core'</span>;</div></code>
+    </pre>
+  </div>
+  <h3 id="defining-input-options-with-a-schema-and-interfaces">
+    <a href="#defining-input-options-with-a-schema-and-interfaces" class="docs-anchor" tabindex="-1" aria-label="Link to Defining input options with a schema and interfaces" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8gd0ulx4fj2edf41c96fpuy20">利用模式和接口来定义输入选项</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7pcyosm9zl5aq83fv85qtsfbf">规则可以从调用者那里收集选项值，并把它们注入到模板中。规则可用的选项及其允许的值和默认值是在原理图的 JSON 模式文件 <code>&lt;schematic&gt;/schema.json</code> 中定义的。可以用 TypeScript 接口来为这个模式定义变量或枚举的数据类型。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="67iiqzva4vyhrhpscd5fv8k0g">该模式定义了原理图中使用的变量的类型和默认值。比如，假设的 “Hello World” 原理图可能具有以下模式定义（schema）。</p>
+<div class="docs-code" header="src/hello-world/schema.json">
+    <div class="docs-code-header"><h3>src/hello-world/schema.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"properties"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"minLength"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"default"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"world"</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"useColor"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"boolean"</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4likm3k62rlpgjgz7ls9x0y7v">在 Angular CLI 命令原理图中查看模式文件示例，请访问 
+<a href="https://github.com/angular/angular-cli/blob/main/packages/schematics/angular/application/schema.json" target="_blank"><code>@schematics/angular</code></a>。</p>
+
+  <h3 id="schematic-prompts">
+    <a href="#schematic-prompts" class="docs-anchor" tabindex="-1" aria-label="Link to Schematic prompts" data-ng_translator_product="100" data-ng_translator_ref_id="2d6xgf9luujj7l9584me7x6bg">原理图提示</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7rd7embglvkinqosuu4ak5m1h">原理图<em>提示</em>能将用户交互引入到原理图执行过程中。可以配置原理图选项，以向用户显示可自定义的问题。在执行原理图之前会显示提示，然后将用户的响应用作选项的值。这使得用户可以指导原理图的操作，而无需深入了解可用选项的全部范围。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="afx36450jqz70w1mlpbn3aa8n">比如，这个 “Hello World” 原理图可能会要求用户提供他的名字，并显示该名字以代替默认名字 “world”。要定义这样的提示，请将 <code>x-prompt</code> 属性添加到 <code>name</code> 变量的模式中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bwy2hv2zozmyavuh4wok0zer2">类似地，你可以添加一个提示，以允许用户确定原理图在执行其 hello 操作时是否将使用颜色。带有两个提示的模式如下。</p>
+<div class="docs-code" header="src/hello-world/schema.json">
+    <div class="docs-code-header"><h3>src/hello-world/schema.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"properties"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"minLength"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"default"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"world"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"x-prompt"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"What is your name?"</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"useColor"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"boolean"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"x-prompt"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Would you like the response in color?"</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <h4 id="prompt-short-form-syntax">
+    <a href="#prompt-short-form-syntax" class="docs-anchor" tabindex="-1" aria-label="Link to Prompt short-form syntax" data-ng_translator_product="100" data-ng_translator_ref_id="nkmecuhg8hfk4incaxy9wkfe">提示的简写语法</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8k72x7k0cbcnbgc41a5lpynnx">这些范例使用提示语法的简写形式，仅提供问题的文本。在大多数情况下，这就是所需要的。但是请注意，这两个提示要求使用不同类型的输入。使用简写形式时，将根据属性的模式自动选择最合适的类型。在该范例中，<code>name</code> 提示使用 <code>input</code> 类型，因为它是一个字符串属性。<code>useColor</code> 提示使用 <code>confirmation</code> 类型，因为它是布尔属性。在这种情况下，“是” 对应于 <code>true</code> 而 “否” 对应于 <code>false</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2huxid4m99vxtbwfhezn4qw6s">支持三种输入类型。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bdh37ewtp8718xmz95unav2ot">输入类型</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">confirmation</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9tornn2wat5vsg6ipeft7k3r9">是或否问题；适用于布尔选项。</td>
+</tr>
+<tr>
+<td align="left">input</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1iyeeeh8hwcqgf6igcjcyfbx9">文本输入；适用于字符串或数字选项。</td>
+</tr>
+<tr>
+<td align="left">list</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="46ysr6hxlm2lnoebrm9ujqt3q">预定义的一组允许值。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="asoa8ynkmm0bc5vcswceuazkh">简而言之，类型是根据属性的类型和约束来推断的。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="axvqhwairpnp6nwepyh28sstc">属性模式</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7e2b49bqef0lz06xkvkedctt6">提示类型</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">"type": "boolean"</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="31ry1fozerlit3bk313aju0rz">确认（"yes"=
+<code>true</code>，"no"=
+<code>false</code>）</td>
+</tr>
+<tr>
+<td align="left">"type": "string"</td>
+<td align="left">input</td>
+</tr>
+<tr>
+<td align="left">"type": "number"</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="jfbxm3okdsp04vhz2klgfl0i">输入（仅接受有效数字）</td>
+</tr>
+<tr>
+<td align="left">"type": "integer"</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="jfbxm3okdsp04vhz2klgfl0i">输入（仅接受有效数字）</td>
+</tr>
+<tr>
+<td align="left">"enum": […]</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4x3c9cmb8oe0qzu42dv7pz4bg">列表（枚举成员变为列表选择项）</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7jgtt2a51nd4m8iqhkspz3">在以下范例中，该属性采用枚举值，因此原理图将自动选择列表类型，并根据可能的值创建菜单。</p>
+<div class="docs-code" header="schema.json">
+    <div class="docs-code-header"><h3>schema.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"style"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"description"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"The file extension or preprocessor to use for style files."</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"default"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"css"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"enum"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">    <span class="hljs-string">"css"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"scss"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"sass"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"less"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"styl"</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"x-prompt"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Which stylesheet format would you like to use?"</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6s9ps0r4yx8o2brec9opztxt8">提示运行时会根据 JSON 模式中提供的约束条件自动验证提供的响应。如果该值不可接受，则提示用户输入新值。这样可以确保传递到原理图的任何值都符合原理图实现的期望，因此你无需在原理图的代码中添加其它检查。</p>
+
+  <h4 id="prompt-long-form-syntax">
+    <a href="#prompt-long-form-syntax" class="docs-anchor" tabindex="-1" aria-label="Link to Prompt long-form syntax" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9ri1c96btu7h6m7y15sixpcuh">提示的长格式语法</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eewsa9tw571eivets7baok9o4">在需要对提示进行其它自定义和控制情况下，<code>x-prompt</code> 字段也支持长格式语法。在这种形式下，<code>x-prompt</code> 字段值是带有子字段的 JSON 对象，这些子字段可自定义提示的行为。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="6kret3re69i0cdgthieg4vtmf">字段</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5t6g5rjbvyj8f7exde2sri2w7">数据值</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">type</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="91juz6msuh6r90iwayi7kbwl8"><code>confirmation</code>、
+<code>input</code> 或 
+<code>list</code>（在简短形式中自动选择）</td>
+</tr>
+<tr>
+<td align="left">message</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cg0bys6flexurpken3sk9nlck">字符串（必填）</td>
+</tr>
+<tr>
+<td align="left">items</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4k3i55s40941r2uj2v1mqtr24">字符串和/或标签/值对象对（仅在类型为 
+<code>list</code> 时有效）</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6m2cg0cxgxulaz35k6dwd84fr">以下长格式示例来自 CLI 用于
+<a href="https://github.com/angular/angular-cli/blob/ba8a6ea59983bb52a6f1e66d105c5a77517f062e/packages/schematics/angular/application/schema.json#L56" target="_blank">生成应用</a>的原理图的 JSON 模式。 它定义了一个提示，让用户选择要为创建的应用使用哪种样式预处理器。 通过使用长格式，原理图可以更明确地格式化菜单选项。</p>
+<div class="docs-code" header="package/schematics/angular/application/schema.json">
+    <div class="docs-code-header"><h3>package/schematics/angular/application/schema.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"style"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"description"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"The file extension or preprocessor to use for style files."</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"default"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"css"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"enum"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">    <span class="hljs-string">"css"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"scss"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"sass"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-string">"less"</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"x-prompt"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Which stylesheet format would you like to use?"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"list"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"items"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">{</span> <span class="hljs-attr">"value"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"css"</span><span class="hljs-punctuation">,</span>  <span class="hljs-attr">"label"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"CSS"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">{</span> <span class="hljs-attr">"value"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"scss"</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"label"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SCSS   [ https://sass-lang.com/documentation/syntax#scss                ]"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">{</span> <span class="hljs-attr">"value"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"sass"</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"label"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Sass   [ https://sass-lang.com/documentation/syntax#the-indented-syntax ]"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">{</span> <span class="hljs-attr">"value"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"less"</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"label"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Less   [ https://lesscss.org/                                            ]"</span> <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div></code>
+    </pre>
+  </div>
+  <h4 id="x-prompt-schema">
+    <a href="#x-prompt-schema" class="docs-anchor" tabindex="-1" aria-label="Link to x-prompt schema" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f3xgltjtlmzpc8n9aikm70zzw">x-prompt 模式</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="80ac5gdkf7b5ey2g1dpckcdv5">定义原理图选项的 JSON 模式支持扩展，以允许对提示及其相应行为进行声明式定义。无需其它逻辑或更改原理图代码即可支持提示。以下 JSON 模式是 <code>x-prompt</code> 字段的长格式语法的完整描述。</p>
+<div class="docs-code" header="x-prompt schema">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f3xgltjtlmzpc8n9aikm70zzw">x-prompt 模式</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"oneOf"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">{</span> <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"object"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"properties"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">                <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                <span class="hljs-attr">"items"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">                    <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"array"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                    <span class="hljs-attr">"items"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">                        <span class="hljs-attr">"oneOf"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">                            <span class="hljs-punctuation">{</span> <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                            <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">                                <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"object"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                                <span class="hljs-attr">"properties"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">                                    <span class="hljs-attr">"label"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"string"</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                                    <span class="hljs-attr">"value"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">                                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">                                <span class="hljs-attr">"required"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> <span class="hljs-string">"value"</span> <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line">                            <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">                        <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line">                    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">                <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"required"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> <span class="hljs-string">"message"</span> <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <h2 id="schematics-cli">
+    <a href="#schematics-cli" class="docs-anchor" tabindex="-1" aria-label="Link to Schematics CLI" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2qorl1fzbsnxnx80m6vk83xzm">原理图 CLI</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5rr17jgfeahii0a0tt3qet09k">原理图有自己的命令行工具。使用 Node 6.9 或以上版本，全局安装 Schematics 命令行工具：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">npm install -g @angular-devkit/schematics-cli</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="vsjcoonzhm5q788he52ai9i5">这将安装可执行文件 <code>schematics</code>，你可以用它在自己的项目文件夹中创建一个新的原理图集合、把一个新的原理图添加到一个现有的集合中，或者扩展一个现有的原理图。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ewn83cr53cw75b6w28xa7hbbg">在下面的章节中，我们将使用 CLI 创建一个新的原理图集合，以介绍文件和目录结构，以及一些基本概念。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7wrh9ejw5wx6w2w25ssaw6283">然而，原理图最常见的用途是将 Angular 库与 Angular CLI 集成。 通过在 Angular 工作区的库项目中直接创建原理图文件来实现这一点，而无需使用 Schematics CLI。 参见 
+<a href="tools/cli/schematics-for-libraries">库的原理图</a>。</p>
+
+  <h3 id="creating-a-schematics-collection">
+    <a href="#creating-a-schematics-collection" class="docs-anchor" tabindex="-1" aria-label="Link to Creating a schematics collection" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bpow710nw9arsmw4yue91x4na">创建一个原理图集合</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9ykusmnpchcjensgt5gq6qdqd">下列命令用来在同名的新项目文件夹中创建一个名为 <code>hello-world</code> 的新原理图。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">schematics blank --name=hello-world</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cr1rhrv90rpqpdvkhweir33hf"><code>blank</code> 原理图是由 Schematics CLI 提供的。该命令用于创建一个新的项目文件夹（该集合的根文件夹），并在该集合中创建一个最初的命名原理图。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6vokhybuex2ntqgtzetopj54j">转到 collection 文件夹，安装你的 npm 依赖，然后在常用的编辑器中打开这个新集合，看看所生成的文件。比如，如果你正在使用 VS Code：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">cd hello-world</div><div class="hljs-ln-line">npm install</div><div class="hljs-ln-line">npm run build</div><div class="hljs-ln-line">code .</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2w0xo65msygna9dj2dke8tal0">最初的原理图与项目文件夹的名字相同，是在 <code>src/hello-world</code> 中生成的。可以把相关的原理图添加到这个集合中，并修改所生成的骨架代码来定义原理图的功能。每个原理图的名称在集合中都必须是唯一的。</p>
+
+  <h3 id="running-a-schematic">
+    <a href="#running-a-schematic" class="docs-anchor" tabindex="-1" aria-label="Link to Running a schematic" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="59ppopt8yjvia7b8szgf08eyw">运行原理图</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8f9odnzutdzyjscu9l62gzqbn">使用 <code>schematics</code> 命令运行一个命名原理图。按以下格式提供项目文件夹的路径、原理图名称和所有必选项。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">schematics &lt;path-to-schematics-project&gt;:&lt;schematics-name&gt; --&lt;required-option&gt;=&lt;value&gt;</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9gog3xmdiz1gq1a42tbid34lz">该路径可以是绝对路径，也可以是执行该命令的当前工作目录的相对路径。比如，要运行刚生成的原理图（它没有必选项），请使用下面的命令。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">schematics .:hello-world</div></code>
+    </pre>
+  </div>
+  <h3 id="adding-a-schematic-to-a-collection">
+    <a href="#adding-a-schematic-to-a-collection" class="docs-anchor" tabindex="-1" aria-label="Link to Adding a schematic to a collection" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aq91k1n4bj53exg3hz5e4kc8a">把原理图添加到集合中</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3ctpr9o3xshm2hja8pms8xo14">要把一个原理图添加到现有的集合中，请使用和新建原理图项目相同的命令，不过要改为在该项目的文件夹下运行该命令。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">cd hello-world</div><div class="hljs-ln-line">schematics blank --name=goodbye-world</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3qpwlzsowsgfo1yo7jcwt2n3n">该命令会在你的集合中生成一个新的命名原理图，它包含一个主文件 <code>index.ts</code> 及其相关的测试规约。它还会把这个新原理图的名字（name），说明（description）和工厂函数（factory function）添加到 <code>collection.json</code> 文件中此集合的 JSON 模式中。</p>
+
+  <h2 id="collection-contents">
+    <a href="#collection-contents" class="docs-anchor" tabindex="-1" aria-label="Link to Collection contents" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cnsnisog2wmixpadv0m7ql0cn">集合的内容</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cixgykxrbss8nonl40lygstk6">集合的根文件夹中包含一些配置文件、<code>node_modules</code> 文件夹和 <code>src/</code> 文件夹。<code>src/</code> 文件夹包含该集合中各个命名原理图的子文件夹，以及一个模式文件（<code>collection.json</code>），它是集合中各个原理图的模式定义。每个原理图都是用名称，描述和工厂函数创建的。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"$schema"</span><span class="hljs-punctuation">:</span></div><div class="hljs-ln-line">     <span class="hljs-string">"../node_modules/@angular-devkit/schematics/collection-schema.json"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"schematics"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"hello-world"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"description"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"A blank schematic."</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"factory"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"./hello-world/index#helloWorld"</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ankau0rclqqucyjygy4pwrczy"><code>$schema</code> 属性指定了 CLI 进行验证时所用的模式。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="1xpmci4du35fjz96vre01hxa5"><code>schematics</code> 属性列出了属于此集合的命名原理图。 每个原理图都有一个纯文本描述，并指向主文件中的生成入口函数。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="3uqebvh2o2ljw67ramgrt4gul"><code>factory</code> 属性指向生成的入口函数。 在此示例中，你通过调用 
+<code>helloWorld()</code> 工厂函数来调用 
+<code>hello-world</code> 原理图。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8ruvwmw8o9drh651lhbps4v2h">可选属性 <code>schema</code> 是一个 JSON 模式文件，它定义了本原理图中可用的命令行参数。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="97vq1t01t20ra9isnsw7az82z">可选的 
+<code>aliases</code> 数组指定了一个或多个用于调用原理图的字符串。 例如，Angular CLI 「generate」命令的原理图有一个别名「g」，让你可以使用命令 
+<code>ng g</code>。</p>
+</li>
+
+  </ul>
+  
+  <h3 id="named-schematics">
+    <a href="#named-schematics" class="docs-anchor" tabindex="-1" aria-label="Link to Named schematics" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cfvd6n7tdh8n9v67quf8a9klw">命名原理图</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9e87y4mrfnrkilgi18oo8gnbz">当你使用 Schematics CLI 创建空白原理图项目时，该集合的第一个成员是一张与该集合同名的空白原理图。当你把这个新的命名原理图添加到本集合中时，它会自动添加到 <code>collection.json</code> 模式中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="38ri9g6jtu12vdr02s0asjqcj">除了名称和描述外，每个原理图还有一个 <code>factory</code> 属性，用于标识此原理图的入口点。在本例中，你通过在主文件 <code>hello-world/index.ts</code> 中调用 <code>helloWorld()</code> 函数来调用此原理图中定义的功能。</p>
+<img alt="overview" src="assets/images/guide/schematics/collection-files.gif">
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9culjs1724kd6q1isx1jxfddv">该集合中每个命名原理图都有以下主要部分。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9adacmyaa3k2v2xx3cltx6y8a">部分</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>index.ts</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ax0kb8cuqf01onkjd1ux3lqp5">定义命名原理图的转换逻辑的代码。</td>
+</tr>
+<tr>
+<td align="left"><code>schema.json</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cm55j81pk8ywzr44ozropw3x">原理图变量定义。</td>
+</tr>
+<tr>
+<td align="left"><code>schema.d.ts</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="c7j8497wdqpeby6m7ysah8wmh">原理图变量。</td>
+</tr>
+<tr>
+<td align="left"><code>files/</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2zls26ayz7yv2witlvcyj716c">可选的组件/模板文件用于复现。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f5dksd423jylcx1x6tzviamxh">原理图可以在 <code>index.ts</code> 文件中提供它全部的逻辑，不需要额外的模板。你也可以在 <code>files/</code> 文件夹中提供组件和模板来为 Angular 创建动态原理图，比如那些独立的 Angular 项目。这个 index 文件中的逻辑会通过定义一些用来注入数据和修改变量的规则来配置这些模板。</p>

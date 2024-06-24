@@ -1,0 +1,45 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="46nwxhp9bfeht5mrnkql4db2w">慢速计算</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/best-practices/runtime-performance/slow-computations.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1180ozhlp6vd7te5glma5qyp5">在每个变更检测周期上，Angular 都会同步进行：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="82obpyqzu55odmo9ltg07w34z">除非另有指定，否则会根据每个组件的检测策略估算所有组件中的所有模板表达式</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="emchxpu960hm1q1j83465lfnc">执行 <code>ngDoCheck</code> 、 <code>ngAfterContentChecked</code> 、 <code>ngAfterViewChecked</code> 和 <code>ngOnChanges</code> 生命周期钩子。模板中的单个慢速计算或生命周期钩子可能会减慢整个变更检测过程，因为 Angular 会按顺序运行计算。</li>
+
+  </ul>
+  
+  <h2 id="identifying-slow-computations">
+    <a href="#identifying-slow-computations" class="docs-anchor" tabindex="-1" aria-label="Link to Identifying slow computations" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b7d9u2s58lmecfijivizvzig7">识别慢速计算</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6zrqp5di8vj8ovogi949606qq">你可以用 Angular DevTools 的分析器来识别繁重的计算。在性能时间线中，单击一个栏以预览特定的变更检测周期。这将显示一个条形图，该图显示了框架在每个组件的变更检测上花了多长时间。当你点击一个组件时，你可以预览 Angular 花了多长时间来评估其模板和生命周期钩子。</p>
+<img alt="Angular DevTools profiler preview showing slow computation" src="assets/images/best-practices/runtime-performance/slow-computations.png">
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ariemsappqdbngn771ssrvs2u">比如，在上面的屏幕截图中，选择了所记录的第二个变更检测周期，其中 Angular 在这个周期花费了超过 573 毫秒，大部分时间都花在了 <code>EmployeeListComponent</code> 上。在详细信息面板中，你可以看到 Angular 花了超过 297 毫秒的时间来估算 <code>EmployeeListComponent</code> 的模板。</p>
+
+  <h2 id="optimizing-slow-computations">
+    <a href="#optimizing-slow-computations" class="docs-anchor" tabindex="-1" aria-label="Link to Optimizing slow computations" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e3xngsvupmbhjkcxu8wumb4yd">优化慢速计算</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4e9n42x2k9dztwd2xdjkjeqgc">有几种技术可以消除慢速计算：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eymeayltqvrha9nxoympfqhmj"><strong>优化底层算法</strong>。这是推荐的方法。如果你可以加快导致问题的算法的速度，则可以加快整个变更检测机制。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="rkoi360qukjpsfggj2ssfrnq"><strong>使用纯管道进行缓存</strong>。你可以将繁重的计算移到纯 
+<a href="guide/pipes">管道</a> 中。Angular 只有在检测到其输入与上次调用时不同的情况下才会重新求值纯管道。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="a0zje1bnckww9hxs6brdc8fzt"><strong>使用记忆化</strong>。
+<a href="https://en.wikipedia.org/wiki/Memoization" target="_blank">记忆化</a> 是一种与纯管道类似的技术，不同之处在于纯管道仅保留上一次计算的结果，而记忆化可以存储多个结果。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="9l6w6tfurqg44rvkztoj2j7vn"><strong>避免在生命周期钩子中重绘/回流</strong>。某些
+<a href="https://web.dev/avoid-large-complex-layouts-and-layout-thrashing/" target="_blank">操作</a>会导致浏览器同步重新计算页面布局或重新渲染。由于回流和重绘通常很慢，要避免在每个变更检测周期中执行这些操作。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a5fzwtxe74sln4xo4wl8unjzf">纯管道和记忆化有不同的权衡。与记忆化相比，纯管道是 Angular 的内置概念，记忆化是一种用于缓存函数结果的通用软件工程实践。如果你使用不同的参数频繁调用繁重的计算，则记忆化的内存开销可能会很大。</p>

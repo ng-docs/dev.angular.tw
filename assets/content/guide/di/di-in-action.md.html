@@ -1,0 +1,67 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8734yfmekzehtg1mc4x4qeqiv">DI 实战</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/di/di-in-action.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="6a1gejsolkdxwaye96txrbbrc">本指南探讨了 Angular 中依赖注入的其他特性。</p>
+
+  <h2 id="custom-providers-with-inject">
+    <a href="#custom-providers-with-inject" class="docs-anchor" tabindex="-1" aria-label="Link to Custom providers with <code>@Inject</code>" data-ng_translator_product="100" data-ng_translator_ref_id="9541vmokecjvxwwcyovtbxyqa">带有 
+<code>@Inject</code> 的自定义提供者</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8vr1v8fkdai5sv3uiba2p3e8t">使用自定义提供者可以为隐式依赖（如内置浏览器 API）提供具体实现。 以下示例使用 
+<code>InjectionToken</code> 作为依赖项提供 
+<a href="https://developer.mozilla.org/docs/Web/API/Window/localStorage" target="_blank">localStorage</a> 浏览器 API 给 
+<code>BrowserStorageService</code>:</p>
+<div class="docs-code" header="src/app/storage.service.ts">
+    <div class="docs-code-header"><h3>src/app/storage.service.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Inject</span>, <span class="hljs-title class_">Injectable</span>, <span class="hljs-title class_">InjectionToken</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">BROWSER_STORAGE</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">InjectionToken</span>&lt;<span class="hljs-title class_">Storage</span>&gt;(<span class="hljs-string">'Browser Storage'</span>, {</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">factory</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">localStorage</span></div><div class="hljs-ln-line highlighted">});</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BrowserStorageService</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Inject</span>(BROWSER_STORAGE) <span class="hljs-keyword">public</span> storage: Storage</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">get</span>(<span class="hljs-params">key: <span class="hljs-built_in">string</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">storage</span>.<span class="hljs-title function_">getItem</span>(key);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">set</span>(<span class="hljs-params">key: <span class="hljs-built_in">string</span>, value: <span class="hljs-built_in">string</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">storage</span>.<span class="hljs-title function_">setItem</span>(key, value);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4055f0ba03uc4k7uvj9vays4t"><code>factory</code> 函数返回附着在浏览器窗口对象上的 
+<code>localStorage</code> 属性。 
+<code>Inject</code> 装饰器应用于 
+<code>storage</code> 构造函数参数，并指定该依赖项的自定义提供者。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="946pj5b72vwdnnqxs8ugfm9eo">现在可以在测试期间用 
+<code>localStorage</code> 的模拟 API 覆盖这个自定义提供者，而不是与真实的浏览器 API 交互。</p>
+
+  <h2 id="inject-the-components-dom-element">
+    <a href="#inject-the-components-dom-element" class="docs-anchor" tabindex="-1" aria-label="Link to Inject the component's DOM element" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3t3t1k1nae7wrfi1vhavne2s7">注入组件的 DOM 元素</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="40gm5iojcgx8ljopcwv26qije">虽然开发者力图避免，但某些视觉效果和第三方工具需要直接访问 DOM。 因此，你可能需要访问组件的 DOM 元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a96ltqwl819qhzil7btakyas3">Angular 通过使用 
+<code>ElementRef</code> 注入令牌来暴露 
+<code>@Component</code> 或 
+<code>@Directive</code> 的底层元素:</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Directive</span>, <span class="hljs-title class_">ElementRef</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'[appHighlight]'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HighlightDirective</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> element: ElementRef</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">update</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">element</span>.<span class="hljs-property">nativeElement</span>.<span class="hljs-property">style</span>.<span class="hljs-property">color</span> = <span class="hljs-string">'red'</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="resolve-circular-dependencies-with-a-forward-reference">
+    <a href="#resolve-circular-dependencies-with-a-forward-reference" class="docs-anchor" tabindex="-1" aria-label="Link to Resolve circular dependencies with a forward reference" data-ng_translator_product="100" data-ng_translator_ref_id="59n8qm7u5qvr6765g4r7zrtq2">使用前向引用解决循环依赖</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2tfha6g3lpqznfc0smwvb3kpj">在 TypeScript 里面，类声明的顺序是很重要的。如果一个类尚未定义，就不能引用它。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8w16pt4bawc60lnk8wlxnn5c1">这通常不是问题，特别是如果你遵循推荐的
+<em>每个文件一个类</em>的规则。但有时循环引用是不可避免的。例如，当类 'A' 引用类 'B' 而 'B' 又引用 'A' 时，其中一个必须先定义。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1culfqc337t5s4ne36euouia6">Angular 的 
+<code>forwardRef()</code> 函数创建一个
+<em>间接</em>引用，Angular 可以稍后求解该引用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3uus9w6nyjcoo5717r72mmiuu">当一个类
+<em>引用自身</em>时，你会遇到类似的问题。例如，在其 
+<code>providers</code> 数组中。
+<code>providers</code> 数组是 
+<code>@Component()</code> 装饰器函数的属性，必须出现在类定义之前。你可以使用 
+<code>forwardRef</code> 打破这种循环引用。</p>
+<div class="docs-code" header="app.component.ts">
+    <div class="docs-code-header"><h3>app.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">PARENT_MENU_ITEM</span>,</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">useExisting</span>: <span class="hljs-title function_">forwardRef</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">MenuItem</span>),</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div>

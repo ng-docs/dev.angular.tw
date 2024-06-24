@@ -1,0 +1,92 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4byiubykxo4pfqxbc605ynmub">添加 localize 包</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/i18n/add-package.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="a4q3pegdnpydxduz3zgp5g9vo">要利用 Angular 的本地化特性，请使用 
+<a href="cli" title="CLI" overview and command reference | angular>Angular CLI</a> 将 
+<code>@angular/localize</code> 包添加到你的项目中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="aez6046rapr7w085862v674kh">要添加 
+<code>@angular/localize</code> 包，请使用以下命令更新项目中的 
+<code>package.json</code> 和 TypeScript 配置文件。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/doc-files/commands.sh" visiblelines="0">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng <span class="hljs-built_in">add</span> @angular/localize</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng extract-i18n</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng extract-i18n --output-path src/locale</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng extract-i18n <span class="hljs-attribute">--format</span>=xlf</div><div class="hljs-ln-line">ng extract-i18n <span class="hljs-attribute">--format</span>=xlf2</div><div class="hljs-ln-line">ng extract-i18n <span class="hljs-attribute">--format</span>=xmb</div><div class="hljs-ln-line">ng extract-i18n <span class="hljs-attribute">--format</span>=json</div><div class="hljs-ln-line">ng extract-i18n <span class="hljs-attribute">--format</span>=arb</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng extract-i18n --out-file source.xlf</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng build --localize</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng serve <span class="hljs-attribute">--configuration</span>=fr</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">ng build <span class="hljs-attribute">--configuration</span>=production,fr</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ehftwq340aplvyioic7lwo2ow">它在 TypeScript 配置文件中添加 <code>types: ["@angular/localize"]</code>，并在 <code>main.ts</code> 文件顶部添加对 <code>@angular/localize</code> 类型定义的引用。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="3gbla38j4cecbdb9pr7hebjco"><strong>有帮助的:</strong> 有关 
+<code>package.json</code> 和 
+<code>tsconfig.json</code> 文件的更多信息，请参阅 
+<a href="reference/configs/npm-packages" title="Workspace" npm dependencies | angular>工作区 npm 依赖项</a> 和 
+<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" title="TypeScript" configuration target="_blank">TypeScript 配置</a>。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="a4bpx41mcvrc1xvbdnxbnovfp">如果没有安装 
+<code>@angular/localize</code>，并且你尝试构建项目的本地化版本（例如，在模板中使用 
+<code>i18n</code> 属性），
+<a href="cli" title="CLI" overview and command reference | angular>Angular CLI</a> 会生成一个错误，其中会包含启用项目 i18n 的步骤。</p>
+
+  <h2 id="options">
+    <a href="#options" class="docs-anchor" tabindex="-1" aria-label="Link to Options" data-ng_translator_product="100" data-ng_translator_ref_id="cyk2rtnidu0xcswyg7218m57s">选项</a>
+  </h2>
+  
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">OPTION</th>
+<th align="left">DESCRIPTION</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8glwd2ohrnmnjec1hpn434ynv">值类型</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="64bf36k4ahul8lj702zguv4qw">默认值</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>--project</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="agjqi42ykk7wq2xj1xt1qtgfa">项目的名称。</td>
+<td align="left"><code>string</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>--use-at-runtime</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5o25pzrenarm3dhcohurf7893">如果设置了，那么 
+<code>$localize</code> 可以在运行时使用。同时 
+<code>@angular/localize</code> 会被包含在 
+<code>package.json</code> 的 
+<code>dependencies</code> 部分中，而不是默认的 
+<code>devDependencies</code>。</td>
+<td align="left"><code>boolean</code></td>
+<td align="left"><code>false</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1xe7a5pol2ar2wdnlyvmf4dih">有关更多可用选项，请参阅 
+<code>ng add</code> 在 
+<a href="cli" title="CLI" overview and command reference | angular>Angular CLI</a> 中的说明。</p>
+
+  <h2 id="whats-next">
+    <a href="#whats-next" class="docs-anchor" tabindex="-1" aria-label="Link to What's next" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="407r2fj2mi5kvg7imj9zdcpe">下一步呢？</a>
+  </h2>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="api/localize" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5h2yz0cqwb11mztk5688uwrse">@angular/localize API</a>
+    
+    <a class="docs-pill" href="guide/i18n/locale-id" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eqn671b0aebnapjs92yqm87z6">通过 ID 引用语言环境</a>
+    
+
+    </nav>
+    

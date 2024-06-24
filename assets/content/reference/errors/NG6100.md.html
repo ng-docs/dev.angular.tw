@@ -1,0 +1,47 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="62rj68ulc71bligbhfdhyhlhm">NgModule.id 设置为 module.id 反模式</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG6100.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7aa2wd19o9eznko85u4kb57od">使用 <code>module.id</code> 作为 NgModule 的 <code>id</code> 是一种常见的反模式，并且可能在你的代码中无法达到预期效果。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9tdpb7kajwu1c4so1s39z0bp5">NgModules 可以用 <code>id</code> 来声明：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">id</span>: <span class="hljs-string">'my_module'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyModule</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9px0kxg08s51mhizaoqqh9ixi">声明一个 
+<code>id</code> 使得 NgModule 可以通过 
+<code>getNgModuleById()</code> 操作进行查找。这个功能很少使用，主要在一些延迟加载 NgModule 且不直接引用它们的特定捆绑场景中使用。在大多数 Angular 代码中，应该使用 ES 动态 
+<code>import()</code>（
+<code>import('./path/to/module')</code>），因为它提供了对被加载 NgModule 的直接引用，而不需要全局注册的副作用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a2ah53ck4v1l8oe9o56cl0l3v">如果你不使用 
+<code>getNgModuleById</code>，则无需为你的 NgModule 提供 
+<code>id</code>。提供 
+<code>id</code> 有一个显著缺点：它使 NgModule 无法进行摇树优化，这可能会影响你的捆绑包大小。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8nt227xsvnpi6fclpxb5vren8">特别是，指定 
+<code>id: module.id</code> 的模式源于对 
+<code>@NgModule.id</code> 的误解。在早期版本的 Angular 中，有时需要在 
+<code>@Component</code> 元数据中包含 
+<code>moduleId: module.id</code> 属性。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="i52oi6531sci4ov9cxlvmi4i">对 
+<code>@NgModule.id</code> 使用 
+<code>module.id</code> 可能是混淆了 
+<code>@Component.moduleId</code> 和 
+<code>@NgModule.id</code>。
+<code>module.id</code> 通常不会对 
+<code>getNgModuleById()</code> 操作有用，因为 
+<code>id</code> 需要是一个众所周知的字符串，而 
+<code>module.id</code> 对使用者来说通常是透明的。</p>
+
+  <h2 id="debugging-the-error">
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7byepkb1zasolwz79592ju2bw">你可以从 NgModules 中删除 <code>id: module.id</code> 声明。编译器会忽略此声明并发出此警告。</p>

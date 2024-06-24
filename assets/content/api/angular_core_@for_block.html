@@ -1,0 +1,81 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>@for</h1><div class="docs-api-item-label" data-mode="full" data-type="block">block</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/tools/manual_api_docs/blocks/for.md#L0-L0" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="6nj19cp1qe529op2da80scirw"><code>@for</code> 控制块为集合中的每个条目重复渲染控制块的内容。</p><p></p></header><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="6nj19cp1qe529op2da80scirw"><code>@for</code> 控制块为集合中的每个条目重复渲染控制块的内容。</p>
+<p>@syntax</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">@for (item of items; track item.name) {</span><span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>{{ item.name }}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="hljs-ln-line">} @empty {</span><span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>There are no items.<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p>@description</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="g76090pp96fuo90owagtm348"><code>@for</code> 控制块根据集合中的变化渲染其内容。集合可以是任何 JavaScript 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols">iterable</a>，但使用常规 
+<code>Array</code> 有性能优势。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bv37jjr2cfo92drr1o4agl1dk">你可以选择在 
+<code>@for</code> 控制块内容之后立即包含一个 
+<code>@empty</code> 部分。当没有条目时，会显示 
+<code>@empty</code> 控制块的内容。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_ref_id="ew6xats36j3t2ee23baiyrbb9">跟踪和对象标识</h3>
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="75dnsx7sg28na3kw3l3i1qg5w"><code>track</code> 表达式的值决定了用于将数组条目与 DOM 中的视图关联的键。清晰的条目标识指示允许 Angular 在集合中的条目被添加、移除或移动时执行最小集的 DOM 操作。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="brs9ysku7hcx7jkgy309i4gx1">为了优化性能，特别是在对不可变数据进行循环时，确保有效使用 track 表达式来唯一标识每个条目。由于可能存在的性能问题，
+<code>track</code> 表达式是 
+<code>@for</code> 循环所必需的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="by3emw38l6f7um167xthzhb7k">对于保持静态的集合，
+<code>track $index</code> 提供了一种简单的跟踪机制。对于动态集合（会有增加、删除或重新排序的情况），选择每个条目的唯一属性作为跟踪键。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_ref_id="9f1d3dg25jnlel19x7ipt6ai3">`$index` 和其他上下文变量</h3>
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1deo5l5uwge9cm8xbzv7xg8qz">在 
+<code>@for</code> 内容内部，总是可以使用几个隐式变量：</p>
+
+      <div class="docs-table docs-scroll-track-transparent">
+        <table>
+          <thead>
+            <tr>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="48xhyn8dc085o9pjaic3ud9sp">变量</th>
+<th data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ryq83o4vnwnm29aax9uihwua">含义</th>
+</tr>
+
+          </thead>
+          <tbody>
+            <tr>
+<td><code>$count</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="bbswk058bbgt5fkl0rgqk1usv">集合中被迭代的项目数</td>
+</tr>
+<tr>
+<td><code>$index</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="6thwsy26mvrsk6aff8x5b630w">当前行的索引</td>
+</tr>
+<tr>
+<td><code>$first</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="bzxpfmqg58115vuixl0iandms">当前行是否为第一行</td>
+</tr>
+<tr>
+<td><code>$last</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="7582yd8etnavnfx5gy6d8vvwo">当前行是否为最后一行</td>
+</tr>
+<tr>
+<td><code>$even</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4ybdbe6i3snxxk3s0pfumf39e">当前行索引是否为偶数</td>
+</tr>
+<tr>
+<td><code>$odd</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="3t5v8vymr8v16918kh34qmx8l">当前行索引是否为奇数</td>
+</tr>
+
+          </tbody>
+        </table>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bpajs63shhhujw4d97myhrbel">这些变量始终以这些名称可用，但可以通过
+<code>let</code>部分进行别名设置：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">@for (item of items; track item.id; let idx = $index, e = $even) {</span><span class="hljs-ln-line">Item #{{ idx }}: {{ item.name }}</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="29fx0r5aa4vzx1wwwcyny1o4h">这种别名特别适用于使用嵌套 
+<code>@for</code> 控制块的情况，此时上下文变量名可能会发生冲突。</p></div></div></div>

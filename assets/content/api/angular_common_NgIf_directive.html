@@ -1,0 +1,126 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>NgIf</h1><div class="docs-api-item-label" data-mode="full" data-type="directive">directive</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/common/src/directives/ng_if.ts#L157-L257" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="31886fc104fg2szplr364w2sl">本结构型指令用于根据表达式的值（强转为
+boolean）是否为真值，来有条件的包含某个模板。当表达式计算为 true 时，Angular 会渲染 <code>then</code>
+子句中提供的模板，当为 false 或 null 时则渲染可选的 <code>else</code> 子句中的模板。<code>else</code>
+子句的默认模板是空白模板。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">NgIf</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngIf">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">ngIf</span>(<span class="hljs-params">value: T</span>);</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngIfThen">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">ngIfThen</span>(<span class="hljs-params">value: TemplateRef&lt;NgIfContext&lt;T&gt;&gt;</span>);</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngIfElse">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">ngIfElse</span>(<span class="hljs-params">value: TemplateRef&lt;NgIfContext&lt;T&gt;&gt;</span>);</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngTemplateGuard_ngIf">  <span class="hljs-keyword">static</span> <span class="hljs-attr">ngTemplateGuard_ngIf</span>: <span class="hljs-string">"binding"</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngTemplateContextGuard">  <span class="hljs-keyword">static</span> <span class="hljs-title function_">ngTemplateContextGuard</span>(<span class="hljs-attr">dir</span>: <span class="hljs-title class_">NgIf</span>&lt;T&gt;, <span class="hljs-attr">ctx</span>: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">boolean</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="31886fc104fg2szplr364w2sl">本结构型指令用于根据表达式的值（强转为
+boolean）是否为真值，来有条件的包含某个模板。当表达式计算为 true 时，Angular 会渲染 <code>then</code>
+子句中提供的模板，当为 false 或 null 时则渲染可选的 <code>else</code> 子句中的模板。<code>else</code>
+子句的默认模板是空白模板。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6sgy9cqwoc2f6qdusxorc1fhd">此指令的
+<a href="guide/directives/structural-directives#asterisk">简写形式</a> 
+<code>*ngIf="condition"</code> 通常以属性形式提供给插入模板的锚元素。Angular 将其扩展为更明确的版本，其中锚元素包含在 
+<code>&lt;ng-template&gt;</code> 元素中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4doexdnugxi8ip1d05fll9ef5">具有简写语法的简单形式：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;<span class="hljs-keyword">div</span> *ngIf=<span class="hljs-string">"condition"</span>&gt;Content <span class="hljs-keyword">to</span> render when condition <span class="hljs-keyword">is</span> <span class="hljs-literal">true</span>.&lt;/<span class="hljs-keyword">div</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6kymg30qyq1g1h2hsr4p5ugvr">具有扩展语法的简单形式：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> [ngIf]=<span class="hljs-string">"condition"</span>&gt;&lt;<span class="hljs-keyword">div</span>&gt;<span class="hljs-type">Content</span> to render <span class="hljs-keyword">when</span> condition <span class="hljs-keyword">is</span></span><span class="hljs-ln-line"><span class="hljs-literal">true</span>.&lt;/<span class="hljs-keyword">div</span>&gt;&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7tfcvvrt3xjn5yb0e9ixgv88j">带有 “else” 块的格式：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;div *ngIf="condition; else elseBlock"&gt;Content <span class="hljs-keyword">to</span> render <span class="hljs-keyword">when</span> condition <span class="hljs-keyword">is</span> <span class="hljs-keyword">true</span>.&lt;/div&gt;</span><span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> #elseBlock&gt;Content <span class="hljs-keyword">to</span> render <span class="hljs-keyword">when</span> condition <span class="hljs-keyword">is</span> <span class="hljs-keyword">false</span>.&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="68z74it9ox1dlndhavfvhv1em">带 “then” 和 “else” 块的简写形式：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;div *ngIf="condition; then thenBlock else elseBlock"&gt;&lt;/div&gt;</span><span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> #thenBlock&gt;Content <span class="hljs-keyword">to</span> render <span class="hljs-keyword">when</span> condition <span class="hljs-keyword">is</span> <span class="hljs-keyword">true</span>.&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span><span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> #elseBlock&gt;Content <span class="hljs-keyword">to</span> render <span class="hljs-keyword">when</span> condition <span class="hljs-keyword">is</span> <span class="hljs-keyword">false</span>.&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dfwp7lqebjv8fyj1fr0h7v90y">本地存储值的形式：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"condition as value; else elseBlock"</span>&gt;</span></span><span class="hljs-template-variable">{{<span class="hljs-name">value</span>}}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-template</span> #<span class="hljs-attr">elseBlock</span>&gt;</span>Content to render when value is null.<span class="hljs-tag">&lt;/<span class="hljs-name">ng-template</span>&gt;</span></span></span>
+          </code>
+        </pre>
+      </div></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="5kclthupqh8b9q4bode6ylk0a"><code>*ngIf</code> 指令最常用于有条件显示内联模板，如下例所示。默认的 
+<code>else</code> 模板为空。</p>
+<code-example path="common/ngIf/ts/module.ts" region="NgIfSimple" />
+
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5sncnn5srqrzi7xn1rpzl8ntf">使用 <code>else</code> 显示替代模板</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8677d6iw82k0u3ggrjfdbq3zn">要在
+<code>expression</code>求值为假时显示一个模板，可以使用
+<code>else</code>模板绑定，如以下示例所示。 
+<code>else</code>绑定指向一个标记为
+<code>#elseBlock</code>的
+<code>&lt;ng-template&gt;</code>元素。 模板可以定义在组件视图的任何地方，但通常为了可读性会放在
+<code>ngIf</code>之后。</p>
+<code-example path="common/ngIf/ts/module.ts" region="NgIfElse" />
+
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="esj9dlm771qufkhgijnln2135">使用内部 <code>then</code> 模板</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6m1of8nfh4r3ecpczbl3wkqr7">在前面的示例中，「then」子句的模板是内联指定的，作为包含
+<code>ngIf</code>指令的标签内容。你也可以通过引用一个标记的
+<code>&lt;ng-template&gt;</code>元素来指定一个外部定义的模板。这样做时，可以在运行时更改使用哪个模板，如以下示例所示。</p>
+<code-example path="common/ngIf/ts/module.ts" region="NgIfThenElse" />
+
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bkme6pu6e1e4q4n737v4ocby4">把条件结果保存在变量中</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2olpatw811nnxj5w4146b6383">你可能想展示来自同一个对象的一些属性。如果你在等待异步数据，对象可能是未定义的。 在这种情况下，可以使用
+<code>ngIf</code>并将条件的结果存储在一个局部变量中，如以下示例所示。</p>
+<code-example path="common/ngIf/ts/module.ts" region="NgIfAs" />
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="40uu9pusf25x127ocjsbjo5zx">这段代码只使用了一个
+<code>AsyncPipe</code>，所以只创建了一个订阅。 条件语句将
+<code>userStream|async</code>的结果存储在局部变量
+<code>user</code>中。 然后可以重复绑定局部变量
+<code>user</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7c6b4q0nu4ako4g0e98nwheoe">只有当 <code>userStream</code> 返回了值的时候，才会有条件的显示此数据。所以你不用使用安全导航操作符（<code>?.</code>）
+来在访问属性时避免空值。你可以在等待数据时显示一个备用模板。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dsttpebkgvt8ur5ks6ndjbdsy">简写语法</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8msal992x7ex0s6hf9kvmnhq9">简写语法
+<code>*ngIf</code>会扩展为两个独立的模板规范，用于「then」和「else」子句。 例如，考虑以下简写语句，在等待数据加载时显示加载页面。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;<span class="hljs-keyword">div</span> class=<span class="hljs-string">"hero-list"</span> *ngIf=<span class="hljs-string">"heroes else loading"</span>&gt;</span><span class="hljs-ln-line"> ...</span><span class="hljs-ln-line">&lt;/<span class="hljs-keyword">div</span>&gt;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> <span class="hljs-comment">#loading&gt;</span></span><span class="hljs-ln-line"> &lt;<span class="hljs-keyword">div</span>&gt;<span class="hljs-type">Loading</span>...&lt;/<span class="hljs-keyword">div</span>&gt;</span><span class="hljs-ln-line">&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="einz68lnozk5ymikhuojplou4">你可以看到 "else" 子句引用了带有 
+<code>#loading</code> 标签的 
+<code>&lt;ng-template&gt;</code>，而 "then" 子句的模板则作为锚元素的内容提供。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4xxlpfpg3932xsv8d8h4qhoaf">然而，当 Angular 扩展简写语法时，它会创建另一个带有
+<code>ngIf</code>和
+<code>ngIfElse</code>指令的
+<code>&lt;ng-template&gt;</code>标签。包含「then」子句模板的锚元素成为这个未标记的
+<code>&lt;ng-template&gt;</code>标签的内容。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> [ngIf]=<span class="hljs-string">"heroes"</span> [ngIfElse]=<span class="hljs-string">"loading"</span>&gt;</span><span class="hljs-ln-line"> &lt;<span class="hljs-keyword">div</span> class=<span class="hljs-string">"hero-list"</span>&gt;</span><span class="hljs-ln-line">  ...</span><span class="hljs-ln-line"> &lt;/<span class="hljs-keyword">div</span>&gt;</span><span class="hljs-ln-line">&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line">&lt;ng-<span class="hljs-keyword">template</span> <span class="hljs-comment">#loading&gt;</span></span><span class="hljs-ln-line"> &lt;<span class="hljs-keyword">div</span>&gt;<span class="hljs-type">Loading</span>...&lt;/<span class="hljs-keyword">div</span>&gt;</span><span class="hljs-ln-line">&lt;/ng-<span class="hljs-keyword">template</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9oo615dald5kshc34eqwvc3w">隐式模板对象的存在对结构型指令的嵌套有影响。有关此主题的更多信息，请参见 
+<a href="guide/directives/structural-directives#one-per-element">结构型指令</a>。</p>
+</div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="ngIf" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngIf</h3><div><code>T</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="32hzs8stfuzve8znwku551dcf">布尔表达式，将其作为显示模板的条件进行计算。</p></div></div></div></div><div id="ngIfThen" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngIfThen</h3><div><code>TemplateRef&lt;NgIfContext&lt;T&gt;&gt;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3ajssgau14hfjwr8g4mcc3z2h">当此条件表达式计算为 true 时要显示的模板。</p></div></div></div></div><div id="ngIfElse" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngIfElse</h3><div><code>TemplateRef&lt;NgIfContext&lt;T&gt;&gt;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9zb6k2hrocthtltq2zf9b04n8">当此条件表达式计算为 false 时要显示的模板。</p></div></div></div></div><div id="ngTemplateGuard_ngIf" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngTemplateGuard_ngIf</h3><div><code>"binding"</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="8yt9n1zlnw7k8ury9xvxmqqjc">在模板中断言绑定到
+<code>ngIf</code>输入的表达式的正确类型。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bwkcz4jud95nrmo3gybolv0ek">此静态字段的存在是 Ivy 模板类型检查编译器的一个信号，即当
+<code>NgIf</code>结构型指令渲染其模板时，绑定到
+<code>ngIf</code>的表达式的类型应该以某种方式被窄化。对于
+<code>NgIf</code>，绑定表达式本身用于窄化其类型，这允许 TypeScript 的 strictNullChecks 特性与
+<code>NgIf</code>一起工作。</p></div></div></div></div><div id="ngTemplateContextGuard" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngTemplateContextGuard</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="9f8ojspvuerbix46ekkxfh2fe">断言
+<code>NgIf</code>将要渲染的模板上下文的正确类型。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4utaivet44x4vs2fzh23o821">此方法的存在是 Ivy 模板类型检查编译器的一个信号，表明
+<code>NgIf</code>结构型指令以特定的上下文类型渲染其模板。</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">dir</span><code>NgIf&lt;T&gt;</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">ctx</span><code>any</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>boolean</code></div></div></div></div></div></div></div>

@@ -1,0 +1,191 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="d1irlmekz2jxdklcwd5qbfxk0">内置控制流</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/templates/control-flow.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="3056gw4u7shdovk1utt4ktz8z">Angular 模板支持
+<em>控制流块</em>，让你可以有条件地显示、隐藏和重复元素。</p>
+
+  <h2 id="if-block-conditionals">
+    <a href="#if-block-conditionals" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@if</code> block conditionals" data-ng_translator_product="100" data-ng_translator_ref_id="39ls2p3lt9bli3u90tk6l6h7k"><code>@if</code> 控制块条件</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="18hf1r4djx8bnc9n3ui02k4zm"><code>@if</code>块在条件表达式为真值时有条件地显示其内容：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@if (a &gt; b) {</div><div class="hljs-ln-line">{{a}} is greater than {{b}}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4mxoa0znztkvl8mqlutke6cq6"><code>@if</code>块可能有一个或多个相关的
+<code>@else</code>块。在
+<code>@if</code>块之后，你可以选择性地指定任意数量的
+<code>@else if</code>块和一个
+<code>@else</code>块：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@if (a &gt; b) {</div><div class="hljs-ln-line">{{a}} is greater than {{b}}</div><div class="hljs-ln-line">} @else if (b &gt; a) {</div><div class="hljs-ln-line">{{a}} is less than {{b}}</div><div class="hljs-ln-line">} @else {</div><div class="hljs-ln-line">{{a}} is equal to {{b}}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="referencing-the-conditional-expressions-result">
+    <a href="#referencing-the-conditional-expressions-result" class="docs-anchor" tabindex="-1" aria-label="Link to Referencing the conditional expression's result" data-ng_translator_product="100" data-ng_translator_ref_id="etqc5zpidhkliqvpkeugkzn12">引用条件表达式结果</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="cwrbri6vqeuviqa6pz6cmp1y3">新的内建
+<code>@if</code>条件支持引用表达式结果以保持对常见编码模式的解决方案：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@if (users$ | async; as users) {</div><div class="hljs-ln-line">{{ users.length }}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="for-block---repeaters">
+    <a href="#for-block---repeaters" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@for</code> block - repeaters" data-ng_translator_product="100" data-ng_translator_ref_id="9th6bufhtuy2mtsi10je1xtth"><code>@for</code> 控制块 - 重复器</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="223ijuajfcoh5vfhipla56lud"><code>@for</code>会为集合中的每个条目重复渲染一个块的内容。集合可以表示为任何JavaScript 
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols" target="_blank">可迭代者</a>，但使用普通的
+<code>Array</code>有性能优势。一个基本的
+<code>@for</code>循环如下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@for (item of items; track item.id) {</div><div class="hljs-ln-line">{{ item.name }}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="track-for-calculating-difference-of-two-collections">
+    <a href="#track-for-calculating-difference-of-two-collections" class="docs-anchor" tabindex="-1" aria-label="Link to <code>track</code> for calculating difference of two collections" data-ng_translator_product="100" data-ng_translator_ref_id="bqsqhqco1usujpmgdeishbqzv"><code>track</code> 用于计算两个集合的差异</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9rhuo1hfazkaivf8n8ay7zqjm"><code>track</code>表达式的值确定用于将数组项与DOM中的视图相关联的关键。清晰地指示项目标识允许Angular在集合中添加、删除或移动项目时执行最小的DOM操作。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2sf6je132nrmblmgbifqh87rp">有效地使用track可以显著提升应用程序的性能，尤其是在循环遍历数据集合时。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dgy5cmv0wb0bpv0nf6djtzljb">对于不会进行修改的集合（没有移动、添加或删除项目），使用
+<code>track $index</code>是一种高效的策略。对于具有可变数据或频繁更改的集合，请选择一个能唯一标识每个项目的属性作为你的track表达式。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7rb7h8kt0ixn781alpj754anw">当使用对象标识作为不可变数据结构的跟踪键时，要注意可能导致增加DOM重新创建，这可能导致不必要的性能成本。</p>
+
+  <h3 id="index-and-other-contextual-variables">
+    <a href="#index-and-other-contextual-variables" class="docs-anchor" tabindex="-1" aria-label="Link to <code>$index</code> and other contextual variables" data-ng_translator_product="100" data-ng_translator_ref_id="42uih7qwo4uoe6qs6623d7ywt"><code>$index</code> 和其他上下文变量</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ggs25511dezuufy432ndwv1k">在
+<code>@for</code>内容中，始终可用几个隐式变量：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="48xhyn8dc085o9pjaic3ud9sp">变量</th>
+<th data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ryq83o4vnwnm29aax9uihwua">含义</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td><code>$count</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="bbswk058bbgt5fkl0rgqk1usv">集合中被迭代的项目数</td>
+</tr>
+<tr>
+<td><code>$index</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="6thwsy26mvrsk6aff8x5b630w">当前行的索引</td>
+</tr>
+<tr>
+<td><code>$first</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="bzxpfmqg58115vuixl0iandms">当前行是否为第一行</td>
+</tr>
+<tr>
+<td><code>$last</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="7582yd8etnavnfx5gy6d8vvwo">当前行是否为最后一行</td>
+</tr>
+<tr>
+<td><code>$even</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="4ybdbe6i3snxxk3s0pfumf39e">当前行索引是否为偶数</td>
+</tr>
+<tr>
+<td><code>$odd</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="3t5v8vymr8v16918kh34qmx8l">当前行索引是否为奇数</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bpajs63shhhujw4d97myhrbel">这些变量始终以这些名称可用，但可以通过
+<code>let</code>部分进行别名设置：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@for (item of items; track item.id; let idx = $index, e = $even) {</div><div class="hljs-ln-line">Item #{{ idx }}: {{ item.name }}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5vepvpe233i0l8eyyo339l6zk">在使用嵌套的
+<code>@for</code>块时，别名特别有用，避免上下文变量名称冲突。</p>
+
+  <h3 id="empty-block">
+    <a href="#empty-block" class="docs-anchor" tabindex="-1" aria-label="Link to <code>empty</code> block" data-ng_translator_product="100" data-ng_translator_ref_id="39yjtuzcthttfuib8j9x68p3j"><code>empty</code> 控制块</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="eanxwhi5beh3z05ynam1ciive">你可以选择在
+<code>@for</code>块内容之后立即包含一个
+<code>@empty</code>部分。当没有项目时，
+<code>@empty</code>块的内容将显示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@for (item of items; track item.name) {</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span> {{ item.name }}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">} @empty {</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span> There are no items.<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="switch-block---selection">
+    <a href="#switch-block---selection" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@switch</code> block - selection" data-ng_translator_product="100" data-ng_translator_ref_id="17mz2zh7254j0ja28kh6s4ei8"><code>@switch</code> 控制块 - 选择</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4dw68a0s7bzezn1qbik7y4u0b"><code>switch</code>的语法与
+<code>if</code>非常相似，受到JavaScript
+<code>switch</code>语句的启发：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@switch (condition) {</div><div class="hljs-ln-line">@case (caseA) {</div><div class="hljs-ln-line">Case A.</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line">@case (caseB) {</div><div class="hljs-ln-line">Case B.</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line">@default {</div><div class="hljs-ln-line">Default case.</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4vb1j3ocj0ey2yeoqb5y4g8ck">条件表达式的值使用
+<code>===</code>运算符与case表达式进行比较。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="91n535qg001allxt06tlbqlfk"><strong><code>@switch</code>没有贯穿效果</strong>，因此你不需要相当于
+<code>break</code>或
+<code>return</code>语句。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="xx7h8q5zy9hgboof3eezfr1h"><code>@default</code>块是可选的，可以省略。如果没有
+<code>@case</code>匹配表达式并且没有
+<code>@default</code>块，则不会显示任何内容。</p>
+
+  <h2 id="built-in-control-flow-and-the-ngif-ngswitch-and-ngfor-structural-directives">
+    <a href="#built-in-control-flow-and-the-ngif-ngswitch-and-ngfor-structural-directives" class="docs-anchor" tabindex="-1" aria-label="Link to Built-in control flow and the <code>NgIf</code>, <code>NgSwitch</code> and <code>NgFor</code> structural directives" data-ng_translator_product="100" data-ng_translator_ref_id="7n5o8k6rzd2ljonm8hqs2bb2">内置控制流和 
+<code>NgIf</code>、
+<code>NgSwitch</code> 以及 
+<code>NgFor</code> 结构型指令</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="buowbz1dwwwi22mm5uju1rft2"><code>@if</code>块替代了
+<code>*ngIf</code>用于表达UI的条件部分。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ct7awcvdmjeez6d6onqud7ewo"><code>@switch</code>块替代了
+<code>ngSwitch</code>，具有重大优势：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="ezaro62zd1hmgiheml0l2pw1w">不需要容器元素来保存条件表达式或每个条件模板；</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="cj6fdih68d45vz0k4bvjnjuni">支持模板类型检查，包括在每个分支内部进行类型窄化。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="357kzbxbudfr414h8lvury34z"><code>@for</code> 控制块替代了 
+<code>*ngFor</code> 进行迭代，并且与其结构型指令 
+<code>NgFor</code> 前身相比有若干差异：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="eyserq7xl1m4yxo0kdujigjz7">追踪表达式（计算与对象标识相对应的键）是强制性的，但具有更好的工效学（只需编写一个表达式，而不是创建
+<code>trackBy</code>方法）；</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="1o9phhji25k1du0nvhgl7hg2p">使用一种新的优化算法来计算要执行的最小DOM操作数量，以响应集合的更改，而不是Angular的可自定义差异实现（
+<code>IterableDiffer</code>）；</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="1ctkrrwxlmyiba0c27fnqxs11">支持
+<code>@empty</code>块。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="emqvl8tosh40xhq3qvus5ox5u"><code>track</code>设置取代了
+<code>NgFor</code>的
+<code>trackBy</code>函数概念。由于
+<code>@for</code>是内置的，因此我们可以提供比传递
+<code>trackBy</code>函数更好的体验，并直接使用表示键的表达式。从
+<code>trackBy</code>迁移到
+<code>track</code>是可能的，方法是调用
+<code>trackBy</code>函数：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@for (item of items; track itemId($index, item)) {</div><div class="hljs-ln-line">{{ item.name }}</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

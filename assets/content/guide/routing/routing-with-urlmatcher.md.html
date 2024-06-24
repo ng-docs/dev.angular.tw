@@ -1,0 +1,162 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="4uwo40omcuihctp6brc49x799">创建自定义路由匹配</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/routing/routing-with-urlmatcher.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e9v16490jxq2ly06goyjtwncd">Angular Router 支持强大的匹配策略，你可以使用它来帮助用户在应用中导航。该匹配策略支持静态路由、带参数的可变路由、通配符路由等。此外，还可以为更复杂的 URL 构建你自己的自定义模式匹配。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="d8oh64jaagjg0pfoda30qsc7t">在本教程中，你将使用 Angular 的 
+<code>UrlMatcher</code> 构建一个自定义路由匹配器。 此匹配器在 URL 中查找 Twitter 句柄。</p>
+
+  <h2 id="objectives">
+    <a href="#objectives" class="docs-anchor" tabindex="-1" aria-label="Link to Objectives" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cbta8klpv23x9gfh4twoy80po">目标</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="b45lqfv051zckog7701s8ekm7">实现 Angular 的 
+<code>UrlMatcher</code> 以创建自定义路由匹配器。</p>
+
+  <h2 id="create-a-sample-application">
+    <a href="#create-a-sample-application" class="docs-anchor" tabindex="-1" aria-label="Link to Create a sample application" data-ng_translator_product="100" data-ng_translator_ref_id="bruw2t9iar7oam6yjy176ohbg">创建示例应用</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3278b05xub1rxx40s2vkb30i0">使用 Angular CLI，创建一个新应用程序 <em>angular-custom-route-match</em>。除了默认的 Angular 应用程序框架之外，还将创建一个 <em>profile</em> 组件。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7uvfft0hal9dw00lysmuz36vz">创建一个新的 Angular 项目 <em>angular-custom-route-match</em>。</p>
+<pre><code class="language-shell">ng new angular-custom-route-match
+</code></pre>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3do26exm0re882co867pvexzp">当提示 <code>Would you like to add Angular routing?</code> 时，选择 <code>Y</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5ki9l0id9r8lyxis54uwg5by9">当系统提示 <code>Which stylesheet format would you like to use?</code> 时，选择 <code>CSS</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="efim14mv5qyd5f7v4ydhx2yix">片刻之后，一个新项目 <code>angular-custom-route-match</code> 就准备好了。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2acwyn9bhgc22geihghkx1o7w">打开终端窗口，进到 <code>angular-custom-route-match</code> 目录。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1uqs3tyh6s4cjvg4hu7q5yv34">创建一个组件 <em>profile</em>。</p>
+<pre><code class="language-shell">ng generate component profile
+</code></pre>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="56ules3y3vnhml0b41efamdvd">在你的代码编辑器中，找到文件 <code>profile.component.html</code> 并将其占位内容替换为以下 HTML。</p>
+<div class="docs-code" path="adev/src/content/examples/routing-with-urlmatcher/src/app/profile/profile.component.html" header="src/app/profile/profile.component.html">
+    <div class="docs-code-header"><h3>src/app/profile/profile.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line">    Hello <span class="hljs-template-variable">{{ <span class="hljs-name">username</span> }}</span><span class="language-xml">!</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="85al3rtbu6xhgqpqia2v0qw1o">在你的代码编辑器中，找到文件 <code>app.component.html</code> 并将其占位内容替换为以下 HTML。</p>
+<div class="docs-code" path="adev/src/content/examples/routing-with-urlmatcher/src/app/app.component.html" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Routing with Custom Matching<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Navigate <span class="hljs-keyword">to</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/@Angular"</span>&gt;</span>my profile<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></span></div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    
+  <h2 id="configure-your-routes-for-your-application">
+    <a href="#configure-your-routes-for-your-application" class="docs-anchor" tabindex="-1" aria-label="Link to Configure your routes for your application" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cvkdm0mhww1zdc193fadmh54i">为你的应用配置路由</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ez1xvrmkfk1ijmjzn6l3s1cmy">在你的应用框架就位后，你需要在 
+<code>app.config.ts</code> 文件中添加路由功能。作为这个过程的一部分，你将创建一个自定义 URL 匹配器，用于在 URL 中查找 Twitter 句柄。此句柄由前面的 
+<code>@</code> 符号标识。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="ebw34s6a2otpzkpqilid0l4eo">在你的代码编辑器中，打开 
+<code>app.config.ts</code> 文件。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="dcan0tqv782wy165dp4jks4dd">为 Angular 的 
+<code>provideRouter</code> 和 
+<code>withComponentInputBinding</code> 以及应用路由添加 
+<code>import</code> 语句。</p>
+<pre><code class="language-ts">import {provideRouter, withComponentInputBinding} from '@angular/router';
+
+import {routes} from './app.routes';
+</code></pre>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="8f6kkwdnlu0nvtq9482hqlv2z">在提供者数组中，添加 
+<code>provideRouter(routes, withComponentInputBinding())</code> 语句。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="2mjbiiusrc5lvpwaa2z5q4rfm">通过将以下代码添加到应用路由来定义自定义路由匹配器。</p>
+<div class="docs-code" path="adev/src/content/examples/routing-with-urlmatcher/src/app/app.routes.ts" visiblelines="5,6,7,8,9,10,11,12,13,14" header="src/app/app.routes.ts">
+    <div class="docs-code-header"><h3>src/app/app.routes.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Routes, UrlSegment} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {ProfileComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./profile/profile.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> const routes: Routes = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    matcher: <span class="hljs-function"><span class="hljs-params">(url)</span> =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-keyword">if</span> (url.length === <span class="hljs-number">1</span> &amp;&amp; url[<span class="hljs-number">0</span>].path.match(<span class="hljs-regexp">/^@[\w]+$/gm</span>)) {</div><div class="hljs-ln-line">        <span class="hljs-keyword">return</span> {consumed: url, posParams: {username: <span class="hljs-keyword">new</span> UrlSegment(url[<span class="hljs-number">0</span>].path.slice(<span class="hljs-number">1</span>), {})}};</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">      <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;</div><div class="hljs-ln-line">    },</div><div class="hljs-ln-line">    component: ProfileComponent,</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">];</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6o28u2gzylkt6at9ap1yllq1n">这个自定义匹配器是一个执行以下任务的函数：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2lsd1wyauynecsqma8rj7ybjh">匹配器验证数组是否只包含一个区段。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9asvl91g1hsusl6w908crvr88">匹配器使用正则表达式来确保用户名的格式是匹配的。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5lm09k3rjaxvq7zd3so0ekxwt">如果匹配，则该函数返回整个 URL，将路由参数 <code>username</code> 定义为路径的子字符串。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="ef95p4jdf8k2c3jk5auqz5dy5">如果没有匹配项，该函数返回 null，Router 会继续寻找其他与此 URL 匹配的路由。</li>
+
+  </ul>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="375xooo4flgp5hiw7oyecviyw"><strong>有用提示：</strong> 自定义 URL 匹配器的行为与任何其他路由定义类似。像定义任何其他路由一样定义子路由或延迟加载的路由。</p>
+
+    </div>
+    
+  <h2 id="reading-the-route-parameters">
+    <a href="#reading-the-route-parameters" class="docs-anchor" tabindex="-1" aria-label="Link to Reading the route parameters" data-ng_translator_product="100" data-ng_translator_ref_id="eovq5jj1tsvzrz2yehw1k707a">读取路由参数</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5heq911uoyhyyiju5wukoidmc">自定义匹配器就位后，你现在可以在 
+<code>profile</code> 组件中绑定路由参数。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cv0qcr85puq4ud77c4x587fm7">在你的代码编辑器中，打开 
+<code>profile.component.ts</code> 文件并创建一个与 
+<code>username</code> 参数匹配的 
+<code>Input</code>。我们之前在 
+<code>provideRouter</code> 中添加了 
+<code>withComponentInputBinding</code> 特性。这允许 
+<code>Router</code> 将信息直接绑定到路由组件。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Input</span>() username!: <span class="hljs-built_in">string</span>;</div></code>
+    </pre>
+  </div>
+  <h2 id="test-your-custom-url-matcher">
+    <a href="#test-your-custom-url-matcher" class="docs-anchor" tabindex="-1" aria-label="Link to Test your custom URL matcher" data-ng_translator_product="100" data-ng_translator_ref_id="7vvao8atfk8h4ow6xi6udtvkn">测试你的自定义 URL 匹配器</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7o5c23w6ue6sr3kk7mtfgh2as">代码就绪后，就可以测试自定义 URL 匹配器了。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eoq17g89px08hlgbysuxg2wxp">在终端窗口中，运行 <code>ng serve</code> 命令。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng serve</div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2ckjv92jxuamm59dj19n89bpp">打开浏览器访问 <code>http://localhost:4200</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cckkahzh8jcreok1wqkluquc7">你会看到一个网页，其中包含一个句子，内容为 <code>Navigate to my profile</code>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8mxkns2sff2g3cy8jytnd2qgm">单击 <strong>my profile</strong> 超链接。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a4ue26onia12p216qjzaffhfz">一个新的句子 <code>Hello, Angular!</code> 出现在页面上。</p>
+</li>
+
+    </ol>
+    
+  <h2 id="next-steps">
+    <a href="#next-steps" class="docs-anchor" tabindex="-1" aria-label="Link to Next steps" data-ng_translator_product="100" data-ng_translator_ref_id="c4pkljueu68ifjoi5994e9l8o">后续步骤</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1ibtonbthpi1nr181fjclvgqm">当你的应用程序中有动态 URL 时，使用 Angular Router 提供的模式匹配功能，可以为你提供很大的灵活性。要了解有关 Angular Router 的更多信息，请参阅以下主题：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="guide/routing/common-router-tasks" data-ng_translator_product="100" data-ng_translator_ref_id="ekwdou98eaqxadsv4dzamfkl4">应用内路由和导航</a>
+    
+    <a class="docs-pill" href="api/router/Router" data-ng_translator_product="100" data-ng_translator_ref_id="3c9pc3vyr8mh3o8rc7p5s2z04">路由器 API</a>
+    
+
+    </nav>
+    
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9116eonfczaw6igaei8mukwja"><strong>有用提示：</strong> 此内容基于 
+<a href="https://medium.com/@brandontroberts/custom-route-matching-with-the-angular-router-fbdd48665483" target="_blank">使用 Angular Router 的自定义路由匹配</a>，作者是 
+<a href="https://twitter.com/brandontroberts" target="_blank">Brandon Roberts</a>。</p>
+
+    </div>
+    

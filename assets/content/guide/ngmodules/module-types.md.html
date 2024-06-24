@@ -1,0 +1,206 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cyl32dynstlmpxl9x7ofoymjq">模块（NgModule）创建指南</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/module-types.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8g8uzqnrjhmswrtmw6qta2k0o">本主题提供了有关你可以创建的不同 NgModules 类别的概念概述，以便以模块化结构组织代码。这些类别并非铁板一块，它们只是建议。你可能想为其他目的创建 NgModules，或者将某些类别的特征组合在一起。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9e72ugj79kx9bnv2xeup6vjay">NgModules 是组织应用程序并保持与特定功能或特性相关的代码与其他代码分开的绝佳方式。使用 NgModules 将组件、指令和管道合并为功能性块。将每个块专注于一个特性或业务域、一个工作流程或导航流、一个常见的实用工具集，或者一个或多个服务的提供者。</p>
+
+  <h2 id="summary-of-ngmodule-categories">
+    <a href="#summary-of-ngmodule-categories" class="docs-anchor" tabindex="-1" aria-label="Link to Summary of NgModule categories" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bzh56zs04krf09magrpoeex31">模块类别汇总</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7iw4wymfquzolo5lyo7ldxu4t">所有应用程序都是通过 
+<a href="guide/ngmodules/bootstrapping" title="使用根 NgModule 启动" 启动一个根 ngmodule>启动根 NgModule</a> 开始的。你可以按照自己的方式组织其他的 NgModules。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ds5ym822q9hktpu2xwyebkqtq">本主题为下列常见模块类别提供了一些指导：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3hg0rfp9hxuu1apt1jmdrpier">分类</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><a href="#domain-ngmodules" data-ng_translator_product="100" data-ng_translator_ref_id="dwmypg6x35bfl5vrcw4uqotno">领域</a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3k4zghf0g0c4rfvw1mdhju845">围绕功能、业务领域或用户体验组织。</td>
+</tr>
+<tr>
+<td align="left"><a href="#routing-ngmodules" data-ng_translator_product="100" data-ng_translator_ref_id="74nlsxkr1xp06lifpm36dhjjp">路由</a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bsrebc7j1rgl2zru2zotzppah">为另一个 NgModule 提供路由配置。</td>
+</tr>
+<tr>
+<td align="left"><a href="#service-ngmodules" data-ng_translator_product="100" data-ng_translator_ref_id="bj0sxs9lg3xv89dux3jgchgud">服务</a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="317u73we7jeqll6wkq0331gho">提供诸如数据访问和消息传递等实用服务。</td>
+</tr>
+<tr>
+<td align="left"><a href="#widget-ngmodules" data-ng_translator_product="100" data-ng_translator_ref_id="6k7un5ve48o3gy90o69k8y494">小部件</a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="174jb972x4z2n48w8w5o29irs">使组件、指令或管道可供其他 NgModules 使用。</td>
+</tr>
+<tr>
+<td align="left"><a href="#shared-ngmodules" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9tyzu13u29t35c2d0ktywgj4a">共享</a></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="94o6lan92e2mpqaoib4azhkis">使一组组件、指令和管道可供其他 NgModules 使用。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8u8s0kb4rjl3ccy9z8dekifyg">下表总结了每个类别的主要特性。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left">NgModule</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8tk7m2dw2fpq11s5lsw03ol8y">声明</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dycvc6pm27ridqfrosy8bqn88">提供者</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="63fbamcp9mtecz7xdlvld1cri">导出</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="c0lcg5k2si8vitcop30s2mvl">被导入</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dwmypg6x35bfl5vrcw4uqotno">领域</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8qzstzs5yva1ifawityjo2t6d">是</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9mywtbh0sqc6iplppvo6nodu2">罕见</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2ejm37mhninquro2xcurt94g0">顶级组件</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="80osixi15z86tk7xwa12afku7">另一个领域，
+<code>AppModule</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6r0jy2w6lrvu5w03a7opz5wvb">带路由的</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8qzstzs5yva1ifawityjo2t6d">是</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9mywtbh0sqc6iplppvo6nodu2">罕见</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="b2j26jl1x07opyz4dbfelj957">不</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="6bs071f5k1m1udzmhtyd822xg">无</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="74nlsxkr1xp06lifpm36dhjjp">路由</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="b2j26jl1x07opyz4dbfelj957">不</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1gwk3kl5ouy9agnbmx6bhgjwp">是（守卫）</td>
+<td align="left">RouterModule</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9raxfqzcp1g6mpleurz5gw24v">另一个领域（用于路由）</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bj0sxs9lg3xv89dux3jgchgud">服务</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="b2j26jl1x07opyz4dbfelj957">不</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8qzstzs5yva1ifawityjo2t6d">是</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="b2j26jl1x07opyz4dbfelj957">不</td>
+<td align="left"><code>AppModule</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="6k7un5ve48o3gy90o69k8y494">小部件</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8qzstzs5yva1ifawityjo2t6d">是</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9mywtbh0sqc6iplppvo6nodu2">罕见</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8qzstzs5yva1ifawityjo2t6d">是</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cmg7ug5m15xnbieoffy29plg8">另一个领域</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9tyzu13u29t35c2d0ktywgj4a">共享</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8qzstzs5yva1ifawityjo2t6d">是</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="b2j26jl1x07opyz4dbfelj957">不</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8qzstzs5yva1ifawityjo2t6d">是</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cmg7ug5m15xnbieoffy29plg8">另一个领域</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="domain-ngmodules">
+    <a href="#domain-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to Domain NgModules" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b522se5s6rn50kyvbfgfr315i">领域模块</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="c87eycvczhud7fbml0hqons6e">使用领域 NgModule 提供专门针对特定功能或应用领域的用户体验，例如编辑客户或下订单。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5b0fsdzais7gt95w3r5cdrahi">领域模块用来组织与特定功能有关的代码，里面包含构成此功能的所有组件、路由和模板。领域模块中的顶级组件是该特性或领域的根，是你要导出的唯一组件。各种私有的支撑子组件都是它的后代。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2r3q6i7nc2hd3uomik80pne79">领域模块要导入到另一个模块中一次并且只能一次，比如一个领域模块，或者一个只包含少量模块的应用的根模块（<code>AppModule</code>）中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="131l3rlt77sz1hcngu1rhj5l2">领域模块主要由可声明对象组成，很少会在此提供服务。如果一定要提供，那么这些服务的生命周期应和该模块的生命周期一致。</p>
+
+  <h2 id="routing-ngmodules">
+    <a href="#routing-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to Routing NgModules" data-ng_translator_product="100" data-ng_translator_ref_id="7wjl2dpwuvvsmiwxox64g4lg">路由定义模块</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6wcf0fy89cue6vsy2qawmh04u">使用路由 NgModule 为领域 NgModule 提供路由配置，从而将路由关注点与其伴随的领域 NgModule 分离开来。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="e9wob2gag41mxg2abouljxt4m"><strong>有用提示:</strong> 欲了解有关路由的概述和详细信息，请参阅 
+<a href="guide/routing" title="应用内" navigation: routing to views>应用内导航：路由到视图</a>。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1so605ezdy0pehfwu8zzrb53y">使用路由定义模块来完成如下任务：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2kgsrpx44ajnzin9sxwumxlxe">定义路由</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="mx8pgfr6dtxspq768887i261">通过 
+<code>imports</code> 向 NgModule 添加路由配置</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="z6icyjmkzm0z4hzrjpjfea6o">往模块的提供者列表中添加路由守卫和解析器（resolver）提供者</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9myv1ziu3zp0rk20i5b5icvbf">路由 NgModule 的名称应与其伴随的 NgModule 名称相对应，使用后缀 
+<code>Routing</code>。 例如，考虑在 
+<code>contact.module.ts</code> 中有一个名为 
+<code>ContactModule</code> 的模块，则在 
+<code>contact-routing.module.ts</code> 中有一个名为 
+<code>ContactRoutingModule</code> 的路由 NgModule。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="d12xuqzm1ju71xxefyfni5vzw">仅将路由 NgModule 导入其伴随的 NgModule 中。 如果伴随的 NgModule 是根 
+<code>AppModule</code>，则 
+<code>AppRoutingModule</code> 使用 
+<code>RouterModule.forRoot(routes)</code> 向其导入添加路由配置。 所有其他路由 NgModule 都是子级，使用 
+<code>RouterModule.forChild(routes)</code> 进行导入。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="am9xd8598zngrqvyseh2op4fr">在你的路由 NgModule 中重新导出 
+<code>RouterModule</code>，以便伴随的 NgModule 的组件可以访问路由指令，如 
+<code>RouterLink</code> 和 
+<code>RouterOutlet</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="86zjkqq8s42y4w4vvj6dl88jq">不要在路由定义模块中使用可声明对象。组件、指令和管道都是伴生领域模块的责任，而不是路由定义模块的。</p>
+
+  <h2 id="service-ngmodules">
+    <a href="#service-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to Service NgModules" data-ng_translator_product="100" data-ng_translator_ref_id="53wyxqp8695c0xbdy0knq67iv">服务模块</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8rx5wdc829a4bjc5dpxq1tkb4">使用服务 NgModule 提供诸如数据访问或消息传递等实用服务。 理想的服务 NgModule 完全由提供者组成，没有声明。 Angular 的 
+<code>HttpClientModule</code> 就是一个好的服务 NgModule 示例。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f1f398nm7ycbf8yuzso13q807">只能使用根模块 <code>AppModule</code> 来导入各种服务模块。</p>
+
+  <h2 id="widget-ngmodules">
+    <a href="#widget-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to Widget NgModules" data-ng_translator_product="100" data-ng_translator_ref_id="6fn05gbwgnk4h73ielpjnzi0d">小部件模块</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4o8sqskoggyjmr51zq1gu5l1y">使用小部件模块可以把组件、指令或管道提供给外部模块使用。把小部件模块导入到任何需要在模板使用这些小部件的模块中。很多第三方 UI 组件库都是作为小部件模块提供的。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="51wgfhplvwxoahsgkdgsam8r4">小部件模块应该完全由可声明对象组成，其中大部分都是导出的。服务提供者非常罕见。</p>
+
+  <h2 id="shared-ngmodules">
+    <a href="#shared-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to Shared NgModules" data-ng_translator_product="100" data-ng_translator_ref_id="2rlftt6pkk4bk3hr69yztnzk9">共享模块</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8rukxlpqyvp9g2bo6g18yngzo">将常用指令、管道和组件放入一个 NgModule 中，通常命名为 
+<code>SharedModule</code>，然后在应用程序的其他部分需要时仅导入该 NgModule。 可以在领域 NgModule 中导入共享 NgModule，包括 
+<a href="guide/ngmodules/lazy-loading" title="延迟加载" 一个 ngmodule>延迟加载的 NgModules</a>。</p>
+
+    <div class="docs-alert docs-alert-note">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9ejraz4wc112dnb0ajbzgc6fq"><strong>注意:</strong> 共享 NgModule 不应包含提供者，也不应包含其导入或重新导出的任何 NgModule 中的提供者。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2ks2a6xsfhdh668vj902js8np">要了解如何使用共享模块组织和简化代码，请参阅 
+<a href="guide/ngmodules/sharing" title="共享" 应用中的 ngmodules>在应用中共享 NgModules</a>。</p>
+
+  <h2 id="next-steps">
+    <a href="#next-steps" class="docs-anchor" tabindex="-1" aria-label="Link to Next steps" data-ng_translator_product="100" data-ng_translator_ref_id="c4pkljueu68ifjoi5994e9l8o">后续步骤</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="34ucpcrn06066oflefdy48ptc">如果你想管理模块的加载以及依赖和服务的使用，参阅下列内容：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="c36iblyryk0tdqayrtcfpazu9">要了解如何在应用程序启动时急性加载 NgModules，或者通过路由器异步延迟加载 NgModules，请参阅 
+<a href="guide/ngmodules/lazy-loading">延迟加载特性模块</a>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="et4gennqde19x1kvzrui4fo">要了解如何为应用程序提供服务或其他依赖项，请参阅 
+<a href="guide/ngmodules/providers" title="为 ngmodule 提供" ngmodule 的依赖项>为 NgModule 提供依赖项</a>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="9za9d0ta2tm24big96zs7cra6">要学习如何创建一个单例服务以在 NgModules 中使用，请参阅
+<a href="guide/ngmodules/singleton-services" title="将服务设为单例">将服务设为单例</a></li>
+
+  </ul>
+  

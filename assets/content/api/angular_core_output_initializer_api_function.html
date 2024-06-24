@@ -1,0 +1,74 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>output</h1><div class="docs-api-item-label" data-mode="full" data-type="initializer_api_function">Initializer API</div><div class="docs-api-item-label" data-mode="full" data-type="developer_preview">Developer preview</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/core/src/authoring/output/output.ts#L65-L68" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="es2y7bd47jb3ntrl39olmmd97"><code>output</code> 函数允许在指令和组件中声明 Angular 的输出。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1rhx9im3hdvrkwrpmwtilyfb1">你可以使用输出向父指令和组件发送值。父组件可以通过以下方式订阅更改：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="23p8wpdblxl4cvtl1wptr4a94">模板事件绑定。例如，
+<code>(myOutput)="doSomething($event)"</code></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="ajc7vdtmhiz2r10n9p8uqgliv">通过使用 
+<code>OutputRef#subscribe</code> 进行编程订阅。</li>
+
+    </ul><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="output_0">output&lt;T = <span class="hljs-built_in">void</span>&gt;(opts?: <span class="hljs-title class_">OutputOptions</span>): <span class="hljs-title class_">OutputEmitterRef</span>&lt;T&gt;;</button></code></pre></div></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="bf6oyd7dwjq8uuv7limgneazo">要使用 
+<code>output()</code>，请从 
+<code>@angular/core</code> 导入该函数。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {output} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core`;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2ey7eflhr9k1iynuimbvohvtg">在你的组件中，引入一个新的类成员，并用 
+<code>output</code> 调用进行初始化。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</span><span class="hljs-ln-line">  ...</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDir</span> {</span><span class="hljs-ln-line">  nameChange = output&lt;<span class="hljs-built_in">string</span>&gt;();    <span class="hljs-comment">// OutputEmitterRef&lt;string&gt;</span></span><span class="hljs-ln-line">  onClick    = <span class="hljs-title function_">output</span>();            <span class="hljs-comment">// OutputEmitterRef&lt;void&gt;</span></span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bdfcruc48v6bxctjyqqxqigiv">你可以使用 
+<code>OutputEmitterRef</code> 的 
+<code>emit</code> 方法向指令的使用者发送值。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">updateName</span>(<span class="hljs-attr">newName</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> {</span><span class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">nameChange</span>.<span class="hljs-title function_">emit</span>(newName);</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card" id="output_0" tabindex="-1"><header><h3>output()</h3></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">opts</span><code>OutputOptions</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>OutputEmitterRef&lt;T&gt;</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><p data-ng_translator_product="100" data-ng_translator_ref_id="bf6oyd7dwjq8uuv7limgneazo">要使用 
+<code>output()</code>，请从 
+<code>@angular/core</code> 导入该函数。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {output} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core`;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2ey7eflhr9k1iynuimbvohvtg">在你的组件中，引入一个新的类成员，并用 
+<code>output</code> 调用进行初始化。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</span><span class="hljs-ln-line">  ...</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDir</span> {</span><span class="hljs-ln-line">  nameChange = output&lt;<span class="hljs-built_in">string</span>&gt;();    <span class="hljs-comment">// OutputEmitterRef&lt;string&gt;</span></span><span class="hljs-ln-line">  onClick    = <span class="hljs-title function_">output</span>();            <span class="hljs-comment">// OutputEmitterRef&lt;void&gt;</span></span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bdfcruc48v6bxctjyqqxqigiv">你可以使用 
+<code>OutputEmitterRef</code> 的 
+<code>emit</code> 方法向指令的使用者发送值。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">updateName</span>(<span class="hljs-attr">newName</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> {</span><span class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">nameChange</span>.<span class="hljs-title function_">emit</span>(newName);</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div></div></div></div></div></div>

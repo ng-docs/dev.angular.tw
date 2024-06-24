@@ -1,0 +1,105 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1 data-ng_translator_product="100" data-ng_translator_ref_id="1qejxun37dz68k5ig2h0hy3bw">指令</h1><div class="docs-api-item-label" data-mode="full" data-type="decorator">decorator</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/core/src/metadata/directives.ts#L378-L384" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2o9oj1s129ex3arbe0v6bp4s1">将类标记为 Angular 指令的装饰器。你可以定义自己的指令，以将自定义行为附加到 DOM 中的元素。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">Directive</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="selector">  selector?: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="inputs">  inputs?: (<span class="hljs-built_in">string</span> | { <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>; alias?: <span class="hljs-built_in">string</span>; required?: <span class="hljs-built_in">boolean</span>; transform?: <span class="hljs-function">(<span class="hljs-params">value: <span class="hljs-built_in">any</span></span>) =&gt;</span> <span class="hljs-built_in">any</span>; })[];</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="outputs">  outputs?: <span class="hljs-built_in">string</span>[];</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="providers">  providers?: <span class="hljs-title class_">Provider</span>[];</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="exportAs">  exportAs?: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="queries">  queries?: { [<span class="hljs-attr">key</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>; };</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="host">  host?: { [<span class="hljs-attr">key</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">string</span>; };</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="jit">  jit?: <span class="hljs-literal">true</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="standalone">  standalone?: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="hostDirectives">  hostDirectives?: (<span class="hljs-title class_">Type</span>&lt;<span class="hljs-built_in">unknown</span>&gt; | { <span class="hljs-attr">directive</span>: <span class="hljs-title class_">Type</span>&lt;<span class="hljs-built_in">unknown</span>&gt;; inputs?: <span class="hljs-built_in">string</span>[]; outputs?: <span class="hljs-built_in">string</span>[]; })[];</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2o9oj1s129ex3arbe0v6bp4s1">将类标记为 Angular 指令的装饰器。你可以定义自己的指令，以将自定义行为附加到 DOM 中的元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="419b88vdyfcnpxfgq2edqxt79">这些选项提供配置元数据，确定指令在运行时应如何处理、实例化和使用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3sk1cd0t9ihxcsbrqyda60d22">指令类（如同组件类）可以实现
+<a href="guide/components/lifecycle">生命周期钩子</a>，以影响它们的配置和行为。</p></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="chbeyjl2rom96cmf202m7l5ub">要想定义一个指令，请为该类加上此装饰器，并提供元数据。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Directive</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-directive'</span>,</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDirective</span> {</span><span class="hljs-ln-line">...</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="168aglh9bbe6lhl88x2qpr69l">声明指令</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3tyer2qwnmqsdyshuo1dmk3ne">为了使指令可用于你应用程序中的其他组件，你应该执行以下操作之一：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="4abvt1vhcc7pufc9i7mu3tcqr">可以将指令标记为
+<a href="guide/components/importing">独立</a>，</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="88qf6345wdekl2tkbxlvjtaiv">或者通过将其添加到 <code>declarations</code> 和 <code>exports</code> 字段来在 NgModule 中声明它。</li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7ezsx9fs04hcmy450dfode429">** 将指令标记为独立 **</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2iddx1vwjevhfyi07de6n22u2">你可以在指令装饰器元数据中添加 
+<code>standalone: true</code> 标志，将其声明为
+<a href="guide/components/importing">独立</a>：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-directive'</span>,</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDirective</span> {}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f4cb4logiy7hk0clo01zquf50">将指令标记为独立时，请确保该指令尚未在 NgModule 中声明。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="f2eogu9s2q4jqky96br8wg9pf">** 在 NgModule 中声明指令 **</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dv01gsfb0szbwbpn8tsvuw187">另一种方法是在 NgModule 中声明一个指令：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-directive'</span>,</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDirective</span> {}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [<span class="hljs-title class_">MyDirective</span>, <span class="hljs-title class_">SomeComponent</span>],</span><span class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [<span class="hljs-title class_">MyDirective</span>], <span class="hljs-comment">// making it available outside of this module</span></span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SomeNgModule</span> {}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aq9cc6b4h8shtoa1ohrf1gw3z">在 NgModule 中声明指令时，请确保：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6xyc4px88uopnbii429alhzvd">该指令正好在一个 NgModule 中声明。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6yfa8jqdvmqkerws2xydfl7hs">该指令不是独立的。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="clejztgv0aer3lg9yxj3s2n7c">你不会重新声明从另一个模块导入的指令。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="24nsgt0oq9bmfppgl8mpq72ss">如果你希望 <code>exports</code> 之外的组件可以访问此指令，则该指令也包含在 export 字段中。</li>
+
+    </ul>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="selector" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>selector</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d8fi7ccf1edtwqsayvh6mm6hj">这个 CSS 选择器用于在模板中标记出该指令，并触发该指令的实例化。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ftpa88t0vcr3qscdmltyiojd">可使用下列形式之一：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3trus5nt33cfjy8c4on21sh8f"><code>element-name</code>：根据元素名选取。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2sz6g553wu0q8z5kpfkk8otjs"><code>.class</code>：根据类名选取。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cgf7ed0kakbnzc2x3lker1dht"><code>[attribute]</code>：根据属性名选取。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c4ldrd4rjx56lttxvqlfvjix4"><code>[attribute=value]</code>：根据属性名和属性值选取。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7sn1vsivdxofikgz11214dtjf"><code>:not(sub_selector)</code>：只有当元素不匹配子选择器 <code>sub_selector</code> 的时候才选取。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7abf7bhxok397zn6graugwbeo"><code>selector1, selector2</code>：无论 <code>selector1</code> 还是 <code>selector2</code> 匹配时都选取。</li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="baytqn3asjqg2lswnqslbdxkm">Angular 只允许指令应用于不跨元素边界的 CSS 选择器。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9vzhdnk4mkmihx8pdepmfa5xw">对于下列模板 HTML，带有 <code>input[type=text]</code> 选择器的指令只会在 <code>&lt;input type="text"&gt;</code> 元素上实例化。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"radio"</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="inputs" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>inputs</h3><div><code>(string | { name: string; alias?: string; required?: boolean; transform?: (value: any) =&gt; any; })[]</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="elizlaqtphj4ype17d3pzyp6j">列举某个指令的一组可供数据绑定的输入属性</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8d98ffm90e1jl4fso1zlsayhu">Angular 在变更检测期间自动更新输入属性。<code>inputs</code> 属性接受配置应作为输入公开的指令属性的字符串或对象文字。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dljanopley3qc55cx4h085907">传入对象文字时，<code>name</code> 属性指示输入应写入类的哪个属性，而 <code>alias</code> 确定输入在模板绑定中可用的名称。<code>required</code> 属性指示输入是必需的，如果在使用指令时未传入，将触发编译时错误。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8jc2n0ummeo28i94tv4zbt3lj">当一个字符串被传递到 <code>inputs</code> 数组时，它的格式可以是 <code>'name'</code> 或 <code>'name: alias'</code>，其中 <code>name</code> 是指令应该写入的类的属性，而 <code>alias</code> 确定输入的名称将在模板绑定中可用。假定基于字符串的输入定义是可选的。</p></div></div></div></div><div id="outputs" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>outputs</h3><div><code>string[]</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="arkbfu9xqvfmi8by7s1fs8e2s">列举一组可供事件绑定的输出属性。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dppkgnt0vgbqgo9qbral2hk4i">当输出属性发出一个事件时，模板中附着到该事件的事件处理器将被调用。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9mhk28i0y5ueyzfmd5rpjkfrw"><code>outputs</code> 属性定义了一组 <code>directiveProperty</code> 来 <code>alias</code> 配置：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dthems01sfhmp4vxdwgxs31g"><code>directiveProperty</code> 用于指定要发出事件的指令属性。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6i4jkp2xnh0gfouuc1mce29ca"><code>alias</code> 指定事件处理程序附加到的 DOM 属性。</li>
+
+    </ul></div></div></div></div><div id="providers" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>providers</h3><div><code>Provider[]</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="36eebnc5evom002r887o79hh4">配置此指令或组件的注入器，将令牌映射到依赖的提供者。</p></div></div></div></div><div id="exportAs" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>exportAs</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6nkz4tbhrxm4vhuboismt49k0">定义一个名字，用于在模板中把该指令赋值给一个变量。</p></div></div></div></div><div id="queries" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>queries</h3><div><code>{ [key: string]: any; }</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="96nqwwl1g4kle3zw75y5xho3w">配置一些查询，它们将被注入到该指令中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9m9owf7ix3mi9npy1x4ptmvus">内容查询在调用 
+<code>ngAfterContentInit</code> 回调之前设置。视图查询在调用 
+<code>ngAfterViewInit</code> 回调之前设置。</p></div></div></div></div><div id="host" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>host</h3><div><code>{ [key: string]: string; }</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2d0ri2jc53xn6y3pjkjzyynta">使用一组键-值对，把类的属性映射到宿主元素的绑定（Property、Attribute 和事件）。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bibeyeb3uvp22g1g55v0xgrtf">Angular 在变更检测期间自动检查宿主属性绑定。如果绑定改变，Angular 会更新指令的宿主元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3ojggpa8bzlgdpcigwrmi3tcc">当键是宿主元素的属性时，属性值会传播到指定的 DOM 属性。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8ftcb0phto883zy1mvzgjhrk">当 key 是 DOM 中的静态 Attribute 时，这个 Attribute 值就会传播到宿主元素上指定的 Property 去。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2abcbr2b8y9nexv037gfvgo9t">对于事件处理：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1njzh3g2tuduife4tl3ynacli">它的 key 就是该指令想要监听的 DOM 事件。
+要想监听全局事件，请把要监听的目标添加到事件名的前面。
+这个目标可以是 <code>window</code>、<code>document</code> 或 <code>body</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ezi9396tg79oaek4nqibtfwtw">它的 value 就是当该事件发生时要执行的语句。如果该语句返回 <code>false</code>，那么就会调用这个 DOM 事件的 <code>preventDefault</code> 函数。
+这个语句中可以引用局部变量 <code>$event</code> 来获取事件数据。</li>
+
+    </ul></div></div></div></div><div id="jit" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>jit</h3><div><code>true</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="175rapszg4ohizzsadqs2y7q1">如果存在，则该指令/组件将被 AOT 编译器忽略。它会保留在发布代码中，并且 JIT 编译器会尝试在运行时在浏览器中对其进行编译。为了确保其行为正确，该应用程序必须导入 <code>@angular/compiler</code>。</p></div></div></div></div><div id="standalone" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>standalone</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2pueqh2tt1kr2zwbawd4dy42k">标记为 <code>standalone</code> 的 Angular 指令不需要在 NgModule 中声明。此类指令不依赖于 NgModule 的任何“中间上下文”（例如配置的提供程序）。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="b2qk685aozsvxc6sxa567lgt8">关于独立组件、指令和管道的更多信息，请参见
+<a href="guide/components/importing">本指南</a>。</p></div></div></div></div><div id="hostDirectives" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>hostDirectives</h3><div><code>(Type&lt;unknown&gt; | { directive: Type&lt;unknown&gt;; inputs?: string[]; outputs?: string[]; })[]</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dzhuo5e95yi2610qbflsf9gz2">指令匹配时应该应用于宿主的独立指令。默认情况下，host 指令的任何输入或输出在宿主上都不可用，除非它们在 <code>inputs</code> 或 <code>outputs</code> 属性中指定。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="24qr34mgyvxxqr4i523a7dgfx">你可以通过在原始输入或输出名称后面放一个冒号和别名来为输入和输出额外别名。例如，如果通过 <code>hostDirectives</code> 应用的指令定义了一个名为 <code>menuDisabled</code> 的 <code>inputs</code>，你可以通过将 <code>'menuDisabled: disabled'</code> <code>disabled</code> 条目添加到 sources 来将其别名为 enabled。</p></div></div></div></div></div></div></div>

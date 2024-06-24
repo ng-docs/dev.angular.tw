@@ -1,0 +1,119 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="77uo0wyg3mbiqgg2mr3i1wsfb">测试请求</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/http/testing.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="3y0pm99kjh9jxzhft5g75nnwv">对于任何外部依赖项，你必须模拟 HTTP 后端，以便你的测试可以模拟与远程服务器的交互。
+<code>@angular/common/http/testing</code> 库提供了工具来捕获应用发出的请求，对其进行断言，并模拟响应以模拟你的后端行为。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dcrt4aszbo65wi729k8zk0wjn">测试库设计的模式是应用首先执行代码并发出请求。然后测试期望某些请求已经或尚未发出，对这些请求进行断言，最后通过“刷新”每个预期请求来提供响应。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="98r9tyag65xhx5e1zete6ah5u">最终，测试可能会验证这个应用不曾发起过非预期的请求。</p>
+
+  <h2 id="setup-for-testing">
+    <a href="#setup-for-testing" class="docs-anchor" tabindex="-1" aria-label="Link to Setup for testing" data-ng_translator_product="100" data-ng_translator_ref_id="2nxzqy7mbd40ymngkm5xqi6cj">搭建测试环境</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="epx6etvfo3fu0df6k0i2l3mwt">要开始测试 
+<code>HttpClient</code> 的使用，配置 
+<code>TestBed</code> 并在你的测试配置中包括 
+<code>provideHttpClient()</code> 和 
+<code>provideHttpClientTesting</code>。这将配置 
+<code>HttpClient</code> 使用测试后端而不是实际网络。它还提供了 
+<code>HttpTestingController</code>，你将使用它与测试后端交互，设置哪些请求已发出的期望，并刷新这些请求的响应。一旦配置好，
+<code>HttpTestingController</code> 可以从 
+<code>TestBed</code> 注入。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title class_">TestBed</span>.<span class="hljs-title function_">configureTestingModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-comment">// ... other test providers</span></div><div class="hljs-ln-line">    <span class="hljs-title function_">provideHttpClient</span>(),</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideHttpClientTesting</span>(),</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">});</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> httpTesting = <span class="hljs-title class_">TestBed</span>.<span class="hljs-title function_">inject</span>(<span class="hljs-title class_">HttpTestingController</span>);</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="e7i2jmnztehg824wj0twpa7yd">现在，当你的测试发出请求时，它们将命中测试后端而不是正常后端。你可以使用 
+<code>httpTesting</code> 对这些请求进行断言。</p>
+
+  <h2 id="expecting-and-answering-requests">
+    <a href="#expecting-and-answering-requests" class="docs-anchor" tabindex="-1" aria-label="Link to Expecting and answering requests" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="22dsiylysj00lm4p0kwhgo1ym">期待并回复请求</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5z5etspd8rp8dkrp2q4rqb9uf">例如，你可以编写一个测试，期望发生一个 GET 请求并提供一个模拟响应：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title class_">TestBed</span>.<span class="hljs-title function_">configureTestingModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">ConfigService</span>,</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideHttpClient</span>(),</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideHttpClientTesting</span>(),</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">});</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> httpTesting = <span class="hljs-title class_">TestBed</span>.<span class="hljs-title function_">inject</span>(<span class="hljs-title class_">HttpTestingController</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// Load `ConfigService` and request the current configuration.</span></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> service = <span class="hljs-title class_">TestBed</span>.<span class="hljs-title function_">inject</span>(<span class="hljs-title class_">ConfigService</span>);</div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> config$ = <span class="hljs-variable language_">this</span>.<span class="hljs-property">configService</span>.<span class="hljs-property">getConfig</span>&lt;<span class="hljs-title class_">Config</span>&gt;();</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// `firstValueFrom` subscribes to the `Observable`, which makes the HTTP request,</span></div><div class="hljs-ln-line"><span class="hljs-comment">// and creates a `Promise` of the response.</span></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> configPromise = <span class="hljs-title function_">firstValueFrom</span>(config$);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// At this point, the request is pending, and we can assert it was made</span></div><div class="hljs-ln-line"><span class="hljs-comment">// via the `HttpTestingController`:</span></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> req = httpTesting.<span class="hljs-title function_">expectOne</span>(<span class="hljs-string">'/api/config'</span>, <span class="hljs-string">'Request to load the configuration'</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// We can assert various properties of the request if desired.</span></div><div class="hljs-ln-line"><span class="hljs-title function_">expect</span>(req.<span class="hljs-property">request</span>.<span class="hljs-property">method</span>).<span class="hljs-title function_">toBe</span>(<span class="hljs-string">'GET'</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// Flushing the request causes it to complete, delivering the result.</span></div><div class="hljs-ln-line">req.<span class="hljs-title function_">flush</span>(<span class="hljs-variable constant_">DEFAULT_CONFIG</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// We can then assert that the response was successfully delivered by the `ConfigService`:</span></div><div class="hljs-ln-line"><span class="hljs-title function_">expect</span>(<span class="hljs-keyword">await</span> configPromise).<span class="hljs-title function_">toEqual</span>(<span class="hljs-variable constant_">DEFAULT_CONFIG</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// Finally, we can assert that no other requests were made.</span></div><div class="hljs-ln-line">httpTesting.<span class="hljs-title function_">verify</span>();</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-note">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="77qp85zr219rmia3iyusmek5d"><strong>注意：</strong> 如果测试发出了多于一个符合给定条件的请求，
+<code>expectOne</code> 将失败。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4of89xyjwkrk3uboslh5majjq">作为对 
+<code>req.method</code> 断言的替代，你可以使用 
+<code>expectOne</code> 的扩展形式来匹配请求方法：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> req = httpTesting.<span class="hljs-title function_">expectOne</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">url</span>: <span class="hljs-string">'/api/config'</span>,</div><div class="hljs-ln-line">}, <span class="hljs-string">'Request to load the configuration'</span>);</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2ql61n67b7106yxdr86a5539h"><strong>提示：</strong> 期望 API 匹配请求的完整 URL，包括所有查询参数。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5xp1fhhvp6l5ue5w4cx6mtqw8">最后一步，验证没有发起过预期之外的请求，足够通用，因此你可以把它移到 <code>afterEach()</code> 中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">afterEach</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// Verify that none of the tests make any extra HTTP requests.</span></div><div class="hljs-ln-line">  <span class="hljs-title class_">TestBed</span>.<span class="hljs-title function_">inject</span>(<span class="hljs-title class_">HttpTestingController</span>).<span class="hljs-title function_">verify</span>();</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+  <h2 id="handling-more-than-one-request-at-once">
+    <a href="#handling-more-than-one-request-at-once" class="docs-anchor" tabindex="-1" aria-label="Link to Handling more than one request at once" data-ng_translator_product="100" data-ng_translator_ref_id="b3qugjkn7ipo1q3yb2zwnzqa6">同时处理多个请求</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5xv1hrzhbwwflllvjmpdqy45y">如果你需要在测试中响应重复请求，使用 
+<code>match()</code> API 替代 
+<code>expectOne()</code>。它接收相同的参数但返回一个匹配请求的数组。返回后，这些请求将从将来的匹配中移除，你需要负责刷新和验证它们。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> allGetRequests = httpTesting.<span class="hljs-title function_">match</span>({<span class="hljs-attr">method</span>: <span class="hljs-string">'GET'</span>});</div><div class="hljs-ln-line">foreach (<span class="hljs-keyword">const</span> req <span class="hljs-keyword">of</span> allGetRequests) {</div><div class="hljs-ln-line">  <span class="hljs-comment">// Handle responding to each request.</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="advanced-matching">
+    <a href="#advanced-matching" class="docs-anchor" tabindex="-1" aria-label="Link to Advanced matching" data-ng_translator_product="100" data-ng_translator_ref_id="3degw9p28tka1ioguq6432fc8">高级匹配</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8gayojnrgdogqec70636czph6">所有匹配函数都接受一个用于自定义匹配逻辑的谓词函数：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// Look for one request that has a request body.</span></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> requestsWithBody = httpTesting.<span class="hljs-title function_">expectOne</span>(<span class="hljs-function"><span class="hljs-params">req</span> =&gt;</span> req.<span class="hljs-property">body</span> !== <span class="hljs-literal">null</span>);</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="agbvt81xxdv6rhb0g9vmhqku8"><code>expectNone</code> 函数断言没有请求匹配给定的条件。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// Assert that no mutation requests have been issued.</span></div><div class="hljs-ln-line">httpTesting.<span class="hljs-title function_">expectNone</span>(<span class="hljs-function"><span class="hljs-params">req</span> =&gt;</span> req.<span class="hljs-property">method</span> !== <span class="hljs-string">'GET'</span>);</div></code>
+    </pre>
+  </div>
+  <h2 id="testing-error-handling">
+    <a href="#testing-error-handling" class="docs-anchor" tabindex="-1" aria-label="Link to Testing error handling" data-ng_translator_product="100" data-ng_translator_ref_id="1j1qnffz25e8nltwc6qefj98v">测试错误处理</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bgog1icgy2pkuhay0zoi5dy8d">你应该测试你的应用在 HTTP 请求失败时的响应。</p>
+
+  <h3 id="backend-errors">
+    <a href="#backend-errors" class="docs-anchor" tabindex="-1" aria-label="Link to Backend errors" data-ng_translator_product="100" data-ng_translator_ref_id="a8ap9mbylnky0nyy24oeutzkp">后端错误</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8muns7w7tfxn4mvg1l4ttw8j">要测试后端错误的处理（当服务器返回非成功状态码时），用一个模拟后端在请求失败时返回的错误响应来刷新请求。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> req = httpTesting.<span class="hljs-title function_">expectOne</span>(<span class="hljs-string">'/api/config'</span>);</div><div class="hljs-ln-line">req.<span class="hljs-title function_">flush</span>(<span class="hljs-string">'Failed!'</span>, {<span class="hljs-attr">status</span>: <span class="hljs-number">500</span>, <span class="hljs-attr">statusText</span>: <span class="hljs-string">'Internal Server Error'</span>});</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// Assert that the application successfully handled the backend error.</span></div></code>
+    </pre>
+  </div>
+  <h3 id="network-errors">
+    <a href="#network-errors" class="docs-anchor" tabindex="-1" aria-label="Link to Network errors" data-ng_translator_product="100" data-ng_translator_ref_id="ahau41i97buqedrt2ycixpb54">网络错误</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1ddf6b4ivl6terxt241j5uxnz">请求也可能由于网络错误而失败，这些错误表现为 
+<code>ProgressEvent</code> 错误。可以使用 
+<code>error()</code> 方法来传递这些错误：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> req = httpTesting.<span class="hljs-title function_">expectOne</span>(<span class="hljs-string">'/api/config'</span>);</div><div class="hljs-ln-line">req.<span class="hljs-title function_">error</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ProgressEvent</span>(<span class="hljs-string">'network error!'</span>));</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// Assert that the application successfully handled the network error.</span></div></code>
+    </pre>
+  </div>

@@ -1,0 +1,57 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>ng-template</h1><div class="docs-api-item-label" data-mode="full" data-type="element">element</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/tools/manual_api_docs/elements/ng-template.md#L0-L0" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="8gz59yzxwd4hepghiapd0dqo4">Angular 的 
+<code>&lt;ng-template&gt;</code> 元素定义了一个默认不渲染的模板。</p><p></p></header><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="8gz59yzxwd4hepghiapd0dqo4">Angular 的 
+<code>&lt;ng-template&gt;</code> 元素定义了一个默认不渲染的模板。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="aay4hrawrq30dxfbgki96rits">使用 
+<code>&lt;ng-template&gt;</code>，你可以定义模板内容，只有当你（无论是直接还是间接）明确指示 Angular 渲染时，该内容才会被渲染，从而使你可以完全控制内容的显示方式和时机。</p>
+<div class="alter is-helpful">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cqfmpv4xhmkcym2vlt5fm0mqt">注意，如果你将内容包裹在 
+<code>&lt;ng-template&gt;</code> 中而没有指示 Angular 渲染它，则该内容不会出现在页面上。例如，参见以下 HTML 代码，处理它时，Angular 不会渲染短语 "Hip! Hip! Hooray!" 中间的 "Hip!"，因为它被 
+<code>&lt;ng-template&gt;</code> 包围。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Hip!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ng-template</span>&gt;</span></span><span class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Hip!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">ng-template</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Hooray!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    </div>
+
+
+<h2 data-ng_translator_product="100" data-ng_translator_ref_id="7n0k9ca44omk9mq238cpk3t0r">使用说明</h2>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4tqmaa9erzhna8poqylp51a6p">结构型指令</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6i8r880hy5hj8xgvq8usql8eh"><code>&lt;ng-template&gt;</code> 的主要用途之一是保存将由 
+<a href="guide/directives/structural-directives">结构型指令</a> 使用的模板内容。这些指令可以根据它们自己的逻辑添加和删除模板内容的副本。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="21a3kgkh7yf2e7ppqntvrtjo9">使用 
+<a href="guide/directives/structural-directives#structural-directive-shorthand">结构型指令简写</a>时，Angular 会在后台创建一个 
+<code>&lt;ng-template&gt;</code> 元素。</p>
+<h3>TemplateRef</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3q2nke3sfkzfhm6w3xq2u4xgb"><code>&lt;ng-template&gt;</code> 元素表示为 
+<code>TemplateRef</code> 类的实例。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7b0ua0xswv6su2vziubf7x749">要将模板的副本添加到 DOM 中，请将此对象传递给 
+<code>ViewContainerRef</code> 方法 
+<code>createEmbeddedView()</code>。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="diflilzd91e608cybfmg13mg7">模板变量</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2463gtwnka2wczanrkbgz0h72"><code>&lt;ng-template&gt;</code> 元素可以在模板中使用 
+<a href="guide/templates/reference-variables#how-angular-assigns-values-to-template-variables">标准模板变量</a>引用。</p>
+<p><em data-ng_translator_product="100" data-ng_translator_ref_id="76lcl40585hpxsb3fp67w3s4v">这是 
+<code>&lt;ng-template&gt;</code> 元素作为 
+<code>ngIf</code> else 子句使用的方式。</em></p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a4zlx4icv867zgcuxva2x79gp">这些模板变量可以与 
+<code>ngTemplateOutlet</code> 指令结合使用来渲染 
+<code>&lt;ng-template&gt;</code> 标签内定义的内容。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2qpvgwcfjf4fzovb04beasqqo">查询</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="an9xsi1ntuzrhjuh1yu8k0y7y">某个 
+<a href="api/core/Query">查询</a>（例如 
+<code>ViewChild</code>）可以找到与 
+<code>&lt;ng-template&gt;</code> 元素关联的 
+<code>TemplateRef</code>，以便可以在程序中使用它；例如，将其传递给 
+<code>ViewContainerRef</code> 方法 
+<code>createEmbeddedView()</code>。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a9d2kxquqgjmc95nsrb27k4sm">上下文</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ci4aypmxt3hw7z4m2zjgmvl1s">在 
+<code>&lt;ng-template&gt;</code> 标签内，你可以引用外部模板中存在的变量。此外，可以将一个上下文对象与 
+<code>&lt;ng-template&gt;</code> 元素关联。这样的对象包含的变量可以通过模板（
+<code>let</code> 和 
+<code>as</code>）声明从模板内容中访问。</p></div></div></div>

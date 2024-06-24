@@ -1,0 +1,50 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="4sxctzbfslp2w1r96pkehkzqh">信号必须在模板插值中被调用。</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/extended-diagnostics/NG8109.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="exr6ogkwbfgqyvdo6g8cqyj9t">此诊断检测模板插值中未被调用的信号。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, signal, <span class="hljs-title class_">Signal</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div&gt;{{ mySignal }}/div&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">    <span class="hljs-attr">mySignal</span>: <span class="hljs-title class_">Signal</span>&lt;<span class="hljs-built_in">number</span>&gt; = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="whats-wrong-with-that">
+    <a href="#whats-wrong-with-that" class="docs-anchor" tabindex="-1" aria-label="Link to What's wrong with that?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dyj3fm6hh05czc2euad3kejpb">那有什么问题？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bcsqgg2cq1vk8g7mpa9nch4vx">Angular 信号是零参数函数（
+<code>() =&gt; T</code>）。执行时，它们返回信号的当前值。 这意味着它们在模板插值中使用时应被调用以渲染其值。</p>
+
+  <h2 id="what-should-i-do-instead">
+    <a href="#what-should-i-do-instead" class="docs-anchor" tabindex="-1" aria-label="Link to What should I do instead?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7bicb9bjjdedhs8bfd5vdiby7">我该怎么办？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1mbv0wk8a2qkfawb3be4nyita">确保在模板插值中使用信号时调用它以渲染其值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, signal, <span class="hljs-title class_">Signal</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div&gt;{{ mySignal() }}/div&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">mySignal</span>: <span class="hljs-title class_">Signal</span>&lt;<span class="hljs-built_in">number</span>&gt; = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>)</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="configuration-requirements">
+    <a href="#configuration-requirements" class="docs-anchor" tabindex="-1" aria-label="Link to Configuration requirements" data-ng_translator_product="100" data-ng_translator_ref_id="bwdhyfdm5yb1t69cyimmn0hs0">配置要求</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bvq1h6pbvb5zkqgoznz2isxaz"><a href="tools/cli/template-typecheck#strict-mode"><code>strictTemplates</code></a> 必须启用，才能发出任何扩展诊断。 
+<code>interpolatedSignalNotInvoked</code> 除了 
+<code>strictTemplates</code> 之外没有其他附加要求。</p>
+
+  <h2 id="what-if-i-cant-avoid-this">
+    <a href="#what-if-i-cant-avoid-this" class="docs-anchor" tabindex="-1" aria-label="Link to What if I can't avoid this?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="duupn560xw3oqrkqmgen1ccwo">如果我无法避免这种情况怎么办？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bzu6yb6isvsmddbdryz1qwy7l">可以通过编辑项目的 <code>tsconfig.json</code> 文件来禁用此诊断：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"angularCompilerOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"extendedDiagnostics"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"checks"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"interpolatedSignalNotInvoked"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"suppress"</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1tl6suaasu3xo2b1onvdft0o9">有关更多信息，请参阅<a href="extended-diagnostics#configuration">扩展诊断配置</a>。</p>

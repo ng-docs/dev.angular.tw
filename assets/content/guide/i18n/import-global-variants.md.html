@@ -1,0 +1,54 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dv39qg75s1ainjob7by1m8jer">导入语言环境数据的全局变量</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/i18n/import-global-variants.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8utba9460u3107bb8oiefec3y"><a href="cli" title="CLI" overview and command reference | angular>Angular CLI</a> 在你运行 
+<a href="cli/build" title="ng" build | cli angular><code>ng build</code></a> 命令并带有 
+<code>--localize</code> 选项时，会自动包含语言环境数据。</p>
+<!--todo: replace with docs-code -->
+
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build --localize</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8lp3jnvsp21dlq0b7kzsf2kdm"><strong>提示：</strong>Angular 的初始安装已经包含了美国英语（
+<code>en-US</code>）的语言环境数据。 
+<a href="cli" title="CLI" overview and command reference | angular>Angular CLI</a> 会自动包含这些语言环境数据，并在你使用 
+<code>--localize</code> 选项运行 
+<a href="cli/build" title="ng" build | cli angular><code>ng build</code></a> 命令时设置 
+<code>LOCALE_ID</code> 值。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="lh7dfyd276cgsntlvma5wnnm">npm 上的 
+<code>@angular/common</code> 包含语言环境数据文件。 语言环境数据的全局变体可以在 
+<code>@angular/common/locales/global</code> 中找到。</p>
+
+  <h2 id="import-example-for-french">
+    <a href="#import-example-for-french" class="docs-anchor" tabindex="-1" aria-label="Link to <code>import</code> example for French" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dtoowf2qul8o3zadxcevl52hu">法语的 <code>import</code> 示例</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="f2zrk5wkl5xcbozusku6fpc9u">例如，你可以在 
+<code>main.ts</code> 中导入法语（
+<code>fr</code>）的全局变体，在该文件中启动应用。</p>
+<div class="docs-code" path="adev/src/content/examples/i18n/src/main.ts" visiblelines="0" header="src/main.ts (import locale)">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="d9r5zl1zvkjhma9jql78nvvzf">src/main.ts（导入语言环境）</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> <span class="hljs-string">'@angular/common/locales/global/fr'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {provideProtractorTestingSupport} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {bootstrapApplication} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {AppComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./app/app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">bootstrapApplication(AppComponent, {</div><div class="hljs-ln-line">  providers: [</div><div class="hljs-ln-line">    provideProtractorTestingSupport(), <span class="hljs-comment">// essential for e2e testing</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">});</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="5s1jrs9b2yy8zrgt42g70xitl"><strong>提示：</strong>在 
+<code>NgModules</code> 应用中，你可以在 
+<code>app.module</code> 中导入它。</p>
+
+    </div>
+    

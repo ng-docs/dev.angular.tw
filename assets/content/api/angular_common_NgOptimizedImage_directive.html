@@ -1,0 +1,116 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>NgOptimizedImage</h1><div class="docs-api-item-label" data-mode="full" data-type="directive">directive</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/common/src/directives/ng_optimized_image/ng_optimized_image.ts#L248-L676" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ar395splt4srpgiaq50datg5i">通过实施最佳实践来提高图像加载性能的指令。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">NgOptimizedImage</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngSrc">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">ngSrc</span>: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngSrcset">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">ngSrcset</span>: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="sizes">  <span class="hljs-meta">@Input</span>() sizes?: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="width">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">width</span>: <span class="hljs-built_in">number</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="height">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">height</span>: <span class="hljs-built_in">number</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="loading">  <span class="hljs-meta">@Input</span>() loading?: <span class="hljs-string">"auto"</span> | <span class="hljs-string">"lazy"</span> | <span class="hljs-string">"eager"</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="priority">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">priority</span>: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="loaderParams">  <span class="hljs-meta">@Input</span>() loaderParams?: { [<span class="hljs-attr">key</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>; };</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="disableOptimizedSrcset">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">disableOptimizedSrcset</span>: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="fill">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">fill</span>: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="placeholder">  <span class="hljs-meta">@Input</span>() placeholder?: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="placeholderConfig">  <span class="hljs-meta">@Input</span>() placeholderConfig?: <span class="hljs-title class_">ImagePlaceholderConfig</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ar395splt4srpgiaq50datg5i">通过实施最佳实践来提高图像加载性能的指令。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6xl8kozd6z0zrm6ltsjdztgww"><code>NgOptimizedImage</code>确保优先加载最大内容渲染（LCP）图像，通过以下方式：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="c10openuk3htri0xungn52khv">自动在
+<code>&lt;img&gt;</code>标签上设置
+<code>fetchpriority</code>属性</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cx0t4u3um3e4f98ec6psgjzwv">默认延迟加载非优先级图像</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="42falm2kdwxzjy6hegm1obr5h">在文档头部自动生成一个预连接 link 标签</li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="98qg342f0m1h3g14qwd025k8g">此外，该指令：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="cig5puqf8dliy9domun4h6zh2">如果提供了相应的
+<code>ImageLoader</code>函数，则生成适当的资产 URL</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2tmcg1dgzkh59bzrz34wuhij6">自动生成 srcset</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8dajxewpy6cz5fek9nqfvl9d5">要求设置 <code>width</code> 和 <code>height</code></li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bqmducxepzfd2nk8qkpizzdmb">如果 <code>width</code> 或 <code>height</code> 设置不正确，则发出警告</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="74bda4q4tox4mzys61v6dbqjq">警告图像在渲染时是否会在视觉上扭曲</li>
+
+    </ul></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="9jtjx0399xjbat3wgma9axopx"><code>NgOptimizedImage</code>指令被标记为
+<a href="guide/components/importing">独立的</a>，可以直接导入。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bxvemacqoz3tm2ygcos1c6ye4">请按照以下步骤启用和使用该指令：</p>
+
+      <ol class="docs-ordered-list">
+        <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5fa9fbubw02i12byzy5ouk3cv">将其导入到必要的 NgModule 或独立组件中。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="1hpy8a6ynpruujb761jwnxhiy">如果你使用图像托管服务，可以选择性地提供一个
+<code>ImageLoader</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="dctkuz2039sucjoenwz05eapg">更新模板中的必要
+<code>&lt;img&gt;</code>标签，并将
+<code>src</code>属性替换为
+<code>ngSrc</code>。 使用
+<code>ngSrc</code>允许指令控制
+<code>src</code>的设置时间，从而触发图像下载。</li>
+
+      </ol>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="41e28mwj9qxsyhqpmd51j3kgz">步骤 1：导入
+<code>NgOptimizedImage</code>指令。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgOptimizedImage</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-comment">// Include it into the necessary NgModule</span></span><span class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">NgOptimizedImage</span>],</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> {}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-comment">// ... or a standalone Component</span></span><span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span></span><span class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">NgOptimizedImage</span>],</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyStandaloneComponent</span> {}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2x3yh95g7ugsdfhjno2x0aofo">第二步：配置加载器。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="coabqatbky062tdhawhqy7vjl">要使用
+<strong>默认加载器</strong>：不需要额外的代码更改。通用加载器返回的 URL 将始终匹配“src”的值。换句话说，该加载器不会对资源 URL 进行任何转换，
+<code>ngSrc</code>属性的值将按原样使用。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9oo84n3eur30zlgc3m32fy1q3">要将现有的加载器用于<strong>第三方图片服务</strong>，请将你选择的服务的提供者工厂添加到 <code>providers</code> 数组中。在下面的示例中，使用了 Imgix 加载器：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {provideImgixLoader} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-comment">// Call the function and add the result to the `providers` array:</span></span><span class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">  <span class="hljs-title function_">provideImgixLoader</span>(<span class="hljs-string">"https://my.base.url/"</span>),</span><span class="hljs-ln-line">],</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="coe5oqapzo7zdcveivanpf6wd"><code>NgOptimizedImage</code>指令提供以下功能：</p>
+
+    <ul class="docs-list">
+      <li><code>provideCloudflareLoader</code></li>
+<li><code>provideCloudinaryLoader</code></li>
+<li><code>provideImageKitLoader</code></li>
+<li><code>provideImgixLoader</code></li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c51rqg0eam5spsladzvwdc3eb">如果你使用不同的图像提供者，你可以创建一个自定义加载器函数，如下所述。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dwo4zuxibkd4chqypaeqy5evn">要使用
+<strong>自定义加载器</strong>：将你的加载器函数作为值提供给
+<code>IMAGE_LOADER</code>依赖注入（DI）令牌。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-variable constant_">IMAGE_LOADER</span>, <span class="hljs-title class_">ImageLoaderConfig</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-comment">// Configure the loader using the `IMAGE_LOADER` token.</span></span><span class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">  {</span><span class="hljs-ln-line">     <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">IMAGE_LOADER</span>,</span><span class="hljs-ln-line">     <span class="hljs-attr">useValue</span>: <span class="hljs-function">(<span class="hljs-params">config: ImageLoaderConfig</span>) =&gt;</span> {</span><span class="hljs-ln-line">       <span class="hljs-keyword">return</span> <span class="hljs-string">`https://example.com/<span class="hljs-subst">${config.src}</span>-<span class="hljs-subst">${config.width}</span>.jpg}`</span>;</span><span class="hljs-ln-line">     }</span><span class="hljs-ln-line">  },</span><span class="hljs-ln-line">],</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="851rjx25tsvgq982orhaj7nic">步骤 3：在模板中更新
+<code>&lt;img&gt;</code>标签，使用
+<code>ngSrc</code>代替
+<code>src</code>。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;img <span class="hljs-attribute">ngSrc</span>=<span class="hljs-string">"logo.png"</span> <span class="hljs-attribute">width</span>=<span class="hljs-string">"200"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"100"</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="ngSrc" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngSrc</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d8t7ixg2dz2uz6wclrk3ive2v">源图像的名称。图片名称将由图片加载器处理，最终 URL 将用作图片的 <code>src</code> 属性。</p></div></div></div></div><div id="ngSrcset" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngSrcset</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="8hk1pz86dl61j4bg2x6ncik0m">一个用逗号分隔的宽度或密度描述符列表。图像名称将取自
+<code>ngSrc</code>，并与宽度或密度描述符列表结合，以生成图像的最终
+<code>srcset</code>属性。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ox89uffraofl00vyy63uanon">范例：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;img ngSrc<span class="hljs-operator">=</span><span class="hljs-string">"hello.jpg"</span> ngSrcset<span class="hljs-operator">=</span><span class="hljs-string">"100w, 200w"</span> /&gt;  <span class="hljs-operator">=</span>&gt;</span><span class="hljs-ln-line">&lt;img src<span class="hljs-operator">=</span><span class="hljs-string">"path/hello.jpg"</span> srcset<span class="hljs-operator">=</span><span class="hljs-string">"path/hello.jpg?w=100 100w, path/hello.jpg?w=200 200w"</span> /&gt;</span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="sizes" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>sizes</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="28p29p43557iyuc5tiukdsnkb">传递给
+<code>&lt;img&gt;</code>元素的基本
+<code>sizes</code>属性。提供sizes会使图像创建一个自动响应式的srcset。</p></div></div></div></div><div id="width" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>width</h3><div><code>number</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="884nxjf7av579e9s5sljp82zw">对于响应式图像：图像的固有宽度（以像素为单位）。对于固定大小的图像：所需的图像渲染宽度（以像素为单位）。</p></div></div></div></div><div id="height" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>height</h3><div><code>number</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="6brajrh2bkg8v8ts1cbneo70a">对于响应式图像：图像的内在高度（以像素为单位）。对于固定大小的图像：图像的期望渲染高度（以像素为单位）。</p></div></div></div></div><div id="loading" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>loading</h3><div><code>"auto" | "lazy" | "eager"</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="2du59ktdgy99e1e4kqv9h4fza">期望的加载行为（lazy、eager 或 auto）。默认值为
+<code>lazy</code>，这对于大多数图像是推荐的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="c5lo8w9uy2tlivatzbdlw7i1r">警告：将图像设置为loading="eager"或loading="auto"将其标记为非优先图像，并可能影响加载性能。对于可能是LCP元素的图像，请使用
+<code>priority</code>属性而不是
+<code>loading</code>。</p></div></div></div></div><div id="priority" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>priority</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="gfqfowfx9cj8yiqpz3lo0mjv">指示此图像是否应具有高优先级。</p></div></div></div></div><div id="loaderParams" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>loaderParams</h3><div><code>{ [key: string]: any; }</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4jpaufp1ha2bs84hogzupyiih">要传递给自定义加载器的数据。</p></div></div></div></div><div id="disableOptimizedSrcset" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>disableOptimizedSrcset</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dim0mgywapqc0r3p4i1xt2lvz">禁用此图像的自动 srcset 生成。</p></div></div></div></div><div id="fill" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>fill</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="56r8doqmv9z8dxhzbpdlu394k">将图像设置为“填充模式”，这消除了高度/宽度要求并添加样式，使图像填充其包含的元素。</p></div></div></div></div><div id="placeholder" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>placeholder</h3><div><code>string | boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="29ex98af95pgv4b286dwaurc7">一个URL或数据URL，用于在此图像加载时作为占位符的图像。</p></div></div></div></div><div id="placeholderConfig" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>placeholderConfig</h3><div><code>ImagePlaceholderConfig</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="cbyz4ky1oe8a7jy50v0k8ndbs">占位符设置的配置对象。选项：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="9s9fvx4laror5p4af860ljqve">blur：将其设置为false将禁用自动CSS模糊效果。</li>
+
+    </ul></div></div></div></div></div></div></div>

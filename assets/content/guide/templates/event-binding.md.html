@@ -1,0 +1,108 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ehfop80m9e0igm4pklg35r7g8">事件绑定</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/templates/event-binding.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3yuuifrn99fjd2z8cu6qsmbep">通过事件绑定，你可以侦听并响应用户操作，比如按键、鼠标移动、点击和触摸。</p>
+
+  <h2 id="binding-to-events">
+    <a href="#binding-to-events" class="docs-anchor" tabindex="-1" aria-label="Link to Binding to events" data-ng_translator_product="100" data-ng_translator_ref_id="erfsd41b6e1mz0lhomzxkgqre">绑定到事件</a>
+  </h2>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="ck07etwapad4775hwry9c4lo7"><strong>提示:</strong> 关于属性绑定的信息，请参阅
+<a href="guide/templates/property-binding">属性绑定</a>。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="j6h18r716p9u42sqtyfs0w3u">要绑定到事件，你可以使用 Angular 事件绑定语法。此语法由等号左侧括号中的目标事件名称和右侧带引号的模板语句组成。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4nqp4ymyxml8as2hsvbd0xm38">创建以下示例；目标事件名是 <code>click</code>，模板语句是 <code>onSave()</code>。</p>
+<div class="docs-code" header="Event binding syntax">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="anlvw5wycwyxercv64cqelff4">事件绑定语法</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSave()"</span>&gt;</span>Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="697nrdag4ntqh890ax27v3fk6">事件绑定侦听按钮的单击事件，并在发生单击时调用组件的 <code>onSave()</code>。</p>
+<img src="assets/images/guide/template-syntax/syntax-diagram.svg" alt="Syntax diagram">
+
+
+  <h3 id="determining-an-event-target">
+    <a href="#determining-an-event-target" class="docs-anchor" tabindex="-1" aria-label="Link to Determining an event target" data-ng_translator_product="100" data-ng_translator_ref_id="484eoa80az4ekkrmtedqlto0p">确定事件目标</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5uyab5kvpneu7sw8igz3jbsun">为了确定事件目标，Angular 会检查目标事件的名称是否与已知指令的 event 属性匹配。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5l8fedq5z45o1ikox5sccw0xp">创建以下示例：（Angular 会检查 <code>myClick</code> 是否是自定义 <code>ClickDirective</code> 上的事件）</p>
+<div class="docs-code" path="adev/src/content/examples/event-binding/src/app/app.component.html" visiblelines="8,9,10" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"event-binding"</span>&gt;</span>Event Binding<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"group"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Target event<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSave($event)"</span>&gt;</span>Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">on-enter</span>=<span class="hljs-string">"onSave()"</span>&gt;</span>on-click Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>myClick is an event on the custom ClickDirective:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">myClick</span>)=<span class="hljs-string">"clickMessage=$event"</span> <span class="hljs-attr">clickable</span>&gt;</span>click with myClick<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-template-variable">{{ <span class="hljs-name">clickMessage</span> }}</span><span class="language-xml"></span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"group"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>$event and event handling statements<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Result: <span class="hljs-template-variable">{{ <span class="hljs-name">currentItem.name</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> [<span class="hljs-attr">value</span>]=<span class="hljs-string">"currentItem.name"</span></span></div><div class="hljs-ln-line">         (<span class="hljs-attr">input</span>)=<span class="hljs-string">"currentItem.name=getValue($event)"</span>&gt;</div><div class="hljs-ln-line">  without NgModel</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"group"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Binding to a nested component<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Custom events with EventEmitter<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">app-item-detail</span> (<span class="hljs-attr">deleteRequest</span>)=<span class="hljs-string">"deleteItem($event)"</span> [<span class="hljs-attr">item</span>]=<span class="hljs-string">"currentItem"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-item-detail</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Click to see event target class:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"parent-div"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onClickMe($event)"</span> <span class="hljs-attr">clickable</span>&gt;</span>Click me (parent)</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"child-div"</span>&gt;</span>Click me too! (child) <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Saves only once:<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSave()"</span> <span class="hljs-attr">clickable</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSave($event)"</span>&gt;</span>Save, no propagation<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Saves twice:<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSave()"</span> <span class="hljs-attr">clickable</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSave()"</span>&gt;</span>Save with propagation<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="862nh724ipnye53nnb5srkvj4">如果目标事件名称 <code>myClick</code> 与 <code>ClickDirective</code> 的输出属性不匹配，Angular 将改为绑定到基础 DOM 元素上的 <code>myClick</code> 事件。</p>
+
+  <h2 id="binding-to-keyboard-events">
+    <a href="#binding-to-keyboard-events" class="docs-anchor" tabindex="-1" aria-label="Link to Binding to keyboard events" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="akmxq1oky1qbv1gsdp9brl6c5">绑定到键盘事件</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7gpj10f7niekzooh97d4qkv6q">你可以使用 Angular 的绑定语法来绑定键盘事件。你可以指定要绑定到键盘事件的键或代码。
+<code>key</code>和
+<code>code</code>字段是浏览器键盘事件对象的本机部分。默认情况下，事件绑定假定你想要使用键盘事件的
+<code>key</code>字段。你也可以使用
+<code>code</code>字段。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6flu1cycrdf1o6ubvb7t04wkn">键的组合可以用点（<code>.</code>）分隔。例如，<code>keydown.enter</code> 将允许你将事件绑定到 <code>enter</code> 键。你还可以用修饰键，例如 <code>shift</code> 、 <code>alt</code> 、 <code>control</code> 和 Mac 中的 <code>command</code> 键。以下示例展示了如何将键盘事件绑定到 <code>keydown.shift.t</code>。</p>
+<pre><code class="language-html">&lt;input (keydown.shift.t)="onKeydown($event)" /&gt;
+</code></pre>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7hrkyfwur5pxp3gu0tg9jdvid">根据操作系统的不同，某些组合键可能会创建特殊字符，而不是你期望的组合键。例如，当你同时使用 option 和 shift 键时，MacOS 会创建特殊字符。如果你绑定到 <code>keydown.shift.alt.t</code>，在 macOS 上，该组合会生成 <code>ˇ</code> 而不是 <code>t</code>，它与绑定不匹配，也不会触发你的事件处理程序。要绑定到 macOS 上的 <code>keydown.shift.alt.t</code>，请使用 <code>code</code> 键盘事件字段来获取正确的行为，例如此示例中显示的 <code>keydown.code.shiftleft.altleft.keyt</code>。</p>
+<pre><code class="language-html">&lt;input (keydown.code.shiftleft.altleft.keyt)="onKeydown($event)" /&gt;
+</code></pre>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="anktdcwsb67e70iv591l9d1v8"><code>code</code> 字段比 <code>key</code> 字段更具体。<code>key</code> 字段总是会报告 <code>shift</code>，而 <code>code</code> 字段将指明 <code>leftshift</code> 或 <code>rightshift</code>。使用 <code>code</code> 字段时，你可能需要添加单独的绑定以捕获你想要的所有行为。使用 <code>code</code> 字段时无需处理操作系统特有的行为，例如 macOS 上的 <code>shift + option</code> 行为。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bei4luzbrj607gkt350k8xgwz">欲了解更多信息，请访问
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values" target="_blank">key</a>和
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values" target="_blank">code</a>的完整参考，以帮助构建你的事件字符串。</p>
+
+  <h2 id="binding-to-passive-events">
+    <a href="#binding-to-passive-events" class="docs-anchor" tabindex="-1" aria-label="Link to Binding to passive events" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="22f3koerv070jxsx8wxhjscf1">绑定到被动事件</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ejm11givkx8nl0f13gj1i59c">Angular 还支持
+<a href="https://developer.chrome.com/en/docs/lighthouse/best-practices/uses-passive-event-listeners/" target="_blank">被动事件</a>监听器。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ccyd0f27lr4l4uw74b38lfs1x">这是一种高级技术，对大多数应用程序来说并非必需。如果需要优化处理频繁发生事件而导致性能问题的情况，你可能会发现这很有用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7oh1h0ei144rsw8id30n2porl">例如，使用以下步骤将滚动事件设为被动事件。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7tmd5i6acbneaajwvtwiwx3v4">在 <code>src</code> 目录下创建一个文件 <code>zone-flags.ts</code>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8owsse9dtfnl1puiqjwsjikkq">将以下行添加到此文件中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">(<span class="hljs-variable language_">window</span> <span class="hljs-keyword">as</span> <span class="hljs-built_in">any</span>)[<span class="hljs-string">'__zone_symbol__PASSIVE_EVENTS'</span>] = [<span class="hljs-string">'scroll'</span>];</div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="abo31jo7ecgn6c85f2zbt4bjn">在 <code>src/polyfills.ts</code> 文件中，在导入 zone.js 之前，先导入新创建的 <code>zone-flags</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> <span class="hljs-string">'./zone-flags'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> <span class="hljs-string">'zone.js'</span>;  <span class="hljs-comment">// Included with Angular CLI.</span></div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6k99xiju5qif9ge6mvtcep509">在这些步骤之后，如果你为 <code>scroll</code> 事件添加事件侦听器，侦听器就会是 <code>passive</code> 的。</p>
+
+  <h2 id="whats-next">
+    <a href="#whats-next" class="docs-anchor" tabindex="-1" aria-label="Link to What's next" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="407r2fj2mi5kvg7imj9zdcpe">下一步呢？</a>
+  </h2>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="guide/templates/event-binding" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="70gml6nio1uqjlsiypa76n5rj">事件绑定的工作原理</a>
+    
+    <a class="docs-pill" href="guide/templates/property-binding" data-ng_translator_product="100" data-ng_translator_ref_id="ibtmbclnc7w7tio7q72px2nt">property 绑定</a>
+    
+    <a class="docs-pill" href="guide/templates/interpolation" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a0s0y9dopwkcuow12bwfuc65v">文本插值</a>
+    
+    <a class="docs-pill" href="guide/templates/two-way-binding" data-ng_translator_product="100" data-ng_translator_ref_id="cfj91a2tzi7kstl2b5xcxrj7n">双向绑定</a>
+    
+
+    </nav>
+    

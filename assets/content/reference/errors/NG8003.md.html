@@ -1,0 +1,38 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="x6agzyji699s28hjegthaj0k">缺少引用目标</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG8003.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-video-container">
+      <iframe class="docs-video" src="https://www.youtube.com/embed/fUSAg4kp2WQ" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless title="Video player"></iframe>
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="894ha0iqgzmtocusy9i0ehqxs">Angular 找不到带有 <code>{{ PLACEHOLDER }}</code> 导出名称的指令。这通常是因为指令上缺少导入或缺少 <a href="api/core/Directive#exportAs"><code>exportAs</code></a>。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7winxpyob5rbjpj73ffypkyj0"><strong>帮助：</strong> 这是一个常见运行时错误的编译器等价物 
+<a href="errors/NG0301">NG0301: 未找到导出</a>。</p>
+
+    </div>
+    
+  <h2 id="debugging-the-error">
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3964yk0ahs5x4gr8w8j1x8utp">使用找不到的导出字符串名称来跟踪使用此导出的模板或模块。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="drea5s1etlji4woqjdkwr6igm">确保所有依赖项都正确导入并在我们的模块中声明。 例如，如果未找到的导出是 
+<code>ngForm</code>，我们需要导入 
+<code>FormsModule</code> 并在 
+<code>*.module.ts</code> 中的导入列表中声明它，以解决缺少的导出错误。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FormsModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">FormsModule</span>,</div><div class="hljs-ln-line">    …</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5twcp9xgehj0id0hw8u6p27x2">如果最近添加了导入，则需要重新启动服务器以查看这些更改。</p>

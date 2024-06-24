@@ -1,0 +1,113 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="9qoqxjt92mtn2itmhyy3arcw2">为组件添加一个输入参数</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/first-app/steps/05-inputs/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="epn77yf34vs1if1celnen0mhj">本教程演示了如何创建一个组件 
+<code>@Input()</code> 并将其用于向组件传递数据以进行自定义。</p>
+
+    <div class="docs-video-container">
+      <iframe class="docs-video" src="https://www.youtube.com/embed/eM3zi_n7lNs?si=WvRGFSkW_7_zDIFD&amp;start=241" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless title="Video player"></iframe>
+    </div>
+    
+  <h2 id="what-youll-learn">
+    <a href="#what-youll-learn" class="docs-anchor" tabindex="-1" aria-label="Link to What you'll learn" data-ng_translator_product="100" data-ng_translator_ref_id="cy8qhuh22qozu5okjmjfdf3nx">你将学到什么</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dznk2i7zxx9054q4wgbmoqg51">你的应用程序的 
+<code>HousingLocationComponent</code> 模板有一个 
+<code>HousingLocation</code> 属性来接收输入。</p>
+
+  <h2 id="conceptual-preview-of-inputs">
+    <a href="#conceptual-preview-of-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to Conceptual preview of Inputs" data-ng_translator_product="100" data-ng_translator_ref_id="eeam3k169tsbsub1gv24k6e72">输入属性的概念性预览</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="exwsnl347w76jo7z8pok8vdgg"><a href="api/core/Input">输入属性</a>允许组件共享数据。数据共享的方向是从父组件到子组件。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2vh5u6rcd50s8c2luhd5emh82">在本课中，你将在 
+<code>HousingLocationComponent</code> 组件中定义 
+<code>@Input()</code> 属性，这将使你能够自定义组件中显示的数据。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="c5yqgvi6uufadjq3370lemp0v">在 
+<a href="guide/components/inputs">使用输入属性接受数据</a> 和 
+<a href="guide/components/outputs">使用输出进行自定义事件</a> 指南中了解更多。</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="import-the-input-decorator">
+    <a href="#import-the-input-decorator" class="docs-anchor" tabindex="-1" aria-label="Link to Import the Input decorator" data-ng_translator_product="100" data-ng_translator_ref_id="be86n26mb50k2mdq236pdunz0">导入 Input 装饰器</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="lmf3jxo4togzqkcn2svu636d">这一步将 
+<code>Input</code> 装饰器导入到类中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eug3k0hymd4usfrh9oohvkiee">在代码编辑器中：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2j1hhdzuzpzh4rxn5ms2fbmah">导航到 <code>src/app/housing-location/housing-location.component.ts</code></li>
+<li>Update the file imports to include <code>Input</code> and <code>HousingLocation</code>:<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/housing-location/housing-location.component.ts" visiblelines="0,1,2" header="Import HousingLocationComponent and Input in src/app/housing-location/housing-location.component.ts">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="7mr3048ca0lxvgbq73y64ap7c">在 src/app/housing-location/housing-location.component.ts 中导入 HousingLocationComponent 和 Input。</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component, Input} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {CommonModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocation} <span class="hljs-keyword">from</span> <span class="hljs-string">'../housinglocation'</span>;</div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-housing-location'</span>,</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  imports: [CommonModule],</div><div class="hljs-ln-line">  template: `<span class="language-javascript"></span></div><div class="hljs-ln-line">    &lt;p&gt;housing-location works!&lt;/p&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./housing-location.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HousingLocationComponent</span> {</div><div class="hljs-ln-line">  @Input() housingLocation!: HousingLocation;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="add-the-input-property">
+    <a href="#add-the-input-property" class="docs-anchor" tabindex="-1" aria-label="Link to Add the Input property" data-ng_translator_product="100" data-ng_translator_ref_id="8krnns4mul5ds2clzriten0xh">添加 Input 属性</a>
+  </h3>
+  
+      
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="958jjp2ri23a2suzy1c04lxa6">在同一文件中，向 
+<code>HousingLocationComponent</code> 类添加一个名为 
+<code>housingLocation</code> 的类型为 
+<code>HousingLocation</code> 的属性。在属性名称后面添加一个 
+<code>!</code>，并在前面加上 
+<code>@Input()</code> 装饰器：</p>
+<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/housing-location/housing-location.component.ts" visiblelines="12,13,14" header="Import HousingLocationComponent and Input in src/app/housing-location/housing-location.component.ts">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="7mr3048ca0lxvgbq73y64ap7c">在 src/app/housing-location/housing-location.component.ts 中导入 HousingLocationComponent 和 Input。</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component, Input} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {CommonModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocation} <span class="hljs-keyword">from</span> <span class="hljs-string">'../housinglocation'</span>;</div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-housing-location'</span>,</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  imports: [CommonModule],</div><div class="hljs-ln-line">  template: `<span class="language-javascript"></span></div><div class="hljs-ln-line">    &lt;p&gt;housing-location works!&lt;/p&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./housing-location.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HousingLocationComponent</span> {</div><div class="hljs-ln-line">  @Input() housingLocation!: HousingLocation;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="exnwwjcumhn66uc10et5oh3qo">你必须添加 
+<code>!</code>，因为输入框期望传递一个值。在这种情况下，没有默认值。在我们的示例应用中，我们知道这个值会被传递进来 —— 这是刻意设计的。这个感叹号被称为非空断言操作符，它告诉 TypeScript 编译器该属性的值不会是 null 或 undefined。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6a1306fc3w56aeqm1wcmz5ewr">保存你的更改并确认应用程序没有任何错误。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2kcshog2nszydh73ast6suqu6">在继续下一步之前更正所有错误。</p>
+</li>
+
+    </ol>
+    
+    </li>
+    
+    </ol>
+    
+    <div class="docs-alert docs-alert-summary">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="1zun1sqluox66knqpfl1dpd4r"><strong>总结：</strong>在这节课中，你创建了一个用 
+<code>@Input()</code> 装饰的新属性。你还使用了非空断言运算符，通知编译器新属性的值不会是 
+<code>null</code> 或 
+<code>undefined</code>。</p>
+
+    </div>
+    
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="guide/components/inputs" data-ng_translator_product="100" data-ng_translator_ref_id="2h4hr0dz0l64wclppqx8i0miy">接受输入属性中的数据</a>
+    
+    <a class="docs-pill" href="guide/components/outputs" data-ng_translator_product="100" data-ng_translator_ref_id="19nddi97pym1lal125ypjx9d4">使用输出定义自定义事件</a>
+    
+
+    </nav>
+    

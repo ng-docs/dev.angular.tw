@@ -1,0 +1,86 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="9ea2px9vis7d86ftm63v9uvc">验证表单</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/18-forms-validation/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4uay60540zofvwg21bs5e9qzp">在处理表单时的另一个常见情景是需要验证输入，以确保提交正确的数据。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="e5xrw6oswxjr6hoajm1tb2qri">在这个活动中，你将学习如何使用响应式表单验证表单。</p>
+<hr>
+
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="import-validators">
+    <a href="#import-validators" class="docs-anchor" tabindex="-1" aria-label="Link to Import Validators" data-ng_translator_product="100" data-ng_translator_ref_id="5kd34m9wu1ym5byotwhpdin74">导入验证器</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="7t8c2rltm493ntxf41ra38ib8">Angular提供了一套验证工具。要使用这些工具，首先更新组件，从
+<code>@angular/forms</code>导入
+<code>Validators</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">ReactiveFormsModule</span>, <span class="hljs-title class_">Validators</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="add-validation-to-form">
+    <a href="#add-validation-to-form" class="docs-anchor" tabindex="-1" aria-label="Link to Add validation to form" data-ng_translator_product="100" data-ng_translator_ref_id="znoko7kqhuz0y007oi7435er">向表单添加验证</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="7sct0g13b2qze484nzic7dqyz">每个
+<code>FormControl</code>可以传入你想要用于验证
+<code>FormControl</code>值的
+<code>Validators</code>。例如，如果你想要使
+<code>profileForm</code>中的
+<code>name</code>字段为必填，则使用
+<code>Validators.required</code>。 对于我们Angular表单中的
+<code>email</code>字段，我们希望确保它不为空并遵循有效的电子邮件地址结构。我们可以通过将
+<code>Validators.required</code>和
+<code>Validators.email</code>验证器组合在一个数组中来实现这一点。 更新
+<code>name</code>和
+<code>email</code>的
+<code>FormControl</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">profileForm = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormGroup</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>, <span class="hljs-title class_">Validators</span>.<span class="hljs-property">required</span>),</div><div class="hljs-ln-line">  <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>, [<span class="hljs-title class_">Validators</span>.<span class="hljs-property">required</span>, <span class="hljs-title class_">Validators</span>.<span class="hljs-property">email</span>]),</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="check-form-validation-in-template">
+    <a href="#check-form-validation-in-template" class="docs-anchor" tabindex="-1" aria-label="Link to Check form validation in template" data-ng_translator_product="100" data-ng_translator_ref_id="60qsiofoilklhe425yij57fef">检查模板中的表单验证</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="4919k1bmduzav9usobmkgc3tc">要确定表单是否有效，
+<code>FormGroup</code>类具有一个
+<code>valid</code>属性。你可以使用这个属性动态绑定属性。根据表单的有效性更新提交
+<code>button</code>以启用它。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> [<span class="hljs-attr">disabled</span>]=<span class="hljs-string">"!profileForm.valid"</span>&gt;</span>Submit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cew78n0kl3y80qp6cqacoeaop">你现在已经了解了使用响应式表单进行验证的基础知识。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="epomkic5bhxg9myt548lto2zb">学习 Angular 中与表单相关的核心概念做得很好。如果你想了解更多，请务必参考
+<a href="guide/forms/form-validation">Angular 表单文档</a>。</p>

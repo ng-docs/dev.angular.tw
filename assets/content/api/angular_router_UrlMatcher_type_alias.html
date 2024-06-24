@@ -1,0 +1,29 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>UrlMatcher</h1><div class="docs-api-item-label" data-mode="full" data-type="type_alias">Type Alias</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/router/src/models.ts#L168-L172" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="7w13zl5r5nwzhcorlzs9drf3y">用于根据 URL 匹配路由的函数。当 
+<code>path</code> 和 
+<code>pathMatch</code> 的组合不够表达时，为 
+<code>Route.matcher</code> 实现自定义 URL 匹配器。不能与 
+<code>path</code> 和 
+<code>pathMatch</code> 一起使用。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">type</span> <span class="hljs-title class_">UrlMatcher</span> = <span class="hljs-function">(<span class="hljs-params"></span></span></div><div class="hljs-ln-line ">  segments: UrlSegment[],</div><div class="hljs-ln-line ">  group: UrlSegmentGroup,</div><div class="hljs-ln-line ">  route: Route,</div><div class="hljs-ln-line ">) =&gt; <span class="hljs-title class_">UrlMatchResult</span> | <span class="hljs-literal">null</span></div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="7w13zl5r5nwzhcorlzs9drf3y">用于根据 URL 匹配路由的函数。当 
+<code>path</code> 和 
+<code>pathMatch</code> 的组合不够表达时，为 
+<code>Route.matcher</code> 实现自定义 URL 匹配器。不能与 
+<code>path</code> 和 
+<code>pathMatch</code> 一起使用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dxpnk7ve2ossa7w9tqs8fp96k">该函数接受以下参数并返回一个 
+<code>UrlMatchResult</code> 对象。</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ajp50fsk4yspzqtbpcazmu5du"><em>segment</em> ：URL 段的数组。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="46ii7xz8vs985qh3lz4jwfcst"><em>group</em> ：段组。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5nmrhozarc3fgrf5zuc8te8qy"><em>route</em> ：要匹配的路由。</li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2xvbl34pdxu9cdt5bnrr1g6ni">下列例子中实现的匹配器会匹配 HTML 文件。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">htmlFiles</span>(<span class="hljs-params">url: UrlSegment[]</span>) </span>{</span><span class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-built_in">url</span>.length === <span class="hljs-number">1</span> &amp;&amp; <span class="hljs-built_in">url</span>[<span class="hljs-number">0</span>].path.endsWith(<span class="hljs-string">'.html'</span>) ? ({<span class="hljs-attribute">consumed</span>: <span class="hljs-built_in">url</span>}) : <span class="hljs-literal">null</span>;</span><span class="hljs-ln-line">}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> routes = [{ <span class="hljs-attribute">matcher</span>: htmlFiles, <span class="hljs-attribute">component</span>: AnyComponent }];</span>
+          </code>
+        </pre>
+      </div></div></div></div>

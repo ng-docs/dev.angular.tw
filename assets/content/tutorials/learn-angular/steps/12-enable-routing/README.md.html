@@ -1,0 +1,101 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="9grq11illla20g4avon1gi2qa">路由概述</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/12-enable-routing/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7c37k69eliphcct1hrpm1yaky">对于大多数应用，总有一天需要超过一个页面。当那一天不可避免地到来时，路由将成为用户性能故事中的重要部分。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eg3wic6bsqvlw3wjdq8s6soyb">在这个活动中，你将学习如何设置和配置应用以使用 Angular 路由器。</p>
+<hr>
+
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="create-an-approutets-file">
+    <a href="#create-an-approutets-file" class="docs-anchor" tabindex="-1" aria-label="Link to Create an app.route.ts file" data-ng_translator_product="100" data-ng_translator_ref_id="2lkleiv5ot1li01tgrz2cb0to">创建 app.route.ts 文件</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="bycx7d4u82pkyzzgffxbn432i">在 
+<code>app.routes.ts</code> 中，做以下更改：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="brhdasyjufz6ceo8iwdq24q72">从 
+<code>@angular/router</code> 包导入 
+<code>Routes</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="14ao9wl7dmgjul3jttim9k7hi">导出一个名为 
+<code>routes</code> 的常量，类型为 
+<code>Routes</code>，赋值为 
+<code>[]</code>。</li>
+
+    </ol>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Routes</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [];</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="add-routing-to-provider">
+    <a href="#add-routing-to-provider" class="docs-anchor" tabindex="-1" aria-label="Link to Add routing to provider" data-ng_translator_product="100" data-ng_translator_ref_id="7g1frwmr2l6k0dhan5cc54v4e">将路由添加到提供者</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="79d2yh0sfoe1nl7loemrl2vl7">在 
+<code>app.config.ts</code> 中，按以下步骤配置应用以使用 Angular 路由器：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="ewt8zezjoi9gg3z3itgxbyqkg">从 
+<code>@angular/router</code> 导入 
+<code>provideRouter</code> 函数。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="6z9urqcyko2l45t3s04y9jeij">从 
+<code>./app.routes.ts</code> 导入 
+<code>routes</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="b9bms76fwzwg31vqdmqkqj0td">在 
+<code>providers</code> 数组中调用 
+<code>provideRouter</code> 函数，并传入 
+<code>routes</code> 作为参数。</li>
+
+    </ol>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">ApplicationConfig</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> {provideRouter} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> {routes} <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.routes'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">providers</span>: [<span class="hljs-title function_">provideRouter</span>(routes)],</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="import-routeroutlet-in-the-component">
+    <a href="#import-routeroutlet-in-the-component" class="docs-anchor" tabindex="-1" aria-label="Link to Import <code>RouterOutlet</code> in the component" data-ng_translator_product="100" data-ng_translator_ref_id="8jg73jti2ivm2bzrd5c91dplx">在组件中导入 
+<code>RouterOutlet</code></a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="7ur3kk6n1irgsyrhjv7rid95k">最后，为了确保你的应用可以使用 Angular 路由，你需要告诉应用在何处显示所需的内容。通过使用 
+<code>@angular/router</code> 中的 
+<code>RouterOutlet</code> 指令来实现。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8wu0vypk1kz21868bqqmuclsx">通过添加 
+<code>&lt;router-outlet /&gt;</code> 更新 
+<code>AppComponent</code> 的模板。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">RouterOutlet</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;nav&gt;</div><div class="hljs-ln-line">      &lt;a href="/"&gt;Home&lt;/a&gt;</div><div class="hljs-ln-line">      |</div><div class="hljs-ln-line">      &lt;a href="/user"&gt;User&lt;/a&gt;</div><div class="hljs-ln-line">    &lt;/nav&gt;</div><div class="hljs-ln-line highlighted">    &lt;router-outlet /&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">RouterOutlet</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p><span class="docs-emoji" data-ng_translator_product="100" data-ng_translator_ref_id="5yak50cd93jj0zmy3bdpqx0pw">你的应用现在已设置为使用 Angular 路由器。做得好！🙌</span></p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6a8okod04cv0cpcyhimsty7tm">继续保持这种势头，学习下一步为我们的应用定义路由。</p>

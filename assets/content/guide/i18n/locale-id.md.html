@@ -1,0 +1,112 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bc6xme8exwc8bvmac4dwvol68">通过 ID 引用语言环境</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/i18n/locale-id.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aq3ztapn5c0yf5mcbrcd7537a">Angular 使用 Unicode <em>语言环境标识符</em>（Unicode 语言环境 ID）来查找正确的语言环境数据，以实现文本字符串的国际化。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bq2ez69870nqu6jkjoo2drm5h">Unicode 语言环境 ID</h3>
+      
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_ref_id="1bifehyb3135ydhkgkc60ou7c">语言环境 ID 符合 
+<a href="https://cldr.unicode.org/index/cldr-spec" title="Core" specification | unicode cldr project target="_blank">Unicode 通用语言环境数据库（CLDR）核心规范</a>。 有关语言环境 ID 的更多信息，请参阅 [Unicode 语言和语言环境标识符][UnicodeCldrDevelopmentCoreSpecificationLocaleIDs]。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="ay7ltfk77aruguue11kmqfhc8">CLDR 和 Angular 使用 
+<a href="https://www.rfc-editor.org/info/bcp47" title="BCP" 47 | rfc editor target="_blank">BCP 47 标签</a> 作为语言环境 ID 的基础。</p>
+</li>
+
+  </ul>
+  
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ek7bbn50f7ewo0v7g4nrox60q">语言环境 ID 指定语言、国家/地区和其他变体或细分的可选代码。语言环境 ID 由语言标识符、破折号（<code>-</code>）字符和语言环境扩展组成。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{language_id}-{locale_extension}</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="ar86ochsdxnfzdn5ysyo5gezq"><strong>提示：</strong>为了准确翻译你的 Angular 项目，你必须决定针对国际化的目标语言和语言环境。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2l4yigool1xcmf62vjzsxwyd9">许多国家使用相同的语言，但用法上有些差异。这些差异包括语法、标点符号、货币格式、十进制数字、日期等。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aifhiggmouaskvhw503y5e8a7">对于本指南中的示例，使用了如下语言和语言环境。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4ctksvtk0p9llpn6y8yd96s8k">语言</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8lamle4ta56lha143pyde3m0r">语言环境</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bq2ez69870nqu6jkjoo2drm5h">Unicode 语言环境 ID</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="74c7i3o50gg7q4fra9bdsqrcs">英语</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="41pbof9yjh0ldhqztstf55w2v">加拿大</td>
+<td align="left"><code>en-CA</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="74c7i3o50gg7q4fra9bdsqrcs">英语</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1u7yqi9yzaqft3nzkfj6tmuou">美国</td>
+<td align="left"><code>en-US</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="a8zyht4kjope0iojyoixdjcvc">法语</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="41pbof9yjh0ldhqztstf55w2v">加拿大</td>
+<td align="left"><code>fr-CA</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="a8zyht4kjope0iojyoixdjcvc">法语</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="6h2kvxm587ml634o982v1ssh">法国</td>
+<td align="left"><code>fr-FR</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="a0xe3ao10befoynirdixpxoek">此 
+<a href="https://github.com/angular/angular/tree/main/packages/common/locales" title="angular/packages/common/locales" | angular github target="_blank">Angular 仓库</a> 包含一些常见的语言环境。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3></h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="6ztmrcw6h5np6cd7isxly1uq9">有关语言代码的列表，请参见 
+<a href="https://www.loc.gov/standards/iso639-2" target="_blank">ISO 639-2</a>。</p>
+
+    </div>
+    
+  <h2 id="set-the-source-locale-id">
+    <a href="#set-the-source-locale-id" class="docs-anchor" tabindex="-1" aria-label="Link to Set the source locale ID" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5ie3b0v540g14nmrv5xd3k7vf">设置源语言环境 ID</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dhv1ru4crn1kdv5bz5b9gd4ns">使用 Angular CLI 设置编写组件模板和代码所用的源语言。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5dei0v73m0v1ggg37b2lsxpmt">默认情况下，Angular 使用 <code>en-US</code> 作为项目的源语言环境。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ednijoaspephw04kpahi1wqlr">要为此构建更改项目的源语言环境，请完成以下操作。</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="65qlonsmylh35jzk1wgcxzo2d">打开 
+<a href="reference/configs/workspace-config" title="Angular" workspace configuration | angular><code>angular.json</code></a> 工作区构建配置文件。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7be0qvw7s0g6koeqt1ka3f0px">在 <code>sourceLocale</code> 字段中更改源语言环境。</li>
+
+    </ol>
+    
+  <h2 id="whats-next">
+    <a href="#whats-next" class="docs-anchor" tabindex="-1" aria-label="Link to What's next" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="407r2fj2mi5kvg7imj9zdcpe">下一步呢？</a>
+  </h2>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="guide/i18n/format-data-locale" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6qmuirvz3lbw5ongyusqsv4rd">根据语言环境格式化数据</a>
+    
+
+    </nav>
+    

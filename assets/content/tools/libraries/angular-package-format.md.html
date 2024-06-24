@@ -1,0 +1,409 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="djemh9azsuvl2vd73wcvk28bb">Angular 包格式</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/libraries/angular-package-format.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eu3oeddn8urasjn2mm0uioctf">本文档描述了 Angular 包格式 (APF)。APF 是针对 npm 包结构和格式的 Angular 专用规范，所有第一方 Angular 包（<code>@angular/core</code> 、 <code>@angular/material</code> 等）和大多数第三方 Angular 库都使用了该规范。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ea5ieczglelbs52rkgalenz6o">APF 能让包在使用 Angular 的大多数常见场景下无缝工作。使用 APF 的包与 Angular 团队提供的工具以及更广泛的 JavaScript 生态系统兼容。建议第三方库开发者也都遵循这种格式。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="60ip2ysen6c7pxuwdunm1plca"><strong>有用：</strong>APF 与 Angular 的其余部分一起进行版本控制，每个主要版本都会改进包格式。 你可以在这个
+<a href="https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/preview" target="_blank">Google 文档</a>中找到 v13 之前的规范版本。</p>
+
+    </div>
+    
+  <h2 id="why-specify-a-package-format">
+    <a href="#why-specify-a-package-format" class="docs-anchor" tabindex="-1" aria-label="Link to Why specify a package format?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ec7wz86lruo8janxgsf7whbw5">为什么要指定包格式？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3a5j1fpqdwl430atagcsgmg2i">在当今的 JavaScript 环境中，开发人员将使用多种不同的工具链（Webpack、rollup、esbuild 等）以多种不同的方式使用包。这些工具可能理解并需要不同的输入 —— 一些工具能处理最新的 ES 语言版本，而其他工具也许要直接使用较旧的 ES 版本。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2wdzn73ybksvzociqsd08bksq">这种 Angular 分发格式支持所有常用的开发工具和工作流，并着重于优化，从而缩小应用程序有效负载大小或缩短开发迭代周期（构建时间）。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4312ijaszm3h9yd0j3fg5gv9k">开发人员可以依赖 Angular CLI 和
+<a href="https://github.com/ng-packagr/ng-packagr" target="_blank">ng-packagr</a>（Angular CLI 使用的构建工具）来以 Angular 包格式生成包。 有关更多详细信息，请查看
+<a href="tools/libraries/creating-libraries">创建库</a>指南。</p>
+
+  <h2 id="file-layout">
+    <a href="#file-layout" class="docs-anchor" tabindex="-1" aria-label="Link to File layout" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="60zl4qg1jig7bd5u898e1a8ws">文件布局</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="19co7s5t9m7g2y36t6asjliyc">以下示例显示了 <code>@angular/core</code> 包文件布局的简化版本，并附有对包中每个文件的解释。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">node<span class="hljs-emphasis">_modules/@angular/core</span></div><div class="hljs-ln-line">├── README.md  </div><div class="hljs-ln-line">├── package.json  </div><div class="hljs-ln-line">├── index.d.ts  </div><div class="hljs-ln-line">├── esm2022  </div><div class="hljs-ln-line">│   ├── core.mjs</div><div class="hljs-ln-line">│   ├── index.mjs</div><div class="hljs-ln-line">│   ├── public_api.mjs</div><div class="hljs-ln-line">│   └── testing  </div><div class="hljs-ln-line">├── fesm2022  </div><div class="hljs-ln-line">│   ├── core.mjs</div><div class="hljs-ln-line">│   ├── core.mjs.map</div><div class="hljs-ln-line">│   ├── testing.mjs</div><div class="hljs-ln-line">│   └── testing.mjs.map</div><div class="hljs-ln-line">└── testing  </div><div class="hljs-ln-line"><span class="hljs-code">    └── index.d.ts  </span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8r7u6ra2vxlrbr10x497uo6jo">此表描述了 <code>node_modules/@angular/core</code> 下的文件布局，注释为描述文件和目录的用途：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8n2c7wfntpyw9gnmnqx5bqxht">文件</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="297niinze7mn1fnajtyjcs0tb">目的</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>README.md</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dftwh4hqixdt0ot4bhmden7l2">包 README，供 npmjs 网站 UI 使用。</td>
+</tr>
+<tr>
+<td align="left"><code>package.json</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4zlmxcwc7kyxnwrakpb87g51z">主要的 
+<code>package.json</code>，描述包本身以及所有可用的入口点和代码格式。该文件包含运行时和工具用于执行模块解析的“exports”映射。</td>
+</tr>
+<tr>
+<td align="left"><code>index.d.ts</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="h5ajmsbyzuh0luid7xpv5ctj">主要入口点 
+<code>@angular/core</code> 的捆绑 
+<code>.d.ts</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>esm2022/</code> <br> &nbsp;&nbsp;─ <code>core.mjs</code> <br> &nbsp;&nbsp;─ <code>index.mjs</code> <br> &nbsp;&nbsp;─ <code>public_api.mjs</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5faa2bjo0scvazkc9ryrp2u0n"><code>@angular/core</code> 源代码树以未压平的 ES2022 格式。</td>
+</tr>
+<tr>
+<td align="left"><code>esm2022/testing/</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9mxgrgu49bblrtkdqrvbw7dov"><code>@angular/core/testing</code> 入口点的源代码树以未压平的 ES2022 格式。</td>
+</tr>
+<tr>
+<td align="left"><code>fesm2022/</code> <br> &nbsp;&nbsp;─ <code>core.mjs</code> <br> &nbsp;&nbsp;─ <code>core.mjs.map</code> <br> &nbsp;&nbsp;─ <code>testing.mjs</code> <br> &nbsp;&nbsp;─ <code>testing.mjs.map</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="aad3ub28jlpxeat2yq1096o8n">所有入口点的代码以压平（FESM）ES2022 格式提供，同时附带源映射。</td>
+</tr>
+<tr>
+<td align="left"><code>testing/</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2t17dqvjnpiwywg4cpm0go868">代表"testing"入口点的目录。</td>
+</tr>
+<tr>
+<td align="left"><code>testing/index.d.ts</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="audlagbj9fqk1zlbbax3uakio"><code>@angular/core/testing</code>入口点的捆绑
+<code>.d.ts</code>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="packagejson">
+    <a href="#packagejson" class="docs-anchor" tabindex="-1" aria-label="Link to <code>package.json</code>"><code>package.json</code></a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b18a1onvyhemr58sva7xhsldc">主 <code>package.json</code> 包含重要的包元数据，包括以下内容：</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_ref_id="4kw6pzyie68iw9rr0u1h0nabf">它
+<a href="#esm-declaration">声明</a>该包是以 EcmaScript 模块（ESM）格式</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="3ocbv44n98yxnrtpbp397n6dr">它包含一个
+<a href="#exports"><code>"exports"</code>字段</a>，定义了所有入口点的可用源代码格式</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="45hgsu2q85h3qjph0wlz0eukz">它包含
+<a href="#legacy-resolution-keys">keys</a>，定义了主要
+<code>@angular/core</code>入口点的可用源代码格式，供不理解
+<code>"exports"</code>的工具使用。 这些键被视为已废弃，随着对
+<code>"exports"</code>的支持在生态系统中推出，它们可能会被移除。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="2hulyv0cihyskyekyqyhvfjan">它声明该包是否包含
+<a href="#side-effects">副作用</a></p>
+</li>
+
+  </ul>
+  
+  <h3 id="esm-declaration">
+    <a href="#esm-declaration" class="docs-anchor" tabindex="-1" aria-label="Link to ESM declaration" data-ng_translator_product="100" data-ng_translator_ref_id="e56nk5cdw0rhsdr7ish6iey63">ESM 声明</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6c5wusrm7u39lmpzc9t73fmut">顶级 <code>package.json</code> 包含此键：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{</div><div class="hljs-ln-line">  <span class="hljs-string">"type"</span>: <span class="hljs-string">"module"</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6wjhw9bi8le759wy2jiv0nlir">这会通知解析器，此包中的代码正在使用 EcmaScript 模块而不是 CommonJS 模块。</p>
+
+  <h3 id="quotexportsquot">
+    <a href="#quotexportsquot" class="docs-anchor" tabindex="-1" aria-label="Link to <code>&quot;exports&quot;</code>"><code>"exports"</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="23bd3layuz0srlzzbtth7nkpg"><code>"exports"</code> 字段具有以下结构：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-string">"exports"</span>: {</div><div class="hljs-ln-line">  <span class="hljs-string">"./schematics/*"</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">"default"</span>: <span class="hljs-string">"./schematics/*.js"</span></div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  <span class="hljs-string">"./package.json"</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">"default"</span>: <span class="hljs-string">"./package.json"</span></div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  <span class="hljs-string">"."</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">"types"</span>: <span class="hljs-string">"./core.d.ts"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"esm"</span>: <span class="hljs-string">"./esm2022/core.mjs"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"esm2022"</span>: <span class="hljs-string">"./esm2022/core.mjs"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"default"</span>: <span class="hljs-string">"./fesm2022/core.mjs"</span></div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  <span class="hljs-string">"./testing"</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">"types"</span>: <span class="hljs-string">"./testing/testing.d.ts"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"esm"</span>: <span class="hljs-string">"./esm2022/testing/testing.mjs"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"esm2022"</span>: <span class="hljs-string">"./esm2022/testing/testing.mjs"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"default"</span>: <span class="hljs-string">"./fesm2022/testing.mjs"</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="341f4o2kvr3vmp8rls5t1p1t4">主要看 <code>"."</code> 和 <code>"./testing"</code> 这两个键，它们分别定义了 <code>@angular/core</code> 主要入口点和 <code>@angular/core/testing</code> 次要入口点的可用代码格式。对于每个入口点，可用的格式为：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cyud1ifnjjmski3sq0abf9rs">格式</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="80hx5tehf2rwur97qgesrgak3">类型定义（
+<code>.d.ts</code>文件）</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="d85m7o30ybsiady4cwvp7wyi8"><code>.d.ts</code>文件在 TypeScript 依赖于给定包时使用。</td>
+</tr>
+<tr>
+<td align="left"><code>es2022</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cu4x70x7zy81nbyud211740tn">ES2022代码展平为单个源文件。</td>
+</tr>
+<tr>
+<td align="left"><code>esm2022</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="e8mmyq79tg3fzgomfz585ky01">ES2022代码在未展平的源文件中（此格式包含用于实验 - 有关详细信息，请参阅
+<a href="#note-about-the-defaults-in-packagejson">关于默认值的讨论</a>）。</td>
+</tr>
+<tr>
+<td align="left"><code>default</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="53x1oy3pmpgto1334i7e4pxv6">ES2022代码展平为单个源。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="elyl8r6s6983rmfz7recn6yqj">能理解这些键名的工具可以优先从 <code>"exports"</code> 中选择所需的代码格式。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="260qzu56w8t9vjgp27z9ckga8">库可能希望公开其他静态文件，这些文件没有被基于 JavaScript 的入口点（比如 Sass mixins 或预编译的 CSS）的导出所捕获。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6ykzwtpfju82vhcpw5qo6ym0r">更多信息，请参阅
+<a href="tools/libraries/creating-libraries#managing-assets-in-a-library">管理库中的资产</a>。</p>
+
+  <h3 id="legacy-resolution-keys">
+    <a href="#legacy-resolution-keys" class="docs-anchor" tabindex="-1" aria-label="Link to Legacy resolution keys" data-ng_translator_product="100" data-ng_translator_ref_id="9jz9a3vknf2lcrksjq8bn6dsa">旧版解析键</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a7yxn9krwhryfu4itp4euh10f">除了 <code>"exports"</code> 之外，顶级 <code>package.json</code> 还为不支持 <code>"exports"</code> 的解析器定义了旧模块解析键。对于 <code>@angular/core</code>，这些是：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{</div><div class="hljs-ln-line">  <span class="hljs-string">"module"</span>: <span class="hljs-string">"./fesm2022/core.mjs"</span>,</div><div class="hljs-ln-line">  <span class="hljs-string">"typings"</span>: <span class="hljs-string">"./core.d.ts"</span>,</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bx7l277711iokrfmvonsv0gt1">如前述代码片段所示，模块解析器可以用这些键来加载特定的代码格式。</p>
+
+  <h3 id="side-effects">
+    <a href="#side-effects" class="docs-anchor" tabindex="-1" aria-label="Link to Side effects" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="36atpxs4ooqf4k4lf79gfdz9y">副作用</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6v2t5pib1j6gq3wcwd7n0gbq9"><code>package.json</code> 的最后一个功能是声明该包是否有
+<a href="#sideeffects-flag">副作用</a>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{</div><div class="hljs-ln-line">  <span class="hljs-string">"sideEffects"</span>: <span class="hljs-literal">false</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1em4w4fzud82eevocwa1ys1vp">大多数 Angular 包不应该依赖于顶级副作用，因此应该包含这个声明。</p>
+
+  <h2 id="entrypoints-and-code-splitting">
+    <a href="#entrypoints-and-code-splitting" class="docs-anchor" tabindex="-1" aria-label="Link to Entrypoints and code splitting" data-ng_translator_product="100" data-ng_translator_ref_id="3k84czi0cy1cl93t11avj2583">入口点和代码拆分</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bpv5ddjo32x0ohvomppqp3z3n">遵循 Angular 包格式的包包含一个主要入口点和零个或多个次要入口点（例如，
+<code>@angular/common/http</code>）。入口点具有多个功能。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6jj01yfop4cxeipadxo02me5s">它们定义了用户要从中导入代码的模块说明符（比如，<code>@angular/core</code> 和 <code>@angular/core/testing</code>）。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="54qoxr1wl1p69jjm2fjjpw6y7">用户通常将这些入口点视为具有不同用途或能力的不同符号组。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1na7vcx473bpiv2mzt08v9fv6">特定的入口点可能只用于特殊目的，例如测试。这些 API 可以从主要入口点中分离出来，以降低它们被意外或不正确使用的机会。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1mckv5uac6fy2gywbvwd7aqyz">它们定义了可以惰性加载代码的粒度。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1v5entoriaplq6lc65dzx4z84">许多现代构建工具只能在 ES 模块级别进行“代码拆分”（又称惰性加载）。Angular 包格式主要使用每个入口点一个“扁平”的 ES 模块。这意味着大多数构建工具无法将具有单个入口点的代码拆分为多个输出块。</p>
+</li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="crm988wse2yddz3mr0hces6b8">APF 包的一般规则是为尽可能小的逻辑相关代码集使用入口点。比如，Angular Material 包将每个逻辑组件或一组组件作为单独的入口点发布 - 一个用于按钮，一个用于选项卡等。如果需要，这允许单独惰性加载每个 Material 组件。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="32jjeux48csb2c0aha468o5j6">并非所有库都需要这样的粒度。大多数具有单一逻辑目的的库应该作为单一入口点发布。比如 <code>@angular/core</code> 为运行时使用单个入口点，因为 Angular 运行时通常用作单个实体。</p>
+
+  <h3 id="resolution-of-secondary-entry-points">
+    <a href="#resolution-of-secondary-entry-points" class="docs-anchor" tabindex="-1" aria-label="Link to Resolution of secondary entry points" data-ng_translator_product="100" data-ng_translator_ref_id="7pwleubiiu0sfm8zef34t32p3">次要入口点的解析</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8y6pgmxshsw3m5di2jew73epl">可以通过包的 <code>package.json</code> 的 <code>"exports"</code> 字段解析辅助入口点。</p>
+
+  <h2 id="readmemd">
+    <a href="#readmemd" class="docs-anchor" tabindex="-1" aria-label="Link to README.md">README.md</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dia6191o065jmk3ho9yqiuck1">Markdown 格式的 README 文件，用于在 npm 和 GitHub 上显示包的描述。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dzcwvosoud92anuqcpj1647r0">@angular/core 包的 README 内容示例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Angular</div><div class="hljs-ln-line">=======</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">The sources for this package are in the main [Angular](https://github.com/angular/angular) repo.Please file issues and pull requests against that repo.</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">License: MIT</div></code>
+    </pre>
+  </div>
+  <h2 id="partial-compilation">
+    <a href="#partial-compilation" class="docs-anchor" tabindex="-1" aria-label="Link to Partial compilation" data-ng_translator_product="100" data-ng_translator_ref_id="7ezeek0ucabgjwair8akr8qn6">部分编译</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f4k5lflj0flbcjl52idlgu7hg">APF 格式的库必须以“部分编译”模式发布。这是 <code>ngc</code> 的一种编译模式，它生成不依赖于特定 Angular 运行时版本的已编译 Angular 代码，与用于应用程序的完整编译形成对比，其中 Angular 编译器和运行时版本必须完全匹配。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e8n1y5lxxyo5mjz4w8djhtgtt">要部分编译 Angular 代码，请在 <code>tsconfig.json</code> 中的 <code>"angularCompilerOptions"</code> 属性中使用 <code>"compilationMode"</code> 标志：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-string">"angularCompilerOptions"</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">"compilationMode"</span>: <span class="hljs-string">"partial"</span>,</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="abfaw93kievk4ub86wjblwpae">然后，在应用程序构建过程中，Angular CLI 将部分编译的库代码转换为完全编译的代码。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dd3jrle8pusx6tsrpdudtpcno">如果你的构建流水线不使用 Angular CLI，请参考 
+<a href="tools/libraries/creating-libraries#consuming-partial-ivy-code-outside-the-angular-cli">在 Angular CLI 之外使用部分 Ivy 代码</a>指南。</p>
+
+  <h2 id="optimizations">
+    <a href="#optimizations" class="docs-anchor" tabindex="-1" aria-label="Link to Optimizations" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="biaikzimxzbisviusrndzfa63">优化</a>
+  </h2>
+  
+  <h3 id="flattening-of-es-modules">
+    <a href="#flattening-of-es-modules" class="docs-anchor" tabindex="-1" aria-label="Link to Flattening of ES modules" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4gfzvlf9v3uxfq2ts4z309e0w">ES 模块的扁平化</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="el1pafinwhyxdh9yvccgj73ef">Angular 包格式规定代码应以“扁平化”ES模块格式发布。这显著减少了 Angular 应用的构建时间以及最终应用捆绑包的下载和解析时间。请查看 Nolan Lawson 的优秀文章 
+<a href="https://nolanlawson.com/2016/08/15/the-cost-of-small-modules" target="_blank">《小模块的成本》</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="b5owa9k66zjfriliruauhf2lo">Angular 编译器可以生成索引 ES 模块文件。像 Rollup 这样的工具可以使用这些文件生成扁平化模块的 
+<em>扁平化 ES 模块</em>（FESM）文件格式。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8mdb1ibmotc97xuyxp9igebkh">FESM 是一种文件格式，它会将所有可从入口点访问的 ES 模块扁平化为单个 ES 模块。它是通过跟踪包中的所有导入并将该代码复制到单个文件中而生成的，同时保留所有公共 ES 导出并删除所有私有导入。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4yq8mbp1to93vls1ll2qgws3w">缩写名称 FESM，发音为<em>phe-som</em>，后面可以跟一个数字，例如 FESM2020。该数字是指模块内 JavaScript 的语言级别。因此，FESM2022 文件将是 ESM+ES2022 格式的，并且包括导入/导出语句和 ES2022 源代码。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="19kqzsrijs41085m6l1gdswi4">要生成扁平化的 ES 模块索引文件，请在 tsconfig.json 文件中使用以下配置选项：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{</div><div class="hljs-ln-line">  <span class="hljs-string">"compilerOptions"</span>: {</div><div class="hljs-ln-line">    …</div><div class="hljs-ln-line">    <span class="hljs-string">"module"</span>: <span class="hljs-string">"esnext"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"target"</span>: <span class="hljs-string">"es2022"</span>,</div><div class="hljs-ln-line">    …</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  <span class="hljs-string">"angularCompilerOptions"</span>: {</div><div class="hljs-ln-line">    …</div><div class="hljs-ln-line">    <span class="hljs-string">"flatModuleOutFile"</span>: <span class="hljs-string">"my-ui-lib.js"</span>,</div><div class="hljs-ln-line">    <span class="hljs-string">"flatModuleId"</span>: <span class="hljs-string">"my-ui-lib"</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="41ai79gyt0py5r7ndrnbpjoqn">一旦 ngc 生成了索引文件（比如 <code>my-ui-lib.js</code>），打包器和优化器（如 Rollup）就可用于生成扁平化的 ESM 文件。</p>
+
+  <h4 id="note-about-the-defaults-in-packagejson">
+    <a href="#note-about-the-defaults-in-packagejson" class="docs-anchor" tabindex="-1" aria-label="Link to Note about the defaults in package.json" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4caakr55h6flyhfw6xcnlddqg">注意 package.json 中的默认值</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="88zh6sb46dmsfsg5kbqe8w8vs">从 webpack v4 开始，ES 模块优化的扁平化对于 webpack 用户来说不再是必需的。当不扁平化 webpack 中的模块时，可以获得更好的代码拆分效果。在实践中，当使用未展平的模块作为 webpack v4 的输入时，仍然可能出现体积回归现象（也就是体积反而变大了）。这就是为什么 package.json 中的 <code>module</code> 和 <code>es2022</code> 条目仍然指向 FESM 文件的原因。这个问题正在调查中。预计在解决体积回归问题后，会将 package.json 中的 <code>module</code> 和 <code>es2022</code> 入口点切换为未展平的文件。APF 目前包含未扁平化的 ESM2022 代码，用于验证这种未来可能出现的更改。</p>
+
+  <h3 id="quotsideeffectsquot-flag">
+    <a href="#quotsideeffectsquot-flag" class="docs-anchor" tabindex="-1" aria-label="Link to &quot;sideEffects&quot; flag" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ctgt07mpuwz63p64o0hs0lbjh">“sideEffects” 标志</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9yvogtzmeqsq4iqcfo8drrcgu">默认情况下，EcmaScript 模块是有副作用的：从模块导入可确保该模块顶层的任何代码都将执行。这通常是不可取的，因为典型模块中的大多数副作用代码并不是真正的副作用，而是仅影响特定符号。如果没有导入和使用这些符号，通常需要在称为 tree-shaking 的优化过程中将它们删除，而副作用代码可以防止这种情况发生。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="74ybgr0nxaa7igtgu2amx5hah">构建工具如 Webpack 支持一个标志，允许包声明它们不依赖于模块顶层的副作用代码，从而使工具有更多自由来从包中进行摇树优化。这些优化的最终结果应是更小的捆绑包大小和代码分割后的更好代码分布。此优化可能会破坏你的代码，如果它包含非本地副作用 —— 但这在 Angular 应用中并不常见，通常是设计不良的标志。推荐所有包通过将 
+<code>sideEffects</code> 属性设置为 
+<code>false</code> 来声明无副作用状态，开发者遵循 
+<a href="/style-guide">Angular 样式指南</a>，这自然会导致代码没有非本地副作用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2u35iqc631ehzjgjnyzjrlb29">更多信息：
+<a href="https://github.com/webpack/webpack/tree/master/examples/side-effects" target="_blank">webpack 文档中的副作用</a></p>
+
+  <h3 id="es2022-language-level">
+    <a href="#es2022-language-level" class="docs-anchor" tabindex="-1" aria-label="Link to ES2022 language level" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9hrsif1pwq7aevqtf97tswk9r">ES2022 语言级别</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8djdpsy43wa8twc7cazpqvq5z">ES2022 语言级别现在是 Angular CLI 和其他工具使用的默认语言级别。Angular CLI 在应用程序构建时会将捆绑包降级到所有目标浏览器都支持的语言级别。</p>
+
+  <h3 id="dts-bundling---type-definition-flattening">
+    <a href="#dts-bundling---type-definition-flattening" class="docs-anchor" tabindex="-1" aria-label="Link to d.ts bundling / type definition flattening" data-ng_translator_product="100" data-ng_translator_ref_id="bu1jbmlu1nqqo0blrx3poa5y0">d.ts 捆绑/类型定义的扁平化</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3v9b4uxykncfmlrpwdji2hw0q">从 APF v8 开始，现在更倾向于运行 
+<a href="https://api-extractor.com" target="_blank">API Extractor</a>，将 TypeScript 定义捆绑在一个单独的文件中，使整个 API 显示在一个文件中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bdxo48bf364qokcyldw5jl887">在之前的 APF 版本中，每个入口点都会在 .d.ts 入口点旁边有一个 <code>src</code> 目录，该目录包含与原始源代码结构匹配的单个 d.ts 文件。虽然这种分发格式仍然被允许和支持，但非常不鼓励它，因为它会弄晕 IDE 之类的工具，然后提供错误的自动完成，并允许用户依赖深度导入的路径，这些路径通常不被认为是库或包的公共 API。</p>
+
+  <h3 id="tslib">
+    <a href="#tslib" class="docs-anchor" tabindex="-1" aria-label="Link to Tslib">Tslib</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="byglz62n091gruqsi7ngnhvpe">从 APF v10 开始，建议添加 tslib 作为主要入口点的直接依赖项。这是因为 tslib 版本与用来编译库的 TypeScript 版本相关联。</p>
+
+  <h2 id="examples">
+    <a href="#examples" class="docs-anchor" tabindex="-1" aria-label="Link to Examples" data-ng_translator_product="100" data-ng_translator_ref_id="f4iecnoqh39op5dvxqr6b3gip">例子</a>
+  </h2>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="https://unpkg.com/browse/@angular/core@17.0.0/" target="_blank" data-ng_translator_product="100" data-ng_translator_ref_id="4mkbbppet653a05r0t462v7n3">@angular/core 包
+<docs-icon class="docs-icon-small">
+ open_in_new
+</docs-icon></a>
+    
+    <a class="docs-pill" href="https://unpkg.com/browse/@angular/material@17.0.0/" target="_blank" data-ng_translator_product="100" data-ng_translator_ref_id="26z6tpuzhqsg1hwwh8zu33vvt">@angular/material 包
+<docs-icon class="docs-icon-small">
+ open_in_new
+</docs-icon></a>
+    
+
+    </nav>
+    
+  <h2 id="definition-of-terms">
+    <a href="#definition-of-terms" class="docs-anchor" tabindex="-1" aria-label="Link to Definition of terms" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2w2zxxzsdukgcllhnr0hbfz8l">术语定义</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="80p7vouhm9kskkgl6qif4qdco">本文档中特意使用了以下术语。在本节中会定义所有这些以便更清晰。</p>
+
+  <h3 id="package">
+    <a href="#package" class="docs-anchor" tabindex="-1" aria-label="Link to Package" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1xgsw2mzyxp4abkks03qoyo30">包</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dod89wnf1h7tdk9545y28k7df">发布到 NPM 并一起安装的最小文件集，比如 <code>@angular/core</code>。该包中包含一个名为 package.json 的清单、编译后的源代码、TypeScript 定义文件、源码映射、元数据等。该包是通过 <code>npm install @angular/core</code> 安装的。</p>
+
+  <h3 id="symbol">
+    <a href="#symbol" class="docs-anchor" tabindex="-1" aria-label="Link to Symbol" data-ng_translator_product="100" data-ng_translator_ref_id="5xiw1gbpmrz9czmn84a7vngz">符号</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="92w5otx9brkackl3xzjlmnrno">包含在模块中的类、函数、常量或变量，可选择通过模块导出，以便对外界可见。</p>
+
+  <h3 id="module">
+    <a href="#module" class="docs-anchor" tabindex="-1" aria-label="Link to Module" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dkuxw56x8curh875ge5tvqede">模块</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b1bxifvn3w97slblb56gf6y30">ECMAScript 模块的缩写。包含导入和导出符号的语句的文件。这与 ECMAScript 规范中模块的定义相同。</p>
+
+  <h3 id="esm">
+    <a href="#esm" class="docs-anchor" tabindex="-1" aria-label="Link to ESM">ESM</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2vi026shzn402088um9ih6ok3">ECMAScript 模块的缩写（见上文）。</p>
+
+  <h3 id="fesm">
+    <a href="#fesm" class="docs-anchor" tabindex="-1" aria-label="Link to FESM">FESM</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6mcnejyqcuubqc62528yms8ip">Flattened ES Modules 的缩写，由一种文件格式组成，该文件格式是通过将所有可从入口点访问的 ES 模块扁平化为单个 ES 模块而创建的。</p>
+
+  <h3 id="module-id">
+    <a href="#module-id" class="docs-anchor" tabindex="-1" aria-label="Link to Module ID" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7gbs3a43m00rqtcvlq9jozwg9">模块标识</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8m7k7n8lfmlfnwybajac89lm9">导入语句中使用的模块的标识符（比如 <code>@angular/core</code>）。此 ID 通常直接映射到文件系统上的路径，但由于有各种模块解析策略，情况也并非总是如此。</p>
+
+  <h3 id="module-specifier">
+    <a href="#module-specifier" class="docs-anchor" tabindex="-1" aria-label="Link to Module specifier" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bjcjp0hr77rq6t950qgj37xnd">模块说明符</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8815w4qqzzlcwr6plp7w1shrj">模块标识符（见上文）。</p>
+
+  <h3 id="module-resolution-strategy">
+    <a href="#module-resolution-strategy" class="docs-anchor" tabindex="-1" aria-label="Link to Module resolution strategy" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dosh8snuj61ibvbtgwcshkbfs">模块解析策略</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4tdjnfc1yywpf46e32hmb4tu7">用于将模块 ID 转换为文件系统上路径的算法。Node.js 有一个规范明确且广泛使用的算法，TypeScript 支持多种模块解析策略，
+<a href="https://developers.google.com/closure/compiler" target="_blank">Closure Compiler</a> 使用另一种策略。</p>
+
+  <h3 id="module-format">
+    <a href="#module-format" class="docs-anchor" tabindex="-1" aria-label="Link to Module format" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3spjhh2ob041t7hltnspq5qwo">模块格式</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b2hlfrc2und7rzdb357448xgq">模块语法规范，至少涵盖从文件导入和导出的语法。常见的模块格式是 CommonJS（CJS，通常用于 Node.js 应用程序）或 ECMAScript 模块 (ESM)。模块格式仅表示单个模块的封装，而不表示用于构成模块内容的 JavaScript 语言特性。正因为如此，Angular 团队经常使用语言级别说明符作为模块格式的后缀，（例如 ESM+ES2022 指定模块为 ESM 格式并包含 ES2022 代码）。</p>
+
+  <h3 id="bundle">
+    <a href="#bundle" class="docs-anchor" tabindex="-1" aria-label="Link to Bundle" data-ng_translator_product="100" data-ng_translator_ref_id="8t2kshuya9i2jzo3zfmilyvu0">捆绑包</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2qoopaa7uzypzzgz2rdnq4ojz">以单个 JS 文件形式出现的构件，由构建工具（例如，
+<a href="https://webpack.js.org" target="_blank">Webpack</a> 或 
+<a href="https://rollupjs.org" target="_blank">Rollup</a>）生成，其中包含一个或多个模块中源自的符号。捆绑是浏览器特定的解决方案，可以减少网络负担，因为浏览器开始下载数百甚至数以万计的文件可能会导致网络负担。Node.js 通常不使用捆绑。常见的捆绑格式有 UMD 和 System.register。</p>
+
+  <h3 id="language-level">
+    <a href="#language-level" class="docs-anchor" tabindex="-1" aria-label="Link to Language level" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2kvppzx651gzgcwqlj3wv3miv">语言级别</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e7jph3d8o5chbdc3z1xai4ofo">代码的语言 (ES2022)。独立于模块格式。</p>
+
+  <h3 id="entry-point">
+    <a href="#entry-point" class="docs-anchor" tabindex="-1" aria-label="Link to Entry point" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7q4w7so1wo1fmsg15jz5rvb0a">入口点</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ahpymxnrbs0wudv4mwb383g3g">旨在由用户导入的模块。它由唯一的模块 ID 引用，并导出该模块 ID 引用的公共 API。一个例子是 <code>@angular/core</code> 或 <code>@angular/core/testing</code>。<code>@angular/core</code> 包中存在两个入口点，但它们导出不同的符号。一个包可以有许多入口点。</p>
+
+  <h3 id="deep-import">
+    <a href="#deep-import" class="docs-anchor" tabindex="-1" aria-label="Link to Deep import" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="47w6wkohvt40ie3bj9jwjtx59">深层导入</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aagekx4dgvciae045kqmymot8">从不是入口点的模块中检索符号的过程。这些模块 ID 通常被认为是私有 API，它们可以在项目的生命周期内或在创建给定包的捆绑包时更改。</p>
+
+  <h3 id="top-level-import">
+    <a href="#top-level-import" class="docs-anchor" tabindex="-1" aria-label="Link to Top-Level import" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3ntv48yvm295aa4hnibc80iy7">顶级导入</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6c1re2zagzr027dvy39909us4">来自入口点的导入。可用的顶级导入定义了公共 API，并在“@angular/name”模块中公开，比如 <code>@angular/core</code> 或 <code>@angular/common</code>。</p>
+
+  <h3 id="tree-shaking">
+    <a href="#tree-shaking" class="docs-anchor" tabindex="-1" aria-label="Link to Tree-shaking" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bs1v547i9dx5u01qukxdvhodw">摇树优化</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="av8xot8e4exypxuqtvfuti92t">识别并删除应用程序中未使用的代码的过程，也称为死代码消除。 这是一个在应用程序级别使用像 
+<a href="https://rollupjs.org" target="_blank">Rollup</a>、
+<a href="https://developers.google.com/closure/compiler" target="_blank">Closure Compiler</a> 或 
+<a href="https://github.com/terser/terser" target="_blank">Terser</a> 等工具执行的全局优化。</p>
+
+  <h3 id="aot-compiler">
+    <a href="#aot-compiler" class="docs-anchor" tabindex="-1" aria-label="Link to AOT compiler" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ac10ejizuxpvklmyi1h245a7a">预先编译器</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ek5md63q9oiw4ijvwbdtz3lyc">Angular 的预先编译器。</p>
+
+  <h3 id="flattened-type-definitions">
+    <a href="#flattened-type-definitions" class="docs-anchor" tabindex="-1" aria-label="Link to Flattened type definitions" data-ng_translator_product="100" data-ng_translator_ref_id="d06n5f1vmkztd1gdrcvpvubd6">扁平类型定义</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5cp1edku7gxk1dl0i13pc2ar7">从 
+<a href="https://api-extractor.com" target="_blank">API Extractor</a> 生成的捆绑的 TypeScript 定义。</p>

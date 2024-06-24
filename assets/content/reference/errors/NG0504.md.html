@@ -1,0 +1,39 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="1025069jf9brb90thy55ebr39">跳过水合标志应用于无效节点</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0504.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="32d1f4zwwhct8q958f9dsxkk">当 <code>ngSkipHydration</code> 属性被添加到不合适的 DOM 节点时，就会发生此错误。<code>ngSkipHydration</code> 属性只能直接在模板中或通过宿主绑定应用于组件的宿主节点。它不能应用于其他 DOM 节点，如果这样做除了导致本错误之外不会有任何效果。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7y3d3wqt0871xkjy4t3o0x73k">有关水合的更多信息，请参阅<a href="guide/hydration">本指南</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="arzd8spphyexzbiuw3akgoz23">以下示例将引发错误。</p>
+
+  <h2 id="example-1">
+    <a href="#example-1" class="docs-anchor" tabindex="-1" aria-label="Link to Example 1" data-ng_translator_product="100" data-ng_translator_ref_id="51744ssk6qm7vaem8fmwyfc9m">示例 1</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2w2ls6vt1dc4poo4t7jhik42a">在此示例中，<code>ngSkipHydration</code> 属性被应用于使用指令进行宿主绑定的 <code>&lt;div&gt;</code>。由于 <code>&lt;div&gt;</code> 不是组件宿主节点，所以 Angular 会抛出错误。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'[dir]'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">host</span>: {<span class="hljs-attr">ngSkipHydration</span>: <span class="hljs-string">'true'</span>},</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dir</span> {</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">Dir</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;div dir&gt;&lt;/div&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleComponent</span> {</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="example-2">
+    <a href="#example-2" class="docs-anchor" tabindex="-1" aria-label="Link to Example 2" data-ng_translator_product="100" data-ng_translator_ref_id="5myjpo365s6azfpu6fempyl94">示例 2</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2iks644srfgzz83evlcgubs3y">在此示例中，<code>ngSkipHydration</code> 通过模板作为属性应用于 <code>&lt;div&gt;</code>。由于 <code>&lt;div&gt;</code> 不是组件的宿主节点，所以 Angular 会抛出错误。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;div ngSkipHydration&gt;&lt;/div&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleComponent</span> {</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="debugging-the-error">
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9t81w5a8opsovfyrbze2ouetm">从所有无效的 DOM 节点中删除 <code>ngSkipHydration</code> 属性。或者，在模板中或通过宿主绑定将 <code>ngSkipHydration</code> 属性移动到组件宿主节点。</p>

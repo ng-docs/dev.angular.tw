@@ -1,0 +1,94 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="8lvpinpfqaoto4raw9g6q7ffo">组件中的控制流 - 
+<code>@if</code></h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/4-control-flow-if/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7yczswpmkack5z892ug30s1fs">在应用开发中，为用户决定在屏幕上显示什么是一个常见任务。许多时候，决定是通过条件以编程方式做出的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="lsezan3ckrofrt5gb738d69j">为了在模板中表示条件显示，Angular 使用 
+<code>@if</code> 模板语法。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eam20ahafmw8ocsc1n780yrov">在这个活动中，你将学习如何在模板中使用条件语句。</p>
+<hr>
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="93pxhjfr6n3zv1beur5a6lpjf">在模板中启用条件显示元素的语法是 
+<code>@if</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="158316nkzu2m0pq9y896zlu3f">下面是一个在组件中使用 
+<code>@if</code> 语法的示例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    @if (isLoggedIn) {</div><div class="hljs-ln-line">      &lt;p&gt;Welcome back, Friend!&lt;/p&gt;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  isLoggedIn = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="26lxbl87x4cqxj7xafq2ls951">需要注意两点：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="cb4h370dyven5jtxhfj49rfb"><code>if</code> 前面有一个 
+<code>@</code> 前缀，因为它是一种特殊的语法，称为 
+<a href="guide/templates">Angular 模板语法</a></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="5khqmptwbxni3kaes6bidoma1">对于使用 v16 及以下版本的应用，请参考 
+<a href="guide/directives/structural-directives">Angular NgIf 文档</a> 了解更多信息。</li>
+
+  </ul>
+  
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="create-a-property-called-isserverrunning">
+    <a href="#create-a-property-called-isserverrunning" class="docs-anchor" tabindex="-1" aria-label="Link to Create a property called <code>isServerRunning</code>" data-ng_translator_product="100" data-ng_translator_ref_id="f3u8z3s7408qg5hpgc67jug3q">创建一个名为 
+<code>isServerRunning</code> 的属性</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="2jxf8bv4vl6650e39d5o2pmdv">在 
+<code>AppComponent</code> 类中，添加一个名为 
+<code>isServerRunning</code> 的 
+<code>boolean</code> 属性，并将初始值设置为 
+<code>true</code>。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="use-if-in-the-template">
+    <a href="#use-if-in-the-template" class="docs-anchor" tabindex="-1" aria-label="Link to Use <code>@if</code> in the template" data-ng_translator_product="100" data-ng_translator_ref_id="e3fkx1wh44w97v626kuhnr1v">在模板中使用 
+<code>@if</code></a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="bo94gugq3o9zb5eodyjfvwbzp">更新模板，如果 
+<code>isServerRunning</code> 的值为 
+<code>true</code>，则显示消息 
+<code>Yes, the server is running</code>。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="use-else-in-the-template">
+    <a href="#use-else-in-the-template" class="docs-anchor" tabindex="-1" aria-label="Link to Use <code>@else</code> in the template" data-ng_translator_product="100" data-ng_translator_ref_id="6moo6ltfuphw0t3och2g3e9zn">在模板中使用 
+<code>@else</code></a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="2h077kca7052q6t3kcsohjwy8">现在 Angular 支持使用 
+<code>@else</code> 语法来定义 else 情况。更新模板，在 else 情况下显示消息 
+<code>No, the server is not running</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4lcfnthaqoa7584arn1yxxqc9">例子如下：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">  @if (isServerRunning) { ... }</div><div class="hljs-ln-line">  @else { ... }</div><div class="hljs-ln-line">`;</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dudzcdt5eiqmz9uy6ejbp62ov">添加你的代码以补全缺少的标记。</p>
+
+    </li>
+    
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cqm20ljby7ylzyobmu9zebtus">这种类型的功能称为条件控制流。接下来你将学习如何在模板中重复某些条目。</p>

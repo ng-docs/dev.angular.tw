@@ -1,0 +1,35 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/animations</span><div class="docs-reference-title"><div><h1>query</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/animations/src/animation_metadata.ts#L1265-L1271" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="du8d0ehjkt762ozgt8xn4tnv0">在当前元素中找到一个或多个内部元素，该元素在序列中正在动画化。与 
+<code>animate()</code> 一起使用。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">query</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">selector</span>: <span class="hljs-built_in">string</span>,</div><div class="hljs-ln-line ">  <span class="hljs-attr">animation</span>: <span class="hljs-title class_">AnimationMetadata</span> | <span class="hljs-title class_">AnimationMetadata</span>[],</div><div class="hljs-ln-line ">  options?: <span class="hljs-title class_">AnimationQueryOptions</span></div><div class="hljs-ln-line ">): <span class="hljs-title class_">AnimationQueryMetadata</span>;</div></code></pre></div></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8y2e7g1n3ggzgulhxd148st1m">多重标记</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bhg9b19sq8yw9p4tsolj8kxb7">多个标记可以合并成复合查询选择器。比如：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"> <span class="hljs-title function_">query</span>(<span class="hljs-string">':self, .record:enter, .record:leave,</span></span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>query</h3><div><code>AnimationQueryMetadata</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="du8d0ehjkt762ozgt8xn4tnv0">在当前元素中找到一个或多个内部元素，该元素在序列中正在动画化。与 
+<code>animate()</code> 一起使用。</p></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">selector</span><code>string</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="qirgy89yv374ichm1ltvg78p">要查询的元素或包含特定于 Angular 的特性的一组元素，使用以下一个或多个标记指定。</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="4ob79af3t4e4f9sm9qgjurfvi"><code>query(":enter")</code> 或 
+<code>query(":leave")</code> ：查询新插入/删除的元素（并非所有元素都可以通过这些标记进行查询，参见 
+<a href="#entering-and-leaving-elements">进入和离开元素</a>）</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="2z3gttn7xz0f193rloapfhy7a"><code>query(":animating")</code> ：查询所有当前正在动画中的元素。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="247bfntxome7ybwhcqlp4n7v0"><code>query("@triggerName")</code> ：查询包含动画触发器的元素。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="79dt9slxvifeik8m6tyrfxmjn"><code>query("@*")</code> ：查询所有包含动画触发器的元素。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="5uomxxltgno3tf7zi7j9xborf"><code>query(":self")</code> ：将当前元素包含到动画序列中。</li>
+
+    </ul></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">animation</span><code>AnimationMetadata | AnimationMetadata[]</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2wpdjtvttn4sq7wl1wtc4xzit">要应用到所查询到的单个或一组元素上的一个或多个动画步骤。
+该数组会被视为一个动画序列。</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">options</span><code>AnimationQueryOptions</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="93mll29k5eubz22nyythea07f">一个选项对象。使用 'limit' 字段限制要收集的条目总数。</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>AnimationQueryMetadata</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8y2e7g1n3ggzgulhxd148st1m">多重标记</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bhg9b19sq8yw9p4tsolj8kxb7">多个标记可以合并成复合查询选择器。比如：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"> <span class="hljs-title function_">query</span>(<span class="hljs-string">':self, .record:enter, .record:leave,</span></span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div></div></div></div></div></div>

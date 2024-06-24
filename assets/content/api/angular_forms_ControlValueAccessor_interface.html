@@ -1,0 +1,66 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/forms</span><div class="docs-reference-title"><div><h1>ControlValueAccessor</h1><div class="docs-api-item-label" data-mode="full" data-type="interface">interface</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/forms/src/directives/control_value_accessor.ts#L23-L132" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="47j1w3p6obpx319avjyb664fx">定义一个接口，该接口充当 Angular 表单 API 和 DOM 中的原生元素之间的桥梁。</p><p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/forms/DefaultValueAccessor">DefaultValueAccessor</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">interface</span> <span class="hljs-title class_">ControlValueAccessor</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="writeValue">  <span class="hljs-title function_">writeValue</span>(<span class="hljs-attr">obj</span>: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">void</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="registerOnChange">  <span class="hljs-title function_">registerOnChange</span>(<span class="hljs-attr">fn</span>: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">void</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="registerOnTouched">  <span class="hljs-title function_">registerOnTouched</span>(<span class="hljs-attr">fn</span>: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">void</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="setDisabledState">  optional <span class="hljs-title function_">setDisabledState</span>(<span class="hljs-attr">isDisabled</span>: <span class="hljs-built_in">boolean</span>): <span class="hljs-built_in">void</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="47j1w3p6obpx319avjyb664fx">定义一个接口，该接口充当 Angular 表单 API 和 DOM 中的原生元素之间的桥梁。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eswrk5qknojqnqhvfg1sxgx4t">实现此接口以创建与 Angular 表单集成的自定义表单控件指令。</p></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="writeValue" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>writeValue</h3><div><code>void</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="755nioao7i2nu763wg9pl36vd">将新值写入元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="64f36clkna1f1j1wx0b0oy06w">当请求从模型到视图的编程更改时，表单 API 会调用此方法以写入视图。</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">obj</span><code>any</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="am2dhd4ennyarrutzvs098n1w">元素的新值</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>void</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bnch3i20yhfxwc2i7efr3i9df">向元素写入值</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="25r0r9fdo0ilr97o6sqfw76er">以下示例将一个值写入原生 DOM 元素。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">writeValue</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">void</span> {</span><span class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">_renderer</span>.<span class="hljs-title function_">setProperty</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">_elementRef</span>.<span class="hljs-property">nativeElement</span>, <span class="hljs-string">'value'</span>, value);</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div></div></div><div id="registerOnChange" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>registerOnChange</h3><div><code>void</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5pdrj98fv4d40aqq2se4828yc">注册一个回调函数，该控件的值在 UI 中更改时将调用该回调函数。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="17trhzi086jdkxzyxihfwx3tz">当值从视图传播到模型时，表单 API 会在初始化时调用此方法以更新表单模型。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="fkys7j3qlffvgts3ysgvseep">在你自己的值访问器中实现 <code>registerOnChange</code>
+方法时，请保存给定的函数，以便你的类在适当的时机调用它。</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">fn</span><code>any</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c4gfrxesnpzqmxepty369m0gx">要注册的回调函数</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>void</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1oy7obx4ib811kq66fo15fhs6">存储变更函数</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4k3ne5ebjf2ubikp8fi2gfk2e">以下示例将所提供的函数存储为内部方法。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">registerOnChange</span>(<span class="hljs-attr">fn</span>: <span class="hljs-function">(<span class="hljs-params">_: <span class="hljs-built_in">any</span></span>) =&gt;</span> <span class="hljs-built_in">void</span>): <span class="hljs-built_in">void</span> {</span><span class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">_onChange</span> = fn;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bd9cmxmtzoq9gk4tom3x6f3dk">当用户界面中的值更改时，请调用已注册的函数以允许表单 API 自行更新：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-attr">host</span>: {</span><span class="hljs-ln-line">   <span class="hljs-string">'(change)'</span>: <span class="hljs-string">'_onChange($event.target.value)'</span></span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div></div></div><div id="registerOnTouched" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>registerOnTouched</h3><div><code>void</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eyscuflosyfpij9fvefuhtlj7">注册一个在初始化时由表单 API 调用的回调函数，以在失焦时更新表单模型。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="72xrmkeuxg07qm0olw8v6fwks">在你自己的值访问器中实现 <code>registerOnTouched</code>
+，请保存给定函数，以便你的类在应将控件视为失焦或“已接触过”时调用它。</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">fn</span><code>any</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c4gfrxesnpzqmxepty369m0gx">要注册的回调函数</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>void</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ueuseyn8fnbdpaiwat25tgwt">存储回调函数</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4k3ne5ebjf2ubikp8fi2gfk2e">以下示例将所提供的函数存储为内部方法。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">registerOnTouched</span>(<span class="hljs-attr">fn</span>: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">void</span> {</span><span class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">_onTouched</span> = fn;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4l9o1fqonskga0hr3bh2j1j4t">在 blur（或等效事件）时，你的类应调用已注册的函数以允许表单 API 自行更新：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-attr">host</span>: {</span><span class="hljs-ln-line">   <span class="hljs-string">'(blur)'</span>: <span class="hljs-string">'_onTouched()'</span></span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div></div></div><div id="setDisabledState" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>setDisabledState</h3><div><code>void</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dxvvlu5cnk5fv6fel3c2e2gv7">当控件状态更改为 “DISABLED” 或从 “DISABLED” 更改时，表单 API
+要调用的函数。根据其状态，它会启用或禁用适当的 DOM 元素。</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">isDisabled</span><code>boolean</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4so1vo943ior3g267qpzo88vz">要在元素上设置的禁用状态</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>void</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7sumbhurpc8wuv48y0scfq12w">以下是将 disabled 属性写入原生 DOM 元素的示例：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-title function_">setDisabledState</span>(<span class="hljs-attr">isDisabled</span>: <span class="hljs-built_in">boolean</span>): <span class="hljs-built_in">void</span> {</span><span class="hljs-ln-line">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">_renderer</span>.<span class="hljs-title function_">setProperty</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">_elementRef</span>.<span class="hljs-property">nativeElement</span>, <span class="hljs-string">'disabled'</span>, isDisabled);</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div></div></div></div></div></div>

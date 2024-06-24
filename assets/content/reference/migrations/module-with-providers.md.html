@@ -1,0 +1,82 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="2zb8tnksqulpzk1ulg427l591"><code>ModuleWithProviders</code> 迁移</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/migrations/module-with-providers.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+  <h2 id="what-does-this-schematic-do">
+    <a href="#what-does-this-schematic-do" class="docs-anchor" tabindex="-1" aria-label="Link to What does this schematic do?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="658j6i5bcolbjplq8i1gn2i5j">这个原理图做了什么？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2akoj10ssqbqwdxpwymc4e2pk">一些 Angular 库，如 
+<code>@angular/router</code> 和 
+<code>@ngrx/store</code>，实现了返回一种称为 
+<code>ModuleWithProviders</code> 的类型的 API（通常通过一个名为 
+<code>forRoot()</code> 的方法）。 这种类型表示一个 
+<code>NgModule</code> 以及其他的提供者。 Angular 版本 9 弃用了没有显式泛型类型的 
+<code>ModuleWithProviders</code> 的使用，其中泛型类型指的是 
+<code>NgModule</code> 的类型。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9ump5l07bzhjjs7q7j7wr81h0">此原理图将为任何缺少泛型的 
+<code>ModuleWithProviders</code> 使用添加一个泛型类型。 在下面的例子中，
+<code>NgModule</code> 的类型是 
+<code>SomeModule</code>，所以原理图将类型更改为 
+<code>ModuleWithProviders&lt;SomeModule&gt;</code>。</p>
+
+  <h3 id="before">
+    <a href="#before" class="docs-anchor" tabindex="-1" aria-label="Link to Before" data-ng_translator_product="100" data-ng_translator_ref_id="8jpgv47qxynubroc4b6c1quce">之前</a>
+  </h3>
+  <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({…})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyModule</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">static</span> <span class="hljs-title function_">forRoot</span>(<span class="hljs-attr">config</span>: <span class="hljs-title class_">SomeConfig</span>): <span class="hljs-title class_">ModuleWithProviders</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> {</div><div class="hljs-ln-line">      <span class="hljs-attr">ngModule</span>: <span class="hljs-title class_">SomeModule</span>,</div><div class="hljs-ln-line">      <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">        {<span class="hljs-attr">provide</span>: <span class="hljs-title class_">SomeConfig</span>, <span class="hljs-attr">useValue</span>: config}</div><div class="hljs-ln-line">      ]</div><div class="hljs-ln-line">    };</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="after">
+    <a href="#after" class="docs-anchor" tabindex="-1" aria-label="Link to After" data-ng_translator_product="100" data-ng_translator_ref_id="7c92j21qrcfq65hcmjtnv9ye1">之后</a>
+  </h3>
+  <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({…})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyModule</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">static</span> <span class="hljs-title function_">forRoot</span>(<span class="hljs-attr">config</span>: <span class="hljs-title class_">SomeConfig</span>): <span class="hljs-title class_">ModuleWithProviders</span>&lt;<span class="hljs-title class_">SomeModule</span>&gt; {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> {</div><div class="hljs-ln-line">      <span class="hljs-attr">ngModule</span>: <span class="hljs-title class_">SomeModule</span>,</div><div class="hljs-ln-line">      <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">        {<span class="hljs-attr">provide</span>: <span class="hljs-title class_">SomeConfig</span>, <span class="hljs-attr">useValue</span>: config }</div><div class="hljs-ln-line">      ]</div><div class="hljs-ln-line">    };</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="cbmiyb86rdk2jbqd7r3ucks4q">在极少数情况下，如果该原理图无法确定
+<code>ModuleWithProviders</code>的类型，你可能会看到原理图打印一个 TODO 注释，以便手动更新代码。</p>
+
+  <h2 id="why-is-this-migration-necessary">
+    <a href="#why-is-this-migration-necessary" class="docs-anchor" tabindex="-1" aria-label="Link to Why is this migration necessary?" data-ng_translator_product="100" data-ng_translator_ref_id="beeyw6htdnv7zrizs0aw385nk">为何这次迁移必不可少？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="58m9ae5xiwdy4wiipvf90w07y"><code>ModuleWithProviders</code>自 Angular 版本 7 起就有了泛型类型，但它一直是可选的。这能编译，是因为
+<code>metadata.json</code>文件包含了所有元数据。使用 Ivy 后，不再需要
+<code>metadata.json</code>文件，因此框架不能假设提供了包含必要类型的文件。相反，Ivy 依赖
+<code>ModuleWithProviders</code>的泛型类型来获取正确的类型信息。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ao836hvw3ikawrbgg57d0e0sr">因此，Angular 版本 9 弃用了没有泛型类型的
+<code>ModuleWithProviders</code>。未来的 Angular 版本将移除默认的泛型类型，使得显式类型成为必要。</p>
+
+  <h2 id="should-i-add-the-generic-type-when-i-add-new-modulewithproviders-to-my-app">
+    <a href="#should-i-add-the-generic-type-when-i-add-new-modulewithproviders-to-my-app" class="docs-anchor" tabindex="-1" aria-label="Link to Should I add the generic type when I add new <code>ModuleWithProviders</code> to my app?" data-ng_translator_product="100" data-ng_translator_ref_id="7jupu5ep4pdox5zwtzzgk750g">在为应用添加新的 
+<code>ModuleWithProviders</code> 时是否应该添加泛型类型？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9drmnc39sf6i5un7it5vxdmz">是的，任何时候你的代码引用
+<code>ModuleWithProviders</code>类型时，都应具有与实际返回的
+<code>NgModule</code>匹配的泛型类型（例如，
+<code>ModuleWithProviders&lt;MyModule&gt;</code>）。</p>
+
+  <h2 id="what-should-i-do-if-the-schematic-prints-a-todo-comment">
+    <a href="#what-should-i-do-if-the-schematic-prints-a-todo-comment" class="docs-anchor" tabindex="-1" aria-label="Link to What should I do if the schematic prints a TODO comment?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cuemlzkesleivudh9zusiicrv">如果此原理图打印出了 TODO 注释，我该怎么办？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="23wb1j74poih99dffkq1exxx7">如果原理图无法检测到
+<code>ModuleWithProviders</code>类型的正确泛型，它将打印一个 TODO 注释。在这种情况下，你需要手动将正确的泛型添加到
+<code>ModuleWithProviders</code>中。它应与
+<code>ModuleWithProviders</code>对象中返回的
+<code>NgModule</code>类型匹配。</p>
+
+  <h2 id="what-does-this-mean-for-libraries">
+    <a href="#what-does-this-mean-for-libraries" class="docs-anchor" tabindex="-1" aria-label="Link to What does this mean for libraries?" data-ng_translator_product="100" data-ng_translator_ref_id="3ynl2b77rv218pdiz4sao6p1g">这对库来说意味着什么？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="17ina1fxa80kmqi5q67ox7nvk">库应在任何使用
+<code>ModuleWithProviders</code>类型的地方添加泛型类型。</p>

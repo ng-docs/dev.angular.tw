@@ -1,0 +1,83 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>RouterLinkActive</h1><div class="docs-api-item-label" data-mode="full" data-type="directive">directive</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/router/src/directives/router_link_active.ts#L103-L260" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8cq1twm5vj7uk1bv29yxmeo9p">跟踪元素上的链接路由当前是否处于活动状态，并允许你指定一个或多个 CSS
+类，以便在链接路由处于活动状态时添加到该元素。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">RouterLinkActive</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="links">  <span class="hljs-attr">links</span>: <span class="hljs-title class_">QueryList</span>&lt;<span class="hljs-title class_">RouterLink</span>&gt;;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="isActive">  <span class="hljs-keyword">readonly</span> <span class="hljs-attr">isActive</span>: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="routerLinkActiveOptions">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">routerLinkActiveOptions</span>: <span class="hljs-title class_">IsActiveMatchOptions</span> | { <span class="hljs-attr">exact</span>: <span class="hljs-built_in">boolean</span>; };</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ariaCurrentWhenActive">  <span class="hljs-meta">@Input</span>() ariaCurrentWhenActive?: <span class="hljs-built_in">boolean</span> | <span class="hljs-string">"page"</span> | <span class="hljs-string">"step"</span> | <span class="hljs-string">"location"</span> | <span class="hljs-string">"date"</span> | <span class="hljs-string">"time"</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="isActiveChange">  <span class="hljs-keyword">readonly</span> <span class="hljs-meta">@Output</span>() <span class="hljs-attr">isActiveChange</span>: <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">boolean</span>&gt;;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="routerLinkActive">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">routerLinkActive</span>(<span class="hljs-params">value: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">string</span>[]</span>);</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8cq1twm5vj7uk1bv29yxmeo9p">跟踪元素上的链接路由当前是否处于活动状态，并允许你指定一个或多个 CSS
+类，以便在链接路由处于活动状态时添加到该元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="786goryyu5vyqa3yzsxmledvd">使用此指令为与活动路径关联的元素创建视觉差异。比如，以下代码会在路由器激活关联的路由时突出显示单词 “Bob”：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;a <span class="hljs-attribute">routerLink</span>=<span class="hljs-string">"/user/bob"</span> <span class="hljs-attribute">routerLinkActive</span>=<span class="hljs-string">"active-link"</span>&gt;Bob&lt;/a&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="atjlq12kbgsrn3el8qxltmw01">每当 URL 是 '/user' 或 '/user/bob' 时，会将 "active-link" 类添加到锚标签中。如果 URL 发生变化，该类会被移除。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dlumaue5zu160i6rjyk8xv60o">你可以用空格分隔的字符串或用数组来设置一个或多个类，比如：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;a routerLink<span class="hljs-operator">=</span><span class="hljs-string">"/user/bob"</span> routerLinkActive<span class="hljs-operator">=</span><span class="hljs-string">"class1 class2"</span>&gt;Bob&lt;/a&gt;</span><span class="hljs-ln-line">&lt;a routerLink<span class="hljs-operator">=</span><span class="hljs-string">"/user/bob"</span> [routerLinkActive]<span class="hljs-operator">=</span><span class="hljs-string">"['class1', 'class2']"</span>&gt;Bob&lt;/a&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bnm1eitl63jib1z92dbmyd8yr">你可以通过传入 <code>exact: true</code> 来配置 RouterLinkActive。这样，只有当 url 和此链接精确匹配时才会添加这些类。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/user/bob"</span> <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"active-link"</span> [<span class="hljs-attr">routerLinkActiveOptions</span>]=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{exact:</span><span class="hljs-ln-line">true}</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>Bob<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7fhn16jo4tc7po7okkwebrnx8">要直接检查链接的 
+<code>isActive</code> 状态，请将 
+<code>RouterLinkActive</code> 实例赋予模板变量。例如，以下示例无需分配任何 CSS 类即可检查状态：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/user/bob"</span> <span class="hljs-attr">routerLinkActive</span> #<span class="hljs-attr">rla</span>=<span class="hljs-string">"routerLinkActive"</span>&gt;</span></span><span class="hljs-ln-line">  Bob </span><span class="hljs-template-variable">{{ <span class="hljs-name">rla.isActive</span> ? <span class="hljs-string">'(already open)'</span> : <span class="hljs-string">''</span>}}</span><span class="language-xml"></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="79cxm78q8fq96mpm5cfvdh5sb">你可以将 
+<code>RouterLinkActive</code> 指令应用于链接元素的祖先。例如，当 URL 是 '/user/jim' 或 '/user/bob' 时，以下示例将 active-link 类设置到 
+<code>&lt;div&gt;</code> 父标签上。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"active-link"</span> [<span class="hljs-attr">routerLinkActiveOptions</span>]=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{exact: true}</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/user/jim"</span>&gt;</span>Jim<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/user/bob"</span>&gt;</span>Bob<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="d8h6upcyl94wgy6f2yeh8meqn"><code>RouterLinkActive</code> 指令还可用于设置 aria-current 属性，为视力障碍用户提供活动元素的替代区分方式。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="49ay8bv68t6a8uebdmnr6tt9r">例如，以下代码在确实处于活动状态时将 'active' 类添加到主页链接，并在这种情况下将其 aria-current
+属性设置为 'page'：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;a routerLink<span class="hljs-operator">=</span><span class="hljs-string">"/"</span> routerLinkActive<span class="hljs-operator">=</span><span class="hljs-string">"active"</span> ariaCurrentWhenActive<span class="hljs-operator">=</span><span class="hljs-string">"page"</span>&gt;Home Page&lt;/a&gt;</span>
+          </code>
+        </pre>
+      </div></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="links" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>links</h3><div><code>QueryList&lt;RouterLink&gt;</code></div></div></header></div><div id="isActive" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>isActive</h3><div><code>boolean</code></div></div></header></div><div id="routerLinkActiveOptions" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>routerLinkActiveOptions</h3><div><code>IsActiveMatchOptions | { exact: boolean; }</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3mdjkuz153sermohtjc4lgx6m">用于配置如何确定路由器链接是否处于活动状态的选项。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="57dkw2hbjnr1ek56xg5qapl0p">这些选项会传递给 
+<code>Router.isActive()</code> 函数。</p></div></div></div></div><div id="ariaCurrentWhenActive" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ariaCurrentWhenActive</h3><div><code>boolean | "page" | "step" | "location" | "date" | "time"</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="86bles9nu2kv7epx829w93u0v">路由器链接处于活动状态时要应用的 Aria-current 属性。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1u0nbf4mwrbm5dx5rc5bho06h">可能的值：
+<code>'page'</code> | 
+<code>'step'</code> | 
+<code>'location'</code> | 
+<code>'date'</code> | 
+<code>'time'</code> | 
+<code>true</code> | 
+<code>false</code>。</p></div></div></div></div><div id="isActiveChange" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>isActiveChange</h3><div><code>EventEmitter&lt;boolean&gt;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7syabks3mac58er7w5bl52lzg">你可以用输出 <code>isActiveChange</code> 来在每次链接变为活动或非活动时获取通知。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="76i7ubnx0n9qaaogf4tbyqzv">发出：true -&gt; 路由处于活动状态 false -&gt; 路由处于非活动状态</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;a</span><span class="hljs-ln-line"> routerLink<span class="hljs-operator">=</span><span class="hljs-string">"/user/bob"</span></span><span class="hljs-ln-line"> routerLinkActive<span class="hljs-operator">=</span><span class="hljs-string">"active-link"</span></span><span class="hljs-ln-line"> (isActiveChange)<span class="hljs-operator">=</span><span class="hljs-string">"this.onRouterLinkActive($event)"</span>&gt;Bob&lt;/a&gt;</span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="routerLinkActive" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>routerLinkActive</h3><div><code>string | string[]</code></div></div></header></div></div></div></div>

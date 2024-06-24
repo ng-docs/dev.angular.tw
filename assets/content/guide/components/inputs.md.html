@@ -1,0 +1,173 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="5k49tekmwj64vfcwul7opzry0">接受输入属性中的数据</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/inputs.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dgm70qgb782h0hajisr0uqi7a"><strong>提示：</strong>本指南假定你已经阅读了
+<a href="essentials">基本指南</a>。如果你是 Angular 的新手，请先阅读该指南。</p>
+
+    </div>
+    
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2pxkdtli8r8cuehh9w7wuk6m9"><strong>提示：</strong>如果你熟悉其他网络框架，输入属性类似于 
+<em>props</em>。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9gzztsiqadd71ah8l7p8ywi05">创建组件时，可以通过在属性上添加 
+<code>@Input</code> 装饰器将特定类属性标记为
+<strong>可绑定</strong>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@Input</span>() value = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="a7eukwjbil3s8uzrpaaxcpj26">这样你就可以在模板中绑定到该属性：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-slider</span> [<span class="hljs-attr">value</span>]=<span class="hljs-string">"50"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7b1uipnm5ebghzyyhhgo1jxmi">Angular 将标记有 
+<code>@Input</code> 装饰器的属性称为
+<strong>输入</strong>。在使用组件时，通过设置其输入来向其传递数据。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bcj445hyk6dnkevfbv5mdl9fr"><strong>Angular 在编译时静态记录输入</strong>。输入不能在运行时添加或移除。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8ru922aon3okzlrx7sbuq8gq2">当扩展组件类时，
+<strong>输入会被子类继承。</strong></p>
+<p><strong data-ng_translator_product="100" data-ng_translator_ref_id="boms95kvhszrbwrpxu51lezeq">输入名称是区分大小写的。</strong></p>
+
+  <h2 id="customizing-inputs">
+    <a href="#customizing-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to Customizing inputs" data-ng_translator_product="100" data-ng_translator_ref_id="eyo30xxkqejo84dxkp03yem3d">自定义输入</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="duud7q2f6yqjfbfwbpu1davdh"><code>@Input</code> 装饰器接受一个配置对象，允许你改变输入的工作方式。</p>
+
+  <h3 id="required-inputs">
+    <a href="#required-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to Required inputs" data-ng_translator_product="100" data-ng_translator_ref_id="aboe7p0ln2s5rbsxbngmej61z">必备的输入属性</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3f8qlzv8mz8cqihv192d6teep">你可以指定 
+<code>required</code> 选项来强制指定输入必须始终具有值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>}) value = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1ozr2hemy0b5vly57t999ls4q">如果尝试在没有指定所有必需输入的情况下使用组件，则 Angular 会在构建时报告错误。</p>
+
+  <h3 id="input-transforms">
+    <a href="#input-transforms" class="docs-anchor" tabindex="-1" aria-label="Link to Input transforms" data-ng_translator_product="100" data-ng_translator_ref_id="eaqmlctzxidt83w7rn1ixo25i">输入转换</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="b03uthsua076t0vjpjscynavn">你可以指定一个 
+<code>transform</code> 函数来在 Angular 设置输入时更改输入的值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-slider'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">transform</span>: trimString}) label = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">trimString</span>(<span class="hljs-params">value: <span class="hljs-built_in">string</span> | <span class="hljs-literal">undefined</span></span>) {</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> value?.<span class="hljs-title function_">trim</span>() ?? <span class="hljs-string">''</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-slider</span> [<span class="hljs-attr">label</span>]=<span class="hljs-string">"systemVolume"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="f4t3rq48bgjqkywb3cas26xu1">在上面的示例中，每当 
+<code>systemVolume</code> 的值发生变化时，Angular 运行 
+<code>trimString</code> 并将 
+<code>label</code> 设置为结果。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cils3vvb5k5815u52hklvrc1p">输入转换的最常见用例是在模板中接受更广泛范围的值类型，通常包括 
+<code>null</code> 和 
+<code>undefined</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="64ijltjyij81pbrky4q6k6ahb"><strong>输入转换函数必须在构建时静态分析。</strong> 不能有条件地设置转换函数，也不能作为表达式求值的结果。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6jocof2ui8xt64kob2z81u674"><strong>输入转换函数应始终是<a href="https://zh.wikipedia.org/wiki/%E7%BA%AF%E5%87%BD%E6%95%B0" target="_blank">纯函数</a>。</strong> 依赖于转换函数外部状态会导致行为不可预测。</p>
+
+  <h4 id="type-checking">
+    <a href="#type-checking" class="docs-anchor" tabindex="-1" aria-label="Link to Type checking" data-ng_translator_product="100" data-ng_translator_ref_id="48ygdr5buyratz1libk1593c3">类型检查</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ejufyqi1h958tdubkkhros93x">当指定输入转换时，转换函数参数的类型决定了在模板中可以设置到输入的值的类型。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">transform</span>: appendPx}) <span class="hljs-attr">widthPx</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">appendPx</span>(<span class="hljs-params">value: <span class="hljs-built_in">number</span></span>) {</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${value}</span>px`</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dt41huadvj7zvcd3s8zs3hovg">在上面的示例中，
+<code>widthPx</code> 输入接受一个 
+<code>number</code>，而类的属性是一个 
+<code>string</code>。</p>
+
+  <h4 id="built-in-transformations">
+    <a href="#built-in-transformations" class="docs-anchor" tabindex="-1" aria-label="Link to Built-in transformations" data-ng_translator_product="100" data-ng_translator_ref_id="1k2x171koqis684e103bvab97">内置转换</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9dqo2ts2azbynl4cc0k6of8lx">Angular 包含两个内置转换函数，用于两种最常见的情况：将值强制转换为布尔值和数字。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, <span class="hljs-title class_">Input</span>, booleanAttribute, numberAttribute} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">transform</span>: booleanAttribute}) disabled = <span class="hljs-literal">false</span>;</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">transform</span>: numberAttribute}) <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5kmczcjqt8n2gfyj76e0wlqx5"><code>booleanAttribute</code> 模拟了标准 HTML 
+<a href="https://developer.mozilla.org/en-US/docs/Glossary/Boolean/HTML" target="_blank">布尔属性</a> 的行为，属性的
+<em>存在</em>表示 "true" 值。然而，Angular 的 
+<code>booleanAttribute</code> 将字面字符串 
+<code>"false"</code> 视为布尔值 
+<code>false</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="azvd61k33ro2xqjs2k61nm1zg"><code>numberAttribute</code> 尝试将给定值解析为数字，如果解析失败则产生 
+<code>NaN</code>。</p>
+
+  <h3 id="input-aliases">
+    <a href="#input-aliases" class="docs-anchor" tabindex="-1" aria-label="Link to Input aliases" data-ng_translator_product="100" data-ng_translator_ref_id="bgrnz4opyshrj7jajdtxv9wee">输入别名</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="cfkh7dnp4i1utv7ljd3r66gwx">你可以指定 
+<code>alias</code> 选项来更改模板中输入的名称。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@Input</span>({<span class="hljs-attr">alias</span>: <span class="hljs-string">'sliderValue'</span>}) value = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-slider</span> [<span class="hljs-attr">sliderValue</span>]=<span class="hljs-string">"50"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4ky4glnzv9j4yijun1pwb3e6q">这个别名不会影响在 TypeScript 代码中使用属性。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4hqp85ocneawwvfk4wsnzzn92">虽然通常应避免为组件的输入创建别名，但这个功能可以用于重命名属性，同时保留原始名称的别名，或者用于避免与本机 DOM 元素属性的名称发生冲突。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9hjynf1rp3gphtvptni2jqlum"><code>@Input</code> 装饰器还可以接受别名作为其第一个参数，而不是配置对象。</p>
+
+  <h2 id="inputs-with-getters-and-setters">
+    <a href="#inputs-with-getters-and-setters" class="docs-anchor" tabindex="-1" aria-label="Link to Inputs with getters and setters" data-ng_translator_product="100" data-ng_translator_ref_id="51wku527n8yzbhlh7g8bexv5d">带有 getter 和 setter 的输入</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="95xp23zkkzoi3l5ulzrov38ig">使用 getter 和 setter 实现的属性可以作为输入：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>()</div><div class="hljs-ln-line">  <span class="hljs-keyword">get</span> <span class="hljs-title function_">value</span>(): <span class="hljs-built_in">number</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">internalValue</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">set</span> <span class="hljs-title function_">value</span>(<span class="hljs-params">newValue: <span class="hljs-built_in">number</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">internalValue</span> = newValue;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> internalValue = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="6a9y7x5pa9r5wxtpjxf47m5l4">你甚至可以通过仅定义公共 setter 来创建一个
+<em>只写</em>输入：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>()</div><div class="hljs-ln-line">  <span class="hljs-keyword">set</span> <span class="hljs-title function_">value</span>(<span class="hljs-params">newValue: <span class="hljs-built_in">number</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">internalValue</span> = newValue;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> internalValue = <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1yig5qaqq9mo1v3xmvplp3b33">如果可能的话，最好使用
+<span style="text-decoration:underline;">输入转换</span>，而不是使用 getter 和 setter。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="890v9f7i7hkerb34pi99k04gz">避免复杂或昂贵的 getter 和 setter。Angular 可能会多次调用输入的 setter，如果 setter 执行任何昂贵的行为，比如 DOM 操作，可能会对应用性能产生负面影响。</p>
+
+  <h2 id="specify-inputs-in-the-component-decorator">
+    <a href="#specify-inputs-in-the-component-decorator" class="docs-anchor" tabindex="-1" aria-label="Link to Specify inputs in the <code>@Component</code> decorator" data-ng_translator_product="100" data-ng_translator_ref_id="zh5qg87mxfh2hdwe4a3znyud">在 
+<code>@Component</code> 装饰器中指定输入</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3a9pyioasb0pw69q468nx96r3">除了使用 
+<code>@Input</code> 装饰器外，你还可以在 
+<code>@Component</code> 装饰器中使用 
+<code>inputs</code> 属性指定组件的输入。当组件从基类继承属性时，这可能很有用：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// `CustomSlider` inherits the `disabled` property from `BaseSlider`.</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">inputs</span>: [<span class="hljs-string">'disabled'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">BaseSlider</span> { }</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9oobz6y62xog0atyvrs79p2l">你还可以通过在字符串中的冒号后放置别名来在 
+<code>inputs</code> 列表中指定输入别名：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// `CustomSlider` inherits the `disabled` property from `BaseSlider`.</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">inputs</span>: [<span class="hljs-string">'disabled: sliderDisabled'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">BaseSlider</span> { }</div></code>
+    </pre>
+  </div>
+  <h2 id="choosing-input-names">
+    <a href="#choosing-input-names" class="docs-anchor" tabindex="-1" aria-label="Link to Choosing input names" data-ng_translator_product="100" data-ng_translator_ref_id="arb8q7pn7hsbts4an2ubado4o">选择输入名称</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2rv7dwwkj562v381sa9q7aavt">避免选择与 HTMLElement 等 DOM 元素的属性发生冲突的输入名称。名称冲突会让人产生困惑，不清楚绑定的属性是属于组件还是 DOM 元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6lpmjqnzgf6ju5qr1uh7jx1ac">避免为组件输入添加前缀，就像你在组件选择器中所做的那样。由于给定元素只能托管一个组件，因此可以假定任何自定义属性都属于组件。</p>

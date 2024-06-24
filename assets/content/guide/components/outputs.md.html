@@ -1,0 +1,103 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="xouzcpcvvkdl1hgqw8ujmosu">使用输出定义自定义事件</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/outputs.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dgm70qgb782h0hajisr0uqi7a"><strong>提示：</strong>本指南假定你已经阅读了
+<a href="essentials">基本指南</a>。如果你是 Angular 的新手，请先阅读该指南。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2zbp1hep3h3agtaly74pv4370">Angular 组件可以通过将属性赋值为新的 
+<code>EventEmitter</code> 并添加 
+<code>@Output</code> 装饰器来定义自定义事件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ExpandablePanel</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Output</span>() panelClosed = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">void</span>&gt;();</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">expandable-panel</span> (<span class="hljs-attr">panelClosed</span>)=<span class="hljs-string">"savePanelState()"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4rcydxv6trvqtvf141k9j8kha">你可以通过在 
+<code>EventEmitter</code> 上调用 
+<code>emit</code> 方法来发射事件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-variable language_">this</span>.<span class="hljs-property">panelClosed</span>.<span class="hljs-title function_">emit</span>();</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="alyflundhuijxap2ib09kp952">Angular 将带有 
+<code>@Output</code> 装饰器标记的属性称为
+<strong>输出</strong>。你可以使用输出将数据传递给其他组件，类似于原生浏览器事件如 
+<code>click</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9mjdjg9z1gh1hajefe1rgircb"><strong>Angular 自定义事件不会冒泡至 DOM</strong>。</p>
+<p><strong data-ng_translator_product="100" data-ng_translator_ref_id="5e1tnxic5nhfw6u5qeba0pq7i">输出名称是区分大小写的。</strong></p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4gjfx4i4fyd8gq6ij4jyn1t87">在扩展组件类时，
+<strong>输出会被子类继承</strong>。</p>
+
+  <h2 id="emitting-event-data">
+    <a href="#emitting-event-data" class="docs-anchor" tabindex="-1" aria-label="Link to Emitting event data" data-ng_translator_product="100" data-ng_translator_ref_id="f4ch0gjr1dwlhum2ta5i06fh3">发射事件数据</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9xpyiqkikt2w3lwu4ldgcsvis">在调用 
+<code>emit</code> 时可以传递事件数据：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// You can emit primitive values.</span></div><div class="hljs-ln-line"><span class="hljs-variable language_">this</span>.<span class="hljs-property">valueChanged</span>.<span class="hljs-title function_">emit</span>(<span class="hljs-number">7</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// You can emit custom event objects</span></div><div class="hljs-ln-line"><span class="hljs-variable language_">this</span>.<span class="hljs-property">thumbDropped</span>.<span class="hljs-title function_">emit</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">pointerX</span>: <span class="hljs-number">123</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">pointerY</span>: <span class="hljs-number">456</span>,</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2npjnlkmrkyx1jy8eulw29cu5">在模板中定义事件监听器时，你可以通过
+<code>$event</code>变量访问事件数据：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-slider</span> (<span class="hljs-attr">valueChanged</span>)=<span class="hljs-string">"logValue($event)"</span> /&gt;</span></div></code>
+    </pre>
+  </div>
+  <h2 id="customizing-output-names">
+    <a href="#customizing-output-names" class="docs-anchor" tabindex="-1" aria-label="Link to Customizing output names" data-ng_translator_product="100" data-ng_translator_ref_id="a3jcm9ntiv6myh7iulr37ro4k">自定义输出名称</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5sphaixvgd7bxcd8qz1uh7lsp"><code>@Output</code>装饰器接受一个参数，让你可以在模板中指定事件的不同名称：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Output</span>(<span class="hljs-string">'valueChanged'</span>) changed = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">number</span>&gt;();</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">custom-slider</span> (<span class="hljs-attr">valueChanged</span>)=<span class="hljs-string">"saveVolume()"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4ky4glnzv9j4yijun1pwb3e6q">这个别名不会影响在 TypeScript 代码中使用属性。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6mz6ym0v8nizofyy4auk8qwg">虽然通常应避免为组件创建输出别名，但这个功能可用于在保留原始名称的同时重命名属性，或者避免与本机 DOM 事件的名称冲突。</p>
+
+  <h2 id="specify-outputs-in-the-component-decorator">
+    <a href="#specify-outputs-in-the-component-decorator" class="docs-anchor" tabindex="-1" aria-label="Link to Specify outputs in the <code>@Component</code> decorator" data-ng_translator_product="100" data-ng_translator_ref_id="4si4kw6i499n39h43f8mrtobe">在 
+<code>@Component</code> 装饰器中指定输出</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="e6axbze5fifdk0w6duqlvykyj">除了 
+<code>@Output</code> 装饰器外，你还可以在 
+<code>@Component</code> 装饰器中的 
+<code>outputs</code> 属性指定组件的输出。这在组件从基类继承属性时非常有用：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// `CustomSlider` inherits the `valueChanged` property from `BaseSlider`.</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-attr">outputs</span>: [<span class="hljs-string">'valueChanged'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">BaseSlider</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="b84c11jggm9l17ech2u3d1szz">你还可以通过在字符串中的冒号后放置别名来在
+<code>outputs</code>列表中指定输出别名：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// `CustomSlider` inherits the `valueChanged` property from `BaseSlider`.</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-attr">outputs</span>: [<span class="hljs-string">'valueChanged: volumeChanged'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomSlider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">BaseSlider</span> {}</div></code>
+    </pre>
+  </div>
+  <h2 id="choosing-event-names">
+    <a href="#choosing-event-names" class="docs-anchor" tabindex="-1" aria-label="Link to Choosing event names" data-ng_translator_product="100" data-ng_translator_ref_id="5lh273f79l2k1hck826ikc046">选择事件名称</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4e8x8fyznuhiny0c1u7w3qdo8">避免选择与HTMLElement等DOM元素上的事件发生冲突的输出名称。名称冲突会使绑定属性是属于组件还是DOM元素产生混淆。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cxxajtrmcv3kk4yozay0xy8yc">避免为组件输出添加前缀，就像你为组件选择器那样。由于给定元素只能承载一个组件，任何自定义属性可以假定属于组件。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="vrzlke2d3q4qk2kjkxky05ct">总是使用
+<a href="https://en.wikipedia.org/wiki/Camel_case" target="_blank">camelCase</a>输出名称。避免使用"on"作为输出名称的前缀。</p>

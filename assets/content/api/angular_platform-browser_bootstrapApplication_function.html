@@ -1,0 +1,92 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/platform-browser</span><div class="docs-reference-title"><div><h1>bootstrapApplication</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/platform-browser/src/browser.ts#L128-L133" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="7720av3b6frrpggexosb2dz78">引导一个 Angular 应用的实例并将一个独立组件渲染为应用的根组件。有关独立组件的更多信息，请参阅 
+<a href="guide/components/importing">本指南</a>。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">bootstrapApplication</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">rootComponent</span>: <span class="hljs-title class_">Type</span>&lt;<span class="hljs-built_in">unknown</span>&gt;,</div><div class="hljs-ln-line ">  options?: <span class="hljs-title class_">ApplicationConfig</span></div><div class="hljs-ln-line ">): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">ApplicationRef</span>&gt;;</div></code></pre></div></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="2t6hc5z9fzk0ofmmmc337b1o">传递给此函数的根组件 
+<em>必须</em> 是独立的（应在 
+<code>@Component</code> 装饰器配置中具有 
+<code>standalone: true</code> 标志）。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'Hello world!'</span></span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RootComponent</span> {}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">appRef</span>: <span class="hljs-title class_">ApplicationRef</span> = <span class="hljs-keyword">await</span> <span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">RootComponent</span>);</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cujsh1q7uwyxx3gwa0eisofhf">你可以通过在作为第二个参数传递的对象中指定 <code>providers</code> 字段来添加应用程序注入器中应该可用的提供者列表：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">await</span> <span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">RootComponent</span>, {</span><span class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">    {<span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">BACKEND_URL</span>, <span class="hljs-attr">useValue</span>: <span class="hljs-string">'https://yourdomain.com/api'</span>}</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">});</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4gauufj78hpu5etje2ip7ppcm"><code>importProvidersFrom</code> 辅助方法可用于收集任何现有 NgModule（及其导入的所有 NgModule）中的所有提供者：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">await</span> <span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">RootComponent</span>, {</span><span class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">    importProvidersFrom(<span class="hljs-title class_">SomeNgModule</span>)</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">});</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2mbjhcryvb3a1q7gfw3hrxi23">注意：
+<code>bootstrapApplication</code> 方法默认不包含 
+<a href="api/core/Testability">Testability</a>。你可以通过使用 
+<code>provideProtractorTestingSupport()</code> 函数获取必要的提供者列表并将其添加到 
+<code>providers</code> 数组中来添加 
+<a href="api/core/Testability">Testability</a>，例如：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {provideProtractorTestingSupport} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-keyword">await</span> <span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">RootComponent</span>, {<span class="hljs-attr">providers</span>: [<span class="hljs-title function_">provideProtractorTestingSupport</span>()]});</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>bootstrapApplication</h3><div><code>Promise&lt;ApplicationRef&gt;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="7720av3b6frrpggexosb2dz78">引导一个 Angular 应用的实例并将一个独立组件渲染为应用的根组件。有关独立组件的更多信息，请参阅 
+<a href="guide/components/importing">本指南</a>。</p></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">rootComponent</span><code>Type&lt;unknown&gt;</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3coglozj706t3mf4345t5v4ia">对应该渲染的独立组件的引用。</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">options</span><code>ApplicationConfig</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="4re883vth7e7bz3qoznger8wa">引导操作的额外配置，请参阅 
+<code>ApplicationConfig</code> 以获取更多信息。</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>Promise&lt;ApplicationRef&gt;</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><p data-ng_translator_product="100" data-ng_translator_ref_id="2t6hc5z9fzk0ofmmmc337b1o">传递给此函数的根组件 
+<em>必须</em> 是独立的（应在 
+<code>@Component</code> 装饰器配置中具有 
+<code>standalone: true</code> 标志）。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'Hello world!'</span></span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RootComponent</span> {}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">appRef</span>: <span class="hljs-title class_">ApplicationRef</span> = <span class="hljs-keyword">await</span> <span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">RootComponent</span>);</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cujsh1q7uwyxx3gwa0eisofhf">你可以通过在作为第二个参数传递的对象中指定 <code>providers</code> 字段来添加应用程序注入器中应该可用的提供者列表：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">await</span> <span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">RootComponent</span>, {</span><span class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">    {<span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">BACKEND_URL</span>, <span class="hljs-attr">useValue</span>: <span class="hljs-string">'https://yourdomain.com/api'</span>}</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">});</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4gauufj78hpu5etje2ip7ppcm"><code>importProvidersFrom</code> 辅助方法可用于收集任何现有 NgModule（及其导入的所有 NgModule）中的所有提供者：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">await</span> <span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">RootComponent</span>, {</span><span class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">    importProvidersFrom(<span class="hljs-title class_">SomeNgModule</span>)</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">});</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2mbjhcryvb3a1q7gfw3hrxi23">注意：
+<code>bootstrapApplication</code> 方法默认不包含 
+<a href="api/core/Testability">Testability</a>。你可以通过使用 
+<code>provideProtractorTestingSupport()</code> 函数获取必要的提供者列表并将其添加到 
+<code>providers</code> 数组中来添加 
+<a href="api/core/Testability">Testability</a>，例如：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">import</span> {provideProtractorTestingSupport} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-keyword">await</span> <span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">RootComponent</span>, {<span class="hljs-attr">providers</span>: [<span class="hljs-title function_">provideProtractorTestingSupport</span>()]});</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div></div></div></div></div></div>

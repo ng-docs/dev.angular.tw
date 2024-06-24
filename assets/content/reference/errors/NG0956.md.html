@@ -1,0 +1,35 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="6u0shj8idklz0autwjcg0t3wz">跟踪表达式导致 DOM 结构重新创建。</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0956.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="75exwie5uyp08fdsmds3k7x4v">在 
+<code>@for</code> 循环中指定的标识跟踪表达式导致了对应于
+<em>所有</em>条目的 DOM 重新创建。这是一个非常昂贵的操作，通常在使用不可变数据结构时发生，示例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;button (click)="toggleAllDone()"&gt;All done!&lt;/button&gt;</div><div class="hljs-ln-line">    &lt;ul&gt;</div><div class="hljs-ln-line">    @for (todo of todos; track todo) {</div><div class="hljs-ln-line">      &lt;li&gt;{{todo.task}}&lt;/li&gt;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">    &lt;/ul&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">App</span> {</div><div class="hljs-ln-line">  todos = [</div><div class="hljs-ln-line">    { <span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">task</span>: <span class="hljs-string">'understand trackBy'</span>, <span class="hljs-attr">done</span>: <span class="hljs-literal">false</span> },</div><div class="hljs-ln-line">    { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">task</span>: <span class="hljs-string">'use proper tracking expression'</span>, <span class="hljs-attr">done</span>: <span class="hljs-literal">false</span> },</div><div class="hljs-ln-line">  ];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">toggleAllDone</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">todos</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">todos</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">todo</span> =&gt;</span> ({ ...todo, <span class="hljs-attr">done</span>: <span class="hljs-literal">true</span> }));</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="3rbsafz7mgskfoqfwljnl4ipp">在提供的示例中，整个列表及其所有视图（DOM 节点、Angular 指令、组件、查询等）在切换条目的 "done" 状态后会重新创建（！）。这里相对便宜的绑定更新到 
+<code>done</code> 属性就足够了。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="42vhteln6u7og9p0htbx1wfti">除了具有高性能损失外，重新创建 DOM 树还会导致 DOM 元素中的状态丢失（例如：焦点、文本选择、在 iframe 中加载的网站等）。</p>
+
+  <h2 id="fixing-the-error">
+    <a href="#fixing-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Fixing the error" data-ng_translator_product="100" data-ng_translator_ref_id="63eun1v9nz40i6edbyrmabm2e">修复错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9zrckgf4n38ewi077rpwdb6j3">更改跟踪表达式，使其无论对象标识如何都能唯一标识集合中的某个条目。在讨论的示例中，正确的跟踪表达式应使用唯一的 
+<code>id</code> 属性（
+<code>item.id</code>）：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;button (click)="toggleAllDone()"&gt;All done!&lt;/button&gt;</div><div class="hljs-ln-line">    &lt;ul&gt;</div><div class="hljs-ln-line">    @for (todo of todos; track todo.id) {</div><div class="hljs-ln-line">      &lt;li&gt;{{todo.task}}&lt;/li&gt;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">    &lt;/ul&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">App</span> {</div><div class="hljs-ln-line">  todos = [</div><div class="hljs-ln-line">    { <span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">task</span>: <span class="hljs-string">'understand trackBy'</span>, <span class="hljs-attr">done</span>: <span class="hljs-literal">false</span> },</div><div class="hljs-ln-line">    { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">task</span>: <span class="hljs-string">'use proper tracking expression'</span>, <span class="hljs-attr">done</span>: <span class="hljs-literal">false</span> },</div><div class="hljs-ln-line">  ];</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">toggleAllDone</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">todos</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">todos</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">todo</span> =&gt;</span> ({ ...todo, <span class="hljs-attr">done</span>: <span class="hljs-literal">true</span> }));</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

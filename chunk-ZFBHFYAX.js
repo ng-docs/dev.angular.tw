@@ -1,0 +1,1 @@
+var o=function(E){return E.API="api",E.CLI="cli",E.DOCS="docs",E.HOME="",E.PLAYGROUND="playground",E.REFERENCE="reference",E.TUTORIALS="tutorials",E.UPDATE="update-guide",E}(o||{}),n=function(E){return E.DOCS="overview",E.REFERENCE="api",E.TUTORIALS="tutorials",E.PLAYGROUND="playground",E.UPDATE="update-guide",E}(n||{});export{o as a,n as b};

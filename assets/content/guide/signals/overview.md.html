@@ -1,0 +1,306 @@
+<div class="docs-decorative-header-container">
+      <div class="docs-decorative-header">
+        <div class="docs-header-content">
+          <docs-breadcrumb></docs-breadcrumb>
+
+          
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4v4ycngrts2vgsrm920jvsyon">Angular 信号（Signal）</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/signals/overview.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+
+          <p data-ng_translator_product="100" data-ng_translator_ref_id="8ozwrjrycb66qqsdrn4uhp8uc"><!-- markdownlint-disable-line --> Angular Signals 是一个体系，能够细粒度地跟踪你的状态在整个应用中的使用方式和位置，从而使框架能够优化渲染更新。</p>
+        </div>
+
+        <!-- illustration -->
+        <svg width="216" height="259" viewbox="0 0 216 259" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M145.45 156.483C152.516 149.306 156.413 139.81 156.413 129.711C156.413 119.611 152.528 110.128 145.45 102.939L158.571 89.8181C180.385 111.879 180.385 147.53 158.571 169.579L145.45 156.458V156.483Z" fill="#F11653" />
+  <path d="M158.558 90.2744C168.941 100.88 174.639 114.864 174.639 129.723C174.639 144.583 168.929 158.567 158.558 169.172L145.881 156.495C152.873 149.281 156.721 139.798 156.721 129.735C156.721 119.673 152.873 110.19 145.881 102.976L158.558 90.2991M158.558 89.4236L145.006 102.976C159.791 117.762 159.791 141.722 145.006 156.507L158.558 170.06C180.829 147.789 180.829 111.694 158.558 89.4236Z" fill="black" />
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M71.7685 156.483C56.9829 141.697 56.9829 117.737 71.7685 102.951L58.2161 89.3989C35.9452 111.67 35.9452 147.764 58.2161 170.035L71.7685 156.483Z" fill="#8514F5" stroke="black" stroke-width="0.93421" stroke-miterlimit="10" />
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M174.195 185.228C204.629 154.547 204.629 104.875 174.195 74.2064L187.303 61.0856C205.554 79.4473 215.604 103.815 215.604 129.711C215.604 155.607 205.554 179.974 187.303 198.336L174.195 185.215V185.228Z" fill="#F11653" />
+  <path d="M187.303 61.5295C224.569 99.2641 224.569 160.182 187.303 197.917L174.626 185.24C189.301 170.343 197.366 150.662 197.366 129.723C197.366 108.784 189.301 89.1029 174.626 74.2063L187.303 61.5295ZM187.303 60.6539L173.751 74.2063C204.407 104.863 204.407 154.571 173.751 185.228L187.303 198.78C225.445 160.638 225.445 98.7955 187.303 60.6539Z" fill="black" />
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M43.0236 185.24C12.3673 154.584 12.3673 104.875 43.0236 74.2188L29.4712 60.6664C-8.6704 98.808 -8.6704 160.651 29.4712 198.792L43.0236 185.24Z" fill="#8514F5" stroke="black" stroke-width="0.93421" stroke-miterlimit="10" />
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M135.227 155.434C150.012 140.649 150.012 116.689 135.227 101.903L148.779 88.3507C171.05 110.622 171.05 146.716 148.779 168.987L135.227 155.434Z" fill="white" stroke="black" stroke-width="0.93421" stroke-miterlimit="10" />
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M81.7077 155.434C66.9221 140.649 66.9221 116.689 81.7077 101.903L68.1553 88.3507C45.8844 110.622 45.8844 146.716 68.1553 168.987L81.7077 155.434Z" fill="white" stroke="black" stroke-width="0.93421" stroke-miterlimit="10" />
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M163.972 184.179C194.628 153.523 194.628 103.815 163.972 73.1582L177.524 59.6058C215.666 97.7474 215.666 159.59 177.524 197.732L163.972 184.179Z" fill="white" stroke="black" stroke-width="0.93421" stroke-miterlimit="10" />
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M52.9628 184.179C22.3065 153.523 22.3065 103.815 52.9628 73.1582L39.4104 59.6058C1.2688 97.7474 1.2688 159.59 39.4104 197.732L52.9628 184.179Z" fill="white" stroke="black" stroke-width="0.93421" stroke-miterlimit="10" />
+  <path d="M127.754 128.527C127.754 139.107 119.085 147.69 108.393 147.69C97.7018 147.69 89.0327 139.107 89.0327 128.527C89.0327 117.946 97.7018 109.364 108.393 109.364C119.085 109.364 127.754 117.946 127.754 128.527Z" fill="white" stroke="var(--primary-contrast)" stroke-width="0.93421" stroke-miterlimit="10" />
+  <path d="M111.698 81.593V5.18655" stroke="var(--primary-contrast)" stroke-width="0.93421" stroke-miterlimit="10" />
+  <path d="M114.769 6.08679L111.698 0.759552L108.628 6.08679H114.769Z" fill="var(--primary-contrast)" />
+  <path d="M94.2489 82.2466L59.1779 47.188" stroke="var(--primary-contrast)" stroke-width="0.766053" stroke-miterlimit="10" />
+  <path d="M61.4592 45.9424L56.6376 44.6476L57.9324 49.4693L61.4592 45.9424Z" fill="var(--primary-contrast)" />
+  <path d="M129.147 82.2466L164.218 47.188" stroke="var(--primary-contrast)" stroke-width="0.766053" stroke-miterlimit="10" />
+  <path d="M165.464 49.4693L166.759 44.6476L161.937 45.9424L165.464 49.4693Z" fill="var(--primary-contrast)" />
+  <path d="M111.698 177.853V254.26" stroke="var(--primary-contrast)" stroke-width="0.93421" stroke-miterlimit="10" />
+  <path d="M108.628 253.36L111.698 258.687L114.769 253.36H108.628Z" fill="var(--primary-contrast)" />
+  <path d="M129.147 177.187L164.218 212.258" stroke="var(--primary-contrast)" stroke-width="0.766053" stroke-miterlimit="10" />
+  <path d="M161.937 213.504L166.759 214.799L165.464 209.977L161.937 213.504Z" fill="var(--primary-contrast)" />
+  <path d="M94.2489 177.187L59.1779 212.258" stroke="var(--primary-contrast)" stroke-width="0.766053" stroke-miterlimit="10" />
+  <path d="M57.9324 209.977L56.6376 214.799L61.4592 213.504L57.9324 209.977Z" fill="var(--primary-contrast)" />
+</svg>
+
+      </div>
+    </div>
+    
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2zh6uvegmme6a1wiek61ynuta"><strong>提示：</strong>在深入阅读本综合指南之前，请查看 Angular 的
+<a href="essentials/managing-dynamic-data">基础部分</a>。</p>
+
+    </div>
+    
+  <h2 id="what-are-signals">
+    <a href="#what-are-signals" class="docs-anchor" tabindex="-1" aria-label="Link to What are signals?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e5nteqfnhhs39uz271fvirz3v">什么是信号？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bu4eklvjzfoi1q1wtec8ndkjy"><strong>信号</strong> 是一个值的包装器，当该值变化时通知感兴趣的消费者。信号可以包含任何值，从原始类型到复杂数据结构。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cy9agcryrsou7yijbf3smhdys">你可以通过调用信号的 getter 函数来读取其值，这使 Angular 能够跟踪信号的使用位置。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dqiqriefulyi8615d7qn8gl05">信号可以是 
+<em>可写的</em> 或 
+<em>只读的</em>。</p>
+
+  <h3 id="writable-signals">
+    <a href="#writable-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Writable signals" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7oz6k6xa7khhyl4bgazsgeuth">可写信号</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5v1exmkighb0qyv0jl571cap3">可写信号提供了一个 API，用于直接更新其值。你可以通过调用 
+<code>signal</code> 函数并传入信号的初始值来创建可写信号：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> count = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// Signals are getter functions - calling them reads their value.</span></div><div class="hljs-ln-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'The count is: '</span> + <span class="hljs-title function_">count</span>());</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="boz9w8qi32qxip6ekdulwfjhj">要更改可写信号的值，可以直接 
+<code>.set()</code> 它：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">count.<span class="hljs-title function_">set</span>(<span class="hljs-number">3</span>);</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3cxlgxd2mbbiqhf1ci0aygzf6">或者使用 <code>.update()</code> 操作从前一个值计算出一个新值：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// Increment the count by 1.</span></div><div class="hljs-ln-line">count.<span class="hljs-title function_">update</span>(<span class="hljs-function"><span class="hljs-params">value</span> =&gt;</span> value + <span class="hljs-number">1</span>);</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ckm10ehrda53859tcwhc0101y">可写信号的类型是 
+<code>WritableSignal</code>。</p>
+
+  <h3 id="computed-signals">
+    <a href="#computed-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2x0royoakh9ax2x3iakyk1sy9">计算型信号</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="34dn9gey7atdm6vn8noulrdcf"><strong>计算信号</strong> 是只读信号，它们的值派生自其他信号。你可以使用 
+<code>computed</code> 函数定义计算信号，并指定一个派生过程：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">count</span>: <span class="hljs-title class_">WritableSignal</span>&lt;<span class="hljs-built_in">number</span>&gt; = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">doubleCount</span>: <span class="hljs-title class_">Signal</span>&lt;<span class="hljs-built_in">number</span>&gt; = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">count</span>() * <span class="hljs-number">2</span>);</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="40jqtst4f26yjl0l48o6hcpb4"><code>doubleCount</code> 信号依赖于 
+<code>count</code> 信号。每当 
+<code>count</code> 更新时，Angular 知道 
+<code>doubleCount</code> 也需要更新。</p>
+
+  <h4 id="computed-signals-are-both-lazily-evaluated-and-memoized">
+    <a href="#computed-signals-are-both-lazily-evaluated-and-memoized" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals are both lazily evaluated and memoized" data-ng_translator_product="100" data-ng_translator_ref_id="6lnytfwkx1nisqzp55t2nutev">计算信号既是惰性求值的，也是记忆化的</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="al3i5wilsfkd4n79r92hsqskg"><code>doubleCount</code> 的派生函数在你第一次读取 
+<code>doubleCount</code> 时才会运行以计算其值。计算出的值随后被缓存，如果你再次读取 
+<code>doubleCount</code>，它将返回缓存的值而不会重新计算。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4po0pjf84ckh893e43p3ed3s2">如果你随后更改 
+<code>count</code>，Angular 知道 
+<code>doubleCount</code> 的缓存值不再有效，下次你读取 
+<code>doubleCount</code> 时将会计算其新值。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1p0rned7zf7imqw6vwpkfgytu">因此，你可以安全地在计算信号中执行计算量大的派生操作，例如过滤数组。</p>
+
+  <h4 id="computed-signals-are-not-writable-signals">
+    <a href="#computed-signals-are-not-writable-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals are not writable signals" data-ng_translator_product="100" data-ng_translator_ref_id="7023c5wb1klek3333mskp4uhs">计算信号不是可写信号</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9mq4yndvns5xj7y53q6onls2x">你不能直接为计算信号赋值。比如，</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">doubleCount.<span class="hljs-title function_">set</span>(<span class="hljs-number">3</span>);</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9koy6mxxxrsvku536o802kq1k">会产生编译错误，因为 
+<code>doubleCount</code> 不是一个 
+<code>WritableSignal</code>。</p>
+
+  <h4 id="computed-signal-dependencies-are-dynamic">
+    <a href="#computed-signal-dependencies-are-dynamic" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signal dependencies are dynamic" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="99c7be7ouf3tfqqccqcfvmkx3">计算信号的依赖关系是动态的</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="95f3dn4zoeoec1h6gyxutj9l2">只有在派生过程中实际读取的信号才会被跟踪。例如，在这个计算信号中，只有当 
+<code>showCount</code> 信号为真时才会读取 
+<code>count</code> 信号：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> showCount = <span class="hljs-title function_">signal</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> count = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> conditionalCount = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">if</span> (<span class="hljs-title function_">showCount</span>()) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-string">`The count is <span class="hljs-subst">${count()}</span>.`</span>;</div><div class="hljs-ln-line">  } <span class="hljs-keyword">else</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-string">'Nothing to see here!'</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2tanqxob1wibo2kkw5on8doik">当你读取 
+<code>conditionalCount</code> 时，如果 
+<code>showCount</code> 是 
+<code>false</code>，将返回「无内容可查看！」信息 
+<em>而不</em> 读取 
+<code>count</code> 信号。这意味着如果你以后更新 
+<code>count</code>，它 
+<em>不会</em> 导致重新计算 
+<code>conditionalCount</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="as4fzpvrxsc7awo2lu3j2drmt">如果你将 
+<code>showCount</code> 设置为 
+<code>true</code>，然后再次读取 
+<code>conditionalCount</code>，派生过程将重新执行并进入 
+<code>showCount</code> 为 
+<code>true</code> 的分支，返回显示 
+<code>count</code> 值的信息。更改 
+<code>count</code> 将使 
+<code>conditionalCount</code> 的缓存值失效。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4yhbaphdgkc24ou00uxcatakx">注意，在派生过程中依赖关系可以被移除也可以被添加。如果你后来将 
+<code>showCount</code> 设置回 
+<code>false</code>，那么 
+<code>count</code> 将不再被视为 
+<code>conditionalCount</code> 的依赖项。</p>
+
+  <h2 id="reading-signals-in-onpush-components">
+    <a href="#reading-signals-in-onpush-components" class="docs-anchor" tabindex="-1" aria-label="Link to Reading signals in <code>OnPush</code> components" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3g2aug3bh97eabpi43w74dzo9">在 <code>OnPush</code> 型组件中读取信号</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ddsrinkgz6k7xgn4xufhanoea">当你在 
+<code>OnPush</code> 组件的模板中读取信号时，Angular 将该信号作为该组件的依赖项进行跟踪。当该信号的值发生变化时，Angular 会自动 
+<a href="api/core/ChangeDetectorRef#markforcheck">标记</a> 该组件，以确保下次变更检测运行时更新组件。有关 
+<code>OnPush</code> 组件的更多信息，请参阅 
+<a href="best-practices/skipping-subtrees">跳过组件子树</a> 指南。</p>
+
+  <h2 id="effects">
+    <a href="#effects" class="docs-anchor" tabindex="-1" aria-label="Link to Effects" data-ng_translator_product="100" data-ng_translator_ref_id="4vten9v01mjrmj5lt1b39xamu">副作用（effect）</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="c6wwldy5nqhmd3blhyqsokpow">信号很有用，因为它们在变化时会通知感兴趣的消费者。
+<strong>副作用</strong> 是在一个或多个信号值变化时运行的操作。你可以使用 
+<code>effect</code> 函数创建一个副作用：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`The current count is: <span class="hljs-subst">${count()}</span>`</span>);</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aqus4ly6lsiu6eu1901a2ifys">副作用<strong>至少会运行一次。</strong> 当副作用运行时，它会跟踪任何信号值读取。只要这些信号值中的任何一个发生变化，副作用就会再次运行。与计算信号类似，副作用会动态跟踪它们的依赖关系，并且仅跟踪在最近一次执行中读取的信号。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b4is5z7ytw3pl5lpj3ix871p2">在变化检测过程中，副作用始终<strong>异步</strong>执行。</p>
+
+  <h3 id="use-cases-for-effects">
+    <a href="#use-cases-for-effects" class="docs-anchor" tabindex="-1" aria-label="Link to Use cases for effects" data-ng_translator_product="100" data-ng_translator_ref_id="b0hy6ub26u53qqw8x9k7ssv9e">副作用的使用案例</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2ghlv3lp68pkhjzxtzyj1kwem">在大多数应用代码中很少需要副作用，但在特定情况下可能会有用。以下是一些 
+<code>effect</code> 可能是一个好解决方案的情况示例：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="1gn9pzkghtnbpc694vej8e09z">记录数据的显示和变化情况（无论是为了分析还是作为调试工具）。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="7vez9wcmzwq5s9qqafmyl36po">保持数据与 
+<code>window.localStorage</code> 同步。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="2myidrlydawrzxz07l4i4mybf">添加无法用模板语法表达的自定义 DOM 行为。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="dcf1m6gc28qicio6fmoeprjq1">对 
+<code>&lt;canvas&gt;</code>、图表库或其他第三方 UI 库进行自定义渲染。</li>
+
+  </ul>
+  
+    <div class="docs-callout docs-callout-critical">
+      <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b61w6swcjr5m72cx6fk3fck56">何时不使用副作用</h3>
+      <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="71aog4nkhi17ekx1wyfmh3dvh">要避免使用副作用来传播状态变更。这可能会导致 <code>ExpressionChangedAfterItHasBeenChecked</code> 错误、导致无限循环更新或导致不必要的变更检测周期。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3h4eq28e1fuuzbrx54rn01dyg">由于这些风险，Angular 默认阻止你在效果中设置信号。如果确实有必要，可以在创建效果时设置 
+<code>allowSignalWrites</code> 标志来启用它。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7wgngowgnfyz299nmtknsypch">相反，使用 
+<code>computed</code> 信号来建模依赖于其他状态的状态。</p>
+
+    </div>
+    
+  <h3 id="injection-context">
+    <a href="#injection-context" class="docs-anchor" tabindex="-1" aria-label="Link to Injection context" data-ng_translator_product="100" data-ng_translator_ref_id="6i2331m8j8vxiqrm3m7o9qbot">注入上下文</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="90gd6g8xrs2ed6k3sfex8inib">默认情况下，你只能在某个 
+<a href="guide/di/dependency-injection-context">注入上下文</a> 中创建一个 
+<code>effect()</code>（在这里你可以访问 
+<code>inject</code> 函数）。满足此要求的最简单方法是在组件、指令或服务 
+<code>构造函数</code> 中调用 
+<code>effect</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EffectiveCounterComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">readonly</span> count = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Register a new effect.</span></div><div class="hljs-ln-line">    <span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`The count is: <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.count()}</span>`</span>);</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1n7zbns2ukkpy4l0ayvo9domt">或者，你可以将效果赋值给某个字段（这也给它一个描述性的名称）。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EffectiveCounterComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">readonly</span> count = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> loggingEffect = <span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`The count is: <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.count()}</span>`</span>);</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1vkg8cz4rlb2ciuu63u57mz32">要在构造函数之外创建效果，可以通过其选项将 
+<code>Injector</code> 传递给 
+<code>effect</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EffectiveCounterComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">readonly</span> count = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> injector: Injector</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">initializeLogging</span>(): <span class="hljs-built_in">void</span> {</div><div class="hljs-ln-line">    <span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`The count is: <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.count()}</span>`</span>);</div><div class="hljs-ln-line">    }, {<span class="hljs-attr">injector</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">injector</span>});</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="destroying-effects">
+    <a href="#destroying-effects" class="docs-anchor" tabindex="-1" aria-label="Link to Destroying effects" data-ng_translator_product="100" data-ng_translator_ref_id="9bhshkxvby122ncer3rn84jdc">销毁副作用</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="74e0lwmpg76kpkbhzhu03utz3">当你创建一个副作用时，它会在其闭包上下文被销毁时自动销毁。这意味着当组件被销毁时，在组件内创建的副作用也会被销毁。指令、服务等中的副作用也是如此。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6neday34hqvz3ol8yobzn39yf">效果返回一个 
+<code>EffectRef</code>，你可以通过调用 
+<code>.destroy()</code> 方法手动销毁它们。你可以将此与 
+<code>manualCleanup</code> 选项结合使用，以创建一个持续到手动销毁的效果。要小心，当这些效果不再需要时，务必清理它们。</p>
+
+  <h2 id="advanced-topics">
+    <a href="#advanced-topics" class="docs-anchor" tabindex="-1" aria-label="Link to Advanced topics" data-ng_translator_product="100" data-ng_translator_ref_id="74227uv8w0mnb9jwmm0p94era">高级主题</a>
+  </h2>
+  
+  <h3 id="signal-equality-functions">
+    <a href="#signal-equality-functions" class="docs-anchor" tabindex="-1" aria-label="Link to Signal equality functions" data-ng_translator_product="100" data-ng_translator_ref_id="ebb4797d6e4zklfo4mardmyqh">信号相等性判定函数</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="91olzgv279iaiz72mt5d9rtag">创建信号时，你可以选择提供相等性判定函数，该函数将用于检查新值是否真的与前一个值不同。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> _ <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> data = <span class="hljs-title function_">signal</span>([<span class="hljs-string">'test'</span>], {<span class="hljs-attr">equal</span>: _.<span class="hljs-property">isEqual</span>});</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// Even though this is a different array instance, the deep equality</span></div><div class="hljs-ln-line"><span class="hljs-comment">// function will consider the values to be equal, and the signal won't</span></div><div class="hljs-ln-line"><span class="hljs-comment">// trigger any updates.</span></div><div class="hljs-ln-line">data.<span class="hljs-title function_">set</span>([<span class="hljs-string">'test'</span>]);</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7dooyqvr1jakjzi1jpqazderh">可以为可写信号和计算信号提供相等性判定函数。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4url9gig5852atcoe4160g5hh"><strong>有用提示：</strong> 默认情况下，信号使用引用相等性（
+<code>===</code> 比较）。</p>
+
+    </div>
+    
+  <h3 id="reading-without-tracking-dependencies">
+    <a href="#reading-without-tracking-dependencies" class="docs-anchor" tabindex="-1" aria-label="Link to Reading without tracking dependencies" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4z69vgrryxr1dp135t7wgnb98">不跟踪依赖关系的读取</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="e8z0vkvrll5y0g0b81si5fzja">在少数情况下，你可能希望在某个响应式函数（如 
+<code>computed</code> 或 
+<code>effect</code>）中执行代码并读取信号 
+<em>而不</em> 创建依赖关系。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2sh3wvafvihjwig17wlaafqwc">例如，假设当 
+<code>currentUser</code> 发生变化时，应该记录 
+<code>counter</code> 的值。你可以创建一个读取这两个信号的 
+<code>effect</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`User set to <span class="hljs-subst">${currentUser()}</span> and the counter is <span class="hljs-subst">${counter()}</span>`</span>);</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="571b185978v0f1lhdm5qf2d5f">此示例将在 
+<em>任一</em> 
+<code>currentUser</code> 或 
+<code>counter</code> 变化时记录一条消息。然而，如果效果只应该在 
+<code>currentUser</code> 变化时运行，那么读取 
+<code>counter</code> 只是偶然的，
+<code>counter</code> 的变化不应该记录新消息。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7lnbcc8sxz46g1r3wynijd6yf">你可以通过使用 
+<code>untracked</code> 调用其 getter 来防止信号读取被跟踪：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`User set to <span class="hljs-subst">${currentUser()}</span> and the counter is <span class="hljs-subst">${untracked(counter)}</span>`</span>);</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="72fhima74nj8yn8jeaj74etke"><code>untracked</code> 还在效果需要调用不应被视为依赖项的外部代码时非常有用：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> user = <span class="hljs-title function_">currentUser</span>();</div><div class="hljs-ln-line">  <span class="hljs-title function_">untracked</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">    <span class="hljs-comment">// If the `loggingService` reads signals, they won't be counted as</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// dependencies of this effect.</span></div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">loggingService</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`User set to <span class="hljs-subst">${user}</span>`</span>);</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+  <h3 id="effect-cleanup-functions">
+    <a href="#effect-cleanup-functions" class="docs-anchor" tabindex="-1" aria-label="Link to Effect cleanup functions" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="49tbudq461hu89rnklzruv9yl">副作用清理函数</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7btes1lipdpmc96ft9cpg681l">Effect 可能会启动某些长时间运行的操作，如果该 effect 被销毁或在第一次操作完成之前再次运行，你应该取消这些操作。当你创建一个 effect 时，你的函数可以选择性地接受一个 
+<code>onCleanup</code> 函数作为其第一个参数。这个 
+<code>onCleanup</code> 函数让你注册一个回调，该回调会在下次 effect 运行之前或 effect 被销毁时被调用。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">effect</span>(<span class="hljs-function">(<span class="hljs-params">onCleanup</span>) =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> user = <span class="hljs-title function_">currentUser</span>();</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> timer = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`1 second ago, the user became <span class="hljs-subst">${user}</span>`</span>);</div><div class="hljs-ln-line">  }, <span class="hljs-number">1000</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">onCleanup</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">    <span class="hljs-built_in">clearTimeout</span>(timer);</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>

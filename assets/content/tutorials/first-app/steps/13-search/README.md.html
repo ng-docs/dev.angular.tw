@@ -1,0 +1,162 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="27hpsbidypakh7khmsq1t4ndk">为你的应用添加搜索特性</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/first-app/steps/13-search/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5ri4f0qpbj6n22ak13q8buxv0">本教程示范了如何向 Angular 应用程序添加搜索功能。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c7dvmzlmo2ncowu58w4zyfbma">该应用程序将使用户能够搜索应用程序提供的数据，并且只显示与输入的字词匹配的结果。</p>
+
+    <div class="docs-video-container">
+      <iframe class="docs-video" src="https://www.youtube.com/embed/5K10oYJ5Y-E?si=TiuNKx_teR9baO7k&amp;start=457" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless title="Video player"></iframe>
+    </div>
+    
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="asun5w2l4ptau4q3fovy2l5k8"><strong>重要：</strong>我们建议在本教程步骤中使用你的本地环境。</p>
+
+    </div>
+    
+  <h2 id="what-youll-learn">
+    <a href="#what-youll-learn" class="docs-anchor" tabindex="-1" aria-label="Link to What you'll learn" data-ng_translator_product="100" data-ng_translator_ref_id="cy8qhuh22qozu5okjmjfdf3nx">你将学到什么</a>
+  </h2>
+  
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6g1lmj8k1tee2jfffp2y5n6a7">应用程序将使用表单中的数据来搜索相匹配的房屋位置</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bhpubsar5bp6toybrkcfsgc1m">应用程序将仅显示匹配的房屋位置</li>
+
+  </ul>
+  
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="update-the-home-component-properties">
+    <a href="#update-the-home-component-properties" class="docs-anchor" tabindex="-1" aria-label="Link to Update the home component properties" data-ng_translator_product="100" data-ng_translator_ref_id="ao5khmw4c39425rqtiwjwur7d">更新 Home 组件属性</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="97t94r82g0ciarl2nriaph019">在此步骤中，你将更新 <code>HomeComponent</code> 类以将数据存储在供过滤的新数组属性中。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3viorynj93yamhp6ra0kilky2">在 <code>src/app/home/home.component.ts</code> 中，将新属性添加到名为 <code>filteredLocationList</code> 的类中。</p>
+<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/14-http/src/app/home/home.component.ts" visiblelines="29" header="Add the filtered results property">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="731y6yqym4lvb70atm9t9fzvt">添加过滤结果属性</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component, inject} from <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {CommonModule} from <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocationComponent} from <span class="hljs-string">'../housing-location/housing-location.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocation} from <span class="hljs-string">'../housinglocation'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingService} from <span class="hljs-string">'../housing.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component({</span></div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-home'</span>,</div><div class="hljs-ln-line">  standalone: true,</div><div class="hljs-ln-line">  imports: [CommonModule, HousingLocationComponent],</div><div class="hljs-ln-line">  template: `</div><div class="hljs-ln-line">    &lt;section&gt;</div><div class="hljs-ln-line">      &lt;form&gt;</div><div class="hljs-ln-line">        &lt;input type=<span class="hljs-string">"text"</span> placeholder=<span class="hljs-string">"Filter by city"</span> #filter /&gt;</div><div class="hljs-ln-line">        &lt;button class=<span class="hljs-string">"primary"</span> type=<span class="hljs-string">"button"</span> (click)=<span class="hljs-string">"filterResults(filter.value)"</span>&gt;Search&lt;/button&gt;</div><div class="hljs-ln-line">      &lt;/form&gt;</div><div class="hljs-ln-line">    &lt;/section&gt;</div><div class="hljs-ln-line">    &lt;section class=<span class="hljs-string">"results"</span>&gt;</div><div class="hljs-ln-line">      &lt;app-housing-location</div><div class="hljs-ln-line">        *ngFor=<span class="hljs-string">"let housingLocation of filteredLocationList"</span></div><div class="hljs-ln-line">        [housingLocation]=<span class="hljs-string">"housingLocation"</span></div><div class="hljs-ln-line">      &gt;&lt;/app-housing-location&gt;</div><div class="hljs-ln-line">    &lt;/section&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./home.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> <span class="hljs-title class_">HomeComponent</span> {</div><div class="hljs-ln-line">  housingLocationList: HousingLocation[] = [];</div><div class="hljs-ln-line">  housingService: HousingService = inject(HousingService);</div><div class="hljs-ln-line">  filteredLocationList: HousingLocation[] = [];</div><div class="hljs-ln-line">  <span class="hljs-keyword">constructor</span>() {</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.housingLocationList = <span class="hljs-keyword">this</span>.housingService.getAllHousingLocations();</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.filteredLocationList = <span class="hljs-keyword">this</span>.housingLocationList;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  filterResults(text: string) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (!text) {</div><div class="hljs-ln-line">      <span class="hljs-keyword">this</span>.filteredLocationList = <span class="hljs-keyword">this</span>.housingLocationList;</div><div class="hljs-ln-line">      <span class="hljs-keyword">return</span>;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.filteredLocationList = <span class="hljs-keyword">this</span>.housingLocationList.filter((housingLocation) =&gt;</div><div class="hljs-ln-line">      housingLocation?.city.toLowerCase().includes(text.toLowerCase()),</div><div class="hljs-ln-line">    );</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="x0r62elq5kb0apnsffs1fsbc"><code>filteredLocationList</code> 持有与用户输入的搜索条件相匹配的值。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7i2954z0dvutnai3nqjo8784u">页面加载时，<code>filteredLocationList</code> 应默认包含所有房屋位置值。更新 <code>HomeComponent</code> 的 <code>constructor</code> 以设置值。</p>
+<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/14-http/src/app/home/home.component.ts" visiblelines="30,31,32,33" header="Set the value of filteredLocationList">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="8bpaw25wu4fgslynpjircdmz1">设置 filteredLocationList 的值</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component, inject} from <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {CommonModule} from <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocationComponent} from <span class="hljs-string">'../housing-location/housing-location.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocation} from <span class="hljs-string">'../housinglocation'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingService} from <span class="hljs-string">'../housing.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component({</span></div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-home'</span>,</div><div class="hljs-ln-line">  standalone: true,</div><div class="hljs-ln-line">  imports: [CommonModule, HousingLocationComponent],</div><div class="hljs-ln-line">  template: `</div><div class="hljs-ln-line">    &lt;section&gt;</div><div class="hljs-ln-line">      &lt;form&gt;</div><div class="hljs-ln-line">        &lt;input type=<span class="hljs-string">"text"</span> placeholder=<span class="hljs-string">"Filter by city"</span> #filter /&gt;</div><div class="hljs-ln-line">        &lt;button class=<span class="hljs-string">"primary"</span> type=<span class="hljs-string">"button"</span> (click)=<span class="hljs-string">"filterResults(filter.value)"</span>&gt;Search&lt;/button&gt;</div><div class="hljs-ln-line">      &lt;/form&gt;</div><div class="hljs-ln-line">    &lt;/section&gt;</div><div class="hljs-ln-line">    &lt;section class=<span class="hljs-string">"results"</span>&gt;</div><div class="hljs-ln-line">      &lt;app-housing-location</div><div class="hljs-ln-line">        *ngFor=<span class="hljs-string">"let housingLocation of filteredLocationList"</span></div><div class="hljs-ln-line">        [housingLocation]=<span class="hljs-string">"housingLocation"</span></div><div class="hljs-ln-line">      &gt;&lt;/app-housing-location&gt;</div><div class="hljs-ln-line">    &lt;/section&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./home.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> <span class="hljs-title class_">HomeComponent</span> {</div><div class="hljs-ln-line">  housingLocationList: HousingLocation[] = [];</div><div class="hljs-ln-line">  housingService: HousingService = inject(HousingService);</div><div class="hljs-ln-line">  filteredLocationList: HousingLocation[] = [];</div><div class="hljs-ln-line">  <span class="hljs-keyword">constructor</span>() {</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.housingLocationList = <span class="hljs-keyword">this</span>.housingService.getAllHousingLocations();</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.filteredLocationList = <span class="hljs-keyword">this</span>.housingLocationList;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  filterResults(text: string) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (!text) {</div><div class="hljs-ln-line">      <span class="hljs-keyword">this</span>.filteredLocationList = <span class="hljs-keyword">this</span>.housingLocationList;</div><div class="hljs-ln-line">      <span class="hljs-keyword">return</span>;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.filteredLocationList = <span class="hljs-keyword">this</span>.housingLocationList.filter((housingLocation) =&gt;</div><div class="hljs-ln-line">      housingLocation?.city.toLowerCase().includes(text.toLowerCase()),</div><div class="hljs-ln-line">    );</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="update-the-home-component-template">
+    <a href="#update-the-home-component-template" class="docs-anchor" tabindex="-1" aria-label="Link to Update the home component template" data-ng_translator_product="100" data-ng_translator_ref_id="55x3fsfc7xjeq9b2jwsx4oph">更新 Home 组件模板</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bs277uh7qym65atyq89y2pqm5"><code>HomeComponent</code> 已经包含一个输入字段，你将使用它来捕获用户的输入。该字符串文本将用于过滤结果。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="crhswb7kmllt1tmj90e6a2wxa">更新 
+<code>HomeComponent</code> 模板，在 
+<code>input</code> 元素中包含一个名为 
+<code>#filter</code> 的模板变量。</p>
+<div class="docs-code" header="Add a template variable to HomeComponent's template">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="dl4y9qro7odzprzvjzlu96xj5">将模板变量添加到 HomeComponent 的模板中</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Filter by city"</span> #<span class="hljs-attr">filter</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="3moufjbp0q6tyoscuq2hr6kvt">此示例使用一个 
+<a href="guide/templates">模板引用变量</a> 来访问 
+<code>input</code> 元素的值。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="23eqp257h2hrq7kez96r0uc6d">接下来，更新组件模板，将事件处理器附着到 "Search" 按钮上。</p>
+<div class="docs-code" header="Bind the click event">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="a5bsprb9w75p1u3s1ia3ku6b9">绑定 click 事件</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"primary"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"filterResults(filter.value)"</span>&gt;</span>Search<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="6q6vptrqw97drfdcmotqiqm69">通过绑定 
+<code>button</code> 元素上的 
+<code>click</code> 事件，你可以调用 
+<code>filterResults</code> 函数。函数的参数是 
+<code>filter</code> 模板变量的 
+<code>value</code> 属性，具体来说，是 
+<code>input</code> HTML 元素的 
+<code>.value</code> 属性。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="dyfxcmn7kdu9voo0v1v68phad">最后一个模板更新是 
+<code>ngFor</code> 指令。更新 
+<code>ngFor</code> 的值以迭代 
+<code>filteredLocationList</code> 数组中的值。</p>
+<div class="docs-code" header="Update the ngFor directive value">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="51p2tcsms8bneanzcro1bzdwc">更新 ngFor 指令值</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-housing-location</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let housingLocation of filteredLocationList"</span> [<span class="hljs-attr">housingLocation</span>]=<span class="hljs-string">"housingLocation"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-housing-location</span>&gt;</span></div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="implement-the-event-handler-function">
+    <a href="#implement-the-event-handler-function" class="docs-anchor" tabindex="-1" aria-label="Link to Implement the event handler function" data-ng_translator_product="100" data-ng_translator_ref_id="d3gqhfm921lsxfeeehgwwox29">实现事件处理器函数</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="agaviuvdq9iplo8umcu80aif5">模板已更新为将 <code>filterResults</code> 函数绑定到 <code>click</code> 事件。接下来，你的任务是在 <code>HomeComponent</code> 类中实现 <code>filterResults</code> 函数。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4zgp89gs0lw5qrfkk392y1rf6">更新 <code>HomeComponent</code> 类以包含 <code>filterResults</code> 函数的实现。</p>
+<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/14-http/src/app/home/home.component.ts" visiblelines="34,35,36,37,38,39,40,41,42,43" header="Add the filterResults function implementation">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="4zghhgayynn1yomn92fjwcxly">添加 filterResults 函数的实现</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component, inject} from <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {CommonModule} from <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocationComponent} from <span class="hljs-string">'../housing-location/housing-location.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocation} from <span class="hljs-string">'../housinglocation'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingService} from <span class="hljs-string">'../housing.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component({</span></div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-home'</span>,</div><div class="hljs-ln-line">  standalone: true,</div><div class="hljs-ln-line">  imports: [CommonModule, HousingLocationComponent],</div><div class="hljs-ln-line">  template: `</div><div class="hljs-ln-line">    &lt;section&gt;</div><div class="hljs-ln-line">      &lt;form&gt;</div><div class="hljs-ln-line">        &lt;input type=<span class="hljs-string">"text"</span> placeholder=<span class="hljs-string">"Filter by city"</span> #filter /&gt;</div><div class="hljs-ln-line">        &lt;button class=<span class="hljs-string">"primary"</span> type=<span class="hljs-string">"button"</span> (click)=<span class="hljs-string">"filterResults(filter.value)"</span>&gt;Search&lt;/button&gt;</div><div class="hljs-ln-line">      &lt;/form&gt;</div><div class="hljs-ln-line">    &lt;/section&gt;</div><div class="hljs-ln-line">    &lt;section class=<span class="hljs-string">"results"</span>&gt;</div><div class="hljs-ln-line">      &lt;app-housing-location</div><div class="hljs-ln-line">        *ngFor=<span class="hljs-string">"let housingLocation of filteredLocationList"</span></div><div class="hljs-ln-line">        [housingLocation]=<span class="hljs-string">"housingLocation"</span></div><div class="hljs-ln-line">      &gt;&lt;/app-housing-location&gt;</div><div class="hljs-ln-line">    &lt;/section&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./home.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> <span class="hljs-title class_">HomeComponent</span> {</div><div class="hljs-ln-line">  housingLocationList: HousingLocation[] = [];</div><div class="hljs-ln-line">  housingService: HousingService = inject(HousingService);</div><div class="hljs-ln-line">  filteredLocationList: HousingLocation[] = [];</div><div class="hljs-ln-line">  <span class="hljs-keyword">constructor</span>() {</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.housingLocationList = <span class="hljs-keyword">this</span>.housingService.getAllHousingLocations();</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.filteredLocationList = <span class="hljs-keyword">this</span>.housingLocationList;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  filterResults(text: string) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (!text) {</div><div class="hljs-ln-line">      <span class="hljs-keyword">this</span>.filteredLocationList = <span class="hljs-keyword">this</span>.housingLocationList;</div><div class="hljs-ln-line">      <span class="hljs-keyword">return</span>;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.filteredLocationList = <span class="hljs-keyword">this</span>.housingLocationList.filter((housingLocation) =&gt;</div><div class="hljs-ln-line">      housingLocation?.city.toLowerCase().includes(text.toLowerCase()),</div><div class="hljs-ln-line">    );</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="d9to43iww6p6e6sernele58v0">这个函数使用 
+<code>String</code> 的 
+<code>filter</code> 函数将 
+<code>text</code> 参数的值与 
+<code>housingLocation.city</code> 属性进行比较。你可以更新此函数以匹配任何属性或多个属性，这将是一个有趣的练习。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d9bvruz5d6s4tuafhg77ynow5">保存你的代码。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1e52w2xz9oidcys9mezsvaw50">刷新浏览器，输入文字后点击“搜索”按钮，确认这样可以按城市搜索房源位置数据。</p>
+</li>
+
+    </ol>
+    <img alt="filtered search results based on user input" src="assets/images/tutorials/first-app/homes-app-lesson-13-step-3.png">
+    </li>
+    
+    </ol>
+    
+    <div class="docs-alert docs-alert-summary">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="1vgsm3thq4vpxeonqdxadfxg8"><strong>总结：</strong>在本课中，你更新了应用以使用模板变量与模板值进行交互，并通过事件绑定和数组函数添加搜索功能。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="ep5mlw3d5q1ucm62jzem9a7pc">有关本课涵盖主题的更多信息，请访问：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="guide/templates" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="38zsz0g8nxbq55sv3194dlsyp">模板变量</a>
+    
+    <a class="docs-pill" href="guide/templates/event-binding" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1nljp7bzzs457rnv2g2zxgf1v">事件处理</a>
+    
+
+    </nav>
+    

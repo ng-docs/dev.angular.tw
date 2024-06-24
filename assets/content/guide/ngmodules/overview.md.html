@@ -1,0 +1,79 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1">NgModules</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/overview.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="ym03w5jrnt3knkpag37h7vab"><strong>NgModules</strong> 配置注入器、编译器并帮助将相关内容组织在一起。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7akli23rug3gczwhocxbd1v2e">NgModule 是一个由 
+<code>@NgModule</code> 装饰器标记的类。 
+<code>@NgModule</code> 接受一个描述如何编译组件模板以及如何在运行时创建注入器的元数据对象。 它标识模块自身的组件、指令和管道，并通过 
+<code>exports</code> 属性使其中一些公开，以便外部组件可以使用它们。 
+<code>@NgModule</code> 还可以向应用程序的依赖注入器添加服务提供者。</p>
+
+  <h2 id="angular-modularity">
+    <a href="#angular-modularity" class="docs-anchor" tabindex="-1" aria-label="Link to Angular modularity" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ezl02ydxqb4ynxky4foww77hp">Angular 模块化</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3ilamfqmqn5jxfk6hfik72v09">模块是组织应用和使用外部库扩展应用的最佳途径。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ajuv2a04gtrplqulfda5tg212">Angular 库是 NgModules，如 
+<code>FormsModule</code>、
+<code>HttpClientModule</code> 和 
+<code>RouterModule</code>。 许多第三方库可作为 NgModules 使用，例如
+<a href="https://material.angular.io" target="_blank">Material Design 组件库</a>、
+<a href="https://ionicframework.com" target="_blank">Ionic</a> 或 
+<a href="https://github.com/angular/angularfire" target="_blank">Angular 的 Firebase 集成</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dv7zzxurp1e0o0u30g8sohzoo">NgModule 把组件、指令和管道打包成内聚的功能块，每个模块聚焦于一个特性区域、业务领域、工作流或通用工具。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cdd7doxhex4rz4qhohuahhcb4">模块还可以把服务加到应用中。这些服务可能是内部开发的（比如你自己写的），或者来自外部的（比如 Angular 的路由和 HTTP 客户端）。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e6op44blqu0dy3ypw9astarco">模块可以在应用启动时急性加载，也可以由路由器进行异步的惰性加载。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3rpwdk3hiiwznfxv7ldu780z9">NgModule 的元数据会做这些：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e2t340tjl3k2r3hkm6f7gqyik">声明某些组件、指令和管道属于这个模块</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b59lz60ldw7tc20c53en1vas7">公开其中的部分组件、指令和管道，以便其它模块中的组件模板中可以使用它们</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9o0ex9j1j1wp8bjueoiashcjb">导入其它带有组件、指令和管道的模块，这些模块中的元件都是本模块所需的</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="62yknemskgcc5ioy9o3fo0qiy">提供一些供应用中的其它组件使用的服务</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="c0ktqr8240dh3aewlcrfmybqy">每个 Angular 应用程序至少有一个模块，即根模块。 你需要
+<a href="guide/ngmodules/bootstrapping">引导</a>该模块以启动应用程序。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9ym5wkmux1dxow99x6flgh7yp">根模块在应用程序中拥有少量组件时是必需的。 随着应用程序的增长，你将根模块重构为代表相关功能集合的 
+<a href="guide/ngmodules/feature-modules">特性模块</a>。 然后将这些模块导入到根模块中。</p>
+
+  <h2 id="the-basic-ngmodule">
+    <a href="#the-basic-ngmodule" class="docs-anchor" tabindex="-1" aria-label="Link to The basic NgModule" data-ng_translator_product="100" data-ng_translator_ref_id="7wm6vcqx58uae24nwua8t17ji">基本的模块</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2nu6uevjqyo7p7gupdljszseh"><a href="/tools/cli">Angular CLI</a> 在创建一个新应用时生成了以下基本的 
+<code>AppModule</code>。</p>
+<div class="docs-code" header="src/app/app.module.ts">
+    <div class="docs-code-header"><h3>src/app/app.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { BrowserModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { NgModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { AppComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@NgModule({</div><div class="hljs-ln-line">  declarations: [AppComponent],</div><div class="hljs-ln-line">  imports: [BrowserModule],</div><div class="hljs-ln-line">  providers: [],</div><div class="hljs-ln-line">  bootstrap: [AppComponent]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="byyfwgt50w0c1kwsbrystgm93">顶部是导入语句。 接下来的部分是配置 
+<code>@NgModule</code> 的地方，声明哪些组件和指令属于它（
+<code>declarations</code>），以及它使用哪些其他模块（
+<code>imports</code>）。 有关 
+<code>@NgModule</code> 结构的更多信息，请务必阅读 
+<a href="guide/ngmodules/bootstrapping">引导启动</a>。</p>
+
+  <h2 id="more-on-ngmodules">
+    <a href="#more-on-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to More on NgModules" data-ng_translator_product="100" data-ng_translator_ref_id="4zpukz8usqrzb3byrzbogm52l">关于 NgModule 的更多知识</a>
+  </h2>
+  
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="/guide/ngmodules/feature-modules" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ppf4n892t274r9syub1dg371">特性模块</a>
+    
+    <a class="docs-pill" href="/guide/ngmodules/providers" data-ng_translator_product="100" data-ng_translator_ref_id="77p47ajmgeg7nllnu7idzpnzw">提供者</a>
+    
+    <a class="docs-pill" href="/guide/ngmodules/module-types" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1ykb0zx7mbuotdngmhjnp1ibi">NgModule 的分类</a>
+    
+
+    </nav>
+    

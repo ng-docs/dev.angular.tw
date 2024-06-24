@@ -1,0 +1,30 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/service-worker</span><div class="docs-reference-title"><div><h1>SwRegistrationOptions</h1><div class="docs-api-item-label" data-mode="full" data-type="undecorated_class">Class</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/service-worker/src/provider.ts#L137-L183" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="b1hfvr1jeohydvvad0parf90v">可用于在 
+<code>ServiceWorkerModule.register()</code> 之外为 
+<code>ServiceWorkerModule</code> 提供选项的令牌。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SwRegistrationOptions</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="enabled">  enabled?: <span class="hljs-built_in">boolean</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="scope">  scope?: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="registrationStrategy">  registrationStrategy?: <span class="hljs-built_in">string</span> | (<span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-built_in">unknown</span>&gt;);</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="b1hfvr1jeohydvvad0parf90v">可用于在 
+<code>ServiceWorkerModule.register()</code> 之外为 
+<code>ServiceWorkerModule</code> 提供选项的令牌。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4ic67cfv4u5zegpgpyrits5rt">你可以用此标记来定义一个在运行时生成注册选项的提供者，例如通过函数调用：</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eyeve4p327chco1s21fi23k9p">{@example service-worker/registration-options/module.ts region="registration-options" header="app.module.ts"}</p></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="enabled" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>enabled</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="42iyq91jbjmwh2eb7nh4e4fd1">ServiceWorker 是否会被注册以及相关服务（如 
+<code>SwPush</code> 和 
+<code>SwUpdate</code>）是否会尝试与其通信和交互。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="85zse8vprpfdsr05rehd9rwsu">默认值：true</p></div></div></div></div><div id="scope" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>scope</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ace9dofrp3wbkqe3hzgjvr5vb">定义 ServiceWorker 的注册范围的 URL；也就是说，它可以控制的 URL 范围。调用<a href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register">ServiceWorkerContainer#register()</a>时将使用它。</p></div></div></div></div><div id="registrationStrategy" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>registrationStrategy</h3><div><code>string | (() =&gt; Observable&lt;unknown&gt;)</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dtlhqngoc6h073fzsm52hnlrk">定义 ServiceWorker 注册策略，该策略确定它将何时注册到浏览器。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1p2m7ohqykpccjwuh9be279w0">应用程序稳定后注册的默认行为（即一旦没有挂起的微任务和宏任务）旨在尽快注册 ServiceWorker，但不影响应用程序的首次加载。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="60ioamz17l2dxwfvu6av3haud">不过，在某些情况下，你可能希望对 ServiceWorker 的注册时间进行更多控制（例如，可能会有长时间运行的超时或轮询间隔，以防止应用程序稳定）。可用的选项是：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="d88xjm0rybxuhrhoi4gpp1v4g"><code>registerWhenStable:&lt;timeout&gt;</code>：在应用稳定后（没有未完成的微任务/宏任务）立即注册，但不超过 
+<code>&lt;timeout&gt;</code> 毫秒。如果应用在 
+<code>&lt;timeout&gt;</code> 毫秒后仍未稳定（例如，由于反复的异步任务），ServiceWorker 仍会被注册。如果省略 
+<code>&lt;timeout&gt;</code>，ServiceWorker 仅在应用稳定后注册。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3f03wysbm0s85re0mp9c6fq62"><code>registerImmediately</code>：立即注册。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="9qo10iq0zc2m75fdwhqzvw19s"><code>registerWithDelay:&lt;timeout&gt;</code>：延迟 
+<code>&lt;timeout&gt;</code> 毫秒注册。例如，使用 
+<code>registerWithDelay:5000</code> 在 5 秒后注册 ServiceWorker。如果省略 
+<code>&lt;timeout&gt;</code>，默认为 
+<code>0</code>，即在所有未完成的微任务完成后尽快异步注册 ServiceWorker。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="42gugy5iuyeqoo9mz8yjt5hgs">一个可观察者工厂函数：一个返回 
+<code>Observable</code> 的函数。该函数将在运行时用于获取并订阅 
+<code>Observable</code>，并且 ServiceWorker 会在首次发出值时注册。</li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9ltyw0j4y4ndb9wppggq1a0cb">默认值：“registerWhenStable:30000”</p></div></div></div></div></div></div></div>

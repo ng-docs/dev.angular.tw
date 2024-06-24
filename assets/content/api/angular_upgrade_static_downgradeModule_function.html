@@ -1,0 +1,191 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/upgrade/static</span><div class="docs-reference-title"><div><h1>downgradeModule</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div><div class="docs-api-item-label" data-mode="full" data-type="deprecated">Deprecated</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/upgrade/static/src/downgrade_module.ts#L258-L258" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="3pdfcuakgdutkl8uyhzxh8xa7">用于创建 AngularJS 模块的辅助函数，可以在需要实例化
+<a href="api/upgrade/static/downgradeComponent"><code>downgradeComponent</code></a>的情况下（可能是延迟地）按需引导 Angular 模块。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line hljs-ln-line-deprecated"><span class="hljs-title function_">downgradeModule</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">moduleOrBootstrapFn</span>: <span class="hljs-title class_">NgModuleFactory</span>&lt;T&gt;</div><div class="hljs-ln-line ">): <span class="hljs-built_in">string</span>;</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="3pdfcuakgdutkl8uyhzxh8xa7">用于创建 AngularJS 模块的辅助函数，可以在需要实例化
+<a href="api/upgrade/static/downgradeComponent"><code>downgradeComponent</code></a>的情况下（可能是延迟地）按需引导 Angular 模块。</p>
+<p><em data-ng_translator_product="100" data-ng_translator_ref_id="24w1s0t56ma8ovylqt88cz8tv">属于 
+<a href="api?query=upgrade%2Fstatic">upgrade/static</a> 库的一部分，用于支持 AOT 编译的混合升级应用。</em></p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c9narjbecamlppabewd1ufahs">它允许惰性加载/引导混合应用程序的 Angular 部分，而无需预先支付成本。例如，你可以有一个 AngularJS
+应用程序，将 Angular 用于特定路由，并且只有在/当用户访问这些路由之一时才实例化 Angular 模块。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="arrfalzt2hn37c9pm9siy6kn">Angular 模块将被引导一次（第一次请求时），并且从那时起将使用相同的引用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cmsewctl4apupum82n2xbtb80"><code>downgradeModule()</code> 需要一个 
+<code>NgModuleFactory</code>、
+<code>NgModule</code> 类或函数：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="1vbtagri0mpkvhyd5y7731x6q"><code>NgModuleFactory</code>：如果传递 
+<code>NgModuleFactory</code>，它将用于使用 
+<code>platformBrowser</code> 的 {@link PlatformRefbootstrapModuleFactory bootstrapModuleFactory()} 实例化模块。注意：此类型的参数已被弃用。请改为提供 
+<code>NgModule</code> 类或引导函数。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="6ax04j1b6iddokqoci904ikhd"><code>NgModule</code> 类：如果传递一个 NgModule 类，它将用于使用 
+<code>platformBrowser</code> 的 {@link PlatformRefbootstrapModule bootstrapModule()} 实例化模块。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="bcmabdvbmq9j6lo1r31mmi4kk"><code>函数</code>：如果传递一个函数，该函数应返回一个求解为 
+<code>NgModuleRef</code> 的 promise。调用该函数时，将提供一个包含额外 {@link StaticProvider 提供者} 的数组，期望这些提供者在返回的 
+<code>NgModuleRef</code> 的 
+<code>Injector</code> 中可用。</li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8dh3zckqe1ew565uzbrqzwhx8"><code>downgradeModule()</code> 返回创建的 AngularJS 包装模块的名称。你可以使用它来声明在你的主 AngularJS 模块中的依赖。</p>
+<p>{@example upgrade/static/ts/lite/module.ts region="basic-how-to"}</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="367xkqt5ypetlht868p08x6v0">有关如何使用 
+<code>downgradeModule()</code> 的更多详细信息，请参见 
+<a href="https://angular.io/guide/upgrade">升级以提高性能</a>。</p></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="8hznf8ffd1m3p3fzjv4w4il9f">除了 
+<code>UpgradeModule</code>，你可以像往常一样使用其他 
+<code>upgrade/static</code> 辅助工具来构建混合应用。注意，Angular 部分（例如降级的服务）在降级模块引导之前将不可用，即通过实例化降级组件。</p>
+<div class="alert is-important">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="10ijdf93yc3pmmmlb4s4rbeog">你不能在同一个混合应用中同时使用 
+<code>downgradeModule()</code> 和 
+<code>UpgradeModule</code>。
+<br> 使用其中一个。</p>
+</div>
+
+<h3 data-ng_translator_product="100" data-ng_translator_ref_id="etk4rwzrv16un6kk5y2hnspkl">与 
+<code>UpgradeModule</code> 的区别</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="afzylck1ova7xidsnnrlyojnm">除了它们不同的 API 之外，
+<code>downgradeModule()</code> 和 
+<code>UpgradeModule</code> 之间还有两个重要的内部区别，这些区别会影响混合应用的行为：</p>
+
+      <ol class="docs-ordered-list">
+        <li data-ng_translator_product="100" data-ng_translator_ref_id="9otwkkfd8peyizpwx6ipqxomj">与 
+<code>UpgradeModule</code> 不同，
+<code>downgradeModule()</code> 不会在 {@link NgZone Angular zone} 内启动主 AngularJS 模块。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="3sbv5ii19dahpargnzgfw3ao8">与 
+<code>UpgradeModule</code> 不同，
+<code>downgradeModule()</code> 不会在检测到应用的 Angular 部分有变化时自动运行 
+<a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$digest">$digest()</a>。</li>
+
+      </ol>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="2u4n0lf48tpwso9vad9mzpotf">这意味着使用 
+<code>UpgradeModule</code> 的应用将更频繁地运行变更检测，以确保两个框架都能正确地接收到可能的变更通知。这将不可避免地导致比必要更多的变更检测运行。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7gdnjozo7smnfldvven5k25tu">另一方面，
+<code>downgradeModule()</code> 不会尝试将两个变更检测体系紧密结合，仅在明确知道必要的情况下（例如，当某个降级组件的输入发生变化时）限制显式变更检测运行。这提高了性能，尤其是在变更检测频繁的应用中，但需要开发者根据需要手动通知每个框架。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="at9hnrxn60qbqpsanuq7aifjj">有关差异及其影响的更详细讨论，请参见 
+<a href="https://angular.io/guide/upgrade">性能优化升级</a>。</p>
+<div class="alert is-helpful">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3zxd8rvjz9myr40gos5of9q78">你可以使用 
+<a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$apply">scope.$apply(...)</a> 或 
+<a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$digest">$rootScope.$digest()</a> 在 AngularJS 中手动触发变更检测运行。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1pkyftepm4w8np6twa1xaair4">你可以使用 {@link NgZonerun * ngZone.run(...)} 在 Angular 中手动触发变更检测运行。</p>
+</div>
+
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3pk51nmmelj99u4lj404opsyu">降级多个模块</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cqb2a0mjk7hw5n4w2czpn1yct">可以降级多个模块并将它们包含在 AngularJS
+应用程序中。在这种情况下，当需要实例化关联的降级组件或可注入时，每个降级的模块都将被引导。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="az3r0cy9bpmqhoztb39quhoyr">降级多个模块时要记住的事情：</p>
+
+    <ul class="docs-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="3v0jg103mxnjfxa3xb1pwxhtu">每个降级的组件/可注入对象需要明确关联到一个降级模块。详见 
+<code>downgradeComponent()</code> 和 
+<code>downgradeInjectable()</code>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="1zvllpazmejrq9q6oob8vm8n1">如果你希望某些可注入对象在所有降级模块之间共享，可以在创建 
+<code>PlatformRef</code>（例如，通过 
+<code>platformBrowser</code> 或 
+<code>platformBrowserDynamic</code>）时将它们提供为 
+<code>StaticProvider</code>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="87ni628h8gxlykrlnpnqkpa82">使用 {@link PlatformRefbootstrapmodule 
+<code>bootstrapModule()</code>} 或 {@link PlatformRefbootstrapmodulefactory 
+<code>bootstrapModuleFactory()</code>} 引导降级模块时，每个模块都被视为“根”模块。因此，对于 
+<code>"root"</code> 中提供的每个可注入对象（通过 {@link InjectableprovidedIn 
+<code>providedIn</code>}）都会创建一个新实例。如果这不是你的意图，你可以有一个共享模块（将充当“根”模块），并使用该模块的注入器创建所有降级模块：</p>
+<code-example path="upgrade/static/ts/lite-multi-shared/module.ts" region="shared-root-module" /></li>
+
+    </ul>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>downgradeModule</h3><div><code>string</code></div></div><span class="docs-param-keyword docs-deprecated">@deprecated</span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item docs-reference-card-item-deprecated"><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="3pdfcuakgdutkl8uyhzxh8xa7">用于创建 AngularJS 模块的辅助函数，可以在需要实例化
+<a href="api/upgrade/static/downgradeComponent"><code>downgradeComponent</code></a>的情况下（可能是延迟地）按需引导 Angular 模块。</p>
+<p><em data-ng_translator_product="100" data-ng_translator_ref_id="24w1s0t56ma8ovylqt88cz8tv">属于 
+<a href="api?query=upgrade%2Fstatic">upgrade/static</a> 库的一部分，用于支持 AOT 编译的混合升级应用。</em></p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c9narjbecamlppabewd1ufahs">它允许惰性加载/引导混合应用程序的 Angular 部分，而无需预先支付成本。例如，你可以有一个 AngularJS
+应用程序，将 Angular 用于特定路由，并且只有在/当用户访问这些路由之一时才实例化 Angular 模块。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="arrfalzt2hn37c9pm9siy6kn">Angular 模块将被引导一次（第一次请求时），并且从那时起将使用相同的引用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cmsewctl4apupum82n2xbtb80"><code>downgradeModule()</code> 需要一个 
+<code>NgModuleFactory</code>、
+<code>NgModule</code> 类或函数：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="1vbtagri0mpkvhyd5y7731x6q"><code>NgModuleFactory</code>：如果传递 
+<code>NgModuleFactory</code>，它将用于使用 
+<code>platformBrowser</code> 的 {@link PlatformRefbootstrapModuleFactory bootstrapModuleFactory()} 实例化模块。注意：此类型的参数已被弃用。请改为提供 
+<code>NgModule</code> 类或引导函数。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="6ax04j1b6iddokqoci904ikhd"><code>NgModule</code> 类：如果传递一个 NgModule 类，它将用于使用 
+<code>platformBrowser</code> 的 {@link PlatformRefbootstrapModule bootstrapModule()} 实例化模块。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="bcmabdvbmq9j6lo1r31mmi4kk"><code>函数</code>：如果传递一个函数，该函数应返回一个求解为 
+<code>NgModuleRef</code> 的 promise。调用该函数时，将提供一个包含额外 {@link StaticProvider 提供者} 的数组，期望这些提供者在返回的 
+<code>NgModuleRef</code> 的 
+<code>Injector</code> 中可用。</li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8dh3zckqe1ew565uzbrqzwhx8"><code>downgradeModule()</code> 返回创建的 AngularJS 包装模块的名称。你可以使用它来声明在你的主 AngularJS 模块中的依赖。</p>
+<p>{@example upgrade/static/ts/lite/module.ts region="basic-how-to"}</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="367xkqt5ypetlht868p08x6v0">有关如何使用 
+<code>downgradeModule()</code> 的更多详细信息，请参见 
+<a href="https://angular.io/guide/upgrade">升级以提高性能</a>。</p></div><div><div class="docs-deprecation-message"><span class="docs-param-keyword docs-deprecated">@deprecated</span><span><p data-ng_translator_product="100" data-ng_translator_ref_id="7iwxzb8013hhftbzwmbz1qb3v">将 
+<code>NgModuleFactory</code> 作为 
+<code>downgradeModule</code> 函数参数传递的方法已被弃用，请改为传递 NgModule 类引用。</p>
+</span></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">moduleOrBootstrapFn</span><code>NgModuleFactory&lt;T&gt;</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>string</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><p data-ng_translator_product="100" data-ng_translator_ref_id="8hznf8ffd1m3p3fzjv4w4il9f">除了 
+<code>UpgradeModule</code>，你可以像往常一样使用其他 
+<code>upgrade/static</code> 辅助工具来构建混合应用。注意，Angular 部分（例如降级的服务）在降级模块引导之前将不可用，即通过实例化降级组件。</p>
+<div class="alert is-important">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="10ijdf93yc3pmmmlb4s4rbeog">你不能在同一个混合应用中同时使用 
+<code>downgradeModule()</code> 和 
+<code>UpgradeModule</code>。
+<br> 使用其中一个。</p>
+</div>
+
+<h3 data-ng_translator_product="100" data-ng_translator_ref_id="etk4rwzrv16un6kk5y2hnspkl">与 
+<code>UpgradeModule</code> 的区别</h3>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="afzylck1ova7xidsnnrlyojnm">除了它们不同的 API 之外，
+<code>downgradeModule()</code> 和 
+<code>UpgradeModule</code> 之间还有两个重要的内部区别，这些区别会影响混合应用的行为：</p>
+
+      <ol class="docs-ordered-list">
+        <li data-ng_translator_product="100" data-ng_translator_ref_id="9otwkkfd8peyizpwx6ipqxomj">与 
+<code>UpgradeModule</code> 不同，
+<code>downgradeModule()</code> 不会在 {@link NgZone Angular zone} 内启动主 AngularJS 模块。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="3sbv5ii19dahpargnzgfw3ao8">与 
+<code>UpgradeModule</code> 不同，
+<code>downgradeModule()</code> 不会在检测到应用的 Angular 部分有变化时自动运行 
+<a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$digest">$digest()</a>。</li>
+
+      </ol>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="2u4n0lf48tpwso9vad9mzpotf">这意味着使用 
+<code>UpgradeModule</code> 的应用将更频繁地运行变更检测，以确保两个框架都能正确地接收到可能的变更通知。这将不可避免地导致比必要更多的变更检测运行。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7gdnjozo7smnfldvven5k25tu">另一方面，
+<code>downgradeModule()</code> 不会尝试将两个变更检测体系紧密结合，仅在明确知道必要的情况下（例如，当某个降级组件的输入发生变化时）限制显式变更检测运行。这提高了性能，尤其是在变更检测频繁的应用中，但需要开发者根据需要手动通知每个框架。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="at9hnrxn60qbqpsanuq7aifjj">有关差异及其影响的更详细讨论，请参见 
+<a href="https://angular.io/guide/upgrade">性能优化升级</a>。</p>
+<div class="alert is-helpful">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3zxd8rvjz9myr40gos5of9q78">你可以使用 
+<a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$apply">scope.$apply(...)</a> 或 
+<a href="https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$digest">$rootScope.$digest()</a> 在 AngularJS 中手动触发变更检测运行。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1pkyftepm4w8np6twa1xaair4">你可以使用 {@link NgZonerun * ngZone.run(...)} 在 Angular 中手动触发变更检测运行。</p>
+</div>
+
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3pk51nmmelj99u4lj404opsyu">降级多个模块</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cqb2a0mjk7hw5n4w2czpn1yct">可以降级多个模块并将它们包含在 AngularJS
+应用程序中。在这种情况下，当需要实例化关联的降级组件或可注入时，每个降级的模块都将被引导。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="az3r0cy9bpmqhoztb39quhoyr">降级多个模块时要记住的事情：</p>
+
+    <ul class="docs-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="3v0jg103mxnjfxa3xb1pwxhtu">每个降级的组件/可注入对象需要明确关联到一个降级模块。详见 
+<code>downgradeComponent()</code> 和 
+<code>downgradeInjectable()</code>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="1zvllpazmejrq9q6oob8vm8n1">如果你希望某些可注入对象在所有降级模块之间共享，可以在创建 
+<code>PlatformRef</code>（例如，通过 
+<code>platformBrowser</code> 或 
+<code>platformBrowserDynamic</code>）时将它们提供为 
+<code>StaticProvider</code>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="87ni628h8gxlykrlnpnqkpa82">使用 {@link PlatformRefbootstrapmodule 
+<code>bootstrapModule()</code>} 或 {@link PlatformRefbootstrapmodulefactory 
+<code>bootstrapModuleFactory()</code>} 引导降级模块时，每个模块都被视为“根”模块。因此，对于 
+<code>"root"</code> 中提供的每个可注入对象（通过 {@link InjectableprovidedIn 
+<code>providedIn</code>}）都会创建一个新实例。如果这不是你的意图，你可以有一个共享模块（将充当“根”模块），并使用该模块的注入器创建所有降级模块：</p>
+<code-example path="upgrade/static/ts/lite-multi-shared/module.ts" region="shared-root-module" /></li>
+
+    </ul>
+    </div></div></div></div></div></div></div></div>

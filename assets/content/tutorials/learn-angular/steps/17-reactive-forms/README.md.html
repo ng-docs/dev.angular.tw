@@ -1,0 +1,142 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="40y4f8g65elhovw5cwrux943a">响应式表单</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/17-reactive-forms/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="5dqlt4aq0rcvruq8tputfowz9">当你想以编程方式管理表单而不仅仅依赖模板时，响应式表单就是答案。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="65r7nwksyecvh6g3qvdweyn11">在这个活动中，你将学习如何设置响应式表单。</p>
+<hr>
+
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="import-reactiveforms-module">
+    <a href="#import-reactiveforms-module" class="docs-anchor" tabindex="-1" aria-label="Link to Import <code>ReactiveForms</code> module" data-ng_translator_product="100" data-ng_translator_ref_id="dv4b6clcxvfljx9y5crj25tyy">导入 
+<code>ReactiveForms</code> 模块</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="b8vgwfqqz0szby984l3budts2">在
+<code>app.component.ts</code>中，从
+<code>@angular/forms</code>导入
+<code>ReactiveFormsModule</code>，并将其添加到组件的
+<code>imports</code>数组中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ReactiveFormsModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;form&gt;</div><div class="hljs-ln-line">      &lt;label&gt;Name</div><div class="hljs-ln-line">        &lt;input type="text" /&gt;</div><div class="hljs-ln-line">      &lt;/label&gt;</div><div class="hljs-ln-line">      &lt;label&gt;Email</div><div class="hljs-ln-line">        &lt;input type="email" /&gt;</div><div class="hljs-ln-line">      &lt;/label&gt;</div><div class="hljs-ln-line">      &lt;button type="submit"&gt;Submit&lt;/button&gt;</div><div class="hljs-ln-line">    &lt;/form&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">ReactiveFormsModule</span>],</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="create-the-formgroup-object-with-formcontrols">
+    <a href="#create-the-formgroup-object-with-formcontrols" class="docs-anchor" tabindex="-1" aria-label="Link to Create the <code>FormGroup</code> object with FormControls" data-ng_translator_product="100" data-ng_translator_ref_id="43r5hjnmw7dl9qpzx4szb80pg">使用 FormControls 创建 
+<code>FormGroup</code> 对象</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="37527txxonpombfzbyx66qx3y">响应式表单使用
+<code>FormControl</code>类来表示表单控件（例如，输入框）。Angular 提供
+<code>FormGroup</code>类作为将表单控件组合成一个有用对象的分组，这样开发人员可以更方便地处理大型表单。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="22q1xasmk3mgesj04iryrd1g3">从
+<code>@angular/forms</code>中添加
+<code>FormControl</code>和
+<code>FormGroup</code>的导入，这样你就可以为每个表单创建一个带有
+<code>name</code>和
+<code>email</code>属性作为FormControls的FormGroup。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">ReactiveFormsModule</span>, <span class="hljs-title class_">FormControl</span>, <span class="hljs-title class_">FormGroup</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;</div><div class="hljs-ln-line">...</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  profileForm = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormGroup</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">name</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">    <span class="hljs-attr">email</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormControl</span>(<span class="hljs-string">''</span>),</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="link-the-formgroup-and-formcontrols-to-the-form">
+    <a href="#link-the-formgroup-and-formcontrols-to-the-form" class="docs-anchor" tabindex="-1" aria-label="Link to Link the FormGroup and FormControls to the form" data-ng_translator_product="100" data-ng_translator_ref_id="c2jo165jok53zqpiwgqthlvwa">将FormGroup和FormControls链接到表单</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="qro01rlphaf6qpxxx4rkqc48">每个
+<code>FormGroup</code>都应该使用
+<code>[formGroup]</code>指令附加到一个表单上。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8mii04ezgq4dzzqggcjt9kd3">此外，每个
+<code>FormControl</code>都可以使用
+<code>formControlName</code>指令附加，并赋值给相应的属性。使用以下表单代码更新模板：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> [<span class="hljs-attr">formGroup</span>]=<span class="hljs-string">"profileForm"</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span></div><div class="hljs-ln-line">    Name</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">"name"</span> /&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span></div><div class="hljs-ln-line">    Email</div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"email"</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">"email"</span> /&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>Submit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="handle-update-to-the-form">
+    <a href="#handle-update-to-the-form" class="docs-anchor" tabindex="-1" aria-label="Link to Handle update to the form" data-ng_translator_product="100" data-ng_translator_ref_id="3ctlthotptouceczw4dlq06w0">处理表单更新</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="441cme7lyb9pbk3rxsqd19zdx">当你想要访问
+<code>FormGroup</code>中的数据时，可以通过访问
+<code>FormGroup</code>的值来实现。更新
+<code>template</code>以显示表单值：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Profile Form<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Name: {{ profileForm.value.name }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Email: {{ profileForm.value.email }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="access-formgroup-values">
+    <a href="#access-formgroup-values" class="docs-anchor" tabindex="-1" aria-label="Link to Access FormGroup values" data-ng_translator_product="100" data-ng_translator_ref_id="3trqriet62qxxtvxn8ez1arvy">访问FormGroup的值</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="2hywiik2y2i62wyvao7bitd15">向组件类添加一个新方法，命名为 
+<code>handleSubmit</code>，稍后你将用它来处理表单提交。 此方法将显示表单中的值，你可以通过 FormGroup 访问这些值。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2ilyvh7ttjqbrnxp91ecnpsdz">在组件类中，添加
+<code>handleSubmit()</code>方法来处理表单提交。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">handleSubmit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">  <span class="hljs-title function_">alert</span>(</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">profileForm</span>.<span class="hljs-property">value</span>.<span class="hljs-property">name</span> + <span class="hljs-string">' | '</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">profileForm</span>.<span class="hljs-property">value</span>.<span class="hljs-property">email</span></div><div class="hljs-ln-line">  );</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="add-ngsubmit-to-the-form">
+    <a href="#add-ngsubmit-to-the-form" class="docs-anchor" tabindex="-1" aria-label="Link to Add <code>ngSubmit</code> to the form" data-ng_translator_product="100" data-ng_translator_ref_id="1hckx4xqu93vqzfkjiipm2120">向表单添加 
+<code>ngSubmit</code></a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="dcgibinzxu1vab11hs9w9jrot">你已经可以访问表单值了，现在是时候处理提交事件并使用
+<code>handleSubmit</code>方法了。Angular有一个专门用于此目的的事件处理器，称为
+<code>ngSubmit</code>。更新表单元素，在表单提交时调用
+<code>handleSubmit</code>方法。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">form</span></span></div><div class="hljs-ln-line">  [<span class="hljs-attr">formGroup</span>]=<span class="hljs-string">"profileForm"</span></div><div class="hljs-ln-line highlighted">  (<span class="hljs-attr">ngSubmit</span>)=<span class="hljs-string">"handleSubmit()"</span>&gt;</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cr1xmenhr6xk301sofn6d9eoi">就是这样，你现在知道如何在Angular中使用响应式表单了。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="exq38zndcgudfuwyj0kw4c9o3">在这个活动中做得很好。继续学习有关表单验证的内容。</p>

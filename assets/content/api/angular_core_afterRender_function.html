@@ -1,0 +1,61 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>afterRender</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div><div class="docs-api-item-label" data-mode="full" data-type="developer_preview">Developer preview</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/core/src/render3/after_render_hooks.ts#L224-L256" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="5m9az62bizc1zvfglfogg9f1q">注册一个回调函数，该回调将在每次应用完成渲染后被调用。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">afterRender</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">callback</span>: <span class="hljs-title class_">VoidFunction</span>,</div><div class="hljs-ln-line ">  options?: <span class="hljs-title class_">AfterRenderOptions</span></div><div class="hljs-ln-line ">): <span class="hljs-title class_">AfterRenderRef</span>;</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="5m9az62bizc1zvfglfogg9f1q">注册一个回调函数，该回调将在每次应用完成渲染后被调用。</p>
+<div class="alert is-critical">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8rajwjshpimd1zi01wx7p7oa4">你应始终显式指定一个非默认的
+<a href="api/core/AfterRenderPhase">阶段</a>，否则会有显著的性能下降风险。</p>
+</div>
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c6jzbu6g7vfibi5a7o0taatfj">注意回调将按注册顺序运行</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="8fe81e0wh59nkiq7usqe93yp2">按注册顺序</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="8sxratv17x5m8kzukkhsr1k0a">每次渲染一次</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="7f8lq68nc9c8c7wp60k4n8xya">仅在浏览器平台上</li>
+
+    </ul>
+    <div class="alert is-important">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bm05qavjycvbx1h8vycrcvd13">在回调运行之前，不保证组件已 
+<a href="guide/hydration">水合</a>。直接读写 DOM 和布局时必须小心。</p>
+</div></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="e0ta0dhwqv6j690mu3pa1swum">使用 
+<code>afterRender</code> 在每次渲染后读写 DOM。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="lzz2v4ucg07faxnpe2bu1wa1">范例</h3>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-cmp'</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;span #content&gt;{{ ... }}&lt;/span&gt;`</span>,</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>afterRender</h3><div><code>AfterRenderRef</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="5m9az62bizc1zvfglfogg9f1q">注册一个回调函数，该回调将在每次应用完成渲染后被调用。</p>
+<div class="alert is-critical">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8rajwjshpimd1zi01wx7p7oa4">你应始终显式指定一个非默认的
+<a href="api/core/AfterRenderPhase">阶段</a>，否则会有显著的性能下降风险。</p>
+</div>
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c6jzbu6g7vfibi5a7o0taatfj">注意回调将按注册顺序运行</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="8fe81e0wh59nkiq7usqe93yp2">按注册顺序</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="8sxratv17x5m8kzukkhsr1k0a">每次渲染一次</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="7f8lq68nc9c8c7wp60k4n8xya">仅在浏览器平台上</li>
+
+    </ul>
+    <div class="alert is-important">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bm05qavjycvbx1h8vycrcvd13">在回调运行之前，不保证组件已 
+<a href="guide/hydration">水合</a>。直接读写 DOM 和布局时必须小心。</p>
+</div></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">callback</span><code>VoidFunction</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="bvj8n0bajxlz4j5kebhjv2b62">要注册的回调函数</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">options</span><code>AfterRenderOptions</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>AfterRenderRef</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><p data-ng_translator_product="100" data-ng_translator_ref_id="e0ta0dhwqv6j690mu3pa1swum">使用 
+<code>afterRender</code> 在每次渲染后读写 DOM。</p>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="lzz2v4ucg07faxnpe2bu1wa1">范例</h3>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</span><span class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-cmp'</span>,</span><span class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;span #content&gt;{{ ... }}&lt;/span&gt;`</span>,</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div></div></div></div></div></div>

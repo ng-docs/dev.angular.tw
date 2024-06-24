@@ -1,0 +1,168 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="63o3famemwo1dv6m2wf1liv55">服务端渲染</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ssr.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="80bnpiy99fpg935l7dykarm2z">服务端渲染（SSR）是在服务器上渲染页面的过程，生成包含初始页面状态的初始 HTML 内容。HTML 内容传送到浏览器后，Angular 初始化应用并利用 HTML 中包含的数据。</p>
+
+  <h2 id="why-use-ssr">
+    <a href="#why-use-ssr" class="docs-anchor" tabindex="-1" aria-label="Link to Why use SSR?" data-ng_translator_product="100" data-ng_translator_ref_id="7uv6u7icrgbywhu01j8xbfhoi">为什么使用 SSR？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="nwvjgdve4yac1pbk1h93ti05">与客户端渲染（CSR）相比，SSR 的主要优点是：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="exue1d5k2zg5rlqpk79fo01zx"><strong>性能提升</strong>：SSR 可以通过向客户端传递完全渲染的 HTML 来提升 web 应用的性能，浏览器甚至可以在下载应用 JavaScript 之前解析并显示这些内容。这对低带宽连接或移动设备上的用户尤其有利。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="8r0asgtgo71m92bl33pjxz7h9"><strong>核心 Web 指标的提升</strong>：SSR 带来的性能提升可以通过 
+<a href="https://web.dev/learn-core-web-vitals/" target="_blank">核心 Web 指标 (CWV)</a> 统计数据来衡量，例如减少首屏内容绘制 (
+<a href="https://developer.chrome.com/en/docs/lighthouse/performance/first-contentful-paint/" target="_blank">FCP</a>) 和最大内容绘制 (
+<a href="https://web.dev/lcp/" target="_blank">LCP</a>)，以及累积布局偏移 (
+<a href="https://web.dev/cls/" target="_blank">CLS</a>)。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="ag6n8pbjogpel0b8cfoea9bxo"><strong>更好的 SEO</strong>：SSR 可以通过使搜索引擎更容易抓取和索引应用内容来改善 web 应用的搜索引擎优化 (SEO)。</li>
+
+  </ul>
+  
+  <h2 id="enable-server-side-rendering">
+    <a href="#enable-server-side-rendering" class="docs-anchor" tabindex="-1" aria-label="Link to Enable server-side rendering" data-ng_translator_product="100" data-ng_translator_ref_id="8wmy1am41dd36dw33fd4gs4rx">启用服务端渲染</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="azrd6zzhppnkoh7557bw82t80">要创建一个
+<strong>新的</strong>带 SSR 的项目，运行：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng new --ssr</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="bdz2zbjvsx2esxf55oi6lc1ml">要将 SSR 添加到
+<strong>现有</strong>项目，使用 Angular CLI 的 
+<code>ng add</code> 命令。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng add @angular/ssr</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5eoz8ckj80aa4f6u0z0r0f0r6">这些命令会创建和更新应用代码以启用 SSR，并在项目结构中添加额外的文件。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">my-app</div><div class="hljs-ln-line">|-- server.ts                       # application server</div><div class="hljs-ln-line">└── src</div><div class="hljs-ln-line">    |-- app</div><div class="hljs-ln-line">    |   └── app.config.server.ts    # server application configuration</div><div class="hljs-ln-line">    └── main.server.ts              # main server application bootstrapping</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="eq5umjkgxj73ppzgu5hr0ik3y">要验证应用是否已服务端渲染，使用 
+<code>ng serve</code> 在本地运行它。初始 HTML 请求应包含应用内容。</p>
+
+  <h2 id="configure-server-side-rendering">
+    <a href="#configure-server-side-rendering" class="docs-anchor" tabindex="-1" aria-label="Link to Configure server-side rendering" data-ng_translator_product="100" data-ng_translator_ref_id="3e71mo3ljwpk0s1e0wxynkrgq">配置服务端渲染</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3a9fpu6ush9eofmetganmh2c8"><code>server.ts</code> 文件配置了一个 Node.js Express 服务器和 Angular 服务器端渲染。使用 
+<code>CommonEngine</code> 来渲染一个 Angular 应用。</p>
+<div class="docs-code" path="adev/src/content/examples/ssr/server.ts" visiblelines="30,31,32,33,34,35,36,37,38,39,40,41,42,43,44">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-variable constant_">APP_BASE_HREF</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">CommonEngine</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/ssr'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">'express'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {fileURLToPath} <span class="hljs-keyword">from</span> <span class="hljs-string">'node:url'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {dirname, join, resolve} <span class="hljs-keyword">from</span> <span class="hljs-string">'node:path'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> bootstrap <span class="hljs-keyword">from</span> <span class="hljs-string">'./src/main.server'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// The Express app is exported so that it can be used by serverless Functions.</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">app</span>(<span class="hljs-params"></span>): express.<span class="hljs-property">Express</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> server = <span class="hljs-title function_">express</span>();</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> serverDistFolder = <span class="hljs-title function_">dirname</span>(<span class="hljs-title function_">fileURLToPath</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>));</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> browserDistFolder = <span class="hljs-title function_">resolve</span>(serverDistFolder, <span class="hljs-string">'../browser'</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> indexHtml = <span class="hljs-title function_">join</span>(serverDistFolder, <span class="hljs-string">'index.server.html'</span>);</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> commonEngine = <span class="hljs-keyword">new</span> <span class="hljs-title class_">CommonEngine</span>();</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  server.<span class="hljs-title function_">set</span>(<span class="hljs-string">'view engine'</span>, <span class="hljs-string">'html'</span>);</div><div class="hljs-ln-line">  server.<span class="hljs-title function_">set</span>(<span class="hljs-string">'views'</span>, browserDistFolder);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> implement data requests securely</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// Serve data from URLS that begin "/api/"</span></div><div class="hljs-ln-line">  server.<span class="hljs-title function_">get</span>(<span class="hljs-string">'/api/**'</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {</div><div class="hljs-ln-line">    res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">send</span>(<span class="hljs-string">'data requests are not yet supported'</span>);</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line">  <span class="hljs-comment">// Serve static files from /browser</span></div><div class="hljs-ln-line">  server.<span class="hljs-title function_">get</span>(</div><div class="hljs-ln-line">    <span class="hljs-string">'*.*'</span>,</div><div class="hljs-ln-line">    express.<span class="hljs-title function_">static</span>(browserDistFolder, {</div><div class="hljs-ln-line">      <span class="hljs-attr">maxAge</span>: <span class="hljs-string">'1y'</span>,</div><div class="hljs-ln-line">    }),</div><div class="hljs-ln-line">  );</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// All regular routes use the Angular engine</span></div><div class="hljs-ln-line">  server.<span class="hljs-title function_">get</span>(<span class="hljs-string">'*'</span>, <span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> {protocol, originalUrl, baseUrl, headers} = req;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    commonEngine</div><div class="hljs-ln-line">      .<span class="hljs-title function_">render</span>({</div><div class="hljs-ln-line">        bootstrap,</div><div class="hljs-ln-line">        <span class="hljs-attr">documentFilePath</span>: indexHtml,</div><div class="hljs-ln-line">        <span class="hljs-attr">url</span>: <span class="hljs-string">`<span class="hljs-subst">${protocol}</span>://<span class="hljs-subst">${headers.host}</span><span class="hljs-subst">${originalUrl}</span>`</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">publicPath</span>: browserDistFolder,</div><div class="hljs-ln-line">        <span class="hljs-attr">providers</span>: [{<span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">APP_BASE_HREF</span>, <span class="hljs-attr">useValue</span>: req.<span class="hljs-property">baseUrl</span>}],</div><div class="hljs-ln-line">      })</div><div class="hljs-ln-line">      .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">html</span>) =&gt;</span> res.<span class="hljs-title function_">send</span>(html))</div><div class="hljs-ln-line">      .<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> <span class="hljs-title function_">next</span>(err));</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> server;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">run</span>(<span class="hljs-params"></span>): <span class="hljs-keyword">void</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> port = process.<span class="hljs-property">env</span>[<span class="hljs-string">'PORT'</span>] || <span class="hljs-number">4000</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// Start up the Node server</span></div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> server = <span class="hljs-title function_">app</span>();</div><div class="hljs-ln-line">  server.<span class="hljs-title function_">listen</span>(port, <span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Node Express server listening on http://localhost:<span class="hljs-subst">${port}</span>`</span>);</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">run</span>();</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9hxl4m9f3tw7lfogos11tgd1t"><code>CommonEngine</code> 的 
+<code>render</code> 方法接受一个包含以下属性的对象：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="9ghvm54f9feewnb0zbrlubp2h">属性</th>
+<th data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="6cwhe65hais9ueojrcln3vqi4">默认值</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td><code>bootstrap</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="8v4bmogyko2twbaypwu290tnz">一个方法，该方法返回一个 
+<code>NgModule</code> 或一个求解为 
+<code>ApplicationRef</code> 的 promise。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>providers</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="5v9d27s598guvmv4mc50u54t3">一个平台级别的提供者数组，用于当前请求。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="1p6jk8u1ncmvm44488va0rdx9">要渲染的页面的 URL。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>inlineCriticalCss</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="8ep5wfos0y3f4wk2upy8ooicp">是否通过内联关键 CSS 来减少阻塞渲染的请求。</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>publicPath</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="ugh6smvbp9zznq51xy2n5j7g">用于浏览器文件和资产的基本路径。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>document</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="51kl17k5ntctcy76otvav6l25">用于引导服务器应用程序的初始 DOM。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>documentFilePath</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="532mtrwwto0rxe9keflvryw7v">用于引导服务器应用程序的初始 DOM 文件路径。</td>
+<td></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="aqs0uw2cxk81rdr7y8mf38pvv">Angular CLI 将为你的 Angular 应用程序生成一个初始的服务器实现，重点是在服务器端渲染你的 Angular 应用程序。该服务器可以扩展以支持其他功能，如 API 路由、重定向、静态资产等。有关详细信息，请参阅
+<a href="https://expressjs.com/" target="_blank">Express 文档</a>。</p>
+
+  <h2 id="hydration">
+    <a href="#hydration" class="docs-anchor" tabindex="-1" aria-label="Link to Hydration" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f56gmhqyrur87h9p9zanu9nib">水合</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="23mseawk51gcdv9mh993zn9f">水合是在客户端上恢复服务器端渲染应用程序的过程。这包括重用服务器端渲染的 DOM 结构、保持应用程序状态、传输服务器已检索的应用程序数据等过程。在使用 SSR 时，默认启用水合。你可以在
+<a href="guide/hydration">水合指南</a>中找到更多信息。</p>
+
+  <h2 id="caching-data-when-using-httpclient">
+    <a href="#caching-data-when-using-httpclient" class="docs-anchor" tabindex="-1" aria-label="Link to Caching data when using HttpClient" data-ng_translator_product="100" data-ng_translator_ref_id="86j04jkj9drg1ojtcxe984irc">使用 HttpClient 时缓存数据</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="am1h7jlrlqkmhzq4neg8p1x59"><a href="api/common/http/HttpClient"><code>HttpClient</code></a> 在服务器上运行时会缓存发送的网络请求。这些信息被序列化并作为初始 HTML 的一部分从服务器传输到浏览器。在浏览器中，
+<code>HttpClient</code> 检查是否在缓存中有数据，如果有，则在初始应用程序渲染期间重用该数据，而不是发起新的 HTTP 请求。一旦浏览器中的应用程序变得
+<a href="api/core/ApplicationRef#isStable">稳定</a>，
+<code>HttpClient</code> 将停止使用缓存。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="c06rd2vpd1dvn9u6tf6qyc9ij">默认情况下，
+<code>HttpClient</code> 会缓存所有不包含 
+<code>Authorization</code> 或 
+<code>Proxy-Authorization</code> 标头的 
+<code>HEAD</code> 和 
+<code>GET</code> 请求。你可以通过在提供水合时使用
+<a href="api/platform-browser/withHttpTransferCacheOptions"><code>withHttpTransferCacheOptions</code></a>来覆盖这些设置。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">AppComponent</span>, {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideClientHydration</span>(<span class="hljs-title function_">withHttpTransferCacheOptions</span>({</div><div class="hljs-ln-line">      <span class="hljs-attr">includePostRequests</span>: <span class="hljs-literal">true</span></div><div class="hljs-ln-line">    }))</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+  <h2 id="authoring-server-compatible-components">
+    <a href="#authoring-server-compatible-components" class="docs-anchor" tabindex="-1" aria-label="Link to Authoring server-compatible components" data-ng_translator_product="100" data-ng_translator_ref_id="6uwfoot46hke04ich763n0a7v">编写服务器兼容组件</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9w8efg2xjf6i5iip42hlf5h6o">一些常见的浏览器 API 和功能可能在服务器上不可用。应用程序不能使用特定于浏览器的全局对象，如 
+<code>window</code>、
+<code>document</code>、
+<code>navigator</code> 或 
+<code>location</code>，以及
+<code>HTMLElement</code>的某些属性。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="59c5j3b2bp8cgwi4b2pdse8kq">一般来说，依赖于特定于浏览器符号的代码只应在浏览器中执行，而不应在服务器上执行。这可以通过
+<a href="api/core/afterRender"><code>afterRender</code></a>和
+<a href="api/core/afterNextRender"><code>afterNextRender</code></a>生命周期钩子来强制执行。这些仅在浏览器上执行，在服务器上跳过。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, <span class="hljs-title class_">ViewChild</span>, afterNextRender } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-cmp'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;span #content&gt;{{ ... }}&lt;/span&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'content'</span>) <span class="hljs-attr">contentRef</span>: <span class="hljs-title class_">ElementRef</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-title function_">afterNextRender</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-comment">// Safe to check `scrollHeight` because this will only run in the browser, not the server.</span></div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'content height: '</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">contentRef</span>.<span class="hljs-property">nativeElement</span>.<span class="hljs-property">scrollHeight</span>);</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="using-angular-service-worker">
+    <a href="#using-angular-service-worker" class="docs-anchor" tabindex="-1" aria-label="Link to Using Angular Service Worker" data-ng_translator_product="100" data-ng_translator_ref_id="8n5dwr3eb2tom8f5yiia0f153">使用 Angular Service Worker</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dnw4aeeqef6882l36xaosyebz">如果你在服务器上结合 Angular 和 Angular 服务工作者使用，行为将与正常的服务器端渲染行为有所不同。初始服务器请求将如预期在服务器上呈现。但是，在初始请求之后，后续请求由服务工作者处理，并始终在客户端端渲染。</p>

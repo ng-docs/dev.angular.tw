@@ -1,0 +1,424 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2tmchdk1ct294f2gw8klyefyd">安全</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/security.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9mrwrcafecguxdtsts5fw0erd">本主题描述了 Angular 内置的针对常见 Web 应用漏洞和攻击（如跨站脚本攻击）的保护措施。 它不涉及应用级别的安全性，例如身份验证和授权。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eqejc7jazv6nfu5xxtnak5zd4">有关下文描述的攻击和缓解措施的更多信息，请参阅 
+<a href="https://www.owasp.org/index.php/Category:OWASP_Guide_Project" target="_blank">开放 Web 应用安全项目（OWASP）指南</a>。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8wvo0nk9ciayfr0clbe1i4x13">举报漏洞</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="c7hyh4y7rlr9dpbcj2ixs55iz">Angular 是 Google 
+<a href="https://bughunters.google.com/about/rules/6521337925468160/google-open-source-software-vulnerability-reward-program-rules" target="_blank">开源软件漏洞奖励计划</a>的一部分。
+<a href="https://bughunters.google.com/report" target="_blank">有关 Angular 漏洞，请在 https://bughunters.google.com 提交你的报告</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7o6rm5nwansrxzbljpu56qvyj">有关 Google 如何处理安全问题的更多信息，请参阅 
+<a href="https://www.google.com/about/appsecurity" target="_blank">Google 的安全理念</a>。</p>
+
+    </div>
+    
+  <h2 id="best-practices">
+    <a href="#best-practices" class="docs-anchor" tabindex="-1" aria-label="Link to Best practices" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bjllji5sr3q5uwcd3o4optfxh">最佳实践</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7u4je06kpuh008dip6dlpctj">以下是一些确保你的 Angular 应用安全的最佳实践。</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="4seifz05ri9ss58n0cfckted3"><strong>跟上最新的 Angular 库版本</strong> - Angular 库会定期更新，这些更新可能会修复以前版本中发现的安全缺陷。查看 Angular 的 
+<a href="https://github.com/angular/angular/blob/main/CHANGELOG.md" target="_blank">变更日志</a> 以获取与安全相关的更新。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="5b7mwuqabszjarq4p50ijntal"><strong>不要更改你自己的 Angular 版本</strong> - 私有的、定制化版本的 Angular 往往会落后于当前版本，可能不包括重要的安全修复和增强功能。相反，将你的 Angular 改进与社区共享并发起 pull request。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="609bmjvqi0p2k01tbohx0i6ml"><strong>避免使用文档中标记为「<em>安全风险</em>」的 Angular API</strong> - 有关更多信息，请参阅本页面的 
+<a href="#trusting-safe-values">信任安全值</a> 部分。</li>
+
+    </ol>
+    
+  <h2 id="preventing-cross-site-scripting-xss">
+    <a href="#preventing-cross-site-scripting-xss" class="docs-anchor" tabindex="-1" aria-label="Link to Preventing cross-site scripting (XSS)" data-ng_translator_product="100" data-ng_translator_ref_id="b0yuw9jlyuidv1j9hn122f0s2">防范跨站脚本（XSS）攻击</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3zjg5sh54w5fv57x3nh61izll"><a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank">跨站脚本（XSS）</a> 使攻击者能够将恶意代码注入网页。 这些代码可以，例如，窃取用户和登录数据，或执行冒充用户的操作。 这是网络上最常见的攻击之一。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="e5eeeexfis12k724v0qah1w0b">为了阻止 XSS 攻击，你必须防止恶意代码进入文档对象模型（DOM）。 例如，如果攻击者能诱使你在 DOM 中插入一个 
+<code>&lt;script&gt;</code> 标签，他们就可以在你的网站上运行任意代码。 攻击不仅限于 
+<code>&lt;script&gt;</code> 标签 — DOM 中的许多元素和属性允许代码执行，例如，
+<code>&lt;img alt="" onerror="..."&gt;</code> 和 
+<code>&lt;a href="javascript:..."&gt;</code>。 如果攻击者控制的数据进入 DOM，预期会有安全漏洞。</p>
+
+  <h3 id="angulars-cross-site-scripting-security-model">
+    <a href="#angulars-cross-site-scripting-security-model" class="docs-anchor" tabindex="-1" aria-label="Link to Angular's cross-site scripting security model" data-ng_translator_product="100" data-ng_translator_ref_id="3r5tviniurmflj66uw239f5no">Angular 的跨站脚本安全模型</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bh8y8g5uvxmmj50qyqfnne9e3">为了系统地阻止 XSS 漏洞，Angular 默认将所有值视为不可信。 当一个值通过模板绑定或插值插入 DOM 时，Angular 会对不可信的值进行消毒和转义。 如果某个值已经在 Angular 之外被消毒并被认为是安全的，请通过标记该 
+<a href="#trusting-safe-values">值为可信</a> 来告知 Angular。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="14phdivg4nx6euty9hkgjggjz">与用于渲染的值不同，Angular 模板默认被认为是可信的，并应被视为可执行代码。 切勿通过拼接用户输入和模板语法来创建模板。 这样做会使攻击者能够将 
+<a href="https://en.wikipedia.org/wiki/Code_injection" target="_blank">任意代码注入</a> 你的应用。 为了防止这些漏洞，在生产部署中始终使用默认的 
+<a href="#use-the-aot-template-compiler">预先编译（AOT）模板编译器</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4mks4g3dn2ree8hfhqt8mw3no">通过使用内容安全策略和可信类型可以提供额外的保护层。 这些 Web 平台特性在 DOM 层面操作，这是防止 XSS 问题最有效的地方。在这里，它们不能通过其他较低级别的 API 绕过。 因此，强烈建议利用这些特性。要做到这一点，请为应用配置 
+<a href="#content-security-policy">内容安全策略</a> 并启用 
+<a href="#enforcing-trusted-types">可信类型强制执行</a>。</p>
+
+  <h3 id="sanitization-and-security-contexts">
+    <a href="#sanitization-and-security-contexts" class="docs-anchor" tabindex="-1" aria-label="Link to Sanitization and security contexts" data-ng_translator_product="100" data-ng_translator_ref_id="7xlut81nemd9ym9zi0vi9pub9">无害化处理与安全上下文</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4jxp468r53cng8i1s00lfhzua"><em>无害化</em> 是对不可信值的检查，将其转化为可以安全插入 DOM 的值。 在许多情况下，无害化不会改变值。 无害化依赖于上下文： 在 CSS 中无害的值在 URL 中可能是危险的。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ls64ghadjsvvmujq56vt3wsq">Angular 定义了四个安全环境：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7nqo06dkmqthsrcpvth4nj8oq">安全上下文</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">HTML</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="97jlcn11j6epihbophjin0z10">在将值解释为 HTML 时使用，例如，当绑定到 
+<code>innerHtml</code>。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ab6gpm47ggoqvg5dy42ycwx7f">样式</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4zahtcjgjh98e6edpxhsdx1a9">在将 CSS 绑定到 
+<code>style</code> 属性时使用。</td>
+</tr>
+<tr>
+<td align="left">URL</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="grdd8o9bt9fmqxid48juxn5v">用于 URL 属性，例如 
+<code>&lt;a href&gt;</code>。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="eem8q4in3t1qrsxl06xymx95y">资源 URL</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5hz5s82igj87k28lqrqbs7f3o">一个被加载并作为代码执行的 URL，例如，在 
+<code>&lt;script src&gt;</code> 中。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5ysry5ape7ijwmn8pejeogj6s">Angular 对 HTML 和 URL 的不可信值进行消毒。无法消毒资源 URL，因为它们包含任意代码。 在开发模式下，当 Angular 必须在消毒过程中更改值时，会在控制台打印警告。</p>
+
+  <h3 id="sanitization-example">
+    <a href="#sanitization-example" class="docs-anchor" tabindex="-1" aria-label="Link to Sanitization example" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="365xxywjscduuegy2qfv6pr0d">无害化范例</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cqiv9f14o3z7q4m55mbdkxunm">下面的例子绑定了 <code>htmlSnippet</code> 的值。一次把它放进插值里，另一次把它绑定到元素的 <code>innerHTML</code> 属性上。</p>
+<div class="docs-code" path="adev/src/content/examples/security/src/app/inner-html-binding.component.html" header="src/app/inner-html-binding.component.html">
+    <div class="docs-code-header"><h3>src/app/inner-html-binding.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Binding innerHTML<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Bound value:<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-inner-html-interpolated"</span>&gt;</span><span class="hljs-template-variable">{{ <span class="hljs-name">htmlSnippet</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Result of binding to innerHTML:<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-inner-html-bound"</span> [<span class="hljs-attr">innerHTML</span>]=<span class="hljs-string">"htmlSnippet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dl080d5r77cgzl6tfdyj3biy2">插值的内容总会被编码 - 其中的 HTML 不会被解释，所以浏览器会在元素的文本内容中显示尖括号。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2ijrsaqsggg9iib43d0mpkp3e">如果希望这段 HTML 被正常解释，就必须绑定到一个 HTML 属性上，比如 <code>innerHTML</code>。但要小心如果把一个可能被攻击者控制的值绑定到 <code>innerHTML</code> 就会导致 XSS 漏洞。比如，某些人可以用这种方式来执行恶意代码：</p>
+<div class="docs-code" path="adev/src/content/examples/security/src/app/inner-html-binding.component.ts" visiblelines="7,8,9,10,11,12" header="src/app/inner-html-binding.component.ts (class)">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="xhwocg3oo5qpz4yrfmzfc2us">src/app/inner-html-binding.component.ts（类）</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-inner-html-binding'</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'./inner-html-binding.component.html'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InnerHtmlBindingComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-regexp">//</span> For example, a user/attacker-controlled value <span class="hljs-keyword">from</span> a URL.</div><div class="hljs-ln-line">  htmlSnippet = <span class="hljs-string">'Template &lt;script&gt;alert("0wned")&lt;/script&gt; &lt;b&gt;Syntax&lt;/b&gt;'</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="egq196mowt244uijiw6ggpklj">Angular 认为这些值是不安全的，并自动进行无害化处理。它会移除 <code>script</code> 元素，但保留安全的内容，比如该片段中的 <code>&lt;b&gt;</code> 元素。</p>
+<img alt="A screenshot showing interpolated and bound HTML values" src="assets/images/guide/security/binding-inner-html.png#small">
+
+
+  <h3 id="direct-use-of-the-dom-apis-and-explicit-sanitization-calls">
+    <a href="#direct-use-of-the-dom-apis-and-explicit-sanitization-calls" class="docs-anchor" tabindex="-1" aria-label="Link to Direct use of the DOM APIs and explicit sanitization calls" data-ng_translator_product="100" data-ng_translator_ref_id="1qaw7j6zm95z8549eysgyt27l">直接使用 DOM API 并显式调用进行消毒</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="eg2h3gh9tqb2q8ocfmqx2p4ks">除非你强制执行可信类型，否则内置的浏览器 DOM API 不会自动保护你免受安全漏洞的侵害。 例如，
+<code>document</code>、通过 
+<code>ElementRef</code> 获取的节点和许多第三方 API 包含不安全的方法。 同样，如果你与其他操纵 DOM 的库交互，你可能不会像使用 Angular 插值那样自动进行消毒。 避免直接与 DOM 交互，而是在可能的情况下使用 Angular 模板。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9szjrw1tcvsdytmvbyxc90u90">对于不可避免的情况，使用内置的 Angular 消毒函数。 使用 
+<a href="api/platform-browser/DomSanitizer#sanitize">DomSanitizer.sanitize</a> 方法和适当的 
+<code>SecurityContext</code> 消毒不可信的值。 该函数也接受使用 
+<code>bypassSecurityTrust</code> … 函数标记为可信的值，并且不会对它们进行消毒，如 
+<a href="#trusting-safe-values">下文所述</a>。</p>
+
+  <h3 id="trusting-safe-values">
+    <a href="#trusting-safe-values" class="docs-anchor" tabindex="-1" aria-label="Link to Trusting safe values" data-ng_translator_product="100" data-ng_translator_ref_id="b35wkxoxu523e184hzupgjazf">信任安全值</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8qd92bujky5gs9jhtmnf8sa75">有时应用确实需要包含可执行代码、显示某个 URL 的 
+<code>&lt;iframe&gt;</code> 或构建潜在危险的 URL。 在这些情况下，为防止自动无害化，告诉 Angular 你检查了一个值，了解它是如何创建的，并确保它是安全的。 
+<em>务必小心</em>。 如果你信任一个可能是恶意的值，会给应用引入安全漏洞。 如果不确定，请找专业的安全审阅员。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5hrklv3m0ini47xj2hvy7c7hm">要将某个值标记为受信任的，注入 
+<code>DomSanitizer</code> 并调用以下方法之一：</p>
+
+  <ul class="docs-list">
+    <li><code>bypassSecurityTrustHtml</code></li>
+<li><code>bypassSecurityTrustScript</code></li>
+<li><code>bypassSecurityTrustStyle</code></li>
+<li><code>bypassSecurityTrustUrl</code></li>
+<li><code>bypassSecurityTrustResourceUrl</code></li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bdg1g7jbv7xar6nb5app2h78e">记住，一个值是否安全取决于它所在的环境，所以你要为这个值按预定的用法选择正确的环境。假设下面的模板需要把 <code>javascript.alert(...)</code> 方法绑定到 URL。</p>
+<div class="docs-code" path="adev/src/content/examples/security/src/app/bypass-security.component.html" visiblelines="2,3,4,5" header="src/app/bypass-security.component.html (URL)">
+    <div class="docs-code-header"><h3>src/app/bypass-security.component.html (URL)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Bypass Security Component<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>An untrusted URL:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-dangerous-url"</span> [<span class="hljs-attr">href</span>]=<span class="hljs-string">"dangerousUrl"</span>&gt;</span>Click me<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>A trusted URL:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-trusted-url"</span> [<span class="hljs-attr">href</span>]=<span class="hljs-string">"trustedUrl"</span>&gt;</span>Click me<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Resource URL:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Showing: <span class="hljs-template-variable">{{ <span class="hljs-name">dangerousVideoUrl</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Trusted:<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-iframe-trusted-src"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"640"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"390"</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"videoUrl"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"trusted video url"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Untrusted:<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-iframe-untrusted-src"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"640"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"390"</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"dangerousVideoUrl"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"unTrusted video url"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a79hazri5klxaozentv622s0e">通常，Angular 会自动无害化这个 URL 并禁止危险的代码。为了防止这种行为，可以调用 <code>bypassSecurityTrustUrl</code> 把这个 URL 值标记为一个可信任的 URL：</p>
+<div class="docs-code" path="adev/src/content/examples/security/src/app/bypass-security.component.ts" visiblelines="14,15,16,17,18,19" header="src/app/bypass-security.component.ts (trust-url)">
+    <div class="docs-code-header"><h3>src/app/bypass-security.component.ts (trust-url)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} from <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {DomSanitizer, SafeResourceUrl, SafeUrl} from <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component({</span></div><div class="hljs-ln-line">  standalone: true,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-bypass-security'</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'./bypass-security.component.html'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> <span class="hljs-title class_">BypassSecurityComponent</span> {</div><div class="hljs-ln-line">  dangerousUrl: string;</div><div class="hljs-ln-line">  trustedUrl: SafeUrl;</div><div class="hljs-ln-line">  dangerousVideoUrl!: string;</div><div class="hljs-ln-line">  videoUrl!: SafeResourceUrl;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">constructor</span>(<span class="hljs-keyword">private</span> sanitizer: DomSanitizer) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// javascript: URLs are dangerous if attacker controlled.</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// Angular sanitizes them in data binding, but you can</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// explicitly tell Angular to trust this value:</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.dangerousUrl = <span class="hljs-string">'javascript:alert("Hi there")'</span>;</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.trustedUrl = sanitizer.bypassSecurityTrustUrl(<span class="hljs-keyword">this</span>.dangerousUrl);</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.updateVideoUrl(<span class="hljs-string">'PUBnlbjZFAI'</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  updateVideoUrl(id: string) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Appending an ID to a YouTube URL is safe.</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// Always make sure to construct SafeValue objects as</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// close as possible to the input data so</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// that it's easier to check if the value is safe.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.dangerousVideoUrl = <span class="hljs-string">'https://www.youtube.com/embed/'</span> + id;</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.videoUrl = <span class="hljs-keyword">this</span>.sanitizer.bypassSecurityTrustResourceUrl(<span class="hljs-keyword">this</span>.dangerousVideoUrl);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><img alt="A screenshot showing an alert box created from a trusted URL" src="assets/images/guide/security/bypass-security-component.png#medium">
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bb2xnc7c5wvlp9qriky5jimic">如果需要把用户输入转换为一个可信任的值，可以在组件方法中处理。下面的模板允许用户输入一个 YouTube 视频的 ID，然后把相应的视频加载到 <code>&lt;iframe&gt;</code> 中。<code>&lt;iframe src&gt;</code> 是一个“资源 URL”的安全环境，因为不可信的源码可能作为文件下载到本地，被毫无防备的用户执行。所以要调用一个组件方法来构造一个新的、可信任的视频 URL，这样 Angular 就会允许把它绑定到 <code>&lt;iframe src&gt;</code>。</p>
+<div class="docs-code" path="adev/src/content/examples/security/src/app/bypass-security.component.html" visiblelines="7,8,9,10,11,12,13,14" header="src/app/bypass-security.component.html (iframe)">
+    <div class="docs-code-header"><h3>src/app/bypass-security.component.html (iframe)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Bypass Security Component<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>An untrusted URL:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-dangerous-url"</span> [<span class="hljs-attr">href</span>]=<span class="hljs-string">"dangerousUrl"</span>&gt;</span>Click me<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>A trusted URL:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-trusted-url"</span> [<span class="hljs-attr">href</span>]=<span class="hljs-string">"trustedUrl"</span>&gt;</span>Click me<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Resource URL:<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Showing: <span class="hljs-template-variable">{{ <span class="hljs-name">dangerousVideoUrl</span> }}</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Trusted:<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-iframe-trusted-src"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"640"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"390"</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"videoUrl"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"trusted video url"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Untrusted:<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"e2e-iframe-untrusted-src"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"640"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"390"</span> [<span class="hljs-attr">src</span>]=<span class="hljs-string">"dangerousVideoUrl"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"unTrusted video url"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/security/src/app/bypass-security.component.ts" visiblelines="23,24,25,26,27,28,29,30" header="src/app/bypass-security.component.ts (trust-video-url)">
+    <div class="docs-code-header"><h3>src/app/bypass-security.component.ts (trust-video-url)</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} from <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {DomSanitizer, SafeResourceUrl, SafeUrl} from <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component({</span></div><div class="hljs-ln-line">  standalone: true,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-bypass-security'</span>,</div><div class="hljs-ln-line">  templateUrl: <span class="hljs-string">'./bypass-security.component.html'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line">export <span class="hljs-keyword">class</span> <span class="hljs-title class_">BypassSecurityComponent</span> {</div><div class="hljs-ln-line">  dangerousUrl: string;</div><div class="hljs-ln-line">  trustedUrl: SafeUrl;</div><div class="hljs-ln-line">  dangerousVideoUrl!: string;</div><div class="hljs-ln-line">  videoUrl!: SafeResourceUrl;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">constructor</span>(<span class="hljs-keyword">private</span> sanitizer: DomSanitizer) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// javascript: URLs are dangerous if attacker controlled.</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// Angular sanitizes them in data binding, but you can</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// explicitly tell Angular to trust this value:</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.dangerousUrl = <span class="hljs-string">'javascript:alert("Hi there")'</span>;</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.trustedUrl = sanitizer.bypassSecurityTrustUrl(<span class="hljs-keyword">this</span>.dangerousUrl);</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.updateVideoUrl(<span class="hljs-string">'PUBnlbjZFAI'</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  updateVideoUrl(id: string) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Appending an ID to a YouTube URL is safe.</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// Always make sure to construct SafeValue objects as</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// close as possible to the input data so</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// that it's easier to check if the value is safe.</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.dangerousVideoUrl = <span class="hljs-string">'https://www.youtube.com/embed/'</span> + id;</div><div class="hljs-ln-line">    <span class="hljs-keyword">this</span>.videoUrl = <span class="hljs-keyword">this</span>.sanitizer.bypassSecurityTrustResourceUrl(<span class="hljs-keyword">this</span>.dangerousVideoUrl);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+  <h3 id="content-security-policy">
+    <a href="#content-security-policy" class="docs-anchor" tabindex="-1" aria-label="Link to Content security policy" data-ng_translator_product="100" data-ng_translator_ref_id="1eltfz13cnddsz51bg1ybj0gh">内容安全策略</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8xow7h7u8rsvqiymetiy02o0e">内容安全策略（CSP）是一种深度防御技术，用于防止 XSS。要启用 CSP，请配置你的 Web 服务器以返回适当的 
+<code>Content-Security-Policy</code> HTTP 标头。更多关于内容安全策略的信息，请参阅 Google Developers 网站上的 
+<a href="https://developers.google.com/web/fundamentals/security/csp" target="_blank">Web 基础指南</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bslsxf2yzhg8wgzrop0lc8ikc">新版 Angular 所需的最小化策略是：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">default-src 'self'; style-src 'self' 'nonce-randomNonceGoesHere'; script-src 'self' 'nonce-randomNonceGoesHere';</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2xz0smry1m4s1u1cgar23e7s9">当为你的 Angular 应用启动服务器时，服务器应在每个请求的 HTTP 标头中包含一个随机生成的 nonce。你必须将此 nonce 提供给 Angular，以便框架可以渲染 
+<code>&lt;style&gt;</code> 元素。你可以通过以下两种方式之一为 Angular 设置 nonce：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="afsckxdpsku2kr99mzk53pfta">将根应用程序元素上的 <code>ngCspNonce</code> 属性设置为 <code>&lt;app ngCspNonce="randomNonceGoesHere"&gt;&lt;/app&gt;</code>。如果你可以访问服务端模板，并且可以在构建响应时将随机数添加到标头和 <code>index.html</code>，请使用此方法。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="76gphjomu6h4thq65fi8hdwcn">使用 
+<code>CSP_NONCE</code> 注入令牌提供 nonce。如果你在运行时可以访问 nonce 并希望能够缓存 
+<code>index.html</code>，请使用此方法。</li>
+
+    </ol>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {bootstrapApplication, <span class="hljs-variable constant_">CSP_NONCE</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">AppComponent</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'./app/app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">AppComponent</span>, {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{</div><div class="hljs-ln-line">    <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">CSP_NONCE</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">useValue</span>: globalThis.<span class="hljs-property">myRandomNonceValue</span></div><div class="hljs-ln-line">  }]</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-helpful">
+      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="6xbiihhho1afa7g2s3v20c1yi">唯一的 nonce</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="49di9ixdx7d2dog6ovcexc1mi">始终确保你提供的 nonce 
+<strong>每个请求都是唯一的</strong>，且不可预测或猜测。如果攻击者可以预测未来的 nonce，则可以绕过 CSP 提供的保护。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="892hlnnkf9uc5w8zki3xsowvr">如果你无法在项目中生成随机数，则可以通过将 <code>'unsafe-inline'</code> 添加到 CSP 标头的 <code>style-src</code> 部分来允许内联样式。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7w88zr2vle94hg5329lphobbh">部分</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>default-src 'self';</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8z4stnw1dzqi6uwrshh52te9p">允许页面从同一个源加载其所有必需的资源。</td>
+</tr>
+<tr>
+<td align="left"><code>style-src 'self' 'nonce-randomNonceGoesHere';</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9h0jkbn7trs18pqc9a6ky7zrg">允许页面从同一个源 (
+<code>'self'</code>) 加载全局样式，以及 Angular 插入的带有 
+<code>nonce-randomNonceGoesHere</code> 的样式。</td>
+</tr>
+<tr>
+<td align="left"><code>script-src 'self' 'nonce-randomNonceGoesHere';</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="mlh8ftqzl3rjs7gf2p1aimiq">允许页面从同一个源 (
+<code>'self'</code>) 加载 JavaScript，以及 Angular CLI 插入的带有 
+<code>nonce-randomNonceGoesHere</code> 的脚本。仅当你使用关键 CSS 内联时才需要此项。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1ohj2vh7ow1fbfnng0nm5tpm3">Angular 本身只需要这些设置即可正常运行。随着项目的增长，你可能需要将 CSP 设置扩展出应用特有的一些额外特性。</p>
+
+  <h3 id="enforcing-trusted-types">
+    <a href="#enforcing-trusted-types" class="docs-anchor" tabindex="-1" aria-label="Link to Enforcing Trusted Types" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="24qpccceijqiefel42l3muyuj">强制执行受信类型</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8lln0z0gxqtd5ttx62hq7xzn2">建议你使用 
+<a href="https://w3c.github.io/trusted-types/dist/spec/" target="_blank">受信类型</a> 作为一种帮助保护你的应用免受跨站脚本攻击的方法。受信类型是一种 
+<a href="https://en.wikipedia.org/wiki/Web_platform" target="_blank">Web 平台</a> 特性，可以通过强制执行更安全的编码实践来帮助你防止跨站脚本攻击。受信类型还可以帮助简化应用代码的审计。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="8n74iex4srmzjlilbug0sghmd">受信类型</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="51s7l78nhzseizah7g9hr7321">受信类型可能尚未在你应用目标的所有浏览器中可用。如果你的启用了受信类型的应用运行在不支持受信类型的浏览器中，应用的特性仍然会被保留。你的应用通过 Angular 的 DomSanitizer 得到了 XSS 保护。请参阅 
+<a href="https://caniuse.com/trusted-types" target="_blank">caniuse.com/trusted-types</a> 了解当前的浏览器支持情况。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6blmcd0kc8kophbp1mez9bqgt">要为你的应用程序强制实施可信类型，你必须将应用程序的 Web 服务器配置为使用以下 Angular 策略之一发出 HTTP 请求头：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9dc5ntx6nv873oalnjesk83gs">策略</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9lz2ilbl74njwyw23mw9u1v39">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>angular</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1lbrp4ch23gy0wcg42xixpvx7">此策略用于 Angular 内部经过安全审查的代码，并且在强制执行受信类型时是 Angular 所需的。当由 Angular 消毒的任何内联模板值或内容时，此策略将其视为安全。</td>
+</tr>
+<tr>
+<td align="left"><code>angular#unsafe-bypass</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="860wy4630nro9oflti30b0x4o">此策略用于那些使用 Angular 中 
+<a href="api/platform-browser/DomSanitizer">DomSanitizer</a> 的绕过安全方法（如 
+<code>bypassSecurityTrustHtml</code>）的应用。任何使用这些方法的应用都必须启用此策略。</td>
+</tr>
+<tr>
+<td align="left"><code>angular#unsafe-jit</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dp4qtnwtxe2nffxrcs1k05gv9">此策略由 
+<a href="api/core/Compiler">即时编译 (JIT) 编译器</a> 使用。如果你的应用直接与 JIT 编译器交互或使用 
+<a href="api/platform-browser-dynamic/platformBrowserDynamic">平台浏览器动态</a> 运行在 JIT 模式下，你必须启用此策略。</td>
+</tr>
+<tr>
+<td align="left"><code>angular#bundler</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="99sgsxxtenbjca4c9gwx0i3fa">此策略在创建延迟加载块文件时由 Angular CLI 捆绑器使用。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f1l9lqvtl7fc4nldszvhfxgf">你应该在以下位置为可信类型配置 HTTP 请求头：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cjn6e417zzmqrktunervl93v8">生产环境基础设施服务器</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8t8qdgum7pcwm0p4whlmo0hor">Angular CLI （ <code>ng serve</code> ），使用 <code>angular.json</code> 文件中的 <code>headers</code> 属性，用于本地开发和端到端测试</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9gfe91rcupzaij53kyikz3nb8">Karma （ <code>ng test</code> ），使用 <code>karma.config.js</code> 文件中的 <code>customHeaders</code> 属性，进行单元测试</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d2ur8bi80ajau10fuho6maa4c">以下是为可信类型和 Angular 配置的请求头示例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Content-Security-Policy: trusted-types angular; require-trusted-types-for 'script';</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6xzf39x9yob5yl342j43idm71">以下是为可信类型和 Angular 应用程序专门配置的请求头示例，这些应用程序使用了 Angular <a href="api/platform-browser/DomSanitizer">DomSanitizer</a> 中那些可以绕过安全性的方法。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Content-Security-Policy: trusted-types angular angular#unsafe-bypass; require-trusted-types-for 'script';</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bostv3cow9jzp7hzku3wkp6xo">以下是使用 JIT，且专门为可信类型和 Angular 应用程序配置的请求头示例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Content-Security-Policy: trusted-types angular angular#unsafe-jit; require-trusted-types-for 'script';</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2hawmv9qf7fwso9fm60erkcw5">以下是专门为使用惰性加载模块的受信任类型和 Angular 应用程序配置的标头示例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">Content-Security-Policy: trusted-types angular angular#bundler; require-trusted-types-for 'script';</div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-helpful">
+      <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b1q2cq0wwmtcekjucgxtiki0d">社区贡献</h3>
+      <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8dhm6rm5n8ppflnajwp7jtz0j">要了解关于如何对可信类型配置进行故障排除的更多信息，以下资源可能会有所帮助：</p>
+<p><a href="https://web.dev/trusted-types/#how-to-use-trusted-types" target="_blank" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="882xs6nwftrw5wtca664aokhj">使用可信类型防范基于 DOM 的跨站脚本漏洞</a></p>
+
+    </div>
+    
+  <h3 id="use-the-aot-template-compiler">
+    <a href="#use-the-aot-template-compiler" class="docs-anchor" tabindex="-1" aria-label="Link to Use the AOT template compiler" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="at1xgqrrxwkmlexmulum0tbzo">使用 AOT 模板编译器</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d9fydwzp6awt7f1p7ml3io6zb">AOT 模板编译器可防止称为模板注入的一整类漏洞，并大大提高了应用程序性能。AOT 模板编译器是 Angular CLI 应用程序使用的默认编译器，你应该在所有生产部署中使用它。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="901cce625oqo0xkbb89edspnw">预先编译 (AOT) 编译器的替代品是即时编译 (JIT) 编译器，它在运行时将模板编译为可执行的模板代码。Angular 信任模板代码，因此动态生成模板并编译它们，特别是包含用户数据的模板，会绕过 Angular 的内置保护机制。这是一种安全反模式。有关安全构建动态表单的信息，请参见 
+<a href="guide/forms/dynamic-forms">动态表单</a> 指南。</p>
+
+  <h3 id="server-side-xss-protection">
+    <a href="#server-side-xss-protection" class="docs-anchor" tabindex="-1" aria-label="Link to Server-side XSS protection" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cvlz4wdz4hqceh72uob76jm40">服务端 XSS 保护</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7cjn1niod8wmhnwuxpqbnexa0">在服务器上构造的 HTML 容易受到注入攻击。将模板代码注入到 Angular 应用程序中与注入可执行代码是一样的：它使攻击者可以完全控制该应用程序。为避免这种情况，请使用一种模板语言来自动转义值以防止服务器上的 XSS 漏洞。不要在服务端使用模板语言生成 Angular 模板。这样做会带来引入模板注入漏洞的高风险。</p>
+
+  <h2 id="http-level-vulnerabilities">
+    <a href="#http-level-vulnerabilities" class="docs-anchor" tabindex="-1" aria-label="Link to HTTP-level vulnerabilities" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9gwgw47mccaasw2dsst36i1sm">HTTP 级漏洞</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="nsfssmrqur2grc0ksjsblqnf">Angular 内置了一些支持来防范两个常见的 HTTP 漏洞：跨站请求伪造（XSRF）和跨站脚本包含（XSSI）。这两个漏洞主要在服务端防范，但是 Angular 也自带了一些辅助特性，可以让客户端的集成变得更容易。</p>
+
+  <h3 id="cross-site-request-forgery">
+    <a href="#cross-site-request-forgery" class="docs-anchor" tabindex="-1" aria-label="Link to Cross-site request forgery" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cy8edwifr6rjs8hcwx1mnxl51">跨站请求伪造</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4q2672rw8n9xgk0z7abceaxnn">在跨站请求伪造（XSRF 或 CSRF）中，攻击者欺骗用户，让他们访问一个假冒页面（比如 <code>evil.com</code>）。该页面带有恶意代码，秘密的向你的应用程序服务器发送恶意请求（比如 <code>example-bank.com</code>）。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1fm8l7ohox31w3mjsn2ojbvx6">假设用户已经在 <code>example-bank.com</code> 登录。用户打开一个邮件，点击里面的链接，在新页面中打开 <code>evil.com</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7zknfj9jpo55jmq5q0lmzorpf">该 <code>evil.com</code> 页面立刻发送恶意请求到 <code>example-bank.com</code>。这个请求可能是从用户账户转账到攻击者的账户。与该请求一起，浏览器自动发出 <code>example-bank.com</code> 的 cookie。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7wxy92lzorbs5f85qxecoi9rr">如果 <code>example-bank.com</code> 服务器缺乏 XSRF 保护，就无法辨识请求是从应用程序发来的合法请求还是从 <code>evil.com</code> 来的假请求。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1dml66qb0kouyok1u25e85ksh">为了防止这种情况，你必须确保每个用户的请求都是从你自己的应用中发出的，而不是从另一个网站发出的。客户端和服务器必须合作来抵挡这种攻击。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="29myblvsmbm1w5wnchp92ql62">常见的反 XSRF 技术是服务器随机生成一个用户认证令牌到 cookie 中。客户端代码获取这个 cookie，并用它为接下来所有的请求添加自定义请求页头。服务器比较收到的 cookie 值与请求页头的值，如果它们不匹配，便拒绝请求。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dnf6futg5b5ur79f8d1p57hp">这个技术之所以有效，是因为所有浏览器都实现了<em>同源策略</em>。只有设置 cookie 的网站的代码可以访问该站的 cookie，并为该站的请求设置自定义页头。这就是说，只有你的应用程序可以获取这个 cookie 令牌和设置自定义页头。<code>evil.com</code> 的恶意代码不能。</p>
+
+  <h3 id="httpclient-xsrf-csrf-security">
+    <a href="#httpclient-xsrf-csrf-security" class="docs-anchor" tabindex="-1" aria-label="Link to <code>HttpClient</code> XSRF/CSRF security" data-ng_translator_product="100" data-ng_translator_ref_id="ks9svkrmdb4sf84ruuy1o01m"><code>HttpClient</code> XSRF/CSRF 安全</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="jb46wkhgbhvo1pag9482c1ke"><code>HttpClient</code> 支持一种防止 XSRF 攻击的 
+<a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-header_token" target="_blank">常见机制</a>。在执行 HTTP 请求时，拦截器会从默认的 
+<code>XSRF-TOKEN</code> Cookie 中读取令牌，并将其设置为 HTTP 标头 
+<code>X-XSRF-TOKEN</code>。因为只有在你的域上运行的代码才能读取 Cookie，后端可以确定 HTTP 请求来自于你的客户端应用而不是攻击者。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="35f8qljoigo9ab1c4dc38h49m">默认情况下，拦截器会在所有更改请求（如 
+<code>POST</code>）到相对 URL 上发送此标头，但不会在 GET/HEAD 请求或绝对 URL 请求上发送。</p>
+
+    <div class="docs-callout docs-callout-helpful">
+      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="a63rurv1xupi2dnqrxalxvsb0">为什么不保护 GET 请求？</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="6u02z4heoqaahcp2un3tyj5ed">CSRF 保护只需要用于可以更改后端状态的请求。由于其性质，CSRF 攻击跨域边界，Web 的 
+<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank">同源策略</a> 将阻止攻击页面检索经过身份验证的 GET 请求的结果。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4tstmusfdcahr2qttgxax8fg6">要利用这一点，你的服务器需要在页面加载或第一次 GET 请求时，在一个 JavaScript 可读取的会话 Cookie 中设置名为 
+<code>XSRF-TOKEN</code> 的令牌。在后续请求中，服务器可以验证 Cookie 是否与 
+<code>X-XSRF-TOKEN</code> HTTP 标头匹配，从而确保只有在你的域上运行的代码才能发送请求。此令牌必须对每个用户唯一，并且必须由服务器验证；这可以防止客户端伪造自己的令牌。将令牌设置为你站点的身份验证 Cookie 的摘要，并添加盐以增加安全性。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="claya94hd1mz406slxkaobnfb">为了防止多个 Angular 应用共享同一个域名或子域时出现冲突，要给每个应用分配一个唯一的 cookie 名称。</p>
+
+    <div class="docs-callout docs-callout-important">
+      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="9y93gqi8kmzi38skaeb32yydg">HttpClient 仅支持 XSRF 保护机制的客户端部分</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="5h2g7d8f05lrzpyr1iu93cj8q">你的后端服务必须配置为为你的页面设置 Cookie，并验证所有合格请求中是否存在此标头。如果未能这样做，将使 Angular 的默认保护失效。</p>
+
+    </div>
+    
+  <h3 id="configure-custom-cookie-header-names">
+    <a href="#configure-custom-cookie-header-names" class="docs-anchor" tabindex="-1" aria-label="Link to Configure custom cookie/header names" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="68mssphxsumko4pwjlf7cwt2m">配置自定义 Cookie 名/标头名</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ebyxhgks8h56uf6yb25dys40i">如果你的后端服务使用不同名称的 XSRF 令牌 Cookie 或标头，可以使用 
+<code>withXsrfConfiguration</code> 来覆盖默认值。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="akpzhhp62p4lclkgwu12o3l8o">将其添加到 
+<code>provideHttpClient</code> 调用中，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideHttpClient</span>(</div><div class="hljs-ln-line">      <span class="hljs-title function_">withXsrfConfiguration</span>({</div><div class="hljs-ln-line">        <span class="hljs-attr">cookieName</span>: <span class="hljs-string">'CUSTOM_XSRF_TOKEN'</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">headerName</span>: <span class="hljs-string">'X-Custom-Xsrf-Header'</span>,</div><div class="hljs-ln-line">      }),</div><div class="hljs-ln-line">    ),</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div>
+  <h3 id="disabling-xsrf-protection">
+    <a href="#disabling-xsrf-protection" class="docs-anchor" tabindex="-1" aria-label="Link to Disabling XSRF protection" data-ng_translator_product="100" data-ng_translator_ref_id="cylxzf63lsyvvouhn14nr5z40">禁用 XSRF 保护</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ccopssswyjuefn0xkifhw8bez">如果内置的 XSRF 保护机制不适用于你的应用，可以使用 
+<code>withNoXsrfProtection</code> 特性来禁用它：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideHttpClient</span>(</div><div class="hljs-ln-line">      <span class="hljs-title function_">withNoXsrfProtection</span>(),</div><div class="hljs-ln-line">    ),</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7zvoftclc6lb3yedp04taewnw">关于 OWASP（开放 Web 应用安全项目）中的 CSRF 信息，请参见 
+<a href="https://owasp.org/www-community/attacks/csrf" target="_blank">跨站请求伪造（CSRF）</a> 和 
+<a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html" target="_blank">跨站请求伪造（CSRF）预防速查表</a>。斯坦福大学的论文 
+<a href="https://seclab.stanford.edu/websec/csrf/csrf.pdf" target="_blank">跨站请求伪造的强大防御</a> 是一个丰富的详细资料来源。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5nuwwavbvuulj4jy1rd095532">另请参见 Dave Smith 在 
+<a href="https://www.youtube.com/watch?v=9inczw6qtpY" title="Cross" site request funkery securing your angular apps from evil doers target="_blank">AngularConnect 2016 上关于 XSRF 的演讲</a>。</p>
+
+  <h3 id="cross-site-script-inclusion-xssi">
+    <a href="#cross-site-script-inclusion-xssi" class="docs-anchor" tabindex="-1" aria-label="Link to Cross-site script inclusion (XSSI)" data-ng_translator_product="100" data-ng_translator_ref_id="3958pr5c4v9c4qookhtxxj5nu">跨站脚本包含（XSSI）</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1ny1t957skgfrdqzi8n8c3fth">跨站脚本包含，也被称为 Json 漏洞，它可以允许一个攻击者的网站从 JSON API 读取数据。这种攻击发生在老的浏览器上，它重写原生 JavaScript 对象的构造函数，然后使用 <code>&lt;script&gt;</code> 标签包含一个 API 的 URL。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2abgqtwguscebfb13q6w06b10">只有在返回的 JSON 能像 JavaScript 一样可以被执行时，这种攻击才会生效。所以服务端会约定给所有 JSON 响应体加上前缀 <code>")]}',\n"</code>，来把它们标记为不可执行的，以防范这种攻击。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7ce7crjv6cn2wu0b1vqic6q9l">Angular 的 
+<code>HttpClient</code> 库识别这种约定，并在进一步解析之前自动从所有响应中去除字符串 
+<code>")]}',\n"</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eo34al0bsgtv8x0thakn66c5k">欲了解更多信息，请参见此 
+<a href="https://security.googleblog.com/2011/05/website-security-for-webmasters.html" target="_blank">Google 网络安全博客文章</a>中的 XSSI 部分。</p>
+
+  <h2 id="auditing-angular-applications">
+    <a href="#auditing-angular-applications" class="docs-anchor" tabindex="-1" aria-label="Link to Auditing Angular applications" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4pxaf1myl3liskzwckibidl08">审计 Angular 应用</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1aoif6nib19zu3qisp7afpykp">Angular 应用必须遵循与常规 Web 应用相同的安全原则，必须进行相应的审计。需要在安全审查中审计的特定于 Angular 的 API，如 
+<a href="#trusting-safe-values"><em>bypassSecurityTrust</em></a> 方法，在文档中被标记为安全敏感。</p>

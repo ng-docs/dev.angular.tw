@@ -1,0 +1,29 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="dl41cl2woajhvolaxrieocapq">无效元素</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG8001.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="axcopmblgcev2ipdkydajv8eh">在编译期间无法解析一个或多个元素，因为该元素不是由 HTML 规范定义的，或者该元素选择器不包含任何组件或指令。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dnhdszhzef8kgmrvrancqqey5"><strong>帮助：</strong> 这是一个常见运行时错误的编译器等价物 
+<code>NG0304: '${tagName}' 不是一个已知元素: ...</code>。</p>
+
+    </div>
+    
+  <h2 id="debugging-the-error">
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6u7wbmfvaqh0g4s43mk3icayl">在错误信息中使用元素名称找到元素被使用的文件。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9wrrtpvx3mpksjbe7o45pd4c2">检查名称和选择器是否正确。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9oijcdsi6ljcrhj8a3z4029az">通过检查组件是否存在于 <code>imports</code> 字段中，可以确保组件已在你的 NgModule 或独立组件中正确导入。如果组件是在 NgModule 中声明的（这意味着它不是独立的），请通过检查其在 <code>exports</code> 字段中是否存在来确保它已正确导出。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b5a87gvcep6767fxs7lnbsiqx">使用自定义元素或 Web 组件时，请确保将 <a href="api/core/CUSTOM_ELEMENTS_SCHEMA"><code>CUSTOM_ELEMENTS_SCHEMA</code></a> 添加到 AppModule 中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="944qrsvb88dffovkgj6ve34o5">如果还不能解决此错误，请检查导入的库，以检查对正在使用的导出和属性的任何最新更改，然后重新启动服务器。</p>

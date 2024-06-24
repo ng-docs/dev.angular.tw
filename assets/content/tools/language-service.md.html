@@ -1,0 +1,166 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2ha168k1thozk25n4q3jnrajw">Angular 语言服务</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/language-service.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dfsr1n1jxasz9jhcl6a0q6uh0">Angular 语言服务为代码编辑器提供了一种在 Angular 模板中获取自动补全、错误、提示和导航的方法。它支持位于独立 HTML 文件中的外部模板以及内联模板。</p>
+
+  <h2 id="configuring-compiler-options-for-the-angular-language-service">
+    <a href="#configuring-compiler-options-for-the-angular-language-service" class="docs-anchor" tabindex="-1" aria-label="Link to Configuring compiler options for the Angular Language Service" data-ng_translator_product="100" data-ng_translator_ref_id="bttqlwqsgobew2o37aaxfu531">配置 Angular 语言服务的编译器选项</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="eue5xpmoxlqcbotxjzaet4f8j">要启用最新的语言服务特性，在 
+<code>tsconfig.json</code> 中设置 
+<code>strictTemplates</code> 选项，将 
+<code>strictTemplates</code> 设置为 
+<code>true</code>，如下例所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"angularCompilerOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"strictTemplates"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4yuyt4o8claf74li67a4fucoq">欲了解更多信息，请参阅 
+<a href="reference/configs/angular-compiler-options">Angular 编译器选项</a> 指南。</p>
+
+  <h2 id="features">
+    <a href="#features" class="docs-anchor" tabindex="-1" aria-label="Link to Features" data-ng_translator_product="100" data-ng_translator_ref_id="920kaz2p0y1fs418qurz1o45h">特性</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bcthhqwku53vcizzntgiaq6qh">编辑器会自动检测到你正在打开 Angular 文件。然后，它就会使用 Angular Language Service 读取 <code>tsconfig.json</code> 文件，查找应用程序中具有的所有模板，然后为你打开的任何模板提供语言服务。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b8c9o7g7wuf87k7iu202eijon">语言服务包括：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="r00316x5cewu12v3ftrjp7t9">自动补全清单</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3zmztekqkbyrjtkbfoe2i60n0">AOT 诊断消息</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f1sa0wjcr81ixrpmk1h2b0fs">快捷信息</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4l4rqqo1d1pgyzcjpcmhj25it">转到定义</li>
+
+  </ul>
+  
+  <h3 id="autocompletion">
+    <a href="#autocompletion" class="docs-anchor" tabindex="-1" aria-label="Link to Autocompletion" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4w9ffi3auytore9nkduori6b1">自动补全</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1bajh55ze7ms6eu1nx1xtcwmo">自动补全可以在输入时为你提供当前情境下的候选内容和提示，从而提高开发速度。下面这个例子展示了插值中的自动补全功能。当你进行输入的时候，就可以按 tab 键来自动补全。</p>
+<img alt="autocompletion" src="assets/images/guide/language-service/language-completion.gif">
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2gwzq5bnhaws9hwcexnzcvipn">还有对元素的自动补全。你定义的任何组件的选择器都会显示在自动补全列表中。</p>
+
+  <h3 id="error-checking">
+    <a href="#error-checking" class="docs-anchor" tabindex="-1" aria-label="Link to Error checking" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="blguyj3yc9hlvge1yvc11dr16">错误检查</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cqhstbdffn4cz57un7yvq8bf5">Angular 语言服务能对代码中存在的错误进行预警。在这个例子中，Angular 不知道什么是 <code>orders</code> 或者它来自哪里。</p>
+<img alt="error checking" src="assets/images/guide/language-service/language-error.gif">
+
+
+  <h3 id="quick-info-and-navigation">
+    <a href="#quick-info-and-navigation" class="docs-anchor" tabindex="-1" aria-label="Link to Quick info and navigation" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8hvxs76r3zyqizwcof6pbuc4j">快捷信息与导航</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="48k3211uq8spapkggs8y4bn3t">快捷信息功能使你可以悬停以查看组件、指令、模块等的来源。然后，你可以单击“转到定义”或按 F12 键直接转到定义。</p>
+<img alt="navigation" src="assets/images/guide/language-service/language-navigation.gif">
+
+
+  <h2 id="angular-language-service-in-your-editor">
+    <a href="#angular-language-service-in-your-editor" class="docs-anchor" tabindex="-1" aria-label="Link to Angular Language Service in your editor" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="97hsiplyxlq186tso3zl8bb4k">在编辑器中使用 Angular 语言服务</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3g1rm0kn26r0sn25e1d5nxf4f">Angular 语言服务目前作为扩展可用于 
+<a href="https://code.visualstudio.com" target="_blank">Visual Studio Code</a>、
+<a href="https://www.jetbrains.com/webstorm" target="_blank">WebStorm</a>、
+<a href="https://www.sublimetext.com" target="_blank">Sublime Text</a> 和 
+<a href="https://www.eclipse.org/eclipseide" target="_blank">Eclipse IDE</a>。</p>
+
+  <h3 id="visual-studio-code">
+    <a href="#visual-studio-code" class="docs-anchor" tabindex="-1" aria-label="Link to Visual Studio Code">Visual Studio Code</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="442oj63a11akjqbdusw9bo7qz">在 
+<a href="https://code.visualstudio.com" target="_blank">Visual Studio Code</a> 中，从 
+<a href="https://marketplace.visualstudio.com/items?itemName=Angular.ng-template" target="_blank">Extensions: Marketplace</a> 安装该扩展。 通过左侧菜单栏中的扩展图标打开市场，或使用 VS Quick Open (Mac 上为 ⌘+P，Windows 上为 CTRL+P) 并键入 "? ext"。 在市场中搜索 Angular 语言服务扩展，并点击 
+<strong>安装</strong> 按钮。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e0ldi9hks54m02zlp0e93t4p7">Visual Studio Code 与 Angular 语言服务的集成工作是由 Angular 团队发布的。</p>
+
+  <h3 id="visual-studio">
+    <a href="#visual-studio" class="docs-anchor" tabindex="-1" aria-label="Link to Visual Studio">Visual Studio</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1ez2nkwvkbugbusv0zyyydk2u">在 
+<a href="https://visualstudio.microsoft.com" target="_blank">Visual Studio</a> 中，从 
+<a href="https://marketplace.visualstudio.com/items?itemName=TypeScriptTeam.AngularLanguageService" target="_blank">Extensions: Marketplace</a> 安装该扩展。 通过编辑器中的 Extensions 选项卡，然后选择 Manage Extensions 打开市场。 在市场中搜索 Angular 语言服务扩展，并点击 
+<strong>安装</strong> 按钮。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="affyvldezbh7ahbo4yfqwyvhc">Angular 语言服务与 Visual Studio 的集成由 Microsoft 维护和分发，同时得到 Angular 团队的帮助。 查看该项目 
+<a href="https://github.com/microsoft/vs-ng-language-service" target="_blank">这里</a>。</p>
+
+  <h3 id="webstorm">
+    <a href="#webstorm" class="docs-anchor" tabindex="-1" aria-label="Link to WebStorm">WebStorm</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1kuz3lavuymi21o3jgh1vpa9">在 
+<a href="https://www.jetbrains.com/webstorm" target="_blank">WebStorm</a> 中，启用插件 
+<a href="https://plugins.jetbrains.com/plugin/6971-angular-and-angularjs" target="_blank">Angular and AngularJS</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4kmwrgl42lkbb0r4lwvg748k3">从 WebStorm 2019.1 开始，<code>@angular/language-service</code> 已经不再需要了，应该从你的 <code>package.json</code> 中移除。</p>
+
+  <h3 id="sublime-text">
+    <a href="#sublime-text" class="docs-anchor" tabindex="-1" aria-label="Link to Sublime Text">Sublime Text</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6apvwxb4m38lqu5ax3d5e2at2">在 
+<a href="https://www.sublimetext.com" target="_blank">Sublime Text</a> 中，作为插件安装的语言服务仅支持内联模板。 若想在 HTML 文件中获得补全功能，需要自定义 Sublime 插件（或修改当前插件）。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1t2kzz41zw0v1l8v21tqaqpnb">要想在内联模板中使用语言服务，你必须首先添加一个扩展，以支持 TypeScript，然后安装 Angular 语言服务插件。从 TypeScript 2.3 开始，TypeScript 提供了一个插件模型，供语言服务使用。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cg7uupfbo76qv1s638mxyyobb">把最新版本的 TypeScript 安装到本地的 <code>node_modules</code> 目录下：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">npm install --save-dev typescript</div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="qph8o4snyx1czw6jdcmjyah0">把 Angular 语言服务的包安装到同一位置：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">npm install --save-dev @angular/language-service</div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aq6ymh80hxl2eejiygrjj8858">安装好这个包后，将以下内容添加到项目的 <code>tsconfig.json</code> 的 <code>"compilerOptions"</code> 部分。</p>
+<div class="docs-code" header="tsconfig.json">
+    <div class="docs-code-header"><h3>tsconfig.json</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"plugins"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">     <span class="hljs-punctuation">{</span><span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular/language-service"</span><span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"> <span class="hljs-punctuation">]</span></div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bk630yukm7i0060w49p52090e">在编辑器的用户首选项（<code>Cmd+,</code> 或 <code>Ctrl+,</code>）中，添加以下内容：</p>
+<div class="docs-code" header="Sublime Text user preferences">
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="19262938cgpvldkmvy92j2jgh">Sublime Text 用户偏好设置</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"typescript-tsdk"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"&lt;path to your folder&gt;/node_modules/typescript/lib"</span></div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="31yt6oo7jin795v263388i0lr">这样就能让 Angular 语言服务提供 <code>.ts</code> 文件中的诊断与自动补全信息。</p>
+
+  <h3 id="eclipse-ide">
+    <a href="#eclipse-ide" class="docs-anchor" tabindex="-1" aria-label="Link to Eclipse IDE">Eclipse IDE</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="818tm1xu00yyuoojnmbx8710x">直接安装带有 Angular 语言服务器的“面向Web和JavaScript开发人员的Eclipse IDE”包，或者从其他 Eclipse IDE 包中，使用“帮助” &gt; “Eclipse Marketplace” 来查找并安装
+<a href="https://marketplace.eclipse.org/content/wild-web-developer-html-css-javascript-typescript-nodejs-angular-json-yaml-kubernetes-xml" target="_blank">Eclipse Wild Web Developer</a>。</p>
+
+  <h2 id="how-the-language-service-works">
+    <a href="#how-the-language-service-works" class="docs-anchor" tabindex="-1" aria-label="Link to How the Language Service works" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dfr7wxgbd47jyqbbvcnayntf6">语言服务的工作原理</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8u9zl2dsytktehyli629b6w5i">当你使用带有语言服务的编辑器时，编辑器会启动一个单独的语言服务进程，并通过 
+<a href="https://en.wikipedia.org/wiki/Remote_procedure_call" target="_blank">RPC</a> 使用 
+<a href="https://microsoft.github.io/language-server-protocol" target="_blank">Language Server Protocol</a> 与其通信。 当你在编辑器中输入时，编辑器会将信息发送给语言服务进程，以跟踪项目的状态。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="42mlj4wvl96cfoax0mc51ck29">当你在模板中触发完成列表时，编辑器首先将模板解析为 HTML 
+<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank">抽象语法树（AST）</a>。 Angular 编译器解释该树以确定上下文：模板所属的模块、当前作用域、组件选择器以及模板 AST 中光标的位置。 然后它可以确定可能在该位置的符号。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="evbk1rrj40m3v3h0iigbdzh98">如果你要进行插值，则需要更多的精力。如果你在 <code>div</code> 有 <code>{{data.---}}</code> 的插值，并且在 <code>data.---</code> 之后需要自动补全列表，则编译器无法使用 HTML AST 查找答案。HTML AST 只能告诉编译器某些文本带有字符 “<code>{{data.---}}</code>”。那时模板解析器会生成一个表达式 AST，该表达式位于模板 AST 中。然后，Angular 语言服务会在其上下文中查找 <code>data.---</code>，询问 TypeScript 语言服务 <code>data</code> 的成员是什么，并返回可能性列表。</p>
+
+  <h2 id="more-information">
+    <a href="#more-information" class="docs-anchor" tabindex="-1" aria-label="Link to More information" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a4i4l0z1p0mxth3he9lk6m2op">更多信息</a>
+  </h2>
+  
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="856jlfqs3o8a7wgtpe9xc30vr">有关实现的更深入信息，请查看 
+<a href="https://github.com/angular/angular/blob/main/packages/language-service/src" target="_blank">Angular 语言服务源代码</a></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="dgnwvwv9p2cdlqer5g6uwlti5">有关设计考虑和意图的更多信息，请参见
+<a href="https://github.com/angular/vscode-ng-language-service/wiki/Design" target="_blank">这里的设计文档</a></li>
+
+  </ul>
+  

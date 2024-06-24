@@ -1,0 +1,71 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>UrlCreationOptions</h1><div class="docs-api-item-label" data-mode="full" data-type="interface">interface</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/router/src/navigation_transition.ts#L103-L196" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="8geqlwrefq1dqkkdbb8xn8mf3">修改 
+<code>Router</code> URL 的选项。向 
+<code>Router</code> 导航函数提供一个包含这些属性的对象，以控制目标 URL 的构建方式。</p><p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/router/Routernavigate" data-ng_translator_product="100" data-ng_translator_ref_id="38wzlicxpy2d7123t2w3lgarr">路由导航</a><a class="docs-pill" href="api/router/RoutercreateUrlTree">RoutercreateUrlTree</a><a class="docs-pill" href="guide/routing/common-router-tasks" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c44kaf0ndv2lwkvg82qm58jsh">路由和导航指南</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">interface</span> <span class="hljs-title class_">UrlCreationOptions</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="relativeTo">  relativeTo?: <span class="hljs-title class_">ActivatedRoute</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="queryParams">  queryParams?: <span class="hljs-title class_">Params</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="fragment">  fragment?: <span class="hljs-built_in">string</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="queryParamsHandling">  queryParamsHandling?: <span class="hljs-title class_">QueryParamsHandling</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="preserveFragment">  preserveFragment?: <span class="hljs-built_in">boolean</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="relativeTo" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>relativeTo</h3><div><code>ActivatedRoute</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cwgq3c4y4u3fsnnol0dctuliz">允许从当前激活的路由进行相对导航。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="88qjgokstzv274kb00q4r95wj">比如，考虑下列路由器配置，parent 路由拥有两个子路由。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">[{</span><span class="hljs-ln-line">  path: <span class="hljs-symbol">'parent</span>',</span><span class="hljs-ln-line">  component: ParentComponent,</span><span class="hljs-ln-line">  children: [{</span><span class="hljs-ln-line">    path: <span class="hljs-symbol">'list</span>',</span><span class="hljs-ln-line">    component: ListComponent</span><span class="hljs-ln-line">  },{</span><span class="hljs-ln-line">    path: <span class="hljs-symbol">'child</span>',</span><span class="hljs-ln-line">    component: ChildComponent</span><span class="hljs-ln-line">  }]</span><span class="hljs-ln-line">}]</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3366wzi9f4j31cjhklc23pcwf">下面的 <code>go()</code> 函数会把目标 URI 解释为相对于已激活路由 <code>child</code> 的，从而导航到 <code>list</code> 路由。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"> <span class="hljs-meta">@Component({...})</span></span><span class="hljs-ln-line"> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</span><span class="hljs-ln-line">   <span class="hljs-keyword">constructor</span>(<span class="hljs-keyword">private</span> router: Router, <span class="hljs-keyword">private</span> route: ActivatedRoute) {}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line">   go() {</span><span class="hljs-ln-line">     router.navigate([<span class="hljs-string">'../list'</span>], { relativeTo: <span class="hljs-keyword">this</span>.route });</span><span class="hljs-ln-line">   }</span><span class="hljs-ln-line"> }</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a6xk6c7a6icbdzxznq12a6dyz">值为 <code>null</code> 或 <code>undefined</code> 表明导航命令应该相对于根应用。</p></div></div></div></div><div id="queryParams" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>queryParams</h3><div><code>Params</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bxutb7mlrutj40hzaio3es35z">设置 URL 的查询参数。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// Navigate to /results?page=1</span></span><span class="hljs-ln-line">router.<span class="hljs-title function_ invoke__">navigate</span>([<span class="hljs-string">'/results'</span>], { <span class="hljs-attr">queryParams</span>: { <span class="hljs-attr">page</span>: <span class="hljs-number">1</span> } });</span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="fragment" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>fragment</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="2f55sjprjkssplqd60m5tuwzf">设置 URL 的哈希片段。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">// Navigate <span class="hljs-selector-tag">to</span> /results<span class="hljs-selector-id">#top</span></span><span class="hljs-ln-line">router<span class="hljs-selector-class">.navigate</span>(<span class="hljs-selector-attr">[<span class="hljs-string">'/results'</span>]</span>, { fragment: <span class="hljs-string">'top'</span> });</span>
+          </code>
+        </pre>
+      </div></div></div></div></div><div id="queryParamsHandling" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>queryParamsHandling</h3><div><code>QueryParamsHandling</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bm6s53hjdlszvbafm05s0s134">如何在路由器链接中处理查询参数以进行下一个导航。为下列值之一：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6o8pl0g3jx7tqdhl30b90s2fu"><code>preserve</code> ：保留当前参数。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9b0gr6f0ny355jzpitwj2xis9"><code>merge</code> ：合并新的当前参数。</li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2nnfwivmg0jt2zg7h3133x58u">“preserve” 选项将放弃所有新的查询参数：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// from /view1?page=1 to/view2?page=1</span></span><span class="hljs-ln-line">router.<span class="hljs-title function_ invoke__">navigate</span>([<span class="hljs-string">'/view2'</span>], { <span class="hljs-attr">queryParams</span>: { <span class="hljs-attr">page</span>: <span class="hljs-number">2</span> },  <span class="hljs-attr">queryParamsHandling</span>: <span class="hljs-string">"preserve"</span></span><span class="hljs-ln-line">});</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d23n0mffor76rdtnq1jvfih2b">“merge” 选项会将新的查询参数附加到当前 URL 的参数中：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-comment">// from /view1?page=1 to/view2?page=1&amp;otherKey=2</span></span><span class="hljs-ln-line">router.<span class="hljs-title function_ invoke__">navigate</span>([<span class="hljs-string">'/view2'</span>], { <span class="hljs-attr">queryParams</span>: { <span class="hljs-attr">otherKey</span>: <span class="hljs-number">2</span> },  <span class="hljs-attr">queryParamsHandling</span>: <span class="hljs-string">"merge"</span></span><span class="hljs-ln-line">});</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3rg23n2h513etlsk6jf9lwjde"><code>queryParams</code> 对象中的参数之间发生键名冲突，则使用新值。</p></div></div></div></div><div id="preserveFragment" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>preserveFragment</h3><div><code>boolean</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="bsdf2l78r8nvnb9sfbkanogji">为 true 时，保留下次导航的 URL 片段。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">// Preserve fragment <span class="hljs-selector-tag">from</span> /results<span class="hljs-selector-id">#top</span> <span class="hljs-selector-tag">to</span> /view<span class="hljs-selector-id">#top</span></span><span class="hljs-ln-line">router<span class="hljs-selector-class">.navigate</span>(<span class="hljs-selector-attr">[<span class="hljs-string">'/view'</span>]</span>, { preserveFragment: true });</span>
+          </code>
+        </pre>
+      </div></div></div></div></div></div></div></div>

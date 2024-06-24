@@ -1,0 +1,207 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4yha3afq07kgs584opdzpq1lo">Service Worker 快速上手</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/ecosystem/service-workers/getting-started.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="vde37g97hp49fbdvo391zd2q">本文档说明了如何在使用 
+<a href="tools/cli">Angular CLI</a> 创建的项目中启用 Angular Service Worker 支持。然后，它通过一个示例展示了 Service Worker 的实际操作，演示加载和基本缓存。</p>
+
+  <h2 id="adding-a-service-worker-to-your-project">
+    <a href="#adding-a-service-worker-to-your-project" class="docs-anchor" tabindex="-1" aria-label="Link to Adding a service worker to your project" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2xsgefbns41m019zxkmklyo1p">为你的项目添加 Service Worker</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="epudt0wp383nmaq4b987xek93">要在你的项目中设置 Angular Service Worker，请运行以下 CLI 命令：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng add @angular/pwa</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7vob609vjawvhuoifc04hc6tn">CLI 通过以下操作配置你的应用以使用 Service Worker：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c6oai5akhc95o4e3wm7e3qq1c">把 <code>@angular/service-worker</code> 添加到你的项目中。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3enldwhkega3uk8li4ga7655t">在 CLI 中启用 Service Worker 的构建支持。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="4w1yfasp4m7bi03lwfgajk0r4">导入并注册带有应用根提供者的 Service Worker。</li>
+<li>Updates the <code>index.html</code> file:
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e9qioqzejauu7lvofggx1keki">包含要添加到 <code>manifest.webmanifest</code> 文件中的链接。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5kdxiv79l61k75i0awcdke2kv">为 <code>theme-color</code> 添加 meta 标签。</li>
+
+  </ul>
+  </li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9212p1ih3xblpr9sjzsd7ogz">创建图标文件，以支持安装渐进式应用（PWA）。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="8i8558x84qovj5njphleot9s0">创建名为 
+<a href="ecosystem/service-workers/config"><code>ngsw-config.json</code></a> 的服务工作线程配置文件，该文件指定了缓存行为和其他设置。</li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dqesf5rpl99huotcqg2fd4nw6">现在，构建本项目：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eakp2vhma7v9tao4aitfq5auj">现在，这个 CLI 项目就可以使用 Angular Service Worker 了。</p>
+
+  <h2 id="service-worker-in-action-a-tour">
+    <a href="#service-worker-in-action-a-tour" class="docs-anchor" tabindex="-1" aria-label="Link to Service worker in action: a tour" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aapfkbx4b29k01a2h7xs8p41g">Service Worker 实战：向导</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2sbdfsejl8k2125iifqaxu6h8">本节用一个范例应用来演示一下 Service Worker 实战。</p>
+
+  <h3 id="initial-load">
+    <a href="#initial-load" class="docs-anchor" tabindex="-1" aria-label="Link to Initial load" data-ng_translator_product="100" data-ng_translator_ref_id="9fe5bvw4ksvggq8yyjr9cemea">最初的加载</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="c83imrpsdedq74sdl80cjn68l">当服务器运行在端口 
+<code>8080</code> 上时，将浏览器指向 
+<code>http://localhost:8080</code>。你的应用应该正常加载。</p>
+
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="eumnke37iwzz0jq7f1p5v464y"><strong>提示：</strong>在测试 Angular 服务工作线程时，建议在浏览器中使用隐身模式或私密窗口，以确保服务工作线程不会读取之前的残留状态，从而导致意外行为。</p>
+
+    </div>
+    
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="1q6gw3hkcimmwzj1ojfhn70qs"><strong>提示：</strong>如果你未使用 HTTPS，服务工作线程只会在访问 
+<code>localhost</code> 的应用时注册。</p>
+
+    </div>
+    
+  <h3 id="simulating-a-network-issue">
+    <a href="#simulating-a-network-issue" class="docs-anchor" tabindex="-1" aria-label="Link to Simulating a network issue" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dfbik6sxxjrssehkisgdje4b2">模拟网络出问题</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cas3n3t0qkdq9lo0t42ug091k">如果想模拟网络问题，以便在你的应用中禁用网络交互。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cfh0b9glok9z92qjdgybth2fo">在 Chrome 中：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e6cpmbxuznvbzvh4rmlz3lz18">选择 <strong>Tools</strong> &gt; <strong>Developer Tools</strong>（从右上角的 Chrome 菜单）。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7egcsyqxgmk8ahjqbdt1ks9kz">进入 <strong>Network 页</strong>。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5a9499yidv2ti3yiohleq20go">在 <strong>Throttling</strong> 下拉菜单中选择 <strong>Offline</strong> 复选框。</li>
+
+    </ol>
+    <img alt="The offline option in the Network tab is selected" src="assets/images/guide/service-worker/offline-option.png">
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dmo4hyyzimw09cwo2rslm8pvy">现在，本应用不能再和网络进行交互了。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3r6porlb9r7ocmc0xjjhqefye">对于那些不使用 Angular Service Worker 的应用，现在刷新将会显示 Chrome 的“网络中断”页，提示“没有可用的网络连接”。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bywpiyn6tkeu4ztuizjlft102">有了 Angular Service Worker，本应用的行为就不一样了。刷新时，页面会正常加载。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="64b5tdkg11lkaa4nyqwl4caeb">看看 Network 页，来验证此 Service Worker 是激活的。</p>
+<img alt="Requests are marked as from ServiceWorker" src="assets/images/guide/service-worker/sw-active.png">
+
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="a9j93paxrhmblgtc5wwcz8u71"><strong>提示：</strong>在「大小」列下，请求状态为 
+<code>(ServiceWorker)</code>。这意味着资源不是从网络加载，而是从服务工作线程的缓存中加载。</p>
+
+    </div>
+    
+  <h3 id="whats-being-cached">
+    <a href="#whats-being-cached" class="docs-anchor" tabindex="-1" aria-label="Link to What's being cached?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cv1x6fcf23pfneu3unifia472">哪些内容被缓存了？</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ev2cd4jpix2527gm1peze0e90">注意，浏览器要渲染的所有这些文件都被缓存了。<code>ngsw-config.json</code> 样板文件被配置成了要缓存 CLI 用到的那些文件：</p>
+
+  <ul class="docs-list">
+    <li><code>index.html</code></li>
+<li><code>favicon.ico</code></li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7yakfueai4l668pdizgb0p7q1">构建结果（JS 和 CSS 包）</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="38gre1eia5fsj9dmgoqn81q9a"><code>assets</code> 下的一切</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="e97b88j0xb1jtmjouj3qkrbsq">直接位于配置的 
+<code>outputPath</code>（默认是 
+<code>./dist/&lt;project-name&gt;/</code>）或 
+<code>resourcesOutputPath</code> 下的图像和字体。有关这些选项的更多信息，请参阅 
+<code>ng build</code> 文档。</li>
+
+  </ul>
+  
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="a7acw32o7r40v5w19mzw6l359"><strong>重要：</strong>生成的 
+<code>ngsw-config.json</code> 包含一个有限的可缓存字体和图像扩展名列表。在某些情况下，你可能需要修改 glob 模式以满足你的需求。</p>
+
+    </div>
+    
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="5lyvy53k9uk5fqhteislebkjo"><strong>重要：</strong>如果在生成配置文件后修改了 
+<code>resourcesOutputPath</code> 或 
+<code>assets</code> 路径，你需要在 
+<code>ngsw-config.json</code> 中手动更改这些路径。</p>
+
+    </div>
+    
+  <h3 id="making-changes-to-your-application">
+    <a href="#making-changes-to-your-application" class="docs-anchor" tabindex="-1" aria-label="Link to Making changes to your application" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="17kj9bztiae63lut6gogrp2bt">修改你的应用</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8dq8mlj78d0u7ta4ic14oqqry">现在，你已经看到了 Service Worker 如何缓存你的应用，接下来的步骤讲它如何进行更新。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="dhwdvtlgn3l634ybqz01tddqc">如果你在隐身窗口中进行测试，打开第二个空白标签页。这会在测试期间保持隐身模式和缓存状态。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="cqaz2383z3qanz2yflrhmm5pm">关闭应用标签页，但不要关闭窗口。这也会关闭开发者工具。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="1jlo12rr4opjk0oxr92etnkp">关闭 
+<code>http-server</code>（Ctrl-c）。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7hr5lbwyrv9f8ov5d2i9yii6x">打开 <code>src/app/app.component.html</code> 以供编辑。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="jyvu169iq829jd2w3lh9k16d">把文本 <code>Welcome to {{title}}!</code> 改为 <code>Bienvenue à {{title}}!</code>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7qo6pjm5mg8j3aw0qd12dg37i">再次构建并运行此服务器：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build</div><div class="hljs-ln-line"> npx http-server -p 8080 -c-1 dist/&lt;project-name&gt;/browser</div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    
+  <h3 id="updating-your-application-in-the-browser">
+    <a href="#updating-your-application-in-the-browser" class="docs-anchor" tabindex="-1" aria-label="Link to Updating your application in the browser" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d3qeh57xh83q2m0u5islqenpc">在浏览器中更新你的应用</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eigww7tkojjjaca1f7ivjixlp">现在，看看浏览器和 Service Worker 如何处理这个更新后的应用。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="9qbmywck46qhnbqqdpnh485mz">在同一个窗口中再次打开 
+<a href="http://localhost:8080" target="_blank">http://localhost:8080</a>。会发生什么？</p>
+ <img alt="It still says Welcome to Service Workers!" src="assets/images/guide/service-worker/welcome-msg-en.png">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="e9pf6q366aheob0gc30e5klt2">出了什么问题？
+<em>实际上，什么问题都没有！</em>Angular 服务工作线程正在执行它的任务，提供它已 
+<strong>安装</strong> 的应用版本，即使有可用的更新。为了速度考虑，服务工作线程不会在提供已缓存的应用前等待检查更新。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="11ns6pv2erucb64qufuk7lvk9">查看 
+<code>http-server</code> 日志，查看服务工作线程请求 
+<code>/ngsw.json</code>。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">[2023-09-07T00:37:24.372Z]  "GET /ngsw.json?ngsw-cache-bust=0.9365263935102124" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7czv5adpbazo5rm8wp921wehx">这是 Service Worker 检查更新的方式。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9mmvm1labqvmf7epmverv6qt">刷新页面。</p>
+ <img alt="The text has changed to say Bienvenue à app!" src="assets/images/guide/service-worker/welcome-msg-fr.png">
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8hvh9ahlo9d5l37xzg2sju6jl">Service Worker <em>在后台</em>安装好了这个更新后的版本，下次加载或刷新页面时，Service Worker 就切换到最新的版本了。</p>
+</li>
+
+    </ol>
+    
+  <h2 id="more-on-angular-service-workers">
+    <a href="#more-on-angular-service-workers" class="docs-anchor" tabindex="-1" aria-label="Link to More on Angular service workers" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e9jl51v338pdg88lkv1cl8f1i">关于 Angular Service Worker 的更多信息</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1oolgylns9kaynftarwog49tq">你可能还对下列内容感兴趣：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="ecosystem/service-workers/config" data-ng_translator_product="100" data-ng_translator_ref_id="eecazk2kc60u3i9t9iml06tlw">配置文件</a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/communications" data-ng_translator_product="100" data-ng_translator_ref_id="8yc3zafldwi6g1hcldyi9y5j4">与 Service Worker 通信</a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/push-notifications" data-ng_translator_product="100" data-ng_translator_ref_id="b1fmcvag2ldn478spoka7jbb3">推送通知</a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/devops" data-ng_translator_product="100" data-ng_translator_ref_id="7q4y6g2v52ulz6wah6v8ethrc">Service Worker 运维</a>
+    
+    <a class="docs-pill" href="ecosystem/service-workers/app-shell" data-ng_translator_product="100" data-ng_translator_ref_id="e7neo7hglt9vgfi3n26lq7t9b">应用外壳模式</a>
+    
+
+    </nav>
+    

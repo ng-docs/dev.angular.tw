@@ -1,0 +1,91 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/upgrade/static/testing</span><div class="docs-reference-title"><div><h1>createAngularJSTestingModule</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/upgrade/static/testing/src/create_angularjs_testing_module.ts#L82-L96" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3cbwz0xt3pmk4kmniqkagw23i">单元测试依赖于降级 Angular 服务的 AngularJS 服务时要使用的帮助器函数。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">createAngularJSTestingModule</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">angularModules</span>: <span class="hljs-built_in">any</span>[]</div><div class="hljs-ln-line ">): <span class="hljs-built_in">string</span>;</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3cbwz0xt3pmk4kmniqkagw23i">单元测试依赖于降级 Angular 服务的 AngularJS 服务时要使用的帮助器函数。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f3rcgsecytmjgdulhvdjdlmez">此函数返回一个 AngularJS 模块，该模块被配置为连接 AngularJS 和 Angular
+注入器，而无需实际引导混合应用程序。这使得单元测试服务变得更简单、更快。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="31rui53azuwpt9y9rp626zs0q">在对<a href="https://docs.angularjs.org/api/ngMock/function/angular.mock.module"><code>angular.mocks.module</code></a>的调用中使用返回的
+AngularJS 模块，以将此模块包含在单元测试注入器中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ayhjs2qmy51mtpoowp47290ny">在以下代码片段中，我们使用两个模块配置 <code>$injector</code>：AngularJS <code>ng1AppModule</code>
+，它是我们混合应用程序的 AngularJS 部分和 <code>Ng2AppModule</code>，它是 Angular 部分。</p>
+<p><code-example path="upgrade/static/ts/full/module.spec.ts" region="angularjs-setup"></code-example></p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="d40i3qf26rof9vlkjvt88tbd8">完成此操作后，我们可以像平常一样通过 AngularJS 的 
+<code>$injector</code> 获取服务。那些（或依赖于）降级的 Angular 服务的服务，将由 Angular 根 
+<code>Injector</code> 根据需要实例化。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7gnxa7yo9vzzd3t4zxtx44vf4">在以下代码片段中，<code>heroesService</code> 是我们从 AngularJS 访问的降级 Angular 服务。</p>
+<p><code-example path="upgrade/static/ts/full/module.spec.ts" region="angularjs-spec"></code-example></p>
+<div class="alert is-important">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bx7r6lco74vvhirhtn83bhyi1">此辅助函数用于测试服务而不是组件。对于组件测试，你仍需引导混合应用。详见 
+<code>UpgradeModule</code> 或 
+<code>downgradeModule</code>。</p>
+</div>
+
+<div class="alert is-important">
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a9gj1w2ywjdj5lplige0wp691">生成的配置不会将 AngularJS 摘要连接到 Zone 钩子。测试作者有责任根据需要调用 <code>$rootScope.$apply</code>
+，以触发来自 Angular 的异步事件的 AngularJS 处理程序。</p>
+</div>
+
+<div class="alert is-important">
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="98y04s1k1yodu14d11z2cxynq">帮助器设置全局变量来保存共享的 Angular 和 AngularJS 注入器。</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="crt8skmkn8c4zcx155jn2ljf1">每个规范只调用一次此帮助器。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="29om8vr25t6mhdw8aamcb80r6">不要在同一个规范中同时使用 
+<code>createAngularJSTestingModule</code> 和 
+<code>createAngularTestingModule</code>。</li>
+
+    </ul>
+    </div>
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8wjot3aqi7263h8l23kiastwm">以下是使用 
+<code>createAngularTestingModule</code> 和 
+<code>createAngularJSTestingModule</code> 的示例应用及其单元测试。</p>
+<code-tabs>
+ <code-pane header="module.spec.ts" path="upgrade/static/ts/full/module.spec.ts"></code-pane>
+ <code-pane header="module.ts" path="upgrade/static/ts/full/module.ts"></code-pane>
+</code-tabs></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>createAngularJSTestingModule</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3cbwz0xt3pmk4kmniqkagw23i">单元测试依赖于降级 Angular 服务的 AngularJS 服务时要使用的帮助器函数。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f3rcgsecytmjgdulhvdjdlmez">此函数返回一个 AngularJS 模块，该模块被配置为连接 AngularJS 和 Angular
+注入器，而无需实际引导混合应用程序。这使得单元测试服务变得更简单、更快。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="31rui53azuwpt9y9rp626zs0q">在对<a href="https://docs.angularjs.org/api/ngMock/function/angular.mock.module"><code>angular.mocks.module</code></a>的调用中使用返回的
+AngularJS 模块，以将此模块包含在单元测试注入器中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ayhjs2qmy51mtpoowp47290ny">在以下代码片段中，我们使用两个模块配置 <code>$injector</code>：AngularJS <code>ng1AppModule</code>
+，它是我们混合应用程序的 AngularJS 部分和 <code>Ng2AppModule</code>，它是 Angular 部分。</p>
+<p><code-example path="upgrade/static/ts/full/module.spec.ts" region="angularjs-setup"></code-example></p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="d40i3qf26rof9vlkjvt88tbd8">完成此操作后，我们可以像平常一样通过 AngularJS 的 
+<code>$injector</code> 获取服务。那些（或依赖于）降级的 Angular 服务的服务，将由 Angular 根 
+<code>Injector</code> 根据需要实例化。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7gnxa7yo9vzzd3t4zxtx44vf4">在以下代码片段中，<code>heroesService</code> 是我们从 AngularJS 访问的降级 Angular 服务。</p>
+<p><code-example path="upgrade/static/ts/full/module.spec.ts" region="angularjs-spec"></code-example></p>
+<div class="alert is-important">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bx7r6lco74vvhirhtn83bhyi1">此辅助函数用于测试服务而不是组件。对于组件测试，你仍需引导混合应用。详见 
+<code>UpgradeModule</code> 或 
+<code>downgradeModule</code>。</p>
+</div>
+
+<div class="alert is-important">
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a9gj1w2ywjdj5lplige0wp691">生成的配置不会将 AngularJS 摘要连接到 Zone 钩子。测试作者有责任根据需要调用 <code>$rootScope.$apply</code>
+，以触发来自 Angular 的异步事件的 AngularJS 处理程序。</p>
+</div>
+
+<div class="alert is-important">
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="98y04s1k1yodu14d11z2cxynq">帮助器设置全局变量来保存共享的 Angular 和 AngularJS 注入器。</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="crt8skmkn8c4zcx155jn2ljf1">每个规范只调用一次此帮助器。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="29om8vr25t6mhdw8aamcb80r6">不要在同一个规范中同时使用 
+<code>createAngularJSTestingModule</code> 和 
+<code>createAngularTestingModule</code>。</li>
+
+    </ul>
+    </div>
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8wjot3aqi7263h8l23kiastwm">以下是使用 
+<code>createAngularTestingModule</code> 和 
+<code>createAngularJSTestingModule</code> 的示例应用及其单元测试。</p>
+<code-tabs>
+ <code-pane header="module.spec.ts" path="upgrade/static/ts/full/module.spec.ts"></code-pane>
+ <code-pane header="module.ts" path="upgrade/static/ts/full/module.ts"></code-pane>
+</code-tabs></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">angularModules</span><code>any[]</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dz3ladsklonuxdni6vzxj0r4j">要包含在配置中的 Angular 模块的集合。</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>string</code></div></div></div></div></div></div></div>

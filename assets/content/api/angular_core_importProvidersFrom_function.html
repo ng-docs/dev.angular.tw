@@ -1,0 +1,51 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>importProvidersFrom</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/core/src/di/provider_collection.ts#L108-L113" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="46tmfgwtls5kg9v4ewtz4o656">从所有 NgModule 和独立组件（包括可传递导入的组件）收集提供程序。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line ">importProvidersFrom(</div><div class="hljs-ln-line ">  ...<span class="hljs-attr">sources</span>: <span class="hljs-title class_">ImportProvidersSource</span>[]</div><div class="hljs-ln-line ">): <span class="hljs-title class_">EnvironmentProviders</span>;</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="46tmfgwtls5kg9v4ewtz4o656">从所有 NgModule 和独立组件（包括可传递导入的组件）收集提供程序。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="59q9r1x6enkhd8x9tlcqdp0i6">通过 
+<code>importProvidersFrom</code> 提取的提供者只能在应用注入器或其他环境注入器（例如路由注入器）中使用。它们不应在组件提供者中使用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ec7d8vc8ig8h15w95iyu334uv">关于独立组件的更多信息，请参见 
+<a href="guide/components/importing">本指南</a>。</p></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="a14er6e33df0ectqvfj76lt67"><code>importProvidersFrom</code> 调用的结果可以在 
+<code>bootstrapApplication</code> 调用中使用：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">await</span> <span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">RootComponent</span>, {</span><span class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">    importProvidersFrom(<span class="hljs-title class_">NgModuleOne</span>, <span class="hljs-title class_">NgModuleTwo</span>)</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">});</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bg4hx25wmzv6s3zag323kcbhs">当使用独立组件时，你也可以在路由的 
+<code>providers</code> 字段中使用 
+<code>importProvidersFrom</code> 的结果：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">ROUTES</span>: <span class="hljs-title class_">Route</span>[] = [</span><span class="hljs-ln-line">  {</span><span class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'foo'</span>,</span><span class="hljs-ln-line">    <span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">      importProvidersFrom(<span class="hljs-title class_">NgModuleOne</span>, <span class="hljs-title class_">NgModuleTwo</span>)</span><span class="hljs-ln-line">    ],</span><span class="hljs-ln-line">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">YourStandaloneComponent</span></span><span class="hljs-ln-line">  }</span><span class="hljs-ln-line">];</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>importProvidersFrom</h3><div><code>EnvironmentProviders</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="46tmfgwtls5kg9v4ewtz4o656">从所有 NgModule 和独立组件（包括可传递导入的组件）收集提供程序。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="59q9r1x6enkhd8x9tlcqdp0i6">通过 
+<code>importProvidersFrom</code> 提取的提供者只能在应用注入器或其他环境注入器（例如路由注入器）中使用。它们不应在组件提供者中使用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ec7d8vc8ig8h15w95iyu334uv">关于独立组件的更多信息，请参见 
+<a href="guide/components/importing">本指南</a>。</p></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">sources</span><code>ImportProvidersSource[]</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>EnvironmentProviders</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><p data-ng_translator_product="100" data-ng_translator_ref_id="a14er6e33df0ectqvfj76lt67"><code>importProvidersFrom</code> 调用的结果可以在 
+<code>bootstrapApplication</code> 调用中使用：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">await</span> <span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">RootComponent</span>, {</span><span class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">    importProvidersFrom(<span class="hljs-title class_">NgModuleOne</span>, <span class="hljs-title class_">NgModuleTwo</span>)</span><span class="hljs-ln-line">  ]</span><span class="hljs-ln-line">});</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bg4hx25wmzv6s3zag323kcbhs">当使用独立组件时，你也可以在路由的 
+<code>providers</code> 字段中使用 
+<code>importProvidersFrom</code> 的结果：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">ROUTES</span>: <span class="hljs-title class_">Route</span>[] = [</span><span class="hljs-ln-line">  {</span><span class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'foo'</span>,</span><span class="hljs-ln-line">    <span class="hljs-attr">providers</span>: [</span><span class="hljs-ln-line">      importProvidersFrom(<span class="hljs-title class_">NgModuleOne</span>, <span class="hljs-title class_">NgModuleTwo</span>)</span><span class="hljs-ln-line">    ],</span><span class="hljs-ln-line">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">YourStandaloneComponent</span></span><span class="hljs-ln-line">  }</span><span class="hljs-ln-line">];</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div></div></div></div></div></div>

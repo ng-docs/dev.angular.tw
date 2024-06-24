@@ -1,0 +1,100 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="brqakocm26ebyfq2gimmewigo">预渲染（SSG）</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/prerendering.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="6oyconfhpe6i5oc06408gaar3">预渲染，通常称为静态站点生成（SSG），表示在构建过程中将页面渲染为静态 HTML 文件的方法。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4q2azq5fqpv9pbs0he4srztr8">预渲染保持了
+<a href="guide/ssr#why-use-server-side-rendering">服务器端渲染（SSR）</a>的相同性能优势，但实现了减少的首字节时间（TTFB），最终增强了用户体验。关键区别在于其方法将页面作为静态内容提供，并且没有基于请求的渲染。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1qhaw3zlz3uq25ctmarw46mu3">当服务器端渲染所需的数据在所有用户之间保持一致时，预渲染策略成为一个有价值的替代方案。与其为每个用户请求动态渲染页面，不如预先渲染它们。</p>
+
+  <h2 id="how-to-prerender-a-page">
+    <a href="#how-to-prerender-a-page" class="docs-anchor" tabindex="-1" aria-label="Link to How to prerender a page" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a9mconueznqx7nmc17d3qcfya">如何预先渲染页面</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ap4wnkwouirzsn2tneboh1dq4">要预渲染静态页面，请使用以下 Angular CLI 命令为你的应用添加 SSR 功能：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng add @angular/ssr</div></code>
+    </pre>
+  </div><div class="alert is-helpful">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="10khxpppf8ryh7si74wlkiwoo">要从一开始就创建具有预渲染功能的应用，请使用 
+<a href="tools/cli/setup-local"><code>ng new --ssr</code></a> 命令。</p>
+</div>
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8bx5gck0gdt42wok8ml63erp8">添加 SSR 后，你可以通过运行构建命令生成静态页面：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build</div></code>
+    </pre>
+  </div>
+  <h3 id="build-options-for-prerender">
+    <a href="#build-options-for-prerender" class="docs-anchor" tabindex="-1" aria-label="Link to Build options for prerender" data-ng_translator_product="100" data-ng_translator_ref_id="3xpkh856riqohkzffg753yy9m">预渲染的构建选项</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3poc2itfxdf03y6w77monxp5n">应用构建器的 
+<code>prerender</code> 选项可以是布尔值或对象以进行更精细的配置。当选项为 
+<code>false</code> 时，不执行预渲染。当选项为 
+<code>true</code> 时，所有选项使用默认值。当选项为对象时，可以单独配置每个选项。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cyk2rtnidu0xcswyg7218m57s">选项</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="6cwhe65hais9ueojrcln3vqi4">默认值</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>discoverRoutes</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="f55zuoosdb6ts2wdr9ji51x0g">构建器是否应该处理 Angular 路由器配置以找到所有不带参数的路由并预渲染它们。</td>
+<td align="left"><code>true</code></td>
+</tr>
+<tr>
+<td align="left"><code>routesFile</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9o7kivzfpc2wf3zqx2cnpc4pg">一个包含所有要预渲染路由列表的文件路径，路由之间用换行符分隔。如果你想预渲染带参数的 URL 路由，此选项非常有用。</td>
+<td align="left"></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"my-app"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:application"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"prerender"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">              <span class="hljs-attr">"discoverRoutes"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span></div><div class="hljs-ln-line">            <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">          <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <h3 id="prerendering-parameterized-routes">
+    <a href="#prerendering-parameterized-routes" class="docs-anchor" tabindex="-1" aria-label="Link to Prerendering parameterized routes" data-ng_translator_product="100" data-ng_translator_ref_id="57iibkooooeiwjg7k90qlkxw2">预渲染带参数的路由</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8gjlihcdpoqw5l6zllkbnwrqk">你可以使用 
+<code>routesFile</code> 选项预渲染带参数的路由。一个带参数的路由示例是 
+<code>product/:id</code>，其中 
+<code>id</code> 是动态提供的。要指定这些路由，它们应列在一个文本文件中，每行一个路由。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5l0j2c6dvipoieolxjvnjl4g1">对于一个具有大量带参数路由的应用，请考虑在运行 
+<code>ng build</code> 之前使用脚本生成此文件。</p>
+<div class="docs-code" header="routes.txt">
+    <div class="docs-code-header"><h3>routes.txt</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">/products/1</div><div class="hljs-ln-line">/products/555</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="8mo5xegfwk30yw7y714hdtw27">在 
+<code>routes.txt</code> 文件中指定路由后，使用 
+<code>routesFile</code> 选项配置构建器以预渲染产品路由。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"my-app"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:application"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">          <span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">            <span class="hljs-attr">"prerender"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">              <span class="hljs-attr">"routesFile"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"routes.txt"</span></div><div class="hljs-ln-line">            <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">          <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">        <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">      <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5bzik988kaaocsb0qm1dzlt1g">这会将 
+<code>ng build</code> 配置为在构建时预渲染 
+<code>/products/1</code> 和 
+<code>/products/555</code>。</p>

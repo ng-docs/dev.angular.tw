@@ -1,0 +1,635 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="86a6leao0pq5hk3gqyd7aemk7">预先（AOT）编译器</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/aot-compiler.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ew39i3g4c1327vynuuu5docu3">Angular 应用主要由组件及其 HTML 模板组成。由于浏览器无法直接理解 Angular 所提供的组件和模板，因此 Angular 应用程序需要先进行编译才能在浏览器中运行。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ap5ggunyhx9s6iuyz1sn77z66">Angular 预先编译（AOT）编译器在构建阶段将你的 Angular HTML 和 TypeScript 代码转换为高效的 JavaScript 代码，
+<em>在</em> 浏览器下载并运行该代码之前。在构建过程中编译应用程序可以提供更快的在浏览器中渲染。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="amwx61474ikc96wiuenj9cupx">本指南中解释了如何指定元数据，并使用一些编译器选项以借助 AOT 编译器来更有效的编译应用。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7ezy7jsjnk4y8qg4dubyqufqw"><strong>提示：</strong> 
+<a href="https://www.youtube.com/watch?v=anphffaCZrQ" target="_blank">查看 Alex Rickabaugh 在 AngularConnect 2019 阐述 Angular 编译器的视频</a>。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dbzg1yw2h82txs5p595aat4oa">下面是你可能要使用 AOT 的部分原因。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="betfffemq5l58dq8mv5vosvwh">原因</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="50yas5hchrolvftacmen7qcip">更快的渲染</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="czhuaqdcx6wxhk3ib0b8rdxnw">使用 AOT，浏览器下载应用程序的预编译版本。浏览器加载可执行代码，因此可以立即渲染应用程序，无需等待首先编译应用程序。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="qw9t9851prcg2xm3dx5fdjwp">较少的异步请求</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5wjg0ggevaqvvylw5fowuaxc4">编译器将外部 HTML 模板和 CSS 样式表
+<em>内联</em>到应用程序 JavaScript 中，消除这些源文件的单独 ajax 请求。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3fdxpt550vicfbbcri4m76afc">更小的 Angular 框架下载大小</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ccnuck7dn9ua3ragnrq7hon36">如果应用程序已经编译，就不需要下载 Angular 编译器。编译器大约是 Angular 本身的一半，因此省略它会显著减少应用程序的有效负载。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4lqtwpylqmhgjuvpdbq9aq9hc">更早地检测模板错误</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5o8jkfxvm9k2kekwhv438cxto">AOT 编译器在构建步骤中检测和报告模板绑定错误，用户在看到它们之前就能发现。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="29jgs05nbj8s9dyo4ys70vpfx">更好的安全性</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="e5xs1i6kax02oxa0itaex5n82">AOT（预先编译）会在服务端将 HTML 模板和组件编译成 JavaScript 文件，长时间之前就完成。没有需要读取的模板，也没有风险的客户端 HTML 或 JavaScript 评估，因此注入攻击的机会更少。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="choosing-a-compiler">
+    <a href="#choosing-a-compiler" class="docs-anchor" tabindex="-1" aria-label="Link to Choosing a compiler" data-ng_translator_product="100" data-ng_translator_ref_id="2o3e9qme7pht4k6kdg9i6dldk">选择编译器</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7tmjeukt2ijvkq5fzld60dksf">Angular 提供了两种方式来编译你的应用：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5c1v5byb3pogxaf6r8uyffq2">Angular 编译</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="30tlatjxu4iem3fjqgus1a6sr">即时编译（JIT）</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="d14pasefti0hkzmn4acic9poo">在浏览器中在运行时编译你的应用程序。这是 Angular 8 之前的默认设置。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="c376oxdtbp8nfu6ja58kdc1rt">预先编译（AOT）</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="enilh4hv7jqqqy4oqa0gmo9qu">在构建时编译你的应用程序和库。自 Angular 9 起，这是默认设置。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2n038s31mwt3jch2aw48kbd3y">当运行 CLI 命令 <a href="cli/build"><code>ng build</code></a> （只构建）或 <a href="cli/serve"><code>ng serve</code></a>（构建并启动本地服务器）时，编译类型（JIT 或 AOT）取决于你在 <code>angular.json</code> 中的构建配置所指定的 <code>aot</code> 属性。默认情况下，对于新的 CLI 应用，其 <code>aot</code> 为 <code>true</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6k7harp22ql8ecg2fvdq5xvx1">查看
+<a href="cli">CLI 命令参考</a>和
+<a href="tools/cli/build">构建和提供 Angular 应用程序</a>以获取更多信息。</p>
+
+  <h2 id="how-aot-works">
+    <a href="#how-aot-works" class="docs-anchor" tabindex="-1" aria-label="Link to How AOT works" data-ng_translator_product="100" data-ng_translator_ref_id="bq8bjvfxhrq96dcf9fhcg9uh3">AOT 工作原理</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6fuqa4cle4p8mdsuu6long869">Angular AOT 编译器提取 
+<strong>元数据</strong> 以解释 Angular 应该管理的应用部分。 你可以在 
+<strong>装饰器</strong> 中显式指定元数据，如 
+<code>@Component()</code> 和 
+<code>@Input()</code>，或在带装饰器的类的构造函数声明中隐式指定。 元数据告诉 Angular 如何构造应用类的实例并在运行时与它们交互。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ciprbie3t2xhuuz0bfv83lnwv">在下面的示例中，
+<code>@Component()</code>元数据对象和类构造函数告诉 Angular 如何创建和显示
+<code>TypicalComponent</code>的实例。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-typical'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div&gt;A typical component for {{data.name}}&lt;/div&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">data</span>: <span class="hljs-title class_">TypicalData</span>;</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> someService: SomeService</span>) { … }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="8o0cggrvcqgkzhifhq10c32kk">Angular 编译器提取元数据 
+<em>一次</em> 并为 
+<code>TypicalComponent</code> 生成一个 
+<em>工厂</em>。 当需要创建 
+<code>TypicalComponent</code> 实例时，Angular 调用工厂，工厂生成一个新的视觉元素，并绑定到组件类的新实例及其注入的依赖项。</p>
+
+  <h3 id="compilation-phases">
+    <a href="#compilation-phases" class="docs-anchor" tabindex="-1" aria-label="Link to Compilation phases" data-ng_translator_product="100" data-ng_translator_ref_id="cors6napom1dxn5jfs01ubk4m">编译的各个阶段</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9fxscotkotcrxy7u00ykuc0fa">AOT 编译分为三个阶段。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left"></th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5ksevlnrwwntaghvm9gkh5nf7">阶段</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left">1</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="6q1qn323vovc12zfwjt1n90ci">代码分析</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cgw42cd3ifpejlu1opgpp1orz">在此阶段，TypeScript 编译器和 
+<em>AOT 收集器</em> 创建源码的表示形式。收集器不会尝试解释它收集的元数据。它尽可能地表示元数据，并在检测到元数据语法违规时记录错误。</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bfw4hs0j1ocbbpmni129cch9k">代码生成</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bwwrb6syoqoidaszsxw1nmtpb">在此阶段，编译器的
+<code>StaticReflector</code>解释阶段1中收集的元数据，对元数据进行额外验证，并在检测到元数据限制违规时抛出错误。</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7ljn0mt4c3ds1hs1h0yxb4qf7">模板类型检查</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9hey5c67wh5le4k0cxiw54k33">在这个可选阶段中，Angular 
+<em>模板编译器</em>使用 TypeScript 编译器验证模板中的绑定表达式。你可以通过设置
+<code>strictTemplates</code>配置选项显式启用此阶段；参见
+<a href="reference/configs/angular-compiler-options">Angular 编译器选项</a>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="metadata-restrictions">
+    <a href="#metadata-restrictions" class="docs-anchor" tabindex="-1" aria-label="Link to Metadata restrictions" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e706ncbspohkemcmgs4ogupag">元数据的限制</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="aan2l7eqmpe37mn1b7ti2upf0">你在 TypeScript 的一个 
+<em>子集</em> 中编写元数据，必须符合以下一般约束：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="88xfb9esq3vlea7cs263hhevd">将
+<a href="#expression-syntax-limitations">表达式语法</a>限制为受支持的 JavaScript 子集</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="2354cbq6wpd0p7dva0qp8y7u3">只在
+<a href="#code-folding">代码折叠</a>之后引用导出的符号</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="4qmn1c1d3y7p0uembon901rwb">只调用编译器支持的
+<a href="#supported-classes-and-functions">函数</a></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="8x1h8nnu86vqc640kldnqt9xw">输入/输出和数据绑定的类成员必须是公共的或受保护的。有关为AOT编译准备应用程序的额外准则和说明，请参见
+<a href="https://medium.com/sparkles-blog/angular-writing-aot-friendly-applications-7b64c8afbe3f" target="_blank">Angular：编写AOT友好应用程序</a>。</li>
+
+  </ul>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4sr7ur7mtsesgl9rrs7p3yats"><strong>提示：</strong> AOT编译中常见的错误通常是由于元数据不符合编译器要求（如下文更详细地描述）。 如果需要帮助理解和解决这些问题，请参见
+<a href="tools/cli/aot-metadata-errors">AOT元数据错误</a>。</p>
+
+    </div>
+    
+  <h3 id="configuring-aot-compilation">
+    <a href="#configuring-aot-compilation" class="docs-anchor" tabindex="-1" aria-label="Link to Configuring AOT compilation" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6bxnkr03spg91rhxv2g1pq018">配置 AOT 编译</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dqc3f3tz1m0t7vfdxxvfhdgim">你可以在
+<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript配置文件</a>中提供选项来控制编译过程。 查看
+<a href="reference/configs/angular-compiler-options">Angular编译器选项</a>以获得所有可用选项的完整列表。</p>
+
+  <h2 id="phase-1-code-analysis">
+    <a href="#phase-1-code-analysis" class="docs-anchor" tabindex="-1" aria-label="Link to Phase 1: Code analysis" data-ng_translator_product="100" data-ng_translator_ref_id="exnp0whhuvtgumnvdc07avdxj">阶段 1：分析</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="91dc6s084zmazzi32xtfr76or">TypeScript 编译器在第一阶段做了一些分析工作。 它生成带有 AOT 编译器生成应用代码所需类型信息的 
+<code>.d.ts</code> 
+<em>类型定义文件</em>。 同时，AOT 
+<strong>收集器</strong> 分析记录在 Angular 装饰器中的元数据，并在
+<strong><code>.metadata.json</code></strong>文件中输出元数据信息，每个 
+<code>.d.ts</code> 文件对应一个。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="csxnkobzpyykh4nzv2ck0znuf">你可以将
+<code>.metadata.json</code>视为装饰器元数据整体结构的图表，表示为
+<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank">抽象语法树（AST）</a>。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="18406agqkmoxfimemaqxlxf7z"><strong>提示：</strong> Angular的
+<a href="https://github.com/angular/angular/blob/main/packages/compiler-cli/src/metadata/schema.ts" target="_blank">schema.ts</a>将JSON格式描述为一组TypeScript接口。</p>
+
+    </div>
+    
+  <h3 id="expression-syntax-limitations">
+    <a href="#expression-syntax-limitations" class="docs-anchor" tabindex="-1" aria-label="Link to Expression syntax limitations" data-ng_translator_product="100" data-ng_translator_ref_id="54fm54djtjvm5rz7kquds3h9v">表达式语法限制</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="al5js0pespniqoehgw0qzyudb">AOT 收集器只能理解 JavaScript 的一个子集。定义元数据对象时要遵循下列语法限制：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8p44mx807exjp3s0k9dwbuxla">语法</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="lzz2v4ucg07faxnpe2bu1wa1">范例</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="pawdo4v1ftsqb7hgncivrrtr">字面对象</td>
+<td align="left"><code>{cherry: true, apple: true, mincemeat: false}</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="celil1s9fvdj5h001ggxww2wg">字面数组</td>
+<td align="left"><code>['cherries', 'flour', 'sugar']</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9jcubru2hcec6y1xoseq584lw">展开数组字面量</td>
+<td align="left"><code>['apples', 'flour', …]</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ajlqvrq9or76b4immqohnkbvt">调用</td>
+<td align="left"><code>bake(ingredients)</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="80lep37b3pz9v0caoqb21dem">新建</td>
+<td align="left"><code>new Oven()</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8hlklpuzu6n50x3rnyjh8ica5">属性访问</td>
+<td align="left"><code>pie.slice</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="c8nkjm5j5wf05rwfytv4oe8oi">数组索引</td>
+<td align="left"><code>ingredients[0]</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9j92obtwtq0usp87w7hnqugc7">标识引用</td>
+<td align="left"><code>Component</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7dg3oxut0wds57hvogtnhfyr6">模板字符串</td>
+<td align="left"><code><code>pie is ${multiplier} times better than cake</code></code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="e6km60trrfnc4j65n50ltmrz6">字面字符串</td>
+<td align="left"><code>'pi'</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9whhr0otfdhciw4ompg2p3y28">字面数字</td>
+<td align="left"><code>3.14153265</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3n8z4687qnsdmn5y6xmbmnnxi">布尔字面量</td>
+<td align="left"><code>true</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3915mfsp6yfqt6ltma1w5m19h">字面空值</td>
+<td align="left"><code>null</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9qfkr5r9jpuemmic1t6z59ubs">支持的前缀运算符</td>
+<td align="left"><code>!cake</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="do39fzcuk0e5ooxm62kmz4lhm">支持的二元运算符</td>
+<td align="left"><code>a+b</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8yferwjkhuahg79erz4z23rnm">条件运算符</td>
+<td align="left"><code>a ? b : c</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="99vy3rp3vy14fnojqf6hj1uc7">括号</td>
+<td align="left"><code>(a+b)</code></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bj5uscaq5fulnhykzwepeao6r">如果表达式使用了不支持的语法，收集器就会往 <code>.metadata.json</code> 文件中写入一个错误节点。稍后，如果编译器用到元数据中的这部分内容来生成应用代码，它就会报告这个错误。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="74rac16v4nf9189hvjdfn1nkm"><strong>有用提示：</strong> 如果你希望 
+<code>ngc</code> 立即报告语法错误，而不是生成带有错误的 
+<code>.metadata.json</code> 文件，请在 TypeScript 配置文件中设置 
+<code>strictMetadataEmit</code> 选项。</p>
+
+    </div>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"angularCompilerOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">"strictMetadataEmit"</span> <span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3ac5sprw2ka9jfacn5388cxqb">Angular 库通过这个选项来确保所有的 Angular <code>.metadata.json</code> 文件都是干净的。当你要构建自己的代码库时，这也同样是一项最佳实践。</p>
+
+  <h3 id="no-arrow-functions">
+    <a href="#no-arrow-functions" class="docs-anchor" tabindex="-1" aria-label="Link to No arrow functions" data-ng_translator_product="100" data-ng_translator_ref_id="cmk4vwqqg3ck95hzsdiojv725">不要有箭头函数</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ugg4to5a9bcotyoiz9rtfh5g">AOT 编译器不支持
+<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/function" target="_blank">函数表达式</a>和
+<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank">箭头函数</a>，也称为
+<em>lambda</em>函数。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="v429s9ycivh9f3gg5fph1ota">考虑如下组件装饰器：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{<span class="hljs-attr">provide</span>: server, <span class="hljs-attr">useFactory</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Server</span>()}]</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9vw3t8qqqnq9r4z6s8pmnjeo6">AOT 的收集器不支持在元数据表达式中出现箭头函数 <code>() =&gt; new Server()</code>。它会在该函数中就地生成一个错误节点。稍后，当编译器解释该节点时，它就会报告一个错误，让你把这个箭头函数转换成一个<em>导出的函数</em>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1sadqhpcharplmexeezc3ksd">你可以把它改写成这样来修复这个错误：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">serverFactory</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Server</span>();</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{<span class="hljs-attr">provide</span>: server, <span class="hljs-attr">useFactory</span>: serverFactory}]</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="biau97ainnq98atfc1yvr7gmg">在版本 5 和更高版本中，编译器会在发出 <code>.js</code> 文件时自动执行此重写。</p>
+
+  <h3 id="code-folding">
+    <a href="#code-folding" class="docs-anchor" tabindex="-1" aria-label="Link to Code folding" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1pg98cu5iosl3v77xe0tzmtu0">代码折叠</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5gyp4t211a7xjjjetbfnizan6">编译器只能解析对
+<em><strong>导出的</strong></em>符号的引用。然而，收集器可以在收集期间评估表达式，并将结果记录在
+<code>.metadata.json</code>中，而不是原始表达式。这允许你在表达式中有限地使用未导出的符号。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c2mfuygqhlwzzu0lx31fmy8t8">比如，收集器可以估算表达式 <code>1 + 2 + 3 + 4</code> 并将其替换为结果 <code>10</code>。这个过程称为<em>折叠</em>。可以用这种方式简化的表达式是<em>可折叠的</em>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c3ig6siqo2ttwfn3pdihcorc7">收集器可以计算对模块局部变量的 <code>const</code> 声明和初始化过的 <code>var</code> 和 <code>let</code> 声明，并从 <code>.metadata.json</code> 文件中移除它们。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bmvammydlsjz5rief6bf16fep">考虑下列组件定义：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> template = <span class="hljs-string">'&lt;div&gt;{{hero.name}}&lt;/div&gt;'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-hero'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: template</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">hero</span>: <span class="hljs-title class_">Hero</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dusg1unylhi4sh85hp7ef5wci">由于 
+<code>template</code> 常量没有导出，编译器无法引用它。 然而，收集器可以通过内联其内容将 
+<code>template</code> 常量折叠到元数据定义中。 效果就像你写了：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-hero'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div&gt;{{hero.name}}&lt;/div&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">hero</span>: <span class="hljs-title class_">Hero</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ekrp7dvp100dbq8yjxs1msfle">不再有对 
+<code>template</code> 的引用，因此在编译器稍后解释 
+<em>收集器</em> 的 
+<code>.metadata.json</code> 输出时不会有任何问题。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="245sbav4ip29byr0ft4ji202p">你还可以通过把 <code>template</code> 常量包含在其它表达式中来让这个例子深入一点：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> template = <span class="hljs-string">'&lt;div&gt;{{hero.name}}&lt;/div&gt;'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-hero'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: template + <span class="hljs-string">'&lt;div&gt;{{hero.title}}&lt;/div&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">hero</span>: <span class="hljs-title class_">Hero</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="apahzps8bqqeol46nyll46g58">收集器把该表达式缩减成其等价的<em>已折叠</em>字符串：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-string">'&lt;div&gt;{{hero.name}}&lt;/div&gt;&lt;div&gt;{{hero.title}}&lt;/div&gt;'</span></div></code>
+    </pre>
+  </div>
+  <h4 id="foldable-syntax">
+    <a href="#foldable-syntax" class="docs-anchor" tabindex="-1" aria-label="Link to Foldable syntax" data-ng_translator_product="100" data-ng_translator_ref_id="66w5yow6rvxff09rca2895ux1">可折叠的语法</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9t12vm44r0v7d3okadism3nvs">下表中描述了收集器可以折叠以及不能折叠哪些表达式：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8p44mx807exjp3s0k9dwbuxla">语法</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8js8rcvbhx832x0aa5btafxm0">可折叠的</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="pawdo4v1ftsqb7hgncivrrtr">字面对象</td>
+<td align="left">yes</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="celil1s9fvdj5h001ggxww2wg">字面数组</td>
+<td align="left">yes</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9jcubru2hcec6y1xoseq584lw">展开数组字面量</td>
+<td align="left">no</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ajlqvrq9or76b4immqohnkbvt">调用</td>
+<td align="left">no</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="80lep37b3pz9v0caoqb21dem">新建</td>
+<td align="left">no</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8hlklpuzu6n50x3rnyjh8ica5">属性访问</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="eu2xtjafpdelexixad8s29kiu">是的，如果目标是可折叠的</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="c8nkjm5j5wf05rwfytv4oe8oi">数组索引</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="606o23hk8xjq0aqug6gp3ysxk">是的，如果目标和索引都是可折叠的</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9j92obtwtq0usp87w7hnqugc7">标识引用</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="a621jxv32k4getbglk8v5t158">是的，如果它是对本地变量的引用</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="b2x8b3uzq2e1c9x6pxn2h0f0k">一个没有替换的模板</td>
+<td align="left">yes</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5vm7wzo9yufzneso1bvy92rd2">一个带有替换的模板</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4426iokopml0k64ar8cz4tklj">是的，如果替换是可折叠的</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="e6km60trrfnc4j65n50ltmrz6">字面字符串</td>
+<td align="left">yes</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9whhr0otfdhciw4ompg2p3y28">字面数字</td>
+<td align="left">yes</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3n8z4687qnsdmn5y6xmbmnnxi">布尔字面量</td>
+<td align="left">yes</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3915mfsp6yfqt6ltma1w5m19h">字面空值</td>
+<td align="left">yes</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9qfkr5r9jpuemmic1t6z59ubs">支持的前缀运算符</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8w7u9s5tktg84igoky5nmk1x8">是的，如果操作数是可折叠的</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="do39fzcuk0e5ooxm62kmz4lhm">支持的二元运算符</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1ffs9xizd3pr7cdvr2rbehme2">是的，如果左右两侧都是可折叠的</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8yferwjkhuahg79erz4z23rnm">条件运算符</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="amjha0tbhse041jeyjuvedlp5">是的，如果条件是可折叠的</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="99vy3rp3vy14fnojqf6hj1uc7">括号</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9nk3eg924z3m839az0x2w9x9">是的，如果表达式是可折叠的</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="e09oe6kub52malu25gmarglin">如果表达式不是可折叠的，收集器会将其写入
+<code>.metadata.json</code>作为编译器解析的
+<a href="https://en.wikipedia.org/wiki/Abstract*syntax*tree" target="_blank">AST</a></p>
+
+  <h2 id="phase-2-code-generation">
+    <a href="#phase-2-code-generation" class="docs-anchor" tabindex="-1" aria-label="Link to Phase 2: code generation" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7dkuta9n5b71mcf4ecwtx9flg">阶段 2：代码生成</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="60ejxlav8x2y28idv9kliher4">收集器不会试图理解它收集并输出到 <code>.metadata.json</code> 中的元数据，它所能做的只是尽可能准确的表述这些元数据，并在检测到元数据中的语法违规时记录这些错误。解释这些 <code>.metadata.json</code> 是编译器在代码生成阶段要承担的工作。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2f8docifkobp53tsjdx25i9qh">编译器理解收集器支持的所有语法形式，但是它也可能拒绝那些虽然<em>语法正确</em>但<em>语义</em>违反了编译器规则的元数据。</p>
+
+  <h3 id="public-or-protected-symbols">
+    <a href="#public-or-protected-symbols" class="docs-anchor" tabindex="-1" aria-label="Link to Public or protected symbols" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cg167by3cxj7ek6kntucm3ro3">公共的或受保护的符号</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="23227kuy1ppw38thjxd1egtg0">编译器只能引用<em>已导出的符号</em>。</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_ref_id="7yn3j8cibvdr3w9fy69bp8nqp">装饰的组件类成员必须是公共或受保护的。 你不能将
+<code>@Input()</code>属性设为私有。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5cjv9svl72qwtv6qyrt09fcej">数据绑定的属性同样必须是公开的（public）或保护的（protected）</p>
+</li>
+
+  </ul>
+  
+  <h3 id="supported-classes-and-functions">
+    <a href="#supported-classes-and-functions" class="docs-anchor" tabindex="-1" aria-label="Link to Supported classes and functions" data-ng_translator_product="100" data-ng_translator_ref_id="bh95gvr0vg7zp74kebyqamdzq">支持的类和函数</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9szpynoy3gh2xhw17kk5ruig8">只要语法有效，收集器就可以用 <code>new</code> 来表示函数调用或对象创建。但是，编译器在后面可以拒绝生成对<em>特定</em>函数的调用或对<em>特定</em>对象的创建。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="al0lyauwz8ypvxccnrcwvocg1">编译器只能创建某些类的实例，仅支持核心装饰器，并且仅支持对返回表达式的宏（函数或静态方法）的调用。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="c421y5ac8mh41l3n9kalw03wx">编译器操作</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="70c03lcwyg7vctfl5zpgdkgx">新实例</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5xdqiv0nv7xmmwe24yn9rvf31">编译器仅允许创建来自
+<code>@angular/core</code>中的
+<code>InjectionToken</code>类的元数据。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="fj9i8h7cp6axo40lwtzez45e">支持的装饰器</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="49b0x3ll9qh9nwgmmm47l1zi0">编译器仅支持
+<a href="api/core#decorators">Angular装饰器在<code>@angular/core</code>模块中的元数据</a>。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4vve9ogkkcpalb2xdkuucyzay">函数调用</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1qbo4qn9dscajhj4jrnzom39y">工厂函数必须是导出的、命名的函数。AOT编译器不支持工厂函数的lambda表达式（"箭头函数"）。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="functions-and-static-method-calls">
+    <a href="#functions-and-static-method-calls" class="docs-anchor" tabindex="-1" aria-label="Link to Functions and static method calls" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6kbb4ju0or5yzbjzjm6pcgni4">函数和静态方法调用</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2xuv4vfa74y9ct2uqhj2v4up0">收集器接受任何只包含一个 <code>return</code> 语句的函数或静态方法。编译器也支持在返回表达式的函数或静态函数中使用<em>宏</em>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="88mt6000uk9b639d21izbyc9x">例如，考虑如下函数：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> wrapInArray&lt;T&gt;(<span class="hljs-attr">value</span>: T): T[] {</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> [value];</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="chtium6n6l36ulxrwux8ux4wy">你可以在元数据定义中调用 <code>wrapInArray</code>，因为它所返回的表达式的值满足编译器支持的 JavaScript 受限子集。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="avtcedibccqkly4kkpyllg8uq">你还可以这样使用 <code>wrapInArray()</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: <span class="hljs-title function_">wrapInArray</span>(<span class="hljs-title class_">TypicalComponent</span>)</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalModule</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cxe1c38pqqvbbjyri66x67hjg">编译器会把这种用法处理成你以前的写法：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [<span class="hljs-title class_">TypicalComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalModule</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ozmlkw6p3gr7jcaw6blabfd8">Angular 
+<a href="api/router/RouterModule"><code>RouterModule</code></a> 导出两个宏静态方法，
+<code>forRoot</code> 和 
+<code>forChild</code>，以帮助声明根路由和子路由。 查看 
+<a href="https://github.com/angular/angular/blob/main/packages/router/src/router_module.ts#L139" title="RouterModule.forRoot" source code target="_blank">源码</a> 了解这些方法如何简化复杂 
+<a href="guide/ngmodules">NgModules</a> 的配置。</p>
+
+  <h3 id="metadata-rewriting">
+    <a href="#metadata-rewriting" class="docs-anchor" tabindex="-1" aria-label="Link to Metadata rewriting" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="80apurgqc66e7jogku2jtp62a">元数据重写</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="73scmd2n4d94ax1a7o5reake1">编译器特殊处理包含字段 
+<code>useClass</code>、
+<code>useValue</code>、
+<code>useFactory</code> 和 
+<code>data</code> 的对象字面量，将初始化这些字段之一的表达式转换为一个替换该表达式的导出变量。 重写这些表达式的过程消除了它们所包含的所有限制，因为编译器不需要了解表达式的值 — 它只需要能够生成对该值的引用。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dn54lv55obipr2bwr6zanx61m">你可以这样写：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalServer</span> {</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{<span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">SERVER</span>, <span class="hljs-attr">useFactory</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">TypicalServer</span>}]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalModule</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5sz4uv9eyalxrj9qd4cnufab2">如果不重写，这就是无效的，因为这里不支持 Lambda 表达式，而且 <code>TypicalServer</code> 也没有被导出。为了支持这种写法，编译器自动把它重写成了这样：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalServer</span> {</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> θ<span class="hljs-number">0</span> = <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypicalServer</span>();</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{<span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">SERVER</span>, <span class="hljs-attr">useFactory</span>: θ<span class="hljs-number">0</span>}]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TypicalModule</span> {}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bcbx8kkzgetiwka0zqsa2lhou">这就让编译器能在工厂中生成一个对 <code>θ0</code> 的引用，而不用知道 <code>θ0</code> 中包含的值到底是什么。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7i6v5c3mlwht17l2y7f7jgatn">编译器会在生成 <code>.js</code> 文件期间进行这种重写。它不会重写 <code>.d.ts</code> 文件，所以 TypeScript 也不会把这个变量当做一项导出，因此也就不会污染 ES 模块中导出的 API。</p>
+
+  <h2 id="phase-3-template-type-checking">
+    <a href="#phase-3-template-type-checking" class="docs-anchor" tabindex="-1" aria-label="Link to Phase 3: Template type checking" data-ng_translator_product="100" data-ng_translator_ref_id="421aw65g3h43m9n601iadlihr">阶段 3：模板类型检查</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="66ae80nv8g6m98lqpdovxk283">Angular 编译器最有用的功能之一就是能够对模板中的表达式进行类型检查，在由于出错而导致运行时崩溃之前就捕获任何错误。在模板类型检查阶段，Angular 模板编译器会使用 TypeScript 编译器来验证模板中的绑定表达式。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="31fh9v37cqu8zdkqb88wfy0xe">通过在项目的 TypeScript 配置文件的 
+<code>"angularCompilerOptions"</code> 中添加编译器选项 
+<code>"fullTemplateTypeCheck"</code> 来明确启用此阶段 (参见 
+<a href="reference/configs/angular-compiler-options">Angular 编译器选项</a>)。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ecodry9om0ny7r8oyefq19ipz">当模板绑定表达式中检测到类型错误时，进行模板验证时就会生成错误。这和 TypeScript 编译器在处理 <code>.ts</code> 文件中的代码时报告错误很相似。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6xntrej05bqyh32ejze8h2o6r">比如，考虑下列组件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'{{person.addresss.street}}'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  person?: <span class="hljs-title class_">Person</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="116qjq5dp583r9ocwz73n1wtm">这会生成如下错误：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">my.component.ts.MyComponent.html(1,1): : Property 'addresss' does not exist on type 'Person'. Did you mean 'address'?</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1usczuq7svqg9yn913noip71t">在错误消息中报告的文件名 
+<code>my.component.ts.MyComponent.html</code> 是一个合成文件 由模板编译器生成，其中包含 
+<code>MyComponent</code> 类模板的内容。 编译器从不将此文件写入磁盘。 行号和列号是相对于该类的 
+<code>MyComponent</code> 中 
+<code>@Component</code> 注解中的模板字符串的。 如果组件使用 
+<code>templateUrl</code> 而不是 
+<code>template</code>，则错误将报告在被 
+<code>templateUrl</code> 引用的 HTML 文件中而不是一个合成文件中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ahop50gfkylhwgxyq3054ns2x">错误的位置是从包含出错的插值表达式的那个文本节点开始的。如果错误是一个属性绑定，比如 <code>[value]="person.address.street"</code>，错误的位置就是那个包含错误的属性的位置。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="adbsjx9at7gcd2xlc8wirq5cd">验证使用 TypeScript 类型检查器和提供给 TypeScript 编译器的选项来控制类型验证的详细程度。比如，如果指定了 <code>strictTypeChecks</code>，则会报告</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">my.component.ts.MyComponent.html(1,1): : Object is possibly 'undefined'</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2mh1xueei491gxm5xyz98xb7v">错误以及上述错误消息。</p>
+
+  <h3 id="type-narrowing">
+    <a href="#type-narrowing" class="docs-anchor" tabindex="-1" aria-label="Link to Type narrowing" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="62jrtenq1nrag23qeufytd223">类型窄化</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="330kqvlkrksp4ct1g38w1qdt6">在 Angular 模板编译器中，
+<code>ngIf</code> 指令中使用的表达式用于窄化类型联合，与 TypeScript 中的 
+<code>if</code> 表达式相同。 例如，为了避免上述模板中的 
+<code>Object is possibly 'undefined'</code> 错误，将其修改为仅在 
+<code>person</code> 的值已初始化时才发出插值，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;span *ngIf="person"&gt; {{person.address.street}} &lt;/span&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  person?: <span class="hljs-title class_">Person</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="10n5jc80vop0589ss0clfrm9s">使用 
+<code>*ngIf</code> 允许 TypeScript 编译器推断绑定表达式中使用的 
+<code>person</code> 永远不会是 
+<code>undefined</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ak1ssctmxrotem74aftscmn3n">有关输入类型窄化的更多信息，请参阅 
+<a href="guide/directives/structural-directives#directive-type-checks">改进自定义指令的模板类型检查</a>。</p>
+
+  <h3 id="non-null-type-assertion-operator">
+    <a href="#non-null-type-assertion-operator" class="docs-anchor" tabindex="-1" aria-label="Link to Non-null type assertion operator" data-ng_translator_product="100" data-ng_translator_ref_id="aeavaaxa4o1gdak39uwwggmvg">非空类型断言操作符</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="e5x45d7nxuv4id87x25sjugh8">当使用 
+<code>*ngIf</code> 不方便或组件中的某些约束确保表达式在插值时始终非空时，使用非空类型断言运算符来抑制 
+<code>Object is possibly 'undefined'</code> 错误。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6v1fs74g3wfz5nofl79joywtj">在下面的例子中，<code>person</code> 和 <code>address</code> 属性总是一起出现的，如果 <code>person</code> 非空，则 <code>address</code> 也一定非空。没有一种简便的写法可以向 TypeScript 和模板编译器描述这种约束。但是这个例子中使用 <code>address!.street</code> 避免了报错。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;span *ngIf="person"&gt; {{person.name}} lives on {{address!.street}} &lt;/span&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  person?: <span class="hljs-title class_">Person</span>;</div><div class="hljs-ln-line">  address?: <span class="hljs-title class_">Address</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">setData</span>(<span class="hljs-params">person: Person, address: Address</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">person</span> = person;</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">address</span> = address;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="hs41q49v5supuw793fc5ptdg">应该保守点使用非空断言操作符，因为将来对组件的重构可能会破坏这个约束。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="97mhw61la8ghatt3jkcm2wyz5">在这个例子中，建议在 
+<code>*ngIf</code> 中包含对 
+<code>address</code> 的检查，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-component'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;span *ngIf="person &amp;&amp; address"&gt; {{person.name}} lives on {{address.street}} &lt;/span&gt;'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span> {</div><div class="hljs-ln-line">  person?: <span class="hljs-title class_">Person</span>;</div><div class="hljs-ln-line">  address?: <span class="hljs-title class_">Address</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">setData</span>(<span class="hljs-params">person: Person, address: Address</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">person</span> = person;</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">address</span> = address;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

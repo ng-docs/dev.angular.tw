@@ -1,0 +1,410 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="9d00bzot0b910neu360d4d5mn">进行 HTTP 请求</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/http/making-requests.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9u02dzfkn93i8oet84c54gmva"><code>HttpClient</code> 具有与用于发出请求的不同 HTTP 动词相对应的方法，这些方法既可以加载数据，也可以在服务器上应用变更。每个方法都返回一个 
+<a href="https://rxjs.dev/guide/observable" target="_blank">RxJS <code>Observable</code></a>，当订阅时，会发送请求并在服务器响应时发出结果。</p>
+
+    <div class="docs-alert docs-alert-note">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cvzsf1xyqsqyx5sp35osmcev1"><strong>注意：</strong> 由 
+<code>HttpClient</code> 创建的 
+<code>Observable</code> 可以被订阅多次，每次订阅都会发出新的后端请求。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cww13w4z4gq5tcz1svtgngfjn">通过传递给请求方法的选项对象，可以调整请求的各种属性和返回响应类型。</p>
+
+  <h2 id="fetching-json-data">
+    <a href="#fetching-json-data" class="docs-anchor" tabindex="-1" aria-label="Link to Fetching JSON data" data-ng_translator_product="100" data-ng_translator_ref_id="469tft1rr5qhzrofazz2aebjo">获取 JSON 数据</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dntf9nlqdbc6ovy9z1m7y9kq">从后端获取数据通常需要使用 
+<a href="api/common/http/HttpClient#get"><code>HttpClient.get()</code></a> 方法发起 GET 请求。该方法接收两个参数：字符串类型的端点 URL（用于获取数据）和一个
+<em>可选的选项</em>对象（用于配置请求）。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7ra2y49h4awi45pfcglbnkj4y">例如，使用 
+<code>HttpClient.get()</code> 方法从一个假设的 API 获取配置数据：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-property">get</span>&lt;<span class="hljs-title class_">Config</span>&gt;(<span class="hljs-string">'/api/config'</span>).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// process the configuration.</span></div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="721awl4ibf5gew76fnmdlje1v">注意泛型类型参数，它指定服务器返回的数据类型为 
+<code>Config</code>。这个参数是可选的，如果你省略它，则返回的数据将为 
+<code>any</code> 类型。</p>
+
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="d96cl5zwxwrjzjh7hj598zrcu"><strong>提示：</strong> 如果数据具有未知的形状，那么比 
+<code>any</code> 更安全的替代品是使用 
+<code>unknown</code> 类型作为响应类型。</p>
+
+    </div>
+    
+    <div class="docs-alert docs-alert-critical">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cj9vfy182kx0r5m9sbp140ax"><strong>重要：</strong>请求方法的泛型类型是对服务器返回数据的一种类型
+<strong>断言</strong>。
+<code>HttpClient</code> 不会验证实际返回的数据是否与此类型匹配。</p>
+
+    </div>
+    
+  <h2 id="fetching-other-types-of-data">
+    <a href="#fetching-other-types-of-data" class="docs-anchor" tabindex="-1" aria-label="Link to Fetching other types of data" data-ng_translator_product="100" data-ng_translator_ref_id="7fa8x8kqypgdnq7bepvhes5ae">获取其他类型的数据</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5d78mruseyn4978r1jkil75ni">默认情况下，
+<code>HttpClient</code> 假定服务器会返回 JSON 数据。当与非 JSON API 交互时，可以告诉 
+<code>HttpClient</code> 在发出请求时期望和返回的响应类型。这个通过 
+<code>responseType</code> 选项完成。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th><strong data-ng_translator_product="100" data-ng_translator_ref_id="agwkyen8jh2ez4z64v3b0c72b"><code>responseType</code> 值</strong></th>
+<th><strong data-ng_translator_product="100" data-ng_translator_ref_id="ewufa0vv2a9is5196org05b6w">返回的响应类型</strong></th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="9kmiyathvc4of5x1k1c4vkscr"><code>'json'</code>（默认）</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="emnvqoj6zs5wp4wrhs9ytpda">给定泛型类型的 JSON 数据</td>
+</tr>
+<tr>
+<td><code>'text'</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="92gl7le0ld5jmpk5rdbz0xkgh">字符串数据</td>
+</tr>
+<tr>
+<td><code>'arraybuffer'</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="drwuhoh91a3z3txzy1cigc9z1"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer" target="_blank"><code>ArrayBuffer</code></a> 包含原始响应字节</td>
+</tr>
+<tr>
+<td><code>'blob'</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="e85w2lztctmp38a67fjj842q4"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob" target="_blank"><code>Blob</code></a> 实例</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6zg6qt4fr2b0dglrw9ztq7wx4">例如，你可以让 
+<code>HttpClient</code> 下载 
+<code>.jpeg</code> 图像的原始字节到 
+<code>ArrayBuffer</code> 中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-title function_">get</span>(<span class="hljs-string">'/images/dog.jpg'</span>, {<span class="hljs-attr">responseType</span>: <span class="hljs-string">'arraybuffer'</span>}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">buffer</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'The image is '</span> + buffer.<span class="hljs-property">byteLength</span> + <span class="hljs-string">' bytes large'</span>);</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-important">
+      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="9yomjefcqntwbjuyw9iocainc">用于 
+<code>responseType</code> 的字面量值</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="2xwdsumsady86tzik2qfpw5vv">因为 
+<code>responseType</code> 的值会影响 
+<code>HttpClient</code> 返回的类型，它必须是一个字面量类型而不是一个 
+<code>string</code> 类型。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bzdzq49cpe7m9w6cehnjhbq8q">如果传递给请求方法的选项对象是一个字面量对象，这将自动发生，但如果你将请求选项提取到一个变量或辅助方法中，则可能需要明确将其指定为字面量，如 
+<code>responseType: 'text' as const</code>。</p>
+
+    </div>
+    
+  <h2 id="mutating-server-state">
+    <a href="#mutating-server-state" class="docs-anchor" tabindex="-1" aria-label="Link to Mutating server state" data-ng_translator_product="100" data-ng_translator_ref_id="8k3cvtsw8gg20fbf4pq5ez00x">变更服务器状态</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4x3zv75gnj5f3hgyp6ptqrpuk">执行变更的服务器 API 通常需要使用请求体指定新状态或要进行的更改来发起 POST 请求。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="l1m04s779ygg53ugop8yq63i"><a href="api/common/http/HttpClient#post"><code>HttpClient.post()</code></a> 方法与 
+<code>get()</code> 类似，并在其选项之前接受一个额外的 
+<code>body</code> 参数：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-property">post</span>&lt;<span class="hljs-title class_">Config</span>&gt;(<span class="hljs-string">'/api/config'</span>, newConfig).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Updated config:'</span>, config);</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="78csi7hwe359b6yn2mwgk9fh5">可以提供许多不同类型的值作为请求的 
+<code>body</code>，
+<code>HttpClient</code> 将相应地序列化它们：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th><strong data-ng_translator_product="100" data-ng_translator_ref_id="bercsq0zfa46kb3c4i5vqx1v2"><code>body</code> 类型</strong></th>
+<th><strong data-ng_translator_product="100" data-ng_translator_ref_id="e1opeznv0qdvhe7orl2myy2ns">序列化为</strong></th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td>string</td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="ef6nwbk6am57zxghpr5b0oju1">纯文本</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="5s88vmob00pbe7qx2dpr8yeg5">number、boolean、array 或 plain object</td>
+<td>JSON</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer" target="_blank"><code>ArrayBuffer</code></a></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="2gwu0y9q9n3g043yw3xd4bgdd">缓冲区中的原始数据</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob" target="_blank"><code>Blob</code></a></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="cxmm7wawu2s1an81kpaedppsa">具有 
+<code>Blob</code> 内容类型的原始数据</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData" target="_blank"><code>FormData</code></a></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="3txv4bmier1o0zgrsd322zx2e"><code>multipart/form-data</code> 编码的数据</td>
+</tr>
+<tr>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="5ez88xc7okgql3iyva4a95771"><a href="api/common/http/HttpParams"><code>HttpParams</code></a> 或 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams" target="_blank"><code>URLSearchParams</code></a></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="cj2e08zrf87u3gm1b7pryoqhk"><code>application/x-www-form-urlencoded</code> 格式的字符串</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="b2dxhseqzdihben8su7p42tjo"><strong>重要：</strong>记得对变更请求的 
+<code>Observable</code> 调用 
+<code>.subscribe()</code> 以实际触发请求。</p>
+
+    </div>
+    
+  <h2 id="setting-url-parameters">
+    <a href="#setting-url-parameters" class="docs-anchor" tabindex="-1" aria-label="Link to Setting URL parameters" data-ng_translator_product="100" data-ng_translator_ref_id="6oeuk9kmjzhojjyujonp4r6hk">设置 URL 参数</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="a46wqsx3ziqptk5kxlfkrcjrz">使用 
+<code>params</code> 选项来指定应包含在请求 URL 中的请求参数。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6vseki1epmib6phktug9xs0dr">传递对象字面量是配置 URL 参数的最简单方式：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-title function_">get</span>(<span class="hljs-string">'/api/config'</span>, {</div><div class="hljs-ln-line">  <span class="hljs-attr">params</span>: {<span class="hljs-attr">filter</span>: <span class="hljs-string">'all'</span>},</div><div class="hljs-ln-line">}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="an9kc7ijblavwbj0lnehd347w">或者，如果你需要更多控制参数的构建或序列化，可以传递 
+<code>HttpParams</code> 实例。</p>
+
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="er07o76n71talpjnrkj8ixuk6"><strong>重要：</strong>
+<code>HttpParams</code> 实例是 
+<em>不可变的</em>，不能直接更改。相反，诸如 
+<code>append()</code> 之类的变更方法会返回一个应用了变更的新 
+<code>HttpParams</code> 实例。</p>
+
+    </div>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> baseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpParams</span>().<span class="hljs-title function_">set</span>(<span class="hljs-string">'filter'</span>, <span class="hljs-string">'all'</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">http.<span class="hljs-title function_">get</span>(<span class="hljs-string">'/api/config'</span>, {</div><div class="hljs-ln-line">  <span class="hljs-attr">params</span>: baseParams.<span class="hljs-title function_">set</span>(<span class="hljs-string">'details'</span>, <span class="hljs-string">'enabled'</span>),</div><div class="hljs-ln-line">}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="i61ektfcd665jw933chtfcov">你可以使用自定义 
+<code>HttpParameterCodec</code> 实例化 
+<code>HttpParams</code>，以确定 
+<code>HttpClient</code> 将如何将参数编码到 URL 中。</p>
+
+  <h2 id="setting-request-headers">
+    <a href="#setting-request-headers" class="docs-anchor" tabindex="-1" aria-label="Link to Setting request headers" data-ng_translator_product="100" data-ng_translator_ref_id="d39ribafeywon09hy4b9q1b2x">设置请求标头</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dm8yd6ehirqb1ipiyxzv1dltk">使用 
+<code>headers</code> 选项来指定应包含在请求中的请求标头。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9fv4guy6h31rs6c8z54dhajau">传递对象字面量是配置请求标头的最简单方式：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-title function_">get</span>(<span class="hljs-string">'/api/config'</span>, {</div><div class="hljs-ln-line">  <span class="hljs-attr">headers</span>: {</div><div class="hljs-ln-line">    <span class="hljs-string">'X-Debug-Level'</span>: <span class="hljs-string">'verbose'</span>,</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2kjdgp7x6910m65cckq93t778">或者，如果你需要更多控制标头的构建，可以传递 
+<code>HttpHeaders</code> 实例。</p>
+
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="c210d0uw0wl2o5tcqgl25conx"><strong>重要：</strong>
+<code>HttpHeaders</code> 实例是 
+<em>不可变的</em>，不能直接更改。相反，诸如 
+<code>append()</code> 之类的变更方法会返回一个应用了变更的新 
+<code>HttpHeaders</code> 实例。</p>
+
+    </div>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> baseHeaders = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpHeaders</span>().<span class="hljs-title function_">set</span>(<span class="hljs-string">'X-Debug-Level'</span>, <span class="hljs-string">'minimal'</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">http.<span class="hljs-property">get</span>&lt;<span class="hljs-title class_">Config</span>&gt;(<span class="hljs-string">'/api/config'</span>, {</div><div class="hljs-ln-line">  <span class="hljs-attr">params</span>: baseParams.<span class="hljs-title function_">set</span>(<span class="hljs-string">'X-Debug-Level'</span>, <span class="hljs-string">'verbose'</span>),</div><div class="hljs-ln-line">}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+  <h2 id="interacting-with-the-server-response-events">
+    <a href="#interacting-with-the-server-response-events" class="docs-anchor" tabindex="-1" aria-label="Link to Interacting with the server response events" data-ng_translator_product="100" data-ng_translator_ref_id="f4a7kuyasarjrg00mc80gk0pn">与服务器响应事件交互</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="77jcn2dz9asheuspiz9j4yntu">为了方便起见，
+<code>HttpClient</code> 默认返回服务器返回的数据（响应体）的 
+<code>Observable</code>。有时，查看实际响应是有意义的，例如检索特定的响应标头。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="d4ris3cq1iifxvowcf2nli0my">要访问整个响应，设置 
+<code>observe</code> 选项为 
+<code>'response'</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-property">get</span>&lt;<span class="hljs-title class_">Config</span>&gt;(<span class="hljs-string">'/api/config'</span>, {<span class="hljs-attr">observe</span>: <span class="hljs-string">'response'</span>}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Response status:'</span>, res.<span class="hljs-property">status</span>);</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Body:'</span>, res.<span class="hljs-property">body</span>);</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-important">
+      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="f5g9z5qtdjfamdwlz07y6pyr2"><code>observe</code> 的字面量值</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="bs2q7hdvl6xh5ot8j69ffxy27">因为 
+<code>observe</code> 的值会影响 
+<code>HttpClient</code> 返回的类型，所以它必须是字面量类型，而不是 
+<code>string</code> 类型。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="em1omd9e2hu0inbaykw8er6xm">如果传递给请求方法的选项对象是字面量对象，这种情况会自动发生，但如果你将请求选项提取到变量或辅助方法中，你可能需要明确地将其指定为字面量，例如 
+<code>observe: 'response' as const</code>。</p>
+
+    </div>
+    
+  <h2 id="receiving-raw-progress-events">
+    <a href="#receiving-raw-progress-events" class="docs-anchor" tabindex="-1" aria-label="Link to Receiving raw progress events" data-ng_translator_product="100" data-ng_translator_ref_id="58px4vlm1xa4b3k5yxddcwdx0">接收原始进度事件</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5wx31brlexidcga3tgf5gvktp">除了响应体或响应对象外，
+<code>HttpClient</code> 还可以返回与请求生命周期中特定时刻对应的原始
+<em>事件</em>流。这些事件包括请求发送时、响应标头返回时和响应体完成时。这些事件还可以包括
+<em>进度事件</em>，它们报告大请求或响应体的上传和下载状态。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="220l0l2sdl21q5ufn85e0tri">进度事件默认是禁用的（因为它们有性能成本），但可以通过 
+<code>reportProgress</code> 选项启用。</p>
+
+    <div class="docs-alert docs-alert-note">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="49msisyhj5vz61z64cre70dik"><strong>注意：</strong> 
+<code>HttpClient</code> 的可选 
+<code>fetch</code> 实现不报告
+<em>上传</em>进度事件。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="lj2wb7epax6vvo32ntdzpz3y">要观察事件流，设置 
+<code>observe</code> 选项为 
+<code>'events'</code>：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http.<span class="hljs-title function_">post</span>(<span class="hljs-string">'/api/upload'</span>, myData, {</div><div class="hljs-ln-line">  <span class="hljs-attr">reportProgress</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">observe</span>: <span class="hljs-string">'events'</span>,</div><div class="hljs-ln-line">}).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">switch</span> (event.<span class="hljs-property">type</span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">case</span> <span class="hljs-title class_">HttpEventType</span>.<span class="hljs-property">UploadProgress</span>:</div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Uploaded '</span> + event.<span class="hljs-property">loaded</span> + <span class="hljs-string">' out of '</span> + event.<span class="hljs-property">total</span> + <span class="hljs-string">' bytes'</span>);</div><div class="hljs-ln-line">      <span class="hljs-keyword">break</span>;</div><div class="hljs-ln-line">    <span class="hljs-keyword">case</span> <span class="hljs-title class_">HttpEventType</span>.<span class="hljs-property">Response</span>:</div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Finished uploading!'</span>);</div><div class="hljs-ln-line">      <span class="hljs-keyword">break</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">});</div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-important">
+      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="f5g9z5qtdjfamdwlz07y6pyr2"><code>observe</code> 的字面量值</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="bs2q7hdvl6xh5ot8j69ffxy27">因为 
+<code>observe</code> 的值会影响 
+<code>HttpClient</code> 返回的类型，所以它必须是字面量类型，而不是 
+<code>string</code> 类型。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="14gpa3kiawdolpbpswxuquko4">如果传递给请求方法的选项对象是字面量对象，这种情况会自动发生，但如果你将请求选项提取到变量或辅助方法中，你可能需要明确地将其指定为字面量，例如 
+<code>observe: 'events' as const</code>。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7czb1q3eimg0jzshsyi7zwjkc">事件流中报告的每个 
+<code>HttpEvent</code> 都有一个 
+<code>type</code>，用于区分事件代表的含义：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th><strong data-ng_translator_product="100" data-ng_translator_ref_id="5vj8hljfptcfjg6ldwr3w15lm"><code>type</code> 值</strong></th>
+<th><strong data-ng_translator_product="100" data-ng_translator_ref_id="42ezsm1o4h33g23ufnndepcms">事件含义</strong></th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td><code>HttpEventType.Sent</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="c74yk9dfwckn3jy6gy1cje81m">请求已被发送到服务器</td>
+</tr>
+<tr>
+<td><code>HttpEventType.UploadProgress</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="9iti79tuiyhra0jowltgzc4cj">一个 
+<code>HttpUploadProgressEvent</code>，报告上传请求体的进度</td>
+</tr>
+<tr>
+<td><code>HttpEventType.ResponseHeader</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="18l6rxtt9j10sns06a5a23te1">已收到响应的头部，包括状态和标头</td>
+</tr>
+<tr>
+<td><code>HttpEventType.DownloadProgress</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="aypr28t7y3gzo0gyje10avyzp">一个 
+<code>HttpDownloadProgressEvent</code>，报告下载响应体的进度</td>
+</tr>
+<tr>
+<td><code>HttpEventType.Response</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="24t06f0js8kbcckj4bmyj3enj">已收到整个响应，包括响应体</td>
+</tr>
+<tr>
+<td><code>HttpEventType.User</code></td>
+<td data-ng_translator_product="100" data-ng_translator_ref_id="b1ky04vvy5rqdu3yyzd97wmzr">来自 Http 拦截器的自定义事件。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="handling-request-failure">
+    <a href="#handling-request-failure" class="docs-anchor" tabindex="-1" aria-label="Link to Handling request failure" data-ng_translator_product="100" data-ng_translator_ref_id="f5139kpgom4dy4eu6vzyxjtfn">处理请求失败</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="auzs9rrmalo35tahlvroqjq9z">HTTP 请求失败的情况有两种：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="r4fqfldfqg4nnws9660a2hde">网络或连接错误可能会阻止请求到达后端服务器。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="3owbmrtg5mz28t28smdn21as0">后端可能接收到请求但处理失败，并返回错误响应。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="nw7jksqungrp75qdpilmvh95"><code>HttpClient</code> 会在 
+<code>HttpErrorResponse</code> 中捕获这两种错误，并通过 
+<code>Observable</code> 的错误通道返回。网络错误的 
+<code>status</code> 码为 
+<code>0</code>，
+<code>error</code> 是一个 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent" target="_blank"><code>ProgressEvent</code></a> 实例。后端错误的 
+<code>status</code> 码则由后端返回，
+<code>error</code> 是错误响应。检查响应以确定错误的原因和相应的处理措施。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="crtl1gbozfn47zjwv0srkxw3s"><a href="https://rxjs.dev/" target="_blank">RxJS 库</a> 提供了多个操作符，这些操作符在错误处理中非常有用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="602jqjk1987sv8oby3q33j0fo">你可以使用 
+<code>catchError</code> 操作符将错误响应转换为 UI 的一个值。这个值可以告诉 UI 显示错误页面或错误值，并在必要时捕获错误原因。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="e96fp9n89efjexaj6es909xqq">有时，像网络中断这样的短暂错误会导致请求意外失败，只需重试请求即可成功。RxJS 提供了多个 
+<em>retry</em> 操作符，这些操作符在特定条件下会自动重新订阅失败的 
+<code>Observable</code>。例如，
+<code>retry()</code> 操作符会自动尝试重新订阅指定次数。</p>
+
+  <h2 id="http-observables">
+    <a href="#http-observables" class="docs-anchor" tabindex="-1" aria-label="Link to Http <code>Observable</code>s" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dz0tepr6uyngbvdtge4h0xlfe">Http <code>Observable</code></a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8lh26gou1xfywfp0w5dzv8jxi"><code>HttpClient</code> 的每个请求方法都会构造并返回一个请求响应类型的 
+<code>Observable</code>。了解这些 
+<code>Observable</code> 的工作原理在使用 
+<code>HttpClient</code> 时非常重要。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9ub2z69mdlfeeyohede9jgsui"><code>HttpClient</code> 生成 RxJS 所谓的「冷」
+<code>Observable</code>，这意味着在 
+<code>Observable</code> 被订阅之前不会发生实际请求。只有在订阅时，请求才会真正发送到服务器。多次订阅同一个 
+<code>Observable</code> 会触发多次后端请求，每个订阅都是独立的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7sugls4tzklproa61cnnqirk0">提示：你可以将 
+<code>HttpClient</code> 的 
+<code>Observable</code> 视为实际服务器请求的
+<em>蓝图</em>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="b0765gi0sv5g4lwv6snfwor9r">一旦订阅，取消订阅将中止正在进行的请求。如果通过 
+<code>async</code> 管道订阅 
+<code>Observable</code>，当用户离开当前页面时它会自动取消请求。此外，如果你将 
+<code>Observable</code> 与 RxJS 组合器如 
+<code>switchMap</code> 一起使用，这种取消将清理任何陈旧的请求。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="c3h4dcp2inkmeepxmvksguvc1">一旦响应返回，来自 
+<code>HttpClient</code> 的 
+<code>Observable</code> 通常会完成（尽管拦截器可能会影响这一点）。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="d22alg8153h5iw7fv07uhpqbs">由于自动完成，如果不清理 
+<code>HttpClient</code> 订阅，通常不会有内存泄漏的风险。然而，和任何异步操作一样，我们强烈建议在使用它们的组件销毁时清理订阅，否则在订阅回调尝试与已销毁的组件交互时可能会遇到错误。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dph5tnypvyrsyd8m55d69jask">提示：使用 
+<code>async</code> 管道或 
+<code>toSignal</code> 操作订阅 
+<code>Observable</code> 可以确保订阅被正确处理。</p>
+
+  <h2 id="best-practices">
+    <a href="#best-practices" class="docs-anchor" tabindex="-1" aria-label="Link to Best practices" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bjllji5sr3q5uwcd3o4optfxh">最佳实践</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2yqbejhrid6vj815sr88ed529">虽然可以在组件中直接注入并使用 
+<code>HttpClient</code>，但我们通常建议你创建可复用的、可注入的服务，将数据访问逻辑隔离和封装。例如，这个 
+<code>UserService</code> 封装了通过用户 ID 请求数据的逻辑：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({<span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> http: HttpClient</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">getUser</span>(<span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span>): <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-title class_">User</span>&gt; {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">http</span>.<span class="hljs-property">get</span>&lt;<span class="hljs-title class_">User</span>&gt;(<span class="hljs-string">`/api/user/<span class="hljs-subst">${id}</span>`</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p>Within a component, you can combine <code>NgIf</code> with the <code>async</code> pipe to render the UI for the data only after it's finished loading:</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;ng-container *ngIf="user$ | async as user"&gt;</div><div class="hljs-ln-line">      &lt;p&gt;Name: {{ user.name }}&lt;/p&gt;</div><div class="hljs-ln-line">      &lt;p&gt;Biography: {{ user.biography }}&lt;/p&gt;</div><div class="hljs-ln-line">    &lt;/ng-container&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserProfileComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() userId!: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  user$!: <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-title class_">User</span>&gt;;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> userService: UserService</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnInit</span>(): <span class="hljs-built_in">void</span> {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">user$</span> = userService.<span class="hljs-title function_">getUser</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">userId</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>

@@ -1,0 +1,208 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="e568dw8murw2d782czdctqzl7">使用查询引用组件子元素</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/queries.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dgm70qgb782h0hajisr0uqi7a"><strong>提示：</strong>本指南假定你已经阅读了
+<a href="essentials">基本指南</a>。如果你是 Angular 的新手，请先阅读该指南。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8inj48o90tpg91mmeveohwznm">组件可以定义
+<strong>查询</strong>来查找子元素并从它们的注入器中读取值。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="72dnq130j3mc8lcn0afb7ipkl">开发人员最常用查询来检索对子组件、指令、DOM 元素等的引用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a0kayfpgcu34gd9algtsodbd8">查询有两种类别：
+<strong>视图查询</strong> 和 
+<strong>内容查询</strong>。</p>
+
+  <h2 id="view-queries">
+    <a href="#view-queries" class="docs-anchor" tabindex="-1" aria-label="Link to View queries" data-ng_translator_product="100" data-ng_translator_ref_id="2a5tlqpspdydex6hp9edul2jb">视图查询</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3s194hz7hzyqfajun1j1vkd3o">视图查询从组件的
+<em>视图</em>中的元素中检索结果 — 即在组件自己的模板中定义的元素。你可以使用 
+<code>@ViewChild</code> 装饰器查询单个结果。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-card-header'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCardHeader</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-card'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;custom-card-header&gt;Visit sunny California!&lt;/custom-card-header&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCard</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@ViewChild</span>(<span class="hljs-title class_">CustomCardHeader</span>) <span class="hljs-attr">header</span>: <span class="hljs-title class_">CustomCardHeader</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">ngAfterViewInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">header</span>.<span class="hljs-property">text</span>);</div><div class="hljs-ln-line highlighted">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="6kjxuga4irxrz380b71ompbof">在这个示例中，
+<code>CustomCard</code> 组件查询子元素 
+<code>CustomCardHeader</code> 并在 
+<code>ngAfterViewInit</code> 中访问结果。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="53k4f64vtaq0pmnsa5v2iijj8">如果查询没有找到结果，它的值为 
+<code>undefined</code>。这可能发生在目标元素被 
+<code>NgIf</code> 隐藏时。Angular 会随着应用状态的变化更新 
+<code>@ViewChild</code> 的结果。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eqm532da8h9bt6nmd5jsfyjyi"><strong>视图查询结果在 <code>ngAfterViewInit</code> 生命周期方法中可用</strong>。在此之前，值为 
+<code>undefined</code>。请参阅 
+<a href="guide/components/lifecycle">生命周期</a> 部分，了解更多关于组件生命周期的细节。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2mhy4xht7bvngb2t4ejfhwhix">你也可以使用 
+<code>@ViewChildren</code> 装饰器查询多个结果。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-card-action'</span>,</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCardAction</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-card'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;custom-card-action&gt;Save&lt;/custom-card-action&gt;</div><div class="hljs-ln-line">    &lt;custom-card-action&gt;Cancel&lt;/custom-card-action&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCard</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@ViewChildren</span>(<span class="hljs-title class_">CustomCardAction</span>) <span class="hljs-attr">actions</span>: <span class="hljs-title class_">QueryList</span>&lt;<span class="hljs-title class_">CustomCardAction</span>&gt;;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">ngAfterViewInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">actions</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">action</span> =&gt;</span> {</div><div class="hljs-ln-line highlighted">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(action.<span class="hljs-property">text</span>);</div><div class="hljs-ln-line highlighted">    });</div><div class="hljs-ln-line highlighted">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="8i5x68rf6zemk7vuhgvwf19el"><code>@ViewChildren</code> 创建一个包含查询结果的 
+<code>QueryList</code> 对象。你可以通过 
+<code>changes</code> 属性订阅查询结果的变化。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2y56sd3nog049wgwgz9plhwd4"><strong>查询永远不会穿过组件边界。</strong> 视图查询只能从组件模板中检索结果。</p>
+
+  <h2 id="content-queries">
+    <a href="#content-queries" class="docs-anchor" tabindex="-1" aria-label="Link to Content queries" data-ng_translator_product="100" data-ng_translator_ref_id="ay96wu6bnipmgxe6mr7tio2qp">内容查询</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3dv6ami1wxmoch3l14sovjbuv">内容查询从组件的
+<em>内容</em>中的元素中检索结果 — 即在组件模板中使用的嵌套在其中的元素。你可以使用 
+<code>@ContentChild</code> 装饰器查询单个结果。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-toggle'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomToggle</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-expando'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomExpando</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@ContentChild</span>(<span class="hljs-title class_">CustomToggle</span>) <span class="hljs-attr">toggle</span>: <span class="hljs-title class_">CustomToggle</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">ngAfterContentInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">toggle</span>.<span class="hljs-property">text</span>);</div><div class="hljs-ln-line highlighted">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'user-profile'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;custom-expando&gt;</div><div class="hljs-ln-line highlighted">      &lt;custom-toggle&gt;Show&lt;/custom-toggle&gt;</div><div class="hljs-ln-line">    &lt;/custom-expando&gt;</div><div class="hljs-ln-line">  `</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ehm56hau5umws34nhq5v1jlk4">在这个示例中，
+<code>CustomExpando</code> 组件查询子元素 
+<code>CustomToggle</code> 并在 
+<code>ngAfterContentInit</code> 中访问结果。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1afkesmqzrte8s90j82k1wd8x">如果查询没有找到结果，它的值为 
+<code>undefined</code>。这可能发生在目标元素不存在或被 
+<code>NgIf</code> 隐藏时。Angular 会随着应用状态的变化更新 
+<code>@ContentChild</code> 的结果。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="85s2c8z3hgbfqnjqinqy5tytd">默认情况下，内容查询仅查找组件的
+<em>直接</em>子元素，不会遍历到后代元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4pl5c620pepqx2pgkq95cjjvc"><strong>内容查询结果在 <code>ngAfterContentInit</code> 生命周期方法中可用</strong>。在此之前，值为 
+<code>undefined</code>。请参阅 
+<a href="guide/components/lifecycle">生命周期</a> 部分，了解更多关于组件生命周期的细节。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8tibsac0poik2po0gw4imjm1w">你也可以使用 
+<code>@ContentChildren</code> 装饰器查询多个结果。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-menu-item'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomMenuItem</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-menu'</span>,</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomMenu</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-meta">@ContentChildren</span>(<span class="hljs-title class_">CustomMenuItem</span>) <span class="hljs-attr">items</span>: <span class="hljs-title class_">QueryList</span>&lt;<span class="hljs-title class_">CustomMenuItem</span>&gt;;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">ngAfterContentInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">items</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> {</div><div class="hljs-ln-line highlighted">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(item.<span class="hljs-property">text</span>);</div><div class="hljs-ln-line highlighted">    });</div><div class="hljs-ln-line highlighted">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'user-profile'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;custom-menu&gt;</div><div class="hljs-ln-line">      &lt;custom-menu-item&gt;Cheese&lt;/custom-menu-item&gt;</div><div class="hljs-ln-line">      &lt;custom-menu-item&gt;Tomato&lt;/custom-menu-item&gt;</div><div class="hljs-ln-line">    &lt;/custom-menu&gt;</div><div class="hljs-ln-line">  `</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5344kwn043iyvvqakaq0w4stj"><code>@ContentChildren</code> 创建一个包含查询结果的 
+<code>QueryList</code> 对象。你可以通过 
+<code>changes</code> 属性订阅查询结果的变化。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7gqd8ixa8scter97lhawmalsx"><strong>查询永远不会跨越组件边界。</strong> 内容查询只能从与组件本身相同的模板中检索结果。</p>
+
+  <h2 id="query-locators">
+    <a href="#query-locators" class="docs-anchor" tabindex="-1" aria-label="Link to Query locators" data-ng_translator_product="100" data-ng_translator_ref_id="7ubxvz7s7u4kx4des967naorb">查询定位器</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8vvpwvd15zve8600jlwgfh924">每个查询装饰器的第一个参数是它的 
+<strong>定位器</strong>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4f7l7sgn9dke4lc8nomm09sdm">大多数情况下，你想要使用组件或指令作为你的定位器。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5ps99vm87z69i7ov53kpm901r">你也可以指定一个字符串定位器，对应于
+<a href="guide/templates/reference-variables">模板引用变量</a>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;button #save&gt;Save&lt;/button&gt;</div><div class="hljs-ln-line">    &lt;button #cancel&gt;Cancel&lt;/button&gt;</div><div class="hljs-ln-line">  `</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ActionBar</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'save'</span>) <span class="hljs-attr">saveButton</span>: <span class="hljs-title class_">ElementRef</span>&lt;<span class="hljs-title class_">HTMLButtonElement</span>&gt;;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4o73byzcsjy0rybjbu6q4dxi7">如果有多个元素定义了相同的模板引用变量，查询会检索第一个匹配的元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="enpj0dnhw5igil4tmpw8olspz">Angular 不支持 CSS 选择器作为查询定位器。</p>
+
+  <h3 id="queries-and-the-injector-tree">
+    <a href="#queries-and-the-injector-tree" class="docs-anchor" tabindex="-1" aria-label="Link to Queries and the injector tree" data-ng_translator_product="100" data-ng_translator_ref_id="1gs0yzwovwa10asfp5xbeoris">查询和注入器树</a>
+  </h3>
+  
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8h7dn3r6qqt5wdrj6x0ocqdag"><strong>提示：</strong>查看 
+<a href="guide/di">依赖注入</a> 了解有关提供者和 Angular 注入树的背景。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="51ckij7xs5m4wyrh0elwkqa0u">对于更高级的情况，你可以使用任何 
+<code>ProviderToken</code> 作为定位器。这让你能够基于组件和指令提供者定位元素。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">SUB_ITEM</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">InjectionToken</span>&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-string">'sub-item'</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [{<span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">SUB_ITEM</span>, <span class="hljs-attr">useValue</span>: <span class="hljs-string">'special-item'</span>}],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpecialItem</span> { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomList</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@ContentChild</span>(<span class="hljs-variable constant_">SUB_ITEM</span>) <span class="hljs-attr">subItemType</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="b401282yhpjskmse5z0y8ilav">上面的示例使用了一个 
+<code>InjectionToken</code> 作为定位器，但你可以使用任何 
+<code>ProviderToken</code> 来定位特定元素。</p>
+
+  <h2 id="query-options">
+    <a href="#query-options" class="docs-anchor" tabindex="-1" aria-label="Link to Query options" data-ng_translator_product="100" data-ng_translator_ref_id="babpgftgxhnfwpglsgwmi9f2n">查询选项</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ay1tyu9a2z78p1uhcy5wogsbj">所有查询装饰器都接受一个选项对象作为第二个参数。这些选项控制查询如何查找其结果。</p>
+
+  <h3 id="static-queries">
+    <a href="#static-queries" class="docs-anchor" tabindex="-1" aria-label="Link to Static queries" data-ng_translator_product="100" data-ng_translator_ref_id="9vq1u53wsficu2h7kl7gax3bc">静态查询</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5gb6boz615dyo9n99d1vedsyd"><code>@ViewChild</code> 和 
+<code>@ContentChild</code> 查询接受 
+<code>static</code> 选项。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-card'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;custom-card-header&gt;Visit sunny California!&lt;/custom-card-header&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCard</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@ViewChild</span>(<span class="hljs-title class_">CustomCardHeader</span>, {<span class="hljs-attr">static</span>: <span class="hljs-literal">true</span>}) <span class="hljs-attr">header</span>: <span class="hljs-title class_">CustomCardHeader</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">header</span>.<span class="hljs-property">text</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="88vvdh32myq3afmmnl4dk9k2r">通过设置 
+<code>static: true</code>，你可以向 Angular 保证此查询的目标
+<em>总是</em>存在且不是有条件渲染的。这使得结果在 
+<code>ngOnInit</code> 生命周期方法中更早可用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="aruceyt2flur9nxcbxy7tzgx1">静态查询结果在初始化后不会更新。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cpwm92i3fcis967hyaxni6us6"><code>@ViewChildren</code> 和 
+<code>@ContentChildren</code> 查询不支持 
+<code>static</code> 选项。</p>
+
+  <h3 id="content-descendants">
+    <a href="#content-descendants" class="docs-anchor" tabindex="-1" aria-label="Link to Content descendants" data-ng_translator_product="100" data-ng_translator_ref_id="6nw19lrrv1dz3tgru7ltw712t">内容后代</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="85s2c8z3hgbfqnjqinqy5tytd">默认情况下，内容查询仅查找组件的
+<em>直接</em>子元素，不会遍历到后代元素。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-expando'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomExpando</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@ContentChild</span>(<span class="hljs-title class_">CustomToggle</span>) <span class="hljs-attr">toggle</span>: <span class="hljs-title class_">CustomToggle</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'user-profile'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;custom-expando&gt;</div><div class="hljs-ln-line highlighted">      &lt;some-other-component&gt;</div><div class="hljs-ln-line highlighted">        &lt;!-- custom-toggle will not be found! --&gt;</div><div class="hljs-ln-line highlighted">        &lt;custom-toggle&gt;Show&lt;/custom-toggle&gt;</div><div class="hljs-ln-line highlighted">      &lt;/some-other-component&gt;</div><div class="hljs-ln-line">    &lt;/custom-expando&gt;</div><div class="hljs-ln-line">  `</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="8byz001ovnlpfktqkz6ozfrg2">在上述示例中，
+<code>CustomExpando</code> 无法找到 
+<code>&lt;custom-toggle&gt;</code>，因为它不是 
+<code>&lt;custom-expando&gt;</code> 的直接子元素。通过设置 
+<code>descendants: true</code>，你可以配置查询以遍历同一模板中的所有后代。然而，查询
+<em>永远不会</em>穿透组件以遍历其他模板中的元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="13pcox17p4r92v6756x2kcf6o">视图查询没有此选项，因为它们
+<em>总是</em>遍历后代。</p>
+
+  <h3 id="reading-specific-values-from-an-elements-injector">
+    <a href="#reading-specific-values-from-an-elements-injector" class="docs-anchor" tabindex="-1" aria-label="Link to Reading specific values from an element's injector" data-ng_translator_product="100" data-ng_translator_ref_id="bvg0cm815zqne9uuuh5jb7p5s">从元素注入器中读取特定值</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="b05rni65wiqj1nyoif964a43c">默认情况下，查询定位器指示了你要查找的元素和检索到的值。你也可以指定 
+<code>read</code> 选项，以从定位器匹配的元素中检索不同的值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomExpando</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@ContentChild</span>(<span class="hljs-title class_">ExpandoContent</span>, {<span class="hljs-attr">read</span>: <span class="hljs-title class_">TemplateRef</span>}) <span class="hljs-attr">toggle</span>: <span class="hljs-title class_">TemplateRef</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9j2fixgbnoyeipm4zduu64wkg">上面的示例定位了一个带有指令 
+<code>ExpandoContent</code> 的元素，并检索与该元素关联的 
+<code>TemplateRef</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4fjjqvz1oou7i8hop8pvwr2cs">开发者最常用 
+<code>read</code> 来检索 
+<code>ElementRef</code> 和 
+<code>TemplateRef</code>。</p>
+
+  <h2 id="using-querylist">
+    <a href="#using-querylist" class="docs-anchor" tabindex="-1" aria-label="Link to Using QueryList" data-ng_translator_product="100" data-ng_translator_ref_id="cams0mf5fxc75im5615hh9p1f">使用 QueryList</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9whet1bkghs85gxdqqoyxliua"><code>@ViewChildren</code> 和 
+<code>@ContentChildren</code> 都提供了一个包含结果列表的 
+<code>QueryList</code> 对象。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="f4xdkkrrvv4qhe0objyci1gtt"><code>QueryList</code> 提供了许多方便的 API，以数组方式处理结果，如 
+<code>map</code>、
+<code>reduce</code> 和 
+<code>forEach</code>。你可以通过调用 
+<code>toArray</code> 来获得当前结果的数组。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="d9e31d13yg2miifje5qmfztfh">你可以订阅 
+<code>changes</code> 属性，在结果发生变化时执行某些操作。</p>
+
+  <h2 id="common-query-pitfalls">
+    <a href="#common-query-pitfalls" class="docs-anchor" tabindex="-1" aria-label="Link to Common query pitfalls" data-ng_translator_product="100" data-ng_translator_ref_id="lxtg4bk20ietksulbwiytzhj">常见的查询陷阱</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="pcbnxld4m8ma8g9vxyn138lg">在使用查询时，常见的陷阱会使你的代码更难理解和维护。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="axujvxcbapxjzqflhs7l200rr">始终保持一个用于多个组件间共享状态的单一事实来源。这样可以避免不同组件中重复状态导致不同步的情况。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2x74wsh7fgl4uycljwul8sg2d">避免直接向子组件写入状态。这种模式可能导致代码脆弱，难以理解，并容易出现 
+<a href="errors/NG0100">ExpressionChangedAfterItHasBeenChecked</a> 错误。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6jte4esgetlh1fammbkbx2a2">永远不要直接向父组件或祖先组件写入状态。这种模式可能导致代码脆弱，难以理解，并容易出现 
+<a href="errors/NG0100">ExpressionChangedAfterItHasBeenChecked</a> 错误。</p>

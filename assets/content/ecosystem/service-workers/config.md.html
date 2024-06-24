@@ -1,0 +1,617 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="2p2gk28awj3zjodmowc1b5vb3">服务工作者配置文件</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/ecosystem/service-workers/config.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="brvz9kmci3y3tw56tvt4tblgt">本主题介绍了 Service Worker 配置文件的属性。</p>
+
+  <h2 id="modifying-the-configuration">
+    <a href="#modifying-the-configuration" class="docs-anchor" tabindex="-1" aria-label="Link to Modifying the configuration" data-ng_translator_product="100" data-ng_translator_ref_id="bdwbwer62q1ei7a2ofkfb8zm7">修改配置</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="a5mzknl4p6rpo6r87fp93i4n8"><code>ngsw-config.json</code> JSON 配置文件指定 Angular 服务工作者应缓存哪些文件和数据 URL，以及如何更新缓存的文件和数据。 
+<a href="tools/cli">Angular CLI</a> 在 
+<code>ng build</code> 期间处理此配置文件。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8c3zzkuau0i2q0auwczmex7dh">所有文件路径必须以 
+<code>/</code> 开头，这对应部署目录 — 通常是 CLI 项目中的 
+<code>dist/&lt;project-name&gt;</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5xyn0qkzi62mk524jvrev965i">除非另有说明，模式使用 
+<strong>有限</strong>* 的 glob 格式，内部将被转换为正则表达式：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="alt6aj32ldjbetkr5jbabg7rc">Glob 格式</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>**</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="e1dnispiaaq0pypq9x3c2l7ii">匹配 0 或多个路径段</td>
+</tr>
+<tr>
+<td align="left"><code>*</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="c2mxmqvwni2gpobak4zsfu0wn">匹配 0 或多个不包括 
+<code>/</code> 的字符</td>
+</tr>
+<tr>
+<td align="left"><code>?</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bz569svq712q0nh7zb7751jvw">仅匹配一个字符，不包括
+<code>/</code></td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bg9g3mfubuirufc7g704u04he">前缀
+<code>!</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="vu1yd0pmuiprycl2ov5aql7y">将模式标记为负，意味着只包括不匹配该模式的文件</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-callout docs-callout-important">
+      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="9eh0gv15h7cyglehmtxv43f79">特殊字符需要转义</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="32c7kxgn877aqlobuqhtj03h3">注意，一些在正则表达式中具有特殊含义的字符并未被转义，而且在内部的 glob 到 regex 转换中，模式也没有被包裹在
+<code>^</code>/
+<code>$</code>中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4g8leaipw79aep7wsxz4cg49i"><code>$</code>是正则表达式中的特殊字符，表示字符串的结束，在将 glob 模式转换为正则表达式时不会自动转义。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3tu3wety4sov0ievc947rr6lk">如果想要精确匹配
+<code>$</code>字符，必须自行转义（使用
+<code>\\$</code>）。例如，glob 模式
+<code>/foo/bar/$value</code>会导致无法匹配的表达式，因为在字符串结束后再有任何字符是不可能的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bjk85lfkaqqu1dj70rg75qwtw">在转换为正则表达式时，模式不会自动被包裹在
+<code>^</code>和
+<code>$</code>中。因此，模式将部分匹配请求的URL。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dblo6bg4jizrzsx17q5buxrhz">如果希望模式匹配 URL 的开头和/或结尾，可以自行添加
+<code>^</code>/
+<code>$</code>。例如，glob 模式
+<code>/foo/bar/*.js</code>会匹配
+<code>.js</code>和
+<code>.json</code>文件。如果只想匹配
+<code>.js</code>文件，使用
+<code>/foo/bar/*.js$</code>。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c7jrdcy64rnb4z051flnifjd8">范例模式：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="eijnx6atc3wl8wls0uqhrhf29">模式</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>/**/*.html</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="daqfmr18oxmiarbbzefg2oerw">指定所有HTML文件</td>
+</tr>
+<tr>
+<td align="left"><code>/*.html</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8zewcg54z7kr5yd87ra0cord7">仅指定根目录中的HTML文件</td>
+</tr>
+<tr>
+<td align="left"><code>!/**/*.map</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="a59b38ayrfn60jev7z5yvznrl">排除所有sourcemap文件</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="service-worker-configuration-properties">
+    <a href="#service-worker-configuration-properties" class="docs-anchor" tabindex="-1" aria-label="Link to Service worker configuration properties" data-ng_translator_product="100" data-ng_translator_ref_id="ausph8teu587vitfuc1gctlgh">Service Worker 配置属性</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cpqg61f1a0sw7d6aqwusfefvs">下面讲讲配置文件中的每个属性。</p>
+
+  <h3 id="appdata">
+    <a href="#appdata" class="docs-anchor" tabindex="-1" aria-label="Link to <code>appData</code>"><code>appData</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2x6p14w5o39qh035fbudygtyh">此部分允许你传递任何你想要的数据，描述应用程序的特定版本。 
+<code>SwUpdate</code>服务将该数据包含在更新通知中。许多应用程序使用此部分提供额外信息，用于显示UI弹出窗口，通知用户有可用的更新。</p>
+
+  <h3 id="index">
+    <a href="#index" class="docs-anchor" tabindex="-1" aria-label="Link to <code>index</code>"><code>index</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5afthcei3ejn68vjw2zv8u3bk">指定用来充当索引页的文件以满足导航请求。通常是 <code>/index.html</code>。</p>
+
+  <h3 id="assetgroups">
+    <a href="#assetgroups" class="docs-anchor" tabindex="-1" aria-label="Link to <code>assetGroups</code>"><code>assetGroups</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="816fh9b00buzvnni0rawjjtbc"><em>资产（Assets）</em>是与应用一起更新的应用版本的一部分。它们可以包含从页面的同源地址加载的资源以及从 CDN 和其它外部 URL 加载的第三方资源。由于在构建时可能没法提前知道所有这些外部 URL，因此也可以指定 URL 的模式。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9dz9wftme3pm9izko58b7f9nm"><strong>提示:</strong> 为了让Service Worker处理从不同来源加载的资源，请确保每个来源的服务器上正确配置了
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS" target="_blank">CORS</a>。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="33jvqpjqsyzt31w1a50k84ms5">该字段包含一个资产组的数组，每个资产组中会定义一组资产资源和它们的缓存策略。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"assetGroups"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      …</div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      …</div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="1qfufzypdbmtrurike5qor7rw"><strong>提示:</strong> 当ServiceWorker处理请求时，它会按照在
+<code>ngsw-config.json</code>中出现的顺序检查资源组。第一个匹配请求资源的资源组将处理该请求。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="26cwt3wgwy66z0wpfun5rg03d">建议将更具体的资源组放在列表中较高的位置。比如，与 <code>/foo.js</code> 匹配的资源组应出现在与 <code>*.js</code> 匹配的资源组之前。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3cuxrz3ntjk5kf7y1dmd9p76l">每个资产组都会指定一组资源和一个管理它们的策略。此策略用来决定何时获取资源以及当检测到更改时该怎么做。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="asulkzv2i7y4o7p8f266gibb6">这些资产组会遵循下面的 Typescript 接口：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">AssetGroup</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  installMode?: <span class="hljs-string">'prefetch'</span> | <span class="hljs-string">'lazy'</span>;</div><div class="hljs-ln-line">  updateMode?: <span class="hljs-string">'prefetch'</span> | <span class="hljs-string">'lazy'</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">resources</span>: {</div><div class="hljs-ln-line">    files?: <span class="hljs-built_in">string</span>[];</div><div class="hljs-ln-line">    urls?: <span class="hljs-built_in">string</span>[];</div><div class="hljs-ln-line">  };</div><div class="hljs-ln-line">  cacheQueryOptions?: {</div><div class="hljs-ln-line">    ignoreSearch?: <span class="hljs-built_in">boolean</span>;</div><div class="hljs-ln-line">  };</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="92yixnf1oim2s934ykisff5c1">每个 <code>AssetGroup</code> 都由以下资产组属性定义。</p>
+
+  <h4 id="name">
+    <a href="#name" class="docs-anchor" tabindex="-1" aria-label="Link to <code>name</code>"><code>name</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6pikykyvq8cfhpfdvw8c86zqt"><code>name</code> 是强制性的。它用来标识该配置文件版本中这个特定的资产组。</p>
+
+  <h4 id="installmode">
+    <a href="#installmode" class="docs-anchor" tabindex="-1" aria-label="Link to <code>installMode</code>"><code>installMode</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5431jis76rtpvrdy8sg1gro6f"><code>installMode</code> 决定了这些资源最初的缓存方式。<code>installMode</code> 可以取如下两个值之一：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bulyvki1easdsqhng9yr2vtyi">值</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>prefetch</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="egxjupneymgv1q53gq2ayk5gt">告诉 Angular 服务工作线程在缓存当前应用程序版本时获取每个列出的资源。这会消耗带宽，但可以确保资源在被请求时始终可用，即使浏览器当前离线。</td>
+</tr>
+<tr>
+<td align="left"><code>lazy</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="92a699esq1oarwshdn0jzxnhi">不提前缓存任何资源。相反，Angular 服务工作线程仅为接收到请求的资源进行缓存。这是一个按需缓存模式。从未被请求的资源不会被缓存。这对于像不同分辨率的图像之类的东西很有用，这样服务工作线程只会为特定屏幕和方向缓存正确的资产。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6p25ajil2ak8y1cdoaru8n875">默认为 <code>prefetch</code>。</p>
+
+  <h4 id="updatemode">
+    <a href="#updatemode" class="docs-anchor" tabindex="-1" aria-label="Link to <code>updateMode</code>"><code>updateMode</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1dj2h2cwbm1ifck5znly5s11a">对于已经存在于缓存中的资源，<code>updateMode</code> 会决定在发现了新版本应用后的缓存行为。自上一版本以来更改过的所有组中资源都会根据 <code>updateMode</code> 进行更新。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bulyvki1easdsqhng9yr2vtyi">值</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>prefetch</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1q3ozuyq49j10i5yi10qwcazs">告诉服务工作线程立即下载和缓存已更改的资源。</td>
+</tr>
+<tr>
+<td align="left"><code>lazy</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="92rits1lm94blcaax82ki0sl6">告诉服务工作线程不缓存这些资源。相反，它将其视为未请求的资源，并在再次请求它们之前等待更新。如果 
+<code>installMode</code> 也是 
+<code>lazy</code>，则 
+<code>updateMode</code> 的 
+<code>lazy</code> 仅有效。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bq999d2tj7hq20khtlek4drk0">其默认值为 <code>installMode</code> 的值。</p>
+
+  <h4 id="resources">
+    <a href="#resources" class="docs-anchor" tabindex="-1" aria-label="Link to <code>resources</code>"><code>resources</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a5ny1sqsqa3c26vwmkfud5ayy">本节描述要缓存的资源，分为如下几组：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="70sannqwg908ofu9uuxon9w2r">资源组</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>files</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="6yevrj1mhew6gkmp7fnlh90so">列出与分发目录中的文件匹配的模式。这些可以是单个文件或类似 glob 的模式，可以匹配多个文件。</td>
+</tr>
+<tr>
+<td align="left"><code>urls</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1869he2sh36bjfm5uqdp7ij7n">包括在运行时匹配的 URL 和 URL 模式。这些资源不会被直接获取，也没有内容哈希，但它们会根据其 HTTP 标头进行缓存。这对于诸如 Google 字体服务等 CDN 非常有用。
+<br> 
+<em>（不支持否定的 glob 模式，并且 <code>?</code> 将按字面匹配；即，它不会匹配除 <code>?</code> 以外的任何字符。）</em></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h4 id="cachequeryoptions">
+    <a href="#cachequeryoptions" class="docs-anchor" tabindex="-1" aria-label="Link to <code>cacheQueryOptions</code>"><code>cacheQueryOptions</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="erz4o1aaurvtzvnhq8p0bmfte">这些选项用于修改请求的匹配行为。它们传递给浏览器的 
+<code>Cache#match</code> 函数。有关详细信息，请参见 
+<a href="https://developer.mozilla.org/docs/Web/API/Cache/match" target="_blank">MDN</a>。目前，仅支持以下选项：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cyk2rtnidu0xcswyg7218m57s">选项</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>ignoreSearch</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cb4grtttu895wkiyadnrg4i84">忽略查询参数。默认为 
+<code>false</code>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h3 id="datagroups">
+    <a href="#datagroups" class="docs-anchor" tabindex="-1" aria-label="Link to <code>dataGroups</code>"><code>dataGroups</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4yjppfuunn21pa4fly64kf7cx">与这些资产性（asset）资源不同，数据请求不会随应用一起版本化。它们会根据手动配置的策略进行缓存，这些策略对 API 请求和所依赖的其它数据等情况会更有用。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2hh1s5uuw4cj8h97abbt246od">本字段包含一个数据组的数组，其中的每一个条目都定义了一组数据资源以及对它们的缓存策略。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"dataGroups"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      …</div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      …</div><div class="hljs-ln-line">    <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">]</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="95jf6ve85yj6xawo6h3m5hf7a"><strong>有用提示：</strong>当 ServiceWorker 处理请求时，它按照在 
+<code>ngsw-config.json</code> 中出现的顺序检查数据组。匹配请求资源的第一个数据组处理请求。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="89szc5wnbhsx6ye49ip02t84n">建议将更具体的数据组放在列表中较高的位置。比如，与 <code>/api/foo.json</code> 匹配的数据组应出现在与 <code>/api/*.json</code> 匹配的数据组之前。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2znl13r1uxaihn1fyg1atkdn9">数据组遵循下列 TypeScript 接口：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">DataGroup</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">urls</span>: <span class="hljs-built_in">string</span>[];</div><div class="hljs-ln-line">  version?: <span class="hljs-built_in">number</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">cacheConfig</span>: {</div><div class="hljs-ln-line">    <span class="hljs-attr">maxSize</span>: <span class="hljs-built_in">number</span>;</div><div class="hljs-ln-line">    <span class="hljs-attr">maxAge</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">    timeout?: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">    strategy?: <span class="hljs-string">'freshness'</span> | <span class="hljs-string">'performance'</span>;</div><div class="hljs-ln-line">  };</div><div class="hljs-ln-line">  cacheQueryOptions?: {</div><div class="hljs-ln-line">    ignoreSearch?: <span class="hljs-built_in">boolean</span>;</div><div class="hljs-ln-line">  };</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9mix5giqritbtm0yj1c9md3rw">每个 <code>DataGroup</code> 都由以下数据组属性定义。</p>
+
+  <h4 id="name-1">
+    <a href="#name-1" class="docs-anchor" tabindex="-1" aria-label="Link to <code>name</code>"><code>name</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2iklz5oz51cczset112nchql1">和 <code>assetGroups</code> 下类似，每个数据组也都有一个 <code>name</code>，用作它的唯一标识。</p>
+
+  <h4 id="urls">
+    <a href="#urls" class="docs-anchor" tabindex="-1" aria-label="Link to <code>urls</code>"><code>urls</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="binemqxc636h1gh2z4152x1ip">一个 URL 模式的列表。匹配这些模式的 URL 将会根据该数据组的策略进行缓存。只有非修改型的请求（GET 和 HEAD）才会进行缓存。</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3cwf23xime8cw6pp2thf3mfki">不支持 glob 中的否定模式</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b32pkeuu91xjkhqz9nzgjd8cv"><code>?</code> 只做字面匹配，也就是说，它<em>只</em>能匹配 <code>?</code> 字符。</li>
+
+  </ul>
+  
+  <h4 id="version">
+    <a href="#version" class="docs-anchor" tabindex="-1" aria-label="Link to <code>version</code>"><code>version</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="65mqausfyeznul6tcl7z139me">API 有时可能会以不向后兼容的方式更改格式。新版本的应用可能与旧的 API 格式不兼容，因此也就与该 API 中目前已缓存的资源不兼容。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c8lxq1cestnzkpbgarp1hngnw"><code>version</code> 提供了一种机制，用于指出这些被缓存的资源已经通过不向后兼容的方式进行了更新，并且旧的缓存条目（即来自以前版本的缓存条目）应该被丢弃。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f23iqn48u24dfbtpw2mad92m4"><code>version</code> 是个整型字段，默认为 <code>1</code>。</p>
+
+  <h4 id="cacheconfig">
+    <a href="#cacheconfig" class="docs-anchor" tabindex="-1" aria-label="Link to <code>cacheConfig</code>"><code>cacheConfig</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="56dqxpdxtz28j3w9ezogs6jqd">本节定义了对匹配上的请求进行缓存时的策略。</p>
+
+  <h5 id="maxsize">
+    <a href="#maxsize" class="docs-anchor" tabindex="-1" aria-label="Link to <code>maxSize</code>"><code>maxSize</code></a>
+  </h5>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="12xw74f3a2n7s89kmynvmowlj">缓存中允许的最大条目或响应数量。</p>
+
+    <div class="docs-alert docs-alert-critical">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8ot0eb19f73s994lvj5ilsao0"><strong>重要提示:</strong> 开放式缓存可以无限增长，最终超出存储配额，导致驱逐。</p>
+
+    </div>
+    
+  <h5 id="maxage">
+    <a href="#maxage" class="docs-anchor" tabindex="-1" aria-label="Link to <code>maxAge</code>"><code>maxAge</code></a>
+  </h5>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ah80814akaxx2rxiqqg0voita"><code>maxAge</code> 参数指示响应在被视为无效并被驱逐之前允许保留在缓存中的时间。 
+<code>maxAge</code> 是一个持续时间字符串，使用以下单位后缀：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7xjpto0lxf3esscgiktta1uqg">后缀</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>d</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dqiutfnlaiwidxulqll5ugqso">天</td>
+</tr>
+<tr>
+<td align="left"><code>h</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="6ayw1ne9w7gg9g8wshpzjyx0c">小时</td>
+</tr>
+<tr>
+<td align="left"><code>m</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="el8ir7zksd3xhxodkqo8yc51w">分钟</td>
+</tr>
+<tr>
+<td align="left"><code>s</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8gzk19wnofszbyi0vs05canad">秒</td>
+</tr>
+<tr>
+<td align="left"><code>u</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3ddacvblnchimc4w0rjqgwkkh">毫秒</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9nlg50v7xzfzsyn0qa5835t0q">比如，字符串 <code>3d12h</code> 规定此内容最多缓存三天半。</p>
+
+  <h5 id="timeout">
+    <a href="#timeout" class="docs-anchor" tabindex="-1" aria-label="Link to <code>timeout</code>"><code>timeout</code></a>
+  </h5>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6q9qgn67yex6ozg5qkal5gec1">这个表示持续时间的字符串用于指定网络超时时间。如果配置了网络超时时间，Angular Service Worker 就会先等待这么长时间再使用缓存。<code>timeout</code> 是一个表示持续时间的字符串，使用下列后缀单位：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7xjpto0lxf3esscgiktta1uqg">后缀</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>d</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dqiutfnlaiwidxulqll5ugqso">天</td>
+</tr>
+<tr>
+<td align="left"><code>h</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="6ayw1ne9w7gg9g8wshpzjyx0c">小时</td>
+</tr>
+<tr>
+<td align="left"><code>m</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="el8ir7zksd3xhxodkqo8yc51w">分钟</td>
+</tr>
+<tr>
+<td align="left"><code>s</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8gzk19wnofszbyi0vs05canad">秒</td>
+</tr>
+<tr>
+<td align="left"><code>u</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3ddacvblnchimc4w0rjqgwkkh">毫秒</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bqoag96g3sq0l1xbwqtr5vkzb">比如，字符串 <code>5s30u</code> 将会被翻译成 5 秒零 30 毫秒的网络超时。</p>
+
+  <h5 id="strategy">
+    <a href="#strategy" class="docs-anchor" tabindex="-1" aria-label="Link to <code>strategy</code>"><code>strategy</code></a>
+  </h5>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cw4f35rkafgr2jkd3gt9khcsg">Angular Service Worker 可以使用两种缓存策略之一来获取数据资源。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ej85i3vyeiha9kyifi5699ksm">缓存策略</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>performance</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3u2es7hjawjos5wu1wb3ka0bu">默认情况下，优化尽可能快速获取响应。如果资源存在于缓存中，则使用缓存版本，不会发起网络请求。这允许一定程度的陈旧，取决于
+<code>maxAge</code>，以换取更好的性能。适用于不经常更改的资源；例如，用户头像图片。</td>
+</tr>
+<tr>
+<td align="left"><code>freshness</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dqfslo5rmrj9gjcrjq34cvt94">优化数据的最新性，优先从网络中获取所请求的数据。只有在根据
+<code>timeout</code>网络超时时，请求才会回退到缓存中。这对于频繁更改的资源很有用；例如，账户余额。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bj7jjg6x7lhecbevpu7iz45mc"><strong>提示:</strong> 你还可以模拟第三种策略，
+<a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#stale-while-revalidate" target="_blank">staleWhileRevalidate</a>，如果缓存数据可用，则返回缓存数据，并在后台获取新数据以供下次使用。 要使用此策略，请将
+<code>strategy</code>设置为
+<code>freshness</code>，并将
+<code>timeout</code>设置为
+<code>0u</code>在
+<code>cacheConfig</code>中。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="exnta1l58fsbijkuykyy4q2dp">本质上说，它会做如下工作：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3qlcyw5odk9s0zpw3fy1bndqp">首先尝试从网络上获取。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1tqy2erbhhhs49qz26bu66xxh">如果网络请求没有立刻完成（也就是 0 ms 内），就忽略缓存有效期，并用缓存的值做为后备。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3ya65525fn5wuz4cy5hruq8ye">一旦网络请求完成，就更新缓存，以供将来的请求使用。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2bcrma3bq0wlqfso5c7pli4pr">如果指定的资源在缓存中不存在，总是等待网络请求。</li>
+
+    </ol>
+    
+  <h5 id="cacheopaqueresponses">
+    <a href="#cacheopaqueresponses" class="docs-anchor" tabindex="-1" aria-label="Link to <code>cacheOpaqueResponses</code>"><code>cacheOpaqueResponses</code></a>
+  </h5>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6mzy10rgkztr4u8gqbwwsub2q">Angular 服务工作者是否应该缓存不透明的响应。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6zwahxjgtbvppi7z7w44mb1j5">如果未指定，则默认值取决于数据组的配置策略：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="6xboqaqdx0082ltr7bynr4y0m">策略</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dztmk1wewgoal88o29ryge3b5">使用 
+<code>freshness</code> 策略的组</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="607tchm930km9mhjrrin6e3zm">默认值为 
+<code>true</code>，并且 Service Worker 会缓存不透明响应。这些组每次都会请求数据，仅在离线或网络缓慢时才回退到缓存的响应。因此，Service Worker 缓存错误响应也无关紧要。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ajgutlfpzuf4lg841ef1m6o6e">使用 
+<code>performance</code> 策略的组</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2s6o18yxowhfi5q5jdakq3sv7">默认值为 
+<code>false</code>，并且 Service Worker 不会缓存不透明响应。这些组将继续返回缓存的响应，直到 
+<code>maxAge</code> 过期，即使错误是由于临时网络或服务器问题造成的。因此，Service Worker 缓存错误响应会有问题。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-callout docs-callout-helpful">
+      <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f4d8es4vcfc6trnx1rcx9a869">评论不透明的响应</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="dxcnngeqqqv5evn0liyu8imu6">如果你不熟悉，不透明响应（
+<a href="https://fetch.spec.whatwg.org#concept-filtered-response-opaque" target="_blank">https://fetch.spec.whatwg.org#concept-filtered-response-opaque</a>）是一种特殊类型的响应，当请求不同源但不返回 CORS 标头的资源时会返回不透明响应。 不透明响应的一个特点是 Service Worker 不允许读取其状态，这意味着它无法检查请求是否成功。 更多详情请参见 [Introduction to fetch()][
+<a href="https://developers.google.com/web/updates/2015/03/introduction-to-fetch#response_types" target="_blank">https://developers.google.com/web/updates/2015/03/introduction-to-fetch#response_types</a>]。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5ch82r0u66y8crf18fj6kv0fo">如果你无法实现 CORS — 例如，如果你无法控制源 — 优先为导致不透明响应的资源使用 
+<code>freshness</code> 策略。</p>
+
+    </div>
+    
+  <h4 id="cachequeryoptions-1">
+    <a href="#cachequeryoptions-1" class="docs-anchor" tabindex="-1" aria-label="Link to <code>cacheQueryOptions</code>"><code>cacheQueryOptions</code></a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="k0jcqwyhn08qp3it9hpayet8">详情请参见 
+<a href="#assetgroups">assetGroups</a>。</p>
+
+  <h3 id="navigationurls">
+    <a href="#navigationurls" class="docs-anchor" tabindex="-1" aria-label="Link to <code>navigationUrls</code>"><code>navigationUrls</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b8ycjqxp6ff2tilgzschg2e65">这个可选节让你可以指定一个自定义的 URL 列表，它们都会被重定向到索引文件。</p>
+
+  <h4 id="handling-navigation-requests">
+    <a href="#handling-navigation-requests" class="docs-anchor" tabindex="-1" aria-label="Link to Handling navigation requests" data-ng_translator_product="100" data-ng_translator_ref_id="dz75yky2oewtnp46k4rqnwdjy">处理导航请求</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5ci6wg5v212cm4nkdc8kwfpd8">Service Worker 会将不匹配任何 
+<code>asset</code> 或 
+<code>data</code> 组的导航请求重定向到指定的 
+<a href="#index">索引文件</a>。 请求被认为是导航请求的情况包括：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="bt9qhn64efy7jtzi7iyq57bbu">其 
+<a href="https://developer.mozilla.org/docs/Web/API/Request/method" target="_blank">method</a> 为 
+<code>GET</code></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="b6x19i2f37pxc7gl5duvdxt9s">其 
+<a href="https://developer.mozilla.org/docs/Web/API/Request/mode" target="_blank">mode</a> 为 
+<code>navigation</code></li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c9wuqhieq06bopl6s1pefxhy5">它接受 <code>text/html</code> 响应（根据 <code>Accept</code> 头的值决定）</li>
+<li>Its URL matches the following criteria:
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="52je61meadr6hxzofff2cs96m">URL 的最后一段路径中不能包含文件扩展名（比如 <code>.</code>）</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5kor07d1xdrlk18vy2wip43ul">URL 中不能包含 <code>__</code></li>
+
+  </ul>
+  </li>
+
+  </ul>
+  
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="ccuylzndevz5j2b1xa0e10dcd"><strong>有帮助的：</strong> 要配置是否将导航请求发送到网络，请参见 
+<a href="#navigationrequeststrategy">navigationRequestStrategy</a> 部分。</p>
+
+    </div>
+    
+  <h4 id="matching-navigation-request-urls">
+    <a href="#matching-navigation-request-urls" class="docs-anchor" tabindex="-1" aria-label="Link to Matching navigation request URLs" data-ng_translator_product="100" data-ng_translator_ref_id="6dt48x8ighzkooe5qb75q1zjo">匹配导航请求 URL</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="89w6gg476u2w3vfijew8jfayq">虽然这些默认条件在大多数情况下都挺好用，不过有时还是要配置一些不同的规则。比如，你可能希望忽略一些特定的路由（它们可能不是 Angular 应用的一部分），而是把它们透传给服务器。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4xbps7wc6irgohmrbq9o3kuid">此字段包含一个 URL 数组和 
+<a href="#modifying-the-configuration">类 glob</a> 的 URL 模式，这些模式在运行时匹配。 它可以包含负模式（即以 
+<code>!</code> 开头的模式）和非负模式以及 URL。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ey223nsanohh1j4jiobj2autd">只有那些能匹配<em>任意</em>正向 URL 或 URL 模式并且<em>不匹配任何一个</em>反向模式的 URL 才会视为导航请求。当匹配时，这些 URL 查询将会被忽略。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a8qib1if6vrxut07g3jovcx46">如果省略了该字段，它的默认值是：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">[</div><div class="hljs-ln-line">  <span class="hljs-string">'/**'</span>,           <span class="hljs-comment">// Include all URLs.</span></div><div class="hljs-ln-line">  <span class="hljs-string">'!/**/*.*'</span>,      <span class="hljs-comment">// Exclude URLs to files.</span></div><div class="hljs-ln-line">  <span class="hljs-string">'!/**/****'</span>,     <span class="hljs-comment">// Exclude URLs containing `**` in the last segment.</span></div><div class="hljs-ln-line">  <span class="hljs-string">'!/**/****/**'</span>,  <span class="hljs-comment">// Exclude URLs containing `**` in any other segment.</span></div><div class="hljs-ln-line">]</div></code>
+    </pre>
+  </div>
+  <h3 id="navigationrequeststrategy">
+    <a href="#navigationrequeststrategy" class="docs-anchor" tabindex="-1" aria-label="Link to <code>navigationRequestStrategy</code>"><code>navigationRequestStrategy</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ag4nj096t48wbm7etpb3cv2g">通过此可选属性，你可以配置服务工作者如何处理导航请求：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"navigationRequestStrategy"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"freshness"</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div>
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dlfs5hlh1j2d93g1dfpjk79x0">可能的值</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>'performance'</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bnvn4nhjwokpm1y5btej4dp6k">默认设置。为指定的
+<a href="#index-file">索引文件</a>启动服务器，该文件通常是缓存的。</td>
+</tr>
+<tr>
+<td align="left"><code>'freshness'</code></td>
+<td align="left">Passes the requests through to the network and falls back to the <code>performance</code> behavior when offline. This value is useful when the server redirects the navigation requests elsewhere using a <code>3xx</code> HTTP redirect status code. Reasons for using this value include: <ul> <li data-ng_translator_product="100" data-ng_translator_ref_id="21znfk6uwx7yisknawf4tcxs1">当身份验证不由应用处理时，重定向到认证网站</li> <li data-ng_translator_product="100" data-ng_translator_ref_id="80ziuc6xfnx31na5irv3bj1bs">在网站重新设计后，为避免破坏现有链接/书签，重定向某些 URL</li> <li data-ng_translator_product="100" data-ng_translator_ref_id="2xfa7l7afnaj8vttg2iaalrgs">当页面暂时停用时，重定向到不同的网站，例如服务器状态页面</li> </ul></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="6obtwv1gn5znwi6p26hun5uld"><strong>重要：</strong>
+<code>freshness</code>策略通常会导致更多请求发送到服务器，这可能会增加响应延迟。建议尽可能使用默认的性能策略。</p>
+
+    </div>
+    

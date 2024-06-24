@@ -1,0 +1,43 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>withNavigationErrorHandler</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/router/src/provide_router.ts#L680-L690" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="21kdkjem81pcd74tbsy05grt0">提供在导航错误发生时调用的函数。</p><p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/router/NavigationError">NavigationError</a><a class="docs-pill" href="api/router/core">/inject</a><a class="docs-pill" href="api/router/runInInjectionContext">runInInjectionContext</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">withNavigationErrorHandler</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">handler</span>: <span class="hljs-function">(<span class="hljs-params">error: NavigationError</span>) =&gt;</span> <span class="hljs-built_in">unknown</span></div><div class="hljs-ln-line ">): <span class="hljs-title class_">NavigationErrorHandlerFeature</span>;</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="21kdkjem81pcd74tbsy05grt0">提供在导航错误发生时调用的函数。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dlkiv1923usbdgsmnyyz3y82w">此函数在应用的 
+<a href="guide/di/dependency-injection-context">注入上下文</a> 中运行，因此可以使用 
+<a href="api/core/inject"><code>inject</code></a> 函数。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eqkdh2hduye2j8pbikz30ikf5">此函数可以返回一个 
+<code>RedirectCommand</code> 将错误转换为重定向，类似于从守卫返回 
+<code>UrlTree</code> 或 
+<code>RedirectCommand</code>。这也会阻止 
+<code>Router</code> 发出 
+<code>NavigationError</code>；它会改为发出带有代码 NavigationCancellationCode.Redirect 的 
+<code>NavigationCancel</code>。返回除了 
+<code>RedirectCommand</code> 以外的值将被忽略，不会改变 
+<code>Router</code> 处理错误的行为。</p></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5hto9ig099e9a3n2gval8n2iw">如何使用错误处理程序选项的基本示例：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">const appRoutes: Routes = [];</span><span class="hljs-ln-line">bootstrapApplication(AppComponent,</span><span class="hljs-ln-line">  {</span><span class="hljs-ln-line">    providers: [</span><span class="hljs-ln-line">      <span class="hljs-built_in">provideRouter</span>(appRoutes, <span class="hljs-built_in">withNavigationErrorHandler</span>((e: NavigationError) =&gt;</span><span class="hljs-ln-line"><span class="hljs-built_in">inject</span>(MyErrorTracker).<span class="hljs-built_in">trackError</span>(e)))</span><span class="hljs-ln-line">    ]</span><span class="hljs-ln-line">  }</span><span class="hljs-ln-line">);</span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>withNavigationErrorHandler</h3><div><code>NavigationErrorHandlerFeature</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_ref_id="21kdkjem81pcd74tbsy05grt0">提供在导航错误发生时调用的函数。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dlkiv1923usbdgsmnyyz3y82w">此函数在应用的 
+<a href="guide/di/dependency-injection-context">注入上下文</a> 中运行，因此可以使用 
+<a href="api/core/inject"><code>inject</code></a> 函数。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eqkdh2hduye2j8pbikz30ikf5">此函数可以返回一个 
+<code>RedirectCommand</code> 将错误转换为重定向，类似于从守卫返回 
+<code>UrlTree</code> 或 
+<code>RedirectCommand</code>。这也会阻止 
+<code>Router</code> 发出 
+<code>NavigationError</code>；它会改为发出带有代码 NavigationCancellationCode.Redirect 的 
+<code>NavigationCancel</code>。返回除了 
+<code>RedirectCommand</code> 以外的值将被忽略，不会改变 
+<code>Router</code> 处理错误的行为。</p></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">handler</span><code>(error: NavigationError) =&gt; unknown</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>NavigationErrorHandlerFeature</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5hto9ig099e9a3n2gval8n2iw">如何使用错误处理程序选项的基本示例：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">const appRoutes: Routes = [];</span><span class="hljs-ln-line">bootstrapApplication(AppComponent,</span><span class="hljs-ln-line">  {</span><span class="hljs-ln-line">    providers: [</span><span class="hljs-ln-line">      <span class="hljs-built_in">provideRouter</span>(appRoutes, <span class="hljs-built_in">withNavigationErrorHandler</span>((e: NavigationError) =&gt;</span><span class="hljs-ln-line"><span class="hljs-built_in">inject</span>(MyErrorTracker).<span class="hljs-built_in">trackError</span>(e)))</span><span class="hljs-ln-line">    ]</span><span class="hljs-ln-line">  }</span><span class="hljs-ln-line">);</span>
+          </code>
+        </pre>
+      </div>
+    </div></div></div></div></div></div></div></div>

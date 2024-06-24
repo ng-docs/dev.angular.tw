@@ -1,0 +1,595 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eho1b3cawkvz0i6ih0w7adlpj">NgOptimizedImage 入门</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/image-optimization.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="78f3suyx5rut4lybwg0knfckb"><code>NgOptimizedImage</code> 指令使加载图像时采用性能最佳实践变得容易。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="305cfimgr1k7i9e6wtk6fhuww">该指令确保通过以下方式优先加载
+<a href="http://web.dev/lcp" target="_blank">最大内容绘制时间（LCP）</a>图像：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="c10openuk3htri0xungn52khv">自动在
+<code>&lt;img&gt;</code>标签上设置
+<code>fetchpriority</code>属性</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6hs9dtc6t6j82idbwj249gt70">默认惰性加载其他图片</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5w5wbx94svd9si2mlxkzqmuiz">断言文档头中有相应的预连接链接标签</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="54kwo2ugxt39l119u2974x0ik">自动生成 <code>srcset</code> 属性</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="byktil6khwayl9dbli77tlgb2">如果应用程序使用 SSR，则生成
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/preload" target="_blank">预加载提示</a></li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1yltehz625xmpf62y4hecgvjk">除了优化加载 LCP 图像之外，
+<code>NgOptimizedImage</code> 还强制执行许多图像最佳实践，例如：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="8wy2f9vifims44vttlde1gfts">使用
+<a href="https://web.dev/image-cdns/#how-image-cdns-use-urls-to-indicate-optimization-options" target="_blank">图像 CDN URL 来应用图像优化</a></li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9sxug4lwclbquq6q682s5yhl9">通过要求 <code>width</code> 和 <code>height</code> 来防止布局偏移</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1te16wt32h53nbw7tg987bdee">如果 <code>width</code> 或 <code>height</code> 设置不正确，则会发出警告</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2n9up45tjx4gg33523q927ppl">给出渲染时图片是否会在视觉上失真的警告</li>
+
+  </ul>
+  <p><strong data-ng_translator_product="100" data-ng_translator_ref_id="8ell7bmjau9env2twdpmmzbjq">注意：尽管 
+<code>NgOptimizedImage</code> 指令在 Angular 版本 15 中成为了一个稳定特性，但它已被回迁，并在 13.4.0 和 14.3.0 版本中也作为一个稳定特性提供。</strong></p>
+
+  <h2 id="getting-started">
+    <a href="#getting-started" class="docs-anchor" tabindex="-1" aria-label="Link to Getting Started" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bbwu5ocoy87h3ob0i4j82759h">快速上手</a>
+  </h2>
+  
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="import-ngoptimizedimage-directive">
+    <a href="#import-ngoptimizedimage-directive" class="docs-anchor" tabindex="-1" aria-label="Link to Import <code>NgOptimizedImage</code> directive" data-ng_translator_product="100" data-ng_translator_ref_id="5nqdsufqq3iwd84hx8yntia3m">导入 
+<code>NgOptimizedImage</code> 指令</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="2xu7ze0997xtd3hwxv8fjdi1c">从
+<code>@angular/common</code>导入
+<code>NgOptimizedImage</code>指令：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgOptimizedImage</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1lvf69c3cksssgp6wf20qf4xr">并将其包含到独立组件或 NgModule 的
+<code>imports</code>数组中：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">  <span class="hljs-title class_">NgOptimizedImage</span>,</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="optional-set-up-a-loader">
+    <a href="#optional-set-up-a-loader" class="docs-anchor" tabindex="-1" aria-label="Link to (Optional) Set up a Loader" data-ng_translator_product="100" data-ng_translator_ref_id="49qq3bigvux0v7el3lfe0xvy0">（可选）设置加载器</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="590n4wroso3x49p25lw8bj1bv">使用 NgOptimizedImage <strong>不一定需要</strong>图片加载器，但使用带有图片 CDN 的加载器可以实现强大的性能特性，包括为图片自动设置 <code>srcset</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="f12cn9axzsyz4ns3gvi7gnx9l">有关设置加载器的简要指南，请参阅本页末尾的
+<a href="#configuring-an-image-loader-for-ngoptimizedimage">配置图像加载器</a>部分。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="enable-the-directive">
+    <a href="#enable-the-directive" class="docs-anchor" tabindex="-1" aria-label="Link to Enable the directive" data-ng_translator_product="100" data-ng_translator_ref_id="ctjefi6m7992552n30hn9ep8">启用指令</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="ebmzg4gg6fs08nxln0uqawxqi">要激活
+<code>NgOptimizedImage</code>指令，请将图像的
+<code>src</code>属性替换为
+<code>ngSrc</code>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;img ngSrc=<span class="hljs-string">"cat.jpg"</span>&gt;</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="a8w1xbdhdvsquph5tqswqekoh">如果你使用了
+<a href="#built-in-loaders">内置的第三方加载器</a>，请确保从
+<code>src</code>中省略基本 URL 路径，因为加载器会自动添加该路径。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="mark-images-as-priority">
+    <a href="#mark-images-as-priority" class="docs-anchor" tabindex="-1" aria-label="Link to Mark images as <code>priority</code>" data-ng_translator_product="100" data-ng_translator_ref_id="ar43pi4dol4hotgn15xh52289">将图片标记为 
+<code>priority</code></a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="3u32y4soh7awi93jsr1q5im4i">始终将页面上的
+<a href="https://web.dev/lcp/#what-elements-are-considered" target="_blank">LCP 图像</a>标记为
+<code>priority</code>以优先加载。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;img ngSrc=<span class="hljs-string">"cat.jpg"</span> width=<span class="hljs-string">"400"</span> height=<span class="hljs-string">"200"</span> priority&gt;</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ey72zfebcr1e5puqueq9ltsef">将图片标记为 <code>priority</code> 会应用以下优化：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="8a428eurh1g3hy80690cfbevy">设置
+<code>fetchpriority=high</code>（关于优先级提示的更多信息请
+<a href="https://web.dev/priority-hints" target="_blank">点击此处</a>）</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="7mhc34kac1cpp317cdpok92q8">设置
+<code>loading=eager</code>（关于原生惰性加载的更多信息请
+<a href="https://web.dev/browser-level-image-lazy-loading" target="_blank">点击此处</a>）</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="6wr1jx64ktsai6fyd2f311hn6">如果
+<a href="guide/ssr">在服务器端渲染</a>，则自动生成一个
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/preload" target="_blank">预加载链接元素</a>。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2tubgu0gnrjlwa8md31rgz2of">在开发过程中，如果LCP元素是一个没有
+<code>priority</code>属性的图像，则Angular会显示警告。页面的LCP元素可能会根据多种因素而变化，比如用户屏幕的尺寸，因此页面可能有多个应该标记为
+<code>priority</code>的图像。查看
+<a href="https://web.dev/css-web-vitals/#images-and-largest-contentful-paint-lcp" target="_blank">Web Vitals中的CSS</a>获取更多详细信息。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="include-width-and-height">
+    <a href="#include-width-and-height" class="docs-anchor" tabindex="-1" aria-label="Link to Include Width and Height" data-ng_translator_product="100" data-ng_translator_ref_id="d3olca82zsf7eg9tvo382dgae">包含宽度和高度</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="ectm1piiwjeyndmoee7alrqlp">为了防止
+<a href="https://web.dev/css-web-vitals/#images-and-layout-shifts" target="_blank">与图像相关的布局移位</a>，NgOptimizedImage要求你为图像指定高度和宽度，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;img ngSrc=<span class="hljs-string">"cat.jpg"</span> width=<span class="hljs-string">"400"</span> height=<span class="hljs-string">"200"</span>&gt;</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1jy9zm3dc96q2ejds21iwxo56">对于 
+<strong>响应式图像</strong>（你已将其样式设置为相对于视口进行放大和缩小的图像），
+<code>width</code> 和 
+<code>height</code> 属性应为图像文件的固有大小。对于响应式图像，还需要 
+<a href="#responsive-images">设置 <code>sizes</code> 的值。</a></p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="39gro0lb0tkg4rves4had523v">对于<strong>固定大小的图片</strong>，<code>width</code> 和 <code>height</code> 属性应该反映图片的所需渲染的大小。这些属性的纵横比应始终与图片的固有纵横比匹配。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4ynp9fpv1jo8kggxdzioluvna">注意：如果你不知道图像的大小，请考虑使用“填充模式”来继承父容器的大小，如下所述。</p>
+
+    </li>
+    
+    </ol>
+    
+  <h2 id="using-fill-mode">
+    <a href="#using-fill-mode" class="docs-anchor" tabindex="-1" aria-label="Link to Using <code>fill</code> mode" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5qk4da0em6k0anicvqmsslngm">使用 <code>fill</code> 模式</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="510jd2ls09thlqr1w8njq1w0d">如果你希望让图片填充其容器元素，可以用 <code>fill</code> 属性。当你想实现“背景图片”行为时，这通常会很有用。当你不知道图片的确切宽度和高度时，它也会很有帮助，但如果你确实有一个具有已知大小的父容器，可能希望将图片适配进其中（请参阅下面的“object-fit”） .。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="77nxf4od7xh2cao6dks1wude2">当你将 <code>fill</code> 属性添加到图片时，不需要也不应该包含 <code>width</code> 和 <code>height</code>，如下例所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;img ngSrc=<span class="hljs-string">"cat.jpg"</span> fill&gt;</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="8we7vufzgku5p0c2zes1zqlf">你可以使用
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit" target="_blank">object-fit</a> CSS属性来更改图像如何填充其容器。如果你使用
+<code>object-fit: "contain"</code>来设置图像的样式，图像将保持其宽高比并“以信封方式”适应元素。如果你设置
+<code>object-fit: "cover"</code>，元素将保持其宽高比，完全填充元素，并可能会“裁剪”一些内容。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7jb3hcmhfkp9lky15bjg3tuy6">在
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit" target="_blank">MDN object-fit文档</a>中查看上述内容的视觉示例。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="de3lhafta7qlkqb3etyaozedj">你还可以使用
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-position" target="_blank">object-position属性</a>来调整图像在其包含元素中的位置。</p>
+
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cc688lwiv5zlr8dnmp4ub7ci2"><strong>重要：</strong>为了使“填充”图像正确渲染，其父元素
+<strong>必须</strong>使用
+<code>position: "relative"</code>，
+<code>position: "fixed"</code>或
+<code>position: "absolute"</code>进行样式设置。</p>
+
+    </div>
+    
+  <h2 id="using-placeholders">
+    <a href="#using-placeholders" class="docs-anchor" tabindex="-1" aria-label="Link to Using placeholders" data-ng_translator_product="100" data-ng_translator_ref_id="9pu3bc45xsyrx9hjk8m7iviig">使用占位符</a>
+  </h2>
+  
+  <h3 id="automatic-placeholders">
+    <a href="#automatic-placeholders" class="docs-anchor" tabindex="-1" aria-label="Link to Automatic placeholders" data-ng_translator_product="100" data-ng_translator_ref_id="9pocjhv4jzvsboixo2xlx3vwd">自动占位符</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="efetauao99m1m6ycifm70z7nh">如果你使用提供自动图像调整大小功能的CDN或图像主机，NgOptimizedImage可以为你的图像显示自动生成的低分辨率占位符。通过将
+<code>placeholder</code>属性添加到你的图像中，利用这一功能：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;img ngSrc=<span class="hljs-string">"cat.jpg"</span> width=<span class="hljs-string">"400"</span> height=<span class="hljs-string">"200"</span> placeholder&gt;</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2agzwatq85mpiwtrut25m8kez">添加此属性将自动使用指定的图像加载器请求图像的第二个、更小的版本。这个小图像将作为CSS模糊的
+<code>background-image</code>样式应用，同时你的图像加载。如果没有提供图像加载器，则无法生成占位图像，并将引发错误。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2q1gks5pr0yx5kn0qrg5yegub">生成的占位符的默认尺寸为30像素宽。你可以通过在
+<code>IMAGE_CONFIG</code>提供程序中指定像素值来更改这个尺寸，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">IMAGE_CONFIG</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">useValue</span>: {</div><div class="hljs-ln-line">      <span class="hljs-attr">placeholderResolution</span>: <span class="hljs-number">40</span></div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7hmscs36towsba0f3c9nhhn79">如果你想在模糊的占位符周围有锐利的边缘，你可以将你的图片放在一个包含
+<code>&lt;div&gt;</code>并设置
+<code>overflow: hidden</code>样式的容器中。只要
+<code>&lt;div&gt;</code>和图片大小相同（比如通过使用
+<code>width: fit-content</code>样式），占位符的“模糊边缘”就会被隐藏。</p>
+
+  <h3 id="data-url-placeholders">
+    <a href="#data-url-placeholders" class="docs-anchor" tabindex="-1" aria-label="Link to Data URL placeholders" data-ng_translator_product="100" data-ng_translator_ref_id="80lfd8z20i8g7lnqa90gyv8y2">数据URL占位符</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="afndbiawz7w5obxqswu3gxdul">你也可以使用不带图像加载器的base64
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs" target="_blank">数据URL</a>来指定一个占位符。数据URL的格式是
+<code>data:image/[imagetype];[data]</code>，其中
+<code>[imagetype]</code>是图像格式，比如
+<code>png</code>，
+<code>[data]</code>是图像的base64编码。这种编码可以通过命令行或JavaScript完成。有关具体命令，请参见
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs#encoding_data_into_base64_format" target="_blank">MDN文档</a>。下面展示了一个带有截断数据的数据URL占位符示例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;img ngSrc=<span class="hljs-string">"cat.jpg"</span> width=<span class="hljs-string">"400"</span> height=<span class="hljs-string">"200"</span> placeholder=<span class="hljs-string">"data:image/png;base64,iVBORw0K..."</span>&gt;</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9h74la0aftkgleme9yb7gh5mz">然而，大型数据URL会增加Angular捆绑包的大小并减慢页面加载速度。如果无法使用图像加载器，Angular团队建议将base64占位符图像保持在小于4KB，并且仅在关键图像上使用。除了减小占位符尺寸，还考虑在保存图像时更改图像格式或参数。在非常低的分辨率下，这些参数对文件大小有很大影响。</p>
+
+  <h3 id="non-blurred-placeholders">
+    <a href="#non-blurred-placeholders" class="docs-anchor" tabindex="-1" aria-label="Link to Non-blurred placeholders" data-ng_translator_product="100" data-ng_translator_ref_id="1qe8xoomgmm3j23m37jxm6bkh">非模糊占位符</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5za6cqrnulunqjdyntt4sbv9e">默认情况下，NgOptimizedImage会对图像占位符应用CSS模糊效果。要呈现无模糊的占位符，请提供一个包含
+<code>blur</code>属性设置为false的对象的
+<code>placeholderConfig</code>参数。例如：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">&lt;img ngSrc=<span class="hljs-string">"cat.jpg"</span> width=<span class="hljs-string">"400"</span> height=<span class="hljs-string">"200"</span> placeholder [placeholderConfig]=<span class="hljs-string">"{blur: false}"</span>&gt;</div></code>
+    </pre>
+  </div>
+  <h2 id="adjusting-image-styling">
+    <a href="#adjusting-image-styling" class="docs-anchor" tabindex="-1" aria-label="Link to Adjusting image styling" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f2m5gyn4hwzmqneru932plral">调整图像样式</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4pvbmqy3d5nx68bkc6yr8n25d">根据图像的样式，添加
+<code>width</code>和
+<code>height</code>属性可能会导致图像呈现不同。如果你的图像样式导致图像呈现为扭曲的宽高比，
+<code>NgOptimizedImage</code>会提醒你。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ezu0ftuqsnonhujf6zmqlz1gd">你通常可以通过添加
+<code>height: auto</code>或
+<code>width: auto</code>到你的图像样式来解决这个问题。更多信息，请参见关于
+<code>&lt;img&gt;</code>标签的
+<a href="https://web.dev/patterns/web-vitals-patterns/images/img-tag" target="_blank">web.dev文章</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7090vxg2dww101ylt3svx0s6j">如果图像上的
+<code>width</code>和
+<code>height</code>属性阻止你使用CSS按照你想要的方式调整图像大小，考虑使用
+<code>fill</code>模式，并对图像的父元素进行样式设置。</p>
+
+  <h2 id="performance-features">
+    <a href="#performance-features" class="docs-anchor" tabindex="-1" aria-label="Link to Performance Features" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8athrjnoftyka8sasn3xdjx4j">性能优化特性</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6yqqtp7yxwvdowtkwudh98c11">NgOptimizedImage 包含许多旨在提高应用程序加载性能的特性。本节会介绍这些特性。</p>
+
+  <h3 id="add-resource-hints">
+    <a href="#add-resource-hints" class="docs-anchor" tabindex="-1" aria-label="Link to Add resource hints" data-ng_translator_product="100" data-ng_translator_ref_id="87vy8z5gk3f6acd63vxmrxibp">添加资源提示</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2ifw0erkh3pwivvytmccqma6r">你可以添加一个
+<a href="https://web.dev/preconnect-and-dns-prefetch" target="_blank"><code>preconnect</code>资源提示</a>，为你的图像源确保LCP图像尽快加载。始终将资源提示放在文档的
+<code>&lt;head&gt;</code>中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"preconnect"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://my.cdn.origin"</span> /&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5b81w5ji3hcyz82fiqc56qo03">默认情况下，如果你为第三方图像服务使用加载器，
+<code>NgOptimizedImage</code>指令会在开发过程中警告，如果检测到服务LCP图像的源没有
+<code>preconnect</code>资源提示。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4tsxwk83wg87g8jw1b8qnjnvv">要禁用这些警告，注入
+<code>PRECONNECT_CHECK_BLOCKLIST</code>令牌：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  {<span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">PRECONNECT_CHECK_BLOCKLIST</span>, <span class="hljs-attr">useValue</span>: <span class="hljs-string">'https://your-domain.com'</span>}</div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div>
+  <h3 id="request-images-at-the-correct-size-with-automatic-srcset">
+    <a href="#request-images-at-the-correct-size-with-automatic-srcset" class="docs-anchor" tabindex="-1" aria-label="Link to Request images at the correct size with automatic <code>srcset</code>" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1xvafdfs3w69nvb8nij0ixq02">使用自动 <code>srcset</code> 请求正确大小的图片</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="f227kbxc589vh1kzcphrqc6pq">定义 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset" target="_blank"><code>srcset</code> 属性</a> 确保浏览器请求适合用户视口大小的图像，这样就不会浪费时间下载过大的图像。
+<code>NgOptimizedImage</code> 根据图像标签上 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes" target="_blank"><code>sizes</code> 属性</a> 的存在和值生成适当的 
+<code>srcset</code>。</p>
+
+  <h4 id="fixed-size-images">
+    <a href="#fixed-size-images" class="docs-anchor" tabindex="-1" aria-label="Link to Fixed-size images" data-ng_translator_product="100" data-ng_translator_ref_id="53avbugmhjt8uqnid0q3doqla">固定大小的图片</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="eitwy84hd93epz4nfcgo6lp99">如果你的图像应该在大小上“固定”（即在各设备上大小相同，除了
+<a href="https://web.dev/codelab-density-descriptors/" target="_blank">像素密度</a>），则无需设置
+<code>sizes</code>属性。可以根据图像的宽度和高度属性自动生成
+<code>srcset</code>，无需其他输入。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9t161psntaecer2k6nt5412qi">生成的示例srcset：
+<code>&lt;img ... srcset="image-400w.jpg 1x, image-800w.jpg 2x"&gt;</code></p>
+
+  <h4 id="responsive-images">
+    <a href="#responsive-images" class="docs-anchor" tabindex="-1" aria-label="Link to Responsive images" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5vmpnuw339d1tvxd0sok6tadb">响应式图片</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9wqvq94j7vr7tnsf802sr79ex">如果你的图像应该是响应式的（即根据视口大小进行放大和缩小），那么你需要定义一个 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes" target="_blank"><code>sizes</code> 属性</a> 以生成 
+<code>srcset</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="15t6q04e0ranx3jlcdzluqrd4">如果你以前没有使用过 <code>sizes</code>，一个很好的起点是根据视口宽度来设置它。例如，如果你的 CSS 要让图片填充视口宽度的 100%，则将 <code>sizes</code> 设置为 <code>100vw</code>，浏览器将选择 <code>srcset</code> 中最接近视口宽度的图片（在考虑像素密度之后）。如果你的图片只可能占屏幕的一半（例如：在侧边栏中），请将 <code>sizes</code> 设置为 <code>50vw</code> 以确保浏览器选择较小的图片。以此类推。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="e1p46vwmys44or5y9989z75j8">如果你发现上述内容不能满足你想要的图片行为，请查看关于
+<a href="#advanced-sizes-values">高级尺寸数值</a>的文档。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="do7su406k8wjj5brf401qewhc">默认情况下，响应式断点是：</p>
+<p><code>[16, 32, 48, 64, 96, 128, 256, 384, 640, 750, 828, 1080, 1200, 1920, 2048, 3840]</code></p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7of36o5iiuxr2psbqngrngx2n">如果你想要自定义这些断点，你可以使用
+<code>IMAGE_CONFIG</code>提供者：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">IMAGE_CONFIG</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">useValue</span>: {</div><div class="hljs-ln-line">      <span class="hljs-attr">breakpoints</span>: [<span class="hljs-number">16</span>, <span class="hljs-number">48</span>, <span class="hljs-number">96</span>, <span class="hljs-number">128</span>, <span class="hljs-number">384</span>, <span class="hljs-number">640</span>, <span class="hljs-number">750</span>, <span class="hljs-number">828</span>, <span class="hljs-number">1080</span>, <span class="hljs-number">1200</span>, <span class="hljs-number">1920</span>]</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9gco7c4ujw33mabe854u3j561">如果你想手动定义 <code>srcset</code> 属性，可以用 <code>ngSrcset</code> 属性提供自己的：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">ngSrc</span>=<span class="hljs-string">"hero.jpg"</span> <span class="hljs-attr">ngSrcset</span>=<span class="hljs-string">"100w, 200w, 300w"</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="e4if1uet7yb3g7pmftueaz2ot">如果存在
+<code>ngSrcset</code>属性，
+<code>NgOptimizedImage</code>将根据包含的尺寸生成并设置
+<code>srcset</code>。不要在
+<code>ngSrcset</code>中包含图片文件名 - 指令会从
+<code>ngSrc</code>中推断这些信息。该指令支持宽度描述符（例如
+<code>100w</code>）和密度描述符（例如
+<code>1x</code>）。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">ngSrc</span>=<span class="hljs-string">"hero.jpg"</span> <span class="hljs-attr">ngSrcset</span>=<span class="hljs-string">"100w, 200w, 300w"</span> <span class="hljs-attr">sizes</span>=<span class="hljs-string">"50vw"</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <h3 id="disabling-automatic-srcset-generation">
+    <a href="#disabling-automatic-srcset-generation" class="docs-anchor" tabindex="-1" aria-label="Link to Disabling automatic srcset generation" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="76rsd8s7f5h5msqht9c39ku61">禁用自动 srcset 生成</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7mfrd6pgpa830ktsjt7ea8b6y">要禁用单个图片的 srcset 生成，你可以在图片上添加 <code>disableOptimizedSrcset</code> 属性：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">ngSrc</span>=<span class="hljs-string">"about.jpg"</span> <span class="hljs-attr">disableOptimizedSrcset</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <h3 id="disabling-image-lazy-loading">
+    <a href="#disabling-image-lazy-loading" class="docs-anchor" tabindex="-1" aria-label="Link to Disabling image lazy loading" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="89y5c1vkpvhktfzhhuahozhll">禁用图片惰性加载</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3pm9el48gl5iho83xbcinbhd2">默认情况下，
+<code>NgOptimizedImage</code>为所有未标记为
+<code>priority</code>的图片设置
+<code>loading=lazy</code>。你可以通过设置
+<code>loading</code>属性来禁用非优先级图片的此行为。该属性接受值：
+<code>eager</code>、
+<code>auto</code>和
+<code>lazy</code>。详情请参阅标准图片
+<code>loading</code>属性的
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading#value" target="_blank">文档</a>。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">ngSrc</span>=<span class="hljs-string">"cat.jpg"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"400"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"200"</span> <span class="hljs-attr">loading</span>=<span class="hljs-string">"eager"</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <h3 id="advanced-sizes-values">
+    <a href="#advanced-sizes-values" class="docs-anchor" tabindex="-1" aria-label="Link to Advanced 'sizes' values" data-ng_translator_product="100" data-ng_translator_ref_id="96a0ls5q07mmd0qsoej0563rn">高级的 'sizes' 数值</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ds71vtononwk860l7eux1w1z7">你可能希望在不同大小的屏幕上以不同的宽度显示图片。这种模式的一个常见例子是基于网格或列的布局，它在移动设备上渲染为单列，在较大的设备上渲染为两列。你可以用“媒体查询”语法在 <code>sizes</code> 属性中捕获此行为，例如以下内容：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">ngSrc</span>=<span class="hljs-string">"cat.jpg"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"400"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"200"</span> <span class="hljs-attr">sizes</span>=<span class="hljs-string">"(max-width: 768px) 100vw, 50vw"</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="br044mqdg7rrsxp7ksf2xfv2v">上面的示例中的 <code>sizes</code> 属性表示“我希望此图片在 768px 宽的设备上是屏幕宽度的 100%。否则，我希望它是屏幕宽度的 50%。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="nunwzacoq5isxuxb600ysudv">有关
+<code>sizes</code>属性的更多信息，请参阅
+<a href="https://web.dev/learn/design/responsive-images/#sizes" target="_blank">web.dev</a>或
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes" target="_blank">mdn</a>。</p>
+
+  <h2 id="configuring-an-image-loader-for-ngoptimizedimage">
+    <a href="#configuring-an-image-loader-for-ngoptimizedimage" class="docs-anchor" tabindex="-1" aria-label="Link to Configuring an image loader for <code>NgOptimizedImage</code>" data-ng_translator_product="100" data-ng_translator_ref_id="dthmvfau0ihzacb7pg1rt1aip">为 
+<code>NgOptimizedImage</code> 配置图片加载器</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7durx6cq9chrqby5soy227nlt">"加载器"是一个为给定图片文件生成
+<a href="https://web.dev/image-cdns/#how-image-cdns-use-urls-to-indicate-optimization-options" target="_blank">图像转换URL</a>的函数。在适当的情况下，
+<code>NgOptimizedImage</code>为图片设置大小、格式和图像质量转换。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6rb20i8fbe6i0j4upwmci5j0z"><code>NgOptimizedImage</code>提供了一个不应用任何转换的通用加载器，以及用于各种第三方图像服务的加载器。它还支持编写自定义加载器。</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7cu5jn1hqlq1kcex7fhomynxu">加载器类型</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ams69bxknsvkxy7e6gbayrjfr">行为</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cktwx3v8n60zs92fz3utmkm06">通用加载器</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3ew3m6uy65qkefgyn1ucgdk2f">通用加载器返回的URL将始终与
+<code>src</code>的值匹配。换句话说，该加载器不应用任何转换。使用 Angular 为图片提供服务的网站是该加载器的主要预期用例。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="c15hj8qtnkcnk5cegrqncn6it">第三方图像服务的加载器</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2syry6qogi0x6jx126ual9k9">第三方图像服务的加载器返回的URL将遵循该特定图像服务使用的API约定。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2nnwz4pz3mc2yjwdcf1mffvob">自定义加载器</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3inijkdootudpzh8e1d6rg6rc">自定义加载器的行为由开发者定义。如果你的图像服务不受预配置的 
+<code>NgOptimizedImage</code> 加载器支持，你应该使用自定义加载器。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="pl229xaad73nur2mewuy3med">根据通常与 Angular 应用程序一起使用的图像服务，
+<code>NgOptimizedImage</code> 提供了预配置的加载器，可与以下图像服务一起使用：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1j1pxvet0tvr9ul037lmljggz">图像服务</th>
+<th align="left">Angular API</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5eur89rbbrrg7fxsvemudi7u2">文档</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="12oozlw8x7sikso0uwpt4nfy0">Cloudflare 图像调整大小</td>
+<td align="left"><code>provideCloudflareLoader</code></td>
+<td align="left"><a href="https://developers.cloudflare.com/images/image-resizing/" target="_blank" data-ng_translator_product="100" data-ng_translator_ref_id="5eur89rbbrrg7fxsvemudi7u2">文档</a></td>
+</tr>
+<tr>
+<td align="left">Cloudinary</td>
+<td align="left"><code>provideCloudinaryLoader</code></td>
+<td align="left"><a href="https://cloudinary.com/documentation/resizing_and_cropping" target="_blank" data-ng_translator_product="100" data-ng_translator_ref_id="5eur89rbbrrg7fxsvemudi7u2">文档</a></td>
+</tr>
+<tr>
+<td align="left">ImageKit</td>
+<td align="left"><code>provideImageKitLoader</code></td>
+<td align="left"><a href="https://docs.imagekit.io/" target="_blank" data-ng_translator_product="100" data-ng_translator_ref_id="5eur89rbbrrg7fxsvemudi7u2">文档</a></td>
+</tr>
+<tr>
+<td align="left">Imgix</td>
+<td align="left"><code>provideImgixLoader</code></td>
+<td align="left"><a href="https://docs.imgix.com/" target="_blank" data-ng_translator_product="100" data-ng_translator_ref_id="5eur89rbbrrg7fxsvemudi7u2">文档</a></td>
+</tr>
+<tr>
+<td align="left">Netlify</td>
+<td align="left"><code>provideNetlifyLoader</code></td>
+<td align="left"><a href="https://docs.netlify.com/image-cdn/overview/" target="_blank" data-ng_translator_product="100" data-ng_translator_ref_id="5eur89rbbrrg7fxsvemudi7u2">文档</a></td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="g14smsomu1lu5ajnzqqzjsmj">要使用<strong>通用加载器</strong>，无需额外的代码更改。这是默认行为。</p>
+
+  <h3 id="built-in-loaders">
+    <a href="#built-in-loaders" class="docs-anchor" tabindex="-1" aria-label="Link to Built-in Loaders" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="oigii9sun5bfiipr8kr5bv1k">内置加载器</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ny2uqn82hb3k0o5uob54xigu">要将现有的加载器用于<strong>第三方图片服务</strong>，请将你选择的服务的提供者工厂添加到 <code>providers</code> 数组中。在下面的示例中，使用了 Imgix 加载器：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  <span class="hljs-title function_">provideImgixLoader</span>(<span class="hljs-string">'https://my.base.url/'</span>),</div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3jtnr8s503yscg0as4o7a48zt">图片资产的基本 URL 应作为参数传递给提供者工厂。对于大多数网站，此基本 URL 应匹配以下模式之一：</p>
+
+  <ul class="docs-list">
+    <li><a href="https://yoursite.yourcdn.com" target="_blank">https://yoursite.yourcdn.com</a></li>
+<li><a href="https://subdomain.yoursite.com" target="_blank">https://subdomain.yoursite.com</a></li>
+<li><a href="https://subdomain.yourcdn.com/yoursite" target="_blank">https://subdomain.yourcdn.com/yoursite</a></li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dfpi92mmb4efycsyxh7cdufam">你可以在相应 CDN 提供者的文档中了解有关基本 URL 结构的更多信息。</p>
+
+  <h3 id="custom-loaders">
+    <a href="#custom-loaders" class="docs-anchor" tabindex="-1" aria-label="Link to Custom Loaders" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1jpn1z8xktu8rlfraic7d4jdr">自定义加载器</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="daa7hmxzb17cih4aeybgx3rd3">要使用
+<strong>自定义加载器</strong>，请将加载器函数作为 
+<code>IMAGE_LOADER</code> 依赖注入令牌的值。在下面的示例中，自定义加载器函数返回以 
+<code>https://example.com</code> 开头的 URL，包括 
+<code>src</code> 和 
+<code>width</code> 作为 URL 参数。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">IMAGE_LOADER</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">useValue</span>: <span class="hljs-function">(<span class="hljs-params">config: ImageLoaderConfig</span>) =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-keyword">return</span> <span class="hljs-string">`https://example.com/images?src=<span class="hljs-subst">${config.src}</span>&amp;width=<span class="hljs-subst">${config.width}</span>`</span>;</div><div class="hljs-ln-line">    },</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">],</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7vmmsct2s8brmcj76g1snfykd"><code>NgOptimizedImage</code> 指令的加载器函数接受一个对象，该对象具有 
+<code>@angular/common</code> 中的 
+<code>ImageLoaderConfig</code> 类型作为其参数，并返回图像资产的绝对 URL。 
+<code>ImageLoaderConfig</code> 对象包含 
+<code>src</code> 属性，以及可选的 
+<code>width</code> 和 
+<code>loaderParams</code> 属性。</p>
+
+    <div class="docs-alert docs-alert-note">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="c2kv4a42mnbudx6vdgk2lpbel"><strong>注意：</strong>即使 
+<code>width</code> 属性可能不总是存在，自定义加载器也必须使用它来支持请求不同宽度的图像，以使 
+<code>ngSrcset</code> 正常工作。</p>
+
+    </div>
+    
+  <h3 id="the-loaderparams-property">
+    <a href="#the-loaderparams-property" class="docs-anchor" tabindex="-1" aria-label="Link to The <code>loaderParams</code> Property" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="915aqv1gdigmktr4atu2km4z1"><code>loaderParams</code> 属性</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="64rti327oo3eu6svq2ml1dec4"><code>NgOptimizedImage</code> 指令支持的另一个属性是 
+<code>loaderParams</code>，专门设计用于支持自定义加载器的使用。 
+<code>loaderParams</code> 属性接受一个具有任何属性作为值的对象，并且本身不执行任何操作。 
+<code>loaderParams</code> 中的数据被添加到传递给自定义加载器的 
+<code>ImageLoaderConfig</code> 对象中，并可用于控制加载器的行为。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4gilijo8758ewahbfh3nmzg54"><code>loaderParams</code> 的一个常见用途是控制高级图像 CDN 功能。</p>
+
+  <h3 id="example-custom-loader">
+    <a href="#example-custom-loader" class="docs-anchor" tabindex="-1" aria-label="Link to Example custom loader" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2cx45n3ovvoj5qf8l0kmh32hz">示例自定义加载器</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4lq3rcmiaadwxjv9jhheyfzd1">下面显示了自定义加载器函数的示例。此示例函数连接 <code>src</code> 和 <code>width</code>，并使用 <code>loaderParams</code> 控制圆角的自定义 CDN 功能：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-title function_">myCustomLoader</span> = (<span class="hljs-params">config: ImageLoaderConfig</span>) =&gt; {</div><div class="hljs-ln-line">  <span class="hljs-keyword">let</span> url = <span class="hljs-string">`https://example.com/images/<span class="hljs-subst">${config.src}</span>?`</span>;</div><div class="hljs-ln-line">  <span class="hljs-keyword">let</span> queryParams = [];</div><div class="hljs-ln-line">  <span class="hljs-keyword">if</span> (config.<span class="hljs-property">width</span>) {</div><div class="hljs-ln-line">    queryParams.<span class="hljs-title function_">push</span>(<span class="hljs-string">`w=<span class="hljs-subst">${config.width}</span>`</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  <span class="hljs-keyword">if</span> (config.<span class="hljs-property">loaderParams</span>?.<span class="hljs-property">roundedCorners</span>) {</div><div class="hljs-ln-line">    queryParams.<span class="hljs-title function_">push</span>(<span class="hljs-string">'mask=corners&amp;corner-radius=5'</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">  <span class="hljs-keyword">return</span> url + queryParams.<span class="hljs-title function_">join</span>(<span class="hljs-string">'&amp;'</span>);</div><div class="hljs-ln-line">};</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8rmx27qyfrh4a84u8vvwbaxjl">请注意，在上面的示例中，我们发明了“roundedCorners”属性名称来控制自定义加载器的特性。然后我们可以在创建图像时使用此特性，如下所示：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">ngSrc</span>=<span class="hljs-string">"profile.jpg"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"300"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"300"</span> [<span class="hljs-attr">loaderParams</span>]=<span class="hljs-string">"{roundedCorners: true}"</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <h2 id="frequently-asked-questions">
+    <a href="#frequently-asked-questions" class="docs-anchor" tabindex="-1" aria-label="Link to Frequently Asked Questions" data-ng_translator_product="100" data-ng_translator_ref_id="4z2ris4lq84izy0gkq4s2l2gu">常见问题</a>
+  </h2>
+  
+  <h3 id="does-ngoptimizedimage-support-the-background-image-css-property">
+    <a href="#does-ngoptimizedimage-support-the-background-image-css-property" class="docs-anchor" tabindex="-1" aria-label="Link to Does NgOptimizedImage support the <code>background-image</code> css property?" data-ng_translator_product="100" data-ng_translator_ref_id="2qy2lf4vsutah9n033bhwesg3">NgOptimizedImage 支持 
+<code>background-image</code> css 属性吗？</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2ahyaxa4sjzuycciqsv0y63o6">NgOptimizedImage 不直接支持 
+<code>background-image</code> CSS 属性，但它设计为能够轻松适应将图像作为另一个元素的背景的用例。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="biqwmmp6y23ajn8npuh43pej4">以下是从 
+<code>background-image</code> 迁移到 
+<code>NgOptimizedImage</code> 的简单步骤。对于这些步骤，我们将把具有图像背景的元素称为「包含元素」：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="13swj73f4uvf7nvbpommojkfv">从包含元素中移除 
+<code>background-image</code> 样式。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="3y9f04fzxf8olx9mw7sqipxxo">确保包含元素具有 
+<code>position: "relative"</code>、
+<code>position: "fixed"</code> 或 
+<code>position: "absolute"</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="6gsfenx25mh1ysuejsa6v9evj">创建一个新的图像元素作为包含元素的子元素，使用 
+<code>ngSrc</code> 启用 
+<code>NgOptimizedImage</code> 指令。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="3dm4bki32j7bsuxkxdbxcigeb">给该元素赋予 
+<code>fill</code> 属性。不要包含 
+<code>height</code> 和 
+<code>width</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="ar2n7nxko35tjjmykyoj1irvs">如果你认为此图像可能是你的 
+<a href="https://web.dev/lcp/" target="_blank">LCP 元素</a>，请在图像元素上添加 
+<code>priority</code> 属性。</li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="9sdn3xvp0mg0xgbrqw2xi54qw">你可以按照
+<a href="#using-fill-mode">使用填充模式</a>部分中的描述调整背景图像如何填充容器。</p>
+
+  <h3 id="why-cant-i-use-src-with-ngoptimizedimage">
+    <a href="#why-cant-i-use-src-with-ngoptimizedimage" class="docs-anchor" tabindex="-1" aria-label="Link to Why can't I use <code>src</code> with <code>NgOptimizedImage</code>?" data-ng_translator_product="100" data-ng_translator_ref_id="1bbf5mgdscr0ay338lix2l9f5">为什么不能将 
+<code>src</code> 与 
+<code>NgOptimizedImage</code> 一起使用？</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3yl6rwq559wj5wsc35p1tfqg5">由于浏览器加载图像的技术考虑，选择 
+<code>ngSrc</code> 属性作为 NgOptimizedImage 的触发器。NgOptimizedImage 会对 
+<code>loading</code> 属性进行编程更改 — 如果浏览器在这些更改之前看到 
+<code>src</code> 属性，它将开始急性下载图像文件，并且这些更改将被忽略。</p>
+
+  <h3 id="can-i-use-two-different-image-domains-in-the-same-page">
+    <a href="#can-i-use-two-different-image-domains-in-the-same-page" class="docs-anchor" tabindex="-1" aria-label="Link to Can I use two different image domains in the same page?" data-ng_translator_product="100" data-ng_translator_ref_id="dkki7xx46w4n8llkfhbqxzt6g">我可以在同一页面中使用两个不同的图像域吗？</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="871cyqebfgbrboz26s2os7ojj"><a href="#configuring-an-image-loader-for-ngoptimizedimage">图像加载器</a>提供者模式设计为在组件中仅使用单个图像 CDN 的常见用例尽可能简单。然而，使用单个提供者管理多个图像 CDN 仍然是非常可能的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="efszckgbly7766ppt72gbwxcz">为此，我们建议编写一个
+<a href="#custom-loaders">自定义图像加载器</a>，使用 
+<a href="#the-loaderparams-property"><code>loaderParams</code> 属性</a>传递指定应使用哪个图像 CDN 的标志，然后根据该标志调用相应的加载器。</p>
+
+  <h3 id="can-you-add-a-new-built-in-loader-for-my-preferred-cdn">
+    <a href="#can-you-add-a-new-built-in-loader-for-my-preferred-cdn" class="docs-anchor" tabindex="-1" aria-label="Link to Can you add a new built-in loader for my preferred CDN?" data-ng_translator_product="100" data-ng_translator_ref_id="9vrn6pedzta7flxvpak6t6ekj">你可以为我偏好的 CDN 添加一个新的内置加载器吗？</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4b08sjxwjwg71wgghvd8gj24f">出于维护原因，我们目前不计划在 Angular 仓库中支持额外的内置加载器。相反，我们鼓励开发者将任何额外的图像加载器发布为第三方包。</p>

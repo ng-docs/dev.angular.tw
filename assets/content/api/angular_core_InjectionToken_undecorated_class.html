@@ -1,0 +1,33 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>InjectionToken</h1><div class="docs-api-item-label" data-mode="full" data-type="undecorated_class">Class</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/core/src/di/injection_token.ts#L63-L108" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="tlt9lppt8ehyxan6ic3r7biq">创建可用于 DI 提供者的令牌。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">InjectionToken</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="toString">  <span class="hljs-title function_">toString</span>(): <span class="hljs-built_in">string</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="tlt9lppt8ehyxan6ic3r7biq">创建可用于 DI 提供者的令牌。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4euczu5fbvxcqw0wv3tntsw6m">当你注入的类型未具体化（没有运行时表示）时，比如注入接口、可调用类型、数组或参数化类型，请使用 
+<code>InjectionToken</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4xot0bizw78hj4v8lbfmscxps"><code>InjectionToken</code> 参数化了 
+<code>T</code>，它是 
+<code>Injector</code> 返回的对象类型。这提供了额外的类型安全。</p>
+<div class="alert is-helpful">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eif7ky6zrspp8dtq2k97m9b8o"><strong>重要提示</strong>：确保在提供者和注入调用中使用同一个 
+<code>InjectionToken</code> 实例。在不同地方创建新的 
+<code>InjectionToken</code> 实例，即使描述相同，也会被 Angular 的 DI 系统视为不同的令牌，从而导致 
+<code>NullInjectorError</code>。</p>
+</div>
+
+<p><code-example format="typescript" language="typescript" path="injection-token/src/main.ts" region="InjectionToken"></code-example></p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7lf9idecu8jl3a1m48nu2n0vv">创建 
+<code>InjectionToken</code> 时，可以选择指定一个工厂函数，该函数返回（可能通过创建）参数化类型 
+<code>T</code> 的默认值。这会使用该工厂设置 
+<code>InjectionToken</code> 作为提供者，就像在应用的根注入器中显式定义的一样。如果工厂函数（不接受任何参数）需要注入依赖，可以使用 
+<a href="api/core/inject"><code>inject</code></a> 函数。你可以在下面的可摇树优化的 InjectionToken 示例中看到这一点。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="867ovuqg6zzazjwo2p7f7436">另外，如果指定了 
+<code>factory</code>，还可以指定 
+<code>providedIn</code> 选项，这会覆盖上述行为，并将令牌标记为属于特定的 
+<code>@NgModule</code>（注意：此选项现已弃用）。如上所述，
+<code>'root'</code> 是 
+<code>providedIn</code> 的默认值。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3lq544d1wh1rza0duc12greiy"><code>providedIn: NgModule</code> 和 
+<code>providedIn: 'any'</code> 选项已弃用。</p></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="79yvhqtuyc2m1wjr3fzyi0im9">基本范例</h3>
+<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1a7i9mis3e0tgp57kc5o88cd7">普通注入令牌</h3>
+<code-example path="core/di/ts/injector_spec.ts" region="InjectionToken" />
+
+<h3 data-ng_translator_product="100" data-ng_translator_ref_id="47pjrg2y7i6ia0m7yr8eblnwx">可摇树优化的 InjectionToken</h3>
+<code-example path="core/di/ts/injector_spec.ts" region="ShakableInjectionToken" /></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="toString" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>toString</h3><div><code>string</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>string</code></div></div></div></div></div></div></div>

@@ -1,0 +1,287 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="zlzz7c1g9hkwkz1rdjs5em5m">创建库</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/libraries/creating-libraries.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="brgsk5gzma2asbekb5oarlgga">对于如何创建和发布新库，以扩展 Angular 的功能，本页面提供了一个概念性的总览</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d4h8gm2oqaey3kcgbu5f7d3s4">如果你发现自己要在多个应用中解决同样的问题（或者要把你的解决方案分享给其它开发者），你就有了一个潜在的库。简单的例子就是一个用来把用户带到你公司网站上的按钮，该按钮会包含在你公司构建的所有应用中。</p>
+
+  <h2 id="getting-started">
+    <a href="#getting-started" class="docs-anchor" tabindex="-1" aria-label="Link to Getting started" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c1ec4dv7ru8g390agopg2loxb">快速上手</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7keygqbkfp7a542q5398pvl9o">使用 Angular CLI，用以下命令在新的工作区中生成一个新库的骨架：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng new my-workspace --no-create-application</div><div class="hljs-ln-line">cd my-workspace</div><div class="hljs-ln-line">ng generate library my-lib</div></code>
+    </pre>
+  </div>
+    <div class="docs-callout docs-callout-helpful">
+      <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3rm2nsqx9t5lrtvumk6l4toci">命名你的库</h3>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="et0xlsxi4swtvm24pptv6fzzz">如果你想将你的库稍后发布到像 npm 这样的公共包注册表中，请非常小心选择你的库的名称。 请查看 
+<a href="tools/libraries/creating-libraries#publishing-your-library">发布你的库</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9dl0rbs7g3k5ivhn3x4oqkixf">避免使用以 <code>ng-</code> 为前缀的名称，比如 <code>ng-library</code>。<code>ng-</code> 前缀是 Angular 框架及其库中使用的保留关键字。首选 <code>ngx-</code> 前缀作为用于表示该库适合与 Angular 一起使用的约定。这也是注册表的使用者区分不同 JavaScript 框架库的优秀指示器。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4tfei1ju96fwcad2lssj284hh"><code>ng generate</code> 命令会在你的工作区中创建 <code>projects/my-lib</code> 文件夹，其中包含带有一个组件和一个服务的 NgModule。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2c3xwsv8r55ewm7jsvw5nnal5"><strong>有用：</strong>要了解有关如何组织库项目结构的更多细节，请参考 
+<a href="reference/configs/file-structure#library-project-files">项目文件结构指南</a> 的 
+<a href="reference/configs/file-structure">库项目文件</a> 部分。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="c9ho4gewbj2rrt2psr5tmuhr5">使用单一代码仓模型为多个项目使用同一工作区。 请查看 
+<a href="reference/configs/file-structure#multiple-projects">为多项目工作区设置</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2q546g7l0pk5azhf97a8zwdg">当你生成一个新库时，工作区配置文件 
+<code>angular.json</code> 会更新一个类型为 
+<code>library</code> 的项目。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">  <span class="hljs-attr">"my-lib"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"root"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"projects/my-lib"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"sourceRoot"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"projects/my-lib/src"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"projectType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"library"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"prefix"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"lib"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">      <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">        <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:ng-packagr"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">        …</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ed7e9xxb3gx456ja9zhh4eo0f">可以使用 CLI 命令来构建、测试和 lint 这个项目：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build my-lib --configuration development</div><div class="hljs-ln-line">ng test my-lib</div><div class="hljs-ln-line">ng lint my-lib</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="59suvfstv17t0r8m857tb044j">注意，项目配置的构建器与应用程序项目的默认构建器不同。 这个构建器，除其他功能外，确保库始终使用 
+<a href="tools/cli/aot-compiler">预先编译器</a> 构建。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bhy4s1q4ia0myi5sgfagm9dnr">要让库代码可以复用，你必须为它定义一个公共的 API。这个“用户层”定义了库中消费者的可用内容。该库的用户应该可以通过单个的导入路径来访问公共功能（如 NgModules、服务提供者和工具函数）。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ei1f0f4jzirbdlm3hbnwvkaoq">库的公共 API 是在库文件夹下的 <code>public-api.ts</code> 文件中维护的。当你的库被导入应用时，从该文件导出的所有内容都会公开。请使用 NgModule 来暴露这些服务和组件。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8ryyoxar8cjkoe8vl2y9uxy8h">你的库里应该提供一些文档（通常是 README 文件）来指导别人安装和维护。</p>
+
+  <h2 id="refactoring-parts-of-an-application-into-a-library">
+    <a href="#refactoring-parts-of-an-application-into-a-library" class="docs-anchor" tabindex="-1" aria-label="Link to Refactoring parts of an application into a library" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="yhhl940weroginw68vbwuq6a">把应用中的部分内容重构成一个库</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="al5ihssdzcnbc5c71r0mc2s4y">为了让你的解决方案可供复用，你需要对它进行调整，以免它依赖应用特有的代码。在将应用的功能迁移到库中时，需要注意以下几点。</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_ref_id="ekh3li6sj4hefdmn9371a74fw">声明如组件和管道应设计为无状态，意味着它们不依赖于或修改外部变量。 如果确实依赖于状态，你需要评估每种情况，并决定它是应用程序状态还是库将管理的状态。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7rdao5hzn65qa27323hubsxph">组件内部订阅的所有可观察者都应该在这些组件的生命周期内进行清理和释放</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7hnyysjqonu3ucvt7qphoql8x">组件对外暴露交互方式时，应该通过输入参数来提供上下文，通过输出参数来将事件传给其它组件</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9m7b2elm6etx53ie3u4ga79db">检查所有内部依赖。</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9us480e1xd2wmkyj6uudxhkff">对于在组件或服务中使用的自定义类或接口，检查它们是否依赖于其它类或接口，它们也需要一起迁移</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="algn2wzgyd7ys09rpo0idaqde">同样，如果你的库代码依赖于某个服务，则需要迁移该服务</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3g041ziudiiqnxf979j7wvf0t">如果你的库代码或其模板依赖于其它库（比如 Angular Material），你就必须把它们配置为该库的依赖</li>
+
+  </ul>
+  </li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5clq0bqzx2yxjb3lecoqozzpr">考虑如何为客户端应用提供服务。</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_ref_id="ahnxluzxqf4umgy0a5vl6h25q">服务应该声明它们自己的提供者，而不是在 NgModule 或组件中声明提供者。声明提供者使得该服务可被<em>摇树优化</em>。这种做法使得编译器在该服务从未被注入到导入库的应用中时，将其排除在捆绑包之外。关于此的更多信息，请参见 
+<a href="guide/di/lightweight-injection-tokens">可摇树优化的提供者</a>。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="eci2xckys9lk4jqvix1kumyjl">如果你要注册全局服务提供者或在多个 NgModule 之间共享提供者，请使用由 
+<a href="api/router/RouterModule">RouterModule</a> 提供的 
+<a href="guide/ngmodules/singleton-services"><code>forRoot()</code> 和 <code>forChild()</code> 设计模式</a></p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="ax3klqy488jrgzd7gpgyefeb1">如果你的库提供可选服务，可能不会被所有客户端应用使用，请使用 
+<a href="guide/di/lightweight-injection-tokens">轻量级令牌设计模式</a> 支持该情况的正确摇树优化</p>
+</li>
+
+  </ul>
+  </li>
+
+  </ul>
+  
+  <h2 id="integrating-with-the-cli-using-code-generation-schematics">
+    <a href="#integrating-with-the-cli-using-code-generation-schematics" class="docs-anchor" tabindex="-1" aria-label="Link to Integrating with the CLI using code-generation schematics" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e9y10vkhp2sp8qxctllffgbzp">使用代码生成原理图与 CLI 集成</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6p7md5xxvt3javes5o1wulr2j">库通常包括定义组件、服务和其他 Angular 工件（管道、指令）的
+<em>可复用代码</em>，你可以将其导入项目中。库被打包成一个 npm 包以进行发布和共享。此包还可以包含原理图，这些原理图提供了直接在项目中生成或转换代码的指令，就像 CLI 使用 
+<code>ng generate component</code> 创建通用的新组件一样。与库一起打包的原理图可以例如提供 Angular CLI 所需的信息，以生成一个配置并使用该库定义的特性或一组特性的组件。这方面的一个例子是 
+<a href="https://material.angular.io/guide/schematics#navigation-schematic" target="_blank">Angular Material 的导航原理图</a>，它配置了 CDK 的 
+<a href="https://material.angular.io/cdk/layout/overview#breakpointobserver" target="_blank">BreakpointObserver</a> 并与 Material 的 
+<a href="https://material.angular.io/components/sidenav/overview" target="_blank">MatSideNav</a> 和 
+<a href="https://material.angular.io/components/toolbar/overview" target="_blank">MatToolbar</a> 组件一起使用。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="fpikdg5hd3ixw6guim89ubyw">创建并包含以下几种原理图。</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2sc7i90hxgq1wlpl7n5smmma3">包含一个安装原理图，以便 <code>ng add</code> 可以把你的库添加到项目中。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6nyna3yzgbwgayjodumbi5e8y">在库中包含了生成原理图，以便 <code>ng generate</code> 可以为项目中的已定义工件（组件，服务，测试等）提供支持。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8f2f00zcdwei2rv5xmulo1ev0">包含一个更新的原理图，以便 <code>ng update</code> 可以更新你的库的依赖，并提供一些迁移来破坏新版本中的更改。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9b8futit3fft50bl82v433l2t">你的库中所包含的内容取决于你的任务。比如，你可以定义一个原理图来创建一个预先填充了固定数据的下拉列表，以展示如何把它添加到一个应用中。如果你想要一个每次包含不同传入值的下拉列表，那么你的库可以定义一个原理图来用指定的配置创建它。然后，开发人员可以使用 <code>ng generate</code> 为自己的应用配置一个实例。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3bfxra1ara0dw2eum9sp5vaye">假设你要读取配置文件，然后根据该配置生成表单。如果该表单需要库的用户进行额外的自定义，它可能最适合用作 schematic。但是，如果这些表单总是一样的，开发人员不需要做太多自定义工作，那么你就可以创建一个动态的组件来获取配置并生成表单。通常，自定义越复杂，schematic 方式就越有用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bkgouxrxhjs66hlvahvtuwkp5">欲了解更多信息，请查看 
+<a href="tools/cli/schematics">原理图概述</a> 和 
+<a href="tools/cli/schematics-for-libraries">库的原理图</a>。</p>
+
+  <h2 id="publishing-your-library">
+    <a href="#publishing-your-library" class="docs-anchor" tabindex="-1" aria-label="Link to Publishing your library" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9wz5xgr4wsch8fph15vvxikdi">发布你的库</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f4oxj1ogjpfphqkfugd4vfugq">使用 Angular CLI 和 npm 包管理器来构建你的库并发布为 npm 包。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3lcd2brl1glmu67lfj1zkw4ij">Angular CLI 使用一个名为 
+<a href="https://github.com/ng-packagr/ng-packagr/blob/master/README.md" target="_blank">ng-packagr</a> 的工具从你编译的代码创建包，可以发布到 npm。 请查看 
+<a href="tools/libraries/creating-libraries#publishing-libraries">使用 Ivy 构建库</a> 了解 
+<code>ng-packagr</code> 支持的分发格式以及如何选择适合你的库的正确格式的指导。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6jbeb83wzxq6xtwi660bcc3qm">你应该总是使用 <code>production</code> 配置来构建用于分发的库。这样可以确保所生成的输出对 npm 使用了适当的优化和正确的软件包格式。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build my-lib</div><div class="hljs-ln-line">cd dist/my-lib</div><div class="hljs-ln-line">npm publish</div></code>
+    </pre>
+  </div>
+  <h2 id="managing-assets-in-a-library">
+    <a href="#managing-assets-in-a-library" class="docs-anchor" tabindex="-1" aria-label="Link to Managing assets in a library" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4ij9bt7c630pne3po3cki9ttp">管理库中的资产（assets）</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ehyjdor5wd774wd8lh5cm5j8c">在你的 Angular 库中，发布包可以包括额外的资产，比如主题文件、Sass 混合或文档（比如变更日志）。 获取更多信息，请查看
+<a href="https://github.com/ng-packagr/ng-packagr/blob/master/docs/copy-assets.md" target="_blank">将资产复制到库中作为构建的一部分</a>和
+<a href="https://github.com/ng-packagr/ng-packagr/blob/master/docs/embed-assets-css.md" target="_blank">在组件样式中嵌入资产</a>。</p>
+
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="c3oh97tux2h5k740f340njtv"><strong>重要：</strong>当包含额外的资产，比如 Sass 混合或预编译的 CSS 时。 你需要手动将这些添加到主入口点的
+<code>package.json</code>中的条件
+<a href="tools/libraries/angular-package-format#quotexportsquot">“exports”</a>中。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="d3po3vafcj969h5u6zz5k2dwe"><code>ng-packagr</code> 将手写的 
+<code>"exports"</code> 与自动生成的合并，允许库作者配置额外的导出子路径或自定义条件。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">"exports"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"."</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"sass"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"./_index.scss"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"./theming"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"sass"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"./_theming.scss"</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"./prebuilt-themes/indigo-pink.css"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"style"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"./prebuilt-themes/indigo-pink.css"</span></div><div class="hljs-ln-line">  <span class="hljs-punctuation">}</span></div><div class="hljs-ln-line"><span class="hljs-punctuation">}</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2c76pozvkew1oqc9f1e8ac6ff">以上摘自
+<a href="https://unpkg.com/browse/@angular/material/package.json" target="_blank">@angular/material</a>发布包。</p>
+
+  <h2 id="peer-dependencies">
+    <a href="#peer-dependencies" class="docs-anchor" tabindex="-1" aria-label="Link to Peer dependencies" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="avj3zq5qgopatb0hlcw6f2hee">对等依赖</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="79i0txjqv02kw9shhlm1ku7pu">各种 Angular 库应该把自己依赖的所有 <code>@angular/*</code> 都列为对等依赖。这确保了当各个模块请求 Angular 时，都会得到完全相同的模块。如果某个库在 <code>dependencies</code> 列出 <code>@angular/core</code> 而不是用 <code>peerDependencies</code>，它可能会得到一个不同的 Angular 模块，这会破坏你的应用。</p>
+
+  <h2 id="using-your-own-library-in-applications">
+    <a href="#using-your-own-library-in-applications" class="docs-anchor" tabindex="-1" aria-label="Link to Using your own library in applications" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ag7zrl4la9hz4dy5g4ttfz0uy">在应用中使用你自己的库</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7gv4xrom9bkqkhs3th59yq4k3">如果要在同一个工作空间中使用某个库，你不必把它发布到 npm 包管理器，但你还是得先构建它。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6560mod8qhj7j92wsu11p3uj0">要想在应用中使用你自己的库：</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_ref_id="9z39p41lzg4sbdbtyfy9banm4">构建库。 你不能在构建之前使用库。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build my-lib</div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="lspz3ttlhbfbu0jd1vgqb5sf">在你的应用中，按名字从库中导入：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { myExport } <span class="hljs-keyword">from</span> <span class="hljs-string">'my-lib'</span>;</div></code>
+    </pre>
+  </div></li>
+
+  </ul>
+  
+  <h3 id="building-and-rebuilding-your-library">
+    <a href="#building-and-rebuilding-your-library" class="docs-anchor" tabindex="-1" aria-label="Link to Building and rebuilding your library" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="skmftwp7nn8zb9er0qrc6611">构建和重建你的库</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a6awpdn3kdsmn82hybo4h0gju">如果你没有把库发布为 npm 包，然后把它从 npm 安装到你的应用中，那么构建步骤就是必要的。比如，如果你克隆了 git 仓库并运行了 <code>npm install</code>，编辑器就会把 <code>my-lib</code> 的导入显示为缺失状态（如果你还没有构建过该库）。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cn9qs5jz1j4um99kgczyywolh"><strong>有用：</strong>当你在 Angular 应用程序中从库中导入内容时，Angular 会在库名称和磁盘上的位置之间查找映射。 当你安装一个库包时，映射在
+<code>node_modules</code>文件夹中。 当你构建你自己的库时，它必须在你的
+<code>tsconfig</code>路径中找到映射。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1gcl4l25jcvimff4fnw2m48jh">用 Angular CLI 生成库时，会自动把它的路径添加到 <code>tsconfig</code> 文件中。Angular CLI 使用 <code>tsconfig</code> 路径告诉构建系统在哪里寻找这个库。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="enah2zo9tfndf21cyvqduav86">获取更多信息，请查看
+<a href="https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping" target="_blank">路径映射概述</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e73q0ioc7kixq3671231qy7cj">如果你发现库中的更改没有反映到应用中，那么你的应用很可能正在使用这个库的旧版本。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ir4v9f6brs8i03o4c0m1zj9r">每当你对它进行修改时，都可以重建你的库，但这个额外的步骤需要时间。<em>增量构建</em>功能可以改善库的开发体验。每当文件发生变化时，都会执行局部构建，并修补一些文件。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="37n00em1fomk6e7bi0c6hqfu6">增量构建可以作为开发环境中的后台进程运行。要启用这个特性，可以在构建命令中加入 <code>--watch</code> 标志：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build my-lib --watch</div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="el78sb030hvjvx1xu0tg6v23z"><strong>重要：</strong>CLI的
+<code>build</code>命令使用不同的构建器，并为库调用不同的构建工具，而不是应用程序。</p>
+
+    </div>
+    
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="tzcxkceu3tzaelgepnziklu5">应用的构建体系（<code>@angular-devkit/build-angular</code>）基于 <code>webpack</code>，并被包含在所有新的 Angular CLI 项目中。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="cok6xvjcc6vlhc18h953yld75">库的构建系统基于
+<code>ng-packagr</code>。 当你使用
+<code>ng generate library my-lib</code>添加库时，它才会添加到你的依赖中。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6r9elfqazszc4a7unk7w8ox8">这两种构建体系支持不同的东西，即使它们支持相同的东西，它们的执行方式也不同。这意味着同一套 TypeScript 源码在生成库时生成的 JavaScript 代码可能与生成应用时生成的 JavaScript 代码也不同。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bnq47dfaov3ivrr3qn2sz46ta">因此，依赖于库的应用应该只使用指向<em>内置库</em>的 TypeScript 路径映射。TypeScript 的路径映射<em>不应该</em>指向库的 <code>.ts</code> 源文件。</p>
+
+  <h2 id="publishing-libraries">
+    <a href="#publishing-libraries" class="docs-anchor" tabindex="-1" aria-label="Link to Publishing libraries" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9jiqaj74dyktjir9mzims4gya">发布库</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c3lnobktb67z5h86aoy2evtr7">发布库时可以使用两种分发格式：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1ucy8b8u5sz8a4n9mv6l83ew2">分发格式</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3wgj0ajyj49kc5w373d6t4595">部分 Ivy（推荐）</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1fubz8o4idg7hypzbmkutkgy6">包含可被任何 Angular 版本（从 v12 开始）的 Ivy 应用程序消费的可移植代码。</td>
+</tr>
+<tr>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9t465lx6s6vcuxkztnyf4691i">全量 Ivy</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="b7imn0pkv29wcj25up8hdzjzu">包含私有的 Angular Ivy 指令，不能保证在不同版本的 Angular 中工作。该格式要求库和应用程序使用
+<em>完全相同</em>版本的 Angular 构建。这种格式对所有直接从源代码构建的库和应用程序代码的环境非常有用。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8qwo94rph4s02ryt4fai8a0fa">对于发布到 npm 的库，请使用 partial-Ivy 格式，因为它在 Angular 的各个补丁版本之间是稳定的。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="75jlq9qjrhywoz32hignxhgfi">如果要发布到 npm，请避免使用完全 Ivy 的方式编译库，因为生成的 Ivy 指令不属于 Angular 公共 API 的一部分，因此在补丁版本之间可能会有所不同。</p>
+
+  <h2 id="ensuring-library-version-compatibility">
+    <a href="#ensuring-library-version-compatibility" class="docs-anchor" tabindex="-1" aria-label="Link to Ensuring library version compatibility" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2o4jqielq20wi30tul0uzimq0">确保库版本兼容性</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="72k8bb3heyu020bfewvw1uwg7">用于构建应用的 Angular 版本应始终与用于构建其任何依赖库的 Angular 版本相同或更大。比如，如果你有一个使用 Angular 13 版的库，则依赖于该库的应用应该使用 Angular 13 版或更高版本。Angular 不支持为该应用使用早期版本。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5yxu23zlu6gvxeeu6nbox0xyw">如果打算将库发布到 npm，请通过在 <code>tsconfig.prod.json</code> 的 <code>"compilationMode": "partial"</code> 来使用部分 Ivy 代码进行编译。这种部分格式在不同版本的 Angular 之间是稳定的，因此可以安全地发布到 npm。这种格式的代码在应用程序构建期间会使用相同版本的 Angular 编译器进行处理，以确保应用程序及其所有库使用的是同一个版本的 Angular。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="75jlq9qjrhywoz32hignxhgfi">如果要发布到 npm，请避免使用完全 Ivy 的方式编译库，因为生成的 Ivy 指令不属于 Angular 公共 API 的一部分，因此在补丁版本之间可能会有所不同。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6u3evg6g1cj56d6fr9mnx13ga">如果你以前从未在 npm 中发布过包，你必须创建一个用户帐户。 在
+<a href="https://docs.npmjs.com/getting-started/publishing-npm-packages" target="_blank">发布 npm 包</a>中了解更多。</p>
+
+  <h2 id="consuming-partial-ivy-code-outside-the-angular-cli">
+    <a href="#consuming-partial-ivy-code-outside-the-angular-cli" class="docs-anchor" tabindex="-1" aria-label="Link to Consuming partial-Ivy code outside the Angular CLI" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4ntgb0gaxtvbqltfhe0d02alw">在 Angular CLI 之外使用部分 Ivy 代码</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9bojhjtqotk3gdrilvgiz95sg">应用将 npm 中的许多 Angular 库安装到其 <code>node_modules</code> 目录中。但是，这些库中的代码不能与已编译的应用直接捆绑在一起，因为它尚未完全编译。要完成编译，可以使用 Angular 链接器。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9iowgrk42zm6qbhm5jyvlyvpa">对于不使用 Angular CLI 的应用，链接器作为 
+<a href="https://babeljs.io" target="_blank">Babel</a> 插件可用。 该插件需要从 
+<code>@angular/compiler-cli/linker/babel</code> 导入。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b1mgul1eyw3kv1w8ibtp8aam">Angular 链接器的 Babel 插件支持构建缓存，这意味着链接器只需一次处理库，而与其他 npm 操作无关。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dy0jxhg86vnfia69gq2ugd3j1">通过使用 
+<a href="https://babeljs.io" target="_blank">Babel</a> 插件 
+<a href="https://webpack.js.org/loaders/babel-loader/#options" target="_blank">babel-loader</a> 注册链接器，将该插件集成到自定义 
+<a href="https://webpack.js.org" target="_blank">Webpack</a> 构建的示例。</p>
+<div class="docs-code" path="adev/src/content/examples/angular-linker-plugin/webpack.config.mjs" visiblelines="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18" header="webpack.config.mjs">
+    <div class="docs-code-header"><h3>webpack.config.mjs</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-string">import</span> <span class="hljs-string">linkerPlugin</span> <span class="hljs-string">from</span> <span class="hljs-string">'@angular/compiler-cli/linker/babel'</span><span class="hljs-string">;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-string">export</span> <span class="hljs-string">default</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">module:</span> {</div><div class="hljs-ln-line">    <span class="hljs-attr">rules:</span> [</div><div class="hljs-ln-line">      {</div><div class="hljs-ln-line">        <span class="hljs-attr">test:</span> <span class="hljs-string">/\.m?js$/</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">use:</span> {</div><div class="hljs-ln-line">          <span class="hljs-attr">loader:</span> <span class="hljs-string">'babel-loader'</span>,</div><div class="hljs-ln-line">          <span class="hljs-attr">options:</span> {</div><div class="hljs-ln-line">            <span class="hljs-attr">plugins:</span> [<span class="hljs-string">linkerPlugin</span>],</div><div class="hljs-ln-line">            <span class="hljs-attr">compact:</span> <span class="hljs-literal">false</span>,</div><div class="hljs-ln-line">            <span class="hljs-attr">cacheDirectory:</span> <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">          }</div><div class="hljs-ln-line">        }</div><div class="hljs-ln-line">      }</div><div class="hljs-ln-line">    ]</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7gwbujzixpq1xrg2o3q1qvho1"><strong>提示：</strong> Angular CLI 自动集成链接器插件，所以如果你的库的使用者使用 CLI，他们可以从 npm 安装 Ivy 原生库而无需任何额外配置。</p>
+
+    </div>
+    

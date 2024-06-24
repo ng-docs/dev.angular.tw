@@ -1,0 +1,79 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="5tiltfwhcoeu3cr1h45cww2ck">组件中的控制流 - 
+<code>@for</code></h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/5-control-flow-for/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="6rqh8t4h3faqcr4xz1j0ms1oz">在构建 Web 应用时，你常常需要重复某些代码多次 —— 例如，给定一个名字数组，你可能希望在每个 
+<code>&lt;p&gt;</code> 标签中显示每个名字。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="clh1ipvk81t4947ito5jirob1">在此活动中，你将学习如何使用 
+<code>@for</code> 在模板中重复元素。</p>
+<hr>
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8kz8py60efhdoo63ie0k4a5v0">启用在模板中重复元素的语法是 
+<code>@for</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4w2kexcp55mbuvq2hu01r9kbm">以下是如何在组件中使用 
+<code>@for</code> 语法的示例：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    @for (os of operatingSystems; track os.id) {</div><div class="hljs-ln-line">      {{ os.name }}</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  operatingSystems = [{<span class="hljs-attr">id</span>: <span class="hljs-string">'win'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Windows'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-string">'osx'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'MacOS'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-string">'linux'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Linux'</span>}];</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="26lxbl87x4cqxj7xafq2ls951">需要注意两点：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="1qz64bavv8ncx9bsu8xabasp4"><code>@</code> 前缀在 <code>for</code> 前是因为它是一种特殊语法，称为 <a href="guide/templates">Angular 模板语法</a>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="6km6le4jft3jmo2za4etod6u">对于使用 v16 及更早版本的应用，请参阅 
+<a href="guide/directives/structural-directives">Angular 文档中的 NgFor</a></li>
+
+  </ul>
+  
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="add-the-users-property">
+    <a href="#add-the-users-property" class="docs-anchor" tabindex="-1" aria-label="Link to Add the <code>users</code> property" data-ng_translator_product="100" data-ng_translator_ref_id="5228za2mca0n4q6bblw2fpa02">添加 
+<code>users</code> 属性</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="1o7iqjw835s8m7we2hzjj9j7c">在 
+<code>AppComponent</code> 类中，添加一个名为 
+<code>users</code> 的属性，其中包含用户及其姓名。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">[{<span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Sarah'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Amy'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Rachel'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Jessica'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Poornima'</span>}]</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="update-the-template">
+    <a href="#update-the-template" class="docs-anchor" tabindex="-1" aria-label="Link to Update the template" data-ng_translator_product="100" data-ng_translator_ref_id="bmnghi104qlgw3v13qolsoj76">更新模板</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="ehttbou2hwp1e0gyimyjz0iu">更新模板，使用 
+<code>@for</code> 模板语法在 
+<code>p</code> 元素中显示每个用户名。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@for</span> (user <span class="hljs-keyword">of</span> users; track user.<span class="hljs-property">id</span>) {</div><div class="hljs-ln-line">  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ user.name }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="399so58kspb76r1t4s15t1jhu">注意：需要使用 
+<code>track</code>，你可以使用 
+<code>id</code> 或其他唯一标识符。</p>
+
+    </li>
+    
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="6gz7u7jnndmdwugiv1nlar1y">这种功能称为控制流。接下来，你将学习如何自定义和与组件通信 —— 顺便说一句，你做得很棒。</p>

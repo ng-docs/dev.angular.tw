@@ -1,0 +1,45 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>TrackByFunction</h1><div class="docs-api-item-label" data-mode="full" data-type="interface">interface</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/core/src/change_detection/differs/iterable_differs.ts#L161-L173" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="18dwirimuq85mcj4nkpwfvjgi">一个可选地传入
+<code>NgForOf</code>指令的函数，用于自定义
+<code>NgForOf</code>如何唯一标识可迭代者中的条目。</p><p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/common/NgForOf#ngForTrackBy">`NgForOf#ngForTrackBy`</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">interface</span> <span class="hljs-title class_">TrackByFunction</span> {</div><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="18dwirimuq85mcj4nkpwfvjgi">一个可选地传入
+<code>NgForOf</code>指令的函数，用于自定义
+<code>NgForOf</code>如何唯一标识可迭代者中的条目。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7hdctkpqdnc9e7m3n9sivcsjj"><code>NgForOf</code>需要唯一标识可迭代者中的条目，以在可迭代者中的条目重新排序、新增或移除时正确执行 DOM 更新。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5pmt723n2afnay66k5qa7lqvm">在所有这些场景中，通常希望仅更新与受更改影响的条目关联的 DOM 元素。此行为对以下内容很重要：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="chr5llnaxjp8frz306z3se2xv">修改迭代器时保留任何特定于 DOM 的 UI 状态（例如光标位置、焦点、文本选择）</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b6te2wcwnd2d181gvnjezpiz6">启用条目添加、删除和可迭代重新排序的动画</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="8tejd6dwnkb4n8jdcvtek1uqe">当使用
+<code>NgForOf</code>动态填充嵌套的
+<code>&lt;option&gt;</code>元素并更新绑定的可迭代者时，保留
+<code>&lt;select&gt;</code>元素的值。</li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="53avlu1zlbzu58s5o3smgbxya">自定义
+<code>trackBy</code>函数的一个常见用途是，当
+<code>NgForOf</code>迭代的模型包含一个具有唯一标识符的属性时。例如，给定一个模型：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> {</span><span class="hljs-ln-line">  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;</span><span class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;</span><span class="hljs-ln-line">  ...</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4hnn2f9yvmewfdcq7jjuiynet">自定义 <code>trackBy</code> 函数可能类似于以下内容：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">function</span> <span class="hljs-title function_">userTrackBy</span>(<span class="hljs-params">index, user</span>) {</span><span class="hljs-ln-line">  <span class="hljs-keyword">return</span> user.<span class="hljs-property">id</span>;</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9o326v6polve7wdxvgz63fwrb">自定义 <code>trackBy</code> 函数必须具有几个属性：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3p9f6fxh960mj1twg1bdniuk5"><a href="https://en.wikipedia.org/wiki/Idempotence">幂等</a>（没有副作用，并且对于给定输入始终返回相同的值）</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9955l2yx7ag5q8rfj7ozqszod">返回所有唯一输入的唯一值</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="72q8i9x3j677s6d0rl6du8urq">快点</li>
+
+    </ul></div></div></div>

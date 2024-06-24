@@ -1,0 +1,44 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>CanMatch</h1><div class="docs-api-item-label" data-mode="full" data-type="interface">interface</div><div class="docs-api-item-label" data-mode="full" data-type="deprecated">Deprecated</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/router/src/models.ts#L1117-L1119" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="cafngho3robxopnmk0nh8hbhu">一个类可以实现的接口，用于作为守卫决定某个 
+<code>Route</code> 是否可以匹配。如果所有守卫返回 
+<code>true</code>，则导航继续，
+<code>Router</code> 将在激活期间使用此 
+<code>Route</code>。如果任何守卫返回 
+<code>false</code>，则此 
+<code>Route</code> 将跳过匹配，转而处理其他 
+<code>Route</code> 配置。</p><p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/router/CanMatchFn">CanMatchFn</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">interface</span> <span class="hljs-title class_">CanMatch</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="canMatch">  <span class="hljs-title function_">canMatch</span>(<span class="hljs-attr">route</span>: <span class="hljs-title class_">Route</span>, <span class="hljs-attr">segments</span>: <span class="hljs-title class_">UrlSegment</span>[]): <span class="hljs-title class_">MaybeAsync</span>&lt;<span class="hljs-title class_">GuardResult</span>&gt;;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="cafngho3robxopnmk0nh8hbhu">一个类可以实现的接口，用于作为守卫决定某个 
+<code>Route</code> 是否可以匹配。如果所有守卫返回 
+<code>true</code>，则导航继续，
+<code>Router</code> 将在激活期间使用此 
+<code>Route</code>。如果任何守卫返回 
+<code>false</code>，则此 
+<code>Route</code> 将跳过匹配，转而处理其他 
+<code>Route</code> 配置。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="einq1pk74pxjwl8s2z7z4bzkd">以下示例实现了一个 
+<code>CanMatch</code> 函数，用于决定当前用户是否有权限访问用户页面。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">UserToken</span> {}</span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Permissions</span> {</span><span class="hljs-ln-line">  canAccess(user: UserToken, route: Route, segments: UrlSegment[]): boolean {</span><span class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</span><span class="hljs-ln-line">  }</span><span class="hljs-ln-line">}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-meta">@Injectable()</span></span><span class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">CanMatchTeamSection</span> <span class="hljs-title">implements</span> <span class="hljs-title">CanMatch</span> {</span><span class="hljs-ln-line">  <span class="hljs-keyword">constructor</span>(<span class="hljs-keyword">private</span> permissions: Permissions, <span class="hljs-keyword">private</span> currentUser: UserToken) {}</span><span class="hljs-ln-line"></span><span class="hljs-ln-line">  canMatch(route: Route, segments: UrlSegment[]): Observable&lt;boolean&gt;|Promise&lt;boolean&gt;|boolean {</span><span class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.permissions.canAccess(<span class="hljs-keyword">this</span>.currentUser, route, segments);</span><span class="hljs-ln-line">  }</span><span class="hljs-ln-line">}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="55ivjcxpdplw5402f6jf2045o">在这里，定义的守卫函数作为
+<code>Route</code>对象的一部分提供，在路由器配置中：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-variable">@NgModule</span>({</span><span class="hljs-ln-line">  <span class="hljs-attribute">imports</span>: [</span><span class="hljs-ln-line">    RouterModule.<span class="hljs-built_in">forRoot</span>([</span><span class="hljs-ln-line">      {</span><span class="hljs-ln-line">        <span class="hljs-attribute">path</span>: <span class="hljs-string">'team/:id'</span>,</span><span class="hljs-ln-line">        <span class="hljs-attribute">component</span>: TeamComponent,</span><span class="hljs-ln-line">        <span class="hljs-attribute">loadChildren</span>: () =&gt; <span class="hljs-built_in">import</span>(<span class="hljs-string">'./team'</span>).<span class="hljs-built_in">then</span>(mod =&gt; mod.TeamModule),</span><span class="hljs-ln-line">        <span class="hljs-attribute">canMatch</span>: [CanMatchTeamSection]</span><span class="hljs-ln-line">      },</span><span class="hljs-ln-line">      {</span><span class="hljs-ln-line">        <span class="hljs-attribute">path</span>: <span class="hljs-string">'**'</span>,</span><span class="hljs-ln-line">        <span class="hljs-attribute">component</span>: NotFoundComponent</span><span class="hljs-ln-line">      }</span><span class="hljs-ln-line">    ])</span><span class="hljs-ln-line">  ],</span><span class="hljs-ln-line">  <span class="hljs-attribute">providers</span>: [CanMatchTeamSection, UserToken, Permissions]</span><span class="hljs-ln-line">})</span><span class="hljs-ln-line">class AppModule {}</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cn037hz2i7djbnngn4jx49url">如果 
+<code>CanMatchTeamSection</code> 返回 
+<code>false</code>，路由器会继续导航到 
+<code>team/:id</code> URL，但会加载 
+<code>NotFoundComponent</code>，因为 
+<code>'team/:id'</code> 的 
+<code>Route</code> 无法用于 URL 匹配，而是使用了全匹配的 
+<code>**</code> 
+<code>Route</code>。</p></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="canMatch" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>canMatch</h3><div><code>MaybeAsync&lt;GuardResult&gt;</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">route</span><code>Route</code><div class="docs-parameter-description"></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">segments</span><code>UrlSegment[]</code><div class="docs-parameter-description"></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>MaybeAsync&lt;GuardResult&gt;</code></div></div></div></div></div></div></div>

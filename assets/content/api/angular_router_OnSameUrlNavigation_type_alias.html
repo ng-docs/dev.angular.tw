@@ -1,0 +1,16 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/router</span><div class="docs-reference-title"><div><h1>OnSameUrlNavigation</h1><div class="docs-api-item-label" data-mode="full" data-type="type_alias">Type Alias</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/router/src/models.ts#L46-L46" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="67e41sd77bicj23jcoveh4vny">定义当路由器收到一个导航到当前 URL 的请求时应该怎么做。可取下列值之一：</p><p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/router/RouteReuseStrategy">RouteReuseStrategy</a><a class="docs-pill" href="api/router/RunGuardsAndResolvers">RunGuardsAndResolvers</a><a class="docs-pill" href="api/router/NavigationBehaviorOptions">NavigationBehaviorOptions</a><a class="docs-pill" href="api/router/RouterConfigOptions">RouterConfigOptions</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">type</span> <span class="hljs-title class_">OnSameUrlNavigation</span> = <span class="hljs-string">'reload'</span> | <span class="hljs-string">'ignore'</span></div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="67e41sd77bicj23jcoveh4vny">定义当路由器收到一个导航到当前 URL 的请求时应该怎么做。可取下列值之一：</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d7b6x84zmhvct5sx8gktcez1i"><code>'ignore'</code> : 路由器忽略请求，与当前状态相同。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="s1ntbdefs5joh6qp21007i5c"><code>'reload'</code>：路由器处理 URL，即使它与当前状态没有区别。你可能需要此选项的一个示例是，如果 <code>canMatch</code> 守卫取决于应用程序状态并且最初拒绝导航到路由。修复状态后，你想要重新导航到相同的 URL，以便可以激活带有 <code>canMatch</code> 守卫的路由。</li>
+
+    </ul>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="ea4h6m2efnqof8r0ywz79wzqe">注意，这仅配置 Route 是否重新处理 URL 并触发相关操作和事件（如重定向、守卫和求解器）。默认情况下，Router 在重新导航到同一组件类型时复用组件实例，而不先访问不同组件。此行为由 
+<code>RouteReuseStrategy</code> 配置。为了在同一 URL 导航时重新加载路由组件，你需要将 
+<code>onSameUrlNavigation</code> 设置为 
+<code>'reload'</code> 
+<em>并且</em> 提供一个在 
+<code>shouldReuseRoute</code> 返回 
+<code>false</code> 的 
+<code>RouteReuseStrategy</code>。此外，除非路径或路径参数更改（由 
+<code>runGuardsAndResolvers</code> 配置），否则路由的大多数守卫和求解器不会运行。</p></div></div></div>

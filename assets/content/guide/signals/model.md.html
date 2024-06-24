@@ -1,0 +1,118 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="9peg3nbw1q4dbnfqsthab9fn0">模型输入</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/signals/model.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="lqszhur4qm0wywl0a4pdzud"><strong>模型输入</strong> 是一种特殊类型的输入，使组件能够将新值传播回另一个组件。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="5wss9bzwbwmkx99lisyptpfv4"><strong>有帮助的提示：</strong> 目前模型输入处于 
+<a href="/reference/releases#developer-preview">开发者预览</a>阶段。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cugcul2ug813akutgl3t6sk8z">创建组件时，可以像创建标准输入一样定义模型输入。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, model, input} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCheckbox</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// This is a model input.</span></div><div class="hljs-ln-line">  checked = <span class="hljs-title function_">model</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// This is a standard input.</span></div><div class="hljs-ln-line">  disabled = <span class="hljs-title function_">input</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="el2b3830mvndttb3e1siym5o6">两种类型的输入都允许绑定一个值到属性中。然而，
+<strong>模型输入允许组件作者将值写入属性</strong>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ciz7xhgx4gql4jn9kvwjweb9f">在其他方面，可以像使用标准输入一样使用模型输入。你可以通过调用信号函数读取值，包括在 
+<code>computed</code> 和 
+<code>effect</code> 这样的响应式上下文中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, model, input} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-checkbox'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div (click)="toggle()"&gt; ... &lt;/div&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCheckbox</span> {</div><div class="hljs-ln-line">  checked = <span class="hljs-title function_">model</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line">  disabled = <span class="hljs-title function_">input</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">toggle</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// While standard inputs are read-only, you can write directly to model inputs.</span></div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">checked</span>.<span class="hljs-title function_">set</span>(!<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">checked</span>());</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="b7xn89em6t0se9em81xuwos22">当组件将新值写入模型输入时，Angular 可以将新值传播回绑定该输入值的组件。这被称为 
+<strong>双向绑定</strong>，因为值可以双向流动。</p>
+
+  <h2 id="two-way-binding-with-signals">
+    <a href="#two-way-binding-with-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Two-way binding with signals" data-ng_translator_product="100" data-ng_translator_ref_id="azd6vrcyn00jw0xhujpmzm6y2">使用信号的双向绑定</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2arom0i0wk7oa73jvw0ogpcz7">你可以将可写信号绑定到模型输入。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-comment">// `checked` is a model input.</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// The parenthesis-inside-square-brackets syntax (aka "banana-in-a-box") creates a two-way binding</span></div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;custom-checkbox [(checked)]="isAdmin" /&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserProfile</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">protected</span> isAdmin = <span class="hljs-title function_">signal</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7ogrxz4gr0spvsvzpyt5ehvj8">在上述示例中，
+<code>CustomCheckbox</code> 可以将值写入其 
+<code>checked</code> 模型输入，然后将这些值传播回 
+<code>UserProfile</code> 中的 
+<code>isAdmin</code> 信号。此绑定保持 
+<code>checked</code> 和 
+<code>isAdmin</code> 的值同步。注意，绑定传递的是 
+<code>isAdmin</code> 信号本身，而不是信号的 
+<em>值</em>。</p>
+
+  <h2 id="two-way-binding-with-plain-properties">
+    <a href="#two-way-binding-with-plain-properties" class="docs-anchor" tabindex="-1" aria-label="Link to Two-way binding with plain properties" data-ng_translator_product="100" data-ng_translator_ref_id="9n7zzmwlbz8gplinqol1fuv">使用普通属性的双向绑定</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1acee4gt91l7elrhogkqpnq8d">你可以将普通 JavaScript 属性绑定到模型输入。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-comment">// `checked` is a model input.</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// The parenthesis-inside-square-brackets syntax (aka "banana-in-a-box") creates a two-way binding</span></div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;custom-checkbox [(checked)]="isAdmin" /&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserProfile</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">protected</span> isAdmin = <span class="hljs-literal">false</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dy0y5eaax8lxnzm73mwof5v3">在上述示例中，
+<code>CustomCheckbox</code> 可以将值写入其 
+<code>checked</code> 模型输入，然后将这些值传播回 
+<code>UserProfile</code> 中的 
+<code>isAdmin</code> 属性。此绑定保持 
+<code>checked</code> 和 
+<code>isAdmin</code> 的值同步。</p>
+
+  <h2 id="implicit-change-events">
+    <a href="#implicit-change-events" class="docs-anchor" tabindex="-1" aria-label="Link to Implicit <code>change</code> events" data-ng_translator_product="100" data-ng_translator_ref_id="6f12bo0nuko2s8r0hb8bnfgz3">隐式 
+<code>change</code> 事件</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2e701j6fwnymdx8239b4y1tqq">在组件或指令中声明模型输入时，Angular 会自动为该模型创建一个对应的 
+<a href="guide/components/outputs">输出</a>。输出的名称是在模型输入的名称后加上 "Change" 后缀。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCheckbox</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// This automatically creates an output named "checkedChange".</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// Can be subscribed to using `(checkedChange)="handler()"` in the template.</span></div><div class="hljs-ln-line">  checked = <span class="hljs-title function_">model</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="eokfskluh5b3xbc77pzk62xf1">每当你通过调用 
+<code>set</code> 或 
+<code>update</code> 方法写入新值到模型输入时，Angular 就会触发此更改事件。</p>
+
+  <h2 id="customizing-model-inputs">
+    <a href="#customizing-model-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to Customizing model inputs" data-ng_translator_product="100" data-ng_translator_ref_id="7oil7uvzz6dombe8rwyudmobq">自定义模型输入</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6b9ladieek6dv29hn2qgzq6u2">你可以像为 
+<a href="guide/signals/inputs">标准输入</a> 一样，将模型输入标记为必要或提供别名。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2rbx17vk6e33o5zq9btofho3p">模型输入不支持输入转换。</p>
+
+  <h2 id="differences-between-model-and-input">
+    <a href="#differences-between-model-and-input" class="docs-anchor" tabindex="-1" aria-label="Link to Differences between <code>model()</code> and <code>input()</code>" data-ng_translator_product="100" data-ng_translator_ref_id="6d7k5sfnyskfu6ker25cu3er5"><code>model()</code> 和 
+<code>input()</code> 的区别</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8tslcsktyq8ltvarpcs3qjfcq"><code>input()</code> 和 
+<code>model()</code> 函数都是在 Angular 中定义基于信号的输入的方法，但它们在一些方面有所不同：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="2p7fc4lwzixj9yl2tuokbitv4"><code>model()</code> 定义了
+<strong>输入和输出</strong>。输出的名称总是输入名称后缀 
+<code>Change</code>，以支持双向绑定。由你的指令的使用者决定是只使用输入，只使用输出，还是同时使用两者。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="35hynrcfeamq8lvkdbom8drre"><code>ModelSignal</code> 是 
+<code>WritableSignal</code>，这意味着可以通过 
+<code>set</code> 和 
+<code>update</code> 方法从任何地方更改其值。当赋予新值时，
+<code>ModelSignal</code> 将向其输出发出信号。这与 
+<code>InputSignal</code> 不同，后者是只读的，只能通过模板更改。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="2vba9cz1kpafkv0lexw1f9nlt">模型输入不支持输入转换，而信号输入支持。</li>
+
+    </ol>
+    
+  <h2 id="when-to-use-model-inputs">
+    <a href="#when-to-use-model-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to When to use model inputs" data-ng_translator_product="100" data-ng_translator_ref_id="52z0pyxy4rsdwg4f13zdqsuma">何时使用模型输入</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bblyj6ohh6rmw515nzyj2zzkf">在基于用户交互修改值的组件中使用模型输入。自定义表单控件（如日期选择器或组合框）应使用模型输入作为其主要值。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="auv9p1vdrwyribpagtreaa3we">避免为了方便而使用模型输入，以免引入一个额外的类属性来包含本地状态。</p>

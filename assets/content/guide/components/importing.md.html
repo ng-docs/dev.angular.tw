@@ -1,0 +1,41 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="20ie3twntwbc9rrakyu6ch0k9">导入和使用组件</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/importing.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dgm70qgb782h0hajisr0uqi7a"><strong>提示：</strong>本指南假定你已经阅读了
+<a href="essentials">基本指南</a>。如果你是 Angular 的新手，请先阅读该指南。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="atf4asuluxl1sp2vrnxwr31dv">Angular支持两种方式将组件提供给其他组件：作为独立的组件或在
+<code>NgModule</code>中。</p>
+
+  <h2 id="standalone-components">
+    <a href="#standalone-components" class="docs-anchor" tabindex="-1" aria-label="Link to Standalone components" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7fgt04a0nuhruo6z4ihwlhmpc">独立组件</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7q4a8f32xetfm1hzslwgikzf">一个
+<strong>独立组件</strong>是在其组件元数据中设置
+<code>standalone: true</code>的组件。独立组件直接导入在其模板中使用的其他组件、指令和管道：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'profile-photo'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfilePhoto</span> { }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">ProfilePhoto</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;profile-photo /&gt;`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserProfile</span> { }</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="8jwhidmelztelk3d5pzcm86bf">独立组件可以直接导入到其他独立组件中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1kzywofuy7qsoxaghjxpegpo9">Angular团队建议所有新开发都使用独立组件。</p>
+
+  <h2 id="ngmodules">
+    <a href="#ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to NgModules">NgModules</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ewag8x1r2wue9bleouo0wf91e">在使用独立组件之前，Angular 代码使用 
+<code>NgModule</code> 作为导入和使用其他组件的机制。详情请参见完整的 
+<a href="guide/ngmodules"><code>NgModule</code> 指南</a>。</p>

@@ -1,0 +1,66 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="1mdo3hwaiy97nip1989rp9pmk">基于构造函数的依赖注入</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/21-constructor-based-di/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="ekmkpuferazsjj4to7w9s9rjw">在之前的活动中，你使用 <code>inject()</code> 函数将资源提供给组件。<code>inject()</code> 是模式之一，了解另一种模式（基于构造函数的依赖注入）也非常有用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="e815i8t9d1ve3bxb0fp2yvde">将资源作为组件的 
+<code>constructor</code> 函数的参数指定。Angular 会将这些资源提供给你的组件。 
+<br>
+<br> 在本次活动中，你将学习如何使用基于构造函数的依赖注入。</p>
+<hr>
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="31q5baucpfkw24n0in2nai2ks">要将服务或其他可注入资源注入到组件中，使用以下语法：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">PetCarDashboardComponent</span> {</div><div class="hljs-ln-line highlighted">    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> petCareService: PetCareService</span>) {</div><div class="hljs-ln-line">        ...</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5qw80woqr6pnbl88a4eptvtur">这里有几件事需要注意：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="27dq56kskrw9w0hku1szodcp1">使用 
+<code>private</code> 关键字</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="dfrhy1ihkco51qx8gziossmw5"><code>petCareService</code> 成为你可以在类中使用的属性</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="bkghygg877rswo8oq7fpbr6md"><code>PetCareService</code> 类是被注入的类</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="e1nouc3z18krzhtpz7sahkzv5">好了，现在你来试试：</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="update-the-code-to-use-constructor-based-di">
+    <a href="#update-the-code-to-use-constructor-based-di" class="docs-anchor" tabindex="-1" aria-label="Link to Update the code to use constructor-based DI" data-ng_translator_product="100" data-ng_translator_ref_id="1jmzyd0v0xjn8kdw3n8s09271">更新代码以使用基于构造函数的 DI</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="1rlvm7pxjw6h0qfhos0kk2amn">在 
+<code>app.component.ts</code> 中，更新构造函数代码以匹配以下代码：</p>
+
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8umj61epms7599ahwf7d865a9"><strong>提示：</strong>记住，如果你遇到困难，请参考此活动页面上的示例。</p>
+
+    </div>
+    <div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> carService: CarService</span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">display</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">carService</span>.<span class="hljs-title function_">getCars</span>().<span class="hljs-title function_">join</span>(<span class="hljs-string">' ⭐️ '</span>);</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dhizblnjf0pxkcyu1bhc0nbxr">恭喜你完成了本次活动。示例代码的效果与使用 
+<code>inject</code> 函数相同。虽然这两种方法大体相同，但有一些小差异超出了本教程的范围。</p>
+<br>
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="z7qjr9j4t90sek8h3xk8c5pr">你可以在 
+<a href="guide/di">Angular 文档</a> 中找到更多关于依赖注入的信息。</p>

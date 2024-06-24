@@ -1,0 +1,34 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="6zom2sjphds1npf9rjjpqmhqy">水合节点不匹配</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0500.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="5iryfmkxmwaq61pardxc7knmm">此错误意味着在水合过程中，Angular 预期的 DOM 结构与服务器端渲染时生成并注解的 DOM 结构一致。然而，在客户端，DOM 树与服务器渲染的 DOM 树不同。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7xrqsbmioooxlwyn6mubhf843">此错误通常是由于使用原生浏览器 API 直接操纵 DOM 结构，导致 DOM 结构在 Angular 生成的内容之外发生变化。如果你使用 
+<code>innerHTML</code> 或 
+<code>outerHTML</code> 设置 HTML 内容，也会发生这种情况，因为这会在 Angular 生成的内容之外改变 DOM 结构。你可以通过重构组件以使用原生 Angular API 而不是原生 API 来解决此问题。如果这不可能，你可以在组件的宿主节点上添加 
+<code>ngSkipHydration</code> 属性，这将禁用组件及其子组件的水合。 
+<code>ngSkipHydration</code> 只应作为最后的手段使用，并应被视为需要修复的错误。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7y3d3wqt0871xkjy4t3o0x73k">有关水合的更多信息，请参阅<a href="guide/hydration">本指南</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3zqf3rzh5w6q74ys4m5q7k0xd">以下示例将触发错误。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-example'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div&gt;&lt;span&gt;world&lt;/span&gt;&lt;/div&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ExampleComponent</span> {</div><div class="hljs-ln-line">  hostElement = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">ElementRef</span>).<span class="hljs-property">nativeElement</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Create a new &lt;p&gt; element with the `Hello` text inside</span></div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> newNode = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">'p'</span>);</div><div class="hljs-ln-line">    newNode.<span class="hljs-property">innerHTML</span> = <span class="hljs-string">'Hello'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// Insert the &lt;p&gt; before the first element. Since Angular has no information</span></div><div class="hljs-ln-line">   <span class="hljs-comment">// about the &lt;p&gt; element, it will be looking for the &lt;div&gt; element at the first</span></div><div class="hljs-ln-line">   <span class="hljs-comment">// element position instead. As a result, a hydration mismatch error would be</span></div><div class="hljs-ln-line">   <span class="hljs-comment">// thrown. Instead, update component's template to create the &lt;p&gt; element.</span></div><div class="hljs-ln-line">   <span class="hljs-variable language_">this</span>.<span class="hljs-property">hostElement</span>.<span class="hljs-title function_">insertBefore</span>(newNode, <span class="hljs-variable language_">this</span>.<span class="hljs-property">hostElement</span>.<span class="hljs-property">firstChild</span>);</div><div class="hljs-ln-line"> }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="debugging-the-error">
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5w04axivaw5recxwq81g1ajti">开发人员控制台中的错误消息应包含有关导致问题的应用程序 DOM 结构的特定部分的信息。检查应用程序的那部分是否存在与水合相关的错误，例如使用原生 API 的直接 DOM 操作。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a1cpmb9n032ai67sg8s0seyi2">检查你的模板是否具有有效的 HTML 结构。更多信息请参见 
+<a href="guide/hydration#valid-html-structure">水合指南</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bn26rlofxteuk19mikbmqofl9">可能的解决方案之一是，你可以将 <code>ngSkipHydration</code> 属性添加到你的组件宿主节点。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="47kxe1x3c666ru0l5jtzsp821">如果你的应用程序在开发环境中运行，但你在生产构建中看到水合错误，请确保所生成的发给浏览器的 HTML 包含 Angular 在服务端渲染期间生成的注释节点。Angular 运行时使用这些注释节点作为视图容器的锚点（无论是否水合），而水合过程会期望它们出现在原始位置。如果你有某种自定义逻辑会从服务端渲染生成的 HTML 中删除注释节点，或者你已将 CDN 配置为在提供内容之前删除它们 - 禁用删除注释节点的特性并检查水合错误是否消失了。</p>

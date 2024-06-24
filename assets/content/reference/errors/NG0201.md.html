@@ -1,0 +1,38 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="806kunqxfw6p1bp2ekeys2ub7">没有找到提供者</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0201.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-video-container">
+      <iframe class="docs-video" src="https://www.youtube.com/embed/lAlOryf1-WU" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless title="Video player"></iframe>
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="695iu7kmoitcmtr4g4btedrt2">当你尝试注入某个服务，但未声明相应的提供者时，会看到此错误。提供者是一个映射表，用于提供一个值，你可以将其注入应用中某个类的构造函数中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="djdnz917tso2x5qseczcfpbck">在我们的
+<a href="guide/di">依赖注入指南</a>中了解更多关于提供者的信息。</p>
+
+  <h2 id="debugging-the-error">
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9j6czg22rrmp3j0phbuwtokbj">从错误指出缺少提供者的对象开始追溯：
+<code>No provider for ${this}!</code>。这通常在需要不存在的提供者的服务中抛出。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3grubipojyb8oaf8go0if6c45">为修复此错误，确保你的服务已在某个 
+<code>NgModule</code> 的提供者列表中注册，或在顶部具有 
+<code>providedIn</code> 属性的 
+<code>@Injectable</code> 装饰器。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="44fvc6fwbuap2ce8gex7xlfkl">最常见的解决方案是在 
+<code>@Injectable</code> 中使用 
+<code>providedIn</code> 添加一个提供者：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({ <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'app'</span> })</div></code>
+    </pre>
+  </div>

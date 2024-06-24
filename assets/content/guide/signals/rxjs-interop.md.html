@@ -1,0 +1,157 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4dgfms6hzrp30whv8dgni5yt8">RxJS 互操作</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/signals/rxjs-interop.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="6b6wb66qv2nt3wfgj8sz1hovk"><strong>重要：</strong> RxJS Interop 包可供
+<a href="reference/releases#developer-preview">开发者预览</a>。你可以尝试使用它，但在稳定之前可能会发生变化。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="a4h9wyz2fzh8zte0tvt4t9a5i">Angular 的 
+<code>@angular/core/rxjs-interop</code> 包提供了将 
+<a href="guide/signals">Angular Signals</a> 与 RxJS 可观察者集成的有用工具。</p>
+
+  <h2 id="tosignal">
+    <a href="#tosignal" class="docs-anchor" tabindex="-1" aria-label="Link to <code>toSignal</code>"><code>toSignal</code></a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7vvpobspuam1psi5emfq7qgkg">使用 
+<code>toSignal</code> 函数创建一个跟踪可观察者值的信号。它的行为类似于模板中的 
+<code>async</code> 管道，但更灵活，可以在应用的任何地方使用。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AsyncPipe</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { interval } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`{{ counter() }}`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Ticker</span> {</div><div class="hljs-ln-line">  counterObservable = <span class="hljs-title function_">interval</span>(<span class="hljs-number">1000</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// Get a `Signal` representing the `counterObservable`'s value.</span></div><div class="hljs-ln-line">  counter = <span class="hljs-title function_">toSignal</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">counterObservable</span>, {<span class="hljs-attr">initialValue</span>: <span class="hljs-number">0</span>});</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="di0wazuwoxz8skapb1vwjkgqo">与 
+<code>async</code> 管道类似，
+<code>toSignal</code> 立即订阅可观察者，这可能会触发副作用。
+<code>toSignal</code> 创建的订阅会在调用 
+<code>toSignal</code> 的组件或服务被销毁时自动取消订阅给定的可观察者。</p>
+
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="56wmkm6rgst53uyuixrgmfn0g"><strong>重要：</strong> 
+<code>toSignal</code> 创建一个订阅。你应该避免对同一个可观察者重复调用它，而是复用它返回的信号。</p>
+
+    </div>
+    
+  <h3 id="injection-context">
+    <a href="#injection-context" class="docs-anchor" tabindex="-1" aria-label="Link to Injection context" data-ng_translator_product="100" data-ng_translator_ref_id="6i2331m8j8vxiqrm3m7o9qbot">注入上下文</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6w1d6b49b7s0rgsowymt8xnib"><code>toSignal</code> 默认需要在
+<a href="guide/di/dependency-injection-context">注入上下文</a>中运行，例如在组件或服务的构造函数中。如果无法获得注入上下文，可以手动指定要使用的 
+<code>Injector</code>。</p>
+
+  <h3 id="initial-values">
+    <a href="#initial-values" class="docs-anchor" tabindex="-1" aria-label="Link to Initial values" data-ng_translator_product="100" data-ng_translator_ref_id="34l32l1ha5h6vhdqna6eo4o04">初始值</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8eftte8nra34igyy1ke3bcyyn">可观察者可能不会在订阅时同步产生值，但信号始终需要当前值。有几种方法可以处理 
+<code>toSignal</code> 信号的“初始”值。</p>
+
+  <h4 id="the-initialvalue-option">
+    <a href="#the-initialvalue-option" class="docs-anchor" tabindex="-1" aria-label="Link to The <code>initialValue</code> option" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1z7zpbpl8vp1ruigacexkkmhg"><code>initialValue</code> 选项</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9k3s4lihtz6vjfn92xwzed3oe">如上例所示，你可以指定一个 
+<code>initialValue</code> 选项，作为可观察者首次发出之前信号应返回的值。</p>
+
+  <h4 id="undefined-initial-values">
+    <a href="#undefined-initial-values" class="docs-anchor" tabindex="-1" aria-label="Link to <code>undefined</code> initial values" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2jw943plkvsesunn6hot0e8o6"><code>undefined</code> 初始值</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7o96xior5ymn7c2lpeicmtxiv">如果你没有提供 
+<code>initialValue</code>，则结果信号在 Observable 发出前将返回 
+<code>undefined</code>。这类似于 
+<code>async</code> 管道返回 
+<code>null</code> 的行为。</p>
+
+  <h4 id="the-requiresync-option">
+    <a href="#the-requiresync-option" class="docs-anchor" tabindex="-1" aria-label="Link to The <code>requireSync</code> option" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="21fop5l9gi6f1d3t9u50g2o07"><code>requireSync</code> 选项</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dpsk6p8afzh5hrz42gs4rr871">某些 Observables 保证同步发出，例如 
+<code>BehaviorSubject</code>。在这种情况下，你可以指定 
+<code>requireSync: true</code> 选项。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="45dlbx6nhooxt8yalpxy3uzvh">当 
+<code>requireSync</code> 为 
+<code>true</code> 时，
+<code>toSignal</code> 强制要求 Observable 在订阅时同步发出。这保证了信号始终有一个值，不需要 
+<code>undefined</code> 类型或初始值。</p>
+
+  <h3 id="manualcleanup">
+    <a href="#manualcleanup" class="docs-anchor" tabindex="-1" aria-label="Link to <code>manualCleanup</code>"><code>manualCleanup</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="aaby8ktv40wx0r0iw1ab2wqe5">默认情况下，当创建它的组件或服务销毁时，
+<code>toSignal</code> 会自动取消订阅 Observable。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="de4puowxzvwbnt9zg6jj8m1zu">要覆盖此行为，你可以传递 
+<code>manualCleanup</code> 选项。你可以为那些自然完成的 Observables 使用此设置。</p>
+
+  <h3 id="error-and-completion">
+    <a href="#error-and-completion" class="docs-anchor" tabindex="-1" aria-label="Link to Error and Completion" data-ng_translator_product="100" data-ng_translator_ref_id="6qa3mqgys3lg88ug8y0te1ksv">错误和完成</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="44ug1q21hedzp0bdf7ntcj4ik">如果在 
+<code>toSignal</code> 中使用的 Observable 产生错误，该错误将在读取信号时抛出。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="lttrc72bhkol7t98zpolt68y">如果在 
+<code>toSignal</code> 中使用的 Observable 完成，信号将继续返回完成前最近一次发出的值。</p>
+
+  <h2 id="toobservable">
+    <a href="#toobservable" class="docs-anchor" tabindex="-1" aria-label="Link to <code>toObservable</code>"><code>toObservable</code></a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7eaua16kljmpgtnxh782d14v2">使用 
+<code>toObservable</code> 工具创建一个 
+<code>Observable</code>，该 Observable 跟踪信号的值。信号的值通过一个 
+<code>effect</code> 进行监控，当值变化时该效果会将值发射给 Observable。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span>, signal } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>(...)</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SearchResults</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">query</span>: <span class="hljs-title class_">Signal</span>&lt;<span class="hljs-built_in">string</span>&gt; = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">QueryService</span>).<span class="hljs-property">query</span>;</div><div class="hljs-ln-line">  query$ = <span class="hljs-title function_">toObservable</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">query</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  results$ = <span class="hljs-variable language_">this</span>.<span class="hljs-property">query$</span>.<span class="hljs-title function_">pipe</span>(</div><div class="hljs-ln-line">    <span class="hljs-title function_">switchMap</span>(<span class="hljs-function"><span class="hljs-params">query</span> =&gt;</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">http</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">'/search?q='</span> + query ))</div><div class="hljs-ln-line">  );</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="q41s00y6wijqdlrb7s21l4vw">随着 
+<code>query</code> 信号的变化，
+<code>query$</code> Observable 发出最新的查询并触发新的 HTTP 请求。</p>
+
+  <h3 id="injection-context-1">
+    <a href="#injection-context-1" class="docs-anchor" tabindex="-1" aria-label="Link to Injection context" data-ng_translator_product="100" data-ng_translator_ref_id="6i2331m8j8vxiqrm3m7o9qbot">注入上下文</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="25boot7u3awv4fazlplp6s7qh"><code>toObservable</code> 默认需要在 
+<a href="guide/di/dependency-injection-context">注入上下文</a> 中运行，例如在组件或服务的构造期间。如果没有可用的注入上下文，你可以手动指定要使用的 
+<code>Injector</code>。</p>
+
+  <h3 id="timing-of-toobservable">
+    <a href="#timing-of-toobservable" class="docs-anchor" tabindex="-1" aria-label="Link to Timing of <code>toObservable</code>" data-ng_translator_product="100" data-ng_translator_ref_id="chadzcrx5i1rr58z80yf3i6hj"><code>toObservable</code> 的时机</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2jqc6d6nsan1nd35sddexf37n"><code>toObservable</code> 使用一个效果来在 
+<code>ReplaySubject</code> 中跟踪信号的值。在订阅时，第一个值（如果可用）可能会同步发出，所有后续值将是异步的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dvxvsv6vty31ii11bolej68of">与可观察者不同，信号从不提供同步的变更通知。即使你多次更新某个信号的值，
+<code>toObservable</code> 也只会在信号稳定后发出该值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> obs$ = <span class="hljs-title function_">toObservable</span>(mySignal);</div><div class="hljs-ln-line">obs$.<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">value</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(value));</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">mySignal.<span class="hljs-title function_">set</span>(<span class="hljs-number">1</span>);</div><div class="hljs-ln-line">mySignal.<span class="hljs-title function_">set</span>(<span class="hljs-number">2</span>);</div><div class="hljs-ln-line">mySignal.<span class="hljs-title function_">set</span>(<span class="hljs-number">3</span>);</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a4ux31glrysjnefpx04bzm0wi">在这里，只会记录最后一个值（3）。</p>
+
+  <h3 id="outputfromobservable">
+    <a href="#outputfromobservable" class="docs-anchor" tabindex="-1" aria-label="Link to <code>outputFromObservable</code>"><code>outputFromObservable</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="a2wx7jxcxg1ssai7jphyz8ei6"><code>outputFromObservable(...)</code> 声明一个基于 RxJS 可观察者发出值的 Angular 输出。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDir</span> {</div><div class="hljs-ln-line">  nameChange$ = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-comment">/* ... */</span>);</div><div class="hljs-ln-line">  nameChange = <span class="hljs-title function_">outputFromObservable</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">nameChange$</span>); <span class="hljs-comment">// OutputRef&lt;string&gt;</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4w65psb6rzjvc19vtu4lcez7y">更多详情参见 
+<a href="/guide/components/output-fn">output() API 指南</a>。</p>
+
+  <h3 id="outputtoobservable">
+    <a href="#outputtoobservable" class="docs-anchor" tabindex="-1" aria-label="Link to <code>outputToObservable</code>"><code>outputToObservable</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8roa08rjiusx51v5un17o6fsk"><code>outputToObservable(...)</code> 将 Angular 输出转换为可观察者。这使你可以方便地将 Angular 输出集成到 RxJS 流中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">outputToObservable</span>(myComp.<span class="hljs-property">instance</span>.<span class="hljs-property">onNameChange</span>)</div><div class="hljs-ln-line">  .<span class="hljs-title function_">pipe</span>(...)</div><div class="hljs-ln-line">  .<span class="hljs-title function_">subscribe</span>(...)</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4w65psb6rzjvc19vtu4lcez7y">更多详情参见 
+<a href="/guide/components/output-fn">output() API 指南</a>。</p>

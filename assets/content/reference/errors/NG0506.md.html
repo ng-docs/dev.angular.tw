@@ -1,0 +1,73 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="7mcewx8qhnzwm6gjbioyt8ejr">应用保持不稳定状态</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0506.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="e8b2r994jstfcwcixudyedgry">此警告仅在水合过程启用且应用在客户端上保持不稳定状态超过一段时间（超过 10 秒）时在浏览器中出现。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ahx09k84zea24d3d95afzevv7">通常，当页面上存在一些待处理的微任务或宏任务时会发生这种情况。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7jdcctvdqb6gu9ds2nh3gbb41">Angular Hydration 依赖于 
+<code>ApplicationRef.isStable</code> 变得稳定时发出的信号：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e7ggo0u1t7umiwzau3n1l8rzn">在服务端渲染（SSR）期间启动序列化过程</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3v41jbp064217n1miw5vh2gti">在浏览器中，此信号用于启动水合后清理以删除无主的 DOM 节点</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9os4k2wc4i751o23kh0mbbjmx">当 
+<code>ApplicationRef.isStable</code> 在 10 秒内未发出 
+<code>true</code> 时，会显示此警告。如果这种行为是有意的，并且你的应用稍后会稳定，你可以选择忽略此警告。</p>
+
+  <h2 id="applications-that-use-zonejs">
+    <a href="#applications-that-use-zonejs" class="docs-anchor" tabindex="-1" aria-label="Link to Applications that use zone.js" data-ng_translator_product="100" data-ng_translator_ref_id="eb92i3fozljl8bcnpr4k3j8pi">使用 zone.js 的应用</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="154k87gxz5g0uzch0i6bxi92h">使用 zone.js 的应用可能有各种因素导致稳定性延迟。这些可能包括待处理的 HTTP 请求、计时器（
+<code>setInterval</code>、
+<code>setTimeout</code>）或一些持续调用 
+<code>requestAnimationFrame</code> 的逻辑。</p>
+
+  <h3 id="macrotasks">
+    <a href="#macrotasks" class="docs-anchor" tabindex="-1" aria-label="Link to Macrotasks" data-ng_translator_product="100" data-ng_translator_ref_id="e0czu7eo18klo4fogwnwpsao">宏任务</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8sa7eqx0pnlq4hfp3g49nmqw">宏任务包括 
+<code>setInterval</code>、
+<code>setTimeout</code>、
+<code>requestAnimationFrame</code> 等函数。如果这些函数之一在应用的初始化阶段或在引导的组件中被调用，可能会延迟应用变得稳定的时刻。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">``</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> { ... }, <span class="hljs-number">1000</span>)</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// or</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> { ... }, <span class="hljs-number">10_000</span>)</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="er4hzk3wm03cd7johp1y497h0">如果这些函数必须在初始化阶段调用，请在 Angular 区域之外调用它们以解决此问题：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> ngZone = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">NgZone</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    ngZone.<span class="hljs-title function_">runOutsideAngular</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> {}, <span class="hljs-number">1000</span>);</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="third-party-libraries">
+    <a href="#third-party-libraries" class="docs-anchor" tabindex="-1" aria-label="Link to Third-party libraries" data-ng_translator_product="100" data-ng_translator_ref_id="87o52u82ncqrzowx9fc3v0yxn">第三方库</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dhczap5oprwheibww8za93oki">某些第三方库也可能产生长时间运行的异步任务，这可能会延迟应用的稳定性。建议按照上述方式在区域之外调用相关库代码。</p>
+
+  <h3 id="running-code-after-an-application-becomes-stable">
+    <a href="#running-code-after-an-application-becomes-stable" class="docs-anchor" tabindex="-1" aria-label="Link to Running code after an application becomes stable" data-ng_translator_product="100" data-ng_translator_ref_id="cf1af02yywe90nbi35vj0rnl2">在应用变得稳定后运行代码</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ak3xkkcekbshk43yknihk09a3">你可以在应用变得稳定后运行设置异步任务的代码：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> applicationRef = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">ApplicationRef</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    applicationRef.<span class="hljs-property">isStable</span>.<span class="hljs-title function_">pipe</span>( <span class="hljs-title function_">first</span>(<span class="hljs-function">(<span class="hljs-params">isStable</span>) =&gt;</span> isStable) ).<span class="hljs-title function_">subscribe</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-comment">// Note that we don't need to use `runOutsideAngular` because `isStable`</span></div><div class="hljs-ln-line">      <span class="hljs-comment">// emits events outside of the Angular zone when it's truthy (falsy values</span></div><div class="hljs-ln-line">      <span class="hljs-comment">// are emitted inside the Angular zone).</span></div><div class="hljs-ln-line">      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> { ... });</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="zoneless-applications">
+    <a href="#zoneless-applications" class="docs-anchor" tabindex="-1" aria-label="Link to Zoneless applications" data-ng_translator_product="100" data-ng_translator_ref_id="9tmdr6uu99pdskv9he2fjzewd">Zoneless 应用</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bf8fw0ja5ry70fufbq6yj7rho">在 Zoneless 的场景中，稳定性可能会因为无限循环中运行的 
+<code>effect</code> 中的应用代码（可能是因为 effect 函数中使用的信号不断变化）或待处理的 HTTP 请求而延迟。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="d1smupwe7676g6jo58hmttfms">开发者还可以通过使用实验性的 
+<a href="/api/core/ExperimentalPendingTasks"><code>PendingTasks</code></a> 服务显式地帮助指示应用的稳定性。如果你在应用中使用了上述 API，请确保调用一个函数以标记任务已完成。</p>

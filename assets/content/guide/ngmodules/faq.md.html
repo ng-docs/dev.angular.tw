@@ -1,0 +1,436 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="kf4izi5x3qitgwqhu7mxeq4r">NgModule 常见问题</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/faq.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c3fb4uldhk51bkfbsjmx0k7i3">NgModules 可以帮你把应用组织成一些紧密相关的代码块。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bpz9taadi172xl2aexxrzkez7">这里回答的是开发者常问起的关于 NgModule 的设计与实现问题。</p>
+
+  <h2 id="what-classes-should-i-add-to-the-declarations-array">
+    <a href="#what-classes-should-i-add-to-the-declarations-array" class="docs-anchor" tabindex="-1" aria-label="Link to What classes should I add to the <code>declarations</code> array?" data-ng_translator_product="100" data-ng_translator_ref_id="q3exsvks9iv8rvncl5dvzziu">我应该向 
+<code>declarations</code> 数组中添加哪些类？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3jh5vvgg7zy1gf283hb0gtunx">将
+<a href="guide/ngmodules/bootstrapping#the-declarations-array">可声明</a>类（组件、指令和管道）添加到
+<code>declarations</code>列表中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="30ki5zqz2ulo664hv21dftwh1">在应用的
+<em>仅一个</em>模块中声明这些类。如果它们属于某个特定模块，则在该模块中声明它们。</p>
+
+  <h2 id="what-is-a-declarable">
+    <a href="#what-is-a-declarable" class="docs-anchor" tabindex="-1" aria-label="Link to What is a <code>declarable</code>?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1qz7raq4d08ykuvk6qoil7zsf">什么是可声明对象（<code>declarable</code>）？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6vq8oyjfuynp37omjbguafhbt">可声明类是你可以添加到模块的
+<code>declarations</code>列表中的类类型（组件、指令和管道）。它们是你唯一可以添加到
+<code>declarations</code>中的类。</p>
+
+  <h2 id="what-classes-should-i-not-add-to-declarations">
+    <a href="#what-classes-should-i-not-add-to-declarations" class="docs-anchor" tabindex="-1" aria-label="Link to What classes should I <em>not</em> add to <code>declarations</code>?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bkd6ebj6zb278gvy10l33lixo">哪些类<em>不</em>应该加到 <code>declarations</code> 中？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="equgqmg83a3kzuve6m7f083fz">仅将
+<a href="guide/ngmodules/bootstrapping#the-declarations-array">可声明</a>类添加到 NgModule 的
+<code>declarations</code>列表中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="63amf8hgfrdmdrd68iidaeb73"><em>不要</em>声明：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="4ua7i9vytwz60sgfc6qammc5b">已在另一个模块中声明的类，无论是应用程序模块、
+<code>@NgModule</code>还是第三方模块。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="v1gdi33mgbmv2zde41yj96cp">从另一个模块导入的一组指令。 例如，不要从
+<code>@angular/forms</code>中声明
+<code>FORMS_DIRECTIVES</code>，因为
+<code>FormsModule</code>已经声明了它。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="brfx5icvv7x0vcrnc84tj3894">模块类。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="815a6dnctobiecpg9y3gn94qm">服务类。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2ykf7z9wowex5yyav8ajkb582">非 Angular 的类和对象，比如：字符串、数字、函数、实体模型、配置、业务逻辑和辅助类。</li>
+
+  </ul>
+  
+  <h2 id="why-list-the-same-component-in-multiple-ngmodule-properties">
+    <a href="#why-list-the-same-component-in-multiple-ngmodule-properties" class="docs-anchor" tabindex="-1" aria-label="Link to Why list the same component in multiple <code>NgModule</code> properties?" data-ng_translator_product="100" data-ng_translator_ref_id="5z7invepv5ya65nk2ggsc231j">为什么要在多个 
+<code>NgModule</code> 属性中列出相同的组件？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="29c6ac348nxw3ya54bsa276jr"><code>AppComponent</code> 经常同时列在 <code>declarations</code> 和 <code>bootstrap</code> 中。另外你还可能看到它同时列在 <code>declarations</code> 和 <code>exports</code> 中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a2qtmkkv0qj39pj98de9j3fm4">这看起来是多余的，不过这些函数具有不同的功能，从它出现在一个列表中无法推断出它也应该在另一个列表中。</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2l66ya0wfi29pai0v2sjikapu"><code>AppComponent</code> 可能被声明在此模块中，但可能不是引导组件。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9aqaups5ut0rpbybn7cq5e45q"><code>AppComponent</code> 可能在此模块中引导，但可能是由另一个特性模块声明的。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5fsdwcshy4cyq9sgytwo2gpn5">某个组件可能是从另一个应用模块中导入的（所以你没法声明它）并且被当前模块重新导出。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2sl37ygwe5a1lhf4zzmd9khrs">某个组件可能被导出，以便用在外部组件的模板中，也可能同时被一个弹出式对话框加载。</li>
+
+  </ul>
+  
+  <h2 id="what-does-quotcant-bind-to-x-since-it-isnt-a-known-property-of-yquot-mean">
+    <a href="#what-does-quotcant-bind-to-x-since-it-isnt-a-known-property-of-yquot-mean" class="docs-anchor" tabindex="-1" aria-label="Link to What does &quot;Can't bind to 'x' since it isn't a known property of 'y'&quot; mean?" data-ng_translator_product="100" data-ng_translator_ref_id="3744wq1oauhi35rq6rb52a0x7">“无法绑定到 'x'，因为它不是 'y' 的已知属性”是什么意思？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c4tx6pmsbwu9dm49umpn2blg3">这个错误通常意味着你或者忘了声明指令“x”，或者你没有导入“x”所属的模块。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="82b878lr3wc3te2ixpdzppxdb"><strong>有帮助：</strong>也许你在应用程序子模块中声明了"x"，但忘记将其导出。 在将其添加到
+<code>exports</code>列表之前，"x"类对其他模块不可见。</p>
+
+    </div>
+    
+  <h2 id="what-should-i-import">
+    <a href="#what-should-i-import" class="docs-anchor" tabindex="-1" aria-label="Link to What should I import?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1e16cjhli11tzjn0u1x9xyhhi">我应该导入什么？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bvpn2rhzhk2jwji2fgl1xjxtk">导入那些公共（已导出）
+<a href="guide/ngmodules/bootstrapping#the-declarations-array">可声明类</a>的NgModule，在本模块的组件模板中需要引用这些类。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="97nltpqdy4u004oyk3x9lpbjv">这通常意味着从
+<code>@angular/common</code>中导入
+<code>CommonModule</code>，以便访问Angular指令，例如
+<code>NgIf</code>和
+<code>NgFor</code>。 你可以直接导入它，也可以从另一个NgModule中
+<a href="#can-i-re-export-classes-and-modules?">重新导出</a>它。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="pt44qiqbf2q83vy7p0v2unva">仅在根
+<code>AppModule</code>中导入
+<a href="#should-i-import-browsermodule-or-commonmodule?">BrowserModule</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="el69da37y0oh5wofd21qptjr2">如果你的组件有双向绑定表达式 
+<code>[(ngModel)]</code>，请从 
+<code>@angular/forms</code> 导入 
+<code>FormsModule</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9krtu131l9scs6cnvmdmbko6f">当你的组件使用它们的组件、指令和管道时，请导入
+<em>共享</em>和
+<em>特性</em>模块。</p>
+
+  <h2 id="should-i-import-browsermodule-or-commonmodule">
+    <a href="#should-i-import-browsermodule-or-commonmodule" class="docs-anchor" tabindex="-1" aria-label="Link to Should I import <code>BrowserModule</code> or <code>CommonModule</code>?" data-ng_translator_product="100" data-ng_translator_ref_id="52o12w2ov2e5w4rdoeyxgfhba">我应该导入 
+<code>BrowserModule</code> 还是 
+<code>CommonModule</code>？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="91eflnrq3t1blg2aihboedfd9">几乎每个浏览器应用的根应用程序模块
+<code>AppModule</code>应导入
+<code>@angular/platform-browser</code>中的
+<code>BrowserModule</code>。 
+<code>BrowserModule</code>提供了启动和运行浏览器应用程序所必需的服务。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cv517ww1hmisd7k02qhc1e09w"><code>BrowserModule</code>还从
+<code>@angular/common</code>中重新导出
+<code>CommonModule</code>， 这意味着
+<code>AppModule</code>中的组件也可以访问每个应用程序所需的 Angular 指令，例如
+<code>NgIf</code>和
+<code>NgFor</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7b1yok87ji4ivhr9g8v3wlnb5">不要在任何其他模块中导入
+<code>BrowserModule</code>。 
+<em>特性模块</em>和
+<em>延迟加载模块</em>应该导入
+<code>CommonModule</code>。 它们需要常见的指令。 它们不需要重新安装应用程序范围的提供者。</p>
+
+    <div class="docs-alert docs-alert-note">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7hd1vrbyf4by9xm0upyw1mhec"><strong>注意：</strong>导入
+<code>CommonModule</code>也可以使特性模块可以在
+<em>任何</em>目标平台上使用，而不仅仅是浏览器。</p>
+
+    </div>
+    
+  <h2 id="what-if-i-import-the-same-module-twice">
+    <a href="#what-if-i-import-the-same-module-twice" class="docs-anchor" tabindex="-1" aria-label="Link to What if I import the same module twice?" data-ng_translator_product="100" data-ng_translator_ref_id="3gbzvrwrfearxbjg9hhfpmh4z">如果我两次导入同一个模块会怎么样？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="da8socz11b431clwc0yzqkwue">没有任何问题。当三个模块全都导入模块'A'时，Angular 只会首次遇到时加载一次模块'A'，之后就不会这么做了。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3sh6upa9yffe5svw7a5scvt20">无论 <code>A</code> 出现在所导入模块的哪个层级，都会如此。如果模块'B'导入模块'A'、模块'C'导入模块'B'，模块'D'导入 <code>[C, B, A]</code>，那么'D'会触发模块'C'的加载，'C'会触发'B'的加载，而'B'会加载'A'。当 Angular 在'D'中想要获取'B'和'A'时，这两个模块已经被缓存过了，可以立即使用。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5mm3pwwsfrj6t98qtwalq4f2l">Angular 不允许模块之间出现循环依赖，所以不要让模块'A'导入模块'B'，而模块'B'又导入模块'A'。</p>
+
+  <h2 id="what-should-i-export">
+    <a href="#what-should-i-export" class="docs-anchor" tabindex="-1" aria-label="Link to What should I export?" data-ng_translator_product="100" data-ng_translator_ref_id="1jys2rejbf25ncvnrwfes33uc">我应该导出什么？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7amhzofm6rpy0iqehw0gaypvo">导出
+<a href="guide/ngmodules/bootstrapping#the-declarations-array">可声明</a>类，这些类应该能够在其他
+<em>NgModules</em>的模板中使用。 这些是你的
+<em>公共</em>类。 如果不导出可声明类，则它将保持
+<em>私有</em>，仅对在此 NgModule 中声明的其他组件可见。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ckz5wj5ncz52lydhfu8nif10z">你<em>可以</em>导出任何可声明类（组件、指令和管道），而不用管它是声明在当前模块中还是某个导入的模块中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="781ejdqjfvkgpcsnuxddc41kq">你<em>可以</em>重新导出整个导入过的模块，这将导致重新导出它们导出的所有类。重新导出的模块甚至不用先导入。</p>
+
+  <h2 id="what-should-i-not-export">
+    <a href="#what-should-i-not-export" class="docs-anchor" tabindex="-1" aria-label="Link to What should I <em>not</em> export?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7sxaz5f9dtv35g7up445xlkli">我<em>不应该</em>导出什么？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5fe4zsjquz632od2zibqr0e3t">不要导出以下内容：</p>
+
+  <ul class="docs-list">
+    <li><p data-ng_translator_product="100" data-ng_translator_ref_id="1pn1pmn0t6s4npr0679o256zl">只在此 NgModule 中声明的组件、指令和管道，仅需要在此 NgModule 中的组件中使用。 如果不希望其他 NgModule 看到它，请不要导出它。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7wxrw7z34kkrfqd1h7fbh7ips">不可声明的对象，比如服务、函数、配置、实体模型等。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="3kvlid7bgretbt0ls8rdg14hp">只有路由器动态加载或引导加载的组件。 这些组件永远不会在另一个组件的模板中被选择。 虽然导出它们没有害处，但也没有好处。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="1n8bk43w206akdmxyijcpzgx5">不具有公共（已导出）声明的纯服务模块。 例如，重新导出
+<code>HttpClientModule</code>没有意义，因为它不导出任何内容。 它的唯一目的是将http服务提供者添加到整个应用程序中。</p>
+</li>
+
+  </ul>
+  
+  <h2 id="can-i-re-export-classes-and-modules">
+    <a href="#can-i-re-export-classes-and-modules" class="docs-anchor" tabindex="-1" aria-label="Link to Can I re-export classes and modules?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="buiwj8cw8viupvbm6sikuvsyw">我可以重新导出类和模块吗？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7vo4eotcdt1sxkawzhaqaei0e">毫无疑问。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dw35su7bzz97ucr400sz7h067">模块是从其它模块中选取类并把它们重新导出成统一、便利的新模块的最佳方式。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a5hu8a79vlofzxykx7awn5bix">一个 NgModule 可以重新导出整个 NgModule，这实际上重新导出了它们所有已导出的类。 Angular 自己的
+<code>BrowserModule</code>就像这样重新导出了一些 NgModule：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">exports</span>: [<span class="hljs-title class_">CommonModule</span>, <span class="hljs-title class_">ApplicationModule</span>]</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="w71fvfssmm57p2ifbvw5goqg">模块还能导出一个组合，它可以包含自己的声明、某些导入的类以及导入的模块。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9u0cyh8rienj35ksqqgnf729w">不必重新导出纯服务模块。 纯服务模块不导出另一个 NgModule 可以使用的
+<a href="guide/ngmodules/bootstrapping#the-declarations-array">可声明</a>类。 例如，重新导出
+<code>HttpClientModule</code>没有意义，因为它不导出任何内容。 它的唯一目的是将http服务提供者添加到整个应用程序中。</p>
+
+  <h2 id="what-is-the-forroot-method">
+    <a href="#what-is-the-forroot-method" class="docs-anchor" tabindex="-1" aria-label="Link to What is the <code>forRoot()</code> method?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ailka1s0q96em45kmvkguv3e"><code>forRoot()</code> 方法是什么？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9nn39fgtnt0o5asnsqq2vv8yg"><code>forRoot()</code>静态方法是一种惯例，使开发人员可以轻松配置旨在作为单例的服务和提供者。 一个很好的
+<code>forRoot()</code>示例是
+<code>RouterModule.forRoot()</code>方法。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5qkxuloaarlm6dkc4r0zw8gly">有关
+<code>forRoot()</code>的更多信息，请参阅
+<a href="guide/ngmodules/singleton-services#the-forroot()-pattern"><code>forRoot()</code>模式</a>部分的
+<a href="guide/ngmodules/singleton-services">单例服务</a>指南。</p>
+
+  <h2 id="why-is-a-service-provided-in-a-feature-module-visible-everywhere">
+    <a href="#why-is-a-service-provided-in-a-feature-module-visible-everywhere" class="docs-anchor" tabindex="-1" aria-label="Link to Why is a service provided in a feature module visible everywhere?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7x8i2uhhe6yzusbcg6lodoqyp">为什么在特性模块中提供的服务在整个应用中都可见？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9wqjvp4b2xywt7tgg8alfa4qv">在引导模块的 
+<code>@NgModule.providers</code> 中列出的提供者具有应用范围。 将服务提供者添加到 
+<code>@NgModule.providers</code> 实际上是将该服务发布到整个应用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bmk756w9tip0w8su45jkrphvw">当你导入一个 NgModule 时，Angular 会将该模块的服务提供者（其 
+<code>providers</code> 列表的内容）添加到应用根注入器。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2zp613wqwibz4xo78dm24fusg">这会让该提供者对应用中所有知道该提供者令牌（token）的类都可见。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="jjyuadsw6vqy936zpfxg56ur">通过 NgModule 导入实现的可扩展性是 NgModule 体系的主要目标。 将 NgModule 提供者合并到应用注入器，使模块库能够轻松地为整个应用增添新的服务。 通过一次性添加 
+<code>HttpClientModule</code>，每个应用组件都可以发起 HTTP 请求。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4q95kvhbuys60ew3hcudw9abh">不过，如果你期望模块的服务只对那个特性模块内部声明的组件可见，那么这可能会带来一些不受欢迎的意外。如果 <code>HeroModule</code> 提供了一个 <code>HeroService</code>，并且根模块 <code>AppModule</code> 导入了 <code>HeroModule</code>，那么任何知道 <code>HeroService</code><em>类型</em>的类都可能注入该服务，而不仅是在 <code>HeroModule</code> 中声明的那些类。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ebkuqx2ihnhustetq98tcbl92">要限制对服务的访问，可以考虑延迟加载提供该服务的 NgModule。 参见 
+<a href="#how-do-i-restrict-service-scope-to-a-module?">如何将服务范围限制到模块？</a> 以获取更多信息。</p>
+
+  <h2 id="why-is-a-service-provided-in-a-lazy-loaded-module-visible-only-to-that-module">
+    <a href="#why-is-a-service-provided-in-a-lazy-loaded-module-visible-only-to-that-module" class="docs-anchor" tabindex="-1" aria-label="Link to Why is a service provided in a lazy-loaded module visible only to that module?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8d6u7kura4lfe84h3e8wvalgh">为什么在惰性加载模块中声明的服务提供者只对该模块自身可见？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8bexzr17su7zhc0eugcemu930">和启动时就加载的模块中的提供者不同，惰性加载模块中的提供者是<em>局限于模块</em>的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="chieh34j3vb78e8p8zug9am2r">当 Angular 路由器延迟加载一个模块时，它会创建一个新的执行上下文。 该上下文有自己的注入器
+<a href="#why-does-lazy-loading-create-a-child-injector?" title="为什么" angular 创建一个子注入器>，它是应用注入器的直接子注入器</a>。 路由器将延迟模块的提供者以及其导入的 NgModules 的提供者添加到这个子注入器。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2fbequmn1q9d2dv9qzrdgomtc">这些提供者不会被拥有相同令牌的应用级别提供者的变化所影响。当路由器在惰性加载环境中创建组件时，Angular 优先使用惰性加载模块中的服务实例，而不是来自应用的根注入器的。</p>
+
+  <h2 id="what-if-two-modules-provide-the-same-service">
+    <a href="#what-if-two-modules-provide-the-same-service" class="docs-anchor" tabindex="-1" aria-label="Link to What if two modules provide the same service?" data-ng_translator_product="100" data-ng_translator_ref_id="do3ssf799zgpo4nmoqfnoh0f5">如果两个模块提供了同一个服务会怎样？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="by6qcb1tnswx4lhw8yia49elo">当同时加载了两个导入的模块，它们都列出了使用同一个令牌的提供者时，后导入的模块会“获胜”，这是因为这两个提供者都被添加到了同一个注入器中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="421l3llro1ue2it8ediw4wb6c">当 Angular 尝试根据令牌注入服务时，它使用第二个提供者来创建并交付服务实例。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="q5hkkpdc0jgsg35m4cdz25e8"><em>每个</em>注入了该服务的类获得的都是由第二个提供者创建的实例。即使是声明在第一个模块中的类，它取得的实例也是来自第二个提供者的。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9j3zdpiepeczv9zptcdxsm0gt">如果模块 A 提供了一个使用令牌'X'的服务，并且导入的模块 B 也用令牌'X'提供了一个服务，那么模块 A 中定义的服务“获胜”了。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bqb4dpedl8odmjtnooi0ng3px">由根 <code>AppModule</code> 提供的服务相对于所导入模块中提供的服务有优先权。换句话说：<code>AppModule</code> 总会获胜。</p>
+
+  <h2 id="how-do-i-restrict-service-scope-to-a-module">
+    <a href="#how-do-i-restrict-service-scope-to-a-module" class="docs-anchor" tabindex="-1" aria-label="Link to How do I restrict service scope to a module?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1q7w15pbcu1wpn79wahdcx4sz">我应该如何把服务的范围限制到模块中？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1vecfq5rfxc2nx4slrb2g2wfg">当一个模块在应用启动时加载时，其 
+<code>@NgModule.providers</code> 具有
+<em>应用范围</em>；即，它们可以在整个应用中注入。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4qtrgca59nk6tccf5pvjrii2o">导入的提供者很容易被由其它导入模块中的提供者替换掉。这虽然是故意这样设计的，但是也可能引起意料之外的结果。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="crtszw6qizuo5wxln4enl6xe2">作为一个通用的规则，应该<em>只导入一次</em>带提供者的模块，最好在应用的<em>根模块</em>中。那里也是配置、包装和重写这些服务的最佳位置。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="aw53ge3elpzxahjz12yq222tz">假设一个模块需要一个自定义的 
+<code>HttpBackend</code>，它为所有 Http 请求添加一个特殊的标头。 如果应用中的另一个模块也自定义了 
+<code>HttpBackend</code> 或者仅仅导入了 
+<code>HttpClientModule</code>，它可能会覆盖此模块的 
+<code>HttpBackend</code> 提供者，从而失去特殊标头。 服务器将拒绝来自此模块的 http 请求。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="e32jzs91ek3yxodwis8qbqt4v">为避免这种问题，仅在 
+<code>AppModule</code>（应用
+<em>根模块</em>）中导入 
+<code>HttpClientModule</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5xa870kc62awloekk6zzids8f">如果你必须防范这种“提供者腐化”现象，那就<em>不要依赖于“启动时加载”模块的 <code>providers</code></em>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6b6ldvtuq32lkddmfrldw2t8a">如果可以，延迟加载该模块。 Angular 会为一个
+<a href="#why-is-a-service-provided-in-a-lazy-loaded-module-visible-only-to-that-module?">延迟加载模块</a>提供其自己的子注入器。 该模块的提供者仅在使用该注入器创建的组件树中可见。</p>
+
+  <h3 id="alternative-restricting-scope-to-a-component-and-its-children">
+    <a href="#alternative-restricting-scope-to-a-component-and-its-children" class="docs-anchor" tabindex="-1" aria-label="Link to Alternative: Restricting scope to a component and its children" data-ng_translator_product="100" data-ng_translator_ref_id="9pti4a6mi32eoy7k3e6eypz5i">替代方案：将范围限制在组件及其子组件</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="igncpyok3wj4woihjvc1anll">继续同样的例子，假设模块的组件确实需要一个私有的、自定义的 
+<code>HttpBackend</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a5b9szui41owozuxtss8vx0w1">创建一个「顶级组件」，作为该模块所有组件的根。 将自定义的 
+<code>HttpBackend</code> 提供者添加到顶级组件的 
+<code>providers</code> 列表中，而不是模块的 
+<code>providers</code> 列表中。 回想一下，Angular 为每个组件实例创建一个子注入器，并用组件自己的提供者填充该注入器。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3aomrv3sp4v79zvrb4psayg2a">当此组件的子组件请求 
+<code>HttpBackend</code> 服务时，Angular 提供的是本地 
+<code>HttpBackend</code> 服务，而不是应用根注入器中提供的版本。因此，子组件可以进行配置好的 HTTP 请求，无论其他模块如何配置 
+<code>HttpBackend</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eh62f44z1av1ljcc5nfvcuqgc">确保将需要访问这个特殊配置的 
+<code>HttpBackend</code> 的组件创建为此组件的子组件。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3slihikvxpgms81csiqhav8cw">你可以将子组件嵌入到顶层组件的模板中。或者，通过给顶层组件一个 
+<code>&lt;router-outlet&gt;</code> 使其成为路由宿主。定义子路由并让路由器将模块组件加载到该插座中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7vwofb1tcc9bo9v7pvwq1xzoh">虽然通过在惰性加载模块中或组件中提供某个服务来限制它的访问都是可行的方式，但在组件中提供服务可能导致这些服务出现多个实例。因此，应该优先使用惰性加载的方式。</p>
+
+  <h2 id="should-i-add-application-wide-providers-to-the-root-appmodule-or-the-root-appcomponent">
+    <a href="#should-i-add-application-wide-providers-to-the-root-appmodule-or-the-root-appcomponent" class="docs-anchor" tabindex="-1" aria-label="Link to Should I add application-wide providers to the root <code>AppModule</code> or the root <code>AppComponent</code>?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8j8fqi96eaqi6tvyjfar89e1">我应该把全应用级提供者添加到根模块 <code>AppModule</code> 中还是根组件 <code>AppComponent</code> 中？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5gs63ypve77jsdiqjvhudl2mj">通过在服务的 
+<code>@Injectable()</code> 装饰器中指定 
+<code>providedIn: 'root'</code> 或在构建 
+<code>InjectionToken</code> 时定义应用范围的提供者（在提供令牌的情况下）。这种方式创建的提供者会自动用于整个应用，不需要列在任何模块中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2uenb234hc983c6yh2ac42yb8">如果某个提供者不能用这种方式配置（可能因为它没有有意义的默认值），那就在根模块 <code>AppModule</code> 中注册这些全应用级服务，而不是在 <code>AppComponent</code> 中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9hghs4n9ib25khz97vcgb2cgr">惰性加载模块及其组件可以注入 <code>AppModule</code> 中的服务，却不能注入 <code>AppComponent</code> 中的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6g4jc5jcndny82s5ec1858w2u"><em>仅</em>在
+<code>AppComponent</code>的提供者中注册服务的情况下，该服务必须对
+<code>AppComponent</code>树外的组件隐藏。这是一种罕见的用例。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1bmkkjdts1q393bqys0tq1ha7">更普遍地，
+<a href="#should-i-add-other-providers-to-a-module-or-a-component?">优先在 NgModules 中注册提供者</a> 而不是在组件中注册。</p>
+
+  <h3 id="discussion">
+    <a href="#discussion" class="docs-anchor" tabindex="-1" aria-label="Link to Discussion" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e51zlya75cbuqy3o40kio43hf">讨论</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4xiuo5idsw0ca7l7ape7cz29j">Angular 将所有启动模块提供者注册到应用根注入器中。根注入器创建的服务具有应用范围，这意味着它们对整个应用可用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4vnwblwqdtbbptbv659mkgy3f">某些服务（如 
+<code>Router</code>）只有在应用根注入器中注册时才能工作。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ble9ah6k0jrbb1kolxdcpcd4">相比之下，Angular 将
+<code>AppComponent</code>的提供者注册到
+<code>AppComponent</code>自己的注入器中。
+<code>AppComponent</code>服务仅对该组件及其组件树可用。它们具有组件范围。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dsr3vuodwax3u2mpd1rdhezl1"><code>AppComponent</code>的注入器是根注入器的子级，在注入器层级中稍低一级。对于不使用路由器的应用来说，这几乎是整个应用。但在使用路由的应用中，路由在根级别操作，这里
+<code>AppComponent</code>服务不存在。这意味着惰性加载的模块无法访问它们。</p>
+
+  <h2 id="should-i-add-other-providers-to-a-module-or-a-component">
+    <a href="#should-i-add-other-providers-to-a-module-or-a-component" class="docs-anchor" tabindex="-1" aria-label="Link to Should I add other providers to a module or a component?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="10yvigwtmiry3t76v6ig5qrhu">我应该把其它提供者注册到模块中还是组件中？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="be1gasxsduj9dq7xrh9fap0mq">应使用 
+<code>@Injectable</code> 语法配置提供者。如果可能，应在应用根中提供（
+<code>providedIn: 'root'</code>）。以这种方式配置的服务，如果仅从延迟加载的上下文中使用，则会延迟加载。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1g4pxgcculbh5k40gsoiqkiuu">如果是否在应用范围内可用是由使用者决定的，那么应在模块（
+<code>@NgModule.providers</code>）中注册提供者，而不是在组件（
+<code>@Component.providers</code>）中注册。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aun1ex6jwtmsral8ev8m9n4e9">当你<em>必须</em>把服务实例的范围限制到某个组件及其子组件树时，就把提供者注册到该组件中。指令的提供者也同样照此处理。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="brgeblsftbb346ygw7dudz8fm">比如，如果英雄编辑组件需要自己私有的缓存英雄服务实例，那就应该在本组件中注册此服务。这样，本组件的每个新实例都会得到一份自己的缓存服务实例。编辑器的改动只会作用于它自己的服务，而不会影响到应用中其它地方的英雄实例。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="14z7mj0hy9z12omi658yo3ij3"><a href="#should-i-add-application-wide-providers-to-the-root-appmodule-or-the-root-appcomponent?">始终将<em>应用范围</em>的服务注册到根<code>AppModule</code></a>，而不是根
+<code>AppComponent</code>。</p>
+
+  <h2 id="why-is-it-bad-if-a-shared-module-provides-a-service-to-a-lazy-loaded-module">
+    <a href="#why-is-it-bad-if-a-shared-module-provides-a-service-to-a-lazy-loaded-module" class="docs-anchor" tabindex="-1" aria-label="Link to Why is it bad if a shared module provides a service to a lazy-loaded module?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6690idlmkoo75mgw93vpradyz">为什么在共享模块中为惰性加载模块提供服务是个馊主意？</a>
+  </h2>
+  
+  <h3 id="the-eagerly-loaded-scenario">
+    <a href="#the-eagerly-loaded-scenario" class="docs-anchor" tabindex="-1" aria-label="Link to The eagerly loaded scenario" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="axohv88mjbupeuk35fmrwzo7l">急性加载的场景</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8awrptwq5rmlufgto8i758mrn">当急性加载的模块提供某个服务（例如 
+<code>UserService</code>）时，该服务在整个应用中都是可用的。如果根模块提供 
+<code>UserService</code> 并且导入另一个提供相同 
+<code>UserService</code> 的模块，Angular 会在根应用注入器中注册其中一个（参见 
+<a href="#what-if-i-import-the-same-module-twice?">如果我两次导入相同的模块会怎样？</a>）。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9eob5zn12k9zi2om4azrae67t">然后，当某些组件注入 <code>UserService</code> 时，Angular 就会发现它已经在应用的根注入器中了，并交付这个全应用级的单例服务。这样不会出现问题。</p>
+
+  <h3 id="the-lazy-loaded-scenario">
+    <a href="#the-lazy-loaded-scenario" class="docs-anchor" tabindex="-1" aria-label="Link to The lazy loaded scenario" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5w1jx7br7jhy4m4z46mg948pp">惰性加载场景</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cd2znw82mlpmducfiz6izohvp">现在，考虑一个惰性加载的模块，它也提供了一个名叫 <code>UserService</code> 的服务。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="et8zxyx3hw760c1b3vm4ewjgg">当路由器准备惰性加载某个模块的时候，它会创建一个子注入器，并且把 <code>UserService</code> 的提供者注册到那个子注入器中。子注入器和根注入器是<em>不同</em>的。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ehaai872834f33ihw4bgci6br">当 Angular 为该模块创建惰性组件并注入
+<code>UserService</code>时，它在惰性模块的
+<em>子注入器</em>中找到
+<code>UserService</code>提供者，并创建
+<em>新</em>的
+<code>UserService</code>实例。这是一个完全不同的
+<code>UserService</code>实例，而不是 Angular 在某个急性加载组件中注入的应用范围单例版本。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bmnkmyc6lx4jcg7twb8o75wum">这个场景导致你的应用每次都创建一个新的服务实例，而不是使用单例的服务。</p>
+
+  <h2 id="why-does-lazy-loading-create-a-child-injector">
+    <a href="#why-does-lazy-loading-create-a-child-injector" class="docs-anchor" tabindex="-1" aria-label="Link to Why does lazy loading create a child injector?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4fr5cegjhii7hzy24nlj29foo">为什么惰性加载模块会创建一个子注入器？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ep7m19dfmantp2ndd67ag48nh">Angular 将
+<code>@NgModule.providers</code>添加到应用根注入器，除非该 NgModule 是惰性加载的。对于惰性加载的 NgModule，Angular 会创建
+<em>子注入器</em>并将模块的提供者添加到子注入器中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9gsyshlk10gg8a8hmye9w973l">这意味着 NgModule 的行为取决于它是在应用启动时加载还是后来延迟加载的。忽视这种差异可能会导致不良后果（参见 
+<a href="#why-is-it-bad-if-a-shared-module-provides-a-service-to-a-lazy-loaded-module?">为什么共享模块为延迟加载模块提供服务是有害的？</a>）。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1t5j2yps1xc2vcvorfasc120t">为什么 Angular 不能像主动加载模块那样把惰性加载模块的提供者也添加到应用程序的根注入器中呢？为什么会出现这种不一致？</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9flamf9zx2x7qu0taw5hu6ulo">答案基于 Angular 依赖注入体系的一个基本特性。注入器可以添加提供者，
+<em>直到它首次被使用</em>。一旦注入器开始创建和提供服务，其提供者列表就会冻结；不允许添加新提供者。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="jk2jc9wnc4ih3xb56ecfcipp">当应用启动时，Angular 首先配置根注入器及所有急性加载的 NgModule 提供者，
+<em>然后</em>创建其第一个组件并注入任何提供的服务。一旦应用开始，应用根注入器就不再接受新提供者。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1k3gydge0qrbh7xqsz99577rl">时间过去，应用逻辑触发某个 NgModule 的惰性加载。Angular 必须将惰性加载模块的提供者添加到某个注入器中。它无法将它们添加到应用根注入器，因为该注入器已关闭以接受新提供者。所以 Angular 为惰性加载模块上下文创建一个新的子注入器。</p>
+
+  <h2 id="how-can-i-tell-if-an-ngmodule-or-service-was-previously-loaded">
+    <a href="#how-can-i-tell-if-an-ngmodule-or-service-was-previously-loaded" class="docs-anchor" tabindex="-1" aria-label="Link to How can I tell if an NgModule or service was previously loaded?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bn149kiy3hogx2qjpkwp6xbx2">我要如何知道一个模块或服务是否已经加载过了？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="38up7ygx6nvtsi1ou27xk85iv">某些 NgModule 及其服务应该只由根 
+<code>AppModule</code> 加载一次。通过延迟加载某个模块再次导入该模块可能会
+<a href="#why-is-it-bad-if-a-shared-module-provides-a-service-to-a-lazy-loaded-module?">产生难以检测和诊断的错误行为</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="yjltg6xqgaaengvva165h2a4">为了防范这种风险，可以写一个构造函数，它会尝试从应用的根注入器中注入该模块或服务。如果这种注入成功了，那就说明这个类是被第二次加载的，你就可以抛出一个错误，或者采取其它挽救措施。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eypcyfltmtokqubrgd4cvz0gp">某些 NgModule（如 
+<code>BrowserModule</code>）实现了这样的防护机制。以下是一个名为 
+<code>GreetingModule</code> 的 NgModule 自定义构造函数。</p>
+<div class="docs-code" header="src/app/greeting/greeting.module.ts">
+    <div class="docs-code-header"><h3>src/app/greeting/greeting.module.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GreetingModule</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Optional</span>() <span class="hljs-meta">@SkipSelf</span>() parentModule?: GreetingModule</span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (parentModule) {</div><div class="hljs-ln-line">      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(</div><div class="hljs-ln-line">        <span class="hljs-string">'GreetingModule is already loaded. Import it in the AppModule only'</span>);</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="what-kinds-of-modules-should-i-have-and-how-should-i-use-them">
+    <a href="#what-kinds-of-modules-should-i-have-and-how-should-i-use-them" class="docs-anchor" tabindex="-1" aria-label="Link to What kinds of modules should I have and how should I use them?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a6yyld2ye5n3zswpwej68mtwh">有哪些类型的模块？我应该如何使用它们？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7s3ueg0s15ifs2kswa8gjnw9b">每个应用都不一样。根据不同程度的经验，开发者会做出不同的选择。下列建议和指导原则广受欢迎。</p>
+
+  <h3 id="sharedmodule">
+    <a href="#sharedmodule" class="docs-anchor" tabindex="-1" aria-label="Link to <code>SharedModule</code>"><code>SharedModule</code></a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4b2o2re47l2sz5nwq58dgtapa"><code>SharedModule</code> 是一个常规名称，用于包含应用中各处使用的组件、指令和管道的 
+<code>NgModule</code>。此模块应该完全由 
+<code>declarations</code> 组成，其中大多数应导出。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2b5x3ycxvhd52iuf1akyt9l4v"><code>SharedModule</code> 可以重新导出其他小部件模块，如 
+<code>CommonModule</code>、
+<code>FormsModule</code> 以及包含你最常用的 UI 控件的 NgModule。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6xxqta36yuqdky29pigrq8gg"><code>SharedModule</code>不应有
+<code>providers</code>，原因如
+<a href="#why-is-it-bad-if-a-shared-module-provides-a-service-to-a-lazy-loaded-module?">前面解释</a>。它的导入或重新导出的模块也不应有
+<code>providers</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4efwrl8gzlgnrob9bnmklyv12">在你的
+<em>特性</em>模块中导入 
+<code>SharedModule</code>。</p>
+
+  <h3 id="feature-modules">
+    <a href="#feature-modules" class="docs-anchor" tabindex="-1" aria-label="Link to Feature Modules" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6fljutr1i4kb9wann6aj1uskb">特性模块</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3vorvyzb1qgpu2ljhgfd8carr">特性模块是你围绕特定的应用业务领域创建的模块，比如用户工作流、小工具集等。它们包含指定的特性，并为你的应用提供支持，比如路由、服务、窗口部件等。要对你的应用中可能会有哪些特性模块有个概念，考虑如果你要把与特定功能（比如搜索）有关的文件放进一个目录下，该目录的内容就可能是一个名叫 <code>SearchModule</code> 的特性模块。它将会包含构成搜索功能的全部组件、路由和模板。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eh6dysrtsxc6t2kitb60vqznd">欲了解更多信息，请参见
+<a href="guide/ngmodules/feature-modules">特性模块</a>和
+<a href="guide/ngmodules/module-types">模块类型</a></p>
+
+  <h2 id="whats-the-difference-between-ngmodules-and-javascript-modules">
+    <a href="#whats-the-difference-between-ngmodules-and-javascript-modules" class="docs-anchor" tabindex="-1" aria-label="Link to What's the difference between NgModules and JavaScript Modules?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="61z9e97qlnd1yb5jeq5lpwdsg">在 NgModule 和 JavaScript 模块之间有什么不同？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="58ugd7lznfuwrxhwpl57b5c1v">在 Angular 应用中，NgModule 会和 JavaScript 的模块一起工作。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a2yuazsehv0lu1ukrznukxnaf">在现代 JavaScript 中，每个文件都是一个模块（参见 Exploring ES6 网站的
+<a href="https://exploringjs.com/es6/ch_modules.html" target="_blank">模块</a>页面）。在每个文件中，你编写 
+<code>export</code> 语句以公开模块的一部分。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6pc9f46yplqmx3f52ier9tzbv">一个 Angular NgModule 是一个带有 
+<code>@NgModule</code> 装饰器的类 — JavaScript 模块不需要有 
+<code>@NgModule</code> 装饰器。Angular 的 
+<code>NgModule</code> 有 
+<code>imports</code> 和 
+<code>exports</code>，它们的功能类似。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f0fcx4qh2l2cacde8fuhxekwy">你可以<em>导入</em>其它 NgModules，以便在当前模块的组件模板中使用它们导出的类。你可以<em>导出</em>当前 NgModules 中的类，以便<em>其它</em> NgModules 可以导入它们，并用在自己的组件模板中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="sfa409nyc2s32aj038y2dc8u">欲了解更多信息，请参见
+<a href="guide/ngmodules/vs-jsmodule">JavaScript 模块与 NgModules</a>。</p>
+
+  <h2 id="what-is-a-template-reference">
+    <a href="#what-is-a-template-reference" class="docs-anchor" tabindex="-1" aria-label="Link to What is a template reference?" data-ng_translator_product="100" data-ng_translator_ref_id="7d3unzcuv2pnycnsesc7t4754">什么是模板引用？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5u9j1leuv5emtkoymp1tkou6">Angular 如何在模板中找到组件、指令和管道？</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="c23hzd5x3mfqs6vrla0enm6ss"><a href="#what-is-the-angular-compiler?">Angular 编译器</a>在组件模板中查找其他组件、指令和管道。找到时，这就是一个模板引用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dh2htgezwcf8qtyqg1itwjfd8">当 Angular 编译器在模板中找到组件或指令时，是因为它可以将该组件或指令的
+<em>选择器</em>与模板中的某些 HTML 匹配。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="98fcekn2j3ewz68vmywbkxnmu">如果管道的
+<em>名称</em>出现在模板 HTML 的管道语法中，编译器就会找到此管道。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4j16vpk2t7nzrpw2b9w9vjexz">Angular 只会在当前模块中声明过的那些类或被当前模块导入的模块所导出的那些类中匹配这些选择器和管道名。</p>
+
+  <h2 id="what-is-the-angular-compiler">
+    <a href="#what-is-the-angular-compiler" class="docs-anchor" tabindex="-1" aria-label="Link to What is the Angular compiler?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="mmd1tmgvcr0we30ml68k78xa">什么是 Angular 编译器？</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1tepovsitp099jch0n8rbs9pk">Angular 编译器将你编写的应用代码转换为高性能的 JavaScript 代码。
+<code>@NgModule</code> 元数据在指导编译过程中起着重要作用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3xs2h093co9nz4j88pyo2grd5">你编写的代码不会立即执行。 例如，组件有包含自定义元素、属性型指令、Angular 绑定声明和某些显然不是原生 HTML 的特有语法的模板。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="asb0bbbhlj1tv7yw11ekor0cn">Angular 编译器读取模板标记，将其与对应的组件类代码结合，并发出
+<em>组件工厂</em>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9zi4rhg77clpz5wu7y54nlrdc">组件工厂创建一个纯粹的 100% JavaScript 表示形式的组件，包含其 
+<code>@Component</code> 元数据中描述的所有内容：HTML、绑定指令、附着样式。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7ktidz70ep9xnfmbfztrsmwgs">由于指令和管道出现在组件模板中，Angular 编译器也将它们纳入编译后的组件代码中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="d0ppglitlomezbhwcskk8zpzv"><code>@NgModule</code> 元数据告诉 Angular 编译器哪些组件要为此模块编译，以及如何将此模块与其他模块关联。</p>

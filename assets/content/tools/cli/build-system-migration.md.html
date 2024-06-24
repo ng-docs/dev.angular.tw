@@ -1,0 +1,292 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="f08ebf1i9lg913cyia17lznh8">迁移到新的构建系统</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/build-system-migration.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="a9yrz43osae8ht7a3ah7duuur">在 v17 及更高版本中，新的构建系统提供了一种改进的方式来构建 Angular 应用。这个新的构建系统包括：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="brr3umunat7p3wx4wpqq2w2x7">使用 ESM 的现代输出格式，带有动态导入表达式以支持延迟模块加载。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9u48qvxb9wl9r8sq04qwi2dud">初始构建和增量重建的构建时性能更快。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="66hqovaqde56kp0evr6jv7fls">更新的 JavaScript 生态系统工具，如 
+<a href="https://esbuild.github.io/" target="_blank">esbuild</a> 和 
+<a href="https://vitejs.dev/" target="_blank">Vite</a>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="6x93k70ci8hasxmxhpymjilzg">集成的 SSR 和预渲染能力。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="cc4irnzqcsw5gvtxlkoykxlwq">这个新的构建系统是稳定的，并且完全支持与 Angular 应用一起使用。你可以将使用 
+<code>browser</code> 构建器的应用迁移到新的构建系统。如果使用自定义构建器，请参考该构建器的文档以了解可能的迁移选项。</p>
+
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="6imzfvk63jnvuxg48124dtja9"><strong>重要：</strong> 现有的基于 Webpack 的构建系统仍被认为是稳定的，并且完全支持。应用可以继续使用 
+<code>browser</code> 构建器，更新时不会自动迁移。</p>
+
+    </div>
+    
+  <h2 id="for-new-applications">
+    <a href="#for-new-applications" class="docs-anchor" tabindex="-1" aria-label="Link to For new applications" data-ng_translator_product="100" data-ng_translator_ref_id="3ocsdrlw5kvnkhdpph5ych1p7">对于新应用</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="alopbgds8avk3lhyzhp5g2mc7">新应用将默认通过 
+<code>application</code> 构建器使用这个新的构建系统。</p>
+
+  <h2 id="for-existing-applications">
+    <a href="#for-existing-applications" class="docs-anchor" tabindex="-1" aria-label="Link to For existing applications" data-ng_translator_product="100" data-ng_translator_ref_id="dsfzgizjbbgjfrvlcbi93gr31">对于现有应用</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bca0yy4d57nxxdq7xbj3h4h3c">根据项目的需求，有自动和手动的迁移程序。从 v18 开始，更新过程将询问你是否希望通过自动迁移将现有应用迁移到新的构建系统。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="3850fta84ldvvi8okptczege6"><strong>提示：</strong> 如果使用 SSR，请记住在应用服务器代码中删除任何 CommonJS 假设（如 
+<code>require</code>、
+<code>__filename</code>、
+<code>__dirname</code> 或其他来自 
+<a href="https://nodejs.org/api/modules.html#the-module-scope" target="_blank">CommonJS 模块范围</a> 的构造）。所有应用代码应兼容 ESM。这不适用于第三方依赖。</p>
+
+    </div>
+    
+  <h3 id="automated-migration-recommended">
+    <a href="#automated-migration-recommended" class="docs-anchor" tabindex="-1" aria-label="Link to Automated migration (Recommended)" data-ng_translator_product="100" data-ng_translator_ref_id="1jijsnj60f9p200pj58pcwc3b">自动迁移（推荐）</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="apbcohpbsnpugwbo63e2jytnu">自动迁移将调整 
+<code>angular.json</code> 中的应用配置以及代码和样式表，以去除之前特有的 Webpack 特性用法。虽然许多更改可以自动完成，大多数应用不需要进一步更改，但每个应用都是独特的，可能需要一些手动更改。迁移后，请尝试构建应用，因为可能会有新的错误需要在代码中进行调整。错误会尽可能提供问题的解决方案，本指南后面的部分描述了一些你可能遇到的更常见情况。当通过 
+<code>ng update</code> 更新到 Angular v18 时，将要求你执行迁移。这个迁移对于 v18 是完全可选的，也可以在更新后随时通过以下命令手动运行：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng update @angular/cli --name use-application-builder</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dnuxfyvxe9h00bly724rij1dn">迁移执行以下操作：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="bni81fzyrjd06arac5khrh6y3">将现有的 
+<code>browser</code> 或 
+<code>browser-esbuild</code> 目标转换为 
+<code>application</code></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="65bfswavfmst1xypecfd4b2l3">移除之前的任何 SSR 构建器（因为 
+<code>application</code> 现在已经包含了这些功能）。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="38per68qfftx7h2tabgz32t12">相应地更新配置。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="cx02f8vsf97yh6a60mwokah8y">将 
+<code>tsconfig.server.json</code> 和 
+<code>tsconfig.app.json</code> 合并，并添加 TypeScript 选项 
+<code>"esModuleInterop": true</code>，以确保 
+<code>express</code> 导入符合 
+<a href="#esm-default-imports-vs-namespace-imports">ESM 规范</a>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="dwbwrnzxtted0l8w0t09sljrh">更新应用服务器代码，以使用新的引导和输出目录结构。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="b6bbr3dzs95rgr2vhg5iqpk1c">移除任何 Webpack 特定的构建器样式表用法（如 
+<code>@import</code>/
+<code>url()</code> 中的波浪号或插入符号），并更新配置以提供等效行为。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="6hdiq0d6in28cp7g1xjn1zkmg">如果没有发现其他 
+<code>@angular-devkit/build-angular</code> 的使用，将转换为使用新的低依赖 
+<code>@angular/build</code> Node.js 包。</li>
+
+  </ul>
+  
+  <h3 id="manual-migration">
+    <a href="#manual-migration" class="docs-anchor" tabindex="-1" aria-label="Link to Manual migration" data-ng_translator_product="100" data-ng_translator_ref_id="6r4n4p3qmhxt22f3xs7udi5g3">手动迁移</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="c80jgy8hoznsjkuur6c9ctvqz">此外，对于现有项目，你可以在每个应用基础上手动选择使用新的构建器，有两个不同选项。两种选项都被 Angular 团队认为是稳定且完全支持的。选择哪种选项取决于你需要进行的迁移更改数量以及你希望在项目中使用的新特性。</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="6tmuo7niq8sjlbzq2jgtx8i82"><code>browser-esbuild</code> 构建器仅构建应用的客户端捆绑包，设计为与提供预先构建系统的现有 
+<code>browser</code> 构建器兼容。它作为现有 
+<code>browser</code> 应用的直接替代品。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="ot6m3uoalew82ltvtffvyjdb"><code>application</code> 构建器涵盖整个应用，如客户端捆绑包，还可以选择构建用于服务端渲染的服务器，并执行静态页面的构建时预渲染。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="19o2sb200wr80j37w7kmqvmu7"><code>application</code> 构建器通常是首选，因为它改进了服务端渲染（SSR）构建，并使将来客户端渲染项目更容易采用 SSR。然而，它需要更多的迁移工作，特别是对于现有的 SSR 应用，如果手动执行迁移。如果你的项目难以采用 
+<code>application</code> 构建器，
+<code>browser-esbuild</code> 可以是一个更容易的解决方案，它在较少的破坏性更改情况下提供大部分构建性能的优势。</p>
+
+  <h4 id="manual-migration-to-the-compatibility-builder">
+    <a href="#manual-migration-to-the-compatibility-builder" class="docs-anchor" tabindex="-1" aria-label="Link to Manual migration to the compatibility builder" data-ng_translator_product="100" data-ng_translator_ref_id="4lfptl5v73dolfsid9wk1lsxb">手动迁移到兼容性构建器</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="e1imgwtcck14ib0gevkhvt9hd">名为 
+<code>browser-esbuild</code> 的构建器在 
+<code>@angular-devkit/build-angular</code> 包中可用，该包存在于 Angular CLI 生成的应用中。你可以尝试新的构建系统，适用于使用 
+<code>browser</code> 构建器的应用。如果使用自定义构建器，请参考该构建器的文档以了解可能的迁移选项。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="emmnrxwdb74h3pibwxymtr7r3">兼容性选项旨在尽量减少初始迁移应用所需的更改量。这是通过备用构建器（
+<code>browser-esbuild</code>）提供的。你可以更新任何应用目标的 
+<code>build</code> 目标以迁移到新的构建系统。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9spw2i9szajkpnh272sc3ty61">以下是你通常会在应用程序的 <code>angular.json</code> 中找到的内容：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"><span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:browser"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">...</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="vkficvjtoyx3jb8yu6mj2xus">更改 <code>builder</code> 字段就是你要进行的唯一更改。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"><span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:browser-esbuild"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">...</div></code>
+    </pre>
+  </div>
+  <h4 id="manual-migration-to-the-new-application-builder">
+    <a href="#manual-migration-to-the-new-application-builder" class="docs-anchor" tabindex="-1" aria-label="Link to Manual migration to the new <code>application</code> builder" data-ng_translator_product="100" data-ng_translator_ref_id="3a9xpl801czu5ui9lvwydnwmo">手动迁移到新的 
+<code>application</code> 构建器</a>
+  </h4>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="c072pgi6zeyw5diwivzpaq6t4">名为 
+<code>application</code> 的构建器在 
+<code>@angular-devkit/build-angular</code> 包中也可用，该包存在于 Angular CLI 生成的应用中。这个构建器是通过 
+<code>ng new</code> 创建的所有新应用的默认构建器。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9spw2i9szajkpnh272sc3ty61">以下是你通常会在应用程序的 <code>angular.json</code> 中找到的内容：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"><span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:browser"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">...</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="e28dtzun0ix5qecd9hh8eexqy">更改 
+<code>builder</code> 字段是你需要进行的第一个更改。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"><span class="hljs-attr">"architect"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">  <span class="hljs-attr">"build"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></div><div class="hljs-ln-line">    <span class="hljs-attr">"builder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"@angular-devkit/build-angular:application"</span><span class="hljs-punctuation">,</span></div><div class="hljs-ln-line">...</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="45qws6a154jbxn70sg50neud">一旦更改了构建器名称，需要更新 
+<code>build</code> 目标中的选项。以下列表讨论了所有需要调整的 
+<code>browser</code> 构建器选项。</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="6koxpussxeco8zdilqk3ms1sq"><code>main</code> 应该重命名为 
+<code>browser</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="7kxaavvoka13fjvi06zpx520"><code>polyfills</code> 应该是一个数组，而不是一个单一文件。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="9aimwv8xb6wlripil1d03kyur"><code>buildOptimizer</code> 应该被移除，因为这由 
+<code>optimization</code> 选项覆盖。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="95pq351boutjek9jh8p8b7y4h"><code>resourcesOutputPath</code> 应该被移除，现在始终为 
+<code>media</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="bky3cwoj6f46nuuhbfj4u5fb"><code>vendorChunk</code> 应该移除，因为这是一个不再需要的性能优化。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="cii372aejh417g02m03gc32lz"><code>commonChunk</code> 应该移除，因为这是一个不再需要的性能优化。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="bs55365r158f5c6isftzat2cd"><code>deployUrl</code> 应该移除且不再支持。请改用 
+<a href="guide/routing/common-router-tasks"><code>&lt;base href&gt;</code></a>。更多信息请参阅 
+<a href="tools/cli/deployment#--deploy-url">部署文档</a>。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="8ngvp1046cvoz63bgk4i9829b"><code>ngswConfigPath</code> 应该重命名为 
+<code>serviceWorker</code>。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ezmwmc4w7ryukxm6hdh9x2e5g">如果应用当前没有使用 SSR，这是允许 
+<code>ng build</code> 正常运行的最后一步。 在第一次执行 
+<code>ng build</code> 后，可能会基于行为差异或应用使用 Webpack 特性的情况出现新的警告或错误。 许多警告会提供如何解决该问题的建议。 如果警告看起来不正确或者解决方案不明显，请在 
+<a href="https://github.com/angular/angular-cli/issues" target="_blank">GitHub</a> 上提交问题。 此外，本指南的后面部分还提供了一些具体情况的补充信息以及当前已知的问题。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3daotgic2tlfg0pms0cy3maoo">对于新使用 SSR 的应用，
+<a href="guide/ssr">Angular SSR 指南</a> 提供了有关为应用添加 SSR 的设置过程的更多信息。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="a4lr3vqgr9prqvzrjh82pn05n">对于已经使用 SSR 的应用，需要进行额外调整以更新应用服务器，从而支持新的集成 SSR 功能。 
+<code>application</code> 构建器现在提供了所有以下预先存在的构建器的集成功能：</p>
+
+  <ul class="docs-list">
+    <li><code>app-shell</code></li>
+<li><code>prerender</code></li>
+<li><code>server</code></li>
+<li><code>ssr-dev-server</code></li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dix4lfepvj411543ht1a3j607"><code>ng update</code> 过程将自动移除 
+<code>@nguniversal</code> 范围包的使用，这些包中先前包含了一些构建器。 新的 
+<code>@angular/ssr</code> 包也会被自动添加，并在更新过程中调整配置和代码。 
+<code>@angular/ssr</code> 包支持 
+<code>browser</code> 构建器和 
+<code>application</code> 构建器。</p>
+
+  <h2 id="executing-a-build">
+    <a href="#executing-a-build" class="docs-anchor" tabindex="-1" aria-label="Link to Executing a build" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4y4mmt2u3qngb48uy6h0vppb0">执行构建</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3i7870iwenfzkq4wwdlzpxs0c">更新应用配置后，可以像之前一样使用 
+<code>ng build</code> 进行构建。 根据选择的构建器迁移，一些命令行选项可能会有所不同。 如果构建命令包含在任何 
+<code>npm</code> 或其他脚本中，请确保审阅并更新它们。 对于已迁移到 
+<code>application</code> 构建器并使用 SSR 和/或预渲染的应用，现在 
+<code>ng build</code> 已集成 SSR 支持，你也可以从脚本中移除额外的 
+<code>ng run</code> 命令。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng build</div></code>
+    </pre>
+  </div>
+  <h2 id="starting-the-development-server">
+    <a href="#starting-the-development-server" class="docs-anchor" tabindex="-1" aria-label="Link to Starting the development server" data-ng_translator_product="100" data-ng_translator_ref_id="18e081k2p966lrlu4dm2hrx0t">启动开发服务器</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7eprrlvelx0cq2w5ggn507otr">开发服务器将自动检测新的构建系统并使用它来构建应用。 要启动开发服务器，无需对 
+<code>dev-server</code> 构建器配置或命令行进行更改。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng serve</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="900l0uhnq5r052mu4gswj3lo6">你可以继续使用以前在开发服务器上使用过的那些<a href="/cli/serve">命令行选项</a>。</p>
+
+  <h2 id="hot-module-replacement">
+    <a href="#hot-module-replacement" class="docs-anchor" tabindex="-1" aria-label="Link to Hot module replacement" data-ng_translator_product="100" data-ng_translator_ref_id="6omfnl7wm6eviiceh1spm3nn0">热模块替换</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="exlvwu7aq2cukif8ur10gf48c">当前不支持基于 JavaScript 的热模块替换 (HMR)。 然而，全局样式表 (
+<code>styles</code> 构建选项) 的 HMR 可用并且默认启用。 以 Angular 为重点的 HMR 功能目前正在计划中，并将在未来的版本中引入。</p>
+
+  <h2 id="unimplemented-options-and-behavior">
+    <a href="#unimplemented-options-and-behavior" class="docs-anchor" tabindex="-1" aria-label="Link to Unimplemented options and behavior" data-ng_translator_product="100" data-ng_translator_ref_id="c4wwdh7v3u03vbzxlgw90pt52">未实现的选项和行为</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d44vzw5b7btju8g7maqssjkgf">几个构建选项尚未实现，但将在构建系统走向稳定状态时添加进去。如果你的应用程序使用这些选项，你仍然可以在不删除它们的情况下试用构建系统。将为任何未实现的选项发出警告，并在构建时忽略它们。但是，如果你的应用程序依赖于这些选项中的任何一个来运行，你可能需要等等才能尝试。</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="djkycgdjwb8ada5eh23oj2j0e"><a href="https://github.com/angular/angular-cli/issues/25102" target="_blank">WASM 导入</a> -- 仍然可以通过 
+<a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Loading_and_running" target="_blank">标准 Web API</a> 手动加载 WASM。</li>
+
+  </ul>
+  
+  <h2 id="esm-default-imports-vs-namespace-imports">
+    <a href="#esm-default-imports-vs-namespace-imports" class="docs-anchor" tabindex="-1" aria-label="Link to ESM default imports vs. namespace imports" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="abr6ttwilip0qfl5rg5bfg6bl">ESM 默认导入 vs. 命名空间导入</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8em7nib0g2akou6piemyngljk">TypeScript 默认允许将默认导出作为命名空间导入然后在调用表达式中使用。 这不幸地偏离了 ECMAScript 规范。 新的构建系统中的底层打包器 (
+<code>esbuild</code>) 期望符合规范的 ESM 代码。 如果你的应用使用了不正确类型的包导入，构建系统现在将生成警告。 然而，为了允许 TypeScript 接受正确的用法，必须在应用的 
+<code>tsconfig</code> 文件中启用一个 TypeScript 选项。 启用后，
+<a href="https://www.typescriptlang.org/tsconfig#esModuleInterop" target="_blank"><code>esModuleInterop</code></a> 选项提供了更好的 ECMAScript 规范对齐，并且也被 TypeScript 团队推荐。 启用后，你可以将包导入更新为符合 ECMAScript 规范的形式。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="c4p00iyjv9864dqen5ndcy7xt">使用 
+<a href="https://npmjs.com/package/moment" target="_blank"><code>moment</code></a> 包作为例子，以下应用代码将导致运行时错误：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> moment <span class="hljs-keyword">from</span> <span class="hljs-string">'moment'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">moment</span>().<span class="hljs-title function_">format</span>());</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1ou2znr00qe5gk2kjb610w0az">构建时将生成警告，通知你存在潜在问题。警告将类似于：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">▲ [WARNING] Calling "moment" will crash at run-time because it's an import namespace object, not a function [call-import-namespace]</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    src/main.ts:2:12:</div><div class="hljs-ln-line">      2 │ console.log(moment().format());</div><div class="hljs-ln-line">        ╵             ~~~~~~</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">Consider changing "moment" to a default import instead:</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    src/main.ts:1:7:</div><div class="hljs-ln-line">      1 │ import * as moment from 'moment';</div><div class="hljs-ln-line">        │        ~~~~~~~~~~~</div><div class="hljs-ln-line">        ╵        moment</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="40x6ludt90m0rl3o1ea38a6vg">但是，你可以通过为应用程序启用 <code>esModuleInterop</code> TypeScript 选项并将导入更改为以下内容来避免运行时错误和警告：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> moment <span class="hljs-keyword">from</span> <span class="hljs-string">'moment'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">moment</span>().<span class="hljs-title function_">format</span>());</div></code>
+    </pre>
+  </div>
+  <h2 id="vite-as-a-development-server">
+    <a href="#vite-as-a-development-server" class="docs-anchor" tabindex="-1" aria-label="Link to Vite as a development server" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4wjaqv87vu4lzihzp3cstdgms">Vite 作为开发服务器</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="125n9i27vs8ascrqc76bryj97">目前在 Angular CLI 中使用 Vite 仅限于 
+<em>开发服务器功能</em>。即使不使用底层的 Vite 构建系统，Vite 也提供了一个功能齐全的开发服务器，具有客户端支持，并已打包成一个低依赖性的 npm 包。这使得它成为提供全面开发服务器功能的理想候选。当前的开发服务器进程使用新的构建系统在内存中生成应用的开发构建，并将结果传递给 Vite 以启动应用。Vite 的使用方式与基于 Webpack 的开发服务器类似，被封装在 Angular CLI 的 
+<code>dev-server</code> 构建器中，目前无法直接配置。</p>
+
+  <h2 id="known-issues">
+    <a href="#known-issues" class="docs-anchor" tabindex="-1" aria-label="Link to Known Issues" data-ng_translator_product="100" data-ng_translator_ref_id="52bb0cpx9ors2iudvwkml8srh">已知的问题</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="672see3aj5o2y7aidfu95r3h4">当前，你在尝试新构建系统时可能会遇到几个已知问题。此列表将更新以保持最新。如果这些问题中的任何一个正在阻止你尝试新的构建系统，请稍后再回来查看，那时候它可能已经解决了。</p>
+
+  <h3 id="type-checking-of-web-worker-code-and-processing-of-nested-web-workers">
+    <a href="#type-checking-of-web-worker-code-and-processing-of-nested-web-workers" class="docs-anchor" tabindex="-1" aria-label="Link to Type-checking of Web Worker code and processing of nested Web Workers" data-ng_translator_product="100" data-ng_translator_ref_id="c1xcktgmw3m1zrdi67yloq8un">Web Worker 代码的类型检查和嵌套 Web Worker 的处理</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="82yj2gzq12epq5ud40potcm7q">Web Worker 可以使用与 
+<code>browser</code> 构建器支持的语法 (
+<code>new Worker(new URL('&lt;workerfile&gt;', import.meta.url))</code>) 在应用代码中使用。 然而，当前 Worker 内的代码不会被 TypeScript 编译器进行类型检查。TypeScript 代码是支持的，但不进行类型检查。 此外，任何嵌套的 Worker 不会被构建系统处理。嵌套的 Worker 是指在另一个 Worker 文件中实例化的 Worker。</p>
+
+  <h3 id="order-dependent-side-effectful-imports-in-lazy-modules">
+    <a href="#order-dependent-side-effectful-imports-in-lazy-modules" class="docs-anchor" tabindex="-1" aria-label="Link to Order-dependent side-effectful imports in lazy modules" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e2g1cm0hzjxubvkzafa1qqbxu">惰性模块中依赖于顺序的副作用导入</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="b02rowlpiqvg0pja4fx0q0dsk">导入声明依赖于特定的顺序，并且在多个延迟加载模块中使用时，可能会导致顶级声明的执行顺序错乱。 这种情况不常见，因为它依赖于使用具有副作用的模块，并且不适用于
+<code>polyfills</code>选项。 这是由底层打捆工具中的
+<a href="https://github.com/evanw/esbuild/issues/399" target="_blank">缺陷</a>引起的，但将在未来的更新中解决。</p>
+
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="lueom6nzhgly3cn5dd1pdapn"><strong>重要:</strong> 无论使用哪种构建系统，尽量避免使用具有非本地副作用的模块（polyfills 除外），以避免此特定问题。具有非本地副作用的模块还会对应用的大小和运行时性能产生负面影响。</p>
+
+    </div>
+    
+  <h2 id="bug-reports">
+    <a href="#bug-reports" class="docs-anchor" tabindex="-1" aria-label="Link to Bug reports" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e1clb4wppaz892hfpdh5a5o16">错误报告</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="44k84pcr0fsn06xnju3nbo210">在
+<a href="https://github.com/angular/angular-cli/issues" target="_blank">GitHub</a>上报告问题和特性请求。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3l6rusy4wzajseatlxmd7dj54">请尽可能提供最小化的重现工程，以帮助团队解决问题。</p>

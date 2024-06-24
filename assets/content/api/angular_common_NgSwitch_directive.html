@@ -1,0 +1,53 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>NgSwitch</h1><div class="docs-api-item-label" data-mode="full" data-type="directive">directive</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/common/src/directives/ng_switch.ts#L118-L185" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="dybbrw1g7uprsn55piaxx9kef">容器上的
+<code>[ngSwitch]</code>指令指定一个要匹配的表达式。要匹配的表达式由容器内视图上的
+<code>ngSwitchCase</code>指令提供。</p>
+
+    <ul class="docs-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="sg243roaugbykli73q8o6gq6">如果有匹配项，则渲染匹配的视图。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="7w8wnr949a3jovgxr09fmhq09">如果没有匹配的视图，则渲染带有
+<code>ngSwitchDefault</code>指令的视图。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="9oh9eydo3e832dbhsj0x978j9">在 
+<code>[NgSwitch]</code> 语句中但在任何 
+<code>NgSwitchCase</code> 或 
+<code>ngSwitchDefault</code> 指令之外的元素会保留在该位置。</li>
+
+    </ul><p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/common/NgSwitchCase">NgSwitchCase</a><a class="docs-pill" href="api/common/NgSwitchDefault">NgSwitchDefault</a><a class="docs-pill" href="guide/directives/structural-directives" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4tqmaa9erzhna8poqylp51a6p">结构型指令</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">NgSwitch</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngSwitch">  <span class="hljs-meta">@Input</span>() <span class="hljs-keyword">set</span> <span class="hljs-title function_">ngSwitch</span>(<span class="hljs-params">value: <span class="hljs-built_in">any</span></span>);</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ab6cfi2kgnblpu8jmg9l669zh">为指令定义一个容器元素，并指定要匹配的 switch 表达式作为属性：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line">&lt;container-element [ngSwitch]<span class="hljs-operator">=</span><span class="hljs-string">"switch_expression"</span>&gt;</span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dcpvb9t4tyghu4exz5synyrjw">在容器内，
+<code>*ngSwitchCase</code> 语句将匹配表达式指定为属性。将 
+<code>*ngSwitchDefault</code> 作为最后一个 case 包含在内。</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">container-element</span> [<span class="hljs-attr">ngSwitch</span>]=<span class="hljs-string">"switch_expression"</span>&gt;</span></span><span class="hljs-ln-line">   <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">"match_expression_1"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line">...</span><span class="hljs-ln-line">   <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchDefault</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">container-element</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8ad1f152n875z0ulirkmy33df">使用范例</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dyha6513rsudttp1lq6sdmxdf">下面的示例演示如何使用多个分支来显示同一视图：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">container-element</span> [<span class="hljs-attr">ngSwitch</span>]=<span class="hljs-string">"switch_expression"</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-comment">&lt;!-- the same view can be shown in more than one case --&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">"match_expression_1"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">"match_expression_2"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">some-other-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">"match_expression_3"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-other-element</span>&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-comment">&lt;!--default case when there are no matches --&gt;</span></span><span class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchDefault</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">container-element</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7g3414lgavbmfsmzbz8m0zysv">以下示例演示如何嵌套案例：</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">container-element</span> [<span class="hljs-attr">ngSwitch</span>]=<span class="hljs-string">"switch_expression"</span>&gt;</span></span><span class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">"match_expression_1"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">"match_expression_2"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">some-other-element</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">"match_expression_3"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-other-element</span>&gt;</span></span><span class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> *<span class="hljs-attr">ngSwitchCase</span>=<span class="hljs-string">"match_expression_3"</span>&gt;</span></span><span class="hljs-ln-line">        <span class="hljs-comment">&lt;!-- use a ng-container to group multiple root nodes --&gt;</span></span><span class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">inner-element</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">inner-element</span>&gt;</span></span><span class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">inner-other-element</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">inner-other-element</span>&gt;</span></span><span class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></span><span class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">some-element</span> *<span class="hljs-attr">ngSwitchDefault</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">some-element</span>&gt;</span></span><span class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">container-element</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="ngSwitch" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngSwitch</h3><div><code>any</code></div></div></header></div></div></div></div>

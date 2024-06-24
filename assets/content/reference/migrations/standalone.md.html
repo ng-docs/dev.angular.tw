@@ -1,0 +1,234 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3z2mhd4e53kky93skdbur6s4n">将现有的 Angular 项目迁移到独立项目</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/migrations/standalone.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="e8t9yzv435e72rrbyr4ug62c3"><strong>独立组件</strong>提供了一种简化的方式来构建 Angular 应用。独立组件、指令和管道旨在通过减少对 
+<code>NgModule</code> 的需求来简化编写体验。现有的应用可以选择性和逐步地采用新的独立风格，而不会有任何重大变化。</p>
+
+    <div class="docs-video-container">
+      <iframe class="docs-video" src="https://www.youtube.com/embed/x5PZwb4XurU" title="Video player" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless></iframe>
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cycz2zas8egmzblparlqfwgk4">从版本 15.2.0 开始，Angular 提供了一个
+<a href="tools/cli/schematics">原理图</a>，以帮助项目作者将现有项目转换为独立 API。该原理图旨在尽可能自动转换尽可能多的代码，但可能需要项目作者进行一些手动修复。使用以下命令运行该原理图：</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate @angular/core:standalone</div></code>
+    </pre>
+  </div>
+  <h2 id="before-updating">
+    <a href="#before-updating" class="docs-anchor" tabindex="-1" aria-label="Link to Before updating" data-ng_translator_product="100" data-ng_translator_ref_id="2c4yygywgpeflhqddpy2q71rh">更新前</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="vcb4xrpcx7581usuzxbe84xx">在使用本原理图之前，请确保项目：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5jpdmgkfmovcgd0z72pbp1l95">使用的是 Angular 15.2.0 或更高版本。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9cu9yi0px5l2al7iztp63vr4w">构建没有任何编译错误。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dx1kjq08yc122sdp4tecak693">在干净的 Git 分支上，所有工作都已保存。</li>
+
+    </ol>
+    
+  <h2 id="schematic-options">
+    <a href="#schematic-options" class="docs-anchor" tabindex="-1" aria-label="Link to Schematic options" data-ng_translator_product="100" data-ng_translator_ref_id="bavmc9s22pe9kepfeabnk6djl">原理图选项</a>
+  </h2>
+  
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ba7axgt6bldn3wzg2te3xd6f">选项</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>mode</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9yjt70v4wzg20eowvhiggzx18">要执行的转换。有关可用选项的详细信息，请参见下文的
+<a href="#migration-modes">迁移模式</a>。</td>
+</tr>
+<tr>
+<td align="left"><code>path</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="277r3iboo5ozpll7zt79dura2">要迁移的路径，相对于项目根目录。你可以使用此选项逐步迁移项目的部分内容。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  
+  <h2 id="migrations-steps">
+    <a href="#migrations-steps" class="docs-anchor" tabindex="-1" aria-label="Link to Migrations steps" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7dg30c2pdh1p1u5xk1mmgt4qo">迁移步骤</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2vfl9niz0vac7w8b5yzr1svq5">迁移过程由三个步骤组成。你必须多次运行它并手动检查项目是否能按预期构建和运行。</p>
+
+    <div class="docs-alert docs-alert-note">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="14h7hv3y6yaeok8lqd9lsvirp"><strong>注意：</strong>虽然原理图可以自动更新大多数代码，但某些边缘情况需要开发者干预。你应该计划在迁移的每一步之后应用手动修复。此外，原理图生成的新代码可能不符合你的代码格式规则。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4d89559pney2jprxbbc9rqtxq">按照下面列出的顺序运行迁移，验证你的代码在每个步骤之间构建和运行：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bty8cj7umhzoflb306gq0xfa3">运行 <code>ng g @angular/core:standalone</code> 并选择 “Convert all components, directives and pipes to standalone”</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5sjvx44sp8pn95jrgkjujz8i0">运行 <code>ng g @angular/core:standalone</code> 并选择 “Remove unnecessary NgModule classes”</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c891h5jrzsixqvc3xmn37tdwm">运行 <code>ng g @angular/core:standalone</code> 并选择 “Bootstrap the project using standalone APIs”</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="274pgm8x603hsr3a3v3szmvu5">运行任何静态分析（lint）和格式检查，修复任何故障，并提交结果</li>
+
+    </ol>
+    
+  <h2 id="after-the-migration">
+    <a href="#after-the-migration" class="docs-anchor" tabindex="-1" aria-label="Link to After the migration" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7o0sl7vcip896jleduh4ln757">迁移后</a>
+  </h2>
+  <p><span class="docs-emoji" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ds5zpxzpne3q1ncjjxtgug5ew">恭喜，你的应用程序已转换为独立应用程序 🎉。这些是你现在可能想要采取的一些可选的后续步骤：</span></p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="905wcjhftoxvz3xrghsw03cvn">查找并移除所有剩余的 
+<code>NgModule</code> 声明：由于
+<a href="#remove-unnecessary-ngmodules">「移除不必要的 NgModules」步骤</a>无法自动移除所有模块，你可能需要手动移除剩余的声明。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="33o9svh76vp122ua7vmzs2uub">运行项目的单元测试并修复所有故障。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3b62cauy9y4zll2fczpxe7az6">如果项目使用了自动格式化，则运行所有代码格式化程序。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="b8tpsm9tnr8m0gijvjyjyjua3">运行项目中的所有 linter 并修复新的警告。某些 linter 支持 
+<code>--fix</code> 标志，可能会自动解决某些警告。</li>
+
+  </ul>
+  
+  <h2 id="migration-modes">
+    <a href="#migration-modes" class="docs-anchor" tabindex="-1" aria-label="Link to Migration modes" data-ng_translator_product="100" data-ng_translator_ref_id="ba21qxx7l1j72s7q5vo833csn">迁移模式</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2mhmrivpwnh0sqfk9qa12n9yv">迁移有以下几个步骤：</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ba57mhw6ct2lftjhk8y26d309">将声明转换为独立的。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6o86zam11gw2j0ao9ri8w5dx0">移除不必要的 NgModule。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ypt9i37g9gyvpt0tyunpl94q">切换到独立的引导启动 API。你应该按照制定顺序运行这些迁移。</li>
+
+    </ol>
+    
+  <h3 id="convert-declarations-to-standalone">
+    <a href="#convert-declarations-to-standalone" class="docs-anchor" tabindex="-1" aria-label="Link to Convert declarations to standalone" data-ng_translator_product="100" data-ng_translator_ref_id="e5v0diwy2sdcglowvhhsked38">将可声明对象转换为独立的</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dksmj3jagszluno2k0fdozgot">在这种模式下，迁移通过设置 <code>standalone: true</code> 并将依赖项添加到它们的 <code>imports</code> 数组来将所有组件、指令和管道转换为独立的。</p>
+
+    <div class="docs-alert docs-alert-helpful">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8j86etx7etna3ehrfmcvs1nst"><strong>提示：</strong>在此步骤中，原理图会忽略那些在引导组件时使用的 NgModules，因为它们可能是由 
+<code>bootstrapModule</code> 而非与独立兼容的 
+<code>bootstrapApplication</code> 使用的根模块。原理图会自动将这些声明作为
+<a href="#switch-to-standalone-bootstrapping-api">「切换到独立引导 API」步骤</a>的一部分进行转换。</p>
+
+    </div>
+    <p><strong data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="avbj53jo8a6qvi7ldp6ge3r5">之前：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// shared.module.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">CommonModule</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [<span class="hljs-title class_">GreeterComponent</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [<span class="hljs-title class_">GreeterComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SharedModule</span> {}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// greeter.component.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'greeter'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div *ngIf="showGreeting"&gt;Hello&lt;/div&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GreeterComponent</span> {</div><div class="hljs-ln-line">  showGreeting = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p><strong data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f0strjmc2u3ezgi4ylp84oekx">之后：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// shared.module.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">CommonModule</span>, <span class="hljs-title class_">GreeterComponent</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [<span class="hljs-title class_">GreeterComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SharedModule</span> {}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// greeter.component.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'greeter'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div *ngIf="showGreeting"&gt;Hello&lt;/div&gt;'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">NgIf</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GreeterComponent</span> {</div><div class="hljs-ln-line">  showGreeting = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h3 id="remove-unnecessary-ngmodules">
+    <a href="#remove-unnecessary-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to Remove unnecessary NgModules" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7frnu95fkded2garz7b5dz8vz">移除不必要的 NgModule</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7eofjm4qwr93tt4il8pwetcot">在将所有声明都转换为独立声明后，就可以安全地删除许多 NgModule 了。此步骤会删除这类模块声明和尽可能多的相应引用。如果迁移无法自动删除引用，它就会留下以下 TODO 注释，以便你可以手动删除 NgModule：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">/* TODO(standalone-migration): clean up removed NgModule reference manually */</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dz73fzq4mtwevt2mtxdogg6yr">如果该模块满足以下条件，则迁移器就认为该模块可以安全删除了：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c8qx3h26nkxscqp89f7fy5rwt">没有 <code>declarations</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2d3pw93zpaicejx8q9ta8uuh9">没有 <code>providers</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ad29hacoase27n416fgpnt9s6">没有 <code>bootstrap</code> 组件。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="3uoamewpmtii1dhh2q32isoxv">没有引用 
+<code>ModuleWithProviders</code> 符号或无法移除的模块的
+<code>imports</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5su6i34i4wbkvjjw2c888gime">没有类成员。空构造函数将被忽略。</li>
+
+  </ul>
+  <p><strong data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="avbj53jo8a6qvi7ldp6ge3r5">之前：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// importer.module.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">FooComponent</span>, <span class="hljs-title class_">BarPipe</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [<span class="hljs-title class_">FooComponent</span>, <span class="hljs-title class_">BarPipe</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ImporterModule</span> {}</div></code>
+    </pre>
+  </div><p><strong data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f0strjmc2u3ezgi4ylp84oekx">之后：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// importer.module.ts</span></div><div class="hljs-ln-line"><span class="hljs-comment">// Does not exist!</span></div></code>
+    </pre>
+  </div>
+  <h3 id="switch-to-standalone-bootstrapping-api">
+    <a href="#switch-to-standalone-bootstrapping-api" class="docs-anchor" tabindex="-1" aria-label="Link to Switch to standalone bootstrapping API" data-ng_translator_product="100" data-ng_translator_ref_id="8b0nxpjcouy99l8a8bqqtjk5s">切换到独立的引导 API</a>
+  </h3>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="56dipn5p5lohlddldpc4fp2n6">此步骤将所有 
+<code>bootstrapModule</code> 的使用转换为新的、基于独立模式的 
+<code>bootstrapApplication</code>。它还会将根组件切换为 
+<code>standalone: true</code> 并删除根 NgModule。如果根模块有任何 
+<code>提供者</code> 或 
+<code>导入</code>，迁移会尽可能多地将这些配置复制到新的引导调用中。</p>
+<p><strong data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="avbj53jo8a6qvi7ldp6ge3r5">之前：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ./app/app.module.ts</span></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [<span class="hljs-title class_">AppComponent</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">bootstrap</span>: [<span class="hljs-title class_">AppComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> {}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ./app/app.component.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ <span class="hljs-attr">selector</span>: <span class="hljs-string">'app'</span>, <span class="hljs-attr">template</span>: <span class="hljs-string">'hello'</span> })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ./main.ts</span></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { platformBrowser } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app/app.module'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">platformBrowser</span>().<span class="hljs-title function_">bootstrapModule</span>(<span class="hljs-title class_">AppModule</span>).<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(e));</div></code>
+    </pre>
+  </div><p><strong data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f0strjmc2u3ezgi4ylp84oekx">之后：</strong></p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ./app/app.module.ts</span></div><div class="hljs-ln-line"><span class="hljs-comment">// Does not exist!</span></div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ./app/app.component.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ <span class="hljs-attr">selector</span>: <span class="hljs-string">'app'</span>, <span class="hljs-attr">template</span>: <span class="hljs-string">'hello'</span>, <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span> })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div></code>
+    </pre>
+  </div><div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// ./main.ts</span></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { bootstrapApplication } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app/app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-title function_">bootstrapApplication</span>(<span class="hljs-title class_">AppComponent</span>).<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(e));</div></code>
+    </pre>
+  </div>
+  <h2 id="common-problems">
+    <a href="#common-problems" class="docs-anchor" tabindex="-1" aria-label="Link to Common problems" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1l08z1e2rx8e4d2lt1awkvhts">常见问题</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5yv5b7kn4ij90qpr3mratfvxe">一些可能阻止原理图正常工作的常见问题包括：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e4wv5xkqtoqljuq7pr1w2ci3p">编译错误 —— 如果项目有编译错误，Angular 就无法正确分析和迁移它。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8fl0aq7x8gwnm4o4dlq01ad91">文件未包含在 tsconfig 中 —— 原理图通过分析项目的 <code>tsconfig.json</code> 文件来确定要迁移的文件。该原理图不会包括任何未被 tsconfig 捕获的文件。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="29ks6jie3vd45vjbez5yj21cg">无法静态分析的代码 —— 原理图使用静态分析来理解你的代码并确定在哪里进行更改。迁移可能会跳过任何包含在构建时无法静态分析的元数据的类。</li>
+
+  </ul>
+  
+  <h2 id="limitations">
+    <a href="#limitations" class="docs-anchor" tabindex="-1" aria-label="Link to Limitations" data-ng_translator_product="100" data-ng_translator_ref_id="dmsauccxl8xk9tpc1jn2jncks">限制</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3rlbxl5iv4ofawh0j5kma58ax">由于迁移的规模和复杂性，有一些情况是原理图无法处理的：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dyfsddu0uhv2lrwlelrd3dl1d">因为单元测试不是预先（AoT）编译的，所以在单元测试中往组件的 <code>imports</code> 中添加类可能不完全正确。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8ppble6k40ew19vsv49aou3jl">该原理图依赖于对 Angular API 的直接调用。原理图无法识别围绕 Angular API 的自定义包装器。例如，如果你在那里定义了一个自定义的 <code>customConfigureTestModule</code> 函数来包装 <code>TestBed.configureTestingModule</code>，它声明的组件可能无法被识别。</li>
+
+  </ul>
+  

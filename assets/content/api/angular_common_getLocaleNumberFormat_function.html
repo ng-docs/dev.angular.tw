@@ -1,0 +1,122 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>getLocaleNumberFormat</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div><div class="docs-api-item-label" data-mode="full" data-type="deprecated">Deprecated</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/common/src/i18n/locale_data_api.ts#L523-L526" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="50odwzlmi3es6h6ug3vjs0foj">检索给定语言环境下的数字格式。</p><p></p><nav class="docs-pill-row"><a class="docs-pill" href="api/common/NumberFormatStyle">NumberFormatStyle</a><a class="docs-pill" href="http://cldr.unicode.org/translation/number-patterns" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="pqqgh0xvyne8fg12b87yybyq">CLDR 官网</a><a class="docs-pill" href="guide/i18n" data-ng_translator_product="100" data-ng_translator_ref_id="8qw9hc8xh7kmhfb77wszj158d">国际化（i18n）指南</a></nav></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line hljs-ln-line-deprecated"><span class="hljs-title function_">getLocaleNumberFormat</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">locale</span>: <span class="hljs-built_in">string</span>,</div><div class="hljs-ln-line ">  <span class="hljs-attr">type</span>: <span class="hljs-title class_">NumberFormatStyle</span></div><div class="hljs-ln-line ">): <span class="hljs-built_in">string</span>;</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="50odwzlmi3es6h6ug3vjs0foj">检索给定语言环境下的数字格式。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2t7qasih7mjkhkjw6h58qlgtw">数字使用模式进行格式化，例如 
+<code>#,###.00</code>。例如，模式 
+<code>#,###.00</code> 用于格式化数字 12345.678 时，可能的结果是 "12'345,678"。如果你的语言的分组分隔符是撇号，十进制分隔符是逗号，会出现这种情况。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="tz3sc2fue5ger1ojet5gw8ud"><b>重要：</b>字符 
+<code>.</code>、
+<code>,</code>、
+<code>0</code>、
+<code>#</code>（以及下方其他字符）是特殊占位符，代表小数点分隔符等，并不是实际字符。你不能「翻译」这些占位符。例如，即使你的语言中小数点用逗号表示，也不要将 
+<code>.</code> 改成 
+<code>,</code>。这些符号应该使用适当的 
+<code>NumberSymbol</code> 替换为本地等价符号。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8zm4yarznh5dvv4v4n1k47yoh">以下是数字模式中使用的特殊字符：</p>
+
+      <div class="docs-table docs-scroll-track-transparent">
+        <table>
+          <thead>
+            <tr>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="5xiw1gbpmrz9czmn84a7vngz">符号</th>
+<th data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ryq83o4vnwnm29aax9uihwua">含义</th>
+</tr>
+
+          </thead>
+          <tbody>
+            <tr>
+<td>.</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="24c5tof8vsy9hs6csjjherux9">自动替换为用作小数点的字符。</td>
+</tr>
+<tr>
+<td>,</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dukee8b6db2kqzq4btbk558dk">替换为（千）“分组”分隔符。</td>
+</tr>
+<tr>
+<td>0</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="10hejp0fgw7rtnb4amch734ob">替换为一个数字（如果没有足够的数字，则为零）。</td>
+</tr>
+<tr>
+<td>#</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="65ayectq4mmvjb5mde1jsufyd">用数字代替（如果数字不足，则不进行任何替换）。</td>
+</tr>
+<tr>
+<td>¤</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8afpz0gsqgawp3isa0n2k10v9">替换为货币符号，比如 $ 或 USD。</td>
+</tr>
+<tr>
+<td>%</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aoof9wdtwoz0akfbrcunoi5dy">标记百分比格式。％符号可能会更改位置，但必须保留。</td>
+</tr>
+<tr>
+<td>E</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="asu3u8ntfzbtvr2xvlarbc1ys">标记科学计数法格式。 E 符号可能会改变位置，但必须保留。</td>
+</tr>
+<tr>
+<td>'</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9r7mg1ktb0q74bjzvema9w336">表示文本字面量的特殊字符，用 ASCII 单引号引起来。</td>
+</tr>
+
+          </tbody>
+        </table>
+      </div></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>getLocaleNumberFormat</h3><div><code>string</code></div></div><span class="docs-param-keyword docs-deprecated">@deprecated</span></header><div class="docs-reference-card-body"><div class="docs-reference-card-item docs-reference-card-item-deprecated"><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="50odwzlmi3es6h6ug3vjs0foj">检索给定语言环境下的数字格式。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2t7qasih7mjkhkjw6h58qlgtw">数字使用模式进行格式化，例如 
+<code>#,###.00</code>。例如，模式 
+<code>#,###.00</code> 用于格式化数字 12345.678 时，可能的结果是 "12'345,678"。如果你的语言的分组分隔符是撇号，十进制分隔符是逗号，会出现这种情况。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="tz3sc2fue5ger1ojet5gw8ud"><b>重要：</b>字符 
+<code>.</code>、
+<code>,</code>、
+<code>0</code>、
+<code>#</code>（以及下方其他字符）是特殊占位符，代表小数点分隔符等，并不是实际字符。你不能「翻译」这些占位符。例如，即使你的语言中小数点用逗号表示，也不要将 
+<code>.</code> 改成 
+<code>,</code>。这些符号应该使用适当的 
+<code>NumberSymbol</code> 替换为本地等价符号。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8zm4yarznh5dvv4v4n1k47yoh">以下是数字模式中使用的特殊字符：</p>
+
+      <div class="docs-table docs-scroll-track-transparent">
+        <table>
+          <thead>
+            <tr>
+<th data-ng_translator_product="100" data-ng_translator_ref_id="5xiw1gbpmrz9czmn84a7vngz">符号</th>
+<th data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ryq83o4vnwnm29aax9uihwua">含义</th>
+</tr>
+
+          </thead>
+          <tbody>
+            <tr>
+<td>.</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="24c5tof8vsy9hs6csjjherux9">自动替换为用作小数点的字符。</td>
+</tr>
+<tr>
+<td>,</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dukee8b6db2kqzq4btbk558dk">替换为（千）“分组”分隔符。</td>
+</tr>
+<tr>
+<td>0</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="10hejp0fgw7rtnb4amch734ob">替换为一个数字（如果没有足够的数字，则为零）。</td>
+</tr>
+<tr>
+<td>#</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="65ayectq4mmvjb5mde1jsufyd">用数字代替（如果数字不足，则不进行任何替换）。</td>
+</tr>
+<tr>
+<td>¤</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8afpz0gsqgawp3isa0n2k10v9">替换为货币符号，比如 $ 或 USD。</td>
+</tr>
+<tr>
+<td>%</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aoof9wdtwoz0akfbrcunoi5dy">标记百分比格式。％符号可能会更改位置，但必须保留。</td>
+</tr>
+<tr>
+<td>E</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="asu3u8ntfzbtvr2xvlarbc1ys">标记科学计数法格式。 E 符号可能会改变位置，但必须保留。</td>
+</tr>
+<tr>
+<td>'</td>
+<td data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9r7mg1ktb0q74bjzvema9w336">表示文本字面量的特殊字符，用 ASCII 单引号引起来。</td>
+</tr>
+
+          </tbody>
+        </table>
+      </div></div><div><div class="docs-deprecation-message"><span class="docs-param-keyword docs-deprecated">@deprecated</span><span><p data-ng_translator_product="100" data-ng_translator_ref_id="bukdf3g9wfti3umlvr8dfnu8g">Angular 推荐依赖 
+<code>Intl</code> API 进行国际化（i18n）。让 
+<code>Intl.NumberFormat</code> 决定数字格式。</p>
+</span></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">locale</span><code>string</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9zj2ramyg5z8bjgrpbh20ttf4">用于要使用的语言环境格式规则的语言环境代码。</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">type</span><code>NumberFormatStyle</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cejfv8jto7vbvl93fraqsug1r">要格式化的数值类型（比如 <code>Decimal</code> 或 <code>Currency</code>）。</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>string</code></div></div></div></div></div></div></div>

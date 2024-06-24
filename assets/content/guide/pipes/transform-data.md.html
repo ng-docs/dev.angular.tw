@@ -1,0 +1,88 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="3p6ck4x0e0oxpvxcf8mi48get">新的转换的自定义 pipe</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/pipes/transform-data.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="39jb1lxpmx51dcv8teehy49v8">创建自定义管道来封装那些内置管道没有提供的转换。然后就可以在模板表达式中使用自定义管道了，像内置管道一样，把输入值转换成显示输出。</p>
+
+  <h2 id="marking-a-class-as-a-pipe">
+    <a href="#marking-a-class-as-a-pipe" class="docs-anchor" tabindex="-1" aria-label="Link to Marking a class as a pipe" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dmncqwy4zdbr1ix9izi238ci4">将类标记为管道</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ciy4kwu6gnsor7xwqa17gvevm">要将类标记为 pipe 并提供配置元数据，请将 
+<code>@Pipe</code> 应用于该类。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4zjsbheimcc5ccravccpi0fni">使用 UpperCamelCase（类名的一般约定）作为 pipe 类名，对应的 
+<code>name</code> 字符串使用 camelCase。不要在 
+<code>name</code> 中使用连字符。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="c0q7u8mmo4g55ryiw8nd3r0l8">有关详细信息和更多示例，请参见 
+<a href="/style-guide#pipe-names" title="Pipe" names in the angular coding style guide>Angular 编码风格指南中的 Pipe 名称</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="59woxknp7rmjrsh7t0u53y0tr">在模板表达式中使用 <code>name</code> 就像在内置管道中一样。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pipe</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Pipe</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-string">'greet'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GreetPipe</span> {}</div></code>
+    </pre>
+  </div>
+  <h2 id="using-the-pipetransform-interface">
+    <a href="#using-the-pipetransform-interface" class="docs-anchor" tabindex="-1" aria-label="Link to Using the PipeTransform interface" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="coz9qgu2vendycp7ynb13ugbr">使用 PipeTransform 接口</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9pmbc7vmfmji8laoabq42fca7">在你的自定义管道类中实现 
+<a href="/api/core/PipeTransform" title="API" reference for pipetransform><code>PipeTransform</code></a> 接口以执行转换。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6rdwu0ty9ppt7pbhl77s60rk5">Angular 调用 <code>transform</code> 方法，该方法使用绑定的值作为第一个参数，把其它任何参数都以列表的形式作为第二个参数，并返回转换后的值。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Pipe</span>, <span class="hljs-title class_">PipeTransform</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Pipe</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-string">'greet'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GreetPipe</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">PipeTransform</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">param1</span>: <span class="hljs-built_in">boolean</span>, <span class="hljs-attr">param2</span>: <span class="hljs-built_in">boolean</span>): <span class="hljs-built_in">string</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello <span class="hljs-subst">${value}</span>`</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div>
+  <h2 id="example-transforming-a-value-exponentially">
+    <a href="#example-transforming-a-value-exponentially" class="docs-anchor" tabindex="-1" aria-label="Link to Example: Transforming a value exponentially" data-ng_translator_product="100" data-ng_translator_ref_id="a8nxbr3fmax5b8puwr1r32cix">范例：指数转换</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="anc4e0w393x6g5fw9pol7ocs5">在游戏中，你可能想实现一个将值指数提高以增强英雄力量的转换。例如，如果英雄的得分是 2，将英雄的力量指数提升 10 倍会产生 1024 分（
+<code>2**10</code>）。使用自定义管道进行此转换。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6hxuxz2tjgo19fh04hpo4t8b0">下列代码范例显示了两个组件定义：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8n2c7wfntpyw9gnmnqx5bqxht">文件</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>exponential-strength.pipe.ts</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3igz5d81kp6l76nsth93e11n1">定义一个名为 
+<code>exponentialStrength</code> 的自定义管道，并使用执行转换的 
+<code>transform</code> 方法。它为传递给管道的参数定义了一个 
+<code>transform</code> 方法的参数（
+<code>exponent</code>）。</td>
+</tr>
+<tr>
+<td align="left"><code>power-booster.component.ts</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5vgobxe8ww4h6i5xvpsadw9cf">演示如何使用该管道，指定一个值（
+<code>2</code>）和指数参数（
+<code>10</code>）。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="docs-code-multifile">
+    <div class="docs-code" path="adev/src/content/examples/pipes/src/app/exponential-strength.pipe.ts" header="src/app/exponential-strength.pipe.ts">
+    <div class="docs-code-header"><h3>src/app/exponential-strength.pipe.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Pipe</span>, <span class="hljs-title class_">PipeTransform</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-comment">/*</span></div><div class="hljs-ln-line"> * Raise the value exponentially</div><div class="hljs-ln-line"> * Takes an exponent argument that defaults to 1.</div><div class="hljs-ln-line"> * Usage:</div><div class="hljs-ln-line"> *   value | exponentialStrength:exponent</div><div class="hljs-ln-line"> * Example:</div><div class="hljs-ln-line"> *   {{ 2 | exponentialStrength:10 }}</div><div class="hljs-ln-line"> *   formats to: 1024</div><div class="hljs-ln-line"> */</div><div class="hljs-ln-line"><span class="hljs-meta">@Pipe</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-string">'exponentialStrength'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ExponentialStrengthPipe</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">PipeTransform</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">number</span>, exponent = <span class="hljs-number">1</span>): <span class="hljs-built_in">number</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">pow</span>(value, exponent);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div><div class="docs-code" path="adev/src/content/examples/pipes/src/app/power-booster.component.ts" header="src/app/power-booster.component.ts">
+    <div class="docs-code-header"><h3>src/app/power-booster.component.ts</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">ExponentialStrengthPipe</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'./exponential-strength.pipe'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-power-booster'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;h2&gt;Power Booster&lt;/h2&gt;</div><div class="hljs-ln-line">    &lt;p&gt;Super power boost: {{2 | exponentialStrength: 10}}&lt;/p&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">ExponentialStrengthPipe</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PowerBoosterComponent</span> {}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div>
+    </div>

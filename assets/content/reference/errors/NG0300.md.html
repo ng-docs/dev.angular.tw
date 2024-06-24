@@ -1,0 +1,31 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="bvnp7dujgxyu8en9os37dgmak">选择器冲突</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0300.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-video-container">
+      <iframe class="docs-video" src="https://www.youtube.com/embed/z_3Z5mOm59I" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless title="Video player"></iframe>
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bkzfju4pvq3i1ox17oczzfn83">两个或更多
+<a href="guide/components">组件</a>使用相同的元素选择器。因为一个元素只能关联一个组件，所以选择器必须是唯一的字符串，以防止 Angular 的歧义。</p>
+
+  <h2 id="debugging-the-error">
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7jt4gfer4bpskh3r9pq9i22uh">使用错误消息中的元素名称搜索代码库中使用相同选择器声明的地方：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'YOUR_STRING'</span>,</div><div class="hljs-ln-line">  …</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cqpebpt4vp43kzlu5j2gte7ww">确保每个组件都有一个唯一的 CSS 选择器。这将确保 Angular 渲染你所期望的组件。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6bdvnpomaarzd1oba78dmhc8h">如果你在查找具有此选择器标签名的多个组件时遇到问题，请检查导入的组件库（如 Angular Material）中的组件。确保你遵循
+<a href="style-guide#component-selectors">最佳实践</a>，以防止选择器冲突。</p>

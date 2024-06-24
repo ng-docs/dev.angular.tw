@@ -1,0 +1,355 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="46o14uth7hi11lt332w6q5xb8">在单页面应用中使用 Angular 路由</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/routing/router-tutorial.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8ppzrxhnjpdcd3v5ktpyf8mxc">本教程将介绍如何构建一个使用多个 Angular 路由的单页面应用 SPA。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="avd9zdg6w0ov2dphgh0dp7j6t">在 SPA（Single Page Application 单页面应用）中，所有应用的所有功能都存在于同一个 HTML 页面中。当用户访问应用的各种特性时，浏览器只需渲染那些用户需要关心的部分，而不用重新加载页面。这种模式可以显著改善应用的用户体验。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b2brrmk2dyqvwdim8j255r8tz">为了定义用户如何在应用中导航，你可以使用路由。可以添加一些路由来定义用户如何从应用的某个部分导航到另一部分。也可以配置一些路由来防范意外或未经授权的行为。</p>
+
+  <h2 id="objectives">
+    <a href="#objectives" class="docs-anchor" tabindex="-1" aria-label="Link to Objectives" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cbta8klpv23x9gfh4twoy80po">目标</a>
+  </h2>
+  
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="70h77yo149u449vsfxt5r2m3y">将范例应用的各个特性组织到一些模块中。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="35hw3aw7np2gu3ipj66xg8e11">定义如何导航到组件。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="43l34wph9ia165pexxzoihj5q">使用参数把信息传给组件。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6zo484f196joy30f76l7xhhgy">通过嵌套多个路由来构造路由体系。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dwb96wmdxz1dir5f89a3vq052">检查用户是否可以访问路由。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dw5zsm38cbfqs7fwxxk77z4om">控制该应用是否可以放弃未保存的更改。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9djs3b5v0vs0aa8c7dohmlhf">通过预先获取路由数据和惰性加载特性模块来提高性能。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c05ue0uznbjoy1pdi6bwm0myg">需要特定的条件来加载组件。</li>
+
+  </ul>
+  
+  <h2 id="create-a-sample-application">
+    <a href="#create-a-sample-application" class="docs-anchor" tabindex="-1" aria-label="Link to Create a sample application" data-ng_translator_product="100" data-ng_translator_ref_id="bruw2t9iar7oam6yjy176ohbg">创建示例应用</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a0p9p17hywrjurzhdswafpczp">使用 Angular CLI，创建一个新的应用<em>angular-router-sample</em>。这个应用程序有两个组件：<em>crisis-list</em>和<em>heroes-list</em>。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f19ajpykgfylkqg7nz8prmpmy">创建一个新的 Angular 项目 <em>angular-router-sample</em>。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng new angular-router-sample</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8sqyxo2fas9r9m49656ijrsif">当系统提示 <code>Would you like to add Angular routing?</code> 时，选择 <code>N</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5ki9l0id9r8lyxis54uwg5by9">当系统提示 <code>Which stylesheet format would you like to use?</code> 时，选择 <code>CSS</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="et4z3j9ncdsmkitq5macxv90a">一段时间后，一个新项目 <code>angular-router-sample</code> 就准备就绪了。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bg5ggztddband7g78mrugzldl">在终端上，导航到 <code>angular-router-sample</code> 目录。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cndom1j9weg4lv711yv63cmb6">创建一个组件 <em>crisis-list</em>。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate component crisis-list</div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3tx75849tr8xcv70wbi6vcowh">在你的代码编辑器中，找到文件 <code>crisis-list.component.html</code> 并用如下 HTML 替换占位符内容。</p>
+<div class="docs-code" path="adev/src/content/examples/router-tutorial/src/app/crisis-list/crisis-list.component.html" header="src/app/crisis-list/crisis-list.component.html">
+    <div class="docs-code-header"><h3>src/app/crisis-list/crisis-list.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>CRISIS CENTER<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Get your crisis here<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="exd8qmu4pruckvpmaaoz6ndjn">创建第二个组件 <em>heroes-list</em>。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate component heroes-list</div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="73foebm8lgbk59wzbpsheyvu2">在你的代码编辑器中，找到 <code>heroes-list.component.html</code> 文件，并用如下 HTML 替换占位符内容。</p>
+<div class="docs-code" path="adev/src/content/examples/router-tutorial/src/app/heroes-list/heroes-list.component.html" header="src/app/heroes-list/heroes-list.component.html">
+    <div class="docs-code-header"><h3>src/app/heroes-list/heroes-list.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>HEROES<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Get your heroes here<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="836tq9d1nxnnp29ayuxnjyjkm">在你的代码编辑器中，打开文件 <code>app.component.html</code> 并用如下 HTML 替换其内容。</p>
+<div class="docs-code" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visiblelines="0,19,20" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Angular Router Sample<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span></span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/crisis-list"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"activebutton"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</div><div class="hljs-ln-line">    Crisis Center</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> |</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span></span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/heroes-list"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"activebutton"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</div><div class="hljs-ln-line">    Heroes</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"display: none;"</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- This HTML represents the initial state for the tutorial. It is not intended to appear in the app. --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-crisis-list</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-crisis-list</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-heroes-list</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-heroes-list</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- This HTML snippet is for when the user first adds the routerlink navigation. --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/crisis-list"</span>&gt;</span>Crisis Center<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> |</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/heroes-list"</span>&gt;</span>Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="rbtxxyj4wr4fzmzpoxa2s75e">运行 <code>ng serve</code> 来验证新应用是否正常运行。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng serve</div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2ckjv92jxuamm59dj19n89bpp">打开浏览器访问 <code>http://localhost:4200</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f2q3igauejft5w27r1d3yxrou">你会看到一个网页，它由一个标题和两个组件的 HTML 组成。</p>
+</li>
+
+    </ol>
+    
+  <h2 id="define-your-routes">
+    <a href="#define-your-routes" class="docs-anchor" tabindex="-1" aria-label="Link to Define your routes" data-ng_translator_product="100" data-ng_translator_ref_id="eyola5y1m9nxg8uatetfffqsu">定义你的各个路由</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bshdgcqsoyfwjezctbp7wtpi1">在本节中，你将定义两个路由：</p>
+
+  <ul class="docs-list">
+    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9oa5anm5prrc9sqzy8ybnw1he">路由 <code>/crisis-center</code> 用来打开 <code>crisis-center</code> 组件。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="sd0g9kbgpe3aheelbsb4yegq">路由 <code>/heroes-list</code> 用来打开 <code>heroes-list</code> 组件。</li>
+
+  </ul>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="85yk5m8jypw6m03i23knwplwo">路由定义是一个 JavaScript 对象。每个路由通常都有两个属性。第一个属性 <code>path</code> 是一个字符串，它指定路由的 URL 路径。第二个属性 <code>component</code> 是组件类，它指定应用要为该路由显示哪个组件。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="2pauvn9rfv9wwpjcl59886j7p">从你的代码编辑器中创建并打开 
+<code>app.routes.ts</code> 文件。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="4hk0nzudp30lvjfq7zm7ukfau">为你的应用创建并导出一个路由列表：</p>
+<pre><code class="language-ts">import {Routes} from '@angular/router';
+
+export const routes = [];
+</code></pre>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="3zz9hpj3onb7e8e2hk0x9vebb">为前两个组件添加两个路由：</p>
+<pre><code class="language-ts">{path: 'crisis-list', component: CrisisListComponent},
+{path: 'heroes-list', component: HeroesListComponent},
+</code></pre>
+</li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7xu9jnb8s59vi8y3oi2i9x3jh">这个路由列表是一个 JavaScript 对象数组，每个对象定义了一个路由的属性。</p>
+
+  <h2 id="import-providerouter-from-angular-router">
+    <a href="#import-providerouter-from-angular-router" class="docs-anchor" tabindex="-1" aria-label="Link to Import <code>provideRouter</code> from <code>@angular/router</code>" data-ng_translator_product="100" data-ng_translator_ref_id="chcrpjo6c4vwsl596s5bt602b">从 
+<code>@angular/router</code> 导入 
+<code>provideRouter</code></a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4uzi6tkv0m2kwr3baqft3nl8z">路由允许你根据 URL 路径显示应用的特定视图。要将此功能添加到你的示例应用中，你需要更新 
+<code>app.config.ts</code> 文件以使用路由提供者函数 
+<code>provideRouter</code>。你需要从 
+<code>@angular/router</code> 导入这个提供者函数。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="d6l5gm2jfhdzyrykc1boau2mq">在你的代码编辑器中，打开 
+<code>app.config.ts</code> 文件。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="3l08j59og1a5wq8pzayvvytbm">添加以下导入语句：</p>
+<pre><code class="language-ts">import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
+</code></pre>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="c608d8zc3ohjsp3k552nwe3rj">更新 
+<code>appConfig</code> 中的提供者：</p>
+<pre><code class="language-ts">providers: [provideRouter(routes)]
+</code></pre>
+</li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8p7zbevq79jsigy7m2b7j4ygi">对于基于 
+<code>NgModule</code> 的应用，将 
+<code>provideRouter</code> 放在 
+<code>AppModule</code> 的 
+<code>providers</code> 列表中，或放在应用中传递给 
+<code>bootstrapModule</code> 的任何模块中。</p>
+
+  <h2 id="update-your-component-with-router-outlet">
+    <a href="#update-your-component-with-router-outlet" class="docs-anchor" tabindex="-1" aria-label="Link to Update your component with <code>router-outlet</code>" data-ng_translator_product="100" data-ng_translator_ref_id="323vaohsld0xqia5hrs306v4i">使用 
+<code>router-outlet</code> 更新你的组件</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bcccvsegwnsha8414jecgn6sb">此刻，你已经为应用定义了两个路由。但是，你的应用仍然在你的 <code>app.component.html</code> 模板中硬编码着 <code>crisis-list</code> 和 <code>heroes-list</code> 组件。为了让你的路由正常工作，需要更新模板，以便根据 URL 路径动态加载一个组件。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="31hxvj2aeq0u3gaosnzdvpat2">要实现此功能，你需要在模板文件中添加 
+<code>router-outlet</code> 指令。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="iu0u9f80e6c0cpfy934pjahh">在代码编辑器中，打开 <code>app.component.html</code> 文件。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4t8f8w1m7pz0tcx3ugxbny2wg">删除下面这几行。</p>
+<div class="docs-code" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visiblelines="19,20" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Angular Router Sample<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span></span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/crisis-list"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"activebutton"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</div><div class="hljs-ln-line">    Crisis Center</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> |</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span></span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/heroes-list"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"activebutton"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</div><div class="hljs-ln-line">    Heroes</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"display: none;"</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- This HTML represents the initial state for the tutorial. It is not intended to appear in the app. --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-crisis-list</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-crisis-list</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-heroes-list</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-heroes-list</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- This HTML snippet is for when the user first adds the routerlink navigation. --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/crisis-list"</span>&gt;</span>Crisis Center<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> |</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/heroes-list"</span>&gt;</span>Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="cnw39lkfv3vx1p3zjt43mz8bf">添加 
+<code>router-outlet</code> 指令。</p>
+<div class="docs-code" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visiblelines="15" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Angular Router Sample<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span></span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/crisis-list"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"activebutton"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</div><div class="hljs-ln-line">    Crisis Center</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> |</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span></span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/heroes-list"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"activebutton"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</div><div class="hljs-ln-line">    Heroes</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"display: none;"</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- This HTML represents the initial state for the tutorial. It is not intended to appear in the app. --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-crisis-list</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-crisis-list</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-heroes-list</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-heroes-list</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- This HTML snippet is for when the user first adds the routerlink navigation. --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/crisis-list"</span>&gt;</span>Crisis Center<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> |</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/heroes-list"</span>&gt;</span>Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="byu0mjzigql6ebir0ib1clau5">在 
+<code>app.component.ts</code> 中的 
+<code>AppComponent</code> 的导入列表中添加 
+<code>RouterOutlet</code>。</p>
+<pre><code class="language-ts">imports: [RouterOutlet],
+</code></pre>
+</li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ce4t9hgwgto45hmej525ewsb0">在浏览器中查看更新后的应用。你应该只看到应用标题。要查看 <code>crisis-list</code> 组件，就要把 <code>crisis-list</code> 添加到浏览器地址栏的路径末尾。比如：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http://localhost:4200/crisis-list</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="61jvz47pgchc4serb6vnu54js">注意，<code>crisis-list</code> 组件会显示出来。Angular 正在使用你定义的路由来动态加载组件。你可以用同样的方法加载 <code>heroes-list</code> 组件：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">http://localhost:4200/heroes-list</div></code>
+    </pre>
+  </div>
+  <h2 id="control-navigation-with-ui-elements">
+    <a href="#control-navigation-with-ui-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Control navigation with UI elements" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2l21tyedt0l9wy3p83i54bxiu">使用 UI 元素控制导航</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="audpyxuvc942spt3dw903dkt4">目前，你的应用支持两种路由。但是目前使用这些路由的唯一方法是让用户在浏览器的地址栏中手动输入路径。在本节中，你要添加两个链接，用户可以单击它们在 <code>heroes-list</code> 和 <code>crisis-list</code> 组件之间导航。你还会添加一些 CSS 样式。虽然这些样式不是必需的，但它们可以让你更容易的识别出当前显示的组件的链接。你将在下一节中添加此功能。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="wblyjov2qglwx1o8uq3z24gz">打开 <code>app.component.html</code> 文件，在标题下方添加以下 HTML。</p>
+<div class="docs-code" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visiblelines="23,24,25,26" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Angular Router Sample<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span></span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/crisis-list"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"activebutton"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</div><div class="hljs-ln-line">    Crisis Center</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> |</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span></span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/heroes-list"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"activebutton"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</div><div class="hljs-ln-line">    Heroes</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"display: none;"</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- This HTML represents the initial state for the tutorial. It is not intended to appear in the app. --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-crisis-list</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-crisis-list</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-heroes-list</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-heroes-list</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- This HTML snippet is for when the user first adds the routerlink navigation. --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/crisis-list"</span>&gt;</span>Crisis Center<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> |</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/heroes-list"</span>&gt;</span>Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1tmprxgqyk43i53b3c3rfo0ct">这个 HTML 使用了一个 Angular 指令 
+<code>routerLink</code>。这个指令将你定义的路由连接到模板文件。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="21mm8341kjpbc4ine090cd9w6">在 
+<code>app.component.ts</code> 中的 
+<code>AppComponent</code> 的导入列表中添加 
+<code>RouterLink</code> 指令。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4hie642ihxmh92y1wdxgvwzs4">打开 <code>app.component.css</code> 文件并添加如下样式。</p>
+<div class="docs-code" path="adev/src/content/examples/router-tutorial/src/app/app.component.css" header="src/app/app.component.css">
+    <div class="docs-code-header"><h3>src/app/app.component.css</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-selector-class">.button</span> {</div><div class="hljs-ln-line">    <span class="hljs-attribute">box-shadow</span>: inset <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">#ffffff</span>;</div><div class="hljs-ln-line">    <span class="hljs-attribute">background</span>: <span class="hljs-number">#ffffff</span> <span class="hljs-built_in">linear-gradient</span>(to bottom, <span class="hljs-number">#ffffff</span> <span class="hljs-number">5%</span>, <span class="hljs-number">#f6f6f6</span> <span class="hljs-number">100%</span>);</div><div class="hljs-ln-line">    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">6px</span>;</div><div class="hljs-ln-line">    <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#dcdcdc</span>;</div><div class="hljs-ln-line">    <span class="hljs-attribute">display</span>: inline-block;</div><div class="hljs-ln-line">    <span class="hljs-attribute">cursor</span>: pointer;</div><div class="hljs-ln-line">    <span class="hljs-attribute">color</span>: <span class="hljs-number">#666666</span>;</div><div class="hljs-ln-line">    <span class="hljs-attribute">font-family</span>: Arial, sans-serif;</div><div class="hljs-ln-line">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">15px</span>;</div><div class="hljs-ln-line">    <span class="hljs-attribute">font-weight</span>: bold;</div><div class="hljs-ln-line">    <span class="hljs-attribute">padding</span>: <span class="hljs-number">6px</span> <span class="hljs-number">24px</span>;</div><div class="hljs-ln-line">    <span class="hljs-attribute">text-decoration</span>: none;</div><div class="hljs-ln-line">    <span class="hljs-attribute">text-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">0</span> <span class="hljs-number">#ffffff</span>;</div><div class="hljs-ln-line">    <span class="hljs-attribute">outline</span>: <span class="hljs-number">0</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"><span class="hljs-selector-class">.activebutton</span> {</div><div class="hljs-ln-line">    <span class="hljs-attribute">box-shadow</span>: inset <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">#dcecfb</span>;</div><div class="hljs-ln-line">    <span class="hljs-attribute">background</span>: <span class="hljs-number">#bddbfa</span> <span class="hljs-built_in">linear-gradient</span>(to bottom, <span class="hljs-number">#bddbfa</span> <span class="hljs-number">5%</span>, <span class="hljs-number">#80b5ea</span> <span class="hljs-number">100%</span>);</div><div class="hljs-ln-line">    <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#84bbf3</span>;</div><div class="hljs-ln-line">    <span class="hljs-attribute">color</span>: <span class="hljs-number">#ffffff</span>;</div><div class="hljs-ln-line">    <span class="hljs-attribute">text-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">0</span> <span class="hljs-number">#528ecc</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bl9l84npb9q0zwxt0ftzdtfj2">如果你在浏览器中查看应用，你会看到这两个链接。单击某个链接时，会出现相应的组件。</p>
+
+  <h2 id="identify-the-active-route">
+    <a href="#identify-the-active-route" class="docs-anchor" tabindex="-1" aria-label="Link to Identify the active route" data-ng_translator_product="100" data-ng_translator_ref_id="5aaw65shwz9t5nrnas0p2iryp">标出活动路由</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5p85wxs1bau0bq5vgpb1cg2o">虽然用户可以使用你在上一节中添加的链接来导航你的应用，但他们没有直接的方法来识别当前的活动路由。 使用 Angular 的 
+<code>routerLinkActive</code> 指令添加此功能。</p>
+
+    <ol class="docs-ordered-list">
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="iu0u9f80e6c0cpfy934pjahh">在代码编辑器中，打开 <code>app.component.html</code> 文件。</li>
+<li>Update the anchor tags to include the <code>routerLinkActive</code> directive.<div class="docs-code" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visiblelines="1,2,3,4,5,6,7,8,9,10,11,12,13,14" header="src/app/app.component.html">
+    <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Angular Router Sample<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span></span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/crisis-list"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"activebutton"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</div><div class="hljs-ln-line">    Crisis Center</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> |</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span></span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/heroes-list"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">routerLinkActive</span>=<span class="hljs-string">"activebutton"</span></div><div class="hljs-ln-line">     <span class="hljs-attr">ariaCurrentWhenActive</span>=<span class="hljs-string">"page"</span>&gt;</div><div class="hljs-ln-line">    Heroes</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"display: none;"</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- This HTML represents the initial state for the tutorial. It is not intended to appear in the app. --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-crisis-list</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-crisis-list</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-heroes-list</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-heroes-list</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">&lt;!-- This HTML snippet is for when the user first adds the routerlink navigation. --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/crisis-list"</span>&gt;</span>Crisis Center<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> |</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/heroes-list"</span>&gt;</span>Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div></code>
+    </pre>
+  </div></li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="3zibjhs4d03kuo4puubw2juo4">将 
+<code>RouterLinkActive</code> 指令添加到 
+<code>app.component.ts</code> 中 
+<code>AppComponent</code> 的 
+<code>imports</code> 列表中。</li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4ouxlpsqajgndn7lciaw3cfx6">再次查看你的应用。 当你点击某个按钮时，该按钮的样式会自动更新，从而向用户标识活动组件。 通过添加 
+<code>routerLinkActive</code> 指令，你告知你的应用将特定的 CSS 类应用到活动路由。 在本教程中，该 CSS 类是 
+<code>activebutton</code>，但你可以使用任何你想要的类。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="epdfg4zsh6ro8vzqihap4pcls">请注意，我们还为 
+<code>routerLinkActive</code> 的 
+<code>ariaCurrentWhenActive</code> 指定了一个值。这确保了视力障碍用户（可能无法感知所应用的不同样式）也可以识别活动按钮。有关详细信息，请参阅无障碍最佳实践 
+<a href="/best-practices/a11y#active-links-identification">活动链接识别部分</a>。</p>
+
+  <h2 id="adding-a-redirect">
+    <a href="#adding-a-redirect" class="docs-anchor" tabindex="-1" aria-label="Link to Adding a redirect" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d7dl9sopp9gc27t9bz5739u6g">添加重定向</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4p3x1tgqfqkg8pi3hyio6w4qg">在本教程的这一步中，你将添加一个重定向路由来把用户导向 <code>/heroes-list</code> 组件。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="e7knlvhxqb1wbp7tk93b9z5d3">从你的代码编辑器中打开 
+<code>app.routes.ts</code> 文件。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="dawexx7iv7dbsuqsnmommnmc2">按如下方式更新 
+<code>routes</code> 部分。</p>
+<pre><code class="language-ts">{path: '', redirectTo: '/heroes-list', pathMatch: 'full'},
+</code></pre>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="f0i550yho5c3kq0ret9yaoepi">注意这个新路由使用一个空字符串作为路径。 此外，它用两个新属性替换了 
+<code>component</code> 属性：</p>
+
+  <div class="docs-table docs-scroll-track-transparent">
+    <table>
+      <thead>
+        <tr>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9ghvm54f9feewnb0zbrlubp2h">属性</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+</tr>
+
+      </thead>
+      <tbody>
+        <tr>
+<td align="left"><code>redirectTo</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="e938uf1gip8t52ddbfpq56m5q">此属性指示 Angular 从空路径重定向到 
+<code>heroes-list</code> 路径。</td>
+</tr>
+<tr>
+<td align="left"><code>pathMatch</code></td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7nxxc300veim0gmmbk3jx5q5f">此属性指示 Angular 匹配 URL 的程度。在本教程中，你应该将此属性设置为 
+<code>full</code>。当路径为空字符串时，推荐使用这种策略。有关此属性的更多信息，请参阅 
+<a href="api/router/Route">Route API 文档</a>。</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  </li>
+
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="56lzjut8xj6fqp1r1modm8ph1">现在，当你打开应用时，它会默认显示 <code>heroes-list</code> 组件。</p>
+
+  <h2 id="adding-a-404-page">
+    <a href="#adding-a-404-page" class="docs-anchor" tabindex="-1" aria-label="Link to Adding a 404 page" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="etw4wyuye7289v04i0wyh1jea">添加 404 页面</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="asy28897rchmkjn1x3z643xvt">用户可以尝试访问你尚未定义的路由。为了解决这个问题，最佳做法是显示一个 404 页面。在本节中，你将创建一个 404 页面，并更新路由配置，以便为任何未指定的路由显示该页面。</p>
+
+    <ol class="docs-ordered-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5odn6vmzpv6p35wvm2gd2ur2b">在终端上，创建一个新的组件 <code>PageNotFound</code>。</p>
+<div class="docs-code shell">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate component page-not-found</div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="lzkitqtouv3zcgx25x7zodg6">在代码编辑器中，打开 <code>page-not-found.component.html</code> 文件并用下面的 HTML 替换它的内容。</p>
+<div class="docs-code" path="adev/src/content/examples/router-tutorial/src/app/page-not-found/page-not-found.component.html" header="src/app/page-not-found/page-not-found.component.html">
+    <div class="docs-code-header"><h3>src/app/page-not-found/page-not-found.component.html</h3></div>
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Page Not Found<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>We couldn't find that page! Not even with x-ray vision.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"></div></code>
+    </pre>
+  </div></li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="2exmv2ie9iidvkvab7qwbpt9u">打开 
+<code>app.routes.ts</code> 文件，并将以下路由添加到 routes 列表中：</p>
+<pre><code class="language-ts">{path: '**', component: PageNotFoundComponent}
+</code></pre>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3rxbvct8sbfmu9z1qq8p4hnex">新路由使用路径 
+<code>**</code>。 这是 Angular 识别通配符路由的方式。 任何不匹配你配置中现有路由的路由都将使用此路由。</p>
+</li>
+
+    </ol>
+    
+    <div class="docs-alert docs-alert-important">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dled3hc2nl2stnml3f4htpf18"><strong>重要提示：</strong> 注意，通配符路由放在数组的末尾。 路由的顺序很重要，因为 Angular 按顺序应用路由，并使用找到的第一个匹配项。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="uiobw0pt85j3db0ljkeqhb19">尝试导航到你的应用中的非存在路由，例如 
+<code>http://localhost:4200/powers</code>。 此路由与 
+<code>app.routes.ts</code> 文件中定义的任何内容都不匹配。 但是，因为你定义了一个通配符路由，应用会自动显示你的 
+<code>PageNotFound</code> 组件。</p>
+
+  <h2 id="next-steps">
+    <a href="#next-steps" class="docs-anchor" tabindex="-1" aria-label="Link to Next steps" data-ng_translator_product="100" data-ng_translator_ref_id="c4pkljueu68ifjoi5994e9l8o">后续步骤</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="olflv3r4gqp5225wn87tctf6">你已经有了一个基本的应用程序，它使用 Angular 的路由功能来根据 URL 地址改变用户可以看到的组件。你还扩展了这些特性，以包含一个重定向，以及一个用来显示自定义 404 页面的通配符路由。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3zlxk6eimcgv1rctvds5jhbxc">关于路由的更多信息，请参阅以下主题：</p>
+
+    <nav class="docs-pill-row">
+      
+    <a class="docs-pill" href="guide/routing/common-router-tasks" data-ng_translator_product="100" data-ng_translator_ref_id="ekwdou98eaqxadsv4dzamfkl4">应用内路由和导航</a>
+    
+    <a class="docs-pill" href="api/router/Router" data-ng_translator_product="100" data-ng_translator_ref_id="3c9pc3vyr8mh3o8rc7p5s2z04">路由器 API</a>
+    
+
+    </nav>
+    

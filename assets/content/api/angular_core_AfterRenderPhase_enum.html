@@ -1,0 +1,37 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/core</span><div class="docs-reference-title"><div><h1>AfterRenderPhase</h1><div class="docs-api-item-label" data-mode="full" data-type="enum">enum</div><div class="docs-api-item-label" data-mode="full" data-type="developer_preview">Developer preview</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/core/src/render3/after_render_hooks.ts#L43-L84" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="6xx8qql85n2orbhs098dzfpgl">运行 
+<code>afterRender</code> 或 
+<code>afterNextRender</code> 回调的阶段。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">enum</span> <span class="hljs-title class_">AfterRenderPhase</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="EarlyRead">  <span class="hljs-title class_">EarlyRead</span>: <span class="hljs-title class_">AfterRenderPhase</span>.<span class="hljs-property">EarlyRead</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="Write">  <span class="hljs-title class_">Write</span>: <span class="hljs-title class_">AfterRenderPhase</span>.<span class="hljs-property">Write</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="MixedReadWrite">  <span class="hljs-title class_">MixedReadWrite</span>: <span class="hljs-title class_">AfterRenderPhase</span>.<span class="hljs-property">MixedReadWrite</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="Read">  <span class="hljs-title class_">Read</span>: <span class="hljs-title class_">AfterRenderPhase</span>.<span class="hljs-property">Read</span>;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="6xx8qql85n2orbhs098dzfpgl">运行 
+<code>afterRender</code> 或 
+<code>afterNextRender</code> 回调的阶段。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4tt7mi7ox0o8io02fqdncaml8">同一阶段中的回调按注册顺序运行。每次渲染后，阶段按以下顺序运行：</p>
+
+      <ol class="docs-ordered-list">
+        <li><code>AfterRenderPhase.EarlyRead</code></li>
+<li><code>AfterRenderPhase.Write</code></li>
+<li><code>AfterRenderPhase.MixedReadWrite</code></li>
+<li><code>AfterRenderPhase.Read</code></li>
+
+      </ol>
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="drwopg6y7pn48ozempknbeqpd">Angular 无法验证或强制要求正确使用阶段，而是依赖每个开发者遵循为每个值记录的指南，并仔细选择适当的阶段，必要时重构自己的代码。通过这样做，Angular 能够更好地减少与手动 DOM 访问相关的性能下降，确保你的应用或库的最终用户获得最佳体验。</p></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="EarlyRead" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>EarlyRead</h3><div></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="en1cpj0sw5cw8on37ou0xnade">使用 
+<code>AfterRenderPhase.EarlyRead</code> 进行仅需在后续 
+<code>AfterRenderPhase.Write</code> 回调之前
+<strong>读取</strong> DOM 的回调，例如执行浏览器本身不支持的自定义布局。
+<strong>绝不要</strong>在可以写入 DOM 的回调中使用该阶段，或在 
+<code>AfterRenderPhase.Read</code> 足够时使用。</p>
+<div class="alert is-important">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3vq0r86tv6uzw7ag0nbxnkvy">使用此值会降低性能。相反，尽可能使用内置的浏览器功能。</p>
+</div></div></div></div></div><div id="Write" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="10kv0u26wy2ovcj7agj1gusja">写入</h3><div></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="89lp9qshzetrcz4kwg7gd87hv">使用 
+<code>AfterRenderPhase.Write</code> 进行仅
+<strong>写入</strong> DOM 的回调。
+<strong>绝不要</strong>在可以读取 DOM 的回调中使用该阶段。</p></div></div></div></div><div id="MixedReadWrite" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>MixedReadWrite</h3><div></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="8wqt38z0nr478pdgqy0m3phq3">使用 
+<code>AfterRenderPhase.MixedReadWrite</code> 进行读取或写入 DOM 的回调，这些回调还没有重构为使用不同的阶段。
+<strong>绝不要</strong>在可以使用不同阶段的回调中使用该阶段。</p>
+<div class="alert is-critical">
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cggzbrw7phjrlowqj9ncj3wj6">使用此值会
+<strong>显著</strong>降低性能。相反，优先重构为使用更具体阶段的多个回调。</p>
+</div></div></div></div></div><div id="Read" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="788im5gbz510zfmya96ufelkk">读取</h3><div></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="1vongd27z1uluxwddds5polsx">使用 
+<code>AfterRenderPhase.Read</code> 进行仅
+<strong>读取</strong> DOM 的回调。
+<strong>绝不要</strong>在可以写入 DOM 的回调中使用该阶段。</p></div></div></div></div></div></div></div>

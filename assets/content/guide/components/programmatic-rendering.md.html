@@ -1,0 +1,67 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="71qsqa2nokpd5fqwmzt3ap5si">以编程方式渲染组件</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/programmatic-rendering.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    
+    <div class="docs-alert docs-alert-tip">
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dgm70qgb782h0hajisr0uqi7a"><strong>提示：</strong>本指南假定你已经阅读了
+<a href="essentials">基本指南</a>。如果你是 Angular 的新手，请先阅读该指南。</p>
+
+    </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dsl6xpphbfh6i3iflmgqxlvgo">除了在模板中直接使用组件外，你还可以动态渲染组件。 有两种主要方式可以动态渲染组件：在模板中使用
+<code>NgComponentOutlet</code>，或者在你的TypeScript代码中使用
+<code>ViewContainerRef</code>。</p>
+
+  <h2 id="using-ngcomponentoutlet">
+    <a href="#using-ngcomponentoutlet" class="docs-anchor" tabindex="-1" aria-label="Link to Using NgComponentOutlet" data-ng_translator_product="100" data-ng_translator_ref_id="awd0meywt00erpj0x9z65he60">使用NgComponentOutlet</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1tnq9ebxedj1qej09f6tccl25"><code>NgComponentOutlet</code>是一个结构型指令，可以在模板中动态渲染给定的组件。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ ... })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AdminBio</span> { <span class="hljs-comment">/* ... */</span> }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ ... })</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StandardBio</span> { <span class="hljs-comment">/* ... */</span> }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;p&gt;Profile for {{user.name}}&lt;/p&gt;</div><div class="hljs-ln-line">    &lt;ng-container *ngComponentOutlet="getBioComponent()" /&gt; `</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomDialog</span> {</div><div class="hljs-ln-line">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">user</span>: <span class="hljs-title class_">User</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">getBioComponent</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">user</span>.<span class="hljs-property">isAdmin</span> ? <span class="hljs-title class_">AdminBio</span> : <span class="hljs-title class_">StandardBio</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ewbz6igzcrhpv1138rtwzxolv">查看
+<a href="api/common/NgComponentOutlet">NgComponentOutlet API 参考</a>以获取有关该指令功能的更多信息。</p>
+
+  <h2 id="using-viewcontainerref">
+    <a href="#using-viewcontainerref" class="docs-anchor" tabindex="-1" aria-label="Link to Using ViewContainerRef" data-ng_translator_product="100" data-ng_translator_ref_id="5vs8rsgaajvoz2xy3npdtyyzu">使用ViewContainerRef</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="61tarispfxmbmn2x06cta0acf"><strong>视图容器</strong>是Angular组件树中可以包含内容的节点。任何组件或指令都可以注入
+<code>ViewContainerRef</code>以获取与该组件或指令在DOM中位置对应的视图容器的引用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dwh5tjtsbvpyswxx468jmibp1">你可以在
+<code>ViewContainerRef</code>上使用
+<code>createComponent</code>方法来动态创建和渲染组件。当你使用
+<code>ViewContainerRef</code>创建新组件时，Angular会将其附加到注入
+<code>ViewContainerRef</code>的组件或指令的下一个同级位置。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'leaf-content'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    This is the leaf content</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LeafContent</span> {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'outer-container'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;p&gt;This is the start of the outer container&lt;/p&gt;</div><div class="hljs-ln-line">    &lt;inner-item /&gt;</div><div class="hljs-ln-line">    &lt;p&gt;This is the end of the outer container&lt;/p&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OuterContainer</span> {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'inner-item'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;button (click)="loadContent()"&gt;Load content&lt;/button&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InnerItem</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> viewContainer: ViewContainerRef</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">loadContent</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">viewContainer</span>.<span class="hljs-title function_">createComponent</span>(<span class="hljs-title class_">LeafContent</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dfr8xt2hlicc7lkzfl3gbf7r2">在上面的示例中，点击"加载内容"按钮会导致以下DOM结构：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">outer-container</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is the start of the outer container<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">inner-item</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>Load content<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">inner-item</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">leaf-content</span>&gt;</span>This is the leaf content<span class="hljs-tag">&lt;/<span class="hljs-name">leaf-content</span>&gt;</span></div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is the end of the outer container<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">outer-container</span>&gt;</span></div></code>
+    </pre>
+  </div>
+  <h2 id="lazy-loading-components">
+    <a href="#lazy-loading-components" class="docs-anchor" tabindex="-1" aria-label="Link to Lazy-loading components" data-ng_translator_product="100" data-ng_translator_ref_id="9lv3lzrq3lryh6s6kht6xnf4w">惰性加载组件</a>
+  </h2>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ba9mvnwv29q09g3lxd6rg30vm">你可以使用上述描述的两种方法，
+<code>NgComponentOutlet</code> 和 
+<code>ViewContainerRef</code>，来使用标准的 JavaScript 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import" target="_blank">动态导入</a> 来惰性加载组件。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;section&gt;</div><div class="hljs-ln-line">      &lt;h2&gt;Basic settings&lt;/h2&gt;</div><div class="hljs-ln-line">      &lt;basic-settings /&gt;</div><div class="hljs-ln-line">    &lt;/section&gt;</div><div class="hljs-ln-line">    &lt;section&gt;</div><div class="hljs-ln-line">      &lt;h2&gt;Advanced settings&lt;/h2&gt;</div><div class="hljs-ln-line">      &lt;button (click)="loadAdvanced()" *ngIf="!advancedSettings"&gt;</div><div class="hljs-ln-line">        Load advanced settings</div><div class="hljs-ln-line">      &lt;/button&gt;</div><div class="hljs-ln-line">      &lt;ng-container *ngComponentOutlet="advancedSettings" /&gt;</div><div class="hljs-ln-line">    &lt;/section&gt;`</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AdminSettings</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">advancedSettings</span>: {<span class="hljs-title function_">new</span>(): <span class="hljs-title class_">AdminSettings</span>} | <span class="hljs-literal">undefined</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">async</span> <span class="hljs-title function_">loadAdvanced</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">advancedSettings</span> = <span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'path/to/advanced_settings.js'</span>);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9ywzjqarvdel61vf7zum844x">上面的示例在接收到按钮点击时加载并显示 
+<code>AdvancedSettings</code>。</p>

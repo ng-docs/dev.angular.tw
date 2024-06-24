@@ -1,0 +1,37 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="2fpwh1iesn2xs9u681h6xplyq">模板表达式中的管道优先级</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/pipes/precedence.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="coyr6omfvwxamie20a4ci52uc">有时你需要在将某个选择传递给管道之前，根据某个条件在两个值之间进行选择。 你可以在模板中使用 JavaScript 三元运算符 (
+<code>?:</code>) 来做出选择。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="8lw2yog80e0cm5t17dmnmkv7w">注意！管道操作符的优先级高于 JavaScript 三元运算符 (
+<code>?:</code>)。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2vv1j0lmtvbamti8xsy6z6anp">如果你像从左到右求值那样简单地编写表达式，可能会对结果感到惊讶。例如：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">condition ? a : b | pipe</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="3rsxu622uora2btt5fbf2grv">解析为</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">condition ? a : (b | pipe)</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="30cep0iivl50ftndd582kf5ef"><code>b</code> 的值通过 
+<code>pipe</code>；
+<code>a</code> 的值
+<em>不会</em>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="f25y3h5vd3yf2n3a5a1dgzqed">如果你希望 pipe 应用于三元表达式的结果，请将整个表达式包裹在括号中。例如：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">(condition ? a : b) | pipe</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2kjobrd86i3u2nc07kd5n2tcv">一般来说，你应该始终使用括号，确保 Angular 按照你的意图求值表达式。</p>

@@ -1,0 +1,72 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5hlwfvf8kqawvgz32yf8ufn92">创建可注入服务</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/19-creating-an-injectable-service/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2kvi0bi51ghf43l7pdw25bjtd">Angular 中的依赖注入（DI）是框架最强大的特性之一。可以将依赖注入视为 Angular 在运行时为你的应用
+<em>提供</em>所需资源的能力。依赖项可以是服务或其他资源。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dxrb62rzmwtbyzgmonjc0na3n">你可以在 
+<a href="guide/di">Angular 文档中了解更多关于依赖注入的信息</a>。现在，你将练习创建 
+<code>injectable</code> 资源。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="av0l3g2so2gjjdorp7ay6hxeo">在这个活动中，你将学习如何创建一个可注入的服务。</p>
+<hr>
+
+<p data-ng_translator_product="100" data-ng_translator_ref_id="55o0y2q8kb5atmwdzn7rry6eq">使用服务的一种方式是作为与数据和 API 交互的方式。为了使服务可重用，你应该将逻辑保留在服务中，并在需要时在整个应用程序中共享它。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="6mocoy9r4vrwom9j2rucj9lby">要使服务符合依赖注入系统的注入资格，请使用
+<code>@Injectable</code>装饰器。例如：</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line highlighted"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span></div><div class="hljs-ln-line highlighted">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> {</div><div class="hljs-ln-line">    <span class="hljs-comment">// methods to retrieve and return data</span></div><div class="hljs-ln-line">}</div></code>
+    </pre>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ddlp13lyw08hcwn43s9ti5w9a"><code>@Injectable</code>装饰器会通知依赖注入系统，
+<code>UserService</code>可以在类中请求。 
+<code>providedIn</code>设置了该资源可用的范围。现在，理解
+<code>providedIn: 'root'</code>意味着
+<code>UserService</code>对整个应用程序可用已经足够了。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eg7rqs8fvcypa6ou4nglcxc2m">好了，你来试试：</p>
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="add-the-injectable-decorator">
+    <a href="#add-the-injectable-decorator" class="docs-anchor" tabindex="-1" aria-label="Link to Add the <code>@Injectable</code> decorator" data-ng_translator_product="100" data-ng_translator_ref_id="7lqg8pnqrk5fn26cncicelu5">添加 
+<code>@Injectable</code> 装饰器</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="1t57kflmhej063z4lbv6657e5">通过添加
+<code>@Injectable</code>装饰器来更新
+<code>car.service.ts</code>中的代码。</p>
+
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="configure-the-decorator">
+    <a href="#configure-the-decorator" class="docs-anchor" tabindex="-1" aria-label="Link to Configure the decorator" data-ng_translator_product="100" data-ng_translator_ref_id="7jpzwipzm8k6g1ixq1ymcq1lb">配置装饰器</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="aawsj7lmky0ww693p0ary747b">传递给装饰器的对象中的值被视为装饰器的配置。 
+<br> 更新
+<code>car.service.ts</code>中的
+<code>@Injectable</code>装饰器，包含
+<code>providedIn: 'root'</code>的配置。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9d9hyc40gxac77j1cyodtqnye">提示：使用上述示例找到正确的语法。</p>
+
+    </li>
+    
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2zj6qqeo47l93lrayc5the4gb"><span class="docs-emoji">干得好 👍，该服务现在已经可</span>
+<code>注入</code>并可以参与其中。现在该服务是
+<code>可注入</code>
+<span class="docs-emoji">，让我们尝试将其注入到组件中 👉</span></p>

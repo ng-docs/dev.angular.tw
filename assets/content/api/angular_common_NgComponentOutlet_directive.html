@@ -1,0 +1,65 @@
+<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/common</span><div class="docs-reference-title"><div><h1>NgComponentOutlet</h1><div class="docs-api-item-label" data-mode="full" data-type="directive">directive</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/common/src/directives/ng_component_outlet.ts#L94-L212" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_ref_id="65ktd46msfwgp5e2crd1n6x35">实例化一个 
+<a href="api/common/Component "><code>Component</code></a> 类型并将其宿主视图插入当前视图。
+<code>NgComponentOutlet</code> 提供了一种动态创建组件的声明式方法。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-keyword">class</span> <span class="hljs-title class_">NgComponentOutlet</span> {</div><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngComponentOutlet">  <span class="hljs-meta">@Input</span>() <span class="hljs-attr">ngComponentOutlet</span>: <span class="hljs-title class_">Type</span>&lt;<span class="hljs-built_in">any</span>&gt;;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngComponentOutletInputs">  <span class="hljs-meta">@Input</span>() ngComponentOutletInputs?: <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">unknown</span>&gt;;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngComponentOutletInjector">  <span class="hljs-meta">@Input</span>() ngComponentOutletInjector?: <span class="hljs-title class_">Injector</span>;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngComponentOutletContent">  <span class="hljs-meta">@Input</span>() ngComponentOutletContent?: <span class="hljs-built_in">any</span>[][];</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line " member-id="ngComponentOutletNgModule">  <span class="hljs-meta">@Input</span>() ngComponentOutletNgModule?: <span class="hljs-title class_">Type</span>&lt;<span class="hljs-built_in">any</span>&gt;;</button><button aria-describedby="jump-msg" type="button" class="hljs-ln-line hljs-ln-line-deprecated" member-id="ngComponentOutletNgModuleFactory">  <span class="hljs-meta">@Input</span>() ngComponentOutletNgModuleFactory?: <span class="hljs-title class_">NgModuleFactory</span>&lt;<span class="hljs-built_in">any</span>&gt;;</button><div class="hljs-ln-line ">}</div></code></pre></div></div></div><div data-tab="说明" data-tab-url="description"><div><p data-ng_translator_product="100" data-ng_translator_ref_id="65ktd46msfwgp5e2crd1n6x35">实例化一个 
+<a href="api/common/Component "><code>Component</code></a> 类型并将其宿主视图插入当前视图。
+<code>NgComponentOutlet</code> 提供了一种动态创建组件的声明式方法。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="9mxerh2qkrojxtj3rr515m38w"><code>NgComponentOutlet</code> 需要一个组件类型，如果设置了假值，视图将清空，任何现有组件将被销毁。</p></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="46btoxvjgtyh2fydncleaf74w">微调控制</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dq0kjcnl4yhp4drgv74po1bvt">你可以使用以下可选属性来控制组件的创建过程：</p>
+
+    <ul class="docs-list">
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="cfyd31b1w7udzljz31786sb6q"><code>ngComponentOutletInputs</code>：可选的组件输入对象，将绑定到组件。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="2mv53q0v9kdcthgh2zmam1pzq"><code>ngComponentOutletInjector</code>：可选的自定义 {@link Injector}，将作为组件的父级使用。默认为当前视图容器的注入器。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8zb6y3wi9nrdzjhiz1f304ob4"><code>ngComponentOutletContent</code>：要插入组件的 content 部分的可项目节点的可选列表（如果存在）。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8j19c8xcbz4hcuqcxe3cfd261"><code>ngComponentOutletNgModule</code>：可选的 NgModule
+类引用，以允许动态加载另一个模块，然后从该模块加载组件。</p>
+</li>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="511rngfoag5og4oeoc5yorelf"><code>ngComponentOutletNgModuleFactory</code>：已弃用的配置选项，允许提供可选的 NgModule 工厂，以便动态加载另一个模块，然后从该模块加载一个组件。请改用 
+<code>ngComponentOutletNgModule</code>。</p>
+</li>
+
+    </ul>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8p44mx807exjp3s0k9dwbuxla">语法</h3>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1vmlj0s3t7wnn0chr27ix8y2o">简单</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> *<span class="hljs-attr">ngComponentOutlet</span>=<span class="hljs-string">"componentTypeExpression"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="15vkq3xcgeo71zkw98df74sbg">带有输入</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> *<span class="hljs-attr">ngComponentOutlet</span>=<span class="hljs-string">"componentTypeExpression;</span><span class="hljs-ln-line">                                  inputs: inputsExpression;"</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e8rpmhhpcjiba2gtzm93t7dvg">定制的注入器/内容</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> *<span class="hljs-attr">ngComponentOutlet</span>=<span class="hljs-string">"componentTypeExpression;</span><span class="hljs-ln-line">                                  injector: injectorExpression;</span><span class="hljs-ln-line">                                  content: contentNodesExpression;"</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1yfi6n1b5ehpnxuykmm1gv6e7">定制的 ngModule 引用</p>
+
+      <div class="docs-code" role="group">
+        <pre class="docs-mini-scroll-track">
+          <code>
+            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> *<span class="hljs-attr">ngComponentOutlet</span>=<span class="hljs-string">"componentTypeExpression;</span><span class="hljs-ln-line">                                  ngModule: ngModuleClass;"</span>&gt;</span></span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span></span>
+          </code>
+        </pre>
+      </div>
+    <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="agsr72nwnjjreml09tsmnu14u">一个简单的例子</h3>
+<code-example path="common/ngComponentOutlet/ts/module.ts" region="SimpleExample" />
+
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6f2jr7lawht4oosq1t280jxtw">带有附加选项的更完整示例：</p>
+<code-example path="common/ngComponentOutlet/ts/module.ts" region="CompleteExample" /></div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="ngComponentOutlet" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngComponentOutlet</h3><div><code>Type&lt;any&gt;</code></div></div></header></div><div id="ngComponentOutletInputs" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngComponentOutletInputs</h3><div><code>Record&lt;string, unknown&gt;</code></div></div></header></div><div id="ngComponentOutletInjector" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngComponentOutletInjector</h3><div><code>Injector</code></div></div></header></div><div id="ngComponentOutletContent" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngComponentOutletContent</h3><div><code>any[][]</code></div></div></header></div><div id="ngComponentOutletNgModule" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngComponentOutletNgModule</h3><div><code>Type&lt;any&gt;</code></div></div></header></div><div id="ngComponentOutletNgModuleFactory" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-reference-header"><h3>ngComponentOutletNgModuleFactory</h3><div><code>NgModuleFactory&lt;any&gt;</code></div></div></header></div></div></div></div>

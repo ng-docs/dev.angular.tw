@@ -1,0 +1,66 @@
+<header class="docs-header">
+      <docs-breadcrumb></docs-breadcrumb>
+
+      
+  <!-- Page title -->
+  <div class="docs-page-title">
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="5zxjv236heu618zozp83c2h5d">使用 RouterLink 进行导航</h1>
+    <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/14-routerLink/README.md" title="Edit this page" aria-label="Edit this page">
+      <!-- Pencil -->
+      <docs-icon role="presentation">edit</docs-icon>
+    </a>
+  </div>
+    </header>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="e8a5gse3r0721hvn5yvgl1p3t">在应用的当前状态下，当我们点击应用内存在的内部链接时，整个页面会刷新。虽然这在小型应用中看起来无关紧要，但对于拥有更多内容的大型页面，这可能会对性能产生影响，因为用户必须重新下载资产并重新运行计算。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="1vdonq93i89s733gkpwgl8txj">在此活动中，你将学习如何利用 
+<code>RouterLink</code> 指令充分使用 Angular 路由。</p>
+<hr>
+
+
+    <ol class="docs-steps">
+      
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="import-routerlink-directive">
+    <a href="#import-routerlink-directive" class="docs-anchor" tabindex="-1" aria-label="Link to Import <code>RouterLink</code> directive" data-ng_translator_product="100" data-ng_translator_ref_id="dqpszktbcjrjemr2vrob04i11">导入 
+<code>RouterLink</code> 指令</a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="dqdn8uhcxesiuxw8is0ne36kn">在 
+<code>app.component.ts</code> 中，将 
+<code>RouterLink</code> 指令导入现有的 
+<code>@angular/router</code> 导入语句，并将其添加到你的组件装饰器的 
+<code>imports</code> 数组中。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">...</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">RouterLink</span>, <span class="hljs-title class_">RouterOutlet</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">RouterLink</span>, <span class="hljs-title class_">RouterOutlet</span>],</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    <li>
+      <span class="docs-step-number" aria-hidden="true"></span>
+      
+  <h3 id="add-a-routerlink-to-template">
+    <a href="#add-a-routerlink-to-template" class="docs-anchor" tabindex="-1" aria-label="Link to Add a <code>routerLink</code> to template" data-ng_translator_product="100" data-ng_translator_ref_id="5zm5wq5h3zngrp6ezsvcmfm6l">向模板添加 
+<code>routerLink</code></a>
+  </h3>
+  
+      <p data-ng_translator_product="100" data-ng_translator_ref_id="1ppi4x1egiufoo2f56ulma0yl">要使用 
+<code>RouterLink</code> 指令，将 
+<code>href</code> 属性替换为 
+<code>routerLink</code>。用此更改更新模板。</p>
+<div class="docs-code">
+    
+    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">RouterLink</span>, <span class="hljs-title class_">RouterOutlet</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line">    &lt;a routerLink="/"&gt;Home&lt;/a&gt;</div><div class="hljs-ln-line">    &lt;a routerLink="/user"&gt;User&lt;/a&gt;</div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">RouterLink</span>, <span class="hljs-title class_">RouterOutlet</span>],</div><div class="hljs-ln-line">})</div></code>
+    </pre>
+  </div>
+    </li>
+    
+    </ol>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4vhxwp7gerqx2kshjsc3pxlfe">现在点击导航中的链接时，你应该不会看到任何闪烁，只看到页面内容本身（即 
+<code>router-outlet</code>）<span>发生了变化 🎉</span></p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="azpvs94qcyrectcjdu6and4av">很好，你已经学习了关于 Angular 路由的一些知识。这只是 
+<code>Router</code> API 的表面，想了解更多请查看 
+<a href="guide/routing">Angular 路由文档</a>。</p>
