@@ -4,38 +4,30 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="emk5er5ex2kx37xl2resznqwi">使用 
-<code>@Output</code> 进行组件通信</h1>
+    <h1 tabindex="-1">使用 <code>@Output</code> 的组件通信</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/9-output/README.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="1u7ob8izv16tasf6nhrg1xql0">在使用组件时，可能需要通知其他组件某些事情已经发生。也许是一个按钮被点击了，一个条目被添加/移除出列表，或发生了一些其他重要更新。在这种情况下，组件需要与父组件通信。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="9xgfa1ejub2ehe7xi0y61ec8q">Angular 使用 
-<code>@Output</code> 装饰器来启用这种行为。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="dfglpbrqcqs084znfxoo9daat">在此活动中，你将学习如何使用 
-<code>@Output</code> 装饰器和 
-<code>EventEmitter</code> 与组件进行通信。</p>
+    <p>在与组件一起工作时，可能需要通知其他组件发生了某些事情。 也许是按钮被点击了，条目已从列表中添加/删除，或者发生了一些其他重要的更新。 在这种情况下，组件需要与父组件通信。</p>
+<p>Angular 使用 <code>@Output</code> 装饰器来启用这种类型的行为。</p>
+<p>在此实践活动中，你将学习如何使用 <code>@Output</code> 装饰器和 <code>EventEmitter</code> 与组件通信。</p>
 <hr>
 
-<p data-ng_translator_product="100" data-ng_translator_ref_id="vkkcb7vonbmmzs959t4o3zz9">要创建从子组件到父组件的通信路径，请在类属性上使用 
-<code>@Output</code> 装饰器，并将其赋值为 
-<code>EventEmitter</code> 类型：</p>
+<p>要创建从子组件到父组件的通信路径，请在类属性上使用 <code>@Output</code> 装饰器，并为其赋予 <code>EventEmitter</code> 类型的值：</p>
 <div class="docs-code" header="child.component.ts">
     <div class="docs-code-header"><h3>child.component.ts</h3></div>
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</div><div class="hljs-ln-line">    <span class="hljs-meta">@Output</span>() incrementCountEvent = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventEmitter</span>&lt;<span class="hljs-built_in">number</span>&gt;();</div><div class="hljs-ln-line">}</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ChildComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Output</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">incrementCountEvent</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> EventEmitter</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;();</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="e0yd4wbj0ctrs53921vviiksf">现在，该组件可以生成父组件可以监听的事件。通过调用 
-<code>emit</code> 方法来触发事件：</p>
+  </div><p>现在，该组件可以生成可由父组件监听的事件。 通过调用 <code>emit</code> 方法触发事件：</p>
 <div class="docs-code" header="child.component.ts">
     <div class="docs-code-header"><h3>child.component.ts</h3></div>
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-title function_">onClick</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">        <span class="hljs-variable language_">this</span>.<span class="hljs-property">count</span>++;</div><div class="hljs-ln-line">        <span class="hljs-variable language_">this</span>.<span class="hljs-property">incrementCountEvent</span>.<span class="hljs-title function_">emit</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">count</span>);</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">}</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ChildComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    ...</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    onClick</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">        this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.count</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">++</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">        this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.incrementCountEvent.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">emit</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.count);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    }</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="41fob3hpnplbvstbtxlv51dfe">emit 函数将生成一个与 
-<code>EventEmitter</code> 实例类型相同的事件。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="1cdoedhzhuphcetu5g9tfb44v">好了，现在轮到你试试了。通过完成这些任务来完善代码：</p>
+  </div><p>emit 函数将生成一个与 <code>EventEmitter</code> 实例类型相同的事件。</p>
+<p>好的，轮到你来尝试一下了。 通过完成以下任务来完成代码：</p>
 
     <ol class="docs-steps">
       
@@ -43,14 +35,10 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-an-output-property">
-    <a href="#add-an-output-property" class="docs-anchor" tabindex="-1" aria-label="Link to Add an <code>@Output</code> property" data-ng_translator_product="100" data-ng_translator_ref_id="8ky546g3vdlukhfontofqp77q">添加一个 
-<code>@Output</code> 属性</a>
+    <a href="#add-an-output-property" class="docs-anchor" tabindex="-1" aria-label="Link to Add an <code>@Output</code> property">添加一个 <code>@Output</code> 属性</a>
   </h3>
   
-      <p data-ng_translator_product="100" data-ng_translator_ref_id="1zh8w31v0f27o8dhj92vvl3ky">通过添加一个名为 
-<code>addItemEvent</code> 的输出属性来更新 
-<code>child.component.ts</code>，确保将 EventEmitter 类型设置为 
-<code>string</code>。</p>
+      <p>更新 <code>child.component.ts</code>，添加一个名为 <code>addItemEvent</code> 的输出属性，请务必将 EventEmitter 类型设置为 <code>string</code>。</p>
 
     </li>
     
@@ -58,16 +46,13 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="complete-additem-method">
-    <a href="#complete-additem-method" class="docs-anchor" tabindex="-1" aria-label="Link to Complete <code>addItem</code> method" data-ng_translator_product="100" data-ng_translator_ref_id="zc467i6engdd3ygk4l15q3cj">完成 
-<code>addItem</code> 方法</a>
+    <a href="#complete-additem-method" class="docs-anchor" tabindex="-1" aria-label="Link to Complete <code>addItem</code> method">完成 <code>addItem</code> 方法</a>
   </h3>
   
-      <p data-ng_translator_product="100" data-ng_translator_ref_id="7ryspxap6svhqpgk0kfsb5748">在 
-<code>child.component.ts</code> 中更新 
-<code>addItem</code> 方法；使用以下代码作为逻辑：</p>
+      <p>在 <code>child.component.ts</code> 中，更新 <code>addItem</code> 方法； 使用以下代码作为逻辑：</p>
 <div class="docs-code" header="child.component.ts">
     <div class="docs-code-header"><h3>child.component.ts</h3></div>
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">addItem</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">  <span class="hljs-variable language_">this</span>.<span class="hljs-property">addItemEvent</span>.<span class="hljs-title function_">emit</span>(<span class="hljs-string">'🐢'</span>);</div><div class="hljs-ln-line">}</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">addItem</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line highlighted"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.addItemEvent.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">emit</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'🐢'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
     </li>
@@ -76,20 +61,18 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="update-the-appcomponent-template">
-    <a href="#update-the-appcomponent-template" class="docs-anchor" tabindex="-1" aria-label="Link to Update the <code>AppComponent</code> template" data-ng_translator_product="100" data-ng_translator_ref_id="c5l004y4uh067am5fhhhprmuz">更新 
-<code>AppComponent</code> 模板</a>
+    <a href="#update-the-appcomponent-template" class="docs-anchor" tabindex="-1" aria-label="Link to Update the <code>AppComponent</code> template">更新 <code>AppComponent</code> 模板</a>
   </h3>
   
-      <p data-ng_translator_product="100" data-ng_translator_ref_id="dk53569bj0jzt3037gdx31775">在 
-<code>app.component.ts</code> 中更新模板，通过添加以下代码来监听发出的事件：</p>
+      <p>在 <code>app.component.ts</code> 中，更新模板以监听发出的事件，方法是添加以下代码：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">app-child</span> (<span class="hljs-attr">addItemEvent</span>)=<span class="hljs-string">"addItem($event)"</span> /&gt;</span></div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">app-child</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> (addItemEvent)</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"addItem($event)"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="8c4pqfsgyap7czp2wp7hxqtf6">现在，每次点击“Add Item”按钮时，该按钮都会向列表中添加一个新条目。</p>
+  </div><p>现在，“添加条目”按钮在每次单击时都会向列表中添加一个新条目。</p>
 
     </li>
     
     </ol>
-    <p><span class="docs-emoji" data-ng_translator_product="100" data-ng_translator_ref_id="djeoseequorzkvd4mh4cnsxma">哇，现在你已经完成了此组件的基本功能 —— 很了不起 👏</span></p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="4kjwg1krf1a68g4ygqawtcojk">继续学习，解锁更多 Angular 的强大特性。</p>
+    <p><span class="docs-emoji">哇，至此你已经完成了组件基础知识的学习 - 令人印象深刻 👏</span></p>
+<p>继续学习以解锁 Angular 更多强大的特性。</p>

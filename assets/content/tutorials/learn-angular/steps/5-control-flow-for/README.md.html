@@ -4,34 +4,28 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="5tiltfwhcoeu3cr1h45cww2ck">组件中的控制流 - 
-<code>@for</code></h1>
+    <h1 tabindex="-1">组件中的控制流 - <code>@for</code></h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/5-control-flow-for/README.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="6rqh8t4h3faqcr4xz1j0ms1oz">在构建 Web 应用时，你常常需要重复某些代码多次 —— 例如，给定一个名字数组，你可能希望在每个 
-<code>&lt;p&gt;</code> 标签中显示每个名字。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="clh1ipvk81t4947ito5jirob1">在此活动中，你将学习如何使用 
-<code>@for</code> 在模板中重复元素。</p>
+    <p>通常在构建 Web 应用时，你需要重复一段代码特定的次数 - 例如，给定一个名称数组，你可能希望在 <code>&lt;p&gt;</code> 标签中显示每个名称。</p>
+<p>在本活动中，你将学习如何使用 <code>@for</code> 在模板中重复条目。</p>
 <hr>
 
-<p data-ng_translator_product="100" data-ng_translator_ref_id="8kz8py60efhdoo63ie0k4a5v0">启用在模板中重复元素的语法是 
-<code>@for</code>。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="4w2kexcp55mbuvq2hu01r9kbm">以下是如何在组件中使用 
-<code>@for</code> 语法的示例：</p>
+<p>在模板中启用条目重复的语法是 <code>@for</code>。</p>
+<p>这是一个关于如何在组件中使用 <code>@for</code> 语法的范例：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    @for (os of operatingSystems; track os.id) {</div><div class="hljs-ln-line">      {{ os.name }}</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {</div><div class="hljs-ln-line">  operatingSystems = [{<span class="hljs-attr">id</span>: <span class="hljs-string">'win'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Windows'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-string">'osx'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'MacOS'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-string">'linux'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Linux'</span>}];</div><div class="hljs-ln-line">}</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    @for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (os </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">of</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> operatingSystems; track os.id) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      {{ os.name }}</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    }</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> AppComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  operatingSystems</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [{id: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'win'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Windows'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}, {id: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'osx'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'MacOS'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}, {id: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'linux'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Linux'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}];</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="26lxbl87x4cqxj7xafq2ls951">需要注意两点：</p>
+  </div><p>注意看以下两点：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_ref_id="1qz64bavv8ncx9bsu8xabasp4"><code>@</code> 前缀在 <code>for</code> 前是因为它是一种特殊语法，称为 <a href="guide/templates">Angular 模板语法</a>。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="6km6le4jft3jmo2za4etod6u">对于使用 v16 及更早版本的应用，请参阅 
-<a href="guide/directives/structural-directives">Angular 文档中的 NgFor</a></li>
+    <li><code>for</code> 带有 <code>@</code> 前缀，因为它是一种称为 <a href="guide/templates">Angular 模板语法</a> 的特殊语法</li>
+<li>对于使用 v16 及更老版本的应用，请参考 <a href="guide/directives/structural-directives">关于 NgFor 的 Angular 文档</a></li>
 
   </ul>
   
@@ -41,16 +35,13 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-the-users-property">
-    <a href="#add-the-users-property" class="docs-anchor" tabindex="-1" aria-label="Link to Add the <code>users</code> property" data-ng_translator_product="100" data-ng_translator_ref_id="5228za2mca0n4q6bblw2fpa02">添加 
-<code>users</code> 属性</a>
+    <a href="#add-the-users-property" class="docs-anchor" tabindex="-1" aria-label="Link to Add the <code>users</code> property">添加 <code>users</code> 属性（Property）</a>
   </h3>
   
-      <p data-ng_translator_product="100" data-ng_translator_ref_id="1o7iqjw835s8m7we2hzjj9j7c">在 
-<code>AppComponent</code> 类中，添加一个名为 
-<code>users</code> 的属性，其中包含用户及其姓名。</p>
+      <p>在 <code>AppComponent</code> 类中，添加一个名为 <code>users</code> 的属性（Property），其中包含用户及其姓名。</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">[{<span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Sarah'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Amy'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Rachel'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Jessica'</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Poornima'</span>}]</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[{id: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Sarah'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}, {id: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Amy'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}, {id: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Rachel'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}, {id: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Jessica'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}, {id: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Poornima'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}]</span></span></code></pre>
     </pre>
   </div>
     </li>
@@ -59,21 +50,17 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="update-the-template">
-    <a href="#update-the-template" class="docs-anchor" tabindex="-1" aria-label="Link to Update the template" data-ng_translator_product="100" data-ng_translator_ref_id="bmnghi104qlgw3v13qolsoj76">更新模板</a>
+    <a href="#update-the-template" class="docs-anchor" tabindex="-1" aria-label="Link to Update the template">更新模板</a>
   </h3>
   
-      <p data-ng_translator_product="100" data-ng_translator_ref_id="ehttbou2hwp1e0gyimyjz0iu">更新模板，使用 
-<code>@for</code> 模板语法在 
-<code>p</code> 元素中显示每个用户名。</p>
+      <p>更新模板以使用 <code>@for</code> 模板语法在 <code>p</code> 元素中显示每个用户名。</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@for</span> (user <span class="hljs-keyword">of</span> users; track user.<span class="hljs-property">id</span>) {</div><div class="hljs-ln-line">  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{ user.name }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line">}</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (user </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">of</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> users; track user.id) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;{{ user.name }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="399so58kspb76r1t4s15t1jhu">注意：需要使用 
-<code>track</code>，你可以使用 
-<code>id</code> 或其他唯一标识符。</p>
+  </div><p>注意：必须使用 <code>track</code>，你可以使用 <code>id</code> 或其他唯一标识符。</p>
 
     </li>
     
     </ol>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="6gz7u7jnndmdwugiv1nlar1y">这种功能称为控制流。接下来，你将学习如何自定义和与组件通信 —— 顺便说一句，你做得很棒。</p>
+    <p>这种类型的功能称为控制流。接下来，你将学习如何自定义组件以及与组件通信 - 顺便说一句，到目前为止你做得非常棒。</p>

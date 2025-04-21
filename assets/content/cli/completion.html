@@ -1,56 +1,47 @@
-<div class="cli"><div class="docs-reference-cli-content"><header class="docs-reference-header"><span class="docs-reference-category">CLI</span><div class="docs-reference-title"><div><h1> completion</h1><div class="docs-api-item-label" data-mode="full" data-type="command">Command</div></div></div></header><div class="docs-code docs-reference-cli-toc"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line">ng completion<button member-id="Options" class="hljs-ln-line-option">[options]</button></div></code></pre></div><div><p data-ng_translator_product="100" data-ng_translator_ref_id="am8jzgaxzmtinersvj93noptm">设置自动补全功能会配置你的终端，这样在输入过程中按下 
-<code>&lt;TAB&gt;</code> 键时会显示各种可用的命令和选项。这使得用户在不需要大量记忆的情况下，可以非常容易地发现和使用 CLI 命令。</p>
+<div class="docs-cli"><div class="docs-reference-cli-content"><header class="docs-reference-header"><span class="docs-reference-category">CLI</span><div class="docs-reference-title"><div><h1> completion</h1><div class="docs-api-item-label type-command full">命令</div></div></div></header><div class="docs-code docs-reference-cli-toc"><pre class="docs-mini-scroll-track"><code><div class="shiki line cli">ng completion<button member-id="Options" class="shiki-ln-line-option">[options]</button></div></code></pre></div><div><p>建立自动补全功能会配置你的终端，这样在输入时，按下 <code>&lt;TAB&gt;</code> 键就会显示可用的各种命令和选项。这让你无需死记硬背就能轻松发现和使用 CLI 命令。</p>
 <p>
     <img src="assets/images/guide/cli/completion.gif" alt="A demo of Angular CLI autocompletion in a terminal. The user types several partial `ng` commands,
 using autocompletion to finish several arguments and list contextual options.
 " title="null" class="docs-image">
     </p>
-<h2 data-ng_translator_product="100" data-ng_translator_ref_id="52pyxp9di576d86bo99mloic5">自动化设置</h2>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="bjqy62na1eq1t3nvyw5b0kyxv">CLI 在你第一次使用它时（v14+），应该会提示并询问是否为你设置自动补全。只需回答『是』，CLI 会处理好剩下的部分。</p>
+
+      <h2 id="automated-setup" class="docs-reference-section-heading docs-reference-section-heading--sub">
+        <a href="#automated-setup" aria-label="Link to Automated setup section" tabindex="-1">自动建立</a>
+      </h2>
+    <p>首次使用 CLI 时（v14+），CLI 应该会提示并询问是否为你建立自动补全功能。只需回答“是”，CLI 就会处理剩下的事情。</p>
 
       <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line">$ ng serve</span><span class="hljs-ln-line">? Would you like <span class="hljs-keyword">to</span> enable autocompletion? This will <span class="hljs-keyword">set</span> <span class="hljs-keyword">up</span> your terminal <span class="hljs-keyword">so</span> pressing TAB <span class="hljs-keyword">while</span> typing Angular CLI commands will show possible <span class="hljs-keyword">options</span> <span class="hljs-built_in">and</span> autocomplete arguments. (Enabling autocompletion will modify configuration <span class="hljs-keyword">files</span> in your home directory.) Yes</span><span class="hljs-ln-line">Appended `<span class="hljs-keyword">source</span> &lt;(ng completion script)` <span class="hljs-keyword">to</span> `/home/my-username/.bashrc`. Restart your terminal <span class="hljs-built_in">or</span> run:</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-keyword">source</span> &lt;(ng completion script)</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"><span class="hljs-keyword">to</span> autocomplete `ng` commands.</span><span class="hljs-ln-line"></span><span class="hljs-ln-line"># Serve output...</span>
-          </code>
+        <pre class="docs-mini-scroll-track">          <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span>$ ng serve</span></span><span class="line"><span>? Would you like to enable autocompletion? This will set up your terminal so pressing TAB while typing Angular CLI commands will show possible options and autocomplete arguments. (Enabling autocompletion will modify configuration files in your home directory.) Yes</span></span><span class="line"><span>Appended `source &lt;(ng completion script)` to `/home/my-username/.bashrc`. Restart your terminal or run:</span></span><span class="line"><span></span></span><span class="line"><span>source &lt;(ng completion script)</span></span><span class="line"><span></span></span><span class="line"><span>to autocomplete `ng` commands.</span></span><span class="line"><span></span></span><span class="line"><span># Serve output...</span></span></code></pre>
         </pre>
       </div>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="x2lw5zdgckcep7w8oub911p7">如果你已经拒绝了提示，它将不会再询问。但你可以运行 
-<code>ng completion</code> 来自动完成同样的操作。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="pfwx1jhmp0fygf3e07kcwyta">这会修改你的终端环境以加载 Angular CLI 自动补全，但不能更新当前终端会话。要么重启它，要么直接运行 
-<code>source &lt;(ng completion script)</code> 以在当前会话中启用自动补全。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="ds11t9b7uyfzy8un5y6nf1eet">通过输入 
-<code>ng ser&lt;TAB&gt;</code> 来测试一下，它应该会自动补全为 
-<code>ng serve</code>。对于模糊参数，会显示所有可能的选项及其文档，例如 
-<code>ng generate &lt;TAB&gt;</code>。</p>
-<h2 data-ng_translator_product="100" data-ng_translator_ref_id="cwskaymivwdmfpq9dmjlfmk1k">手动设置</h2>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="1yzd5s9qhjfr4lct203xjlpsa">一些用户可能有高度自定义的终端设置，可能有配置文件被检入源代码控制并具有特定结构。
-<code>ng completion</code> 只会将 Angular 的设置附加到当前 shell 的现有配置文件中，或者如果不存在则创建一个。如果你想更精确地控制此配置的存放位置，可以通过在 shell 启动时运行以下命令手动设置：</p>
+    <p>如果你之前拒绝了提示，它就不会再次询问。但是你可以运行 <code>ng completion</code> 来自动执行相同的操作。</p>
+<p>这将修改你的终端环境以加载 Angular CLI 自动补全功能，但无法更新你当前的终端会话。可以重启终端，或者直接运行 <code>source &lt;(ng completion script)</code> 以在你当前的会话中启用自动补全功能。</p>
+<p>通过输入 <code>ng ser&lt;TAB&gt;</code> 来测试一下，它应该会自动补全为 <code>ng serve</code>。有歧义的参数将显示所有可能的选项及其文档，例如 <code>ng generate &lt;TAB&gt;</code>。</p>
+
+      <h2 id="manual-setup" class="docs-reference-section-heading docs-reference-section-heading--sub">
+        <a href="#manual-setup" aria-label="Link to Manual setup section" tabindex="-1">手动建立</a>
+      </h2>
+    <p>有些用户可能具有高度自定义的终端设置，其配置文件可能会以固定的结构检入到源码控制中。<code>ng completion</code> 始终只会将 Angular 的设置附加到当前 Shell 的现有配置文件中，或者在不存在配置文件时创建一个。如果你想更精确地控制此配置文件的位置，你可以通过让你的 Shell 在启动时运行以下命令来手动建立它：</p>
 
       <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line"><span class="hljs-built_in">source</span> &lt;(ng completion script)</span>
-          </code>
+        <pre class="docs-mini-scroll-track">          <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">source</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> &lt;(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> completion script)</span></span></code></pre>
         </pre>
       </div>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="87os128ji9mkenl5lhvmaac3p">这相当于 
-<code>ng completion</code> 自动设置的内容，并在需要时为高级用户在其环境中提供更多灵活性。</p>
-<h2 data-ng_translator_product="100" data-ng_translator_ref_id="4lactszu3ajd0km167hytvba6">平台支持</h2>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="d1x8w6mlgzo8gk7qbjgm1qt51">Angular CLI 支持在 MacOS 和 Linux 操作系统上的 Bash 和 Zsh shell 自动补全。在 Windows 上，支持 Git Bash 和 
-<a href="https://docs.microsoft.com/en-us/windows/wsl/">Windows Subsystem for Linux</a> 使用 Bash 或 Zsh。</p>
-<h2 data-ng_translator_product="100" data-ng_translator_ref_id="1q7q9lmqozt8xzh7q6lau3825">全局安装</h2>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="ewyezml9pkc6rr68l4r8afcrd">自动补全通过配置你的终端在启动时调用 Angular CLI 来加载设置脚本。这意味着终端必须能够找到并执行 Angular CLI，通常通过全局安装将二进制文件放在用户的 
-<code>$PATH</code> 中。如果你收到 
-<code>command not found: ng</code> 错误，请确保 CLI 已全局安装，你可以使用 
-<code>-g</code> 标志来进行安装：</p>
+    <p>这等效于 <code>ng completion</code> 将自动建立的内容，并在需要时为高级用户提供更高的环境灵活性。</p>
+
+      <h2 id="platform-support" class="docs-reference-section-heading docs-reference-section-heading--sub">
+        <a href="#platform-support" aria-label="Link to Platform support section" tabindex="-1">平台支持</a>
+      </h2>
+    <p>Angular CLI 支持 MacOS 和 Linux 操作系统上 Bash 和 Zsh Shell 的自动补全功能。在 Windows 上，支持使用 Bash 或 Zsh 的 Git Bash 和 <a href="https://docs.microsoft.com/en-us/windows/wsl/">Windows Subsystem for Linux</a>。</p>
+
+      <h2 id="global-install" class="docs-reference-section-heading docs-reference-section-heading--sub">
+        <a href="#global-install" aria-label="Link to Global install section" tabindex="-1">全局安装</a>
+      </h2>
+    <p>自动补全的工作原理是配置你的终端，以便在启动时调用 Angular CLI 来加载建立脚本。这意味着终端必须能够找到并执行 Angular CLI，通常是通过全局安装将二进制文件放在用户的 <code>$PATH</code> 中。如果你收到 <code>command not found: ng</code>，请确保 CLI 已全局安装，你可以使用 <code>-g</code> 标志来完成全局安装：</p>
 
       <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line">npm install -g @angular/cli</span>
-          </code>
+        <pre class="docs-mini-scroll-track">          <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> install</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> -g</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> @angular/cli</span></span></code></pre>
         </pre>
       </div>
-    </div><h3 data-ng_translator_product="100" data-ng_translator_ref_id="5qi73tckmyguoolfm8ybo6w1y">子命令</h3><p data-ng_translator_product="100" data-ng_translator_ref_id="1j3l4y797uv34qe3kepzmbipm">此命令有以下子命令</p><ul><li><a href="cli/completion/script">script</a></li></ul></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div id="Options" class="docs-reference-member-card" tabindex="-1"><header><div class="docs-card-ref-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="cyk2rtnidu0xcswyg7218m57s">选项</h3></div></header><div class="docs-reference-card-body"><div class="docs-ref-content"><div class="docs-ref-option-and-description"><div class="docs-reference-option"><code>help</code></div><div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5ziwpescwgmf61892apmzsy97">在控制台显示关于本命令的帮助信息。</p>
-</div></div><div class="docs-reference-type-and-default"><span>Value Type</span><code>boolean</code></div></div></div></div></div></div></div>
+    </div><h3>子命令</h3><p>此命令具有以下子命令</p><ul><li><a href="cli/completion/script">script</a></li></ul></div><div class="docs-reference-members"><h2 id="options" class="docs-reference-section-heading"><a href="#options" aria-label="Link to Options section" tabindex="-1">选项</a></h2><div class="docs-reference-member-card"><div class="docs-reference-card-body"><div class="docs-ref-content"><div class="docs-ref-option-and-description"><div class="docs-reference-option"><code>help</code></div><div><p>在控制台中显示此命令的帮助消息。</p>
+</div></div><div class="docs-reference-type-and-default"><span>值类型</span><code>boolean</code></div></div></div></div></div></div>

@@ -4,7 +4,7 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="5qqcogi1vipre2nfk2gesarkr">依赖注入中的循环依赖</h1>
+    <h1 tabindex="-1">依赖注入（DI）中的循环依赖</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0200.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
@@ -15,20 +15,11 @@
     <div class="docs-video-container">
       <iframe class="docs-video" src="https://www.youtube.com/embed/CpLOm4o_FzM" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless title="Video player"></iframe>
     </div>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="3v0wt5ko4isct3ueofr9e7im5">当某个
-<a href="guide/di/hierarchical-dependency-injection">服务的依赖</a>直接或间接依赖于该服务本身时，就存在循环依赖。例如，如果 
-<code>UserService</code> 依赖于 
-<code>EmployeeService</code>，而 
-<code>EmployeeService</code> 也依赖于 
-<code>UserService</code>。Angular 将不得不实例化 
-<code>EmployeeService</code> 来创建 
-<code>UserService</code>，而 
-<code>UserService</code> 自身又依赖于 
-<code>UserService</code>。</p>
+    <p>当一个<a href="guide/di/hierarchical-dependency-injection">服务的依赖</a>直接或间接地依赖于服务自身时，就会存在循环依赖。例如，如果 <code>UserService</code> 依赖于 <code>EmployeeService</code>，而 <code>EmployeeService</code> 也依赖于 <code>UserService</code>。Angular 将不得不实例化 <code>EmployeeService</code> 以创建 <code>UserService</code>，而 <code>UserService</code> 本身又依赖于 <code>UserService</code>。</p>
 
   <h2 id="debugging-the-error">
-    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error">调试错误</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="esm09vp4vww8u41jr8nlyc036">使用调用栈来确定循环依赖的存在。你可以通过
-<a href="guide/di/di-in-action">映射出</a>组件、模块或服务的依赖关系，并识别导致问题的循环，来查看是否有任何子依赖项依赖于原始文件。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3ta0mi4vwxjwpifqretrpc18m">打破依赖关系的这种循环以解决此错误。这通常意味着删除或重构依赖项以使其彼此不互相依赖。</p>
+  <p>使用调用堆栈来确定循环依赖存在的位置。
+通过<a href="guide/di/di-in-action">映射出</a>组件、模块或服务的依赖关系，并找出导致问题的循环，你将能够看到是否有任何子依赖项依赖于原始文件。</p>
+<p>打破这个依赖循环（或环）以求解此错误。这通常意味着移除或重构这些依赖项，使它们不再相互依赖。</p>

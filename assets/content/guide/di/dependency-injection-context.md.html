@@ -4,80 +4,63 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="6i2331m8j8vxiqrm3m7o9qbot">注入上下文</h1>
+    <h1 tabindex="-1">注入上下文</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/di/dependency-injection-context.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="d6hw2pixvs4sdlh0brtf1vkeh">依赖注入（DI）体系内部依赖于一个运行时上下文，在该上下文中当前的注入器是可用的。这意味着注入器只有在代码在此类上下文中执行时才能工作。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="44wmjx4i91jw2nf2gj1hcfu9f">注入上下文在以下情况中是可用的：</p>
+    <p>依赖注入 (DI) 体系在内部依赖于一个运行时上下文，在该上下文中，当前的注入器是可用的。
+这意味着只有当代码在这样的上下文中执行时，注入器才能工作。</p>
+<p>注入上下文在以下情况中可用：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_ref_id="ctj4ofjovl30n14lr0cle2p95">在 DI 系统实例化类（如 
-<code>@Injectable</code> 或 
-<code>@Component</code>）的构造过程中（通过 
-<code>constructor</code>）。</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="29172th10uuxu5ic4snjdofwf">在此类类的字段的初始化器中。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="e82lr77d4hpgl6e9phgt11abm">在 
-<code>Provider</code> 或 
-<code>@Injectable</code> 的 
-<code>useFactory</code> 指定的工厂函数中。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="f0xqutzu1y1l6hiqbdt8xrm0h">在为 
-<code>InjectionToken</code> 指定的 
-<code>factory</code> 函数中。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="1p17ev0jy9vt2nw8adxnnq79b">在运行于注入上下文中的堆栈框架内。</li>
+    <li>在由 DI 体系实例化的类（例如 <code>@Injectable</code> 或 <code>@Component</code>）的构造期间（通过 <code>constructor</code>）。</li>
+<li>在此类字段的初始化器中。</li>
+<li>在为 <code>Provider</code> 或 <code>@Injectable</code> 的 <code>useFactory</code> 指定的工厂函数中。</li>
+<li>在为 <code>InjectionToken</code> 指定的 <code>factory</code> 函数中。</li>
+<li>在注入上下文中运行的堆栈帧内。</li>
 
   </ul>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="9mhyhzfvlpulgvh43wr5088az">知道何时处于注入上下文中将允许你使用 
-<a href="api/core/inject"><code>inject</code></a> 函数来注入实例。</p>
+  <p>了解你何时处于注入上下文中，将允许你使用 <a href="api/core/inject"><code>inject</code></a> 函数来注入实例。</p>
 
   <h2 id="class-constructors">
-    <a href="#class-constructors" class="docs-anchor" tabindex="-1" aria-label="Link to Class constructors" data-ng_translator_product="100" data-ng_translator_ref_id="3oqj1hssym4rnwiox0y7y15s7">类构造函数</a>
+    <a href="#class-constructors" class="docs-anchor" tabindex="-1" aria-label="Link to Class constructors">类构造函数</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="3se2ivrscm85y92ntf39sqo3u">每次 DI 系统实例化一个类时，都是在注入上下文中进行的。这由框架自身处理。类的构造函数在该运行时上下文中执行，这也允许使用 
-<a href="api/core/inject"><code>inject</code></a> 函数注入令牌。</p>
+  <p>每次 DI 体系实例化一个类时，它都会在注入上下文中执行此操作。这由框架本身处理。该类的构造函数在该运行时上下文中执行，这也允许使用 <a href="api/core/inject"><code>inject</code></a> 函数注入令牌。</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComponent</span>  {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> <span class="hljs-attr">service1</span>: <span class="hljs-title class_">Service1</span>;</div><div class="hljs-ln-line highlighted">  <span class="hljs-keyword">private</span> <span class="hljs-attr">service2</span>: <span class="hljs-title class_">Service2</span> = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">Service2</span>); <span class="hljs-comment">// In context</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">service1</span> = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">HeroService</span>) <span class="hljs-comment">// In context</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> MyComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> service1</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Service1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line highlighted"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> service2</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Service2</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(Service2); </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// In context</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  constructor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line highlighted"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.service1 </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(Service1) </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// In context</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h2 id="stack-frame-in-context">
-    <a href="#stack-frame-in-context" class="docs-anchor" tabindex="-1" aria-label="Link to Stack frame in context" data-ng_translator_product="100" data-ng_translator_ref_id="351h91x0frwbrcy4xnwswpvly">上下文中的堆栈框架</a>
+    <a href="#stack-frame-in-context" class="docs-anchor" tabindex="-1" aria-label="Link to Stack frame in context">上下文中的堆栈帧</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="csj7boceuhwzssnbwd3zzft6u">某些 API 设计为在注入上下文中运行。例如，路由守卫就是这种情况。这允许在守卫函数中使用 
-<a href="api/core/inject"><code>inject</code></a> 来访问服务。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="o4j0dta69263qil30taizi6l">这里是一个 
-<code>CanActivateFn</code> 的示例</p>
+  <p>某些 API 被设计为在注入上下文中运行。例如，路由器守卫就是这种情况。这允许在守卫函数中使用 <a href="api/core/inject"><code>inject</code></a> 来访问服务。</p>
+<p>这是 <code>CanActivateFn</code> 的一个范例</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">canActivateTeam</span>: <span class="hljs-title class_">CanActivateFn</span> =</div><div class="hljs-ln-line">    <span class="hljs-function">(<span class="hljs-params">route: ActivatedRouteSnapshot, state: RouterStateSnapshot</span>) =&gt;</span> {</div><div class="hljs-ln-line highlighted">      <span class="hljs-keyword">return</span> <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">PermissionsService</span>).<span class="hljs-title function_">canActivate</span>(<span class="hljs-title function_">inject</span>(<span class="hljs-title class_">UserToken</span>), route.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);</div><div class="hljs-ln-line">    };</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> canActivateTeam</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> CanActivateFn</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    (</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">route</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ActivatedRouteSnapshot</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">state</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> RouterStateSnapshot</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line highlighted"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">      return</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(PermissionsService).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">canActivate</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(UserToken), route.params.id);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    };</span></span></code></pre>
     </pre>
   </div>
   <h2 id="run-within-an-injection-context">
-    <a href="#run-within-an-injection-context" class="docs-anchor" tabindex="-1" aria-label="Link to Run within an injection context" data-ng_translator_product="100" data-ng_translator_ref_id="9b1oyrnzm5bu9hsv5breup3h6">在注入上下文中运行</a>
+    <a href="#run-within-an-injection-context" class="docs-anchor" tabindex="-1" aria-label="Link to Run within an injection context">在注入上下文中运行</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="6jyiy6getxrp6zuwbhbnstsne">当你想在一个给定的注入上下文中运行某个函数，而此时你并不在其中时，可以使用 
-<code>runInInjectionContext</code> 来实现。 这需要访问某个给定的注入器，比如 
-<code>EnvironmentInjector</code>，例如：</p>
+  <p>当你想在注入上下文中运行给定的函数，而你又不在其中时，你可以使用 <code>runInInjectionContext</code> 来做到这一点。
+这需要访问给定的注入器，例如 <code>EnvironmentInjector</code>：</p>
 <div class="docs-code" header="src/app/heroes/hero.service.ts">
     <div class="docs-code-header"><h3>src/app/heroes/hero.service.ts</h3></div>
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HeroService</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> environmentInjector = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">EnvironmentInjector</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">someMethod</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-title function_">runInInjectionContext</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">environmentInjector</span>, <span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line highlighted">      <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">SomeService</span>); <span class="hljs-comment">// Do what you need with the injected service</span></div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Injectable</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  providedIn: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'root'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HeroService</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> environmentInjector</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(EnvironmentInjector);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  someMethod</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    runInInjectionContext</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.environmentInjector, () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line highlighted"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(SomeService); </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Do what you need with the injected service</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ai7rm11wdit64yk6t0j3ldyiy">请注意，只有当注入器可以解析必要的令牌时，
-<code>inject</code> 才会返回一个实例。</p>
+  </div><p>请注意，只有当注入器可以求解所需的令牌时，<code>inject</code> 才会返回一个实例。</p>
 
   <h2 id="asserts-the-context">
-    <a href="#asserts-the-context" class="docs-anchor" tabindex="-1" aria-label="Link to Asserts the context" data-ng_translator_product="100" data-ng_translator_ref_id="6nggrxl3vuxqokgusz5o03mnd">断言上下文</a>
+    <a href="#asserts-the-context" class="docs-anchor" tabindex="-1" aria-label="Link to Asserts the context">断言上下文</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="3627l0sek6fbgbwlk4wq72z35">Angular 提供了 
-<code>assertInInjectionContext</code> 辅助函数，用于断言当前上下文是注入上下文。</p>
+  <p>Angular 提供了 <code>assertInInjectionContext</code> 辅助函数来断言当前上下文是否为注入上下文。</p>
 
   <h2 id="using-di-outside-of-a-context">
-    <a href="#using-di-outside-of-a-context" class="docs-anchor" tabindex="-1" aria-label="Link to Using DI outside of a context" data-ng_translator_product="100" data-ng_translator_ref_id="1ckg2xj8uymhpwr4stuxcfzle">在上下文之外使用 DI</a>
+    <a href="#using-di-outside-of-a-context" class="docs-anchor" tabindex="-1" aria-label="Link to Using DI outside of a context">在上下文之外使用 DI</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="49q56kmjf9hoosdb5b1e0u6tv">在注入上下文之外调用 
-<a href="api/core/inject"><code>inject</code></a> 或调用 
-<code>assertInInjectionContext</code> 将会抛出 
-<a href="/errors/NG0203">错误 NG0203</a>。</p>
+  <p>在注入上下文之外调用 <a href="api/core/inject"><code>inject</code></a> 或调用 <code>assertInInjectionContext</code> 将会抛出 <a href="/errors/NG0203">错误 NG0203</a>。</p>

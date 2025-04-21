@@ -4,43 +4,32 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="ewybkvfjqe9cog15csab2gfya">缺少值访问器</h1>
+    <h1 tabindex="-1">缺少值访问器</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG01203.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5yl3bn9uz39rvkypg7oohme6n">对于所有自定义表单控件，你必须注册一个值访问器。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ebdjwj2dz85kyh4xo7ohoc2rl">这是一个如何提供它的示例：</p>
+    <p>对于所有自定义表单控件，你都必须注册一个值访问器。</p>
+<p>这是一个如何提供值访问器的范例：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">provide</span>: <span class="hljs-variable constant_">NG_VALUE_ACCESSOR</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">useExisting</span>: <span class="hljs-title function_">forwardRef</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">MyInputField</span>),</div><div class="hljs-ln-line">    <span class="hljs-attr">multi</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">]</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">providers</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    provide: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">NG_VALUE_ACCESSOR</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    useExisting: </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">forwardRef</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> MyInputField),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    multi: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span></span></code></pre>
     </pre>
   </div>
   <h2 id="debugging-the-error">
-    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error">调试此错误</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d4w8wtg5ztlpx35ttqjz36x11">如前所述，你的控件应该有一个值访问器，但它却没有。不过，在实践中发生这种情况的原因有很多。下面是会导致此错误的一些已知问题的列表。</p>
+  <p>如上所述，你的控件本应具有值访问器，但却缺少一个。然而，在实践中，发生这种情况的原因有很多。以下是导致此错误的一些已知问题列表。</p>
 
     <ol class="docs-ordered-list">
-      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ep20o7tgdfymapnbp3az0yc0z">如果你<strong>定义</strong>了一个自定义表单控件，你是否忘了提供一个值访问器？</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="95dipybzdhcmwpa59vwyxqtm8">你是否在没有值的元素或
-<strong>无效元素</strong>（例如 
-<code>&lt;div [(ngModel)]="foo"&gt;</code>）上放置了 
-<code>ngModel</code>？</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="ca3jr2vmtpife75ktj6vu75zu">你是否在 
-<code>NgModule</code> 内声明了自定义表单控件？如果是，请确保你
-<strong>导入</strong>了 
-<code>NgModule</code>。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="11ij3llwm84wykjavz0s0o1w4">你是否在使用第三方自定义表单控件时使用了 
-<code>ngModel</code>？检查该控件是否提供了值访问器。如果没有，在控件的元素上使用 
-<strong><code>ngDefaultControl</code></strong>。</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4kir53ccfch1ao9s29n3c4r2u">你在<strong>测试</strong>自定义表单控件吗？确保配置你的测试台以便让它知道此控件。你可以用 <code>Testbed.configureTestingModule</code> 来实现。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="1ci7ugx8rk5y7idqxbwf4supw">你是否在使用
-<strong>Nx 和模块联合</strong>（Module Federation）与 Webpack？你的 
-<code>webpack.config.js</code> 可能需要
-<a href="https://github.com/angular/angular/issues/43821#issuecomment-1054845431" target="_blank">额外配置</a>以确保共享表单包。</li>
+      <li>如果你<strong>定义了</strong>一个自定义表单控件，你是否记得提供一个值访问器？</li>
+<li>你是否将 <code>ngModel</code> 放在了没有值的元素或<strong>无效元素</strong>上（例如 <code>&lt;div [(ngModel)]="foo"&gt;</code>）？</li>
+<li>你是否正在使用在 <code>NgModule</code> 内部声明的自定义表单控件？如果是，请确保你正在<strong>导入</strong>该 <code>NgModule</code>。</li>
+<li>你是否正在将 <code>ngModel</code> 与第三方自定义表单控件一起使用？检查该控件是否提供了值访问器。如果未提供，请在该控件的元素上使用 <strong><code>ngDefaultControl</code></strong>。</li>
+<li>你是否正在<strong>测试</strong>自定义表单控件？请务必配置你的测试床，以便了解该控件。你可以使用 <code>Testbed.configureTestingModule</code> 来做到这一点。</li>
+<li>你是否正在将 <strong>Nx 和模块联邦</strong> 与 webpack 结合使用？你的 <code>webpack.config.js</code> 可能需要<a href="https://github.com/angular/angular/issues/43821#issuecomment-1054845431" target="_blank">额外的配置</a>，以确保 forms 包是共享的。</li>
 
     </ol>
     

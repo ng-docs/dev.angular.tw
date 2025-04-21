@@ -4,39 +4,35 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="4f44qioe9j6jf39tmzzcf0grs">向组件模板添加插值</h1>
+    <h1 tabindex="-1">向组件的模板添加插值</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/first-app/steps/07-dynamic-template-values/README.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8hj9lvhhteamdza28mz2jjcji">本教程示范了如何向 Angular 模板中添加插值，以便在模板中显示动态数据。</p>
+    <p>本教程课程演示了如何向 Angular 模板添加插值，以便在模板中显示动态数据。</p>
 
     <div class="docs-video-container">
       <iframe class="docs-video" src="https://www.youtube.com/embed/eM3zi_n7lNs?si=IFAly3Ss8dwqFx8N&amp;start=338" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless title="Video player"></iframe>
     </div>
     
   <h2 id="what-youll-learn">
-    <a href="#what-youll-learn" class="docs-anchor" tabindex="-1" aria-label="Link to What you'll learn" data-ng_translator_product="100" data-ng_translator_ref_id="cy8qhuh22qozu5okjmjfdf3nx">你将学到什么</a>
+    <a href="#what-youll-learn" class="docs-anchor" tabindex="-1" aria-label="Link to What you'll learn">你将学到什么</a>
   </h2>
   
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ckyc75th2r7ddnol8xwkgrc5s">应用程序将在 <code>HousingLocationComponent</code> 模板中显示插值。</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3aa1qnk9ya43ni9hn1jnhseyg">应用程序将向浏览器渲染出房屋位置数据。</li>
+    <li>你的应用将在 <code>HousingLocationComponent</code> 模板中显示插值结果。</li>
+<li>你的应用会将房屋位置数据渲染到浏览器。</li>
 
   </ul>
   
   <h2 id="conceptual-preview-of-interpolation">
-    <a href="#conceptual-preview-of-interpolation" class="docs-anchor" tabindex="-1" aria-label="Link to Conceptual preview of interpolation" data-ng_translator_product="100" data-ng_translator_ref_id="4gc45ik6n2tghtdphqufffbxc">插值的概念性预览</a>
+    <a href="#conceptual-preview-of-interpolation" class="docs-anchor" tabindex="-1" aria-label="Link to Conceptual preview of interpolation">插值的概念预览</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="57ye8n81ov3zdumdjrtlswdog">在这一步中，你将使用插值在模板中显示值（属性和
-<code>Input</code>值）。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="2n3m7rwvqcrkp3i8mqxa0s15i">在 Angular 模板中使用 
-<code>{{ expression }}</code>，可以从属性、
-<code>Inputs</code> 和有效的 JavaScript 表达式中渲染值。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="2vxg4z0k13g1uetl5eoakmwi9">有关更详细的解释，请参考
-<a href="guide/templates/interpolation">使用插值显示值</a>指南。</p>
+  <p>在此步骤中，你将使用插值在模板中显示值（属性（Property）和 <code>Input</code> 值）。</p>
+<p>在 Angular 模板中使用 <code>{{ expression }}</code>，你可以渲染来自属性（Property）、<code>Inputs</code> 和有效的 JavaScript 表达式的值。</p>
+<p>要获得更深入的解释，请参阅<a href="guide/templates/binding#render-dynamic-text-with-text-interpolation">使用插值显示值</a>指南。</p>
 
     <ol class="docs-steps">
       
@@ -44,46 +40,37 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="update-housinglocationcomponent-template-to-include-interpolated-values">
-    <a href="#update-housinglocationcomponent-template-to-include-interpolated-values" class="docs-anchor" tabindex="-1" aria-label="Link to Update <code>HousingLocationComponent</code> template to include interpolated values" data-ng_translator_product="100" data-ng_translator_ref_id="ba6koe4wd4zyd6ljtudb8dj95">更新 
-<code>HousingLocationComponent</code> 模板以包含插值结果</a>
+    <a href="#update-housinglocationcomponent-template-to-include-interpolated-values" class="docs-anchor" tabindex="-1" aria-label="Link to Update <code>HousingLocationComponent</code> template to include interpolated values">更新 <code>HousingLocationComponent</code> 模板以包含插值结果</a>
   </h3>
   
-      <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="uxi21bo8ctmx019cv5phsbim">此步骤在 <code>HousingLocationComponent</code> 模板中添加新的 HTML 结构和插值。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eug3k0hymd4usfrh9oohvkiee">在代码编辑器中：</p>
+      <p>此步骤在 <code>HousingLocationComponent</code> 模板中添加了新的 HTML 结构和插值结果。</p>
+<p>在代码编辑器中：</p>
 
     <ol class="docs-ordered-list">
-      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2j1hhdzuzpzh4rxn5ms2fbmah">导航到 <code>src/app/housing-location/housing-location.component.ts</code></p>
-</li>
-<li><p data-ng_translator_product="100" data-ng_translator_ref_id="dvh5js59r6u823umn8qd91bsk">在
-<code>@Component</code>装饰器的模板属性中，用以下代码替换现有的HTML标记：</p>
-<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/08-ngFor/src/app/housing-location/housing-location.component.ts" visiblelines="8,9,10,11,12,13,14,15,16,17,18,19" header="Update HousingLocationComponent template">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="xxy7pn6yzicsuzm9pu15ztw">更新HousingLocationComponent模板</h3></div>
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component, Input} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {CommonModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocation} <span class="hljs-keyword">from</span> <span class="hljs-string">'../housinglocation'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-housing-location'</span>,</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  imports: [CommonModule],</div><div class="hljs-ln-line">  template: `<span class="language-javascript"></span></div><div class="hljs-ln-line">    &lt;section <span class="hljs-keyword">class</span>=<span class="hljs-string">"listing"</span>&gt;</div><div class="hljs-ln-line">      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">img</span></span></span></div><div class="hljs-ln-line">        <span class="hljs-attr">class</span>=<span class="hljs-string">"listing-photo"</span></div><div class="hljs-ln-line">        [<span class="hljs-attr">src</span>]=<span class="hljs-string">"housingLocation.photo"</span></div><div class="hljs-ln-line">        <span class="hljs-attr">alt</span>=<span class="hljs-string">"Exterior photo of {{ housingLocation.name }}"</span></div><div class="hljs-ln-line">        <span class="hljs-attr">crossorigin</span></div><div class="hljs-ln-line">      /&gt;</div><div class="hljs-ln-line">      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"listing-heading"</span>&gt;</span>{{ housingLocation.name }}<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span></div><div class="hljs-ln-line">      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"listing-location"</span>&gt;</span>{{ housingLocation.city }}, {{ housingLocation.state }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></div><div class="hljs-ln-line">    &lt;/section&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./housing-location.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HousingLocationComponent</span> {</div><div class="hljs-ln-line">  @Input() housingLocation!: HousingLocation;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
-    </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c7vf8mbdbqefldctxk970rmv">在此更新过的模板代码中，你已使用属性绑定将 <code>housingLocation.photo</code> 绑定到 <code>src</code> 属性。而 <code>alt</code> 属性通过插值为图像的替代文本提供更多上下文。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="8syg7mljsxthzpcecuxwj6hpp">你使用插值来包含
-<code>housingLocation</code>属性的
-<code>name</code>、
-<code>city</code>和
-<code>state</code>的值。</p>
-</li>
+      <li>导航到 <code>src/app/housing-location/housing-location.component.ts</code></li>
+<li>在 <code>@Component</code> 装饰器的模板属性中，将现有的 HTML 标记替换为以下代码：</li>
 
     </ol>
-    
+    <div class="docs-code" path="adev/src/content/tutorials/first-app/steps/08-ngFor/src/app/housing-location/housing-location.component.ts" visiblelines="8,9,10,11,12,13,14,15,16,17,18,19" header="Update HousingLocationComponent template">
+    <div class="docs-code-header"><h3>更新 HousingLocationComponent 模板</h3></div>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Component, Input} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {CommonModule} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/common'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {HousingLocation} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '../housinglocation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-housing-location'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  imports: [CommonModule],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">section</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"listing"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">img</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">        class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"listing-photo"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">        [src]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"housingLocation.photo"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">        alt</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"Exterior photo of {{ </span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">housingLocation</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">name</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> }}"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">        crossorigin</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h2</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"listing-heading"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;{{ housingLocation.name }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"listing-location"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;{{ housingLocation.city }}, {{ housingLocation.state }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">section</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  styleUrls: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'./housing-location.component.css'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HousingLocationComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">housingLocation</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">!:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HousingLocation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span></code></pre>
+    </pre>
+  </div><p>在这个更新后的模板代码中，你使用了属性绑定将 <code>housingLocation.photo</code> 绑定到 <code>src</code> Attribute。<code>alt</code> Attribute 使用插值来为图像的 alt 文本提供更多上下文。</p>
+<p>你使用插值来包含 <code>housingLocation</code> 属性的 <code>name</code>、<code>city</code> 和 <code>state</code> 的值。</p>
+
     </li>
     
     <li>
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="confirm-the-changes-render-in-the-browser">
-    <a href="#confirm-the-changes-render-in-the-browser" class="docs-anchor" tabindex="-1" aria-label="Link to Confirm the changes render in the browser" data-ng_translator_product="100" data-ng_translator_ref_id="1em5fy9jxrczw679hl3vbg181">确认更改在浏览器中渲染</a>
+    <a href="#confirm-the-changes-render-in-the-browser" class="docs-anchor" tabindex="-1" aria-label="Link to Confirm the changes render in the browser">确认更改在浏览器中渲染</a>
   </h3>
   
       
     <ol class="docs-ordered-list">
-      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7y9sibc49gz4j1owr3vr5a678">保存所有更改。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="tqgqhuijbm1f7lqv7jivsyao">打开浏览器，确认应用程序呈现照片、城市和州的示例数据。
-<img alt="homes-app浏览器框架显示logo、过滤文本输入框、搜索按钮和相同的住房位置UI卡片" src="assets/images/tutorials/first-app/homes-app-lesson-07-step-2.png"></li>
+      <li>保存所有更改。</li>
+<li>打开浏览器并确认应用渲染了照片、城市和州示例数据。<img alt="browser frame of homes-app displaying logo, filter text input box, search button and the same housing location UI card" src="assets/images/tutorials/first-app/homes-app-lesson-07-step-2.png"></li>
 
     </ol>
     
@@ -92,25 +79,28 @@
     </ol>
     
     <div class="docs-alert docs-alert-summary">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="b5vgdm02tnjflp37ii8xgf6xl"><strong>总结：</strong>在这节课中，你添加了一个新的HTML结构，并使用Angular模板语法在
-<code>HousingLocation</code>模板中呈现值。</p>
+    <p><strong>摘要：</strong> 在本课程中，你添加了一个新的 HTML 结构，并使用 Angular 模板语法在 <code>HousingLocation</code> 模板中渲染值。</p>
 
     </div>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="9sbiu38yixtc7zd9goagw6avr">现在，你掌握了两项重要技能：</p>
+    <p>现在，你掌握了两项重要的技能：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2ewb06781tl7awanyv21pamsd">将数据传给组件</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="565sl7xfsprv96widdwsnemq">将值插入模板</li>
+    <li>将数据传递给组件</li>
+<li>将值插值到模板中</li>
 
   </ul>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="825nzvudugny8gsg4z81zxs8h">有了这些技能，应用程序现在就可以共享数据并在浏览器中显示动态值。到目前为止这工作得很好。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="ep5mlw3d5q1ucm62jzem9a7pc">有关本课涵盖主题的更多信息，请访问：</p>
+  <p>有了这些技能，你的应用现在可以共享数据并在浏览器中显示动态值了。目前为止做得很好。</p>
+<p>有关本课程涵盖主题的更多信息，请访问：</p>
 
     <nav class="docs-pill-row">
       
-    <a class="docs-pill" href="guide/templates/interpolation" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cp2s7wol83gmsbkck7ziazrb1">模板语法</a>
+    <a class="docs-pill" href="guide/templates">
+      模板语法
+    </a>
     
-    <a class="docs-pill" href="guide/templates/template-syntax" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="41pcwo5migl8hksejkz64jc7j">显示带插值的值</a>
+    <a class="docs-pill" href="guide/templates/binding#render-dynamic-text-with-text-interpolation">
+      使用插值显示值
+    </a>
     
 
     </nav>

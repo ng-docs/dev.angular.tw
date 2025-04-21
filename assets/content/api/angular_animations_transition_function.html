@@ -1,278 +1,115 @@
-<div class="api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/animations</span><div class="docs-reference-title"><div><h1>transition</h1><div class="docs-api-item-label" data-mode="full" data-type="function">function</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/animations/src/animation_metadata.ts#L1036-L1049" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><p class="docs-reference-description"></p><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="hnu0iivzcbch5b0xuf9vomko">声明一个转场动画，以便在满足给定条件时运行一系列动画步骤。</p><p></p></header><div data-tab="API" data-tab-url="api"><div class="docs-reference-api-tab"><div class="docs-code"><pre class="docs-mini-scroll-track"><code><div class="hljs-ln-line "><span class="hljs-title function_">transition</span>(</div><div class="hljs-ln-line ">  <span class="hljs-attr">stateChangeExpr</span>: <span class="hljs-built_in">string</span> | (<span class="hljs-function">(<span class="hljs-params">fromState: <span class="hljs-built_in">string</span>, toState: <span class="hljs-built_in">string</span>, element?: <span class="hljs-built_in">any</span>, params?: { [key: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>; }</span>) =&gt;</span> <span class="hljs-built_in">boolean</span>),</div><div class="hljs-ln-line ">  <span class="hljs-attr">steps</span>: <span class="hljs-title class_">AnimationMetadata</span> | <span class="hljs-title class_">AnimationMetadata</span>[],</div><div class="hljs-ln-line ">  options?: <span class="hljs-title class_">AnimationOptions</span></div><div class="hljs-ln-line ">): <span class="hljs-title class_">AnimationTransitionMetadata</span>;</div></code></pre></div></div></div><div data-tab="用法说明" data-tab-url="usage-notes"><div><h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="g6p46qvihea35zye6z4vd7zd">状态更改表达式</h3>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1lm8eosu0g8znryeb1y6ti4xz">状态更改表达式会指示 Angular 何时运行转换的动画，它可以是</p>
+<div class="docs-api"><header class="docs-reference-header"><span class="docs-reference-category">@angular/animations</span><div class="docs-reference-title"><div><h1>过渡</h1><div class="docs-api-item-label type-function full">function</div></div><a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/blob/main/packages/animations/src/animation_metadata.ts#L1036-L1049" title="View source" aria-label="View source"><i role="presentation" aria-hidden="true" class="material-symbols-outlined">code</i></a></div><section class="docs-reference-description"><p>声明一个动画过渡，当满足某个特定条件时播放。</p></section></header><div class="docs-reference-section docs-reference-api-section"><h2 id="api" class="docs-reference-section-heading"><a href="#api" aria-label="Link to API section" tabindex="-1">API</a></h2><div class="docs-code"><pre class="docs-mini-scroll-track"><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0">  <code>
+    <span class="line "><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">function</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/animations/transition">transition</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span></span><span class="line "><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  stateChangeExpr</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> |</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> ((</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">fromState</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">toState</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">element</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> any</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">params</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { [</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">key</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> any</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">; } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> undefined</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> boolean</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">),</span></span><span class="line "><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  steps</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/animations/AnimationMetadata">AnimationMetadata</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> |</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/animations/AnimationMetadata">AnimationMetadata</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[],</span></span><span class="line "><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  options</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/animations/AnimationOptions">AnimationOptions</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> |</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> null</span></span><span class="line "><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/animations/AnimationTransitionMetadata">AnimationTransitionMetadata</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span>
+  </code>
+  </pre></pre></div></div><div class="docs-reference-members"><div id="transition_0" class="docs-reference-member-card"><header class="docs-reference-card-header"><h3>过渡</h3><div><code><a href="/api/animations/AnimationTransitionMetadata">AnimationTransitionMetadata</a></code></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p>声明一个动画过渡，当满足某个特定条件时播放。</p></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">stateChangeExpr</span><code>string | ((fromState: string, toState: string, element?: any, params?: { [key: string]: any; } | undefined) =&gt; boolean)</code><div class="docs-parameter-description"><p>具有特定格式的字符串，或用于指定动画过渡应何时发生的函数（请参阅<a href="#state-change-expression">状态更改表达式</a>）。</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">steps</span><code><a href="/api/animations/AnimationMetadata">AnimationMetadata</a> | <a href="/api/animations/AnimationMetadata">AnimationMetadata</a>[]</code><div class="docs-parameter-description"><p>表示动画指令的一个或多个动画对象。</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">options</span><code><a href="/api/animations/AnimationOptions">AnimationOptions</a> | null</code><div class="docs-parameter-description"><p>一个 options 对象，可用于指定动画的延迟或为其提供自定义参数。</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code><a href="/api/animations/AnimationTransitionMetadata">AnimationTransitionMetadata</a></code></div></div></div></div></div><div class="docs-reference-section"><h2 id="usage-notes" class="docs-reference-section-heading"><a href="#usage-notes" aria-label="Link to Usage Notes section" tabindex="-1">用法说明</a></h2><div>
+      <h3 id="state-change-expression" class="docs-reference-section-heading docs-reference-section-heading--sub">
+        <a href="#state-change-expression" aria-label="Link to State Change Expression section" tabindex="-1">状态更改表达式</a>
+      </h3>
+    <p>状态更改表达式指示 Angular 何时运行过渡动画，它可以是</p>
 
     <ul class="docs-list">
-      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5lfi2hbmqhegmkqrq1vzihxtu">具有特定语法的字符串</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1oy2sn84qeipp8fg7px6d4voz">或一个比较前一个状态和当前状态（绑定到元素触发器的表达式的值）的函数，如果应该发生转换，则返回
-<code>true</code>，否则返回 <code>false</code></li>
+      <li>具有特定语法的字符串</li>
+<li>或者是一个函数，用于比较先前的状态和当前状态（绑定到元素触发器的表达式的值），如果应该发生过渡，则返回 <code>true</code>，否则返回 <code>false</code></li>
 
     </ul>
-    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dr32td0zl10i9u4lospa9wzde">字符串格式可以是：</p>
+    <p>字符串格式可以是：</p>
 
     <ul class="docs-list">
-      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e9z7cozgd3qhwk916brjzow1t"><code>fromState =&gt; toState</code>，这表明应该发生转换的动画，然后绑定到触发器元素的表达式从 <code>fromState</code>
-到 <code>toState</code></p>
-<p><em data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ox89uffraofl00vyy63uanon">范例：</em></p>
+      <li><p><code>fromState =&gt; toState</code>，这表示当绑定到触发器元素的表达式从 <code>fromState</code> 变为 <code>toState</code> 时，应发生过渡动画</p>
+<p><em>范例：</em></p>
 
       <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">'open =&gt; closed'</span>, <span class="hljs-title function_">animate</span>(<span class="hljs-string">'.5s ease-out'</span>, <span class="hljs-title function_">style</span>({ <span class="hljs-attr">height</span>: <span class="hljs-number">0</span> }) ))</span>
-          </code>
+        <pre class="docs-mini-scroll-track">          <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  <a href="/api/animations/transition">transition</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'open =&gt; closed'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/animations/animate">animate</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'.5s ease-out'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/animations/style">style</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({ height: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }) ))</span></span></code></pre>
         </pre>
       </div>
     </li>
-<li><p data-ng_translator_product="100" data-ng_translator_ref_id="bbr06rj8j2bkz8nlg7sr6dmik"><code>fromState &lt;=&gt; toState</code> ，表示当绑定到触发器元素的表达式从 
-<code>fromState</code> 变为 
-<code>toState</code> 或反之时，应该进行过渡动画。</p>
-<p><em data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ox89uffraofl00vyy63uanon">范例：</em></p>
+<li><p><code>fromState &lt;=&gt; toState</code>，这表示当绑定到触发器元素的表达式从 <code>fromState</code> 变为 <code>toState</code> 或反之亦然时，应发生过渡动画</p>
+<p><em>范例：</em></p>
 
       <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">'enabled &lt;=&gt; disabled'</span>, <span class="hljs-title function_">animate</span>(<span class="hljs-string">'1s cubic-bezier(0.8,0.3,0,1)'</span>))</span>
-          </code>
+        <pre class="docs-mini-scroll-track">          <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  <a href="/api/animations/transition">transition</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'enabled &lt;=&gt; disabled'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/animations/animate">animate</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'1s cubic-bezier(0.8,0.3,0,1)'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">))</span></span></code></pre>
         </pre>
       </div>
     </li>
-<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ed3vkvjr4ls03adwyij41pp6"><code>:enter</code> / <code>:leave</code>，这表明转换的动画应该在元素进入或存在 DOM 时发生</p>
-<p><em data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ox89uffraofl00vyy63uanon">范例：</em></p>
+<li><p><code>:enter</code>/<code>:leave</code>，这表示当元素进入或离开 DOM 时，应发生过渡动画</p>
+<p><em>范例：</em></p>
 
       <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">':enter'</span>, [</span><span class="hljs-ln-line">    <span class="hljs-title function_">style</span>({ <span class="hljs-attr">opacity</span>: <span class="hljs-number">0</span> }),</span><span class="hljs-ln-line">    <span class="hljs-title function_">animate</span>(<span class="hljs-string">'500ms'</span>, <span class="hljs-title function_">style</span>({ <span class="hljs-attr">opacity</span>: <span class="hljs-number">1</span> }))</span><span class="hljs-ln-line">  ])</span>
-          </code>
+        <pre class="docs-mini-scroll-track">          <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  <a href="/api/animations/transition">transition</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">':enter'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    <a href="/api/animations/style">style</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({ opacity: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    <a href="/api/animations/animate">animate</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'500ms'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/animations/style">style</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({ opacity: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }))</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  ])</span></span></code></pre>
         </pre>
       </div>
     </li>
-<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="33zaqw3ufs1l6m9b74q5g6zar"><code>:increment</code> / <code>:decrement</code>
-，表示当绑定到触发器元素的数值表达式的值增加或减少时，应该发生转换的动画</p>
-<p><em data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ox89uffraofl00vyy63uanon">范例：</em></p>
+<li><p><code>:increment</code>/<code>:decrement</code>，这表示当绑定到触发器元素的数值表达式的值增加或减少时，应发生过渡动画</p>
+<p><em>范例：</em></p>
 
       <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">':increment'</span>, <span class="hljs-title function_">query</span>(<span class="hljs-string">'@counter'</span>, <span class="hljs-title function_">animateChild</span>()))</span>
-          </code>
+        <pre class="docs-mini-scroll-track">          <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  <a href="/api/animations/transition">transition</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">':increment'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/animations/query">query</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'@counter'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/animations/animateChild">animateChild</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()))</span></span></code></pre>
         </pre>
       </div>
     </li>
-<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ewdi1oos45vfwxkzpc2zx9e8s">上述任何一项的序列除以逗号，这表明只要状态更改表达式之一匹配，就应该发生转换的动画</p>
-<p><em data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ox89uffraofl00vyy63uanon">范例：</em></p>
+<li><p>以上任何一项的序列（以逗号分隔），这表示每当状态更改表达式之一匹配时，都应发生过渡动画</p>
+<p><em>范例：</em></p>
 
       <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">':increment, * =&gt; enabled, :enter'</span>, <span class="hljs-title function_">animate</span>(<span class="hljs-string">'1s ease'</span>, <span class="hljs-title function_">keyframes</span>([</span><span class="hljs-ln-line">    <span class="hljs-title function_">style</span>({ <span class="hljs-attr">transform</span>: <span class="hljs-string">'scale(1)'</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0</span>}),</span><span class="hljs-ln-line">    <span class="hljs-title function_">style</span>({ <span class="hljs-attr">transform</span>: <span class="hljs-string">'scale(1.1)'</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0.7</span>}),</span><span class="hljs-ln-line">    <span class="hljs-title function_">style</span>({ <span class="hljs-attr">transform</span>: <span class="hljs-string">'scale(1)'</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">1</span>})</span><span class="hljs-ln-line">  ]))),</span>
-          </code>
+        <pre class="docs-mini-scroll-track">          <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  <a href="/api/animations/transition">transition</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">':increment, * =&gt; enabled, :enter'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/animations/animate">animate</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'1s ease'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/animations/keyframes">keyframes</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">([</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    <a href="/api/animations/style">style</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({ transform: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'scale(1)'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, offset: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    <a href="/api/animations/style">style</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({ transform: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'scale(1.1)'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, offset: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0.7</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    <a href="/api/animations/style">style</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({ transform: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'scale(1)'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, offset: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  ]))),</span></span></code></pre>
         </pre>
       </div>
     </li>
 
     </ul>
-    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d2ptslk15tc2iohxoo2dgk5tw">另请注意，在这种情况下：</p>
+    <p>另请注意，在这种上下文中：</p>
 
     <ul class="docs-list">
-      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3ikaso8seehvxpj3ev2b4bn7i"><code>void</code> 可用于表明此元素的不存在</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dzuhmuqi28cl54a56buhyb2vw">星号可以作为匹配任何状态的通配符</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ahf6cxkeq2fca8rmvar79829u">（由于上述原因，<code>void =&gt; *</code> 等效于 <code>:enter</code>，并且 <code>* =&gt; void</code> 等效于 <code>:leave</code> ）</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2nw74h85hcicee5w32ke8i7il"><code>true</code> 和 <code>false</code> 也分别匹配表达式值 <code>1</code> 和 <code>0</code> （但不匹配 <em>truthy</em> 和 <em>falsy</em> 值）</li>
+      <li><code>void</code> 可用于指示元素不存在</li>
+<li>星号可以用作匹配任何状态的通配符</li>
+<li>（作为上述结果，<code>void =&gt; *</code> 等价于 <code>:enter</code>，而 <code>* =&gt; void</code> 则等价于 <code>:leave</code>）</li>
+<li><code>true</code> 和 <code>false</code> 也分别匹配表达式值 <code>1</code> 和 <code>0</code>（但不匹配<em>真值</em>和<em>假值</em>）</li>
 
     </ul>
-    <div class="alert is-helpful">
+    <div class="docs-alert docs-alert-helpful">
 
-<p data-ng_translator_product="100" data-ng_translator_ref_id="ec49lxey0qbd3avc64rf9l5ts">注意进入和离开元素，因为它们的过渡对开发者来说是一个常见陷阱。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="csfq5kqy5dqrrwzpos511cmnl">注意，当带有触发器的元素进入 DOM 时，其 
-<code>:enter</code> 过渡总是会执行，但如果该元素与其父元素一起被移除，则其 
-<code>:leave</code> 过渡不会执行（因为它会在过渡有机会执行之前“无预警”地被移除，唯一能使这种过渡发生的情况是元素自行退出 DOM）。</p>
+<p>请注意进入和离开的元素，因为它们的过渡效果会给开发人员带来常见的陷阱。</p>
+<p>请注意，当带有触发器的元素进入 DOM 时，其 <code>:enter</code> 过渡效果始终会执行，但是如果该元素与其父元素一起被移除，则其 <code>:leave</code> 过渡效果将不会执行（因为它将在其过渡效果有机会执行之前“无警告”地被移除，这种过渡效果发生的唯一方式是元素自行退出 DOM）。</p>
 </div>
 
-<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7gzz7wu6829lqptmkdyniyz7v">把动画播放到最终状态</h3>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="3bgnoveix0rih7sd2rka6skx0">如果过渡的最后一步是对不带 
-<code>style</code> 数据的 
-<code>animate()</code> 调用，那么该步骤会自动被视为最终动画弧度，以使元素达到最终状态。在这种情况下，Angular 会自动添加或移除 CSS 样式，以确保元素处于正确的最终状态。</p>
-<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8ad1f152n875z0ulirkmy33df">使用范例</h3>
 
+      <h3 id="animating-to-a-final-state" class="docs-reference-section-heading docs-reference-section-heading--sub">
+        <a href="#animating-to-a-final-state" aria-label="Link to Animating to a Final State section" tabindex="-1">最终状态动画</a>
+      </h3>
+    <p>如果过渡效果的最后一步是调用 <code><a href="/api/animations/animate()">animate()</a></code>，且该调用使用了时序值但没有 <code><a href="/api/animations/style">style</a></code> 数据，则该步骤将自动被视为最终动画弧，为了使元素达到最终状态，在这种情况下，Angular 会自动添加或移除 CSS 样式，以确保元素处于正确的最终状态。</p>
+
+      <h3 id="usage-examples" class="docs-reference-section-heading docs-reference-section-heading--sub">
+        <a href="#usage-examples" aria-label="Link to Usage Examples section" tabindex="-1">用例</a>
+      </h3>
+    
     <ul class="docs-list">
-      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cuf5en6ohsfndwouumdnr0ld8">根据触发器的表达式值应用的过渡动画</li>
+      <li>基于触发器表达式值应用的过渡动画</li>
 
     </ul>
     
       <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> [@<span class="hljs-attr">myAnimationTrigger</span>]=<span class="hljs-string">"myStatusExp"</span>&gt;</span></span><span class="hljs-ln-line"> ...</span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-          </code>
+        <pre class="docs-mini-scroll-track">          <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [@myAnimationTrigger]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"myStatusExp"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
         </pre>
       </div>
     
       <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line"><span class="hljs-title function_">trigger</span>(<span class="hljs-string">"myAnimationTrigger"</span>, [</span><span class="hljs-ln-line">  ..., <span class="hljs-comment">// states</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">"on =&gt; off, open =&gt; closed"</span>, <span class="hljs-title function_">animate</span>(<span class="hljs-number">500</span>)),</span><span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">"* &lt;=&gt; error"</span>, <span class="hljs-title function_">query</span>(<span class="hljs-string">'.indicator'</span>, <span class="hljs-title function_">animateChild</span>()))</span><span class="hljs-ln-line">])</span>
-          </code>
+        <pre class="docs-mini-scroll-track">          <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/animations/trigger">trigger</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"myAnimationTrigger"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  ...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// states</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  <a href="/api/animations/transition">transition</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"on =&gt; off, open =&gt; closed"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/animations/animate">animate</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">500</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  <a href="/api/animations/transition">transition</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"* &lt;=&gt; error"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/animations/query">query</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'.indicator'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/animations/animateChild">animateChild</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()))</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">])</span></span></code></pre>
         </pre>
       </div>
     
     <ul class="docs-list">
-      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bmvrrzex14sstorv0cdeu5q8f">根据自定义逻辑应用的过渡动画，具体取决于触发器的表达式值和提供的参数</p>
+      <li><p>基于自定义逻辑（取决于触发器的表达式值和提供的参数）应用的过渡动画</p>
 
       <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> [@<span class="hljs-attr">myAnimationTrigger</span>]=<span class="hljs-string">"{</span><span class="hljs-ln-line"> value: stepName,</span><span class="hljs-ln-line"> params: { target: currentTarget }</span><span class="hljs-ln-line">}"</span>&gt;</span></span><span class="hljs-ln-line"> ...</span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-          </code>
+        <pre class="docs-mini-scroll-track">          <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [@myAnimationTrigger]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"{</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> value: stepName,</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> params: { target: currentTarget }</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
         </pre>
       </div>
     
       <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line"><span class="hljs-title function_">trigger</span>(<span class="hljs-string">"myAnimationTrigger"</span>, [</span><span class="hljs-ln-line">  ..., <span class="hljs-comment">// states</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(</span><span class="hljs-ln-line">    <span class="hljs-function">(<span class="hljs-params">fromState, toState, _element, params</span>) =&gt;</span></span><span class="hljs-ln-line">      [<span class="hljs-string">'firststep'</span>, <span class="hljs-string">'laststep'</span>].<span class="hljs-title function_">includes</span>(fromState.<span class="hljs-title function_">toLowerCase</span>())</span><span class="hljs-ln-line">      &amp;&amp; toState === params?.[<span class="hljs-string">'target'</span>],</span><span class="hljs-ln-line">    <span class="hljs-title function_">animate</span>(<span class="hljs-string">'1s'</span>)</span><span class="hljs-ln-line">  )</span><span class="hljs-ln-line">])</span>
-          </code>
+        <pre class="docs-mini-scroll-track">          <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/animations/trigger">trigger</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"myAnimationTrigger"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  ...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// states</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  <a href="/api/animations/transition">transition</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    (</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">fromState</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">toState</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">_element</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">params</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'firststep'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'laststep'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">].</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">includes</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(fromState.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">toLowerCase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">())</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">      &amp;&amp;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> toState </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">===</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> params?.[</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'target'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">],</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    <a href="/api/animations/animate">animate</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'1s'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  )</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">])</span></span></code></pre>
         </pre>
       </div>
     </li>
 
     </ul>
-    </div></div><div class="docs-reference-members-container"><div class="docs-reference-members"><div class="docs-reference-member-card"><header><div class="docs-reference-header"><h3>transition</h3><div><code>AnimationTransitionMetadata</code></div></div></header><div class="docs-reference-card-body"><div class="docs-reference-card-item "><div class="docs-function-definition"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="hnu0iivzcbch5b0xuf9vomko">声明一个转场动画，以便在满足给定条件时运行一系列动画步骤。</p></div><div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">stateChangeExpr</span><code>string | ((fromState: string, toState: string, element?: any, params?: { [key: string]: any; }) =&gt; boolean)</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="7jcvfdr17smc202i5ooo6sxkr">一个具有特定格式的字符串或一个指定何时发生动画过渡的函数（参见 
-<a href="#state-change-expression">状态变化表达式</a>）。</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">steps</span><code>AnimationMetadata | AnimationMetadata[]</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aq1mw06t0q617b4zm1mew8e1a">表示动画操作指南的一个或多个动画对象。</p></div></div><div class="docs-param-group"><span class="docs-param-keyword">@param</span><span class="docs-param-name">options</span><code>AnimationOptions</code><div class="docs-parameter-description"><p data-ng_translator_product="100" data-ng_translator_ref_id="4yktpaea588zvz0v2wpbyvhnl">一个选项对象，可用于指定动画的延迟或为其提供自定义参数。</p></div></div><div class="docs-return-type"><span class="docs-param-keyword">@returns</span><code>AnimationTransitionMetadata</code></div><div class="docs-usage-notes"><span class="docs-param-keyword">Usage notes</span><div><h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="g6p46qvihea35zye6z4vd7zd">状态更改表达式</h3>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1lm8eosu0g8znryeb1y6ti4xz">状态更改表达式会指示 Angular 何时运行转换的动画，它可以是</p>
-
-    <ul class="docs-list">
-      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5lfi2hbmqhegmkqrq1vzihxtu">具有特定语法的字符串</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1oy2sn84qeipp8fg7px6d4voz">或一个比较前一个状态和当前状态（绑定到元素触发器的表达式的值）的函数，如果应该发生转换，则返回
-<code>true</code>，否则返回 <code>false</code></li>
-
-    </ul>
-    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dr32td0zl10i9u4lospa9wzde">字符串格式可以是：</p>
-
-    <ul class="docs-list">
-      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e9z7cozgd3qhwk916brjzow1t"><code>fromState =&gt; toState</code>，这表明应该发生转换的动画，然后绑定到触发器元素的表达式从 <code>fromState</code>
-到 <code>toState</code></p>
-<p><em data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ox89uffraofl00vyy63uanon">范例：</em></p>
-
-      <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">'open =&gt; closed'</span>, <span class="hljs-title function_">animate</span>(<span class="hljs-string">'.5s ease-out'</span>, <span class="hljs-title function_">style</span>({ <span class="hljs-attr">height</span>: <span class="hljs-number">0</span> }) ))</span>
-          </code>
-        </pre>
-      </div>
-    </li>
-<li><p data-ng_translator_product="100" data-ng_translator_ref_id="bbr06rj8j2bkz8nlg7sr6dmik"><code>fromState &lt;=&gt; toState</code> ，表示当绑定到触发器元素的表达式从 
-<code>fromState</code> 变为 
-<code>toState</code> 或反之时，应该进行过渡动画。</p>
-<p><em data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ox89uffraofl00vyy63uanon">范例：</em></p>
-
-      <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">'enabled &lt;=&gt; disabled'</span>, <span class="hljs-title function_">animate</span>(<span class="hljs-string">'1s cubic-bezier(0.8,0.3,0,1)'</span>))</span>
-          </code>
-        </pre>
-      </div>
-    </li>
-<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ed3vkvjr4ls03adwyij41pp6"><code>:enter</code> / <code>:leave</code>，这表明转换的动画应该在元素进入或存在 DOM 时发生</p>
-<p><em data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ox89uffraofl00vyy63uanon">范例：</em></p>
-
-      <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">':enter'</span>, [</span><span class="hljs-ln-line">    <span class="hljs-title function_">style</span>({ <span class="hljs-attr">opacity</span>: <span class="hljs-number">0</span> }),</span><span class="hljs-ln-line">    <span class="hljs-title function_">animate</span>(<span class="hljs-string">'500ms'</span>, <span class="hljs-title function_">style</span>({ <span class="hljs-attr">opacity</span>: <span class="hljs-number">1</span> }))</span><span class="hljs-ln-line">  ])</span>
-          </code>
-        </pre>
-      </div>
-    </li>
-<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="33zaqw3ufs1l6m9b74q5g6zar"><code>:increment</code> / <code>:decrement</code>
-，表示当绑定到触发器元素的数值表达式的值增加或减少时，应该发生转换的动画</p>
-<p><em data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ox89uffraofl00vyy63uanon">范例：</em></p>
-
-      <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">':increment'</span>, <span class="hljs-title function_">query</span>(<span class="hljs-string">'@counter'</span>, <span class="hljs-title function_">animateChild</span>()))</span>
-          </code>
-        </pre>
-      </div>
-    </li>
-<li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ewdi1oos45vfwxkzpc2zx9e8s">上述任何一项的序列除以逗号，这表明只要状态更改表达式之一匹配，就应该发生转换的动画</p>
-<p><em data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7ox89uffraofl00vyy63uanon">范例：</em></p>
-
-      <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">':increment, * =&gt; enabled, :enter'</span>, <span class="hljs-title function_">animate</span>(<span class="hljs-string">'1s ease'</span>, <span class="hljs-title function_">keyframes</span>([</span><span class="hljs-ln-line">    <span class="hljs-title function_">style</span>({ <span class="hljs-attr">transform</span>: <span class="hljs-string">'scale(1)'</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0</span>}),</span><span class="hljs-ln-line">    <span class="hljs-title function_">style</span>({ <span class="hljs-attr">transform</span>: <span class="hljs-string">'scale(1.1)'</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">0.7</span>}),</span><span class="hljs-ln-line">    <span class="hljs-title function_">style</span>({ <span class="hljs-attr">transform</span>: <span class="hljs-string">'scale(1)'</span>, <span class="hljs-attr">offset</span>: <span class="hljs-number">1</span>})</span><span class="hljs-ln-line">  ]))),</span>
-          </code>
-        </pre>
-      </div>
-    </li>
-
-    </ul>
-    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d2ptslk15tc2iohxoo2dgk5tw">另请注意，在这种情况下：</p>
-
-    <ul class="docs-list">
-      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3ikaso8seehvxpj3ev2b4bn7i"><code>void</code> 可用于表明此元素的不存在</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dzuhmuqi28cl54a56buhyb2vw">星号可以作为匹配任何状态的通配符</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ahf6cxkeq2fca8rmvar79829u">（由于上述原因，<code>void =&gt; *</code> 等效于 <code>:enter</code>，并且 <code>* =&gt; void</code> 等效于 <code>:leave</code> ）</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2nw74h85hcicee5w32ke8i7il"><code>true</code> 和 <code>false</code> 也分别匹配表达式值 <code>1</code> 和 <code>0</code> （但不匹配 <em>truthy</em> 和 <em>falsy</em> 值）</li>
-
-    </ul>
-    <div class="alert is-helpful">
-
-<p data-ng_translator_product="100" data-ng_translator_ref_id="ec49lxey0qbd3avc64rf9l5ts">注意进入和离开元素，因为它们的过渡对开发者来说是一个常见陷阱。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="csfq5kqy5dqrrwzpos511cmnl">注意，当带有触发器的元素进入 DOM 时，其 
-<code>:enter</code> 过渡总是会执行，但如果该元素与其父元素一起被移除，则其 
-<code>:leave</code> 过渡不会执行（因为它会在过渡有机会执行之前“无预警”地被移除，唯一能使这种过渡发生的情况是元素自行退出 DOM）。</p>
-</div>
-
-<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7gzz7wu6829lqptmkdyniyz7v">把动画播放到最终状态</h3>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="3bgnoveix0rih7sd2rka6skx0">如果过渡的最后一步是对不带 
-<code>style</code> 数据的 
-<code>animate()</code> 调用，那么该步骤会自动被视为最终动画弧度，以使元素达到最终状态。在这种情况下，Angular 会自动添加或移除 CSS 样式，以确保元素处于正确的最终状态。</p>
-<h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8ad1f152n875z0ulirkmy33df">使用范例</h3>
-
-    <ul class="docs-list">
-      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cuf5en6ohsfndwouumdnr0ld8">根据触发器的表达式值应用的过渡动画</li>
-
-    </ul>
-    
-      <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> [@<span class="hljs-attr">myAnimationTrigger</span>]=<span class="hljs-string">"myStatusExp"</span>&gt;</span></span><span class="hljs-ln-line"> ...</span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-          </code>
-        </pre>
-      </div>
-    
-      <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line"><span class="hljs-title function_">trigger</span>(<span class="hljs-string">"myAnimationTrigger"</span>, [</span><span class="hljs-ln-line">  ..., <span class="hljs-comment">// states</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">"on =&gt; off, open =&gt; closed"</span>, <span class="hljs-title function_">animate</span>(<span class="hljs-number">500</span>)),</span><span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(<span class="hljs-string">"* &lt;=&gt; error"</span>, <span class="hljs-title function_">query</span>(<span class="hljs-string">'.indicator'</span>, <span class="hljs-title function_">animateChild</span>()))</span><span class="hljs-ln-line">])</span>
-          </code>
-        </pre>
-      </div>
-    
-    <ul class="docs-list">
-      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bmvrrzex14sstorv0cdeu5q8f">根据自定义逻辑应用的过渡动画，具体取决于触发器的表达式值和提供的参数</p>
-
-      <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> [@<span class="hljs-attr">myAnimationTrigger</span>]=<span class="hljs-string">"{</span><span class="hljs-ln-line"> value: stepName,</span><span class="hljs-ln-line"> params: { target: currentTarget }</span><span class="hljs-ln-line">}"</span>&gt;</span></span><span class="hljs-ln-line"> ...</span><span class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-          </code>
-        </pre>
-      </div>
-    
-      <div class="docs-code" role="group">
-        <pre class="docs-mini-scroll-track">
-          <code>
-            <span class="hljs-ln-line"><span class="hljs-title function_">trigger</span>(<span class="hljs-string">"myAnimationTrigger"</span>, [</span><span class="hljs-ln-line">  ..., <span class="hljs-comment">// states</span></span><span class="hljs-ln-line">  <span class="hljs-title function_">transition</span>(</span><span class="hljs-ln-line">    <span class="hljs-function">(<span class="hljs-params">fromState, toState, _element, params</span>) =&gt;</span></span><span class="hljs-ln-line">      [<span class="hljs-string">'firststep'</span>, <span class="hljs-string">'laststep'</span>].<span class="hljs-title function_">includes</span>(fromState.<span class="hljs-title function_">toLowerCase</span>())</span><span class="hljs-ln-line">      &amp;&amp; toState === params?.[<span class="hljs-string">'target'</span>],</span><span class="hljs-ln-line">    <span class="hljs-title function_">animate</span>(<span class="hljs-string">'1s'</span>)</span><span class="hljs-ln-line">  )</span><span class="hljs-ln-line">])</span>
-          </code>
-        </pre>
-      </div>
-    </li>
-
-    </ul>
-    </div></div></div></div></div></div></div></div>
+    </div></div></div>

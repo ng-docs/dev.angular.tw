@@ -4,92 +4,87 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="adipm05s0xaqp6vvwb5c5iirh">工作区和项目文件结构</h1>
+    <h1 tabindex="-1">工作区和项目文件结构</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/configs/file-structure.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="6wc5u135n6lpemgrcedhf349h">你可以在 Angular 工作区的上下文中开发应用。 一个工作区包含一个或多个项目的文件。 一个项目是一组包含应用或可共享库的文件。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="f1ddavgiv0mqscwfu2coxp296">Angular CLI 的 <code>ng new</code> 命令可以创建一个工作区。</p>
+    <p>你可以在 Angular 工作区的上下文中开发应用。
+一个工作区包含一个或多个项目的相关文件。
+一个项目是由构成应用或可共享库的一组文件。</p>
+<p>Angular CLI 的 <code>ng new</code> 命令会创建一个工作区。</p>
 <div class="docs-code shell">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng new my-project</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> new</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> my-project</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2xm6ih4h43hi84yyz0q230lgb">当你运行此命令时，CLI 会在一个新工作区中安装必要的 Angular npm 包和其他依赖项，并创建一个名为 
-<em>my-project</em> 的根级别应用。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="dippe0694ni1d5enpzgbekjbk">默认情况下，
-<code>ng new</code> 会在工作区的根目录创建一个初始的骨架应用及其端到端测试。 骨架是一个简单的欢迎应用，准备运行且易于修改。 根级应用与工作区同名，源文件位于工作区的 
-<code>src/</code> 子文件夹中。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a8w9rdm36tq429nca1v19hzln">这种默认行为适用于典型的“多重（multi）仓库”开发风格，每个应用都位于它自己的工作区中。建议初学者和中级用户使用 <code>ng new</code> 为每个应用创建一个单独的工作区。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="6uah1olw7k8lkmr03ulgrero2">Angular 还支持包含 
-<a href="#multiple-projects">多个项目</a> 的工作区。 这种开发环境适合开发可共享库的高级用户，以及采用单一代码仓开发风格的企业，该风格使用单个代码仓和全局配置来管理所有 Angular 项目。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="60iub86wza2qn1drl9mccwx6o">要建立一个单一代码仓工作区，你应该跳过创建根应用。 参见下面的 
-<a href="#multiple-projects">多项目工作区设置</a>。</p>
+  </div><p>当你运行此命令时，CLI 会在一个新的工作区中安装必要的 Angular npm 包和其他依赖项，以及一个名为 <em>my-project</em> 的根级应用。</p>
+<p>默认情况下，<code>ng new</code> 会在工作区的根级别创建一个初始骨架应用，以及它的端到端测试。
+此骨架是一个简单的欢迎应用，可以立即运行并且易于修改。
+根级应用与工作区同名，并且源码文件位于工作区的 <code>src/</code> 子目录下。</p>
+<p>这种默认行为适用于典型的“多代码仓”开发风格，即每个应用都位于其自己的工作区中。
+建议初学者和中级用户使用 <code>ng new</code> 为每个应用创建一个单独的工作区。</p>
+<p>Angular 还支持具有<a href="#multiple-projects">多个项目</a>的工作区。
+这种类型的开发环境适用于正在开发可共享库的高级用户，以及使用“单一代码仓”开发风格的企业，这种风格为所有 Angular 项目使用单一代码仓和全局配置。</p>
+<p>要建立单一代码仓工作区，你应该跳过创建根应用。
+请参阅下面的<a href="#multiple-projects">建立多项目工作区</a>。</p>
 
   <h2 id="workspace-configuration-files">
-    <a href="#workspace-configuration-files" class="docs-anchor" tabindex="-1" aria-label="Link to Workspace configuration files" data-ng_translator_product="100" data-ng_translator_ref_id="89kee340hzittjzszp29fnz4z">工作区配置文件</a>
+    <a href="#workspace-configuration-files" class="docs-anchor" tabindex="-1" aria-label="Link to Workspace configuration files">工作区配置文件</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="87iilvvth487dzjq8y7z4xg3q">工作区内的所有项目共享一个 
-<a href="reference/configs/workspace-config">配置</a>。 工作区的顶层包含工作区级别的配置文件、根级应用的配置文件，以及根级应用源文件和测试文件的子文件夹。</p>
+  <p>工作区内的所有项目共享一个<a href="reference/configs/workspace-config">配置</a>。
+工作区的顶层包含工作区范围的配置文件、根级应用的配置文件以及根级应用源码和测试文件的子文件夹。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="89kee340hzittjzszp29fnz4z">工作区配置文件</th>
-<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="297niinze7mn1fnajtyjcs0tb">目的</th>
+<th align="left">工作区配置文件</th>
+<th align="left">用途</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>.editorconfig</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="av8gi1udt6x0fejq199dm882f">代码编辑器的配置。 参见 
-<a href="https://editorconfig.org" target="_blank">EditorConfig</a>。</td>
+<td align="left">代码编辑器的配置。请参阅 <a href="https://editorconfig.org" target="_blank">EditorConfig</a>。</td>
 </tr>
 <tr>
 <td align="left"><code>.gitignore</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="4gki8fijo0g53vkvcgvi2nxeb">指定 Git 应忽略的有意不跟踪的文件。 参见 
-<a href="https://git-scm.com" target="_blank">Git</a>。</td>
+<td align="left">指定 <a href="https://git-scm.com" target="_blank">Git</a> 应该忽略的，有意不跟踪的文件。</td>
 </tr>
 <tr>
 <td align="left"><code>README.md</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3gr9fdgqljf4pborx2oai3fi6">工作区文档。</td>
+<td align="left">工作区的文档。</td>
 </tr>
 <tr>
 <td align="left"><code>angular.json</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="e58hlay4j8dh68a6tvjes52e1">工作区中所有项目的 CLI 配置，包括如何构建、启动和测试每个项目的配置选项。详情请参见
-<a href="reference/configs/workspace-config">Angular 工作区配置</a>。</td>
+<td align="left">工作区中所有项目的 CLI 配置，包括如何构建、启动服务器和测试每个项目的配置选项。 有关详细信息，请参阅<a href="reference/configs/workspace-config">Angular 工作区配置</a>。</td>
 </tr>
 <tr>
 <td align="left"><code>package.json</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="83bw6jgqi8837t04oph31xarr">为工作区中所有项目配置
-<a href="reference/configs/npm-packages">npm 包依赖</a>。有关此文件的具体格式和内容，请参见 
-<a href="https://docs.npmjs.com/files/package.json" target="_blank">npm 文档</a>。</td>
+<td align="left">配置可用于工作区中所有项目的<a href="reference/configs/npm-packages">npm 包依赖</a>。 有关此文件的特定格式和内容，请参阅 <a href="https://docs.npmjs.com/files/package.json" target="_blank">npm 文档</a>。</td>
 </tr>
 <tr>
 <td align="left"><code>package-lock.json</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="18c4wytfqcp8sm6058umutquq">提供由 npm 客户端安装到
-<code>node_modules</code>中的所有包的版本信息。详情请参见 
-<a href="https://docs.npmjs.com/files/package-lock.json" target="_blank">npm 文档</a>。</td>
+<td align="left">为 npm 客户端安装到 <code>node_modules</code> 中的所有包提供版本信息。 有关详细信息，请参阅 <a href="https://docs.npmjs.com/files/package-lock.json" target="_blank">npm 文档</a>。</td>
 </tr>
 <tr>
 <td align="left"><code>src/</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bwvbqu8oqr41y5gimqlwd6sqg">根级应用项目的源文件。</td>
+<td align="left">根级应用项目的源文件。</td>
+</tr>
+<tr>
+<td align="left"><code>public/</code></td>
+<td align="left">包含图像和其他资产文件，这些文件将由开发服务器作为静态文件启动服务器，并在你构建应用时按原样复制。</td>
 </tr>
 <tr>
 <td align="left"><code>node_modules/</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="1u6hm9scs5qpd6pgm757hyknp">整个工作区安装的
-<a href="reference/configs/npm-packages">npm 包</a>。工作区范围内的
-<code>node_modules</code>依赖对所有项目可见。</td>
+<td align="left">为整个工作区安装的 <a href="reference/configs/npm-packages">npm 包</a>。 工作区范围的 <code>node_modules</code> 依赖项对所有项目都可见。</td>
 </tr>
 <tr>
 <td align="left"><code>tsconfig.json</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="eleio4gcftljuz1bbxsnadzd">工作区中项目的基础
-<a href="https://www.typescriptlang.org" target="_blank">TypeScript</a>配置。所有其他配置文件都继承自此基础文件。更多信息请参见
-<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#tsconfig-bases" target="_blank">相关 TypeScript 文档</a>。</td>
+<td align="left">工作区中项目的基本<a href="https://www.typescriptlang.org" target="_blank">TypeScript</a> 配置。 所有其他配置文件都从此基本文件继承。 有关更多信息，请参阅<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#tsconfig-bases" target="_blank">相关的 TypeScript 文档</a>。</td>
 </tr>
 
       </tbody>
@@ -97,112 +92,95 @@
   </div>
   
   <h2 id="application-project-files">
-    <a href="#application-project-files" class="docs-anchor" tabindex="-1" aria-label="Link to Application project files" data-ng_translator_product="100" data-ng_translator_ref_id="4ois6v63edonchum9g47cbxqh">应用项目文件</a>
+    <a href="#application-project-files" class="docs-anchor" tabindex="-1" aria-label="Link to Application project files">应用项目文件</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5zx4fcfdops425p1y42u2nfu7">CLI 命令 <code>ng new my-app</code> 会默认创建名为 “my-app” 的工作区文件夹，并在 <code>src/</code> 文件夹下为工作区顶层的根应用生成一个新的应用骨架。新生成的应用包含一个根模块的源文件，包括一个根组件及其模板。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="44pdgi7gskzoy0nwm0tx2kcyt">当工作区文件结构就位后，可以在命令行中使用
-<code>ng generate</code>命令为应用添加功能和数据。该根级应用是 CLI 命令的
-<em>默认应用</em>（除非在创建
-<a href="#multiple-projects">其他应用</a>后更改默认设置）。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="do4s449vlvi8xxpal18vov5es">对于单应用的工作区，工作区的 <code>src/</code> 子文件夹包含根应用的源文件（应用逻辑、数据和静态资源）。对于多项目的工作区，<code>projects/</code> 文件夹中的其它项目各自包含一个具有相同结构的 <code>project-name/src/</code> 子目录。</p>
+  <p>默认情况下，CLI 命令 <code>ng new my-app</code> 创建一个名为“my-app”的工作区文件夹，并在工作区顶层的 <code>src/</code> 文件夹中生成一个新的应用骨架。
+新生成的应用包含根模块的源文件，以及根组件和模板。</p>
+<p>当工作区文件结构就位后，你可以在命令行上使用 <code>ng generate</code> 命令向应用添加功能和数据。
+这个初始的根级应用是 CLI 命令的<em>默认应用</em>（除非你在创建<a href="#multiple-projects">其他应用</a>后更改了默认值）。</p>
+<p>对于单应用工作区，工作区的 <code>src</code> 子文件夹包含根应用的源文件（应用逻辑、数据和资产）。
+对于多项目工作区，<code>projects</code> 文件夹中的其他项目包含一个具有相同结构的 <code>project-name/src/</code> 子文件夹。</p>
 
   <h3 id="application-source-files">
-    <a href="#application-source-files" class="docs-anchor" tabindex="-1" aria-label="Link to Application source files" data-ng_translator_product="100" data-ng_translator_ref_id="1xslyrubgj3piz8vqn8ekpzh0">应用源文件</a>
+    <a href="#application-source-files" class="docs-anchor" tabindex="-1" aria-label="Link to Application source files">应用源文件</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="dj38q85ofhc8ppxkiiuofemcj"><code>src/</code>顶级目录下的文件支持运行你的应用。子文件夹包含应用源代码和特定于应用的配置。</p>
+  <p><code>src/</code> 顶层的文件支持运行你的应用。
+子文件夹包含应用源码和应用特定的配置。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="56tp7bgw8vtk9p5ovwe8gsheq">应用支持文件</th>
-<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="297niinze7mn1fnajtyjcs0tb">目的</th>
+<th align="left">应用支持文件</th>
+<th align="left">用途</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>app/</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9fmmkx54glm6wmpdy8yd9civu">包含定义你的应用逻辑和数据的组件文件。详情请参见
-<a href="#app-src">下文</a>。</td>
-</tr>
-<tr>
-<td align="left"><code>public/</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="2ebmw5klxfrv9gl6lzkbjrkeg">包含图像和其他资产文件，由开发服务器作为静态文件提供，并在构建应用时按原样复制。</td>
+<td align="left">包含在其中定义应用逻辑和数据的组件文件。 有关详细信息，请参见<a href="#app-src">下面</a>。</td>
 </tr>
 <tr>
 <td align="left"><code>favicon.ico</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8nta9uf2o6m0x1jtxsd53fxid">在书签栏中使用的应用图标。</td>
+<td align="left">要在书签栏中用于此应用的图标。</td>
 </tr>
 <tr>
 <td align="left"><code>index.html</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5ek9jy3i83vvkan8qx8taxuak">当有人访问你的网站时所提供的主 HTML 页面。CLI 在构建应用时会自动添加所有 JavaScript 和 CSS 文件，因此通常不需要在这里手动添加任何
-<code>&lt;script&gt;</code>或
-<code>&lt;link&gt;</code>标签。</td>
+<td align="left">当有人访问你的站点时启动服务器的主 HTML 页面。 CLI 在构建你的应用时会自动添加所有 JavaScript 和 CSS 文件，因此你通常不需要在此处手动添加任何 <code>&lt;script&gt;</code> 或 <code>&lt;link&gt;</code> 标签。</td>
 </tr>
 <tr>
 <td align="left"><code>main.ts</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="ckgg5f5zlxzk9fmwrjnc3s065">你的应用的主入口点。</td>
+<td align="left">应用的main入口点。</td>
 </tr>
 <tr>
 <td align="left"><code>styles.css</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="6qeknr027i00s94cmfhpagdkr">应用程序全局 CSS 样式。</td>
+<td align="left">应用于整个应用的全局 CSS 样式。</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7niq2aihksb6kj2t0t9m573hy">在 <code>src/</code> 文件夹里面，<code>app/</code> 文件夹中包含此项目的逻辑和数据。Angular 组件、模板和样式也都在这里。</p>
+  <p>在 <code>src</code> 文件夹中，<code>app</code> 文件夹包含你项目的逻辑和数据。
+Angular 组件、模板和样式放在这里。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="53wyd5r5metpimewyca6vtp5y"><code>src/app/</code>文件</th>
-<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="297niinze7mn1fnajtyjcs0tb">目的</th>
+<th align="left"><code>src/app/</code> 文件</th>
+<th align="left">用途</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>app.config.ts</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dh6qz0c7rw2hbcqzyklv9v5kf">定义应用配置，告诉 Angular 如何组装应用。当你向应用添加更多提供者时，应在此声明。
-<br>
-<br>
-<em>仅在使用<code>--standalone</code>选项时生成。</em></td>
+<td align="left">定义应用配置，以告知 Angular 如何组装应用。 当你向应用添加更多提供者时，应该在此处声明它们。<br><br><em>仅在使用 <code>--standalone</code> 选项时生成。</em></td>
 </tr>
 <tr>
 <td align="left"><code>app.component.ts</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3m8z7tuysmzzknfwxz0lk8cyg">定义应用的根组件，名为 
-<code>AppComponent</code>。与此根组件关联的视图成为视图层次结构的根，你添加组件和服务到应用时，此视图将扩展。</td>
+<td align="left">定义应用的根组件，名为 <code>AppComponent</code>。 当你向应用添加组件和服务时，与此根组件关联的视图将成为视图分层的根。</td>
 </tr>
 <tr>
 <td align="left"><code>app.component.html</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="edl5wxjct8kztgztday7wzn3i">定义与 
-<code>AppComponent</code> 关联的 HTML 模板。</td>
+<td align="left">定义与 <code>AppComponent</code> 关联的 HTML 模板。</td>
 </tr>
 <tr>
 <td align="left"><code>app.component.css</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9yy5bn8vnfi6grtvsvtlubnpr">定义 
-<code>AppComponent</code> 的 CSS 样式表。</td>
+<td align="left">定义 <code>AppComponent</code> 的 CSS 样式表。</td>
 </tr>
 <tr>
 <td align="left"><code>app.component.spec.ts</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dx3fvc4ursn2esp6n3qxzcsq3">定义 
-<code>AppComponent</code> 的单元测试。</td>
+<td align="left">定义 <code>AppComponent</code> 的单元测试。</td>
 </tr>
 <tr>
 <td align="left"><code>app.module.ts</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="699pjeh1z0dev0c71lxvcpyam">定义根模块，名为 
-<code>AppModule</code>，告诉 Angular 如何组装应用。初始时仅声明 
-<code>AppComponent</code>。当你向应用添加更多组件时，必须在此声明它们。
-<br>
-<br>
-<em>仅在使用 <code>--standalone false</code> 选项时生成。</em></td>
+<td align="left">定义根模块，名为 <code>AppModule</code>，它告诉 Angular 如何组装应用。 最初仅声明 <code>AppComponent</code>。 当你向应用添加更多组件时，必须在此处声明它们。<br><br><em>仅在使用 <code>--standalone false</code> 选项时生成。</em></td>
 </tr>
 <tr>
 <td align="left"><code>app.routes.ts</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="cm19wq52z07r7f26m7xcg5k7h">定义应用的路由配置。</td>
+<td align="left">定义应用的路由配置。</td>
 </tr>
 
       </tbody>
@@ -210,34 +188,29 @@
   </div>
   
   <h3 id="application-configuration-files">
-    <a href="#application-configuration-files" class="docs-anchor" tabindex="-1" aria-label="Link to Application configuration files" data-ng_translator_product="100" data-ng_translator_ref_id="bsobsq6jbk5a05n5m83cwlv9a">应用配置文件</a>
+    <a href="#application-configuration-files" class="docs-anchor" tabindex="-1" aria-label="Link to Application configuration files">应用配置文件</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="d9iy7vr9wppixhs4w7xcs3jn7">根应用的特定配置文件位于工作区根目录。对于多项目工作区，项目特定的配置文件位于项目根目录下的 
-<code>projects/project-name/</code>。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="b34dlio0p20zzwli72s2z3m8l">项目特定的 
-<a href="https://www.typescriptlang.org" target="_blank">TypeScript</a> 配置文件继承自工作区范围的 
-<code>tsconfig.json</code>。</p>
+  <p>根应用的特定于应用的配置文件位于工作区根级别。
+对于多项目工作区，特定于项目的配置文件位于项目根目录下的 <code>projects/project-name/</code> 中。</p>
+<p>特定于项目的 <a href="https://www.typescriptlang.org" target="_blank">TypeScript</a> 配置文件继承自工作区范围的 <code>tsconfig.json</code>。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3g3wlmn4902yjtzvu8l76ph32">应用特定的配置文件</th>
-<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="297niinze7mn1fnajtyjcs0tb">目的</th>
+<th align="left">应用特定的配置文件</th>
+<th align="left">用途</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>tsconfig.app.json</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="748vmk8q1z8l1t0wu9jbnjr92">应用特定的 
-<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 配置</a>，包括 
-<a href="reference/configs/angular-compiler-options">Angular 编译器选项</a>。</td>
+<td align="left">应用特定的<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 配置</a>，包括 <a href="reference/configs/angular-compiler-options">Angular 编译器选项</a>。</td>
 </tr>
 <tr>
 <td align="left"><code>tsconfig.spec.json</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="81b61xd71m17p39kjp40mf9w3">应用测试的 
-<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 配置</a>。</td>
+<td align="left">用于应用测试的 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 配置</a>。</td>
 </tr>
 
       </tbody>
@@ -245,91 +218,82 @@
   </div>
   
   <h2 id="multiple-projects">
-    <a href="#multiple-projects" class="docs-anchor" tabindex="-1" aria-label="Link to Multiple projects" data-ng_translator_product="100" data-ng_translator_ref_id="23ypg65gdgrvm3zhznqveybxn">多重项目</a>
+    <a href="#multiple-projects" class="docs-anchor" tabindex="-1" aria-label="Link to Multiple projects">多个项目</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="2eyinferywj1iib167rvjcmss">多项目工作区适合使用单一代码仓和全局配置进行多个 Angular 项目（「单一代码仓」模型）的组织。多项目工作区还支持库开发。</p>
+  <p>多项目工作区适用于为多个 Angular 项目（“单一代码仓”模型）使用单一代码仓和全局配置的组织。
+多项目工作区还支持库开发。</p>
 
   <h3 id="setting-up-for-a-multi-project-workspace">
-    <a href="#setting-up-for-a-multi-project-workspace" class="docs-anchor" tabindex="-1" aria-label="Link to Setting up for a multi-project workspace" data-ng_translator_product="100" data-ng_translator_ref_id="ctt7kwbbfv2vi60sfd44r0vde">建立多项目工作区</a>
+    <a href="#setting-up-for-a-multi-project-workspace" class="docs-anchor" tabindex="-1" aria-label="Link to Setting up for a multi-project workspace">建立多项目工作区</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="83kcqbp539xomnje4afvdl53e">如果你打算在工作区中包含多个项目，可以在创建工作区时不要自动创建初始应用，并为工作区指定一个唯一的名字。下列命令用于创建一个包含全工作区级配置文件的工作区，但没有根应用。</p>
+  <p>如果你打算在一个工作区中拥有多个项目，那么可以在创建工作区时跳过初始应用的生成步骤，并为该工作区指定一个唯一的名称。
+以下命令会创建一个包含所有工作区范围的配置文件的工作区，但不包含根级别的应用。</p>
 <div class="docs-code shell">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng new my-workspace --no-create-application</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> new</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> my-workspace</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> --no-create-application</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c9esmffwgtejorgpgjq8vdq04">然后，你可以使用工作区内唯一的名字来生成应用和库。</p>
+  </div><p>然后，你可以生成名称在工作区内唯一的应用和库。</p>
 <div class="docs-code shell">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">cd my-workspace</div><div class="hljs-ln-line">ng generate application my-app</div><div class="hljs-ln-line">ng generate library my-lib</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">cd</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> my-workspace</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> generate</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> application</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> my-app</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> generate</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> library</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> my-lib</span></span></code></pre>
     </pre>
   </div>
   <h3 id="multiple-project-file-structure">
-    <a href="#multiple-project-file-structure" class="docs-anchor" tabindex="-1" aria-label="Link to Multiple project file structure" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2yziruv70c8mlkv2akzscptlo">多重项目的文件结构</a>
+    <a href="#multiple-project-file-structure" class="docs-anchor" tabindex="-1" aria-label="Link to Multiple project file structure">多项目文件结构</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="6x62lpdf6o62u70jqvyz425p1">第一个显式生成的应用进入 
-<code>projects</code> 文件夹，与工作区中的所有其他项目一起。新生成的库也添加在 
-<code>projects</code> 下。当你以这种方式创建项目时，工作区的文件结构完全与 
-<a href="reference/configs/workspace-config">工作区配置文件</a> 
-<code>angular.json</code> 的结构一致。</p>
+  <p>第一个显式生成的应用会进入 <code>projects</code> 文件夹，与工作区中的所有其他项目放在一起。
+新生成的库也会添加到 <code>projects</code> 下。
+当你以这种方式创建项目时，工作区的文件结构与 <a href="reference/configs/workspace-config">工作区配置文件</a> <code>angular.json</code> 的结构完全一致。</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">my-workspace/</div><div class="hljs-ln-line">  ├── …                (workspace-wide configuration files)</div><div class="hljs-ln-line">  └── projects/        (applications and libraries)</div><div class="hljs-ln-line"><span class="hljs-code">      ├── my-app/      (an explicitly generated application)</span></div><div class="hljs-ln-line">      │   └── …        (application-specific code and configuration)</div><div class="hljs-ln-line">      └── my-lib/      (a generated library)</div><div class="hljs-ln-line">          └── …        (library-specific code and configuration)</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">my-workspace/</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  ├── …                (workspace-wide configuration files)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  └── projects/        (applications and libraries)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      ├── my-app/      (an explicitly generated application)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      │   └── …        (application-specific code and configuration)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      └── my-lib/      (a generated library)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          └── …        (library-specific code and configuration)</span></span></code></pre>
     </pre>
   </div>
   <h2 id="library-project-files">
-    <a href="#library-project-files" class="docs-anchor" tabindex="-1" aria-label="Link to Library project files" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="zsr1eff0wy78uq2ks5rc5mk6">库项目文件</a>
+    <a href="#library-project-files" class="docs-anchor" tabindex="-1" aria-label="Link to Library project files">库项目文件</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="aabcccw0bdo19jieqb3qleyru">当你使用 CLI 生成库（如使用命令 
-<code>ng generate library my-lib</code>）时，生成的文件进入工作区的 
-<code>projects/</code> 文件夹。有关创建自己的库的更多信息，请参阅 
-<a href="tools/libraries/creating-libraries">创建库</a>。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="5gunnma0bgoi6iby4yx0sunlo">与应用不同，库有自己的 
-<code>package.json</code> 配置文件。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9zwed45kf1875mqdeqhafx7kx">在 <code>projects/</code> 目录下，<code>my-lib</code> 文件夹中包含你的库代码。</p>
+  <p>当你使用 CLI 生成库（使用诸如 <code>ng generate library my-lib</code> 这样的命令）时，生成的文件会进入工作区的 <code>projects/</code> 文件夹。
+有关创建你自己的库的更多信息，请参阅 <a href="tools/libraries/creating-libraries">创建库</a>。</p>
+<p>与应用不同，库有自己的 <code>package.json</code> 配置文件。</p>
+<p>在 <code>projects/</code> 文件夹下，<code>my-lib</code> 文件夹包含你的库代码。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9p3uh9kwurnp3zoxri3ww5v60">库源文件</th>
-<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="297niinze7mn1fnajtyjcs0tb">目的</th>
+<th align="left">库源码文件</th>
+<th align="left">用途</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>src/lib</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="7fdcsnf9cy62lvqfjvzt86ikw">包含你的库项目的逻辑和数据。和应用项目一样，库项目可以包含组件、服务、模块、指令和管道。</td>
+<td align="left">包含你的库项目的逻辑和数据。与应用项目类似，库项目可以包含组件、服务、模块、指令和管道。</td>
 </tr>
 <tr>
 <td align="left"><code>src/public-api.ts</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8z0yp7hai3cf1m4ewirqz6073">指定从你的库中导出的所有文件。</td>
+<td align="left">指定从你的库导出的所有文件。</td>
 </tr>
 <tr>
 <td align="left"><code>ng-package.json</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3e30ddpkmqfxods6rdzbcwb9b">由 
-<a href="https://github.com/ng-packagr/ng-packagr" target="_blank">ng-packagr</a> 用于构建你的库的配置文件。</td>
+<td align="left">由 <a href="https://github.com/ng-packagr/ng-packagr" target="_blank">ng-packagr</a> 用于构建你的库的配置文件。</td>
 </tr>
 <tr>
 <td align="left"><code>package.json</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="enh9oqrtnlz3o3ntrauf2368r">配置此库所需的 
-<a href="reference/configs/npm-packages">npm 包依赖</a>。</td>
+<td align="left">配置此库所需的 <a href="reference/configs/npm-packages">npm 包依赖</a>。</td>
 </tr>
 <tr>
 <td align="left"><code>tsconfig.lib.json</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5xevyw9z8adifusx746xqpjkc">库专用的 
-<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 配置</a>，包括 
-<a href="reference/configs/angular-compiler-options">Angular 编译器选项</a>。</td>
+<td align="left">库特定的 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 配置</a>，包括 <a href="reference/configs/angular-compiler-options">Angular 编译器选项</a>。</td>
 </tr>
 <tr>
 <td align="left"><code>tsconfig.lib.prod.json</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bapna645q5wjdpzlvowk5euob">在生产模式下构建库时使用的库专用 
-<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 配置</a>。</td>
+<td align="left">库特定的 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 配置</a>，在生产模式下构建库时使用。</td>
 </tr>
 <tr>
 <td align="left"><code>tsconfig.spec.json</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="eoxzvpisddwjuh76u5n6yk3u4">用于库的单元测试的 
-<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 配置</a>。</td>
+<td align="left">用于库的单元测试的 <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">TypeScript 配置</a>。</td>
 </tr>
 
       </tbody>

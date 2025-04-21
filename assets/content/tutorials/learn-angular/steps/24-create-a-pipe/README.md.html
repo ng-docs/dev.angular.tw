@@ -4,32 +4,30 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="6sgi2f4a53p9jo0lksc5dciag">创建自定义管道</h1>
+    <h1 tabindex="-1">创建一个自定义管道</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/24-create-a-pipe/README.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="97721ll5iftcr4qkd3q8rxelq">你可以在 Angular 中创建自定义管道以满足你的数据转换需求。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="hwaazzdt2iky9xm9hpwlhcjk">在这个活动中，你将创建一个自定义管道并在模板中使用它。</p>
+    <p>你可以在 Angular 中创建自定义管道，以满足你的数据转换需求。</p>
+<p>在这个活动中，你将创建一个自定义管道并在你的模板中使用它。</p>
 <hr>
 
-<p data-ng_translator_product="100" data-ng_translator_ref_id="2jvj37dnqbdmg9q6nxxo61r5d">管道是一个带有 
-<code>@Pipe</code> 装饰器的 TypeScript 类。这里有一个示例：</p>
+<p>管道是一个带有 <code>@Pipe</code> 装饰器的 TypeScript 类。这是一个范例：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Pipe</span>, <span class="hljs-title class_">PipeTransform</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Pipe</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-string">'star'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StarPipe</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">PipeTransform</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">string</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-string">`⭐️ <span class="hljs-subst">${value}</span> ⭐️`</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Pipe, PipeTransform} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Pipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'star'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> StarPipe</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> implements</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> PipeTransform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  transform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">value</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> `⭐️ ${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">value</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">} ⭐️`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="53zt9dzqi4vvio234w3dezcjr"><code>StarPipe</code> 接受一个字符串值并返回带有星号包裹的字符串。注意以下几点：</p>
+  </div><p><code>StarPipe</code> 接受一个字符串值，并返回在该字符串前后加上星号的字符串。请注意：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_ref_id="2smsasjs4ycvci6xezc0k39f4"><code>@Pipe</code> 装饰器配置中的名称将在模板中使用</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="ck2ki4228fe249bye0g9bubq"><code>transform</code> 函数是你放置逻辑的地方</li>
+    <li><code>@Pipe</code> 装饰器配置中的名称将在模板中使用</li>
+<li><code>transform</code> 函数是你放置逻辑的地方</li>
 
   </ul>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="bzirf51wk7tx1gnhw6kjhh72n">好吧，现在轮到你试试了 — 你将创建 
-<code>ReversePipe</code>：</p>
+  <p>好了，现在轮到你来尝试一下了——你将创建 <code>ReversePipe</code>：</p>
 
     <ol class="docs-steps">
       
@@ -37,17 +35,13 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="create-the-reversepipe">
-    <a href="#create-the-reversepipe" class="docs-anchor" tabindex="-1" aria-label="Link to Create the <code>ReversePipe</code>" data-ng_translator_product="100" data-ng_translator_ref_id="23qxgewwnv7iovuhrr1n37qyt">创建 
-<code>ReversePipe</code></a>
+    <a href="#create-the-reversepipe" class="docs-anchor" tabindex="-1" aria-label="Link to Create the <code>ReversePipe</code>">创建 <code>ReversePipe</code></a>
   </h3>
   
-      <p data-ng_translator_product="100" data-ng_translator_ref_id="8tcatce0y2z8znmvn5y51rh58">在 
-<code>reverse.pipe.ts</code> 中，添加 
-<code>@Pipe</code> 装饰器到 
-<code>ReversePipe</code> 类，并提供以下配置：</p>
+      <p>在 <code>reverse.pipe.ts</code> 中，将 <code>@Pipe</code> 装饰器添加到 <code>ReversePipe</code> 类，并提供以下配置：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Pipe</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">name</span>: <span class="hljs-string">'reverse'</span></div><div class="hljs-ln-line">})</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Pipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'reverse'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span></code></pre>
     </pre>
   </div>
     </li>
@@ -56,16 +50,13 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="implement-the-transform-function">
-    <a href="#implement-the-transform-function" class="docs-anchor" tabindex="-1" aria-label="Link to Implement the <code>transform</code> function" data-ng_translator_product="100" data-ng_translator_ref_id="5rlye9zx99ppi2gdjb0jlrf3">实现 
-<code>transform</code> 函数</a>
+    <a href="#implement-the-transform-function" class="docs-anchor" tabindex="-1" aria-label="Link to Implement the <code>transform</code> function">实现 <code>transform</code> 函数</a>
   </h3>
   
-      <p data-ng_translator_product="100" data-ng_translator_ref_id="ajgy36u3h4e4m1em778on0aji">现在 
-<code>ReversePipe</code> 类是一个管道。更新 
-<code>transform</code> 函数以添加反转逻辑：</p>
+      <p>现在 <code>ReversePipe</code> 类是一个管道了。更新 <code>transform</code> 函数以添加反转逻辑：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReversePipe</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">PipeTransform</span> {</div><div class="hljs-ln-line">    <span class="hljs-title function_">transform</span>(<span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">string</span> {</div><div class="hljs-ln-line highlighted">        <span class="hljs-keyword">let</span> reverse = <span class="hljs-string">''</span>;</div><div class="hljs-ln-line highlighted"></div><div class="hljs-ln-line highlighted">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = value.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {</div><div class="hljs-ln-line highlighted">            reverse += value[i];</div><div class="hljs-ln-line highlighted">        }</div><div class="hljs-ln-line highlighted"></div><div class="hljs-ln-line highlighted">        <span class="hljs-keyword">return</span> reverse;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">}</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ReversePipe</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> implements</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> PipeTransform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    transform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">value</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line highlighted"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">        let</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> reverse </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> ''</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line highlighted"></span><span class="line highlighted"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">        for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">let</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> i </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> value.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">length</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> -</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">; i </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">&gt;=</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">; i</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) {</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">            reverse </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">+=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> value[i];</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        }</span></span><span class="line highlighted"></span><span class="line highlighted"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">        return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> reverse;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    }</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
     </li>
@@ -74,18 +65,16 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="use-the-reversepipe-in-the-template">
-    <a href="#use-the-reversepipe-in-the-template" class="docs-anchor" tabindex="-1" aria-label="Link to Use the <code>ReversePipe</code> in the template" data-ng_translator_product="100" data-ng_translator_ref_id="3qt3eca4luq0trg2hrujf01vf">在模板中使用 
-<code>ReversePipe</code></a>
+    <a href="#use-the-reversepipe-in-the-template" class="docs-anchor" tabindex="-1" aria-label="Link to Use the <code>ReversePipe</code> in the template">在模板中使用 <code>ReversePipe</code></a>
   </h3>
   
       
     </li>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="54f8yro4n6iadmwbwesw36aj">随着管道逻辑的实现，最后一步是在模板中使用它。在 
-<code>app.component.ts</code> 中将管道包含在模板中，并将其添加到组件导入中：</p>
+    <p>在实现了管道逻辑之后，最后一步是在模板中使用它。在 <code>app.component.ts</code> 中，将管道包含在模板中，并将其添加到组件导入中：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">    ...</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">template</span>: <span class="hljs-string">`Reverse Machine: {{ word | reverse }}`</span></div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">ReversePipe</span>]</div><div class="hljs-ln-line">})</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    ...</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">Reverse Machine: {{ word </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> reverse</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }}</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    imports: [ReversePipe]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span></code></pre>
     </pre>
   </div>
     </ol>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="aqyt8lxo8z9jo79uystl6hf3">就这样，你完成了。恭喜你完成了此活动。你现在知道如何使用管道，甚至如何实现自己的自定义管道。</p>
+    <p>这样你就完成了。祝贺你完成此活动。你现在知道如何使用管道，甚至知道如何实现你自己的自定义管道。</p>

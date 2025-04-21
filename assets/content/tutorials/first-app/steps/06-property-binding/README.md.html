@@ -4,38 +4,35 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="aiifxt098p7grg30newkx7nvr">向组件模板添加一个属性绑定</h1>
+    <h1 tabindex="-1">向组件的模板添加属性绑定</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/first-app/steps/06-property-binding/README.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1bi4dja9y52w3pgdgzkvauh4">这节课演示了如何将属性绑定添加到模板中并通过它将动态数据传给组件。</p>
+    <p>本教程课程演示了如何向模板添加属性绑定，并使用它将动态数据传递给组件。</p>
 
     <div class="docs-video-container">
       <iframe class="docs-video" src="https://www.youtube.com/embed/eM3zi_n7lNs?si=AsiczpWnMz5HhJqB&amp;start=599" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless title="Video player"></iframe>
     </div>
     
   <h2 id="what-youll-learn">
-    <a href="#what-youll-learn" class="docs-anchor" tabindex="-1" aria-label="Link to What you'll learn" data-ng_translator_product="100" data-ng_translator_ref_id="cy8qhuh22qozu5okjmjfdf3nx">你将学到什么</a>
+    <a href="#what-youll-learn" class="docs-anchor" tabindex="-1" aria-label="Link to What you'll learn">你将学到什么</a>
   </h2>
   
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="hb3f1a7cs49x357b4qn3o2at">应用程序在 <code>HomeComponent</code> 模板中具有一些数据绑定。</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dzyghfiutwkjhk91e379ifhs7">应用程序将数据从 <code>HomeComponent</code> 发送到 <code>HousingLocationComponent</code>。</li>
+    <li>你的应用在 <code>HomeComponent</code> 模板中具有数据绑定。</li>
+<li>你的应用将数据从 <code>HomeComponent</code> 发送到 <code>HousingLocationComponent</code>。</li>
 
   </ul>
   
   <h2 id="conceptual-preview-of-inputs">
-    <a href="#conceptual-preview-of-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to Conceptual preview of Inputs" data-ng_translator_product="100" data-ng_translator_ref_id="eeam3k169tsbsub1gv24k6e72">输入属性的概念性预览</a>
+    <a href="#conceptual-preview-of-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to Conceptual preview of Inputs">对输入（Input）的概念性预览</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="aw3awzx00gdyur25b3gju1j2o">在这节课中，你将继续通过在模板中使用属性绑定将数据从父组件共享到子组件的过程。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="cykvikh8le2x19051se8jvhjb">属性绑定使你能够将一个变量连接到 Angular 模板中的一个 
-<code>Input</code>。然后，数据会动态绑定到 
-<code>Input</code> 中。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="2ygvensotxsc7psdtcmw938uk">欲了解更详细的说明，请参阅 
-<a href="guide/templates/property-binding">属性绑定</a> 指南。</p>
+  <p>在本课程中，你将继续执行从父组件向子组件共享数据的过程，方法是使用属性绑定将数据绑定到模板中的那些属性（Property）。</p>
+<p>属性绑定使你能够将变量连接到 Angular 模板中的 <code>Input</code>。然后，数据会动态绑定到 <code>Input</code>。</p>
+<p>要获得更深入的解释，请参阅<a href="guide/templates/property-binding">属性绑定</a>指南。</p>
 
     <ol class="docs-steps">
       
@@ -43,25 +40,22 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="update-the-homecomponent-template">
-    <a href="#update-the-homecomponent-template" class="docs-anchor" tabindex="-1" aria-label="Link to Update the <code>HomeComponent</code> template" data-ng_translator_product="100" data-ng_translator_ref_id="9i3fqmuegkgpaumviur3h3ko">更新 
-<code>HomeComponent</code> 模板</a>
+    <a href="#update-the-homecomponent-template" class="docs-anchor" tabindex="-1" aria-label="Link to Update the <code>HomeComponent</code> template">更新 <code>HomeComponent</code> 模板</a>
   </h3>
   
-      <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1co0ezx9zodfr71l3l9n31w6s">此步骤将属性绑定添加到 <code>&lt;app-housing-location&gt;</code> 标记上。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eug3k0hymd4usfrh9oohvkiee">在代码编辑器中：</p>
+      <p>此步骤将属性绑定添加到 <code>&lt;app-housing-location&gt;</code> 标签。</p>
+<p>在代码编辑器中：</p>
 
     <ol class="docs-ordered-list">
-      <li><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7oiouk36c6xv3lsj2yevl8hzt">导航到 <code>src/app/home/home.component.ts</code></p>
+      <li><p>导航到 <code>src/app/home/home.component.ts</code></p>
 </li>
-<li><p data-ng_translator_product="100" data-ng_translator_ref_id="eiq4zx1wg1201l8kj6ck7l8qx">在 
-<code>@Component</code> 装饰器的模板属性中，更新代码以匹配下面的代码：</p>
+<li><p>在 <code>@Component</code> 装饰器的 template 属性中，更新代码以匹配以下代码：</p>
 <div class="docs-code" path="adev/src/content/tutorials/first-app/steps/07-dynamic-template-values/src/app/home/home.component.ts" visiblelines="16,17,18" header="Add housingLocation property binding">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="934x3y8x1pfnyea99ve57m81m">添加 housingLocation 属性绑定</h3></div>
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {CommonModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocationComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'../housing-location/housing-location.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {HousingLocation} <span class="hljs-keyword">from</span> <span class="hljs-string">'../housinglocation'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-home'</span>,</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  imports: [CommonModule, HousingLocationComponent],</div><div class="hljs-ln-line">  template: `<span class="language-javascript"></span></div><div class="hljs-ln-line">    &lt;section&gt;</div><div class="hljs-ln-line">      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span></span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Filter by city"</span> /&gt;</span></div><div class="hljs-ln-line">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"primary"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span>&gt;</span>Search<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></div><div class="hljs-ln-line">    &lt;/section&gt;</div><div class="hljs-ln-line">    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"results"</span>&gt;</span></span></div><div class="hljs-ln-line">      <span class="hljs-tag">&lt;<span class="hljs-name">app-housing-location</span> [<span class="hljs-attr">housingLocation</span>]=<span class="hljs-string">"housingLocation"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-housing-location</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span></div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">  styleUrls: [<span class="hljs-string">'./home.component.css'</span>],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HomeComponent</span> {</div><div class="hljs-ln-line">  readonly baseUrl = <span class="hljs-string">'https://angular.dev/assets/tutorials/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  housingLocation: HousingLocation = {</div><div class="hljs-ln-line">    id: <span class="hljs-number">9999</span>,</div><div class="hljs-ln-line">    name: <span class="hljs-string">'Test Home'</span>,</div><div class="hljs-ln-line">    city: <span class="hljs-string">'Test city'</span>,</div><div class="hljs-ln-line">    state: <span class="hljs-string">'ST'</span>,</div><div class="hljs-ln-line">    photo: `<span class="language-javascript">${<span class="hljs-variable language_">this</span>.<span class="hljs-property">baseUrl</span>}/example-house.<span class="hljs-property">jpg</span></span>`,</div><div class="hljs-ln-line">    availableUnits: <span class="hljs-number">99</span>,</div><div class="hljs-ln-line">    wifi: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">    laundry: <span class="hljs-literal">false</span>,</div><div class="hljs-ln-line">  };</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    <div class="docs-code-header"><h3>添加 housingLocation 属性绑定</h3></div>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Component} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {CommonModule} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/common'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {HousingLocationComponent} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '../housing-location/housing-location.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {HousingLocation} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '../housinglocation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-home'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  imports: [CommonModule, HousingLocationComponent],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">section</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">form</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">input</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> type</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"text"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"Filter by city"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"primary"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> type</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"button"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Search&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">form</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">section</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">section</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"results"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">app-housing-location</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [housingLocation]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"housingLocation"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">app-housing-location</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">section</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  styleUrls: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'./home.component.css'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HomeComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  readonly</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> baseUrl</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'https://angular.dev/assets/images/tutorials/common'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  housingLocation</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HousingLocation</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    id: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">9999</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Test Home'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    city: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Test city'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    state: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'ST'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    photo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">baseUrl</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}/example-house.jpg`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    availableUnits: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">99</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    wifi: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    laundry: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">false</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  };</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8jb1aw0vw61dnuryhuyup6v88">当向组件标签添加属性绑定时，我们使用 <code>[attribute] = "value"</code> 语法来通知 Angular 所赋的值应该视为来自组件类的属性，而不是字符串值。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="f5irm43tpjh49hcrh5ycd8pt0">右侧的值是从
-<code>HomeComponent</code>中属性的名称。</p>
+  </div><p>当向组件标签添加属性绑定时，我们使用 <code>[attribute] = "value"</code> 语法来通知 Angular，分配的值应被视为来自组件类的属性（Property），而不是字符串值。</p>
+<p>右侧的值是来自 <code>HomeComponent</code> 的属性（Property）的名称。</p>
 </li>
 
     </ol>
@@ -72,13 +66,13 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="confirm-the-code-still-works">
-    <a href="#confirm-the-code-still-works" class="docs-anchor" tabindex="-1" aria-label="Link to Confirm the code still works" data-ng_translator_product="100" data-ng_translator_ref_id="2xhihx99078phfjktr26eztu9">确认代码仍在运行</a>
+    <a href="#confirm-the-code-still-works" class="docs-anchor" tabindex="-1" aria-label="Link to Confirm the code still works">确认代码仍然有效</a>
   </h3>
   
       
     <ol class="docs-ordered-list">
-      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6a1306fc3w56aeqm1wcmz5ewr">保存你的更改并确认应用程序没有任何错误。</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2kcshog2nszydh73ast6suqu6">在继续下一步之前更正所有错误。</li>
+      <li>保存你的更改并确认应用没有任何错误。</li>
+<li>在继续下一步之前，请更正任何错误。</li>
 
     </ol>
     
@@ -87,15 +81,14 @@
     </ol>
     
     <div class="docs-alert docs-alert-summary">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="8cw74t9vltn4thdrbd6fdpk69"><strong>总结：</strong>在这节课中，你添加了一个新的属性绑定，并传递了一个类属性的引用。现在，
-<code>HousingLocationComponent</code>可以访问数据，用于自定义组件的显示。</p>
+    <p><strong>摘要：</strong>在本课程中，你添加了一个新的属性绑定，并传入了对类属性（Property）的引用。现在，<code>HousingLocationComponent</code> 可以访问可用于自定义组件显示的数据。</p>
 
     </div>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="ep5mlw3d5q1ucm62jzem9a7pc">有关本课涵盖主题的更多信息，请访问：</p>
+    <p>有关本课程涵盖主题的更多信息，请访问：</p>
 
     <nav class="docs-pill-row">
       
-    <a class="docs-pill" href="guide/templates/property-binding" data-ng_translator_product="100" data-ng_translator_ref_id="ibtmbclnc7w7tio7q72px2nt">property 绑定</a>
+    <a class="docs-pill" href="/guide/templates/property-binding">属性绑定</a>
     
 
     </nav>

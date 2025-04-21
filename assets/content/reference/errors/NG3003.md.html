@@ -4,64 +4,65 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="3om2jklo9um4nevr3ni48ggx8">检测到导入循环</h1>
+    <h1 tabindex="-1">检测到循环导入</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG3003.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cqjm7mtophvgytjp92eloydif">该组件引用的组件、指令或管道将要求编译器添加某个导入，而这将导致循环导入。比如，考虑一个场景，其中 <code>ParentComponent</code> 在其模板中引用了 <code>ChildComponent</code></p>
+    <p>此组件引用的组件、指令或管道将要求编译器添加一个导入，而这将导致循环导入。
+例如，考虑 <code>ParentComponent</code> 在其模板中引用 <code>ChildComponent</code> 的场景：</p>
 <div class="docs-code" path="adev/src/content/examples/errors/cyclic-imports/parent.component.ts" header="parent.component.ts">
     <div class="docs-code-header"><h3>parent.component.ts</h3></div>
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {ChildComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./child.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  standalone: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'app-parent'</span>,</div><div class="hljs-ln-line">  imports: [ChildComponent],</div><div class="hljs-ln-line">  template: <span class="hljs-string">'&lt;app-child/&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ParentComponent</span> {}</div><div class="hljs-ln-line"></div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Component} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {ChildComponent} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './child.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-parent'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  imports: [ChildComponent],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">app-child</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">/&gt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ParentComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}</span></span><span class="line"></span></code></pre>
     </pre>
   </div><div class="docs-code" path="adev/src/content/examples/errors/cyclic-imports/child.component.ts" header="child.component.ts">
     <div class="docs-code-header"><h3>child.component.ts</h3></div>
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">ParentComponent</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'./parent.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-child'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'The child!'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ChildComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> parent: ParentComponent</span>) {}</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Component, inject} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {ParentComponent} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './parent.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-child'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">The child!</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ChildComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> parent</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(ParentComponent);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="eqtauo867m5lmhdblayyqc4d6">由于 <code>ChildComponent</code> 在其构造函数中引用了 <code>ParentComponent</code>，因此已经有一个从 <code>child.component.ts</code> 到 <code>parent.component.ts</code> 的导入。</p>
+  </div><p>由于 <code>ChildComponent</code> 在其构造函数中引用了 <code>ParentComponent</code>，因此已经存在从 <code>child.component.ts</code> 到 <code>parent.component.ts</code> 的导入。</p>
 
     <div class="docs-alert docs-alert-helpful">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="6lusfmvv2fb70hawiyukddoeh"><strong>帮助信息：</strong>父组件的模板包含 
-<code>&lt;child&gt;&lt;/child&gt;</code>。因此，此模板生成的代码必须包含对 
-<code>ChildComponent</code> 类的引用。为了进行此引用，编译器必须从 
-<code>parent.component.ts</code> 到 
-<code>child.component.ts</code> 添加导入，这将导致导入循环：</p>
+    <p><strong>提示：</strong> 父组件的模板包含 <code>&lt;child&gt;&lt;/child&gt;</code>。
+因此，此模板的生成代码必须包含对 <code>ChildComponent</code> 类的引用。
+为了建立此引用，编译器将不得不添加从 <code>parent.component.ts</code> 到 <code>child.component.ts</code> 的导入，这将导致循环导入：</p>
 
     </div>
     <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">parent.component.ts -&gt; child.component.ts -&gt; parent.component.ts</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span>parent.component.ts -&gt; child.component.ts -&gt; parent.component.ts</span></span></code></pre>
     </pre>
   </div>
   <h2 id="remote-scoping">
-    <a href="#remote-scoping" class="docs-anchor" tabindex="-1" aria-label="Link to Remote Scoping" data-ng_translator_product="100" data-ng_translator_ref_id="6dx2efdwnb1rvq2njx28mmnub">远程作用域</a>
+    <a href="#remote-scoping" class="docs-anchor" tabindex="-1" aria-label="Link to Remote Scoping">远程作用域</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="5crwpyl3x640hyxaqor7plvwn">如果你使用 NgModules，为了避免添加导致循环依赖的导入，会在声明依赖组件的 
-<code>NgModule</code> 类中添加额外的代码。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="deyhmqspwz1wu19lgenfn3rbz">这被称为「远程作用域」。</p>
+  <p>如果你正在使用 NgModule，为了避免添加创建循环的导入，会在声明连接依赖项的组件的 <code>NgModule</code> 类中添加额外的代码。</p>
+<p>这被称为“远程作用域”。</p>
 
   <h2 id="libraries">
-    <a href="#libraries" class="docs-anchor" tabindex="-1" aria-label="Link to Libraries" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="accdlvrx8gygmhhoivg70rme2">库</a>
+    <a href="#libraries" class="docs-anchor" tabindex="-1" aria-label="Link to Libraries">库</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="g7p2sze6n5d3sv1d586zp5z5">不幸的是，“远程作用域”代码有副作用，它会阻止摇树优化，并且不能在库中使用。因此，当使用 <code>"compilationMode": "partial"</code> 设置来构建库时，任何需要循环导入的组件都将引发此 <code>NG3003</code> 编译器错误。</p>
+  <p>不幸的是，“远程作用域”代码具有副作用——这会阻止摇树优化——并且不能在库中使用。
+因此，当使用 <code>"compilationMode": "partial"</code> 设置构建库时，任何需要循环导入的组件都会导致引发此 <code>NG3003</code> 编译器错误。</p>
 
   <h2 id="debugging-the-error">
-    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error">调试错误</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9uwy3f6cq6691h5wyg3al8nmt">这种循环会显示为错误消息的一部分。比如：</p>
+  <p>将要生成的循环会显示为错误消息的一部分。
+例如：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">The component ChildComponent is used <span class="hljs-keyword">in</span> the template but importing it would create <span class="hljs-selector-tag">a</span> cycle:</div><div class="hljs-ln-line">/parent<span class="hljs-selector-class">.component</span><span class="hljs-selector-class">.ts</span> -&gt; /child<span class="hljs-selector-class">.component</span><span class="hljs-selector-class">.ts</span> -&gt; /parent<span class="hljs-selector-class">.component</span>.ts</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">The component ChildComponent is used </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">in</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> the template but importing it would create a </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">cycle</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">:</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">parent.component.ts </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">-&gt;</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> /</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">child.component.ts </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">-&gt;</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> /</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">parent.component.ts</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cp2njk23obr2001ojs7uc7cir">使用它来确定所引用的组件、管道或指令是如何反向依赖要编译的组件的。以下是一些解决问题的方法：</p>
+  </div><p>使用此方法来确定被引用的组件、管道或指令如何反向依赖于正在编译的组件。
+以下是解决问题的一些想法：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="24gyezjz3nczwrfcj1p3fkmha">尝试重新安排你的依赖关系，以避免循环。比如，使用存储在独立文件中的中间接口，可以将该文件导入两个相关文件中而不会导致循环导入。</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="afx6bdimqwvf7rph7550frufn">把相互引用的类移入同一个文件中，以避免它们相互导入。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="u8ibzqmewd92tvewcw4a4ffa">如果导入声明仅用于类型，请将 import 语句转换为仅类型导入（使用 
-<code>import type</code> 语法），因为仅类型导入不会导致循环。</li>
+    <li>尝试重新排列你的依赖项以避免循环。
+例如，使用存储在独立文件中的中间接口，该接口可以导入到两个依赖文件中，而不会导致导入循环。</li>
+<li>将相互引用的类移动到同一个文件中，以避免它们之间有任何导入。</li>
+<li>如果导入的声明仅用作类型，则将导入语句转换为仅类型的导入（使用 <code>import type</code> 语法），因为仅类型的导入不会导致循环。</li>
 
   </ul>
   

@@ -4,34 +4,31 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="1eq7bpgkpay7s8b3usp6wbcci">未找到根元素</h1>
+    <h1 tabindex="-1">未找到根元素</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG05104.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="4p03exf0j91j3i1ul2xv9srnq">引导的组件定义在 
-<code>@NgModule</code> 装饰器的 
-<code>bootstrap</code> 属性中，或作为独立组件的 
-<code>bootstrapApplication</code> 的第一个参数。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="6fjpjxpunpko35e678rgkwqp6">当 Angular 尝试引导这些组件之一但无法在 DOM 中找到其对应节点时，会发生此错误。</p>
+    <p>已引导组件在 <code>@NgModule</code> 装饰器的 <code>bootstrap</code> 属性中定义，或者作为独立组件的 <code>bootstrapApplication</code> 的第一个参数。</p>
+<p>当 Angular 尝试引导这些组件之一，但在 DOM 中找不到其对应的节点时，会发生此错误。</p>
 
   <h2 id="debugging-the-error">
-    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error" data-ng_translator_product="100" data-ng_translator_ref_id="6rp3v2icazrcg6696buxdgjjo">调试此错误</a>
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error">调试错误</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="7rkvhzslmzlb5vunxputl5z9u">此问题发生在选择器与标签不匹配时</p>
+  <p>当选择器与标签不匹配时，会发生此问题</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'my-app'</span>,</div><div class="hljs-ln-line">  ...</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'my-app'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> AppComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}</span></span></code></pre>
     </pre>
   </div><div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">app-root</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-root</span>&gt;</span> <span class="hljs-comment">&lt;!-- Doesn't match the selector --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">html</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">app-root</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">app-root</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- Doesn't match the selector --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">html</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9ga4lx02xbk8up7wqyymp0tds">将标签替换为正确的：</p>
+  </div><p>用正确的标签替换该标签：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-tag">&lt;<span class="hljs-name">my-app</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">my-app</span>&gt;</span> <span class="hljs-comment">&lt;!-- OK --&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">html</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">my-app</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">my-app</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- OK --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">html</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
   </div>

@@ -6,18 +6,18 @@
           
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4v4ycngrts2vgsrm920jvsyon">Angular 信号（Signal）</h1>
+    <h1 tabindex="-1">Angular Signal</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/signals/overview.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
 
-          <p data-ng_translator_product="100" data-ng_translator_ref_id="8ozwrjrycb66qqsdrn4uhp8uc"><!-- markdownlint-disable-line --> Angular Signals 是一个体系，能够细粒度地跟踪你的状态在整个应用中的使用方式和位置，从而使框架能够优化渲染更新。</p>
+          <p><!-- markdownlint-disable-line -->Angular Signal 是一种体系，它可以精细地跟踪你的状态在整个应用中的使用方式和位置，从而允许框架优化渲染更新。</p>
         </div>
 
         <!-- illustration -->
-        <svg width="216" height="259" viewbox="0 0 216 259" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="216" height="259" viewBox="0 0 216 259" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" clip-rule="evenodd" d="M145.45 156.483C152.516 149.306 156.413 139.81 156.413 129.711C156.413 119.611 152.528 110.128 145.45 102.939L158.571 89.8181C180.385 111.879 180.385 147.53 158.571 169.579L145.45 156.458V156.483Z" fill="#F11653" />
   <path d="M158.558 90.2744C168.941 100.88 174.639 114.864 174.639 129.723C174.639 144.583 168.929 158.567 158.558 169.172L145.881 156.495C152.873 149.281 156.721 139.798 156.721 129.735C156.721 119.673 152.873 110.19 145.881 102.976L158.558 90.2991M158.558 89.4236L145.006 102.976C159.791 117.762 159.791 141.722 145.006 156.507L158.558 170.06C180.829 147.789 180.829 111.694 158.558 89.4236Z" fill="black" />
   <path fill-rule="evenodd" clip-rule="evenodd" d="M71.7685 156.483C56.9829 141.697 56.9829 117.737 71.7685 102.951L58.2161 89.3989C35.9452 111.67 35.9452 147.764 58.2161 170.035L71.7685 156.483Z" fill="#8514F5" stroke="black" stroke-width="0.93421" stroke-miterlimit="10" />
@@ -47,260 +47,187 @@
     </div>
     
     <div class="docs-alert docs-alert-tip">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="2zh6uvegmme6a1wiek61ynuta"><strong>提示：</strong>在深入阅读本综合指南之前，请查看 Angular 的
-<a href="essentials/managing-dynamic-data">基础部分</a>。</p>
+    <p><strong>提示：</strong> 在深入学习本综合指南之前，请先查看 Angular 的 <a href="essentials/signals">要点</a>。</p>
 
     </div>
     
   <h2 id="what-are-signals">
-    <a href="#what-are-signals" class="docs-anchor" tabindex="-1" aria-label="Link to What are signals?" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e5nteqfnhhs39uz271fvirz3v">什么是信号？</a>
+    <a href="#what-are-signals" class="docs-anchor" tabindex="-1" aria-label="Link to What are signals?">什么是 Signal？</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="bu4eklvjzfoi1q1wtec8ndkjy"><strong>信号</strong> 是一个值的包装器，当该值变化时通知感兴趣的消费者。信号可以包含任何值，从原始类型到复杂数据结构。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="cy9agcryrsou7yijbf3smhdys">你可以通过调用信号的 getter 函数来读取其值，这使 Angular 能够跟踪信号的使用位置。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="dqiqriefulyi8615d7qn8gl05">信号可以是 
-<em>可写的</em> 或 
-<em>只读的</em>。</p>
+  <p><strong>Signal</strong> 是对值的包装器，当该值发生变化时，它会通知感兴趣的使用者。Signal 可以包含任何值，从原始类型到复杂的数据结构。</p>
+<p>你可以通过调用 signal 的 getter 函数来读取其值，这允许 Angular 跟踪 signal 的使用位置。</p>
+<p>Signal 可以是<em>可写</em>的，也可以是<em>只读</em>的。</p>
 
   <h3 id="writable-signals">
-    <a href="#writable-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Writable signals" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7oz6k6xa7khhyl4bgazsgeuth">可写信号</a>
+    <a href="#writable-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Writable signals">可写 Signal</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="5v1exmkighb0qyv0jl571cap3">可写信号提供了一个 API，用于直接更新其值。你可以通过调用 
-<code>signal</code> 函数并传入信号的初始值来创建可写信号：</p>
+  <p>可写 Signal 提供了一个 API，用于直接更新它们的值。你可以通过使用 signal 的初始值调用 <code>signal</code> 函数来创建可写 signal：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> count = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// Signals are getter functions - calling them reads their value.</span></div><div class="hljs-ln-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'The count is: '</span> + <span class="hljs-title function_">count</span>());</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> count</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Signals are getter functions - calling them reads their value.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'The count is: '</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> +</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> count</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">());</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="boz9w8qi32qxip6ekdulwfjhj">要更改可写信号的值，可以直接 
-<code>.set()</code> 它：</p>
+  </div><p>要更改可写 signal 的值，可以直接 <code>.set()</code> 它：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">count.<span class="hljs-title function_">set</span>(<span class="hljs-number">3</span>);</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">count.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">set</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3cxlgxd2mbbiqhf1ci0aygzf6">或者使用 <code>.update()</code> 操作从前一个值计算出一个新值：</p>
+  </div><p>或者使用 <code>.update()</code> 操作从先前的值计算出一个新值：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// Increment the count by 1.</span></div><div class="hljs-ln-line">count.<span class="hljs-title function_">update</span>(<span class="hljs-function"><span class="hljs-params">value</span> =&gt;</span> value + <span class="hljs-number">1</span>);</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Increment the count by 1.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">count.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">update</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">value</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> value </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">+</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ckm10ehrda53859tcwhc0101y">可写信号的类型是 
-<code>WritableSignal</code>。</p>
+  </div><p>可写 Signal 的类型为 <code>WritableSignal</code>。</p>
 
   <h3 id="computed-signals">
-    <a href="#computed-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="2x0royoakh9ax2x3iakyk1sy9">计算型信号</a>
+    <a href="#computed-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals">计算 Signal</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="34dn9gey7atdm6vn8noulrdcf"><strong>计算信号</strong> 是只读信号，它们的值派生自其他信号。你可以使用 
-<code>computed</code> 函数定义计算信号，并指定一个派生过程：</p>
+  <p><strong>计算 Signal</strong> 是只读 signal，它们的值从其他 signal 派生而来。你可以使用 <code>computed</code> 函数并指定派生方式来定义计算 Signal：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">count</span>: <span class="hljs-title class_">WritableSignal</span>&lt;<span class="hljs-built_in">number</span>&gt; = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">doubleCount</span>: <span class="hljs-title class_">Signal</span>&lt;<span class="hljs-built_in">number</span>&gt; = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">count</span>() * <span class="hljs-number">2</span>);</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> count</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> WritableSignal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> doubleCount</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> computed</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> count</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">*</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="40jqtst4f26yjl0l48o6hcpb4"><code>doubleCount</code> 信号依赖于 
-<code>count</code> 信号。每当 
-<code>count</code> 更新时，Angular 知道 
-<code>doubleCount</code> 也需要更新。</p>
+  </div><p><code>doubleCount</code> signal 依赖于 <code>count</code> signal。每当 <code>count</code> 更新时，Angular 都会知道 <code>doubleCount</code> 也需要更新。</p>
 
   <h4 id="computed-signals-are-both-lazily-evaluated-and-memoized">
-    <a href="#computed-signals-are-both-lazily-evaluated-and-memoized" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals are both lazily evaluated and memoized" data-ng_translator_product="100" data-ng_translator_ref_id="6lnytfwkx1nisqzp55t2nutev">计算信号既是惰性求值的，也是记忆化的</a>
+    <a href="#computed-signals-are-both-lazily-evaluated-and-memoized" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals are both lazily evaluated and memoized">计算 Signal 既是惰性求值的，又是经过 memoized 的</a>
   </h4>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="al3i5wilsfkd4n79r92hsqskg"><code>doubleCount</code> 的派生函数在你第一次读取 
-<code>doubleCount</code> 时才会运行以计算其值。计算出的值随后被缓存，如果你再次读取 
-<code>doubleCount</code>，它将返回缓存的值而不会重新计算。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="4po0pjf84ckh893e43p3ed3s2">如果你随后更改 
-<code>count</code>，Angular 知道 
-<code>doubleCount</code> 的缓存值不再有效，下次你读取 
-<code>doubleCount</code> 时将会计算其新值。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="1p0rned7zf7imqw6vwpkfgytu">因此，你可以安全地在计算信号中执行计算量大的派生操作，例如过滤数组。</p>
+  <p>在首次读取 <code>doubleCount</code> 之前，<code>doubleCount</code> 的派生函数不会运行以计算其值。然后，计算出的值会被缓存，如果再次读取 <code>doubleCount</code>，它将返回缓存的值，而无需重新计算。</p>
+<p>如果你随后更改 <code>count</code>，Angular 就会知道 <code>doubleCount</code> 的缓存值不再有效，并且下次你读取 <code>doubleCount</code> 时，将计算其新值。</p>
+<p>因此，你可以在计算 Signal 中安全地执行计算量大的派生，例如过滤数组。</p>
 
   <h4 id="computed-signals-are-not-writable-signals">
-    <a href="#computed-signals-are-not-writable-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals are not writable signals" data-ng_translator_product="100" data-ng_translator_ref_id="7023c5wb1klek3333mskp4uhs">计算信号不是可写信号</a>
+    <a href="#computed-signals-are-not-writable-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals are not writable signals">计算 Signal 不是可写 Signal</a>
   </h4>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9mq4yndvns5xj7y53q6onls2x">你不能直接为计算信号赋值。比如，</p>
+  <p>你不能直接为计算 Signal 赋值。也就是说，</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">doubleCount.<span class="hljs-title function_">set</span>(<span class="hljs-number">3</span>);</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">doubleCount.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">set</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9koy6mxxxrsvku536o802kq1k">会产生编译错误，因为 
-<code>doubleCount</code> 不是一个 
-<code>WritableSignal</code>。</p>
+  </div><p>会产生编译错误，因为 <code>doubleCount</code> 不是 <code>WritableSignal</code>。</p>
 
   <h4 id="computed-signal-dependencies-are-dynamic">
-    <a href="#computed-signal-dependencies-are-dynamic" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signal dependencies are dynamic" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="99c7be7ouf3tfqqccqcfvmkx3">计算信号的依赖关系是动态的</a>
+    <a href="#computed-signal-dependencies-are-dynamic" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signal dependencies are dynamic">计算 Signal 的依赖是动态的</a>
   </h4>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="95f3dn4zoeoec1h6gyxutj9l2">只有在派生过程中实际读取的信号才会被跟踪。例如，在这个计算信号中，只有当 
-<code>showCount</code> 信号为真时才会读取 
-<code>count</code> 信号：</p>
+  <p>只有在派生期间实际读取的 signal 才会被跟踪。例如，在此 <code>computed</code> 中，仅当 <code>showCount</code> signal 为 true 时，才会读取 <code>count</code> signal：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> showCount = <span class="hljs-title function_">signal</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> count = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> conditionalCount = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">if</span> (<span class="hljs-title function_">showCount</span>()) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-string">`The count is <span class="hljs-subst">${count()}</span>.`</span>;</div><div class="hljs-ln-line">  } <span class="hljs-keyword">else</span> {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> <span class="hljs-string">'Nothing to see here!'</span>;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">});</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> showCount</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">false</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> count</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> conditionalCount</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> computed</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">showCount</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()) {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> `The count is ${</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">count</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}.`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">else</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'Nothing to see here!'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2tanqxob1wibo2kkw5on8doik">当你读取 
-<code>conditionalCount</code> 时，如果 
-<code>showCount</code> 是 
-<code>false</code>，将返回「无内容可查看！」信息 
-<em>而不</em> 读取 
-<code>count</code> 信号。这意味着如果你以后更新 
-<code>count</code>，它 
-<em>不会</em> 导致重新计算 
-<code>conditionalCount</code>。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="as4fzpvrxsc7awo2lu3j2drmt">如果你将 
-<code>showCount</code> 设置为 
-<code>true</code>，然后再次读取 
-<code>conditionalCount</code>，派生过程将重新执行并进入 
-<code>showCount</code> 为 
-<code>true</code> 的分支，返回显示 
-<code>count</code> 值的信息。更改 
-<code>count</code> 将使 
-<code>conditionalCount</code> 的缓存值失效。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="4yhbaphdgkc24ou00uxcatakx">注意，在派生过程中依赖关系可以被移除也可以被添加。如果你后来将 
-<code>showCount</code> 设置回 
-<code>false</code>，那么 
-<code>count</code> 将不再被视为 
-<code>conditionalCount</code> 的依赖项。</p>
+  </div><p>当你读取 <code>conditionalCount</code> 时，如果 <code>showCount</code> 为 <code>false</code>，则会返回“Nothing to see here!”消息，<em>而无需</em>读取 <code>count</code> signal。这意味着，如果你稍后更新 <code>count</code>，它<em>不会</em>导致 <code>conditionalCount</code> 的重新计算。</p>
+<p>如果你将 <code>showCount</code> 设置为 <code>true</code>，然后再次读取 <code>conditionalCount</code>，则派生将重新执行并采用 <code>showCount</code> 为 <code>true</code> 的分支，返回显示 <code>count</code> 值的消息。然后，更改 <code>count</code> 将使 <code>conditionalCount</code> 的缓存值无效。</p>
+<p>请注意，依赖项可以在派生期间被删除以及添加。如果你稍后将 <code>showCount</code> 设置回 <code>false</code>，则 <code>count</code> 将不再被视为 <code>conditionalCount</code> 的依赖项。</p>
 
   <h2 id="reading-signals-in-onpush-components">
-    <a href="#reading-signals-in-onpush-components" class="docs-anchor" tabindex="-1" aria-label="Link to Reading signals in <code>OnPush</code> components" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3g2aug3bh97eabpi43w74dzo9">在 <code>OnPush</code> 型组件中读取信号</a>
+    <a href="#reading-signals-in-onpush-components" class="docs-anchor" tabindex="-1" aria-label="Link to Reading signals in <code>OnPush</code> components">在 <code>OnPush</code> 组件中读取 signal</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="ddsrinkgz6k7xgn4xufhanoea">当你在 
-<code>OnPush</code> 组件的模板中读取信号时，Angular 将该信号作为该组件的依赖项进行跟踪。当该信号的值发生变化时，Angular 会自动 
-<a href="api/core/ChangeDetectorRef#markforcheck">标记</a> 该组件，以确保下次变更检测运行时更新组件。有关 
-<code>OnPush</code> 组件的更多信息，请参阅 
-<a href="best-practices/skipping-subtrees">跳过组件子树</a> 指南。</p>
+  <p>当你在 <code>OnPush</code> 组件的模板中读取 signal 时，Angular 会将该 signal 跟踪为该组件的依赖项。当该 signal 的值发生更改时，Angular 会自动<a href="api/core/ChangeDetectorRef#markforcheck">标记</a>该组件，以确保在下次变更检测运行时对其进行更新。有关 <code>OnPush</code> 组件的更多信息，请参阅<a href="best-practices/skipping-subtrees">跳过组件子树</a>指南。</p>
 
   <h2 id="effects">
-    <a href="#effects" class="docs-anchor" tabindex="-1" aria-label="Link to Effects" data-ng_translator_product="100" data-ng_translator_ref_id="4vten9v01mjrmj5lt1b39xamu">副作用（effect）</a>
+    <a href="#effects" class="docs-anchor" tabindex="-1" aria-label="Link to Effects">副作用</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="c6wwldy5nqhmd3blhyqsokpow">信号很有用，因为它们在变化时会通知感兴趣的消费者。
-<strong>副作用</strong> 是在一个或多个信号值变化时运行的操作。你可以使用 
-<code>effect</code> 函数创建一个副作用：</p>
+  <p>Signal 非常有用，因为它们会在值更改时通知感兴趣的使用者。<strong>副作用</strong>是一种操作，当一个或多个 signal 值发生更改时，它会运行。你可以使用 <code>effect</code> 函数创建一个副作用：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`The current count is: <span class="hljs-subst">${count()}</span>`</span>);</div><div class="hljs-ln-line">});</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`The current count is: ${</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">count</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aqus4ly6lsiu6eu1901a2ifys">副作用<strong>至少会运行一次。</strong> 当副作用运行时，它会跟踪任何信号值读取。只要这些信号值中的任何一个发生变化，副作用就会再次运行。与计算信号类似，副作用会动态跟踪它们的依赖关系，并且仅跟踪在最近一次执行中读取的信号。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b4is5z7ytw3pl5lpj3ix871p2">在变化检测过程中，副作用始终<strong>异步</strong>执行。</p>
+  </div><p>副作用总是<strong>至少运行一次。</strong> 当副作用运行时，它会跟踪任何 signal 值的读取。每当这些 signal 值中的任何一个发生更改时，副作用都会再次运行。与计算 Signal 类似，副作用会动态跟踪其依赖项，并且仅跟踪在最近一次执行中读取的 signal。</p>
+<p>副作用总是在变更检测过程中<strong>异步</strong>执行。</p>
 
   <h3 id="use-cases-for-effects">
-    <a href="#use-cases-for-effects" class="docs-anchor" tabindex="-1" aria-label="Link to Use cases for effects" data-ng_translator_product="100" data-ng_translator_ref_id="b0hy6ub26u53qqw8x9k7ssv9e">副作用的使用案例</a>
+    <a href="#use-cases-for-effects" class="docs-anchor" tabindex="-1" aria-label="Link to Use cases for effects">副作用的用例</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="2ghlv3lp68pkhjzxtzyj1kwem">在大多数应用代码中很少需要副作用，但在特定情况下可能会有用。以下是一些 
-<code>effect</code> 可能是一个好解决方案的情况示例：</p>
+  <p>在大多数应用代码中，副作用很少是必要的，但在特定情况下可能很有用。以下是一些 <code>effect</code> 可能是良好解决方案的情况示例：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_ref_id="1gn9pzkghtnbpc694vej8e09z">记录数据的显示和变化情况（无论是为了分析还是作为调试工具）。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="7vez9wcmzwq5s9qqafmyl36po">保持数据与 
-<code>window.localStorage</code> 同步。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="2myidrlydawrzxz07l4i4mybf">添加无法用模板语法表达的自定义 DOM 行为。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="dcf1m6gc28qicio6fmoeprjq1">对 
-<code>&lt;canvas&gt;</code>、图表库或其他第三方 UI 库进行自定义渲染。</li>
+    <li>记录正在显示的数据及其更改时间，用于分析或作为调试工具。</li>
+<li>使数据与 <code>window.localStorage</code> 保持同步。</li>
+<li>添加无法用模板语法表达的自定义 DOM 行为。</li>
+<li>对 <code>&lt;canvas&gt;</code>、图表库或其他第三方 UI 库执行自定义渲染。</li>
 
   </ul>
   
     <div class="docs-callout docs-callout-critical">
-      <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b61w6swcjr5m72cx6fk3fck56">何时不使用副作用</h3>
-      <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="71aog4nkhi17ekx1wyfmh3dvh">要避免使用副作用来传播状态变更。这可能会导致 <code>ExpressionChangedAfterItHasBeenChecked</code> 错误、导致无限循环更新或导致不必要的变更检测周期。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="3h4eq28e1fuuzbrx54rn01dyg">由于这些风险，Angular 默认阻止你在效果中设置信号。如果确实有必要，可以在创建效果时设置 
-<code>allowSignalWrites</code> 标志来启用它。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="7wgngowgnfyz299nmtknsypch">相反，使用 
-<code>computed</code> 信号来建模依赖于其他状态的状态。</p>
+      <h3>何时不使用副作用</h3>
+      <p>避免使用副作用来传播状态更改。这可能会导致 <code>ExpressionChangedAfterItHasBeenChecked</code> 错误、无限循环更新或不必要的变更检测周期。</p>
+<p>相反，使用 <code>computed</code> signal 对依赖于其他状态的状态进行建模。</p>
 
     </div>
     
   <h3 id="injection-context">
-    <a href="#injection-context" class="docs-anchor" tabindex="-1" aria-label="Link to Injection context" data-ng_translator_product="100" data-ng_translator_ref_id="6i2331m8j8vxiqrm3m7o9qbot">注入上下文</a>
+    <a href="#injection-context" class="docs-anchor" tabindex="-1" aria-label="Link to Injection context">注入上下文</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="90gd6g8xrs2ed6k3sfex8inib">默认情况下，你只能在某个 
-<a href="guide/di/dependency-injection-context">注入上下文</a> 中创建一个 
-<code>effect()</code>（在这里你可以访问 
-<code>inject</code> 函数）。满足此要求的最简单方法是在组件、指令或服务 
-<code>构造函数</code> 中调用 
-<code>effect</code>：</p>
+  <p>默认情况下，你只能在<a href="guide/di/dependency-injection-context">注入上下文</a>（你可以访问 <code>inject</code> 函数的地方）中创建 <code>effect()</code>。满足此要求的最简单方法是在组件、指令或服务的 <code>constructor</code> 中调用 <code>effect</code>：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EffectiveCounterComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">readonly</span> count = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// Register a new effect.</span></div><div class="hljs-ln-line">    <span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`The count is: <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.count()}</span>`</span>);</div><div class="hljs-ln-line">    });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> EffectiveCounterComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  readonly</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> count</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  constructor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // Register a new effect.</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`The count is: ${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">count</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1n7zbns2ukkpy4l0ayvo9domt">或者，你可以将效果赋值给某个字段（这也给它一个描述性的名称）。</p>
+  </div><p>或者，你可以将副作用赋值给一个字段（这也为其提供了一个描述性名称）。</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EffectiveCounterComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">readonly</span> count = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> loggingEffect = <span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`The count is: <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.count()}</span>`</span>);</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line">}</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> EffectiveCounterComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  readonly</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> count</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> loggingEffect</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`The count is: ${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">count</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="1vkg8cz4rlb2ciuu63u57mz32">要在构造函数之外创建效果，可以通过其选项将 
-<code>Injector</code> 传递给 
-<code>effect</code>：</p>
+  </div><p>要在构造函数外部创建副作用，你可以通过其选项将 <code>Injector</code> 传递给 <code>effect</code>：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EffectiveCounterComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">readonly</span> count = <span class="hljs-title function_">signal</span>(<span class="hljs-number">0</span>);</div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> injector: Injector</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">initializeLogging</span>(): <span class="hljs-built_in">void</span> {</div><div class="hljs-ln-line">    <span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`The count is: <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.count()}</span>`</span>);</div><div class="hljs-ln-line">    }, {<span class="hljs-attr">injector</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">injector</span>});</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> EffectiveCounterComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  readonly</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> count</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> injector</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(Injector);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  initializeLogging</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> void</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`The count is: ${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">count</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    }, {injector: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.injector});</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h3 id="destroying-effects">
-    <a href="#destroying-effects" class="docs-anchor" tabindex="-1" aria-label="Link to Destroying effects" data-ng_translator_product="100" data-ng_translator_ref_id="9bhshkxvby122ncer3rn84jdc">销毁副作用</a>
+    <a href="#destroying-effects" class="docs-anchor" tabindex="-1" aria-label="Link to Destroying effects">销毁副作用</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="74e0lwmpg76kpkbhzhu03utz3">当你创建一个副作用时，它会在其闭包上下文被销毁时自动销毁。这意味着当组件被销毁时，在组件内创建的副作用也会被销毁。指令、服务等中的副作用也是如此。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="6neday34hqvz3ol8yobzn39yf">效果返回一个 
-<code>EffectRef</code>，你可以通过调用 
-<code>.destroy()</code> 方法手动销毁它们。你可以将此与 
-<code>manualCleanup</code> 选项结合使用，以创建一个持续到手动销毁的效果。要小心，当这些效果不再需要时，务必清理它们。</p>
+  <p>当你创建一个副作用时，它会在其封闭上下文被销毁时自动销毁。这意味着在组件内创建的副作用会在组件被销毁时销毁。指令、服务等中的副作用也是如此。</p>
+<p>副作用返回一个 <code>EffectRef</code>，你可以通过调用 <code>.destroy()</code> 方法手动销毁它们。你可以将此与 <code>manualCleanup</code> 选项结合使用，以创建一个持续到手动销毁为止的副作用。请注意在不再需要此类副作用时实际清理它们。</p>
 
   <h2 id="advanced-topics">
-    <a href="#advanced-topics" class="docs-anchor" tabindex="-1" aria-label="Link to Advanced topics" data-ng_translator_product="100" data-ng_translator_ref_id="74227uv8w0mnb9jwmm0p94era">高级主题</a>
+    <a href="#advanced-topics" class="docs-anchor" tabindex="-1" aria-label="Link to Advanced topics">高级主题</a>
   </h2>
   
   <h3 id="signal-equality-functions">
-    <a href="#signal-equality-functions" class="docs-anchor" tabindex="-1" aria-label="Link to Signal equality functions" data-ng_translator_product="100" data-ng_translator_ref_id="ebb4797d6e4zklfo4mardmyqh">信号相等性判定函数</a>
+    <a href="#signal-equality-functions" class="docs-anchor" tabindex="-1" aria-label="Link to Signal equality functions">Signal 相等性函数</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="91olzgv279iaiz72mt5d9rtag">创建信号时，你可以选择提供相等性判定函数，该函数将用于检查新值是否真的与前一个值不同。</p>
+  <p>在创建 signal 时，你可以选择性地提供一个相等性函数，它将用于检查新值是否与之前的值真正不同。</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> _ <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> data = <span class="hljs-title function_">signal</span>([<span class="hljs-string">'test'</span>], {<span class="hljs-attr">equal</span>: _.<span class="hljs-property">isEqual</span>});</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// Even though this is a different array instance, the deep equality</span></div><div class="hljs-ln-line"><span class="hljs-comment">// function will consider the values to be equal, and the signal won't</span></div><div class="hljs-ln-line"><span class="hljs-comment">// trigger any updates.</span></div><div class="hljs-ln-line">data.<span class="hljs-title function_">set</span>([<span class="hljs-string">'test'</span>]);</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> _ </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'lodash'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">([</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'test'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">], {equal: _.isEqual});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Even though this is a different array instance, the deep equality</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// function will consider the values to be equal, and the signal won't</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// trigger any updates.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">data.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">set</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">([</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'test'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]);</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7dooyqvr1jakjzi1jpqazderh">可以为可写信号和计算信号提供相等性判定函数。</p>
+  </div><p>可以为可写和计算型 signal 提供相等性函数。</p>
 
     <div class="docs-alert docs-alert-helpful">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="4url9gig5852atcoe4160g5hh"><strong>有用提示：</strong> 默认情况下，信号使用引用相等性（
-<code>===</code> 比较）。</p>
+    <p><strong>提示：</strong> 默认情况下，signal 使用引用相等性（<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/is" target="_blank"><code>Object.is()</code></a> 比较）。</p>
 
     </div>
     
   <h3 id="reading-without-tracking-dependencies">
-    <a href="#reading-without-tracking-dependencies" class="docs-anchor" tabindex="-1" aria-label="Link to Reading without tracking dependencies" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4z69vgrryxr1dp135t7wgnb98">不跟踪依赖关系的读取</a>
+    <a href="#reading-without-tracking-dependencies" class="docs-anchor" tabindex="-1" aria-label="Link to Reading without tracking dependencies">读取时不跟踪依赖</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="e8z0vkvrll5y0g0b81si5fzja">在少数情况下，你可能希望在某个响应式函数（如 
-<code>computed</code> 或 
-<code>effect</code>）中执行代码并读取信号 
-<em>而不</em> 创建依赖关系。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="2sh3wvafvihjwig17wlaafqwc">例如，假设当 
-<code>currentUser</code> 发生变化时，应该记录 
-<code>counter</code> 的值。你可以创建一个读取这两个信号的 
-<code>effect</code>：</p>
+  <p>极少数情况下，你可能希望执行某些代码，这些代码可能会在诸如 <code>computed</code> 或 <code>effect</code> 之类的响应式函数中读取 signal，<em>而无需</em>创建依赖。</p>
+<p>例如，假设当 <code>currentUser</code> 更改时，应该记录 <code>counter</code> 的值。你可以创建一个 <code>effect</code> 来读取这两个 signal：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`User set to <span class="hljs-subst">${currentUser()}</span> and the counter is <span class="hljs-subst">${counter()}</span>`</span>);</div><div class="hljs-ln-line">});</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`User set to ${</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">currentUser</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">} and the counter is ${</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">counter</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="571b185978v0f1lhdm5qf2d5f">此示例将在 
-<em>任一</em> 
-<code>currentUser</code> 或 
-<code>counter</code> 变化时记录一条消息。然而，如果效果只应该在 
-<code>currentUser</code> 变化时运行，那么读取 
-<code>counter</code> 只是偶然的，
-<code>counter</code> 的变化不应该记录新消息。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="7lnbcc8sxz46g1r3wynijd6yf">你可以通过使用 
-<code>untracked</code> 调用其 getter 来防止信号读取被跟踪：</p>
+  </div><p>此范例将在 <code>currentUser</code> 或 <code>counter</code> <em>任一</em>更改时记录一条消息。但是，如果 effect 应该仅在 <code>currentUser</code> 更改时运行，则对 <code>counter</code> 的读取只是附带的，并且对 <code>counter</code> 的更改不应记录新消息。</p>
+<p>你可以通过使用 <code>untracked</code> 调用 signal 的 getter 来阻止跟踪 signal 读取：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`User set to <span class="hljs-subst">${currentUser()}</span> and the counter is <span class="hljs-subst">${untracked(counter)}</span>`</span>);</div><div class="hljs-ln-line">});</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`User set to ${</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">currentUser</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">} and the counter is ${</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">untracked</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">(</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">counter</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">)</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="72fhima74nj8yn8jeaj74etke"><code>untracked</code> 还在效果需要调用不应被视为依赖项的外部代码时非常有用：</p>
+  </div><p>当副作用需要调用一些不应被视为依赖项的外部代码时，<code>untracked</code> 也很有用：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">effect</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> user = <span class="hljs-title function_">currentUser</span>();</div><div class="hljs-ln-line">  <span class="hljs-title function_">untracked</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">    <span class="hljs-comment">// If the `loggingService` reads signals, they won't be counted as</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// dependencies of this effect.</span></div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">loggingService</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`User set to <span class="hljs-subst">${user}</span>`</span>);</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line">});</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> user</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> currentUser</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  untracked</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // If the `loggingService` reads signals, they won't be counted as</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // dependencies of this effect.</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.loggingService.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`User set to ${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">user</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
   </div>
   <h3 id="effect-cleanup-functions">
-    <a href="#effect-cleanup-functions" class="docs-anchor" tabindex="-1" aria-label="Link to Effect cleanup functions" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="49tbudq461hu89rnklzruv9yl">副作用清理函数</a>
+    <a href="#effect-cleanup-functions" class="docs-anchor" tabindex="-1" aria-label="Link to Effect cleanup functions">Effect 清理函数</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="7btes1lipdpmc96ft9cpg681l">Effect 可能会启动某些长时间运行的操作，如果该 effect 被销毁或在第一次操作完成之前再次运行，你应该取消这些操作。当你创建一个 effect 时，你的函数可以选择性地接受一个 
-<code>onCleanup</code> 函数作为其第一个参数。这个 
-<code>onCleanup</code> 函数让你注册一个回调，该回调会在下次 effect 运行之前或 effect 被销毁时被调用。</p>
+  <p>Effect 可能会启动长时间运行的操作，如果 effect 在第一个操作完成之前被销毁或再次运行，则应取消这些操作。创建 effect 时，你的函数可以选择接受一个 <code>onCleanup</code> 函数作为其第一个参数。此 <code>onCleanup</code> 函数允许你注册一个回调，该回调在 effect 的下一次运行开始之前或在 effect 被销毁时调用。</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">effect</span>(<span class="hljs-function">(<span class="hljs-params">onCleanup</span>) =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> user = <span class="hljs-title function_">currentUser</span>();</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-keyword">const</span> timer = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`1 second ago, the user became <span class="hljs-subst">${user}</span>`</span>);</div><div class="hljs-ln-line">  }, <span class="hljs-number">1000</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">onCleanup</span>(<span class="hljs-function">() =&gt;</span> {</div><div class="hljs-ln-line">    <span class="hljs-built_in">clearTimeout</span>(timer);</div><div class="hljs-ln-line">  });</div><div class="hljs-ln-line">});</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">((</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">onCleanup</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> user</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> currentUser</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> timer</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> setTimeout</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`1 second ago, the user became ${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">user</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1000</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  onCleanup</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    clearTimeout</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(timer);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
   </div>
+  <h2 id="using-signals-with-rxjs">
+    <a href="#using-signals-with-rxjs" class="docs-anchor" tabindex="-1" aria-label="Link to Using signals with RxJS">将 signal 与 RxJS 结合使用</a>
+  </h2>
+  <p>有关 signal 和 RxJS 之间互操作性的详细信息，请参阅 <a href="ecosystem/rxjs-interop">RxJS 与 Angular signal 的互操作性</a>。</p>

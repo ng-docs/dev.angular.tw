@@ -4,78 +4,64 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="6lcqicp33l7nmer7gzsvlnera"><code>HttpClient</code>安全性</h1>
+    <h1 tabindex="-1"><code>HttpClient</code> 安全性</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/http/security.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="8mt1bhaif5l2ystzn2h4e0u34"><code>HttpClient</code>内置支持两种常见的HTTP安全机制：XSSI保护和XSRF/CSRF保护。</p>
+    <p><code>HttpClient</code> 内置了对两种常见的 HTTP 安全机制的支持：XSSI 保护和 XSRF/CSRF 保护。</p>
 
     <div class="docs-alert docs-alert-tip">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="cu6nc3yl1x58mncpf0eiwcqgb"><strong>提示：</strong>也可以考虑为你的API采用
-<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy" target="_blank">内容安全策略</a>。</p>
+    <p><strong>提示：</strong> 还可以考虑为你的 API 采用 <a href="https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy" target="_blank">Content Security Policy</a>。</p>
 
     </div>
     
   <h2 id="xssi-protection">
-    <a href="#xssi-protection" class="docs-anchor" tabindex="-1" aria-label="Link to XSSI protection" data-ng_translator_product="100" data-ng_translator_ref_id="67xphhiopxezlsa8b7jhl1m36">XSSI保护</a>
+    <a href="#xssi-protection" class="docs-anchor" tabindex="-1" aria-label="Link to XSSI protection">XSSI 保护</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="3qzacw1jf1w4u7dp7khe7wxe">跨站脚本包含（XSSI）是一种
-<a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank">跨站脚本</a>攻击形式，攻击者将你的API端点的JSON数据作为
-<code>&lt;script&gt;</code>加载到他们控制的页面上，然后可以使用不同的JavaScript技术访问这些数据。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="cwn6fnzhi36g0bef7ecx9mbnz">防止XSSI的常见技术是为JSON响应添加「不可执行前缀」，通常是
-<code>)]}',\n</code>。这个前缀可以防止JSON响应被解释为有效的可执行JavaScript。当作为数据加载API时，可以在JSON解析之前去掉前缀。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="4kavmkmre7h9qkvdan85q7huz"><code>HttpClient</code>在解析响应中的JSON时会自动去掉这个XSSI前缀（如果存在）。</p>
+  <p>跨站脚本包含 (XSSI) 是一种 <a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank">跨站脚本</a> 攻击，在这种攻击中，攻击者将来自你的 API 端点的 JSON 数据作为 <code>&lt;script&gt;</code> 加载到他们控制的页面上。然后可以使用不同的 JavaScript 技术来访问这些数据。</p>
+<p>防止 XSSI 的一种常用技术是使用“不可执行前缀”（通常为 <code>)]}',\n</code>）来提供 JSON 响应。此前缀会阻止 JSON 响应被解释为有效的可执行 JavaScript。当 API 作为数据加载时，可以在 JSON 解析之前剥离此前缀。</p>
+<p><code>HttpClient</code> 在从响应中解析 JSON 时，会自动去除 XSSI 前缀（如果存在）。</p>
 
   <h2 id="xsrf-csrf-protection">
-    <a href="#xsrf-csrf-protection" class="docs-anchor" tabindex="-1" aria-label="Link to XSRF/CSRF protection" data-ng_translator_product="100" data-ng_translator_ref_id="49qeqcn0n3or0mw3pnw5j762x">XSRF/CSRF保护</a>
+    <a href="#xsrf-csrf-protection" class="docs-anchor" tabindex="-1" aria-label="Link to XSRF/CSRF protection">XSRF/CSRF 保护</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="a5b199b5gjymj6q1ujadi9y05"><a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery" target="_blank">跨站请求伪造（XSRF或CSRF）</a>是一种攻击技术，攻击者可以诱骗已认证用户在不知情的情况下在你的网站上执行操作。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="jb46wkhgbhvo1pag9482c1ke"><code>HttpClient</code> 支持一种防止 XSRF 攻击的 
-<a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-header_token" target="_blank">常见机制</a>。在执行 HTTP 请求时，拦截器会从默认的 
-<code>XSRF-TOKEN</code> Cookie 中读取令牌，并将其设置为 HTTP 标头 
-<code>X-XSRF-TOKEN</code>。因为只有在你的域上运行的代码才能读取 Cookie，后端可以确定 HTTP 请求来自于你的客户端应用而不是攻击者。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="35f8qljoigo9ab1c4dc38h49m">默认情况下，拦截器会在所有更改请求（如 
-<code>POST</code>）到相对 URL 上发送此标头，但不会在 GET/HEAD 请求或绝对 URL 请求上发送。</p>
+  <p><a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery" target="_blank">跨站请求伪造 (XSRF 或 CSRF)</a> 是一种攻击技术，攻击者可以借此诱骗已通过身份验证的用户在不知情的情况下在你的网站上执行操作。</p>
+<p><code>HttpClient</code> 支持一种用于防止 XSRF 攻击的<a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-header_token" target="_blank">常用机制</a>。当执行 HTTP 请求时，拦截器会从 Cookie（默认为 <code>XSRF-TOKEN</code>）中读取令牌，并将其设置为 HTTP 标头 <code>X-XSRF-TOKEN</code>。由于只有在你域名下运行的代码才能读取 Cookie，因此后端可以确定 HTTP 请求来自你的客户端应用，而不是攻击者。</p>
+<p>默认情况下，拦截器会在所有发送到相对 URL 的变更请求（例如 <code>POST</code>）上发送此标头，但不会在 GET/HEAD 请求或带有绝对 URL 的请求上发送。</p>
 
     <div class="docs-callout docs-callout-helpful">
-      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="a63rurv1xupi2dnqrxalxvsb0">为什么不保护 GET 请求？</h3>
-      <p data-ng_translator_product="100" data-ng_translator_ref_id="6u02z4heoqaahcp2un3tyj5ed">CSRF 保护只需要用于可以更改后端状态的请求。由于其性质，CSRF 攻击跨域边界，Web 的 
-<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank">同源策略</a> 将阻止攻击页面检索经过身份验证的 GET 请求的结果。</p>
+      <h3>为什么不保护 GET 请求？</h3>
+      <p>只有对于那些可以在后端更改状态的请求，才需要 CSRF 保护。CSRF 攻击本质上会跨越域边界，并且 Web 的 <a href="https://developer.mozilla.org/docs/Web/Security/Same-origin_policy" target="_blank">同源策略</a> 将阻止攻击页面检索已通过身份验证的 GET 请求的结果。</p>
 
     </div>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="4tstmusfdcahr2qttgxax8fg6">要利用这一点，你的服务器需要在页面加载或第一次 GET 请求时，在一个 JavaScript 可读取的会话 Cookie 中设置名为 
-<code>XSRF-TOKEN</code> 的令牌。在后续请求中，服务器可以验证 Cookie 是否与 
-<code>X-XSRF-TOKEN</code> HTTP 标头匹配，从而确保只有在你的域上运行的代码才能发送请求。此令牌必须对每个用户唯一，并且必须由服务器验证；这可以防止客户端伪造自己的令牌。将令牌设置为你站点的身份验证 Cookie 的摘要，并添加盐以增加安全性。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="claya94hd1mz406slxkaobnfb">为了防止多个 Angular 应用共享同一个域名或子域时出现冲突，要给每个应用分配一个唯一的 cookie 名称。</p>
+    <p>为了利用这一点，你的服务器需要在页面加载或首次 GET 请求时，在名为 <code>XSRF-TOKEN</code> 的 JavaScript 可读会话 Cookie 中设置一个令牌。在后续请求中，服务器可以验证 Cookie 是否与 <code>X-XSRF-TOKEN</code> HTTP 标头匹配，从而确信只有在你的域上运行的代码才可能发送此请求。令牌对于每个用户都必须是唯一的，并且必须可由服务器验证；这可以防止客户端自行生成令牌。将令牌设置为你的站点的身份验证 Cookie 的摘要，并带有一个盐值以增加安全性。</p>
+<p>为了防止在多个 Angular 应用共享同一域或子域的环境中发生冲突，请为每个应用提供唯一的 Cookie 名称。</p>
 
     <div class="docs-callout docs-callout-important">
-      <h3 data-ng_translator_product="100" data-ng_translator_ref_id="9y93gqi8kmzi38skaeb32yydg">HttpClient 仅支持 XSRF 保护机制的客户端部分</h3>
-      <p data-ng_translator_product="100" data-ng_translator_ref_id="5h2g7d8f05lrzpyr1iu93cj8q">你的后端服务必须配置为为你的页面设置 Cookie，并验证所有合格请求中是否存在此标头。如果未能这样做，将使 Angular 的默认保护失效。</p>
+      <h3>HttpClient 仅支持 XSRF 保护方案的客户端部分</h3>
+      <p>你的后端服务必须配置为为你的页面设置 Cookie，并验证标头是否存在于所有符合条件的请求中。如果不这样做，Angular 的默认保护将失效。</p>
 
     </div>
     
   <h3 id="configure-custom-cookie-header-names">
-    <a href="#configure-custom-cookie-header-names" class="docs-anchor" tabindex="-1" aria-label="Link to Configure custom cookie/header names" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="68mssphxsumko4pwjlf7cwt2m">配置自定义 Cookie 名/标头名</a>
+    <a href="#configure-custom-cookie-header-names" class="docs-anchor" tabindex="-1" aria-label="Link to Configure custom cookie/header names">配置自定义 Cookie/标头名称</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="ebyxhgks8h56uf6yb25dys40i">如果你的后端服务使用不同名称的 XSRF 令牌 Cookie 或标头，可以使用 
-<code>withXsrfConfiguration</code> 来覆盖默认值。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="akpzhhp62p4lclkgwu12o3l8o">将其添加到 
-<code>provideHttpClient</code> 调用中，如下所示：</p>
+  <p>如果你的后端服务对 XSRF 令牌 Cookie 或标头使用了不同的名称，请使用 <code>withXsrfConfiguration</code> 来覆盖默认值。</p>
+<p>如下所示，将其添加到 <code>provideHttpClient</code> 调用中：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideHttpClient</span>(</div><div class="hljs-ln-line">      <span class="hljs-title function_">withXsrfConfiguration</span>({</div><div class="hljs-ln-line">        <span class="hljs-attr">cookieName</span>: <span class="hljs-string">'CUSTOM_XSRF_TOKEN'</span>,</div><div class="hljs-ln-line">        <span class="hljs-attr">headerName</span>: <span class="hljs-string">'X-Custom-Xsrf-Header'</span>,</div><div class="hljs-ln-line">      }),</div><div class="hljs-ln-line">    ),</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">};</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> appConfig</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ApplicationConfig</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  providers: [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    provideHttpClient</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      withXsrfConfiguration</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        cookieName: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'CUSTOM_XSRF_TOKEN'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        headerName: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'X-Custom-Xsrf-Header'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      }),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    ),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  ]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">};</span></span></code></pre>
     </pre>
   </div>
   <h3 id="disabling-xsrf-protection">
-    <a href="#disabling-xsrf-protection" class="docs-anchor" tabindex="-1" aria-label="Link to Disabling XSRF protection" data-ng_translator_product="100" data-ng_translator_ref_id="cylxzf63lsyvvouhn14nr5z40">禁用 XSRF 保护</a>
+    <a href="#disabling-xsrf-protection" class="docs-anchor" tabindex="-1" aria-label="Link to Disabling XSRF protection">禁用 XSRF 保护</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="ccopssswyjuefn0xkifhw8bez">如果内置的 XSRF 保护机制不适用于你的应用，可以使用 
-<code>withNoXsrfProtection</code> 特性来禁用它：</p>
+  <p>如果内置的 XSRF 保护机制不适用于你的应用，你可以使用 <code>withNoXsrfProtection</code> 特性来禁用它：</p>
 <div class="docs-code">
     
-    <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideHttpClient</span>(</div><div class="hljs-ln-line">      <span class="hljs-title function_">withNoXsrfProtection</span>(),</div><div class="hljs-ln-line">    ),</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">};</div></code>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> appConfig</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ApplicationConfig</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  providers: [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    provideHttpClient</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      withNoXsrfProtection</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    ),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  ]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">};</span></span></code></pre>
     </pre>
   </div>

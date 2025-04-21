@@ -6,18 +6,19 @@
           
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5w5kqvgmi0o4l4z6rjt7db87s">模板语法</h1>
+    <h1 tabindex="-1">模板语法</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/templates/overview.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
 
-          <p data-ng_translator_product="100" data-ng_translator_ref_id="4aoz4kdpcmm2k82si8us4398n"><!-- markdownlint-disable-line --> 在 Angular 中，*模板*是一块 HTML 代码。 在模板中使用特殊语法，可以利用 Angular 的许多功能。</p>
+          <p><!-- markdownlint-disable-line -->在 Angular 中，模板是一段 HTML。
+在模板中使用特殊的语法可以充分利用 Angular 的许多特性。</p>
         </div>
 
         <!-- illustration -->
-        <svg width="207" height="243" viewbox="0 0 207 243" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="207" height="243" viewBox="0 0 207 243" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g>
     <path d="M175.344 68.2852H32.0263C29.1795 68.2852 26.8717 70.5929 26.8717 73.4398V162.375C26.8717 165.222 29.1795 167.53 32.0263 167.53H175.344C178.191 167.53 180.499 165.222 180.499 162.375V73.4398C180.499 70.5929 178.191 68.2852 175.344 68.2852Z" fill="var(--senary-contrast)" style="mix-blend-mode: multiply; transition: opacity 0.3s ease;" opacity=".7" />
   </g>
@@ -51,95 +52,96 @@
     </div>
     
     <div class="docs-alert docs-alert-tip">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="a8twkovfbv41n9ikztn7h9d60"><strong>提示:</strong> 在深入阅读这份详尽指南之前，请查看 Angular 的
-<a href="essentials/rendering-dynamic-templates">Essentials</a>。</p>
+    <p><strong>提示：</strong>在深入学习本综合指南之前，请查看 Angular 的<a href="essentials/templates">要点</a>。</p>
 
     </div>
-    <!--todo: Do we still need the following section? It seems more relevant to those coming from AngularJS, which is now 7 versions ago. -->
-<!-- You may be familiar with the component/template duality from your experience with model-view-controller (MVC) or model-view-viewmodel (MVVM).
-In Angular, the component plays the part of the controller/viewmodel, and the template represents the view. -->
+    <p>每个 Angular 组件都有一个<strong>模板</strong>，用于定义组件渲染到页面上的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model" target="_blank">DOM</a>。通过使用模板，Angular 能够在数据更改时自动保持页面最新。</p>
+<p>模板通常位于 <code>*.component.ts</code> 文件的 <code>template</code> 属性或 <code>*.component.html</code> 文件中。要了解更多信息，请查看<a href="/guide/components">深入组件指南</a>。</p>
 
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5lillkwfgvbodjcsfogox31km">应用程序中的每个 Angular 模板都是一块 HTML，你可以将其包含在浏览器显示的页面中。Angular 中的 HTML 模板与常规 HTML 一样，可以在浏览器中渲染视图或用户界面，但功能要多得多。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5jnoa87ru062b68f7yfqibl7e">使用 Angular CLI 生成 Angular 应用时，<code>app.component.html</code> 文件是一个包含占位符 HTML 的默认模板。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="654iy415b0lm36o3f7mlh1fgp">本模板语法指南向你展示了如何通过协调类和模板之间的数据来控制 UX/UI。</p>
-
-  <h2 id="empower-your-html">
-    <a href="#empower-your-html" class="docs-anchor" tabindex="-1" aria-label="Link to Empower your HTML" data-ng_translator_product="100" data-ng_translator_ref_id="223lu7dwlgq6jh2t13r6mxywe">为你的 HTML 赋能</a>
+  <h2 id="how-do-templates-work">
+    <a href="#how-do-templates-work" class="docs-anchor" tabindex="-1" aria-label="Link to How do templates work?">模板是如何工作的？</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="30fhvq0fb6xwcthepl7q7m6wf">通过在模板中使用特殊的 Angular 语法，扩展你的应用程序的HTML词汇。 例如，Angular 可以帮助你通过内置的模板函数、变量、事件监听和数据绑定动态获取和设置DOM（文档对象模型）的值。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3cvteh5kkgspqsq428qhuikay">几乎所有的 HTML 语法都是有效的模板语法。但是，由于 Angular 模板只是整个网页的一部分，而不是整个网页，因此你不需要包含诸如 <code>&lt;html&gt;</code>，<code>&lt;body&gt;</code> 或 <code>&lt;base&gt;</code> 元素。这样你可以专注于正在开发的那部分页面。</p>
+  <p>模板基于 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">HTML</a> 语法，并具有其他特性，例如内置模板函数、数据绑定、事件监听、变量等等。</p>
+<p>Angular 将模板编译成 JavaScript，以便建立对你的应用的内部理解。这样做的好处之一是 Angular 会自动将内置的渲染优化应用于你的应用。</p>
 
-    <div class="docs-alert docs-alert-important">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="198mreahr73ng94ck81eh0bbn"><strong>重要:</strong> 为了消除脚本注入攻击的风险，Angular 不支持在模板中使用
-<code>&lt;script&gt;</code>元素。 Angular 会忽略
-<code>&lt;script&gt;</code>标签，并在浏览器控制台输出警告。 欲了解更多信息，请查看
-<a href="best-practices/security">安全</a>页面。</p>
+  <h3 id="differences-from-standard-html">
+    <a href="#differences-from-standard-html" class="docs-anchor" tabindex="-1" aria-label="Link to Differences from standard HTML">与标准 HTML 的差异</a>
+  </h3>
+  <p>模板和标准 HTML 语法之间的一些差异包括：</p>
 
-    </div>
-    
-  <h2 id="more-on-template-syntax">
-    <a href="#more-on-template-syntax" class="docs-anchor" tabindex="-1" aria-label="Link to More on template syntax" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="17gbqei8x3zozb5w3xf0z2qfu">关于模板语法的更多信息</a>
+  <ul class="docs-list">
+    <li>模板源码中的注释不包含在渲染后的输出中</li>
+<li>组件和指令元素可以是自闭合的（例如，<code>&lt;UserProfile /&gt;</code>）</li>
+<li>具有某些字符（即 <code>[]</code>、<code>()</code> 等）的 Attribute 对 Angular 具有特殊含义。有关更多信息，请参阅<a href="guide/templates/binding">绑定文档</a>和<a href="guide/templates/event-listeners">添加事件监听器文档</a>。</li>
+<li><code>@</code> 字符对于 Angular 具有特殊含义，用于向模板添加动态行为，例如<a href="guide/templates/control-flow">控制块</a>。你可以通过将其转义为 HTML 实体代码（<code>&amp;commat;</code> 或 <code>&amp;#64;</code>）来包含字面量 <code>@</code> 字符。</li>
+<li>Angular 会忽略和折叠不必要的空白字符。有关更多详细信息，请参阅<a href="guide/templates/whitespace">模板中的空白</a>。</li>
+<li>Angular 可能会向页面添加注释节点，作为动态内容的占位符，但开发人员可以忽略这些注释节点。</li>
+
+  </ul>
+  <p>此外，虽然大多数 HTML 语法都是有效的模板语法，但 Angular 不支持模板中的 <code>&lt;script&gt;</code> 元素。有关更多信息，请参阅<a href="best-practices/security">安全性</a>页面。</p>
+
+  <h2 id="whats-next">
+    <a href="#whats-next" class="docs-anchor" tabindex="-1" aria-label="Link to What's next?">下一步是什么？</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1oolgylns9kaynftarwog49tq">你可能还对下列内容感兴趣：</p>
+  <p>你可能对以下内容也感兴趣：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="349gxhvoq0786v2eduuongf1f">主题</th>
-<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+<th align="left">主题</th>
+<th align="left">详情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
-<td align="left"><a href="guide/templates/interpolation" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5dwlx3euzg7g5mhwhve51wn2p">插值</a></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3vjcdz7kopgbpz27k22y8cyyf">学习如何在 HTML 中使用插值和表达式。</td>
+<td align="left"><a href="guide/templates/binding">绑定动态文本、属性（Property）和 Attribute</a></td>
+<td align="left">将动态数据绑定到文本、属性（Property）和 Attribute。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/template-statements" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a3h6h64ogldnmi7qf3gggut7p">模板语句</a></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8o8xzyo58w2rlfmz1rtsjy3wt">在你的模板中响应事件。</td>
+<td align="left"><a href="guide/templates/event-listeners">添加事件监听器</a></td>
+<td align="left">响应模板中的事件。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/binding" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bhz87804xt0nm2nf4oqx6i31t">绑定语法</a></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5p00kiuroz44vfma03jkagg0e">使用绑定来协调应用中的值。</td>
+<td align="left"><a href="guide/templates/two-way-binding">双向绑定</a></td>
+<td align="left">同时绑定一个值并传播更改。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/property-binding" data-ng_translator_product="100" data-ng_translator_ref_id="dhtlys4gb8e2hkqb2wclwgnoe">property 绑定</a></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="3lodvrpf2zejg5c6i9prrq9sf">设置目标元素的属性（Property）或指令的 
-<code>@Input()</code> 装饰器。</td>
+<td align="left"><a href="guide/templates/control-flow">控制块</a></td>
+<td align="left">有条件地显示、隐藏和重复元素。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/attribute-binding" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cdkioe1e5iviiy0ltbah7sawc">Attribute、类和样式绑定</a></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="eyjlq084genf0qu7vi4h8dt7d">设置属性、类和样式的值。</td>
+<td align="left"><a href="guide/templates/pipes">管道</a></td>
+<td align="left">声明式地转换数据。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/event-binding" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ehfop80m9e0igm4pklg35r7g8">事件绑定</a></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="31snv82api7n7mdawk477hog">监听 HTML 事件。</td>
+<td align="left"><a href="guide/templates/ng-content">使用 ng-content 开槽子内容</a></td>
+<td align="left">控制组件如何渲染内容。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/two-way-binding" data-ng_translator_product="100" data-ng_translator_ref_id="4xy6wmoza9k1s7w2doa894ml4">双向绑定</a></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="6h82mn5mpdksorg4nxnsr6tos">在类和其模板之间共享数据。</td>
+<td align="left"><a href="guide/templates/ng-template">使用 ng-template 创建模板片段</a></td>
+<td align="left">声明一个模板片段。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/directives" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="caiz9ki6ffyzkmf5op1f69ql7">内置指令</a></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bt5hcpthajspu4419nv7p1c8a">监听并修改 HTML 的行为和布局。</td>
+<td align="left"><a href="guide/templates/ng-container">使用 ng-container 对元素进行分组</a></td>
+<td align="left">将多个元素组合在一起或标记一个用于渲染的位置。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/reference-variables" data-ng_translator_product="100" data-ng_translator_ref_id="8uvan8lsq0xovcq0yu20ntf94">模板引用变量</a></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="59senwuxsk427e1wleg3ilziw">在模板中使用特殊变量引用某个 DOM 元素。</td>
+<td align="left"><a href="guide/templates/variables">模板中的变量</a></td>
+<td align="left">了解变量声明。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/components/inputs" data-ng_translator_product="100" data-ng_translator_ref_id="e41z1ta8j4fn0xhay00whz365">输入</a></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5k49tekmwj64vfcwul7opzry0">接受输入属性中的数据</td>
+<td align="left"><a href="guide/templates/defer">使用 @defer 延迟加载</a></td>
+<td align="left">使用 <code>@defer</code> 创建可延迟加载的视图。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/components/outputs" data-ng_translator_product="100" data-ng_translator_ref_id="bbi241e8i5tgokdc67ew3rkcc">输出</a></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="xouzcpcvvkdl1hgqw8ujmosu">使用输出定义自定义事件</td>
+<td align="left"><a href="guide/templates/expression-syntax">表达式语法</a></td>
+<td align="left">了解 Angular 表达式和标准 JavaScript 之间的异同。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/svg-in-templates" data-ng_translator_product="100" data-ng_translator_ref_id="3ni5n7riuwhfwzyv7n7jypzdr">模板中的 SVG</a></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="dh0ptdiuc5kji69u0bwp82afy">动态生成交互图形。</td>
+<td align="left"><a href="guide/templates/whitespace">模板中的空白</a></td>
+<td align="left">了解 Angular 如何处理空白。</td>
 </tr>
 
       </tbody>
