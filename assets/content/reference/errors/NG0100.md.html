@@ -4,7 +4,7 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">检查后表达式已更改</h1>
+    <h1 tabindex="-1">檢查後表示式已更改</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0100.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
@@ -15,14 +15,14 @@
     <div class="docs-video-container">
       <iframe class="docs-video" src="https://www.youtube.com/embed/O47uUnJjbJc" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless title="Video player"></iframe>
     </div>
-    <p>当在变更检测完成后表达式值被更改时，Angular 抛出一个 <code>ExpressionChangedAfterItHasBeenCheckedError</code> 错误。Angular 只在开发模式下抛出这个错误。</p>
-<p>在开发模式下，Angular 在每次变更检测运行后执行一次额外的检查，以确保绑定没有更改。这可以捕获视图处于不一致状态的错误。例如，如果一个方法或 getter 每次被调用时返回不同的值，或者如果一个子组件更改了其父组件上的值，则可能发生这种情况。如果发生任何一种情况，则表明变更检测不稳定。Angular 抛出此错误以确保数据始终在视图中正确反映，从而防止不稳定的 UI 行为或可能的无限循环。</p>
-<p>当您添加了模板表达式或已开始实现生命周期钩子（如 <code>ngAfterViewInit</code> 或 <code>ngOnChanges</code>）时，通常会发生此错误。在处理加载状态和异步操作时，或者当子组件更改其父组件绑定时，也很常见。</p>
+    <p>當在變更檢測完成後表示式值被更改時，Angular 丟擲一個 <code>ExpressionChangedAfterItHasBeenCheckedError</code> 錯誤。Angular 只在開發模式下丟擲這個錯誤。</p>
+<p>在開發模式下，Angular 在每次變更檢測執行後執行一次額外的檢查，以確保繫結沒有更改。這可以捕獲檢視處於不一致狀態的錯誤。例如，如果一個方法或 getter 每次被呼叫時回傳不同的值，或者如果一個子元件更改了其父元件上的值，則可能發生這種情況。如果發生任何一種情況，則表明變更檢測不穩定。Angular 丟擲此錯誤以確保資料始終在檢視中正確反映，從而防止不穩定的 UI 行為或可能的無限迴圈。</p>
+<p>當您新增了樣板表示式或已開始實現生命週期鉤子（如 <code>ngAfterViewInit</code> 或 <code>ngOnChanges</code>）時，通常會發生此錯誤。在處理載入狀態和非同步操作時，或者當子元件更改其父元件繫結時，也很常見。</p>
 
   <h2 id="debugging-the-error">
-    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error">调试错误</a>
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error">除錯錯誤</a>
   </h2>
-  <p>CLI 生成的<a href="https://developer.mozilla.org/docs/Tools/Debugger/How_to/Use_a_source_map" target="_blank">源码映射</a>在调试时非常有用。向上导航调用堆栈，直到找到错误中显示的值已更改的模板表达式。</p>
-<p>确保在运行变更检测后，模板中的绑定没有任何更改。这通常意味着重构以针对您的用例使用正确的组件生命周期钩子。如果问题存在于 <code>ngAfterViewInit</code> 中，建议的解决方案是使用构造函数或 <code>ngOnInit</code> 来设置初始值，或者为其他值绑定使用 <code>ngAfterContentInit</code>。</p>
-<p>如果您在视图中绑定到方法，请确保调用不会更新模板中的任何其他绑定。</p>
-<p>阅读<a href="https://angularindepth.com/posts/1001/everything-you-need-to-know-about-the-expressionchangedafterithasbeencheckederror-error" target="_blank">“关于 "ExpressionChangedAfterItHasBeenCheckedError" 错误，你需要知道的一切”</a>，详细了解哪种解决方案适合您，并在<a href="https://blog.angular-university.io/angular-debugging" target="_blank">“Angular 调试 "检查后表达式已更改"：简单解释（和修复）”</a>中了解为什么这很有用。</p>
+  <p>CLI 生成的<a href="https://developer.mozilla.org/docs/Tools/Debugger/How_to/Use_a_source_map" target="_blank">原始碼對映</a>在除錯時非常有用。向上導向呼叫堆疊，直到找到錯誤中顯示的值已更改的樣板表示式。</p>
+<p>確保在執行變更檢測後，樣板中的繫結沒有任何更改。這通常意味著重構以針對您的用例使用正確的元件生命週期鉤子。如果問題存在於 <code>ngAfterViewInit</code> 中，建議的解決方案是使用建構式函式或 <code>ngOnInit</code> 來設定初始值，或者為其他值繫結使用 <code>ngAfterContentInit</code>。</p>
+<p>如果您在檢視中繫結到方法，請確保呼叫不會更新樣板中的任何其他繫結。</p>
+<p>閱讀<a href="https://angularindepth.com/posts/1001/everything-you-need-to-know-about-the-expressionchangedafterithasbeencheckederror-error" target="_blank">『關於 "ExpressionChangedAfterItHasBeenCheckedError" 錯誤，你需要知道的一切』</a>，詳細瞭解哪種解決方案適合您，並在<a href="https://blog.angular-university.io/angular-debugging" target="_blank">『Angular 除錯 "檢查後表示式已更改"：簡單解釋（和修復）』</a>中瞭解為什麼這很有用。</p>

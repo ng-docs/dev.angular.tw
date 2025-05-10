@@ -4,7 +4,7 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="3q4t2vob8qvc0bj45iceb1d8">可延迟视图</h1>
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="3q4t2vob8qvc0bj45iceb1d8">可延遲檢視</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/defer.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
@@ -13,111 +13,111 @@
     </header>
     
   <h2 id="overview">
-    <a href="#overview" class="docs-anchor" tabindex="-1" aria-label="Link to Overview" data-ng_translator_product="100" data-ng_translator_ref_id="3ivgu86loww6mg4fq1brezlnd">概览</a>
+    <a href="#overview" class="docs-anchor" tabindex="-1" aria-label="Link to Overview" data-ng_translator_product="100" data-ng_translator_ref_id="3ivgu86loww6mg4fq1brezlnd">概覽</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="bpye10z5irblavwvewablklhl">可延迟视图可以在组件模板中使用，以延迟加载该模板中的某些依赖项。这些依赖项包括组件、指令和管道，以及任何相关的 CSS。要使用此特性，你可以声明性地将模板的一部分包裹在一个 
-<code>@defer</code> 控制块中，指定加载条件。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="cgjo4r93vj19xips92bx6nb3v">可延迟视图支持一系列的 
-<a href="guide/defer#triggers">触发器</a>、
-<a href="guide/defer#prefetching">预取</a>，以及几个用于 
-<a href="guide/defer#placeholder">占位</a>、
-<a href="guide/defer#loading">加载</a>和 
-<a href="guide/defer#error">错误</a>状态管理的子块。你还可以使用 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bpye10z5irblavwvewablklhl">可延遲檢視可以在元件樣板中使用，以延遲載入該樣板中的某些依賴項。這些依賴項包括元件、指令和通道，以及任何相關的 CSS。要使用此屬性，你可以宣告性地將樣板的一部分包裹在一個 
+<code>@defer</code> 控制塊中，指定載入條件。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cgjo4r93vj19xips92bx6nb3v">可延遲檢視支援一系列的 
+<a href="guide/defer#triggers">觸發器</a>、
+<a href="guide/defer#prefetching">預取</a>，以及幾個用於 
+<a href="guide/defer#placeholder">佔位</a>、
+<a href="guide/defer#loading">載入</a>和 
+<a href="guide/defer#error">錯誤</a>狀態管理的子區塊。你還可以使用 
 <a href="guide/defer#when"><code>when</code></a> 和 
-<a href="guide/defer#prefetching"><code>prefetch when</code></a> 创建自定义条件。</p>
+<a href="guide/defer#prefetching"><code>prefetch when</code></a> 建立自定義條件。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">large-component</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h2 id="why-use-deferrable-views">
-    <a href="#why-use-deferrable-views" class="docs-anchor" tabindex="-1" aria-label="Link to Why use Deferrable Views?" data-ng_translator_product="100" data-ng_translator_ref_id="eqw38jgvw2xoyqoitjjbfww7l">为什么使用可延迟视图？</a>
+    <a href="#why-use-deferrable-views" class="docs-anchor" tabindex="-1" aria-label="Link to Why use Deferrable Views?" data-ng_translator_product="100" data-ng_translator_ref_id="eqw38jgvw2xoyqoitjjbfww7l">為什麼使用可延遲檢視？</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="au9ln6o6se7e21u4xyy3uejai">可延迟视图，也称为 
-<code>@defer</code> 控制块，是一种强大的工具，可以用来减少应用的初始捆绑包大小，或延迟加载那些可能直到以后也不会加载的重量级组件。这应该会带来更快的初始加载速度，并改善你的核心网页指标（CWV）结果。延迟加载某些组件尤其能改善最大内容绘制（LCP）和首字节时间（TTFB）。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="au9ln6o6se7e21u4xyy3uejai">可延遲檢視，也稱為 
+<code>@defer</code> 控制區塊，是一種強大的工具，可以用來減少應用的初始捆綁包大小，或延遲載入那些可能直到以後也不會載入的重量級元件。這應該會帶來更快的初始載入速度，並改善你的核心網頁指標（CWV）結果。延遲載入某些元件尤其能改善最大內容繪製（LCP）和首位元組時間（TTFB）。</p>
 
     <div class="docs-alert docs-alert-note">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="45pa0ez7dhgu8b50ia6dqtdus"><strong>注意：</strong>强烈建议任何延迟加载的组件（可能在依赖项加载后导致布局移动）都放在折叠线以下，或者用户尚未可见的地方。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="45pa0ez7dhgu8b50ia6dqtdus"><strong>注意：</strong>強烈建議任何延遲載入的元件（可能在依賴項載入後導致佈局移動）都放在摺疊線以下，或者使用者尚未可見的地方。</p>
 
     </div>
     
   <h2 id="which-dependencies-are-defer-loadable">
-    <a href="#which-dependencies-are-defer-loadable" class="docs-anchor" tabindex="-1" aria-label="Link to Which dependencies are defer-loadable?" data-ng_translator_product="100" data-ng_translator_ref_id="av5807mkv3w8igny4fjzbbew2">哪些依赖项是可延迟加载的？</a>
+    <a href="#which-dependencies-are-defer-loadable" class="docs-anchor" tabindex="-1" aria-label="Link to Which dependencies are defer-loadable?" data-ng_translator_product="100" data-ng_translator_ref_id="av5807mkv3w8igny4fjzbbew2">哪些依賴項是可延遲載入的？</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="8ng7s52qwoemljyevalyqncqc">为了使 
-<code>@defer</code> 控制块内的依赖项能够延迟加载，它们需要满足两个条件：</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8ng7s52qwoemljyevalyqncqc">為了使 
+<code>@defer</code> 控制區塊內的依賴項能夠延遲載入，它們需要滿足兩個條件：</p>
 
     <ol class="docs-ordered-list">
-      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="d6qlawwhvtunapjlal8co8fl4">它们必须是独立的。非独立的依赖项无法延迟加载，即使在 
-<code>@defer</code> 控制块内也会被急性加载。</p>
+      <li><p data-ng_translator_product="100" data-ng_translator_ref_id="d6qlawwhvtunapjlal8co8fl4">它們必須是獨立的。非獨立的依賴項無法延遲載入，即使在 
+<code>@defer</code> 控制區塊內也會被急性載入。</p>
 </li>
-<li><p data-ng_translator_product="100" data-ng_translator_ref_id="2t97qelcj0z2eyi6367xeidjn">它们不能直接从同一个文件（在 
-<code>@defer</code> 控制块外部）引用；这包括 ViewChild 查询。</p>
+<li><p data-ng_translator_product="100" data-ng_translator_ref_id="2t97qelcj0z2eyi6367xeidjn">它們不能直接從同一個檔案（在 
+<code>@defer</code> 控制區塊外部）引用；這包括 ViewChild 查詢。</p>
 </li>
 
     </ol>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="3q43pbzuijfspeey0hfsvvc4x">在延迟加载块中使用的组件、指令和管道的传递性依赖项可以是独立的，也可以是基于 NgModule 的，都会被延迟加载。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="3q43pbzuijfspeey0hfsvvc4x">在延遲載入塊中使用的元件、指令和通道的傳遞性依賴項可以是獨立的，也可以是基於 NgModule 的，都會被延遲載入。</p>
 
   <h2 id="blocks">
-    <a href="#blocks" class="docs-anchor" tabindex="-1" aria-label="Link to Blocks" data-ng_translator_product="100" data-ng_translator_ref_id="a5xwaqbi0e61umqg5kpxpysa">控制块</a>
+    <a href="#blocks" class="docs-anchor" tabindex="-1" aria-label="Link to Blocks" data-ng_translator_product="100" data-ng_translator_ref_id="a5xwaqbi0e61umqg5kpxpysa">控制區塊</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="eol78aln4dyspultxk7we35u1"><code>@defer</code> 控制块有几个子块，允许你优雅地处理延迟加载过程中的不同阶段。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="eol78aln4dyspultxk7we35u1"><code>@defer</code> 控制區塊有幾個子區塊，允許你優雅地處理延遲載入過程中的不同階段。</p>
 
   <h3 id="defer">
     <a href="#defer" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@defer</code>"><code>@defer</code></a>
   </h3>
   <p data-ng_translator_product="100" data-ng_translator_ref_id="1dkyhho2tmy5qx3y250hmha2p">主 
-<code>@defer</code> 控制块的内容是延迟加载的内容部分。它不会在初始加载时渲染，所有内容将在满足指定的 
-<a href="guide/defer#triggers">触发器</a> 或 
-<code>when</code> 条件并获取依赖项后才会出现。默认情况下，
-<code>@defer</code> 控制块在浏览器状态变为 
-<a href="guide/defer#on-idle">空闲</a> 时触发。</p>
+<code>@defer</code> 控制區塊的內容是延遲載入的內容部分。它不會在初始載入時渲染，所有內容將在滿足指定的 
+<a href="guide/defer#triggers">觸發器</a> 或 
+<code>when</code> 條件並獲取依賴項後才會出現。預設情況下，
+<code>@defer</code> 控制區塊在瀏覽器狀態變為 
+<a href="guide/defer#on-idle">空閒</a> 時觸發。</p>
 
   <h3 id="placeholder">
     <a href="#placeholder" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@placeholder</code>"><code>@placeholder</code></a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="b7e02pr8wtu4ji9rxsnapxcjb">默认情况下，延迟加载控制块在触发之前不渲染任何内容。
-<code>@placeholder</code> 是一个可选的块，用于声明在延迟加载控制块触发之前要显示的内容。一旦加载完成，占位符内容将被主内容替换。你可以在占位符部分使用任何内容，包括纯 HTML、组件、指令和管道；但是请记住，占位符块的依赖项是急性加载的。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="b7e02pr8wtu4ji9rxsnapxcjb">預設情況下，延遲載入控制區塊在觸發之前不渲染任何內容。
+<code>@placeholder</code> 是一個可選的區塊，用於宣告在延遲載入控制區塊觸發之前要顯示的內容。一旦載入完成，佔位符內容將被主內容替換。你可以在佔位符部分使用任何內容，包括純 HTML、元件、指令和通道；但是請記住，佔位符區塊的依賴項是急性載入的。</p>
 
     <div class="docs-alert docs-alert-note">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="6co4njdx06up68xjwk3crvy6f"><strong>注意：</strong>为了获得最佳的用户体验，你应该始终指定一个 
-<code>@placeholder</code> 块。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="6co4njdx06up68xjwk3crvy6f"><strong>注意：</strong>為了獲得最佳的使用者體驗，你應該始終指定一個 
+<code>@placeholder</code> 區塊。</p>
 
     </div>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="d859cez6bu3slqmve207e3epf"><code>@placeholder</code> 控制块接受一个可选参数以指定此占位符应显示的
-最小时间。此 
-<code>minimum</code> 参数以毫秒（ms）或秒（s）为时间单位指定。为防止在延迟依赖项快速获取的情况下占位符内容快速闪烁，设置了此参数。
-<code>@placeholder</code> 控制块在完成其初始渲染后开始计算 
-<code>minimum</code> 计时器。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="d859cez6bu3slqmve207e3epf"><code>@placeholder</code> 控制區塊接受一個可選引數以指定此佔位符應顯示的
+最小時間。此 
+<code>minimum</code> 引數以毫秒（ms）或秒（s）為時間單位指定。為防止在延遲依賴項快速獲取的情況下佔位符內容快速閃爍，設定了此引數。
+<code>@placeholder</code> 控制區塊在完成其初始渲染後開始計算 
+<code>minimum</code> 計時器。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">large-component</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder (minimum 500ms) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Placeholder content<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
     <div class="docs-alert docs-alert-note">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="as7rv9d9r5cgfmg3i2g5cndqy"><strong>注意：</strong>某些触发器可能需要存在 
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="as7rv9d9r5cgfmg3i2g5cndqy"><strong>注意：</strong>某些觸發器可能需要存在 
 <code>@placeholder</code> 或 
-<a href="guide/templates/reference-variables">模板引用变量</a> 才能工作。有关详细信息，请参阅 
-<a href="guide/defer#triggers">触发器</a> 部分。</p>
+<a href="guide/templates/reference-variables">樣板引用變數</a> 才能工作。有關詳細訊息，請參閱 
+<a href="guide/defer#triggers">觸發器</a> 部分。</p>
 
     </div>
     
   <h3 id="loading">
     <a href="#loading" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@loading</code>"><code>@loading</code></a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="cae7beasxbp792afg0ixyggtq"><code>@loading</code> 控制块是一个可选控制块，允许你声明在加载任何延迟依赖项期间显示的内容。其依赖项被急性加载（与 
-<code>@placeholder</code> 类似）。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="20yswa0abeyji0blgaahv2pxn">例如，你可以显示一个加载动画。一旦触发加载，
-<code>@loading</code> 控制块将替换 
-<code>@placeholder</code> 控制块。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="cae7beasxbp792afg0ixyggtq"><code>@loading</code> 控制區塊是一個可選控制區塊，允許你宣告在載入任何延遲依賴項期間顯示的內容。其依賴項被急性載入（與 
+<code>@placeholder</code> 類似）。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="20yswa0abeyji0blgaahv2pxn">例如，你可以顯示一個載入動畫。一旦觸發載入，
+<code>@loading</code> 控制區塊將替換 
+<code>@placeholder</code> 控制區塊。</p>
 <p data-ng_translator_product="100" data-ng_translator_ref_id="7ilnvhe2j6beujcwg1xqrvyvd">此 
-<code>@loading</code> 控制块接受两个可选参数，用于指定此占位符应显示的最短时间和在加载开始后显示加载模板前等待的时间。
+<code>@loading</code> 控制區塊接受兩個可選引數，用於指定此佔位符應顯示的最短時間和在載入開始後顯示載入樣板前等待的時間。
 <code>minimum</code> 和 
-<code>after</code> 参数以毫秒（ms）或秒（s）为时间增量进行指定。与 
-<code>@placeholder</code> 类似，这些参数存在是为了防止在延迟依赖项被快速获取的情况下内容快速闪烁。
-<code>@loading</code> 控制块的 
+<code>after</code> 引數以毫秒（ms）或秒（s）為時間增量進行指定。與 
+<code>@placeholder</code> 類似，這些引數存在是為了防止在延遲依賴項被快速獲取的情況下內容快速閃爍。
+<code>@loading</code> 控制區塊的 
 <code>minimum</code> 和 
-<code>after</code> 计时器在加载触发后立即开始。</p>
+<code>after</code> 計時器在載入觸發後立即開始。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">large-component</span> /&gt;</span></div><div class="hljs-ln-line">} @loading (after 100ms; minimum 1s) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"loading..."</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"loading.gif"</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
@@ -126,33 +126,33 @@
   <h3 id="error">
     <a href="#error" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@error</code>"><code>@error</code></a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="70ekio5p4v4yxik0t1va0z91m"><code>@error</code> 控制块允许你声明在延迟加载失败时显示的内容。与 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="70ekio5p4v4yxik0t1va0z91m"><code>@error</code> 控制區塊允許你宣告在延遲載入失敗時顯示的內容。與 
 <code>@placeholder</code> 和 
-<code>@loading</code> 类似，
-<code>@error</code> 控制块的依赖项被急性加载。
-<code>@error</code> 控制块是可选的。</p>
+<code>@loading</code> 類似，
+<code>@error</code> 控制區塊的依賴項被急性載入。
+<code>@error</code> 控制區塊是可選的。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @error {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Failed to load the calendar<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h2 id="triggers">
-    <a href="#triggers" class="docs-anchor" tabindex="-1" aria-label="Link to Triggers" data-ng_translator_product="100" data-ng_translator_ref_id="7vgcf722ylvmkj1nb28q7j5wh">触发器</a>
+    <a href="#triggers" class="docs-anchor" tabindex="-1" aria-label="Link to Triggers" data-ng_translator_product="100" data-ng_translator_ref_id="7vgcf722ylvmkj1nb28q7j5wh">觸發器</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="6bnwz8z0hno3l7tk6ow3wh0ym">当 
-<code>@defer</code> 控制块被触发时，它会用延迟加载的内容替换占位符内容。有两种配置此替换何时触发的选项：
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6bnwz8z0hno3l7tk6ow3wh0ym">當 
+<code>@defer</code> 控制區塊被觸發時，它會用延遲載入的內容替換佔位符內容。有兩種設定此替換何時觸發的選項：
 <code>on</code> 和 
 <code>when</code>。</p>
 <p data-ng_translator_product="100" data-ng_translator_ref_id="6hp2czyy8m8g7illj3i6flzvc"><a id="on"></a> 
-<code>on</code> 使用以下可用触发器列表中的某个触发器来指定触发条件。例如，可以在交互时或在视口中触发。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="y6yy85zsidrmes9o0bje6oer">可以一次定义多个事件触发器。例如：
-<code>on interaction; on timer(5s)</code> 表示如果用户与占位符交互，或在 5 秒后，延迟控制块将被触发。</p>
+<code>on</code> 使用以下可用觸發器清單中的某個觸發器來指定觸發條件。例如，可以在互動時或在視口中觸發。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="y6yy85zsidrmes9o0bje6oer">可以一次定義多個事件觸發器。例如：
+<code>on interaction; on timer(5s)</code> 表示如果使用者與佔位符互動，或在 5 秒後，延遲控制區塊將被觸發。</p>
 
     <div class="docs-alert docs-alert-note">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="bjiz6ceezfofbf6e0vudjngac"><strong>注意：</strong>多个 
-<code>on</code> 触发器始终是 OR 条件。同样，
-<code>on</code> 与 
-<code>when</code> 条件混合使用时也始终是 OR 条件。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bjiz6ceezfofbf6e0vudjngac"><strong>注意：</strong>多個 
+<code>on</code> 觸發器始終是 OR 條件。同樣，
+<code>on</code> 與 
+<code>when</code> 條件混合使用時也始終是 OR 條件。</p>
 
     </div>
     <div class="docs-code">
@@ -160,132 +160,132 @@
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on viewport; on timer(5s)) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"placeholder.png"</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5kuc7dckyoibsomr5e3fj1pgt"><a id="when"></a> 
-<code>when</code> 作为一个返回布尔值的表达式来指定条件。当此表达式变为真值时，占位符将被延迟加载的内容替换（如果需要获取依赖项，则可能是异步操作）。</p>
+<code>when</code> 作為一個回傳布林值的表示式來指定條件。當此表示式變為真值時，佔位符將被延遲載入的內容替換（如果需要獲取依賴項，則可能是非同步操作）。</p>
 
     <div class="docs-alert docs-alert-note">
     <p data-ng_translator_product="100" data-ng_translator_ref_id="3cndeg3z24uu8iu98q3pmh9qu"><strong>注意：</strong>如果 
-<code>when</code> 条件切换回 
-<code>false</code>，延迟控制块不会恢复到占位符。替换是一次性操作。如果控制块内的内容应有条件地渲染，可以在控制块内使用 
-<code>if</code> 条件。</p>
+<code>when</code> 條件切換回 
+<code>false</code>，延遲控制區塊不會恢復到佔位符。替換是一次性操作。如果控制區塊內的內容應有條件地渲染，可以在控制區塊內使用 
+<code>if</code> 條件。</p>
 
     </div>
     <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (when cond) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4a0xokaw1c579hp8rzbybpfy9">你也可以在一个语句中同时使用 
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="4a0xokaw1c579hp8rzbybpfy9">你也可以在一個語句中同時使用 
 <code>when</code> 和 
-<code>on</code>，只要任一条件满足，替换就会被触发。</p>
+<code>on</code>，只要任一條件滿足，替換就會被觸發。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on viewport; when cond) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"placeholder.png"</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h3 id="on-idle">
-    <a href="#on-idle" class="docs-anchor" tabindex="-1" aria-label="Link to on idle" data-ng_translator_product="100" data-ng_translator_ref_id="6yo0od9ry9n4jlq7362h1j6nu">空闲时</a>
+    <a href="#on-idle" class="docs-anchor" tabindex="-1" aria-label="Link to on idle" data-ng_translator_product="100" data-ng_translator_ref_id="6yo0od9ry9n4jlq7362h1j6nu">空閒時</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="9gf9pjtsqp3wuper8vgmoq3b8"><code>idle</code> 将在浏览器达到空闲状态（使用 
-<code>requestIdleCallback</code> API 检测）时触发延迟加载。这是延迟控制块的默认行为。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9gf9pjtsqp3wuper8vgmoq3b8"><code>idle</code> 將在瀏覽器達到空閒狀態（使用 
+<code>requestIdleCallback</code> API 檢測）時觸發延遲載入。這是延遲控制區塊的預設行為。</p>
 
   <h3 id="on-viewport">
-    <a href="#on-viewport" class="docs-anchor" tabindex="-1" aria-label="Link to on viewport" data-ng_translator_product="100" data-ng_translator_ref_id="3l5fa35s4o3mdit39v4bccrw1">在视口中</a>
+    <a href="#on-viewport" class="docs-anchor" tabindex="-1" aria-label="Link to on viewport" data-ng_translator_product="100" data-ng_translator_ref_id="3l5fa35s4o3mdit39v4bccrw1">在視口中</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="krab0l2yt3r0kjzgtml0gr69"><code>viewport</code> 将在指定内容进入视口时触发延迟控制块，使用 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API" target="_blank"><code>IntersectionObserver</code> API</a>。这可能是占位符内容或元素引用。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="aknyqi7gf8t7z3ev72ttb79ii">默认情况下，只要该占位符是单个根元素节点，它将作为进入视口的被观察元素。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="krab0l2yt3r0kjzgtml0gr69"><code>viewport</code> 將在指定內容進入視口時觸發延遲控制區塊，使用 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API" target="_blank"><code>IntersectionObserver</code> API</a>。這可能是佔位符內容或元素引用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="aknyqi7gf8t7z3ev72ttb79ii">預設情況下，只要該佔位符是單個根元素節點，它將作為進入視口的被觀察元素。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on viewport) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Calendar placeholder<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="bhb4b9elv7rnyx3i7bvyezizn">或者，你可以在与 
-<code>@defer</code> 控制块相同的模板中指定一个
-<a href="guide/templates/reference-variables">模板引用变量</a>，作为被观察进入视口的元素。此变量作为参数传递给视口触发器。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="bhb4b9elv7rnyx3i7bvyezizn">或者，你可以在與 
+<code>@defer</code> 控制區塊相同的樣板中指定一個
+<a href="guide/templates/reference-variables">樣板引用變數</a>，作為被觀察進入視口的元素。此變數作為引數傳遞給視口觸發器。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> #<span class="hljs-attr">greeting</span>&gt;</span>Hello!<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@defer (on viewport(greeting)) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">greetings-cmp</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h3 id="on-interaction">
-    <a href="#on-interaction" class="docs-anchor" tabindex="-1" aria-label="Link to on interaction" data-ng_translator_product="100" data-ng_translator_ref_id="jpomf2uqg6fxlc7dz8t1zc00">当交互时</a>
+    <a href="#on-interaction" class="docs-anchor" tabindex="-1" aria-label="Link to on interaction" data-ng_translator_product="100" data-ng_translator_ref_id="jpomf2uqg6fxlc7dz8t1zc00">當互動時</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="2klbl2kcd6s8b036jo8c5rxy7"><code>interaction</code> 将在用户通过 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2klbl2kcd6s8b036jo8c5rxy7"><code>interaction</code> 將在使用者透過 
 <code>click</code> 或 
-<code>keydown</code> 事件与指定元素交互时触发延迟块。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="edmq5s0p78ydl9mdlb909qs81">默认情况下，只要该占位符是单个根元素节点，它将作为交互元素。</p>
+<code>keydown</code> 事件與指定元素互動時觸發延遲區塊。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="edmq5s0p78ydl9mdlb909qs81">預設情況下，只要該佔位符是單個根元素節點，它將作為互動元素。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on interaction) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Calendar placeholder<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2m7h02g1mmwm8chponlsk4c2b">或者，你可以指定一个
-<a href="guide/templates/reference-variables">模板引用变量</a>，作为触发交互的元素。此变量作为参数传递给交互触发器。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2m7h02g1mmwm8chponlsk4c2b">或者，你可以指定一個
+<a href="guide/templates/reference-variables">樣板引用變數</a>，作為觸發互動的元素。此變數作為引數傳遞給互動觸發器。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> #<span class="hljs-attr">greeting</span>&gt;</span>Hello!<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@defer (on interaction(greeting)) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Calendar placeholder<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h3 id="on-hover">
-    <a href="#on-hover" class="docs-anchor" tabindex="-1" aria-label="Link to on hover" data-ng_translator_product="100" data-ng_translator_ref_id="79fn49s04jmptc9py6b736189">当悬停时</a>
+    <a href="#on-hover" class="docs-anchor" tabindex="-1" aria-label="Link to on hover" data-ng_translator_product="100" data-ng_translator_ref_id="79fn49s04jmptc9py6b736189">當懸停時</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="avwgfyonfa7p4igjahem9p4l3"><code>hover</code> 在鼠标悬停于触发区域时触发延迟加载。使用的事件是 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="avwgfyonfa7p4igjahem9p4l3"><code>hover</code> 在滑鼠懸停於觸發區域時觸發延遲載入。使用的事件是 
 <code>mouseenter</code> 和 
 <code>focusin</code>。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="dmec9s3522j6g9av48cxjc2sx">默认情况下，只要该占位符是单个根元素节点，它将作为悬停元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dmec9s3522j6g9av48cxjc2sx">預設情況下，只要該佔位符是單個根元素節點，它將作為懸停元素。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on hover) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Calendar placeholder<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="cixv6ca09m7oxyncczao11lps">或者，你可以指定一个
-<a href="guide/templates/reference-variables">模板引用变量</a>，作为悬停元素。此变量作为参数传递给悬停触发器。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="cixv6ca09m7oxyncczao11lps">或者，你可以指定一個
+<a href="guide/templates/reference-variables">樣板引用變數</a>，作為懸停元素。此變數作為引數傳遞給懸停觸發器。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> #<span class="hljs-attr">greeting</span>&gt;</span>Hello!<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@defer (on hover(greeting)) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Calendar placeholder<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h3 id="on-immediate">
-    <a href="#on-immediate" class="docs-anchor" tabindex="-1" aria-label="Link to on immediate" data-ng_translator_product="100" data-ng_translator_ref_id="2u6bykvmbcmje6t8v1naz9x3q">立即触发</a>
+    <a href="#on-immediate" class="docs-anchor" tabindex="-1" aria-label="Link to on immediate" data-ng_translator_product="100" data-ng_translator_ref_id="2u6bykvmbcmje6t8v1naz9x3q">立即觸發</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="9d6t0zhr85x6cczjowbcm94ow"><code>immediate</code> 会立即触发延迟加载，这意味着客户端完成渲染后，延迟块将立即开始获取。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9d6t0zhr85x6cczjowbcm94ow"><code>immediate</code> 會立即觸發延遲載入，這意味著用戶端完成渲染後，延遲區塊將立即開始獲取。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on immediate) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Calendar placeholder<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h3 id="on-timer">
-    <a href="#on-timer" class="docs-anchor" tabindex="-1" aria-label="Link to on timer" data-ng_translator_product="100" data-ng_translator_ref_id="ae8oye3lfxqwvh13qy06adsfr">定时触发</a>
+    <a href="#on-timer" class="docs-anchor" tabindex="-1" aria-label="Link to on timer" data-ng_translator_product="100" data-ng_translator_ref_id="ae8oye3lfxqwvh13qy06adsfr">定時觸發</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="enqp2n849tfxu0eutm22doidv"><code>timer(x)</code> 将在指定的持续时间后触发。持续时间是必要的，可以以 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="enqp2n849tfxu0eutm22doidv"><code>timer(x)</code> 將在指定的持續時間後觸發。持續時間是必要的，可以以 
 <code>ms</code> 或 
-<code>s</code> 为单位指定。</p>
+<code>s</code> 為單位指定。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on timer(500ms)) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h2 id="prefetching">
-    <a href="#prefetching" class="docs-anchor" tabindex="-1" aria-label="Link to Prefetching" data-ng_translator_product="100" data-ng_translator_ref_id="686wkjb6lmoavo6zrleeymhrp">预取</a>
+    <a href="#prefetching" class="docs-anchor" tabindex="-1" aria-label="Link to Prefetching" data-ng_translator_product="100" data-ng_translator_ref_id="686wkjb6lmoavo6zrleeymhrp">預取</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="4udgfefg2n55yip7i9jvzufzp"><code>@defer</code> 允许指定何时应该触发依赖项的预取。你可以使用特殊的 
-<code>prefetch</code> 关键字。
-<code>prefetch</code> 语法与主要的延迟条件类似，接受 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4udgfefg2n55yip7i9jvzufzp"><code>@defer</code> 允許指定何時應該觸發依賴項的預取。你可以使用特殊的 
+<code>prefetch</code> 關鍵字。
+<code>prefetch</code> 語法與主要的延遲條件類似，接受 
 <code>when</code> 和/或 
-<code>on</code> 来声明触发器。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="2oycr9fte06bph87a30p1upd3">在这种情况下，
+<code>on</code> 來宣告觸發器。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2oycr9fte06bph87a30p1upd3">在這種情況下，
 <code>when</code> 和 
-<code>on</code> 关联延迟控制何时渲染，而 
+<code>on</code> 關聯延遲控制何時渲染，而 
 <code>prefetch when</code> 和 
-<code>prefetch on</code> 控制何时获取资源。这允许更高级的行为，例如在用户实际看到或与延迟块交互之前开始预取资源，但可能很快就会与之交互，从而更快地提供资源。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="5o3q281ubwjjx218tjzblr8o7">在下面的示例中，当浏览器变为空闲时开始预取，而块内容在交互时渲染。</p>
+<code>prefetch on</code> 控制何時獲取資源。這允許更高階的行為，例如在使用者實際看到或與延遲區塊互動之前開始預取資源，但可能很快就會與之互動，從而更快地提供資源。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5o3q281ubwjjx218tjzblr8o7">在下面的範例中，當瀏覽器變為空閒時開始預取，而區塊內容在互動時渲染。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@defer (on interaction; prefetch on idle) {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">calendar-cmp</span> /&gt;</span></div><div class="hljs-ln-line">} @placeholder {</div><div class="hljs-ln-line">  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"placeholder.png"</span> /&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h2 id="testing">
-    <a href="#testing" class="docs-anchor" tabindex="-1" aria-label="Link to Testing" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="etpgj6p39fywtmcrsphy8qrcg">测试</a>
+    <a href="#testing" class="docs-anchor" tabindex="-1" aria-label="Link to Testing" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="etpgj6p39fywtmcrsphy8qrcg">測試</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="e0kturzt59is5ltoh0tr5gzth">Angular 提供 TestBed API 以简化测试 
-<code>@defer</code> 块和在测试期间触发不同状态的过程。默认情况下，测试中的 
-<code>@defer</code> 块将像实际应用中一样播放。如果你想手动逐步执行状态，可以在 TestBed 配置中将延迟块行为切换为 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="e0kturzt59is5ltoh0tr5gzth">Angular 提供 TestBed API 以簡化測試 
+<code>@defer</code> 區塊和在測試期間觸發不同狀態的過程。預設情況下，測試中的 
+<code>@defer</code> 區塊將像實際應用中一樣播放。如果你想手動逐步執行狀態，可以在 TestBed 設定中將延遲區塊行為切換為 
 <code>Manual</code>。</p>
 <div class="docs-code">
     
@@ -293,34 +293,34 @@
     </pre>
   </div>
   <h2 id="behavior-with-server-side-rendering-ssr-and-static-site-generation-ssg">
-    <a href="#behavior-with-server-side-rendering-ssr-and-static-site-generation-ssg" class="docs-anchor" tabindex="-1" aria-label="Link to Behavior with Server-side rendering (SSR) and Static site generation (SSG)" data-ng_translator_product="100" data-ng_translator_ref_id="1l738nh4yhfl1btc712ne60hp">服务器端渲染（SSR）和静态站点生成（SSG）的行为</a>
+    <a href="#behavior-with-server-side-rendering-ssr-and-static-site-generation-ssg" class="docs-anchor" tabindex="-1" aria-label="Link to Behavior with Server-side rendering (SSR) and Static site generation (SSG)" data-ng_translator_product="100" data-ng_translator_ref_id="1l738nh4yhfl1btc712ne60hp">伺服器端渲染（SSR）和靜態站點生成（SSG）的行為</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="528i7hztxvzxz3l1ejmav4bm9">在服务器上渲染应用（使用 SSR 或 SSG）时，延迟控制块总是渲染它们的 
-<code>@placeholder</code>（或在未指定占位符时什么也不渲染）。在服务器上触发器会被忽略。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="528i7hztxvzxz3l1ejmav4bm9">在服務器上渲染應用（使用 SSR 或 SSG）時，延遲控制區塊總是渲染它們的 
+<code>@placeholder</code>（或在未指定佔位符時什麼也不渲染）。在服務器上觸發器會被忽略。</p>
 
   <h2 id="behavior-with-ngmodule">
-    <a href="#behavior-with-ngmodule" class="docs-anchor" tabindex="-1" aria-label="Link to Behavior with <code>NgModule</code>" data-ng_translator_product="100" data-ng_translator_ref_id="d7pyngxdwhjrt7xzsryqjmnyx">与 
-<code>NgModule</code> 的行为</a>
+    <a href="#behavior-with-ngmodule" class="docs-anchor" tabindex="-1" aria-label="Link to Behavior with <code>NgModule</code>" data-ng_translator_product="100" data-ng_translator_ref_id="d7pyngxdwhjrt7xzsryqjmnyx">與 
+<code>NgModule</code> 的行為</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="66857xovxk4vebi7qhpk7omvy"><code>@defer</code> 控制块可以在独立的和基于 NgModule 的组件、指令和管道中使用。你可以在 
-<code>@defer</code> 控制块中使用独立的和基于 NgModule 的依赖项，但
-<strong>只有独立的组件、指令和管道可以延迟加载</strong>。基于 NgModule 的依赖项会被包含在急性加载的捆绑包中。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="66857xovxk4vebi7qhpk7omvy"><code>@defer</code> 控制區塊可以在獨立的和基於 NgModule 的元件、指令和通道中使用。你可以在 
+<code>@defer</code> 控制塊中使用獨立的和基於 NgModule 的依賴項，但
+<strong>只有獨立的元件、指令和通道可以延遲載入</strong>。基於 NgModule 的依賴項會被包含在急性載入的捆綁包中。</p>
 
   <h2 id="nested-defer-blocks-and-avoiding-cascading-loads">
-    <a href="#nested-defer-blocks-and-avoiding-cascading-loads" class="docs-anchor" tabindex="-1" aria-label="Link to Nested <code>@defer</code> blocks and avoiding cascading loads" data-ng_translator_product="100" data-ng_translator_ref_id="bici5d3003pgwx0juwtyk72rh">嵌套 
-<code>@defer</code> 控制块及避免级联加载</a>
+    <a href="#nested-defer-blocks-and-avoiding-cascading-loads" class="docs-anchor" tabindex="-1" aria-label="Link to Nested <code>@defer</code> blocks and avoiding cascading loads" data-ng_translator_product="100" data-ng_translator_ref_id="bici5d3003pgwx0juwtyk72rh">巢狀 
+<code>@defer</code> 控制區塊及避免級聯載入</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="5ok0nd3ek6wh0pu4u2zt9fils">在某些情况下，嵌套多个 
-<code>@defer</code> 控制块可能会导致级联请求。例如，当一个带有即时触发器的 
-<code>@defer</code> 控制块中嵌套了另一个带有即时触发器的 
-<code>@defer</code> 控制块时，会发生这种情况。嵌套 
-<code>@defer</code> 控制块时，确保内部的控制块有一组不同的条件，这样它们不会同时触发，从而导致级联请求。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5ok0nd3ek6wh0pu4u2zt9fils">在某些情況下，巢狀多個 
+<code>@defer</code> 控制區塊可能會導致級聯請求。例如，當一個帶有即時觸發器的 
+<code>@defer</code> 控制塊中巢狀了另一個帶有即時觸發器的 
+<code>@defer</code> 控制區塊時，會發生這種情況。巢狀 
+<code>@defer</code> 控制區塊時，確保內部的控制區塊有一組不同的條件，這樣它們不會同時觸發，從而導致級聯請求。</p>
 
   <h2 id="avoiding-layout-shifts">
-    <a href="#avoiding-layout-shifts" class="docs-anchor" tabindex="-1" aria-label="Link to Avoiding Layout Shifts" data-ng_translator_product="100" data-ng_translator_ref_id="b1wzdl7lyg58c7pevmdhoqm7r">避免布局偏移</a>
+    <a href="#avoiding-layout-shifts" class="docs-anchor" tabindex="-1" aria-label="Link to Avoiding Layout Shifts" data-ng_translator_product="100" data-ng_translator_ref_id="b1wzdl7lyg58c7pevmdhoqm7r">避免佈局偏移</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="ezmyx51phab07pu6pd6pag682">建议的最佳实践是不延迟加载在初次加载时对用户视口可见的组件。这会通过增加累计布局偏移（CLS）来对核心 Web 指标产生负面影响。如果选择在此区域延迟加载组件，最好避免使用 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ezmyx51phab07pu6pd6pag682">建議的最佳實踐是不延遲載入在初次載入時對使用者視口可見的元件。這會通過增加累計佈局偏移（CLS）來對核心 Web 指標產生負面影響。如果選擇在此區域延遲載入元件，最好避免使用 
 <code>immediate</code>、
 <code>timer</code>、
-<code>viewport</code> 和自定义 
-<code>when</code> 条件，这些条件会导致内容在页面初次渲染时加载。</p>
+<code>viewport</code> 和自定義 
+<code>when</code> 條件，這些條件會導致內容在頁面初次渲染時載入。</p>

@@ -13,43 +13,43 @@
     </header>
     
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong> 本指南假设你已经阅读过<a href="essentials">《要点指南》</a>。 如果你是 Angular 新手，请先阅读它。</p>
+    <p><strong>提示：</strong> 本指南假設你已經閱讀過<a href="essentials">《要點指南》</a>。 如果你是 Angular 新手，請先閱讀它。</p>
 
     </div>
-    <p>Angular 为你处理了大多数 DOM 的创建、更新和移除。 但是，你可能极少需要直接与组件的 DOM 交互。 组件可以注入 ElementRef 以获得对组件宿主元素的引用：</p>
+    <p>Angular 為你處理了大多數 DOM 的建立、更新和移除。 但是，你可能極少需要直接與元件的 DOM 互動。 元件可以注入 ElementRef 以獲得對元件宿主元素的引用：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ProfilePhoto</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  constructor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> elementRef</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(ElementRef);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(elementRef.nativeElement);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p><code>nativeElement</code> 属性引用宿主 <a href="https://developer.mozilla.org/docs/Web/API/Element" target="_blank">Element</a> 实例。</p>
-<p>你可以使用 Angular 的 <code>afterRender</code> 和 <code>afterNextRender</code> 函数来注册一个<strong>渲染回调</strong>，该回调在 Angular 完成页面渲染后运行。</p>
+  </div><p><code>nativeElement</code> 屬性引用宿主 <a href="https://developer.mozilla.org/docs/Web/API/Element" target="_blank">Element</a> 實例。</p>
+<p>你可以使用 Angular 的 <code>afterRender</code> 和 <code>afterNextRender</code> 函式來註冊一個<strong>渲染回呼</strong>，該回調在 Angular 完成頁面渲染後執行。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ProfilePhoto</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  constructor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> elementRef</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(ElementRef);</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    afterRender</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">      // Focus the first input element in this component.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      elementRef.nativeElement.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">querySelector</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'input'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)?.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">focus</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p><code>afterRender</code> 和 <code>afterNextRender</code> 必须在<em>注入上下文</em>中调用，通常是组件的构造函数。</p>
-<p><strong>尽可能避免直接操纵 DOM。</strong> 始终优先在组件模板中表达 DOM 的结构，并使用绑定来更新该 DOM。</p>
-<p><strong>渲染回调永远不会在服务器端渲染或构建时预渲染期间运行。</strong></p>
-<p><strong>永远不要在其他 Angular 生命周期钩子中直接操纵 DOM</strong>。 Angular 不保证组件的 DOM 在渲染回调之外的任何时间点都已完全渲染。 此外，在其他生命周期钩子期间读取或修改 DOM 可能会对页面性能产生负面影响，因为它会导致<a href="https://web.dev/avoid-large-complex-layouts-and-layout-thrashing" target="_blank">布局抖动</a>。</p>
+  </div><p><code>afterRender</code> 和 <code>afterNextRender</code> 必須在<em>注入上下文</em>中呼叫，通常是元件的建構式函式。</p>
+<p><strong>儘可能避免直接操縱 DOM。</strong> 始終優先在元件樣板中表達 DOM 的結構，並使用繫結來更新該 DOM。</p>
+<p><strong>渲染回呼永遠不會在服務器端渲染或建立時預渲染期間執行。</strong></p>
+<p><strong>永遠不要在其他 Angular 生命週期鉤子中直接操縱 DOM</strong>。 Angular 不保證元件的 DOM 在渲染回呼之外的任何時間點都已完全渲染。 此外，在其他生命週期鉤子期間讀取或修改 DOM 可能會對頁面效能產生負面影響，因為它會導致<a href="https://web.dev/avoid-large-complex-layouts-and-layout-thrashing" target="_blank">佈局抖動</a>。</p>
 
   <h2 id="using-a-components-renderer">
-    <a href="#using-a-components-renderer" class="docs-anchor" tabindex="-1" aria-label="Link to Using a component's renderer">使用组件的渲染器</a>
+    <a href="#using-a-components-renderer" class="docs-anchor" tabindex="-1" aria-label="Link to Using a component's renderer">使用元件的渲染器</a>
   </h2>
-  <p>组件可以注入 <code>Renderer2</code> 的实例，以执行某些与 Angular 其他特性相关的 DOM 操纵。</p>
-<p>由组件的 <code>Renderer2</code> 创建的任何 DOM 元素都参与该组件的<a href="guide/components/styling#style-scoping">样式封装</a>。</p>
-<p>某些 <code>Renderer2</code> API 也与 Angular 的动画系统相关联。 你可以使用 <code>setProperty</code> 方法来更新合成动画属性，并使用 <code>listen</code> 方法为合成动画事件添加事件监听器。 有关详细信息，请参阅<a href="guide/animations">动画</a>指南。</p>
-<p>除了这两个狭窄的用例外，使用 <code>Renderer2</code> 和原生 DOM API 之间没有区别。 <code>Renderer2</code> API 不支持在服务器端渲染或构建时预渲染上下文中进行 DOM 操纵。</p>
+  <p>元件可以注入 <code>Renderer2</code> 的實例，以執行某些與 Angular 其他屬性相關的 DOM 操縱。</p>
+<p>由元件的 <code>Renderer2</code> 建立的任何 DOM 元素都參與該組件的<a href="guide/components/styling#style-scoping">樣式封裝</a>。</p>
+<p>某些 <code>Renderer2</code> API 也與 Angular 的動畫系統相關聯。 你可以使用 <code>setProperty</code> 方法來更新合成動畫屬性，並使用 <code>listen</code> 方法為合成動畫事件新增事件監聽器。 有關詳細訊息，請參閱<a href="guide/animations">動畫</a>指南。</p>
+<p>除了這兩個狹窄的用例外，使用 <code>Renderer2</code> 和原生 DOM API 之間沒有區別。 <code>Renderer2</code> API 不支援在服務器端渲染或建立時預渲染上下文中進行 DOM 操縱。</p>
 
   <h2 id="when-to-use-dom-apis">
-    <a href="#when-to-use-dom-apis" class="docs-anchor" tabindex="-1" aria-label="Link to When to use DOM APIs">何时使用 DOM API</a>
+    <a href="#when-to-use-dom-apis" class="docs-anchor" tabindex="-1" aria-label="Link to When to use DOM APIs">何時使用 DOM API</a>
   </h2>
-  <p>虽然 Angular 处理了大多数渲染问题，但某些行为可能仍然需要使用 DOM API。 一些常见的用例包括：</p>
+  <p>雖然 Angular 處理了大多數渲染問題，但某些行為可能仍然需要使用 DOM API。 一些常見的用例包括：</p>
 
   <ul class="docs-list">
-    <li>管理元素焦点</li>
-<li>测量元素几何形状，例如使用 <code>getBoundingClientRect</code></li>
-<li>读取元素的文本内容</li>
-<li>建立原生观察器，例如 <a href="https://developer.mozilla.org/docs/Web/API/MutationObserver" target="_blank"><code>MutationObserver</code></a>、<a href="https://developer.mozilla.org/docs/Web/API/ResizeObserver" target="_blank"><code>ResizeObserver</code></a> 或 <a href="https://developer.mozilla.org/docs/Web/API/Intersection_Observer_API" target="_blank"><code>IntersectionObserver</code></a>。</li>
+    <li>管理元素焦點</li>
+<li>測量元素幾何形狀，例如使用 <code>getBoundingClientRect</code></li>
+<li>讀取元素的文字內容</li>
+<li>建立原生觀察器，例如 <a href="https://developer.mozilla.org/docs/Web/API/MutationObserver" target="_blank"><code>MutationObserver</code></a>、<a href="https://developer.mozilla.org/docs/Web/API/ResizeObserver" target="_blank"><code>ResizeObserver</code></a> 或 <a href="https://developer.mozilla.org/docs/Web/API/Intersection_Observer_API" target="_blank"><code>IntersectionObserver</code></a>。</li>
 
   </ul>
-  <p>避免插入、移除和修改 DOM 元素。 特别是，<strong>永远不要直接设置元素的 <code>innerHTML</code> 属性</strong>，这会使你的应用容易受到<a href="https://developer.mozilla.org/docs/Glossary/Cross-site_scripting" target="_blank">跨站脚本 (XSS) 攻击</a>。 Angular 的模板绑定（包括 <code>innerHTML</code> 的绑定）包含有助于防范 XSS 攻击的安全措施。 有关详细信息，请参阅<a href="best-practices/security">《安全指南》</a>。</p>
+  <p>避免插入、移除和修改 DOM 元素。 特別是，<strong>永遠不要直接設定元素的 <code>innerHTML</code> 屬性</strong>，這會使你的應用容易受到<a href="https://developer.mozilla.org/docs/Glossary/Cross-site_scripting" target="_blank">跨站指令碼 (XSS) 攻擊</a>。 Angular 的樣板繫結（包括 <code>innerHTML</code> 的繫結）包含有助於防範 XSS 攻擊的安全措施。 有關詳細訊息，請參閱<a href="best-practices/security">《安全指南》</a>。</p>

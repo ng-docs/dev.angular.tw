@@ -4,40 +4,40 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">组件 ID 生成冲突</h1>
+    <h1 tabindex="-1">元件 ID 生成衝突</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0912.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>当创建组件时，Angular 会为每个组件生成唯一的组件 ID。这是使用 Angular 组件元数据生成的，包括但不限于：选择器、宿主绑定的数量、类属性名、视图和内容查询。当两个组件的元数据相同时（通常共享相同的选择器），就会发生 ID 生成冲突。</p>
-<p>组件 ID 在 Angular 内部使用于：</p>
+    <p>當建立元件時，Angular 會為每個元件生成唯一的元件 ID。這是使用 Angular 元件元資料生成的，包括但不限於：選擇器、宿主繫結的數量、類別屬性名、檢視和內容查詢。當兩個元件的元資料相同時（通常共享相同的選擇器），就會發生 ID 生成衝突。</p>
+<p>元件 ID 在 Angular 內部使用於：</p>
 
   <ul class="docs-list">
-    <li>用于 DOM 节点的额外注解，以实现样式封装</li>
-<li>在<a href="guide/hydration">水合</a>期间，用于在<a href="guide/ssr">服务器端渲染</a>后恢复应用状态。</li>
+    <li>用於 DOM 節點的額外註解，以實現樣式封裝</li>
+<li>在<a href="guide/hydration">水合</a>期間，用於在<a href="guide/ssr">伺服器端渲染</a>後恢復應用狀態。</li>
 
   </ul>
-  <p>为了避免组件 ID 冲突可能导致的问题，建议按照下述方法解决它们。</p>
+  <p>為了避免元件 ID 衝突可能導致的問題，建議按照下述方法解決它們。</p>
 
   <h2 id="example-of-a-component-id-collision">
-    <a href="#example-of-a-component-id-collision" class="docs-anchor" tabindex="-1" aria-label="Link to Example of a Component ID collision">组件 ID 冲突的范例</a>
+    <a href="#example-of-a-component-id-collision" class="docs-anchor" tabindex="-1" aria-label="Link to Example of a Component ID collision">元件 ID 衝突的範例</a>
   </h2>
   <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'my-component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'complex-template'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SomeComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'my-component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'empty-template'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SomeMockedComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}</span></span></code></pre>
     </pre>
-  </div><p>定义这两个组件将触发 ID 生成冲突，并且在开发期间会显示警告。</p>
+  </div><p>定義這兩個元件將觸發 ID 生成衝突，並且在開發期間會顯示警告。</p>
 
   <h2 id="debugging-the-error">
-    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error">调试错误</a>
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error">除錯錯誤</a>
   </h2>
-  <p>警告消息包含 ID 冲突的两个组件的类名。</p>
-<p>可以使用以下解决方案之一来解决此问题：</p>
+  <p>警告訊息套件含 ID 衝突的兩個元件的類別名稱。</p>
+<p>可以使用以下解決方案之一來解決此問題：</p>
 
     <ol class="docs-ordered-list">
-      <li>更改两个组件之一的选择器。例如，使用像 <code>:not()</code> 这样没有效果的伪选择器和一个不同的标签名。</li>
+      <li>更改兩個元件之一的選擇器。例如，使用像 <code>:not()</code> 這樣沒有效果的偽選擇器和一個不同的標籤名。</li>
 
     </ol>
     <div class="docs-code">
@@ -46,7 +46,7 @@
     </pre>
   </div>
     <ol class="docs-ordered-list">
-      <li>向其中一个组件添加额外的宿主属性（Attribute）。</li>
+      <li>向其中一個元件新增額外的宿主屬性（Attribute）。</li>
 
     </ol>
     <div class="docs-code">

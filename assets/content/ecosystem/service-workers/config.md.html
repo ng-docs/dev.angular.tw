@@ -4,47 +4,47 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">Service Worker 配置文件</h1>
+    <h1 tabindex="-1">Service Worker 設定檔案</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/ecosystem/service-workers/config.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>本主题介绍 Service Worker 配置文件的属性。</p>
+    <p>本主題介紹 Service Worker 設定檔案的屬性。</p>
 
   <h2 id="modifying-the-configuration">
-    <a href="#modifying-the-configuration" class="docs-anchor" tabindex="-1" aria-label="Link to Modifying the configuration">修改配置</a>
+    <a href="#modifying-the-configuration" class="docs-anchor" tabindex="-1" aria-label="Link to Modifying the configuration">修改設定</a>
   </h2>
-  <p><code>ngsw-config.json</code> JSON 配置文件用于指定 Angular Service Worker 应该缓存哪些文件和数据 URL，以及应该如何更新缓存的文件和数据。<a href="tools/cli">Angular CLI</a> 在 <code>ng build</code> 期间处理此配置文件。</p>
-<p>所有文件路径都必须以 <code>/</code> 开头，它对应于部署目录 —— 在 CLI 项目中通常是 <code>dist/&lt;project-name&gt;</code>。</p>
-<p>除非另有注释，否则模式使用 <strong>有限的</strong>* glob 格式，该格式在内部将转换为正则表达式：</p>
+  <p><code>ngsw-config.json</code> JSON 設定檔案用於指定 Angular Service Worker 應該快取哪些檔案和數據 URL，以及應該如何更新快取的檔案和數據。<a href="tools/cli">Angular CLI</a> 在 <code>ng build</code> 期間處理此設定檔案。</p>
+<p>所有檔案路徑都必須以 <code>/</code> 開頭，它對應於部署目錄 —— 在 CLI 專案中通常是 <code>dist/&lt;project-name&gt;</code>。</p>
+<p>除非另有註解，否則模式使用 <strong>有限的</strong>* glob 格式，該格式在內部將轉換為正則表示式：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
 <th align="left">Glob 格式</th>
-<th align="left">详情</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>**</code></td>
-<td align="left">匹配 0 个或多个路径段</td>
+<td align="left">對應 0 個或多個路徑段</td>
 </tr>
 <tr>
 <td align="left"><code>*</code></td>
-<td align="left">匹配 0 个或多个字符，但不包括 <code>/</code></td>
+<td align="left">對應 0 個或多個字元，但不包括 <code>/</code></td>
 </tr>
 <tr>
 <td align="left"><code>?</code></td>
-<td align="left">精确匹配一个字符，但不包括 <code>/</code></td>
+<td align="left">精確對應一個字元，但不包括 <code>/</code></td>
 </tr>
 <tr>
-<td align="left"><code>!</code> 前缀</td>
-<td align="left">将模式标记为否定，表示仅包含与该模式不匹配的文件</td>
+<td align="left"><code>!</code> 字首</td>
+<td align="left">將模式標記為否定，表示僅包含與該模式不對應的檔案</td>
 </tr>
 
       </tbody>
@@ -52,37 +52,37 @@
   </div>
   
     <div class="docs-callout docs-callout-important">
-      <h3>特殊字符需要转义</h3>
-      <p>请注意，正则表达式中具有特殊含义的某些字符不会被转义，并且在内部 glob 到正则表达式的转换中，模式也不会包装在 <code>^</code>/<code>$</code> 中。</p>
-<p><code>$</code> 是正则表达式中的一个特殊字符，用于匹配字符串的结尾。当把 glob 模式转换为正则表达式时，它不会被自动转义。</p>
-<p>如果你想字面量匹配 <code>$</code> 字符，则必须自己转义它（使用 <code>\\$</code>）。例如，glob 模式 <code>/foo/bar/$value</code> 会产生无法匹配的表达式，因为字符串在结束后不可能再有任何字符。</p>
-<p>当将模式转换为正则表达式时，该模式不会自动包装在 <code>^</code> 和 <code>$</code> 中。因此，这些模式将部分匹配请求 URL。</p>
-<p>如果你希望你的模式匹配 URL 的开头和/或结尾，你可以自己添加 <code>^</code>/<code>$</code>。例如，glob 模式 <code>/foo/bar/*.js</code> 将同时匹配 <code>.js</code> 和 <code>.json</code> 文件。如果你只想匹配 <code>.js</code> 文件，请使用 <code>/foo/bar/*.js$</code>。</p>
+      <h3>特殊字元需要轉義</h3>
+      <p>請注意，正則表示式中具有特殊含義的某些字元不會被轉義，並且在內部 glob 到正則表示式的轉換中，模式也不會包裝在 <code>^</code>/<code>$</code> 中。</p>
+<p><code>$</code> 是正則表示式中的一個特殊字元，用於對應字串的結尾。當把 glob 模式轉換為正則表示式時，它不會被自動轉義。</p>
+<p>如果你想字面量對應 <code>$</code> 字元，則必須自己轉義它（使用 <code>\\$</code>）。例如，glob 模式 <code>/foo/bar/$value</code> 會產生無法對應的表示式，因為字串在結束後不可能再有任何字元。</p>
+<p>當將模式轉換為正則表示式時，該模式不會自動包裝在 <code>^</code> 和 <code>$</code> 中。因此，這些模式將部分對應請求 URL。</p>
+<p>如果你希望你的模式對應 URL 的開頭和/或結尾，你可以自己新增 <code>^</code>/<code>$</code>。例如，glob 模式 <code>/foo/bar/*.js</code> 將同時對應 <code>.js</code> 和 <code>.json</code> 檔案。如果你只想對應 <code>.js</code> 檔案，請使用 <code>/foo/bar/*.js$</code>。</p>
 
     </div>
-    <p>范例模式：</p>
+    <p>範例模式：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
 <th align="left">模式</th>
-<th align="left">详情</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>/**/*.html</code></td>
-<td align="left">指定所有 HTML 文件</td>
+<td align="left">指定所有 HTML 檔案</td>
 </tr>
 <tr>
 <td align="left"><code>/*.html</code></td>
-<td align="left">仅指定根目录中的 HTML 文件</td>
+<td align="left">僅指定根目錄中的 HTML 檔案</td>
 </tr>
 <tr>
 <td align="left"><code>!/**/*.map</code></td>
-<td align="left">排除所有源码映射</td>
+<td align="left">排除所有原始碼對映</td>
 </tr>
 
       </tbody>
@@ -90,133 +90,133 @@
   </div>
   
   <h2 id="service-worker-configuration-properties">
-    <a href="#service-worker-configuration-properties" class="docs-anchor" tabindex="-1" aria-label="Link to Service worker configuration properties">Service Worker 配置属性</a>
+    <a href="#service-worker-configuration-properties" class="docs-anchor" tabindex="-1" aria-label="Link to Service worker configuration properties">Service Worker 設定屬性</a>
   </h2>
-  <p>以下各节介绍配置文件的每个属性。</p>
+  <p>以下各節介紹設定檔案的每個屬性。</p>
 
   <h3 id="appdata">
     <a href="#appdata" class="docs-anchor" tabindex="-1" aria-label="Link to <code>appData</code>"><code>appData</code></a>
   </h3>
-  <p>本节使你能够传递任何你想要的数据，以描述此特定版本的应用。<code>SwUpdate</code> 服务会在更新通知中包含该数据。许多应用使用本节来提供额外的资讯，以显示 UI 弹出窗口，从而通知用户有可用的更新。</p>
+  <p>本節使你能夠傳遞任何你想要的資料，以描述此特定版本的應用。<code>SwUpdate</code> 服務會在更新通知中包含該資料。許多應用使用本節來提供額外的資訊，以顯示 UI 彈出視窗，從而通知使用者有可用的更新。</p>
 
   <h3 id="index">
     <a href="#index" class="docs-anchor" tabindex="-1" aria-label="Link to <code>index</code>"><code>index</code></a>
   </h3>
-  <p>指定用作索引页的文件，以满足导航请求。通常这是 <code>/index.html</code>。</p>
+  <p>指定用作索引頁的檔案，以滿足導向請求。通常這是 <code>/index.html</code>。</p>
 
   <h3 id="assetgroups">
     <a href="#assetgroups" class="docs-anchor" tabindex="-1" aria-label="Link to <code>assetGroups</code>"><code>assetGroups</code></a>
   </h3>
-  <p><em>资产</em>是应用版本的一部分资源，它们会随应用一起更新。它们可以包括从页面来源加载的资源，以及从 CDN 和其他外部 URL 加载的第三方资源。由于并非所有此类外部 URL 都可能在构建时已知，因此可以匹配 URL 模式。</p>
+  <p><em>資產</em>是應用版本的一部分資源，它們會隨應用一起更新。它們可以包括從頁面來源載入的資源，以及從 CDN 和其他外部 URL 載入的第三方資源。由於並非所有此類外部 URL 都可能在建立時已知，因此可以對應 URL 模式。</p>
 
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> 为了让 Service Worker 处理从不同来源加载的资源，请确保在每个来源的服务器上正确配置了 <a href="https://developer.mozilla.org/docs/Web/HTTP/CORS" target="_blank">CORS</a>。</p>
+    <p><strong>提示：</strong> 為了讓 Service Worker 處理從不同來源載入的資源，請確保在每個來源的伺服器上正確設定了 <a href="https://developer.mozilla.org/docs/Web/HTTP/CORS" target="_blank">CORS</a>。</p>
 
     </div>
-    <p>此字段包含一个资产组数组，每个资产组都定义了一组资产资源以及缓存它们所依据的策略。</p>
+    <p>此欄位包含一個資產組陣列，每個資產組都定義了一組資產資源以及快取它們所依據的策略。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">{</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  "assetGroups"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    {</span></span><span class="line"><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic">      …</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    {</span></span><span class="line"><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic">      …</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  ]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> 当 ServiceWorker 处理请求时，它会按照资产组在 <code>ngsw-config.json</code> 中出现的顺序检查资产组。第一个与请求资源匹配的资产组将处理该请求。</p>
+    <p><strong>提示：</strong> 當 ServiceWorker 處理請求時，它會按照資產組在 <code>ngsw-config.json</code> 中出現的順序檢查資產組。第一個與請求資源對應的資產組將處理該請求。</p>
 
     </div>
-    <p>建议你将更具体的资产组放在列表的更靠前的位置。例如，匹配 <code>/foo.js</code> 的资产组应出现在匹配 <code>*.js</code> 的资产组之前。</p>
-<p>每个资产组都指定一组资源和一个管理它们的策略。此策略确定何时获取资源以及检测到更改时会发生什么。</p>
-<p>资产组遵循此处显示的 Typescript 接口：</p>
+    <p>建議你將更具體的資產組放在清單的更靠前的位置。例如，對應 <code>/foo.js</code> 的資產組應出現在對應 <code>*.js</code> 的資產組之前。</p>
+<p>每個資產組都指定一組資源和一個管理它們的策略。此策略確定何時獲取資源以及檢測到更改時會發生什麼。</p>
+<p>資產組遵循此處顯示的 Typescript 介面：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">interface</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> AssetGroup</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  name</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  installMode</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'prefetch'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'lazy'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  updateMode</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'prefetch'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'lazy'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  resources</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">    files</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[];</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">    urls</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[];</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  };</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  cacheQueryOptions</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">    ignoreSearch</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> boolean</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  };</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>每个 <code>AssetGroup</code> 均由以下资产组属性定义。</p>
+  </div><p>每個 <code>AssetGroup</code> 均由以下資產組屬性定義。</p>
 
   <h4 id="name">
     <a href="#name" class="docs-anchor" tabindex="-1" aria-label="Link to <code>name</code>"><code>name</code></a>
   </h4>
-  <p><code>name</code> 是必填项。它用于标识配置版本之间此特定的资产组。</p>
+  <p><code>name</code> 是必填項。它用於標識設定版本之間此特定的資產組。</p>
 
   <h4 id="installmode">
     <a href="#installmode" class="docs-anchor" tabindex="-1" aria-label="Link to <code>installMode</code>"><code>installMode</code></a>
   </h4>
-  <p><code>installMode</code> 确定如何初始缓存这些资源。<code>installMode</code> 可以是以下两个值之一：</p>
+  <p><code>installMode</code> 確定如何初始快取這些資源。<code>installMode</code> 可以是以下兩個值之一：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
 <th align="left">值</th>
-<th align="left">详情</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>prefetch</code></td>
-<td align="left">告知 Angular Service Worker 在缓存当前版本的应用时，获取每个列出的资源。这会消耗大量带宽，但可确保资源在被请求时始终可用，即使浏览器当前处于离线状态也是如此。</td>
+<td align="left">告知 Angular Service Worker 在快取當前版本的應用時，獲取每個列出的資源。這會消耗大量頻寬，但可確保資源在被請求時始終可用，即使瀏覽器當前處於離線狀態也是如此。</td>
 </tr>
 <tr>
 <td align="left"><code>lazy</code></td>
-<td align="left">不预先缓存任何资源。相反，Angular Service Worker 仅缓存收到请求的资源。这是一种按需缓存模式。从未请求过的资源不会被缓存。这对于不同分辨率的图像等内容很有用，因此 Service Worker 仅缓存特定屏幕和方向的正确资产。</td>
+<td align="left">不預先快取任何資源。相反，Angular Service Worker 僅快取收到請求的資源。這是一種按需快取模式。從未請求過的資源不會被快取。這對於不同解析度的影象等內容很有用，因此 Service Worker 僅快取特定螢幕和方向的正確資產。</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p>默认为 <code>prefetch</code>。</p>
+  <p>預設為 <code>prefetch</code>。</p>
 
   <h4 id="updatemode">
     <a href="#updatemode" class="docs-anchor" tabindex="-1" aria-label="Link to <code>updateMode</code>"><code>updateMode</code></a>
   </h4>
-  <p>对于已在缓存中的资源，当发现新版本的应用时，<code>updateMode</code> 确定缓存行为。自上一版本以来组中已更改的任何资源都将根据 <code>updateMode</code> 进行更新。</p>
+  <p>對於已在快取中的資源，當發現新版本的應用時，<code>updateMode</code> 確定快取行為。自上一版本以來組中已更改的任何資源都將根據 <code>updateMode</code> 進行更新。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
 <th align="left">值</th>
-<th align="left">详情</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>prefetch</code></td>
-<td align="left">告知 Service Worker 立即下载并缓存已更改的资源。</td>
+<td align="left">告知 Service Worker 立即下載並快取已更改的資源。</td>
 </tr>
 <tr>
 <td align="left"><code>lazy</code></td>
-<td align="left">告知 Service Worker 不要缓存这些资源。相反，它将它们视为未请求的资源，并等待再次请求它们后再更新它们。仅当 <code>installMode</code> 也为 <code>lazy</code> 时，<code>updateMode</code> 为 <code>lazy</code> 才有效。</td>
+<td align="left">告知 Service Worker 不要快取這些資源。相反，它將它們視為未請求的資源，並等待再次請求它們後再更新它們。僅當 <code>installMode</code> 也為 <code>lazy</code> 時，<code>updateMode</code> 為 <code>lazy</code> 才有效。</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p>默认为 <code>installMode</code> 设置的值。</p>
+  <p>預設為 <code>installMode</code> 設定的值。</p>
 
   <h4 id="resources">
     <a href="#resources" class="docs-anchor" tabindex="-1" aria-label="Link to <code>resources</code>"><code>resources</code></a>
   </h4>
-  <p>本节介绍要缓存的资源，分为以下几组：</p>
+  <p>本節介紹要快取的資源，分為以下幾組：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left">资源组</th>
-<th align="left">详情</th>
+<th align="left">資源組</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>files</code></td>
-<td align="left">列出与分发目录中的文件匹配的模式。这些可以是单个文件，也可以是匹配多个文件的类似 glob 的模式。</td>
+<td align="left">列出與分發目錄中的檔案對應的模式。這些可以是單個檔案，也可以是對應多個檔案的類似 glob 的模式。</td>
 </tr>
 <tr>
 <td align="left"><code>urls</code></td>
-<td align="left">包括在运行时匹配的 URL 和 URL 模式。这些资源不是直接获取的，也没有内容哈希，但会根据其 HTTP 标头进行缓存。这对于 CDN（如 Google Fonts 服务）最有用。<br><em>（不支持负 glob 模式，<code>?</code> 将按字面量匹配；也就是说，它不会匹配除 <code>?</code> 之外的任何字符。）</em></td>
+<td align="left">包括在執行時對應的 URL 和 URL 模式。這些資源不是直接獲取的，也沒有內容雜湊，但會根據其 HTTP 標頭進行快取。這對於 CDN（如 Google Fonts 服務）最有用。<br><em>（不支援負 glob 模式，<code>?</code> 將按字面量對應；也就是說，它不會對應除 <code>?</code> 之外的任何字元。）</em></td>
 </tr>
 
       </tbody>
@@ -226,24 +226,24 @@
   <h4 id="cachequeryoptions">
     <a href="#cachequeryoptions" class="docs-anchor" tabindex="-1" aria-label="Link to <code>cacheQueryOptions</code>"><code>cacheQueryOptions</code></a>
   </h4>
-  <p>这些选项用于修改请求的匹配行为。
-它们被传递给浏览器的 <code>Cache#match</code> 函数。
-有关详细信息，请参阅 <a href="https://developer.mozilla.org/docs/Web/API/Cache/match" target="_blank">MDN</a>。
-目前，仅支持以下选项：</p>
+  <p>這些選項用於修改請求的對應行為。
+它們被傳遞給瀏覽器的 <code>Cache#match</code> 函式。
+有關詳細訊息，請參閱 <a href="https://developer.mozilla.org/docs/Web/API/Cache/match" target="_blank">MDN</a>。
+目前，僅支援以下選項：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left">选项</th>
-<th align="left">详情</th>
+<th align="left">選項</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>ignoreSearch</code></td>
-<td align="left">忽略查询参数。默认为 <code>false</code>。</td>
+<td align="left">忽略查詢引數。預設為 <code>false</code>。</td>
 </tr>
 
       </tbody>
@@ -253,80 +253,80 @@
   <h3 id="datagroups">
     <a href="#datagroups" class="docs-anchor" tabindex="-1" aria-label="Link to <code>dataGroups</code>"><code>dataGroups</code></a>
   </h3>
-  <p>与资产资源不同，数据请求不会随应用一起进行版本控制。
-它们根据手动配置的策略进行缓存，这些策略对于 API 请求和其他数据依赖项等情况更有用。</p>
-<p>此字段包含一个数据组数组，每个数据组定义一组数据资源以及缓存这些资源的策略。</p>
+  <p>與資產資源不同，資料請求不會隨應用一起進行版本控制。
+它們根據手動設定的策略進行快取，這些策略對於 API 請求和其他資料依賴項等情況更有用。</p>
+<p>此欄位包含一個資料組陣列，每個資料組定義一組資料資源以及快取這些資源的策略。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">{</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  "dataGroups"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    {</span></span><span class="line"><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic">      …</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    {</span></span><span class="line"><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic">      …</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  ]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> 当 ServiceWorker 处理请求时，它会按照数据组在 <code>ngsw-config.json</code> 中出现的顺序检查数据组。
-第一个与请求的资源匹配的数据组将处理该请求。</p>
+    <p><strong>提示：</strong> 當 ServiceWorker 處理請求時，它會按照資料組在 <code>ngsw-config.json</code> 中出現的順序檢查資料組。
+第一個與請求的資源對應的資料組將處理該請求。</p>
 
     </div>
-    <p>建议您将更具体的数据组放在列表的更上方。
-例如，匹配 <code>/api/foo.json</code> 的数据组应出现在匹配 <code>/api/*.json</code> 的数据组之前。</p>
-<p>数据组遵循以下 Typescript 接口：</p>
+    <p>建議您將更具體的資料組放在清單的更上方。
+例如，對應 <code>/api/foo.json</code> 的資料組應出現在對應 <code>/api/*.json</code> 的資料組之前。</p>
+<p>資料組遵循以下 Typescript 介面：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> interface</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> DataGroup</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  name</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  urls</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[];</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  version</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  cacheConfig</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">    maxSize</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">    maxAge</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">    timeout</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">    refreshAhead</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">    strategy</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'freshness'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'performance'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  };</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  cacheQueryOptions</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">    ignoreSearch</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> boolean</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  };</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>每个 <code>DataGroup</code> 均由以下数据组属性定义。</p>
+  </div><p>每個 <code>DataGroup</code> 均由以下資料組屬性定義。</p>
 
   <h4 id="name-1">
     <a href="#name-1" class="docs-anchor" tabindex="-1" aria-label="Link to <code>name</code>"><code>name</code></a>
   </h4>
-  <p>与 <code>assetGroups</code> 类似，每个数据组都有一个 <code>name</code> 来唯一标识它。</p>
+  <p>與 <code>assetGroups</code> 類似，每個資料組都有一個 <code>name</code> 來唯一標識它。</p>
 
   <h4 id="urls">
     <a href="#urls" class="docs-anchor" tabindex="-1" aria-label="Link to <code>urls</code>"><code>urls</code></a>
   </h4>
-  <p>URL 模式列表。
-与这些模式匹配的 URL 将根据此数据组的策略进行缓存。
-仅缓存非 mutating 请求（GET 和 HEAD）。</p>
+  <p>URL 模式清單。
+與這些模式對應的 URL 將根據此資料組的策略進行快取。
+僅快取非 mutating 請求（GET 和 HEAD）。</p>
 
   <ul class="docs-list">
-    <li>不支持负 glob 模式</li>
-<li><code>?</code> 会被字面量匹配；也就是说，它<em>只</em>匹配字符 <code>?</code></li>
+    <li>不支援負 glob 模式</li>
+<li><code>?</code> 會被字面量對應；也就是說，它<em>只</em>對應字元 <code>?</code></li>
 
   </ul>
   
   <h4 id="version">
     <a href="#version" class="docs-anchor" tabindex="-1" aria-label="Link to <code>version</code>"><code>version</code></a>
   </h4>
-  <p>有时，API 会以不向后兼容的方式更改格式。
-新版本的应用可能与旧的 API 格式不兼容，因此可能与来自该 API 的现有缓存资源不兼容。</p>
-<p><code>version</code> 提供了一种机制来表明，正在缓存的资源已经以向后不兼容的方式更新，并且应该丢弃旧的缓存条目（即来自先前版本的条目）。</p>
-<p><code>version</code> 是一个整数字段，默认为 <code>1</code>。</p>
+  <p>有時，API 會以不向後相容的方式更改格式。
+新版本的應用可能與舊的 API 格式不相容，因此可能與來自該 API 的現有快取資源不相容。</p>
+<p><code>version</code> 提供了一種機制來表明，正在快取的資源已經以向後不相容的方式更新，並且應該丟棄舊的快取條目（即來自先前版本的條目）。</p>
+<p><code>version</code> 是一個整數欄位，預設為 <code>1</code>。</p>
 
   <h4 id="cacheconfig">
     <a href="#cacheconfig" class="docs-anchor" tabindex="-1" aria-label="Link to <code>cacheConfig</code>"><code>cacheConfig</code></a>
   </h4>
-  <p>以下属性定义了缓存匹配请求的策略。</p>
+  <p>以下屬性定義了快取對應請求的策略。</p>
 
   <h5 id="maxsize">
     <a href="#maxsize" class="docs-anchor" tabindex="-1" aria-label="Link to <code>maxSize</code>"><code>maxSize</code></a>
   </h5>
-  <p>缓存中条目或响应的最大数量。</p>
+  <p>快取中條目或回應的最大數量。</p>
 
     <div class="docs-alert docs-alert-critical">
-    <p><strong>重要提示：</strong> 开放式缓存可能会以无限制的方式增长，并最终超出存储配额，从而导致驱逐。</p>
+    <p><strong>重要提示：</strong> 開放式快取可能會以無限制的方式增長，並最終超出儲存配額，從而導致驅逐。</p>
 
     </div>
     
   <h5 id="maxage">
     <a href="#maxage" class="docs-anchor" tabindex="-1" aria-label="Link to <code>maxAge</code>"><code>maxAge</code></a>
   </h5>
-  <p><code>maxAge</code> 参数指示响应在被视为无效和驱逐之前允许在缓存中保留多长时间。<code>maxAge</code> 是一个持续时间字符串，使用以下单位后缀：</p>
+  <p><code>maxAge</code> 引數指示回應在被視為無效和驅逐之前允許在快取中保留多長時間。<code>maxAge</code> 是一個持續時間字串，使用以下單位字尾：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left">后缀</th>
-<th align="left">详情</th>
+<th align="left">字尾</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
@@ -337,11 +337,11 @@
 </tr>
 <tr>
 <td align="left"><code>h</code></td>
-<td align="left">小时</td>
+<td align="left">小時</td>
 </tr>
 <tr>
 <td align="left"><code>m</code></td>
-<td align="left">分钟</td>
+<td align="left">分鐘</td>
 </tr>
 <tr>
 <td align="left"><code>s</code></td>
@@ -355,21 +355,21 @@
       </tbody>
     </table>
   </div>
-  <p>例如，字符串 <code>3d12h</code> 会将内容缓存最多三天半。</p>
+  <p>例如，字串 <code>3d12h</code> 會將內容快取最多三天半。</p>
 
   <h5 id="timeout">
     <a href="#timeout" class="docs-anchor" tabindex="-1" aria-label="Link to <code>timeout</code>"><code>timeout</code></a>
   </h5>
-  <p>此持续时间字符串指定网络超时。
-网络超时是指 Angular Service Worker 在使用缓存的响应之前等待网络响应的时间（如果配置为这样做）。
-<code>timeout</code> 是一个持续时间字符串，使用以下单位后缀：</p>
+  <p>此持續時間字串指定網路超時。
+網路超時是指 Angular Service Worker 在使用快取的回應之前等待網路回應的時間（如果設定為這樣做）。
+<code>timeout</code> 是一個持續時間字串，使用以下單位字尾：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left">后缀</th>
-<th align="left">详情</th>
+<th align="left">字尾</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
@@ -380,11 +380,11 @@
 </tr>
 <tr>
 <td align="left"><code>h</code></td>
-<td align="left">小时</td>
+<td align="left">小時</td>
 </tr>
 <tr>
 <td align="left"><code>m</code></td>
-<td align="left">分钟</td>
+<td align="left">分鐘</td>
 </tr>
 <tr>
 <td align="left"><code>s</code></td>
@@ -398,20 +398,20 @@
       </tbody>
     </table>
   </div>
-  <p>例如，字符串 <code>5s30u</code> 转换为五秒和 30 毫秒的网络超时。</p>
+  <p>例如，字串 <code>5s30u</code> 轉換為五秒和 30 毫秒的網路超時。</p>
 
   <h5 id="refreshahead">
     <a href="#refreshahead" class="docs-anchor" tabindex="-1" aria-label="Link to <code>refreshAhead</code>"><code>refreshAhead</code></a>
   </h5>
-  <p>此持续时间字符串指定在缓存资源过期之前 Angular Service Worker 应主动尝试从网络刷新资源的时间。
-<code>refreshAhead</code> 持续时间是一个可选配置，它确定在缓存响应过期之前多长时间，Service Worker 应发起请求以从网络刷新资源。</p>
+  <p>此持續時間字串指定在快取資源過期之前 Angular Service Worker 應主動嘗試從網路重新整理資源的時間。
+<code>refreshAhead</code> 持續時間是一個可選設定，它確定在快取回應過期之前多長時間，Service Worker 應發起請求以從網路重新整理資源。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left">后缀</th>
-<th align="left">详情</th>
+<th align="left">字尾</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
@@ -422,11 +422,11 @@
 </tr>
 <tr>
 <td align="left"><code>h</code></td>
-<td align="left">小时</td>
+<td align="left">小時</td>
 </tr>
 <tr>
 <td align="left"><code>m</code></td>
-<td align="left">分钟</td>
+<td align="left">分鐘</td>
 </tr>
 <tr>
 <td align="left"><code>s</code></td>
@@ -440,30 +440,30 @@
       </tbody>
     </table>
   </div>
-  <p>例如，字符串 <code>1h30m</code> 转换为在过期时间前一小时 30 分钟。</p>
+  <p>例如，字串 <code>1h30m</code> 轉換為在過期時間前一小時 30 分鐘。</p>
 
   <h5 id="strategy">
     <a href="#strategy" class="docs-anchor" tabindex="-1" aria-label="Link to <code>strategy</code>"><code>strategy</code></a>
   </h5>
-  <p>Angular Service Worker 可以对数据资源使用两种缓存策略中的任何一种。</p>
+  <p>Angular Service Worker 可以對資料資源使用兩種快取策略中的任何一種。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left">缓存策略</th>
-<th align="left">详情</th>
+<th align="left">快取策略</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>performance</code></td>
-<td align="left">默认策略，针对尽可能快的响应进行了优化。如果资源存在于缓存中，则使用缓存的版本，并且不进行网络请求。这允许一定的陈旧性（取决于 <code>maxAge</code>），以换取更好的性能。这适用于不经常更改的资源；例如，用户头像图片。</td>
+<td align="left">預設策略，針對儘可能快的回應進行了最佳化。如果資源存在於快取中，則使用快取的版本，並且不進行網路請求。這允許一定的陳舊性（取決於 <code>maxAge</code>），以換取更好的效能。這適用於不經常更改的資源；例如，使用者頭像圖片。</td>
 </tr>
 <tr>
 <td align="left"><code>freshness</code></td>
-<td align="left">针对数据的时效性进行了优化，优先从网络获取请求的数据。仅当网络超时（根据 <code>timeout</code>）时，请求才会回退到缓存。这对于频繁更改的资源很有用；例如，帐户余额。</td>
+<td align="left">針對資料的時效性進行了最佳化，優先從網路獲取請求的資料。僅當網路超時（根據 <code>timeout</code>）時，請求才會回退到快取。這對於頻繁更改的資源很有用；例如，帳戶餘額。</td>
 </tr>
 
       </tbody>
@@ -471,43 +471,43 @@
   </div>
   
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> 您还可以模拟第三种策略 <a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#stale-while-revalidate" target="_blank">staleWhileRevalidate</a>，如果缓存数据可用，则返回缓存数据，但也会在后台从网络获取新数据以备下次使用。
-要使用此策略，请在 <code>cacheConfig</code> 中将 <code>strategy</code> 设置为 <code>freshness</code>，并将 <code>timeout</code> 设置为 <code>0u</code>。</p>
+    <p><strong>提示：</strong> 您還可以模擬第三種策略 <a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#stale-while-revalidate" target="_blank">staleWhileRevalidate</a>，如果快取資料可用，則回傳快取資料，但也會在後台從網路獲取新資料以備下次使用。
+要使用此策略，請在 <code>cacheConfig</code> 中將 <code>strategy</code> 設定為 <code>freshness</code>，並將 <code>timeout</code> 設定為 <code>0u</code>。</p>
 
     </div>
-    <p>这实际上执行以下操作：</p>
+    <p>這實際上執行以下操作：</p>
 
     <ol class="docs-ordered-list">
-      <li>首先尝试从网络获取。</li>
-<li>如果网络请求没有立即完成，即在 0 毫秒超时后，则忽略缓存期限并回退到缓存的值。</li>
-<li>网络请求完成后，更新缓存以用于将来的请求。</li>
-<li>如果缓存中不存在该资源，则仍然等待网络请求。</li>
+      <li>首先嘗試從網路獲取。</li>
+<li>如果網路請求沒有立即完成，即在 0 毫秒超時後，則忽略快取期限並回退到快取的值。</li>
+<li>網路請求完成後，更新快取以用於將來的請求。</li>
+<li>如果快取中不存在該資源，則仍然等待網路請求。</li>
 
     </ol>
     
   <h5 id="cacheopaqueresponses">
     <a href="#cacheopaqueresponses" class="docs-anchor" tabindex="-1" aria-label="Link to <code>cacheOpaqueResponses</code>"><code>cacheOpaqueResponses</code></a>
   </h5>
-  <p>Angular Service Worker 是否应缓存不透明响应。</p>
-<p>如果未指定，则默认值取决于数据组的配置策略：</p>
+  <p>Angular Service Worker 是否應快取不透明回應。</p>
+<p>如果未指定，則預設值取決於資料組的設定策略：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
 <th align="left">策略</th>
-<th align="left">详情</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
-<td align="left">使用 <code>freshness</code> 策略的组</td>
-<td align="left">默认值为 <code>true</code>，Service Worker 会缓存不透明响应。这些组每次都会请求数据，并且仅在离线或网络缓慢时才回退到缓存的响应。因此，Service Worker 是否缓存错误响应并不重要。</td>
+<td align="left">使用 <code>freshness</code> 策略的組</td>
+<td align="left">預設值為 <code>true</code>，Service Worker 會快取不透明回應。這些組每次都會請求資料，並且僅在離線或網路緩慢時才回退到快取的回應。因此，Service Worker 是否快取錯誤回應並不重要。</td>
 </tr>
 <tr>
-<td align="left">使用 <code>performance</code> 策略的组</td>
-<td align="left">默认值为 <code>false</code>，Service Worker 不会缓存不透明的响应。即使错误是由于临时的网络或服务器问题导致的，这些组也会继续返回缓存的响应，直到 <code>maxAge</code> 过期。因此，Service Worker 缓存错误响应是有问题的。</td>
+<td align="left">使用 <code>performance</code> 策略的組</td>
+<td align="left">預設值為 <code>false</code>，Service Worker 不會快取不透明的回應。即使錯誤是由於臨時的網路或伺服器問題導致的，這些組也會繼續回傳快取的回應，直到 <code>maxAge</code> 過期。因此，Service Worker 快取錯誤回應是有問題的。</td>
 </tr>
 
       </tbody>
@@ -515,36 +515,36 @@
   </div>
   
     <div class="docs-callout docs-callout-helpful">
-      <h3>关于不透明响应的注释</h3>
-      <p>如果您不熟悉<a href="https://fetch.spec.whatwg.org#concept-filtered-response-opaque" target="_blank">不透明响应</a>，它是一种特殊类型的响应，当请求来自不同源且不返回 CORS 标头的资源时返回。
-不透明响应的特性之一是 Service Worker 不允许读取其状态，这意味着它无法检查请求是否成功。
-更多详细信息，请参阅 <a href="https://developers.google.com/web/updates/2015/03/introduction-to-fetch#response_types" target="_blank"><code>fetch()</code> 简介</a>。</p>
-<p>如果您无法实现 CORS（例如，如果您不控制来源），则对于导致不透明响应的资源，请优先使用 <code>freshness</code> 策略。</p>
+      <h3>關於不透明回應的註解</h3>
+      <p>如果您不熟悉<a href="https://fetch.spec.whatwg.org#concept-filtered-response-opaque" target="_blank">不透明回應</a>，它是一種特殊型別的回應，當請求來自不同源且不回傳 CORS 標頭的資源時回傳。
+不透明回應的屬性之一是 Service Worker 不允許讀取其狀態，這意味著它無法檢查請求是否成功。
+更多詳細訊息，請參閱 <a href="https://developers.google.com/web/updates/2015/03/introduction-to-fetch#response_types" target="_blank"><code>fetch()</code> 簡介</a>。</p>
+<p>如果您無法實現 CORS（例如，如果您不控制來源），則對於導致不透明回應的資源，請優先使用 <code>freshness</code> 策略。</p>
 
     </div>
     
   <h4 id="cachequeryoptions-1">
     <a href="#cachequeryoptions-1" class="docs-anchor" tabindex="-1" aria-label="Link to <code>cacheQueryOptions</code>"><code>cacheQueryOptions</code></a>
   </h4>
-  <p>有关详细信息，请参阅 <a href="#assetgroups">assetGroups</a>。</p>
+  <p>有關詳細訊息，請參閱 <a href="#assetgroups">assetGroups</a>。</p>
 
   <h3 id="navigationurls">
     <a href="#navigationurls" class="docs-anchor" tabindex="-1" aria-label="Link to <code>navigationUrls</code>"><code>navigationUrls</code></a>
   </h3>
-  <p>这个可选部分使您可以指定要重定向到索引文件的自定义 URL 列表。</p>
+  <p>這個可選部分使您可以指定要重導向到索引檔案的自定義 URL 清單。</p>
 
   <h4 id="handling-navigation-requests">
-    <a href="#handling-navigation-requests" class="docs-anchor" tabindex="-1" aria-label="Link to Handling navigation requests">处理导航请求</a>
+    <a href="#handling-navigation-requests" class="docs-anchor" tabindex="-1" aria-label="Link to Handling navigation requests">處理導向請求</a>
   </h4>
-  <p>ServiceWorker 会将与任何 <code>asset</code> 或 <code>data</code> 组都不匹配的导航请求重定向到指定的 <a href="#index">索引文件</a>。
-如果请求满足以下条件，则被视为导航请求：</p>
+  <p>ServiceWorker 會將與任何 <code>asset</code> 或 <code>data</code> 組都不對應的導向請求重導向到指定的 <a href="#index">索引檔案</a>。
+如果請求滿足以下條件，則被視為導向請求：</p>
 
   <ul class="docs-list">
     <li>它的 <a href="https://developer.mozilla.org/docs/Web/API/Request/method" target="_blank">method</a> 是 <code>GET</code></li>
 <li>它的 <a href="https://developer.mozilla.org/docs/Web/API/Request/mode" target="_blank">mode</a> 是 <code>navigation</code></li>
-<li>它接受 <code>text/html</code> 响应，由 <code>Accept</code> 标头的值确定</li>
-<li>它的 URL 符合以下条件：<ul class="docs-list">
-    <li>URL 的最后一个路径段中不得包含文件扩展名（即 <code>.</code>）</li>
+<li>它接受 <code>text/html</code> 回應，由 <code>Accept</code> 標頭的值確定</li>
+<li>它的 URL 符合以下條件：<ul class="docs-list">
+    <li>URL 的最後一個路徑段中不得包含檔案副檔名（即 <code>.</code>）</li>
 <li>URL 不得包含 <code>__</code></li>
 
   </ul>
@@ -553,20 +553,20 @@
   </ul>
   
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> 要配置是否将导航请求发送到网络，请参阅 <a href="#navigationrequeststrategy">navigationRequestStrategy</a> 部分和 <a href="#application-max-age">applicationMaxAge</a> 部分。</p>
+    <p><strong>提示：</strong> 要設定是否將導向請求傳送到網路，請參閱 <a href="#navigationrequeststrategy">navigationRequestStrategy</a> 部分和 <a href="#application-max-age">applicationMaxAge</a> 部分。</p>
 
     </div>
     
   <h4 id="matching-navigation-request-urls">
-    <a href="#matching-navigation-request-urls" class="docs-anchor" tabindex="-1" aria-label="Link to Matching navigation request URLs">匹配导航请求 URL</a>
+    <a href="#matching-navigation-request-urls" class="docs-anchor" tabindex="-1" aria-label="Link to Matching navigation request URLs">對應導向請求 URL</a>
   </h4>
-  <p>虽然这些默认条件在大多数情况下都适用，但有时需要配置不同的规则。
-例如，您可能想要忽略特定的路由（例如那些不属于 Angular 应用的路由），并将它们传递到服务器。</p>
-<p>此字段包含一个 URL 数组和在运行时匹配的 <a href="#modifying-the-configuration">类 glob</a> URL 模式。
-它可以包含否定模式（即以 <code>!</code> 开头的模式）和非否定模式及 URL。</p>
-<p>只有 URL 与<em>任何</em>非否定 URL/模式匹配且与<em>任何</em>否定 URL/模式都不匹配的请求才被视为导航请求。
-匹配时会忽略 URL 查询。</p>
-<p>如果省略该字段，则默认为：</p>
+  <p>雖然這些預設條件在大多數情況下都適用，但有時需要設定不同的規則。
+例如，您可能想要忽略特定的路由（例如那些不屬於 Angular 應用的路由），並將它們傳遞到伺服器。</p>
+<p>此欄位包含一個 URL 陣列和在執行時對應的 <a href="#modifying-the-configuration">類 glob</a> URL 模式。
+它可以包含否定模式（即以 <code>!</code> 開頭的模式）和非否定模式及 URL。</p>
+<p>只有 URL 與<em>任何</em>非否定 URL/模式對應且與<em>任何</em>否定 URL/模式都不對應的請求才被視為導向請求。
+對應時會忽略 URL 查詢。</p>
+<p>如果省略該欄位，則預設為：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  '/**'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,           </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Include all URLs.</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  '!/**/*.*'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,      </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Exclude URLs to files (containing a file extension in the last segment).</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  '!/**/*__*'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,     </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Exclude URLs containing `__` in the last segment.</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  '!/**/*__*/**'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Exclude URLs containing `__` in any other segment.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span></span></code></pre>
@@ -575,7 +575,7 @@
   <h3 id="navigationrequeststrategy">
     <a href="#navigationrequeststrategy" class="docs-anchor" tabindex="-1" aria-label="Link to <code>navigationRequestStrategy</code>"><code>navigationRequestStrategy</code></a>
   </h3>
-  <p>这个可选属性使您可以配置 Service Worker 如何处理导航请求：</p>
+  <p>這個可選屬性使您可以設定 Service Worker 如何處理導向請求：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">{</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  "navigationRequestStrategy"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"freshness"</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -586,18 +586,18 @@
       <thead>
         <tr>
 <th align="left">可能的值</th>
-<th align="left">详情</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>'performance'</code></td>
-<td align="left">默认设置。提供指定的 <a href="#index-file">索引文件</a>，该文件通常会被缓存。</td>
+<td align="left">預設設定。提供指定的 <a href="#index-file">索引檔案</a>，該檔案通常會被快取。</td>
 </tr>
 <tr>
 <td align="left"><code>'freshness'</code></td>
-<td align="left">将请求传递到网络，并在离线时回退到 <code>performance</code> 行为。当服务器使用 <code>3xx</code> HTTP 重定向状态代码将导航请求重定向到其他位置时，此值非常有用。使用此值的原因包括：<ul> <li>当身份验证不由应用处理时，重定向到身份验证网站</li> <li>在网站重新设计后，重定向特定 URL 以避免破坏现有链接/书签</li> <li>当页面暂时关闭时，重定向到其他网站，例如服务器状态页面</li> </ul></td>
+<td align="left">將請求傳遞到網路，並在離線時回退到 <code>performance</code> 行為。當服務器使用 <code>3xx</code> HTTP 重導向狀態程式碼將導向請求重導向到其他位置時，此值非常有用。使用此值的原因包括：<ul> <li>當身份驗證不由應用處理時，重導向到身份驗證網站</li> <li>在網站重新設計後，重導向特定 URL 以避免破壞現有連結/書籤</li> <li>當頁面暫時關閉時，重導向到其他網站，例如伺服器狀態頁面</li> </ul></td>
 </tr>
 
       </tbody>
@@ -605,11 +605,11 @@
   </div>
   
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要提示：</strong> <code>freshness</code> 策略通常会导致向服务器发送更多请求，这可能会增加响应延迟。建议您尽可能使用默认的 performance 策略。</p>
+    <p><strong>重要提示：</strong> <code>freshness</code> 策略通常會導致向伺服器傳送更多請求，這可能會增加回應延遲。建議您儘可能使用預設的 performance 策略。</p>
 
     </div>
     
   <h3 id="applicationmaxage">
     <a href="#applicationmaxage" class="docs-anchor" tabindex="-1" aria-label="Link to <code>applicationMaxAge</code>"><code>applicationMaxAge</code></a>
   </h3>
-  <p>这个可选属性使您可以配置 Service Worker 缓存任何请求的时长。在 <code>maxAge</code> 内，文件将从缓存中提供。超出此时间后，所有请求都将仅从网络提供，包括资产和数据请求。</p>
+  <p>這個可選屬性使您可以設定 Service Worker 快取任何請求的時長。在 <code>maxAge</code> 內，檔案將從快取中提供。超出此時間後，所有請求都將僅從網路提供，包括資產和數據請求。</p>

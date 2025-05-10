@@ -4,7 +4,7 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">高级组件配置</h1>
+    <h1 tabindex="-1">高階元件設定</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/advanced-configuration.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
@@ -13,36 +13,36 @@
     </header>
     
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong> 本指南假设你已经阅读过<a href="essentials">《要点指南》</a>。如果你是 Angular 新手，请先阅读它。</p>
+    <p><strong>提示：</strong> 本指南假設你已經閱讀過<a href="essentials">《要點指南》</a>。如果你是 Angular 新手，請先閱讀它。</p>
 
     </div>
     
   <h2 id="changedetectionstrategy">
     <a href="#changedetectionstrategy" class="docs-anchor" tabindex="-1" aria-label="Link to ChangeDetectionStrategy">ChangeDetectionStrategy</a>
   </h2>
-  <p><code>@Component</code> 装饰器接受一个 <code>changeDetection</code> 选项，用于控制组件的<strong>变更检测模式</strong>。有两种变更检测模式选项。</p>
-<p><strong><code>ChangeDetectionStrategy.Default</code></strong> 顾名思义，是默认策略。在这种模式下，每当应用范围内可能发生任何活动时，Angular 都会检查组件的 DOM 是否需要更新。触发此检查的活动包括用户交互、网络响应、定时器等等。</p>
-<p><strong><code>ChangeDetectionStrategy.OnPush</code></strong> 是一种可选模式，可以减少 Angular 需要执行的检查量。在这种模式下，框架仅在以下情况下检查组件的 DOM 是否需要更新：</p>
+  <p><code>@Component</code> 裝飾器接受一個 <code>changeDetection</code> 選項，用於控制組件的<strong>變更檢測模式</strong>。有兩種變更檢測模式選項。</p>
+<p><strong><code>ChangeDetectionStrategy.Default</code></strong> 顧名思義，是預設策略。在這種模式下，每當應用範圍內可能發生任何活動時，Angular 都會檢查元件的 DOM 是否需要更新。觸發此檢查的活動包括使用者互動、網路回應、定時器等等。</p>
+<p><strong><code>ChangeDetectionStrategy.OnPush</code></strong> 是一種可選模式，可以減少 Angular 需要執行的檢查量。在這種模式下，框架僅在以下情況下檢查元件的 DOM 是否需要更新：</p>
 
   <ul class="docs-list">
-    <li>组件输入由于模板中的绑定而发生更改，或者</li>
-<li>此组件中的事件监听器运行</li>
-<li>通过 <code>ChangeDetectorRef.markForCheck</code> 或包装它的东西（如 <code>AsyncPipe</code>）显式地将组件标记为需要检查。</li>
+    <li>元件輸入由於樣板中的繫結而發生更改，或者</li>
+<li>此元件中的事件監聽器執行</li>
+<li>透過 <code>ChangeDetectorRef.markForCheck</code> 或包裝它的東西（如 <code>AsyncPipe</code>）顯式地將元件標記為需要檢查。</li>
 
   </ul>
-  <p>此外，当检查 OnPush 组件时，Angular <em>还会</em>检查其所有祖先组件，并在应用树中向上遍历。</p>
+  <p>此外，當檢查 OnPush 元件時，Angular <em>還會</em>檢查其所有祖先元件，並在應用樹中向上遍歷。</p>
 
   <h2 id="preservewhitespaces">
     <a href="#preservewhitespaces" class="docs-anchor" tabindex="-1" aria-label="Link to PreserveWhitespaces">PreserveWhitespaces</a>
   </h2>
-  <p>默认情况下，Angular 会删除和折叠模板中多余的空格，最常见的是来自换行符和缩进的空格。你可以通过在组件的元数据中显式地将 <code>preserveWhitespaces</code> 设置为 <code>true</code> 来更改此设置。</p>
+  <p>預設情況下，Angular 會刪除和摺疊樣板中多餘的空格，最常見的是來自換行符和縮排的空格。你可以透過在元件的元資料中顯式地將 <code>preserveWhitespaces</code> 設定為 <code>true</code> 來更改此設定。</p>
 
   <h2 id="custom-element-schemas">
-    <a href="#custom-element-schemas" class="docs-anchor" tabindex="-1" aria-label="Link to Custom element schemas">自定义元素 schema</a>
+    <a href="#custom-element-schemas" class="docs-anchor" tabindex="-1" aria-label="Link to Custom element schemas">自定義元素 schema</a>
   </h2>
-  <p>默认情况下，当 Angular 遇到未知的 HTML 元素时，会抛出一个错误。你可以通过在组件元数据中的 <code>schemas</code> 属性中包含 <code>CUSTOM_ELEMENTS_SCHEMA</code> 来禁用组件的此行为。</p>
+  <p>預設情況下，當 Angular 遇到未知的 HTML 元素時，會丟擲一個錯誤。你可以透過在元件元資料中的 <code>schemas</code> 屬性中包含 <code>CUSTOM_ELEMENTS_SCHEMA</code> 來停用元件的此行為。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Component, CUSTOM_ELEMENTS_SCHEMA} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  ...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  schemas: [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">CUSTOM_ELEMENTS_SCHEMA</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">some-unknown-component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">some-unknown-component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ComponentWithCustomElements</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { }</span></span></code></pre>
     </pre>
-  </div><p>目前，Angular 不支持任何其他 schema。</p>
+  </div><p>目前，Angular 不支援任何其他 schema。</p>

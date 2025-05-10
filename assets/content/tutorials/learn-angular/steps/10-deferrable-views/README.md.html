@@ -4,16 +4,16 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">可延迟视图</h1>
+    <h1 tabindex="-1">可延遲檢視</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/learn-angular/steps/10-deferrable-views/README.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>有时在应用开发中，你最终会得到许多需要在你的应用中引用的组件，但由于各种原因，其中一些组件不需要立即加载。</p>
-<p>也许它们位于可见区域下方，或者是直到稍后才交互的重型组件。 在这种情况下，我们可以使用可延迟视图稍后加载其中一些资源。</p>
-<p>在此活动中，你将学习如何使用可延迟视图来延迟加载组件模板的某个部分。</p>
+    <p>有時在應用開發中，你最終會得到許多需要在你的應用中引用的元件，但由於各種原因，其中一些元件不需要立即載入。</p>
+<p>也許它們位於可見區域下方，或者是直到稍後才互動的重型元件。 在這種情況下，我們可以使用可延遲檢視稍後載入其中一些資源。</p>
+<p>在此活動中，你將學習如何使用可延遲檢視來延遲載入元件樣板的某個部分。</p>
 <hr>
 
 
@@ -23,16 +23,16 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-a-defer-block-around-the-comments-component">
-    <a href="#add-a-defer-block-around-the-comments-component" class="docs-anchor" tabindex="-1" aria-label="Link to Add a <code>@defer</code> block around the comments component">在 comments 组件周围添加一个 <code>@defer</code> 控制块</a>
+    <a href="#add-a-defer-block-around-the-comments-component" class="docs-anchor" tabindex="-1" aria-label="Link to Add a <code>@defer</code> block around the comments component">在 comments 元件周圍新增一個 <code>@defer</code> 控制區塊</a>
   </h3>
   
-      <p>在你的应用中，博客文章页面在文章详情之后有一个评论组件。</p>
-<p>用 <code>@defer</code> 控制块包裹评论组件以延迟加载它。</p>
+      <p>在你的應用中，部落格文章頁面在文章詳情之後有一個評論元件。</p>
+<p>用 <code>@defer</code> 控制區塊包裹評論元件以延遲載入它。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">comments</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>上面的代码是如何使用基本的 <code>@defer</code> 控制块的示例。 默认情况下，当浏览器空闲时，<code>@defer</code> 将加载 <code>comments</code> 组件。</p>
+  </div><p>上面的程式碼是如何使用基本的 <code>@defer</code> 控制區塊的範例。 預設情況下，當瀏覽器空閒時，<code>@defer</code> 將載入 <code>comments</code> 元件。</p>
 
     </li>
     
@@ -40,10 +40,10 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-a-placeholder">
-    <a href="#add-a-placeholder" class="docs-anchor" tabindex="-1" aria-label="Link to Add a placeholder">添加一个占位符</a>
+    <a href="#add-a-placeholder" class="docs-anchor" tabindex="-1" aria-label="Link to Add a placeholder">新增一個佔位符</a>
   </h3>
   
-      <p>向 <code>@defer</code> 控制块添加一个 <code>@placeholder</code> 控制块。 <code>@placeholder</code> 控制块是你放置 html 的位置，它将在延迟加载开始之前显示。 <code>@placeholder</code> 控制块中的内容是急性加载的。</p>
+      <p>向 <code>@defer</code> 控制區塊新增一個 <code>@placeholder</code> 控制區塊。 <code>@placeholder</code> 控制區塊是你放置 html 的位置，它將在延遲載入開始之前顯示。 <code>@placeholder</code> 控制塊中的內容是急性載入的。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">comments</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Future comments&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -55,10 +55,10 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-a-loading-block">
-    <a href="#add-a-loading-block" class="docs-anchor" tabindex="-1" aria-label="Link to Add a loading block">添加一个加载块</a>
+    <a href="#add-a-loading-block" class="docs-anchor" tabindex="-1" aria-label="Link to Add a loading block">新增一個載入區塊</a>
   </h3>
   
-      <p>向 <code>@defer</code> 控制块添加一个 <code>@loading</code> 控制块。 <code>@loading</code> 控制块是你放置 html 的位置，它将在<em>当</em>正在主动获取延迟内容但尚未完成时显示。 <code>@loading</code> 控制块中的内容是急性加载的。</p>
+      <p>向 <code>@defer</code> 控制區塊新增一個 <code>@loading</code> 控制區塊。 <code>@loading</code> 控制區塊是你放置 html 的位置，它將在<em>當</em>正在主動獲取延遲內容但尚未完成時顯示。 <code>@loading</code> 控制塊中的內容是急性載入的。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">comments</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Future comments&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@loading</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Loading comments...&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -70,10 +70,10 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-a-minimum-duration">
-    <a href="#add-a-minimum-duration" class="docs-anchor" tabindex="-1" aria-label="Link to Add a minimum duration">添加最短持续时间</a>
+    <a href="#add-a-minimum-duration" class="docs-anchor" tabindex="-1" aria-label="Link to Add a minimum duration">新增最短持續時間</a>
   </h3>
   
-      <p><code>@placeholder</code> 和 <code>@loading</code> 部分都有可选参数，以防止在快速加载时发生闪烁。 <code>@placeholder</code> 具有 <code>minimum</code>，而 <code>@loading</code> 具有 <code>minimum</code> 和 <code>after</code>。 向 <code>@loading</code> 控制块添加 <code>minimum</code> 持续时间，以便它至少渲染 2 秒。</p>
+      <p><code>@placeholder</code> 和 <code>@loading</code> 部分都有可選引數，以防止在快速載入時發生閃爍。 <code>@placeholder</code> 具有 <code>minimum</code>，而 <code>@loading</code> 具有 <code>minimum</code> 和 <code>after</code>。 向 <code>@loading</code> 控制區塊新增 <code>minimum</code> 持續時間，以便它至少渲染 2 秒。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">comments</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Future comments&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@loading</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (minimum 2s) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Loading comments...&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -85,10 +85,10 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-a-viewport-trigger">
-    <a href="#add-a-viewport-trigger" class="docs-anchor" tabindex="-1" aria-label="Link to Add a viewport trigger">添加一个视口触发器</a>
+    <a href="#add-a-viewport-trigger" class="docs-anchor" tabindex="-1" aria-label="Link to Add a viewport trigger">新增一個視口觸發器</a>
   </h3>
   
-      <p>可延迟视图有许多触发器选项。 添加一个视口触发器，以便内容在进入视口后延迟加载。</p>
+      <p>可延遲檢視有許多觸發器選項。 新增一個視口觸發器，以便內容在進入視口後延遲載入。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line highlighted"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (on viewport) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">comments</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -100,19 +100,19 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-content">
-    <a href="#add-content" class="docs-anchor" tabindex="-1" aria-label="Link to Add content">添加内容</a>
+    <a href="#add-content" class="docs-anchor" tabindex="-1" aria-label="Link to Add content">新增內容</a>
   </h3>
   
-      <p>当你延迟加载页面下方足够远以至于需要滚动才能看到的内容时，最好使用视口触发器。 因此，让我们向博客文章添加一些内容。 你可以自己编写，也可以复制以下内容并将其放在 <code>&lt;article&gt;</code> 元素内。</p>
+      <p>當你延遲載入頁面下方足夠遠以至於需要捲動才能看到的內容時，最好使用視口觸發器。 因此，讓我們向部落格文章新增一些內容。 你可以自己編寫，也可以複製以下內容並將其放在 <code>&lt;article&gt;</code> 元素內。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">article</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Angular is my favorite framework, and this is why. Angular has the coolest deferrable view feature that makes defer loading content the easiest and most ergonomic it could possibly be. The Angular community is also filled with amazing contributors and experts that create excellent content. The community is welcoming and friendly, and it really is the best community out there.&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;I can't express enough how much I enjoy working with Angular. It offers the best developer experience I've ever had. I love that the Angular team puts their developers first and takes care to make us very happy. They genuinely want Angular to be the best framework it can be, and they're doing such an amazing job at it, too. This statement comes from my heart and is not at all copied and pasted. In fact, I think I'll say these exact same things again a few times.&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Angular is my favorite framework, and this is why. Angular has the coolest deferrable view feature that makes defer loading content the easiest and most ergonomic it could possibly be. The Angular community is also filled with amazing contributors and experts that create excellent content. The community is welcoming and friendly, and it really is the best community out there.&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;I can't express enough how much I enjoy working with Angular. It offers the best developer experience I've ever had. I love that the Angular team puts their developers first and takes care to make us very happy. They genuinely want Angular to be the best framework it can be, and they're doing such an amazing job at it, too. This statement comes from my heart and is not at all copied and pasted. In fact, I think I'll say these exact same things again a few times.&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Angular is my favorite framework, and this is why. Angular has the coolest deferrable view feature that makes defer loading content the easiest and most ergonomic it could possibly be. The Angular community is also filled with amazing contributors and experts that create excellent content. The community is welcoming and friendly, and it really is the best community out there.&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;I can't express enough how much I enjoy working with Angular. It offers the best developer experience I've ever had. I love that the Angular team puts their developers first and takes care to make us very happy. They genuinely want Angular to be the best framework it can be, and they're doing such an amazing job at it, too. This statement comes from my heart and is not at all copied and pasted.&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">article</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>添加此代码后，现在向下滚动以查看在你将其滚动到视口中后延迟加载的内容。</p>
+  </div><p>新增此程式碼後，現在向下捲動以檢視在你將其捲動到視口中後延遲載入的內容。</p>
 
     </li>
     
     </ol>
-    <p><span class="docs-emoji">在此活动中，你已经学习了如何在你的应用中使用可延迟视图。 做得好。 🙌</span></p>
-<p>你可以使用它们做更多的事情，例如不同的触发器、预取和 <code>@error</code> 控制块。</p>
-<p>如果你想了解更多信息，请查看<a href="guide/defer">可延迟视图的文档</a>。</p>
+    <p><span class="docs-emoji">在此活動中，你已經學習瞭如何在你的應用中使用可延遲檢視。 做得好。 🙌</span></p>
+<p>你可以使用它們做更多的事情，例如不同的觸發器、預取和 <code>@error</code> 控制區塊。</p>
+<p>如果你想了解更多訊息，請檢視<a href="guide/defer">可延遲檢視的文件</a>。</p>

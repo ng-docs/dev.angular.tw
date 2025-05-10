@@ -4,118 +4,118 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bf4qau51t25zl7c84rwr3a4f">特性模块</h1>
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bf4qau51t25zl7c84rwr3a4f">屬性模組</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/feature-modules.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9d2kzc8u7qck2znv56nw9m765">特性模块是用来对代码进行组织的模块。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7u3kdym9f2adg5vji86gxk8ia">随着应用的增长，你可能需要组织与特定应用有关的代码。
-这将帮你把特性划出清晰的边界。使用特性模块，你可以把与特定的功能或特性有关的代码从其它代码中分离出来。
-为应用勾勒出清晰的边界，有助于开发人员之间、小组之间的协作，有助于分离各个指令，并帮助管理根模块的大小。</p>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9d2kzc8u7qck2znv56nw9m765">屬性模組是用來對程式碼進行組織的模組。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7u3kdym9f2adg5vji86gxk8ia">隨著應用的增長，你可能需要組織與特定應用有關的程式碼。
+這將幫你把屬性劃出清晰的邊界。使用屬性模組，你可以把與特定的功能或屬性有關的程式碼從其它程式碼中分離出來。
+為應用勾勒出清晰的邊界，有助於開發人員之間、小組之間的協作，有助於分離各個指令，並幫助管理根模組的大小。</p>
 
   <h2 id="feature-modules-vs-root-modules">
-    <a href="#feature-modules-vs-root-modules" class="docs-anchor" tabindex="-1" aria-label="Link to Feature modules vs. root modules" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bqxwz5vg5splvi09jha5fyq81">特性模块 vs. 根模块</a>
+    <a href="#feature-modules-vs-root-modules" class="docs-anchor" tabindex="-1" aria-label="Link to Feature modules vs. root modules" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bqxwz5vg5splvi09jha5fyq81">屬性模組 vs. 根模組</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="77kg3qac2hbb8v4kes46ohhvk">与核心的 Angular API 的概念相反，特性模块是最佳的组织方式。特性模块提供了聚焦于特定应用需求的一组功能，比如用户工作流、路由或表单。
-虽然你也可以用根模块做完所有事情，不过特性模块可以帮助你把应用划分成一些聚焦的功能区。特性模块通过它提供的服务以及共享出的组件、指令和管道来与根模块和其它模块合作。</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="77kg3qac2hbb8v4kes46ohhvk">與核心的 Angular API 的概念相反，屬性模組是最佳的組織方式。屬性模組提供了聚焦於特定應用需求的一組功能，比如使用者工作流、路由或表單。
+雖然你也可以用根模組做完所有事情，不過屬性模組可以幫助你把應用劃分成一些聚焦的功能區。屬性模組透過它提供的服務以及共享出的元件、指令和通道來與根模組和其它模組合作。</p>
 
   <h2 id="how-to-make-a-feature-module">
-    <a href="#how-to-make-a-feature-module" class="docs-anchor" tabindex="-1" aria-label="Link to How to make a feature module" data-ng_translator_product="100" data-ng_translator_ref_id="3jcazmx5d98oytp4pisxx0dip">如何制作特性模块</a>
+    <a href="#how-to-make-a-feature-module" class="docs-anchor" tabindex="-1" aria-label="Link to How to make a feature module" data-ng_translator_product="100" data-ng_translator_ref_id="3jcazmx5d98oytp4pisxx0dip">如何製作屬性模組</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="7wia4keys6meetzpf86rqnjg1">假设你已经使用 
-<a href="/tools/cli">Angular CLI</a> 创建了一个应用，可以在根项目目录中输入以下命令，通过 CLI 创建一个特性模块。你可以省略名称中的 "Module" 后缀，因为 CLI 会自动添加它：</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7wia4keys6meetzpf86rqnjg1">假設你已經使用 
+<a href="/tools/cli">Angular CLI</a> 建立了一個應用，可以在根專案目錄中輸入以下指令，透過 CLI 建立一個屬性模組。你可以省略名稱中的 "Module" 字尾，因為 CLI 會自動新增它：</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate module CustomerDashboard</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a0pyi66xi2ptfppcdku005sdx">这会让 CLI 创建一个名叫 <code>customer-dashboard</code> 的文件夹，其中有一个名叫 <code>customer-dashboard.module.ts</code>，内容如下：</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a0pyi66xi2ptfppcdku005sdx">這會讓 CLI 建立一個名叫 <code>customer-dashboard</code> 的資料夾，其中有一個名叫 <code>customer-dashboard.module.ts</code>，內容如下：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CommonModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">CommonModule</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: []</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomerDashboardModule</span> { }</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="c6mnnt3pmqbbt9a4yqmrgig15">无论是根模块还是特性模块，NgModule 的结构是相同的。在 CLI 生成的特性模块中，文件顶部有两个 JavaScript 导入语句：第一个导入 
-<code>NgModule</code>，这与根模块一样，让你可以使用 
-<code>@NgModule</code> 装饰器；第二个导入 
-<code>CommonModule</code>，它提供了许多常用指令（如 
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="c6mnnt3pmqbbt9a4yqmrgig15">無論是根模組還是屬性模組，NgModule 的結構是相同的。在 CLI 生成的屬性模組中，檔案頂部有兩個 JavaScript 匯入語句：第一個匯入 
+<code>NgModule</code>，這與根模組一樣，讓你可以使用 
+<code>@NgModule</code> 裝飾器；第二個匯入 
+<code>CommonModule</code>，它提供了許多常用指令（如 
 <code>ngIf</code> 和 
 <code>ngFor</code>）。</p>
 
     <div class="docs-alert docs-alert-note">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="5au5hfmivlk7wi19ymx44n29z"><strong>注意：</strong>特性模块导入 
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="5au5hfmivlk7wi19ymx44n29z"><strong>注意：</strong>屬性模組匯入 
 <code>CommonModule</code> 而不是 
-<code>BrowserModule</code>，后者只在根模块中导入一次。
-<code>CommonModule</code> 仅包含常用指令（如 
+<code>BrowserModule</code>，後者只在根模組中匯入一次。
+<code>CommonModule</code> 僅包含常用指令（如 
 <code>ngIf</code> 和 
-<code>ngFor</code>）的信息，这些指令在大多数模板中都需要，而 
-<code>BrowserModule</code> 配置 Angular 应用在浏览器中运行，这只需要做一次。</p>
+<code>ngFor</code>）的訊息，這些指令在大多數樣板中都需要，而 
+<code>BrowserModule</code> 設定 Angular 應用在瀏覽器中執行，這隻需要做一次。</p>
 
     </div>
-    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="64i4ti54m0vczvw2ggzgurseh"><code>declarations</code> 数组让你能添加专属于这个模块的可声明对象（组件、指令和管道）。
-要添加组件，就在命令行中输入如下命令，这里的 <code>customer-dashboard</code> 是一个目录，CLI 会把特性模块生成在这里，而 <code>CustomerDashboard</code> 就是该组件的名字：</p>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="64i4ti54m0vczvw2ggzgurseh"><code>declarations</code> 陣列讓你能新增專屬於這個模組的可宣告物件（元件、指令和通道）。
+要新增元件，就在指令行中輸入如下指令，這裡的 <code>customer-dashboard</code> 是一個目錄，CLI 會把屬性模組生成在這裡，而 <code>CustomerDashboard</code> 就是該組件的名字：</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate component customer-dashboard/CustomerDashboard</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="109l0dce6c1qzxizwpwv2z2ai">这会在 
-<code>customer-dashboard</code> 文件夹内生成一个新组件的文件夹，并更新 
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="109l0dce6c1qzxizwpwv2z2ai">這會在 
+<code>customer-dashboard</code> 資料夾內生成一個新元件的資料夾，並更新 
 <code>CustomerDashboardModule</code>。</p>
 <div class="docs-code" header="src/app/customer-dashboard/customer-dashboard.module.ts">
     <div class="docs-code-header"><h3>src/app/customer-dashboard/customer-dashboard.module.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { NgModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { CommonModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> { CustomerDashboardComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./customer-dashboard/customer-dashboard.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@NgModule({</div><div class="hljs-ln-line">  imports: [</div><div class="hljs-ln-line">    CommonModule</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  declarations: [</div><div class="hljs-ln-line highlighted">    CustomerDashboardComponent</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  exports: [</div><div class="hljs-ln-line highlighted">    CustomerDashboardComponent</div><div class="hljs-ln-line">  ]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomerDashboardModule</span> { }</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="402xuabs06c1t6vo5h5eoh1j9"><code>CustomerDashboardComponent</code> 出现在了顶部的 JavaScript 导入列表里，并且被添加到了 <code>declarations</code> 数组中，它会让 Angular 把新组件和这个特性模块联系起来。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="402xuabs06c1t6vo5h5eoh1j9"><code>CustomerDashboardComponent</code> 出現在了頂部的 JavaScript 匯入清單裡，並且被新增到了 <code>declarations</code> 陣列中，它會讓 Angular 把新元件和這個屬性模組聯絡起來。</p>
 
   <h2 id="importing-a-feature-module">
-    <a href="#importing-a-feature-module" class="docs-anchor" tabindex="-1" aria-label="Link to Importing a feature module" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e6dll9l77n9l9br0f3ny04x0k">导入特性模块</a>
+    <a href="#importing-a-feature-module" class="docs-anchor" tabindex="-1" aria-label="Link to Importing a feature module" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="e6dll9l77n9l9br0f3ny04x0k">匯入屬性模組</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1vx73d0atpaeikxo2eoe4lmk6">要想把这个特性模块包含进应用中，你还得让根模块 <code>app.module.ts</code> 知道它。注意，在 <code>customer-dashboard.module.ts</code> 文件底部 <code>CustomerDashboardModule</code> 的导出部分。这样就把它暴露出来，以便其它模块可以拿到它。要想把它导入到 <code>AppModule</code> 中，就把它加入 <code>app.module.ts</code> 的导入表中，并将其加入 <code>imports</code> 数组：</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1vx73d0atpaeikxo2eoe4lmk6">要想把這個屬性模組包含進應用中，你還得讓根模組 <code>app.module.ts</code> 知道它。注意，在 <code>customer-dashboard.module.ts</code> 檔案底部 <code>CustomerDashboardModule</code> 的匯出部分。這樣就把它暴露出來，以便其它模組可以拿到它。要想把它匯入到 <code>AppModule</code> 中，就把它加入 <code>app.module.ts</code> 的匯入表中，並將其加入 <code>imports</code> 陣列：</p>
 <div class="docs-code" header="src/app/app.module.ts">
     <div class="docs-code-header"><h3>src/app/app.module.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">BrowserModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-comment">// import the feature module here so you can add it to the imports array below</span></div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CustomerDashboardModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./customer-dashboard/customer-dashboard.module'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">AppComponent</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">BrowserModule</span>,</div><div class="hljs-ln-line highlighted">    <span class="hljs-title class_">CustomerDashboardModule</span> <span class="hljs-comment">// add the feature module here</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [],</div><div class="hljs-ln-line">  <span class="hljs-attr">bootstrap</span>: [<span class="hljs-title class_">AppComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> { }</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="aco9y2qffm0hr8ffx5bdkbp5n">现在 
-<code>AppModule</code> 知道了特性模块，
-<code>AppComponent</code> 可以使用客户仪表板组件。更多详细信息请参见下节。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="epbf3idzn67v8pkwcxqzryvvs">如果你向特性模块添加任何服务提供者，
-<code>AppModule</code> 也会知道这些提供者，其他任何导入的特性模块也是如此。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="aco9y2qffm0hr8ffx5bdkbp5n">現在 
+<code>AppModule</code> 知道了屬性模組，
+<code>AppComponent</code> 可以使用客戶儀表板元件。更多詳細訊息請參見下節。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="epbf3idzn67v8pkwcxqzryvvs">如果你向屬性模組新增任何服務提供者，
+<code>AppModule</code> 也會知道這些提供者，其他任何匯入的屬性模組也是如此。</p>
 
   <h2 id="rendering-a-feature-modules-component-template">
-    <a href="#rendering-a-feature-modules-component-template" class="docs-anchor" tabindex="-1" aria-label="Link to Rendering a feature module's component template" data-ng_translator_product="100" data-ng_translator_ref_id="6setre8jqluggrhei0ekhra9j">渲染特性模块的组件模板</a>
+    <a href="#rendering-a-feature-modules-component-template" class="docs-anchor" tabindex="-1" aria-label="Link to Rendering a feature module's component template" data-ng_translator_product="100" data-ng_translator_ref_id="6setre8jqluggrhei0ekhra9j">渲染屬性模組的元件樣板</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dzpqysevg9iyz9xrb6durbi7u">当 CLI 为这个特性模块生成 <code>CustomerDashboardComponent</code> 时，还包含一个模板 <code>customer-dashboard.component.html</code>，它带有如下页面脚本：</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dzpqysevg9iyz9xrb6durbi7u">當 CLI 為這個屬性模組生成 <code>CustomerDashboardComponent</code> 時，還包含一個樣板 <code>customer-dashboard.component.html</code>，它帶有如下頁面指令碼：</p>
 <div class="docs-code" header="src/app/customer-dashboard/customer-dashboard/customer-dashboard.component.html">
     <div class="docs-code-header"><h3>src/app/customer-dashboard/customer-dashboard/customer-dashboard.component.html</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span></div><div class="hljs-ln-line">  customer-dashboard works!</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7cqn1spicb1j0zr6wdke8kcr0">要想在 <code>AppComponent</code> 中查看这些 HTML，你首先要在 <code>CustomerDashboardModule</code> 中导出 <code>CustomerDashboardComponent</code>。
-在 <code>customer-dashboard.module.ts</code> 中，<code>declarations</code> 数组的紧下方，加入一个包含 <code>CustomerDashboardModule</code> 的 <code>exports</code> 数组：</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7cqn1spicb1j0zr6wdke8kcr0">要想在 <code>AppComponent</code> 中檢視這些 HTML，你首先要在 <code>CustomerDashboardModule</code> 中匯出 <code>CustomerDashboardComponent</code>。
+在 <code>customer-dashboard.module.ts</code> 中，<code>declarations</code> 陣列的緊下方，加入一個包含 <code>CustomerDashboardModule</code> 的 <code>exports</code> 陣列：</p>
 <div class="docs-code" header="src/app/customer-dashboard/customer-dashboard.module.ts">
     <div class="docs-code-header"><h3>src/app/customer-dashboard/customer-dashboard.module.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attribute">exports</span>:<span class="hljs-meta"> [</span></div><div class="hljs-ln-line highlighted">    CustomerDashboardComponent</div><div class="hljs-ln-line">  ]</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="douu83oy0rlym1gzquqmtikku">然后，在 <code>AppComponent</code> 的 <code>app.component.html</code> 中，加入标签 <code>&lt;app-customer-dashboard&gt;</code>：</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="douu83oy0rlym1gzquqmtikku">然後，在 <code>AppComponent</code> 的 <code>app.component.html</code> 中，加入標籤 <code>&lt;app-customer-dashboard&gt;</code>：</p>
 <div class="docs-code" header="src/app/app.component.html">
     <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line">  {{title}}</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">app-customer-dashboard</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-customer-dashboard</span>&gt;</span></div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7xldnueeqk2mmunvno4ns840c">现在，除了默认渲染出的标题外，还渲染出了 <code>CustomerDashboardComponent</code> 的模板：</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7xldnueeqk2mmunvno4ns840c">現在，除了預設渲染出的標題外，還渲染出了 <code>CustomerDashboardComponent</code> 的樣板：</p>
 <img alt="feature module component" src="assets/images/guide/ngmodules/feature-module.png">
 
 
   <h2 id="more-on-ngmodules">
-    <a href="#more-on-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to More on NgModules" data-ng_translator_product="100" data-ng_translator_ref_id="4zpukz8usqrzb3byrzbogm52l">关于 NgModule 的更多知识</a>
+    <a href="#more-on-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to More on NgModules" data-ng_translator_product="100" data-ng_translator_ref_id="4zpukz8usqrzb3byrzbogm52l">關於 NgModule 的更多知識</a>
   </h2>
   
     <nav class="docs-pill-row">
       
-    <a class="docs-pill" href="/guide/ngmodules/lazy-loading" data-ng_translator_product="100" data-ng_translator_ref_id="8mfq8hr7438egl50cypdn8g9">使用 Angular 路由器惰性加载模块</a>
+    <a class="docs-pill" href="/guide/ngmodules/lazy-loading" data-ng_translator_product="100" data-ng_translator_ref_id="8mfq8hr7438egl50cypdn8g9">使用 Angular 路由器延遲載入模組</a>
     
     <a class="docs-pill" href="/guide/ngmodules/providers" data-ng_translator_product="100" data-ng_translator_ref_id="77p47ajmgeg7nllnu7idzpnzw">提供者</a>
     
-    <a class="docs-pill" href="/guide/ngmodules/module-types" data-ng_translator_product="100" data-ng_translator_ref_id="2e8lovj893j5ltyvz9l7kg2zy">特性模块的分类</a>
+    <a class="docs-pill" href="/guide/ngmodules/module-types" data-ng_translator_product="100" data-ng_translator_ref_id="2e8lovj893j5ltyvz9l7kg2zy">屬性模組的分類</a>
     
 
     </nav>

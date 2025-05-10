@@ -6,14 +6,14 @@
           
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">依赖注入</h1>
+    <h1 tabindex="-1">依賴注入</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/introduction/essentials/dependency-injection.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
 
-          <p><!-- markdownlint-disable-line -->在你的应用和测试中复用代码和控制行为。</p>
+          <p><!-- markdownlint-disable-line -->在你的應用和測試中複用程式碼和控制行為。</p>
         </div>
 
         <!-- illustration -->
@@ -110,41 +110,41 @@
 
       </div>
     </div>
-    <p>当需要在组件之间共享逻辑时，Angular 利用了<a href="guide/di">依赖注入</a>的设计模式，允许你创建一个“服务”，从而允许你将代码注入到组件中，同时从单一事实之源对其进行管理。</p>
+    <p>當需要在元件之間共享邏輯時，Angular 利用了<a href="guide/di">依賴注入</a>的設計模式，允許你建立一個『服務』，從而允許你將程式碼注入到元件中，同時從單一事實之源對其進行管理。</p>
 
   <h2 id="what-are-services">
-    <a href="#what-are-services" class="docs-anchor" tabindex="-1" aria-label="Link to What are services?">什么是服务？</a>
+    <a href="#what-are-services" class="docs-anchor" tabindex="-1" aria-label="Link to What are services?">什麼是服務？</a>
   </h2>
-  <p>服务是可以注入的可复用代码片段。</p>
-<p>与定义组件类似，服务由以下部分组成：</p>
+  <p>服務是可以注入的可複用程式碼片段。</p>
+<p>與定義元件類別似，服務由以下部分組成：</p>
 
   <ul class="docs-list">
-    <li>一个 <strong>TypeScript 装饰器</strong>，它通过 <code>@Injectable</code> 将类声明为 Angular 服务，并允许你通过 <code>providedIn</code> 属性（通常为 <code>'root'</code>）定义应用的哪个部分可以访问该服务，从而允许在应用内的任何位置访问该服务。</li>
-<li>一个 <strong>TypeScript 类</strong>，用于定义在注入服务时可访问的所需代码</li>
+    <li>一個 <strong>TypeScript 裝飾器</strong>，它透過 <code>@Injectable</code> 將類別宣告為 Angular 服務，並允許你透過 <code>providedIn</code> 屬性（通常為 <code>'root'</code>）定義應用的哪個部分可以訪問該服務，從而允許在應用內的任何位置訪問該服務。</li>
+<li>一個 <strong>TypeScript 類</strong>，用於定義在注入服務時可訪問的所需程式碼</li>
 
   </ul>
-  <p>这是一个 <code>Calculator</code> 服务的范例。</p>
+  <p>這是一個 <code>Calculator</code> 服務的範例。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Injectable} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Injectable</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({providedIn: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'root'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Calculator</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  add</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">x</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">y</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> x </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">+</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> y;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h2 id="how-to-use-a-service">
-    <a href="#how-to-use-a-service" class="docs-anchor" tabindex="-1" aria-label="Link to How to use a service">如何使用服务</a>
+    <a href="#how-to-use-a-service" class="docs-anchor" tabindex="-1" aria-label="Link to How to use a service">如何使用服務</a>
   </h2>
-  <p>当你想在组件中使用服务时，你需要：</p>
+  <p>當你想在元件中使用服務時，你需要：</p>
 
     <ol class="docs-ordered-list">
-      <li>导入服务</li>
-<li>声明一个类字段，用于注入服务。将该类字段赋值为对内置函数 <code>inject</code> 调用的结果，该函数会创建服务</li>
+      <li>匯入服務</li>
+<li>宣告一個類欄位，用於注入服務。將該類別欄位賦值為對內建函式 <code>inject</code> 呼叫的結果，該函式會建立服務</li>
 
     </ol>
-    <p>以下是它在 <code>Receipt</code> 组件中的样子：</p>
+    <p>以下是它在 <code>Receipt</code> 元件中的樣子：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Component, inject } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Calculator } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './calculator'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-receipt'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;The total is {{ totalCost }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Receipt</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> calculator</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(Calculator);</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  totalCost</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.calculator.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">add</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">50</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">25</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>在这个范例中，<code>Calculator</code> 正在被使用，方法是调用 Angular 函数 <code>inject</code> 并将服务传递给它。</p>
+  </div><p>在這個範例中，<code>Calculator</code> 正在被使用，方法是呼叫 Angular 函式 <code>inject</code> 並將服務傳遞給它。</p>
 
   <h2 id="next-step">
     <a href="#next-step" class="docs-anchor" tabindex="-1" aria-label="Link to Next Step">下一步</a>
@@ -153,11 +153,11 @@
     <nav class="docs-pill-row">
       
     <a class="docs-pill" href="essentials/next-steps">
-      要点之后的后续步骤
+      要點之後的後續步驟
     </a>
     
     <a class="docs-pill" href="guide/di">
-      深入的依赖注入指南
+      深入的依賴注入指南
     </a>
     
 

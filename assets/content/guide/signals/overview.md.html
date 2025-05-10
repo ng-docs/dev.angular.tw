@@ -13,7 +13,7 @@
     </a>
   </div>
 
-          <p><!-- markdownlint-disable-line -->Angular Signal 是一种体系，它可以精细地跟踪你的状态在整个应用中的使用方式和位置，从而允许框架优化渲染更新。</p>
+          <p><!-- markdownlint-disable-line -->Angular Signal 是一種體系，它可以精細地跟蹤你的狀態在整個應用中的使用方式和位置，從而允許框架最佳化渲染更新。</p>
         </div>
 
         <!-- illustration -->
@@ -47,187 +47,187 @@
     </div>
     
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong> 在深入学习本综合指南之前，请先查看 Angular 的 <a href="essentials/signals">要点</a>。</p>
+    <p><strong>提示：</strong> 在深入學習本綜合指南之前，請先檢視 Angular 的 <a href="essentials/signals">要點</a>。</p>
 
     </div>
     
   <h2 id="what-are-signals">
-    <a href="#what-are-signals" class="docs-anchor" tabindex="-1" aria-label="Link to What are signals?">什么是 Signal？</a>
+    <a href="#what-are-signals" class="docs-anchor" tabindex="-1" aria-label="Link to What are signals?">什麼是 Signal？</a>
   </h2>
-  <p><strong>Signal</strong> 是对值的包装器，当该值发生变化时，它会通知感兴趣的使用者。Signal 可以包含任何值，从原始类型到复杂的数据结构。</p>
-<p>你可以通过调用 signal 的 getter 函数来读取其值，这允许 Angular 跟踪 signal 的使用位置。</p>
-<p>Signal 可以是<em>可写</em>的，也可以是<em>只读</em>的。</p>
+  <p><strong>Signal</strong> 是對值的套件裝器，當該值發生變化時，它會通知感興趣的使用者。Signal 可以包含任何值，從原始型別到複雜的資料結構。</p>
+<p>你可以透過呼叫 signal 的 getter 函式來讀取其值，這允許 Angular 跟蹤 signal 的使用位置。</p>
+<p>Signal 可以是<em>可寫</em>的，也可以是<em>只讀</em>的。</p>
 
   <h3 id="writable-signals">
-    <a href="#writable-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Writable signals">可写 Signal</a>
+    <a href="#writable-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Writable signals">可寫 Signal</a>
   </h3>
-  <p>可写 Signal 提供了一个 API，用于直接更新它们的值。你可以通过使用 signal 的初始值调用 <code>signal</code> 函数来创建可写 signal：</p>
+  <p>可寫 Signal 提供了一個 API，用於直接更新它們的值。你可以透過使用 signal 的初始值呼叫 <code>signal</code> 函式來建立可寫 signal：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> count</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Signals are getter functions - calling them reads their value.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'The count is: '</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> +</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> count</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">());</span></span></code></pre>
     </pre>
-  </div><p>要更改可写 signal 的值，可以直接 <code>.set()</code> 它：</p>
+  </div><p>要更改可寫 signal 的值，可以直接 <code>.set()</code> 它：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">count.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">set</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span></code></pre>
     </pre>
-  </div><p>或者使用 <code>.update()</code> 操作从先前的值计算出一个新值：</p>
+  </div><p>或者使用 <code>.update()</code> 操作從先前的值計算出一個新值：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Increment the count by 1.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">count.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">update</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">value</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> value </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">+</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span></code></pre>
     </pre>
-  </div><p>可写 Signal 的类型为 <code>WritableSignal</code>。</p>
+  </div><p>可寫 Signal 的型別為 <code>WritableSignal</code>。</p>
 
   <h3 id="computed-signals">
-    <a href="#computed-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals">计算 Signal</a>
+    <a href="#computed-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals">計算 Signal</a>
   </h3>
-  <p><strong>计算 Signal</strong> 是只读 signal，它们的值从其他 signal 派生而来。你可以使用 <code>computed</code> 函数并指定派生方式来定义计算 Signal：</p>
+  <p><strong>計算 Signal</strong> 是隻讀 signal，它們的值從其他 signal 派生而來。你可以使用 <code>computed</code> 函式並指定派生方式來定義計算 Signal：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> count</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> WritableSignal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> doubleCount</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> computed</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> count</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">*</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span></code></pre>
     </pre>
-  </div><p><code>doubleCount</code> signal 依赖于 <code>count</code> signal。每当 <code>count</code> 更新时，Angular 都会知道 <code>doubleCount</code> 也需要更新。</p>
+  </div><p><code>doubleCount</code> signal 依賴於 <code>count</code> signal。每當 <code>count</code> 更新時，Angular 都會知道 <code>doubleCount</code> 也需要更新。</p>
 
   <h4 id="computed-signals-are-both-lazily-evaluated-and-memoized">
-    <a href="#computed-signals-are-both-lazily-evaluated-and-memoized" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals are both lazily evaluated and memoized">计算 Signal 既是惰性求值的，又是经过 memoized 的</a>
+    <a href="#computed-signals-are-both-lazily-evaluated-and-memoized" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals are both lazily evaluated and memoized">計算 Signal 既是惰性求值的，又是經過 memoized 的</a>
   </h4>
-  <p>在首次读取 <code>doubleCount</code> 之前，<code>doubleCount</code> 的派生函数不会运行以计算其值。然后，计算出的值会被缓存，如果再次读取 <code>doubleCount</code>，它将返回缓存的值，而无需重新计算。</p>
-<p>如果你随后更改 <code>count</code>，Angular 就会知道 <code>doubleCount</code> 的缓存值不再有效，并且下次你读取 <code>doubleCount</code> 时，将计算其新值。</p>
-<p>因此，你可以在计算 Signal 中安全地执行计算量大的派生，例如过滤数组。</p>
+  <p>在首次讀取 <code>doubleCount</code> 之前，<code>doubleCount</code> 的派生函式不會執行以計算其值。然後，計算出的值會被快取，如果再次讀取 <code>doubleCount</code>，它將回傳快取的值，而無需重新計算。</p>
+<p>如果你隨後更改 <code>count</code>，Angular 就會知道 <code>doubleCount</code> 的快取值不再有效，並且下次你讀取 <code>doubleCount</code> 時，將計算其新值。</p>
+<p>因此，你可以在計算 Signal 中安全地執行計算量大的派生，例如過濾陣列。</p>
 
   <h4 id="computed-signals-are-not-writable-signals">
-    <a href="#computed-signals-are-not-writable-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals are not writable signals">计算 Signal 不是可写 Signal</a>
+    <a href="#computed-signals-are-not-writable-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signals are not writable signals">計算 Signal 不是可寫 Signal</a>
   </h4>
-  <p>你不能直接为计算 Signal 赋值。也就是说，</p>
+  <p>你不能直接為計算 Signal 賦值。也就是說，</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">doubleCount.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">set</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span></code></pre>
     </pre>
-  </div><p>会产生编译错误，因为 <code>doubleCount</code> 不是 <code>WritableSignal</code>。</p>
+  </div><p>會產生編譯錯誤，因為 <code>doubleCount</code> 不是 <code>WritableSignal</code>。</p>
 
   <h4 id="computed-signal-dependencies-are-dynamic">
-    <a href="#computed-signal-dependencies-are-dynamic" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signal dependencies are dynamic">计算 Signal 的依赖是动态的</a>
+    <a href="#computed-signal-dependencies-are-dynamic" class="docs-anchor" tabindex="-1" aria-label="Link to Computed signal dependencies are dynamic">計算 Signal 的依賴是動態的</a>
   </h4>
-  <p>只有在派生期间实际读取的 signal 才会被跟踪。例如，在此 <code>computed</code> 中，仅当 <code>showCount</code> signal 为 true 时，才会读取 <code>count</code> signal：</p>
+  <p>只有在派生期間實際讀取的 signal 才會被跟蹤。例如，在此 <code>computed</code> 中，僅當 <code>showCount</code> signal 為 true 時，才會讀取 <code>count</code> signal：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> showCount</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">false</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> count</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> conditionalCount</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> computed</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">showCount</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()) {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> `The count is ${</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">count</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}.`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">else</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'Nothing to see here!'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
-  </div><p>当你读取 <code>conditionalCount</code> 时，如果 <code>showCount</code> 为 <code>false</code>，则会返回“Nothing to see here!”消息，<em>而无需</em>读取 <code>count</code> signal。这意味着，如果你稍后更新 <code>count</code>，它<em>不会</em>导致 <code>conditionalCount</code> 的重新计算。</p>
-<p>如果你将 <code>showCount</code> 设置为 <code>true</code>，然后再次读取 <code>conditionalCount</code>，则派生将重新执行并采用 <code>showCount</code> 为 <code>true</code> 的分支，返回显示 <code>count</code> 值的消息。然后，更改 <code>count</code> 将使 <code>conditionalCount</code> 的缓存值无效。</p>
-<p>请注意，依赖项可以在派生期间被删除以及添加。如果你稍后将 <code>showCount</code> 设置回 <code>false</code>，则 <code>count</code> 将不再被视为 <code>conditionalCount</code> 的依赖项。</p>
+  </div><p>當你讀取 <code>conditionalCount</code> 時，如果 <code>showCount</code> 為 <code>false</code>，則會回傳『Nothing to see here!』訊息，<em>而無需</em>讀取 <code>count</code> signal。這意味著，如果你稍後更新 <code>count</code>，它<em>不會</em>導致 <code>conditionalCount</code> 的重新計算。</p>
+<p>如果你將 <code>showCount</code> 設定為 <code>true</code>，然後再次讀取 <code>conditionalCount</code>，則派生將重新執行並採用 <code>showCount</code> 為 <code>true</code> 的分支，回傳顯示 <code>count</code> 值的訊息。然後，更改 <code>count</code> 將使 <code>conditionalCount</code> 的快取值無效。</p>
+<p>請注意，依賴項可以在派生期間被刪除以及新增。如果你稍後將 <code>showCount</code> 設定回 <code>false</code>，則 <code>count</code> 將不再被視為 <code>conditionalCount</code> 的依賴項。</p>
 
   <h2 id="reading-signals-in-onpush-components">
-    <a href="#reading-signals-in-onpush-components" class="docs-anchor" tabindex="-1" aria-label="Link to Reading signals in <code>OnPush</code> components">在 <code>OnPush</code> 组件中读取 signal</a>
+    <a href="#reading-signals-in-onpush-components" class="docs-anchor" tabindex="-1" aria-label="Link to Reading signals in <code>OnPush</code> components">在 <code>OnPush</code> 元件中讀取 signal</a>
   </h2>
-  <p>当你在 <code>OnPush</code> 组件的模板中读取 signal 时，Angular 会将该 signal 跟踪为该组件的依赖项。当该 signal 的值发生更改时，Angular 会自动<a href="api/core/ChangeDetectorRef#markforcheck">标记</a>该组件，以确保在下次变更检测运行时对其进行更新。有关 <code>OnPush</code> 组件的更多信息，请参阅<a href="best-practices/skipping-subtrees">跳过组件子树</a>指南。</p>
+  <p>當你在 <code>OnPush</code> 元件的樣板中讀取 signal 時，Angular 會將該 signal 跟蹤為該組件的依賴項。當該 signal 的值發生更改時，Angular 會自動<a href="api/core/ChangeDetectorRef#markforcheck">標記</a>該組件，以確保在下次變更檢測執行時對其進行更新。有關 <code>OnPush</code> 元件的更多訊息，請參閱<a href="best-practices/skipping-subtrees">跳過元件子樹</a>指南。</p>
 
   <h2 id="effects">
     <a href="#effects" class="docs-anchor" tabindex="-1" aria-label="Link to Effects">副作用</a>
   </h2>
-  <p>Signal 非常有用，因为它们会在值更改时通知感兴趣的使用者。<strong>副作用</strong>是一种操作，当一个或多个 signal 值发生更改时，它会运行。你可以使用 <code>effect</code> 函数创建一个副作用：</p>
+  <p>Signal 非常有用，因為它們會在值更改時通知感興趣的使用者。<strong>副作用</strong>是一種操作，當一個或多個 signal 值發生更改時，它會執行。你可以使用 <code>effect</code> 函式建立一個副作用：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`The current count is: ${</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">count</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
-  </div><p>副作用总是<strong>至少运行一次。</strong> 当副作用运行时，它会跟踪任何 signal 值的读取。每当这些 signal 值中的任何一个发生更改时，副作用都会再次运行。与计算 Signal 类似，副作用会动态跟踪其依赖项，并且仅跟踪在最近一次执行中读取的 signal。</p>
-<p>副作用总是在变更检测过程中<strong>异步</strong>执行。</p>
+  </div><p>副作用總是<strong>至少執行一次。</strong> 當副作用執行時，它會跟蹤任何 signal 值的讀取。每當這些 signal 值中的任何一個發生更改時，副作用都會再次執行。與計算 Signal 類似，副作用會動態跟蹤其依賴項，並且僅跟蹤在最近一次執行中讀取的 signal。</p>
+<p>副作用總是在變更檢測過程中<strong>非同步</strong>執行。</p>
 
   <h3 id="use-cases-for-effects">
     <a href="#use-cases-for-effects" class="docs-anchor" tabindex="-1" aria-label="Link to Use cases for effects">副作用的用例</a>
   </h3>
-  <p>在大多数应用代码中，副作用很少是必要的，但在特定情况下可能很有用。以下是一些 <code>effect</code> 可能是良好解决方案的情况示例：</p>
+  <p>在大多數應用程式碼中，副作用很少是必要的，但在特定情況下可能很有用。以下是一些 <code>effect</code> 可能是良好解決方案的情況範例：</p>
 
   <ul class="docs-list">
-    <li>记录正在显示的数据及其更改时间，用于分析或作为调试工具。</li>
-<li>使数据与 <code>window.localStorage</code> 保持同步。</li>
-<li>添加无法用模板语法表达的自定义 DOM 行为。</li>
-<li>对 <code>&lt;canvas&gt;</code>、图表库或其他第三方 UI 库执行自定义渲染。</li>
+    <li>記錄正在顯示的資料及其更改時間，用於分析或作為除錯工具。</li>
+<li>使資料與 <code>window.localStorage</code> 保持同步。</li>
+<li>新增無法用樣板語法表達的自定義 DOM 行為。</li>
+<li>對 <code>&lt;canvas&gt;</code>、圖表庫或其他第三方 UI 函式庫執行自定義渲染。</li>
 
   </ul>
   
     <div class="docs-callout docs-callout-critical">
-      <h3>何时不使用副作用</h3>
-      <p>避免使用副作用来传播状态更改。这可能会导致 <code>ExpressionChangedAfterItHasBeenChecked</code> 错误、无限循环更新或不必要的变更检测周期。</p>
-<p>相反，使用 <code>computed</code> signal 对依赖于其他状态的状态进行建模。</p>
+      <h3>何時不使用副作用</h3>
+      <p>避免使用副作用來傳播狀態更改。這可能會導致 <code>ExpressionChangedAfterItHasBeenChecked</code> 錯誤、無限迴圈更新或不必要的變更檢測週期。</p>
+<p>相反，使用 <code>computed</code> signal 對依賴於其他狀態的狀態進行建模。</p>
 
     </div>
     
   <h3 id="injection-context">
     <a href="#injection-context" class="docs-anchor" tabindex="-1" aria-label="Link to Injection context">注入上下文</a>
   </h3>
-  <p>默认情况下，你只能在<a href="guide/di/dependency-injection-context">注入上下文</a>（你可以访问 <code>inject</code> 函数的地方）中创建 <code>effect()</code>。满足此要求的最简单方法是在组件、指令或服务的 <code>constructor</code> 中调用 <code>effect</code>：</p>
+  <p>預設情況下，你只能在<a href="guide/di/dependency-injection-context">注入上下文</a>（你可以訪問 <code>inject</code> 函式的地方）中建立 <code>effect()</code>。滿足此要求的最簡單方法是在元件、指令或服務的 <code>constructor</code> 中呼叫 <code>effect</code>：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> EffectiveCounterComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  readonly</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> count</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  constructor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // Register a new effect.</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`The count is: ${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">count</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>或者，你可以将副作用赋值给一个字段（这也为其提供了一个描述性名称）。</p>
+  </div><p>或者，你可以將副作用賦值給一個欄位（這也為其提供了一個描述性名稱）。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> EffectiveCounterComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  readonly</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> count</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> loggingEffect</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`The count is: ${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">count</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>要在构造函数外部创建副作用，你可以通过其选项将 <code>Injector</code> 传递给 <code>effect</code>：</p>
+  </div><p>要在建構式函式外部建立副作用，你可以透過其選項將 <code>Injector</code> 傳遞給 <code>effect</code>：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> EffectiveCounterComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  readonly</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> count</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> injector</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(Injector);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  initializeLogging</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> void</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`The count is: ${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">count</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    }, {injector: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.injector});</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h3 id="destroying-effects">
-    <a href="#destroying-effects" class="docs-anchor" tabindex="-1" aria-label="Link to Destroying effects">销毁副作用</a>
+    <a href="#destroying-effects" class="docs-anchor" tabindex="-1" aria-label="Link to Destroying effects">銷燬副作用</a>
   </h3>
-  <p>当你创建一个副作用时，它会在其封闭上下文被销毁时自动销毁。这意味着在组件内创建的副作用会在组件被销毁时销毁。指令、服务等中的副作用也是如此。</p>
-<p>副作用返回一个 <code>EffectRef</code>，你可以通过调用 <code>.destroy()</code> 方法手动销毁它们。你可以将此与 <code>manualCleanup</code> 选项结合使用，以创建一个持续到手动销毁为止的副作用。请注意在不再需要此类副作用时实际清理它们。</p>
+  <p>當你建立一個副作用時，它會在其封閉上下文被銷燬時自動銷燬。這意味著在元件內建立的副作用會在元件被銷燬時銷燬。指令、服務等中的副作用也是如此。</p>
+<p>副作用回傳一個 <code>EffectRef</code>，你可以透過呼叫 <code>.destroy()</code> 方法手動銷燬它們。你可以將此與 <code>manualCleanup</code> 選項結合使用，以建立一個持續到手動銷燬為止的副作用。請注意在不再需要此類副作用時實際清理它們。</p>
 
   <h2 id="advanced-topics">
-    <a href="#advanced-topics" class="docs-anchor" tabindex="-1" aria-label="Link to Advanced topics">高级主题</a>
+    <a href="#advanced-topics" class="docs-anchor" tabindex="-1" aria-label="Link to Advanced topics">高階主題</a>
   </h2>
   
   <h3 id="signal-equality-functions">
-    <a href="#signal-equality-functions" class="docs-anchor" tabindex="-1" aria-label="Link to Signal equality functions">Signal 相等性函数</a>
+    <a href="#signal-equality-functions" class="docs-anchor" tabindex="-1" aria-label="Link to Signal equality functions">Signal 相等性函式</a>
   </h3>
-  <p>在创建 signal 时，你可以选择性地提供一个相等性函数，它将用于检查新值是否与之前的值真正不同。</p>
+  <p>在建立 signal 時，你可以選擇性地提供一個相等性函式，它將用於檢查新值是否與之前的值真正不同。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> _ </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'lodash'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">([</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'test'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">], {equal: _.isEqual});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Even though this is a different array instance, the deep equality</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// function will consider the values to be equal, and the signal won't</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// trigger any updates.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">data.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">set</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">([</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'test'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]);</span></span></code></pre>
     </pre>
-  </div><p>可以为可写和计算型 signal 提供相等性函数。</p>
+  </div><p>可以為可寫和計算型 signal 提供相等性函式。</p>
 
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> 默认情况下，signal 使用引用相等性（<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/is" target="_blank"><code>Object.is()</code></a> 比较）。</p>
+    <p><strong>提示：</strong> 預設情況下，signal 使用引用相等性（<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/is" target="_blank"><code>Object.is()</code></a> 比較）。</p>
 
     </div>
     
   <h3 id="reading-without-tracking-dependencies">
-    <a href="#reading-without-tracking-dependencies" class="docs-anchor" tabindex="-1" aria-label="Link to Reading without tracking dependencies">读取时不跟踪依赖</a>
+    <a href="#reading-without-tracking-dependencies" class="docs-anchor" tabindex="-1" aria-label="Link to Reading without tracking dependencies">讀取時不跟蹤依賴</a>
   </h3>
-  <p>极少数情况下，你可能希望执行某些代码，这些代码可能会在诸如 <code>computed</code> 或 <code>effect</code> 之类的响应式函数中读取 signal，<em>而无需</em>创建依赖。</p>
-<p>例如，假设当 <code>currentUser</code> 更改时，应该记录 <code>counter</code> 的值。你可以创建一个 <code>effect</code> 来读取这两个 signal：</p>
+  <p>極少數情況下，你可能希望執行某些程式碼，這些程式碼可能會在諸如 <code>computed</code> 或 <code>effect</code> 之類的回應式函式中讀取 signal，<em>而無需</em>建立依賴。</p>
+<p>例如，假設當 <code>currentUser</code> 更改時，應該記錄 <code>counter</code> 的值。你可以建立一個 <code>effect</code> 來讀取這兩個 signal：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`User set to ${</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">currentUser</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">} and the counter is ${</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">counter</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
-  </div><p>此范例将在 <code>currentUser</code> 或 <code>counter</code> <em>任一</em>更改时记录一条消息。但是，如果 effect 应该仅在 <code>currentUser</code> 更改时运行，则对 <code>counter</code> 的读取只是附带的，并且对 <code>counter</code> 的更改不应记录新消息。</p>
-<p>你可以通过使用 <code>untracked</code> 调用 signal 的 getter 来阻止跟踪 signal 读取：</p>
+  </div><p>此範例將在 <code>currentUser</code> 或 <code>counter</code> <em>任一</em>更改時記錄一條訊息。但是，如果 effect 應該僅在 <code>currentUser</code> 更改時運行，則對 <code>counter</code> 的讀取只是附帶的，並且對 <code>counter</code> 的更改不應記錄新訊息。</p>
+<p>你可以透過使用 <code>untracked</code> 呼叫 signal 的 getter 來阻止跟蹤 signal 讀取：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`User set to ${</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">currentUser</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">} and the counter is ${</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">untracked</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">(</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">counter</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">)</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
-  </div><p>当副作用需要调用一些不应被视为依赖项的外部代码时，<code>untracked</code> 也很有用：</p>
+  </div><p>當副作用需要呼叫一些不應被視為依賴項的外部程式碼時，<code>untracked</code> 也很有用：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> user</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> currentUser</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  untracked</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // If the `loggingService` reads signals, they won't be counted as</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // dependencies of this effect.</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.loggingService.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`User set to ${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">user</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
   </div>
   <h3 id="effect-cleanup-functions">
-    <a href="#effect-cleanup-functions" class="docs-anchor" tabindex="-1" aria-label="Link to Effect cleanup functions">Effect 清理函数</a>
+    <a href="#effect-cleanup-functions" class="docs-anchor" tabindex="-1" aria-label="Link to Effect cleanup functions">Effect 清理函式</a>
   </h3>
-  <p>Effect 可能会启动长时间运行的操作，如果 effect 在第一个操作完成之前被销毁或再次运行，则应取消这些操作。创建 effect 时，你的函数可以选择接受一个 <code>onCleanup</code> 函数作为其第一个参数。此 <code>onCleanup</code> 函数允许你注册一个回调，该回调在 effect 的下一次运行开始之前或在 effect 被销毁时调用。</p>
+  <p>Effect 可能會啟動長時間執行的操作，如果 effect 在第一個操作完成之前被銷燬或再次執行，則應取消這些操作。建立 effect 時，你的函式可以選擇接受一個 <code>onCleanup</code> 函式作為其第一個引數。此 <code>onCleanup</code> 函式允許你註冊一個回呼，該回調在 effect 的下一次執行開始之前或在 effect 被銷燬時調用。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">effect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">((</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">onCleanup</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> user</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> currentUser</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> timer</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> setTimeout</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`1 second ago, the user became ${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">user</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1000</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  onCleanup</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    clearTimeout</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(timer);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
   </div>
   <h2 id="using-signals-with-rxjs">
-    <a href="#using-signals-with-rxjs" class="docs-anchor" tabindex="-1" aria-label="Link to Using signals with RxJS">将 signal 与 RxJS 结合使用</a>
+    <a href="#using-signals-with-rxjs" class="docs-anchor" tabindex="-1" aria-label="Link to Using signals with RxJS">將 signal 與 RxJS 結合使用</a>
   </h2>
-  <p>有关 signal 和 RxJS 之间互操作性的详细信息，请参阅 <a href="ecosystem/rxjs-interop">RxJS 与 Angular signal 的互操作性</a>。</p>
+  <p>有關 signal 和 RxJS 之間互操作性的詳細訊息，請參閱 <a href="ecosystem/rxjs-interop">RxJS 與 Angular signal 的互操作性</a>。</p>

@@ -4,30 +4,30 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">为组件添加一个输入参数</h1>
+    <h1 tabindex="-1">為元件新增一個輸入引數</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/first-app/steps/05-inputs/README.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>本教程课程演示了如何创建一个组件 <code>@Input()</code> 并使用它将数据传递给组件以进行自定义。</p>
+    <p>本教程課程示範了如何建立一個元件 <code>@Input()</code> 並使用它將資料傳遞給元件以進行自定義。</p>
 
     <div class="docs-video-container">
       <iframe class="docs-video" src="https://www.youtube.com/embed/eM3zi_n7lNs?si=WvRGFSkW_7_zDIFD&amp;start=241" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless title="Video player"></iframe>
     </div>
     
   <h2 id="what-youll-learn">
-    <a href="#what-youll-learn" class="docs-anchor" tabindex="-1" aria-label="Link to What you'll learn">你将学到什么</a>
+    <a href="#what-youll-learn" class="docs-anchor" tabindex="-1" aria-label="Link to What you'll learn">你將學到什麼</a>
   </h2>
-  <p>你的应用的 <code>HousingLocationComponent</code> 模板有一个 <code>HousingLocation</code> 属性（Property）来接收输入。</p>
+  <p>你的應用的 <code>HousingLocationComponent</code> 樣板有一個 <code>HousingLocation</code> 屬性（Property）來接收輸入。</p>
 
   <h2 id="conceptual-preview-of-inputs">
-    <a href="#conceptual-preview-of-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to Conceptual preview of Inputs">输入（Inputs）的概念预览</a>
+    <a href="#conceptual-preview-of-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to Conceptual preview of Inputs">輸入（Inputs）的概念預覽</a>
   </h2>
-  <p><a href="api/core/Input">输入（Inputs）</a> 允许组件共享数据。数据共享的方向是从父组件到子组件。</p>
-<p>在本课程中，你将在 <code>HousingLocationComponent</code> 组件中定义 <code>@Input()</code> 属性（property），这将使你能够自定义组件中显示的数据。</p>
-<p>在<a href="guide/components/inputs">使用输入属性（property）接收数据</a> 和 <a href="guide/components/outputs">使用输出属性（property）自定义事件</a> 指南中了解更多信息。</p>
+  <p><a href="api/core/Input">輸入（Inputs）</a> 允許元件共享資料。資料共享的方向是從父元件到子元件。</p>
+<p>在本課程中，你將在 <code>HousingLocationComponent</code> 元件中定義 <code>@Input()</code> 屬性（property），這將使你能夠自定義元件中顯示的資料。</p>
+<p>在<a href="guide/components/inputs">使用輸入屬性（property）接收資料</a> 和 <a href="guide/components/outputs">使用輸出屬性（property）自定義事件</a> 指南中瞭解更多訊息。</p>
 
     <ol class="docs-steps">
       
@@ -35,16 +35,16 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="import-the-input-decorator">
-    <a href="#import-the-input-decorator" class="docs-anchor" tabindex="-1" aria-label="Link to Import the Input decorator">导入 Input 装饰器</a>
+    <a href="#import-the-input-decorator" class="docs-anchor" tabindex="-1" aria-label="Link to Import the Input decorator">匯入 Input 裝飾器</a>
   </h3>
   
-      <p>此步骤将 <code>Input</code> 装饰器导入到类中。</p>
-<p>在代码编辑器中：</p>
+      <p>此步驟將 <code>Input</code> 裝飾器匯入到類別中。</p>
+<p>在程式碼編輯器中：</p>
 
     <ol class="docs-ordered-list">
-      <li>导航到 <code>src/app/housing-location/housing-location.component.ts</code></li>
-<li>更新文件导入以包含 <code>Input</code> 和 <code>HousingLocation</code>：<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/housing-location/housing-location.component.ts" visiblelines="0,1,2" header="Import HousingLocationComponent and Input in src/app/housing-location/housing-location.component.ts">
-    <div class="docs-code-header"><h3>在 src/app/housing-location/housing-location.component.ts 中导入 HousingLocationComponent 和 Input</h3></div>
+      <li>導向到 <code>src/app/housing-location/housing-location.component.ts</code></li>
+<li>更新檔案匯入以包含 <code>Input</code> 和 <code>HousingLocation</code>：<div class="docs-code" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/housing-location/housing-location.component.ts" visiblelines="0,1,2" header="Import HousingLocationComponent and Input in src/app/housing-location/housing-location.component.ts">
+    <div class="docs-code-header"><h3>在 src/app/housing-location/housing-location.component.ts 中匯入 HousingLocationComponent 和 Input</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Component, Input} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {CommonModule} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/common'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {HousingLocation} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '../housinglocation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-housing-location'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  imports: [CommonModule],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;housing-location works!&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  styleUrls: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'./housing-location.component.css'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HousingLocationComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">housingLocation</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">!:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HousingLocation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span></code></pre>
     </pre>
   </div></li>
@@ -57,21 +57,21 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-the-input-property">
-    <a href="#add-the-input-property" class="docs-anchor" tabindex="-1" aria-label="Link to Add the Input property">添加 Input 属性（Property）</a>
+    <a href="#add-the-input-property" class="docs-anchor" tabindex="-1" aria-label="Link to Add the Input property">新增 Input 屬性（Property）</a>
   </h3>
   
       
     <ol class="docs-ordered-list">
-      <li><p>在同一文件中，向 <code>HousingLocationComponent</code> 类添加一个名为 <code>housingLocation</code> 的属性（property），其类型为 <code>HousingLocation</code>。在属性名称后添加 <code>!</code>，并以 <code>@Input()</code> 装饰器作为前缀：</p>
+      <li><p>在同一檔案中，向 <code>HousingLocationComponent</code> 類新增一個名為 <code>housingLocation</code> 的屬性（property），其型別為 <code>HousingLocation</code>。在屬性名稱後新增 <code>!</code>，並以 <code>@Input()</code> 裝飾器作為字首：</p>
 <div class="docs-code" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/housing-location/housing-location.component.ts" visiblelines="12,13,14" header="Import HousingLocationComponent and Input in src/app/housing-location/housing-location.component.ts">
-    <div class="docs-code-header"><h3>在 src/app/housing-location/housing-location.component.ts 中导入 HousingLocationComponent 和 Input</h3></div>
+    <div class="docs-code-header"><h3>在 src/app/housing-location/housing-location.component.ts 中匯入 HousingLocationComponent 和 Input</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Component, Input} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {CommonModule} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/common'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {HousingLocation} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '../housinglocation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-housing-location'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  imports: [CommonModule],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;housing-location works!&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  styleUrls: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'./housing-location.component.css'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HousingLocationComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">housingLocation</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">!:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HousingLocation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span></code></pre>
     </pre>
-  </div><p>你必须添加 <code>!</code>，因为输入（input）期望值被传入。在这种情况下，没有默认值。在我们的示例应用案例中，我们知道值将被传入 - 这是设计使然。感叹号被称为非空断言操作符，它告诉 TypeScript 编译器此属性（property）的值不会为 null 或 undefined。</p>
+  </div><p>你必須新增 <code>!</code>，因為輸入（input）期望值被傳入。在這種情況下，沒有預設值。在我們的範例應用案例中，我們知道值將被傳入 - 這是設計使然。感嘆號被稱為非空斷言運算子，它告訴 TypeScript 編譯器此屬性（property）的值不會為 null 或 undefined。</p>
 </li>
-<li><p>保存你的更改并确认应用没有任何错误。</p>
+<li><p>儲存你的更改並確認應用沒有任何錯誤。</p>
 </li>
-<li><p>在继续下一步之前，纠正任何错误。</p>
+<li><p>在繼續下一步之前，糾正任何錯誤。</p>
 </li>
 
     </ol>
@@ -81,18 +81,18 @@
     </ol>
     
     <div class="docs-alert docs-alert-summary">
-    <p><strong>总结：</strong> 在本课程中，你创建了一个用 <code>@Input()</code> 装饰器装饰的新属性（property）。你还使用了非空断言运算符来通知编译器新属性（property）的值不会是 <code>null</code> 或 <code>undefined</code>。</p>
+    <p><strong>總結：</strong> 在本課程中，你建立了一個用 <code>@Input()</code> 裝飾器裝飾的新屬性（property）。你還使用了非空斷言運算符來通知編譯器新屬性（property）的值不會是 <code>null</code> 或 <code>undefined</code>。</p>
 
     </div>
     
     <nav class="docs-pill-row">
       
     <a class="docs-pill" href="guide/components/inputs">
-      使用输入属性（property）接收数据
+      使用輸入屬性（property）接收資料
     </a>
     
     <a class="docs-pill" href="guide/components/outputs">
-      使用输出属性（property）自定义事件
+      使用輸出屬性（property）自定義事件
     </a>
     
 

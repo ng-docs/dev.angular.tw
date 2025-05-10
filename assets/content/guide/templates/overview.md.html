@@ -6,15 +6,15 @@
           
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">模板语法</h1>
+    <h1 tabindex="-1">樣板語法</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/templates/overview.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
 
-          <p><!-- markdownlint-disable-line -->在 Angular 中，模板是一段 HTML。
-在模板中使用特殊的语法可以充分利用 Angular 的许多特性。</p>
+          <p><!-- markdownlint-disable-line -->在 Angular 中，樣板是一段 HTML。
+在樣板中使用特殊的語法可以充分利用 Angular 的許多屬性。</p>
         </div>
 
         <!-- illustration -->
@@ -52,96 +52,96 @@
     </div>
     
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong>在深入学习本综合指南之前，请查看 Angular 的<a href="essentials/templates">要点</a>。</p>
+    <p><strong>提示：</strong>在深入學習本綜合指南之前，請檢視 Angular 的<a href="essentials/templates">要點</a>。</p>
 
     </div>
-    <p>每个 Angular 组件都有一个<strong>模板</strong>，用于定义组件渲染到页面上的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model" target="_blank">DOM</a>。通过使用模板，Angular 能够在数据更改时自动保持页面最新。</p>
-<p>模板通常位于 <code>*.component.ts</code> 文件的 <code>template</code> 属性或 <code>*.component.html</code> 文件中。要了解更多信息，请查看<a href="/guide/components">深入组件指南</a>。</p>
+    <p>每個 Angular 元件都有一個<strong>樣板</strong>，用於定義元件渲染到頁面上的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model" target="_blank">DOM</a>。透過使用樣板，Angular 能夠在資料更改時自動保持頁面最新。</p>
+<p>樣板通常位於 <code>*.component.ts</code> 檔案的 <code>template</code> 屬性或 <code>*.component.html</code> 檔案中。要了解更多訊息，請檢視<a href="/guide/components">深入元件指南</a>。</p>
 
   <h2 id="how-do-templates-work">
-    <a href="#how-do-templates-work" class="docs-anchor" tabindex="-1" aria-label="Link to How do templates work?">模板是如何工作的？</a>
+    <a href="#how-do-templates-work" class="docs-anchor" tabindex="-1" aria-label="Link to How do templates work?">樣板是如何工作的？</a>
   </h2>
-  <p>模板基于 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">HTML</a> 语法，并具有其他特性，例如内置模板函数、数据绑定、事件监听、变量等等。</p>
-<p>Angular 将模板编译成 JavaScript，以便建立对你的应用的内部理解。这样做的好处之一是 Angular 会自动将内置的渲染优化应用于你的应用。</p>
+  <p>樣板基於 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">HTML</a> 語法，並具有其他屬性，例如內建樣板函式、資料繫結、事件監聽、變數等等。</p>
+<p>Angular 將樣板編譯成 JavaScript，以便建立對你的應用的內部理解。這樣做的好處之一是 Angular 會自動將內建的渲染最佳化應用於你的應用。</p>
 
   <h3 id="differences-from-standard-html">
-    <a href="#differences-from-standard-html" class="docs-anchor" tabindex="-1" aria-label="Link to Differences from standard HTML">与标准 HTML 的差异</a>
+    <a href="#differences-from-standard-html" class="docs-anchor" tabindex="-1" aria-label="Link to Differences from standard HTML">與標準 HTML 的差異</a>
   </h3>
-  <p>模板和标准 HTML 语法之间的一些差异包括：</p>
+  <p>樣板和標準 HTML 語法之間的一些差異包括：</p>
 
   <ul class="docs-list">
-    <li>模板源码中的注释不包含在渲染后的输出中</li>
-<li>组件和指令元素可以是自闭合的（例如，<code>&lt;UserProfile /&gt;</code>）</li>
-<li>具有某些字符（即 <code>[]</code>、<code>()</code> 等）的 Attribute 对 Angular 具有特殊含义。有关更多信息，请参阅<a href="guide/templates/binding">绑定文档</a>和<a href="guide/templates/event-listeners">添加事件监听器文档</a>。</li>
-<li><code>@</code> 字符对于 Angular 具有特殊含义，用于向模板添加动态行为，例如<a href="guide/templates/control-flow">控制块</a>。你可以通过将其转义为 HTML 实体代码（<code>&amp;commat;</code> 或 <code>&amp;#64;</code>）来包含字面量 <code>@</code> 字符。</li>
-<li>Angular 会忽略和折叠不必要的空白字符。有关更多详细信息，请参阅<a href="guide/templates/whitespace">模板中的空白</a>。</li>
-<li>Angular 可能会向页面添加注释节点，作为动态内容的占位符，但开发人员可以忽略这些注释节点。</li>
+    <li>樣板原始碼中的註解不包含在渲染後的輸出中</li>
+<li>元件和指令元素可以是自閉合的（例如，<code>&lt;UserProfile /&gt;</code>）</li>
+<li>具有某些字元（即 <code>[]</code>、<code>()</code> 等）的 Attribute 對 Angular 具有特殊含義。有關更多訊息，請參閱<a href="guide/templates/binding">繫結文件</a>和<a href="guide/templates/event-listeners">新增事件監聽器文件</a>。</li>
+<li><code>@</code> 字元對於 Angular 具有特殊含義，用於向樣板新增動態行為，例如<a href="guide/templates/control-flow">控制區塊</a>。你可以透過將其轉義為 HTML 實體程式碼（<code>&amp;commat;</code> 或 <code>&amp;#64;</code>）來包含字面量 <code>@</code> 字元。</li>
+<li>Angular 會忽略和摺疊不必要的空白字元。有關更多詳細訊息，請參閱<a href="guide/templates/whitespace">樣板中的空白</a>。</li>
+<li>Angular 可能會向頁面新增註解節點，作為動態內容的佔位符，但開發人員可以忽略這些註解節點。</li>
 
   </ul>
-  <p>此外，虽然大多数 HTML 语法都是有效的模板语法，但 Angular 不支持模板中的 <code>&lt;script&gt;</code> 元素。有关更多信息，请参阅<a href="best-practices/security">安全性</a>页面。</p>
+  <p>此外，雖然大多數 HTML 語法都是有效的樣板語法，但 Angular 不支援樣板中的 <code>&lt;script&gt;</code> 元素。有關更多訊息，請參閱<a href="best-practices/security">安全性</a>頁面。</p>
 
   <h2 id="whats-next">
-    <a href="#whats-next" class="docs-anchor" tabindex="-1" aria-label="Link to What's next?">下一步是什么？</a>
+    <a href="#whats-next" class="docs-anchor" tabindex="-1" aria-label="Link to What's next?">下一步是什麼？</a>
   </h2>
-  <p>你可能对以下内容也感兴趣：</p>
+  <p>你可能對以下內容也感興趣：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left">主题</th>
-<th align="left">详情</th>
+<th align="left">主題</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
-<td align="left"><a href="guide/templates/binding">绑定动态文本、属性（Property）和 Attribute</a></td>
-<td align="left">将动态数据绑定到文本、属性（Property）和 Attribute。</td>
+<td align="left"><a href="guide/templates/binding">繫結動態文字、屬性（Property）和 Attribute</a></td>
+<td align="left">將動態資料繫結到文字、屬性（Property）和 Attribute。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/event-listeners">添加事件监听器</a></td>
-<td align="left">响应模板中的事件。</td>
+<td align="left"><a href="guide/templates/event-listeners">新增事件監聽器</a></td>
+<td align="left">回應樣板中的事件。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/two-way-binding">双向绑定</a></td>
-<td align="left">同时绑定一个值并传播更改。</td>
+<td align="left"><a href="guide/templates/two-way-binding">雙向繫結</a></td>
+<td align="left">同時繫結一個值並傳播更改。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/control-flow">控制块</a></td>
-<td align="left">有条件地显示、隐藏和重复元素。</td>
+<td align="left"><a href="guide/templates/control-flow">控制區塊</a></td>
+<td align="left">有條件地顯示、隱藏和重複元素。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/pipes">管道</a></td>
-<td align="left">声明式地转换数据。</td>
+<td align="left"><a href="guide/templates/pipes">通道</a></td>
+<td align="left">宣告式地轉換資料。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/ng-content">使用 ng-content 开槽子内容</a></td>
-<td align="left">控制组件如何渲染内容。</td>
+<td align="left"><a href="guide/templates/ng-content">使用 ng-content 開槽子內容</a></td>
+<td align="left">控制組件如何渲染內容。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/ng-template">使用 ng-template 创建模板片段</a></td>
-<td align="left">声明一个模板片段。</td>
+<td align="left"><a href="guide/templates/ng-template">使用 ng-template 建立樣板片段</a></td>
+<td align="left">宣告一個樣板片段。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/ng-container">使用 ng-container 对元素进行分组</a></td>
-<td align="left">将多个元素组合在一起或标记一个用于渲染的位置。</td>
+<td align="left"><a href="guide/templates/ng-container">使用 ng-container 對元素進行分組</a></td>
+<td align="left">將多個元素組合在一起或標記一個用於渲染的位置。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/variables">模板中的变量</a></td>
-<td align="left">了解变量声明。</td>
+<td align="left"><a href="guide/templates/variables">樣板中的變數</a></td>
+<td align="left">瞭解變數宣告。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/defer">使用 @defer 延迟加载</a></td>
-<td align="left">使用 <code>@defer</code> 创建可延迟加载的视图。</td>
+<td align="left"><a href="guide/templates/defer">使用 @defer 延遲載入</a></td>
+<td align="left">使用 <code>@defer</code> 建立可延遲載入的檢視。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/expression-syntax">表达式语法</a></td>
-<td align="left">了解 Angular 表达式和标准 JavaScript 之间的异同。</td>
+<td align="left"><a href="guide/templates/expression-syntax">表示式語法</a></td>
+<td align="left">瞭解 Angular 表示式和標準 JavaScript 之間的異同。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/whitespace">模板中的空白</a></td>
-<td align="left">了解 Angular 如何处理空白。</td>
+<td align="left"><a href="guide/templates/whitespace">樣板中的空白</a></td>
+<td align="left">瞭解 Angular 如何處理空白。</td>
 </tr>
 
       </tbody>

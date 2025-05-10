@@ -4,107 +4,107 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a9s0kcs00fdk5zlnqa607ov9z">惰性加载特性模块</h1>
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a9s0kcs00fdk5zlnqa607ov9z">延遲載入屬性模組</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/lazy-loading.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d11d3joik5ypqehhfjwkbvxc7">默认情况下，NgModule 都是急性加载的。意思是它会在应用加载时尽快加载，所有模块都是如此，无论是否立即要用。对于带有很多路由的大型应用，考虑使用惰性加载 —— 一种按需加载 NgModule 的模式。惰性加载可以减小初始包的尺寸，从而减少加载时间。</p>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d11d3joik5ypqehhfjwkbvxc7">預設情況下，NgModule 都是急性載入的。意思是它會在應用載入時儘快載入，所有模組都是如此，無論是否立即要用。對於帶有很多路由的大型應用，考慮使用延遲載入 —— 一種按需載入 NgModule 的模式。延遲載入可以減小初始套件的尺寸，從而減少載入時間。</p>
 <!-- For the final sample application with two lazy-loaded modules that this page describes: -->
 <!-- TODO: link to GitHub -->
 <!-- <docs-code live/> -->
 
 
   <h2 id="lazy-loading-basics">
-    <a href="#lazy-loading-basics" class="docs-anchor" tabindex="-1" aria-label="Link to Lazy loading basics" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8zx53gxb57cnbbnapcf001a3t">惰性加载入门</a>
+    <a href="#lazy-loading-basics" class="docs-anchor" tabindex="-1" aria-label="Link to Lazy loading basics" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8zx53gxb57cnbbnapcf001a3t">延遲載入入門</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="57kme7hb66hid1o1zofv6hjuh">本节介绍配置延迟加载路由的基本步骤。 有关分步示例，请参阅本页的 
-<a href="#step-by-step-setup">分步设置</a> 部分。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="83w92v4nz4iema8cw27qmy53p">要惰性加载 Angular 模块，请在 <code>AppRoutingModule</code> <code>routes</code> 中使用 <code>loadChildren</code> 代替 <code>component</code> 进行配置，代码如下。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="57kme7hb66hid1o1zofv6hjuh">本節介紹設定延遲載入路由的基本步驟。 有關分步範例，請參閱本頁的 
+<a href="#step-by-step-setup">分步設定</a> 部分。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="83w92v4nz4iema8cw27qmy53p">要延遲載入 Angular 模組，請在 <code>AppRoutingModule</code> <code>routes</code> 中使用 <code>loadChildren</code> 代替 <code>component</code> 進行設定，程式碼如下。</p>
 <div class="docs-code" header="AppRoutingModule (excerpt)">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="4p820kpv6vj59f0jzixja04r7">AppRoutingModule（摘录）</h3></div>
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="4p820kpv6vj59f0jzixja04r7">AppRoutingModule（摘錄）</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'items'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">loadChildren</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./items/items.module'</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">ItemsModule</span>)</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">];</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b66w8x8ylq02faxtqowo7sdvd">在惰性加载模块的路由模块中，添加一个指向该组件的路由。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b66w8x8ylq02faxtqowo7sdvd">在延遲載入模組的路由模組中，新增一個指向該組件的路由。</p>
 <div class="docs-code" header="Routing module for lazy loaded module (excerpt)">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="30cwct3exlilwhghzv8dezw77">延迟加载模块的路由模块（摘录）</h3></div>
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="30cwct3exlilwhghzv8dezw77">延遲載入模組的路由模組（摘錄）</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">ItemsComponent</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">];</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9329nt03yuevmxyf8ehq9dsbb">还要确保从 <code>AppModule</code> 中移除了 <code>ItemsModule</code>。想要一个关于惰性加载模块的分步操作指南，请继续查看本页的后续章节。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9329nt03yuevmxyf8ehq9dsbb">還要確保從 <code>AppModule</code> 中移除了 <code>ItemsModule</code>。想要一個關於延遲載入模組的分步操作指南，請繼續檢視本頁的後續章節。</p>
 
   <h2 id="step-by-step-setup">
-    <a href="#step-by-step-setup" class="docs-anchor" tabindex="-1" aria-label="Link to Step-by-step setup" data-ng_translator_product="100" data-ng_translator_ref_id="eb4aukeptwb40zedr0orfluex">分步设置</a>
+    <a href="#step-by-step-setup" class="docs-anchor" tabindex="-1" aria-label="Link to Step-by-step setup" data-ng_translator_product="100" data-ng_translator_ref_id="eb4aukeptwb40zedr0orfluex">分步設定</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="30lb3wvr5pmvyired5kfe45oo">建立惰性加载的特性模块需要两个主要步骤：</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="30lb3wvr5pmvyired5kfe45oo">建立延遲載入的屬性模組需要兩個主要步驟：</p>
 
     <ol class="docs-ordered-list">
-      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cpkhqyw70n5udlid8659azhz1">使用 <code>--route</code> 标志，用 Angular CLI 创建特性模块。</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5orue9zcrifdsfac6knx146lx">配置相关路由。</li>
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cpkhqyw70n5udlid8659azhz1">使用 <code>--route</code> 標誌，用 Angular CLI 建立屬性模組。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5orue9zcrifdsfac6knx146lx">設定相關路由。</li>
 
     </ol>
     
   <h3 id="set-up-an-application">
-    <a href="#set-up-an-application" class="docs-anchor" tabindex="-1" aria-label="Link to Set up an application" data-ng_translator_product="100" data-ng_translator_ref_id="971bddnimrptte0jo1mhnn5of">建立应用</a>
+    <a href="#set-up-an-application" class="docs-anchor" tabindex="-1" aria-label="Link to Set up an application" data-ng_translator_product="100" data-ng_translator_ref_id="971bddnimrptte0jo1mhnn5of">建立應用</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="90ruorueg35vqor7boundxnln">如果你还没有应用，请按照以下步骤使用 Angular CLI 创建一个。 如果你已经有了应用，则跳到 
-<a href="#config-routes">配置路由</a>。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1idnxu3l5swgn9ebei3h4bey0">输入下列命令，其中的 <code>customer-app</code> 表示你的应用名称。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="90ruorueg35vqor7boundxnln">如果你還沒有應用，請按照以下步驟使用 Angular CLI 建立一個。 如果你已經有了應用，則跳到 
+<a href="#config-routes">設定路由</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1idnxu3l5swgn9ebei3h4bey0">輸入下列指令，其中的 <code>customer-app</code> 表示你的應用名稱。</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng new customer-app --no-standalone --routing</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="bauau2dzbd1hz9opkxx1npzvs">这将创建一个名为 
-<code>customer-app</code> 的应用，
-<code>--no-standalone</code> 标志使应用基于模块，并且 
-<code>--routing</code> 标志生成一个名为 
-<code>app-routing.module.ts</code> 的文件。 这是你为特性模块设置延迟加载所需的文件之一。 通过执行命令 
-<code>cd customer-app</code> 导航到项目中。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="bauau2dzbd1hz9opkxx1npzvs">這將建立一個名為 
+<code>customer-app</code> 的應用，
+<code>--no-standalone</code> 標誌使應用基於模組，並且 
+<code>--routing</code> 標誌生成一個名為 
+<code>app-routing.module.ts</code> 的檔案。 這是你為屬性模組設定延遲載入所需的檔案之一。 透過執行指令 
+<code>cd customer-app</code> 導向到專案中。</p>
 
   <h3 id="create-a-feature-module-with-routing">
-    <a href="#create-a-feature-module-with-routing" class="docs-anchor" tabindex="-1" aria-label="Link to Create a feature module with routing" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ehvdac0f6uf3osqkewp527vxz">创建带有路由的特性模块</a>
+    <a href="#create-a-feature-module-with-routing" class="docs-anchor" tabindex="-1" aria-label="Link to Create a feature module with routing" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ehvdac0f6uf3osqkewp527vxz">建立帶有路由的屬性模組</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5qix7hlia501518qpn9cov4x5">接下来，你将需要一个包含路由的目标组件的特性模块。要创建它，在命令行工具中输入如下命令，其中 <code>customers</code> 是特性模块的名称。加载 <code>customers</code> 特性模块的路径也是 <code>customers</code>，因为它是通过 <code>--route</code> 选项指定的：</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5qix7hlia501518qpn9cov4x5">接下來，你將需要一個包含路由的目標元件的屬性模組。要建立它，在指令行工具中輸入如下指令，其中 <code>customers</code> 是屬性模組的名稱。載入 <code>customers</code> 屬性模組的路徑也是 <code>customers</code>，因為它是透過 <code>--route</code> 選項指定的：</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate module customers --route customers --module app.module</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="244ux5u3k39tvyohe8yjjo750">这将创建一个
-<code>customers</code>目录，其中包含在
-<code>customers.module.ts</code>文件中定义的新惰性加载特性模块
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="244ux5u3k39tvyohe8yjjo750">這將建立一個
+<code>customers</code>目錄，其中包含在
+<code>customers.module.ts</code>檔案中定義的新延遲載入屬性模組
 <code>CustomersModule</code>，以及在
-<code>customers-routing.module.ts</code>文件中定义的路由模块
-<code>CustomersRoutingModule</code>。该命令会自动在新特性模块中声明
-<code>CustomersComponent</code>并导入
+<code>customers-routing.module.ts</code>檔案中定義的路由模組
+<code>CustomersRoutingModule</code>。該指令會自動在新屬性模組中宣告
+<code>CustomersComponent</code>並匯入
 <code>CustomersRoutingModule</code>。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7lhcbwzpyrex5az8thw682pao">因为这个新模块想要惰性加载，所以该命令<strong>不会</strong>在应用的根模块 <code>app.module.ts</code> 中添加对新特性模块的引用。相反，它将声明的路由 <code>customers</code> 添加到以 <code>--module</code> 选项指定的模块中声明的 <code>routes</code> 数组中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7lhcbwzpyrex5az8thw682pao">因為這個新模組想要延遲載入，所以該指令<strong>不會</strong>在應用的根模組 <code>app.module.ts</code> 中新增對新屬性模組的引用。相反，它將宣告的路由 <code>customers</code> 新增到以 <code>--module</code> 選項指定的模組中宣告的 <code>routes</code> 陣列中。</p>
 <div class="docs-code" header="src/app/app-routing.module.ts">
     <div class="docs-code-header"><h3>src/app/app-routing.module.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'customers'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">loadChildren</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./customers/customers.module'</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">CustomersModule</span>)</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">];</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4qzx7uyyhctfqr1td8p8pijm4">注意，惰性加载语法使用 <code>loadChildren</code>，其后是一个使用浏览器内置的 <code>import('...')</code> 语法进行动态导入的函数。其导入路径是到当前模块的相对路径。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4qzx7uyyhctfqr1td8p8pijm4">注意，延遲載入語法使用 <code>loadChildren</code>，其後是一個使用瀏覽器內建的 <code>import('...')</code> 語法進行動態匯入的函式。其匯入路徑是到當前模組的相對路徑。</p>
 
     <div class="docs-callout docs-callout-helpful">
-      <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="hkdw2kjmei7poo43bduc9yhb">基于字符串的惰性加载</h3>
+      <h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="hkdw2kjmei7poo43bduc9yhb">基於字串的延遲載入</h3>
       <p data-ng_translator_product="100" data-ng_translator_ref_id="15lvbau4diba1hjkes93x9wra">在 Angular 版本 8 中，
-<code>loadChildren</code> 路由规范的字符串语法已被弃用，改为使用 
-<code>import()</code> 语法。 你可以通过在 
-<code>tsconfig</code> 文件中包含延迟加载的路由，选择使用基于字符串的延迟加载（
-<code>loadChildren: './path/to/module#Module'</code>），这会将延迟加载的文件包含在编译中。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9tdn0uidf6b5j73muoyr6qp2n">默认情况下，会用 Angular CLI 生成项目，这些项目将更严格地包含旨在与 <code>import()</code> 语法一起使用的文件。</p>
+<code>loadChildren</code> 路由規範的字串語法已被棄用，改為使用 
+<code>import()</code> 語法。 你可以透過在 
+<code>tsconfig</code> 檔案中包含延遲載入的路由，選擇使用基於字串的延遲載入（
+<code>loadChildren: './path/to/module#Module'</code>），這會將延遲載入的檔案包含在編譯中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9tdn0uidf6b5j73muoyr6qp2n">預設情況下，會用 Angular CLI 生成專案，這些專案將更嚴格地包含旨在與 <code>import()</code> 語法一起使用的檔案。</p>
 
     </div>
     
   <h3 id="add-another-feature-module">
-    <a href="#add-another-feature-module" class="docs-anchor" tabindex="-1" aria-label="Link to Add another feature module" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a3p0a47xmo4c7t4gfxvxsn2yh">添加另一个特性模块</a>
+    <a href="#add-another-feature-module" class="docs-anchor" tabindex="-1" aria-label="Link to Add another feature module" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a3p0a47xmo4c7t4gfxvxsn2yh">新增另一個屬性模組</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="15k2dnnwdm4oa33m1tm7hyfjv">使用同样的命令创建第二个带路由的惰性加载特性模块及其桩组件。</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="15k2dnnwdm4oa33m1tm7hyfjv">使用同樣的指令建立第二個帶路由的延遲載入屬性模組及其樁元件。</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate module orders --route orders --module app.module</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="24zfl47u17p5ah490y1rsmbrp">这将创建一个名为 <code>orders</code> 的新目录，其中包含 <code>OrdersModule</code> 和 <code>OrdersRoutingModule</code> 以及新的 <code>OrdersComponent</code> 源文件。使用 <code>--route</code> 选项指定的 <code>orders</code> 路由，用惰性加载语法添加到了 <code>app-routing.module.ts</code> 文件内的 <code>routes</code> 数组中。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="24zfl47u17p5ah490y1rsmbrp">這將建立一個名為 <code>orders</code> 的新目錄，其中包含 <code>OrdersModule</code> 和 <code>OrdersRoutingModule</code> 以及新的 <code>OrdersComponent</code> 源檔案。使用 <code>--route</code> 選項指定的 <code>orders</code> 路由，用延遲載入語法新增到了 <code>app-routing.module.ts</code> 檔案內的 <code>routes</code> 陣列中。</p>
 <div class="docs-code" header="src/app/app-routing.module.ts">
     <div class="docs-code-header"><h3>src/app/app-routing.module.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'customers'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">loadChildren</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./customers/customers.module'</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">CustomersModule</span>)</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line highlighted">  {</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">path</span>: <span class="hljs-string">'orders'</span>,</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">loadChildren</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./orders/orders.module'</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">OrdersModule</span>)</div><div class="hljs-ln-line highlighted">  }</div><div class="hljs-ln-line">];</div></code>
@@ -113,211 +113,211 @@
   <h3 id="set-up-the-ui">
     <a href="#set-up-the-ui" class="docs-anchor" tabindex="-1" aria-label="Link to Set up the UI" data-ng_translator_product="100" data-ng_translator_ref_id="3lnczifhdupgnvrqxix5b2qzr">建立 UI</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dxubm2xqmimv28y9jl2kiipen">虽然你也可以在地址栏中输入 URL，不过导航 UI 会更好用，也更常见。把 <code>app.component.html</code> 中的占位脚本替换成一个自定义的导航，以便你在浏览器中能在模块之间导航。</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dxubm2xqmimv28y9jl2kiipen">雖然你也可以在地址欄中輸入 URL，不過導向 UI 會更好用，也更常見。把 <code>app.component.html</code> 中的佔位指令碼替換成一個自定義的導向，以便你在瀏覽器中能在模組之間導向。</p>
 <div class="docs-code" header="src/app/app.component.html">
     <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line">  {{title}}</div><div class="hljs-ln-line"><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/customers"</span>&gt;</span>Customers<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">"/orders"</span>&gt;</span>Orders<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line highlighted"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">routerLink</span>=<span class="hljs-string">""</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span></div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="baj9mak95escy76h36jqzpo3i">要想在浏览器中看到你的应用，就在命令行工具窗口中输入下列命令：</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="baj9mak95escy76h36jqzpo3i">要想在瀏覽器中看到你的應用，就在指令行工具視窗中輸入下列指令：</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng serve</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b5sadbzo9xxyvcjskgiu23xl8">然后，跳转到 <code>localhost:4200</code>，这时你应该看到 "customer-app" 和三个按钮。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b5sadbzo9xxyvcjskgiu23xl8">然後，跳轉到 <code>localhost:4200</code>，這時你應該看到 "customer-app" 和三個按鈕。</p>
 <img alt="three buttons in the browser" src="assets/images/guide/modules/lazy-loading-three-buttons.png" width="300">
 
-<p data-ng_translator_product="100" data-ng_translator_ref_id="akgoykkh2kv4wl2ko8wnw7cwd">这些按钮之所以能工作，是因为 Angular CLI 自动将特性模块的路由添加到了 
+<p data-ng_translator_product="100" data-ng_translator_ref_id="akgoykkh2kv4wl2ko8wnw7cwd">這些按鈕之所以能工作，是因為 Angular CLI 自動將屬性模組的路由新增到了 
 <code>app-routing.module.ts</code> 中的 
-<code>routes</code> 数组。</p>
+<code>routes</code> 陣列。</p>
 
   <h3 id="imports-and-route-configuration">
-    <a href="#imports-and-route-configuration" class="docs-anchor" tabindex="-1" aria-label="Link to Imports and route configuration" data-ng_translator_product="100" data-ng_translator_ref_id="2z2dtsbpps9e5rbc4gimhro0">导入与路由配置</a>
+    <a href="#imports-and-route-configuration" class="docs-anchor" tabindex="-1" aria-label="Link to Imports and route configuration" data-ng_translator_product="100" data-ng_translator_ref_id="2z2dtsbpps9e5rbc4gimhro0">匯入與路由設定</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9rjxxley6kk9ybgfmg7cjdkkv">Angular CLI 会将每个特性模块自动添加到应用级的路由映射表中。通过添加默认路由来最终完成这些步骤。在 <code>app-routing.module.ts</code> 文件中，使用如下命令更新 <code>routes</code> 数组：</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9rjxxley6kk9ybgfmg7cjdkkv">Angular CLI 會將每個屬性模組自動新增到應用級的路由對映表中。透過新增預設路由來最終完成這些步驟。在 <code>app-routing.module.ts</code> 檔案中，使用如下指令更新 <code>routes</code> 陣列：</p>
 <div class="docs-code" header="src/app/app-routing.module.ts">
     <div class="docs-code-header"><h3>src/app/app-routing.module.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'customers'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">loadChildren</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./customers/customers.module'</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">CustomersModule</span>)</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">'orders'</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">loadChildren</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./orders/orders.module'</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">OrdersModule</span>)</div><div class="hljs-ln-line">  },</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">redirectTo</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">pathMatch</span>: <span class="hljs-string">'full'</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">];</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="37e125lnn41dnyzo3sg69faza">前两个路径是到 <code>CustomersModule</code> 和 <code>OrdersModule</code> 的路由。最后一个条目则定义了默认路由。空路径匹配所有不匹配先前路径的内容。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="37e125lnn41dnyzo3sg69faza">前兩個路徑是到 <code>CustomersModule</code> 和 <code>OrdersModule</code> 的路由。最後一個條目則定義了預設路由。空路徑對應所有不對應先前路徑的內容。</p>
 
   <h3 id="inside-the-feature-module">
-    <a href="#inside-the-feature-module" class="docs-anchor" tabindex="-1" aria-label="Link to Inside the feature module" data-ng_translator_product="100" data-ng_translator_ref_id="ber0iikaop1gq5iqtb21ntl6f">特性模块内部</a>
+    <a href="#inside-the-feature-module" class="docs-anchor" tabindex="-1" aria-label="Link to Inside the feature module" data-ng_translator_product="100" data-ng_translator_ref_id="ber0iikaop1gq5iqtb21ntl6f">屬性模組內部</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9ns8qfwyu3ytni0uhlyqw7fv3">接下来，仔细看看 <code>customers.module.ts</code> 文件。如果你使用的是 Angular CLI，并按照此页面中的步骤进行操作，则无需在此处执行任何操作。</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9ns8qfwyu3ytni0uhlyqw7fv3">接下來，仔細看看 <code>customers.module.ts</code> 檔案。如果你使用的是 Angular CLI，並按照此頁面中的步驟進行操作，則無需在此處執行任何操作。</p>
 <div class="docs-code" header="src/app/customers/customers.module.ts">
     <div class="docs-code-header"><h3>src/app/customers/customers.module.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CommonModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CustomersRoutingModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./customers-routing.module'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CustomersComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./customers.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">CommonModule</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">CustomersRoutingModule</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [<span class="hljs-title class_">CustomersComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomersModule</span> { }</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9zfssqmi9mac1hvycglezyfu7"><code>customers.module.ts</code> 文件导入了 
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9zfssqmi9mac1hvycglezyfu7"><code>customers.module.ts</code> 檔案匯入了 
 <code>customers-routing.module.ts</code> 和 
-<code>customers.component.ts</code> 文件。 
+<code>customers.component.ts</code> 檔案。 
 <code>CustomersRoutingModule</code> 被列在 
 <code>@NgModule</code> 的 
-<code>imports</code> 数组中，使 
-<code>CustomersModule</code> 能访问其自己的路由模块。 
+<code>imports</code> 陣列中，使 
+<code>CustomersModule</code> 能訪問其自己的路由模組。 
 <code>CustomersComponent</code> 在 
-<code>declarations</code> 数组中，这意味着 
-<code>CustomersComponent</code> 属于 
+<code>declarations</code> 陣列中，這意味著 
+<code>CustomersComponent</code> 屬於 
 <code>CustomersModule</code>。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6h02jive3r53katbz65e3assv">然后，<code>app-routing.module.ts</code> 会使用 JavaScript 的动态导入功能来导入特性模块 <code>customers.module.ts</code>。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bgfard5vbhsxlsxky0jpaml9o">专属于特性模块的路由定义文件 <code>customers-routing.module.ts</code> 将导入在 <code>customers.component.ts</code> 文件中定义的自有特性组件，以及其它 JavaScript 导入语句。然后将空路径映射到 <code>CustomersComponent</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6h02jive3r53katbz65e3assv">然後，<code>app-routing.module.ts</code> 會使用 JavaScript 的動態匯入功能來匯入屬性模組 <code>customers.module.ts</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bgfard5vbhsxlsxky0jpaml9o">專屬於屬性模組的路由定義檔案 <code>customers-routing.module.ts</code> 將匯入在 <code>customers.component.ts</code> 檔案中定義的自有屬性元件，以及其它 JavaScript 匯入語句。然後將空路徑對映到 <code>CustomersComponent</code>。</p>
 <div class="docs-code" header="src/app/customers/customers-routing.module.ts">
     <div class="docs-code-header"><h3>src/app/customers/customers-routing.module.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Routes</span>, <span class="hljs-title class_">RouterModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CustomersComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./customers.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">path</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">CustomersComponent</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">];</div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">RouterModule</span>.<span class="hljs-title function_">forChild</span>(routes)],</div><div class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [<span class="hljs-title class_">RouterModule</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomersRoutingModule</span> { }</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3t1uzeqpbv380siullimamp0b">这里的 <code>path</code> 设置为空字符串，因为 <code>AppRoutingModule</code> 中的路径已经设置为 <code>customers</code>，因此，<code>CustomersRoutingModule</code> 中的此路由已经位于 <code>customers</code> 这个上下文中。此路由模块中的每个路由都是其子路由。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1lhzv57pviu9ap5gu8vez00ba">另一个特性模块中路由模块的配置也类似。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3t1uzeqpbv380siullimamp0b">這裡的 <code>path</code> 設定為空字串，因為 <code>AppRoutingModule</code> 中的路徑已經設定為 <code>customers</code>，因此，<code>CustomersRoutingModule</code> 中的此路由已經位於 <code>customers</code> 這個上下文中。此路由模組中的每個路由都是其子路由。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1lhzv57pviu9ap5gu8vez00ba">另一個屬性模組中路由模組的設定也類似。</p>
 <div class="docs-code" header="src/app/orders/orders-routing.module.ts (excerpt)">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="20vms3xv6su2nbmsxfzashi4">src/app/orders/orders-routing.module.ts（摘录）</h3></div>
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="20vms3xv6su2nbmsxfzashi4">src/app/orders/orders-routing.module.ts（摘錄）</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">OrdersComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./orders.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">routes</span>: <span class="hljs-title class_">Routes</span> = [</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line">    <span class="hljs-attr">path</span>: <span class="hljs-string">''</span>,</div><div class="hljs-ln-line">    <span class="hljs-attr">component</span>: <span class="hljs-title class_">OrdersComponent</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">];</div></code>
     </pre>
   </div>
   <h3 id="verify-lazy-loading">
-    <a href="#verify-lazy-loading" class="docs-anchor" tabindex="-1" aria-label="Link to Verify lazy loading" data-ng_translator_product="100" data-ng_translator_ref_id="42ioxkbuxsue4tsjucg8cy2y2">验证延迟加载</a>
+    <a href="#verify-lazy-loading" class="docs-anchor" tabindex="-1" aria-label="Link to Verify lazy loading" data-ng_translator_product="100" data-ng_translator_ref_id="42ioxkbuxsue4tsjucg8cy2y2">驗證延遲載入</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="7fg83ox0wxzek9y4j5y61y5x6">你可以使用 Chrome 开发者工具验证某个模块是否确实在延迟加载。在 Chrome 中，按 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7fg83ox0wxzek9y4j5y61y5x6">你可以使用 Chrome 開發者工具驗證某個模組是否確實在延遲載入。在 Chrome 中，按 
 <kbd>⌘ Cmd</kbd>+
 <kbd>Option</kbd>+
 <kbd>i</kbd>（Mac）或 
 <kbd>Ctrl</kbd>+
 <kbd>Shift</kbd>+
-<kbd>j</kbd>（PC）打开开发者工具，然后转到 Network 标签页。</p>
+<kbd>j</kbd>（PC）開啟開發者工具，然後轉到 Network 標籤頁。</p>
 <img alt="lazy loaded modules diagram" src="assets/images/guide/modules/lazy-loading-network-tab.png" width="600">
 
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dx6kxr5gja1r3is3akgfj616d">点击 Orders 或 Customers 按钮。如果你看到某个 chunk 文件出现了，就表示一切就绪，特性模块被惰性加载成功了。Orders 和 Customers 都应该出现一次 chunk，并且它们各自只应该出现一次。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dx6kxr5gja1r3is3akgfj616d">點選 Orders 或 Customers 按鈕。如果你看到某個 chunk 檔案出現了，就表示一切就緒，屬性模組被延遲載入成功了。Orders 和 Customers 都應該出現一次 chunk，並且它們各自只應該出現一次。</p>
 <img alt="lazy loaded modules diagram" src="assets/images/guide/modules/lazy-loading-chunk-arrow.png" width="600">
 
-<p data-ng_translator_product="100" data-ng_translator_ref_id="720x7no2s4f0511umb4w8c6el">要再次查看或在更改后进行测试，请点击网络选项卡左上角的带线圈的圆圈：</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="720x7no2s4f0511umb4w8c6el">要再次檢視或在更改後進行測試，請點選網路頁籤左上角的帶線圈的圓圈：</p>
 <img alt="lazy loaded modules diagram" src="assets/images/guide/modules/lazy-loading-clear.gif" width="200">
 
-<p data-ng_translator_product="100" data-ng_translator_ref_id="2u4mqtun0gv30twxaoxzgvmj4">然后根据你的平台，按 
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2u4mqtun0gv30twxaoxzgvmj4">然後根據你的平台，按 
 <kbd>⌘ Cmd</kbd>+
 <kbd>R</kbd> 或 
 <kbd>Ctrl</kbd>+
-<kbd>R</kbd> 重新加载。</p>
+<kbd>R</kbd> 重新載入。</p>
 
   <h2 id="forroot-and-forchild">
-    <a href="#forroot-and-forchild" class="docs-anchor" tabindex="-1" aria-label="Link to <code>forRoot()</code> and <code>forChild()</code>" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7g1lw84rxzgxzbl2u8g3cvqb5"><code>forRoot()</code> 与 <code>forChild()</code></a>
+    <a href="#forroot-and-forchild" class="docs-anchor" tabindex="-1" aria-label="Link to <code>forRoot()</code> and <code>forChild()</code>" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7g1lw84rxzgxzbl2u8g3cvqb5"><code>forRoot()</code> 與 <code>forChild()</code></a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="d0b80opltg1ed13z2sxtu9flt">你可能已经注意到 Angular CLI 将 
-<code>RouterModule.forRoot(routes)</code> 添加到 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="d0b80opltg1ed13z2sxtu9flt">你可能已經注意到 Angular CLI 將 
+<code>RouterModule.forRoot(routes)</code> 新增到 
 <code>AppRoutingModule</code> 的 
-<code>imports</code> 数组中。这让 Angular 知道 
-<code>AppRoutingModule</code> 是一个路由模块，
-<code>forRoot()</code> 指定这是根路由模块。它配置你传递给它的所有路由，赋予你对路由器指令的访问权限，并注册 
-<code>Router</code> 服务。在应用中只使用一次 
+<code>imports</code> 陣列中。這讓 Angular 知道 
+<code>AppRoutingModule</code> 是一個路由模組，
+<code>forRoot()</code> 指定這是根路由模組。它設定你傳遞給它的所有路由，賦予你對路由器指令的訪問許可權，並註冊 
+<code>Router</code> 服務。在應用中只使用一次 
 <code>forRoot()</code>，放在 
-<code>AppRoutingModule</code> 内。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1figtxmq2alarz8dmqp370yrr">Angular CLI 还会把 <code>RouterModule.forChild(routes)</code> 添加到各个特性模块中。这种方式下 Angular 就会知道这个路由列表只负责提供额外的路由并且其设计意图是作为特性模块使用。你可以在多个模块中使用 <code>forChild()</code>。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="7ko184j23u52spt2p2cc68yvt"><code>forRoot()</code>方法负责 Router 的
-<em>全局</em>注入器配置。 
-<code>forChild()</code>方法没有注入器配置。 它使用
+<code>AppRoutingModule</code> 內。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1figtxmq2alarz8dmqp370yrr">Angular CLI 還會把 <code>RouterModule.forChild(routes)</code> 新增到各個屬性模組中。這種方式下 Angular 就會知道這個路由清單只負責提供額外的路由並且其設計意圖是作為屬性模組使用。你可以在多個模組中使用 <code>forChild()</code>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7ko184j23u52spt2p2cc68yvt"><code>forRoot()</code>方法負責 Router 的
+<em>全域</em>注入器設定。 
+<code>forChild()</code>方法沒有注入器設定。 它使用
 <code>RouterOutlet</code>和
-<code>RouterLink</code>等指令。更多信息，请参见单例服务指南的
+<code>RouterLink</code>等指令。更多訊息，請參見單例服務指南的
 <a href="guide/ngmodules/singleton-services#forRoot"><code>forRoot()</code>模式</a>部分。</p>
 
   <h2 id="preloading">
-    <a href="#preloading" class="docs-anchor" tabindex="-1" aria-label="Link to Preloading" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="49xqnvehgda1bjiqtnuitjwyb">预加载</a>
+    <a href="#preloading" class="docs-anchor" tabindex="-1" aria-label="Link to Preloading" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="49xqnvehgda1bjiqtnuitjwyb">預載入</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6m5gim22wvmed484cpogscad4">预加载通过在后台加载部分应用来改进用户体验。你可以预加载模块、独立组件或组件数据。</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6m5gim22wvmed484cpogscad4">預載入透過在後台載入部分應用來改進使用者體驗。你可以預載入模組、獨立元件或元件資料。</p>
 
   <h3 id="preloading-modules-and-standalone-components">
-    <a href="#preloading-modules-and-standalone-components" class="docs-anchor" tabindex="-1" aria-label="Link to Preloading modules and standalone components" data-ng_translator_product="100" data-ng_translator_ref_id="bq5csyg382f384lwcjjwpw7j0">预加载模块和预加载独立组件</a>
+    <a href="#preloading-modules-and-standalone-components" class="docs-anchor" tabindex="-1" aria-label="Link to Preloading modules and standalone components" data-ng_translator_product="100" data-ng_translator_ref_id="bq5csyg382f384lwcjjwpw7j0">預載入模組和預載入獨立元件</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="jgqr9lb5u7i4jy0q0899b93b">预加载模块和预加载独立组件通过在后台加载部分应用来改善用户体验。这样一来，用户在激活路由时就无需等待下载这些元素。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="mhpj64hsmphi5u14fmujxq9h">要启用所有延迟加载模块和独立组件的预加载，从 Angular 
-<code>router</code> 导入 
-<code>PreloadAllModules</code> 标记。</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="jgqr9lb5u7i4jy0q0899b93b">預載入模組和預載入獨立元件透過在後台載入部分應用來改善使用者體驗。這樣一來，使用者在啟用路由時就無需等待下載這些元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="mhpj64hsmphi5u14fmujxq9h">要啟用所有延遲載入模組和獨立元件的預載入，從 Angular 
+<code>router</code> 匯入 
+<code>PreloadAllModules</code> 標記。</p>
 
   <h3 id="module-based-application">
-    <a href="#module-based-application" class="docs-anchor" tabindex="-1" aria-label="Link to Module based application" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9dfs1h700gy2y2brorwp6bqlo">基于模块的应用程序</a>
+    <a href="#module-based-application" class="docs-anchor" tabindex="-1" aria-label="Link to Module based application" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9dfs1h700gy2y2brorwp6bqlo">基於模組的應用程式</a>
   </h3>
   <div class="docs-code" header="AppRoutingModule (excerpt)">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="4p820kpv6vj59f0jzixja04r7">AppRoutingModule（摘录）</h3></div>
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="4p820kpv6vj59f0jzixja04r7">AppRoutingModule（摘錄）</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">PreloadAllModules</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dsl28soklatmeof6zjxv1smqt">然后，在 
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dsl28soklatmeof6zjxv1smqt">然後，在 
 <code>AppRoutingModule</code> 的 
-<code>RouterModule.forRoot()</code> 调用中指定你的预加载策略。</p>
+<code>RouterModule.forRoot()</code> 呼叫中指定你的預載入策略。</p>
 <div class="docs-code" header="AppRoutingModule (excerpt)">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="4p820kpv6vj59f0jzixja04r7">AppRoutingModule（摘录）</h3></div>
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="4p820kpv6vj59f0jzixja04r7">AppRoutingModule（摘錄）</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title class_">RouterModule</span>.<span class="hljs-title function_">forRoot</span>(</div><div class="hljs-ln-line">  appRoutes,</div><div class="hljs-ln-line">  {</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">preloadingStrategy</span>: <span class="hljs-title class_">PreloadAllModules</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">)</div></code>
     </pre>
   </div>
   <h3 id="standalone-application">
-    <a href="#standalone-application" class="docs-anchor" tabindex="-1" aria-label="Link to Standalone application" data-ng_translator_product="100" data-ng_translator_ref_id="dntquglskc2umxghz646iidxh">独立应用</a>
+    <a href="#standalone-application" class="docs-anchor" tabindex="-1" aria-label="Link to Standalone application" data-ng_translator_product="100" data-ng_translator_ref_id="dntquglskc2umxghz646iidxh">獨立應用</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="7zgabcf8ctqg7z6mbs79rb5dp">对于独立应用，通过在 
-<code>app.config.ts</code> 中将 
-<code>withPreloading</code> 添加到 
-<code>provideRouter</code> 的 RouterFeatures 来配置预加载策略。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7zgabcf8ctqg7z6mbs79rb5dp">對於獨立應用，透過在 
+<code>app.config.ts</code> 中將 
+<code>withPreloading</code> 新增到 
+<code>provideRouter</code> 的 RouterFeatures 來設定預載入策略。</p>
 <div class="docs-code" header="app.config.ts">
     <div class="docs-code-header"><h3>app.config.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ApplicationConfig</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title class_">PreloadAllModules</span>,</div><div class="hljs-ln-line">  provideRouter</div><div class="hljs-ln-line highlighted">  withPreloading,</div><div class="hljs-ln-line">} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { routes } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.routes'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">appConfig</span>: <span class="hljs-title class_">ApplicationConfig</span> = {</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title function_">provideRouter</span>(</div><div class="hljs-ln-line">      routes,</div><div class="hljs-ln-line highlighted">      <span class="hljs-title function_">withPreloading</span>(<span class="hljs-title class_">PreloadAllModules</span>)</div><div class="hljs-ln-line">    ),</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">};</div></code>
     </pre>
   </div>
   <h3 id="preloading-component-data">
-    <a href="#preloading-component-data" class="docs-anchor" tabindex="-1" aria-label="Link to Preloading component data" data-ng_translator_product="100" data-ng_translator_ref_id="3blkbv0kufkmqd8vfrv3tb2r3">预加载组件数据</a>
+    <a href="#preloading-component-data" class="docs-anchor" tabindex="-1" aria-label="Link to Preloading component data" data-ng_translator_product="100" data-ng_translator_ref_id="3blkbv0kufkmqd8vfrv3tb2r3">預載入元件資料</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7jy2k6e8xd5lm11ptf4y07fkc">要预加载组件数据，可以用 <code>resolver</code> 守卫。解析器通过阻止页面加载来改进用户体验，直到显示页面时的全部必要数据都可用。</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7jy2k6e8xd5lm11ptf4y07fkc">要預載入元件資料，可以用 <code>resolver</code> 守衛。解析器透過阻止頁面載入來改進使用者體驗，直到顯示頁面時的全部必要資料都可用。</p>
 
   <h4 id="resolvers">
     <a href="#resolvers" class="docs-anchor" tabindex="-1" aria-label="Link to Resolvers" data-ng_translator_product="100" data-ng_translator_ref_id="9hfti5ve73iuleb2yja24s3tt">解析器</a>
   </h4>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="atefy34xsv42eg5n4llgjm75c">创建一个解析器服务。通过 Angular CLI，创建服务的命令如下：</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="atefy34xsv42eg5n4llgjm75c">建立一個解析器服務。透過 Angular CLI，建立服務的指令如下：</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">ng generate service &lt;service-name&gt;</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ckspr0t14hq4opeerrq27gdux">在新创建的服务中，实现 
-<code>@angular/router</code> 包提供的 
-<code>Resolve</code> 接口：</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="ckspr0t14hq4opeerrq27gdux">在新創建的服務中，實現 
+<code>@angular/router</code> 套件提供的 
+<code>Resolve</code> 介面：</p>
 <div class="docs-code" header="Resolver service (excerpt)">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="74k0cq4piw7jsqtim4oc68rvv">解析器服务（节选）</h3></div>
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="74k0cq4piw7jsqtim4oc68rvv">解析器服務（節選）</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Resolve</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">…</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">/*An interface that represents your data model*/</span></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Crisis</span> {</div><div class="hljs-ln-line">  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;</div><div class="hljs-ln-line">  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CrisisDetailResolverService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Resolve</span>&lt;<span class="hljs-title class_">Crisis</span>&gt; {</div><div class="hljs-ln-line">  <span class="hljs-title function_">resolve</span>(<span class="hljs-attr">route</span>: <span class="hljs-title class_">ActivatedRouteSnapshot</span>, <span class="hljs-attr">state</span>: <span class="hljs-title class_">RouterStateSnapshot</span>): <span class="hljs-title class_">Observable</span>&lt;<span class="hljs-title class_">Crisis</span>&gt; {</div><div class="hljs-ln-line">    <span class="hljs-comment">// your logic goes here</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5cct99emsq6pux8m6sbywy8eq">把这个解析器导入此模块的路由模块。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5cct99emsq6pux8m6sbywy8eq">把這個解析器匯入此模組的路由模組。</p>
 <div class="docs-code" header="Feature module's routing module (excerpt)">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="702rgat7m34tkhln56a03bepk">特性模块的路由模块（节选）</h3></div>
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="702rgat7m34tkhln56a03bepk">屬性模組的路由模組（節選）</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CrisisDetailResolverService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./crisis-detail-resolver.service'</span>;</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1hvnzaffz5x7qtaq5ptfmozn9">在组件的 <code>route</code> 配置中添加一个 <code>resolve</code> 对象。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1hvnzaffz5x7qtaq5ptfmozn9">在元件的 <code>route</code> 設定中新增一個 <code>resolve</code> 物件。</p>
 <div class="docs-code" header="Feature module's routing module (excerpt)">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="702rgat7m34tkhln56a03bepk">特性模块的路由模块（节选）</h3></div>
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="702rgat7m34tkhln56a03bepk">屬性模組的路由模組（節選）</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">{</div><div class="hljs-ln-line">  <span class="hljs-attr">path</span>: <span class="hljs-string">'/your-path'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">component</span>: <span class="hljs-title class_">YourComponent</span>,</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">resolve</span>: {</div><div class="hljs-ln-line highlighted">    <span class="hljs-attr">crisis</span>: <span class="hljs-title class_">CrisisDetailResolverService</span></div><div class="hljs-ln-line highlighted">  }</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="8qczovqevheb5w2q61edqx1dk">在组件的构造函数中，注入代表当前路由的 
-<code>ActivatedRoute</code> 类的实例。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="8qczovqevheb5w2q61edqx1dk">在元件的建構式函式中，注入代表當前路由的 
+<code>ActivatedRoute</code> 類別的實例。</p>
 <div class="docs-code" header="Component's constructor (excerpt)">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="mwwkm5kjm8wwb4uhlt8eqnfg">组件的构造函数（节选）</h3></div>
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="mwwkm5kjm8wwb4uhlt8eqnfg">元件的建構式函式（節選）</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { ActivatedRoute } from <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component({ … })</span></div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">YourComponent</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">constructor</span>(<span class="hljs-keyword">private</span> route: ActivatedRoute) {}</div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div><p data-ng_translator_product="100" data-ng_translator_ref_id="c0jki6oatucyzatfdvh2api8i">使用注入的 
-<code>ActivatedRoute</code> 类的实例来访问与给定路由相关联的 
+<code>ActivatedRoute</code> 類別的實例來訪問與給定路由相關聯的 
 <code>data</code>。</p>
 <div class="docs-code" header="Component's ngOnInit lifecycle hook (excerpt)">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="6ntl72xoxryel3r84p7kdtpum">组件的 ngOnInit 生命周期钩子（节选）</h3></div>
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="6ntl72xoxryel3r84p7kdtpum">元件的 ngOnInit 生命週期鉤子（節選）</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line highlighted"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ActivatedRoute</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({ … })</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">YourComponent</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> route: ActivatedRoute</span>) {}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">ngOnInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">route</span>.<span class="hljs-property">data</span></div><div class="hljs-ln-line">      .<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {</div><div class="hljs-ln-line">        <span class="hljs-keyword">const</span> <span class="hljs-attr">crisis</span>: <span class="hljs-title class_">Crisis</span> = data.<span class="hljs-property">crisis</span>;</div><div class="hljs-ln-line">        <span class="hljs-comment">// …</span></div><div class="hljs-ln-line">      });</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h2 id="troubleshooting-lazy-loading-modules">
-    <a href="#troubleshooting-lazy-loading-modules" class="docs-anchor" tabindex="-1" aria-label="Link to Troubleshooting lazy-loading modules" data-ng_translator_product="100" data-ng_translator_ref_id="2j8jek9m4fwmfpbms62uln1em">对惰性加载模块进行故障排查</a>
+    <a href="#troubleshooting-lazy-loading-modules" class="docs-anchor" tabindex="-1" aria-label="Link to Troubleshooting lazy-loading modules" data-ng_translator_product="100" data-ng_translator_ref_id="2j8jek9m4fwmfpbms62uln1em">對延遲載入模組進行故障排查</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6mlljxr2gqiohh8p6z661wvtb">惰性加载模块时常见的错误之一，就是在应用程序中的多个位置导入通用模块。可以先用 Angular CLI 生成模块并包括 <code>--route route-name</code> 参数，来测试这种情况，其中 <code>route-name</code> 是模块的名称。接下来，创建不带 <code>--route</code> 参数的模块。如果你调用 <code>ng generate module</code> 时带上了 <code>--route</code> 参数，就会返回一个错误，否则它便可以正确运行，这样一来你就可能会在多个位置导入相同的模块。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3e6fple13ritgbdilizaiw57p">请记住，许多常见的 Angular 模块都应该导入应用的基础模块中。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="55y9f4wf4n0oq09k0dql80a5i">有关 Angular 模块的更多信息，请参见 <a href="guide/ngmodules">NgModules</a>。</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6mlljxr2gqiohh8p6z661wvtb">延遲載入模組時常見的錯誤之一，就是在應用程式中的多個位置匯入通用模組。可以先用 Angular CLI 生成模組幷包括 <code>--route route-name</code> 引數，來測試這種情況，其中 <code>route-name</code> 是模組的名稱。接下來，建立不帶 <code>--route</code> 引數的模組。如果你呼叫 <code>ng generate module</code> 時帶上了 <code>--route</code> 引數，就會回傳一個錯誤，否則它便可以正確執行，這樣一來你就可能會在多個位置匯入相同的模組。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3e6fple13ritgbdilizaiw57p">請記住，許多常見的 Angular 模組都應該匯入應用的基礎模組中。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="55y9f4wf4n0oq09k0dql80a5i">有關 Angular 模組的更多訊息，請參見 <a href="guide/ngmodules">NgModules</a>。</p>
 
   <h2 id="more-on-ngmodules-and-routing">
-    <a href="#more-on-ngmodules-and-routing" class="docs-anchor" tabindex="-1" aria-label="Link to More on NgModules and routing" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="er6oquwap1jwfax9ckc5fo67u">更多关于 NgModule 和路由的知识</a>
+    <a href="#more-on-ngmodules-and-routing" class="docs-anchor" tabindex="-1" aria-label="Link to More on NgModules and routing" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="er6oquwap1jwfax9ckc5fo67u">更多關於 NgModule 和路由的知識</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1oolgylns9kaynftarwog49tq">你可能还对下列内容感兴趣：</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1oolgylns9kaynftarwog49tq">你可能還對下列內容感興趣：</p>
 
   <ul class="docs-list">
-    <li><a href="guide/routing" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ih4vj86fyrg1eqs17rhkyho3">路由与导航</a></li>
+    <li><a href="guide/routing" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ih4vj86fyrg1eqs17rhkyho3">路由與導向</a></li>
 <li><a href="guide/ngmodules/providers" data-ng_translator_product="100" data-ng_translator_ref_id="dycvc6pm27ridqfrosy8bqn88">提供者</a></li>
-<li><a href="guide/ngmodules/module-types" data-ng_translator_product="100" data-ng_translator_ref_id="7428z9j4wm6zdmfr007wx3t0d">特性模块的分类</a></li>
-<li><a href="https://web.dev/route-level-code-splitting-in-angular" target="_blank" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ezcrowlssxa4b8ai8dk5js4rg">Angular 中的路由级代码拆分</a></li>
-<li><a href="https://web.dev/route-preloading-in-angular" target="_blank" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9vaoeljvzzias7tl8mc9wdvae">Angular 中的路由预加载策略</a></li>
+<li><a href="guide/ngmodules/module-types" data-ng_translator_product="100" data-ng_translator_ref_id="7428z9j4wm6zdmfr007wx3t0d">屬性模組的分類</a></li>
+<li><a href="https://web.dev/route-level-code-splitting-in-angular" target="_blank" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ezcrowlssxa4b8ai8dk5js4rg">Angular 中的路由級程式碼拆分</a></li>
+<li><a href="https://web.dev/route-preloading-in-angular" target="_blank" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9vaoeljvzzias7tl8mc9wdvae">Angular 中的路由預載入策略</a></li>
 
   </ul>
   

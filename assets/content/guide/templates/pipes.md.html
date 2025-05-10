@@ -4,7 +4,7 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">管道</h1>
+    <h1 tabindex="-1">通道</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/templates/pipes.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
@@ -13,36 +13,36 @@
     </header>
     
   <h2 id="overview">
-    <a href="#overview" class="docs-anchor" tabindex="-1" aria-label="Link to Overview">概览</a>
+    <a href="#overview" class="docs-anchor" tabindex="-1" aria-label="Link to Overview">概覽</a>
   </h2>
-  <p>管道是 Angular 模板表达式中的一种特殊操作符，允许你在模板中声明式地转换数据。管道允许你声明一次转换函数，然后在多个模板中复用该转换。Angular 管道使用竖线字符 (<code>|</code>)，其灵感来源于 <a href="https://en.wikipedia.org/wiki/Pipeline_(Unix)" target="_blank">Unix 管道</a>。</p>
+  <p>通道是 Angular 樣板表示式中的一種特殊運算子，允許你在樣板中宣告式地轉換資料。通道允許你宣告一次轉換函式，然後在多個樣板中複用該轉換。Angular 通道使用豎線字元 (<code>|</code>)，其靈感來源於 <a href="https://en.wikipedia.org/wiki/Pipeline_(Unix)" target="_blank">Unix 通道</a>。</p>
 
     <div class="docs-alert docs-alert-note">
-    <p><strong>注意：</strong> Angular 的管道语法与标准 JavaScript 不同，标准 JavaScript 使用竖线字符作为 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR" target="_blank">按位或运算符</a>。Angular 模板表达式不支持按位运算符。</p>
+    <p><strong>注意：</strong> Angular 的通道語法與標準 JavaScript 不同，標準 JavaScript 使用豎線字元作為 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR" target="_blank">按位或運算符</a>。Angular 樣板表示式不支援按位運算符。</p>
 
     </div>
-    <p>这里有一个范例，展示了 Angular 提供的一些内置管道：</p>
+    <p>這裡有一個範例，展示了 Angular 提供的一些內建通道：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Component } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { CurrencyPipe, DatePipe, TitleCasePipe } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/common'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-root'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  imports: [CurrencyPipe, DatePipe, TitleCasePipe],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">main</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">       &lt;!-- Transform the company name to title-case and</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">       transform the purchasedOn date to a locale-formatted string --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Purchases from {{ company </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> titlecase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }} on {{ purchasedOn </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> date</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">	    &lt;!-- Transform the amount to a currency-formatted string --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Total: {{ amount </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> currency</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">main</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ShoppingCartComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  amount</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 123.45</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  company</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'acme corporation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  purchasedOn</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '2024-07-08'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>当 Angular 渲染组件时，它将确保适当的日期格式和货币基于用户的语言环境。如果用户在美国，它将渲染为：</p>
+  </div><p>當 Angular 渲染元件時，它將確保適當的日期格式和貨幣基於使用者的語言環境。如果使用者在美國，它將渲染為：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">main</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Purchases from Acme Corporation on Jul 8, 2024&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Total: $123.45&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">main</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>请参阅 <a href="/guide/i18n">关于 i18n 的深入指南</a>，以了解更多关于 Angular 如何本地化值的信息。</p>
+  </div><p>請參閱 <a href="/guide/i18n">關於 i18n 的深入指南</a>，以瞭解更多關於 Angular 如何本地化值的訊息。</p>
 
   <h3 id="built-in-pipes">
-    <a href="#built-in-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Built-in Pipes">内置管道</a>
+    <a href="#built-in-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Built-in Pipes">內建通道</a>
   </h3>
-  <p>Angular 在 <code>@angular/common</code> 包中包含了一组内置管道：</p>
+  <p>Angular 在 <code>@angular/common</code> 套件中包含了一組內建通道：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th>名称</th>
+<th>名稱</th>
 <th>描述</th>
 </tr>
 
@@ -50,55 +50,55 @@
       <tbody>
         <tr>
 <td><a href="api/common/AsyncPipe"><code>AsyncPipe</code></a></td>
-<td>从 <code>Promise</code> 或 RxJS <code>Observable</code> 中读取值。</td>
+<td>從 <code>Promise</code> 或 RxJS <code>Observable</code> 中讀取值。</td>
 </tr>
 <tr>
 <td><a href="api/common/CurrencyPipe"><code>CurrencyPipe</code></a></td>
-<td>根据语言环境规则，将数字转换为货币字符串。</td>
+<td>根據語言環境規則，將數字轉換為貨幣字串。</td>
 </tr>
 <tr>
 <td><a href="api/common/DatePipe"><code>DatePipe</code></a></td>
-<td>根据语言环境规则，格式化 <code>Date</code> 值。</td>
+<td>根據語言環境規則，格式化 <code>Date</code> 值。</td>
 </tr>
 <tr>
 <td><a href="api/common/DecimalPipe"><code>DecimalPipe</code></a></td>
-<td>根据语言环境规则，将数字转换为带小数点的字符串。</td>
+<td>根據語言環境規則，將數字轉換為帶小數點的字串。</td>
 </tr>
 <tr>
 <td><a href="api/common/I18nPluralPipe"><code>I18nPluralPipe</code></a></td>
-<td>根据语言环境规则，将值映射到对该值进行复数化的字符串。</td>
+<td>根據語言環境規則，將值對映到對該值進行複數化的字串。</td>
 </tr>
 <tr>
 <td><a href="api/common/I18nSelectPipe"><code>I18nSelectPipe</code></a></td>
-<td>将键映射到返回所需值的自定义选择器。</td>
+<td>將鍵對映到回傳所需值的自定義選擇器。</td>
 </tr>
 <tr>
 <td><a href="api/common/JsonPipe"><code>JsonPipe</code></a></td>
-<td>通过 <code>JSON.stringify</code> 将对象转换为字符串表示形式，用于调试。</td>
+<td>透過 <code>JSON.stringify</code> 將物件轉換為字串表示形式，用於除錯。</td>
 </tr>
 <tr>
 <td><a href="api/common/KeyValuePipe"><code>KeyValuePipe</code></a></td>
-<td>将 Object 或 Map 转换为键值对数组。</td>
+<td>將 Object 或 Map 轉換為鍵值對陣列。</td>
 </tr>
 <tr>
 <td><a href="api/common/LowerCasePipe"><code>LowerCasePipe</code></a></td>
-<td>将文本转换为全小写。</td>
+<td>將文字轉換為全小寫。</td>
 </tr>
 <tr>
 <td><a href="api/common/PercentPipe"><code>PercentPipe</code></a></td>
-<td>根据语言环境规则，将数字转换为百分比字符串。</td>
+<td>根據語言環境規則，將數字轉換為百分比字串。</td>
 </tr>
 <tr>
 <td><a href="api/common/SlicePipe"><code>SlicePipe</code></a></td>
-<td>创建一个新的 Array 或 String，其中包含元素的子集（切片）。</td>
+<td>建立一個新的 Array 或 String，其中包含元素的子集（切片）。</td>
 </tr>
 <tr>
 <td><a href="api/common/TitleCasePipe"><code>TitleCasePipe</code></a></td>
-<td>将文本转换为首字母大写。</td>
+<td>將文字轉換為首字母大寫。</td>
 </tr>
 <tr>
 <td><a href="api/common/UpperCasePipe"><code>UpperCasePipe</code></a></td>
-<td>将文本转换为全大写。</td>
+<td>將文字轉換為全大寫。</td>
 </tr>
 
       </tbody>
@@ -106,162 +106,162 @@
   </div>
   
   <h2 id="using-pipes">
-    <a href="#using-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Using pipes">使用管道</a>
+    <a href="#using-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Using pipes">使用通道</a>
   </h2>
-  <p>Angular 的管道操作符在模板表达式中使用竖线字符 (<code>|</code>)。管道操作符是一个二元运算符 —— 左侧操作数是传递给转换函数的值，右侧操作数是管道的名称和任何附加参数（如下所述）。</p>
+  <p>Angular 的通道運算子在樣板表示式中使用豎線字元 (<code>|</code>)。通道運算子是一個二元運算符 —— 左側操作數是傳遞給轉換函式的值，右側操作數是通道的名稱和任何附加引數（如下所述）。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Total: {{ amount </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> currency</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>在此范例中，<code>amount</code> 的值被传递到 <code>CurrencyPipe</code> 中，其中管道名称为 <code>currency</code>。然后，它为用户的语言环境渲染默认货币。</p>
+  </div><p>在此範例中，<code>amount</code> 的值被傳遞到 <code>CurrencyPipe</code> 中，其中通道名稱為 <code>currency</code>。然後，它為使用者的語言環境渲染預設貨幣。</p>
 
   <h3 id="combining-multiple-pipes-in-the-same-expression">
-    <a href="#combining-multiple-pipes-in-the-same-expression" class="docs-anchor" tabindex="-1" aria-label="Link to Combining multiple pipes in the same expression">在同一表达式中组合多个管道</a>
+    <a href="#combining-multiple-pipes-in-the-same-expression" class="docs-anchor" tabindex="-1" aria-label="Link to Combining multiple pipes in the same expression">在同一表示式中組合多個通道</a>
   </h3>
-  <p>你可以使用多个管道操作符对一个值应用多个转换。Angular 从左到右运行管道。</p>
-<p>以下范例演示了管道的组合，以全大写形式显示本地化的日期：</p>
+  <p>你可以使用多個通道運算子對一個值應用多個轉換。Angular 從左到右執行通道。</p>
+<p>以下範例示範了通道的組合，以全大寫形式顯示本地化的日期：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;The event will occur on {{ scheduledOn </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> date</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> |</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> uppercase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }}.&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
   </div>
   <h3 id="passing-parameters-to-pipes">
-    <a href="#passing-parameters-to-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Passing parameters to pipes">向管道传递参数</a>
+    <a href="#passing-parameters-to-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Passing parameters to pipes">向通道傳遞引數</a>
   </h3>
-  <p>一些管道接受参数来配置转换。要指定参数，请在管道名称后附加一个冒号 (<code>:</code>)，后跟参数值。</p>
-<p>例如，<code>DatePipe</code> 能够接受参数以特定方式格式化日期。</p>
+  <p>一些通道接受引數來設定轉換。要指定引數，請在通道名稱後附加一個冒號 (<code>:</code>)，後跟引數值。</p>
+<p>例如，<code>DatePipe</code> 能夠接受引數以特定方式格式化日期。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;The event will occur at {{ scheduledOn </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> date</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'hh:mm'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }}.&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>一些管道可能接受多个参数。你可以指定其他参数值，并用冒号字符 (<code>:</code>) 分隔。</p>
-<p>例如，我们还可以传递第二个可选参数来控制时区。</p>
+  </div><p>一些通道可能接受多個引數。你可以指定其他引數值，並用冒號字元 (<code>:</code>) 分隔。</p>
+<p>例如，我們還可以傳遞第二個可選引數來控制時區。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;The event will occur at {{ scheduledOn </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> date</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'hh:mm'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'UTC'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }}.&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
   </div>
   <h2 id="how-pipes-work">
-    <a href="#how-pipes-work" class="docs-anchor" tabindex="-1" aria-label="Link to How pipes work">管道的工作原理</a>
+    <a href="#how-pipes-work" class="docs-anchor" tabindex="-1" aria-label="Link to How pipes work">通道的工作原理</a>
   </h2>
-  <p>从概念上讲，管道是接受输入值并返回转换后值的函数。</p>
+  <p>從概念上講，通道是接受輸入值並回傳轉換後值的函式。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Component } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { CurrencyPipe} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/common'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-root'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  imports: [CurrencyPipe],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">main</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Total: {{ amount </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> currency</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">main</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> AppComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  amount</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 123.45</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>在此范例中：</p>
+  </div><p>在此範例中：</p>
 
     <ol class="docs-ordered-list">
-      <li><code>CurrencyPipe</code> 从 <code>@angular/common</code> 导入</li>
-<li><code>CurrencyPipe</code> 被添加到 <code>imports</code> 数组中</li>
-<li><code>amount</code> 数据被传递到 <code>currency</code> 管道</li>
+      <li><code>CurrencyPipe</code> 從 <code>@angular/common</code> 匯入</li>
+<li><code>CurrencyPipe</code> 被新增到 <code>imports</code> 陣列中</li>
+<li><code>amount</code> 資料被傳遞到 <code>currency</code> 通道</li>
 
     </ol>
     
   <h3 id="pipe-operator-precedence">
-    <a href="#pipe-operator-precedence" class="docs-anchor" tabindex="-1" aria-label="Link to Pipe operator precedence">管道操作符优先级</a>
+    <a href="#pipe-operator-precedence" class="docs-anchor" tabindex="-1" aria-label="Link to Pipe operator precedence">通道運算子優先級</a>
   </h3>
-  <p>管道操作符的优先级低于其他二元运算符，包括 <code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>%</code>、<code>&amp;&amp;</code>、<code>||</code> 和 <code>??</code>。</p>
+  <p>通道運算子的優先級低於其他二元運算符，包括 <code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>%</code>、<code>&amp;&amp;</code>、<code>||</code> 和 <code>??</code>。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- firstName and lastName are concatenated before the result is passed to the uppercase pipe --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">{{ firstName </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">+</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> lastName </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> uppercase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }}</span></span></code></pre>
     </pre>
-  </div><p>管道操作符的优先级高于条件（三元）运算符。</p>
+  </div><p>通道運算子的優先級高於條件（三元）運算符。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">{{ (isAdmin </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'Access granted'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> :</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'Access denied'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> uppercase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }}</span></span></code></pre>
     </pre>
-  </div><p>如果在没有括号的情况下编写相同的表达式：</p>
+  </div><p>如果在沒有括號的情況下編寫相同的表示式：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">{{ isAdmin </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'Access granted'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> :</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'Access denied'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> |</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> uppercase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }}</span></span></code></pre>
     </pre>
-  </div><p>它将被解析为：</p>
+  </div><p>它將被解析為：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">{{ isAdmin </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'Access granted'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> :</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Access denied'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> |</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> uppercase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) }}</span></span></code></pre>
     </pre>
-  </div><p>当操作符优先级可能不明确时，请始终在表达式中使用括号。</p>
+  </div><p>當運算子優先級可能不明確時，請始終在表示式中使用括號。</p>
 
   <h3 id="change-detection-with-pipes">
-    <a href="#change-detection-with-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Change detection with pipes">使用管道进行变更检测</a>
+    <a href="#change-detection-with-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Change detection with pipes">使用通道進行變更檢測</a>
   </h3>
-  <p>默认情况下，所有管道都被认为是<code>纯</code>管道，这意味着它仅在原始输入值（例如 <code>String</code>、<code>Number</code>、<code>Boolean</code> 或 <code>Symbol</code>）或更改的对象引用（例如 <code>Array</code>、<code>Object</code>、<code>Function</code> 或 <code>Date</code>）发生变化时执行。纯管道提供了性能优势，因为如果传递的值没有更改，Angular 可以避免调用转换函数。</p>
-<p>因此，这意味着除非整个对象或数组引用被替换为不同的实例，否则不会检测到对对象属性或数组条目的修改。如果你想要这种级别的变更检测，请参阅 <a href="#detecting-change-within-arrays-or-objects">检测数组或对象内部的更改</a>。</p>
+  <p>預設情況下，所有通道都被認為是<code>純</code>通道，這意味著它僅在原始輸入值（例如 <code>String</code>、<code>Number</code>、<code>Boolean</code> 或 <code>Symbol</code>）或更改的物件引用（例如 <code>Array</code>、<code>Object</code>、<code>Function</code> 或 <code>Date</code>）發生變化時執行。純通道提供了效能優勢，因為如果傳遞的值沒有更改，Angular 可以避免呼叫轉換函式。</p>
+<p>因此，這意味著除非整個物件或陣列引用被替換為不同的實例，否則不會檢測到對物件屬性或陣列條目的修改。如果你想要這種級別的變更檢測，請參閱 <a href="#detecting-change-within-arrays-or-objects">檢測陣列或物件內部的更改</a>。</p>
 
   <h2 id="creating-custom-pipes">
-    <a href="#creating-custom-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Creating custom pipes">创建自定义管道</a>
+    <a href="#creating-custom-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Creating custom pipes">建立自定義通道</a>
   </h2>
-  <p>你可以通过使用 <code>@Pipe</code> 装饰器实现一个 TypeScript 类来定义自定义管道。一个管道必须具备以下两点：</p>
+  <p>你可以透過使用 <code>@Pipe</code> 裝飾器實現一個 TypeScript 類來定義自定義通道。一個通道必須具備以下兩點：</p>
 
   <ul class="docs-list">
-    <li>一个名称，在管道装饰器中指定</li>
-<li>一个名为 <code>transform</code> 的方法，用于执行值转换。</li>
+    <li>一個名稱，在通道裝飾器中指定</li>
+<li>一個名為 <code>transform</code> 的方法，用於執行值轉換。</li>
 
   </ul>
-  <p>TypeScript 类还应该实现 <code>PipeTransform</code> 接口，以确保它满足管道的类型签名。</p>
-<p>这是一个自定义管道的范例，它将字符串转换为 kebab case：</p>
+  <p>TypeScript 類還應該實現 <code>PipeTransform</code> 介面，以確保它滿足通道的型別簽名。</p>
+<p>這是一個自定義通道的範例，它將字串轉換為 kebab case：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// kebab-case.pipe.ts</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Pipe, PipeTransform } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Pipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'kebabCase'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> KebabCasePipe</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> implements</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> PipeTransform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  transform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">value</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> value.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">toLowerCase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">().</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">replace</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">/</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> /</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">g</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'-'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h3 id="using-the-pipe-decorator">
-    <a href="#using-the-pipe-decorator" class="docs-anchor" tabindex="-1" aria-label="Link to Using the <code>@Pipe</code> decorator">使用 <code>@Pipe</code> 装饰器</a>
+    <a href="#using-the-pipe-decorator" class="docs-anchor" tabindex="-1" aria-label="Link to Using the <code>@Pipe</code> decorator">使用 <code>@Pipe</code> 裝飾器</a>
   </h3>
-  <p>当创建自定义管道时，从 <code>@angular/core</code> 包中导入 <code>Pipe</code>，并将其用作 TypeScript 类的装饰器。</p>
+  <p>當建立自定義通道時，從 <code>@angular/core</code> 套件中匯入 <code>Pipe</code>，並將其用作 TypeScript 類別的裝飾器。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Pipe } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Pipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'myCustomTransformation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> MyCustomTransformationPipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}</span></span></code></pre>
     </pre>
-  </div><p><code>@Pipe</code> 装饰器需要一个 <code>name</code>，用于控制管道在模板中的使用方式。</p>
+  </div><p><code>@Pipe</code> 裝飾器需要一個 <code>name</code>，用於控制通道在樣板中的使用方式。</p>
 
   <h3 id="naming-convention-for-custom-pipes">
-    <a href="#naming-convention-for-custom-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Naming convention for custom pipes">自定义管道的命名约定</a>
+    <a href="#naming-convention-for-custom-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Naming convention for custom pipes">自定義通道的命名約定</a>
   </h3>
-  <p>自定义管道的命名约定由两个约定组成：</p>
+  <p>自定義通道的命名約定由兩個約定組成：</p>
 
   <ul class="docs-list">
-    <li><code>name</code> - 推荐使用 camelCase。不要使用连字符。</li>
-<li><code>class name</code> - <code>name</code> 的 PascalCase 版本，并在末尾附加 <code>Pipe</code></li>
+    <li><code>name</code> - 推薦使用 camelCase。不要使用連字元。</li>
+<li><code>class name</code> - <code>name</code> 的 PascalCase 版本，並在末尾附加 <code>Pipe</code></li>
 
   </ul>
   
   <h3 id="implement-the-pipetransform-interface">
-    <a href="#implement-the-pipetransform-interface" class="docs-anchor" tabindex="-1" aria-label="Link to Implement the <code>PipeTransform</code> interface">实现 <code>PipeTransform</code> 接口</a>
+    <a href="#implement-the-pipetransform-interface" class="docs-anchor" tabindex="-1" aria-label="Link to Implement the <code>PipeTransform</code> interface">實現 <code>PipeTransform</code> 介面</a>
   </h3>
-  <p>除了 <code>@Pipe</code> 装饰器之外，自定义管道应该始终实现来自 <code>@angular/core</code> 的 <code>PipeTransform</code> 接口。</p>
+  <p>除了 <code>@Pipe</code> 裝飾器之外，自定義通道應該始終實現來自 <code>@angular/core</code> 的 <code>PipeTransform</code> 介面。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Pipe, PipeTransform } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Pipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'myCustomTransformation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> MyCustomTransformationPipe</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> implements</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> PipeTransform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}</span></span></code></pre>
     </pre>
-  </div><p>实现此接口可确保你的管道类具有正确的结构。</p>
+  </div><p>實現此介面可確保你的通道類具有正確的結構。</p>
 
   <h3 id="transforming-the-value-of-a-pipe">
-    <a href="#transforming-the-value-of-a-pipe" class="docs-anchor" tabindex="-1" aria-label="Link to Transforming the value of a pipe">转换管道的值</a>
+    <a href="#transforming-the-value-of-a-pipe" class="docs-anchor" tabindex="-1" aria-label="Link to Transforming the value of a pipe">轉換通道的值</a>
   </h3>
-  <p>每次转换都由 <code>transform</code> 方法调用，第一个参数是要传入的值，返回值是转换后的值。</p>
+  <p>每次轉換都由 <code>transform</code> 方法呼叫，第一個引數是要傳入的值，回傳值是轉換後的值。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Pipe, PipeTransform } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Pipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'myCustomTransformation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> MyCustomTransformationPipe</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> implements</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> PipeTransform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  transform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">value</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> `My custom transformation of ${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">value</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}.`</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h3 id="adding-parameters-to-a-custom-pipe">
-    <a href="#adding-parameters-to-a-custom-pipe" class="docs-anchor" tabindex="-1" aria-label="Link to Adding parameters to a custom pipe">向自定义管道添加参数</a>
+    <a href="#adding-parameters-to-a-custom-pipe" class="docs-anchor" tabindex="-1" aria-label="Link to Adding parameters to a custom pipe">向自定義通道新增引數</a>
   </h3>
-  <p>你可以通过向 <code>transform</code> 方法添加额外的参数，来向你的转换添加参数：</p>
+  <p>你可以透過向 <code>transform</code> 方法新增額外的引數，來向你的轉換新增引數：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Pipe, PipeTransform } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Pipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'myCustomTransformation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> MyCustomTransformationPipe</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> implements</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> PipeTransform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  transform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">value</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">format</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    let</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> msg </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> `My custom transformation of ${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">value</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}.`</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (format </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">===</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'uppercase'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">      return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> msg.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">toUpperCase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">else</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">      return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> msg</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h3 id="detecting-change-within-arrays-or-objects">
-    <a href="#detecting-change-within-arrays-or-objects" class="docs-anchor" tabindex="-1" aria-label="Link to Detecting change within arrays or objects">检测数组或对象内部的变化</a>
+    <a href="#detecting-change-within-arrays-or-objects" class="docs-anchor" tabindex="-1" aria-label="Link to Detecting change within arrays or objects">檢測陣列或物件內部的變化</a>
   </h3>
-  <p>当你希望管道检测数组或对象内部的变化时，必须通过传递 <code>pure</code> 标志并将其值设为 <code>false</code>，将其标记为非纯函数。</p>
-<p>除非绝对必要，否则应避免创建非纯管道，因为如果不小心使用，它们可能会导致显著的性能损失。</p>
+  <p>當你希望通道檢測陣列或物件內部的變化時，必須透過傳遞 <code>pure</code> 標誌並將其值設為 <code>false</code>，將其標記為非純函式。</p>
+<p>除非絕對必要，否則應避免建立非純通道，因為如果不小心使用，它們可能會導致顯著的效能損失。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Pipe, PipeTransform } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Pipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'joinNamesImpure'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  pure: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">false</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> JoinNamesImpurePipe</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> implements</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> PipeTransform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  transform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">names</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[])</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> names.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">join</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>Angular 开发人员通常采用在管道 <code>name</code> 和类名中包含 <code>Impure</code> 的约定，以向其他开发人员表明潜在的性能陷阱。</p>
+  </div><p>Angular 開發人員通常採用在通道 <code>name</code> 和類別名稱中包含 <code>Impure</code> 的約定，以向其他開發人員表明潛在的效能陷阱。</p>

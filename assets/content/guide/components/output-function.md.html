@@ -4,107 +4,107 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="antbt3ulnkvc6ji7u3n6hymig">基于函数的输出</h1>
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="antbt3ulnkvc6ji7u3n6hymig">基於函式的輸出</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/components/output-function.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="3yl3g6okn49tdu628a3l2zdq7"><code>output()</code> 函数声明指令或组件中的一个输出。输出允许你向父组件发出值。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="3yl3g6okn49tdu628a3l2zdq7"><code>output()</code> 函式宣告指令或元件中的一個輸出。輸出允許你向父元件發出值。</p>
 
     <div class="docs-alert docs-alert-helpful">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="1srpae2mfgh9bc6ly8hscyl41"><strong>有帮助：</strong> 
-<code>output()</code> 函数目前处于 
-<a href="/reference/releases#developer-preview">开发者预览</a> 阶段。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="1srpae2mfgh9bc6ly8hscyl41"><strong>有幫助：</strong> 
+<code>output()</code> 函式目前處於 
+<a href="/reference/releases#developer-preview">開發者預覽</a> 階段。</p>
 
     </div>
     <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, output} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComp</span> {</div><div class="hljs-ln-line highlighted">  onNameChange = output&lt;<span class="hljs-built_in">string</span>&gt;()    <span class="hljs-comment">// OutputEmitterRef&lt;string&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">setNewName</span>(<span class="hljs-params">newName: <span class="hljs-built_in">string</span></span>) {</div><div class="hljs-ln-line highlighted">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">onNameChange</span>.<span class="hljs-title function_">emit</span>(newName);</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="877ikltmwlb0v9ms89farq73x">每当你使用 
-<code>output</code> 函数作为类成员的初始化器时，Angular 会自动识别输出。父组件可以通过使用事件绑定语法在模板中监听输出。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="877ikltmwlb0v9ms89farq73x">每當你使用 
+<code>output</code> 函式作為類別成員的初始化器時，Angular 會自動識別輸出。父元件可以透過使用事件繫結語法在樣板中監聽輸出。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">my-comp</span> (<span class="hljs-attr">onNameChange</span>)=<span class="hljs-string">"showNewName($event)"</span> /&gt;</span></div></code>
     </pre>
   </div>
   <h2 id="aliasing-an-output">
-    <a href="#aliasing-an-output" class="docs-anchor" tabindex="-1" aria-label="Link to Aliasing an output" data-ng_translator_product="100" data-ng_translator_ref_id="14v61wea7tlqmmvcay5jxc162">输出别名</a>
+    <a href="#aliasing-an-output" class="docs-anchor" tabindex="-1" aria-label="Link to Aliasing an output" data-ng_translator_product="100" data-ng_translator_ref_id="14v61wea7tlqmmvcay5jxc162">輸出別名</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="21pekfzxe7cqly03sxbuzkoax">Angular 使用类成员名称作为输出的名称。你可以为了改变它们的公共名称而为输出取别名。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="21pekfzxe7cqly03sxbuzkoax">Angular 使用類別成員名稱作為輸出的名稱。你可以為了改變它們的公共名稱而為輸出取別名。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComp</span> {</div><div class="hljs-ln-line">  onNameChange = <span class="hljs-title function_">output</span>({<span class="hljs-attr">alias</span>: <span class="hljs-string">'ngxNameChange'</span>});</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9amf7g7rgczk70hgl3sfdv7o9">这允许用户使用 
-<code>(ngxNameChange)</code> 绑定到你的输出，而在你的组件内部，你可以使用 
-<code>this.onNameChange</code> 访问输出发射器。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="9amf7g7rgczk70hgl3sfdv7o9">這允許使用者使用 
+<code>(ngxNameChange)</code> 繫結到你的輸出，而在你的元件內部，你可以使用 
+<code>this.onNameChange</code> 訪問輸出發射器。</p>
 
   <h2 id="subscribing-programmatically">
-    <a href="#subscribing-programmatically" class="docs-anchor" tabindex="-1" aria-label="Link to Subscribing programmatically" data-ng_translator_product="100" data-ng_translator_ref_id="ayc2y4eertf80ijetxk63qywl">编程订阅</a>
+    <a href="#subscribing-programmatically" class="docs-anchor" tabindex="-1" aria-label="Link to Subscribing programmatically" data-ng_translator_product="100" data-ng_translator_ref_id="ayc2y4eertf80ijetxk63qywl">程式設計訂閱</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="d9dv6rzvn66zfvzwk18lx7sag">消费者可以使用对 
-<code>ComponentRef</code> 的引用动态创建你的组件。在这些情况下，父组件可以通过直接访问类型为 
-<code>OutputRef</code> 的属性来订阅输出。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="d9dv6rzvn66zfvzwk18lx7sag">消費者可以使用對 
+<code>ComponentRef</code> 的引用動態建立你的元件。在這些情況下，父元件可以透過直接訪問型別為 
+<code>OutputRef</code> 的屬性來訂閱輸出。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">const</span> myComp = viewContainerRef.<span class="hljs-title function_">createComponent</span>(...);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">myComp.<span class="hljs-property">instance</span>.<span class="hljs-property">onNameChange</span>.<span class="hljs-title function_">subscribe</span>(<span class="hljs-function"><span class="hljs-params">newName</span> =&gt;</span> {</div><div class="hljs-ln-line">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(newName);</div><div class="hljs-ln-line">});</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="23hcfmfe550ih2oyof809sabh">当销毁 
-<code>myComp</code> 时，Angular 会自动清理订阅。或者，会返回一个包含显式取消订阅的函数的对象，以便更早地取消订阅。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="23hcfmfe550ih2oyof809sabh">當銷燬 
+<code>myComp</code> 時，Angular 會自動清理訂閱。或者，會回傳一個包含顯式取消訂閱的函式的物件，以便更早地取消訂閱。</p>
 
   <h2 id="using-rxjs-observables-as-source">
-    <a href="#using-rxjs-observables-as-source" class="docs-anchor" tabindex="-1" aria-label="Link to Using RxJS observables as source" data-ng_translator_product="100" data-ng_translator_ref_id="39c8pfr98ub7s1lnz12m3o03i">使用 RxJS 可观察者作为源</a>
+    <a href="#using-rxjs-observables-as-source" class="docs-anchor" tabindex="-1" aria-label="Link to Using RxJS observables as source" data-ng_translator_product="100" data-ng_translator_ref_id="39c8pfr98ub7s1lnz12m3o03i">使用 RxJS 可觀察者作為源</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="3w53gulrywwotfyjhuvblxlvn">在某些情况下，你可能希望基于 RxJS 可观察者发射输出值。Angular 提供了一种使用 RxJS 可观察者作为输出源的方式。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="3kd4k01y4fo04nxgq4mn7mimq"><code>outputFromObservable</code> 函数是一个编译器原语，类似于 
-<code>output()</code> 函数，并声明由 RxJS 可观察者驱动的输出。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="3w53gulrywwotfyjhuvblxlvn">在某些情況下，你可能希望基於 RxJS 可觀察者發射輸出值。Angular 提供了一種使用 RxJS 可觀察者作為輸出源的方式。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3kd4k01y4fo04nxgq4mn7mimq"><code>outputFromObservable</code> 函式是一個編譯器原語，類似於 
+<code>output()</code> 函式，並宣告由 RxJS 可觀察者驅動的輸出。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Directive</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {outputFromObservable} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core/rxjs-interop'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>(...)</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDir</span> {</div><div class="hljs-ln-line">  nameChange$ = <span class="hljs-variable language_">this</span>.<span class="hljs-property">dataService</span>.<span class="hljs-title function_">get</span>(); <span class="hljs-comment">// Observable&lt;Data&gt;</span></div><div class="hljs-ln-line highlighted">  nameChange = <span class="hljs-title function_">outputFromObservable</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">nameChange$</span>);</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2zt7208vft7mtuip6x65k6mfv">Angular 将订阅转发给可观察者，但在拥有指令被销毁时停止转发值。在上面的示例中，如果 
-<code>MyDir</code> 被销毁，
-<code>nameChange</code> 将不再发射值。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2zt7208vft7mtuip6x65k6mfv">Angular 將訂閱轉發給可觀察者，但在擁有指令被銷燬時停止轉發值。在上面的範例中，如果 
+<code>MyDir</code> 被銷燬，
+<code>nameChange</code> 將不再發射值。</p>
 
     <div class="docs-alert docs-alert-helpful">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="3tx1ngwskpdrcf47sb2m6dnoy"><strong>提示：</strong>大多数情况下，使用 
-<code>output()</code> 就足够了，你可以主动发射值。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="3tx1ngwskpdrcf47sb2m6dnoy"><strong>提示：</strong>大多數情況下，使用 
+<code>output()</code> 就足夠了，你可以主動發射值。</p>
 
     </div>
     
   <h2 id="converting-an-output-to-an-observable">
-    <a href="#converting-an-output-to-an-observable" class="docs-anchor" tabindex="-1" aria-label="Link to Converting an output to an observable" data-ng_translator_product="100" data-ng_translator_ref_id="dir5h3n1az4fw5bka4nw3npvq">将输出转换为可观察者</a>
+    <a href="#converting-an-output-to-an-observable" class="docs-anchor" tabindex="-1" aria-label="Link to Converting an output to an observable" data-ng_translator_product="100" data-ng_translator_ref_id="dir5h3n1az4fw5bka4nw3npvq">將輸出轉換為可觀察者</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="8qhc07gbpche3isur7uhycvch">你可以通过在 
-<code>OutputRef</code> 上调用 
-<code>.subscribe</code> 方法订阅输出。在其他情况下，Angular 提供了一个将 
-<code>OutputRef</code> 转换为可观察者的辅助函数。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8qhc07gbpche3isur7uhycvch">你可以透過在 
+<code>OutputRef</code> 上呼叫 
+<code>.subscribe</code> 方法訂閱輸出。在其他情況下，Angular 提供了一個將 
+<code>OutputRef</code> 轉換為可觀察者的輔助函式。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {outputToObservable} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core/rxjs-interop'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>(...)</div><div class="hljs-ln-line"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComp</span> {</div><div class="hljs-ln-line">  onNameChange = output&lt;<span class="hljs-built_in">string</span>&gt;();</div><div class="hljs-ln-line">}</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-comment">// Instance reference to `MyComp`.</span></div><div class="hljs-ln-line"><span class="hljs-keyword">const</span> <span class="hljs-attr">myComp</span>: <span class="hljs-title class_">MyComp</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line highlighted"><span class="hljs-title function_">outputToObservable</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">myComp</span>.<span class="hljs-property">instance</span>.<span class="hljs-property">onNameChange</span>) <span class="hljs-comment">// Observable&lt;string&gt;</span></div><div class="hljs-ln-line">  .<span class="hljs-title function_">pipe</span>(...)</div><div class="hljs-ln-line">  .<span class="hljs-title function_">subscribe</span>(...);</div></code>
     </pre>
   </div>
   <h2 id="why-you-should-use-output-over-decorator-based-output">
-    <a href="#why-you-should-use-output-over-decorator-based-output" class="docs-anchor" tabindex="-1" aria-label="Link to Why you should use <code>output()</code> over decorator-based <code>@Output()</code>?" data-ng_translator_product="100" data-ng_translator_ref_id="b8a3127zhreijx3tzwalcv7s9">为什么你应该使用 
-<code>output()</code> 而不是基于装饰器的 
+    <a href="#why-you-should-use-output-over-decorator-based-output" class="docs-anchor" tabindex="-1" aria-label="Link to Why you should use <code>output()</code> over decorator-based <code>@Output()</code>?" data-ng_translator_product="100" data-ng_translator_ref_id="b8a3127zhreijx3tzwalcv7s9">為什麼你應該使用 
+<code>output()</code> 而不是基於裝飾器的 
 <code>@Output()</code>？</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="d81ymab8oeqt7ha5xlhm198pk"><code>output()</code> 函数相比基于装饰器的 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="d81ymab8oeqt7ha5xlhm198pk"><code>output()</code> 函式相比基於裝飾器的 
 <code>@Output</code> 和 
-<code>EventEmitter</code> 提供了许多好处：</p>
+<code>EventEmitter</code> 提供了許多好處：</p>
 
     <ol class="docs-ordered-list">
-      <li data-ng_translator_product="100" data-ng_translator_ref_id="cd00cm5203spneoe6si6ea8du">更简单的思维模型和 API： 
-<br>• 没有错误通道、完成通道或其他来自 RxJS 的 API 概念。 
-<br>• 输出是简单的发射器。你可以使用 
-<code>.emit</code> 函数发射值。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="3wrponv0cdhgjurkepxn4qzjw">更准确的类型。 
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="cd00cm5203spneoe6si6ea8du">更簡單的思維模型和 API： 
+<br>• 沒有錯誤通道、完成通道或其他來自 RxJS 的 API 概念。 
+<br>• 輸出是簡單的發射器。你可以使用 
+<code>.emit</code> 函式發射值。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="3wrponv0cdhgjurkepxn4qzjw">更準確的型別。 
 <br>• 
-<code>OutputEmitterRef.emit(value)</code> 现在拥有正确的类型，而 
-<code>EventEmitter</code> 具有破损的类型，可能导致运行时错误。</li>
+<code>OutputEmitterRef.emit(value)</code> 現在擁有正確的型別，而 
+<code>EventEmitter</code> 具有破損的型別，可能導致執行時錯誤。</li>
 
     </ol>
     

@@ -4,115 +4,115 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="9peg3nbw1q4dbnfqsthab9fn0">模型输入</h1>
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="9peg3nbw1q4dbnfqsthab9fn0">模型輸入</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/signals/model.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="lqszhur4qm0wywl0a4pdzud"><strong>模型输入</strong> 是一种特殊类型的输入，使组件能够将新值传播回另一个组件。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="lqszhur4qm0wywl0a4pdzud"><strong>模型輸入</strong> 是一種特殊型別的輸入，使元件能夠將新值傳播回另一個元件。</p>
 
     <div class="docs-alert docs-alert-helpful">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="5wss9bzwbwmkx99lisyptpfv4"><strong>有帮助的提示：</strong> 目前模型输入处于 
-<a href="/reference/releases#developer-preview">开发者预览</a>阶段。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="5wss9bzwbwmkx99lisyptpfv4"><strong>有幫助的提示：</strong> 目前模型輸入處於 
+<a href="/reference/releases#developer-preview">開發者預覽</a>階段。</p>
 
     </div>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="cugcul2ug813akutgl3t6sk8z">创建组件时，可以像创建标准输入一样定义模型输入。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="cugcul2ug813akutgl3t6sk8z">建立元件時，可以像建立標準輸入一樣定義模型輸入。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, model, input} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCheckbox</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// This is a model input.</span></div><div class="hljs-ln-line">  checked = <span class="hljs-title function_">model</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-comment">// This is a standard input.</span></div><div class="hljs-ln-line">  disabled = <span class="hljs-title function_">input</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="el2b3830mvndttb3e1siym5o6">两种类型的输入都允许绑定一个值到属性中。然而，
-<strong>模型输入允许组件作者将值写入属性</strong>。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="ciz7xhgx4gql4jn9kvwjweb9f">在其他方面，可以像使用标准输入一样使用模型输入。你可以通过调用信号函数读取值，包括在 
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="el2b3830mvndttb3e1siym5o6">兩種型別的輸入都允許繫結一個值到屬性中。然而，
+<strong>模型輸入允許元件作者將值寫入屬性</strong>。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="ciz7xhgx4gql4jn9kvwjweb9f">在其他方面，可以像使用標準輸入一樣使用模型輸入。你可以透過呼叫訊號函式讀取值，包括在 
 <code>computed</code> 和 
-<code>effect</code> 这样的响应式上下文中。</p>
+<code>effect</code> 這樣的回應式上下文中。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Component</span>, model, input} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'custom-checkbox'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div (click)="toggle()"&gt; ... &lt;/div&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCheckbox</span> {</div><div class="hljs-ln-line">  checked = <span class="hljs-title function_">model</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line">  disabled = <span class="hljs-title function_">input</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">toggle</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-comment">// While standard inputs are read-only, you can write directly to model inputs.</span></div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">checked</span>.<span class="hljs-title function_">set</span>(!<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">checked</span>());</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="b7xn89em6t0se9em81xuwos22">当组件将新值写入模型输入时，Angular 可以将新值传播回绑定该输入值的组件。这被称为 
-<strong>双向绑定</strong>，因为值可以双向流动。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="b7xn89em6t0se9em81xuwos22">當元件將新值寫入模型輸入時，Angular 可以將新值傳播回繫結該輸入值的元件。這被稱為 
+<strong>雙向繫結</strong>，因為值可以雙向流動。</p>
 
   <h2 id="two-way-binding-with-signals">
-    <a href="#two-way-binding-with-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Two-way binding with signals" data-ng_translator_product="100" data-ng_translator_ref_id="azd6vrcyn00jw0xhujpmzm6y2">使用信号的双向绑定</a>
+    <a href="#two-way-binding-with-signals" class="docs-anchor" tabindex="-1" aria-label="Link to Two-way binding with signals" data-ng_translator_product="100" data-ng_translator_ref_id="azd6vrcyn00jw0xhujpmzm6y2">使用訊號的雙向繫結</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="2arom0i0wk7oa73jvw0ogpcz7">你可以将可写信号绑定到模型输入。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2arom0i0wk7oa73jvw0ogpcz7">你可以將可寫訊號繫結到模型輸入。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-comment">// `checked` is a model input.</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// The parenthesis-inside-square-brackets syntax (aka "banana-in-a-box") creates a two-way binding</span></div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;custom-checkbox [(checked)]="isAdmin" /&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserProfile</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">protected</span> isAdmin = <span class="hljs-title function_">signal</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7ogrxz4gr0spvsvzpyt5ehvj8">在上述示例中，
-<code>CustomCheckbox</code> 可以将值写入其 
-<code>checked</code> 模型输入，然后将这些值传播回 
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7ogrxz4gr0spvsvzpyt5ehvj8">在上述範例中，
+<code>CustomCheckbox</code> 可以將值寫入其 
+<code>checked</code> 模型輸入，然後將這些值傳播回 
 <code>UserProfile</code> 中的 
-<code>isAdmin</code> 信号。此绑定保持 
+<code>isAdmin</code> 訊號。此繫結保持 
 <code>checked</code> 和 
-<code>isAdmin</code> 的值同步。注意，绑定传递的是 
-<code>isAdmin</code> 信号本身，而不是信号的 
+<code>isAdmin</code> 的值同步。注意，繫結傳遞的是 
+<code>isAdmin</code> 訊號本身，而不是訊號的 
 <em>值</em>。</p>
 
   <h2 id="two-way-binding-with-plain-properties">
-    <a href="#two-way-binding-with-plain-properties" class="docs-anchor" tabindex="-1" aria-label="Link to Two-way binding with plain properties" data-ng_translator_product="100" data-ng_translator_ref_id="9n7zzmwlbz8gplinqol1fuv">使用普通属性的双向绑定</a>
+    <a href="#two-way-binding-with-plain-properties" class="docs-anchor" tabindex="-1" aria-label="Link to Two-way binding with plain properties" data-ng_translator_product="100" data-ng_translator_ref_id="9n7zzmwlbz8gplinqol1fuv">使用普通屬性的雙向繫結</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="1acee4gt91l7elrhogkqpnq8d">你可以将普通 JavaScript 属性绑定到模型输入。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="1acee4gt91l7elrhogkqpnq8d">你可以將普通 JavaScript 屬性繫結到模型輸入。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  ...,</div><div class="hljs-ln-line">  <span class="hljs-comment">// `checked` is a model input.</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// The parenthesis-inside-square-brackets syntax (aka "banana-in-a-box") creates a two-way binding</span></div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;custom-checkbox [(checked)]="isAdmin" /&gt;'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserProfile</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">protected</span> isAdmin = <span class="hljs-literal">false</span>;</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dy0y5eaax8lxnzm73mwof5v3">在上述示例中，
-<code>CustomCheckbox</code> 可以将值写入其 
-<code>checked</code> 模型输入，然后将这些值传播回 
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="dy0y5eaax8lxnzm73mwof5v3">在上述範例中，
+<code>CustomCheckbox</code> 可以將值寫入其 
+<code>checked</code> 模型輸入，然後將這些值傳播回 
 <code>UserProfile</code> 中的 
-<code>isAdmin</code> 属性。此绑定保持 
+<code>isAdmin</code> 屬性。此繫結保持 
 <code>checked</code> 和 
 <code>isAdmin</code> 的值同步。</p>
 
   <h2 id="implicit-change-events">
-    <a href="#implicit-change-events" class="docs-anchor" tabindex="-1" aria-label="Link to Implicit <code>change</code> events" data-ng_translator_product="100" data-ng_translator_ref_id="6f12bo0nuko2s8r0hb8bnfgz3">隐式 
+    <a href="#implicit-change-events" class="docs-anchor" tabindex="-1" aria-label="Link to Implicit <code>change</code> events" data-ng_translator_product="100" data-ng_translator_ref_id="6f12bo0nuko2s8r0hb8bnfgz3">隱式 
 <code>change</code> 事件</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="2e701j6fwnymdx8239b4y1tqq">在组件或指令中声明模型输入时，Angular 会自动为该模型创建一个对应的 
-<a href="guide/components/outputs">输出</a>。输出的名称是在模型输入的名称后加上 "Change" 后缀。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="2e701j6fwnymdx8239b4y1tqq">在元件或指令中宣告模型輸入時，Angular 會自動為該模型建立一個對應的 
+<a href="guide/components/outputs">輸出</a>。輸出的名稱是在模型輸入的名稱後加上 "Change" 字尾。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Directive</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomCheckbox</span> {</div><div class="hljs-ln-line">  <span class="hljs-comment">// This automatically creates an output named "checkedChange".</span></div><div class="hljs-ln-line">  <span class="hljs-comment">// Can be subscribed to using `(checkedChange)="handler()"` in the template.</span></div><div class="hljs-ln-line">  checked = <span class="hljs-title function_">model</span>(<span class="hljs-literal">false</span>);</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="eokfskluh5b3xbc77pzk62xf1">每当你通过调用 
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="eokfskluh5b3xbc77pzk62xf1">每當你透過呼叫 
 <code>set</code> 或 
-<code>update</code> 方法写入新值到模型输入时，Angular 就会触发此更改事件。</p>
+<code>update</code> 方法寫入新值到模型輸入時，Angular 就會觸發此更改事件。</p>
 
   <h2 id="customizing-model-inputs">
-    <a href="#customizing-model-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to Customizing model inputs" data-ng_translator_product="100" data-ng_translator_ref_id="7oil7uvzz6dombe8rwyudmobq">自定义模型输入</a>
+    <a href="#customizing-model-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to Customizing model inputs" data-ng_translator_product="100" data-ng_translator_ref_id="7oil7uvzz6dombe8rwyudmobq">自定義模型輸入</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="6b9ladieek6dv29hn2qgzq6u2">你可以像为 
-<a href="guide/signals/inputs">标准输入</a> 一样，将模型输入标记为必要或提供别名。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="2rbx17vk6e33o5zq9btofho3p">模型输入不支持输入转换。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6b9ladieek6dv29hn2qgzq6u2">你可以像為 
+<a href="guide/signals/inputs">標準輸入</a> 一樣，將模型輸入標記為必要或提供別名。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="2rbx17vk6e33o5zq9btofho3p">模型輸入不支援輸入轉換。</p>
 
   <h2 id="differences-between-model-and-input">
     <a href="#differences-between-model-and-input" class="docs-anchor" tabindex="-1" aria-label="Link to Differences between <code>model()</code> and <code>input()</code>" data-ng_translator_product="100" data-ng_translator_ref_id="6d7k5sfnyskfu6ker25cu3er5"><code>model()</code> 和 
-<code>input()</code> 的区别</a>
+<code>input()</code> 的區別</a>
   </h2>
   <p data-ng_translator_product="100" data-ng_translator_ref_id="8tslcsktyq8ltvarpcs3qjfcq"><code>input()</code> 和 
-<code>model()</code> 函数都是在 Angular 中定义基于信号的输入的方法，但它们在一些方面有所不同：</p>
+<code>model()</code> 函式都是在 Angular 中定義基於訊號的輸入的方法，但它們在一些方面有所不同：</p>
 
     <ol class="docs-ordered-list">
-      <li data-ng_translator_product="100" data-ng_translator_ref_id="2p7fc4lwzixj9yl2tuokbitv4"><code>model()</code> 定义了
-<strong>输入和输出</strong>。输出的名称总是输入名称后缀 
-<code>Change</code>，以支持双向绑定。由你的指令的使用者决定是只使用输入，只使用输出，还是同时使用两者。</li>
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="2p7fc4lwzixj9yl2tuokbitv4"><code>model()</code> 定義了
+<strong>輸入和輸出</strong>。輸出的名稱總是輸入名稱字尾 
+<code>Change</code>，以支援雙向繫結。由你的指令的使用者決定是隻使用輸入，只使用輸出，還是同時使用兩者。</li>
 <li data-ng_translator_product="100" data-ng_translator_ref_id="35hynrcfeamq8lvkdbom8drre"><code>ModelSignal</code> 是 
-<code>WritableSignal</code>，这意味着可以通过 
+<code>WritableSignal</code>，這意味著可以透過 
 <code>set</code> 和 
-<code>update</code> 方法从任何地方更改其值。当赋予新值时，
-<code>ModelSignal</code> 将向其输出发出信号。这与 
-<code>InputSignal</code> 不同，后者是只读的，只能通过模板更改。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="2vba9cz1kpafkv0lexw1f9nlt">模型输入不支持输入转换，而信号输入支持。</li>
+<code>update</code> 方法從任何地方更改其值。當賦予新值時，
+<code>ModelSignal</code> 將向其輸出發出訊號。這與 
+<code>InputSignal</code> 不同，後者是隻讀的，只能透過樣板更改。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="2vba9cz1kpafkv0lexw1f9nlt">模型輸入不支援輸入轉換，而訊號輸入支援。</li>
 
     </ol>
     
   <h2 id="when-to-use-model-inputs">
-    <a href="#when-to-use-model-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to When to use model inputs" data-ng_translator_product="100" data-ng_translator_ref_id="52z0pyxy4rsdwg4f13zdqsuma">何时使用模型输入</a>
+    <a href="#when-to-use-model-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to When to use model inputs" data-ng_translator_product="100" data-ng_translator_ref_id="52z0pyxy4rsdwg4f13zdqsuma">何時使用模型輸入</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="bblyj6ohh6rmw515nzyj2zzkf">在基于用户交互修改值的组件中使用模型输入。自定义表单控件（如日期选择器或组合框）应使用模型输入作为其主要值。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="auv9p1vdrwyribpagtreaa3we">避免为了方便而使用模型输入，以免引入一个额外的类属性来包含本地状态。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bblyj6ohh6rmw515nzyj2zzkf">在基於使用者互動修改值的元件中使用模型輸入。自定義表單控制元件（如日期選擇器或組合框）應使用模型輸入作為其主要值。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="auv9p1vdrwyribpagtreaa3we">避免為了方便而使用模型輸入，以免引入一個額外的類別屬性來包含本地狀態。</p>

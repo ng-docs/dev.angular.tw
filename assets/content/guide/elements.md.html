@@ -4,27 +4,27 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">Angular Element 概览</h1>
+    <h1 tabindex="-1">Angular Element 概覽</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/elements.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p><em>Angular Element</em> 是打包为<em>自定义元素</em>（也称为 Web Components）的 Angular 组件，自定义元素是一种以框架无关的方式定义新的 HTML 元素的 Web 标准。</p>
-<p><a href="https://developer.mozilla.org/docs/Web/Web_Components/Using_custom_elements" target="_blank">自定义元素</a>是 Web 平台的一项特性，在 Angular 支持的所有浏览器上均可用。
-自定义元素扩展了 HTML，允许你定义一个标签，其内容由 JavaScript 代码创建和控制。
-浏览器维护着已定义自定义元素的 <code>CustomElementRegistry</code>，它将可实例化的 JavaScript 类映射到 HTML 标签。</p>
-<p><code>@angular/elements</code> 包导出了一个 <code>createCustomElement()</code> API，该 API 提供了从 Angular 的组件接口和变更检测功能到内置 DOM API 的桥梁。</p>
-<p>将组件转换为自定义元素，使所有必需的 Angular 基础架构都可用于浏览器。
-创建自定义元素既简单又直接，并且会自动将你组件定义的视图与变更检测和数据绑定连接起来，从而将 Angular 功能映射到相应的内置 HTML 等效项。</p>
+    <p><em>Angular Element</em> 是打包為<em>自定義元素</em>（也稱為 Web Components）的 Angular 元件，自定義元素是一種以框架無關的方式定義新的 HTML 元素的 Web 標準。</p>
+<p><a href="https://developer.mozilla.org/docs/Web/Web_Components/Using_custom_elements" target="_blank">自定義元素</a>是 Web 平台的一項屬性，在 Angular 支援的所有瀏覽器上均可用。
+自定義元素擴充套件了 HTML，允許你定義一個標籤，其內容由 JavaScript 程式碼建立和控制。
+瀏覽器維護著已定義自定義元素的 <code>CustomElementRegistry</code>，它將可實例化的 JavaScript 類對映到 HTML 標籤。</p>
+<p><code>@angular/elements</code> 套件匯出了一個 <code>createCustomElement()</code> API，該 API 提供了從 Angular 的元件介面和變更檢測功能到內建 DOM API 的橋樑。</p>
+<p>將元件轉換為自定義元素，使所有必需的 Angular 基礎架構都可用於瀏覽器。
+建立自定義元素既簡單又直接，並且會自動將你元件定義的檢視與變更檢測和數據繫結連線起來，從而將 Angular 功能對映到相應的內建 HTML 等效項。</p>
 
   <h2 id="using-custom-elements">
-    <a href="#using-custom-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Using custom elements">使用自定义元素</a>
+    <a href="#using-custom-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Using custom elements">使用自定義元素</a>
   </h2>
-  <p>自定义元素会自行启动 —— 它们在添加到 DOM 时启动，并在从 DOM 中移除时销毁。
-一旦将自定义元素添加到任何页面的 DOM 中，它的外观和行为都类似于任何其他 HTML 元素，并且不需要任何关于 Angular 术语或用法约定的专门知识。</p>
-<p>要将 <code>@angular/elements</code> 包添加到你的工作区，请运行以下命令：</p>
+  <p>自定義元素會自行啟動 —— 它們在新增到 DOM 時啟動，並在從 DOM 中移除時銷燬。
+一旦將自定義元素新增到任何頁面的 DOM 中，它的外觀和行為都類似於任何其他 HTML 元素，並且不需要任何關於 Angular 術語或用法約定的專門知識。</p>
+<p>要將 <code>@angular/elements</code> 套件新增到你的工作區，請執行以下指令：</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> install</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> @angular/elements</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> --save</span></span></code></pre>
@@ -33,88 +33,88 @@
   <h3 id="how-it-works">
     <a href="#how-it-works" class="docs-anchor" tabindex="-1" aria-label="Link to How it works">它是如何工作的</a>
   </h3>
-  <p><code>createCustomElement()</code> 函数将组件转换为一个类，该类可以作为自定义元素在浏览器中注册。
-在浏览器自定义元素注册表中注册配置类后，像使用内置 HTML 元素一样，在你直接添加到 DOM 中的内容中使用这个新元素：</p>
+  <p><code>createCustomElement()</code> 函式將元件轉換為一個類，該類別可以作為自定義元素在瀏覽器中註冊。
+在瀏覽器自定義元素登錄檔中註冊設定類後，像使用內建 HTML 元素一樣，在你直接新增到 DOM 中的內容中使用這個新元素：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">my-popup</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> message</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"Use Angular!"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">my-popup</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>当你的自定义元素放置在页面上时，浏览器会创建已注册类的实例并将其添加到 DOM 中。
-内容由组件的模板提供，该模板使用 Angular 模板语法，并使用组件和 DOM 数据进行渲染。
-组件中的输入属性（Property）对应于元素的输入属性（Attribute）。</p>
+  </div><p>當你的自定義元素放置在頁面上時，瀏覽器會建立已註冊類別的實例並將其新增到 DOM 中。
+內容由元件的樣板提供，該樣板使用 Angular 樣板語法，並使用元件和 DOM 資料進行渲染。
+元件中的輸入屬性（Property）對應於元素的輸入屬性（Attribute）。</p>
 
   <h2 id="transforming-components-to-custom-elements">
-    <a href="#transforming-components-to-custom-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Transforming components to custom elements">将组件转换为自定义元素</a>
+    <a href="#transforming-components-to-custom-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Transforming components to custom elements">將元件轉換為自定義元素</a>
   </h2>
-  <p>Angular 提供了 <code>createCustomElement()</code> 函数，用于将 Angular 组件及其依赖项转换为自定义元素。</p>
-<p>转换过程实现了 <code>NgElementConstructor</code> 接口，并创建了一个构造函数类，该类配置为生成组件的自启动实例。</p>
-<p>使用浏览器原生的 <a href="https://developer.mozilla.org/docs/Web/API/CustomElementRegistry/define" target="_blank"><code>customElements.define()</code></a> 函数来注册配置的构造函数及其关联的自定义元素标签到浏览器的 <a href="https://developer.mozilla.org/docs/Web/API/CustomElementRegistry" target="_blank"><code>CustomElementRegistry</code></a>。
-当浏览器遇到已注册元素的标签时，它会使用该构造函数来创建自定义元素实例。</p>
+  <p>Angular 提供了 <code>createCustomElement()</code> 函式，用於將 Angular 元件及其依賴項轉換為自定義元素。</p>
+<p>轉換過程實現了 <code>NgElementConstructor</code> 介面，並建立了一個建構式函式類，該類別設定為生成元件的自啟動實例。</p>
+<p>使用瀏覽器原生的 <a href="https://developer.mozilla.org/docs/Web/API/CustomElementRegistry/define" target="_blank"><code>customElements.define()</code></a> 函式來註冊設定的建構式函式及其關聯的自定義元素標籤到瀏覽器的 <a href="https://developer.mozilla.org/docs/Web/API/CustomElementRegistry" target="_blank"><code>CustomElementRegistry</code></a>。
+當瀏覽器遇到已註冊元素的標籤時，它會使用該建構式函式來建立自定義元素實例。</p>
 
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要提示：</strong> 避免使用组件的选择器作为自定义元素标签名。
-这可能会导致意外行为，因为 Angular 会为一个 DOM 元素创建两个组件实例：
-一个常规 Angular 组件和第二个使用自定义元素的组件。</p>
+    <p><strong>重要提示：</strong> 避免使用元件的選擇器作為自定義元素標籤名。
+這可能會導致意外行為，因為 Angular 會為一個 DOM 元素建立兩個元件實例：
+一個常規 Angular 元件和第二個使用自定義元素的元件。</p>
 
     </div>
     
   <h3 id="mapping">
-    <a href="#mapping" class="docs-anchor" tabindex="-1" aria-label="Link to Mapping">映射</a>
+    <a href="#mapping" class="docs-anchor" tabindex="-1" aria-label="Link to Mapping">對映</a>
   </h3>
-  <p>自定义元素<em>宿主</em>一个 Angular 组件，在组件中定义的数据和逻辑与标准 DOM API 之间架起了一座桥梁。
-组件属性（Property）和逻辑直接映射到 HTML 属性（Attribute）和浏览器的事件系统。</p>
+  <p>自定義元素<em>宿主</em>一個 Angular 元件，在元件中定義的資料和邏輯與標準 DOM API 之間架起了一座橋樑。
+元件屬性（Property）和邏輯直接對映到 HTML 屬性（Attribute）和瀏覽器的事件系統。</p>
 
   <ul class="docs-list">
-    <li><p>创建 API 会解析组件以查找输入属性（Property），并为自定义元素定义相应的属性（Attribute）。
-它会转换属性名称，以使其与不识别大小写区分的自定义元素兼容。
-生成的属性名称使用短划线分隔的小写字母。
-例如，对于具有 <code>@Input('myInputProp') inputProp</code> 的组件，相应的自定义元素会定义一个属性 <code>my-input-prop</code>。</p>
+    <li><p>建立 API 會解析元件以查詢輸入屬性（Property），併為自定義元素定義相應的屬性（Attribute）。
+它會轉換屬性名稱，以使其與不識別大小寫區分的自定義元素相容。
+生成的屬性名稱使用短劃線分隔的小寫字母。
+例如，對於具有 <code>@Input('myInputProp') inputProp</code> 的元件，相應的自定義元素會定義一個屬性 <code>my-input-prop</code>。</p>
 </li>
-<li><p>组件输出作为 HTML <a href="https://developer.mozilla.org/docs/Web/API/CustomEvent" target="_blank">自定义事件</a> 分派，自定义事件的名称与输出名称匹配。
-  例如，对于具有 <code>@Output() valueChanged = new EventEmitter()</code> 的组件，相应的自定义元素会分派名称为 "valueChanged" 的事件，并且发出的数据存储在事件的 <code>detail</code> 属性（Property）中。
-  如果提供别名，则使用该值；例如，<code>@Output('myClick') clicks = new EventEmitter&lt;string&gt;();</code> 会导致分派名称为 "myClick" 的事件。</p>
+<li><p>元件輸出作為 HTML <a href="https://developer.mozilla.org/docs/Web/API/CustomEvent" target="_blank">自定義事件</a> 分派，自定義事件的名稱與輸出名稱對應。
+  例如，對於具有 <code>@Output() valueChanged = new EventEmitter()</code> 的元件，相應的自定義元素會分派名稱為 "valueChanged" 的事件，並且發出的資料儲存在事件的 <code>detail</code> 屬性（Property）中。
+  如果提供別名，則使用該值；例如，<code>@Output('myClick') clicks = new EventEmitter&lt;string&gt;();</code> 會導致分派名稱為 "myClick" 的事件。</p>
 </li>
 
   </ul>
-  <p>有关更多信息，请参阅 Web Component 文档，了解 <a href="https://developer.mozilla.org/docs/Web/Guide/Events/Creating_and_triggering_events#Creating_custom_events" target="_blank">创建自定义事件</a>。</p>
+  <p>有關更多訊息，請參閱 Web Component 文件，瞭解 <a href="https://developer.mozilla.org/docs/Web/Guide/Events/Creating_and_triggering_events#Creating_custom_events" target="_blank">建立自定義事件</a>。</p>
 
   <h2 id="example-a-popup-service">
-    <a href="#example-a-popup-service" class="docs-anchor" tabindex="-1" aria-label="Link to Example: A Popup Service">范例：弹出服务</a>
+    <a href="#example-a-popup-service" class="docs-anchor" tabindex="-1" aria-label="Link to Example: A Popup Service">範例：彈出服務</a>
   </h2>
-  <p>以前，当你想在运行时向应用添加组件时，你必须定义一个<em>动态组件</em>，然后你必须加载它，将其附着到 DOM 中的元素，并连接所有依赖项、变更检测和事件处理。</p>
-<p>通过使用 Angular 自定义元素，可以自动提供所有基础架构和框架，从而使过程更简单、更透明 —— 你只需定义你想要的事件处理类型即可。
-（如果你不打算在你的应用中使用该组件，你仍然必须将其从编译中排除。）</p>
-<p>以下“弹出服务”范例应用定义了一个组件，你可以动态加载该组件，也可以将其转换为自定义元素。</p>
+  <p>以前，當你想在執行時嚮應用新增元件時，你必須定義一個<em>動態元件</em>，然後你必須載入它，將其附著到 DOM 中的元素，並連線所有依賴項、變更檢測和事件處理。</p>
+<p>透過使用 Angular 自定義元素，可以自動提供所有基礎架構和框架，從而使過程更簡單、更透明 —— 你只需定義你想要的事件處理型別即可。
+（如果你不打算在你的應用中使用該組件，你仍然必須將其從編譯中排除。）</p>
+<p>以下『彈出服務』範例應用定義了一個元件，你可以動態載入該組件，也可以將其轉換為自定義元素。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left">文件</th>
-<th align="left">详情</th>
+<th align="left">檔案</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>popup.component.ts</code></td>
-<td align="left">定义了一个简单的弹出元素，用于显示输入消息，并带有一些动画和样式。</td>
+<td align="left">定義了一個簡單的彈出元素，用於顯示輸入訊息，並帶有一些動畫和樣式。</td>
 </tr>
 <tr>
 <td align="left"><code>popup.service.ts</code></td>
-<td align="left">创建一个可注入的服务，该服务提供了两种不同的方式来调用 <code>PopupComponent</code>；作为动态组件或作为自定义元素。请注意，动态加载方法需要更多的建立（set up）工作。</td>
+<td align="left">建立一個可注入的服務，該服務提供了兩種不同的方式來呼叫 <code>PopupComponent</code>；作為動態元件或作為自定義元素。請注意，動態載入方法需要更多的建立（set up）工作。</td>
 </tr>
 <tr>
 <td align="left"><code>app.component.ts</code></td>
-<td align="left">定义应用的根组件，该组件使用 <code>PopupService</code> 在运行时将弹出窗口添加到 DOM。当应用运行时，根组件的构造函数会将 <code>PopupComponent</code> 转换为自定义元素。</td>
+<td align="left">定義應用的根元件，該組件使用 <code>PopupService</code> 在執行時將彈出視窗新增到 DOM。當應用執行時，根元件的建構式函式會將 <code>PopupComponent</code> 轉換為自定義元素。</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p>为了进行比较，演示展示了两种方法。
-一个按钮使用动态加载方法添加弹出窗口，另一个按钮使用自定义元素。
-结果是相同的，但准备工作是不同的。</p>
+  <p>為了進行比較，示範展示了兩種方法。
+一個按鈕使用動態載入方法新增彈出視窗，另一個按鈕使用自定義元素。
+結果是相同的，但準備工作是不同的。</p>
 <div class="docs-code-multifile">
     <div class="docs-code" path="adev/src/content/examples/elements/src/app/popup.component.ts" header="popup.component.ts">
     <div class="docs-code-header"><h3>popup.component.ts</h3></div>
@@ -131,48 +131,48 @@
   </div>
     </div>
   <h2 id="typings-for-custom-elements">
-    <a href="#typings-for-custom-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Typings for custom elements">自定义元素的类型定义</a>
+    <a href="#typings-for-custom-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Typings for custom elements">自定義元素的型別定義</a>
   </h2>
-  <p>通用 DOM API，例如 <code>document.createElement()</code> 或 <code>document.querySelector()</code>，返回适合指定参数的元素类型。
-例如，调用 <code>document.createElement('a')</code> 返回 <code>HTMLAnchorElement</code>，TypeScript 知道它具有 <code>href</code> 属性（Property）。
-同样，<code>document.createElement('div')</code> 返回 <code>HTMLDivElement</code>，TypeScript 知道它没有 <code>href</code> 属性（Property）。</p>
-<p>当使用未知元素（例如，我们的示例中的自定义元素名称 <code>popup-element</code>）调用时，这些方法会返回通用类型，例如 <code>HTMLElement</code>，因为 TypeScript 无法推断返回元素的正确类型。</p>
-<p>使用 Angular 创建的自定义元素扩展了 <code>NgElement</code>（它反过来又扩展了 <code>HTMLElement</code>）。
-此外，这些自定义元素将为相应组件的每个输入属性（Property）设置一个属性（Property）。
-例如，我们的 <code>popup-element</code> 具有 <code>string</code> 类型的 <code>message</code> 属性（Property）。</p>
-<p>如果你想为你的自定义元素获取正确的类型，有几种选择。
-假设你基于以下组件创建了一个 <code>my-dialog</code> 自定义元素：</p>
+  <p>通用 DOM API，例如 <code>document.createElement()</code> 或 <code>document.querySelector()</code>，回傳適合指定引數的元素型別。
+例如，呼叫 <code>document.createElement('a')</code> 回傳 <code>HTMLAnchorElement</code>，TypeScript 知道它具有 <code>href</code> 屬性（Property）。
+同樣，<code>document.createElement('div')</code> 回傳 <code>HTMLDivElement</code>，TypeScript 知道它沒有 <code>href</code> 屬性（Property）。</p>
+<p>當使用未知元素（例如，我們的範例中的自定義元素名稱 <code>popup-element</code>）呼叫時，這些方法會回傳通用類型，例如 <code>HTMLElement</code>，因為 TypeScript 無法推斷回傳元素的正確型別。</p>
+<p>使用 Angular 建立的自定義元素擴充套件了 <code>NgElement</code>（它反過來又擴充套件了 <code>HTMLElement</code>）。
+此外，這些自定義元素將為相應元件的每個輸入屬性（Property）設定一個屬性（Property）。
+例如，我們的 <code>popup-element</code> 具有 <code>string</code> 型別的 <code>message</code> 屬性（Property）。</p>
+<p>如果你想為你的自定義元素獲取正確的型別，有幾種選擇。
+假設你基於以下元件建立了一個 <code>my-dialog</code> 自定義元素：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(…)</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> MyDialog</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">content</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>获取准确类型定义的最直接方法是将相关 DOM 方法的返回值强制转换为正确的类型。
-为此，请使用 <code>NgElement</code> 和 <code>WithProperties</code> 类型（均从 <code>@angular/elements</code> 导出）：</p>
+  </div><p>獲取準確型別定義的最直接方法是將相關 DOM 方法的回傳值強制轉換為正確的型別。
+為此，請使用 <code>NgElement</code> 和 <code>WithProperties</code> 型別（均從 <code>@angular/elements</code> 匯出）：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> aDialog</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> document.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">createElement</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'my-dialog'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">as</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> NgElement</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> &amp;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> WithProperties</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;{</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">content</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}&gt;;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">aDialog.content </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'Hello, world!'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">aDialog.content </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 123</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// &lt;-- ERROR: TypeScript knows this should be a string.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">aDialog.body </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'News'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// &lt;-- ERROR: TypeScript knows there is no `body` property on `aDialog`.</span></span></code></pre>
     </pre>
-  </div><p>对于你的自定义元素，这是快速获取 TypeScript 特性（例如类型检查和自动完成支持）的好方法。
-但是，如果你在多个地方需要它，它可能会变得很麻烦，因为你必须在每次出现时都强制转换返回类型。</p>
-<p>另一种替代方案是增强 <code>HTMLElementTagNameMap</code>，它只需要定义一次每个自定义元素的类型。TypeScript 使用 <code>HTMLElementTagNameMap</code> 基于返回元素的标签名（对于 DOM 方法，如 <code>document.createElement()</code>、<code>document.querySelector()</code> 等）来推断返回元素的类型：</p>
+  </div><p>對於你的自定義元素，這是快速獲取 TypeScript 屬性（例如型別檢查和自動完成支援）的好方法。
+但是，如果你在多個地方需要它，它可能會變得很麻煩，因為你必須在每次出現時都強制轉換回傳型別。</p>
+<p>另一種替代方案是增強 <code>HTMLElementTagNameMap</code>，它只需要定義一次每個自定義元素的型別。TypeScript 使用 <code>HTMLElementTagNameMap</code> 基於回傳元素的標籤名（對於 DOM 方法，如 <code>document.createElement()</code>、<code>document.querySelector()</code> 等）來推斷回傳元素的型別：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">declare</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> global {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  interface</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HTMLElementTagNameMap</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    'my-dialog'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> NgElement</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> &amp;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> WithProperties</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;{</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">content</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}&gt;;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    'my-other-element'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> NgElement</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> &amp;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> WithProperties</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;{</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">foo</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'bar'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}&gt;;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    …</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>现在，TypeScript 可以像推断内置元素一样推断出正确的类型：</p>
+  </div><p>現在，TypeScript 可以像推斷內建元素一樣推斷出正確的型別：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">document.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">createElement</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'div'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)               </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">//--&gt; HTMLDivElement (built-in element)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">document.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">querySelector</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'foo'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)               </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">//--&gt; Element        (unknown element)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">document.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">createElement</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'my-dialog'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)         </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">//--&gt; NgElement &amp; WithProperties&lt;{content: string}&gt; (custom element)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">document.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">querySelector</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'my-other-element'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">//--&gt; NgElement &amp; WithProperties&lt;{foo: 'bar'}&gt;      (custom element)</span></span></code></pre>
     </pre>
   </div>
   <h2 id="limitations">
-    <a href="#limitations" class="docs-anchor" tabindex="-1" aria-label="Link to Limitations">局限性</a>
+    <a href="#limitations" class="docs-anchor" tabindex="-1" aria-label="Link to Limitations">侷限性</a>
   </h2>
-  <p>由于 <a href="https://github.com/angular/angular/issues/38778" target="_blank">disconnect()</a> 回调的问题，销毁然后再重新附着用 <code>@angular/elements</code> 创建的自定义元素时应谨慎。您可能会遇到此问题的场景包括：</p>
+  <p>由於 <a href="https://github.com/angular/angular/issues/38778" target="_blank">disconnect()</a> 回呼的問題，銷燬然後再重新附著用 <code>@angular/elements</code> 建立的自定義元素時應謹慎。您可能會遇到此問題的場景包括：</p>
 
   <ul class="docs-list">
-    <li>在 <code>AngularJs</code> 的 <code>ng-if</code> 或 <code>ng-repeat</code> 中渲染组件</li>
-<li>手动从 DOM 中分离和重新附着元素</li>
+    <li>在 <code>AngularJs</code> 的 <code>ng-if</code> 或 <code>ng-repeat</code> 中渲染元件</li>
+<li>手動從 DOM 中分離和重新附著元素</li>
 
   </ul>
   

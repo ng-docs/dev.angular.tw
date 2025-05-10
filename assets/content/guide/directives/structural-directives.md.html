@@ -4,62 +4,62 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">结构型指令</h1>
+    <h1 tabindex="-1">結構型指令</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/directives/structural-directives.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>结构型指令是应用于 <code>&lt;ng-template&gt;</code> 元素的指令，它们有条件地或重复地渲染 <code>&lt;ng-template&gt;</code> 的内容。</p>
+    <p>結構型指令是應用於 <code>&lt;ng-template&gt;</code> 元素的指令，它們有條件地或重複地渲染 <code>&lt;ng-template&gt;</code> 的內容。</p>
 
   <h2 id="example-use-case">
-    <a href="#example-use-case" class="docs-anchor" tabindex="-1" aria-label="Link to Example use case">用例范例</a>
+    <a href="#example-use-case" class="docs-anchor" tabindex="-1" aria-label="Link to Example use case">用例範例</a>
   </h2>
-  <p>在本指南中，你将构建一个结构型指令，该指令从给定的数据源获取数据，并在数据可用时渲染其模板。这个指令被称为 <code>SelectDirective</code>，以 SQL 关键字 <code>SELECT</code> 命名，并使用属性选择器 <code>[select]</code> 与之匹配。</p>
-<p><code>SelectDirective</code> 将有一个输入属性来命名要使用的数据源，你将把它叫做 <code>selectFrom</code>。此输入的 <code>select</code> 前缀对于 <a href="#structural-directive-shorthand">简写语法</a> 很重要。该指令将使用一个模板上下文来实例化它的 <code>&lt;ng-template&gt;</code>，该上下文提供所选数据。</p>
-<p>以下是在 <code>&lt;ng-template&gt;</code> 上直接使用此指令的示例，如下所示：</p>
+  <p>在本指南中，你將建立一個結構型指令，該指令從給定的資料來源獲取資料，並在資料可用時渲染其樣板。這個指令被稱為 <code>SelectDirective</code>，以 SQL 關鍵字 <code>SELECT</code> 命名，並使用屬性選擇器 <code>[select]</code> 與之對應。</p>
+<p><code>SelectDirective</code> 將有一個輸入屬性來命名要使用的資料來源，你將把它叫做 <code>selectFrom</code>。此輸入的 <code>select</code> 字首對於 <a href="#structural-directive-shorthand">簡寫語法</a> 很重要。該指令將使用一個樣板上下文來實例化它的 <code>&lt;ng-template&gt;</code>，該上下文提供所選資料。</p>
+<p>以下是在 <code>&lt;ng-template&gt;</code> 上直接使用此指令的範例，如下所示：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">ng-template</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> select</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> let-data</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [selectFrom]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"source"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;The data is: {{ data }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">ng-template</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>结构型指令可以等待数据变为可用，然后渲染其 <code>&lt;ng-template&gt;</code>。</p>
+  </div><p>結構型指令可以等待資料變為可用，然後渲染其 <code>&lt;ng-template&gt;</code>。</p>
 
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> 请注意，Angular 的 <code>&lt;ng-template&gt;</code> 元素定义了一个默认情况下不渲染任何内容的模板，如果你只是将元素包裹在 <code>&lt;ng-template&gt;</code> 中而不应用结构型指令，这些元素将不会被渲染。</p>
+    <p><strong>提示：</strong> 請注意，Angular 的 <code>&lt;ng-template&gt;</code> 元素定義了一個預設情況下不渲染任何內容的樣板，如果你只是將元素包裹在 <code>&lt;ng-template&gt;</code> 中而不應用結構型指令，這些元素將不會被渲染。</p>
 
     </div>
-    <p>欲知详情，请参阅 <a href="api/core/ng-template">ng-template API</a> 文档。</p>
+    <p>欲知詳情，請參閱 <a href="api/core/ng-template">ng-template API</a> 文件。</p>
 
   <h2 id="structural-directive-shorthand">
-    <a href="#structural-directive-shorthand" class="docs-anchor" tabindex="-1" aria-label="Link to Structural directive shorthand">结构型指令简写</a>
+    <a href="#structural-directive-shorthand" class="docs-anchor" tabindex="-1" aria-label="Link to Structural directive shorthand">結構型指令簡寫</a>
   </h2>
-  <p>Angular 支持结构型指令的简写语法，从而避免了显式编写 <code>&lt;ng-template&gt;</code> 元素的需要。</p>
-<p>结构型指令可以通过在指令属性选择器前加上星号 (<code>*</code>) 直接应用于元素，例如 <code>*select</code>。Angular 将结构型指令前面的星号转换为一个 <code>&lt;ng-template&gt;</code>，该 <code>&lt;ng-template&gt;</code> 宿主该指令并包围该元素及其后代。</p>
-<p>你可以将此用法与 <code>SelectDirective</code> 结合使用，如下所示：</p>
+  <p>Angular 支援結構型指令的簡寫語法，從而避免了顯式編寫 <code>&lt;ng-template&gt;</code> 元素的需要。</p>
+<p>結構型指令可以透過在指令屬性選擇器前加上星號 (<code>*</code>) 直接應用於元素，例如 <code>*select</code>。Angular 將結構型指令前面的星號轉換為一個 <code>&lt;ng-template&gt;</code>，該 <code>&lt;ng-template&gt;</code> 宿主該指令幷包圍該元素及其後代。</p>
+<p>你可以將此用法與 <code>SelectDirective</code> 結合使用，如下所示：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> *select</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"let data from source"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;The data is: {{data}}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>这个例子展示了结构型指令简写语法的灵活性，有时也称为<em>微语法</em>。</p>
-<p>以这种方式使用时，只有结构型指令及其绑定应用于 <code>&lt;ng-template&gt;</code>。<code>&lt;p&gt;</code> 标签上的任何其他属性或绑定都保持不变。例如，以下两种形式是等效的：</p>
+  </div><p>這個例子展示了結構型指令簡寫語法的靈活性，有時也稱為<em>微語法</em>。</p>
+<p>以這種方式使用時，只有結構型指令及其繫結應用於 <code>&lt;ng-template&gt;</code>。<code>&lt;p&gt;</code> 標籤上的任何其他屬性或繫結都保持不變。例如，以下兩種形式是等效的：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- Shorthand syntax: --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"data-view"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> *select</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"let data from source"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;The data is: {{data}}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- Long-form syntax: --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">ng-template</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> select</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> let-data</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [selectFrom]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"source"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"data-view"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;The data is: {{data}}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">ng-template</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>简写语法通过一组约定进行扩展。更详尽的<a href="#structural-directive-syntax-reference">语法</a>在下面定义，但在上面的示例中，这种转换可以解释如下：</p>
-<p><code>*select</code> 表达式的第一部分是 <code>let data</code>，它声明了一个模板变量 <code>data</code>。由于没有赋值，模板变量被绑定到模板上下文属性 <code>$implicit</code>。</p>
-<p>语法的第二部分是一个键-表达式对，<code>from source</code>。<code>from</code> 是一个绑定键，而 <code>source</code> 是一个常规的模板表达式。绑定键通过将它们转换为 PascalCase 并预先添加结构型指令选择器来映射到属性（Property）。<code>from</code> 键被映射到 <code>selectFrom</code>，然后绑定到表达式 <code>source</code>。这就是为什么许多结构型指令的输入都以结构型指令的选择器为前缀。</p>
+  </div><p>簡寫語法透過一組約定進行擴充套件。更詳盡的<a href="#structural-directive-syntax-reference">語法</a>在下面定義，但在上面的範例中，這種轉換可以解釋如下：</p>
+<p><code>*select</code> 表示式的第一部分是 <code>let data</code>，它宣告了一個樣板變數 <code>data</code>。由於沒有賦值，樣板變數被繫結到樣板上下文屬性 <code>$implicit</code>。</p>
+<p>語法的第二部分是一個鍵-表示式對，<code>from source</code>。<code>from</code> 是一個繫結鍵，而 <code>source</code> 是一個常規的樣板表示式。繫結鍵透過將它們轉換為 PascalCase 並預先新增結構型指令選擇器來對映到屬性（Property）。<code>from</code> 鍵被對映到 <code>selectFrom</code>，然後繫結到表示式 <code>source</code>。這就是為什麼許多結構型指令的輸入都以結構型指令的選擇器為字首。</p>
 
   <h2 id="one-structural-directive-per-element">
-    <a href="#one-structural-directive-per-element" class="docs-anchor" tabindex="-1" aria-label="Link to One structural directive per element">每个元素一个结构型指令</a>
+    <a href="#one-structural-directive-per-element" class="docs-anchor" tabindex="-1" aria-label="Link to One structural directive per element">每個元素一個結構型指令</a>
   </h2>
-  <p>当使用简写语法时，每个元素只能应用一个结构型指令。这是因为只有一个 <code>&lt;ng-template&gt;</code> 元素，该指令将被解包到该元素上。多个指令将需要多个嵌套的 <code>&lt;ng-template&gt;</code>，并且不清楚哪个指令应该放在首位。当需要在同一个物理 DOM 元素或组件周围应用多个结构型指令时，可以使用 <code>&lt;ng-container&gt;</code> 来创建包装层，这允许用户定义嵌套结构。</p>
+  <p>當使用簡寫語法時，每個元素只能應用一個結構型指令。這是因為只有一個 <code>&lt;ng-template&gt;</code> 元素，該指令將被解開到該元素上。多個指令將需要多個巢狀的 <code>&lt;ng-template&gt;</code>，並且不清楚哪個指令應該放在首位。當需要在同一個物理 DOM 元素或元件周圍應用多個結構型指令時，可以使用 <code>&lt;ng-container&gt;</code> 來建立包裝層，這允許使用者定義巢狀結構。</p>
 
   <h2 id="creating-a-structural-directive">
-    <a href="#creating-a-structural-directive" class="docs-anchor" tabindex="-1" aria-label="Link to Creating a structural directive">创建结构型指令</a>
+    <a href="#creating-a-structural-directive" class="docs-anchor" tabindex="-1" aria-label="Link to Creating a structural directive">建立結構型指令</a>
   </h2>
-  <p>本节将指导你创建 <code>SelectDirective</code>。</p>
+  <p>本節將指導你建立 <code>SelectDirective</code>。</p>
 
     <ol class="docs-steps">
       
@@ -70,12 +70,12 @@
     <a href="#generate-the-directive" class="docs-anchor" tabindex="-1" aria-label="Link to Generate the directive">生成指令</a>
   </h3>
   
-      <p>使用 Angular CLI，运行以下命令，其中 <code>select</code> 是指令的名称：</p>
+      <p>使用 Angular CLI，執行以下指令，其中 <code>select</code> 是指令的名稱：</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> generate</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> directive</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> select</span></span></code></pre>
     </pre>
-  </div><p>Angular 创建指令类并指定 CSS 选择器 <code>[select]</code>，该选择器在模板中标识该指令。</p>
+  </div><p>Angular 建立指令類並指定 CSS 選擇器 <code>[select]</code>，該選擇器在樣板中標識該指令。</p>
 
     </li>
     
@@ -83,10 +83,10 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="make-the-directive-structural">
-    <a href="#make-the-directive-structural" class="docs-anchor" tabindex="-1" aria-label="Link to Make the directive structural">使指令成为结构型指令</a>
+    <a href="#make-the-directive-structural" class="docs-anchor" tabindex="-1" aria-label="Link to Make the directive structural">使指令成為結構型指令</a>
   </h3>
   
-      <p>导入 <code>TemplateRef</code> 和 <code>ViewContainerRef</code>。在指令中注入 <code>TemplateRef</code> 和 <code>ViewContainerRef</code> 作为私有属性。</p>
+      <p>匯入 <code>TemplateRef</code> 和 <code>ViewContainerRef</code>。在指令中注入 <code>TemplateRef</code> 和 <code>ViewContainerRef</code> 作為私有屬性。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Directive, TemplateRef, ViewContainerRef} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Directive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'[select]'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SelectDirective</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> templateRef</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(TemplateRef);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> ViewContainerRef</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(ViewContainerRef);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -98,10 +98,10 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-the-selectfrom-input">
-    <a href="#add-the-selectfrom-input" class="docs-anchor" tabindex="-1" aria-label="Link to Add the 'selectFrom' input">添加 'selectFrom' 输入</a>
+    <a href="#add-the-selectfrom-input" class="docs-anchor" tabindex="-1" aria-label="Link to Add the 'selectFrom' input">新增 'selectFrom' 輸入</a>
   </h3>
   
-      <p>添加一个 <code>selectFrom</code> <code>@Input()</code> 属性。</p>
+      <p>新增一個 <code>selectFrom</code> <code>@Input()</code> 屬性。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SelectDirective</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({required: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}) </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">selectFrom</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">!:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> DataSource</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -113,10 +113,10 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-the-business-logic">
-    <a href="#add-the-business-logic" class="docs-anchor" tabindex="-1" aria-label="Link to Add the business logic">添加业务逻辑</a>
+    <a href="#add-the-business-logic" class="docs-anchor" tabindex="-1" aria-label="Link to Add the business logic">新增業務邏輯</a>
   </h3>
   
-      <p>现在 <code>SelectDirective</code> 已被搭建为具有输入的结构型指令，你现在可以添加逻辑来获取数据并使用它渲染模板：</p>
+      <p>現在 <code>SelectDirective</code> 已被搭建為具有輸入的結構型指令，你現在可以新增邏輯來獲取資料並使用它渲染樣板：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SelectDirective</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  async</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ngOnInit</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> await</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.selectFrom.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">load</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.viewContainerRef.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">createEmbeddedView</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.templateRef, {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">      // Create the embedded view with a context object that contains</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">      // the data via the key `$implicit`.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      $implicit: data,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -125,17 +125,17 @@
     </li>
     
     </ol>
-    <p>就是这样 - <code>SelectDirective</code> 已经启动并运行。后续步骤可能是<a href="#typing-the-directives-context">添加模板类型检查支持</a>。</p>
+    <p>就是這樣 - <code>SelectDirective</code> 已經啟動並執行。後續步驟可能是<a href="#typing-the-directives-context">新增樣板型別檢查支援</a>。</p>
 
   <h2 id="structural-directive-syntax-reference">
-    <a href="#structural-directive-syntax-reference" class="docs-anchor" tabindex="-1" aria-label="Link to Structural directive syntax reference">结构型指令语法参考</a>
+    <a href="#structural-directive-syntax-reference" class="docs-anchor" tabindex="-1" aria-label="Link to Structural directive syntax reference">結構型指令語法參考</a>
   </h2>
-  <p>当你编写自己的结构型指令时，请使用以下语法：</p>
+  <p>當你編寫自己的結構型指令時，請使用以下語法：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">*</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">:prefix</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"( :let | :expression ) (';' | ',')? ( :let | :as | :keyExp )*"</span></span></code></pre>
     </pre>
-  </div><p>以下模式描述了结构型指令语法的每个部分：</p>
+  </div><p>以下模式描述了結構型指令語法的每個部分：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">as</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> = :</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> "as"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> :local </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">";"</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">keyExp </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> :</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">key </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">":"</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> :</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">expression</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"as"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> :local)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> ";"</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">let </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> "let"</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> :</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">local </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"="</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> :export</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> ";"</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?</span></span></code></pre>
@@ -145,31 +145,31 @@
     <table>
       <thead>
         <tr>
-<th align="left">关键字</th>
-<th align="left">详情</th>
+<th align="left">關鍵字</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>prefix</code></td>
-<td align="left">HTML 属性键</td>
+<td align="left">HTML 屬性鍵</td>
 </tr>
 <tr>
 <td align="left"><code>key</code></td>
-<td align="left">HTML 属性键</td>
+<td align="left">HTML 屬性鍵</td>
 </tr>
 <tr>
 <td align="left"><code>local</code></td>
-<td align="left">模板中使用的局部变量名</td>
+<td align="left">樣板中使用的區域性變數名</td>
 </tr>
 <tr>
 <td align="left"><code>export</code></td>
-<td align="left">指令以给定名称导出的值</td>
+<td align="left">指令以給定名稱匯出的值</td>
 </tr>
 <tr>
 <td align="left"><code>expression</code></td>
-<td align="left">标准 Angular 表达式</td>
+<td align="left">標準 Angular 表示式</td>
 </tr>
 
       </tbody>
@@ -177,27 +177,27 @@
   </div>
   
   <h3 id="how-angular-translates-shorthand">
-    <a href="#how-angular-translates-shorthand" class="docs-anchor" tabindex="-1" aria-label="Link to How Angular translates shorthand">Angular 如何转换简写</a>
+    <a href="#how-angular-translates-shorthand" class="docs-anchor" tabindex="-1" aria-label="Link to How Angular translates shorthand">Angular 如何轉換簡寫</a>
   </h3>
-  <p>Angular 将结构型指令简写转换为正常的绑定语法，如下所示：</p>
+  <p>Angular 將結構型指令簡寫轉換為正常的綁定語法，如下所示：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left">简写</th>
-<th align="left">转换结果</th>
+<th align="left">簡寫</th>
+<th align="left">轉換結果</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
-<td align="left"><code>prefix</code> 和不带修饰的 <code>expression</code></td>
+<td align="left"><code>prefix</code> 和不帶修飾的 <code>expression</code></td>
 <td align="left"><code>[prefix]="expression"</code></td>
 </tr>
 <tr>
 <td align="left"><code>keyExp</code></td>
-<td align="left"><code>[prefixKey]="expression"</code> (<code>prefix</code> 会被添加到 <code>key</code> 中)</td>
+<td align="left"><code>[prefixKey]="expression"</code> (<code>prefix</code> 會被新增到 <code>key</code> 中)</td>
 </tr>
 <tr>
 <td align="left"><code>let local</code></td>
@@ -209,16 +209,16 @@
   </div>
   
   <h3 id="shorthand-examples">
-    <a href="#shorthand-examples" class="docs-anchor" tabindex="-1" aria-label="Link to Shorthand examples">简写示例</a>
+    <a href="#shorthand-examples" class="docs-anchor" tabindex="-1" aria-label="Link to Shorthand examples">簡寫範例</a>
   </h3>
-  <p>下表提供了简写示例：</p>
+  <p>下表提供了簡寫範例：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left">简写</th>
-<th align="left">Angular 如何解释该语法</th>
+<th align="left">簡寫</th>
+<th align="left">Angular 如何解釋該語法</th>
 </tr>
 
       </thead>
@@ -245,46 +245,46 @@
   </div>
   
   <h2 id="improving-template-type-checking-for-custom-directives">
-    <a href="#improving-template-type-checking-for-custom-directives" class="docs-anchor" tabindex="-1" aria-label="Link to Improving template type checking for custom directives">改进自定义指令的模板类型检查</a>
+    <a href="#improving-template-type-checking-for-custom-directives" class="docs-anchor" tabindex="-1" aria-label="Link to Improving template type checking for custom directives">改進自定義指令的樣板型別檢查</a>
   </h2>
-  <p>你可以通过向指令定义中添加模板守卫，来改进自定义指令的模板类型检查。这些守卫可以帮助 Angular 模板类型检查器在编译时发现模板中的错误，从而避免运行时错误。 有两种不同类型的守卫：</p>
+  <p>你可以透過向指令定義中新增樣板守衛，來改進自定義指令的樣板型別檢查。這些守衛可以幫助 Angular 樣板型別檢查器在編譯時發現樣板中的錯誤，從而避免執行時錯誤。 有兩種不同型別的守衛：</p>
 
   <ul class="docs-list">
-    <li><code>ngTemplateGuard_(input)</code> 使你可以基于特定输入项的类型来控制如何窄化输入表达式。</li>
-<li><code>ngTemplateContextGuard</code> 用于根据指令本身的类型来确定模板的上下文对象的类型。</li>
+    <li><code>ngTemplateGuard_(input)</code> 使你可以基於特定輸入項的型別來控制如何窄化輸入表示式。</li>
+<li><code>ngTemplateContextGuard</code> 用於根據指令本身的型別來確定樣板的上下文物件的型別。</li>
 
   </ul>
-  <p>本节提供了这两种守卫的范例。 欲知详情，参阅<a href="tools/cli/template-typecheck" title="Template" type-checking guide>模板类型检查</a>。</p>
+  <p>本節提供了這兩種守衛的範例。 欲知詳情，參閱<a href="tools/cli/template-typecheck" title="Template" type-checking guide>樣板型別檢查</a>。</p>
 
   <h3 id="type-narrowing-with-template-guards">
-    <a href="#type-narrowing-with-template-guards" class="docs-anchor" tabindex="-1" aria-label="Link to Type narrowing with template guards">使用模板守卫进行类型窄化</a>
+    <a href="#type-narrowing-with-template-guards" class="docs-anchor" tabindex="-1" aria-label="Link to Type narrowing with template guards">使用樣板守衛進行型別窄化</a>
   </h3>
-  <p>模板中的结构型指令控制着该模板是否在运行时渲染。 一些结构型指令希望根据输入表达式的类型执行类型窄化。</p>
-<p>使用输入守卫可以实现两种窄化：</p>
+  <p>樣板中的結構型指令控制著該樣板是否在執行時渲染。 一些結構型指令希望根據輸入表示式的型別執行型別窄化。</p>
+<p>使用輸入守衛可以實現兩種窄化：</p>
 
   <ul class="docs-list">
-    <li>基于 TypeScript 类型断言函数窄化输入表达式。</li>
-<li>基于输入表达式的真值与否窄化输入表达式。</li>
+    <li>基於 TypeScript 型別斷言函式窄化輸入表示式。</li>
+<li>基於輸入表示式的真值與否窄化輸入表示式。</li>
 
   </ul>
-  <p>要通过定义类型断言函数来窄化输入表达式：</p>
+  <p>要透過定義型別斷言函式來窄化輸入表示式：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// This directive only renders its template if the actor is a user.</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// You want to assert that within the template, the type of the `actor`</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// expression is narrowed to `User`.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Directive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ActorIsUser</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">actor</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> User</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Robot</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  static</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ngTemplateGuard_actor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">dir</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ActorIsUser</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">expr</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> User</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Robot</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> expr</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> is</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> User</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // The return statement is unnecessary in practice, but included to</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // prevent TypeScript errors.</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>类型检查在模板中的行为，就好像已经对绑定到输入的表达式断言了 <code>ngTemplateGuard_actor</code> 一样。</p>
-<p>某些指令仅在输入为真值时才渲染其模板。 在类型断言函数中无法捕获真值与否的完整语义，因此可以使用 <code>'binding'</code> 字面量类型来向模板类型检查器发出信号，表明应将绑定表达式本身用作守卫：</p>
+  </div><p>型別檢查在樣板中的行為，就好像已經對繫結到輸入的表示式斷言了 <code>ngTemplateGuard_actor</code> 一樣。</p>
+<p>某些指令僅在輸入為真值時才渲染其樣板。 在型別斷言函式中無法捕獲真值與否的完整語義，因此可以使用 <code>'binding'</code> 字面量型別來向樣板型別檢查器發出訊號，表明應將繫結表示式本身用作守衛：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Directive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> CustomIf</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">condition</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">!:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> any</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  static</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> ngTemplateGuard_condition</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'binding'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>模板类型检查器的行为，就好像已断言绑定到 <code>condition</code> 的表达式在模板中为真值一样。</p>
+  </div><p>樣板型別檢查器的行為，就好像已斷言繫結到 <code>condition</code> 的表示式在樣板中為真值一樣。</p>
 
   <h3 id="typing-the-directives-context">
-    <a href="#typing-the-directives-context" class="docs-anchor" tabindex="-1" aria-label="Link to Typing the directive's context">为指令的上下文添加类型</a>
+    <a href="#typing-the-directives-context" class="docs-anchor" tabindex="-1" aria-label="Link to Typing the directive's context">為指令的上下文新增型別</a>
   </h3>
-  <p>如果你的结构型指令为实例化的模板提供了一个上下文，你可以通过提供一个静态的 <code>ngTemplateContextGuard</code> 类型断言函数，在模板内部正确地为其添加类型。 此函数可以使用指令的类型来派生上下文的类型，这在指令的类型是泛型时非常有用。</p>
-<p>对于上面描述的 <code>SelectDirective</code>，你可以实现一个 <code>ngTemplateContextGuard</code> 来正确指定数据类型，即使数据源是泛型的。</p>
+  <p>如果你的結構型指令為實例化的樣板提供了一個上下文，你可以透過提供一個靜態的 <code>ngTemplateContextGuard</code> 型別斷言函式，在樣板內部正確地為其新增型別。 此函式可以使用指令的型別來派生上下文的型別，這在指令的型別是泛型時非常有用。</p>
+<p>對於上面描述的 <code>SelectDirective</code>，你可以實現一個 <code>ngTemplateContextGuard</code> 來正確指定資料型別，即使資料來源是泛型的。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Declare an interface for the template context:</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> interface</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SelectTemplateContext</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">T</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  $implicit</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> T</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Directive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SelectDirective</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">T</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // The directive's generic type `T` will be inferred from the `DataSource` type</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // passed to the input.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({required: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}) </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">selectFrom</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">!:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> DataSource</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">T</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Narrow the type of the context using the generic type of the directive.</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  static</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ngTemplateContextGuard</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">T</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">dir</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SelectDirective</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">T</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">ctx</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> any</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> ctx</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> is</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SelectTemplateContext</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">T</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // As before the guard body is not used at runtime, and included only to avoid</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // TypeScript errors.</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>

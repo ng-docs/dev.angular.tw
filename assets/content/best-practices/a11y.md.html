@@ -4,34 +4,34 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">Angular 中的无障碍性</h1>
+    <h1 tabindex="-1">Angular 中的無障礙性</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/best-practices/a11y.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>网络被各种各样的人使用，包括那些有视觉或运动障碍的人。
-各种辅助技术可供使用，使这些群体更容易与基于网络的软件应用进行交互。
-此外，将应用设计得更具无障碍性通常会改善所有用户的用户体验。</p>
-<p>要深入了解设计无障碍应用的问题和技巧，请参阅 Google 的 web.dev <a href="https://web.dev/learn/accessibility/" target="_blank">Learn Accessibility</a> 课程。</p>
-<p>本页讨论了设计 Angular 应用的最佳实践，这些应用可以很好地服务于所有用户，包括那些依赖辅助技术的用户。</p>
+    <p>網路被各種各樣的人使用，包括那些有視覺或運動障礙的人。
+各種輔助技術可供使用，使這些群體更容易與基於網路的軟體應用進行互動。
+此外，將應用設計得更具無障礙性通常會改善所有使用者的使用者體驗。</p>
+<p>要深入瞭解設計無障礙應用的問題和技巧，請參閱 Google 的 web.dev <a href="https://web.dev/learn/accessibility/" target="_blank">Learn Accessibility</a> 課程。</p>
+<p>本頁討論了設計 Angular 應用的最佳實踐，這些應用可以很好地服務於所有使用者，包括那些依賴輔助技術的使用者。</p>
 
   <h2 id="accessibility-attributes">
-    <a href="#accessibility-attributes" class="docs-anchor" tabindex="-1" aria-label="Link to Accessibility attributes">无障碍功能属性（Attribute）</a>
+    <a href="#accessibility-attributes" class="docs-anchor" tabindex="-1" aria-label="Link to Accessibility attributes">無障礙功能屬性（Attribute）</a>
   </h2>
   <!-- TODO: add link once attribute binding guide is implemented -->
-<p>构建无障碍 Web 体验通常涉及设置 <a href="https://web.dev/learn/accessibility/aria-html/" target="_blank">无障碍富 Internet 应用 (ARIA) 属性（Attribute）</a>，以便在可能缺少语义含义的地方提供语义含义。
-使用属性绑定模板语法来控制与无障碍功能相关的属性（Attribute）的值。</p>
-<p>当在 Angular 中绑定到 ARIA 属性（Attribute）时，你必须使用 <code>attr.</code> 前缀。ARIA 规范特别依赖于 HTML 属性（Attribute），而不是 DOM 元素的属性（Property）。</p>
+<p>建立無障礙 Web 體驗通常涉及設定 <a href="https://web.dev/learn/accessibility/aria-html/" target="_blank">無障礙富 Internet 應用 (ARIA) 屬性（Attribute）</a>，以便在可能缺少語義含義的地方提供語義含義。
+使用屬性繫結樣板語法來控制與無障礙功能相關的屬性（Attribute）的值。</p>
+<p>當在 Angular 中繫結到 ARIA 屬性（Attribute）時，你必須使用 <code>attr.</code> 字首。ARIA 規範特別依賴於 HTML 屬性（Attribute），而不是 DOM 元素的屬性（Property）。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- Use attr. when binding to an ARIA attribute --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [attr.aria-label]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"myActionLabel"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;…&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
   </div>
     <div class="docs-alert docs-alert-note">
-    <p><strong>注意：</strong> 这种语法仅对于属性（Attribute）<em>绑定</em>是必要的。
-静态 ARIA 属性（Attribute）不需要额外的语法。</p>
+    <p><strong>注意：</strong> 這種語法僅對於屬性（Attribute）<em>繫結</em>是必要的。
+靜態 ARIA 屬性（Attribute）不需要額外的語法。</p>
 
     </div>
     <div class="docs-code">
@@ -40,57 +40,57 @@
     </pre>
   </div>
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> 按照惯例，HTML 属性（Attribute）使用小写名称 (<code>tabindex</code>)，而属性（Property）使用 camelCase 名称 (<code>tabIndex</code>)。</p>
+    <p><strong>提示：</strong> 按照慣例，HTML 屬性（Attribute）使用小寫名稱 (<code>tabindex</code>)，而屬性（Property）使用 camelCase 名稱 (<code>tabIndex</code>)。</p>
 
     </div>
     <!-- TODO: add link once attribute binding guide implemented -->
-<p>有关属性（Attribute）和属性（Property）之间差异的更多背景知识，请参阅<a href="guide/templates">绑定语法指南</a>。</p>
+<p>有關屬性（Attribute）和屬性（Property）之間差異的更多背景知識，請參閱<a href="guide/templates">綁定語法指南</a>。</p>
 
   <h2 id="angular-ui-components">
-    <a href="#angular-ui-components" class="docs-anchor" tabindex="-1" aria-label="Link to Angular UI components">Angular UI 组件</a>
+    <a href="#angular-ui-components" class="docs-anchor" tabindex="-1" aria-label="Link to Angular UI components">Angular UI 元件</a>
   </h2>
-  <p>由 Angular 团队维护的 <a href="https://material.angular.io" target="_blank">Angular Material</a> 库是一套旨在完全实现无障碍性的可复用 UI 组件。<a href="https://material.angular.io/cdk/categories" target="_blank">组件开发工具包 (CDK)</a> 包括 <code>a11y</code> 包，该包提供支持无障碍性各个方面的工具。
+  <p>由 Angular 團隊維護的 <a href="https://material.angular.io" target="_blank">Angular Material</a> 函式庫是一套旨在完全實現無障礙性的可複用 UI 元件。<a href="https://material.angular.io/cdk/categories" target="_blank">元件開發工具包 (CDK)</a> 包括 <code>a11y</code> 套件，該套件提供支援無障礙性各個方面的工具。
 例如：</p>
 
   <ul class="docs-list">
-    <li><p><code>LiveAnnouncer</code> 用于为使用 <code>aria-live</code> 区域的屏幕阅读器用户播报消息。
-  有关 <a href="https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-live" target="_blank">aria-live 区域</a>的更多信息，请参阅 W3C 文档。</p>
+    <li><p><code>LiveAnnouncer</code> 用於為使用 <code>aria-live</code> 區域的螢幕閱讀器使用者播報訊息。
+  有關 <a href="https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-live" target="_blank">aria-live 區域</a>的更多訊息，請參閱 W3C 文件。</p>
 </li>
-<li><p><code>cdkTrapFocus</code> 指令将 Tab 键焦点捕获在元素内。
-  使用它可以为模态对话框等组件创建无障碍体验，在这些组件中，焦点必须受到约束。</p>
+<li><p><code>cdkTrapFocus</code> 指令將 Tab 鍵焦點捕獲在元素內。
+  使用它可以為模態對話框等元件建立無障礙體驗，在這些元件中，焦點必須受到約束。</p>
 </li>
 
   </ul>
-  <p>有关这些工具和其他工具的完整详细信息，请参阅 <a href="https://material.angular.io/cdk/a11y/overview" target="_blank">Angular CDK 无障碍性概览</a>。</p>
+  <p>有關這些工具和其他工具的完整詳細訊息，請參閱 <a href="https://material.angular.io/cdk/a11y/overview" target="_blank">Angular CDK 無障礙性概覽</a>。</p>
 
   <h3 id="augmenting-native-elements">
-    <a href="#augmenting-native-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Augmenting native elements">扩充原生元素</a>
+    <a href="#augmenting-native-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Augmenting native elements">擴充原生元素</a>
   </h3>
-  <p>原生 HTML 元素捕获了几个对无障碍性很重要的标准交互模式。
-在编写 Angular 组件时，应尽可能直接复用这些原生元素，而不是重新实现良好支持的行为。</p>
-<p>例如，与其为新型按钮创建自定义元素，不如创建一个组件，该组件将属性选择器与原生 <code>&lt;button&gt;</code> 元素一起使用。
-这最常应用于 <code>&lt;button&gt;</code> 和 <code>&lt;a&gt;</code>，但也可以与其他许多类型的元素一起使用。</p>
-<p>你可以在 Angular Material 中看到此模式的示例：
+  <p>原生 HTML 元素捕獲了幾個對無障礙性很重要的標準互動模式。
+在編寫 Angular 元件時，應儘可能直接複用這些原生元素，而不是重新實現良好支援的行為。</p>
+<p>例如，與其為新型按鈕建立自定義元素，不如建立一個元件，該組件將屬性選擇器與原生 <code>&lt;button&gt;</code> 元素一起使用。
+這最常應用於 <code>&lt;button&gt;</code> 和 <code>&lt;a&gt;</code>，但也可以與其他許多型別的元素一起使用。</p>
+<p>你可以在 Angular Material 中看到此模式的範例：
 <a href="https://github.com/angular/components/blob/main/src/material/button/button.ts#L33C3-L36C5" target="_blank"><code>MatButton</code></a>、<a href="https://github.com/angular/components/blob/main/src/material/tabs/tab-nav-bar/tab-nav-bar.ts#L62" target="_blank"><code>MatTabNav</code></a> 和 <a href="https://github.com/angular/components/blob/main/src/material/table/table.ts#L40" target="_blank"><code>MatTable</code></a>。</p>
 
   <h3 id="using-containers-for-native-elements">
-    <a href="#using-containers-for-native-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Using containers for native elements">为原生元素使用容器</a>
+    <a href="#using-containers-for-native-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Using containers for native elements">為原生元素使用容器</a>
   </h3>
-  <p>有时，使用适当的原生元素需要一个容器元素。
-例如，原生 <code>&lt;input&gt;</code> 元素不能有子元素，因此任何自定义文本输入组件都需要用额外的元素包装 <code>&lt;input&gt;</code>。
-仅仅在自定义组件的模板中包含 <code>&lt;input&gt;</code>，你的组件用户就无法为 <code>&lt;input&gt;</code> 元素设置任意属性（Property）和属性（Attribute）。
-相反，创建一个容器组件，该组件使用内容投影将原生控件包含在组件的 API 中。</p>
-<p>你可以将 <a href="https://material.angular.io/components/form-field/overview" target="_blank"><code>MatFormField</code></a> 视为此模式的一个示例。</p>
+  <p>有時，使用適當的原生元素需要一個容器元素。
+例如，原生 <code>&lt;input&gt;</code> 元素不能有子元素，因此任何自定義文字輸入元件都需要用額外的元素包裝 <code>&lt;input&gt;</code>。
+僅僅在自定義元件的樣板中包含 <code>&lt;input&gt;</code>，你的元件使用者就無法為 <code>&lt;input&gt;</code> 元素設定任意屬性（Property）和屬性（Attribute）。
+相反，建立一個容器組件，該組件使用內容投影將原生控制元件包含在元件的 API 中。</p>
+<p>你可以將 <a href="https://material.angular.io/components/form-field/overview" target="_blank"><code>MatFormField</code></a> 視為此模式的一個範例。</p>
 
   <h2 id="case-study-building-a-custom-progress-bar">
-    <a href="#case-study-building-a-custom-progress-bar" class="docs-anchor" tabindex="-1" aria-label="Link to Case study: Building a custom progress bar">案例研究：构建自定义进度条</a>
+    <a href="#case-study-building-a-custom-progress-bar" class="docs-anchor" tabindex="-1" aria-label="Link to Case study: Building a custom progress bar">案例研究：建立自定義進度條</a>
   </h2>
-  <p>以下示例展示了如何通过使用宿主绑定来控制与无障碍功能相关的属性（Attribute），从而使进度条具有无障碍性。</p>
+  <p>以下範例展示了如何透過使用宿主繫結來控制與無障礙功能相關的屬性（Attribute），從而使進度條具有無障礙性。</p>
 
   <ul class="docs-list">
-    <li>该组件定义了一个启用无障碍功能的元素，该元素同时具有标准 HTML 属性（Attribute） <code>role</code> 和 ARIA 属性（Attribute）。
-  ARIA 属性（Attribute） <code>aria-valuenow</code> 绑定到用户的输入。</li>
-<li>在模板中，<code>aria-label</code> 属性（Attribute）确保了控件对屏幕阅读器是无障碍的。</li>
+    <li>該組件定義了一個啟用無障礙功能的元素，該元素同時具有標準 HTML 屬性（Attribute） <code>role</code> 和 ARIA 屬性（Attribute）。
+  ARIA 屬性（Attribute） <code>aria-valuenow</code> 繫結到使用者的輸入。</li>
+<li>在樣板中，<code>aria-label</code> 屬性（Attribute）確保了控制元件對螢幕閱讀器是無障礙的。</li>
 
   </ul>
   <div class="docs-code-multifile">
@@ -100,7 +100,7 @@
     </pre>
   </div><div class="docs-code" path="adev/src/content/examples/accessibility/src/app/app.component.html">
     
-    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span role="presentation" class="shiki-ln-number">1</span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Accessibility Example&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span role="presentation" class="shiki-ln-number">2</span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">label</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"progress-value"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span role="presentation" class="shiki-ln-number">3</span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  Enter an example progress value</span></span><span role="presentation" class="shiki-ln-number">4</span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">input</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> id</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"progress-value"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> type</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"number"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> min</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"0"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> max</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"100"</span></span><span role="presentation" class="shiki-ln-number">5</span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      [value]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"progress"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> (input)</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"setProgress($event)"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span role="presentation" class="shiki-ln-number">6</span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">label</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span role="presentation" class="shiki-ln-number">7</span><span class="line"></span><span role="presentation" class="shiki-ln-number highlighted">8</span><span class="line highlighted"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- The user of the progressbar sets an aria-label to communicate what the progress means. --&gt;</span></span><span role="presentation" class="shiki-ln-number highlighted">9</span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">app-example-progressbar</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [value]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"progress"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> aria-label</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"进度条范例"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span role="presentation" class="shiki-ln-number">10</span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">app-example-progressbar</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span role="presentation" class="shiki-ln-number">11</span><span class="line"></span><span role="presentation" class="shiki-ln-number">12</span><span class="line"></span></code></pre>
+    <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span role="presentation" class="shiki-ln-number">1</span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Accessibility Example&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span role="presentation" class="shiki-ln-number">2</span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">label</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"progress-value"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span role="presentation" class="shiki-ln-number">3</span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  Enter an example progress value</span></span><span role="presentation" class="shiki-ln-number">4</span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">input</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> id</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"progress-value"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> type</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"number"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> min</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"0"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> max</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"100"</span></span><span role="presentation" class="shiki-ln-number">5</span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      [value]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"progress"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> (input)</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"setProgress($event)"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span role="presentation" class="shiki-ln-number">6</span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">label</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span role="presentation" class="shiki-ln-number">7</span><span class="line"></span><span role="presentation" class="shiki-ln-number highlighted">8</span><span class="line highlighted"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- The user of the progressbar sets an aria-label to communicate what the progress means. --&gt;</span></span><span role="presentation" class="shiki-ln-number highlighted">9</span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">app-example-progressbar</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [value]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"progress"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> aria-label</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"進度條範例"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span role="presentation" class="shiki-ln-number">10</span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">app-example-progressbar</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span role="presentation" class="shiki-ln-number">11</span><span class="line"></span><span role="presentation" class="shiki-ln-number">12</span><span class="line"></span></code></pre>
     </pre>
   </div>
     </div>
@@ -109,30 +109,30 @@
   </h2>
   
   <h3 id="focus-management-after-navigation">
-    <a href="#focus-management-after-navigation" class="docs-anchor" tabindex="-1" aria-label="Link to Focus management after navigation">导航后的焦点管理</a>
+    <a href="#focus-management-after-navigation" class="docs-anchor" tabindex="-1" aria-label="Link to Focus management after navigation">導向後的焦點管理</a>
   </h3>
-  <p>在 UI 中跟踪和控制 <a href="https://web.dev/learn/accessibility/focus/" target="_blank">焦点</a> 是在设计无障碍功能时的一个重要考虑因素。
-当使用 Angular 路由时，你应该决定页面焦点在导航后移到哪里。</p>
-<p>为了避免仅仅依赖视觉提示，你需要确保你的路由代码在页面导航后更新焦点。
-使用 <code>Router</code> 服务中的 <code>NavigationEnd</code> 事件来了解何时更新焦点。</p>
-<p>以下示例展示了如何在导航后查找并聚焦 DOM 中的主要内容标头。</p>
+  <p>在 UI 中跟蹤和控制 <a href="https://web.dev/learn/accessibility/focus/" target="_blank">焦點</a> 是在設計無障礙功能時的一個重要考慮因素。
+當使用 Angular 路由時，你應該決定頁面焦點在導向後移到哪裡。</p>
+<p>為了避免僅僅依賴視覺提示，你需要確保你的路由程式碼在頁面導向後更新焦點。
+使用 <code>Router</code> 服務中的 <code>NavigationEnd</code> 事件來了解何時更新焦點。</p>
+<p>以下範例展示了如何在導向後查詢並聚焦 DOM 中的主要內容標頭。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">router.events.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">pipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">filter</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">e</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> e </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">instanceof</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> NavigationEnd</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> mainHeader</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> document.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">querySelector</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'#main-content-header'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (mainHeader) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    mainHeader.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">focus</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
-  </div><p>在实际应用中，接收焦点的元素取决于你的具体应用结构和布局。
-聚焦的元素应该让用户能够立即进入刚刚路由到视图中的主要内容。
-你应该避免在路由更改后焦点返回到 <code>body</code> 元素的情况。</p>
+  </div><p>在實際應用中，接收焦點的元素取決於你的具體應用結構和佈局。
+聚焦的元素應該讓使用者能夠立即進入剛剛路由到檢視中的主要內容。
+你應該避免在路由更改後焦點回傳到 <code>body</code> 元素的情況。</p>
 
   <h3 id="active-links-identification">
-    <a href="#active-links-identification" class="docs-anchor" tabindex="-1" aria-label="Link to Active links identification">活动链接标识</a>
+    <a href="#active-links-identification" class="docs-anchor" tabindex="-1" aria-label="Link to Active links identification">活動連結標識</a>
   </h3>
-  <p>应用于活动 <code>RouterLink</code> 元素的 CSS 类（例如 <code>RouterLinkActive</code>）提供了一个视觉提示来标识活动链接。
-不幸的是，视觉提示对盲人或视障用户没有帮助。
-将 <code>aria-current</code> 属性（Attribute）应用于元素可以帮助标识活动链接。
-有关更多信息，请参阅 <a href="https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Attributes/aria-current" target="_blank">Mozilla Developer Network (MDN) aria-current</a>）。</p>
-<p><code>RouterLinkActive</code> 指令提供了 <code>ariaCurrentWhenActive</code> 输入，当链接变为活动状态时，它会将 <code>aria-current</code> 设置为指定值。</p>
-<p>以下示例展示了如何将 <code>active-page</code> 类应用于活动链接，以及如何在活动链接处于活动状态时将其 <code>aria-current</code> 属性（Attribute）设置为 <code>"page"</code>：</p>
+  <p>應用於活動 <code>RouterLink</code> 元素的 CSS 類（例如 <code>RouterLinkActive</code>）提供了一個視覺提示來標識活動連結。
+不幸的是，視覺提示對盲人或視障使用者沒有幫助。
+將 <code>aria-current</code> 屬性（Attribute）應用於元素可以幫助標識活動連結。
+有關更多訊息，請參閱 <a href="https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Attributes/aria-current" target="_blank">Mozilla Developer Network (MDN) aria-current</a>）。</p>
+<p><code>RouterLinkActive</code> 指令提供了 <code>ariaCurrentWhenActive</code> 輸入，當連結變為活動狀態時，它會將 <code>aria-current</code> 設定為指定值。</p>
+<p>以下範例展示了如何將 <code>active-page</code> 類應用於活動連結，以及如何在活動連結處於活動狀態時將其 <code>aria-current</code> 屬性（Attribute）設定為 <code>"page"</code>：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">nav</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> routerLink</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"home"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      routerLinkActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"active-page"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      ariaCurrentWhenActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"page"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    Home</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> routerLink</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"about"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      routerLinkActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"active-page"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      ariaCurrentWhenActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"page"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    About</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> routerLink</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"shop"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      routerLinkActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"active-page"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      ariaCurrentWhenActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"page"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    Shop</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">nav</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
@@ -141,30 +141,30 @@
 
 
   <h2 id="more-information">
-    <a href="#more-information" class="docs-anchor" tabindex="-1" aria-label="Link to More information">更多信息</a>
+    <a href="#more-information" class="docs-anchor" tabindex="-1" aria-label="Link to More information">更多訊息</a>
   </h2>
   
   <ul class="docs-list">
-    <li><a href="https://developers.google.com/web/fundamentals/accessibility" target="_blank">无障碍性 - Google Web Fundamentals</a></li>
-<li><a href="https://www.w3.org/TR/wai-aria" target="_blank">ARIA 规范和编写实践</a></li>
-<li><a href="https://material.io/design/usability/accessibility.html" target="_blank">Material Design - 无障碍性</a></li>
+    <li><a href="https://developers.google.com/web/fundamentals/accessibility" target="_blank">無障礙性 - Google Web Fundamentals</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria" target="_blank">ARIA 規範和編寫實踐</a></li>
+<li><a href="https://material.io/design/usability/accessibility.html" target="_blank">Material Design - 無障礙性</a></li>
 <li><a href="https://www.smashingmagazine.com/search/?q=accessibility" target="_blank">Smashing Magazine</a></li>
-<li><a href="https://inclusive-components.design" target="_blank">包容性组件</a></li>
-<li><a href="https://dequeuniversity.com/resources" target="_blank">无障碍性资源和代码范例</a></li>
-<li><a href="https://www.w3.org/WAI/people-use-web" target="_blank">W3C - Web Accessibility Initiative（Web 无障碍倡议）</a></li>
+<li><a href="https://inclusive-components.design" target="_blank">包容性元件</a></li>
+<li><a href="https://dequeuniversity.com/resources" target="_blank">無障礙性資源和程式碼範例</a></li>
+<li><a href="https://www.w3.org/WAI/people-use-web" target="_blank">W3C - Web Accessibility Initiative（Web 無障礙倡議）</a></li>
 <li><a href="https://www.youtube.com/watch?v=HtTyRajRuyY" target="_blank">Rob Dodson A11ycasts</a></li>
-<li><a href="https://github.com/angular-eslint/angular-eslint#functionality" target="_blank">Angular ESLint</a> 提供了 linting 规则，可以帮助你确保你的代码符合无障碍性标准。</li>
+<li><a href="https://github.com/angular-eslint/angular-eslint#functionality" target="_blank">Angular ESLint</a> 提供了 linting 規則，可以幫助你確保你的程式碼符合無障礙性標準。</li>
 
   </ul>
   <!-- vale Angular.Angular_Spelling = YES -->
 
-<p>图书</p>
+<p>圖書</p>
 <!-- vale Angular.Google_Quotes = NO -->
 
 
   <ul class="docs-list">
-    <li>“A Web for Everyone: Designing Accessible User Experiences,” Sarah Horton 和 Whitney Quesenbery</li>
-<li>“Inclusive Design Patterns,” Heydon Pickering</li>
+    <li>『A Web for Everyone: Designing Accessible User Experiences,』 Sarah Horton 和 Whitney Quesenbery</li>
+<li>『Inclusive Design Patterns,』 Heydon Pickering</li>
 
   </ul>
   <!-- vale Angular.Google_Quotes = YES -->

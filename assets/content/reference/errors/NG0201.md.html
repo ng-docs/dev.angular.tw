@@ -15,15 +15,15 @@
     <div class="docs-video-container">
       <iframe class="docs-video" src="https://www.youtube.com/embed/lAlOryf1-WU" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless title="Video player"></iframe>
     </div>
-    <p>当你尝试注入一个服务，但没有声明相应的提供者时，你会看到这个错误。提供者是一种映射表，它提供一个值，你可以将该值注入到你的应用中的类的构造函数中。</p>
-<p>在我们的<a href="guide/di">依赖注入指南</a>中阅读更多关于提供者的信息。</p>
+    <p>當你嘗試注入一個服務，但沒有宣告相應的提供者時，你會看到這個錯誤。提供者是一種對映表，它提供一個值，你可以將該值注入到你的應用中的類別的建構式函式中。</p>
+<p>在我們的<a href="guide/di">依賴注入指南</a>中閱讀更多關於提供者的訊息。</p>
 
   <h2 id="debugging-the-error">
-    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error">调试此错误</a>
+    <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error">除錯此錯誤</a>
   </h2>
-  <p>从错误指出缺少提供者的对象开始反向追溯：<code>No provider for ${this}!</code>。这通常在服务中抛出，这些服务需要不存在的提供者。</p>
-<p>要修复此错误，请确保你的服务已在 <code>NgModule</code> 的提供者列表中注册，或者在顶部带有 <code>providedIn</code> 属性的 <code>@Injectable</code> 装饰器。</p>
-<p>最常见的解决方案是在 <code>@Injectable</code> 中使用 <code>providedIn</code> 添加一个提供者：</p>
+  <p>從錯誤指出缺少提供者的物件開始反向追溯：<code>No provider for ${this}!</code>。這通常在服務中丟擲，這些服務需要不存在的提供者。</p>
+<p>要修復此錯誤，請確保你的服務已在 <code>NgModule</code> 的提供者清單中註冊，或者在頂部帶有 <code>providedIn</code> 屬性的 <code>@Injectable</code> 裝飾器。</p>
+<p>最常見的解決方案是在 <code>@Injectable</code> 中使用 <code>providedIn</code> 新增一個提供者：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Injectable</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({ providedIn: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> })</span></span></code></pre>
