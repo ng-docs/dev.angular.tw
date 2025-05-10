@@ -6,15 +6,15 @@
           
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">樣板語法</h1>
+    <h1 tabindex="-1">範本語法</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/templates/overview.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
 
-          <p><!-- markdownlint-disable-line -->在 Angular 中，樣板是一段 HTML。
-在樣板中使用特殊的語法可以充分利用 Angular 的許多屬性。</p>
+          <p><!-- markdownlint-disable-line -->在 Angular 中，範本是一段 HTML。
+在範本中使用特殊的語法可以充分利用 Angular 的許多屬性。</p>
         </div>
 
         <!-- illustration -->
@@ -55,30 +55,30 @@
     <p><strong>提示：</strong>在深入學習本綜合指南之前，請檢視 Angular 的<a href="essentials/templates">要點</a>。</p>
 
     </div>
-    <p>每個 Angular 元件都有一個<strong>樣板</strong>，用於定義元件渲染到頁面上的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model" target="_blank">DOM</a>。透過使用樣板，Angular 能夠在資料更改時自動保持頁面最新。</p>
-<p>樣板通常位於 <code>*.component.ts</code> 檔案的 <code>template</code> 屬性或 <code>*.component.html</code> 檔案中。要了解更多訊息，請檢視<a href="/guide/components">深入元件指南</a>。</p>
+    <p>每個 Angular 元件都有一個<strong>範本</strong>，用於定義元件渲染到頁面上的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model" target="_blank">DOM</a>。透過使用範本，Angular 能夠在資料更改時自動保持頁面最新。</p>
+<p>範本通常位於 <code>*.component.ts</code> 檔案的 <code>template</code> 屬性或 <code>*.component.html</code> 檔案中。要了解更多訊息，請檢視<a href="/guide/components">深入元件指南</a>。</p>
 
   <h2 id="how-do-templates-work">
-    <a href="#how-do-templates-work" class="docs-anchor" tabindex="-1" aria-label="Link to How do templates work?">樣板是如何工作的？</a>
+    <a href="#how-do-templates-work" class="docs-anchor" tabindex="-1" aria-label="Link to How do templates work?">範本是如何工作的？</a>
   </h2>
-  <p>樣板基於 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">HTML</a> 語法，並具有其他屬性，例如內建樣板函式、資料繫結、事件監聽、變數等等。</p>
-<p>Angular 將樣板編譯成 JavaScript，以便建立對你的應用的內部理解。這樣做的好處之一是 Angular 會自動將內建的渲染最佳化應用於你的應用。</p>
+  <p>範本基於 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">HTML</a> 語法，並具有其他屬性，例如內建範本函式、資料繫結、事件監聽、變數等等。</p>
+<p>Angular 將範本編譯成 JavaScript，以便建立對你的應用的內部理解。這樣做的好處之一是 Angular 會自動將內建的渲染最佳化應用於你的應用。</p>
 
   <h3 id="differences-from-standard-html">
     <a href="#differences-from-standard-html" class="docs-anchor" tabindex="-1" aria-label="Link to Differences from standard HTML">與標準 HTML 的差異</a>
   </h3>
-  <p>樣板和標準 HTML 語法之間的一些差異包括：</p>
+  <p>範本和標準 HTML 語法之間的一些差異包括：</p>
 
   <ul class="docs-list">
-    <li>樣板原始碼中的註解不包含在渲染後的輸出中</li>
+    <li>範本原始碼中的註解不包含在渲染後的輸出中</li>
 <li>元件和指令元素可以是自閉合的（例如，<code>&lt;UserProfile /&gt;</code>）</li>
 <li>具有某些字元（即 <code>[]</code>、<code>()</code> 等）的 Attribute 對 Angular 具有特殊含義。有關更多訊息，請參閱<a href="guide/templates/binding">繫結文件</a>和<a href="guide/templates/event-listeners">新增事件監聽器文件</a>。</li>
-<li><code>@</code> 字元對於 Angular 具有特殊含義，用於向樣板新增動態行為，例如<a href="guide/templates/control-flow">控制區塊</a>。你可以透過將其轉義為 HTML 實體程式碼（<code>&amp;commat;</code> 或 <code>&amp;#64;</code>）來包含字面量 <code>@</code> 字元。</li>
-<li>Angular 會忽略和摺疊不必要的空白字元。有關更多詳細訊息，請參閱<a href="guide/templates/whitespace">樣板中的空白</a>。</li>
+<li><code>@</code> 字元對於 Angular 具有特殊含義，用於向範本新增動態行為，例如<a href="guide/templates/control-flow">控制區塊</a>。你可以透過將其轉義為 HTML 實體程式碼（<code>&amp;commat;</code> 或 <code>&amp;#64;</code>）來包含字面量 <code>@</code> 字元。</li>
+<li>Angular 會忽略和摺疊不必要的空白字元。有關更多詳細訊息，請參閱<a href="guide/templates/whitespace">範本中的空白</a>。</li>
 <li>Angular 可能會向頁面新增註解節點，作為動態內容的佔位符，但開發人員可以忽略這些註解節點。</li>
 
   </ul>
-  <p>此外，雖然大多數 HTML 語法都是有效的樣板語法，但 Angular 不支援樣板中的 <code>&lt;script&gt;</code> 元素。有關更多訊息，請參閱<a href="best-practices/security">安全性</a>頁面。</p>
+  <p>此外，雖然大多數 HTML 語法都是有效的範本語法，但 Angular 不支援範本中的 <code>&lt;script&gt;</code> 元素。有關更多訊息，請參閱<a href="best-practices/security">安全性</a>頁面。</p>
 
   <h2 id="whats-next">
     <a href="#whats-next" class="docs-anchor" tabindex="-1" aria-label="Link to What's next?">下一步是什麼？</a>
@@ -101,7 +101,7 @@
 </tr>
 <tr>
 <td align="left"><a href="guide/templates/event-listeners">新增事件監聽器</a></td>
-<td align="left">回應樣板中的事件。</td>
+<td align="left">回應範本中的事件。</td>
 </tr>
 <tr>
 <td align="left"><a href="guide/templates/two-way-binding">雙向繫結</a></td>
@@ -120,15 +120,15 @@
 <td align="left">控制組件如何渲染內容。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/ng-template">使用 ng-template 建立樣板片段</a></td>
-<td align="left">宣告一個樣板片段。</td>
+<td align="left"><a href="guide/templates/ng-template">使用 ng-template 建立範本片段</a></td>
+<td align="left">宣告一個範本片段。</td>
 </tr>
 <tr>
 <td align="left"><a href="guide/templates/ng-container">使用 ng-container 對元素進行分組</a></td>
 <td align="left">將多個元素組合在一起或標記一個用於渲染的位置。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/variables">樣板中的變數</a></td>
+<td align="left"><a href="guide/templates/variables">範本中的變數</a></td>
 <td align="left">瞭解變數宣告。</td>
 </tr>
 <tr>
@@ -140,7 +140,7 @@
 <td align="left">瞭解 Angular 表示式和標準 JavaScript 之間的異同。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/templates/whitespace">樣板中的空白</a></td>
+<td align="left"><a href="guide/templates/whitespace">範本中的空白</a></td>
 <td align="left">瞭解 Angular 如何處理空白。</td>
 </tr>
 

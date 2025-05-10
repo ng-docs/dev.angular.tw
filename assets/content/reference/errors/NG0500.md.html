@@ -24,6 +24,6 @@
     <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error">除錯錯誤</a>
   </h2>
   <p>開發者控制台中的錯誤訊息應包含有關導致問題的應用 DOM 結構的特定部分的訊息。檢查應用的那部分是否存在與水合相關的錯誤，例如使用原生 API 進行直接 DOM 操縱。</p>
-<p>檢查您的樣板是否具有有效的 HTML 結構。有關更多訊息，請參見<a href="guide/hydration#valid-html-structure">水合指南</a>。</p>
+<p>檢查您的範本是否具有有效的 HTML 結構。有關更多訊息，請參見<a href="guide/hydration#valid-html-structure">水合指南</a>。</p>
 <p>您可以將 <code>ngSkipHydration</code> 屬性新增到元件宿主節點，作為一種可能的權宜之計。</p>
 <p>如果您的應用在開發環境中工作正常，但在生產建立中看到水合錯誤，請確保傳遞到瀏覽器的生成的 HTML 包含 Angular 在服務器端渲染期間生成的註解節點。這些註解節點被 Angular 執行時用作檢視容器（無論是否進行水合）的錨點，並且水合過程期望它們出現在其原始位置。如果您有自定義邏輯從伺服器端渲染生成的 HTML 中刪除註解節點，或者您已設定 CDN 以在提供內容服務之前刪除它們 - 請停用註解節點移除，並檢查水合錯誤是否消失。</p>

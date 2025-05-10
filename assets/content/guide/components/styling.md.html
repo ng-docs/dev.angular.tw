@@ -41,20 +41,20 @@
   <h3 id="viewencapsulationemulated">
     <a href="#viewencapsulationemulated" class="docs-anchor" tabindex="-1" aria-label="Link to ViewEncapsulation.Emulated">ViewEncapsulation.Emulated</a>
   </h3>
-  <p>預設情況下，Angular 使用模擬封裝，以便元件的樣式僅應用於在該組件樣板中定義的元素。 在此模式下，框架為每個元件實例生成唯一的 HTML Attribute，將該 Attribute 新增到元件樣板中的元素，並將該 Attribute 插入到元件樣式中定義的 CSS 選擇器中。</p>
+  <p>預設情況下，Angular 使用模擬封裝，以便元件的樣式僅應用於在該組件範本中定義的元素。 在此模式下，框架為每個元件實例生成唯一的 HTML Attribute，將該 Attribute 新增到元件範本中的元素，並將該 Attribute 插入到元件樣式中定義的 CSS 選擇器中。</p>
 <p>此模式確保元件的樣式不會洩漏出去並影響其他元件。 但是，在元件外部定義的全域樣式仍然可能會影響具有模擬封裝的元件內部的元素。</p>
-<p>在模擬模式下，Angular 支援 <a href="https://developer.mozilla.org/docs/Web/CSS/:host" target="_blank"><code>:host</code></a> 和 <a href="https://developer.mozilla.org/docs/Web/CSS/:host-context" target="_blank"><code>:host-context()</code></a> 偽類，而無需使用 <a href="https://developer.mozilla.org/docs/Web/Web_Components/Using_shadow_DOM" target="_blank">Shadow DOM</a>。 在編譯期間，框架會將這些偽類轉換為 Attribute，因此它在執行時不符合這些原生偽類的規則（例如，瀏覽器相容性、特異性）。 Angular 的模擬封裝模式不支援任何其他與 Shadow DOM 相關的偽類，例如 <code>::shadow</code> 或 <code>::part</code>。</p>
+<p>在模擬模式下，Angular 支援 <a href="https://developer.mozilla.org/docs/Web/CSS/:host" target="_blank"><code>:host</code></a> 和 <a href="https://developer.mozilla.org/docs/Web/CSS/:host-context" target="_blank"><code>:host-context()</code></a> 偽類別，而無需使用 <a href="https://developer.mozilla.org/docs/Web/Web_Components/Using_shadow_DOM" target="_blank">Shadow DOM</a>。 在編譯期間，框架會將這些偽類別轉換為 Attribute，因此它在執行時不符合這些原生偽類別的規則（例如，瀏覽器相容性、特異性）。 Angular 的模擬封裝模式不支援任何其他與 Shadow DOM 相關的偽類別，例如 <code>::shadow</code> 或 <code>::part</code>。</p>
 
   <h4 id="ng-deep">
     <a href="#ng-deep" class="docs-anchor" tabindex="-1" aria-label="Link to <code>::ng-deep</code>"><code>::ng-deep</code></a>
   </h4>
-  <p>Angular 的模擬封裝模式支援自定義偽類 <code>::ng-deep</code>。 將此偽類應用於 CSS 規則會停用該規則的封裝，從而有效地將其轉換為全域樣式。 <strong>Angular 團隊強烈建議不要再使用 <code>::ng-deep</code></strong>。 這些 API 仍然完全是為了向後相容。</p>
+  <p>Angular 的模擬封裝模式支援自定義偽類別 <code>::ng-deep</code>。 將此偽類別應用於 CSS 規則會停用該規則的封裝，從而有效地將其轉換為全域樣式。 <strong>Angular 團隊強烈建議不要再使用 <code>::ng-deep</code></strong>。 這些 API 仍然完全是為了向後相容。</p>
 
   <h3 id="viewencapsulationshadowdom">
     <a href="#viewencapsulationshadowdom" class="docs-anchor" tabindex="-1" aria-label="Link to ViewEncapsulation.ShadowDom">ViewEncapsulation.ShadowDom</a>
   </h3>
-  <p>此模式透過使用 <a href="https://developer.mozilla.org/docs/Web/Web_Components/Using_shadow_DOM" target="_blank">Web 標準 Shadow DOM API</a> 在元件內限定樣式的作用域。 啟用此模式後，Angular 會將陰影根附著到元件的宿主元素，並將元件的樣板和樣式渲染到相應的陰影樹中。</p>
-<p>此模式嚴格保證<em>只有</em>該組件的樣式才應用於元件樣板中的元素。 全域樣式不能影響陰影樹中的元素，陰影樹內的樣式也不能影響該陰影樹之外的元素。</p>
+  <p>此模式透過使用 <a href="https://developer.mozilla.org/docs/Web/Web_Components/Using_shadow_DOM" target="_blank">Web 標準 Shadow DOM API</a> 在元件內限定樣式的作用域。 啟用此模式後，Angular 會將陰影根附著到元件的宿主元素，並將元件的範本和樣式渲染到相應的陰影樹中。</p>
+<p>此模式嚴格保證<em>只有</em>該組件的樣式才應用於元件範本中的元素。 全域樣式不能影響陰影樹中的元素，陰影樹內的樣式也不能影響該陰影樹之外的元素。</p>
 <p>但是，啟用 <code>ShadowDom</code> 封裝的影響不僅僅是樣式作用域。 在陰影樹中渲染元件會影響事件傳播、與 <a href="https://developer.mozilla.org/docs/Web/Web_Components/Using_templates_and_slots" target="_blank"><code>&lt;slot&gt;</code> API</a> 的互動以及瀏覽器開發者工具顯示元素的方式。 在你的應用中啟用此選項之前，請務必瞭解使用 Shadow DOM 的全部含義。</p>
 
   <h3 id="viewencapsulationnone">
@@ -68,12 +68,12 @@
     </div>
     
   <h2 id="defining-styles-in-templates">
-    <a href="#defining-styles-in-templates" class="docs-anchor" tabindex="-1" aria-label="Link to Defining styles in templates">在樣板中定義樣式</a>
+    <a href="#defining-styles-in-templates" class="docs-anchor" tabindex="-1" aria-label="Link to Defining styles in templates">在範本中定義樣式</a>
   </h2>
-  <p>你可以在元件的樣板中使用 <code>&lt;style&gt;</code> 元素來定義其他樣式。 元件的檢視封裝模式適用於以這種方式定義的樣式。</p>
+  <p>你可以在元件的範本中使用 <code>&lt;style&gt;</code> 元素來定義其他樣式。 元件的檢視封裝模式適用於以這種方式定義的樣式。</p>
 <p>Angular 不支援樣式元素內部的繫結。</p>
 
   <h2 id="referencing-external-style-files">
     <a href="#referencing-external-style-files" class="docs-anchor" tabindex="-1" aria-label="Link to Referencing external style files">引用外部樣式檔案</a>
   </h2>
-  <p>元件樣板可以 使用 <a href="https://developer.mozilla.org/docs/Web/HTML/Element/link" target="_blank"><code>&lt;link&gt;</code> 元素</a> 來引用 CSS 檔案。 此外，你的 CSS 可能會使用 <a href="https://developer.mozilla.org/docs/Web/CSS/@import" target="_blank"><code>@import</code> at-rule</a> 來引用 CSS 檔案。 Angular 將這些引用視為<em>外部</em>樣式。 外部樣式不受模擬檢視封裝的影響。</p>
+  <p>元件範本可以 使用 <a href="https://developer.mozilla.org/docs/Web/HTML/Element/link" target="_blank"><code>&lt;link&gt;</code> 元素</a> 來引用 CSS 檔案。 此外，你的 CSS 可能會使用 <a href="https://developer.mozilla.org/docs/Web/CSS/@import" target="_blank"><code>@import</code> at-rule</a> 來引用 CSS 檔案。 Angular 將這些引用視為<em>外部</em>樣式。 外部樣式不受模擬檢視封裝的影響。</p>

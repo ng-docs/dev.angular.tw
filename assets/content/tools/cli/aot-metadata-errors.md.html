@@ -76,7 +76,7 @@
   </h2>
   
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> <em>只能引用初始化的變數和常數，因為樣板編譯器需要此變數的值。</em></p>
+    <p><strong>提示：</strong> <em>只能引用初始化的變數和常數，因為範本編譯器需要此變數的值。</em></p>
 
     </div>
     <p>編譯器找到了對未初始化的匯出變數或靜態欄位的引用。
@@ -91,8 +91,8 @@
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// ERROR - not initialized there either</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { someTemplate } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './config'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'my-component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: someTemplate</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> MyComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}</span></span></code></pre>
     </pre>
-  </div><p>編譯器不能等到執行時才獲取樣板訊息。
-它必須從原始碼中靜態地推導出 <code>someTemplate</code> 變數的值，以便它可以生成元件工廠，其中包括基於樣板建立元素的指令。</p>
+  </div><p>編譯器不能等到執行時才獲取範本訊息。
+它必須從原始碼中靜態地推導出 <code>someTemplate</code> 變數的值，以便它可以生成元件工廠，其中包括基於範本建立元素的指令。</p>
 <p>要糾正此錯誤，請在<em>同一行</em>的初始化子句中提供變數的初始值。</p>
 <div class="docs-code">
     
@@ -100,22 +100,22 @@
     </pre>
   </div>
   <h2 id="reference-to-a-non-exported-class">
-    <a href="#reference-to-a-non-exported-class" class="docs-anchor" tabindex="-1" aria-label="Link to Reference to a non-exported class">引用未匯出的類</a>
+    <a href="#reference-to-a-non-exported-class" class="docs-anchor" tabindex="-1" aria-label="Link to Reference to a non-exported class">引用未匯出的類別</a>
   </h2>
   
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> <em>引用未匯出的類 <code>&lt;類別名稱&gt;</code>。</em>
+    <p><strong>提示：</strong> <em>引用未匯出的類別 <code>&lt;類別名稱&gt;</code>。</em>
 <em>考慮匯出該類別。</em></p>
 
     </div>
-    <p>元資料引用了一個未匯出的類。</p>
-<p>例如，你可能定義了一個類，並將其用作 providers 陣列中的注入令牌，但忽略了匯出該類別。</p>
+    <p>元資料引用了一個未匯出的類別。</p>
+<p>例如，你可能定義了一個類別，並將其用作 providers 陣列中的注入令牌，但忽略了匯出該類別。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// ERROR</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">abstract</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> MyStrategy</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { }</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  …</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  providers</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    { provide: MyStrategy, useValue: … }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  ]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  …</span></span></code></pre>
     </pre>
-  </div><p>Angular 在單獨的模組中生成類別工廠，該工廠<a href="tools/cli/aot-compiler#exported-symbols">只能訪問匯出的類</a>。
-要糾正此錯誤，請匯出引用的類。</p>
+  </div><p>Angular 在單獨的模組中生成類別工廠，該工廠<a href="tools/cli/aot-compiler#exported-symbols">只能訪問匯出的類別</a>。
+要糾正此錯誤，請匯出引用的類別。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// CORRECTED</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> abstract</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> MyStrategy</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { }</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  …</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  providers</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    { provide: MyStrategy, useValue: … }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  ]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  …</span></span></code></pre>
@@ -171,7 +171,7 @@
   </h2>
   
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> <em>樣板編譯器不支援引用匯出的已解構變數或常數。請考慮簡化此操作以避免解構。</em></p>
+    <p><strong>提示：</strong> <em>範本編譯器不支援引用匯出的已解構變數或常數。請考慮簡化此操作以避免解構。</em></p>
 
     </div>
     <p>編譯器不支援引用透過<a href="https://www.typescriptlang.org/docs/handbook/variable-declarations.html#destructuring" target="_blank">解構</a>賦值的變數。</p>
@@ -261,20 +261,20 @@ Angular 編譯器不理解你忽略匯出或匯入的型別。</p>
   </div><p>避免引用具有複雜初始化器或計算屬性的列舉。</p>
 
   <h2 id="tagged-template-expressions-are-not-supported">
-    <a href="#tagged-template-expressions-are-not-supported" class="docs-anchor" tabindex="-1" aria-label="Link to Tagged template expressions are not supported">不支援標記樣板表示式</a>
+    <a href="#tagged-template-expressions-are-not-supported" class="docs-anchor" tabindex="-1" aria-label="Link to Tagged template expressions are not supported">不支援標記範本表示式</a>
   </h2>
   
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> <em>元資料中不支援標記樣板表示式。</em></p>
+    <p><strong>提示：</strong> <em>元資料中不支援標記範本表示式。</em></p>
 
     </div>
-    <p>編譯器遇到了 JavaScript ES2015 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals" target="_blank">標記樣板表示式</a>，例如以下內容。</p>
+    <p>編譯器遇到了 JavaScript ES2015 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals" target="_blank">標記範本表示式</a>，例如以下內容。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// ERROR</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> expression</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'funky'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> raw</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> String.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">raw</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`A tagged template ${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">expression</span><span style="--shiki-light:#24292E;--shiki-dark:#9ECBFF">} string`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#E1E4E8"> …</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#B392F0"> template</span><span style="--shiki-light:#032F62;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'&lt;div&gt;'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> +</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> raw</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> +</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '&lt;/div&gt;'</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#E1E4E8"> …</span></span></code></pre>
     </pre>
   </div><p><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/raw" target="_blank"><code>String.raw()</code></a> 是 JavaScript ES2015 原生的<em>標籤函式</em>。</p>
-<p>AoT 編譯器不支援標記樣板表示式；在元資料表示式中避免使用它們。</p>
+<p>AoT 編譯器不支援標記範本表示式；在元資料表示式中避免使用它們。</p>
 
   <h2 id="symbol-reference-expected">
     <a href="#symbol-reference-expected" class="docs-anchor" tabindex="-1" aria-label="Link to Symbol reference expected">應為 Symbol 引用</a>

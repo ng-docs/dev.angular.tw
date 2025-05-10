@@ -13,10 +13,10 @@
     </header>
     <p>一個不允許在回應式上下文中執行的函式，卻從回應式上下文中被呼叫。</p>
 <p>例如，不能從 <code>computed</code> 或正在執行的 effect 中排程 <code>effect</code>。
-避免在樣板表示式中呼叫諸如 <code>effect</code> 之類的函式，因為這些函式會在它們自己的回應式上下文中執行。</p>
+避免在範本表示式中呼叫諸如 <code>effect</code> 之類別的函式，因為這些函式會在它們自己的回應式上下文中執行。</p>
 <p>計算表示式應為純函式。
 純函式意味著表示式不應觸發任何副作用。
-副作用是指諸如排程 <code>afterRender</code>、建立新的 <code>effect</code> 或訂閱可觀察者之類的操作。</p>
+副作用是指諸如排程 <code>afterRender</code>、建立新的 <code>effect</code> 或訂閱可觀察者之類別的操作。</p>
 <p>為了避免常見的陷阱，某些操作在回應式上下文中被顯式禁止。
 例如，在 <code>computed</code> 中使用 <code>afterRender</code> 將在每次計算表示式求值時調度新的渲染鉤子。
 這可能不是預期的行為，並可能降低應用效能。</p>
@@ -31,14 +31,14 @@
     <a href="#afterrender" class="docs-anchor" tabindex="-1" aria-label="Link to <code>afterRender</code>"><code>afterRender</code></a>
   </h4>
   <p>將 <code>afterRender</code> 的呼叫移到回應式上下文之外。</p>
-<p>排程渲染後鉤子的一個好地方是在元件的類建構式函式中。
+<p>排程渲染後鉤子的一個好地方是在元件的類別建構式函式中。
 或者，使用 <code>untracked</code> 離開回應式上下文並顯式選擇退出此錯誤。</p>
 
   <h4 id="effect">
     <a href="#effect" class="docs-anchor" tabindex="-1" aria-label="Link to <code>effect</code>"><code>effect</code></a>
   </h4>
   <p>將 <code>effect</code> 的呼叫移到回應式上下文之外。</p>
-<p>排程 effect 的一個好地方是在 <code>@Component</code> 的類建構式函式中。</p>
+<p>排程 effect 的一個好地方是在 <code>@Component</code> 的類別建構式函式中。</p>
 
   <h4 id="tosignal">
     <a href="#tosignal" class="docs-anchor" tabindex="-1" aria-label="Link to <code>toSignal</code>"><code>toSignal</code></a>

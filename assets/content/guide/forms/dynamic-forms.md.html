@@ -12,8 +12,8 @@
   </div>
     </header>
     <p>許多表單（如調查問卷）在格式和意圖上可能非常相似。
-為了更快、更輕鬆地生成此類表單的不同版本，你可以建立一個基於元資料的<em>動態表單樣板</em>，該元資料描述了業務物件模型。
-然後，根據資料模型中的更改，使用該樣板自動生成新表單。</p>
+為了更快、更輕鬆地生成此類別表單的不同版本，你可以建立一個基於元資料的<em>動態表單範本</em>，該元資料描述了業務物件模型。
+然後，根據資料模型中的更改，使用該範本自動生成新表單。</p>
 <p>當你的表單型別的內容必須經常更改以滿足快速變化的業務和法規要求時，此技術特別有用。
 一個典型的用例是調查問卷。
 你可能需要在不同的上下文中獲取使用者的輸入。
@@ -64,11 +64,11 @@
     </pre>
   </div>
   <h3 id="define-control-classes">
-    <a href="#define-control-classes" class="docs-anchor" tabindex="-1" aria-label="Link to Define control classes">定義控制元件類</a>
+    <a href="#define-control-classes" class="docs-anchor" tabindex="-1" aria-label="Link to Define control classes">定義控制元件類別</a>
   </h3>
-  <p>在此基礎上，該範例派生出兩個新類 <code>TextboxQuestion</code> 和 <code>DropdownQuestion</code>，它們代表不同的控制元件型別。
-在下一步建立表單樣板時，你將實例化這些特定的問題型別，以便動態渲染相應的控制元件。</p>
-<p><code>TextboxQuestion</code> 控制元件型別在表單樣板中使用 <code>&lt;input&gt;</code> 元素表示。它會顯示一個問題，並讓使用者輸入。元素的 <code>type</code> 屬性是根據 <code>options</code> 引數中指定的 <code>type</code> 欄位定義的（例如 <code>text</code>、<code>email</code>、<code>url</code>）。</p>
+  <p>在此基礎上，該範例派生出兩個新類別 <code>TextboxQuestion</code> 和 <code>DropdownQuestion</code>，它們代表不同的控制元件型別。
+在下一步建立表單範本時，你將實例化這些特定的問題型別，以便動態渲染相應的控制元件。</p>
+<p><code>TextboxQuestion</code> 控制元件型別在表單範本中使用 <code>&lt;input&gt;</code> 元素表示。它會顯示一個問題，並讓使用者輸入。元素的 <code>type</code> 屬性是根據 <code>options</code> 引數中指定的 <code>type</code> 欄位定義的（例如 <code>text</code>、<code>email</code>、<code>url</code>）。</p>
 <div class="docs-code" path="adev/src/content/examples/dynamic-form/src/app/question-textbox.ts" header="question-textbox.ts">
     <div class="docs-code-header"><h3>question-textbox.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {QuestionBase} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './question-base'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> TextboxQuestion</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> extends</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> QuestionBase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  override</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> controlType</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'textbox'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span></code></pre>
@@ -94,9 +94,9 @@
     <a href="#compose-dynamic-form-contents" class="docs-anchor" tabindex="-1" aria-label="Link to Compose dynamic form contents">組合動態表單內容</a>
   </h2>
   <p>動態表單本身由容器組件表示，你將在後麵的步驟中新增該組件。
-每個問題在表單元件的樣板中都由 <code>&lt;app-question&gt;</code> 標記表示，該標記與 <code>DynamicFormQuestionComponent</code> 的實例對應。</p>
+每個問題在表單元件的範本中都由 <code>&lt;app-question&gt;</code> 標記表示，該標記與 <code>DynamicFormQuestionComponent</code> 的實例對應。</p>
 <p><code>DynamicFormQuestionComponent</code> 負責根據資料繫結的問題物件中的值渲染單個問題的詳細訊息。
-表單依賴於 <a href="api/forms/FormGroupDirective" title="API" reference><code>[formGroup]</code> 指令</a>，以將樣板 HTML 連線到基礎控制元件物件。
+表單依賴於 <a href="api/forms/FormGroupDirective" title="API" reference><code>[formGroup]</code> 指令</a>，以將範本 HTML 連線到基礎控制元件物件。
 <code>DynamicFormQuestionComponent</code> 建立表單組，並使用問題模型中定義的控制元件填充它們，從而指定顯示和驗證規則。</p>
 <div class="docs-code-multifile">
     <div class="docs-code" path="adev/src/content/examples/dynamic-form/src/app/dynamic-form-question.component.html" header="dynamic-form-question.component.html">
@@ -110,7 +110,7 @@
   </div>
     </div><p><code>DynamicFormQuestionComponent</code> 的目標是展示模型中定義的問題型別。
 目前你只有兩種問題型別，但你可以想象更多。
-樣板中的 <code>ngSwitch</code> 語句確定要顯示的問題型別。
+範本中的 <code>ngSwitch</code> 語句確定要顯示的問題型別。
 該 switch 將指令與 <a href="api/forms/FormControlName" title="FormControlName" directive api reference><code>formControlName</code></a> 和 <a href="api/forms/FormGroupDirective" title="FormGroupDirective" api reference><code>formGroup</code></a> 選擇器一起使用。
 這兩個指令都在 <code>ReactiveFormsModule</code> 中定義。</p>
 
@@ -129,9 +129,9 @@
     </pre>
   </div>
   <h2 id="create-a-dynamic-form-template">
-    <a href="#create-a-dynamic-form-template" class="docs-anchor" tabindex="-1" aria-label="Link to Create a dynamic form template">建立一個動態表單樣板</a>
+    <a href="#create-a-dynamic-form-template" class="docs-anchor" tabindex="-1" aria-label="Link to Create a dynamic form template">建立一個動態表單範本</a>
   </h2>
-  <p><code>DynamicFormComponent</code> 元件是表單的入口點和主容器，該表單在樣板中使用 <code>&lt;app-dynamic-form&gt;</code> 表示。</p>
+  <p><code>DynamicFormComponent</code> 元件是表單的入口點和主容器，該表單在範本中使用 <code>&lt;app-dynamic-form&gt;</code> 表示。</p>
 <p><code>DynamicFormComponent</code> 元件透過將每個問題繫結到與 <code>DynamicFormQuestionComponent</code> 對應的 <code>&lt;app-question&gt;</code> 元素來呈現問題清單。</p>
 <div class="docs-code-multifile">
     <div class="docs-code" path="adev/src/content/examples/dynamic-form/src/app/dynamic-form.component.html" header="dynamic-form.component.html">
@@ -145,9 +145,9 @@
   </div>
     </div>
   <h3 id="display-the-form">
-    <a href="#display-the-form" class="docs-anchor" tabindex="-1" aria-label="Link to Display the form">顯示錶單</a>
+    <a href="#display-the-form" class="docs-anchor" tabindex="-1" aria-label="Link to Display the form">顯示表單</a>
   </h3>
-  <p>要顯示動態表單的實例，<code>AppComponent</code> 外殼樣板會將 <code>QuestionService</code> 回傳的 <code>questions</code> 陣列傳遞給表單容器組件 <code>&lt;app-dynamic-form&gt;</code>。</p>
+  <p>要顯示動態表單的實例，<code>AppComponent</code> 外殼範本會將 <code>QuestionService</code> 回傳的 <code>questions</code> 陣列傳遞給表單容器組件 <code>&lt;app-dynamic-form&gt;</code>。</p>
 <div class="docs-code" path="adev/src/content/examples/dynamic-form/src/app/app.component.ts" header="app.component.ts">
     <div class="docs-code-header"><h3>app.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Component, inject} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {AsyncPipe} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/common'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {DynamicFormComponent} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './dynamic-form.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {QuestionService} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './question.service'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {QuestionBase} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './question-base'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Observable} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'rxjs'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-root'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Job Application for Heroes&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">app-dynamic-form</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [questions]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"questions$ | async"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  providers: [QuestionService],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  imports: [AsyncPipe, DynamicFormComponent],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> AppComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  questions$</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Observable</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">QuestionBase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;[]&gt; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(QuestionService).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">getQuestions</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span></code></pre>
@@ -157,7 +157,7 @@
   <h3 id="ensuring-valid-data">
     <a href="#ensuring-valid-data" class="docs-anchor" tabindex="-1" aria-label="Link to Ensuring valid data">確保資料有效</a>
   </h3>
-  <p>表單樣板使用元資料的動態資料繫結來渲染表單，而無需對特定問題進行任何硬編碼的假設。
+  <p>表單範本使用元資料的動態資料繫結來渲染表單，而無需對特定問題進行任何硬編碼的假設。
 它會動態新增控制元件元資料和驗證標準。</p>
 <p>為了確保輸入有效，<em>儲存</em>按鈕在表單處於有效狀態之前處於停用狀態。
 當表單有效時，單擊<em>儲存</em>，應用會將當前表單值渲染為 JSON。</p>

@@ -12,7 +12,7 @@
   </div>
     </header>
     <p>前面的章節介紹瞭如何使用類別實例作為依賴項。
-除了類之外，你還可以使用諸如 <code>boolean</code>、<code>string</code>、<code>Date</code> 和物件之類的值作為依賴項。
+除了類別之外，你還可以使用諸如 <code>boolean</code>、<code>string</code>、<code>Date</code> 和物件之類別的值作為依賴項。
 Angular 提供了必要的 API 來使依賴設定更加靈活，因此你可以使這些值在依賴注入中可用。</p>
 
   <h2 id="specifying-a-provider-token">
@@ -24,9 +24,9 @@ Angular 提供了必要的 API 來使依賴設定更加靈活，因此你可以�
     <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">providers</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: [Logger],</span></span></code></pre>
     </pre>
-  </div><p>但是，你可以設定依賴注入，以將 <code>Logger</code> 提供者令牌與不同的類或任何其他值關聯。
+  </div><p>但是，你可以設定依賴注入，以將 <code>Logger</code> 提供者令牌與不同的類別或任何其他值關聯。
 因此，當注入 <code>Logger</code> 時，將使用設定的值來替代。</p>
-<p>事實上，類提供者語法是一種簡寫表示式，它可以擴充套件為由 <code>Provider</code> 介面定義的提供者設定。
+<p>事實上，類別提供者語法是一種簡寫表示式，它可以擴充套件為由 <code>Provider</code> 介面定義的提供者設定。
 在這種情況下，Angular 會將 <code>providers</code> 值擴充套件為完整的提供者物件，如下所示：</p>
 <div class="docs-code" header="src/app/app.component.ts">
     <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
@@ -37,7 +37,7 @@ Angular 提供了必要的 API 來使依賴設定更加靈活，因此你可以�
   <ul class="docs-list">
     <li><code>provide</code> 屬性持有用作消費依賴值的鍵的令牌。</li>
 <li>第二個屬性是提供者定義物件，它告訴注入器<strong>如何</strong>建立依賴值。提供者定義可以是以下之一：<ul class="docs-list">
-    <li><code>useClass</code> - 此選項告訴 Angular DI 在注入依賴項時實例化所提供的類</li>
+    <li><code>useClass</code> - 此選項告訴 Angular DI 在注入依賴項時實例化所提供的類別</li>
 <li><code>useExisting</code> - 允許你為一個令牌設定別名，並引用任何現有的令牌。</li>
 <li><code>useFactory</code> - 允許你定義一個構造依賴項的函式。</li>
 <li><code>useValue</code> - 提供一個應該用作依賴項的靜態值。</li>
@@ -49,17 +49,17 @@ Angular 提供了必要的 API 來使依賴設定更加靈活，因此你可以�
   <p>以下各節介紹如何使用不同的提供者定義。</p>
 
   <h3 id="class-providers-useclass">
-    <a href="#class-providers-useclass" class="docs-anchor" tabindex="-1" aria-label="Link to Class providers: useClass">類提供者：useClass</a>
+    <a href="#class-providers-useclass" class="docs-anchor" tabindex="-1" aria-label="Link to Class providers: useClass">類別提供者：useClass</a>
   </h3>
   <p><code>useClass</code> 提供者鍵允許你建立並回傳指定類別的新實例。</p>
-<p>你可以使用這種型別的提供者來為通用類或預設類替換備用實現。
-例如，備用實現可以實現不同的策略、擴充套件預設類，或者在測試用例中模擬真實類的行為。</p>
-<p>在以下範例中，當元件或任何其他類請求 <code>Logger</code> 依賴項時，將實例化 <code>BetterLogger</code>：</p>
+<p>你可以使用這種型別的提供者來為通用類別或預設類別替換備用實現。
+例如，備用實現可以實現不同的策略、擴充套件預設類別，或者在測試用例中模擬真實類別的行為。</p>
+<p>在以下範例中，當元件或任何其他類別請求 <code>Logger</code> 依賴項時，將實例化 <code>BetterLogger</code>：</p>
 <div class="docs-code" header="src/app/app.component.ts">
     <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[{ provide: Logger, useClass: BetterLogger }]</span></span></code></pre>
     </pre>
-  </div><p>如果備用類提供者有自己的依賴項，請在父模組或元件的 providers 元資料屬性中指定這兩個提供者：</p>
+  </div><p>如果備用類別提供者有自己的依賴項，請在父模組或元件的 providers 元資料屬性中指定這兩個提供者：</p>
 <div class="docs-code" header="src/app/app.component.ts">
     <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  UserService, </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// dependency needed in `EvenBetterLogger`.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { provide: Logger, useClass: EvenBetterLogger },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span></span></code></pre>
@@ -116,7 +116,7 @@ Angular 提供了必要的 API 來使依賴設定更加靈活，因此你可以�
   <ul class="docs-list">
     <li><code>useFactory</code> 欄位指定提供者是一個工廠函式，其實例化方法是 <code>heroServiceFactory</code>。</li>
 <li><code>deps</code> 屬性是一個提供者令牌陣列。
-<code>Logger</code> 和 <code>UserService</code> 類充當其自身類提供者的令牌。
+<code>Logger</code> 和 <code>UserService</code> 類別充當其自身類別提供者的令牌。
 注入器會求解這些令牌，並根據指定的順序將相應的服務注入到對應的 <code>heroServiceFactory</code> 工廠函式引數中。</li>
 
   </ul>
@@ -133,7 +133,7 @@ Angular 提供了必要的 API 來使依賴設定更加靈活，因此你可以�
   <h2 id="using-an-injectiontoken-object">
     <a href="#using-an-injectiontoken-object" class="docs-anchor" tabindex="-1" aria-label="Link to Using an <code>InjectionToken</code> object">使用 <code>InjectionToken</code> 物件</a>
   </h2>
-  <p>對於非類依賴，可以使用 <code>InjectionToken</code> 物件作為提供者令牌。
+  <p>對於非類別依賴，可以使用 <code>InjectionToken</code> 物件作為提供者令牌。
 以下範例定義了一個型別為 <code>InjectionToken</code> 的令牌 <code>APP_CONFIG</code>：</p>
 <div class="docs-code" header="src/app/app.config.ts">
     <div class="docs-code-header"><h3>src/app/app.config.ts</h3></div>

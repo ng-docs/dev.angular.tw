@@ -14,19 +14,19 @@
     <p>在每個變更檢測週期，Angular 同步地：</p>
 
   <ul class="docs-list">
-    <li>除非另有規定，否則根據每個元件的檢測策略，求值所有元件中的所有樣板表示式</li>
+    <li>除非另有規定，否則根據每個元件的檢測策略，求值所有元件中的所有範本表示式</li>
 <li>執行 <code>ngDoCheck</code>、<code>ngAfterContentChecked</code>、<code>ngAfterViewChecked</code> 和 <code>ngOnChanges</code> 生命週期鉤子。
-樣板或生命週期鉤子中的單個慢速計算可能會減慢整個變更檢測過程，因為 Angular 會按順序執行這些計算。</li>
+範本或生命週期鉤子中的單個慢速計算可能會減慢整個變更檢測過程，因為 Angular 會按順序執行這些計算。</li>
 
   </ul>
   
   <h2 id="identifying-slow-computations">
     <a href="#identifying-slow-computations" class="docs-anchor" tabindex="-1" aria-label="Link to Identifying slow computations">識別慢速計算</a>
   </h2>
-  <p>你可以使用 Angular DevTools 的效能分析器來識別重計算。在效能時間線中，單擊一個條形以預覽特定的變更檢測週期。這將顯示一個條形圖，其中顯示了框架在每個元件的變更檢測中花費了多長時間。當你單擊一個元件時，你可以預覽 Angular 在求值其樣板和生命週期鉤子時花費了多長時間。</p>
+  <p>你可以使用 Angular DevTools 的效能分析器來識別重計算。在效能時間線中，單擊一個條形以預覽特定的變更檢測週期。這將顯示一個條形圖，其中顯示了框架在每個元件的變更檢測中花費了多長時間。當你單擊一個元件時，你可以預覽 Angular 在求值其範本和生命週期鉤子時花費了多長時間。</p>
 <img alt="Angular DevTools profiler preview showing slow computation" src="assets/images/best-practices/runtime-performance/slow-computations.png">
 
-<p>例如，在前面的螢幕截圖中，選擇了第二個記錄的變更檢測週期。Angular 在此週期中花費了超過 573 毫秒，其中大部分時間花費在 <code>EmployeeListComponent</code> 中。在詳細訊息面板中，你可以看到 Angular 花費了超過 297 毫秒來求值 <code>EmployeeListComponent</code> 的樣板。</p>
+<p>例如，在前面的螢幕截圖中，選擇了第二個記錄的變更檢測週期。Angular 在此週期中花費了超過 573 毫秒，其中大部分時間花費在 <code>EmployeeListComponent</code> 中。在詳細訊息面板中，你可以看到 Angular 花費了超過 297 毫秒來求值 <code>EmployeeListComponent</code> 的範本。</p>
 
   <h2 id="optimizing-slow-computations">
     <a href="#optimizing-slow-computations" class="docs-anchor" tabindex="-1" aria-label="Link to Optimizing slow computations">最佳化慢速計算</a>

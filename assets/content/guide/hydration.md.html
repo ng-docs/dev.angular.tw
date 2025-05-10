@@ -61,7 +61,7 @@
     <p><strong>提示：</strong> 在水合完全工作之前，你可能需要修復直接 DOM 操縱的實例，方法是切換到 Angular 構造或使用 <code>ngSkipHydration</code>。 有關更多詳細訊息，請參閱 <a href="#constraints">約束</a>、<a href="#direct-dom-manipulation">直接 DOM 操縱</a> 和 <a href="#how-to-skip-hydration-for-particular-components">如何跳過特定元件的水合</a>。</p>
 
     </div>
-    <p>在開發模式下執行應用時，你可以透過在瀏覽器中開啟開發者工具並檢視控制台來確認是否啟用水合。 你應該會看到一條訊息，其中包含與水合相關的統計訊息，例如已水合的元件和節點數。 Angular 根據頁面上渲染的所有元件（包括來自第三方庫的元件）計算統計訊息。</p>
+    <p>在開發模式下執行應用時，你可以透過在瀏覽器中開啟開發者工具並檢視控制台來確認是否啟用水合。 你應該會看到一條訊息，其中包含與水合相關的統計訊息，例如已水合的元件和節點數。 Angular 根據頁面上渲染的所有元件（包括來自第三方函式庫的元件）計算統計訊息。</p>
 <p>你還可以使用 <a href="tools/devtools">Angular DevTools 瀏覽器擴充套件程式</a> 來檢視頁面上元件的水合狀態。 Angular DevTools 還允許啟用一個疊加層，以指示頁面的哪些部分已水合。 如果存在水合不對應錯誤，DevTools 還會突出顯示導致錯誤的元件。</p>
 
   <h2 id="capturing-and-replaying-events">
@@ -111,12 +111,12 @@
   </h3>
   <p>如果你有使用原生 DOM API 或使用 <code>innerHTML</code> 或 <code>outerHTML</code> 操縱 DOM 的元件，則水合過程將遇到錯誤。 DOM 操縱成為問題的特定情況包括訪問 <code>document</code>、查詢特定元素以及使用 <code>appendChild</code> 注入其他節點等情況。 分離 DOM 節點並將它們移動到其他位置也會導致錯誤。</p>
 <p>這是因為 Angular 不知道這些 DOM 更改，並且無法在水合過程中求解它們。 Angular 將期望某種結構，但在嘗試水合時會遇到不同的結構。 這種不對應將導致水合失敗並丟擲 DOM 不對應錯誤（<a href="#errors">請參見下文</a>）。</p>
-<p>最好重構你的元件以避免此類 DOM 操縱。 如果可以，請嘗試使用 Angular API 來完成這項工作。 如果你無法重構此行為，請使用 <code>ngSkipHydration</code> 屬性（<a href="#how-to-skip-hydration-for-particular-components">如下所述</a>），直到你可以重構為水合友好的解決方案。</p>
+<p>最好重構你的元件以避免此類別 DOM 操縱。 如果可以，請嘗試使用 Angular API 來完成這項工作。 如果你無法重構此行為，請使用 <code>ngSkipHydration</code> 屬性（<a href="#how-to-skip-hydration-for-particular-components">如下所述</a>），直到你可以重構為水合友好的解決方案。</p>
 
   <h3 id="valid-html-structure">
     <a href="#valid-html-structure" class="docs-anchor" tabindex="-1" aria-label="Link to Valid HTML structure">有效的 HTML 結構</a>
   </h3>
-  <p>在某些情況下，如果你的元件樣板沒有有效的 HTML 結構，則可能會在水合期間導致 DOM 不對應錯誤。</p>
+  <p>在某些情況下，如果你的元件範本沒有有效的 HTML 結構，則可能會在水合期間導致 DOM 不對應錯誤。</p>
 <p>例如，以下是此問題的一些最常見情況。</p>
 
   <ul class="docs-list">
@@ -152,7 +152,7 @@
   <h2 id="errors">
     <a href="#errors" class="docs-anchor" tabindex="-1" aria-label="Link to Errors">錯誤</a>
   </h2>
-  <p>你可能會遇到幾種與水合相關的錯誤，從節點不對應到在無效宿主節點上使用 <code>ngSkipHydration</code> 的情況。可能發生的最常見的錯誤情況是由於使用原生 API 直接操縱 DOM，導致水合無法在用戶端找到或對應伺服器渲染的預期 DOM 樹結構。你可能遇到的另一種情況在前面的<a href="#valid-html-structure">有效的 HTML 結構</a>一節中提到過。因此，請確保你的樣板中的 HTML 使用有效的結構，這樣你就可以避免這種錯誤情況。</p>
+  <p>你可能會遇到幾種與水合相關的錯誤，從節點不對應到在無效宿主節點上使用 <code>ngSkipHydration</code> 的情況。可能發生的最常見的錯誤情況是由於使用原生 API 直接操縱 DOM，導致水合無法在用戶端找到或對應伺服器渲染的預期 DOM 樹結構。你可能遇到的另一種情況在前面的<a href="#valid-html-structure">有效的 HTML 結構</a>一節中提到過。因此，請確保你的範本中的 HTML 使用有效的結構，這樣你就可以避免這種錯誤情況。</p>
 <p>有關水合相關錯誤的完整參考，請訪問<a href="/errors">錯誤參考指南</a>。</p>
 
   <h2 id="how-to-skip-hydration-for-particular-components">
@@ -202,14 +202,14 @@
   <p>避免引入 <code>@if</code> 控制區塊和其他條件語句，這些語句在服務器端渲染時顯示的內容與用戶端渲染時不同，例如將 <code>@if</code> 控制區塊與 Angular 的 <code>isPlatformBrowser</code> 函式一起使用。這些渲染差異會導致佈局偏移，從而對最終使用者體驗和核心 Web 指標產生負面影響。</p>
 
   <h2 id="third-party-libraries-with-dom-manipulation">
-    <a href="#third-party-libraries-with-dom-manipulation" class="docs-anchor" tabindex="-1" aria-label="Link to Third Party Libraries with DOM Manipulation">使用 DOM 操縱的第三方庫</a>
+    <a href="#third-party-libraries-with-dom-manipulation" class="docs-anchor" tabindex="-1" aria-label="Link to Third Party Libraries with DOM Manipulation">使用 DOM 操縱的第三方函式庫</a>
   </h2>
-  <p>有許多第三方庫依賴 DOM 操縱才能渲染。D3 圖表就是一個典型的例子。這些函式庫在沒有水合的情況下可以工作，但當啟用水合時，它們可能會導致 DOM 不對應錯誤。目前，如果你在使用這些函式庫之一時遇到 DOM 不對應錯誤，你可以將 <code>ngSkipHydration</code> 屬性新增到使用該函式庫進行渲染的元件。</p>
+  <p>有許多第三方函式庫依賴 DOM 操縱才能渲染。D3 圖表就是一個典型的例子。這些函式庫在沒有水合的情況下可以工作，但當啟用水合時，它們可能會導致 DOM 不對應錯誤。目前，如果你在使用這些函式庫之一時遇到 DOM 不對應錯誤，你可以將 <code>ngSkipHydration</code> 屬性新增到使用該函式庫進行渲染的元件。</p>
 
   <h2 id="third-party-scripts-with-dom-manipulation">
     <a href="#third-party-scripts-with-dom-manipulation" class="docs-anchor" tabindex="-1" aria-label="Link to Third Party Scripts with DOM Manipulation">使用 DOM 操縱的第三方指令碼</a>
   </h2>
-  <p>許多第三方指令碼（如廣告跟蹤器和分析）會在水合發生之前修改 DOM。這些指令碼可能會導致水合錯誤，因為頁面不再與 Angular 期望的結構對應。儘可能優先考慮將此類指令碼推遲到水合之後執行。考慮使用 <a href="api/core/afterNextRender"><code>AfterNextRender</code></a> 將指令碼延遲到水合後處理發生之後。</p>
+  <p>許多第三方指令碼（如廣告跟蹤器和分析）會在水合發生之前修改 DOM。這些指令碼可能會導致水合錯誤，因為頁面不再與 Angular 期望的結構對應。儘可能優先考慮將此類別指令碼推遲到水合之後執行。考慮使用 <a href="api/core/afterNextRender"><code>AfterNextRender</code></a> 將指令碼延遲到水合後處理發生之後。</p>
 
   <h2 id="incremental-hydration">
     <a href="#incremental-hydration" class="docs-anchor" tabindex="-1" aria-label="Link to Incremental Hydration">增量式水合</a>

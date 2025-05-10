@@ -12,14 +12,14 @@
   </div>
     </header>
     <p>服務是一個廣泛的類別，包含應用所需的任何值、函式或屬性。
-服務通常是一個具有狹義、明確用途的類。
-元件是可以使用 DI 的一類。</p>
+服務通常是一個具有狹義、明確用途的類別。
+元件是可以使用 DI 的一類別。</p>
 <p>Angular 區分元件和服務，以提高模組化和複用性。
 透過將元件的檢視相關屬性與其他型別的處理分離開來，你可以使你的元件類別更精簡和高效。</p>
 <p>理想情況下，元件的工作是改善使用者體驗，僅此而已。
-元件應該提供用於資料繫結的屬性（Property）和方法，以便在檢視（由樣板渲染）和應用邏輯（通常包含模型的概念）之間進行協調。</p>
+元件應該提供用於資料繫結的屬性（Property）和方法，以便在檢視（由範本渲染）和應用邏輯（通常包含模型的概念）之間進行協調。</p>
 <p>元件可以將某些任務委託給服務，例如從伺服器獲取資料、驗證使用者輸入或直接記錄到控制台。
-透過在可注入的服務類別中定義此類處理任務，你可以使這些任務可供任何元件使用。
+透過在可注入的服務類別中定義此類別處理任務，你可以使這些任務可供任何元件使用。
 你還可以透過在不同情況下設定同種服務的不同提供者，使你的應用更具適應性。</p>
 <p>Angular 不強制執行這些原則。
 Angular 透過使你能夠輕鬆地將應用邏輯分解為服務，並透過 DI 使這些服務可用於元件，從而幫助你遵循這些原則。</p>
@@ -29,7 +29,7 @@ Angular 透過使你能夠輕鬆地將應用邏輯分解為服務，並透過 DI
   </h2>
   <p>這是一個將日誌記錄到瀏覽器控制台的服務類別的範例：</p>
 <div class="docs-code" header="src/app/logger.service.ts (class)">
-    <div class="docs-code-header"><h3>src/app/logger.service.ts (類)</h3></div>
+    <div class="docs-code-header"><h3>src/app/logger.service.ts (類別)</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Logger</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">msg</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> unknown</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) { console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(msg); }</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  error</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">msg</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> unknown</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) { console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">error</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(msg); }</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  warn</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">msg</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> unknown</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) { console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">warn</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(msg); }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div><p>服務可以依賴於其他服務。
@@ -44,7 +44,7 @@ Angular 透過使你能夠輕鬆地將應用邏輯分解為服務，並透過 DI
     <a href="#creating-an-injectable-service" class="docs-anchor" tabindex="-1" aria-label="Link to Creating an injectable service">建立可注入的服務</a>
   </h2>
   <p>Angular CLI 提供了一個用於建立新服務的指令。在以下範例中，你將向現有應用新增一個新服務。</p>
-<p>要在 <code>src/app/heroes</code> 資料夾中生成一個新的 <code>HeroService</code> 類，請按照以下步驟操作：</p>
+<p>要在 <code>src/app/heroes</code> 資料夾中生成一個新的 <code>HeroService</code> 類別，請按照以下步驟操作：</p>
 
     <ol class="docs-ordered-list">
       <li>執行此 <a href="/tools/cli">Angular CLI</a> 指令：</li>
@@ -59,7 +59,7 @@ Angular 透過使你能夠輕鬆地將應用邏輯分解為服務，並透過 DI
     <div class="docs-code-header"><h3>src/app/heroes/hero.service.ts (CLI 生成)</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Injectable } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Injectable</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  providedIn: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'root'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HeroService</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}</span></span></code></pre>
     </pre>
-  </div><p><code>@Injectable()</code> 裝飾器指定 Angular 可以在 DI 體系中使用此類。
+  </div><p><code>@Injectable()</code> 裝飾器指定 Angular 可以在 DI 體系中使用此類別。
 元資料 <code>providedIn: 'root'</code> 意味著 <code>HeroService</code> 在整個應用中都可用。</p>
 <p>新增一個 <code>getHeroes()</code> 方法，該方法從 <code>mock.heroes.ts</code> 回傳英雄，以獲取英雄模擬資料：</p>
 <div class="docs-code" header="src/app/heroes/hero.service.ts">
@@ -71,7 +71,7 @@ Angular 透過使你能夠輕鬆地將應用邏輯分解為服務，並透過 DI
   <h2 id="injecting-services">
     <a href="#injecting-services" class="docs-anchor" tabindex="-1" aria-label="Link to Injecting services">注入服務</a>
   </h2>
-  <p>要將服務作為依賴項注入到元件中，你可以宣告一個表示依賴項的類欄位，並使用 Angular 的 <code>inject</code> 函式來初始化它。</p>
+  <p>要將服務作為依賴項注入到元件中，你可以宣告一個表示依賴項的類別欄位，並使用 Angular 的 <code>inject</code> 函式來初始化它。</p>
 <p>以下範例在 <code>HeroListComponent</code> 中指定了 <code>HeroService</code>。
 <code>heroService</code> 的型別是 <code>HeroService</code>。</p>
 <div class="docs-code" header="src/app/heroes/hero-list.component.ts">
@@ -83,7 +83,7 @@ Angular 透過使你能夠輕鬆地將應用邏輯分解為服務，並透過 DI
     <div class="docs-code-header"><h3>src/app/heroes/hero-list.component.ts (建構式函式簽名)</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">constructor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(private heroService: HeroService)</span></span></code></pre>
     </pre>
-  </div><p><code>inject</code> 方法可以在類別和函式中使用，而建構式函式方法自然只能在類建構式函式中使用。但是，在任何一種情況下，依賴項都只能在有效的<a href="guide/di/dependency-injection-context">注入上下文</a>中注入，通常是在元件的構造或初始化期間。</p>
+  </div><p><code>inject</code> 方法可以在類別和函式中使用，而建構式函式方法自然只能在類別建構式函式中使用。但是，在任何一種情況下，依賴項都只能在有效的<a href="guide/di/dependency-injection-context">注入上下文</a>中注入，通常是在元件的構造或初始化期間。</p>
 
   <h2 id="injecting-services-in-other-services">
     <a href="#injecting-services-in-other-services" class="docs-anchor" tabindex="-1" aria-label="Link to Injecting services in other services">在其他服務中注入服務</a>

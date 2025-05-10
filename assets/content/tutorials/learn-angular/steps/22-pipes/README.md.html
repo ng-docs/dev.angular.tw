@@ -11,11 +11,11 @@
     </a>
   </div>
     </header>
-    <p>通道是在樣板中轉換資料時使用的函式。通常，通道是不會引起副作用的『純』函式。Angular 有許多有用的內建通道，你可以匯入並在元件中使用。你也可以建立自定義通道。</p>
-<p>在本活動中，你將匯入一個通道並在樣板中使用它。</p>
+    <p>通道是在範本中轉換資料時使用的函式。通常，通道是不會引起副作用的『純』函式。Angular 有許多有用的內建通道，你可以匯入並在元件中使用。你也可以建立自定義通道。</p>
+<p>在本活動中，你將匯入一個通道並在範本中使用它。</p>
 <hr>
 
-<p>要在樣板中使用通道，請將其包含在內嵌表示式中。請檢視以下範例：</p>
+<p>要在範本中使用通道，請將其包含在內嵌表示式中。請檢視以下範例：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line highlighted"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {UpperCasePipe} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/common'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    ...</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">{{ loudMessage </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> uppercase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }}</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    imports: [UpperCasePipe],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> AppComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">    loudMessage</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'we think you are doing great!'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -43,7 +43,7 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-the-pipe-to-the-template-imports">
-    <a href="#add-the-pipe-to-the-template-imports" class="docs-anchor" tabindex="-1" aria-label="Link to Add the pipe to the template imports">將通道新增到樣板匯入</a>
+    <a href="#add-the-pipe-to-the-template-imports" class="docs-anchor" tabindex="-1" aria-label="Link to Add the pipe to the template imports">將通道新增到範本匯入</a>
   </h3>
   
       <p>接下來，更新 <code>@Component()</code> 裝飾器的 <code>imports</code> 以包含對 <code>LowerCasePipe</code> 的引用</p>
@@ -58,10 +58,10 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-the-pipe-to-the-template">
-    <a href="#add-the-pipe-to-the-template" class="docs-anchor" tabindex="-1" aria-label="Link to Add the pipe to the template">將通道新增到樣板</a>
+    <a href="#add-the-pipe-to-the-template" class="docs-anchor" tabindex="-1" aria-label="Link to Add the pipe to the template">將通道新增到範本</a>
   </h3>
   
-      <p>最後，在 <code>app.component.ts</code> 中，更新樣板以包含 <code>lowercase</code> 通道：</p>
+      <p>最後，在 <code>app.component.ts</code> 中，更新範本以包含 <code>lowercase</code> 通道：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">template</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`{{username | lowercase }}`</span></span></code></pre>
