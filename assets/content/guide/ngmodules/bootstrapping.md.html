@@ -4,35 +4,35 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9bhecunqj13rlqofhj2oynsyw">使用根模块启动应用</h1>
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9bhecunqj13rlqofhj2oynsyw">使用根模組啟動應用</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/bootstrapping.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="2gkhs148jh907n315l71fe2lv">一个 NgModule 描述了应用各部分如何组合在一起。 每个应用至少有一个 Angular 模块，
-<em>根</em> 模块，它必须存在以便在启动时引导应用。 按照惯例和默认情况下，这个 NgModule 名为 
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="2gkhs148jh907n315l71fe2lv">一個 NgModule 描述了應用各部分如何組合在一起。 每個應用至少有一個 Angular 模組，
+<em>根</em> 模組，它必須存在以便在啟動時引導應用。 按照慣例和預設情況下，這個 NgModule 名為 
 <code>AppModule</code>。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="dfwms3c4oeap4atp5ypvuy164">当使用
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dfwms3c4oeap4atp5ypvuy164">當使用
 <a href="/tools/cli">Angular CLI</a>的
-<code>ng new</code>命令生成应用时，默认的
+<code>ng new</code>指令生成應用時，預設的
 <code>AppModule</code>如下所示：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">BrowserModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">AppComponent</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">BrowserModule</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [],</div><div class="hljs-ln-line">  <span class="hljs-attr">bootstrap</span>: [<span class="hljs-title class_">AppComponent</span>]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> { }</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2pwio7db92d9ojigivpdz7mcl"><code>@NgModule</code>装饰器将
-<code>AppModule</code>标识为一个
-<code>NgModule</code>类。
-<code>@NgModule</code>接受一个元数据对象，告诉 Angular 如何编译和启动应用程序。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2pwio7db92d9ojigivpdz7mcl"><code>@NgModule</code>裝飾器將
+<code>AppModule</code>標識為一個
+<code>NgModule</code>類。
+<code>@NgModule</code>接受一個元資料物件，告訴 Angular 如何編譯和啟動應用程式。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8te295zcf2sqjzlh66eay7dl3">元数据字段</th>
-<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="8te295zcf2sqjzlh66eay7dl3">元資料欄位</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">詳情</th>
 </tr>
 
       </thead>
@@ -40,22 +40,22 @@
         <tr>
 <td align="left"><code>declarations</code></td>
 <td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="bfern6dzib9zyg2g6eqg1t8s1">包括
-<em>根</em>应用程序组件。</td>
+<em>根</em>應用程式元件。</td>
 </tr>
 <tr>
 <td align="left"><code>imports</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5l30ar6f9h2avidggyvdkqwib">导入 
-<code>BrowserModule</code> 以启用特定于浏览器的服务（例如 DOM 渲染、消毒）</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="5l30ar6f9h2avidggyvdkqwib">匯入 
+<code>BrowserModule</code> 以啟用特定於瀏覽器的服務（例如 DOM 渲染、消毒）</td>
 </tr>
 <tr>
 <td align="left"><code>providers</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="c6mpiqdx0o6zmzra2qluw5j9q">服务提供者。</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="c6mpiqdx0o6zmzra2qluw5j9q">服務提供者。</td>
 </tr>
 <tr>
 <td align="left"><code>bootstrap</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="sp9lnn0yg7ddogsz3ev9ldgt">Angular 创建并插入到 
-<code>index.html</code> 主机网页中的 
-<em>根</em> 组件。</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="sp9lnn0yg7ddogsz3ev9ldgt">Angular 建立並插入到 
+<code>index.html</code> 主機網頁中的 
+<em>根</em> 元件。</td>
 </tr>
 
       </tbody>
@@ -63,17 +63,17 @@
   </div>
   
   <h2 id="the-declarations-array">
-    <a href="#the-declarations-array" class="docs-anchor" tabindex="-1" aria-label="Link to The <code>declarations</code> array" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aw3bqt30ptntvnhw1ftlh0k1l"><code>declarations</code> 数组</a>
+    <a href="#the-declarations-array" class="docs-anchor" tabindex="-1" aria-label="Link to The <code>declarations</code> array" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aw3bqt30ptntvnhw1ftlh0k1l"><code>declarations</code> 陣列</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8l3epl4r8j46rcy1o8vigdxpk">该模块的 <code>declarations</code> 数组告诉 Angular 哪些组件属于该模块。当你创建更多组件时，也要把它们添加到 <code>declarations</code> 中。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="5jtpwvfgpdf47uayyyd40fe7v"><code>declarations</code> 数组仅接受可声明项。 可声明项包括 
-<a href="guide/components">组件</a>、
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="8l3epl4r8j46rcy1o8vigdxpk">該模組的 <code>declarations</code> 陣列告訴 Angular 哪些元件屬於該模組。當你建立更多元件時，也要把它們新增到 <code>declarations</code> 中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5jtpwvfgpdf47uayyyd40fe7v"><code>declarations</code> 陣列僅接受可宣告項。 可宣告項包括 
+<a href="guide/components">元件</a>、
 <a href="guide/directives">指令</a> 和 
-<a href="guide/pipes">管道</a>。 一个模块的所有可声明项必须在 
-<code>declarations</code> 数组中。 可声明项必须属于正好一个模块。 如果在多个模块中声明相同的类，编译器会返回错误。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="5bzv1aezedypq3tf9bektmca2">这些已声明的类在模块内可用，但对于不同模块的组件是私有的，除非它们从此模块中导出并且其他模块导入此模块。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="csw0xqx5ijyl4bwo9vs457epe">下面是一个 
-<code>declarations</code> 数组中包含内容的示例：</p>
+<a href="guide/pipes">通道</a>。 一個模組的所有可宣告項必須在 
+<code>declarations</code> 陣列中。 可宣告項必須屬於正好一個模組。 如果在多個模組中宣告相同的類，編譯器會回傳錯誤。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5bzv1aezedypq3tf9bektmca2">這些已宣告的類在模組內可用，但對於不同模組的元件是私有的，除非它們從此模組中匯出並且其他模組匯入此模組。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="csw0xqx5ijyl4bwo9vs457epe">下面是一個 
+<code>declarations</code> 陣列中包含內容的範例：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-attr">declarations</span>: [</div><div class="hljs-ln-line">  <span class="hljs-title class_">YourComponent</span>,</div><div class="hljs-ln-line">  <span class="hljs-title class_">YourPipe</span>,</div><div class="hljs-ln-line">  <span class="hljs-title class_">YourDirective</span></div><div class="hljs-ln-line">],</div></code>
@@ -83,85 +83,85 @@
     <a href="#using-directives-with-ngmodule" class="docs-anchor" tabindex="-1" aria-label="Link to Using directives with <code>@NgModule</code>" data-ng_translator_product="100" data-ng_translator_ref_id="9zviv2t4v3wmkopz2rch0jlyl">在 
 <code>@NgModule</code> 中使用指令</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5f4q7nevr7v4uud9vpt345eki">使用 <code>declarations</code> 数组声明指令。在模块中使用指令、组件或管道的步骤如下：</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5f4q7nevr7v4uud9vpt345eki">使用 <code>declarations</code> 陣列宣告指令。在模組中使用指令、元件或通道的步驟如下：</p>
 
     <ol class="docs-ordered-list">
-      <li data-ng_translator_product="100" data-ng_translator_ref_id="5f3o1iextur1d8szhcpa687e8">从编写它的 TypeScript 文件中导出它</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="d85w4ng4qtfel2tmh3xml9aqb">将其导入到包含 
-<code>@NgModule</code> 类的适当文件中。</li>
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="5f3o1iextur1d8szhcpa687e8">從編寫它的 TypeScript 檔案中匯出它</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="d85w4ng4qtfel2tmh3xml9aqb">將其匯入到包含 
+<code>@NgModule</code> 類別的適當檔案中。</li>
 <li data-ng_translator_product="100" data-ng_translator_ref_id="dulfftgrr0t78wizj95b9yc5">在 
 <code>@NgModule</code> 的 
-<code>declarations</code> 数组中声明它。</li>
+<code>declarations</code> 陣列中宣告它。</li>
 
     </ol>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="dm7kkax48ivzf7yhfm36yvwrc">这三个步骤看起来像以下。在创建指令的文件中，导出它。 以下示例展示了一个名为 
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="dm7kkax48ivzf7yhfm36yvwrc">這三個步驟看起來像以下。在建立指令的檔案中，匯出它。 以下範例展示了一個名為 
 <code>ItemDirective</code> 的空指令。</p>
 <div class="docs-code" header="src/app/item.directive.ts">
     <div class="docs-code-header"><h3>src/app/item.directive.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Directive } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Directive({</div><div class="hljs-ln-line">  selector: <span class="hljs-string">'[appItem]'</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line highlighted"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ItemDirective</span> {</div><div class="hljs-ln-line">  <span class="hljs-regexp">//</span> your code here</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5nf6ek7arjvoaxk7wxnpv2rum">关键点在于你必须导出它，这样你才能在其他地方导入它。 接下来，将其导入到包含你的 
-<code>NgModule</code> 的文件中。在本例中，这是 
-<code>app.module.ts</code> 文件。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5nf6ek7arjvoaxk7wxnpv2rum">關鍵點在於你必須匯出它，這樣你才能在其他地方匯入它。 接下來，將其匯入到包含你的 
+<code>NgModule</code> 的檔案中。在本例中，這是 
+<code>app.module.ts</code> 檔案。</p>
 <div class="docs-code" header="src/app/app.module.ts">
     <div class="docs-code-header"><h3>src/app/app.module.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { ItemDirective } <span class="hljs-keyword">from</span> <span class="hljs-string">'./item.directive'</span>;</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="d96glafk6uol6mh3ex2legjrp">并且在同一文件中，将其添加到 
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="d96glafk6uol6mh3ex2legjrp">並且在同一檔案中，將其新增到 
 <code>@NgModule</code> 的 
-<code>declarations</code> 数组中：</p>
+<code>declarations</code> 陣列中：</p>
 <div class="docs-code" header="src/app/app.module.ts">
     <div class="docs-code-header"><h3>src/app/app.module.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title">declarations:</span> [</div><div class="hljs-ln-line"><span class="hljs-built_in">    AppComponent,</span></div><div class="hljs-ln-line highlighted">    ItemDirective</div><div class="hljs-ln-line">  ],</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5grlrvk2u7yak8ahqhwius9bs">现在你可以在组件中使用 
-<code>ItemDirective</code>。 此示例使用了 
-<code>AppModule</code>，但对于功能模块，你将按照相同步骤进行。 关于指令的更多信息，请参见 
-<a href="guide/directives/attribute-directives">属性型指令</a> 和 
-<a href="guide/directives/structural-directives">结构型指令</a>。 对于 
-<a href="guide/pipes">管道</a> 和 
-<a href="guide/components">组件</a>，你也将使用相同的技术。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b6mm6qmcur6w06vjyzl6st7ya">记住：组件、指令和管道都只能属于一个模块。你在应用中也只需要声明它们一次，因为你还可以通过导入必要的模块来使用它们。这能节省你的时间，并且帮助你的应用保持精简。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="5grlrvk2u7yak8ahqhwius9bs">現在你可以在元件中使用 
+<code>ItemDirective</code>。 此範例使用了 
+<code>AppModule</code>，但對於功能模組，你將按照相同步驟進行。 關於指令的更多訊息，請參見 
+<a href="guide/directives/attribute-directives">屬性型指令</a> 和 
+<a href="guide/directives/structural-directives">結構型指令</a>。 對於 
+<a href="guide/pipes">通道</a> 和 
+<a href="guide/components">元件</a>，你也將使用相同的技術。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="b6mm6qmcur6w06vjyzl6st7ya">記住：元件、指令和通道都只能屬於一個模組。你在應用中也只需要宣告它們一次，因為你還可以透過匯入必要的模組來使用它們。這能節省你的時間，並且幫助你的應用保持精簡。</p>
 
   <h2 id="the-imports-array">
-    <a href="#the-imports-array" class="docs-anchor" tabindex="-1" aria-label="Link to The <code>imports</code> array" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bi6b3mmlsz6ksv2xyjagejgi2"><code>imports</code> 数组</a>
+    <a href="#the-imports-array" class="docs-anchor" tabindex="-1" aria-label="Link to The <code>imports</code> array" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bi6b3mmlsz6ksv2xyjagejgi2"><code>imports</code> 陣列</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="7cel9giap29s0vumby5rc0x4u">模块在 
-<code>@NgModule</code> 元数据对象中接受一个 
-<code>imports</code> 数组。 它告诉 Angular 关于其他 NgModules，这个特定模块需要以正常运行。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7cel9giap29s0vumby5rc0x4u">模組在 
+<code>@NgModule</code> 元資料物件中接受一個 
+<code>imports</code> 陣列。 它告訴 Angular 關於其他 NgModules，這個特定模組需要以正常執行。</p>
 <div class="docs-code" header="src/app/app.module.ts">
     <div class="docs-code-header"><h3>src/app/app.module.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title">imports:</span> [</div><div class="hljs-ln-line"><span class="hljs-built_in">    BrowserModule,</span></div><div class="hljs-ln-line"><span class="hljs-built_in">    FormsModule,</span></div><div class="hljs-ln-line">    HttpClientModule</div><div class="hljs-ln-line">  ],</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="8hdps8qbbbe2oxodra1ngfxh9">这些模块列表是那些导出组件、指令或管道，这些组件模板在该模块中引用。 在这种情况下，组件是 
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="8hdps8qbbbe2oxodra1ngfxh9">這些模組清單是那些匯出元件、指令或通道，這些元件樣板在該模組中引用。 在這種情況下，元件是 
 <code>AppComponent</code>，它引用了 
 <code>BrowserModule</code>、
 <code>FormsModule</code> 或 
-<code>HttpClientModule</code> 中的组件、指令或管道。 当组件模板引用另一个组件、指令或管道时，若被引用的类在该模块中声明，或者该类从另一个模块导入，则可以引用。</p>
+<code>HttpClientModule</code> 中的元件、指令或通道。 當元件樣板引用另一個元件、指令或通道時，若被引用的類在該模組中宣告，或者該類別從另一個模組匯入，則可以引用。</p>
 
   <h2 id="the-providers-array">
-    <a href="#the-providers-array" class="docs-anchor" tabindex="-1" aria-label="Link to The <code>providers</code> array" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="40cz07amhewuja5cvaroai04k"><code>providers</code> 数组</a>
+    <a href="#the-providers-array" class="docs-anchor" tabindex="-1" aria-label="Link to The <code>providers</code> array" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="40cz07amhewuja5cvaroai04k"><code>providers</code> 陣列</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="9qm8ohf3kxcd05r3s7go4gfi5">提供者数组是你列出应用程序需要的服务的地方。 当你在这里列出服务时，它们在整个应用程序中可用。 在使用功能模块和延迟加载时，你可以对其进行作用域限制。 更多信息，请参见 
-<a href="guide/ngmodules/providers">模块中的提供者</a>。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9qm8ohf3kxcd05r3s7go4gfi5">提供者陣列是你列出應用程式需要的服務的地方。 當你在這裡列出服務時，它們在整個應用程式中可用。 在使用功能模組和延遲載入時，你可以對其進行作用域限制。 更多訊息，請參見 
+<a href="guide/ngmodules/providers">模組中的提供者</a>。</p>
 
   <h2 id="the-bootstrap-array">
-    <a href="#the-bootstrap-array" class="docs-anchor" tabindex="-1" aria-label="Link to The <code>bootstrap</code> array" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a3xc1opqzima0ua6pv7ddm4wf"><code>bootstrap</code> 数组</a>
+    <a href="#the-bootstrap-array" class="docs-anchor" tabindex="-1" aria-label="Link to The <code>bootstrap</code> array" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="a3xc1opqzima0ua6pv7ddm4wf"><code>bootstrap</code> 陣列</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="8w1tn3qtaqfqw5pgffepbgg2d">应用程序通过引导根
-<code>AppModule</code>来启动。 引导过程会创建在
-<code>bootstrap</code>数组中列出的组件，并将每个组件插入到浏览器DOM中，如果找到与组件的
-<code>selector</code>匹配的元素。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="cbpvt9b0yrdjomj5ydx9lqu8b">每个引导组件都是其自己组件树的基础。 插入一个引导组件通常会触发一系列组件创建的级联过程，来构建该树。 虽然你可以在一个宿主网页上放置多个组件树，但大多数应用程序只有一个组件树，并引导单个根组件。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="5z7zp5td2og2aywfpurq9gxd0">根组件通常称为
-<code>AppComponent</code>，位于根模块的
-<code>bootstrap</code>数组中。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="eqncqf4oxj6068m6j4od4xnz9">在想要基于API响应引导组件的情况下， 或者想要挂载
-<code>AppComponent</code>到不匹配组件选择器的不同DOM节点时，请参考
-<code>ApplicationRef.bootstrap()</code>文档。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8w1tn3qtaqfqw5pgffepbgg2d">應用程式透過引導根
+<code>AppModule</code>來啟動。 引導過程會建立在
+<code>bootstrap</code>陣列中列出的元件，並將每個元件插入到瀏覽器DOM中，如果找到與元件的
+<code>selector</code>對應的元素。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="cbpvt9b0yrdjomj5ydx9lqu8b">每個引導元件都是其自己元件樹的基礎。 插入一個引導元件通常會觸發一系列元件建立的級聯過程，來建立該樹。 雖然你可以在一個宿主網頁上放置多個元件樹，但大多數應用程式只有一個元件樹，並引導單個根元件。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="5z7zp5td2og2aywfpurq9gxd0">根元件通常稱為
+<code>AppComponent</code>，位於根模組的
+<code>bootstrap</code>陣列中。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eqncqf4oxj6068m6j4od4xnz9">在想要基於API回應引導元件的情況下， 或者想要掛載
+<code>AppComponent</code>到不對應元件選擇器的不同DOM節點時，請參考
+<code>ApplicationRef.bootstrap()</code>文件。</p>
 
   <h2 id="more-about-angular-modules">
-    <a href="#more-about-angular-modules" class="docs-anchor" tabindex="-1" aria-label="Link to More about Angular Modules" data-ng_translator_product="100" data-ng_translator_ref_id="1yrlh3gck8640ceyk45u61sjw">关于 Angular 模块的更多知识</a>
+    <a href="#more-about-angular-modules" class="docs-anchor" tabindex="-1" aria-label="Link to More about Angular Modules" data-ng_translator_product="100" data-ng_translator_ref_id="1yrlh3gck8640ceyk45u61sjw">關於 Angular 模組的更多知識</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="f0wlpmuw1xp8zbbj88bhum53f">查看
-<a href="guide/ngmodules/frequent">常用模块</a>，了解在应用程序中常见的模块。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="f0wlpmuw1xp8zbbj88bhum53f">檢視
+<a href="guide/ngmodules/frequent">常用模組</a>，瞭解在應用程式中常見的模組。</p>

@@ -4,160 +4,160 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">配置依赖提供者</h1>
+    <h1 tabindex="-1">設定依賴提供者</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/di/dependency-injection-providers.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>前面的章节介绍了如何使用类实例作为依赖项。
-除了类之外，你还可以使用诸如 <code>boolean</code>、<code>string</code>、<code>Date</code> 和对象之类的值作为依赖项。
-Angular 提供了必要的 API 来使依赖配置更加灵活，因此你可以使这些值在依赖注入中可用。</p>
+    <p>前面的章節介紹瞭如何使用類別實例作為依賴項。
+除了類之外，你還可以使用諸如 <code>boolean</code>、<code>string</code>、<code>Date</code> 和物件之類的值作為依賴項。
+Angular 提供了必要的 API 來使依賴設定更加靈活，因此你可以使這些值在依賴注入中可用。</p>
 
   <h2 id="specifying-a-provider-token">
     <a href="#specifying-a-provider-token" class="docs-anchor" tabindex="-1" aria-label="Link to Specifying a provider token">指定提供者令牌</a>
   </h2>
-  <p>如果你将服务类指定为提供者令牌，则默认行为是注入器使用 <code>new</code> 运算符来实例化该类。</p>
-<p>在以下范例中，应用组件提供了一个 <code>Logger</code> 实例：</p>
+  <p>如果你將服務類別指定為提供者令牌，則預設行為是注入器使用 <code>new</code> 運算符來實例化該類別。</p>
+<p>在以下範例中，應用元件提供了一個 <code>Logger</code> 實例：</p>
 <div class="docs-code" header="src/app/app.component.ts">
     <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">providers</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: [Logger],</span></span></code></pre>
     </pre>
-  </div><p>但是，你可以配置依赖注入，以将 <code>Logger</code> 提供者令牌与不同的类或任何其他值关联。
-因此，当注入 <code>Logger</code> 时，将使用配置的值来替代。</p>
-<p>事实上，类提供者语法是一种简写表达式，它可以扩展为由 <code>Provider</code> 接口定义的提供者配置。
-在这种情况下，Angular 会将 <code>providers</code> 值扩展为完整的提供者对象，如下所示：</p>
+  </div><p>但是，你可以設定依賴注入，以將 <code>Logger</code> 提供者令牌與不同的類或任何其他值關聯。
+因此，當注入 <code>Logger</code> 時，將使用設定的值來替代。</p>
+<p>事實上，類提供者語法是一種簡寫表示式，它可以擴充套件為由 <code>Provider</code> 介面定義的提供者設定。
+在這種情況下，Angular 會將 <code>providers</code> 值擴充套件為完整的提供者物件，如下所示：</p>
 <div class="docs-code" header="src/app/app.component.ts">
     <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[{ provide: Logger, useClass: Logger }]</span></span></code></pre>
     </pre>
-  </div><p>展开后的提供者配置是一个具有两个属性的对象字面量：</p>
+  </div><p>展開後的提供者設定是一個具有兩個屬性的物件字面量：</p>
 
   <ul class="docs-list">
-    <li><code>provide</code> 属性持有用作消费依赖值的键的令牌。</li>
-<li>第二个属性是提供者定义对象，它告诉注入器<strong>如何</strong>创建依赖值。提供者定义可以是以下之一：<ul class="docs-list">
-    <li><code>useClass</code> - 此选项告诉 Angular DI 在注入依赖项时实例化所提供的类</li>
-<li><code>useExisting</code> - 允许你为一个令牌设置别名，并引用任何现有的令牌。</li>
-<li><code>useFactory</code> - 允许你定义一个构造依赖项的函数。</li>
-<li><code>useValue</code> - 提供一个应该用作依赖项的静态值。</li>
+    <li><code>provide</code> 屬性持有用作消費依賴值的鍵的令牌。</li>
+<li>第二個屬性是提供者定義物件，它告訴注入器<strong>如何</strong>建立依賴值。提供者定義可以是以下之一：<ul class="docs-list">
+    <li><code>useClass</code> - 此選項告訴 Angular DI 在注入依賴項時實例化所提供的類</li>
+<li><code>useExisting</code> - 允許你為一個令牌設定別名，並引用任何現有的令牌。</li>
+<li><code>useFactory</code> - 允許你定義一個構造依賴項的函式。</li>
+<li><code>useValue</code> - 提供一個應該用作依賴項的靜態值。</li>
 
   </ul>
   </li>
 
   </ul>
-  <p>以下各节介绍如何使用不同的提供者定义。</p>
+  <p>以下各節介紹如何使用不同的提供者定義。</p>
 
   <h3 id="class-providers-useclass">
-    <a href="#class-providers-useclass" class="docs-anchor" tabindex="-1" aria-label="Link to Class providers: useClass">类提供者：useClass</a>
+    <a href="#class-providers-useclass" class="docs-anchor" tabindex="-1" aria-label="Link to Class providers: useClass">類提供者：useClass</a>
   </h3>
-  <p><code>useClass</code> 提供者键允许你创建并返回指定类的新实例。</p>
-<p>你可以使用这种类型的提供者来为通用类或默认类替换备用实现。
-例如，备用实现可以实现不同的策略、扩展默认类，或者在测试用例中模拟真实类的行为。</p>
-<p>在以下范例中，当组件或任何其他类请求 <code>Logger</code> 依赖项时，将实例化 <code>BetterLogger</code>：</p>
+  <p><code>useClass</code> 提供者鍵允許你建立並回傳指定類別的新實例。</p>
+<p>你可以使用這種型別的提供者來為通用類或預設類替換備用實現。
+例如，備用實現可以實現不同的策略、擴充套件預設類，或者在測試用例中模擬真實類的行為。</p>
+<p>在以下範例中，當元件或任何其他類請求 <code>Logger</code> 依賴項時，將實例化 <code>BetterLogger</code>：</p>
 <div class="docs-code" header="src/app/app.component.ts">
     <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[{ provide: Logger, useClass: BetterLogger }]</span></span></code></pre>
     </pre>
-  </div><p>如果备用类提供者有自己的依赖项，请在父模块或组件的 providers 元数据属性中指定这两个提供者：</p>
+  </div><p>如果備用類提供者有自己的依賴項，請在父模組或元件的 providers 元資料屬性中指定這兩個提供者：</p>
 <div class="docs-code" header="src/app/app.component.ts">
     <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  UserService, </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// dependency needed in `EvenBetterLogger`.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { provide: Logger, useClass: EvenBetterLogger },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span></span></code></pre>
     </pre>
-  </div><p>在此范例中，<code>EvenBetterLogger</code> 在日志消息中显示用户名。此记录器从注入的 <code>UserService</code> 实例获取用户：</p>
+  </div><p>在此範例中，<code>EvenBetterLogger</code> 在日誌訊息中顯示使用者名。此記錄器從注入的 <code>UserService</code> 實例獲取使用者：</p>
 <div class="docs-code" header="src/app/even-better-logger.component.ts">
     <div class="docs-code-header"><h3>src/app/even-better-logger.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Injectable</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> EvenBetterLogger</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> extends</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Logger</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line highlighted"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> userService</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(UserService);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  override</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">message</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) {</span></span><span class="line highlighted"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> name</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.userService.user.name;</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    super</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`Message to ${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">name</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}: ${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">message</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>Angular 依赖注入知道如何构造 <code>UserService</code> 依赖项，因为它已在上面配置并且在注入器中可用。</p>
+  </div><p>Angular 依賴注入知道如何構造 <code>UserService</code> 依賴項，因為它已在上面設定並且在注入器中可用。</p>
 
   <h3 id="alias-providers-useexisting">
-    <a href="#alias-providers-useexisting" class="docs-anchor" tabindex="-1" aria-label="Link to Alias providers: useExisting">别名提供者：useExisting</a>
+    <a href="#alias-providers-useexisting" class="docs-anchor" tabindex="-1" aria-label="Link to Alias providers: useExisting">別名提供者：useExisting</a>
   </h3>
-  <p><code>useExisting</code> 提供者键允许你将一个令牌映射到另一个令牌。
-实际上，第一个令牌是与第二个令牌关联的服务的别名，从而创建了访问同一服务对象的两种方式。</p>
-<p>在以下范例中，当组件请求新的或旧的记录器时，注入器会注入 <code>NewLogger</code> 的单例实例：
-这样，<code>OldLogger</code> 就是 <code>NewLogger</code> 的别名。</p>
+  <p><code>useExisting</code> 提供者鍵允許你將一個令牌對映到另一個令牌。
+實際上，第一個令牌是與第二個令牌關聯的服務的別名，從而建立了訪問同一服務物件的兩種方式。</p>
+<p>在以下範例中，當元件請求新的或舊的記錄器時，注入器會注入 <code>NewLogger</code> 的單例實例：
+這樣，<code>OldLogger</code> 就是 <code>NewLogger</code> 的別名。</p>
 <div class="docs-code" header="src/app/app.component.ts">
     <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  NewLogger,</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Alias OldLogger w/ reference to NewLogger</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { provide: OldLogger, useExisting: NewLogger},</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span></span></code></pre>
     </pre>
   </div>
     <div class="docs-alert docs-alert-note">
-    <p><strong>注意：</strong> 确保不要使用 <code>useClass</code> 将 <code>OldLogger</code> 别名为 <code>NewLogger</code>，因为这会创建两个不同的 <code>NewLogger</code> 实例。</p>
+    <p><strong>注意：</strong> 確保不要使用 <code>useClass</code> 將 <code>OldLogger</code> 別名為 <code>NewLogger</code>，因為這會建立兩個不同的 <code>NewLogger</code> 實例。</p>
 
     </div>
     
   <h3 id="factory-providers-usefactory">
-    <a href="#factory-providers-usefactory" class="docs-anchor" tabindex="-1" aria-label="Link to Factory providers: useFactory">工厂提供者：useFactory</a>
+    <a href="#factory-providers-usefactory" class="docs-anchor" tabindex="-1" aria-label="Link to Factory providers: useFactory">工廠提供者：useFactory</a>
   </h3>
-  <p><code>useFactory</code> 提供者键允许你通过调用工厂函数来创建依赖对象。
-使用这种方法，你可以基于依赖注入和应用中其他位置可用的信息来创建动态值。</p>
-<p>在以下范例中，只有授权用户才能在 <code>HeroService</code> 中看到秘密英雄。
-授权可能会在单个应用会话期间更改，例如当不同的用户登录时。</p>
-<p>为了将安全敏感信息保留在 <code>UserService</code> 中，并从 <code>HeroService</code> 中分离出来，请为 <code>HeroService</code> 构造函数提供一个布尔标志来控制秘密英雄的显示：</p>
+  <p><code>useFactory</code> 提供者鍵允許你透過呼叫工廠函式來建立依賴物件。
+使用這種方法，你可以基於依賴注入和應用中其他位置可用的訊息來建立動態值。</p>
+<p>在以下範例中，只有授權使用者才能在 <code>HeroService</code> 中看到秘密英雄。
+授權可能會在單個應用會話期間更改，例如當不同的使用者登入時。</p>
+<p>為了將安全敏感訊息保留在 <code>UserService</code> 中，並從 <code>HeroService</code> 中分離出來，請為 <code>HeroService</code> 建構式函式提供一個布林標誌來控制秘密英雄的顯示：</p>
 <div class="docs-code" header="src/app/heroes/hero.service.ts">
     <div class="docs-code-header"><h3>src/app/heroes/hero.service.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HeroService</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  constructor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> logger</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Logger</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line highlighted"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> isAuthorized</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> boolean</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) { }</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  getHeroes</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line highlighted"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> auth</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.isAuthorized </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'authorized'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> :</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'unauthorized'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.logger.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`Getting heroes for ${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">auth</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">} user.`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> HEROES</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">filter</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">hero</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.isAuthorized </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">||</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> !</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">hero.isSecret);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>为了实现 <code>isAuthorized</code> 标志，请使用工厂提供者为 <code>HeroService</code> 创建一个新的记录器实例。
-这是必要的，因为在构造英雄服务时，我们需要手动传递 <code>Logger</code>：</p>
+  </div><p>為了實現 <code>isAuthorized</code> 標誌，請使用工廠提供者為 <code>HeroService</code> 建立一個新的記錄器實例。
+這是必要的，因為在構造英雄服務時，我們需要手動傳遞 <code>Logger</code>：</p>
 <div class="docs-code" header="src/app/heroes/hero.service.provider.ts">
     <div class="docs-code-header"><h3>src/app/heroes/hero.service.provider.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> heroServiceFactory</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">logger</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Logger</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">userService</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> UserService</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HeroService</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(logger, userService.user.isAuthorized);</span></span></code></pre>
     </pre>
-  </div><p>工厂函数可以访问 <code>UserService</code>。
-你将 <code>Logger</code> 和 <code>UserService</code> 都注入到工厂提供者中，以便注入器可以将它们传递给工厂函数：</p>
+  </div><p>工廠函式可以訪問 <code>UserService</code>。
+你將 <code>Logger</code> 和 <code>UserService</code> 都注入到工廠提供者中，以便注入器可以將它們傳遞給工廠函式：</p>
 <div class="docs-code" header="src/app/heroes/hero.service.provider.ts">
     <div class="docs-code-header"><h3>src/app/heroes/hero.service.provider.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> heroServiceProvider</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  provide: HeroService,</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  useFactory: heroServiceFactory,</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  deps: [Logger, UserService]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">};</span></span></code></pre>
     </pre>
   </div>
   <ul class="docs-list">
-    <li><code>useFactory</code> 字段指定提供者是一个工厂函数，其实例化方法是 <code>heroServiceFactory</code>。</li>
-<li><code>deps</code> 属性是一个提供者令牌数组。
-<code>Logger</code> 和 <code>UserService</code> 类充当其自身类提供者的令牌。
-注入器会求解这些令牌，并根据指定的顺序将相应的服务注入到匹配的 <code>heroServiceFactory</code> 工厂函数参数中。</li>
+    <li><code>useFactory</code> 欄位指定提供者是一個工廠函式，其實例化方法是 <code>heroServiceFactory</code>。</li>
+<li><code>deps</code> 屬性是一個提供者令牌陣列。
+<code>Logger</code> 和 <code>UserService</code> 類充當其自身類提供者的令牌。
+注入器會求解這些令牌，並根據指定的順序將相應的服務注入到對應的 <code>heroServiceFactory</code> 工廠函式引數中。</li>
 
   </ul>
-  <p>在导出的变量 <code>heroServiceProvider</code> 中捕获工厂提供者，使得该工厂提供者可复用。</p>
+  <p>在匯出的變數 <code>heroServiceProvider</code> 中捕獲工廠提供者，使得該工廠提供者可複用。</p>
 
   <h3 id="value-providers-usevalue">
     <a href="#value-providers-usevalue" class="docs-anchor" tabindex="-1" aria-label="Link to Value providers: useValue">值提供者：useValue</a>
   </h3>
-  <p><code>useValue</code> 键允许你将一个静态值与一个 DI 令牌关联起来。</p>
-<p>使用这项技术可以提供运行时配置常量，例如网站根地址和特性标记。
-你也可以在单元测试中使用值提供者来提供模拟数据，以替代生产数据服务。</p>
-<p>下一节提供了关于 <code>useValue</code> 键的更多信息。</p>
+  <p><code>useValue</code> 鍵允許你將一個靜態值與一個 DI 令牌關聯起來。</p>
+<p>使用這項技術可以提供執行時設定常數，例如網站根地址和屬性標記。
+你也可以在單元測試中使用值提供者來提供模擬資料，以替代生產資料服務。</p>
+<p>下一節提供了關於 <code>useValue</code> 鍵的更多訊息。</p>
 
   <h2 id="using-an-injectiontoken-object">
-    <a href="#using-an-injectiontoken-object" class="docs-anchor" tabindex="-1" aria-label="Link to Using an <code>InjectionToken</code> object">使用 <code>InjectionToken</code> 对象</a>
+    <a href="#using-an-injectiontoken-object" class="docs-anchor" tabindex="-1" aria-label="Link to Using an <code>InjectionToken</code> object">使用 <code>InjectionToken</code> 物件</a>
   </h2>
-  <p>对于非类依赖，可以使用 <code>InjectionToken</code> 对象作为提供者令牌。
-以下范例定义了一个类型为 <code>InjectionToken</code> 的令牌 <code>APP_CONFIG</code>：</p>
+  <p>對於非類依賴，可以使用 <code>InjectionToken</code> 物件作為提供者令牌。
+以下範例定義了一個型別為 <code>InjectionToken</code> 的令牌 <code>APP_CONFIG</code>：</p>
 <div class="docs-code" header="src/app/app.config.ts">
     <div class="docs-code-header"><h3>src/app/app.config.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { InjectionToken } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line highlighted"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> interface</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> AppConfig</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  title</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> APP_CONFIG</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> InjectionToken</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">AppConfig</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app.config description'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span></code></pre>
     </pre>
-  </div><p>可选的类型参数 <code>&lt;AppConfig&gt;</code> 和令牌描述 <code>app.config description</code> 指定了此令牌的用途。</p>
-<p>接下来，在组件中使用 <code>APP_CONFIG</code> 的 <code>InjectionToken</code> 对象注册依赖提供者：</p>
+  </div><p>可選的型別引數 <code>&lt;AppConfig&gt;</code> 和令牌描述 <code>app.config description</code> 指定了此令牌的用途。</p>
+<p>接下來，在元件中使用 <code>APP_CONFIG</code> 的 <code>InjectionToken</code> 物件註冊依賴提供者：</p>
 <div class="docs-code" header="src/app/app.component.ts">
     <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> MY_APP_CONFIG_VARIABLE</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> AppConfig</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  title: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Hello'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">};</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">providers</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: [{ provide: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">APP_CONFIG</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, useValue: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">MY_APP_CONFIG_VARIABLE</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }]</span></span></code></pre>
     </pre>
-  </div><p>现在，使用 <code>inject</code> 函数在构造函数体中注入配置对象：</p>
+  </div><p>現在，使用 <code>inject</code> 函式在建構式函式體中注入設定物件：</p>
 <div class="docs-code" header="src/app/app.component.ts">
     <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> AppComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line highlighted"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  constructor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> config</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">APP_CONFIG</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.title </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> config.title;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h3 id="interfaces-and-di">
-    <a href="#interfaces-and-di" class="docs-anchor" tabindex="-1" aria-label="Link to Interfaces and DI">接口和 DI</a>
+    <a href="#interfaces-and-di" class="docs-anchor" tabindex="-1" aria-label="Link to Interfaces and DI">介面和 DI</a>
   </h3>
-  <p>尽管 TypeScript 的 <code>AppConfig</code> 接口支持在类中进行类型标注，但 <code>AppConfig</code> 接口在 DI 中不起任何作用。
-在 TypeScript 中，接口是一种设计时产物，并且没有运行时表示或令牌，DI 框架无法使用它。</p>
-<p>当 TypeScript 编译为 JavaScript 时，接口会消失，因为 JavaScript 没有接口。
-由于 Angular 在运行时找不到接口，因此该接口不能作为令牌，你也不能注入它：</p>
+  <p>儘管 TypeScript 的 <code>AppConfig</code> 介面支援在類別中進行型別標註，但 <code>AppConfig</code> 介面在 DI 中不起任何作用。
+在 TypeScript 中，介面是一種設計時產物，並且沒有執行時表示或令牌，DI 框架無法使用它。</p>
+<p>當 TypeScript 編譯為 JavaScript 時，介面會消失，因為 JavaScript 沒有介面。
+由於 Angular 在執行時找不到介面，因此該介面不能作為令牌，你也不能注入它：</p>
 <div class="docs-code" header="src/app/app.component.ts">
     <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Can't use interface as provider token</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[{ provide: AppConfig, useValue: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">MY_APP_CONFIG_VARIABLE</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> })]</span></span></code></pre>

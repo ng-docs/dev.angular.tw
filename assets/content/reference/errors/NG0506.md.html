@@ -4,60 +4,60 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">应用保持不稳定</h1>
+    <h1 tabindex="-1">應用保持不穩定</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0506.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>仅当在客户端启用水合，但应用在较长时间（超过 10 秒）内仍保持不稳定状态时，此警告才会出现在浏览器中。</p>
-<p>通常，当页面上有一些待处理的微任务或宏任务时，就会发生这种情况。</p>
-<p>当应用内部变为稳定状态时，Angular 水合依赖于来自 <code>ApplicationRef.isStable</code> 的信号：</p>
+    <p>僅當在用戶端啟用水合，但應用在較長時間（超過 10 秒）內仍保持不穩定狀態時，此警告才會出現在瀏覽器中。</p>
+<p>通常，當頁面上有一些待處理的微任務或巨集任務時，就會發生這種情況。</p>
+<p>當應用內部變為穩定狀態時，Angular 水合依賴於來自 <code>ApplicationRef.isStable</code> 的訊號：</p>
 
   <ul class="docs-list">
-    <li>在服务端渲染 (SSR) 期间启动序列化过程</li>
-<li>在浏览器中，此信号用于启动水合后清理，以移除未被认领的 DOM 节点</li>
+    <li>在服務端渲染 (SSR) 期間啟動序列化過程</li>
+<li>在瀏覽器中，此訊號用於啟動水合後清理，以移除未被認領的 DOM 節點</li>
 
   </ul>
-  <p>当 <code>ApplicationRef.isStable</code> 在 10 秒内未发出 <code>true</code> 时，将显示此警告。如果此行为是故意的，并且你的应用稍后会稳定，你可以选择忽略此警告。</p>
+  <p>當 <code>ApplicationRef.isStable</code> 在 10 秒內未發出 <code>true</code> 時，將顯示此警告。如果此行為是故意的，並且你的應用稍後會穩定，你可以選擇忽略此警告。</p>
 
   <h2 id="applications-that-use-zonejs">
-    <a href="#applications-that-use-zonejs" class="docs-anchor" tabindex="-1" aria-label="Link to Applications that use zone.js">使用 zone.js 的应用</a>
+    <a href="#applications-that-use-zonejs" class="docs-anchor" tabindex="-1" aria-label="Link to Applications that use zone.js">使用 zone.js 的應用</a>
   </h2>
-  <p>使用 zone.js 的应用可能有多种因素导致稳定性延迟。这些因素可能包括待处理的 HTTP 请求、定时器 (<code>setInterval</code>、<code>setTimeout</code>) 或一些持续调用 <code>requestAnimationFrame</code> 的逻辑。</p>
+  <p>使用 zone.js 的應用可能有多種因素導致穩定性延遲。這些因素可能包括待處理的 HTTP 請求、定時器 (<code>setInterval</code>、<code>setTimeout</code>) 或一些持續呼叫 <code>requestAnimationFrame</code> 的邏輯。</p>
 
   <h3 id="macrotasks">
-    <a href="#macrotasks" class="docs-anchor" tabindex="-1" aria-label="Link to Macrotasks">宏任务</a>
+    <a href="#macrotasks" class="docs-anchor" tabindex="-1" aria-label="Link to Macrotasks">巨集任務</a>
   </h3>
-  <p>宏任务包括 <code>setInterval</code>、<code>setTimeout</code>、<code>requestAnimationFrame</code> 等函数。
-如果在应用的初始化阶段或在引导组件中调用了这些函数之一，则可能会延迟应用变为稳定的时刻。</p>
+  <p>巨集任務包括 <code>setInterval</code>、<code>setTimeout</code>、<code>requestAnimationFrame</code> 等函式。
+如果在應用的初始化階段或在引導元件中呼叫了這些函式之一，則可能會延遲應用變為穩定的時刻。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">``</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SimpleComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  constructor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    setInterval</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1000</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // or</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    setTimeout</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">10_000</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>如果必须在初始化阶段调用这些函数，则在 Angular Zone 之外调用它们可以解决问题：</p>
+  </div><p>如果必須在初始化階段呼叫這些函式，則在 Angular Zone 之外呼叫它們可以解決問題：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SimpleComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  constructor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> ngZone</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(NgZone);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    ngZone.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">runOutsideAngular</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      setInterval</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1000</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h3 id="third-party-libraries">
-    <a href="#third-party-libraries" class="docs-anchor" tabindex="-1" aria-label="Link to Third-party libraries">第三方库</a>
+    <a href="#third-party-libraries" class="docs-anchor" tabindex="-1" aria-label="Link to Third-party libraries">第三方庫</a>
   </h3>
-  <p>某些第三方库也可能产生长时间运行的异步任务，这可能会延迟应用的稳定性。建议如上所述在 Zone 之外调用相关的库代码。</p>
+  <p>某些第三方庫也可能產生長時間執行的非同步任務，這可能會延遲應用的穩定性。建議如上所述在 Zone 之外呼叫相關的函式庫程式碼。</p>
 
   <h3 id="running-code-after-an-application-becomes-stable">
-    <a href="#running-code-after-an-application-becomes-stable" class="docs-anchor" tabindex="-1" aria-label="Link to Running code after an application becomes stable">在应用变为稳定状态后运行代码</a>
+    <a href="#running-code-after-an-application-becomes-stable" class="docs-anchor" tabindex="-1" aria-label="Link to Running code after an application becomes stable">在應用變為穩定狀態後執行程式碼</a>
   </h3>
-  <p>一旦应用变为稳定状态，你可以运行一段代码来建立异步任务：</p>
+  <p>一旦應用變為穩定狀態，你可以執行一段程式碼來建立非同步任務：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SimpleComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  constructor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> applicationRef</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(ApplicationRef);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    applicationRef.isStable.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">pipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">( </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">first</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">((</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">isStable</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> isStable) ).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">      // Note that we don't need to use `runOutsideAngular` because `isStable`</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">      // emits events outside of the Angular zone when it's truthy (falsy values</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">      // are emitted inside the Angular zone).</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      setTimeout</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h2 id="zoneless-applications">
-    <a href="#zoneless-applications" class="docs-anchor" tabindex="-1" aria-label="Link to Zoneless applications">Zoneless 应用</a>
+    <a href="#zoneless-applications" class="docs-anchor" tabindex="-1" aria-label="Link to Zoneless applications">Zoneless 應用</a>
   </h2>
-  <p>在 zoneless 场景中，稳定性可能会因 <code>effect</code> 内的应用代码无限循环运行（可能是因为 effect 函数中使用的信号不断变化）或待处理的 HTTP 请求而延迟。</p>
-<p>开发人员还可以通过使用 <a href="/api/core/PendingTasks"><code>PendingTasks</code></a> 服务显式地帮助指示应用的稳定性。如果在你的应用中使用了上述 API，请确保调用一个函数将任务标记为已完成。</p>
+  <p>在 zoneless 場景中，穩定性可能會因 <code>effect</code> 內的應用程式碼無限迴圈執行（可能是因為 effect 函式中使用的訊號不斷變化）或待處理的 HTTP 請求而延遲。</p>
+<p>開發人員還可以透過使用 <a href="/api/core/PendingTasks"><code>PendingTasks</code></a> 服務顯式地幫助指示應用的穩定性。如果在你的應用中使用了上述 API，請確保呼叫一個函式將任務標記為已完成。</p>

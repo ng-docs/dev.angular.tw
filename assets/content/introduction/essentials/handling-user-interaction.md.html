@@ -6,14 +6,14 @@
           
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="7dc26thcc4cw1a1r25pzoxcmi">处理用户交互</h1>
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="7dc26thcc4cw1a1r25pzoxcmi">處理使用者互動</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/introduction/essentials/handling-user-interaction.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
 
-          <p data-ng_translator_product="100" data-ng_translator_ref_id="e9qotrjz20i7sp80nef51uwwt"><!-- markdownlint-disable-line --> 在你的应用中处理用户交互。</p>
+          <p data-ng_translator_product="100" data-ng_translator_ref_id="e9qotrjz20i7sp80nef51uwwt"><!-- markdownlint-disable-line --> 在你的應用中處理使用者互動。</p>
         </div>
 
         <!-- illustration -->
@@ -100,30 +100,30 @@
 
       </div>
     </div>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="bvybwljuuzbz1wg1b7ej0w919">处理用户交互并随后处理它是构建动态应用的关键方面之一。在本指南中，我们将看看简单的用户交互 - 事件处理。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="bvybwljuuzbz1wg1b7ej0w919">處理使用者互動並隨後處理它是建立動態應用的關鍵方面之一。在本指南中，我們將看看簡單的使用者互動 - 事件處理。</p>
 
   <h2 id="event-handling">
-    <a href="#event-handling" class="docs-anchor" tabindex="-1" aria-label="Link to Event Handling" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="avdp5yql1zi66avgh7zlc44sx">事件处理</a>
+    <a href="#event-handling" class="docs-anchor" tabindex="-1" aria-label="Link to Event Handling" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="avdp5yql1zi66avgh7zlc44sx">事件處理</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="5b49r5jdntjwajkswvodbruox">你可以通过以下方式向元素添加事件处理器：</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="5b49r5jdntjwajkswvodbruox">你可以透過以下方式向元素新增事件處理器：</p>
 
     <ol class="docs-ordered-list">
-      <li data-ng_translator_product="100" data-ng_translator_ref_id="aixwbjolr5z4mrevcfsyplagg">在圆括号内添加一个带有事件名称的属性</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="176sxedu2mskp74coymrczw69">指定当事件触发时你想运行的 JavaScript 语句</li>
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="aixwbjolr5z4mrevcfsyplagg">在圓括號內新增一個帶有事件名稱的屬性</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="176sxedu2mskp74coymrczw69">指定當事件觸發時你想執行的 JavaScript 語句</li>
 
     </ol>
     <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"save()"</span>&gt;</span>Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="745ox02bb2gxnki31ax0h0r5y">例如，如果我们想创建一个按钮，当 
-<code>click</code> 事件触发时运行 
-<code>transformText</code> 函数，它看起来如下所示：</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="745ox02bb2gxnki31ax0h0r5y">例如，如果我們想建立一個按鈕，當 
+<code>click</code> 事件觸發時運行 
+<code>transformText</code> 函式，它看起來如下所示：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-comment">// text-transformer.component.ts</span></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'text-transformer'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;p&gt;{{ announcement }}&lt;/p&gt;</div><div class="hljs-ln-line">    &lt;button (click)="transformText()"&gt;Abracadabra!&lt;/button&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TextTransformer</span> {</div><div class="hljs-ln-line">  announcement = <span class="hljs-string">'Hello again Angular!'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">transformText</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">this</span>.<span class="hljs-property">announcement</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">announcement</span>.<span class="hljs-title function_">toUpperCase</span>();</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="e4sqx7963rfxgrnkiwu2a4mi6">其他常见的事件监听器示例包括：</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="e4sqx7963rfxgrnkiwu2a4mi6">其他常見的事件監聽器範例包括：</p>
 
   <ul class="docs-list">
     <li><code>&lt;input (keyup)="validateInput()" /&gt;</code></li>
@@ -134,9 +134,9 @@
   <h3 id="event">
     <a href="#event" class="docs-anchor" tabindex="-1" aria-label="Link to $event">$event</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="dryel24v3rrwl2w728g7wcblx">如果你需要访问 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/Event" target="_blank">事件</a> 对象，Angular 提供了一个隐式的 
-<code>$event</code> 变量，你可以将其传递给一个函数：</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dryel24v3rrwl2w728g7wcblx">如果你需要訪問 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Event" target="_blank">事件</a> 物件，Angular 提供了一個隱式的 
+<code>$event</code> 變數，你可以將其傳遞給一個函式：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"createUser($event)"</span>&gt;</span>Submit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></div></code>
@@ -148,7 +148,7 @@
   
     <nav class="docs-pill-row">
       
-    <a class="docs-pill" href="essentials/sharing-logic" data-ng_translator_product="100" data-ng_translator_ref_id="5bgw52pq9qtejhztz63pll3ek">逻辑共享</a>
+    <a class="docs-pill" href="essentials/sharing-logic" data-ng_translator_product="100" data-ng_translator_ref_id="5bgw52pq9qtejhztz63pll3ek">邏輯共享</a>
     
 
     </nav>

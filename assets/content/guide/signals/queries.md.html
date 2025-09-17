@@ -4,38 +4,38 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="al58ovkri23bhkzbju7vytf9k">信号查询</h1>
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="al58ovkri23bhkzbju7vytf9k">訊號查詢</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/signals/queries.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="7tq4tuiafsdh5fjg6upd5x47v">组件或指令可以定义查询，以找到子元素并从它们的注入器中读取值。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="3ax87wkt9uvslck2z9n4qjhtd">开发者最常用查询来获取组件、指令、DOM 元素等的引用。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="eutcarm9m9xyzdxvrqnf0apc0">查询分为两类：视图查询和内容查询。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="4e9g9hl2aq476t5r4fsbbwbzc">信号查询将查询结果作为响应式原语信号提供。你可以在 
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7tq4tuiafsdh5fjg6upd5x47v">元件或指令可以定義查詢，以找到子元素並從它們的注入器中讀取值。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="3ax87wkt9uvslck2z9n4qjhtd">開發者最常用查詢來獲取元件、指令、DOM 元素等的引用。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="eutcarm9m9xyzdxvrqnf0apc0">查詢分為兩類：檢視查詢和內容查詢。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4e9g9hl2aq476t5r4fsbbwbzc">訊號查詢將查詢結果作為回應式原語訊號提供。你可以在 
 <code>computed</code> 和 
-<code>effect</code> 中使用查询结果，并将这些结果与其他信号组合。</p>
+<code>effect</code> 中使用查詢結果，並將這些結果與其他訊號組合。</p>
 
     <div class="docs-alert docs-alert-important">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="7kdxwciuloer8meaqmpbmgda3"><strong>重要：</strong>信号查询处于
-<a href="reference/releases#developer-preview">开发者预览</a>阶段。基于反馈，API 可能会更改，而不经过 Angular 的弃用周期。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7kdxwciuloer8meaqmpbmgda3"><strong>重要：</strong>訊號查詢處於
+<a href="reference/releases#developer-preview">開發者預覽</a>階段。基於反饋，API 可能會更改，而不經過 Angular 的棄用週期。</p>
 
     </div>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="8x573z69vso1ueqcrlhu4or00">如果你已经熟悉 Angular 查询，可以直接跳到
-<a href="#comparing-signal-based-queries-to-decorator-based-queries">比较基于信号的查询与基于装饰器的查询</a></p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="8x573z69vso1ueqcrlhu4or00">如果你已經熟悉 Angular 查詢，可以直接跳到
+<a href="#comparing-signal-based-queries-to-decorator-based-queries">比較基於訊號的查詢與基於裝飾器的查詢</a></p>
 
   <h2 id="view-queries">
-    <a href="#view-queries" class="docs-anchor" tabindex="-1" aria-label="Link to View queries" data-ng_translator_product="100" data-ng_translator_ref_id="2a5tlqpspdydex6hp9edul2jb">视图查询</a>
+    <a href="#view-queries" class="docs-anchor" tabindex="-1" aria-label="Link to View queries" data-ng_translator_product="100" data-ng_translator_ref_id="2a5tlqpspdydex6hp9edul2jb">檢視查詢</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="9f7o8o5f3ird3jfscvyrhbrhe">视图查询从组件自身模板（视图）中的元素中获取结果。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="9f7o8o5f3ird3jfscvyrhbrhe">檢視查詢從元件自身樣板（檢視）中的元素中獲取結果。</p>
 
   <h3 id="viewchild">
     <a href="#viewchild" class="docs-anchor" tabindex="-1" aria-label="Link to <code>viewChild</code>"><code>viewChild</code></a>
   </h3>
   <p data-ng_translator_product="100" data-ng_translator_ref_id="186a1wnpn9olzodpdcwpt6ofh">你可以使用 
-<code>viewChild</code> 函数声明一个查询以获取单个结果。</p>
+<code>viewChild</code> 函式宣告一個查詢以獲取單個結果。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">        &lt;div #el&gt;&lt;/div&gt;</div><div class="hljs-ln-line">        &lt;my-component /&gt;</div><div class="hljs-ln-line">    `</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestComponent</span> {</div><div class="hljs-ln-line">    <span class="hljs-comment">// query for a single result by a string predicate  </span></div><div class="hljs-ln-line">    divEl = viewChild&lt;<span class="hljs-title class_">ElementRef</span>&gt;(<span class="hljs-string">'el'</span>);       <span class="hljs-comment">// Signal&lt;ElementRef|undefined&gt;</span></div><div class="hljs-ln-line">    <span class="hljs-comment">// query for a single result by a type predicate</span></div><div class="hljs-ln-line">    cmp = <span class="hljs-title function_">viewChild</span>(<span class="hljs-title class_">MyComponent</span>);              <span class="hljs-comment">// Signal&lt;MyComponent|undefined&gt;</span></div><div class="hljs-ln-line">}</div></code>
@@ -45,44 +45,44 @@
     <a href="#viewchildren" class="docs-anchor" tabindex="-1" aria-label="Link to <code>viewChildren</code>"><code>viewChildren</code></a>
   </h3>
   <p data-ng_translator_product="100" data-ng_translator_ref_id="5js3x1nfd3qt2y5ohbl3ml9a9">你也可以使用 
-<code>viewChildren</code> 函数查询多个结果。</p>
+<code>viewChildren</code> 函式查詢多個結果。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"> <span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">        &lt;div #el&gt;&lt;/div&gt;</div><div class="hljs-ln-line">        @if (show) {</div><div class="hljs-ln-line">            &lt;div #el&gt;&lt;/div&gt;</div><div class="hljs-ln-line">        }</div><div class="hljs-ln-line">    `</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestComponent</span> {</div><div class="hljs-ln-line">    show = <span class="hljs-literal">true</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// query for multiple results</span></div><div class="hljs-ln-line">    divEls = viewChildren&lt;<span class="hljs-title class_">ElementRef</span>&gt;(<span class="hljs-string">'el'</span>);        <span class="hljs-comment">// Signal&lt;ReadonlyArray&lt;ElementRef&gt;&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h3 id="view-query-options">
-    <a href="#view-query-options" class="docs-anchor" tabindex="-1" aria-label="Link to View query options" data-ng_translator_product="100" data-ng_translator_ref_id="21hecleojc2h4569hm9tax35e">视图查询选项</a>
+    <a href="#view-query-options" class="docs-anchor" tabindex="-1" aria-label="Link to View query options" data-ng_translator_product="100" data-ng_translator_ref_id="21hecleojc2h4569hm9tax35e">檢視查詢選項</a>
   </h3>
   <p data-ng_translator_product="100" data-ng_translator_ref_id="amq1s4wevdkaqnr0mjo6jqx8i"><code>viewChild</code> 和 
-<code>viewChildren</code> 查询声明函数具有类似的签名，接受两个参数：</p>
+<code>viewChildren</code> 查詢宣告函式具有類似的簽名，接受兩個引數：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_ref_id="cuqijjy0g5gpk6mzrq2uy2fhz">一个
-<strong>定位器</strong>，用于指定查询目标——它可以是一个 
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="cuqijjy0g5gpk6mzrq2uy2fhz">一個
+<strong>定位器</strong>，用於指定查詢目標——它可以是一個 
 <code>string</code> 或任何可注入的令牌</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="arwih0elwk87ha8e4e3pfc6zw">一组
-<strong>选项</strong>，用于调整给定查询的行为。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="arwih0elwk87ha8e4e3pfc6zw">一組
+<strong>選項</strong>，用於調整給定查詢的行為。</li>
 
   </ul>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="dfmwi8fzq0ms9ec7377hmjzfx">基于信号的视图查询只接受一个选项：
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="dfmwi8fzq0ms9ec7377hmjzfx">基於訊號的檢視查詢只接受一個選項：
 <code>read</code>。
-<code>read</code> 选项指示要从匹配节点中注入并在最终结果中返回的结果类型。</p>
+<code>read</code> 選項指示要從對應節點中注入並在最終結果中回傳的結果型別。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">    <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;my-component/&gt;`</span></div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestComponent</span> {</div><div class="hljs-ln-line">    <span class="hljs-comment">// query for a single result with options</span></div><div class="hljs-ln-line">    cmp = <span class="hljs-title function_">viewChild</span>(<span class="hljs-title class_">MyComponent</span>, {<span class="hljs-attr">read</span>: <span class="hljs-title class_">ElementRef</span>});   <span class="hljs-comment">// Signal&lt;ElementRef|undefined&gt;</span></div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h2 id="content-queries">
-    <a href="#content-queries" class="docs-anchor" tabindex="-1" aria-label="Link to Content queries" data-ng_translator_product="100" data-ng_translator_ref_id="ay96wu6bnipmgxe6mr7tio2qp">内容查询</a>
+    <a href="#content-queries" class="docs-anchor" tabindex="-1" aria-label="Link to Content queries" data-ng_translator_product="100" data-ng_translator_ref_id="ay96wu6bnipmgxe6mr7tio2qp">內容查詢</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="bk1grqdhevgk6iqazqy3myoxf">内容查询从组件内容中的元素（组件标签内嵌套的元素）中检索结果。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bk1grqdhevgk6iqazqy3myoxf">內容查詢從元件內容中的元素（元件標籤內嵌套的元素）中檢索結果。</p>
 
   <h3 id="contentchild">
     <a href="#contentchild" class="docs-anchor" tabindex="-1" aria-label="Link to <code>contentChild</code>"><code>contentChild</code></a>
   </h3>
   <p data-ng_translator_product="100" data-ng_translator_ref_id="ej17psdovv9fm1p68trqx5o2p">你可以使用 
-<code>contentChild</code> 函数查询单个结果。</p>
+<code>contentChild</code> 函式查詢單個結果。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line">    <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestComponent</span> {</div><div class="hljs-ln-line">    <span class="hljs-comment">// query by a string predicate  </span></div><div class="hljs-ln-line">    headerEl = contentChild&lt;<span class="hljs-title class_">ElementRef</span>&gt;(<span class="hljs-string">'h'</span>);   <span class="hljs-comment">// Signal&lt;ElementRef|undefined&gt;</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">    <span class="hljs-comment">// query by a type predicate</span></div><div class="hljs-ln-line">    header = <span class="hljs-title function_">contentChild</span>(<span class="hljs-title class_">MyHeader</span>);            <span class="hljs-comment">// Signal&lt;MyHeader|undefined&gt;</span></div><div class="hljs-ln-line">}</div></code>
@@ -92,114 +92,114 @@
     <a href="#contentchildren" class="docs-anchor" tabindex="-1" aria-label="Link to <code>contentChildren</code>"><code>contentChildren</code></a>
   </h3>
   <p data-ng_translator_product="100" data-ng_translator_ref_id="7guit5hjrbqwafgzhmhcqcr1w">你也可以使用 
-<code>contentChildren</code> 函数查询多个结果。</p>
+<code>contentChildren</code> 函式查詢多個結果。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">    <span class="hljs-meta">@Component</span>({...})</div><div class="hljs-ln-line">    <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestComponent</span> {</div><div class="hljs-ln-line">    <span class="hljs-comment">// query for multiple results</span></div><div class="hljs-ln-line">    divEls = contentChildren&lt;<span class="hljs-title class_">ElementRef</span>&gt;(<span class="hljs-string">'h'</span>);  <span class="hljs-comment">// Signal&lt;ReadonlyArray&lt;ElementRef&gt;&gt;</span></div><div class="hljs-ln-line">    }</div></code>
     </pre>
   </div>
   <h3 id="content-query-options">
-    <a href="#content-query-options" class="docs-anchor" tabindex="-1" aria-label="Link to Content query options" data-ng_translator_product="100" data-ng_translator_ref_id="a43dlp424jdrycvcwgt0d0jb8">内容查询选项</a>
+    <a href="#content-query-options" class="docs-anchor" tabindex="-1" aria-label="Link to Content query options" data-ng_translator_product="100" data-ng_translator_ref_id="a43dlp424jdrycvcwgt0d0jb8">內容查詢選項</a>
   </h3>
   <p data-ng_translator_product="100" data-ng_translator_ref_id="4ejub6w97jdbsknihxdtxck93"><code>contentChild</code> 和 
-<code>contentChildren</code> 查询声明函数有相似的签名，接受两个参数：</p>
+<code>contentChildren</code> 查詢宣告函式有相似的簽名，接受兩個引數：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_ref_id="cuqijjy0g5gpk6mzrq2uy2fhz">一个
-<strong>定位器</strong>，用于指定查询目标——它可以是一个 
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="cuqijjy0g5gpk6mzrq2uy2fhz">一個
+<strong>定位器</strong>，用於指定查詢目標——它可以是一個 
 <code>string</code> 或任何可注入的令牌</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="arwih0elwk87ha8e4e3pfc6zw">一组
-<strong>选项</strong>，用于调整给定查询的行为。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="arwih0elwk87ha8e4e3pfc6zw">一組
+<strong>選項</strong>，用於調整給定查詢的行為。</li>
 
   </ul>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="4cugs45okyduw16rpjyybmwav">内容查询接受以下选项：</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4cugs45okyduw16rpjyybmwav">內容查詢接受以下選項：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_ref_id="khjovquzc4sll3ij0vg2ue3g"><code>descendants</code> 默认情况下，内容查询仅查找组件的直接子元素，不会遍历到后代。如果将此选项更改为 
-<code>true</code>，查询结果将包括该元素的所有后代。但是，即使为 
-<code>true</code>，查询也
-<em>从不</em>深入组件内部。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="51idji9gnsvqa9zycu52rzfgu"><code>read</code> 指示从匹配的节点中检索的结果类型，并在最终结果中返回。</li>
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="khjovquzc4sll3ij0vg2ue3g"><code>descendants</code> 預設情況下，內容查詢僅查詢元件的直接子元素，不會遍歷到後代。如果將此選項更改為 
+<code>true</code>，查詢結果將包括該元素的所有後代。但是，即使為 
+<code>true</code>，查詢也
+<em>從不</em>深入元件內部。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="51idji9gnsvqa9zycu52rzfgu"><code>read</code> 指示從對應的節點中檢索的結果型別，並在最終結果中回傳。</li>
 
   </ul>
   
   <h3 id="required-child-queries">
-    <a href="#required-child-queries" class="docs-anchor" tabindex="-1" aria-label="Link to Required child queries" data-ng_translator_product="100" data-ng_translator_ref_id="4flhso3g3c7m6lk1svxtvhnrt">必要的子查询</a>
+    <a href="#required-child-queries" class="docs-anchor" tabindex="-1" aria-label="Link to Required child queries" data-ng_translator_product="100" data-ng_translator_ref_id="4flhso3g3c7m6lk1svxtvhnrt">必要的子查詢</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="4msvh1ysn872ao4d5tixryfwv">如果子查询（
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="4msvh1ysn872ao4d5tixryfwv">如果子查詢（
 <code>viewChild</code> 或 
-<code>contentChild</code>）没有找到结果，其值为 
-<code>undefined</code>。如果目标元素被控制流语句（如 
+<code>contentChild</code>）沒有找到結果，其值為 
+<code>undefined</code>。如果目標元素被控制流語句（如 
 <code>@if</code> 或 
-<code>@for</code>）隐藏，这种情况可能会发生。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="dnodueu7pjac3i3suqelbvb0j">因此，子查询返回一个可能具有 
-<code>undefined</code> 值的信号。大多数情况下，特别是对于视图子查询，开发者会这样编写代码：</p>
+<code>@for</code>）隱藏，這種情況可能會發生。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dnodueu7pjac3i3suqelbvb0j">因此，子查詢回傳一個可能具有 
+<code>undefined</code> 值的訊號。大多數情況下，特別是對於檢視子查詢，開發者會這樣編寫程式碼：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_ref_id="7civr90h3s2pjdyscrk2uzt6">至少有一个匹配结果；</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="2ocvwb6uu22fnuuh13hbxbohg">在模板处理并且查询结果可用时访问结果。</li>
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="7civr90h3s2pjdyscrk2uzt6">至少有一個對應結果；</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="2ocvwb6uu22fnuuh13hbxbohg">在樣板處理並且查詢結果可用時訪問結果。</li>
 
   </ul>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="e3tsfbd9k8as1hm4bccvpsekt">对于这种情况，你可以将子查询标记为 
-<code>required</code>，以确保至少有一个匹配结果。这会从结果类型签名中消除 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="e3tsfbd9k8as1hm4bccvpsekt">對於這種情況，你可以將子查詢標記為 
+<code>required</code>，以確保至少有一個對應結果。這會從結果型別簽名中消除 
 <code>undefined</code>。如果 
-<code>required</code> 查询没有找到任何结果，Angular 会抛出错误。</p>
+<code>required</code> 查詢沒有找到任何結果，Angular 會丟擲錯誤。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;div #requiredEl&gt;&lt;/div&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">App</span> {</div><div class="hljs-ln-line">  existingEl = viewChild.required(<span class="hljs-string">'requiredEl'</span>);     <span class="hljs-comment">// required and existing result</span></div><div class="hljs-ln-line">  missingEl = viewChild.required(<span class="hljs-string">'notInATemplate'</span>); <span class="hljs-comment">// required but NOT existing result</span></div><div class="hljs-ln-line">  </div><div class="hljs-ln-line">  <span class="hljs-title function_">ngAfterViewInit</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">existingEl</span>()); <span class="hljs-comment">// OK :-)</span></div><div class="hljs-ln-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">missingEl</span>());  <span class="hljs-comment">// Runtime error: result marked as required by not available! </span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h2 id="results-availability-timing">
-    <a href="#results-availability-timing" class="docs-anchor" tabindex="-1" aria-label="Link to Results availability timing" data-ng_translator_product="100" data-ng_translator_ref_id="3mcjezgkyclrifsk25n59ijt5">结果可用性时间</a>
+    <a href="#results-availability-timing" class="docs-anchor" tabindex="-1" aria-label="Link to Results availability timing" data-ng_translator_product="100" data-ng_translator_ref_id="3mcjezgkyclrifsk25n59ijt5">結果可用性時間</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="62tbj3dmbcotmpnvicqs6d2ug">信号查询编写函数将作为指令实例构造的一部分执行。这发生在我们创建查询实例并执行模板的创建模式以收集任何匹配项之前。因此，在信号实例创建（并且可以读取）但尚未收集到任何查询结果之间会有一段时间。默认情况下，Angular 会在结果可用之前返回 
-<code>undefined</code>（对于子查询）或空数组（对于子项查询）。如果此时访问必要的查询，则会抛出错误。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="mez3bscy3nwzpx5w7fo6pzl7">Angular 会按需延迟计算基于信号的查询结果。这意味着除非有读取信号的代码路径，否则不会收集查询结果。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="4ya9xje1c0717dp5rs04cg237">查询结果可能会随着视图的操纵而变化（通过 Angular 的控制流 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="62tbj3dmbcotmpnvicqs6d2ug">訊號查詢編寫函式將作為指令實例構造的一部分執行。這發生在我們建立查詢實例並執行樣板的建立模式以收集任何對應項之前。因此，在訊號實例建立（並且可以讀取）但尚未收集到任何查詢結果之間會有一段時間。預設情況下，Angular 會在結果可用之前回傳 
+<code>undefined</code>（對於子查詢）或空陣列（對於子項查詢）。如果此時訪問必要的查詢，則會丟擲錯誤。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="mez3bscy3nwzpx5w7fo6pzl7">Angular 會按需延遲計算基於訊號的查詢結果。這意味著除非有讀取訊號的程式碼路徑，否則不會收集查詢結果。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="4ya9xje1c0717dp5rs04cg237">查詢結果可能會隨著檢視的操縱而變化（透過 Angular 的控制流 
 <code>@if</code>、
-<code>@for</code> 等，或通过直接调用 
-<code>ViewContainerRef</code> API）。当你从查询结果信号中读取值时，可能会随着时间接收到不同的值。</p>
+<code>@for</code> 等，或透過直接呼叫 
+<code>ViewContainerRef</code> API）。當你從查詢結果訊號中讀取值時，可能會隨著時間接收到不同的值。</p>
 
     <div class="docs-alert docs-alert-note">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="4qsp5ygluxuhv81s6fzk54z0m"><strong>注意：</strong>为了避免在模板渲染时返回不完整的查询结果，Angular 会延迟查询解析，直到完成给定模板的渲染。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="4qsp5ygluxuhv81s6fzk54z0m"><strong>注意：</strong>為了避免在樣板渲染時回傳不完整的查詢結果，Angular 會延遲查詢解析，直到完成給定樣板的渲染。</p>
 
     </div>
     
   <h2 id="query-declarations-functions-and-the-associated-rules">
-    <a href="#query-declarations-functions-and-the-associated-rules" class="docs-anchor" tabindex="-1" aria-label="Link to Query declarations functions and the associated rules" data-ng_translator_product="100" data-ng_translator_ref_id="7xgxs49bbr3cvd5lcg9ptsv59">查询声明函数及其相关规则</a>
+    <a href="#query-declarations-functions-and-the-associated-rules" class="docs-anchor" tabindex="-1" aria-label="Link to Query declarations functions and the associated rules" data-ng_translator_product="100" data-ng_translator_ref_id="7xgxs49bbr3cvd5lcg9ptsv59">查詢宣告函式及其相關規則</a>
   </h2>
   <p data-ng_translator_product="100" data-ng_translator_ref_id="zlk2wyg6ax20wp73ojwk7hyh"><code>viewChild</code>、
 <code>contentChild</code>、
 <code>viewChildren</code> 和 
-<code>contentChildren</code> 函数是 Angular 编译器识别的特殊函数。你可以使用这些函数通过初始化组件或指令属性来声明查询。这些函数不能在组件和指令属性的初始化器之外调用。</p>
+<code>contentChildren</code> 函式是 Angular 編譯器識別的特殊函式。你可以使用這些函式透過初始化元件或指令屬性來宣告查詢。這些函式不能在元件和指令屬性的初始化器之外呼叫。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-root'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">standalone</span>: <span class="hljs-literal">true</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span></div><div class="hljs-ln-line">    &lt;div #el&gt;&lt;/div&gt;</div><div class="hljs-ln-line">  `,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">App</span> {</div><div class="hljs-ln-line">  el = <span class="hljs-title function_">viewChild</span>(<span class="hljs-string">'el'</span>); <span class="hljs-comment">// all good!</span></div><div class="hljs-ln-line"></div><div class="hljs-ln-line">  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">const</span> myConst = <span class="hljs-title function_">viewChild</span>(<span class="hljs-string">'el'</span>); <span class="hljs-comment">// NOT SUPPORTED</span></div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h2 id="comparing-signal-based-queries-to-decorator-based-queries">
-    <a href="#comparing-signal-based-queries-to-decorator-based-queries" class="docs-anchor" tabindex="-1" aria-label="Link to Comparing signal-based queries to decorator-based queries" data-ng_translator_product="100" data-ng_translator_ref_id="e5f7yu16l5aqrist9m73g7j3">将基于信号的查询与基于装饰器的查询进行比较</a>
+    <a href="#comparing-signal-based-queries-to-decorator-based-queries" class="docs-anchor" tabindex="-1" aria-label="Link to Comparing signal-based queries to decorator-based queries" data-ng_translator_product="100" data-ng_translator_ref_id="e5f7yu16l5aqrist9m73g7j3">將基於訊號的查詢與基於裝飾器的查詢進行比較</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="8qlbkh94l08dhkjzwcik0q0i4">信号查询是使用 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8qlbkh94l08dhkjzwcik0q0i4">訊號查詢是使用 
 <code>@ContentChild</code>、
 <code>@ContentChildren</code>、
 <code>@ViewChild</code> 或 
-<code>@ViewChildren</code> 装饰器声明的查询的替代方法。此新方法将查询结果作为信号公开，这意味着查询结果可以与其他信号（使用 
+<code>@ViewChildren</code> 裝飾器宣告的查詢的替代方法。此新方法將查詢結果作為訊號公開，這意味著查詢結果可以與其他訊號（使用 
 <code>computed</code> 或 
-<code>effect</code>）组合，并驱动变更检测。此外，基于信号的查询体系还提供其他好处：</p>
+<code>effect</code>）組合，並驅動變更檢測。此外，基於訊號的查詢體系還提供其他好處：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_ref_id="9b98tw29j0vtm3fgi5lfsfdhb"><strong>更可预测的时机。</strong> 你可以在查询结果可用时立即访问它们。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="7yb4dkt3q6nauqcybc1pay9m"><strong>更简单的 API 表面。</strong> 所有查询都返回一个信号，且包含多个结果的查询让你可以使用标准数组。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="51qku5aanh1cfm7nh6q5kmtq3"><strong>改进的类型安全性。</strong> 较少的查询用例包含可能结果中的 
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="9b98tw29j0vtm3fgi5lfsfdhb"><strong>更可預測的時機。</strong> 你可以在查詢結果可用時立即訪問它們。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="7yb4dkt3q6nauqcybc1pay9m"><strong>更簡單的 API 表面。</strong> 所有查詢都回傳一個訊號，且包含多個結果的查詢讓你可以使用標準陣列。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="51qku5aanh1cfm7nh6q5kmtq3"><strong>改進的型別安全性。</strong> 較少的查詢用例包含可能結果中的 
 <code>undefined</code>。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="3c20wxlb8ox680voicd89rapp"><strong>更准确的类型推断。</strong> 当你使用类型谓词或指定显式 
-<code>read</code> 选项时，TypeScript 可以推断出更准确的类型。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="3ptmkvdlpmwev2zlcxtg12sw3"><strong>更惰性的更新。</strong> - Angular 惰性地更新基于信号的查询结果；除非你的代码显式读取查询结果，否则框架不会执行任何操作。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="3c20wxlb8ox680voicd89rapp"><strong>更準確的型別推斷。</strong> 當你使用型別謂詞或指定顯式 
+<code>read</code> 選項時，TypeScript 可以推斷出更準確的型別。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="3ptmkvdlpmwev2zlcxtg12sw3"><strong>更惰性的更新。</strong> - Angular 惰性地更新基於訊號的查詢結果；除非你的程式碼顯式讀取查詢結果，否則框架不會執行任何操作。</li>
 
   </ul>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="8t1xp5knhdf15drrg3s9izih8">底层的查询机制变化不大 —— 从概念上讲，Angular 仍然创建单数“子”或复数“子”查询，目标是模板（视图）或内容中的元素。不同之处在于结果的类型以及结果可用的确切时机。声明基于信号的查询的编写格式也发生了变化：用作类成员初始化器的 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="8t1xp5knhdf15drrg3s9izih8">底層的查詢機制變化不大 —— 從概念上講，Angular 仍然建立單數『子』或複數『子』查詢，目標是樣板（檢視）或內容中的元素。不同之處在於結果的型別以及結果可用的確切時機。宣告基於訊號的查詢的編寫格式也發生了變化：用作類別成員初始化器的 
 <code>viewChild</code>、
 <code>viewChildren</code>、
 <code>contentChild</code> 和 
-<code>contentChildren</code> 函数会被 Angular 自动识别。</p>
+<code>contentChildren</code> 函式會被 Angular 自動識別。</p>

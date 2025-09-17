@@ -4,78 +4,78 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="essl9gfrqg45g47n7kl5z0gxp">单例服务</h1>
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="essl9gfrqg45g47n7kl5z0gxp">單例服務</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/singleton-services.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ckm5exsmenhkp3azz44373i80">单例服务是指在应用中只存在一个实例的服务。</p>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ckm5exsmenhkp3azz44373i80">單例服務是指在應用中只存在一個實例的服務。</p>
 
   <h2 id="providing-a-singleton-service">
-    <a href="#providing-a-singleton-service" class="docs-anchor" tabindex="-1" aria-label="Link to Providing a singleton service" data-ng_translator_product="100" data-ng_translator_ref_id="8sl670sylcg1vukn5ecj4wovf">提供单例服务</a>
+    <a href="#providing-a-singleton-service" class="docs-anchor" tabindex="-1" aria-label="Link to Providing a singleton service" data-ng_translator_product="100" data-ng_translator_ref_id="8sl670sylcg1vukn5ecj4wovf">提供單例服務</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3y76osnfeejbdfugpj5ht65uf">在 Angular 中有两种方式来生成单例服务：</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3y76osnfeejbdfugpj5ht65uf">在 Angular 中有兩種方式來生成單例服務：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_ref_id="8dlmoo1xnt0zoxjreokaiy8g1">将 
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="8dlmoo1xnt0zoxjreokaiy8g1">將 
 <code>@Injectable()</code> 的 
-<code>providedIn</code> 属性设置为 
+<code>providedIn</code> 屬性設定為 
 <code>"root"</code></li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d90rvxzdcxavsqd78a9f4zkie">把该服务包含在 <code>AppModule</code> 或某个只会被 <code>AppModule</code> 导入的模块中。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="d90rvxzdcxavsqd78a9f4zkie">把該服務包含在 <code>AppModule</code> 或某個只會被 <code>AppModule</code> 匯入的模組中。</li>
 
   </ul>
   
   <h3 id="using-providedin">
     <a href="#using-providedin" class="docs-anchor" tabindex="-1" aria-label="Link to Using <code>providedIn</code>" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5sydl5lj799ufsa0u4e8poilr">使用 <code>providedIn</code></a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="b5k4qnmi4tkwfse3lhq5r4lpt">创建单例服务的首选方法是在服务的 
-<code>@Injectable()</code> 装饰器上将 
-<code>providedIn</code> 设置为 
-<code>root</code>。 这告诉 Angular 在应用程序根部提供该服务。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="b5k4qnmi4tkwfse3lhq5r4lpt">建立單例服務的首選方法是在服務的 
+<code>@Injectable()</code> 裝飾器上將 
+<code>providedIn</code> 設定為 
+<code>root</code>。 這告訴 Angular 在應用程式根部提供該服務。</p>
 <div class="docs-code" header="src/app/user.service.ts">
     <div class="docs-code-header"><h3>src/app/user.service.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Injectable({</div><div class="hljs-ln-line highlighted">  providedIn: <span class="hljs-string">'root'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> {</div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h3 id="ngmodule-providers-array">
-    <a href="#ngmodule-providers-array" class="docs-anchor" tabindex="-1" aria-label="Link to NgModule <code>providers</code> array" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1cc44zmw8gd45i4uw212aujet">NgModule 的 <code>providers</code> 数组</a>
+    <a href="#ngmodule-providers-array" class="docs-anchor" tabindex="-1" aria-label="Link to NgModule <code>providers</code> array" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1cc44zmw8gd45i4uw212aujet">NgModule 的 <code>providers</code> 陣列</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="7678cbyrdlrei39ioaskpr9jr">在使用 Angular 6.0 之前版本构建的应用程序中，服务通常是在 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7678cbyrdlrei39ioaskpr9jr">在使用 Angular 6.0 之前版本建立的應用程式中，服務通常是在 
 <code>@NgModule</code> 的 
-<code>providers</code> 字段中注册的，如下所示：</p>
+<code>providers</code> 欄位中註冊的，如下所示：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">  <span class="hljs-attr">providers</span>: [<span class="hljs-title class_">UserService</span>],</div><div class="hljs-ln-line">})</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2ft2m76j9mkk5dtoo0xeoc6gc">如果这个 NgModule 是根 
-<code>AppModule</code>，那么 
-<code>UserService</code> 将是一个单例并在整个应用程序中可用。 尽管你可能会看到这样编码，但从 Angular 6.0 开始，更倾向于在服务本身的 
-<code>@Injectable()</code> 装饰器上使用 
-<code>providedIn</code> 属性，因为这样可以使你的服务进行摇树优化。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2ft2m76j9mkk5dtoo0xeoc6gc">如果這個 NgModule 是根 
+<code>AppModule</code>，那麼 
+<code>UserService</code> 將是一個單例並在整個應用程式中可用。 儘管你可能會看到這樣編碼，但從 Angular 6.0 開始，更傾向於在服務本身的 
+<code>@Injectable()</code> 裝飾器上使用 
+<code>providedIn</code> 屬性，因為這樣可以使你的服務進行搖樹最佳化。</p>
 
   <h2 id="the-forroot-pattern">
     <a href="#the-forroot-pattern" class="docs-anchor" tabindex="-1" aria-label="Link to The <code>forRoot()</code> pattern" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3s0x3w8qbcdtrtmjvai66phid"><code>forRoot()</code> 模式</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="51psyzuys866g3h6zjz8h858">通常，你只需要用 <code>providedIn</code> 提供服务，用 <code>forRoot()</code>/<code>forChild()</code> 提供路由即可。不过，理解 <code>forRoot()</code> 为何能够确保服务只有单个实例，可以让你学会更深层次的开发知识。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4mh6e525k4s32t63j15xw7dno">如果模块同时定义了 providers（服务）和 declarations（组件、指令、管道），那么，当你同时在多个特性模块中加载此模块时，这些服务就会被注册在多个地方。这会导致出现多个服务实例，并且该服务的行为不再像单例一样。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="duvt9n4tph6fv99rvd92j1cj8">有多种方式来防止这种现象：</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="51psyzuys866g3h6zjz8h858">通常，你只需要用 <code>providedIn</code> 提供服務，用 <code>forRoot()</code>/<code>forChild()</code> 提供路由即可。不過，理解 <code>forRoot()</code> 為何能夠確保服務只有單個實例，可以讓你學會更深層次的開發知識。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="4mh6e525k4s32t63j15xw7dno">如果模組同時定義了 providers（服務）和 declarations（元件、指令、通道），那麼，當你同時在多個屬性模組中載入此模組時，這些服務就會被註冊在多個地方。這會導致出現多個服務實例，並且該服務的行為不再像單例一樣。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="duvt9n4tph6fv99rvd92j1cj8">有多種方式來防止這種現象：</p>
 
   <ul class="docs-list">
     <li data-ng_translator_product="100" data-ng_translator_ref_id="7ztdkr6hlcj6sz77isjatjauc">使用 
-<a href="#using-providedin"><code>providedIn</code> 语法</a>，而不是在模块中注册服务。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="xba0bcba6vbr6e08f1ldmjw8">将你的服务分离到它们自己的模块中，并且只导入一次。</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6kjw06zvs1ojwnc9s6bvqnckf">在模块中分别定义 <code>forRoot()</code> 和 <code>forChild()</code> 方法。</li>
+<a href="#using-providedin"><code>providedIn</code> 語法</a>，而不是在模組中註冊服務。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="xba0bcba6vbr6e08f1ldmjw8">將你的服務分離到它們自己的模組中，並且只匯入一次。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6kjw06zvs1ojwnc9s6bvqnckf">在模組中分別定義 <code>forRoot()</code> 和 <code>forChild()</code> 方法。</li>
 
   </ul>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="61ynejoey3g8tgzvdpdupav8d">有关介绍性说明，请参阅 
-<a href="guide/ngmodules/lazy-loading">延迟加载特性模块</a> 指南。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5l3boadny9lt6wny39iji3voj">使用 <code>forRoot()</code> 来把提供者从该模块中分离出去，这样你就能在根模块中导入该模块时带上 <code>providers</code>，并且在子模块中导入它时不带 <code>providers</code>。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="61ynejoey3g8tgzvdpdupav8d">有關介紹性說明，請參閱 
+<a href="guide/ngmodules/lazy-loading">延遲載入屬性模組</a> 指南。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5l3boadny9lt6wny39iji3voj">使用 <code>forRoot()</code> 來把提供者從該模組中分離出去，這樣你就能在根模組中匯入該模組時帶上 <code>providers</code>，並且在子模組中匯入它時不帶 <code>providers</code>。</p>
 
     <ol class="docs-ordered-list">
-      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dhk1f4h5qgwmhpyhizas6vqp1">在该模块中创建一个静态方法 <code>forRoot()</code>。</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ec1j9fb17jc1rv1tx0vqjx023">把这些提供者放进 <code>forRoot()</code> 方法中。</li>
+      <li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="dhk1f4h5qgwmhpyhizas6vqp1">在該模組中建立一個靜態方法 <code>forRoot()</code>。</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ec1j9fb17jc1rv1tx0vqjx023">把這些提供者放進 <code>forRoot()</code> 方法中。</li>
 
     </ol>
     <div class="docs-code" header="src/app/greeting/greeting.module.ts">
@@ -88,129 +88,129 @@
 <code>Router</code></a>
   </h3>
   <p data-ng_translator_product="100" data-ng_translator_ref_id="dfo437qdghy9jgsv7e7m3xzo8"><code>RouterModule</code> 提供 
-<code>Router</code> 服务，以及路由器指令，例如 
+<code>Router</code> 服務，以及路由器指令，例如 
 <code>RouterOutlet</code> 和 
-<code>routerLink</code>。 根应用模块导入 
-<code>RouterModule</code>，以便应用拥有一个 
-<code>Router</code>，并且根应用组件可以访问这些路由器指令。 任何特性模块也必须导入 
-<code>RouterModule</code>，以便它们的组件可以在其模板中放置路由器指令。</p>
+<code>routerLink</code>。 根應用模組匯入 
+<code>RouterModule</code>，以便應用擁有一個 
+<code>Router</code>，並且根應用元件可以訪問這些路由器指令。 任何屬性模組也必須匯入 
+<code>RouterModule</code>，以便它們的元件可以在其樣板中放置路由器指令。</p>
 <p data-ng_translator_product="100" data-ng_translator_ref_id="14m1lipid1q9us3yezsgi4jg2">如果 
-<code>RouterModule</code> 没有 
-<code>forRoot()</code>，那么每个特性模块都会实例化一个新的 
-<code>Router</code> 实例，这会破坏应用，因为只能有一个 
-<code>Router</code>。 通过使用 
-<code>forRoot()</code> 方法，根应用模块导入 
-<code>RouterModule.forRoot(...)</code> 并得到一个 
-<code>Router</code>，所有特性模块导入 
-<code>RouterModule.forChild(...)</code>，这样不会实例化另一个 
+<code>RouterModule</code> 沒有 
+<code>forRoot()</code>，那麼每個屬性模組都會實例化一個新的 
+<code>Router</code> 實例，這會破壞應用，因為只能有一個 
+<code>Router</code>。 透過使用 
+<code>forRoot()</code> 方法，根應用模組匯入 
+<code>RouterModule.forRoot(...)</code> 並得到一個 
+<code>Router</code>，所有屬性模組匯入 
+<code>RouterModule.forChild(...)</code>，這樣不會實例化另一個 
 <code>Router</code>。</p>
 
     <div class="docs-alert docs-alert-helpful">
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="3slcx2gqlc3ayotcdj2vls1gl"><strong>有用提示：</strong> 如果你有一个既包含提供者又包含对象声明的模块，你 
-<em>可以</em> 使用这种技术将它们分开，你可能会在遗留应用中看到这种模式。 然而，自 Angular 6.0 起，提供服务的最佳实践是使用 
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="3slcx2gqlc3ayotcdj2vls1gl"><strong>有用提示：</strong> 如果你有一個既包含提供者又包含物件宣告的模組，你 
+<em>可以</em> 使用這種技術將它們分開，你可能會在遺留應用中看到這種模式。 然而，自 Angular 6.0 起，提供服務的最佳實踐是使用 
 <code>@Injectable()</code> 的 
-<code>providedIn</code> 属性。</p>
+<code>providedIn</code> 屬性。</p>
 
     </div>
     
   <h3 id="how-forroot-works">
     <a href="#how-forroot-works" class="docs-anchor" tabindex="-1" aria-label="Link to How <code>forRoot()</code> works" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="5pww07skb60zzs9sttya55pwp"><code>forRoot()</code> 的工作原理</a>
   </h3>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6y4uoif8lxgq3hp7946zuobu3"><code>forRoot()</code> 会接受一个服务配置对象，并返回一个 <a href="api/core/ModuleWithProviders">ModuleWithProviders</a> 对象，它带有下列属性：</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6y4uoif8lxgq3hp7946zuobu3"><code>forRoot()</code> 會接受一個服務設定物件，並回傳一個 <a href="api/core/ModuleWithProviders">ModuleWithProviders</a> 物件，它帶有下列屬性：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9ghvm54f9feewnb0zbrlubp2h">属性</th>
-<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">详情</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_ref_id="9ghvm54f9feewnb0zbrlubp2h">屬性</th>
+<th align="left" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="3prlgfrx5eo2xqncnnob4crxu">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>ngModule</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="eygwsloky787ughuhexsrwatq">在这个例子中，
-<code>GreetingModule</code> 类</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="eygwsloky787ughuhexsrwatq">在這個例子中，
+<code>GreetingModule</code> 類</td>
 </tr>
 <tr>
 <td align="left"><code>providers</code></td>
-<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="644209uzx56nzirffhrirte29">配置的提供者</td>
+<td align="left" data-ng_translator_product="100" data-ng_translator_ref_id="644209uzx56nzirffhrirte29">設定的提供者</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="443dssvomsik4nau0hofa96v5">具体来说，Angular 在附加列在 
-<code>@NgModule.providers</code> 中的条目之前，会累积所有导入的提供者。 这个顺序确保你显式添加到 
-<code>AppModule</code> 提供者中的任何内容优先于导入模块的提供者。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="864jajxpkgr2dpg06hwto61i4">在这个范例应用中，导入 <code>GreetingModule</code>，并只在 <code>AppModule</code> 中调用一次它的 <code>forRoot()</code> 方法。像这样注册它一次就可以防止出现多个实例。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="30tk498vkp7myza6dc1oqh22n">在以下示例中，
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="443dssvomsik4nau0hofa96v5">具體來說，Angular 在附加列在 
+<code>@NgModule.providers</code> 中的條目之前，會累積所有匯入的提供者。 這個順序確保你顯式新增到 
+<code>AppModule</code> 提供者中的任何內容優先於匯入模組的提供者。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="864jajxpkgr2dpg06hwto61i4">在這個範例應用中，匯入 <code>GreetingModule</code>，並只在 <code>AppModule</code> 中呼叫一次它的 <code>forRoot()</code> 方法。像這樣註冊它一次就可以防止出現多個實例。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="30tk498vkp7myza6dc1oqh22n">在以下範例中，
 <code>UserServiceConfig</code> 在 
-<code>UserService</code> 中是可选注入的。 如果存在配置，服务会根据检索到的配置设置用户名。</p>
+<code>UserService</code> 中是可選注入的。 如果存在設定，服務會根據檢索到的設定設定使用者名。</p>
 <div class="docs-code" header="src/app/greeting/user.service.ts (constructor)">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="36mavucpehjsba2egmeirbhwt">src/app/greeting/user.service.ts（构造函数）</h3></div>
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="36mavucpehjsba2egmeirbhwt">src/app/greeting/user.service.ts（建構式函式）</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Optional</span>() config?: UserServiceConfig</span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (config) {</div><div class="hljs-ln-line">      <span class="hljs-variable language_">this</span>.<span class="hljs-property">_userName</span> = config.<span class="hljs-property">userName</span>;</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aw17be10ps7ht9yd3btrmmgts">下面是一个接受 <code>UserServiceConfig</code> 参数的 <code>forRoot()</code> 方法：</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aw17be10ps7ht9yd3btrmmgts">下面是一個接受 <code>UserServiceConfig</code> 引數的 <code>forRoot()</code> 方法：</p>
 <div class="docs-code" header="src/app/greeting/greeting.module.ts">
     <div class="docs-code-header"><h3>src/app/greeting/greeting.module.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({...})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GreetingModule</span> {</div><div class="hljs-ln-line highlighted">  <span class="hljs-keyword">static</span> <span class="hljs-title function_">forRoot</span>(<span class="hljs-attr">config</span>: <span class="hljs-title class_">UserServiceConfig</span>): <span class="hljs-title class_">ModuleWithProviders</span>&lt;<span class="hljs-title class_">GreetingModule</span>&gt; {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> {</div><div class="hljs-ln-line">      <span class="hljs-attr">ngModule</span>: <span class="hljs-title class_">GreetingModule</span>,</div><div class="hljs-ln-line highlighted">      <span class="hljs-attr">providers</span>: [</div><div class="hljs-ln-line highlighted">        {<span class="hljs-attr">provide</span>: <span class="hljs-title class_">UserServiceConfig</span>, <span class="hljs-attr">useValue</span>: config }</div><div class="hljs-ln-line">      ]</div><div class="hljs-ln-line">    };</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="e898v7oqxjx7es4gkteqgchks">最后，将其调用放在 
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="e898v7oqxjx7es4gkteqgchks">最後，將其呼叫放在 
 <code>AppModule</code> 的 
-<code>imports</code> 列表中。 在以下代码片段中，文件的其他部分被省略。</p>
+<code>imports</code> 清單中。 在以下程式碼片段中，檔案的其他部分被省略。</p>
 <div class="docs-code" header="src/app/app.module.ts (imports)">
-    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="boy8fbyf4864hgw6ubb5q2wbg">src/app/app.module.ts（导入）</h3></div>
+    <div class="docs-code-header"><h3 data-ng_translator_product="100" data-ng_translator_ref_id="boy8fbyf4864hgw6ubb5q2wbg">src/app/app.module.ts（匯入）</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">GreetingModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./greeting/greeting.module'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line">  <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">  <span class="hljs-attr">imports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-comment">// ...</span></div><div class="hljs-ln-line">    <span class="hljs-title class_">GreetingModule</span>.<span class="hljs-title function_">forRoot</span>({<span class="hljs-attr">userName</span>: <span class="hljs-string">'Miss Marple'</span>}),</div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">})</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7sh0isjgcsku9pq9suqajjdto">然后，应用将显示「Miss Marple」作为用户。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="c95nwozh3pb1rzq960m9qnb20">记得将 
-<code>GreetingModule</code> 作为 JavaScript 导入，并且不要在多个 
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="7sh0isjgcsku9pq9suqajjdto">然後，應用將顯示「Miss Marple」作為使用者。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="c95nwozh3pb1rzq960m9qnb20">記得將 
+<code>GreetingModule</code> 作為 JavaScript 匯入，並且不要在多個 
 <code>@NgModule</code> 的 
-<code>imports</code> 列表中添加 
+<code>imports</code> 清單中新增 
 <code>forRoot</code> 的用法。</p>
 
   <h2 id="prevent-reimport-of-the-greetingmodule">
-    <a href="#prevent-reimport-of-the-greetingmodule" class="docs-anchor" tabindex="-1" aria-label="Link to Prevent reimport of the <code>GreetingModule</code>" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cwqlvjmfz4rnbs3dwmovfopyi">防止重复导入 <code>GreetingModule</code></a>
+    <a href="#prevent-reimport-of-the-greetingmodule" class="docs-anchor" tabindex="-1" aria-label="Link to Prevent reimport of the <code>GreetingModule</code>" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cwqlvjmfz4rnbs3dwmovfopyi">防止重複匯入 <code>GreetingModule</code></a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="6h9y5jhi91fkyp8n7guslrra1">只有根模块 
-<code>AppModule</code> 应该导入 
-<code>GreetingModule</code>。 如果某个延迟加载模块也导入了它，应用可能会生成某些服务的
-<a href="guide/ngmodules/faq#why-is-it-bad-if-a-shared-module-provides-a-service-to-a-lazy-loaded-module?">多个实例</a>。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="48f5jjz1xps2v2p705eqjtgfm">要想防止惰性加载模块重复导入 <code>GreetingModule</code>，可以添加如下的 <code>GreetingModule</code> 构造函数。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="6h9y5jhi91fkyp8n7guslrra1">只有根模組 
+<code>AppModule</code> 應該匯入 
+<code>GreetingModule</code>。 如果某個延遲載入模組也匯入了它，應用可能會生成某些服務的
+<a href="guide/ngmodules/faq#why-is-it-bad-if-a-shared-module-provides-a-service-to-a-lazy-loaded-module?">多個實例</a>。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="48f5jjz1xps2v2p705eqjtgfm">要想防止延遲載入模組重複匯入 <code>GreetingModule</code>，可以新增如下的 <code>GreetingModule</code> 建構式函式。</p>
 <div class="docs-code" header="src/app/greeting/greeting.module.ts">
     <div class="docs-code-header"><h3>src/app/greeting/greeting.module.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@Optional</span>() <span class="hljs-meta">@SkipSelf</span>() parentModule?: GreetingModule</span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">if</span> (parentModule) {</div><div class="hljs-ln-line">      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(</div><div class="hljs-ln-line">        <span class="hljs-string">'GreetingModule is already loaded. Import it in the AppModule only'</span>);</div><div class="hljs-ln-line">    }</div><div class="hljs-ln-line">  }</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="bmg7xz9oy2x3z0l57mhg0zv1p">构造函数告诉 Angular 将
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="bmg7xz9oy2x3z0l57mhg0zv1p">建構式函式告訴 Angular 將
 <code>GreetingModule</code>注入到自身。如果 Angular 在
-<em>当前</em>注入器中查找
-<code>GreetingModule</code>，该注入将是循环的，但
-<code>@SkipSelf()</code>装饰器表示「在我上方的注入器层级结构中的祖先注入器中查找
+<em>當前</em>注入器中查詢
+<code>GreetingModule</code>，該注入將是迴圈的，但
+<code>@SkipSelf()</code>裝飾器表示「在我上方的注入器層級結構中的祖先注入器中查詢
 <code>GreetingModule</code>」。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="bbt0q6hpii32qskoyvujy0maa">默认情况下，注入器在找不到请求的提供者时会抛出错误。 
-<code>@Optional()</code> 装饰器表示找不到服务也没关系。 注入器返回 
+<p data-ng_translator_product="100" data-ng_translator_ref_id="bbt0q6hpii32qskoyvujy0maa">預設情況下，注入器在找不到請求的提供者時會丟擲錯誤。 
+<code>@Optional()</code> 裝飾器表示找不到服務也沒關係。 注入器回傳 
 <code>null</code>，
-<code>parentModule</code> 参数为 null，构造函数顺利结束。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="yf1qzu417e4apogeisw078rp">但如果你把 <code>GreetingModule</code> 导入到像 <code>CustomersModule</code> 这样的惰性加载模块中，事情就不一样了。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="dy0ztyfinemzv537p0538wt0j">Angular 使用自己的注入器（根注入器的子级）创建延迟加载模块。 
-<code>@SkipSelf()</code> 导致 Angular 在父注入器中查找 
-<code>GreetingModule</code>，这一次是根注入器。 当然，它找到了根模块 
-<code>AppModule</code> 导入的实例。 现在 
-<code>parentModule</code> 存在，构造函数抛出错误。</p>
+<code>parentModule</code> 引數為 null，建構式函式順利結束。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="yf1qzu417e4apogeisw078rp">但如果你把 <code>GreetingModule</code> 匯入到像 <code>CustomersModule</code> 這樣的延遲載入模組中，事情就不一樣了。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="dy0ztyfinemzv537p0538wt0j">Angular 使用自己的注入器（根注入器的子級）建立延遲載入模組。 
+<code>@SkipSelf()</code> 導致 Angular 在父注入器中查詢 
+<code>GreetingModule</code>，這一次是根注入器。 當然，它找到了根模組 
+<code>AppModule</code> 匯入的實例。 現在 
+<code>parentModule</code> 存在，建構式函式丟擲錯誤。</p>
 
   <h2 id="more-on-ngmodules">
-    <a href="#more-on-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to More on NgModules" data-ng_translator_product="100" data-ng_translator_ref_id="4zpukz8usqrzb3byrzbogm52l">关于 NgModule 的更多知识</a>
+    <a href="#more-on-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to More on NgModules" data-ng_translator_product="100" data-ng_translator_ref_id="4zpukz8usqrzb3byrzbogm52l">關於 NgModule 的更多知識</a>
   </h2>
   
     <nav class="docs-pill-row">
       
-    <a class="docs-pill" href="/guide/ngmodules/sharing" data-ng_translator_product="100" data-ng_translator_ref_id="6zyvq4ot13xfzo2f3szmyfs1a">共享模块</a>
+    <a class="docs-pill" href="/guide/ngmodules/sharing" data-ng_translator_product="100" data-ng_translator_ref_id="6zyvq4ot13xfzo2f3szmyfs1a">共享模組</a>
     
-    <a class="docs-pill" href="/guide/ngmodules/lazy-loading" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7x7ql6zjjt42rfszd9ny27zca">惰性加载模块</a>
+    <a class="docs-pill" href="/guide/ngmodules/lazy-loading" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="7x7ql6zjjt42rfszd9ny27zca">延遲載入模組</a>
     
-    <a class="docs-pill" href="/guide/ngmodules/faq" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="yuxphnkbw61x3eyhzmd7j0le">NgModule 常见问题</a>
+    <a class="docs-pill" href="/guide/ngmodules/faq" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="yuxphnkbw61x3eyhzmd7j0le">NgModule 常見問題</a>
     
 
     </nav>

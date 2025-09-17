@@ -4,58 +4,58 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="efs0su6gkc36b3ebrpwcawn9f">共享特性模块</h1>
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="efs0su6gkc36b3ebrpwcawn9f">共享屬性模組</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/ngmodules/sharing.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="almfirwjqadkwr8rovrajukv">创建共享模块能让你更好地组织和梳理代码。你可以把常用的指令、管道和组件放进一个模块中，然后在应用中其它需要这些的地方导入该模块。</p>
-<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ieqhjjuzbomr40a444aqfqfg">想象某个应用有下列模块：</p>
+    <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="almfirwjqadkwr8rovrajukv">建立共享模組能讓你更好地組織和梳理程式碼。你可以把常用的指令、通道和元件放進一個模組中，然後在應用中其它需要這些的地方匯入該模組。</p>
+<p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="ieqhjjuzbomr40a444aqfqfg">想象某個應用有下列模組：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CommonModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NgModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FormsModule</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CustomerComponent</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./customer.component'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">NewItemDirective</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./new-item.directive'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">OrdersPipe</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./orders.pipe'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@NgModule</span>({</div><div class="hljs-ln-line highlighted">  <span class="hljs-attr">imports</span>: [<span class="hljs-title class_">CommonModule</span>],</div><div class="hljs-ln-line">  <span class="hljs-attr">declarations</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">CustomerComponent</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">NewItemDirective</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">OrdersPipe</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">  <span class="hljs-attr">exports</span>: [</div><div class="hljs-ln-line">    <span class="hljs-title class_">CustomerComponent</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">NewItemDirective</span>,</div><div class="hljs-ln-line">    <span class="hljs-title class_">OrdersPipe</span>,</div><div class="hljs-ln-line highlighted">    <span class="hljs-title class_">CommonModule</span>,</div><div class="hljs-ln-line highlighted">    <span class="hljs-title class_">FormsModule</span></div><div class="hljs-ln-line">  ],</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SharedModule</span> { }</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="blfmdvokvcm93eg3dh3cxfmhu">请注意以下事项：</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="blfmdvokvcm93eg3dh3cxfmhu">請注意以下事項：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_ref_id="9txmae4qj7i5bgooy06x7chff">这导入了 
-<code>CommonModule</code>，因为该模块的组件需要常见指令</li>
-<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cir2zxhqpgzlq05enjr7eqzbv">它声明并导出了一些工具性的管道、指令和组件类。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="5vjjs20jhhukz1hm5ut3bju9d">它重新导出了 
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="9txmae4qj7i5bgooy06x7chff">這匯入了 
+<code>CommonModule</code>，因為該模組的元件需要常見指令</li>
+<li data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="cir2zxhqpgzlq05enjr7eqzbv">它宣告並匯出了一些工具性的通道、指令和元件類別。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="5vjjs20jhhukz1hm5ut3bju9d">它重新匯出了 
 <code>CommonModule</code> 和 
 <code>FormsModule</code></li>
 
   </ul>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="bdujl1cf6qyg9w4z7afljgivp">通过重新导出 
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="bdujl1cf6qyg9w4z7afljgivp">透過重新匯出 
 <code>CommonModule</code> 和 
-<code>FormsModule</code>，任何导入该 
-<code>SharedModule</code> 的其他模块都可以访问来自 
+<code>FormsModule</code>，任何匯入該 
+<code>SharedModule</code> 的其他模組都可以訪問來自 
 <code>CommonModule</code> 的指令（如 
 <code>NgIf</code> 和 
-<code>NgFor</code>），并可以使用 
+<code>NgFor</code>），並可以使用 
 <code>FormsModule</code> 中的 
-<code>[(ngModel)]</code> 绑定到组件属性。</p>
+<code>[(ngModel)]</code> 繫結到元件屬性。</p>
 <p data-ng_translator_product="100" data-ng_translator_ref_id="578afmz7iyz7ahymmq3cy06z0">即使由 
-<code>SharedModule</code> 声明的组件可能不使用 
-<code>[(ngModel)]</code> 进行绑定，也可能不需要 
-<code>SharedModule</code> 导入 
+<code>SharedModule</code> 宣告的元件可能不使用 
+<code>[(ngModel)]</code> 進行繫結，也可能不需要 
+<code>SharedModule</code> 匯入 
 <code>FormsModule</code>，
-<code>SharedModule</code> 仍然可以导出 
-<code>FormsModule</code> 而无需在其 
-<code>imports</code> 中列出。 这样，你可以使其他模块访问 
-<code>FormsModule</code> 而无需使其对自身可用。</p>
+<code>SharedModule</code> 仍然可以匯出 
+<code>FormsModule</code> 而無需在其 
+<code>imports</code> 中列出。 這樣，你可以使其他模組訪問 
+<code>FormsModule</code> 而無需使其對自身可用。</p>
 
   <h2 id="more-on-ngmodules">
-    <a href="#more-on-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to More on NgModules" data-ng_translator_product="100" data-ng_translator_ref_id="4zpukz8usqrzb3byrzbogm52l">关于 NgModule 的更多知识</a>
+    <a href="#more-on-ngmodules" class="docs-anchor" tabindex="-1" aria-label="Link to More on NgModules" data-ng_translator_product="100" data-ng_translator_ref_id="4zpukz8usqrzb3byrzbogm52l">關於 NgModule 的更多知識</a>
   </h2>
   
     <nav class="docs-pill-row">
       
     <a class="docs-pill" href="/guide/ngmodules/providers" data-ng_translator_product="100" data-ng_translator_ref_id="77p47ajmgeg7nllnu7idzpnzw">提供者</a>
     
-    <a class="docs-pill" href="/guide/ngmodules/module-types" data-ng_translator_product="100" data-ng_translator_ref_id="2e8lovj893j5ltyvz9l7kg2zy">特性模块的分类</a>
+    <a class="docs-pill" href="/guide/ngmodules/module-types" data-ng_translator_product="100" data-ng_translator_ref_id="2e8lovj893j5ltyvz9l7kg2zy">屬性模組的分類</a>
     
 
     </nav>

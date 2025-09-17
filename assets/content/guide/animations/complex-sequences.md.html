@@ -4,43 +4,43 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">复杂动画序列</h1>
+    <h1 tabindex="-1">複雜動畫序列</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/animations/complex-sequences.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>到目前为止，我们学习了单个 HTML 元素的简单动画。
-Angular 还允许你为协调的序列制作动画，例如当元素进入和离开页面时，为整个网格或元素列表制作动画。
-你可以选择并行运行多个动画，或者顺序运行离散动画，一个接一个地运行。</p>
-<p>控制复杂动画序列的函数包括：</p>
+    <p>到目前為止，我們學習了單個 HTML 元素的簡單動畫。
+Angular 還允許你為協調的序列製作動畫，例如當元素進入和離開頁面時，為整個網格或元素清單製作動畫。
+你可以選擇並行執行多個動畫，或者順序執行離散動畫，一個接一個地執行。</p>
+<p>控制複雜動畫序列的函式包括：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left">函数</th>
-<th align="left">详情</th>
+<th align="left">函式</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>query()</code></td>
-<td align="left">查找一个或多个内部 HTML 元素。</td>
+<td align="left">查詢一個或多個內部 HTML 元素。</td>
 </tr>
 <tr>
 <td align="left"><code>stagger()</code></td>
-<td align="left">将级联延迟应用于多个元素的动画。</td>
+<td align="left">將級聯延遲應用於多個元素的動畫。</td>
 </tr>
 <tr>
 <td align="left"><a href="api/animations/group"><code>group()</code></a></td>
-<td align="left">并行运行多个动画步骤。</td>
+<td align="left">並行執行多個動畫步驟。</td>
 </tr>
 <tr>
 <td align="left"><code>sequence()</code></td>
-<td align="left">一个接一个地运行动画步骤。</td>
+<td align="left">一個接一個地執行動畫步驟。</td>
 </tr>
 
       </tbody>
@@ -48,59 +48,59 @@ Angular 还允许你为协调的序列制作动画，例如当元素进入和离
   </div>
   
   <h2 id="the-query-function">
-    <a href="#the-query-function" class="docs-anchor" tabindex="-1" aria-label="Link to The query() function"><code>query()</code> 函数</a>
+    <a href="#the-query-function" class="docs-anchor" tabindex="-1" aria-label="Link to The query() function"><code>query()</code> 函式</a>
   </h2>
-  <p>大多数复杂动画都依赖 <code>query()</code> 函数来查找子元素并对其应用动画，此类基本范例包括：</p>
+  <p>大多數複雜動畫都依賴 <code>query()</code> 函式來查詢子元素並對其應用動畫，此類基本範例包括：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left">范例</th>
-<th align="left">详情</th>
+<th align="left">範例</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
-<td align="left">先是 <code>query()</code>，然后是 <code>animate()</code></td>
-<td align="left">用于查询简单的 HTML 元素并直接对其应用动画。</td>
+<td align="left">先是 <code>query()</code>，然後是 <code>animate()</code></td>
+<td align="left">用於查詢簡單的 HTML 元素並直接對其應用動畫。</td>
 </tr>
 <tr>
-<td align="left">先是 <code>query()</code>，然后是 <code>animateChild()</code></td>
-<td align="left">用于查询子元素，这些子元素本身已应用了动画元数据并触发此类动画（否则将被当前/父元素的动画阻止）。</td>
+<td align="left">先是 <code>query()</code>，然後是 <code>animateChild()</code></td>
+<td align="left">用於查詢子元素，這些子元素本身已應用了動畫元資料並觸發此類動畫（否則將被當前/父元素的動畫阻止）。</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p><code>query()</code> 的第一个参数是一个 <a href="https://developer.mozilla.org/docs/Web/CSS/CSS_Selectors" target="_blank">css 选择器</a>字符串，它还可以包含以下 Angular 特定的标记：</p>
+  <p><code>query()</code> 的第一個引數是一個 <a href="https://developer.mozilla.org/docs/Web/CSS/CSS_Selectors" target="_blank">css 選擇器</a>字串，它還可以包含以下 Angular 特定的標記：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th align="left">标记</th>
-<th align="left">详情</th>
+<th align="left">標記</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><code>:enter</code> <br> <code>:leave</code></td>
-<td align="left">用于进入/离开的元素。</td>
+<td align="left">用於進入/離開的元素。</td>
 </tr>
 <tr>
 <td align="left"><code>:animating</code></td>
-<td align="left">用于当前正在制作动画的元素。</td>
+<td align="left">用於當前正在製作動畫的元素。</td>
 </tr>
 <tr>
 <td align="left"><code>@*</code> <br> <code>@triggerName</code></td>
-<td align="left">用于具有任何触发器或特定触发器的元素。</td>
+<td align="left">用於具有任何觸發器或特定觸發器的元素。</td>
 </tr>
 <tr>
 <td align="left"><code>:self</code></td>
-<td align="left">正在制作动画的元素本身。</td>
+<td align="left">正在製作動畫的元素本身。</td>
 </tr>
 
       </tbody>
@@ -108,27 +108,27 @@ Angular 还允许你为协调的序列制作动画，例如当元素进入和离
   </div>
   
     <div class="docs-callout docs-callout-helpful">
-      <h3>进入和离开元素</h3>
-      <p>并非所有子元素实际上都被视为进入/离开；有时，这可能违反直觉并且令人困惑。请参阅 <a href="api/animations/query#entering-and-leaving-elements">query api 文档</a>以获取更多信息。</p>
-<p>你还可以在动画范例（在动画<a href="guide/animations#about-this-guide">简介部分</a>中介绍）的“查询”选项卡下看到对此的阐释。</p>
+      <h3>進入和離開元素</h3>
+      <p>並非所有子元素實際上都被視為進入/離開；有時，這可能違反直覺並且令人困惑。請參閱 <a href="api/animations/query#entering-and-leaving-elements">query api 文件</a>以獲取更多訊息。</p>
+<p>你還可以在動畫範例（在動畫<a href="guide/animations#about-this-guide">簡介部分</a>中介紹）的『查詢』頁籤下看到對此的闡釋。</p>
 
     </div>
     
   <h2 id="animate-multiple-elements-using-query-and-stagger-functions">
-    <a href="#animate-multiple-elements-using-query-and-stagger-functions" class="docs-anchor" tabindex="-1" aria-label="Link to Animate multiple elements using query() and stagger() functions">使用 query() 和 stagger() 函数为多个元素制作动画</a>
+    <a href="#animate-multiple-elements-using-query-and-stagger-functions" class="docs-anchor" tabindex="-1" aria-label="Link to Animate multiple elements using query() and stagger() functions">使用 query() 和 stagger() 函式為多個元素製作動畫</a>
   </h2>
-  <p>通过 <code>query()</code> 查询子元素后，<code>stagger()</code> 函数允许你定义每个被查询的条目（将要制作动画）之间的时序间隔，从而在元素之间以延迟的方式制作动画。</p>
-<p>以下范例演示了如何使用 <code>query()</code> 和 <code>stagger()</code> 函数为列表（英雄列表）制作动画，方法是从上到下按顺序添加每个英雄，并略有延迟。</p>
+  <p>透過 <code>query()</code> 查詢子元素後，<code>stagger()</code> 函式允許你定義每個被查詢的條目（將要製作動畫）之間的時序間隔，從而在元素之間以延遲的方式製作動畫。</p>
+<p>以下範例示範了如何使用 <code>query()</code> 和 <code>stagger()</code> 函式為清單（英雄清單）製作動畫，方法是從上到下按順序新增每個英雄，並略有延遲。</p>
 
   <ul class="docs-list">
-    <li><p>使用 <code>query()</code> 查找符合特定条件的进入页面的元素</p>
+    <li><p>使用 <code>query()</code> 查詢符合特定條件的進入頁面的元素</p>
 </li>
-<li><p>对于每个此类元素，使用 <code>style()</code> 为该元素设置相同的初始样式。
-  使其透明，并使用 <code>transform</code> 将其移出位置，以便它可以滑动到位。</p>
+<li><p>對於每個此類元素，使用 <code>style()</code> 為該元素設定相同的初始樣式。
+  使其透明，並使用 <code>transform</code> 將其移出位置，以便它可以滑動到位。</p>
 </li>
-<li><p>使用 <code>stagger()</code> 将每个动画延迟 30 毫秒</p>
+<li><p>使用 <code>stagger()</code> 將每個動畫延遲 30 毫秒</p>
 </li>
-<li><p>使用自定义定义的缓动曲线为屏幕上的每个元素制作 0.5 秒的动画，同时使其淡入并取消变换</p>
+<li><p>使用自定義定義的緩動曲線為螢幕上的每個元素製作 0.5 秒的動畫，同時使其淡入並取消變換</p>
 </li>
 
   </ul>
@@ -138,122 +138,122 @@ Angular 还允许你为协调的序列制作动画，例如当元素进入和离
     </pre>
   </div>
   <h2 id="parallel-animation-using-group-function">
-    <a href="#parallel-animation-using-group-function" class="docs-anchor" tabindex="-1" aria-label="Link to Parallel animation using group() function">使用 group() 函数的并行动画</a>
+    <a href="#parallel-animation-using-group-function" class="docs-anchor" tabindex="-1" aria-label="Link to Parallel animation using group() function">使用 group() 函式的並行動畫</a>
   </h2>
-  <p>你已经了解了如何在每个连续动画之间添加延迟。
-但是，你可能还希望配置并行发生的动画。
-例如，你可能想要为同一元素的两个 CSS 属性制作动画，但每个属性使用不同的 <code>easing</code> 函数。
-为此，你可以使用动画 <a href="api/animations/group"><code>group()</code></a> 函数。</p>
+  <p>你已經瞭解瞭如何在每個連續動畫之間新增延遲。
+但是，你可能還希望設定並行發生的動畫。
+例如，你可能想要為同一元素的兩個 CSS 屬性製作動畫，但每個屬性使用不同的 <code>easing</code> 函式。
+為此，你可以使用動畫 <a href="api/animations/group"><code>group()</code></a> 函式。</p>
 
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> <a href="api/animations/group"><code>group()</code></a> 函数用于对动画<em>步骤</em>进行分组，而不是对动画元素进行分组。</p>
+    <p><strong>提示：</strong> <a href="api/animations/group"><code>group()</code></a> 函式用於對動畫<em>步驟</em>進行分組，而不是對動畫元素進行分組。</p>
 
     </div>
-    <p>以下范例在 <code>:enter</code> 和 <code>:leave</code> 上都使用了 <a href="api/animations/group"><code>group()</code></a>，用于两种不同的时序配置，从而将两个独立的动画并行应用于同一元素。</p>
+    <p>以下範例在 <code>:enter</code> 和 <code>:leave</code> 上都使用了 <a href="api/animations/group"><code>group()</code></a>，用於兩種不同的時序設定，從而將兩個獨立的動畫並行應用於同一元素。</p>
 <div class="docs-code" path="adev/src/content/examples/animations/src/app/hero-list-groups.component.ts" visiblelines="22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68" header="src/app/hero-list-groups.component.ts (excerpt)">
-    <div class="docs-code-header"><h3>src/app/hero-list-groups.component.ts（节选）</h3></div>
+    <div class="docs-code-header"><h3>src/app/hero-list-groups.component.ts（節選）</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Component, Input, Output, EventEmitter} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {trigger, state, style, animate, transition, group} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/animations'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Hero} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './hero'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {NgFor} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/common'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-hero-list-groups'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">ul</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"heroes"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">      @for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (hero </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">of</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> heroes; track hero) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">li</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [@flyInOut]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"'in'"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"inner"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> type</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"button"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> (click)</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"removeHero(hero.id)"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">            &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">span</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"badge"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;{{ hero.id }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">span</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">            &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">span</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"name"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;{{ hero.name }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">span</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">li</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">ul</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  styleUrls: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'./hero-list-page.component.css'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  imports: [NgFor],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  animations: [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    trigger</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'flyInOut'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      state</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">        'in'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">        style</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          width: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'*'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          transform: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'translateX(0)'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          opacity: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        }),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      ),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      transition</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">':enter'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">        style</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({width: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">10</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, transform: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'translateX(50px)'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, opacity: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">        group</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">([</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">          animate</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">            '0.3s 0.1s ease'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">            style</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">              transform: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'translateX(0)'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">              width: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'*'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">            }),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          ),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">          animate</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">            '0.3s ease'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">            style</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">              opacity: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">            }),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          ),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        ]),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      ]),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      transition</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">':leave'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">        group</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">([</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">          animate</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">            '0.3s ease'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">            style</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">              transform: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'translateX(50px)'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">              width: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">10</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">            }),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          ),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">          animate</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">            '0.3s 0.2s ease'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">            style</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">              opacity: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">            }),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          ),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        ]),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      ]),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    ]),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  ],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HeroListGroupsComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">heroes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Hero</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[] </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [];</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Output</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">remove</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> EventEmitter</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;();</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  removeHero</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">id</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.remove.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">emit</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(id);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span></code></pre>
     </pre>
   </div>
   <h2 id="sequential-vs-parallel-animations">
-    <a href="#sequential-vs-parallel-animations" class="docs-anchor" tabindex="-1" aria-label="Link to Sequential vs. parallel animations">顺序动画与并行动画</a>
+    <a href="#sequential-vs-parallel-animations" class="docs-anchor" tabindex="-1" aria-label="Link to Sequential vs. parallel animations">順序動畫與並行動畫</a>
   </h2>
-  <p>复杂动画可以同时发生很多事情。
-但是，如果你想创建一个动画，其中涉及多个动画一个接一个地发生，该怎么办？之前你使用了 <a href="api/animations/group"><code>group()</code></a> 来同时并行运行多个动画。</p>
-<p>第二个名为 <code>sequence()</code> 的函数使你可以一个接一个地运行这些相同的动画。
-在 <code>sequence()</code> 中，动画步骤由 <code>style()</code> 或 <code>animate()</code> 函数调用组成。</p>
+  <p>複雜動畫可以同時發生很多事情。
+但是，如果你想建立一個動畫，其中涉及多個動畫一個接一個地發生，該怎麼辦？之前你使用了 <a href="api/animations/group"><code>group()</code></a> 來同時並行執行多個動畫。</p>
+<p>第二個名為 <code>sequence()</code> 的函式使你可以一個接一個地執行這些相同的動畫。
+在 <code>sequence()</code> 中，動畫步驟由 <code>style()</code> 或 <code>animate()</code> 函式呼叫組成。</p>
 
   <ul class="docs-list">
-    <li>使用 <code>style()</code> 立即应用提供的样式数据。</li>
-<li>使用 <code>animate()</code> 在给定的时间间隔内应用样式数据。</li>
+    <li>使用 <code>style()</code> 立即應用提供的樣式資料。</li>
+<li>使用 <code>animate()</code> 在給定的時間間隔內應用樣式資料。</li>
 
   </ul>
   
   <h2 id="filter-animation-example">
-    <a href="#filter-animation-example" class="docs-anchor" tabindex="-1" aria-label="Link to Filter animation example">筛选器动画范例</a>
+    <a href="#filter-animation-example" class="docs-anchor" tabindex="-1" aria-label="Link to Filter animation example">篩選器動畫範例</a>
   </h2>
-  <p>看看范例页面上的另一个动画。
-在“筛选器/交错”选项卡下，在<strong>搜索英雄</strong>文本框中输入一些文本，例如 <code>Magnet</code> 或 <code>tornado</code>。</p>
-<p>筛选器在你键入时实时工作。
-当你键入每个新字母时，元素会离开页面，并且筛选器会逐渐变得更严格。
-当你删除筛选器框中的每个字母时，英雄列表会逐渐重新进入页面。</p>
-<p>HTML 模板包含一个名为 <code>filterAnimation</code> 的触发器。</p>
+  <p>看看範例頁面上的另一個動畫。
+在『篩選器/交錯』頁籤下，在<strong>搜尋英雄</strong>文字框中輸入一些文字，例如 <code>Magnet</code> 或 <code>tornado</code>。</p>
+<p>篩選器在你鍵入時實時工作。
+當你鍵入每個新字母時，元素會離開頁面，並且篩選器會逐漸變得更嚴格。
+當你刪除篩選器框中的每個字母時，英雄清單會逐漸重新進入頁面。</p>
+<p>HTML 樣板包含一個名為 <code>filterAnimation</code> 的觸發器。</p>
 <div class="docs-code" path="adev/src/content/examples/animations/src/app/hero-list-page.component.html" visiblelines="2,3,4,5,6,7,8,9,10,11,12,13,14,15,16" header="src/app/hero-list-page.component.html">
     <div class="docs-code-header"><h3>src/app/hero-list-page.component.html</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Filter/Stagger&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">label</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"search"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Search heroes: &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">label</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">input</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> type</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"text"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> id</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"search"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> #criteria</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">       (input)</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"updateCriteria(criteria.value)"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">       placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"Search heroes"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">ul</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"heroes"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [@filterAnimation]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"heroesTotal"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  @for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (hero </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">of</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> heroes; track hero) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">li</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"hero"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"inner"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">span</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"badge"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;{{ hero.id }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">span</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">span</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"name"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;{{ hero.name }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">span</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">li</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">ul</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span></code></pre>
     </pre>
-  </div><p>组件装饰器中的 <code>filterAnimation</code> 包含三个过渡。</p>
+  </div><p>元件裝飾器中的 <code>filterAnimation</code> 包含三個轉場。</p>
 <div class="docs-code" path="adev/src/content/examples/animations/src/app/hero-list-page.component.ts" visiblelines="6,11,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69" header="src/app/hero-list-page.component.ts">
     <div class="docs-code-header"><h3>src/app/hero-list-page.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Component, HostBinding, OnInit} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {trigger, transition, animate, style, query, stagger} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/animations'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {HEROES} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './mock-heroes'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Hero} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './hero'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {NgFor} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/common'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  imports: [NgFor],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-hero-list-page'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  templateUrl: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'hero-list-page.component.html'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  styleUrls: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'hero-list-page.component.css'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  animations: [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    trigger</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'pageAnimations'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      transition</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">':enter'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">        query</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'.hero'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">          style</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({opacity: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, transform: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'translateY(-100px)'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">          stagger</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">30</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">            animate</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'500ms cubic-bezier(0.35, 0, 0.25, 1)'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">style</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({opacity: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, transform: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'none'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          ]),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        ]),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      ]),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    ]),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    trigger</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'filterAnimation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      transition</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">':enter, * =&gt; 0, * =&gt; -1'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, []),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      transition</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">':increment'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">        query</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">          ':enter'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">            style</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({opacity: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, width: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">            stagger</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">50</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">animate</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'300ms ease-out'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">style</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({opacity: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, width: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'*'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}))]),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          ],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">          {optional: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">},</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        ),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      ]),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      transition</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">':decrement'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">        query</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">':leave'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">stagger</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">50</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, [</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">animate</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'300ms ease-out'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">style</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({opacity: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, width: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}))])]),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      ]),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    ]),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  ],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HeroListPageComponent</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> implements</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> OnInit</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">HostBinding</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'@pageAnimations'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  public</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> animatePage</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  heroesTotal</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> -</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  get</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> heroes</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">._heroes;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> _heroes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Hero</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[] </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [];</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  ngOnInit</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">._heroes </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> HEROES</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  updateCriteria</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">criteria</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    criteria </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> criteria </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> criteria.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">trim</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> ''</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">._heroes </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> HEROES</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">filter</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">((</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">hero</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      hero.name.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">toLowerCase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">().</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">includes</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(criteria.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">toLowerCase</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    );</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> newTotal</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.heroes.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">length</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.heroesTotal </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">!==</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> newTotal) {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">      this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.heroesTotal </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> newTotal;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">else</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">!</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">criteria) {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">      this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.heroesTotal </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> -</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span></code></pre>
     </pre>
-  </div><p>此范例中的代码执行以下任务：</p>
+  </div><p>此範例中的程式碼執行以下任務：</p>
 
   <ul class="docs-list">
-    <li>当用户首次打开或导航到此页面时跳过动画（筛选器动画会窄化已存在的内容，因此它仅适用于 DOM 中已存在的元素）</li>
-<li>根据搜索输入的值筛选英雄</li>
+    <li>當用戶首次開啟或導向到此頁面時跳過動畫（篩選器動畫會窄化已存在的內容，因此它僅適用於 DOM 中已存在的元素）</li>
+<li>根據搜尋輸入的值篩選英雄</li>
 
   </ul>
-  <p>对于每次更改：</p>
+  <p>對於每次更改：</p>
 
   <ul class="docs-list">
-    <li><p>通过将其不透明度和宽度设置为 0 来隐藏离开 DOM 的元素</p>
+    <li><p>透過將其不透明度和寬度設定為 0 來隱藏離開 DOM 的元素</p>
 </li>
-<li><p>在 300 毫秒内，为一个进入 DOM 的元素添加动画效果。
-  在动画期间，该元素呈现其默认宽度和不透明度。</p>
+<li><p>在 300 毫秒內，為一個進入 DOM 的元素新增動畫效果。
+  在動畫期間，該元素呈現其預設寬度和不透明度。</p>
 </li>
-<li><p>如果有多个元素进入或离开 DOM，则会错开每个动画，从页面顶部开始，每个元素之间延迟 50 毫秒</p>
+<li><p>如果有多個元素進入或離開 DOM，則會錯開每個動畫，從頁面頂部開始，每個元素之間延遲 50 毫秒</p>
 </li>
 
   </ul>
   
   <h2 id="animating-the-items-of-a-reordering-list">
-    <a href="#animating-the-items-of-a-reordering-list" class="docs-anchor" tabindex="-1" aria-label="Link to Animating the items of a reordering list">为重新排序的列表的条目添加动画效果</a>
+    <a href="#animating-the-items-of-a-reordering-list" class="docs-anchor" tabindex="-1" aria-label="Link to Animating the items of a reordering list">為重新排序的清單的條目新增動畫效果</a>
   </h2>
-  <p>尽管 Angular 可以开箱即用地为 <code>*ngFor</code> 列表条目正确地添加动画效果，但如果它们的顺序发生变化，它将无法做到这一点。
-这是因为它会失去对哪个元素是哪个元素的跟踪，从而导致动画中断。
-帮助 Angular 跟踪此类元素的唯一方法是将 <code>TrackByFunction</code> 赋值给 <code>NgForOf</code> 指令。
-这确保了 Angular 始终知道哪个元素是哪个元素，从而使其始终能够将正确的动画应用于正确的元素。</p>
+  <p>儘管 Angular 可以開箱即用地為 <code>*ngFor</code> 清單條目正確地新增動畫效果，但如果它們的順序發生變化，它將無法做到這一點。
+這是因為它會失去對哪個元素是哪個元素的跟蹤，從而導致動畫中斷。
+幫助 Angular 跟蹤此類元素的唯一方法是將 <code>TrackByFunction</code> 賦值給 <code>NgForOf</code> 指令。
+這確保了 Angular 始終知道哪個元素是哪個元素，從而使其始終能夠將正確的動畫應用於正確的元素。</p>
 
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要提示：</strong> 如果你需要为 <code>*ngFor</code> 列表的条目添加动画效果，并且这些条目的顺序有可能在运行时发生变化，请始终使用 <code>TrackByFunction</code>。</p>
+    <p><strong>重要提示：</strong> 如果你需要為 <code>*ngFor</code> 清單的條目新增動畫效果，並且這些條目的順序有可能在執行時發生變化，請始終使用 <code>TrackByFunction</code>。</p>
 
     </div>
     
   <h2 id="animations-and-component-view-encapsulation">
-    <a href="#animations-and-component-view-encapsulation" class="docs-anchor" tabindex="-1" aria-label="Link to Animations and Component View Encapsulation">动画和组件视图封装</a>
+    <a href="#animations-and-component-view-encapsulation" class="docs-anchor" tabindex="-1" aria-label="Link to Animations and Component View Encapsulation">動畫和元件檢視封裝</a>
   </h2>
-  <p>Angular 动画基于组件的 DOM 结构，并且不直接考虑 <a href="guide/components/styling#style-scoping">视图封装</a>，这意味着使用 <code>ViewEncapsulation.Emulated</code> 的组件的行为方式与它们使用 <code>ViewEncapsulation.None</code> 完全相同（<code>ViewEncapsulation.ShadowDom</code> 的行为方式有所不同，我们稍后会讨论）。</p>
-<p>例如，如果 <code>query()</code> 函数（你将在本动画指南的其余部分看到更多相关内容）要应用于使用模拟视图封装的组件树的顶部，则此类查询将能够识别（并因此为）树中任何深度的 DOM 元素添加动画效果。</p>
-<p>另一方面，<code>ViewEncapsulation.ShadowDom</code> 通过将 DOM 元素“隐藏”在 <a href="https://developer.mozilla.org/docs/Web/API/ShadowRoot" target="_blank"><code>ShadowRoot</code></a> 元素内部来更改组件的 DOM 结构。这种 DOM 操作确实会阻止某些动画实现正常工作，因为它依赖于简单的 DOM 结构，并且没有考虑 <code>ShadowRoot</code> 元素。因此，建议避免将动画应用于包含使用 ShadowDom 视图封装的组件的视图。</p>
+  <p>Angular 動畫基於元件的 DOM 結構，並且不直接考慮 <a href="guide/components/styling#style-scoping">檢視封裝</a>，這意味著使用 <code>ViewEncapsulation.Emulated</code> 的元件的行為方式與它們使用 <code>ViewEncapsulation.None</code> 完全相同（<code>ViewEncapsulation.ShadowDom</code> 的行為方式有所不同，我們稍後會討論）。</p>
+<p>例如，如果 <code>query()</code> 函式（你將在本動畫指南的其餘部分看到更多相關內容）要應用於使用模擬檢視封裝的元件樹的頂部，則此類查詢將能夠識別（並因此為）樹中任何深度的 DOM 元素新增動畫效果。</p>
+<p>另一方面，<code>ViewEncapsulation.ShadowDom</code> 透過將 DOM 元素『隱藏』在 <a href="https://developer.mozilla.org/docs/Web/API/ShadowRoot" target="_blank"><code>ShadowRoot</code></a> 元素內部來更改元件的 DOM 結構。這種 DOM 操作確實會阻止某些動畫實現正常工作，因為它依賴於簡單的 DOM 結構，並且沒有考慮 <code>ShadowRoot</code> 元素。因此，建議避免將動畫應用於包含使用 ShadowDom 檢視封裝的元件的檢視。</p>
 
   <h2 id="animation-sequence-summary">
-    <a href="#animation-sequence-summary" class="docs-anchor" tabindex="-1" aria-label="Link to Animation sequence summary">动画序列摘要</a>
+    <a href="#animation-sequence-summary" class="docs-anchor" tabindex="-1" aria-label="Link to Animation sequence summary">動畫序列摘要</a>
   </h2>
-  <p>用于为多个元素添加动画效果的 Angular 函数以 <code>query()</code> 开头，以查找内部元素；例如，收集 <code>&lt;div&gt;</code> 中的所有图像。
-其余函数 <code>stagger()</code>、<a href="api/animations/group"><code>group()</code></a> 和 <code>sequence()</code> 应用级联或让你控制如何应用多个动画步骤。</p>
+  <p>用於為多個元素新增動畫效果的 Angular 函式以 <code>query()</code> 開頭，以查詢內部元素；例如，收集 <code>&lt;div&gt;</code> 中的所有影象。
+其餘函式 <code>stagger()</code>、<a href="api/animations/group"><code>group()</code></a> 和 <code>sequence()</code> 應用級聯或讓你控制如何應用多個動畫步驟。</p>
 
   <h2 id="more-on-angular-animations">
-    <a href="#more-on-angular-animations" class="docs-anchor" tabindex="-1" aria-label="Link to More on Angular animations">有关 Angular 动画的更多信息</a>
+    <a href="#more-on-angular-animations" class="docs-anchor" tabindex="-1" aria-label="Link to More on Angular animations">有關 Angular 動畫的更多訊息</a>
   </h2>
-  <p>你可能还对以下内容感兴趣：</p>
+  <p>你可能還對以下內容感興趣：</p>
 
     <nav class="docs-pill-row">
       
     <a class="docs-pill" href="guide/animations">
-      Angular 动画简介
+      Angular 動畫簡介
     </a>
     
     <a class="docs-pill" href="guide/animations/transition-and-triggers">
-      过渡和触发器
+      轉場和觸發器
     </a>
     
     <a class="docs-pill" href="guide/animations/reusable-animations">
-      可复用的动画
+      可複用的動畫
     </a>
     
     <a class="docs-pill" href="guide/animations/route-animations">
-      路由过渡动画
+      路由轉場動畫
     </a>
     
 

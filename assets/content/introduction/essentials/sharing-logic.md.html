@@ -6,14 +6,14 @@
           
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="d2lsqzjc93o18ae9ixvyx0z4b">共享代码</h1>
+    <h1 tabindex="-1" data-ng_translator_product="100" data-ng_translator_ref_id="d2lsqzjc93o18ae9ixvyx0z4b">共享程式碼</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/introduction/essentials/sharing-logic.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
 
-          <p data-ng_translator_product="100" data-ng_translator_ref_id="9buatxflswqc3tf0cjj9nxffb"><!-- markdownlint-disable-line --> 依赖注入允许你共享代码。</p>
+          <p data-ng_translator_product="100" data-ng_translator_ref_id="9buatxflswqc3tf0cjj9nxffb"><!-- markdownlint-disable-line --> 依賴注入允許你共享程式碼。</p>
         </div>
 
         <!-- illustration -->
@@ -110,51 +110,51 @@
 
       </div>
     </div>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="94llp1tr602lubsv35nmn0b4b">当你需要在组件之间共享逻辑时，Angular 利用
-<a href="guide/di">依赖注入</a>的设计模式，允许你创建一个“服务”，从而允许你将代码注入组件，并从单一事实之源管理它。</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="94llp1tr602lubsv35nmn0b4b">當你需要在元件之間共享邏輯時，Angular 利用
+<a href="guide/di">依賴注入</a>的設計模式，允許你建立一個『服務』，從而允許你將程式碼注入元件，並從單一事實之源管理它。</p>
 
   <h2 id="what-are-services">
-    <a href="#what-are-services" class="docs-anchor" tabindex="-1" aria-label="Link to What are services?" data-ng_translator_product="100" data-ng_translator_ref_id="11f5muuuaxa3940hk8znqv68g">什么是服务？</a>
+    <a href="#what-are-services" class="docs-anchor" tabindex="-1" aria-label="Link to What are services?" data-ng_translator_product="100" data-ng_translator_ref_id="11f5muuuaxa3940hk8znqv68g">什麼是服務？</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="a1zdvhq39w7py41fggj6c1o8i">服务是可重用的代码片段，可以被注入</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="7lb3m4o7czldz7rfblvhuo398">类似于定义组件，服务由以下内容组成：</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="a1zdvhq39w7py41fggj6c1o8i">服務是可重用的程式碼片段，可以被注入</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="7lb3m4o7czldz7rfblvhuo398">類似於定義元件，服務由以下內容組成：</p>
 
   <ul class="docs-list">
-    <li data-ng_translator_product="100" data-ng_translator_ref_id="ee41mfyliv5ewpmt2nisrxju6">一个 
-<strong>TypeScript 装饰器</strong>，通过 
-<code>@Injectable</code> 声明该类为 Angular 服务，并允许你通过 
-<code>providedIn</code> 属性（通常为 
-<code>'root'</code>）定义应用程序中哪些部分可以访问该服务，从而允许服务在应用程序中的任何地方被访问。</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="81bchgmn60n9i4b33t51963j7">一个 
-<strong>TypeScript 类</strong>，定义当服务被注入时将可访问的代码</li>
+    <li data-ng_translator_product="100" data-ng_translator_ref_id="ee41mfyliv5ewpmt2nisrxju6">一個 
+<strong>TypeScript 裝飾器</strong>，透過 
+<code>@Injectable</code> 宣告該類別為 Angular 服務，並允許你透過 
+<code>providedIn</code> 屬性（通常為 
+<code>'root'</code>）定義應用程式中哪些部分可以訪問該服務，從而允許服務在應用程式中的任何地方被訪問。</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="81bchgmn60n9i4b33t51963j7">一個 
+<strong>TypeScript 類</strong>，定義當服務被注入時將可訪問的程式碼</li>
 
   </ul>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="7gxj4btr5bpr6biilj3xw3dot">这是一个 
-<code>Calculator</code> 服务的示例。</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="7gxj4btr5bpr6biilj3xw3dot">這是一個 
+<code>Calculator</code> 服務的範例。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">Injectable</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Injectable</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">providedIn</span>: <span class="hljs-string">'root'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CalculatorService</span> {</div><div class="hljs-ln-line">  <span class="hljs-title function_">add</span>(<span class="hljs-params">x: <span class="hljs-built_in">number</span>, y: <span class="hljs-built_in">number</span></span>) {</div><div class="hljs-ln-line">    <span class="hljs-keyword">return</span> x + y;</div><div class="hljs-ln-line">  }</div><div class="hljs-ln-line">}</div></code>
     </pre>
   </div>
   <h2 id="how-to-use-a-service">
-    <a href="#how-to-use-a-service" class="docs-anchor" tabindex="-1" aria-label="Link to How to use a service" data-ng_translator_product="100" data-ng_translator_ref_id="dps426fb46rdthrrr89e6x8ud">如何使用服务</a>
+    <a href="#how-to-use-a-service" class="docs-anchor" tabindex="-1" aria-label="Link to How to use a service" data-ng_translator_product="100" data-ng_translator_ref_id="dps426fb46rdthrrr89e6x8ud">如何使用服務</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_ref_id="ayypw81b4xx7h8cvhy5xfj05k">当你想在组件中使用服务时，你需要：</p>
+  <p data-ng_translator_product="100" data-ng_translator_ref_id="ayypw81b4xx7h8cvhy5xfj05k">當你想在元件中使用服務時，你需要：</p>
 
     <ol class="docs-ordered-list">
-      <li data-ng_translator_product="100" data-ng_translator_ref_id="2v14rprsrj2ngt0eza5yqmuls">导入服务</li>
-<li data-ng_translator_product="100" data-ng_translator_ref_id="aup2h4ftz75lk6j5qrhej4nnd">声明一个类字段，服务被注入到其中。将类字段赋值为调用内置函数 
-<code>inject</code> 创建服务的结果</li>
+      <li data-ng_translator_product="100" data-ng_translator_ref_id="2v14rprsrj2ngt0eza5yqmuls">匯入服務</li>
+<li data-ng_translator_product="100" data-ng_translator_ref_id="aup2h4ftz75lk6j5qrhej4nnd">宣告一個類欄位，服務被注入到其中。將類欄位賦值為呼叫內建函式 
+<code>inject</code> 建立服務的結果</li>
 
     </ol>
-    <p data-ng_translator_product="100" data-ng_translator_ref_id="7ggcqvlflko2rywkiub5jdaz4">这是在
-<code>Receipt</code>组件中的可能样子：</p>
+    <p data-ng_translator_product="100" data-ng_translator_ref_id="7ggcqvlflko2rywkiub5jdaz4">這是在
+<code>Receipt</code>元件中的可能樣子：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Component</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CalculatorService</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'./calculator.service'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-meta">@Component</span>({</div><div class="hljs-ln-line">  <span class="hljs-attr">selector</span>: <span class="hljs-string">'app-receipt'</span>,</div><div class="hljs-ln-line">  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;h1&gt;The total is {{ totalCost }}&lt;/h1&gt;`</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"></div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Receipt</span> {</div><div class="hljs-ln-line">  <span class="hljs-keyword">private</span> calculatorService = <span class="hljs-title function_">inject</span>(<span class="hljs-title class_">CalculatorService</span>);</div><div class="hljs-ln-line">  totalCost = <span class="hljs-variable language_">this</span>.<span class="hljs-property">calculatorService</span>.<span class="hljs-title function_">add</span>(<span class="hljs-number">50</span>, <span class="hljs-number">25</span>);</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2w52z5zedzj9urhinsaqmq856">在这个例子中，通过调用 Angular 函数
-<code>inject</code>并将服务传递给它来使用
+  </div><p data-ng_translator_product="100" data-ng_translator_ref_id="2w52z5zedzj9urhinsaqmq856">在這個例子中，透過呼叫 Angular 函式
+<code>inject</code>並將服務傳遞給它來使用
 <code>CalculatorService</code>。</p>
 
   <h2 id="next-step">
@@ -163,7 +163,7 @@
   
     <nav class="docs-pill-row">
       
-    <a class="docs-pill" href="essentials/next-steps" data-ng_translator_product="100" data-ng_translator_ref_id="5etb4kglexjztfx37e3m6iig5">掌握基础后的下一步</a>
+    <a class="docs-pill" href="essentials/next-steps" data-ng_translator_product="100" data-ng_translator_ref_id="5etb4kglexjztfx37e3m6iig5">掌握基礎後的下一步</a>
     
 
     </nav>

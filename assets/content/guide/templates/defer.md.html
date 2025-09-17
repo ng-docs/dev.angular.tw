@@ -4,119 +4,119 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">使用 <code>@defer</code> 延迟加载</h1>
+    <h1 tabindex="-1">使用 <code>@defer</code> 延遲載入</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/templates/defer.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>可延迟视图，也称为 <code>@defer</code> 控制块，通过延迟加载对于页面初始渲染并非绝对必要的代码，从而减小应用的初始捆绑包大小。这通常会加快初始加载速度并改进核心 Web 指标 (CWV)，主要是最大内容绘制 (LCP) 和首字节时间 (TTFB)。</p>
-<p>要使用此特性，你可以声明式地将模板的某个部分包裹在 @defer 控制块中：</p>
+    <p>可延遲檢視，也稱為 <code>@defer</code> 控制區塊，透過延遲載入對於頁面初始渲染並非絕對必要的程式碼，從而減小應用的初始捆綁包大小。這通常會加快初始載入速度並改進核心 Web 指標 (CWV)，主要是最大內容繪製 (LCP) 和首位元組時間 (TTFB)。</p>
+<p>要使用此屬性，你可以宣告式地將樣板的某個部分包裹在 @defer 控制塊中：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p><code>@defer</code> 控制块内任何组件、指令和管道的代码都会被拆分到一个单独的 JavaScript 文件中，并且仅在必要时（在模板的其余部分渲染完毕后）加载。</p>
-<p>可延迟视图支持各种触发器、预取选项以及用于占位符、加载和错误状态管理的子控制块。</p>
+  </div><p><code>@defer</code> 控制區塊內任何元件、指令和通道的程式碼都會被拆分到一個單獨的 JavaScript 檔案中，並且僅在必要時（在樣板的其餘部分渲染完畢後）載入。</p>
+<p>可延遲檢視支援各種觸發器、預取選項以及用於佔位符、載入和錯誤狀態管理的子控制區塊。</p>
 
   <h2 id="which-dependencies-are-deferred">
-    <a href="#which-dependencies-are-deferred" class="docs-anchor" tabindex="-1" aria-label="Link to Which dependencies are deferred?">哪些依赖项会被延迟？</a>
+    <a href="#which-dependencies-are-deferred" class="docs-anchor" tabindex="-1" aria-label="Link to Which dependencies are deferred?">哪些依賴項會被延遲？</a>
   </h2>
-  <p>在加载应用时，组件、指令、管道以及任何组件 CSS 样式都可以被延迟。</p>
-<p>为了使 <code>@defer</code> 控制块中的依赖项被延迟，它们需要满足两个条件：</p>
+  <p>在載入應用時，元件、指令、通道以及任何元件 CSS 樣式都可以被延遲。</p>
+<p>為了使 <code>@defer</code> 控制塊中的依賴項被延遲，它們需要滿足兩個條件：</p>
 
     <ol class="docs-ordered-list">
-      <li><strong>它们必须是独立的。</strong> 非独立的依赖项无法延迟，并且仍然是急性加载的，即使它们位于 <code>@defer</code> 控制块内。</li>
-<li><strong>它们不能在同一文件中 <code>@defer</code> 控制块之外被引用。</strong> 如果它们在 <code>@defer</code> 控制块之外被引用，或者在 ViewChild 查询中被引用，则这些依赖项将被急性加载。</li>
+      <li><strong>它們必須是獨立的。</strong> 非獨立的依賴項無法延遲，並且仍然是急性載入的，即使它們位於 <code>@defer</code> 控制區塊內。</li>
+<li><strong>它們不能在同一檔案中 <code>@defer</code> 控制區塊之外被引用。</strong> 如果它們在 <code>@defer</code> 控制區塊之外被引用，或者在 ViewChild 查詢中被引用，則這些依賴項將被急性載入。</li>
 
     </ol>
-    <p>在 <code>@defer</code> 控制块中使用的组件、指令和管道的<em>传递性</em>依赖项不一定需要是独立的；传递性依赖项仍然可以在 <code>NgModule</code> 中声明并参与延迟加载。</p>
-<p>Angular 的编译器为 <code>@defer</code> 控制块中使用的每个组件、指令和管道生成一个 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import" target="_blank">动态导入</a> 语句。在所有导入求解后，控制块的主要内容才会渲染。Angular 不保证这些导入的任何特定顺序。</p>
+    <p>在 <code>@defer</code> 控制塊中使用的元件、指令和通道的<em>傳遞性</em>依賴項不一定需要是獨立的；傳遞性依賴項仍然可以在 <code>NgModule</code> 中宣告並參與延遲載入。</p>
+<p>Angular 的編譯器為 <code>@defer</code> 控制塊中使用的每個元件、指令和通道生成一個 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import" target="_blank">動態匯入</a> 語句。在所有匯入求解後，控制區塊的主要內容才會渲染。Angular 不保證這些匯入的任何特定順序。</p>
 
   <h2 id="how-to-manage-different-stages-of-deferred-loading">
-    <a href="#how-to-manage-different-stages-of-deferred-loading" class="docs-anchor" tabindex="-1" aria-label="Link to How to manage different stages of deferred loading">如何管理延迟加载的不同阶段</a>
+    <a href="#how-to-manage-different-stages-of-deferred-loading" class="docs-anchor" tabindex="-1" aria-label="Link to How to manage different stages of deferred loading">如何管理延遲載入的不同階段</a>
   </h2>
-  <p><code>@defer</code> 控制块有几个子控制块，可让你优雅地处理延迟加载过程中的不同阶段。</p>
+  <p><code>@defer</code> 控制區塊有幾個子控制區塊，可讓你優雅地處理延遲載入過程中的不同階段。</p>
 
   <h3 id="defer">
     <a href="#defer" class="docs-anchor" tabindex="-1" aria-label="Link to <code>@defer</code>"><code>@defer</code></a>
   </h3>
-  <p>这是定义要惰性加载的内容部分的主控制块。它最初不会渲染——延迟的内容会在指定的<a href="/guide/defer#triggers">触发器</a>发生或满足 <code>when</code> 条件后加载和渲染。</p>
-<p>默认情况下，当浏览器状态变为<a href="/guide/defer#idle">空闲</a>时，会触发 @defer 控制块。</p>
+  <p>這是定義要延遲載入的內容部分的主控制區塊。它最初不會渲染——延遲的內容會在指定的<a href="/guide/defer#triggers">觸發器</a>發生或滿足 <code>when</code> 條件後加載和渲染。</p>
+<p>預設情況下，當瀏覽器狀態變為<a href="/guide/defer#idle">空閒</a>時，會觸發 @defer 控制區塊。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h3 id="show-placeholder-content-with-placeholder">
-    <a href="#show-placeholder-content-with-placeholder" class="docs-anchor" tabindex="-1" aria-label="Link to Show placeholder content with <code>@placeholder</code>">使用 <code>@placeholder</code> 显示占位符内容</a>
+    <a href="#show-placeholder-content-with-placeholder" class="docs-anchor" tabindex="-1" aria-label="Link to Show placeholder content with <code>@placeholder</code>">使用 <code>@placeholder</code> 顯示佔位符內容</a>
   </h3>
-  <p>默认情况下，defer 控制块在被触发之前不渲染任何内容。</p>
-<p><code>@placeholder</code> 是一个可选的控制块，用于声明在 <code>@defer</code> 控制块被触发之前要显示的内容。</p>
+  <p>預設情況下，defer 控制區塊在被觸發之前不渲染任何內容。</p>
+<p><code>@placeholder</code> 是一個可選的控制區塊，用於宣告在 <code>@defer</code> 控制區塊被觸發之前要顯示的內容。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Placeholder content&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>虽然是可选的，但某些触发器可能需要 <code>@placeholder</code> 或<a href="/guide/templates/variables#template-reference-variables">模板引用变量</a>的存在才能起作用。有关更多详细信息，请参阅<a href="/guide/defer#triggers">触发器</a>部分。</p>
-<p>加载完成后，Angular 会将占位符内容替换为主内容。你可以在占位符部分使用任何内容，包括纯 HTML、组件、指令和管道。请记住，<em>占位符控制块的依赖项是急性加载的</em>。</p>
-<p><code>@placeholder</code> 控制块接受一个可选参数，用于指定在占位符内容初始渲染后，此占位符应显示的<code>minimum</code> 最短时间。</p>
+  </div><p>雖然是可選的，但某些觸發器可能需要 <code>@placeholder</code> 或<a href="/guide/templates/variables#template-reference-variables">樣板引用變數</a>的存在才能起作用。有關更多詳細訊息，請參閱<a href="/guide/defer#triggers">觸發器</a>部分。</p>
+<p>載入完成後，Angular 會將佔位符內容替換為主內容。你可以在佔位符部分使用任何內容，包括純 HTML、元件、指令和通道。請記住，<em>佔位符控制區塊的依賴項是急性載入的</em>。</p>
+<p><code>@placeholder</code> 控制區塊接受一個可選引數，用於指定在佔位符內容初始渲染後，此佔位符應顯示的<code>minimum</code> 最短時間。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (minimum 500ms) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Placeholder content&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>此 <code>minimum</code> 参数以毫秒 (ms) 或秒 (s) 的时间增量指定。你可以使用此参数来防止在快速获取延迟依赖项的情况下占位符内容快速闪烁。</p>
+  </div><p>此 <code>minimum</code> 引數以毫秒 (ms) 或秒 (s) 的時間增量指定。你可以使用此引數來防止在快速獲取延遲依賴項的情況下佔位符內容快速閃爍。</p>
 
   <h3 id="show-loading-content-with-loading">
-    <a href="#show-loading-content-with-loading" class="docs-anchor" tabindex="-1" aria-label="Link to Show loading content with <code>@loading</code>">使用 <code>@loading</code> 显示加载内容</a>
+    <a href="#show-loading-content-with-loading" class="docs-anchor" tabindex="-1" aria-label="Link to Show loading content with <code>@loading</code>">使用 <code>@loading</code> 顯示載入內容</a>
   </h3>
-  <p><code>@loading</code> 控制块是一个可选的控制块，允许你声明在延迟依赖项加载时显示的内容。一旦触发加载，它将替换 <code>@placeholder</code> 控制块。</p>
+  <p><code>@loading</code> 控制區塊是一個可選的控制區塊，允許你宣告在延遲依賴項載入時顯示的內容。一旦觸發載入，它將替換 <code>@placeholder</code> 控制區塊。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@loading</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">img</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> alt</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"loading..."</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> src</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"loading.gif"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Placeholder content&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>它的依赖项是急性加载的（类似于 <code>@placeholder</code>）。</p>
-<p><code>@loading</code> 控制块接受两个可选参数，以帮助防止在快速获取延迟依赖项时可能发生的内容快速闪烁，：</p>
+  </div><p>它的依賴項是急性載入的（類似於 <code>@placeholder</code>）。</p>
+<p><code>@loading</code> 控制區塊接受兩個可選引數，以幫助防止在快速獲取延遲依賴項時可能發生的內容快速閃爍，：</p>
 
   <ul class="docs-list">
-    <li><code>minimum</code> - 此占位符应显示的最短时间</li>
-<li><code>after</code> - 加载开始后，在显示加载模板之前要等待的时间量</li>
+    <li><code>minimum</code> - 此佔位符應顯示的最短時間</li>
+<li><code>after</code> - 載入開始後，在顯示載入樣板之前要等待的時間量</li>
 
   </ul>
   <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@loading</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (after 100ms; minimum 1s) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">img</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> alt</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"loading..."</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> src</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"loading.gif"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>这两个参数都以毫秒 (ms) 或秒 (s) 的时间增量指定。此外，这两个参数的计时器都在加载被触发后立即开始。</p>
+  </div><p>這兩個引數都以毫秒 (ms) 或秒 (s) 的時間增量指定。此外，這兩個引數的計時器都在載入被觸發後立即開始。</p>
 
   <h3 id="show-error-state-when-deferred-loading-fails-with-error">
-    <a href="#show-error-state-when-deferred-loading-fails-with-error" class="docs-anchor" tabindex="-1" aria-label="Link to Show error state when deferred loading fails with <code>@error</code>">当延迟加载失败时，使用 <code>@error</code> 显示错误状态</a>
+    <a href="#show-error-state-when-deferred-loading-fails-with-error" class="docs-anchor" tabindex="-1" aria-label="Link to Show error state when deferred loading fails with <code>@error</code>">當延遲載入失敗時，使用 <code>@error</code> 顯示錯誤狀態</a>
   </h3>
-  <p><code>@error</code> 控制块是一个可选的控制块，用于在延迟加载失败时显示。与 <code>@placeholder</code> 和 <code>@loading</code> 类似，@error 控制块的依赖项是急性加载的。</p>
+  <p><code>@error</code> 控制區塊是一個可選的控制區塊，用於在延遲載入失敗時顯示。與 <code>@placeholder</code> 和 <code>@loading</code> 類似，@error 控制區塊的依賴項是急性載入的。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@error</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Failed to load large component.&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h2 id="controlling-deferred-content-loading-with-triggers">
-    <a href="#controlling-deferred-content-loading-with-triggers" class="docs-anchor" tabindex="-1" aria-label="Link to Controlling deferred content loading with triggers">使用触发器控制延迟内容加载</a>
+    <a href="#controlling-deferred-content-loading-with-triggers" class="docs-anchor" tabindex="-1" aria-label="Link to Controlling deferred content loading with triggers">使用觸發器控制延遲內容載入</a>
   </h2>
-  <p>你可以指定<strong>触发器</strong>来控制 Angular 何时加载和显示延迟内容。</p>
-<p>当 <code>@defer</code> 控制块被触发时，它会将占位符内容替换为惰性加载的内容。</p>
-<p>可以通过用分号 <code>;</code> 分隔来定义多个事件触发器，并将它们评估为 OR 条件。</p>
-<p>触发器有两种类型：<code>on</code> 和 <code>when</code>。</p>
+  <p>你可以指定<strong>觸發器</strong>來控制 Angular 何時載入和顯示延遲內容。</p>
+<p>當 <code>@defer</code> 控制區塊被觸發時，它會將佔位符內容替換為延遲載入的內容。</p>
+<p>可以透過用分號 <code>;</code> 分隔來定義多個事件觸發器，並將它們評估為 OR 條件。</p>
+<p>觸發器有兩種型別：<code>on</code> 和 <code>when</code>。</p>
 
   <h3 id="on">
     <a href="#on" class="docs-anchor" tabindex="-1" aria-label="Link to <code>on</code>"><code>on</code></a>
   </h3>
-  <p><code>on</code> 指定触发 <code>@defer</code> 控制块的条件。</p>
-<p>可用的触发器如下：</p>
+  <p><code>on</code> 指定觸發 <code>@defer</code> 控制區塊的條件。</p>
+<p>可用的觸發器如下：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th>触发器</th>
+<th>觸發器</th>
 <th>描述</th>
 </tr>
 
@@ -124,27 +124,27 @@
       <tbody>
         <tr>
 <td><a href="#idle"><code>idle</code></a></td>
-<td>当浏览器空闲时触发。</td>
+<td>當瀏覽器空閒時觸發。</td>
 </tr>
 <tr>
 <td><a href="#viewport"><code>viewport</code></a></td>
-<td>当指定内容进入视口时触发</td>
+<td>當指定內容進入視口時觸發</td>
 </tr>
 <tr>
 <td><a href="#interaction"><code>interaction</code></a></td>
-<td>当用户与指定元素交互时触发</td>
+<td>當用戶與指定元素互動時觸發</td>
 </tr>
 <tr>
 <td><a href="#hover"><code>hover</code></a></td>
-<td>当鼠标悬停在指定区域上方时触发</td>
+<td>當滑鼠懸停在指定區域上方時觸發</td>
 </tr>
 <tr>
 <td><a href="#immediate"><code>immediate</code></a></td>
-<td>在非延迟内容完成渲染后立即触发</td>
+<td>在非延遲內容完成渲染後立即觸發</td>
 </tr>
 <tr>
 <td><a href="#timer"><code>timer</code></a></td>
-<td>在特定持续时间后触发</td>
+<td>在特定持續時間後觸發</td>
 </tr>
 
       </tbody>
@@ -154,7 +154,7 @@
   <h4 id="idle">
     <a href="#idle" class="docs-anchor" tabindex="-1" aria-label="Link to <code>idle</code>"><code>idle</code></a>
   </h4>
-  <p><code>idle</code> 触发器在浏览器基于 requestIdleCallback 达到空闲状态后加载延迟内容。这是 defer 控制块的默认行为。</p>
+  <p><code>idle</code> 觸發器在瀏覽器基於 requestIdleCallback 達到空閒狀態後加載延遲內容。這是 defer 控制區塊的預設行為。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- @defer (on idle) --&gt;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-cmp</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Large component placeholder&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -163,13 +163,13 @@
   <h4 id="viewport">
     <a href="#viewport" class="docs-anchor" tabindex="-1" aria-label="Link to <code>viewport</code>"><code>viewport</code></a>
   </h4>
-  <p>当指定内容使用 <a href="https://developer.mozilla.org/docs/Web/API/Intersection_Observer_API" target="_blank">Intersection Observer API</a> 进入视口时，<code>viewport</code> 触发器会加载延迟内容。观察到的内容可以是 <code>@placeholder</code> 内容或显式元素引用。</p>
-<p>默认情况下，<code>@defer</code> 监视占位符是否进入视口。以这种方式使用的占位符必须具有单个根元素。</p>
+  <p>當指定內容使用 <a href="https://developer.mozilla.org/docs/Web/API/Intersection_Observer_API" target="_blank">Intersection Observer API</a> 進入視口時，<code>viewport</code> 觸發器會載入延遲內容。觀察到的內容可以是 <code>@placeholder</code> 內容或顯式元素引用。</p>
+<p>預設情況下，<code>@defer</code> 監視佔位符是否進入視口。以這種方式使用的佔位符必須具有單個根元素。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (on viewport) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-cmp</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Large component placeholder&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>或者，你可以在与 <code>@defer</code> 块相同的模板中指定一个 <a href="/guide/templates/variables">模板引用变量</a>，作为被监视以进入视口的元素。此变量作为视口触发器上的参数传入。</p>
+  </div><p>或者，你可以在與 <code>@defer</code> 區塊相同的樣板中指定一個 <a href="/guide/templates/variables">樣板引用變數</a>，作為被監視以進入視口的元素。此變數作為視口觸發器上的引數傳入。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> #greeting</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Hello!&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (on </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">viewport</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(greeting)) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">greetings-cmp</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -178,13 +178,13 @@
   <h4 id="interaction">
     <a href="#interaction" class="docs-anchor" tabindex="-1" aria-label="Link to <code>interaction</code>"><code>interaction</code></a>
   </h4>
-  <p>当用户通过 <code>click</code> 或 <code>keydown</code> 事件与指定元素交互时，<code>interaction</code> 触发器会加载延迟加载内容。</p>
-<p>默认情况下，占位符充当交互元素。以这种方式使用的占位符必须具有单个根元素。</p>
+  <p>當用戶透過 <code>click</code> 或 <code>keydown</code> 事件與指定元素互動時，<code>interaction</code> 觸發器會載入延遲載入內容。</p>
+<p>預設情況下，佔位符充當互動元素。以這種方式使用的佔位符必須具有單個根元素。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (on interaction) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-cmp</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Large component placeholder&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>或者，你可以在与 <code>@defer</code> 块相同的模板中指定一个 <a href="/guide/templates/variables">模板引用变量</a>，作为被监视以进入视口的元素。此变量作为视口触发器上的参数传入。</p>
+  </div><p>或者，你可以在與 <code>@defer</code> 區塊相同的樣板中指定一個 <a href="/guide/templates/variables">樣板引用變數</a>，作為被監視以進入視口的元素。此變數作為視口觸發器上的引數傳入。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> #greeting</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Hello!&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (on </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">interaction</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(greeting)) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">greetings-cmp</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -193,13 +193,13 @@
   <h4 id="hover">
     <a href="#hover" class="docs-anchor" tabindex="-1" aria-label="Link to <code>hover</code>"><code>hover</code></a>
   </h4>
-  <p>当鼠标通过 <code>mouseover</code> 和 <code>focusin</code> 事件悬停在触发区域上方时，<code>hover</code> 触发器会加载延迟加载内容。</p>
-<p>默认情况下，占位符充当交互元素。以这种方式使用的占位符必须具有单个根元素。</p>
+  <p>當滑鼠透過 <code>mouseover</code> 和 <code>focusin</code> 事件懸停在觸發區域上方時，<code>hover</code> 觸發器會載入延遲載入內容。</p>
+<p>預設情況下，佔位符充當互動元素。以這種方式使用的佔位符必須具有單個根元素。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (on hover) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-cmp</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Large component placeholder&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>或者，你可以在与 <code>@defer</code> 块相同的模板中指定一个 <a href="/guide/templates/variables">模板引用变量</a>，作为被监视以进入视口的元素。此变量作为视口触发器上的参数传入。</p>
+  </div><p>或者，你可以在與 <code>@defer</code> 區塊相同的樣板中指定一個 <a href="/guide/templates/variables">樣板引用變數</a>，作為被監視以進入視口的元素。此變數作為視口觸發器上的引數傳入。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> #greeting</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Hello!&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (on </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">hover</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(greeting)) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">greetings-cmp</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -208,7 +208,7 @@
   <h4 id="immediate">
     <a href="#immediate" class="docs-anchor" tabindex="-1" aria-label="Link to <code>immediate</code>"><code>immediate</code></a>
   </h4>
-  <p><code>immediate</code> 触发器会立即加载延迟加载内容。这意味着延迟加载块会在所有其他非延迟加载内容完成渲染后立即加载。</p>
+  <p><code>immediate</code> 觸發器會立即載入延遲載入內容。這意味著延遲載入區塊會在所有其他非延遲載入內容完成渲染後立即載入。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (on immediate) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-cmp</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Large component placeholder&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -217,66 +217,66 @@
   <h4 id="timer">
     <a href="#timer" class="docs-anchor" tabindex="-1" aria-label="Link to <code>timer</code>"><code>timer</code></a>
   </h4>
-  <p><code>timer</code> 触发器会在指定的时长后加载延迟加载内容。</p>
+  <p><code>timer</code> 觸發器會在指定的時長後加載延遲載入內容。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (on </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">timer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(500ms)) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-cmp</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Large component placeholder&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>时长参数必须以毫秒 (<code>ms</code>) 或秒 (<code>s</code>) 为单位指定。</p>
+  </div><p>時長引數必須以毫秒 (<code>ms</code>) 或秒 (<code>s</code>) 為單位指定。</p>
 
   <h3 id="when">
     <a href="#when" class="docs-anchor" tabindex="-1" aria-label="Link to <code>when</code>"><code>when</code></a>
   </h3>
-  <p><code>when</code> 触发器接受自定义条件表达式，并在条件变为真值时加载延迟加载内容。</p>
+  <p><code>when</code> 觸發器接受自定義條件表示式，並在條件變為真值時載入延遲載入內容。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (when condition) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-cmp</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Large component placeholder&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>这是一次性操作——如果条件在变为真值后又变为假值，<code>@defer</code> 块不会恢复为占位符。</p>
+  </div><p>這是一次性操作——如果條件在變為真值後又變為假值，<code>@defer</code> 區塊不會恢復為佔位符。</p>
 
   <h2 id="prefetching-data-with-prefetch">
-    <a href="#prefetching-data-with-prefetch" class="docs-anchor" tabindex="-1" aria-label="Link to Prefetching data with <code>prefetch</code>">使用 <code>prefetch</code> 预取数据</a>
+    <a href="#prefetching-data-with-prefetch" class="docs-anchor" tabindex="-1" aria-label="Link to Prefetching data with <code>prefetch</code>">使用 <code>prefetch</code> 預取資料</a>
   </h2>
-  <p>除了指定确定何时显示延迟加载内容的条件之外，你还可以选择性地指定一个 <strong>预取触发器</strong>。此触发器允许你在显示延迟加载内容之前加载与 <code>@defer</code> 块关联的 JavaScript。</p>
-<p>预取启用更高级的行为，例如允许你在用户实际看到或与 defer 块交互之前开始预取资源，但用户可能很快会与之交互，从而更快地提供资源。</p>
-<p>你可以指定一个预取触发器，方式与块的主要触发器类似，但要以 <code>prefetch</code> 关键字为前缀。块的主要触发器和预取触发器用分号字符 (<code>;</code>) 分隔。</p>
-<p>在下面的示例中，预取在浏览器空闲时开始，并且仅在用户与占位符交互后才渲染块的内容。</p>
+  <p>除了指定確定何時顯示延遲載入內容的條件之外，你還可以選擇性地指定一個 <strong>預取觸發器</strong>。此觸發器允許你在顯示延遲載入內容之前載入與 <code>@defer</code> 區塊關聯的 JavaScript。</p>
+<p>預取啟用更高階的行為，例如允許你在使用者實際看到或與 defer 區塊互動之前開始預取資源，但使用者可能很快會與之互動，從而更快地提供資源。</p>
+<p>你可以指定一個預取觸發器，方式與區塊的主要觸發器類似，但要以 <code>prefetch</code> 關鍵字為字首。區塊的主要觸發器和預取觸發器用分號字元 (<code>;</code>) 分隔。</p>
+<p>在下面的範例中，預取在瀏覽器空閒時開始，並且僅在使用者與佔位符互動後才渲染區塊的內容。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (on interaction; prefetch on idle) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-cmp</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Large component placeholder&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h2 id="testing-defer-blocks">
-    <a href="#testing-defer-blocks" class="docs-anchor" tabindex="-1" aria-label="Link to Testing <code>@defer</code> blocks">测试 <code>@defer</code> 块</a>
+    <a href="#testing-defer-blocks" class="docs-anchor" tabindex="-1" aria-label="Link to Testing <code>@defer</code> blocks">測試 <code>@defer</code> 區塊</a>
   </h2>
-  <p>Angular 提供了 TestBed API，以简化测试 <code>@defer</code> 块和在测试期间触发不同状态的过程。默认情况下，测试中的 <code>@defer</code> 块的运行方式与真实应用中的 defer 块的行为方式相同。如果想手动单步执行状态，可以在 TestBed 配置中将 defer 块行为切换为 <code>Manual</code>。</p>
+  <p>Angular 提供了 TestBed API，以簡化測試 <code>@defer</code> 區塊和在測試期間觸發不同狀態的過程。預設情況下，測試中的 <code>@defer</code> 區塊的執行方式與真實應用中的 defer 區塊的行為方式相同。如果想手動單步執行狀態，可以在 TestBed 設定中將 defer 區塊行為切換為 <code>Manual</code>。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">it</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'should render a defer block in different states'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">async</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // configures the defer block behavior to start in "paused" state for manual control.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  TestBed.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">configureTestingModule</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({deferBlockBehavior: DeferBlockBehavior.Manual});</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">      @defer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">large-component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@placeholder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        Placeholder</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@loading</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        Loading...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      }</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    `</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  })</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ComponentA</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Create component fixture.</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> componentFixture</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> TestBed.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">createComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(ComponentA);</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Retrieve the list of all defer block fixtures and get the first block.</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> deferBlockFixture</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> componentFixture.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">getDeferBlocks</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">())[</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Renders placeholder state by default.</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  expect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(componentFixture.nativeElement.innerHTML).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">toContain</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Placeholder'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Render loading state and verify rendered output.</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> deferBlockFixture.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">render</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(DeferBlockState.Loading);</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  expect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(componentFixture.nativeElement.innerHTML).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">toContain</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Loading'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Render final state and verify the output.</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> deferBlockFixture.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">render</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(DeferBlockState.Complete);</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  expect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(componentFixture.nativeElement.innerHTML).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">toContain</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'large works!'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
     </pre>
   </div>
   <h2 id="does-defer-work-with-ngmodule">
-    <a href="#does-defer-work-with-ngmodule" class="docs-anchor" tabindex="-1" aria-label="Link to Does <code>@defer</code> work with <code>NgModule</code>?"><code>@defer</code> 可以与 <code>NgModule</code> 一起使用吗？</a>
+    <a href="#does-defer-work-with-ngmodule" class="docs-anchor" tabindex="-1" aria-label="Link to Does <code>@defer</code> work with <code>NgModule</code>?"><code>@defer</code> 可以與 <code>NgModule</code> 一起使用嗎？</a>
   </h2>
-  <p><code>@defer</code> 控制块与独立组件和基于 NgModule 的组件、指令和管道都兼容。但是，<strong>只有独立的组件、指令和管道可以被延迟</strong>。基于 NgModule 的依赖项不会被延迟，并且包含在急性加载的捆绑包中。</p>
+  <p><code>@defer</code> 控制區塊與獨立元件和基於 NgModule 的元件、指令和通道都相容。但是，<strong>只有獨立的元件、指令和通道可以被延遲</strong>。基於 NgModule 的依賴項不會被延遲，並且包含在急性載入的捆綁包中。</p>
 
   <h2 id="how-does-defer-work-with-server-side-rendering-ssr-and-static-site-generation-ssg">
-    <a href="#how-does-defer-work-with-server-side-rendering-ssr-and-static-site-generation-ssg" class="docs-anchor" tabindex="-1" aria-label="Link to How does <code>@defer</code> work with server-side rendering (SSR) and static-site generation (SSG)?"><code>@defer</code> 如何与服务器端渲染 (SSR) 和静态站点生成 (SSG) 一起工作？</a>
+    <a href="#how-does-defer-work-with-server-side-rendering-ssr-and-static-site-generation-ssg" class="docs-anchor" tabindex="-1" aria-label="Link to How does <code>@defer</code> work with server-side rendering (SSR) and static-site generation (SSG)?"><code>@defer</code> 如何與伺服器端渲染 (SSR) 和靜態站點生成 (SSG) 一起工作？</a>
   </h2>
-  <p>默认情况下，当在服务器上渲染应用（无论是使用 SSR 还是 SSG）时，defer 块始终渲染它们的 <code>@placeholder</code>（如果未指定占位符，则不渲染任何内容），并且触发器不会被调用。在客户端，<code>@placeholder</code> 的内容会被水合，并且触发器会被激活。</p>
-<p>要在服务器上（SSR 和 SSG）渲染 <code>@defer</code> 块的主要内容，你可以启用 <a href="/guide/incremental-hydration">水合增强特性</a> 并为必要的块配置 <code>hydrate</code> 触发器。</p>
+  <p>預設情況下，當在服務器上渲染應用（無論是使用 SSR 還是 SSG）時，defer 區塊始終渲染它們的 <code>@placeholder</code>（如果未指定佔位符，則不渲染任何內容），並且觸發器不會被呼叫。在用戶端，<code>@placeholder</code> 的內容會被水合，並且觸發器會被啟用。</p>
+<p>要在服務器上（SSR 和 SSG）渲染 <code>@defer</code> 區塊的主要內容，你可以啟用 <a href="/guide/incremental-hydration">水合增強屬性</a> 併為必要的區塊設定 <code>hydrate</code> 觸發器。</p>
 
   <h2 id="best-practices-for-deferring-views">
-    <a href="#best-practices-for-deferring-views" class="docs-anchor" tabindex="-1" aria-label="Link to Best practices for deferring views">延迟加载视图的最佳实践</a>
+    <a href="#best-practices-for-deferring-views" class="docs-anchor" tabindex="-1" aria-label="Link to Best practices for deferring views">延遲載入檢視的最佳實踐</a>
   </h2>
   
   <h3 id="avoid-cascading-loads-with-nested-defer-blocks">
-    <a href="#avoid-cascading-loads-with-nested-defer-blocks" class="docs-anchor" tabindex="-1" aria-label="Link to Avoid cascading loads with nested <code>@defer</code> blocks">避免使用嵌套的 <code>@defer</code> 块进行级联加载</a>
+    <a href="#avoid-cascading-loads-with-nested-defer-blocks" class="docs-anchor" tabindex="-1" aria-label="Link to Avoid cascading loads with nested <code>@defer</code> blocks">避免使用巢狀的 <code>@defer</code> 區塊進行級聯載入</a>
   </h3>
-  <p>当你有嵌套的 <code>@defer</code> 块时，它们应该具有不同的触发器，以避免同时加载，这会导致级联请求并可能对页面加载性能产生负面影响。</p>
+  <p>當你有巢狀的 <code>@defer</code> 區塊時，它們應該具有不同的觸發器，以避免同時載入，這會導致級聯請求並可能對頁面載入效能產生負面影響。</p>
 
   <h3 id="avoid-layout-shifts">
-    <a href="#avoid-layout-shifts" class="docs-anchor" tabindex="-1" aria-label="Link to Avoid layout shifts">避免布局偏移</a>
+    <a href="#avoid-layout-shifts" class="docs-anchor" tabindex="-1" aria-label="Link to Avoid layout shifts">避免佈局偏移</a>
   </h3>
-  <p>避免延迟加载在初始加载时在用户视口中可见的组件。这样做可能会通过导致累积布局偏移 (CLS) 增加而对 Core Web Vitals 产生负面影响。</p>
-<p>如果这种情况是必要的，请避免使用 <code>immediate</code>、<code>timer</code>、<code>viewport</code> 和自定义 <code>when</code> 触发器，这些触发器会导致内容在初始页面渲染期间加载。</p>
+  <p>避免延遲載入在初始載入時在使用者視口中可見的元件。這樣做可能會通過導致累積佈局偏移 (CLS) 增加而對 Core Web Vitals 產生負面影響。</p>
+<p>如果這種情況是必要的，請避免使用 <code>immediate</code>、<code>timer</code>、<code>viewport</code> 和自定義 <code>when</code> 觸發器，這些觸發器會導致內容在初始頁面渲染期間載入。</p>

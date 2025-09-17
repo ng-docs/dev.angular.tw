@@ -4,53 +4,53 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">模板中的空白符</h1>
+    <h1 tabindex="-1">樣板中的空白符</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/templates/whitespace.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>默认情况下，Angular 模板不会保留框架认为不必要的空白符。这通常发生在两种情况下：元素之间的空白符和文本内部可折叠的空白符。</p>
+    <p>預設情況下，Angular 樣板不會保留框架認為不必要的空白符。這通常發生在兩種情況下：元素之間的空白符和文字內部可摺疊的空白符。</p>
 
   <h2 id="whitespace-between-elements">
-    <a href="#whitespace-between-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Whitespace between elements">元素之间的空白符</a>
+    <a href="#whitespace-between-elements" class="docs-anchor" tabindex="-1" aria-label="Link to Whitespace between elements">元素之間的空白符</a>
   </h2>
-  <p>大多数开发人员喜欢使用换行符和缩进符来格式化他们的模板，以提高模板的可读性：</p>
+  <p>大多數開發人員喜歡使用換行符和縮排符來格式化他們的樣板，以提高樣板的可讀性：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">section</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;User profile&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">label</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    User name</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">label</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">section</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>此模板在所有元素之间都包含空白符。以下代码段显示了相同的 HTML，其中每个空白字符都替换为井号 (<code>#</code>) 字符，以突出显示存在多少空白符：</p>
+  </div><p>此樣板在所有元素之間都包含空白符。以下程式碼段落顯示了相同的 HTML，其中每個空白字元都替換為井號 (<code>#</code>) 字元，以突出顯示存在多少空白符：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- Total Whitespace: 20 --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">section</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;###&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;User profile&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;###&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">label</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;#####User name#####&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;###&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">label</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;#&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">section</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>保留模板中编写的空白符会导致许多不必要的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Text" target="_blank">文本节点</a>，并增加页面渲染开销。通过忽略元素之间的这些空白符，Angular 在页面上渲染模板时执行的工作更少，从而提高了整体性能。</p>
+  </div><p>保留樣板中編寫的空白符會導致許多不必要的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Text" target="_blank">文字節點</a>，並增加頁面渲染開銷。透過忽略元素之間的這些空白符，Angular 在頁面上渲染樣板時執行的工作更少，從而提高了整體性能。</p>
 
   <h2 id="collapsible-whitespace-inside-text">
-    <a href="#collapsible-whitespace-inside-text" class="docs-anchor" tabindex="-1" aria-label="Link to Collapsible whitespace inside text">文本内部可折叠的空白符</a>
+    <a href="#collapsible-whitespace-inside-text" class="docs-anchor" tabindex="-1" aria-label="Link to Collapsible whitespace inside text">文字內部可摺疊的空白符</a>
   </h2>
-  <p>当你的 Web 浏览器在页面上渲染 HTML 时，它会将多个连续的空白字符折叠为一个字符：</p>
+  <p>當你的 Web 瀏覽器在頁面上渲染 HTML 時，它會將多個連續的空白字元摺疊為一個字元：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- What it looks like in the template --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Hello         world&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>在此范例中，浏览器仅在 “Hello” 和 “world” 之间显示一个空格。</p>
+  </div><p>在此範例中，瀏覽器僅在 『Hello』 和 『world』 之間顯示一個空格。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- What shows up in the browser --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Hello world&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>有关其工作原理的更多上下文，请参阅 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace" target="_blank">HTML、CSS 和 DOM 如何处理空白符</a>。</p>
-<p>Angular 通过在编译模板时将这些不必要的空白字符折叠为一个字符，从而从一开始就避免将它们发送到浏览器。</p>
+  </div><p>有關其工作原理的更多上下文，請參閱 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace" target="_blank">HTML、CSS 和 DOM 如何處理空白符</a>。</p>
+<p>Angular 透過在編譯樣板時將這些不必要的空白字元摺疊為一個字元，從而從一開始就避免將它們傳送到瀏覽器。</p>
 
   <h2 id="preserving-whitespace">
     <a href="#preserving-whitespace" class="docs-anchor" tabindex="-1" aria-label="Link to Preserving whitespace">保留空白符</a>
   </h2>
-  <p>你可以通过在模板的 <code>@Component</code> 装饰器中指定 <code>preserveWhitespaces: true</code> 来告诉 Angular 保留模板中的空白符。</p>
+  <p>你可以透過在樣板的 <code>@Component</code> 裝飾器中指定 <code>preserveWhitespaces: true</code> 來告訴 Angular 保留樣板中的空白符。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  /* ... */</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  preserveWhitespaces: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Hello         world&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span></code></pre>
     </pre>
-  </div><p>除非绝对必要，否则请避免设置此选项。保留空白符可能会导致 Angular 在渲染时生成明显更多的节点，从而减慢你的应用。</p>
-<p>你还可以使用 Angular 特有的特殊 HTML 实体 <code>&amp;ngsp;</code>。此实体生成一个空格字符，该字符会保留在编译后的输出中。</p>
+  </div><p>除非絕對必要，否則請避免設定此選項。保留空白符可能會導致 Angular 在渲染時生成明顯更多的節點，從而減慢你的應用。</p>
+<p>你還可以使用 Angular 特有的特殊 HTML 實體 <code>&amp;ngsp;</code>。此實體生成一個空格字元，該字元會保留在編譯後的輸出中。</p>

@@ -4,155 +4,155 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">测试</h1>
+    <h1 tabindex="-1">測試</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/testing/overview.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>测试你的 Angular 应用可以帮助你检查你的应用是否按照预期工作。</p>
+    <p>測試你的 Angular 應用可以幫助你檢查你的應用是否按照預期工作。</p>
 
   <h2 id="set-up-testing">
-    <a href="#set-up-testing" class="docs-anchor" tabindex="-1" aria-label="Link to Set up testing">建立测试</a>
+    <a href="#set-up-testing" class="docs-anchor" tabindex="-1" aria-label="Link to Set up testing">建立測試</a>
   </h2>
-  <p>Angular CLI 下载并安装使用 <a href="https://jasmine.github.io" target="_blank">Jasmine 测试框架</a> 测试 Angular 应用所需的一切。</p>
-<p>你使用 CLI 创建的项目可以立即进行测试。
-只需运行 <a href="cli/test"><code>ng test</code></a> CLI 命令：</p>
+  <p>Angular CLI 下載並安裝使用 <a href="https://jasmine.github.io" target="_blank">Jasmine 測試框架</a> 測試 Angular 應用所需的一切。</p>
+<p>你使用 CLI 建立的專案可以立即進行測試。
+只需執行 <a href="cli/test"><code>ng test</code></a> CLI 指令：</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> test</span></span></code></pre>
     </pre>
-  </div><p><code>ng test</code> 命令以<em>监听模式</em>构建应用，
-并启动 <a href="https://karma-runner.github.io" target="_blank">Karma 测试运行器</a>。</p>
-<p>控制台输出如下所示：</p>
+  </div><p><code>ng test</code> 指令以<em>監聽模式</em>建立應用，
+並啟動 <a href="https://karma-runner.github.io" target="_blank">Karma 測試執行器</a>。</p>
+<p>控制台輸出如下所示：</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">02</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 11</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 2022</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 09:08:28.605:INFO</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [karma-server]: Karma v6.4.1 server started at http://localhost:9876/</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">02</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 11</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 2022</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 09:08:28.607:INFO</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [launcher]: Launching browsers Chrome with concurrency unlimited</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">02</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 11</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 2022</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 09:08:28.620:INFO</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [launcher]: Starting browser Chrome</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">02</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 11</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 2022</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 09:08:31.312:INFO</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [Chrome]: Connected on socket -LaEYvD2R7MdcS0-AAAB with id 31534482</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Chrome:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> Executed</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 3</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> of</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 3</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> SUCCESS</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (0.193 </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">secs</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> /</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 0.172</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> secs</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">TOTAL:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 3</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> SUCCESS</span></span></code></pre>
     </pre>
-  </div><p>日志的最后一行显示 Karma 运行了三个测试，全部通过。</p>
-<p>测试输出使用 <a href="https://github.com/dfederm/karma-jasmine-html-reporter" target="_blank">Karma Jasmine HTML Reporter</a> 显示在浏览器中。</p>
+  </div><p>日誌的最後一行顯示 Karma 執行了三個測試，全部透過。</p>
+<p>測試輸出使用 <a href="https://github.com/dfederm/karma-jasmine-html-reporter" target="_blank">Karma Jasmine HTML Reporter</a> 顯示在瀏覽器中。</p>
 <img alt="Jasmine HTML Reporter in the browser" src="assets/images/guide/testing/initial-jasmine-html-reporter.png">
 
-<p>单击测试行可重新运行该测试，或单击描述可重新运行所选测试组（“测试套件”）中的测试。</p>
-<p>同时，<code>ng test</code> 命令正在监视更改。</p>
-<p>要查看实际效果，请对 <code>app.component.ts</code> 稍作更改并保存。
-测试会再次运行，浏览器会刷新，并显示新的测试结果。</p>
+<p>單擊測試行可重新執行該測試，或單擊描述可重新執行所選測試組（『測試套件』）中的測試。</p>
+<p>同時，<code>ng test</code> 指令正在監視更改。</p>
+<p>要檢視實際效果，請對 <code>app.component.ts</code> 稍作更改並儲存。
+測試會再次執行，瀏覽器會重新整理，並顯示新的測試結果。</p>
 
   <h2 id="configuration">
-    <a href="#configuration" class="docs-anchor" tabindex="-1" aria-label="Link to Configuration">配置</a>
+    <a href="#configuration" class="docs-anchor" tabindex="-1" aria-label="Link to Configuration">設定</a>
   </h2>
-  <p>Angular CLI 负责处理 Jasmine 和 Karma 的配置。它会根据 <code>angular.json</code> 文件中指定的选项在内存中构建完整的配置。</p>
-<p>如果要自定义 Karma，可以通过运行以下命令来创建 <code>karma.conf.js</code>：</p>
+  <p>Angular CLI 負責處理 Jasmine 和 Karma 的設定。它會根據 <code>angular.json</code> 檔案中指定的選項在記憶體中建立完整的設定。</p>
+<p>如果要自定義 Karma，可以透過執行以下指令來建立 <code>karma.conf.js</code>：</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> generate</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> config</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> karma</span></span></code></pre>
     </pre>
   </div>
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> 在 <a href="http://karma-runner.github.io/6.4/config/configuration-file.html" target="_blank">Karma 配置指南</a> 中阅读有关 Karma 配置的更多信息。</p>
+    <p><strong>提示：</strong> 在 <a href="http://karma-runner.github.io/6.4/config/configuration-file.html" target="_blank">Karma 設定指南</a> 中閱讀有關 Karma 設定的更多訊息。</p>
 
     </div>
     
   <h3 id="other-test-frameworks">
-    <a href="#other-test-frameworks" class="docs-anchor" tabindex="-1" aria-label="Link to Other test frameworks">其他测试框架</a>
+    <a href="#other-test-frameworks" class="docs-anchor" tabindex="-1" aria-label="Link to Other test frameworks">其他測試框架</a>
   </h3>
-  <p>你还可以使用其他测试库和测试运行器对 Angular 应用进行单元测试。
-每个库和运行器都有自己独特的安装步骤、配置和语法。</p>
+  <p>你還可以使用其他測試庫和測試執行器對 Angular 應用進行單元測試。
+每個函式庫和執行器都有自己獨特的安裝步驟、設定和語法。</p>
 
   <h3 id="test-file-name-and-location">
-    <a href="#test-file-name-and-location" class="docs-anchor" tabindex="-1" aria-label="Link to Test file name and location">测试文件名和位置</a>
+    <a href="#test-file-name-and-location" class="docs-anchor" tabindex="-1" aria-label="Link to Test file name and location">測試檔案名和位置</a>
   </h3>
-  <p>在 <code>src/app</code> 文件夹中，Angular CLI 为 <code>AppComponent</code> 生成了一个名为 <code>app.component.spec.ts</code> 的测试文件。</p>
+  <p>在 <code>src/app</code> 資料夾中，Angular CLI 為 <code>AppComponent</code> 生成了一個名為 <code>app.component.spec.ts</code> 的測試檔案。</p>
 
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要提示：</strong> 测试文件扩展名<strong>必须是 <code>.spec.ts</code></strong>，以便工具可以将其识别为包含测试的文件（也称为<em>spec</em> 文件）。</p>
+    <p><strong>重要提示：</strong> 測試檔案副檔名<strong>必須是 <code>.spec.ts</code></strong>，以便工具可以將其識別為包含測試的檔案（也稱為<em>spec</em> 檔案）。</p>
 
     </div>
-    <p><code>app.component.ts</code> 和 <code>app.component.spec.ts</code> 文件是同一文件夹中的同级文件。
-两个文件的根文件名 (<code>app.component</code>) 相同。</p>
-<p>在你的项目中，<em>每种</em>测试文件都应采用这两个约定。</p>
+    <p><code>app.component.ts</code> 和 <code>app.component.spec.ts</code> 檔案是同一資料夾中的同級檔案。
+兩個檔案的根檔案名 (<code>app.component</code>) 相同。</p>
+<p>在你的專案中，<em>每種</em>測試檔案都應採用這兩個約定。</p>
 
   <h4 id="place-your-spec-file-next-to-the-file-it-tests">
-    <a href="#place-your-spec-file-next-to-the-file-it-tests" class="docs-anchor" tabindex="-1" aria-label="Link to Place your spec file next to the file it tests">将你的 spec 文件放在它所测试的文件旁边</a>
+    <a href="#place-your-spec-file-next-to-the-file-it-tests" class="docs-anchor" tabindex="-1" aria-label="Link to Place your spec file next to the file it tests">將你的 spec 檔案放在它所測試的檔案旁邊</a>
   </h4>
-  <p>最好将单元测试 spec 文件放在与它们测试的应用源码文件相同的文件夹中：</p>
+  <p>最好將單元測試 spec 檔案放在與它們測試的應用原始碼檔案相同的資料夾中：</p>
 
   <ul class="docs-list">
-    <li>这样的测试很容易找到</li>
-<li>你可以一目了然地看到应用的哪个部分缺少测试</li>
-<li>附近的测试可以揭示某个部分如何在上下文中工作</li>
-<li>当你移动源码（不可避免）时，你会记得移动测试</li>
-<li>当你重命名源文件（不可避免）时，你会记得重命名测试文件</li>
+    <li>這樣的測試很容易找到</li>
+<li>你可以一目瞭然地看到應用的哪個部分缺少測試</li>
+<li>附近的測試可以揭示某個部分如何在上下文中工作</li>
+<li>當你移動原始碼（不可避免）時，你會記得移動測試</li>
+<li>當你重新命名源檔案（不可避免）時，你會記得重新命名測試檔案</li>
 
   </ul>
   
   <h4 id="place-your-spec-files-in-a-test-folder">
-    <a href="#place-your-spec-files-in-a-test-folder" class="docs-anchor" tabindex="-1" aria-label="Link to Place your spec files in a test folder">将你的 spec 文件放在 test 文件夹中</a>
+    <a href="#place-your-spec-files-in-a-test-folder" class="docs-anchor" tabindex="-1" aria-label="Link to Place your spec files in a test folder">將你的 spec 檔案放在 test 資料夾中</a>
   </h4>
-  <p>应用集成 spec 可以测试分布在文件夹和模块中的多个部分的交互。
-它们实际上不属于任何特定的部分，因此它们在任何一个文件旁边都没有自然的归宿。</p>
-<p>通常最好在 <code>tests</code> 目录中为它们创建一个合适的文件夹。</p>
-<p>当然，测试测试辅助函数的 spec 属于 <code>test</code> 文件夹，
-与其对应的辅助函数文件放在一起。</p>
+  <p>應用整合 spec 可以測試分佈在資料夾和模組中的多個部分的互動。
+它們實際上不屬於任何特定的部分，因此它們在任何一個檔案旁邊都沒有自然的歸宿。</p>
+<p>通常最好在 <code>tests</code> 目錄中為它們建立一個合適的資料夾。</p>
+<p>當然，測試測試輔助函式的 spec 屬於 <code>test</code> 資料夾，
+與其對應的輔助函式檔案放在一起。</p>
 
   <h2 id="testing-in-continuous-integration">
-    <a href="#testing-in-continuous-integration" class="docs-anchor" tabindex="-1" aria-label="Link to Testing in continuous integration">在持续集成中进行测试</a>
+    <a href="#testing-in-continuous-integration" class="docs-anchor" tabindex="-1" aria-label="Link to Testing in continuous integration">在持續整合中進行測試</a>
   </h2>
-  <p>保持项目没有缺陷的最佳方法之一是通过测试套件，但你可能会忘记一直运行测试。</p>
-<p>持续集成 (CI) 服务器允许你建立项目仓库，以便你的测试在每次提交和拉取请求时运行。</p>
-<p>要在持续集成 (CI) 中测试你的 Angular CLI 应用，请运行以下命令：</p>
+  <p>保持專案沒有缺陷的最佳方法之一是透過測試套件，但你可能會忘記一直執行測試。</p>
+<p>持續整合 (CI) 伺服器允許你建立專案倉庫，以便你的測試在每次送出和拉取請求時運行。</p>
+<p>要在持續整合 (CI) 中測試你的 Angular CLI 應用，請執行以下指令：</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> test</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> --no-watch</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> --no-progress</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> --browsers=ChromeHeadless</span></span></code></pre>
     </pre>
   </div>
   <h2 id="more-information-on-testing">
-    <a href="#more-information-on-testing" class="docs-anchor" tabindex="-1" aria-label="Link to More information on testing">有关测试的更多信息</a>
+    <a href="#more-information-on-testing" class="docs-anchor" tabindex="-1" aria-label="Link to More information on testing">有關測試的更多訊息</a>
   </h2>
-  <p>在为你的应用建立测试之后，你可能会发现以下测试指南很有用。</p>
+  <p>在為你的應用建立測試之後，你可能會發現以下測試指南很有用。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
 <th align="left"></th>
-<th align="left">详情</th>
+<th align="left">詳情</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
-<td align="left"><a href="guide/testing/code-coverage">代码覆盖率</a></td>
-<td align="left">你的测试覆盖了你的应用的多少，以及如何指定所需的量。</td>
+<td align="left"><a href="guide/testing/code-coverage">程式碼覆蓋率</a></td>
+<td align="left">你的測試覆蓋了你的應用的多少，以及如何指定所需的量。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/testing/services">测试服务</a></td>
-<td align="left">如何测试你的应用使用的服务。</td>
+<td align="left"><a href="guide/testing/services">測試服務</a></td>
+<td align="left">如何測試你的應用使用的服務。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/testing/components-basics">组件测试基础知识</a></td>
-<td align="left">Angular 组件测试基础知识。</td>
+<td align="left"><a href="guide/testing/components-basics">元件測試基礎知識</a></td>
+<td align="left">Angular 元件測試基礎知識。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/testing/components-scenarios">组件测试场景</a></td>
-<td align="left">各种组件测试场景和用例。</td>
+<td align="left"><a href="guide/testing/components-scenarios">元件測試場景</a></td>
+<td align="left">各種元件測試場景和用例。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/testing/attribute-directives">测试属性型指令</a></td>
-<td align="left">如何测试你的属性型指令。</td>
+<td align="left"><a href="guide/testing/attribute-directives">測試屬性型指令</a></td>
+<td align="left">如何測試你的屬性型指令。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/testing/pipes">测试管道</a></td>
-<td align="left">如何测试管道。</td>
+<td align="left"><a href="guide/testing/pipes">測試通道</a></td>
+<td align="left">如何測試通道。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/testing/debugging">调试测试</a></td>
-<td align="left">常见的测试 Bug。</td>
+<td align="left"><a href="guide/testing/debugging">除錯測試</a></td>
+<td align="left">常見的測試 Bug。</td>
 </tr>
 <tr>
-<td align="left"><a href="guide/testing/utility-apis">测试实用工具 API</a></td>
-<td align="left">Angular 测试特性。</td>
+<td align="left"><a href="guide/testing/utility-apis">測試實用工具 API</a></td>
+<td align="left">Angular 測試屬性。</td>
 </tr>
 
       </tbody>

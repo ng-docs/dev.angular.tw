@@ -6,14 +6,14 @@
           
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">模板</h1>
+    <h1 tabindex="-1">樣板</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/introduction/essentials/templates.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
 
-          <p><!-- markdownlint-disable-line -->使用 Angular 的模板语法来创建动态用户界面。</p>
+          <p><!-- markdownlint-disable-line -->使用 Angular 的樣板語法來建立動態使用者介面。</p>
         </div>
 
         <!-- illustration -->
@@ -49,100 +49,100 @@
 
       </div>
     </div>
-    <p>组件模板不仅仅是静态 HTML，它们可以使用来自你的组件类的数据，并为用户互动设置处理器。</p>
+    <p>元件樣板不僅僅是靜態 HTML，它們可以使用來自你的元件類別的資料，併為使用者互動設定處理器。</p>
 
   <h2 id="showing-dynamic-text">
-    <a href="#showing-dynamic-text" class="docs-anchor" tabindex="-1" aria-label="Link to Showing dynamic text">显示动态文本</a>
+    <a href="#showing-dynamic-text" class="docs-anchor" tabindex="-1" aria-label="Link to Showing dynamic text">顯示動態文字</a>
   </h2>
-  <p>在 Angular 中，<em>绑定</em>在组件的模板和数据之间创建动态连接。这种连接确保了对组件数据的更改会自动更新渲染后的模板。</p>
-<p>你可以使用双花括号在模板中创建一个绑定来显示一些动态文本：</p>
+  <p>在 Angular 中，<em>繫結</em>在元件的樣板和資料之間建立動態連線。這種連線確保了對元件資料的更改會自動更新渲染後的樣板。</p>
+<p>你可以使用雙花括號在樣板中建立一個繫結來顯示一些動態文字：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'user-profile'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Profile for {{</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">userName</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()}}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> TodoListItem</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  userName</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'pro_programmer_123'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>当 Angular 渲染组件时，你会看到：</p>
+  </div><p>當 Angular 渲染元件時，你會看到：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Profile for pro_programmer_123&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>当信号的值发生变化时，Angular 会自动保持绑定为最新。以上面的例子为基础，如果我们更新 <code>userName</code> 信号的值：</p>
+  </div><p>當訊號的值發生變化時，Angular 會自動保持繫結為最新。以上麵的例子為基礎，如果我們更新 <code>userName</code> 訊號的值：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.userName.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">set</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'cool_coder_789'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span></code></pre>
     </pre>
-  </div><p>渲染后的页面会更新以反映新值：</p>
+  </div><p>渲染後的頁面會更新以反映新值：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Profile for cool_coder_789&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
   </div>
   <h2 id="setting-dynamic-properties-and-attributes">
-    <a href="#setting-dynamic-properties-and-attributes" class="docs-anchor" tabindex="-1" aria-label="Link to Setting dynamic properties and attributes">设置动态属性（Property）和属性（Attribute）</a>
+    <a href="#setting-dynamic-properties-and-attributes" class="docs-anchor" tabindex="-1" aria-label="Link to Setting dynamic properties and attributes">設定動態屬性（Property）和屬性（Attribute）</a>
   </h2>
-  <p>Angular 支持使用方括号将动态值绑定到 DOM 属性（Property）：</p>
+  <p>Angular 支援使用方括號將動態值繫結到 DOM 屬性（Property）：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  /*...*/</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Set the `disabled` property of the button based on the value of `isValidUserId`.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [disabled]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"isValidUserId()"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Save changes&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> UserProfile</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  isValidUserId</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> signal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">false</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>你也可以通过在属性（Attribute）名称前加上 <code>attr.</code> 来绑定到 HTML <em>属性（Attribute）</em>：</p>
+  </div><p>你也可以透過在屬性（Attribute）名稱前加上 <code>attr.</code> 來繫結到 HTML <em>屬性（Attribute）</em>：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- Bind the `role` attribute on the `&lt;ul&gt;` element to value of `listRole`. --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">ul</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [attr.role]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"listRole()"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>当绑定的值发生变化时，Angular 会自动更新 DOM 属性（Property）和属性（Attribute）。</p>
+  </div><p>當繫結的值發生變化時，Angular 會自動更新 DOM 屬性（Property）和屬性（Attribute）。</p>
 
   <h2 id="handling-user-interaction">
-    <a href="#handling-user-interaction" class="docs-anchor" tabindex="-1" aria-label="Link to Handling user interaction">处理用户互动</a>
+    <a href="#handling-user-interaction" class="docs-anchor" tabindex="-1" aria-label="Link to Handling user interaction">處理使用者互動</a>
   </h2>
-  <p>Angular 允许你使用圆括号在模板中向元素添加事件监听器：</p>
+  <p>Angular 允許你使用圓括號在樣板中向元素新增事件監聽器：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  /*...*/</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Add an 'click' event handler that calls the `cancelSubscription` method. </span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> (click)</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"cancelSubscription()"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Cancel subscription&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> UserProfile</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  /* ... */</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  </span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  cancelSubscription</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() { </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">/* Your event handling code goes here. */</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>如果你需要将 <a href="https://developer.mozilla.org/docs/Web/API/Event" target="_blank">event</a> 对象传递给你的监听器，你可以使用 Angular 的内置 `$event` 变量在函数调用中：</p>
+  </div><p>如果你需要將 <a href="https://developer.mozilla.org/docs/Web/API/Event" target="_blank">event</a> 物件傳遞給你的監聽器，你可以使用 Angular 的內建 `$event` 變數在函式呼叫中：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  /*...*/</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Add an 'click' event handler that calls the `cancelSubscription` method. </span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> (click)</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"cancelSubscription($event)"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Cancel subscription&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> UserProfile</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  /* ... */</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  </span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  cancelSubscription</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">event</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Event</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) { </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">/* Your event handling code goes here. */</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div>
   <h2 id="control-flow-with-if-and-for">
-    <a href="#control-flow-with-if-and-for" class="docs-anchor" tabindex="-1" aria-label="Link to Control flow with <code>@if</code> and <code>@for</code>">使用 <code>@if</code> 和 <code>@for</code> 进行控制流</a>
+    <a href="#control-flow-with-if-and-for" class="docs-anchor" tabindex="-1" aria-label="Link to Control flow with <code>@if</code> and <code>@for</code>">使用 <code>@if</code> 和 <code>@for</code> 進行控制流</a>
   </h2>
-  <p>你可以使用 Angular 的 <code>@if</code> 控制块有条件地隐藏和显示模板的某些部分：</p>
+  <p>你可以使用 Angular 的 <code>@if</code> 控制區塊有條件地隱藏和顯示樣板的某些部分：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;User profile&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">isAdmin</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Admin settings&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  &lt;!-- ... --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p><code>@if</code> 控制块也支持可选的 <code>@else</code> 控制块：</p>
+  </div><p><code>@if</code> 控制區塊也支援可選的 <code>@else</code> 控制區塊：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;User profile&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">isAdmin</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Admin settings&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  &lt;!-- ... --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@else</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;User settings&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  &lt;!-- ... --&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  </span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>你可以使用 Angular 的 <code>@for</code> 控制块多次重复模板的某一部分：</p>
+  </div><p>你可以使用 Angular 的 <code>@for</code> 控制區塊多次重複樣板的某一部分：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;User profile&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">ul</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"user-badge-list"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  @for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (badge </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">of</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> badges</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(); track badge.id) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">li</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"user-badge"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;{{badge.name}}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">li</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">ul</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
-  </div><p>Angular 使用 <code>track</code> 关键字（如上例所示）将数据与 <code>@for</code> 创建的 DOM 元素关联起来。有关更多信息，请参阅 <a href="guide/templates/control-flow#why-is-track-in-for-blocks-important"><em>为什么 @for 控制块中的 track 很重要？</em></a>。</p>
+  </div><p>Angular 使用 <code>track</code> 關鍵字（如上例所示）將資料與 <code>@for</code> 建立的 DOM 元素關聯起來。有關更多訊息，請參閱 <a href="guide/templates/control-flow#why-is-track-in-for-blocks-important"><em>為什麼 @for 控制塊中的 track 很重要？</em></a>。</p>
 
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong> 想要了解更多关于 Angular 模板的信息？请参阅 <a href="guide/templates">深入模板指南</a> 以获取完整详细信息。</p>
+    <p><strong>提示：</strong> 想要瞭解更多關於 Angular 樣板的訊息？請參閱 <a href="guide/templates">深入樣板指南</a> 以獲取完整詳細訊息。</p>
 
     </div>
     
   <h2 id="next-step">
     <a href="#next-step" class="docs-anchor" tabindex="-1" aria-label="Link to Next Step">下一步</a>
   </h2>
-  <p>既然你的应用中已经有了动态数据和模板，现在是时候学习如何通过有条件地隐藏或显示某些元素、循环遍历元素等来增强模板了。</p>
+  <p>既然你的應用中已經有了動態資料和樣板，現在是時候學習如何透過有條件地隱藏或顯示某些元素、迴圈遍歷元素等來增強樣板了。</p>
 
     <nav class="docs-pill-row">
       
     <a class="docs-pill" href="essentials/dependency-injection">
-      使用依赖注入的模块化设计
+      使用依賴注入的模組化設計
     </a>
     
     <a class="docs-pill" href="guide/templates">
-      深入模板指南
+      深入樣板指南
     </a>
     
 
