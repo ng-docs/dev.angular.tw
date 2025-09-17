@@ -22,7 +22,7 @@
   </h2>
   <!-- TODO: add link once attribute binding guide is implemented -->
 <p>建立無障礙 Web 體驗通常涉及設定 <a href="https://web.dev/learn/accessibility/aria-html/" target="_blank">無障礙富 Internet 應用 (ARIA) 屬性（Attribute）</a>，以便在可能缺少語義含義的地方提供語義含義。
-使用屬性繫結樣板語法來控制與無障礙功能相關的屬性（Attribute）的值。</p>
+使用屬性繫結範本語法來控制與無障礙功能相關的屬性（Attribute）的值。</p>
 <p>當在 Angular 中繫結到 ARIA 屬性（Attribute）時，你必須使用 <code>attr.</code> 字首。ARIA 規範特別依賴於 HTML 屬性（Attribute），而不是 DOM 元素的屬性（Property）。</p>
 <div class="docs-code">
     
@@ -78,7 +78,7 @@
   </h3>
   <p>有時，使用適當的原生元素需要一個容器元素。
 例如，原生 <code>&lt;input&gt;</code> 元素不能有子元素，因此任何自定義文字輸入元件都需要用額外的元素包裝 <code>&lt;input&gt;</code>。
-僅僅在自定義元件的樣板中包含 <code>&lt;input&gt;</code>，你的元件使用者就無法為 <code>&lt;input&gt;</code> 元素設定任意屬性（Property）和屬性（Attribute）。
+僅僅在自定義元件的範本中包含 <code>&lt;input&gt;</code>，你的元件使用者就無法為 <code>&lt;input&gt;</code> 元素設定任意屬性（Property）和屬性（Attribute）。
 相反，建立一個容器組件，該組件使用內容投影將原生控制元件包含在元件的 API 中。</p>
 <p>你可以將 <a href="https://material.angular.io/components/form-field/overview" target="_blank"><code>MatFormField</code></a> 視為此模式的一個範例。</p>
 
@@ -90,7 +90,7 @@
   <ul class="docs-list">
     <li>該組件定義了一個啟用無障礙功能的元素，該元素同時具有標準 HTML 屬性（Attribute） <code>role</code> 和 ARIA 屬性（Attribute）。
   ARIA 屬性（Attribute） <code>aria-valuenow</code> 繫結到使用者的輸入。</li>
-<li>在樣板中，<code>aria-label</code> 屬性（Attribute）確保了控制元件對螢幕閱讀器是無障礙的。</li>
+<li>在範本中，<code>aria-label</code> 屬性（Attribute）確保了控制元件對螢幕閱讀器是無障礙的。</li>
 
   </ul>
   <div class="docs-code-multifile">
@@ -127,12 +127,12 @@
   <h3 id="active-links-identification">
     <a href="#active-links-identification" class="docs-anchor" tabindex="-1" aria-label="Link to Active links identification">活動連結標識</a>
   </h3>
-  <p>應用於活動 <code>RouterLink</code> 元素的 CSS 類（例如 <code>RouterLinkActive</code>）提供了一個視覺提示來標識活動連結。
+  <p>應用於活動 <code>RouterLink</code> 元素的 CSS 類別（例如 <code>RouterLinkActive</code>）提供了一個視覺提示來標識活動連結。
 不幸的是，視覺提示對盲人或視障使用者沒有幫助。
 將 <code>aria-current</code> 屬性（Attribute）應用於元素可以幫助標識活動連結。
 有關更多訊息，請參閱 <a href="https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Attributes/aria-current" target="_blank">Mozilla Developer Network (MDN) aria-current</a>）。</p>
 <p><code>RouterLinkActive</code> 指令提供了 <code>ariaCurrentWhenActive</code> 輸入，當連結變為活動狀態時，它會將 <code>aria-current</code> 設定為指定值。</p>
-<p>以下範例展示了如何將 <code>active-page</code> 類應用於活動連結，以及如何在活動連結處於活動狀態時將其 <code>aria-current</code> 屬性（Attribute）設定為 <code>"page"</code>：</p>
+<p>以下範例展示了如何將 <code>active-page</code> 類別應用於活動連結，以及如何在活動連結處於活動狀態時將其 <code>aria-current</code> 屬性（Attribute）設定為 <code>"page"</code>：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">nav</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> routerLink</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"home"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      routerLinkActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"active-page"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      ariaCurrentWhenActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"page"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    Home</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> routerLink</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"about"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      routerLinkActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"active-page"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      ariaCurrentWhenActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"page"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    About</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> routerLink</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"shop"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      routerLinkActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"active-page"</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      ariaCurrentWhenActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"page"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    Shop</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">nav</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>

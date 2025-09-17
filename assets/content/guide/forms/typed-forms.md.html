@@ -34,7 +34,7 @@
     </pre>
   </div><p>使用嚴格型別化的回應式表單，上面的程式碼不會編譯，因為 <code>email</code> 上沒有 <code>domain</code> 屬性（Property）。</p>
 <p>除了增加的安全性之外，這些型別還支援各種其他改進，例如在 IDE 中更好的自動完成，以及顯式指定表單結構的方式。</p>
-<p>這些改進目前僅適用於<em>回應式</em>表單（而非<a href="guide/forms/template-driven-forms"><em>樣板驅動</em>表單</a>）。</p>
+<p>這些改進目前僅適用於<em>回應式</em>表單（而非<a href="guide/forms/template-driven-forms"><em>範本驅動</em>表單</a>）。</p>
 
   <h2 id="untyped-forms">
     <a href="#untyped-forms" class="docs-anchor" tabindex="-1" aria-label="Link to Untyped Forms">非類型化表單</a>
@@ -127,7 +127,7 @@
   <h3 id="formrecord">
     <a href="#formrecord" class="docs-anchor" tabindex="-1" aria-label="Link to <code>FormRecord</code>"><code>FormRecord</code></a>
   </h3>
-  <p>某些 <code>FormGroup</code> 用法不符合上述模式，因為鍵是事先未知的。<code>FormRecord</code> 類是為此情況設計的：</p>
+  <p>某些 <code>FormGroup</code> 用法不符合上述模式，因為鍵是事先未知的。<code>FormRecord</code> 類別是為此情況設計的：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> addresses</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> FormRecord</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">FormControl</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">string</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">null</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&gt;({});</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">addresses.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">addControl</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Andrew'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> FormControl</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'2340 Folsom St'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">));</span></span></code></pre>
@@ -143,8 +143,8 @@
   <h2 id="formbuilder-and-nonnullableformbuilder">
     <a href="#formbuilder-and-nonnullableformbuilder" class="docs-anchor" tabindex="-1" aria-label="Link to <code>FormBuilder</code> and <code>NonNullableFormBuilder</code>"><code>FormBuilder</code> 和 <code>NonNullableFormBuilder</code></a>
   </h2>
-  <p><code>FormBuilder</code> 類也已升級為支援新型別，方式與上述範例相同。</p>
-<p>此外，還有一個額外的建構式可用：<code>NonNullableFormBuilder</code>。此類型是用於在每個控制元件上指定 <code>{nonNullable: true}</code> 的簡寫形式，並且可以消除大型不可為空表單中的大量樣板程式碼。你可以使用 <code>FormBuilder</code> 上的 <code>nonNullable</code> 屬性來訪問它：</p>
+  <p><code>FormBuilder</code> 類別也已升級為支援新型別，方式與上述範例相同。</p>
+<p>此外，還有一個額外的建構式可用：<code>NonNullableFormBuilder</code>。此類型是用於在每個控制元件上指定 <code>{nonNullable: true}</code> 的簡寫形式，並且可以消除大型不可為空表單中的大量範本程式碼。你可以使用 <code>FormBuilder</code> 上的 <code>nonNullable</code> 屬性來訪問它：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> fb</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> FormBuilder</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> login</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> fb.nonNullable.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">group</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  email: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">''</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  password: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">''</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>

@@ -4,7 +4,7 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">樣板型別檢查</h1>
+    <h1 tabindex="-1">範本型別檢查</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/cli/template-typecheck.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
@@ -13,15 +13,15 @@
     </header>
     
   <h2 id="overview-of-template-type-checking">
-    <a href="#overview-of-template-type-checking" class="docs-anchor" tabindex="-1" aria-label="Link to Overview of template type checking">樣板型別檢查概覽</a>
+    <a href="#overview-of-template-type-checking" class="docs-anchor" tabindex="-1" aria-label="Link to Overview of template type checking">範本型別檢查概覽</a>
   </h2>
-  <p>正如 TypeScript 可以捕獲你程式碼中的型別錯誤一樣，Angular 也會檢查你的應用樣板中的表示式和繫結，並報告它發現的任何型別錯誤。
+  <p>正如 TypeScript 可以捕獲你程式碼中的型別錯誤一樣，Angular 也會檢查你的應用範本中的表示式和繫結，並報告它發現的任何型別錯誤。
 Angular 目前有三種執行此操作的模式，具體取決於 <a href="reference/configs/angular-compiler-options">Angular 編譯器選項</a>中 <code>fullTemplateTypeCheck</code> 和 <code>strictTemplates</code> 標誌的值。</p>
 
   <h3 id="basic-mode">
     <a href="#basic-mode" class="docs-anchor" tabindex="-1" aria-label="Link to Basic mode">基本模式</a>
   </h3>
-  <p>在最基本的型別檢查模式下，當 <code>fullTemplateTypeCheck</code> 標誌設定為 <code>false</code> 時，Angular 僅驗證樣板中的頂層表示式。</p>
+  <p>在最基本的型別檢查模式下，當 <code>fullTemplateTypeCheck</code> 標誌設定為 <code>false</code> 時，Angular 僅驗證範本中的頂層表示式。</p>
 <p>如果你編寫了 <code>&lt;map [city]="user.address.city"&gt;</code>，編譯器會驗證以下內容：</p>
 
   <ul class="docs-list">
@@ -43,7 +43,7 @@ Angular 目前有三種執行此操作的模式，具體取決於 <a href="refer
   <h3 id="full-mode">
     <a href="#full-mode" class="docs-anchor" tabindex="-1" aria-label="Link to Full mode">完整模式</a>
   </h3>
-  <p>如果 <code>fullTemplateTypeCheck</code> 標誌設定為 <code>true</code>，Angular 會在樣板中更積極地進行型別檢查。
+  <p>如果 <code>fullTemplateTypeCheck</code> 標誌設定為 <code>true</code>，Angular 會在範本中更積極地進行型別檢查。
 特別是：</p>
 
   <ul class="docs-list">
@@ -79,7 +79,7 @@ Angular 目前有三種執行此操作的模式，具體取決於 <a href="refer
     <li>驗證元件/指令繫結是否可賦值給其 <code>@Input()</code></li>
 <li>在驗證前面的模式時，遵循 TypeScript 的 <code>strictNullChecks</code> 標誌</li>
 <li>推斷元件/指令的正確型別，包括泛型</li>
-<li>在設定的位置推斷樣板上下文型別（例如，允許對 <code>NgFor</code> 進行正確的型別檢查）</li>
+<li>在設定的位置推斷範本上下文型別（例如，允許對 <code>NgFor</code> 進行正確的型別檢查）</li>
 <li>推斷元件/指令、DOM 和動畫事件繫結中 <code>$event</code> 的正確型別</li>
 <li>根據標籤名稱推斷對 DOM 元素的區域性引用的正確型別（例如，<code>document.createElement</code> 將為該標籤回傳的型別）</li>
 
@@ -104,11 +104,11 @@ Angular 目前有三種執行此操作的模式，具體取決於 <a href="refer
 在嚴格模式下，Angular 知道 <code>&lt;span&gt;</code> 中的 <code>user</code> 具有 <code>User</code> 型別，並且 <code>address</code> 是一個物件，其 <code>city</code> 屬性的型別為 <code>string</code>。</p>
 
   <h2 id="troubleshooting-template-errors">
-    <a href="#troubleshooting-template-errors" class="docs-anchor" tabindex="-1" aria-label="Link to Troubleshooting template errors">排查樣板錯誤</a>
+    <a href="#troubleshooting-template-errors" class="docs-anchor" tabindex="-1" aria-label="Link to Troubleshooting template errors">排查範本錯誤</a>
   </h2>
-  <p>在嚴格模式下，你可能會遇到在以前的任何模式下都不會出現的樣板錯誤。
-這些錯誤通常表示樣板中真正的型別不對應，而以前的工具沒有捕獲到這些不對應。
-如果是這種情況，則錯誤訊息應明確指出樣板中出現問題的具體位置。</p>
+  <p>在嚴格模式下，你可能會遇到在以前的任何模式下都不會出現的範本錯誤。
+這些錯誤通常表示範本中真正的型別不對應，而以前的工具沒有捕獲到這些不對應。
+如果是這種情況，則錯誤訊息應明確指出範本中出現問題的具體位置。</p>
 <p>當 Angular 函式庫的型別定義不完整或不正確，或者當型別定義與預期不完全一致時，也可能出現誤報，如下例所示。</p>
 
   <ul class="docs-list">
@@ -148,7 +148,7 @@ Angular 目前有三種執行此操作的模式，具體取決於 <a href="refer
 </tr>
 <tr>
 <td align="left"><code>strictInputAccessModifiers</code></td>
-<td align="left">當把繫結表示式賦值給 <code>@Input()</code> 時，是否遵循諸如 <code>private</code>/<code>protected</code>/<code>readonly</code> 之類的訪問修飾符。如果停用，則會忽略 <code>@Input</code> 的訪問修飾符；僅檢查型別。即使將 <code>strictTemplates</code> 設定為 <code>true</code>，此選項也預設為 <code>false</code>。</td>
+<td align="left">當把繫結表示式賦值給 <code>@Input()</code> 時，是否遵循諸如 <code>private</code>/<code>protected</code>/<code>readonly</code> 之類別的訪問修飾符。如果停用，則會忽略 <code>@Input</code> 的訪問修飾符；僅檢查型別。即使將 <code>strictTemplates</code> 設定為 <code>true</code>，此選項也預設為 <code>false</code>。</td>
 </tr>
 <tr>
 <td align="left"><code>strictNullInputTypes</code></td>
@@ -180,7 +180,7 @@ Angular 目前有三種執行此操作的模式，具體取決於 <a href="refer
 </tr>
 <tr>
 <td align="left"><code>strictLiteralTypes</code></td>
-<td align="left">是否推斷樣板中宣告的物件和數組字面量的型別。如果停用，此類字面量的型別將為 <code>any</code>。當設定了 <code>fullTemplateTypeCheck</code> 或 <code>strictTemplates</code> <em>之一</em>時，此標誌為 <code>true</code>。</td>
+<td align="left">是否推斷範本中宣告的物件和數組字面量的型別。如果停用，此類別字面量的型別將為 <code>any</code>。當設定了 <code>fullTemplateTypeCheck</code> 或 <code>strictTemplates</code> <em>之一</em>時，此標誌為 <code>true</code>。</td>
 </tr>
 
       </tbody>
@@ -188,30 +188,30 @@ Angular 目前有三種執行此操作的模式，具體取決於 <a href="refer
   </div>
   <p>如果在透過這些標誌進行排查後仍然遇到問題，請透過停用 <code>strictTemplates</code> 回退到完整模式。</p>
 <p>如果這不起作用，最後的選擇是使用 <code>fullTemplateTypeCheck: false</code> 完全關閉完整模式。</p>
-<p>你無法使用任何推薦方法求解的型別檢查錯誤可能是樣板型別檢查器本身的錯誤造成的。
+<p>你無法使用任何推薦方法求解的型別檢查錯誤可能是範本型別檢查器本身的錯誤造成的。
 如果你遇到的錯誤需要回退到基本模式，則很可能是這種錯誤。
 如果發生這種情況，請<a href="https://github.com/angular/angular/issues" target="_blank">送出 issue</a>，以便團隊可以解決它。</p>
 
   <h2 id="inputs-and-type-checking">
     <a href="#inputs-and-type-checking" class="docs-anchor" tabindex="-1" aria-label="Link to Inputs and type-checking">輸入和型別檢查</a>
   </h2>
-  <p>樣板型別檢查器會檢查繫結表示式的型別是否與相應指令輸入的型別相容。
+  <p>範本型別檢查器會檢查繫結表示式的型別是否與相應指令輸入的型別相容。
 例如，考慮以下元件：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> interface</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> User</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  name</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'user-detail'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'{{ user.name }}'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> UserDetailComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">user</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> User</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p><code>AppComponent</code> 樣板按如下方式使用此元件：</p>
+  </div><p><code>AppComponent</code> 範本按如下方式使用此元件：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-root'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'&lt;user-detail [user]="selectedUser"&gt;&lt;/user-detail&gt;'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> AppComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  selectedUser</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> User</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> |</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> null</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> null</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>在這裡，在對 <code>AppComponent</code> 的樣板進行型別檢查期間，<code>[user]="selectedUser"</code> 繫結對應於 <code>UserDetailComponent.user</code> 輸入。
+  </div><p>在這裡，在對 <code>AppComponent</code> 的範本進行型別檢查期間，<code>[user]="selectedUser"</code> 繫結對應於 <code>UserDetailComponent.user</code> 輸入。
 因此，Angular 將 <code>selectedUser</code> 屬性（Property）賦值給 <code>UserDetailComponent.user</code>，如果它們的型別不相容，這將導致錯誤。
-TypeScript 根據其型別體系檢查賦值，並遵循諸如 <code>strictNullChecks</code> 之類的標誌，因為它們是在應用中設定的。</p>
-<p>透過為樣板型別檢查器提供更具體的樣板內型別要求，避免執行時型別錯誤。
-透過在指令定義中提供樣板保護函式，使你自己的指令的輸入型別要求儘可能具體。
-請參閱本指南中的<a href="guide/directives/structural-directives#directive-type-checks">改進自定義指令的樣板型別檢查</a>。</p>
+TypeScript 根據其型別體系檢查賦值，並遵循諸如 <code>strictNullChecks</code> 之類別的標誌，因為它們是在應用中設定的。</p>
+<p>透過為範本型別檢查器提供更具體的範本內型別要求，避免執行時型別錯誤。
+透過在指令定義中提供範本保護函式，使你自己的指令的輸入型別要求儘可能具體。
+請參閱本指南中的<a href="guide/directives/structural-directives#directive-type-checks">改進自定義指令的範本型別檢查</a>。</p>
 
   <h3 id="strict-null-checks">
     <a href="#strict-null-checks" class="docs-anchor" tabindex="-1" aria-label="Link to Strict null checks">嚴格的 Null 檢查</a>
@@ -235,7 +235,7 @@ TypeScript 根據其型別體系檢查賦值，並遵循諸如 <code>strictNullC
   <p>對於上述問題，有兩種可能的解決方法：</p>
 
   <ul class="docs-list">
-    <li><p>在樣板中，在可空表示式的末尾包含非空斷言運算子 <code>!</code>，例如</p>
+    <li><p>在範本中，在可空表示式的末尾包含非空斷言運算子 <code>!</code>，例如</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">user-detail</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [user]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"user!"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">user-detail</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
@@ -247,21 +247,21 @@ TypeScript 根據其型別體系檢查賦值，並遵循諸如 <code>strictNullC
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">user-detail</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [user]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"(user$ | async)!"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">user-detail</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
     </pre>
   </div></li>
-<li><p>完全停用 Angular 樣板中的嚴格 Null 檢查。</p>
+<li><p>完全停用 Angular 範本中的嚴格 Null 檢查。</p>
 <p>當啟用 <code>strictTemplates</code> 時，仍然可以停用型別檢查的某些方面。
-  將選項 <code>strictNullInputTypes</code> 設定為 <code>false</code> 會停用 Angular 樣板中的嚴格 Null 檢查。
+  將選項 <code>strictNullInputTypes</code> 設定為 <code>false</code> 會停用 Angular 範本中的嚴格 Null 檢查。
   此標誌適用於作為應用一部分的所有元件。</p>
 </li>
 
   </ul>
   
   <h3 id="advice-for-library-authors">
-    <a href="#advice-for-library-authors" class="docs-anchor" tabindex="-1" aria-label="Link to Advice for library authors">給庫作者的建議</a>
+    <a href="#advice-for-library-authors" class="docs-anchor" tabindex="-1" aria-label="Link to Advice for library authors">給函式庫作者的建議</a>
   </h3>
-  <p>作為庫作者，你可以採取一些措施來為你的使用者提供最佳體驗。
+  <p>作為函式庫作者，你可以採取一些措施來為你的使用者提供最佳體驗。
 首先，啟用 <code>strictNullChecks</code> 並在輸入的型別中包含 <code>null</code>（如果適用），可以告知你的使用者他們是否可以提供可空值。
-此外，還可以提供特定於樣板型別檢查器的型別提示。
-請參閱<a href="guide/directives/structural-directives#directive-type-checks">改進自定義指令的樣板型別檢查</a>和<a href="#input-setter-coercion">輸入 setter 強制轉換</a>。</p>
+此外，還可以提供特定於範本型別檢查器的型別提示。
+請參閱<a href="guide/directives/structural-directives#directive-type-checks">改進自定義指令的範本型別檢查</a>和<a href="#input-setter-coercion">輸入 setter 強制轉換</a>。</p>
 
   <h2 id="input-setter-coercion">
     <a href="#input-setter-coercion" class="docs-anchor" tabindex="-1" aria-label="Link to Input setter coercion">輸入 setter 強制轉換</a>
@@ -273,9 +273,9 @@ TypeScript 根據其型別體系檢查賦值，並遵循諸如 <code>strictNullC
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'submit-button'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    &lt;div class="wrapper"&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">      &lt;button [disabled]="disabled"&gt;Submit&lt;/button&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    &lt;/div&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SubmitButton</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> _disabled</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> boolean</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  get</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> disabled</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> boolean</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">._disabled;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  set</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> disabled</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">value</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> boolean</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">._disabled </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> value;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>在這裡，元件的 <code>disabled</code> 輸入正在傳遞到樣板中的 <code>&lt;button&gt;</code>。
+  </div><p>在這裡，元件的 <code>disabled</code> 輸入正在傳遞到範本中的 <code>&lt;button&gt;</code>。
 只要將 <code>boolean</code> 值繫結到輸入，所有這些都按預期工作。
-但是，假設使用者在樣板中將此輸入用作 Attribute：</p>
+但是，假設使用者在範本中將此輸入用作 Attribute：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">submit-button</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> disabled</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">submit-button</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
@@ -293,7 +293,7 @@ TypeScript 根據其型別體系檢查賦值，並遵循諸如 <code>strictNullC
     </pre>
   </div><p>理想的情況是將此處的 <code>value</code> 型別從 <code>boolean</code> 更改為 <code>boolean|''</code>，以對應 setter 實際接受的值集。
 TypeScript 4.3 之前的版本要求 getter 和 setter 具有相同的型別，因此如果 getter 應該回傳 <code>boolean</code>，則 setter 會停留在較窄的型別上。</p>
-<p>如果使用者為樣板啟用了 Angular 最嚴格的型別檢查，則會產生一個問題：空字串 (<code>''</code>) 實際上不可賦值給 <code>disabled</code> 欄位，這在使用 Attribute 形式時會產生型別錯誤。</p>
+<p>如果使用者為範本啟用了 Angular 最嚴格的型別檢查，則會產生一個問題：空字串 (<code>''</code>) 實際上不可賦值給 <code>disabled</code> 欄位，這在使用 Attribute 形式時會產生型別錯誤。</p>
 <p>作為此問題的解決方法，Angular 支援為 <code>@Input()</code> 檢查比輸入欄位本身宣告的更廣泛、更寬鬆的型別。
 透過向元件類別新增帶有 <code>ngAcceptInputType_</code> 字首的靜態屬性來啟用此功能：</p>
 <div class="docs-code">

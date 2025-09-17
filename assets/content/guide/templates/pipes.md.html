@@ -15,10 +15,10 @@
   <h2 id="overview">
     <a href="#overview" class="docs-anchor" tabindex="-1" aria-label="Link to Overview">概覽</a>
   </h2>
-  <p>通道是 Angular 樣板表示式中的一種特殊運算子，允許你在樣板中宣告式地轉換資料。通道允許你宣告一次轉換函式，然後在多個樣板中複用該轉換。Angular 通道使用豎線字元 (<code>|</code>)，其靈感來源於 <a href="https://en.wikipedia.org/wiki/Pipeline_(Unix)" target="_blank">Unix 通道</a>。</p>
+  <p>通道是 Angular 範本表示式中的一種特殊運算子，允許你在範本中宣告式地轉換資料。通道允許你宣告一次轉換函式，然後在多個範本中複用該轉換。Angular 通道使用豎線字元 (<code>|</code>)，其靈感來源於 <a href="https://en.wikipedia.org/wiki/Pipeline_(Unix)" target="_blank">Unix 通道</a>。</p>
 
     <div class="docs-alert docs-alert-note">
-    <p><strong>注意：</strong> Angular 的通道語法與標準 JavaScript 不同，標準 JavaScript 使用豎線字元作為 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR" target="_blank">按位或運算符</a>。Angular 樣板表示式不支援按位運算符。</p>
+    <p><strong>注意：</strong> Angular 的通道語法與標準 JavaScript 不同，標準 JavaScript 使用豎線字元作為 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR" target="_blank">按位或運算符</a>。Angular 範本表示式不支援按位運算符。</p>
 
     </div>
     <p>這裡有一個範例，展示了 Angular 提供的一些內建通道：</p>
@@ -108,7 +108,7 @@
   <h2 id="using-pipes">
     <a href="#using-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Using pipes">使用通道</a>
   </h2>
-  <p>Angular 的通道運算子在樣板表示式中使用豎線字元 (<code>|</code>)。通道運算子是一個二元運算符 —— 左側操作數是傳遞給轉換函式的值，右側操作數是通道的名稱和任何附加引數（如下所述）。</p>
+  <p>Angular 的通道運算子在範本表示式中使用豎線字元 (<code>|</code>)。通道運算子是一個二元運算符 —— 左側操作數是傳遞給轉換函式的值，右側操作數是通道的名稱和任何附加引數（如下所述）。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Total: {{ amount </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> currency</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
@@ -192,14 +192,14 @@
   <h2 id="creating-custom-pipes">
     <a href="#creating-custom-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Creating custom pipes">建立自定義通道</a>
   </h2>
-  <p>你可以透過使用 <code>@Pipe</code> 裝飾器實現一個 TypeScript 類來定義自定義通道。一個通道必須具備以下兩點：</p>
+  <p>你可以透過使用 <code>@Pipe</code> 裝飾器實現一個 TypeScript 類別來定義自定義通道。一個通道必須具備以下兩點：</p>
 
   <ul class="docs-list">
     <li>一個名稱，在通道裝飾器中指定</li>
 <li>一個名為 <code>transform</code> 的方法，用於執行值轉換。</li>
 
   </ul>
-  <p>TypeScript 類還應該實現 <code>PipeTransform</code> 介面，以確保它滿足通道的型別簽名。</p>
+  <p>TypeScript 類別還應該實現 <code>PipeTransform</code> 介面，以確保它滿足通道的型別簽名。</p>
 <p>這是一個自定義通道的範例，它將字串轉換為 kebab case：</p>
 <div class="docs-code">
     
@@ -214,7 +214,7 @@
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Pipe } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Pipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'myCustomTransformation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> MyCustomTransformationPipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}</span></span></code></pre>
     </pre>
-  </div><p><code>@Pipe</code> 裝飾器需要一個 <code>name</code>，用於控制通道在樣板中的使用方式。</p>
+  </div><p><code>@Pipe</code> 裝飾器需要一個 <code>name</code>，用於控制通道在範本中的使用方式。</p>
 
   <h3 id="naming-convention-for-custom-pipes">
     <a href="#naming-convention-for-custom-pipes" class="docs-anchor" tabindex="-1" aria-label="Link to Naming convention for custom pipes">自定義通道的命名約定</a>
@@ -235,7 +235,7 @@
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Pipe, PipeTransform } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Pipe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'myCustomTransformation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> MyCustomTransformationPipe</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> implements</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> PipeTransform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}</span></span></code></pre>
     </pre>
-  </div><p>實現此介面可確保你的通道類具有正確的結構。</p>
+  </div><p>實現此介面可確保你的通道類別具有正確的結構。</p>
 
   <h3 id="transforming-the-value-of-a-pipe">
     <a href="#transforming-the-value-of-a-pipe" class="docs-anchor" tabindex="-1" aria-label="Link to Transforming the value of a pipe">轉換通道的值</a>

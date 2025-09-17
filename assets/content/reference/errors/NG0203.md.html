@@ -11,7 +11,7 @@
     </a>
   </div>
     </header>
-    <p>當你在允許的<a href="guide/di/dependency-injection-context">注入上下文</a>之外嘗試使用 <a href="api/core/inject"><code>inject</code></a> 函式時，就會看到此錯誤。注入上下文在類建立和初始化期間可用。它也可用於透過 <code>runInInjectionContext</code> 使用的函式。</p>
+    <p>當你在允許的<a href="guide/di/dependency-injection-context">注入上下文</a>之外嘗試使用 <a href="api/core/inject"><code>inject</code></a> 函式時，就會看到此錯誤。注入上下文在類別建立和初始化期間可用。它也可用於透過 <code>runInInjectionContext</code> 使用的函式。</p>
 <p>在實踐中，建構式函式、建構式函式引數和欄位初始化器中允許 <code>inject()</code> 呼叫：</p>
 <div class="docs-code">
     
@@ -22,7 +22,7 @@
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">providers</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {provide: Car, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">useFactory</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // OK: a class factory</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> engine</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(Engine);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Car</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(engine);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }}</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span></span></code></pre>
     </pre>
-  </div><p>在類建立或 <code>runInInjectionContext</code> 之外呼叫 <a href="api/core/inject"><code>inject</code></a> 函式將導致錯誤。最值得注意的是，在建立類別實例之後，在方法（包括生命週期鉤子）中不允許呼叫 <code>inject()</code>：</p>
+  </div><p>在類別建立或 <code>runInInjectionContext</code> 之外呼叫 <a href="api/core/inject"><code>inject</code></a> 函式將導致錯誤。最值得注意的是，在建立類別實例之後，在方法（包括生命週期鉤子）中不允許呼叫 <code>inject()</code>：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({ </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> })</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> CarComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  ngOnInit</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // ERROR: too late, the component instance was already created</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> engine</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(Engine);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    engine.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">start</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -32,7 +32,7 @@
     <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error">除錯錯誤</a>
   </h2>
   <p>從錯誤堆疊跟蹤向後追溯，以確定不允許的 <code>inject()</code> 呼叫所在的位置。</p>
-<p>要修復此錯誤，請將 <a href="api/core/inject"><code>inject</code></a> 呼叫移動到允許的位置（通常是類建構式函式或欄位初始化器）。</p>
+<p>要修復此錯誤，請將 <a href="api/core/inject"><code>inject</code></a> 呼叫移動到允許的位置（通常是類別建構式函式或欄位初始化器）。</p>
 <p><strong>注意：</strong> 如果你在測試上下文中執行，<code>TestBed.runInInjectionContext</code> 將使 <code>inject()</code> 能夠成功。</p>
 <div class="docs-code">
     

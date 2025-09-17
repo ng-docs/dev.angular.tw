@@ -11,8 +11,8 @@
     </a>
   </div>
     </header>
-    <p>Angular 應用主要由元件及其 HTML 樣板組成。
-由於瀏覽器無法直接理解 Angular 提供的元件和樣板，因此 Angular 應用需要一個編譯過程才能在瀏覽器中執行。</p>
+    <p>Angular 應用主要由元件及其 HTML 範本組成。
+由於瀏覽器無法直接理解 Angular 提供的元件和範本，因此 Angular 應用需要一個編譯過程才能在瀏覽器中執行。</p>
 <p>Angular 預先編譯 (AoT) 編譯器在建立階段<em>在</em>瀏覽器下載並執行該程式碼<em>之前</em>，將你的 Angular HTML 和 TypeScript 程式碼轉換為高效的 JavaScript 程式碼。
 在建立過程中編譯你的應用可以在瀏覽器中提供更快的渲染。</p>
 <p>本指南解釋瞭如何指定元資料並應用可用的編譯器選項，以使用 AoT 編譯器高效地編譯你的應用。</p>
@@ -39,19 +39,19 @@
 </tr>
 <tr>
 <td align="left">更少的非同步請求</td>
-<td align="left">編譯器將外部 HTML 樣板和 CSS 樣式表<em>行內</em>到應用 JavaScript 中，從而消除了對這些源檔案的單獨 ajax 請求。</td>
+<td align="left">編譯器將外部 HTML 範本和 CSS 樣式表<em>行內</em>到應用 JavaScript 中，從而消除了對這些源檔案的單獨 ajax 請求。</td>
 </tr>
 <tr>
 <td align="left">更小的 Angular 框架下載大小</td>
 <td align="left">如果應用已經編譯，則無需下載 Angular 編譯器。編譯器大約佔 Angular 本身的一半，因此省略它可以顯著減少應用的有效負載。</td>
 </tr>
 <tr>
-<td align="left">更早地檢測樣板錯誤</td>
-<td align="left">AoT 編譯器在建立步驟中檢測並報告樣板繫結錯誤，在使用者看到它們之前。</td>
+<td align="left">更早地檢測範本錯誤</td>
+<td align="left">AoT 編譯器在建立步驟中檢測並報告範本繫結錯誤，在使用者看到它們之前。</td>
 </tr>
 <tr>
 <td align="left">更好的安全性</td>
-<td align="left">AoT 將 HTML 樣板和元件編譯為 JavaScript 檔案，在它們被提供給用戶端<em>很久之前</em>。由於沒有樣板需要讀取，也沒有有風險的用戶端 HTML 或 JavaScript 求值，因此減少了注入攻擊的機會。</td>
+<td align="left">AoT 將 HTML 範本和元件編譯為 JavaScript 檔案，在它們被提供給用戶端<em>很久之前</em>。由於沒有範本需要讀取，也沒有有風險的用戶端 HTML 或 JavaScript 求值，因此減少了注入攻擊的機會。</td>
 </tr>
 
       </tbody>
@@ -94,7 +94,7 @@
   </h2>
   <p>Angular AoT 編譯器提取 <strong>metadata</strong>，以解釋 Angular 應該管理的應用部分。你可以在 <strong>裝飾器</strong>（如 <code>@Component()</code> 和 <code>@Input()</code>）中顯式指定元資料，或在帶裝飾器的類別的建構式函式宣告中隱式指定。
 元資料告訴 Angular 如何構造你的應用類別的實例並在執行時與它們互動。</p>
-<p>在以下範例中，<code>@Component()</code> 元資料物件和類建構式函式告訴 Angular 如何建立和顯示 <code>TypicalComponent</code> 的實例。</p>
+<p>在以下範例中，<code>@Component()</code> 元資料物件和類別建構式函式告訴 Angular 如何建立和顯示 <code>TypicalComponent</code> 的實例。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-typical'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'&lt;div&gt;A typical component for {{data.name}}&lt;/div&gt;'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> TypicalComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Input</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> TypicalData</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> someService</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(SomeService);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -130,8 +130,8 @@
 </tr>
 <tr>
 <td align="left">3</td>
-<td align="left">樣板型別檢查</td>
-<td align="left">在這個可選階段，Angular *樣板編譯器* 使用 TypeScript 編譯器來驗證樣板中的繫結表示式。你可以透過設定 <code>strictTemplates</code> 設定選項來顯式啟用此階段；請參閱 <a href="reference/configs/angular-compiler-options">Angular 編譯器選項</a>。</td>
+<td align="left">範本型別檢查</td>
+<td align="left">在這個可選階段，Angular *範本編譯器* 使用 TypeScript 編譯器來驗證範本中的繫結表示式。你可以透過設定 <code>strictTemplates</code> 設定選項來顯式啟用此階段；請參閱 <a href="reference/configs/angular-compiler-options">Angular 編譯器選項</a>。</td>
 </tr>
 
       </tbody>
@@ -225,7 +225,7 @@
 <td align="left"><code>Component</code></td>
 </tr>
 <tr>
-<td align="left">樣板字串</td>
+<td align="left">範本字串</td>
 <td align="left"><code><code>pie is ${multiplier} times better than cake</code></code></td>
 </tr>
 <tr>
@@ -378,11 +378,11 @@
 <td align="left">是，如果它是對本地變數的引用</td>
 </tr>
 <tr>
-<td align="left">沒有替換的樣板</td>
+<td align="left">沒有替換的範本</td>
 <td align="left">yes</td>
 </tr>
 <tr>
-<td align="left">帶有替換的樣板</td>
+<td align="left">帶有替換的範本</td>
 <td align="left">是，如果替換是可摺疊的</td>
 </tr>
 <tr>
@@ -525,12 +525,12 @@
 並且它不會干擾 ES 模組的匯出 API。</p>
 
   <h2 id="phase-3-template-type-checking">
-    <a href="#phase-3-template-type-checking" class="docs-anchor" tabindex="-1" aria-label="Link to Phase 3: Template type checking">階段 3：樣板型別檢查</a>
+    <a href="#phase-3-template-type-checking" class="docs-anchor" tabindex="-1" aria-label="Link to Phase 3: Template type checking">階段 3：範本型別檢查</a>
   </h2>
-  <p>Angular 編譯器的最有用的屬性之一是能夠對樣板中的表示式進行型別檢查，並在錯誤導致執行時崩潰之前捕獲它們。
-在樣板型別檢查階段，Angular 樣板編譯器使用 TypeScript 編譯器來驗證樣板中的繫結表示式。</p>
+  <p>Angular 編譯器的最有用的屬性之一是能夠對範本中的表示式進行型別檢查，並在錯誤導致執行時崩潰之前捕獲它們。
+在範本型別檢查階段，Angular 範本編譯器使用 TypeScript 編譯器來驗證範本中的繫結表示式。</p>
 <p>透過在專案的 TypeScript 設定檔案的 <code>"angularCompilerOptions"</code> 中新增編譯器選項 <code>"fullTemplateTypeCheck"</code> 來顯式啟用此階段（請參閱<a href="reference/configs/angular-compiler-options">Angular 編譯器選項</a>）。</p>
-<p>當在樣板繫結表示式中檢測到型別錯誤時，樣板驗證會生成錯誤訊息，類似於 TypeScript 編譯器針對 <code>.ts</code> 檔案中的程式碼報告型別錯誤的方式。</p>
+<p>當在範本繫結表示式中檢測到型別錯誤時，範本驗證會生成錯誤訊息，類似於 TypeScript 編譯器針對 <code>.ts</code> 檔案中的程式碼報告型別錯誤的方式。</p>
 <p>例如，考慮以下元件：</p>
 <div class="docs-code">
     
@@ -541,9 +541,9 @@
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">my.component.ts.MyComponent.html(1,1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">): </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">:</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> Property </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'addresss'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> does not exist on type </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Person'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">. Did you mean </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'address'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?</span></span></code></pre>
     </pre>
-  </div><p>錯誤訊息中報告的檔案名 <code>my.component.ts.MyComponent.html</code> 是一個合成檔案，由樣板編譯器生成，其中包含 <code>MyComponent</code> 類樣板的內容。
+  </div><p>錯誤訊息中報告的檔案名 <code>my.component.ts.MyComponent.html</code> 是一個合成檔案，由範本編譯器生成，其中包含 <code>MyComponent</code> 類別範本的內容。
 編譯器永遠不會將此檔案寫入磁碟。
-行號和列號相對於類 <code>MyComponent</code> 的 <code>@Component</code> 註解中的樣板字串而言（在本例中為 <code>MyComponent</code>）。
+行號和列號相對於類別 <code>MyComponent</code> 的 <code>@Component</code> 註解中的範本字串而言（在本例中為 <code>MyComponent</code>）。
 如果元件使用 <code>templateUrl</code> 而不是 <code>template</code>，則錯誤將在 <code>templateUrl</code> 引用的 HTML 檔案中報告，而不是在合成檔案中報告。</p>
 <p>錯誤位置是包含帶有錯誤的內嵌表示式的文字節點的開頭。
 如果錯誤在屬性繫結中，例如 <code>[value]="person.address.street"</code>，則錯誤位置是包含錯誤的屬性的位置。</p>
@@ -558,21 +558,21 @@
   <h3 id="type-narrowing">
     <a href="#type-narrowing" class="docs-anchor" tabindex="-1" aria-label="Link to Type narrowing">型別窄化</a>
   </h3>
-  <p><code>ngIf</code> 指令中使用的表示式用於窄化 Angular 樣板編譯器中的型別聯合，就像 <code>if</code> 表示式在 TypeScript 中所做的那樣。
-例如，為了避免上面樣板中出現 <code>Object is possibly 'undefined'</code> 錯誤，請修改它，以便僅當 <code>person</code> 的值已初始化時才發出內嵌，如下所示：</p>
+  <p><code>ngIf</code> 指令中使用的表示式用於窄化 Angular 範本編譯器中的型別聯合，就像 <code>if</code> 表示式在 TypeScript 中所做的那樣。
+例如，為了避免上面範本中出現 <code>Object is possibly 'undefined'</code> 錯誤，請修改它，以便僅當 <code>person</code> 的值已初始化時才發出內嵌，如下所示：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'my-component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'&lt;span *ngIf="person"&gt; {{person.address.street}} &lt;/span&gt;'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> MyComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  person</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Person</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
   </div><p>使用 <code>*ngIf</code> 允許 TypeScript 編譯器推斷繫結表示式中使用的 <code>person</code> 永遠不會是 <code>undefined</code>。</p>
-<p>有關輸入型別窄化的更多訊息，請參閱<a href="guide/directives/structural-directives#directive-type-checks">改進自定義指令的樣板型別檢查</a>。</p>
+<p>有關輸入型別窄化的更多訊息，請參閱<a href="guide/directives/structural-directives#directive-type-checks">改進自定義指令的範本型別檢查</a>。</p>
 
   <h3 id="non-null-type-assertion-operator">
     <a href="#non-null-type-assertion-operator" class="docs-anchor" tabindex="-1" aria-label="Link to Non-null type assertion operator">非空型別斷言運算子</a>
   </h3>
   <p>當使用 <code>*ngIf</code> 不方便時，或者當元件中的某些約束確保當繫結表示式被內嵌時表示式始終為非空時，可以使用非空型別斷言運算子來抑制 <code>Object is possibly 'undefined'</code> 錯誤。</p>
 <p>在以下範例中，<code>person</code> 和 <code>address</code> 屬性始終一起設定，這意味著如果 <code>person</code> 為非空，則 <code>address</code> 始終為非空。
-沒有方便的方法向 TypeScript 和樣板編譯器描述此約束，但在此範例中，透過使用 <code>address!.street</code> 抑制了錯誤。</p>
+沒有方便的方法向 TypeScript 和範本編譯器描述此約束，但在此範例中，透過使用 <code>address!.street</code> 抑制了錯誤。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'my-component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'&lt;span *ngIf="person"&gt; {{person.name}} lives on {{address!.street}} &lt;/span&gt;'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> MyComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  person</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Person</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  address</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">?:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Address</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  setData</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">person</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Person</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">address</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Address</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.person </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> person;</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.address </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> address;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>

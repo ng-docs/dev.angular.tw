@@ -24,7 +24,7 @@ Angular 原理圖工具透過建立虛擬檔案系統來防止副作用和錯誤
   <h2 id="schematics-concepts">
     <a href="#schematics-concepts" class="docs-anchor" tabindex="-1" aria-label="Link to Schematics concepts">原理圖概念</a>
   </h2>
-  <p>原理圖的公共 API 定義了一些類，這些類代表了基本概念。</p>
+  <p>原理圖的公共 API 定義了一些類別，這些類別代表了基本概念。</p>
 
   <ul class="docs-list">
     <li><p>虛擬檔案系統由 <code>Tree</code> 表示。<code>Tree</code> 資料結構包含一個<em>基</em>（一組已經存在的檔案）和一個<em>暫存區</em>（要應用於基的更改清單）。在進行修改時，你實際上並沒有更改基，而是將這些修改新增到暫存區。</p>
@@ -47,7 +47,7 @@ Angular 原理圖工具透過建立虛擬檔案系統來防止副作用和錯誤
     <div class="docs-code-header"><h3>index.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Rule, SchematicContext, Tree } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular-devkit/schematics'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// You don't have to export the function as default.</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// You can also have more than one rule factory per file.</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> function</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> helloWorld</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">_options</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> any</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Rule</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">tree</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Tree</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">_context</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> SchematicContext</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">   return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> tree;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> };</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>你的規則可以透過呼叫外部工具和實現邏輯來更改你的專案。例如，你需要一個規則來定義如何將原理圖中的樣板合併到宿主專案中。</p>
+  </div><p>你的規則可以透過呼叫外部工具和實現邏輯來更改你的專案。例如，你需要一個規則來定義如何將原理圖中的範本合併到宿主專案中。</p>
 <p>規則可以使用 <code>@schematics/angular</code> 套件提供的實用程式。查詢用於處理模組、依賴項、TypeScript、AST、JSON、Angular CLI 工作區和專案等的輔助函式。</p>
 <div class="docs-code" header="index.ts">
     <div class="docs-code-header"><h3>index.ts</h3></div>
@@ -57,7 +57,7 @@ Angular 原理圖工具透過建立虛擬檔案系統來防止副作用和錯誤
   <h3 id="defining-input-options-with-a-schema-and-interfaces">
     <a href="#defining-input-options-with-a-schema-and-interfaces" class="docs-anchor" tabindex="-1" aria-label="Link to Defining input options with a schema and interfaces">使用模式和介面定義輸入選項</a>
   </h3>
-  <p>規則可以從呼叫者那裡收集選項值，並將它們注入到樣板中。你的規則可用的選項及其允許的值和預設值在原理圖的 JSON 模式檔案 <code>&lt;schematic&gt;/schema.json</code> 中定義。使用 TypeScript 介面為模式定義變數或列舉資料型別。</p>
+  <p>規則可以從呼叫者那裡收集選項值，並將它們注入到範本中。你的規則可用的選項及其允許的值和預設值在原理圖的 JSON 模式檔案 <code>&lt;schematic&gt;/schema.json</code> 中定義。使用 TypeScript 介面為模式定義變數或列舉資料型別。</p>
 <p>模式定義了原理圖中使用的變數的型別和預設值。例如，假設的『Hello World』原理圖可能具有以下模式。</p>
 <div class="docs-code" header="src/hello-world/schema.json">
     <div class="docs-code-header"><h3>src/hello-world/schema.json</h3></div>
@@ -213,7 +213,7 @@ Angular 原理圖工具透過建立虛擬檔案系統來防止副作用和錯誤
   </div><p>這將安裝 <code>schematics</code> 可執行檔案，你可以使用它在自己的專案資料夾中建立新的原理圖集合，將新的原理圖新增到現有集合，或擴充套件現有原理圖。</p>
 <p>在以下各節中，你將使用 CLI 建立一個新的原理圖集合，以介紹檔案和檔案結構，以及一些基本概念。</p>
 <p>然而，原理圖最常見的用途是將 Angular 函式庫與 Angular CLI 整合。
-透過在 Angular 工作區中的庫專案中直接建立原理圖檔案來實現這一點，而無需使用原理圖 CLI。
+透過在 Angular 工作區中的函式庫專案中直接建立原理圖檔案來實現這一點，而無需使用原理圖 CLI。
 請參閱<a href="tools/cli/schematics-for-libraries">函式庫的原理圖</a>。</p>
 
   <h3 id="creating-a-schematics-collection">
@@ -326,12 +326,12 @@ Angular 原理圖工具透過建立虛擬檔案系統來防止副作用和錯誤
 </tr>
 <tr>
 <td align="left"><code>files/</code></td>
-<td align="left">要複製的可選元件/樣板檔案。</td>
+<td align="left">要複製的可選元件/範本檔案。</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p>原理圖有可能在 <code>index.ts</code> 檔案中提供其所有邏輯，而無需額外的樣板。
-但是，你可以透過在 <code>files</code> 資料夾中提供元件和樣板（如獨立 Angular 專案中的元件和樣板）來為 Angular 建立動態原理圖。
-索引檔案中的邏輯透過定義注入資料和修改變數的規則來設定這些樣板。</p>
+  <p>原理圖有可能在 <code>index.ts</code> 檔案中提供其所有邏輯，而無需額外的範本。
+但是，你可以透過在 <code>files</code> 資料夾中提供元件和範本（如獨立 Angular 專案中的元件和範本）來為 Angular 建立動態原理圖。
+索引檔案中的邏輯透過定義注入資料和修改變數的規則來設定這些範本。</p>

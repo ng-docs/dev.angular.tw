@@ -32,22 +32,22 @@
     </pre>
   </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="bhnl3vylbhc3nhlz68d3uf2ng">現在，你就可以在應用中到處注入 <code>UserService</code> 了。</p>
 <p data-ng_translator_product="100" data-ng_translator_ref_id="eegvd8vqvm86qc5vyh81y5pm4">服務本身是一個由 CLI 生成並用 
-<code>@Injectable()</code> 裝飾的類。 預設情況下，此裝飾器有一個 
+<code>@Injectable()</code> 裝飾的類別。 預設情況下，此裝飾器有一個 
 <code>providedIn</code> 屬性，該屬性為服務建立一個提供者。 在此情況下，
 <code>providedIn: 'root'</code> 指定 Angular 應在根注入器中提供此服務。</p>
 
   <h2 id="provider-scope">
     <a href="#provider-scope" class="docs-anchor" tabindex="-1" aria-label="Link to Provider scope" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="1v52y51wo5zeaxywqzof5ft6k">提供者的作用域</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c1br4paltkl5qtgfka32g1a0q">當你把服務提供者新增到應用的根注入器中時，它就在整個應用程式中可用了。另外，這些服務提供者也同樣對整個應用中的類是可用的 —— 只要它們有供查詢用的服務令牌。</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="c1br4paltkl5qtgfka32g1a0q">當你把服務提供者新增到應用的根注入器中時，它就在整個應用程式中可用了。另外，這些服務提供者也同樣對整個應用中的類別是可用的 —— 只要它們有供查詢用的服務令牌。</p>
 <p data-ng_translator_product="100" data-ng_translator_ref_id="av3jsbd04f5bsv0djvkbqe82j">你應該始終在根注入器中提供服務，除非某些情況下需要服務僅在消費者匯入特定 
 <code>@NgModule</code> 時可用。</p>
 
   <h2 id="limiting-provider-scope-by-lazy-loading-modules">
     <a href="#limiting-provider-scope-by-lazy-loading-modules" class="docs-anchor" tabindex="-1" aria-label="Link to Limiting provider scope by lazy loading modules" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="zrrzcu38os8yr0jqt35u4jhc">使用延遲載入模組限制提供者的作用域</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ug7ln3y4sreicsqwfpp0e4rn">在 CLI 生成的基本應用中，模組是急性載入的，這意味著它們都是由本應用啟動的，Angular 會使用一個依賴注入體系來讓一切服務都在模組間有效。對於急性載入式應用，應用中的根注入器會讓所有服務提供者都對整個應用有效。</p>
-<p data-ng_translator_product="100" data-ng_translator_ref_id="42pjzp6f7y6zotbdpolj6pbor">當使用延遲載入時，此行為會發生變化。延遲載入是指僅在需要時（例如路由時）載入模組。它們不像急性載入的模組那樣立即載入。這意味著由於根注入器不知道這些模組，列在它們的提供者陣列中的任何服務都不可用。</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ug7ln3y4sreicsqwfpp0e4rn">在 CLI 生成的基本應用中，模組是預先載入的，這意味著它們都是由本應用啟動的，Angular 會使用一個依賴注入體系來讓一切服務都在模組間有效。對於預先載入式應用，應用中的根注入器會讓所有服務提供者都對整個應用有效。</p>
+<p data-ng_translator_product="100" data-ng_translator_ref_id="42pjzp6f7y6zotbdpolj6pbor">當使用延遲載入時，此行為會發生變化。延遲載入是指僅在需要時（例如路由時）載入模組。它們不像預先載入的模組那樣立即載入。這意味著由於根注入器不知道這些模組，列在它們的提供者陣列中的任何服務都不可用。</p>
 <!--todo: KW--Make diagram here -->
 <!--todo: KW--per Misko: not clear if the lazy modules are siblings or grand-children. They are both depending on router structure. -->
 
@@ -60,14 +60,14 @@
     <div class="docs-code-header"><h3>src/app/user.service.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line"><span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;</div><div class="hljs-ln-line"></div><div class="hljs-ln-line">@Injectable({</div><div class="hljs-ln-line highlighted">  providedIn: <span class="hljs-string">'any'</span>,</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> {</div><div class="hljs-ln-line">}</div></code>
     </pre>
-  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aj9x8a4gfdcctoi46132qh84y">透過使用 <code>providedIn: 'any'</code>，所有急性載入的模組都會共享同一個服務單例，不過，延遲載入模組各自有它們自己獨有的單例。如下所示。</p>
+  </div><p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="aj9x8a4gfdcctoi46132qh84y">透過使用 <code>providedIn: 'any'</code>，所有預先載入的模組都會共享同一個服務單例，不過，延遲載入模組各自有它們自己獨有的單例。如下所示。</p>
 <img alt="any-provider-scope" class="left" src="assets/images/guide/providers/any-provider.svg">
 
 
   <h2 id="limiting-provider-scope-with-components">
     <a href="#limiting-provider-scope-with-components" class="docs-anchor" tabindex="-1" aria-label="Link to Limiting provider scope with components" data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="9i9pygcxdrpwxn9o8ym477mv3">使用元件限定服務提供者的作用域</a>
   </h2>
-  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ru65z677yc0uv1v0lta8s8g2">另一種限定提供者作用域的方式是把要限定的服務新增到元件的 <code>providers</code> 陣列中。元件中的提供者和 NgModule 中的提供者是彼此獨立的。當你要急性載入一個自帶了全部所需服務的模組時，這種方式是有幫助的。在元件中提供服務，會限定該服務只能在該組件及其子元件中有效，而同一模組中的其它元件不能訪問它。</p>
+  <p data-ng_translator_product="100" data-ng_translator_confirmed data-ng_translator_ref_id="6ru65z677yc0uv1v0lta8s8g2">另一種限定提供者作用域的方式是把要限定的服務新增到元件的 <code>providers</code> 陣列中。元件中的提供者和 NgModule 中的提供者是彼此獨立的。當你要預先載入一個自帶了全部所需服務的模組時，這種方式是有幫助的。在元件中提供服務，會限定該服務只能在該組件及其子元件中有效，而同一模組中的其它元件不能訪問它。</p>
 <div class="docs-code" header="src/app/app.component.ts">
     <div class="docs-code-header"><h3>src/app/app.component.ts</h3></div>
     <pre class="docs-mini-scroll-track">      <code><div class="hljs-ln-line">@Component({</div><div class="hljs-ln-line">  <span class="hljs-regexp">//</span> ...</div><div class="hljs-ln-line">  providers: [UserService]</div><div class="hljs-ln-line">})</div><div class="hljs-ln-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> {}</div></code>

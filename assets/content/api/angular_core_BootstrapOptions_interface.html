@@ -15,7 +15,7 @@
         <pre class="docs-mini-scroll-track">          <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> (click)</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"doSomething()"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> (click)</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"doSomethingElse()"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
         </pre>
       </div>
-    <p>當按鈕被點選時，由於事件冒泡，兩個事件處理程式都將被呼叫，並且會觸發 2 次變更檢測。我們可以合併這類事件，以便只觸發一次變更檢測。</p>
+    <p>當按鈕被點選時，由於事件冒泡，兩個事件處理程式都將被呼叫，並且會觸發 2 次變更檢測。我們可以合併這類別事件，以便只觸發一次變更檢測。</p>
 <p>預設情況下，此選項將為 false。因此，事件將不會被合併，並且變更檢測將被多次觸發。如果此選項設定為 true，則將透過排程動畫幀非同步觸發變更檢測。因此，在上述情況下，變更檢測將僅觸發一次。</p></div></div></div></div><div id="ngZoneRunCoalescing" class="docs-reference-member-card"><header class="docs-reference-card-header"><h3>ngZoneRunCoalescing</h3><code>boolean | undefined</code></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div><p>可以選擇指定是否應將 <code><a href="/api/core/NgZone#run()">NgZone#run()</a></code> 方法呼叫合併為單個變更檢測。</p>
 <p>考慮以下情況。</p>
 
@@ -26,14 +26,14 @@
     <p>這種情況會多次觸發變更檢測。
 使用 ngZoneRunCoalescing 選項，事件迴圈中的所有變更檢測僅觸發一次。
 此外，變更檢測在 requestAnimation 中執行。</p></div></div></div></div><div id="ignoreChangesOutsideZone" class="docs-reference-member-card"><header class="docs-reference-card-header"><h3>ignoreChangesOutsideZone</h3><code>boolean | undefined</code></header><div class="docs-reference-card-body"><div class="docs-reference-card-item"><div class="docs-deprecation-message"><span class="docs-param-keyword docs-deprecated">@deprecated</span><span><p>引入此選項是出於謹慎，旨在讓開發人員選擇退出 v18 中的新行為，即當上述事件發生在 Zone 之外時，會排程變更檢測。在監控發布後的結果後，我們已確定此屬性按預期工作，並且不認為應該透過將此選項設定為 <code>true</code> 來停用它。</p>
-</span></div><div><p>當為 false 時，當 Angular 收到需要重新整理樣板的明確指示時，會排程變更檢測。這包括：</p>
+</span></div><div><p>當為 false 時，當 Angular 收到需要重新整理範本的明確指示時，會排程變更檢測。這包括：</p>
 
     <ul class="docs-list">
       <li>呼叫 <code><a href="/api/core/ChangeDetectorRef#markForCheck">ChangeDetectorRef.markForCheck</a></code></li>
 <li>呼叫 <code><a href="/api/core/ComponentRef#setInput">ComponentRef.setInput</a></code></li>
-<li>更新在樣板中讀取的 Signal</li>
+<li>更新在範本中讀取的 Signal</li>
 <li>附著一個標記為髒的檢視</li>
 <li>移除檢視</li>
-<li>註冊渲染鉤子（僅當渲染鉤子執行上述操作之一時，才會重新整理樣板）</li>
+<li>註冊渲染鉤子（僅當渲染鉤子執行上述操作之一時，才會重新整理範本）</li>
 
     </ul></div></div></div></div></div></div></div>

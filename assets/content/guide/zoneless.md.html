@@ -53,8 +53,8 @@
   <ul class="docs-list">
     <li><code>ChangeDetectorRef.markForCheck</code>（由 <code>AsyncPipe</code> 自動呼叫）</li>
 <li><code>ComponentRef.setInput</code></li>
-<li>更新在樣板中讀取的訊號</li>
-<li>繫結的宿主或樣板偵聽器回呼</li>
+<li>更新在範本中讀取的訊號</li>
+<li>繫結的宿主或範本偵聽器回呼</li>
 <li>附著一個被上述某項標記為髒的檢視</li>
 
   </ul>
@@ -63,7 +63,7 @@
     <a href="#onpush-compatible-components" class="docs-anchor" tabindex="-1" aria-label="Link to <code>OnPush</code>-compatible components">相容 <code>OnPush</code> 的元件</a>
   </h3>
   <p>確保元件正在使用上述正確的通知機制的一種方法是使用 <a href="/best-practices/skipping-subtrees#using-onpush">ChangeDetectionStrategy.OnPush</a>。</p>
-<p><code>OnPush</code> 變更檢測策略不是必要條件，但它是應用元件實現 zoneless 相容性的推薦步驟。函式庫元件並非總是可以使用 <code>ChangeDetectionStrategy.OnPush</code>。當函式庫元件是可能使用 <code>ChangeDetectionStrategy.Default</code> 的使用者元件的宿主時，它不能使用 <code>OnPush</code>，因為如果子元件不相容 <code>OnPush</code> 並且依賴 ZoneJS 來觸發變更檢測，這將阻止子元件重新整理。只要元件在需要執行變更檢測時通知 Angular（呼叫 <code>markForCheck</code>、使用訊號、<code>AsyncPipe</code> 等），元件就可以使用 <code>Default</code> 策略。作為使用者元件的宿主意味著使用諸如 <code>ViewContainerRef.createComponent</code> 之類的 API，而不僅僅是託管來自使用者元件的樣板的一部分（即內容投影或使用樣板引用輸入）。</p>
+<p><code>OnPush</code> 變更檢測策略不是必要條件，但它是應用元件實現 zoneless 相容性的推薦步驟。函式庫元件並非總是可以使用 <code>ChangeDetectionStrategy.OnPush</code>。當函式庫元件是可能使用 <code>ChangeDetectionStrategy.Default</code> 的使用者元件的宿主時，它不能使用 <code>OnPush</code>，因為如果子元件不相容 <code>OnPush</code> 並且依賴 ZoneJS 來觸發變更檢測，這將阻止子元件重新整理。只要元件在需要執行變更檢測時通知 Angular（呼叫 <code>markForCheck</code>、使用訊號、<code>AsyncPipe</code> 等），元件就可以使用 <code>Default</code> 策略。作為使用者元件的宿主意味著使用諸如 <code>ViewContainerRef.createComponent</code> 之類別的 API，而不僅僅是託管來自使用者元件的範本的一部分（即內容投影或使用範本引用輸入）。</p>
 
   <h3 id="remove-ngzoneonmicrotaskempty-ngzoneonunstable-ngzoneisstable-or-ngzoneonstable">
     <a href="#remove-ngzoneonmicrotaskempty-ngzoneonunstable-ngzoneisstable-or-ngzoneonstable" class="docs-anchor" tabindex="-1" aria-label="Link to Remove <code>NgZone.onMicrotaskEmpty</code>, <code>NgZone.onUnstable</code>, <code>NgZone.isStable</code>, or <code>NgZone.onStable</code>">移除 <code>NgZone.onMicrotaskEmpty</code>、<code>NgZone.onUnstable</code>、<code>NgZone.isStable</code> 或 <code>NgZone.onStable</code></a>
@@ -112,7 +112,7 @@
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">TestBed.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">configureTestingModule</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  providers: [</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">provideExperimentalZonelessChangeDetection</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> fixture</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> TestBed.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">createComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(MyComponent);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> fixture.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">whenStable</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span></code></pre>
     </pre>
   </div><p>為了確保測試具有與生產程式碼最相似的行為，請儘可能避免使用 <code>fixture.detectChanges()</code>。當 Angular 可能原本沒有計劃變更檢測時，這將強制執行變更檢測。測試應確保這些通知正在發生，並允許 Angular 處理何時同步狀態，而不是手動強制其在測試中發生。</p>
-<p>對於現有的測試套件，使用 <code>fixture.detectChanges()</code> 是一種常見的模式，並且可能不值得費力將其轉換為 <code>await fixture.whenStable()</code>。<code>TestBed</code> 仍然會強制執行 fixture 的元件與 <code>OnPush</code> 相容，並且如果發現樣板值在沒有變更通知的情況下被更新（即 <code>fixture.componentInstance.someValue = 'newValue';</code>），則會丟擲 <code>ExpressionChangedAfterItHasBeenCheckedError</code>。如果該組件在生產環境中使用，則應透過更新元件以使用訊號來管理狀態或呼叫 <code>ChangeDetectorRef.markForCheck()</code> 來解決此問題。如果該組件僅用作測試套件裝器，並且從不在應用中使用，則可以使用 <code>fixture.changeDetectorRef.markForCheck()</code>。</p>
+<p>對於現有的測試套件，使用 <code>fixture.detectChanges()</code> 是一種常見的模式，並且可能不值得費力將其轉換為 <code>await fixture.whenStable()</code>。<code>TestBed</code> 仍然會強制執行 fixture 的元件與 <code>OnPush</code> 相容，並且如果發現範本值在沒有變更通知的情況下被更新（即 <code>fixture.componentInstance.someValue = 'newValue';</code>），則會丟擲 <code>ExpressionChangedAfterItHasBeenCheckedError</code>。如果該組件在生產環境中使用，則應透過更新元件以使用訊號來管理狀態或呼叫 <code>ChangeDetectorRef.markForCheck()</code> 來解決此問題。如果該組件僅用作測試套件裝器，並且從不在應用中使用，則可以使用 <code>fixture.changeDetectorRef.markForCheck()</code>。</p>
 
   <h3 id="debug-mode-check-to-ensure-updates-are-detected">
     <a href="#debug-mode-check-to-ensure-updates-are-detected" class="docs-anchor" tabindex="-1" aria-label="Link to Debug-mode check to ensure updates are detected">除錯模式檢查以確保檢測到更新</a>

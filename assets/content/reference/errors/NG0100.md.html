@@ -17,12 +17,12 @@
     </div>
     <p>當在變更檢測完成後表示式值被更改時，Angular 丟擲一個 <code>ExpressionChangedAfterItHasBeenCheckedError</code> 錯誤。Angular 只在開發模式下丟擲這個錯誤。</p>
 <p>在開發模式下，Angular 在每次變更檢測執行後執行一次額外的檢查，以確保繫結沒有更改。這可以捕獲檢視處於不一致狀態的錯誤。例如，如果一個方法或 getter 每次被呼叫時回傳不同的值，或者如果一個子元件更改了其父元件上的值，則可能發生這種情況。如果發生任何一種情況，則表明變更檢測不穩定。Angular 丟擲此錯誤以確保資料始終在檢視中正確反映，從而防止不穩定的 UI 行為或可能的無限迴圈。</p>
-<p>當您新增了樣板表示式或已開始實現生命週期鉤子（如 <code>ngAfterViewInit</code> 或 <code>ngOnChanges</code>）時，通常會發生此錯誤。在處理載入狀態和非同步操作時，或者當子元件更改其父元件繫結時，也很常見。</p>
+<p>當您新增了範本表示式或已開始實現生命週期鉤子（如 <code>ngAfterViewInit</code> 或 <code>ngOnChanges</code>）時，通常會發生此錯誤。在處理載入狀態和非同步操作時，或者當子元件更改其父元件繫結時，也很常見。</p>
 
   <h2 id="debugging-the-error">
     <a href="#debugging-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Debugging the error">除錯錯誤</a>
   </h2>
-  <p>CLI 生成的<a href="https://developer.mozilla.org/docs/Tools/Debugger/How_to/Use_a_source_map" target="_blank">原始碼對映</a>在除錯時非常有用。向上導向呼叫堆疊，直到找到錯誤中顯示的值已更改的樣板表示式。</p>
-<p>確保在執行變更檢測後，樣板中的繫結沒有任何更改。這通常意味著重構以針對您的用例使用正確的元件生命週期鉤子。如果問題存在於 <code>ngAfterViewInit</code> 中，建議的解決方案是使用建構式函式或 <code>ngOnInit</code> 來設定初始值，或者為其他值繫結使用 <code>ngAfterContentInit</code>。</p>
-<p>如果您在檢視中繫結到方法，請確保呼叫不會更新樣板中的任何其他繫結。</p>
+  <p>CLI 生成的<a href="https://developer.mozilla.org/docs/Tools/Debugger/How_to/Use_a_source_map" target="_blank">原始碼對映</a>在除錯時非常有用。向上導向呼叫堆疊，直到找到錯誤中顯示的值已更改的範本表示式。</p>
+<p>確保在執行變更檢測後，範本中的繫結沒有任何更改。這通常意味著重構以針對您的用例使用正確的元件生命週期鉤子。如果問題存在於 <code>ngAfterViewInit</code> 中，建議的解決方案是使用建構式函式或 <code>ngOnInit</code> 來設定初始值，或者為其他值繫結使用 <code>ngAfterContentInit</code>。</p>
+<p>如果您在檢視中繫結到方法，請確保呼叫不會更新範本中的任何其他繫結。</p>
 <p>閱讀<a href="https://angularindepth.com/posts/1001/everything-you-need-to-know-about-the-expressionchangedafterithasbeencheckederror-error" target="_blank">『關於 "ExpressionChangedAfterItHasBeenCheckedError" 錯誤，你需要知道的一切』</a>，詳細瞭解哪種解決方案適合您，並在<a href="https://blog.angular-university.io/angular-debugging" target="_blank">『Angular 除錯 "檢查後表示式已更改"：簡單解釋（和修復）』</a>中瞭解為什麼這很有用。</p>

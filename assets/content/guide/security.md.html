@@ -50,12 +50,12 @@
     <a href="#angulars-cross-site-scripting-security-model" class="docs-anchor" tabindex="-1" aria-label="Link to Angular's cross-site scripting security model">Angular 的跨站指令碼安全模型</a>
   </h3>
   <p>為了系統地阻止 XSS 錯誤，Angular 預設將所有值都視為不受信任的。
-當透過樣板繫結或內嵌將值插入到 DOM 中時，Angular 會對不受信任的值進行無害化和轉義。
+當透過範本繫結或內嵌將值插入到 DOM 中時，Angular 會對不受信任的值進行無害化和轉義。
 如果某個值已經在 Angular 外部進行了無害化處理，並且被認為是安全的，請透過將 <a href="#trusting-safe-values">值標記為受信任</a> 來告知 Angular。</p>
-<p>與用於渲染的值不同，Angular 樣板預設被認為是受信任的，並且應被視為可執行程式碼。
-永遠不要透過連線使用者輸入和樣板語法來建立樣板。
+<p>與用於渲染的值不同，Angular 範本預設被認為是受信任的，並且應被視為可執行程式碼。
+永遠不要透過連線使用者輸入和範本語法來建立範本。
 這樣做會使攻擊者能夠將<a href="https://en.wikipedia.org/wiki/Code_injection" target="_blank">任意程式碼注入</a>到你的應用中。
-為了防止這些漏洞，在生產部署中始終使用預設的 <a href="#use-the-aot-template-compiler">預先編譯 (AoT) 樣板編譯器</a>。</p>
+為了防止這些漏洞，在生產部署中始終使用預設的 <a href="#use-the-aot-template-compiler">預先編譯 (AoT) 範本編譯器</a>。</p>
 <p>可以透過使用內容安全策略和受信任型別來提供額外的保護層。
 這些 Web 平台屬性在 DOM 級別執行，這是防止 XSS 問題的最有效位置。在這裡，它們無法使用其他較低級別的 API 繞過。
 因此，強烈建議利用這些屬性。為此，請為應用設定<a href="#content-security-policy">內容安全策略</a>，並啟用<a href="#enforcing-trusted-types">受信任型別強制執行</a>。</p>
@@ -105,7 +105,7 @@
   <h3 id="sanitization-example">
     <a href="#sanitization-example" class="docs-anchor" tabindex="-1" aria-label="Link to Sanitization example">無害化範例</a>
   </h3>
-  <p>以下樣板繫結了 <code>htmlSnippet</code> 的值。一次是透過將其內嵌到元素的內容中，另一次是透過將其繫結到元素的 <code>innerHTML</code> 屬性：</p>
+  <p>以下範本繫結了 <code>htmlSnippet</code> 的值。一次是透過將其內嵌到元素的內容中，另一次是透過將其繫結到元素的 <code>innerHTML</code> 屬性：</p>
 <div class="docs-code" path="adev/src/content/examples/security/src/app/inner-html-binding.component.html" header="src/app/inner-html-binding.component.html">
     <div class="docs-code-header"><h3>src/app/inner-html-binding.component.html</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Binding innerHTML&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Bound value:&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"e2e-inner-html-interpolated"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;{{ htmlSnippet }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Result of binding to innerHTML:&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"e2e-inner-html-bound"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [innerHTML]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"htmlSnippet"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span></code></pre>
@@ -115,7 +115,7 @@
 請注意，將攻擊者可能控制的值繫結到 <code>innerHTML</code> 通常會導致 XSS 漏洞。
 例如，可以按以下方式執行 JavaScript：</p>
 <div class="docs-code" path="adev/src/content/examples/security/src/app/inner-html-binding.component.ts" visiblelines="6,7,8,9,10,11" header="src/app/inner-html-binding.component.ts (class)">
-    <div class="docs-code-header"><h3>src/app/inner-html-binding.component.ts (類)</h3></div>
+    <div class="docs-code-header"><h3>src/app/inner-html-binding.component.ts (類別)</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Component} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-inner-html-binding'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  templateUrl: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'./inner-html-binding.component.html'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> InnerHtmlBindingComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // For example, a user/attacker-controlled value from a URL.</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  htmlSnippet</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'Template &lt;script&gt;alert("0wned")&lt;/script&gt; &lt;b&gt;Syntax&lt;/b&gt;'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span></code></pre>
     </pre>
   </div><p>Angular 識別出該值是不安全的，並自動對其進行無害化處理，這會刪除 <code>script</code> 元素，但保留安全內容，例如 <code>&lt;b&gt;</code> 元素。</p>
@@ -128,7 +128,7 @@
   <p>除非你強制執行受信任型別，否則內建的瀏覽器 DOM API 不會自動保護你免受安全漏洞的侵害。
 例如，<code>document</code>、透過 <code>ElementRef</code> 可用的節點以及許多第三方 API 都包含不安全的方法。
 同樣，如果你與其他操縱 DOM 的函式庫進行互動，你可能不會像使用 Angular 內嵌那樣進行相同的自動無害化處理。
-避免直接與 DOM 互動，而應儘可能使用 Angular 樣板。</p>
+避免直接與 DOM 互動，而應儘可能使用 Angular 範本。</p>
 <p>對於不可避免的情況，請使用內建的 Angular 無害化函式。
 使用 <a href="api/platform-browser/DomSanitizer#sanitize">DomSanitizer.sanitize</a> 方法和適當的 <code>SecurityContext</code> 對不受信任的值進行無害化處理。
 該函式還接受使用 <code>bypassSecurityTrust</code> 函式標記為受信任的值，並且不對其進行無害化處理，如<a href="#trusting-safe-values">下文所述</a>。</p>
@@ -152,7 +152,7 @@
 
   </ul>
   <p>請記住，值是否安全取決於上下文，因此請為你的預期值用途選擇正確的上下文。
-假設以下樣板需要將 URL 繫結到 <code>javascript:alert(...)</code> 呼叫：</p>
+假設以下範本需要將 URL 繫結到 <code>javascript:alert(...)</code> 呼叫：</p>
 <div class="docs-code" path="adev/src/content/examples/security/src/app/bypass-security.component.html" visiblelines="2,3,4,5" header="src/app/bypass-security.component.html (URL)">
     <div class="docs-code-header"><h3>src/app/bypass-security.component.html (URL)</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Bypass Security Component&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;An untrusted URL:&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"e2e-dangerous-url"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [href]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"dangerousUrl"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Click me&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;A trusted URL:&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"e2e-trusted-url"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [href]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"trustedUrl"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Click me&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Resource URL:&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Showing: {{ dangerousVideoUrl }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Trusted:&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">iframe</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"e2e-iframe-trusted-src"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> width</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"640"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> height</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"390"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [src]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"videoUrl"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> title</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"trusted video url"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">iframe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Untrusted:&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">p</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">iframe</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"e2e-iframe-untrusted-src"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> width</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"640"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> height</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"390"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [src]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"dangerousVideoUrl"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> title</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"unTrusted video url"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">iframe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span></code></pre>
@@ -166,7 +166,7 @@
   </div><img alt="A screenshot showing an alert box created from a trusted URL" src="assets/images/guide/security/bypass-security-component.png#medium">
 
 <p>如果你需要將使用者輸入轉換為受信任的值，請使用元件方法。
-以下樣板允許使用者輸入 YouTube 影片 ID 並在 <code>&lt;iframe&gt;</code> 中載入相應的影片。
+以下範本允許使用者輸入 YouTube 影片 ID 並在 <code>&lt;iframe&gt;</code> 中載入相應的影片。
 <code>&lt;iframe src&gt;</code> 屬性是資源 URL 安全上下文，因為不受信任的來源可能會偷偷放入檔案下載，而毫無戒心的使用者可能會執行這些檔案。
 為了防止這種情況，請調用元件上的方法來構造受信任的影片 URL，這將使 Angular 允許繫結到 <code>&lt;iframe src&gt;</code> 中：</p>
 <div class="docs-code" path="adev/src/content/examples/security/src/app/bypass-security.component.html" visiblelines="7,8,9,10,11,12,13,14" header="src/app/bypass-security.component.html (iframe)">
@@ -194,7 +194,7 @@
 你可以透過以下兩種方式之一為 Angular 設定 nonce：</p>
 
     <ol class="docs-ordered-list">
-      <li>在根應用元素上將 <code>ngCspNonce</code> 屬性設定為 <code>&lt;app ngCspNonce="randomNonceGoesHere"&gt;&lt;/app&gt;</code>。如果你有權訪問伺服器端樣板，該樣板可以在構造回應時將 nonce 新增到標頭和 <code>index.html</code>，請使用此方法。</li>
+      <li>在根應用元素上將 <code>ngCspNonce</code> 屬性設定為 <code>&lt;app ngCspNonce="randomNonceGoesHere"&gt;&lt;/app&gt;</code>。如果你有權訪問伺服器端範本，該範本可以在構造回應時將 nonce 新增到標頭和 <code>index.html</code>，請使用此方法。</li>
 <li>使用 <code>CSP_NONCE</code> 注入令牌來提供 nonce。如果你可以在執行時訪問 nonce，並且希望能夠快取 <code>index.html</code>，請使用此方法。</li>
 
     </ol>
@@ -268,7 +268,7 @@
       <tbody>
         <tr>
 <td align="left"><code>angular</code></td>
-<td align="left">此策略用於 Angular 內部經過安全審查的程式碼，並且是在強制執行受信任型別時 Angular 正常執行所必需的。任何行內樣板值或由 Angular 無害化處理的內容都將被此策略視為安全。</td>
+<td align="left">此策略用於 Angular 內部經過安全審查的程式碼，並且是在強制執行受信任型別時 Angular 正常執行所必需的。任何行內範本值或由 Angular 無害化處理的內容都將被此策略視為安全。</td>
 </tr>
 <tr>
 <td align="left"><code>angular#bundler</code></td>
@@ -327,22 +327,22 @@
     </div>
     
   <h3 id="use-the-aot-template-compiler">
-    <a href="#use-the-aot-template-compiler" class="docs-anchor" tabindex="-1" aria-label="Link to Use the AOT template compiler">使用預先 (AoT) 樣板編譯器</a>
+    <a href="#use-the-aot-template-compiler" class="docs-anchor" tabindex="-1" aria-label="Link to Use the AOT template compiler">使用預先 (AoT) 範本編譯器</a>
   </h3>
-  <p>預先 (AoT) 樣板編譯器可防止一整類稱為樣板注入的漏洞，並大大提高應用效能。
-預先 (AoT) 樣板編譯器是 Angular CLI 應用使用的預設編譯器，你應該在所有生產部署中使用它。</p>
-<p>預先 (AoT) 編譯器的替代方案是即時 (JiT) 編譯器，它在執行時在瀏覽器中將樣板編譯為可執行的樣板程式碼。
-Angular 信任樣板程式碼，因此動態生成樣板並對其進行編譯，特別是包含使用者資料的樣板，會繞過 Angular 的內建保護。這是一種安全反模式。
+  <p>預先 (AoT) 範本編譯器可防止一整類別稱為範本注入的漏洞，並大大提高應用效能。
+預先 (AoT) 範本編譯器是 Angular CLI 應用使用的預設編譯器，你應該在所有生產部署中使用它。</p>
+<p>預先 (AoT) 編譯器的替代方案是即時 (JiT) 編譯器，它在執行時在瀏覽器中將範本編譯為可執行的範本程式碼。
+Angular 信任範本程式碼，因此動態生成範本並對其進行編譯，特別是包含使用者資料的範本，會繞過 Angular 的內建保護。這是一種安全反模式。
 有關以安全方式動態建立表單的訊息，請參閱<a href="guide/forms/dynamic-forms">動態表單</a>指南。</p>
 
   <h3 id="server-side-xss-protection">
     <a href="#server-side-xss-protection" class="docs-anchor" tabindex="-1" aria-label="Link to Server-side XSS protection">伺服器端 XSS 保護</a>
   </h3>
   <p>在服務器上建立的 HTML 容易受到注入攻擊。
-將樣板程式碼注入到 Angular 應用中與將可執行程式碼注入到應用中相同：
+將範本程式碼注入到 Angular 應用中與將可執行程式碼注入到應用中相同：
 它使攻擊者可以完全控制應用。
-為防止這種情況，請使用一種樣板語言，該語言可以自動轉義值，以防止伺服器上的 XSS 漏洞。
-不要使用樣板語言在服務器端建立 Angular 樣板。這會帶來引入樣板注入漏洞的高風險。</p>
+為防止這種情況，請使用一種範本語言，該語言可以自動轉義值，以防止伺服器上的 XSS 漏洞。
+不要使用範本語言在服務器端建立 Angular 範本。這會帶來引入範本注入漏洞的高風險。</p>
 
   <h2 id="http-level-vulnerabilities">
     <a href="#http-level-vulnerabilities" class="docs-anchor" tabindex="-1" aria-label="Link to HTTP-level vulnerabilities">HTTP 級別的漏洞</a>

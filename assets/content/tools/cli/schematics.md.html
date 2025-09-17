@@ -11,11 +11,11 @@
     </a>
   </div>
     </header>
-    <p>原理圖是一個基於樣板的程式碼產生器，支援複雜的邏輯。
+    <p>原理圖是一個基於範本的程式碼產生器，支援複雜的邏輯。
 它是一組用於透過生成或修改程式碼來轉換軟體專案的指令集。
 原理圖被打包到集合中，並使用 npm 安裝。</p>
 <p>原理圖集合可以成為建立、修改和維護任何軟體專案的強大工具，但對於自定義 Angular 專案以滿足你所在組織的特定需求尤其有用。
-例如，你可以使用原理圖，使用預定義的樣板或佈局來生成常用 UI 模式或特定元件。
+例如，你可以使用原理圖，使用預定義的範本或佈局來生成常用 UI 模式或特定元件。
 使用原理圖來強化架構規則和約定，使你的專案保持一致性和互操作性。</p>
 
   <h2 id="schematics-for-the-angular-cli">
@@ -53,7 +53,7 @@ Angular CLI 使用原理圖將轉換應用於 Web 應用專案。
 
   <ul class="docs-list">
     <li><em>新增原理圖</em> 讓開發人員可以使用 <code>ng add</code> 在 Angular 工作區中安裝你的函式庫</li>
-<li><em>Generation 原理圖</em> 可以告知 <code>ng generate</code> 子指令如何修改專案、新增設定和指令碼，以及搭建在你的庫中定義的工件</li>
+<li><em>Generation 原理圖</em> 可以告知 <code>ng generate</code> 子指令如何修改專案、新增設定和指令碼，以及搭建在你的函式庫中定義的工件</li>
 <li><em>update 原理圖</em> 可以告知 <code>ng update</code> 指令如何在發布新版本時更新函式庫的依賴項並針對重大更改進行調整</li>
 
   </ul>
@@ -79,7 +79,7 @@ Angular CLI 使用原理圖將轉換應用於 Web 應用專案。
 <code>add</code> 指令使用你的套件管理器下載新的依賴項，並呼叫作為原理圖實現的安裝指令碼。</p>
 <p>例如，<a href="https://material.angular.io/guide/schematics" target="_blank"><code>@angular/material</code></a> 原理圖告知 <code>add</code> 指令安裝和建立 Angular Material 和主題，並註冊可以使用 <code>ng generate</code> 建立的新 starter 元件。
 將此原理圖作為你自己的 add 原理圖的範例和模型。</p>
-<p>合作伙伴和第三方庫也透過 add 原理圖支援 Angular CLI。
+<p>合作伙伴和第三方函式庫也透過 add 原理圖支援 Angular CLI。
 例如，<code>@ng-bootstrap/schematics</code> 將 <a href="https://ng-bootstrap.github.io" target="_blank">ng-bootstrap</a> 新增到應用，而 <code>@clr/angular</code> 安裝並建立 <a href="https://clarity.design/documentation/get-started" target="_blank">VMWare 的 Clarity</a>。</p>
 <p><em>add 原理圖</em> 還可以使用設定更改來更新專案，新增額外的依賴項（例如膩子指令碼），或搭建特定於套件的初始化程式碼。
 例如，<code>@angular/pwa</code> 原理圖透過新增應用清單和 Service Worker 將你的應用變成 PWA。</p>
@@ -88,7 +88,7 @@ Angular CLI 使用原理圖將轉換應用於 Web 應用專案。
     <a href="#generation-schematics" class="docs-anchor" tabindex="-1" aria-label="Link to Generation schematics">Generation 原理圖</a>
   </h3>
   <p>Generation 原理圖是 <code>ng generate</code> 指令的指令。
-已記錄的子指令使用預設的 Angular generation 原理圖，但你可以指定不同的原理圖（代替子指令）來生成在你的庫中定義的工件。</p>
+已記錄的子指令使用預設的 Angular generation 原理圖，但你可以指定不同的原理圖（代替子指令）來生成在你的函式庫中定義的工件。</p>
 <p>例如，Angular Material 為其定義的 UI 元件提供 generation 原理圖。
 以下指令使用這些原理圖之一來渲染一個 Angular Material <code>&lt;mat-table&gt;</code>，該表已預先設定了用於排序和分頁的資料來源。</p>
 <div class="docs-code shell">
@@ -114,7 +114,7 @@ Angular CLI 使用原理圖將轉換應用於 Web 應用專案。
     <p>我們建議你不要預設強制更新所有依賴項。
 請先嚐試更新特定的依賴項。</p>
 <p>有關 <code>ng update</code> 指令如何工作的更多訊息，請參閱<a href="https://github.com/angular/angular-cli/blob/main/docs/specifications/update.md" target="_blank">Update Command</a>。</p>
-<p>如果你建立了函式庫的新版本，其中引入了潛在的重大更改，則可以提供 <em>update 原理圖</em>，以使 <code>ng update</code> 指令能夠自動求解正在更新的專案中的任何此類更改。</p>
+<p>如果你建立了函式庫的新版本，其中引入了潛在的重大更改，則可以提供 <em>update 原理圖</em>，以使 <code>ng update</code> 指令能夠自動求解正在更新的專案中的任何此類別更改。</p>
 <p>例如，假設你要更新 Angular Material 函式庫。</p>
 <div class="docs-code shell">
     

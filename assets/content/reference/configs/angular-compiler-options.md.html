@@ -33,7 +33,7 @@
   </div><p>更多訊息，請參閱<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" target="_blank">《TypeScript 手冊》</a>。</p>
 
   <h2 id="template-options">
-    <a href="#template-options" class="docs-anchor" tabindex="-1" aria-label="Link to Template options">樣板選項</a>
+    <a href="#template-options" class="docs-anchor" tabindex="-1" aria-label="Link to Template options">範本選項</a>
   </h2>
   <p>以下選項可用於設定 Angular AoT 編譯器。</p>
 
@@ -45,7 +45,7 @@
 可以是 <code>static fields</code> 或 <code>decorators</code> 之一。預設值為 <code>static fields</code>。</p>
 
   <ul class="docs-list">
-    <li><p>預設情況下，編譯器會將裝飾器替換為類別中的靜態欄位，這允許像 <a href="https://github.com/google/closure-compiler" target="_blank">Closure compiler</a> 這樣的高階搖樹最佳化器刪除未使用的類</p>
+    <li><p>預設情況下，編譯器會將裝飾器替換為類別中的靜態欄位，這允許像 <a href="https://github.com/google/closure-compiler" target="_blank">Closure compiler</a> 這樣的高階搖樹最佳化器刪除未使用的類別</p>
 </li>
 <li><p><code>decorators</code> 值將裝飾器保留在原位，這使得編譯速度更快。
   TypeScript 發出對 <code>__decorate</code> 輔助函式的呼叫。
@@ -97,7 +97,7 @@
 <p>對於大多數應用來說，<code>'full'</code> 是正確的編譯模式。</p>
 <p>對於獨立發布的函式庫（例如 NPM 套件），請使用 <code>'partial'</code>。
 <code>'partial'</code> 編譯輸出一種穩定的中間格式，這種格式可以更好地支持由以不同於函式庫的 Angular 版本建立的應用使用。
-與應用一起在 『HEAD』 建立的函式庫，以及在單一程式碼倉庫中使用相同 Angular 版本的函式庫可以使用 <code>'full'</code>，因為不存在版本偏差的風險。</p>
+與應用一起在 『HEAD』 建立的函式庫，以及在單一程式碼儲存庫中使用相同 Angular 版本的函式庫可以使用 <code>'full'</code>，因為不存在版本偏差的風險。</p>
 
   <h3 id="disableexpressionlowering">
     <a href="#disableexpressionlowering" class="docs-anchor" tabindex="-1" aria-label="Link to <code>disableExpressionLowering</code>"><code>disableExpressionLowering</code></a>
@@ -116,21 +116,21 @@
   <h3 id="enablei18nlegacymessageidformat">
     <a href="#enablei18nlegacymessageidformat" class="docs-anchor" tabindex="-1" aria-label="Link to <code>enableI18nLegacyMessageIdFormat</code>"><code>enableI18nLegacyMessageIdFormat</code></a>
   </h3>
-  <p>指示 Angular 樣板編譯器為透過 <code>i18n</code> 屬性在樣板中標記的訊息建立舊式 ID。
+  <p>指示 Angular 範本編譯器為透過 <code>i18n</code> 屬性在範本中標記的訊息建立舊式 ID。
 有關標記訊息以進行本地化的更多訊息，請參閱<a href="guide/i18n/prepare#mark-text-in-component-template" title="Mark" text in component template - prepare for translation | angular>標記要翻譯的文字</a>。</p>
 <p>除非你的專案依賴於先前使用舊式 ID 建立的翻譯，否則請將此選項設定為 <code>false</code>。
 預設為 <code>true</code>。</p>
 <p>pre-Ivy 訊息提取工具為提取的訊息 ID 建立了各種舊式格式。
-這些訊息格式存在一些問題，例如空格處理以及依賴於樣板原始 HTML 中的訊息。</p>
+這些訊息格式存在一些問題，例如空格處理以及依賴於範本原始 HTML 中的訊息。</p>
 <p>新的訊息格式對空格更改更具彈性，在所有翻譯檔案格式中都相同，並且可以直接從對 <code>$localize</code> 的呼叫建立。
-這允許應用程式碼中的 <code>$localize</code> 訊息使用與元件樣板中相同的 <code>i18n</code> 訊息相同的 ID。</p>
+這允許應用程式碼中的 <code>$localize</code> 訊息使用與元件範本中相同的 <code>i18n</code> 訊息相同的 ID。</p>
 
   <h3 id="enableresourceinlining">
     <a href="#enableresourceinlining" class="docs-anchor" tabindex="-1" aria-label="Link to <code>enableResourceInlining</code>"><code>enableResourceInlining</code></a>
   </h3>
   <p>當為 <code>true</code> 時，將所有 <code>@Component</code> 裝飾器中的 <code>templateUrl</code> 和 <code>styleUrls</code> 屬性替換為 <code>template</code> 和 <code>styles</code> 屬性中的行內內容。</p>
-<p>啟用後，<code>ngc</code> 的 <code>.js</code> 輸出不包含任何延遲載入的樣板或樣式 URL。</p>
-<p>對於使用 Angular CLI 建立的庫專案，開發設定預設為 <code>true</code>。</p>
+<p>啟用後，<code>ngc</code> 的 <code>.js</code> 輸出不包含任何延遲載入的範本或樣式 URL。</p>
+<p>對於使用 Angular CLI 建立的函式庫專案，開發設定預設為 <code>true</code>。</p>
 
   <h3 id="enablelegacytemplate">
     <a href="#enablelegacytemplate" class="docs-anchor" tabindex="-1" aria-label="Link to <code>enableLegacyTemplate</code>"><code>enableLegacyTemplate</code></a>
@@ -143,7 +143,7 @@
     <a href="#flatmoduleid" class="docs-anchor" tabindex="-1" aria-label="Link to <code>flatModuleId</code>"><code>flatModuleId</code></a>
   </h3>
   <p>用於匯入扁平模組的模組 ID（當 <code>flatModuleOutFile</code> 為 <code>true</code> 時）。
-樣板編譯器建立的引用在從扁平模組匯入符號時使用此模組名稱。
+範本編譯器建立的引用在從扁平模組匯入符號時使用此模組名稱。
 如果 <code>flatModuleOutFile</code> 為 <code>false</code>，則忽略此選項。</p>
 
   <h3 id="flatmoduleoutfile">
@@ -165,8 +165,8 @@
   <h3 id="fulltemplatetypecheck">
     <a href="#fulltemplatetypecheck" class="docs-anchor" tabindex="-1" aria-label="Link to <code>fullTemplateTypeCheck</code>"><code>fullTemplateTypeCheck</code></a>
   </h3>
-  <p>當為 <code>true</code>（推薦值）時，啟用樣板編譯器的<a href="tools/cli/aot-compiler#binding-expression-validation">繫結表示式驗證</a>階段。此階段使用 TypeScript 來驗證繫結表示式。
-有關更多訊息，請參閱<a href="tools/cli/template-typecheck">樣板型別檢查</a>。</p>
+  <p>當為 <code>true</code>（推薦值）時，啟用範本編譯器的<a href="tools/cli/aot-compiler#binding-expression-validation">繫結表示式驗證</a>階段。此階段使用 TypeScript 來驗證繫結表示式。
+有關更多訊息，請參閱<a href="tools/cli/template-typecheck">範本型別檢查</a>。</p>
 <p>預設為 <code>false</code>，但是當你使用 Angular CLI 指令 <code>ng new --strict</code> 時，它在新專案的設定中被設定為 <code>true</code>。</p>
 
     <div class="docs-alert docs-alert-important">
@@ -184,7 +184,7 @@
   <h3 id="preservewhitespaces">
     <a href="#preservewhitespaces" class="docs-anchor" tabindex="-1" aria-label="Link to <code>preserveWhitespaces</code>"><code>preserveWhitespaces</code></a>
   </h3>
-  <p>當為 <code>false</code>（預設值）時，從已編譯的樣板中刪除空白文字節點，這將導致發出的模板工廠模組更小。
+  <p>當為 <code>false</code>（預設值）時，從已編譯的範本中刪除空白文字節點，這將導致發出的模板工廠模組更小。
 設定為 <code>true</code> 以保留空白文字節點。</p>
 
     <div class="docs-alert docs-alert-helpful">
@@ -197,8 +197,8 @@
   </h3>
   <p>當為 <code>true</code> 時，不生成 <code>.metadata.json</code> 檔案。
 預設為 <code>false</code>。</p>
-<p><code>.metadata.json</code> 檔案包含樣板編譯器從 <code>.ts</code> 檔案中所需的訊息，這些訊息未包含在 TypeScript 編譯器生成的 <code>.d.ts</code> 檔案中。
-例如，此訊息包括註解的內容，例如元件的樣板，TypeScript 會將其發出到 <code>.js</code> 檔案，但不會發出到 <code>.d.ts</code> 檔案。</p>
+<p><code>.metadata.json</code> 檔案包含範本編譯器從 <code>.ts</code> 檔案中所需的訊息，這些訊息未包含在 TypeScript 編譯器生成的 <code>.d.ts</code> 檔案中。
+例如，此訊息包括註解的內容，例如元件的範本，TypeScript 會將其發出到 <code>.js</code> 檔案，但不會發出到 <code>.d.ts</code> 檔案。</p>
 <p>當使用工廠摘要時，你可以設定為 <code>true</code>，因為工廠摘要包含 <code>.metadata.json</code> 檔案中訊息的副本。</p>
 <p>如果你正在使用 TypeScript 的 <code>--outFile</code> 選項，請設定為 <code>true</code>，因為元資料檔案對於這種樣式的 TypeScript 輸出無效。
 Angular 社群不建議將 <code>--outFile</code> 與 Angular 一起使用。
@@ -208,9 +208,9 @@ Angular 社群不建議將 <code>--outFile</code> 與 Angular 一起使用。
     <a href="#skiptemplatecodegen" class="docs-anchor" tabindex="-1" aria-label="Link to <code>skipTemplateCodegen</code>"><code>skipTemplateCodegen</code></a>
   </h3>
   <p>當為 <code>true</code> 時，不會發出 <code>.ngfactory.js</code> 和 <code>.ngstyle.js</code> 檔案。
-這將關閉大多數樣板編譯器功能，並停用樣板診斷訊息的報告。</p>
-<p>可用於指示樣板編譯器生成 <code>.metadata.json</code> 檔案，以便與 <code>npm</code> 套件一起分發。 這避免了生成無法分發到 <code>npm</code> 的 <code>.ngfactory.js</code> 和 <code>.ngstyle.js</code> 檔案。</p>
-<p>對於使用 Angular CLI 建立的庫專案，開發設定預設為 <code>true</code>。</p>
+這將關閉大多數範本編譯器功能，並停用範本診斷訊息的報告。</p>
+<p>可用於指示範本編譯器生成 <code>.metadata.json</code> 檔案，以便與 <code>npm</code> 套件一起分發。 這避免了生成無法分發到 <code>npm</code> 的 <code>.ngfactory.js</code> 和 <code>.ngstyle.js</code> 檔案。</p>
+<p>對於使用 Angular CLI 建立的函式庫專案，開發設定預設為 <code>true</code>。</p>
 
   <h3 id="strictmetadataemit">
     <a href="#strictmetadataemit" class="docs-anchor" tabindex="-1" aria-label="Link to <code>strictMetadataEmit</code>"><code>strictMetadataEmit</code></a>
@@ -219,15 +219,15 @@ Angular 社群不建議將 <code>--outFile</code> 與 Angular 一起使用。
 預設為 <code>false</code>。
 僅當 <code>"skipMetadataEmit"</code> 為 <code>false</code> 且 <code>"skipTemplateCodegen"</code> 為 <code>true</code> 時使用。</p>
 <p>此選項旨在驗證為與 <code>npm</code> 套件捆綁而發出的 <code>.metadata.json</code> 檔案。
-驗證非常嚴格，並且可能會針對元資料發出錯誤，而這些元資料在樣板編譯器使用時永遠不會產生錯誤。
+驗證非常嚴格，並且可能會針對元資料發出錯誤，而這些元資料在範本編譯器使用時永遠不會產生錯誤。
 你可以選擇透過在記錄符號的註解中包含 <code>@dynamic</code> 來禁止此選項為匯出的符號發出的錯誤。</p>
 <p><code>.metadata.json</code> 檔案包含錯誤是有效的。
-如果元資料用於確定註解的內容，則樣板編譯器會報告這些錯誤。
+如果元資料用於確定註解的內容，則範本編譯器會報告這些錯誤。
 元資料收集器無法預測哪些符號旨在用於註解中。 它會搶先在匯出的符號的元資料中包含錯誤節點。
-然後，如果使用了這些符號，樣板編譯器可以使用錯誤節點來報告錯誤。</p>
-<p>如果函式庫的用戶端打算在註解中使用符號，則樣板編譯器通常不會報告此錯誤。 它會在用戶端實際使用該符號後才報告。
+然後，如果使用了這些符號，範本編譯器可以使用錯誤節點來報告錯誤。</p>
+<p>如果函式庫的用戶端打算在註解中使用符號，則範本編譯器通常不會報告此錯誤。 它會在用戶端實際使用該符號後才報告。
 此選項允許在函式庫的建立階段檢測這些錯誤，例如，在生成 Angular 函式庫本身時使用。</p>
-<p>對於使用 Angular CLI 建立的庫專案，開發設定預設為 <code>true</code>。</p>
+<p>對於使用 Angular CLI 建立的函式庫專案，開發設定預設為 <code>true</code>。</p>
 
   <h3 id="strictinjectionparameters">
     <a href="#strictinjectionparameters" class="docs-anchor" tabindex="-1" aria-label="Link to <code>strictInjectionParameters</code>"><code>strictInjectionParameters</code></a>
@@ -240,9 +240,9 @@ Angular 社群不建議將 <code>--outFile</code> 與 Angular 一起使用。
   <h3 id="stricttemplates">
     <a href="#stricttemplates" class="docs-anchor" tabindex="-1" aria-label="Link to <code>strictTemplates</code>"><code>strictTemplates</code></a>
   </h3>
-  <p>當為 <code>true</code> 時，啟用<a href="tools/cli/template-typecheck#strict-mode">嚴格樣板型別檢查</a>。</p>
-<p>此選項啟用的嚴格性標誌允許你開啟和關閉特定型別的嚴格樣板型別檢查。
-請參閱<a href="tools/cli/template-typecheck#troubleshooting-template-errors">排查樣板錯誤</a>。</p>
+  <p>當為 <code>true</code> 時，啟用<a href="tools/cli/template-typecheck#strict-mode">嚴格範本型別檢查</a>。</p>
+<p>此選項啟用的嚴格性標誌允許你開啟和關閉特定型別的嚴格範本型別檢查。
+請參閱<a href="tools/cli/template-typecheck#troubleshooting-template-errors">排查範本錯誤</a>。</p>
 <p>當你使用 Angular CLI 指令 <code>ng new --strict</code> 時，它在新專案的設定中設定為 <code>true</code>。</p>
 
   <h3 id="strictstandalone">
@@ -253,7 +253,7 @@ Angular 社群不建議將 <code>--outFile</code> 與 Angular 一起使用。
   <h3 id="trace">
     <a href="#trace" class="docs-anchor" tabindex="-1" aria-label="Link to <code>trace</code>"><code>trace</code></a>
   </h3>
-  <p>當為 <code>true</code> 時，在編譯樣板時列印額外訊息。
+  <p>當為 <code>true</code> 時，在編譯範本時列印額外訊息。
 預設為 <code>false</code>。</p>
 
   <h2 id="command-line-options">

@@ -46,11 +46,11 @@
 路徑中沒有前導斜槓。
 路由器會為你解析和建立最終 URL，這使你在應用檢視之間導向時可以使用相對路徑和絕對路徑。</p>
 <p>第二個路由中的 <code>:id</code> 是路由引數的令牌。
-在諸如 <code>/hero/42</code> 之類的 URL 中，『42』是 <code>id</code> 引數的值。
+在諸如 <code>/hero/42</code> 之類別的 URL 中，『42』是 <code>id</code> 引數的值。
 相應的 <code>HeroDetailComponent</code> 使用該值來查詢並顯示其 <code>id</code> 為 42 的英雄。</p>
 <p>第三個路由中的 <code>data</code> 屬性是儲存與此特定路由關聯的任意資料的位置。
 <code>data</code> 屬性在每個已啟用的路由中都可訪問。
-使用它來儲存諸如頁面標題、麵包屑文字和其他只讀靜態資料之類的條目。
+使用它來儲存諸如頁面標題、麵包屑文字和其他只讀靜態資料之類別的條目。
 使用 resolve 守衛來檢索動態資料。</p>
 <p>第四個路由中的空路徑表示應用的預設路徑——當 URL 中的路徑為空時（通常在啟動時為空）要訪問的位置。
 此預設路由會重導向到 <code>/heroes</code> URL 的路由，因此會顯示 <code>HeroesListComponent</code>。</p>
@@ -62,39 +62,39 @@
   <h2 id="router-outlet">
     <a href="#router-outlet" class="docs-anchor" tabindex="-1" aria-label="Link to Router outlet">路由器出口</a>
   </h2>
-  <p><code>RouterOutlet</code> 是路由器庫中的一個指令，其用法類似於元件。
-它充當佔位符，標記樣板中路由器應顯示該出口元件的位置。</p>
+  <p><code>RouterOutlet</code> 是路由器函式庫中的一個指令，其用法類似於元件。
+它充當佔位符，標記範本中路由器應顯示該出口元件的位置。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">router-outlet</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">router-outlet</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- Routed components go here --&gt;</span></span></code></pre>
     </pre>
-  </div><p>給定前面的設定，當此應用的瀏覽器 URL 變為 <code>/heroes</code> 時，路由器會將該 URL 與路由路徑 <code>/heroes</code> 對應，並將 <code>HeroListComponent</code> 顯示為與你放置在宿主元件樣板中的 <code>RouterOutlet</code> 同級的元素。</p>
+  </div><p>給定前面的設定，當此應用的瀏覽器 URL 變為 <code>/heroes</code> 時，路由器會將該 URL 與路由路徑 <code>/heroes</code> 對應，並將 <code>HeroListComponent</code> 顯示為與你放置在宿主元件範本中的 <code>RouterOutlet</code> 同級的元素。</p>
 
   <h2 id="router-links">
     <a href="#router-links" class="docs-anchor" tabindex="-1" aria-label="Link to Router links">路由器連結</a>
   </h2>
   <p>要作為某些使用者操作（例如單擊錨標記）的結果進行導向，請使用 <code>RouterLink</code>。</p>
-<p>考慮以下樣板：</p>
+<p>考慮以下範本：</p>
 <div class="docs-code" path="adev/src/content/examples/router/src/app/app.component.1.html" header="src/app/app.component.html">
     <div class="docs-code-header"><h3>src/app/app.component.html</h3></div>
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Angular Router&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">nav</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> routerLink</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"/crisis-center"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> routerLinkActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"active"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ariaCurrentWhenActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"page"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Crisis Center&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> routerLink</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"/heroes"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> routerLinkActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"active"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ariaCurrentWhenActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"page"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Heroes&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">a</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">nav</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">router-outlet</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">router-outlet</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span></code></pre>
     </pre>
   </div><p>錨標記上的 <code>RouterLink</code> 指令使路由器可以控制這些元素。
 導向路徑是固定的，因此你可以將字串賦值為到 <code>routerLink</code> 的一次性繫結。</p>
-<p>如果導向路徑更具動態性，你可以繫結到回傳路由連結引數陣列的樣板表示式；即<a href="guide/routing/common-router-tasks#link-parameters-array">連結引數陣列</a>。
+<p>如果導向路徑更具動態性，你可以繫結到回傳路由連結引數陣列的範本表示式；即<a href="guide/routing/common-router-tasks#link-parameters-array">連結引數陣列</a>。
 路由器將該陣列求解為一個完整的 URL。</p>
 
   <h2 id="active-router-links">
     <a href="#active-router-links" class="docs-anchor" tabindex="-1" aria-label="Link to Active router links">活動的路由器連結</a>
   </h2>
-  <p><code>RouterLinkActive</code> 指令根據當前的 <code>RouterState</code> 切換活動 <code>RouterLink</code> 繫結的 CSS 類。</p>
+  <p><code>RouterLinkActive</code> 指令根據當前的 <code>RouterState</code> 切換活動 <code>RouterLink</code> 繫結的 CSS 類別。</p>
 <p>在每個錨標記上，你都會看到一個到 <code>RouterLinkActive</code> 指令的<a href="guide/templates/property-binding">屬性（Property）繫結</a>，如下所示</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">routerLinkActive="..."</span></span></code></pre>
     </pre>
-  </div><p>等號 <code>=</code> 右側的樣板表示式包含一個空格分隔的 CSS 類字串，當此連結處於活動狀態時，路由器會新增這些類，而在連結處於非活動狀態時，路由器會刪除這些類。
-你可以將 <code>RouterLinkActive</code> 指令設定為類字串，例如 <code>routerLinkActive="active fluffy"</code>，或將其繫結到回傳此類字串的元件屬性。
+  </div><p>等號 <code>=</code> 右側的範本表示式包含一個空格分隔的 CSS 類別字串，當此連結處於活動狀態時，路由器會新增這些類別，而在連結處於非活動狀態時，路由器會刪除這些類別。
+你可以將 <code>RouterLinkActive</code> 指令設定為類別字串，例如 <code>routerLinkActive="active fluffy"</code>，或將其繫結到回傳此類別字串的元件屬性。
 例如，</p>
 <div class="docs-code">
     

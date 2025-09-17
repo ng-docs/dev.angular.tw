@@ -11,8 +11,8 @@
     </a>
   </div>
     </header>
-    <p>Angular 語言服務為程式碼編輯器提供了一種在 Angular 樣板中獲取程式碼完成、錯誤、提示和導向的方法。
-它適用於獨立 HTML 檔案中的外部樣板，也適用於行內樣板。</p>
+    <p>Angular 語言服務為程式碼編輯器提供了一種在 Angular 範本中獲取程式碼完成、錯誤、提示和導向的方法。
+它適用於獨立 HTML 檔案中的外部範本，也適用於行內範本。</p>
 
   <h2 id="configuring-compiler-options-for-the-angular-language-service">
     <a href="#configuring-compiler-options-for-the-angular-language-service" class="docs-anchor" tabindex="-1" aria-label="Link to Configuring compiler options for the Angular Language Service">為 Angular 語言服務設定編譯器選項</a>
@@ -28,7 +28,7 @@
     <a href="#features" class="docs-anchor" tabindex="-1" aria-label="Link to Features">屬性</a>
   </h2>
   <p>你的編輯器會自動檢測到你正在開啟 Angular 檔案。
-然後，它會使用 Angular 語言服務讀取你的 <code>tsconfig.json</code> 檔案，找到你的應用中的所有樣板，然後為你開啟的任何樣板提供語言服務。</p>
+然後，它會使用 Angular 語言服務讀取你的 <code>tsconfig.json</code> 檔案，找到你的應用中的所有範本，然後為你開啟的任何範本提供語言服務。</p>
 <p>語言服務包括：</p>
 
   <ul class="docs-list">
@@ -97,9 +97,9 @@
   <h3 id="sublime-text">
     <a href="#sublime-text" class="docs-anchor" tabindex="-1" aria-label="Link to Sublime Text">Sublime Text</a>
   </h3>
-  <p>在 <a href="https://www.sublimetext.com" target="_blank">Sublime Text</a> 中，語言服務僅在作為外掛安裝時才支援行內樣板。
+  <p>在 <a href="https://www.sublimetext.com" target="_blank">Sublime Text</a> 中，語言服務僅在作為外掛安裝時才支援行內範本。
 你需要一個自定義的 Sublime 外掛（或對當前外掛的修改）才能在 HTML 檔案中實現程式碼完成。</p>
-<p>要將語言服務用於行內樣板，你必須首先新增一個擴充套件以允許 TypeScript，然後安裝 Angular Language Service 外掛。
+<p>要將語言服務用於行內範本，你必須首先新增一個擴充套件以允許 TypeScript，然後安裝 Angular Language Service 外掛。
 從 TypeScript 2.3 開始，TypeScript 具有語言服務可以使用的外掛模型。</p>
 
     <ol class="docs-ordered-list">
@@ -154,13 +154,13 @@
   </h2>
   <p>當你在編輯器中使用語言服務時，編輯器會啟動一個單獨的語言服務程序，並透過 <a href="https://en.wikipedia.org/wiki/Remote_procedure_call" target="_blank">RPC</a>，使用 <a href="https://microsoft.github.io/language-server-protocol" target="_blank">Language Server Protocol</a> 與之通訊。
 當你在編輯器中輸入時，編輯器會將訊息傳送到語言服務程序，以跟蹤你的專案狀態。</p>
-<p>當你在樣板中觸發補全清單時，編輯器首先將樣板解析為 HTML <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank">抽象語法樹 (AST)</a>。
-Angular 編譯器會解釋該樹以確定上下文：樣板所屬的模組、當前作用域、元件選擇器以及游標在樣板 AST 中的位置。
+<p>當你在範本中觸發補全清單時，編輯器首先將範本解析為 HTML <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank">抽象語法樹 (AST)</a>。
+Angular 編譯器會解釋該樹以確定上下文：範本所屬的模組、當前作用域、元件選擇器以及游標在範本 AST 中的位置。
 然後，它可以確定可能位於該位置的符號。</p>
 <p>如果你在內嵌中，情況會稍微複雜一些。
 如果你在 <code>div</code> 中有一個 <code>{{data.---}}</code> 的內嵌，並且需要在 <code>data.---</code> 之後獲得補全清單，那麼編譯器就無法使用 HTML AST 來找到答案。
 HTML AST 只能告訴編譯器，這裡有一些文字，其字元為 "<code>{{data.---}}</code>"。
-這時，樣板解析器會生成一個表示式 AST，它位於樣板 AST 中。
+這時，範本解析器會生成一個表示式 AST，它位於範本 AST 中。
 然後，Angular 語言服務會檢視上下文中的 <code>data.---</code>，詢問 TypeScript 語言服務 <code>data</code> 的成員是什麼，並回傳可能的清單。</p>
 
   <h2 id="more-information">

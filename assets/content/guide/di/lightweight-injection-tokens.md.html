@@ -21,7 +21,7 @@
 它可以確保當應用僅使用函式庫的某些功能時，可以從用戶端應用的捆綁包中刪除未使用的程式碼。</p>
 <p>當應用使用你的函式庫時，你的函式庫可能提供了一些用戶端應用未使用的服務。
 在這種情況下，應用開發人員應該期望該服務被搖樹最佳化，並且不增加已編譯應用的大小。
-由於應用開發人員無法瞭解或補救庫中的搖樹最佳化問題，因此函式庫開發人員有責任這樣做。
+由於應用開發人員無法瞭解或補救函式庫中的搖樹最佳化問題，因此函式庫開發人員有責任這樣做。
 為了防止保留未使用的元件，你的函式庫應使用輕量級注入令牌設計模式。</p>
 
   <h2 id="when-tokens-are-retained">
@@ -38,7 +38,7 @@
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'lib-header'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  …,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> LibHeaderComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Component</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'lib-card'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  …,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> LibCardComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line highlighted"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  @</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ContentChild</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(LibHeaderComponent) </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">header</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> LibHeaderComponent</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">null</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> null</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
     </pre>
-  </div><p>由於 <code>&lt;lib-header&gt;</code> 是可選的，因此該元素可以以最小形式 <code>&lt;lib-card&gt;&lt;/lib-card&gt;</code> 出現在樣板中。
+  </div><p>由於 <code>&lt;lib-header&gt;</code> 是可選的，因此該元素可以以最小形式 <code>&lt;lib-card&gt;&lt;/lib-card&gt;</code> 出現在範本中。
 在這種情況下，未使用 <code>&lt;lib-header&gt;</code>，你可能希望對其進行搖樹最佳化，但事實並非如此。
 這是因為 <code>LibCardComponent</code> 實際上包含對 <code>LibHeaderComponent</code> 的兩個引用：</p>
 <div class="docs-code">
@@ -60,7 +60,7 @@
   </ul>
   <p>在此範例中，編譯器保留了值位置中出現的 <code>LibHeaderComponent</code> 令牌。
 即使應用實際上在任何地方都沒有使用 <code>&lt;lib-header&gt;</code>，這也阻止了引用的元件被搖樹最佳化。
-如果 <code>LibHeaderComponent</code> 的程式碼、樣板和樣式組合變得太大，則不必要地包含它會顯著增加用戶端應用的大小。</p>
+如果 <code>LibHeaderComponent</code> 的程式碼、範本和樣式組合變得太大，則不必要地包含它會顯著增加用戶端應用的大小。</p>
 
   <h2 id="when-to-use-the-lightweight-injection-token-pattern">
     <a href="#when-to-use-the-lightweight-injection-token-pattern" class="docs-anchor" tabindex="-1" aria-label="Link to When to use the lightweight injection token pattern">何時使用輕量級注入令牌模式</a>
@@ -101,7 +101,7 @@
 這使得可以對 <code>LibHeaderComponent</code> 進行完整的搖樹最佳化。
 <code>LibHeaderToken</code> 被保留，但它只是一個物件宣告，沒有具體的實現。
 它很小，並且在編譯後保留時不會對應用大小產生實質性影響。</p>
-<p>相反，<code>LibHeaderComponent</code> 本身實現了抽象的 <code>LibHeaderToken</code> 類。
+<p>相反，<code>LibHeaderComponent</code> 本身實現了抽象的 <code>LibHeaderToken</code> 類別。
 你可以安全地在元件定義中使用該令牌作為提供者，從而允許 Angular 正確注入具體型別。</p>
 <p>總而言之，輕量級注入令牌模式包括以下內容：</p>
 

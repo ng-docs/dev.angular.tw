@@ -120,7 +120,7 @@
   <h2 id="reading-signals-in-onpush-components">
     <a href="#reading-signals-in-onpush-components" class="docs-anchor" tabindex="-1" aria-label="Link to Reading signals in <code>OnPush</code> components">在 <code>OnPush</code> 元件中讀取 signal</a>
   </h2>
-  <p>當你在 <code>OnPush</code> 元件的樣板中讀取 signal 時，Angular 會將該 signal 跟蹤為該組件的依賴項。當該 signal 的值發生更改時，Angular 會自動<a href="api/core/ChangeDetectorRef#markforcheck">標記</a>該組件，以確保在下次變更檢測執行時對其進行更新。有關 <code>OnPush</code> 元件的更多訊息，請參閱<a href="best-practices/skipping-subtrees">跳過元件子樹</a>指南。</p>
+  <p>當你在 <code>OnPush</code> 元件的範本中讀取 signal 時，Angular 會將該 signal 跟蹤為該組件的依賴項。當該 signal 的值發生更改時，Angular 會自動<a href="api/core/ChangeDetectorRef#markforcheck">標記</a>該組件，以確保在下次變更檢測執行時對其進行更新。有關 <code>OnPush</code> 元件的更多訊息，請參閱<a href="best-practices/skipping-subtrees">跳過元件子樹</a>指南。</p>
 
   <h2 id="effects">
     <a href="#effects" class="docs-anchor" tabindex="-1" aria-label="Link to Effects">副作用</a>
@@ -141,8 +141,8 @@
   <ul class="docs-list">
     <li>記錄正在顯示的資料及其更改時間，用於分析或作為除錯工具。</li>
 <li>使資料與 <code>window.localStorage</code> 保持同步。</li>
-<li>新增無法用樣板語法表達的自定義 DOM 行為。</li>
-<li>對 <code>&lt;canvas&gt;</code>、圖表庫或其他第三方 UI 函式庫執行自定義渲染。</li>
+<li>新增無法用範本語法表達的自定義 DOM 行為。</li>
+<li>對 <code>&lt;canvas&gt;</code>、圖表函式庫或其他第三方 UI 函式庫執行自定義渲染。</li>
 
   </ul>
   
@@ -176,7 +176,7 @@
     <a href="#destroying-effects" class="docs-anchor" tabindex="-1" aria-label="Link to Destroying effects">銷燬副作用</a>
   </h3>
   <p>當你建立一個副作用時，它會在其封閉上下文被銷燬時自動銷燬。這意味著在元件內建立的副作用會在元件被銷燬時銷燬。指令、服務等中的副作用也是如此。</p>
-<p>副作用回傳一個 <code>EffectRef</code>，你可以透過呼叫 <code>.destroy()</code> 方法手動銷燬它們。你可以將此與 <code>manualCleanup</code> 選項結合使用，以建立一個持續到手動銷燬為止的副作用。請注意在不再需要此類副作用時實際清理它們。</p>
+<p>副作用回傳一個 <code>EffectRef</code>，你可以透過呼叫 <code>.destroy()</code> 方法手動銷燬它們。你可以將此與 <code>manualCleanup</code> 選項結合使用，以建立一個持續到手動銷燬為止的副作用。請注意在不再需要此類別副作用時實際清理它們。</p>
 
   <h2 id="advanced-topics">
     <a href="#advanced-topics" class="docs-anchor" tabindex="-1" aria-label="Link to Advanced topics">高階主題</a>
@@ -200,7 +200,7 @@
   <h3 id="reading-without-tracking-dependencies">
     <a href="#reading-without-tracking-dependencies" class="docs-anchor" tabindex="-1" aria-label="Link to Reading without tracking dependencies">讀取時不跟蹤依賴</a>
   </h3>
-  <p>極少數情況下，你可能希望執行某些程式碼，這些程式碼可能會在諸如 <code>computed</code> 或 <code>effect</code> 之類的回應式函式中讀取 signal，<em>而無需</em>建立依賴。</p>
+  <p>極少數情況下，你可能希望執行某些程式碼，這些程式碼可能會在諸如 <code>computed</code> 或 <code>effect</code> 之類別的回應式函式中讀取 signal，<em>而無需</em>建立依賴。</p>
 <p>例如，假設當 <code>currentUser</code> 更改時，應該記錄 <code>counter</code> 的值。你可以建立一個 <code>effect</code> 來讀取這兩個 signal：</p>
 <div class="docs-code">
     

@@ -37,10 +37,10 @@
     <p><code>ng generate</code> 指令會在你的工作區中建立 <code>projects/my-lib</code> 資料夾，其中包含 NgModule 中的元件和服務。</p>
 
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>提示：</strong> 有關庫專案結構方式的更多詳細訊息，請參閱<a href="reference/configs/file-structure">專案檔案結構指南</a>的<a href="reference/configs/file-structure#library-project-files">函式庫專案檔案</a>部分。</p>
+    <p><strong>提示：</strong> 有關函式庫專案結構方式的更多詳細訊息，請參閱<a href="reference/configs/file-structure">專案檔案結構指南</a>的<a href="reference/configs/file-structure#library-project-files">函式庫專案檔案</a>部分。</p>
 
     </div>
-    <p>使用單一程式碼倉庫模型，以便為多個專案使用同一個工作區。
+    <p>使用單一程式碼儲存庫模型，以便為多個專案使用同一個工作區。
 請參閱<a href="reference/configs/file-structure#multiple-projects">建立多專案工作區</a>。</p>
 <p>當你生成新的函式庫時，工作區設定檔案 <code>angular.json</code> 會使用 <code>library</code> 型別的專案進行更新。</p>
 <div class="docs-code">
@@ -53,11 +53,11 @@
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> build</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> my-lib</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> --configuration</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> development</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> test</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> my-lib</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> lint</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> my-lib</span></span></code></pre>
     </pre>
   </div><p>請注意，為專案設定的建構式與應用專案的預設建構式不同。
-除了其他事項外，此建構式還確保始終使用<a href="tools/cli/aot-compiler">預先編譯器</a>建立庫。</p>
+除了其他事項外，此建構式還確保始終使用<a href="tools/cli/aot-compiler">預先編譯器</a>建立函式庫。</p>
 <p>為了使函式庫程式碼可複用，你必須為其定義公共 API。
 這個『使用者層』定義了你的函式庫的使用者可以使用什麼。
 你的函式庫的使用者應該能夠透過單個匯入路徑訪問公共功能（例如 NgModule、提供者和通用實用函式）。</p>
-<p>函式庫的公共 API 在庫資料夾的 <code>public-api.ts</code> 檔案中維護。
+<p>函式庫的公共 API 在函式庫資料夾的 <code>public-api.ts</code> 檔案中維護。
 當你的函式庫匯入到應用中時，從此檔案匯出的任何內容都會公開。
 使用 NgModule 來公開服務和元件。</p>
 <p>你的函式庫應提供用於安裝和維護的文件（通常是 README 檔案）。</p>
@@ -66,10 +66,10 @@
     <a href="#refactoring-parts-of-an-application-into-a-library" class="docs-anchor" tabindex="-1" aria-label="Link to Refactoring parts of an application into a library">將應用的某些部分重構為函式庫</a>
   </h2>
   <p>為了使你的解決方案可複用，你需要對其進行調整，使其不依賴於特定於應用的程式碼。
-以下是將應用功能遷移到庫中時需要考慮的一些事項。</p>
+以下是將應用功能遷移到函式庫中時需要考慮的一些事項。</p>
 
   <ul class="docs-list">
-    <li><p>諸如元件和通道之類的物件宣告應設計為無狀態的，這意味著它們不依賴或更改外部變數。
+    <li><p>諸如元件和通道之類別的物件宣告應設計為無狀態的，這意味著它們不依賴或更改外部變數。
   如果你確實依賴於狀態，則需要評估每種情況，並確定它是應用狀態還是函式庫將管理的狀態。</p>
 </li>
 <li><p>元件在內部訂閱的任何可觀察者都應在這些元件的生命週期內進行清理和處理</p>
@@ -79,9 +79,9 @@
 <li><p>檢查所有內部依賴。</p>
 
   <ul class="docs-list">
-    <li>對於元件或服務中使用的自定義類或介面，請檢查它們是否依賴於也需要遷移的其他類或介面</li>
+    <li>對於元件或服務中使用的自定義類別或介面，請檢查它們是否依賴於也需要遷移的其他類別或介面</li>
 <li>同樣，如果你的函式庫程式碼依賴於某個服務，則該服務也需要遷移</li>
-<li>如果你的函式庫程式碼或其樣板依賴於其他函式庫（例如 Angular Material），則必須使用這些依賴項設定你的函式庫</li>
+<li>如果你的函式庫程式碼或其範本依賴於其他函式庫（例如 Angular Material），則必須使用這些依賴項設定你的函式庫</li>
 
   </ul>
   </li>
@@ -109,17 +109,17 @@
   <p>函式庫通常包含<em>可複用程式碼</em>，這些程式碼定義了你匯入到專案中的元件、服務和其他 Angular 工件（通道、指令）。
 函式庫被打包到 npm 套件中以進行發布和共享。
 該套件還可以包含原理圖，這些原理圖提供了直接在專案中生成或轉換程式碼的說明，就像 CLI 使用 <code>ng generate component</code> 建立通用新元件一樣。
-與函式庫打包在一起的原理圖可以為 Angular CLI 提供生成元件所需的訊息，該組件設定和使用該庫中定義的特定屬性或一組屬性。
+與函式庫打包在一起的原理圖可以為 Angular CLI 提供生成元件所需的訊息，該組件設定和使用該函式庫中定義的特定屬性或一組屬性。
 這方面的一個範例是 <a href="https://material.angular.io/guide/schematics#navigation-schematic" target="_blank">Angular Material 的導向原理圖</a>，它設定了 CDK 的 <a href="https://material.angular.io/cdk/layout/overview#breakpointobserver" target="_blank">BreakpointObserver</a>，並將其與 Material 的 <a href="https://material.angular.io/components/sidenav/overview" target="_blank">MatSideNav</a> 和 <a href="https://material.angular.io/components/toolbar/overview" target="_blank">MatToolbar</a> 元件一起使用。</p>
 <p>建立幷包含以下型別的原理圖：</p>
 
   <ul class="docs-list">
     <li>包含安裝原理圖，以便 <code>ng add</code> 可以將你的函式庫新增到專案中</li>
-<li>在你的庫中包含生成原理圖，以便 <code>ng generate</code> 可以在專案中搭建你定義工件（元件、服務、測試）的腳手架</li>
+<li>在你的函式庫中包含生成原理圖，以便 <code>ng generate</code> 可以在專案中搭建你定義工件（元件、服務、測試）的腳手架</li>
 <li>包含更新原理圖，以便 <code>ng update</code> 可以更新函式庫的依賴項，併為新版本中的重大更改提供遷移</li>
 
   </ul>
-  <p>庫中包含的內容取決於你的任務。
+  <p>函式庫中包含的內容取決於你的任務。
 例如，你可以定義一個原理圖來建立一個預先填充了罐頭資料的下拉清單，以展示如何將其新增到應用中。
 如果你想要一個每次都包含不同傳入值的下拉清單，你的函式庫可以定義一個原理圖來使用給定的設定建立它。
 然後，開發者可以使用 <code>ng generate</code> 為他們自己的應用設定一個實例。</p>
@@ -134,7 +134,7 @@
   </h2>
   <p>使用 Angular CLI 和 npm 套件管理器來建立和發布你的函式庫作為 npm 套件。</p>
 <p>Angular CLI 使用一個名為 <a href="https://github.com/ng-packagr/ng-packagr/blob/master/README.md" target="_blank">ng-packagr</a> 的工具，從你的已編譯程式碼建立可以發布到 npm 的套件。
-有關 <code>ng-packagr</code> 支援的發行格式以及如何為你的函式庫選擇正確格式的指南，請參閱<a href="tools/libraries/creating-libraries#publishing-libraries">使用 Ivy 建立庫</a>。</p>
+有關 <code>ng-packagr</code> 支援的發行格式以及如何為你的函式庫選擇正確格式的指南，請參閱<a href="tools/libraries/creating-libraries#publishing-libraries">使用 Ivy 建立函式庫</a>。</p>
 <p>你應該始終使用 <code>production</code> 設定建立用於分發的函式庫。
 這確保了生成的輸出使用適當的最佳化和正確的 npm 套件格式。</p>
 <div class="docs-code shell">
@@ -143,17 +143,17 @@
     </pre>
   </div>
   <h2 id="managing-assets-in-a-library">
-    <a href="#managing-assets-in-a-library" class="docs-anchor" tabindex="-1" aria-label="Link to Managing assets in a library">管理庫中的資產</a>
+    <a href="#managing-assets-in-a-library" class="docs-anchor" tabindex="-1" aria-label="Link to Managing assets in a library">管理函式庫中的資產</a>
   </h2>
-  <p>在你的 Angular 庫中，可分發檔案可以包含其他資產，例如主題檔案、Sass mixin 或文件（如變更日誌）。
-有關更多訊息，請參閱<a href="https://github.com/ng-packagr/ng-packagr/blob/master/docs/copy-assets.md" target="_blank">在建立過程中將資產複製到庫中</a>和<a href="https://github.com/ng-packagr/ng-packagr/blob/master/docs/embed-assets-css.md" target="_blank">在元件樣式中嵌入資產</a>。</p>
+  <p>在你的 Angular 函式庫中，可分發檔案可以包含其他資產，例如主題檔案、Sass mixin 或文件（如變更日誌）。
+有關更多訊息，請參閱<a href="https://github.com/ng-packagr/ng-packagr/blob/master/docs/copy-assets.md" target="_blank">在建立過程中將資產複製到函式庫中</a>和<a href="https://github.com/ng-packagr/ng-packagr/blob/master/docs/embed-assets-css.md" target="_blank">在元件樣式中嵌入資產</a>。</p>
 
     <div class="docs-alert docs-alert-important">
     <p><strong>重要提示：</strong> 當包含 Sass mixin 或預編譯 CSS 等其他資產時。
 你需要手動將這些新增到主入口點的 <code>package.json</code> 中的條件 <a href="tools/libraries/angular-package-format#quotexportsquot">『exports』</a> 中。</p>
 
     </div>
-    <p><code>ng-packagr</code> 會將手寫的 <code>"exports"</code> 與自動生成的 <code>"exports"</code> 合併，從而允許庫作者設定額外的匯出子路徑或自定義條件。</p>
+    <p><code>ng-packagr</code> 會將手寫的 <code>"exports"</code> 與自動生成的 <code>"exports"</code> 合併，從而允許函式庫作者設定額外的匯出子路徑或自定義條件。</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"exports"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  "."</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    "sass"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"./_index.scss"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  "./theming"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    "sass"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"./_theming.scss"</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  "./prebuilt-themes/indigo-pink.css"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    "style"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"./prebuilt-themes/indigo-pink.css"</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -175,13 +175,13 @@
 
   <ul class="docs-list">
     <li><p>建立此函式庫。
-  在建立庫之前，你無法使用它。</p>
+  在建立函式庫之前，你無法使用它。</p>
 <div class="docs-code shell">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> build</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> my-lib</span></span></code></pre>
     </pre>
   </div></li>
-<li><p>在你的應用中，透過名稱從庫中匯入：</p>
+<li><p>在你的應用中，透過名稱從函式庫中匯入：</p>
 <div class="docs-code">
     
     <pre class="docs-mini-scroll-track">      <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { myExport } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'my-lib'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span></code></pre>
@@ -194,7 +194,7 @@
     <a href="#building-and-rebuilding-your-library" class="docs-anchor" tabindex="-1" aria-label="Link to Building and rebuilding your library">建立和重新建立你的函式庫</a>
   </h3>
   <p>如果你尚未將你的函式庫作為 npm 套件發布，然後又從 npm 將該套件安裝回你的應用中，那麼建立步驟非常重要。
-例如，如果你克隆了你的 git 倉庫並執行 <code>npm install</code>，那麼如果尚未建立你的函式庫，你的編輯器會將 <code>my-lib</code> 匯入顯示為丟失。</p>
+例如，如果你克隆了你的 git 儲存庫並執行 <code>npm install</code>，那麼如果尚未建立你的函式庫，你的編輯器會將 <code>my-lib</code> 匯入顯示為丟失。</p>
 
     <div class="docs-alert docs-alert-helpful">
     <p><strong>提示：</strong> 當你在 Angular 應用中從函式庫匯入某些內容時，Angular 會查詢函式庫名稱和磁碟上位置之間的對映表。
@@ -228,8 +228,8 @@ Angular CLI 使用 <code>tsconfig</code> 路徑來告知建立體系在哪裡可
 
   </ul>
   <p>這兩個建立體系支援不同的東西，即使在它們支援相同的東西時，它們也會以不同的方式執行這些操作。
-這意味著 TypeScript 原始碼在建立的庫中可能產生與建立的應用中不同的 JavaScript 程式碼。</p>
-<p>因此，依賴於函式庫的應用應僅使用指向<em>已建立庫</em>的 TypeScript 路徑對映。
+這意味著 TypeScript 原始碼在建立的函式庫中可能產生與建立的應用中不同的 JavaScript 程式碼。</p>
+<p>因此，依賴於函式庫的應用應僅使用指向<em>已建立函式庫</em>的 TypeScript 路徑對映。
 TypeScript 路徑對映<em>不應</em>指向函式庫原始碼 <code>.ts</code> 檔案。</p>
 
   <h2 id="publishing-libraries">
@@ -263,9 +263,9 @@ TypeScript 路徑對映<em>不應</em>指向函式庫原始碼 <code>.ts</code> 
 <p>如果要發布到 npm，請避免使用 full-Ivy 程式碼編譯函式庫，因為生成的 Ivy 指令不是 Angular 公共 API 的一部分，因此可能會在補丁版本之間發生更改。</p>
 
   <h2 id="ensuring-library-version-compatibility">
-    <a href="#ensuring-library-version-compatibility" class="docs-anchor" tabindex="-1" aria-label="Link to Ensuring library version compatibility">確保庫版本相容性</a>
+    <a href="#ensuring-library-version-compatibility" class="docs-anchor" tabindex="-1" aria-label="Link to Ensuring library version compatibility">確保函式庫版本相容性</a>
   </h2>
-  <p>用於建立應用的 Angular 版本應始終與用於建立其任何依賴庫的 Angular 版本相同或更高。
+  <p>用於建立應用的 Angular 版本應始終與用於建立其任何依賴函式庫的 Angular 版本相同或更高。
 例如，如果你的函式庫使用 Angular 版本 13，則依賴於該函式庫的應用應使用 Angular 版本 13 或更高版本。
 Angular 不支援為應用使用更早的版本。</p>
 <p>如果你打算將你的函式庫發布到 npm，請透過在 <code>tsconfig.prod.json</code> 中設定 <code>"compilationMode": "partial"</code> 來使用 partial-Ivy 程式碼進行編譯。
@@ -279,7 +279,7 @@ Angular 不支援為應用使用更早的版本。</p>
     <a href="#consuming-partial-ivy-code-outside-the-angular-cli" class="docs-anchor" tabindex="-1" aria-label="Link to Consuming partial-Ivy code outside the Angular CLI">在 Angular CLI 之外使用 partial-Ivy 程式碼</a>
   </h2>
   <p>應用從 npm 將許多 Angular 函式庫安裝到其 <code>node_modules</code> 目錄中。
-但是，這些庫中的程式碼不能與建立的應用一起直接打捆，因為它尚未完全編譯。
+但是，這些函式庫中的程式碼不能與建立的應用一起直接打捆，因為它尚未完全編譯。
 要完成編譯，請使用 Angular linker。</p>
 <p>對於不使用 Angular CLI 的應用，linker 可以作為 <a href="https://babeljs.io" target="_blank">Babel</a> 外掛使用。
 該外掛要從 <code>@angular/compiler-cli/linker/babel</code> 匯入。</p>
