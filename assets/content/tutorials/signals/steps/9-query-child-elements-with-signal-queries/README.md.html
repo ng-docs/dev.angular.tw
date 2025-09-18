@@ -4,15 +4,15 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">使用信号查询查询子元素</h1>
+    <h1 tabindex="-1">使用訊號查詢查詢子元素</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/signals/steps/9-query-child-elements-with-signal-queries/README.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>既然您已经了解了<a href="/tutorials/signals/8-using-signals-with-directives">如何将信号与指令结合使用</a>，那么让我们来探索基于信号的查询 API。这些 API 提供了一种响应式的方式来访问和交互子组件及指令。组件和指令都可以执行查询，同时也可以被查询。与传统的 ViewChild 不同，信号查询会自动更新并提供类型安全的子组件和指令访问方式。</p>
-<p>在此活动中，您将添加 viewChild 查询以以编程方式与子组件进行交互。</p>
+    <p>既然您已經瞭解了<a href="/tutorials/signals/8-using-signals-with-directives">如何將訊號與指令結合使用</a>，那麼讓我們來探索基於訊號的查詢 API。這些 API 提供了一種回應式的方式來訪問和互動子元件及指令。元件和指令都可以執行查詢，同時也可以被查詢。與傳統的 ViewChild 不同，訊號查詢會自動更新並提供型別安全的子元件和指令訪問方式。</p>
+<p>在此活動中，您將新增 viewChild 查詢以以程式設計方式與子元件進行互動。</p>
 <hr>
 
 
@@ -22,10 +22,10 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-viewchild-import">
-    <a href="#add-viewchild-import" class="docs-anchor" tabindex="-1" aria-label="Link to Add viewChild import">添加 viewChild 导入</a>
+    <a href="#add-viewchild-import" class="docs-anchor" tabindex="-1" aria-label="Link to Add viewChild import">新增 viewChild 匯入</a>
   </h3>
   
-      <p>首先，在 <code>app.ts</code> 中添加 <code>viewChild</code> 导入以访问子组件。</p>
+      <p>首先，在 <code>app.ts</code> 中新增 <code>viewChild</code> 匯入以訪問子元件。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {Component, signal, computed, viewChild, ChangeDetectionStrategy} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span></code></pre>
@@ -36,14 +36,14 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="create-viewchild-queries">
-    <a href="#create-viewchild-queries" class="docs-anchor" tabindex="-1" aria-label="Link to Create viewChild queries">创建 viewChild 查询</a>
+    <a href="#create-viewchild-queries" class="docs-anchor" tabindex="-1" aria-label="Link to Create viewChild queries">建立 viewChild 查詢</a>
   </h3>
   
-      <p>将 viewChild 查询添加到 App 组件以访问子组件。</p>
+      <p>將 viewChild 查詢新增到 App 元件以訪問子元件。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Query APIs to access child components</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">firstProduct </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> viewChild</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(ProductCard);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">cartSummary </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> viewChild</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(CartSummary);</span></span></code></pre>
-  </div><p>这些查询会创建引用子组件实例的信号。</p>
+  </div><p>這些查詢會建立引用子元件實例的訊號。</p>
 
     </li>
     
@@ -51,10 +51,10 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="implement-parent-methods">
-    <a href="#implement-parent-methods" class="docs-anchor" tabindex="-1" aria-label="Link to Implement parent methods">实现父组件方法</a>
+    <a href="#implement-parent-methods" class="docs-anchor" tabindex="-1" aria-label="Link to Implement parent methods">實現父元件方法</a>
   </h3>
   
-      <p>在 <code>app.ts</code> 中使用 viewChild 查询调用子组件上的方法：</p>
+      <p>在 <code>app.ts</code> 中使用 viewChild 查詢呼叫子元件上的方法：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">showFirstProductDetails</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> product</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">firstProduct</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (product) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    product.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">highlight</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">initiateCheckout</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">() {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> summary</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">cartSummary</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (summary) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    summary.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">initiateCheckout</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -65,20 +65,20 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="test-the-interactions">
-    <a href="#test-the-interactions" class="docs-anchor" tabindex="-1" aria-label="Link to Test the interactions">测试交互</a>
+    <a href="#test-the-interactions" class="docs-anchor" tabindex="-1" aria-label="Link to Test the interactions">測試互動</a>
   </h3>
   
-      <p>控件按钮现在应该可以工作了：</p>
+      <p>控制元件按鈕現在應該可以工作了：</p>
 
   <ul class="docs-list">
-    <li><strong>“显示第一个产品详情”</strong> - 调用 ProductCard 上的 <code>highlight()</code></li>
-<li><strong>“发起结账”</strong> - 调用 CartSummary 上的 <code>initiateCheckout()</code></li>
+    <li><strong>『顯示第一個產品詳情』</strong> - 呼叫 ProductCard 上的 <code>highlight()</code></li>
+<li><strong>『發起結賬』</strong> - 呼叫 CartSummary 上的 <code>initiateCheckout()</code></li>
 
   </ul>
-  <p>单击按钮，查看 viewChild 查询如何使父组件控制子组件的行为。</p>
+  <p>單擊按鈕，檢視 viewChild 查詢如何使父元件控制子元件的行為。</p>
 
     </li>
     
     </ol>
-    <p>太棒了！您已经学会了如何使用基于信号的查询 API 来进行子组件交互：</p>
-<p>在下一课中，您将学习<a href="/tutorials/signals/10-reacting-to-signal-changes-with-effect">如何使用 effect 对信号更改做出反应</a>！</p>
+    <p>太棒了！您已經學會瞭如何使用基於訊號的查詢 API 來進行子元件互動：</p>
+<p>在下一課中，您將學習<a href="/tutorials/signals/10-reacting-to-signal-changes-with-effect">如何使用 effect 對訊號更改做出反應</a>！</p>

@@ -4,57 +4,57 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">在响应式上下文中不允许的函数调用</h1>
+    <h1 tabindex="-1">在回應式上下文中不允許的函式呼叫</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/errors/NG0602.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>一个不允许在响应式上下文中运行的函数，却从响应式上下文中被调用。</p>
-<p>例如，不能在 <a href="/api/core/computed"><code>computed</code></a> 或正在执行的 effect 中调度一个 <a href="/api/core/effect"><code>effect</code></a>。
-避免将 <a href="/api/core/effect"><code>effect</code></a> 等函数作为模板表达式的一部分进行调用，因为这些表达式会在它们自己的响应式上下文中执行。</p>
-<p>计算表达式应为纯粹的。
-纯粹意味着表达式不会触发任何副作用。
-副作用是诸如调度 <a href="/api/core/afterNextRender"><code>afterNextRender</code></a>/<a href="/api/core/afterEveryRender"><code>afterEveryRender</code></a>、创建新的 <a href="/api/core/effect"><code>effect</code></a> 或订阅可观察者等操作。</p>
-<p>为了避免常见的陷阱，某些操作在响应式上下文中被明确禁止。
-例如，在 <a href="/api/core/computed"><code>computed</code></a> 中使用 <a href="/api/core/afterNextRender"><code>afterNextRender</code></a>/<a href="/api/core/afterEveryRender"><code>afterEveryRender</code></a> 会在每次计算表达式求值时调度新的渲染钩子。
-这很可能不是预期的，并且可能会降低应用程序性能。</p>
+    <p>一個不允許在回應式上下文中執行的函式，卻從回應式上下文中被呼叫。</p>
+<p>例如，不能在 <a href="/api/core/computed"><code>computed</code></a> 或正在執行的 effect 中排程一個 <a href="/api/core/effect"><code>effect</code></a>。
+避免將 <a href="/api/core/effect"><code>effect</code></a> 等函式作為樣板表示式的一部分進行呼叫，因為這些表示式會在它們自己的回應式上下文中執行。</p>
+<p>計算表示式應為純粹的。
+純粹意味著表示式不會觸發任何副作用。
+副作用是諸如排程 <a href="/api/core/afterNextRender"><code>afterNextRender</code></a>/<a href="/api/core/afterEveryRender"><code>afterEveryRender</code></a>、建立新的 <a href="/api/core/effect"><code>effect</code></a> 或訂閱可觀察者等操作。</p>
+<p>為了避免常見的陷阱，某些操作在回應式上下文中被明確禁止。
+例如，在 <a href="/api/core/computed"><code>computed</code></a> 中使用 <a href="/api/core/afterNextRender"><code>afterNextRender</code></a>/<a href="/api/core/afterEveryRender"><code>afterEveryRender</code></a> 會在每次計算表示式求值時調度新的渲染鉤子。
+這很可能不是預期的，並且可能會降低應用程式效能。</p>
 
   <h3 id="fixing-the-error">
-    <a href="#fixing-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Fixing the error">修复此错误</a>
+    <a href="#fixing-the-error" class="docs-anchor" tabindex="-1" aria-label="Link to Fixing the error">修復此錯誤</a>
   </h3>
-  <p>本错误指南并非详尽无遗。
-它捕获了一些常见场景以及如何解决此错误。</p>
+  <p>本錯誤指南並非詳盡無遺。
+它捕獲了一些常見場景以及如何解決此錯誤。</p>
 
   <h4 id="afternextrender-aftereveryrender">
     <a href="#afternextrender-aftereveryrender" class="docs-anchor" tabindex="-1" aria-label="Link to <code>afterNextRender</code>/<code>afterEveryRender</code>"><code>afterNextRender</code>/<code>afterEveryRender</code></a>
   </h4>
-  <p>将 <a href="/api/core/afterNextRender"><code>afterNextRender</code></a>/<a href="/api/core/afterEveryRender"><code>afterEveryRender</code></a> 的调用移出响应式上下文。</p>
-<p>调度渲染后钩子的一个好地方是在组件的类构造函数中。
-或者，使用 <a href="/api/core/untracked"><code>untracked</code></a> 来离开响应式上下文并显式选择退出此错误。</p>
+  <p>將 <a href="/api/core/afterNextRender"><code>afterNextRender</code></a>/<a href="/api/core/afterEveryRender"><code>afterEveryRender</code></a> 的呼叫移出回應式上下文。</p>
+<p>排程渲染後鉤子的一個好地方是在元件的類建構式函式中。
+或者，使用 <a href="/api/core/untracked"><code>untracked</code></a> 來離開回應式上下文並顯式選擇退出此錯誤。</p>
 
   <h4 id="effect">
     <a href="#effect" class="docs-anchor" tabindex="-1" aria-label="Link to <code>effect</code>"><code>effect</code></a>
   </h4>
-  <p>将 <a href="/api/core/effect"><code>effect</code></a> 的调用移出响应式上下文。</p>
-<p>调度 effect 的一个好地方是在 <a href="/api/core/Component"><code>@Component</code></a> 的类构造函数中。</p>
+  <p>將 <a href="/api/core/effect"><code>effect</code></a> 的呼叫移出回應式上下文。</p>
+<p>排程 effect 的一個好地方是在 <a href="/api/core/Component"><code>@Component</code></a> 的類建構式函式中。</p>
 
   <h4 id="tosignal">
     <a href="#tosignal" class="docs-anchor" tabindex="-1" aria-label="Link to <code>toSignal</code>"><code>toSignal</code></a>
   </h4>
-  <p>将 <a href="/api/core/rxjs-interop/toSignal"><code>toSignal</code></a> 的调用移出响应式上下文。</p>
+  <p>將 <a href="/api/core/rxjs-interop/toSignal"><code>toSignal</code></a> 的呼叫移出回應式上下文。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">result </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/computed">computed</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> dataSignal</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/rxjs-interop/toSignal">toSignal</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(dataObservable$);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  return</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> doSomething</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">dataSignal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">());</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
-  </div><p>可以重构为：</p>
+  </div><p>可以重構為：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">dataSignal </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/rxjs-interop/toSignal">toSignal</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(dataObservable$);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">result </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/computed">computed</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> doSomething</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">dataSignal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()));</span></span></code></pre>
-  </div><p>或者，如果这不可行，请考虑手动订阅可观察者。</p>
-<p>作为最后的手段，使用 <a href="/api/core/untracked"><code>untracked</code></a> 来离开响应式上下文。
-请注意，离开响应式上下文可能导致 <a href="/api/core/untracked"><code>untracked</code></a> 内部的信号读取被忽略。</p>
+  </div><p>或者，如果這不可行，請考慮手動訂閱可觀察者。</p>
+<p>作為最後的手段，使用 <a href="/api/core/untracked"><code>untracked</code></a> 來離開回應式上下文。
+請注意，離開回應式上下文可能導致 <a href="/api/core/untracked"><code>untracked</code></a> 內部的訊號讀取被忽略。</p>
 <p>@debugging</p>
-<p>错误消息提到了意外调用的函数。
-在你的应用代码中查找此函数调用。</p>
-<p>或者，浏览器中的堆栈跟踪将显示函数在何处被调用以及它位于何处。</p>
+<p>錯誤訊息提到了意外呼叫的函式。
+在你的應用程式碼中查詢此函式呼叫。</p>
+<p>或者，瀏覽器中的堆疊跟蹤將顯示函式在何處被呼叫以及它位於何處。</p>

@@ -11,48 +11,48 @@
     </a>
   </div>
     </header>
-    <p>本指南可帮助您为 Angular 应用的不同部分选择正确的渲染策略。</p>
+    <p>本指南可幫助您為 Angular 應用的不同部分選擇正確的渲染策略。</p>
 
   <h2 id="what-are-rendering-strategies">
-    <a href="#what-are-rendering-strategies" class="docs-anchor" tabindex="-1" aria-label="Link to What are rendering strategies?">什么是渲染策略？</a>
+    <a href="#what-are-rendering-strategies" class="docs-anchor" tabindex="-1" aria-label="Link to What are rendering strategies?">什麼是渲染策略？</a>
   </h2>
-  <p>渲染策略决定了您的 Angular 应用的 HTML 内容何时以及在何处生成。每种策略在初始页面加载性能、交互性、SEO 功能和服务器资源使用之间提供了不同的权衡。</p>
-<p>Angular 支持三种主要的渲染策略：</p>
+  <p>渲染策略決定了您的 Angular 應用的 HTML 內容何時以及在何處生成。每種策略在初始頁面載入效能、互動性、SEO 功能和伺服器資源使用之間提供了不同的權衡。</p>
+<p>Angular 支援三種主要的渲染策略：</p>
 
   <ul class="docs-list">
-    <li><strong>客户端渲染 (CSR)</strong> - 内容完全在浏览器中渲染</li>
-<li><strong>静态站点生成 (SSG/预渲染)</strong> - 内容在构建时预先渲染</li>
-<li><strong>服务器端渲染 (SSR)</strong> - 内容在服务器上为路由的初始请求进行渲染</li>
+    <li><strong>用戶端渲染 (CSR)</strong> - 內容完全在瀏覽器中渲染</li>
+<li><strong>靜態站點生成 (SSG/預渲染)</strong> - 內容在建立時預先渲染</li>
+<li><strong>伺服器端渲染 (SSR)</strong> - 內容在服務器上為路由的初始請求進行渲染</li>
 
   </ul>
   
   <h2 id="client-side-rendering-csr">
-    <a href="#client-side-rendering-csr" class="docs-anchor" tabindex="-1" aria-label="Link to Client-Side Rendering (CSR)">客户端渲染 (CSR)</a>
+    <a href="#client-side-rendering-csr" class="docs-anchor" tabindex="-1" aria-label="Link to Client-Side Rendering (CSR)">用戶端渲染 (CSR)</a>
   </h2>
-  <p><strong>CSR 是 Angular 的默认设置。</strong> JavaScript 加载后，内容完全在浏览器中渲染。</p>
+  <p><strong>CSR 是 Angular 的預設設定。</strong> JavaScript 載入後，內容完全在瀏覽器中渲染。</p>
 
   <h3 id="when-to-use-csr">
-    <a href="#when-to-use-csr" class="docs-anchor" tabindex="-1" aria-label="Link to When to use CSR">何时使用 CSR</a>
+    <a href="#when-to-use-csr" class="docs-anchor" tabindex="-1" aria-label="Link to When to use CSR">何時使用 CSR</a>
   </h3>
-  <p><span class="docs-emoji">✅ 适用于以下场景：</span></p>
+  <p><span class="docs-emoji">✅ 適用於以下場景：</span></p>
 
   <ul class="docs-list">
-    <li>交互式应用（仪表盘、管理面板）</li>
-<li>实时应用</li>
-<li>不关心 SEO 的内部工具</li>
-<li>具有复杂客户端状态的单页应用</li>
+    <li>互動式應用（儀表盤、管理面板）</li>
+<li>實時應用</li>
+<li>不關心 SEO 的內部工具</li>
+<li>具有複雜用戶端狀態的單頁應用</li>
 
   </ul>
-  <p><span class="docs-emoji">❌ 可能时，请考虑避免使用：</span></p>
+  <p><span class="docs-emoji">❌ 可能時，請考慮避免使用：</span></p>
 
   <ul class="docs-list">
-    <li>需要 SEO 的面向公众的内容</li>
-<li>初始加载性能至关重要的页面</li>
+    <li>需要 SEO 的面向公眾的內容</li>
+<li>初始載入效能至關重要的頁面</li>
 
   </ul>
   
   <h3 id="csr-trade-offs">
-    <a href="#csr-trade-offs" class="docs-anchor" tabindex="-1" aria-label="Link to CSR trade-offs">CSR 的权衡</a>
+    <a href="#csr-trade-offs" class="docs-anchor" tabindex="-1" aria-label="Link to CSR trade-offs">CSR 的權衡</a>
   </h3>
   
   <div class="docs-table docs-scroll-track-transparent">
@@ -60,30 +60,30 @@
       <thead>
         <tr>
 <th align="left">方面</th>
-<th align="left">影响</th>
+<th align="left">影響</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><strong>SEO</strong></td>
-<td align="left">差 - 在 JS 执行之前爬虫无法看到内容</td>
+<td align="left">差 - 在 JS 執行之前爬蟲無法看到內容</td>
 </tr>
 <tr>
-<td align="left"><strong>初始加载</strong></td>
-<td align="left">较慢 - 必须先下载并执行 JavaScript</td>
+<td align="left"><strong>初始載入</strong></td>
+<td align="left">較慢 - 必須先下載並執行 JavaScript</td>
 </tr>
 <tr>
-<td align="left"><strong>交互性</strong></td>
-<td align="left">加载后即时可用</td>
+<td align="left"><strong>互動性</strong></td>
+<td align="left">載入後即時可用</td>
 </tr>
 <tr>
-<td align="left"><strong>服务器需求</strong></td>
-<td align="left">除了一些配置外，最少</td>
+<td align="left"><strong>伺服器需求</strong></td>
+<td align="left">除了一些設定外，最少</td>
 </tr>
 <tr>
-<td align="left"><strong>复杂性</strong></td>
-<td align="left">最简单，因为它只需最少的配置即可工作</td>
+<td align="left"><strong>複雜性</strong></td>
+<td align="left">最簡單，因為它只需最少的設定即可工作</td>
 </tr>
 
       </tbody>
@@ -91,33 +91,33 @@
   </div>
   
   <h2 id="static-site-generation-ssg-prerendering">
-    <a href="#static-site-generation-ssg-prerendering" class="docs-anchor" tabindex="-1" aria-label="Link to Static Site Generation (SSG/Prerendering)">静态站点生成 (SSG/预渲染)</a>
+    <a href="#static-site-generation-ssg-prerendering" class="docs-anchor" tabindex="-1" aria-label="Link to Static Site Generation (SSG/Prerendering)">靜態站點生成 (SSG/預渲染)</a>
   </h2>
-  <p><strong>SSG 在构建时将页面预渲染</strong>为静态 HTML 文件。服务器在初始页面加载时发送预构建的 HTML。水合后，您的应用将完全在浏览器中运行，就像传统的 SPA 一样 - 后续的导航、路由更改和 API 调用都发生在客户端，无需服务器渲染。</p>
+  <p><strong>SSG 在建立時將頁面預渲染</strong>為靜態 HTML 檔案。伺服器在初始頁面載入時傳送預建立的 HTML。水合後，您的應用將完全在瀏覽器中執行，就像傳統的 SPA 一樣 - 後續的導向、路由更改和 API 呼叫都發生在用戶端，無需伺服器渲染。</p>
 
   <h3 id="when-to-use-ssg">
-    <a href="#when-to-use-ssg" class="docs-anchor" tabindex="-1" aria-label="Link to When to use SSG">何时使用 SSG</a>
+    <a href="#when-to-use-ssg" class="docs-anchor" tabindex="-1" aria-label="Link to When to use SSG">何時使用 SSG</a>
   </h3>
-  <p><span class="docs-emoji">✅ 适用于以下场景：</span></p>
+  <p><span class="docs-emoji">✅ 適用於以下場景：</span></p>
 
   <ul class="docs-list">
-    <li>营销页面和着陆页</li>
-<li>博客文章和文档</li>
-<li>内容稳定的产品目录</li>
-<li>不因用户而异的内容</li>
+    <li>營銷頁面和著陸頁</li>
+<li>部落格文章和文件</li>
+<li>內容穩定的產品目錄</li>
+<li>不因使用者而異的內容</li>
 
   </ul>
-  <p><span class="docs-emoji">❌ 可能时，请考虑避免使用：</span></p>
+  <p><span class="docs-emoji">❌ 可能時，請考慮避免使用：</span></p>
 
   <ul class="docs-list">
-    <li>用户特定的内容</li>
-<li>频繁变化的数据</li>
-<li>实时信息</li>
+    <li>使用者特定的內容</li>
+<li>頻繁變化的資料</li>
+<li>實時訊息</li>
 
   </ul>
   
   <h3 id="ssg-trade-offs">
-    <a href="#ssg-trade-offs" class="docs-anchor" tabindex="-1" aria-label="Link to SSG trade-offs">SSG 的权衡</a>
+    <a href="#ssg-trade-offs" class="docs-anchor" tabindex="-1" aria-label="Link to SSG trade-offs">SSG 的權衡</a>
   </h3>
   
   <div class="docs-table docs-scroll-track-transparent">
@@ -125,68 +125,68 @@
       <thead>
         <tr>
 <th align="left">方面</th>
-<th align="left">影响</th>
+<th align="left">影響</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><strong>SEO</strong></td>
-<td align="left">极佳 - 立即提供完整的 HTML</td>
+<td align="left">極佳 - 立即提供完整的 HTML</td>
 </tr>
 <tr>
-<td align="left"><strong>初始加载</strong></td>
-<td align="left">最快 - 预生成的 HTML</td>
+<td align="left"><strong>初始載入</strong></td>
+<td align="left">最快 - 預生成的 HTML</td>
 </tr>
 <tr>
-<td align="left"><strong>交互性</strong></td>
-<td align="left">水合完成后</td>
+<td align="left"><strong>互動性</strong></td>
+<td align="left">水合完成後</td>
 </tr>
 <tr>
-<td align="left"><strong>服务器需求</strong></td>
-<td align="left">服务时无（CDN 友好）</td>
+<td align="left"><strong>伺服器需求</strong></td>
+<td align="left">服務時無（CDN 友好）</td>
 </tr>
 <tr>
-<td align="left"><strong>构建时间</strong></td>
-<td align="left">较长 - 预先生成所有页面</td>
+<td align="left"><strong>建立時間</strong></td>
+<td align="left">較長 - 預先生成所有頁面</td>
 </tr>
 <tr>
-<td align="left"><strong>内容更新</strong></td>
-<td align="left">需要重新构建和重新部署</td>
+<td align="left"><strong>內容更新</strong></td>
+<td align="left">需要重新建立和重新部署</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p><span class="docs-emoji">📖 </span><strong>实现：</strong>请参阅 SSR 指南中的<a href="guide/ssr#customizing-build-time-prerendering-ssg">自定义构建时预渲染</a>。</p>
+  <p><span class="docs-emoji">📖 </span><strong>實現：</strong>請參閱 SSR 指南中的<a href="guide/ssr#customizing-build-time-prerendering-ssg">自定義建立時預渲染</a>。</p>
 
   <h2 id="server-side-rendering-ssr">
-    <a href="#server-side-rendering-ssr" class="docs-anchor" tabindex="-1" aria-label="Link to Server-Side Rendering (SSR)">服务器端渲染 (SSR)</a>
+    <a href="#server-side-rendering-ssr" class="docs-anchor" tabindex="-1" aria-label="Link to Server-Side Rendering (SSR)">伺服器端渲染 (SSR)</a>
   </h2>
-  <p><strong>SSR 为路由的初始请求在服务器上生成 HTML</strong>，提供具有良好 SEO 的动态内容。服务器渲染 HTML 并将其发送到客户端。</p>
-<p>客户端渲染页面后，Angular 会<a href="/guide/hydration#what-is-hydration">水合</a>应用，然后应用将完全在浏览器中运行，就像传统的 SPA 一样 - 后续的导航、路由更改和 API 调用都发生在客户端，无需额外的服务器渲染。</p>
+  <p><strong>SSR 為路由的初始請求在服務器上生成 HTML</strong>，提供具有良好 SEO 的動態內容。伺服器渲染 HTML 並將其傳送到用戶端。</p>
+<p>用戶端渲染頁面後，Angular 會<a href="/guide/hydration#what-is-hydration">水合</a>應用，然後應用將完全在瀏覽器中執行，就像傳統的 SPA 一樣 - 後續的導向、路由更改和 API 呼叫都發生在用戶端，無需額外的伺服器渲染。</p>
 
   <h3 id="when-to-use-ssr">
-    <a href="#when-to-use-ssr" class="docs-anchor" tabindex="-1" aria-label="Link to When to use SSR">何时使用 SSR</a>
+    <a href="#when-to-use-ssr" class="docs-anchor" tabindex="-1" aria-label="Link to When to use SSR">何時使用 SSR</a>
   </h3>
-  <p><span class="docs-emoji">✅ 适用于以下场景：</span></p>
+  <p><span class="docs-emoji">✅ 適用於以下場景：</span></p>
 
   <ul class="docs-list">
-    <li>电子商务产品页面（动态定价/库存）</li>
-<li>新闻网站和社交媒体信息流</li>
-<li>个性化内容，频繁变化</li>
+    <li>電子商務產品頁面（動態定價/庫存）</li>
+<li>新聞網站和社交媒體信息流</li>
+<li>個性化內容，頻繁變化</li>
 
   </ul>
-  <p><span class="docs-emoji">❌ 可能时，请考虑避免使用：</span></p>
+  <p><span class="docs-emoji">❌ 可能時，請考慮避免使用：</span></p>
 
   <ul class="docs-list">
-    <li>静态内容（请改用 SSG）</li>
-<li>当服务器成本是顾虑时</li>
+    <li>靜態內容（請改用 SSG）</li>
+<li>當服務器成本是顧慮時</li>
 
   </ul>
   
   <h3 id="ssr-trade-offs">
-    <a href="#ssr-trade-offs" class="docs-anchor" tabindex="-1" aria-label="Link to SSR trade-offs">SSR 的权衡</a>
+    <a href="#ssr-trade-offs" class="docs-anchor" tabindex="-1" aria-label="Link to SSR trade-offs">SSR 的權衡</a>
   </h3>
   
   <div class="docs-table docs-scroll-track-transparent">
@@ -194,47 +194,47 @@
       <thead>
         <tr>
 <th align="left">方面</th>
-<th align="left">影响</th>
+<th align="left">影響</th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td align="left"><strong>SEO</strong></td>
-<td align="left">优秀 - 为爬虫提供完整的 HTML</td>
+<td align="left">優秀 - 為爬蟲提供完整的 HTML</td>
 </tr>
 <tr>
-<td align="left"><strong>初始加载</strong></td>
-<td align="left">快速 - 内容即时可见</td>
+<td align="left"><strong>初始載入</strong></td>
+<td align="left">快速 - 內容即時可見</td>
 </tr>
 <tr>
-<td align="left"><strong>交互性</strong></td>
-<td align="left">延迟到水合完成</td>
+<td align="left"><strong>互動性</strong></td>
+<td align="left">延遲到水合完成</td>
 </tr>
 <tr>
-<td align="left"><strong>服务器需求</strong></td>
-<td align="left">需要服务器</td>
+<td align="left"><strong>伺服器需求</strong></td>
+<td align="left">需要伺服器</td>
 </tr>
 <tr>
-<td align="left"><strong>个性化</strong></td>
-<td align="left">完全访问用户上下文</td>
+<td align="left"><strong>個性化</strong></td>
+<td align="left">完全訪問使用者上下文</td>
 </tr>
 <tr>
-<td align="left"><strong>服务器成本</strong></td>
-<td align="left">更高 - 在路由的初始请求时渲染</td>
+<td align="left"><strong>伺服器成本</strong></td>
+<td align="left">更高 - 在路由的初始請求時渲染</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p><span class="docs-emoji">📖 </span><strong>实现：</strong>请参阅 SSR 指南中的 <a href="guide/ssr#server-routing">服务器路由</a> 和 <a href="guide/ssr#authoring-server-compatible-components">编写服务器兼容组件</a>。</p>
+  <p><span class="docs-emoji">📖 </span><strong>實現：</strong>請參閱 SSR 指南中的 <a href="guide/ssr#server-routing">伺服器路由</a> 和 <a href="guide/ssr#authoring-server-compatible-components">編寫伺服器相容元件</a>。</p>
 
   <h2 id="choosing-the-right-strategy">
-    <a href="#choosing-the-right-strategy" class="docs-anchor" tabindex="-1" aria-label="Link to Choosing the Right Strategy">选择正确的策略</a>
+    <a href="#choosing-the-right-strategy" class="docs-anchor" tabindex="-1" aria-label="Link to Choosing the Right Strategy">選擇正確的策略</a>
   </h2>
   
   <h3 id="decision-matrix">
-    <a href="#decision-matrix" class="docs-anchor" tabindex="-1" aria-label="Link to Decision matrix">决策矩阵</a>
+    <a href="#decision-matrix" class="docs-anchor" tabindex="-1" aria-label="Link to Decision matrix">決策矩陣</a>
   </h3>
   
   <div class="docs-table docs-scroll-track-transparent">
@@ -249,24 +249,24 @@
       </thead>
       <tbody>
         <tr>
-<td align="left"><strong>SEO + 静态内容</strong></td>
+<td align="left"><strong>SEO + 靜態內容</strong></td>
 <td align="left">SSG</td>
-<td align="left">预渲染的 HTML，最快的加载速度</td>
+<td align="left">預渲染的 HTML，最快的載入速度</td>
 </tr>
 <tr>
-<td align="left"><strong>SEO + 动态内容</strong></td>
+<td align="left"><strong>SEO + 動態內容</strong></td>
 <td align="left">SSR</td>
-<td align="left">路由初始请求时的最新内容</td>
+<td align="left">路由初始請求時的最新內容</td>
 </tr>
 <tr>
-<td align="left"><strong>无 SEO + 交互性</strong></td>
+<td align="left"><strong>無 SEO + 互動性</strong></td>
 <td align="left">CSR</td>
-<td align="left">最简单，无需服务器</td>
+<td align="left">最簡單，無需伺服器</td>
 </tr>
 <tr>
 <td align="left"><strong>混合需求</strong></td>
 <td align="left">混合</td>
-<td align="left">每个路由使用不同的策略</td>
+<td align="left">每個路由使用不同的策略</td>
 </tr>
 
       </tbody>
@@ -274,33 +274,33 @@
   </div>
   
   <h2 id="making-ssr-ssg-interactive-with-hydration">
-    <a href="#making-ssr-ssg-interactive-with-hydration" class="docs-anchor" tabindex="-1" aria-label="Link to Making SSR/SSG Interactive with Hydration">通过水合使 SSR/SSG 具有交互性</a>
+    <a href="#making-ssr-ssg-interactive-with-hydration" class="docs-anchor" tabindex="-1" aria-label="Link to Making SSR/SSG Interactive with Hydration">透過水合使 SSR/SSG 具有互動性</a>
   </h2>
-  <p>使用 SSR 或 SSG 时，Angular 会“水合”服务器渲染的 HTML 以使其具有交互性。</p>
+  <p>使用 SSR 或 SSG 時，Angular 會『水合』伺服器渲染的 HTML 以使其具有互動性。</p>
 <p><strong>可用策略：</strong></p>
 
   <ul class="docs-list">
-    <li><strong>完全水合</strong> - 整个应用一次性变得可交互（默认）</li>
-<li><strong>增量水合</strong> - 部分内容按需变得可交互（性能更佳）</li>
-<li><strong>事件重放</strong> - 在水合完成前捕获点击事件</li>
+    <li><strong>完全水合</strong> - 整個應用一次性變得可互動（預設）</li>
+<li><strong>增量水合</strong> - 部分內容按需變得可互動（效能更佳）</li>
+<li><strong>事件重放</strong> - 在水合完成前捕獲點選事件</li>
 
   </ul>
-  <p><span class="docs-emoji">📖 </span><strong>了解更多：</strong></p>
+  <p><span class="docs-emoji">📖 </span><strong>瞭解更多：</strong></p>
 
   <ul class="docs-list">
-    <li><a href="guide/hydration">水合指南</a> - 完整的水合设置</li>
-<li><a href="guide/incremental-hydration">增量水合</a> - 使用 <code>@defer</code> 块的高级水合</li>
+    <li><a href="guide/hydration">水合指南</a> - 完整的水合設定</li>
+<li><a href="guide/incremental-hydration">增量水合</a> - 使用 <code>@defer</code> 區塊的高階水合</li>
 
   </ul>
   
   <h2 id="next-steps">
-    <a href="#next-steps" class="docs-anchor" tabindex="-1" aria-label="Link to Next steps">后续步骤</a>
+    <a href="#next-steps" class="docs-anchor" tabindex="-1" aria-label="Link to Next steps">後續步驟</a>
   </h2>
   
     <nav class="docs-pill-row">
       
     <a class="docs-pill" href="/guide/ssr">
-      服务器端渲染
+      伺服器端渲染
     </a>
     
     <a class="docs-pill" href="/guide/hydration">

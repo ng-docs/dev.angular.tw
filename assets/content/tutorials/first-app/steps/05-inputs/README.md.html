@@ -4,35 +4,35 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">为组件添加一个输入参数</h1>
+    <h1 tabindex="-1">為元件新增一個輸入引數</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tutorials/first-app/steps/05-inputs/README.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>本教程课程演示了如何创建 <code>input</code> 函数，并使用它将数据传递给组件以进行自定义。</p>
+    <p>本教程課程示範了如何建立 <code>input</code> 函式，並使用它將資料傳遞給元件以進行自定義。</p>
 
     <div class="docs-video-container">
       <iframe class="docs-video" src="https://www.youtube.com/embed/eM3zi_n7lNs?si=WvRGFSkW_7_zDIFD&amp;start=241" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen credentialless title="Video player"></iframe>
     </div>
     
     <div class="docs-alert docs-alert-note">
-    <p><strong>注意：</strong>此视频反映的是旧的语法，但主要概念仍然有效。</p>
+    <p><strong>注意：</strong>此影片反映的是舊的語法，但主要概念仍然有效。</p>
 
     </div>
     
   <h2 id="what-youll-learn">
-    <a href="#what-youll-learn" class="docs-anchor" tabindex="-1" aria-label="Link to What you'll learn">你将学到什么</a>
+    <a href="#what-youll-learn" class="docs-anchor" tabindex="-1" aria-label="Link to What you'll learn">你將學到什麼</a>
   </h2>
-  <p>你的应用的 <code>HousingLocation</code> 模板有一个 <code>HousingLocation</code> 属性来接收输入。</p>
+  <p>你的應用的 <code>HousingLocation</code> 樣板有一個 <code>HousingLocation</code> 屬性來接收輸入。</p>
 
   <h2 id="conceptual-preview-of-inputs">
-    <a href="#conceptual-preview-of-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to Conceptual preview of Inputs">输入（Inputs）的概念预览</a>
+    <a href="#conceptual-preview-of-inputs" class="docs-anchor" tabindex="-1" aria-label="Link to Conceptual preview of Inputs">輸入（Inputs）的概念預覽</a>
   </h2>
-  <p><a href="api/core/input">输入</a>允许组件指定可以从父组件传递给它的数据。</p>
-<p>在本课中，你将在 <code>HousingLocation</code> 组件中定义一个 <a href="/api/core/input"><code>input</code></a> 属性，使你能够自定义组件中显示的数据。</p>
-<p>在<a href="guide/components/inputs">使用输入属性（property）接收数据</a> 和 <a href="guide/components/outputs">使用输出属性（property）自定义事件</a> 指南中了解更多信息。</p>
+  <p><a href="api/core/input">輸入</a>允許元件指定可以從父元件傳遞給它的資料。</p>
+<p>在本課中，你將在 <code>HousingLocation</code> 元件中定義一個 <a href="/api/core/input"><code>input</code></a> 屬性，使你能夠自定義元件中顯示的資料。</p>
+<p>在<a href="guide/components/inputs">使用輸入屬性（property）接收資料</a> 和 <a href="guide/components/outputs">使用輸出屬性（property）自定義事件</a> 指南中瞭解更多訊息。</p>
 
     <ol class="docs-steps">
       
@@ -40,12 +40,12 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="import-the-input-function">
-    <a href="#import-the-input-function" class="docs-anchor" tabindex="-1" aria-label="Link to Import the input() function">导入 input() 函数</a>
+    <a href="#import-the-input-function" class="docs-anchor" tabindex="-1" aria-label="Link to Import the input() function">匯入 input() 函式</a>
   </h3>
   
-      <p>在代码编辑器中，将 <code>@angular/core</code> 中的 <code>input</code> 辅助方法导入到 <code>HousingLocation</code> 组件中。</p>
+      <p>在程式碼編輯器中，將 <code>@angular/core</code> 中的 <code>input</code> 輔助方法匯入到 <code>HousingLocation</code> 元件中。</p>
 <div class="docs-code" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/housing-location/housing-location.ts" visiblelines="0" header="Import input in housing-location.ts">
-    <div class="docs-code-header"><h3>在 housing-location.ts 中导入 input</h3></div>
+    <div class="docs-code-header"><h3>在 housing-location.ts 中匯入 input</h3></div>
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {<a href="/api/core/Component">Component</a>, input} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {HousingLocationInfo} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '../housinglocation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/core/Component">Component</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-housing-location'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    &lt;p&gt;housing-location works!&lt;/p&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  styleUrls: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'./housing-location.css'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HousingLocation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  housingLocation</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> <a href="/api/core/input">input</a>.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">required</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">HousingLocationInfo</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;();</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span></code></pre>
   </div>
     </li>
@@ -54,14 +54,14 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="add-the-input-property">
-    <a href="#add-the-input-property" class="docs-anchor" tabindex="-1" aria-label="Link to Add the Input property">添加 Input 属性（Property）</a>
+    <a href="#add-the-input-property" class="docs-anchor" tabindex="-1" aria-label="Link to Add the Input property">新增 Input 屬性（Property）</a>
   </h3>
   
-      <p>添加一个名为 <code>housingLocation</code> 的必需属性，并使用类型为 <code>HousingLocationInfo</code> 的 <a href="/api/core/input#required"><code>input.required()</code></a> 进行初始化。</p>
+      <p>新增一個名為 <code>housingLocation</code> 的必需屬性，並使用型別為 <code>HousingLocationInfo</code> 的 <a href="/api/core/input#required"><code>input.required()</code></a> 進行初始化。</p>
 <div class="docs-code" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/housing-location/housing-location.ts" visiblelines="11" header="Declare the input property in housing-location.ts">
-    <div class="docs-code-header"><h3>在 housing-location.ts 中声明输入属性</h3></div>
+    <div class="docs-code-header"><h3>在 housing-location.ts 中宣告輸入屬性</h3></div>
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {<a href="/api/core/Component">Component</a>, input} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {HousingLocationInfo} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '../housinglocation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/core/Component">Component</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-housing-location'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    &lt;p&gt;housing-location works!&lt;/p&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  styleUrls: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'./housing-location.css'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HousingLocation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  housingLocation</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> <a href="/api/core/input">input</a>.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">required</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">HousingLocationInfo</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;();</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span></code></pre>
-  </div><p>你必须在 <a href="/api/core/input"><code>input</code></a> 上调用 <code>required</code> 方法，以指示父组件必须提供一个值。在我们的示例应用程序中，我们知道这个值总是会被传递进来——这是设计使然。<code>.required()</code> 调用确保 TypeScript 编译器强制执行此操作，并在模板中使用此组件时将该属性视为非可空类型。</p>
+  </div><p>你必須在 <a href="/api/core/input"><code>input</code></a> 上呼叫 <code>required</code> 方法，以指示父元件必須提供一個值。在我們的範例應用程式中，我們知道這個值總是會被傳遞進來——這是設計使然。<code>.required()</code> 呼叫確保 TypeScript 編譯器強制執行此操作，並在樣板中使用此元件時將該屬性視為非可空型別。</p>
 
     </li>
     
@@ -69,12 +69,12 @@
       <span class="docs-step-number" aria-hidden="true"></span>
       
   <h3 id="pass-data-to-the-input">
-    <a href="#pass-data-to-the-input" class="docs-anchor" tabindex="-1" aria-label="Link to Pass data to the input">将数据传递给输入</a>
+    <a href="#pass-data-to-the-input" class="docs-anchor" tabindex="-1" aria-label="Link to Pass data to the input">將資料傳遞給輸入</a>
   </h3>
   
-      <p>将 <code>housingLocation</code> 值从 <code>Home</code> 组件发送到 HousingLocation 组件的 <code>housingLocation</code> 属性。</p>
+      <p>將 <code>housingLocation</code> 值從 <code>Home</code> 元件傳送到 HousingLocation 元件的 <code>housingLocation</code> 屬性。</p>
 <div class="docs-code" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/home/home.ts" visiblelines="15" header="Declare the input property for HousingLocation in home.ts">
-    <div class="docs-code-header"><h3>在 home.ts 中声明 HousingLocation 的输入属性</h3></div>
+    <div class="docs-code-header"><h3>在 home.ts 中宣告 HousingLocation 的輸入屬性</h3></div>
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {<a href="/api/core/Component">Component</a>} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {HousingLocation} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '../housing-location/housing-location'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {HousingLocationInfo} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '../housinglocation'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/core/Component">Component</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'app-home'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  imports: [HousingLocation],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    &lt;section&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">      &lt;form&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">        &lt;<a href="/api/core/input">input</a> type="text" placeholder="Filter by city" /&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">        &lt;button class="primary" type="button"&gt;Search&lt;/button&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">      &lt;/form&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    &lt;/section&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    &lt;section class="results"&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">      &lt;app-housing-location [housingLocation]="housingLocation"/&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    &lt;/section&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  styleUrls: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'./home.css'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Home</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  readonly</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> baseUrl</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 'https://angular.dev/assets/images/tutorials/common'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  housingLocation</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> HousingLocationInfo</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    id: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">9999</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Test Home'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    city: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Test city'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    <a href="/api/animations/state">state</a>: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'ST'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    photo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">baseUrl</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}/example-house.jpg`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    availableUnits: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">99</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    wifi: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    laundry: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">false</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  };</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span></code></pre>
   </div>
     </li>
@@ -82,18 +82,18 @@
     </ol>
     
     <div class="docs-alert docs-alert-summary">
-    <p><strong>总结：</strong>在本课中，你创建了一个新的 <a href="/api/core/input"><code>input</code></a> 属性。你还使用了 <code>.required</code> 方法来确保信号值始终已定义。</p>
+    <p><strong>總結：</strong>在本課中，你建立了一個新的 <a href="/api/core/input"><code>input</code></a> 屬性。你還使用了 <code>.required</code> 方法來確保訊號值始終已定義。</p>
 
     </div>
     
     <nav class="docs-pill-row">
       
     <a class="docs-pill" href="guide/components/inputs">
-      使用输入属性（property）接收数据
+      使用輸入屬性（property）接收資料
     </a>
     
     <a class="docs-pill" href="guide/components/outputs">
-      使用输出属性（property）自定义事件
+      使用輸出屬性（property）自定義事件
     </a>
     
 

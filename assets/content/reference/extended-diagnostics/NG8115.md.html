@@ -4,43 +4,43 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">未调用的 track 函数</h1>
+    <h1 tabindex="-1">未呼叫的 track 函式</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/reference/extended-diagnostics/NG8115.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>此诊断用于检测 <code>@for</code> 块中未调用 track 函数的情况。</p>
+    <p>此診斷用於檢測 <code>@for</code> 塊中未呼叫 track 函式的情況。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {<a href="/api/core/Component">Component</a>} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/core/Component">Component</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`@for (item of items; track trackByName) {}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Items</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  protected</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> trackByName</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">item</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) { </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> item.name; }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
   </div>
   <h2 id="whats-wrong-with-that">
-    <a href="#whats-wrong-with-that" class="docs-anchor" tabindex="-1" aria-label="Link to What's wrong with that?">这样做有什么问题？</a>
+    <a href="#whats-wrong-with-that" class="docs-anchor" tabindex="-1" aria-label="Link to What's wrong with that?">這樣做有什麼問題？</a>
   </h2>
-  <p><code>@for</code> 块需要唯一地标识可迭代对象中的条目，以便在可迭代对象中的条目被重新排序、添加新条目或删除现有条目时正确执行 DOM 更新。
-如果不调用该函数，协调算法将使用函数引用而不是返回值来比较条目。</p>
+  <p><code>@for</code> 區塊需要唯一地標識可迭代物件中的條目，以便在可迭代物件中的條目被重新排序、新增新條目或刪除現有條目時正確執行 DOM 更新。
+如果不呼叫該函式，協調演算法將使用函式引用而不是回傳值來比較條目。</p>
 
   <h2 id="what-should-i-do-instead">
-    <a href="#what-should-i-do-instead" class="docs-anchor" tabindex="-1" aria-label="Link to What should I do instead?">我应该怎么做？</a>
+    <a href="#what-should-i-do-instead" class="docs-anchor" tabindex="-1" aria-label="Link to What should I do instead?">我應該怎麼做？</a>
   </h2>
-  <p>在使用 <code>@for</code> 块时，请确保调用 track 函数以执行该函数，这样循环才能唯一地标识条目。</p>
+  <p>在使用 <code>@for</code> 區塊時，請確保呼叫 track 函式以執行該函式，這樣迴圈才能唯一地標識條目。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {<a href="/api/core/Component">Component</a>} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/core/Component">Component</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`@for (item of items; track trackByName(item)) {}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Items</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  protected</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> trackByName</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">item</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) { </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> item.name; }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
   </div>
   <h2 id="configuration-requirements">
-    <a href="#configuration-requirements" class="docs-anchor" tabindex="-1" aria-label="Link to Configuration requirements">配置要求</a>
+    <a href="#configuration-requirements" class="docs-anchor" tabindex="-1" aria-label="Link to Configuration requirements">設定要求</a>
   </h2>
-  <p>必须启用 <a href="tools/cli/template-typecheck#strict-mode"><code>strictTemplates</code></a> 才能发出任何扩展诊断。
-<code>uninvokedTrackFunction</code> 除了 <code>strictTemplates</code> 之外没有其他要求。</p>
+  <p>必須啟用 <a href="tools/cli/template-typecheck#strict-mode"><code>strictTemplates</code></a> 才能發出任何擴充套件診斷。
+<code>uninvokedTrackFunction</code> 除了 <code>strictTemplates</code> 之外沒有其他要求。</p>
 
   <h2 id="what-if-i-cant-avoid-this">
-    <a href="#what-if-i-cant-avoid-this" class="docs-anchor" tabindex="-1" aria-label="Link to What if I can't avoid this?">如果我无法避免这种情况怎么办？</a>
+    <a href="#what-if-i-cant-avoid-this" class="docs-anchor" tabindex="-1" aria-label="Link to What if I can't avoid this?">如果我無法避免這種情況怎麼辦？</a>
   </h2>
-  <p>可以通过编辑项目的 <code>tsconfig.json</code> 文件来禁用此诊断：</p>
+  <p>可以透過編輯專案的 <code>tsconfig.json</code> 檔案來停用此診斷：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">{</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  "angularCompilerOptions"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    "extendedDiagnostics"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">      "checks"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">        "uninvokedTrackFunction"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"suppress"</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
-  </div><p>有关更多信息，请参阅 <a href="extended-diagnostics#configuration">扩展诊断配置</a>。</p>
+  </div><p>有關更多訊息，請參閱 <a href="extended-diagnostics#configuration">擴充套件診斷設定</a>。</p>

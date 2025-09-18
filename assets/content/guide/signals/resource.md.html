@@ -4,7 +4,7 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">使用资源实现异步响应性</h1>
+    <h1 tabindex="-1">使用資源實現非同步回應性</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/signals/resource.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
@@ -13,31 +13,31 @@
     </header>
     
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要：</strong><a href="/api/core/resource"><code>resource</code></a> 是<a href="reference/releases#experimental">实验性</a>的。它已准备好供您试用，但在稳定之前可能会发生变化。</p>
+    <p><strong>重要：</strong><a href="/api/core/resource"><code>resource</code></a> 是<a href="reference/releases#experimental">實驗性</a>的。它已準備好供您試用，但在穩定之前可能會發生變化。</p>
 
     </div>
-    <p>大多数信号 API 是同步的——<a href="/api/core/signal"><code>signal</code></a>、<a href="/api/core/computed"><code>computed</code></a>、<a href="/api/core/input"><code>input</code></a> 等。然而，应用程序通常需要处理异步可用的数据。 <a href="/api/core/Resource"><code>Resource</code></a> 为您提供了一种将异步数据整合到应用程序的基于信号的代码中的方法。</p>
-<p>您可以使用 <a href="/api/core/Resource"><code>Resource</code></a> 来执行任何类型的异步操作，但 <a href="/api/core/Resource"><code>Resource</code></a> 最常见的用例是从服务器获取数据。以下示例创建一个资源来获取一些用户数据。</p>
-<p>创建 <a href="/api/core/Resource"><code>Resource</code></a> 最简单的方法是使用 <a href="/api/core/resource"><code>resource</code></a> 函数。</p>
+    <p>大多數訊號 API 是同步的——<a href="/api/core/signal"><code>signal</code></a>、<a href="/api/core/computed"><code>computed</code></a>、<a href="/api/core/input"><code>input</code></a> 等。然而，應用程式通常需要處理非同步可用的資料。 <a href="/api/core/Resource"><code>Resource</code></a> 為您提供了一種將非同步資料整合到應用程式的基於訊號的程式碼中的方法。</p>
+<p>您可以使用 <a href="/api/core/Resource"><code>Resource</code></a> 來執行任何型別的非同步操作，但 <a href="/api/core/Resource"><code>Resource</code></a> 最常見的用例是從伺服器獲取資料。以下範例建立一個資源來獲取一些使用者資料。</p>
+<p>建立 <a href="/api/core/Resource"><code>Resource</code></a> 最簡單的方法是使用 <a href="/api/core/resource"><code>resource</code></a> 函式。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {<a href="/api/core/resource">resource</a>, Signal} </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> userId</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/Signal">Signal</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> getUserId</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> userResource</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/resource">resource</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Define a reactive computation.</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // The params value recomputes whenever any read signals change.</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  params</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> ({id: </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">userId</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()}),</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Define an async loader that retrieves data.</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // The resource calls this function every time the `params` value changes.</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  loader</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: ({</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">params</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> fetchUser</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(params),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Create a computed signal based on the result of the resource's loader function.</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> firstName</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/computed">computed</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (userResource.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">hasValue</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()) {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // `hasValue` serves 2 purposes:</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // - It acts as type guard to strip `undefined` from the type</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // - If protects against reading a throwing `value` when the resource is in error state</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> userResource.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">value</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">().firstName;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // fallback in case the resource value is `undefined` or if the resource is in error state</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  return</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> undefined</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
-  </div><p><a href="/api/core/resource"><code>resource</code></a>函数接受一个<a href="/api/core/ResourceOptions"><code>ResourceOptions</code></a>对象，该对象具有两个主要属性：<code>params</code>和<code>loader</code>。</p>
-<p><code>params</code>属性定义了一个生成参数值的响应式计算。每当此计算中读取的信号发生更改时，资源就会生成一个新的参数值，这与<a href="/api/core/computed"><code>computed</code></a>类似。</p>
-<p><code>loader</code>属性定义了一个<a href="/api/core/ResourceLoader"><code>ResourceLoader</code></a>——一个检索某些状态的异步函数。每当<code>params</code>计算生成新值时，资源都会调用加载器，并将该值传递给加载器。有关更多详细信息，请参见下面的<a href="#resource-loaders">资源加载器</a>。</p>
-<p><a href="/api/core/Resource"><code>Resource</code></a>有一个<code>value</code>信号，其中包含加载器的结果。</p>
+  </div><p><a href="/api/core/resource"><code>resource</code></a>函式接受一個<a href="/api/core/ResourceOptions"><code>ResourceOptions</code></a>物件，該物件具有兩個主要屬性：<code>params</code>和<code>loader</code>。</p>
+<p><code>params</code>屬性定義了一個生成引數值的回應式計算。每當此計算中讀取的訊號發生更改時，資源就會生成一個新的引數值，這與<a href="/api/core/computed"><code>computed</code></a>類似。</p>
+<p><code>loader</code>屬性定義了一個<a href="/api/core/ResourceLoader"><code>ResourceLoader</code></a>——一個檢索某些狀態的非同步函式。每當<code>params</code>計算生成新值時，資源都會呼叫載入器，並將該值傳遞給載入器。有關更多詳細訊息，請參見下面的<a href="#resource-loaders">資源載入器</a>。</p>
+<p><a href="/api/core/Resource"><code>Resource</code></a>有一個<code>value</code>訊號，其中包含載入器的結果。</p>
 
   <h2 id="resource-loaders">
-    <a href="#resource-loaders" class="docs-anchor" tabindex="-1" aria-label="Link to Resource loaders">资源加载器</a>
+    <a href="#resource-loaders" class="docs-anchor" tabindex="-1" aria-label="Link to Resource loaders">資源載入器</a>
   </h2>
-  <p>创建资源时，您需要指定一个<a href="/api/core/ResourceLoader"><code>ResourceLoader</code></a>。此加载器是一个异步函数，它接受单个参数——一个<a href="/api/core/ResourceLoaderParams"><code>ResourceLoaderParams</code></a>对象——并返回一个值。</p>
-<p><a href="/api/core/ResourceLoaderParams"><code>ResourceLoaderParams</code></a>对象包含三个属性：<code>params</code>、<code>previous</code>和<code>abortSignal</code>。</p>
+  <p>建立資源時，您需要指定一個<a href="/api/core/ResourceLoader"><code>ResourceLoader</code></a>。此載入器是一個非同步函式，它接受單個引數——一個<a href="/api/core/ResourceLoaderParams"><code>ResourceLoaderParams</code></a>物件——並回傳一個值。</p>
+<p><a href="/api/core/ResourceLoaderParams"><code>ResourceLoaderParams</code></a>物件包含三個屬性：<code>params</code>、<code>previous</code>和<code>abortSignal</code>。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th>属性</th>
+<th>屬性</th>
 <th>描述</th>
 </tr>
 
@@ -45,50 +45,50 @@
       <tbody>
         <tr>
 <td><code>params</code></td>
-<td>资源<code>params</code>计算的值。</td>
+<td>資源<code>params</code>計算的值。</td>
 </tr>
 <tr>
 <td><code>previous</code></td>
-<td>一个具有<code>status</code>属性的对象，包含之前的<a href="/api/core/ResourceStatus"><code>ResourceStatus</code></a>。</td>
+<td>一個具有<code>status</code>屬性的物件，包含之前的<a href="/api/core/ResourceStatus"><code>ResourceStatus</code></a>。</td>
 </tr>
 <tr>
 <td><code>abortSignal</code></td>
-<td>一个 <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal" target="_blank"><code>AbortSignal</code></a>。有关详细信息，请参见下文的<a href="#aborting-requests">中止请求</a>。</td>
+<td>一個 <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal" target="_blank"><code>AbortSignal</code></a>。有關詳細訊息，請參見下文的<a href="#aborting-requests">中止請求</a>。</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p>如果<code>params</code>计算返回<code>undefined</code>，则加载器函数不会运行，资源状态将变为<code>'idle'</code>。</p>
+  <p>如果<code>params</code>計算回傳<code>undefined</code>，則載入器函式不會執行，資源狀態將變為<code>'idle'</code>。</p>
 
   <h3 id="aborting-requests">
-    <a href="#aborting-requests" class="docs-anchor" tabindex="-1" aria-label="Link to Aborting requests">中止请求</a>
+    <a href="#aborting-requests" class="docs-anchor" tabindex="-1" aria-label="Link to Aborting requests">中止請求</a>
   </h3>
-  <p>如果资源在加载过程中<code>params</code>计算发生更改，则资源会中止挂起的加载操作。</p>
-<p>您可以在<a href="/api/core/ResourceLoaderParams"><code>ResourceLoaderParams</code></a>中使用<code>abortSignal</code>来响应被中止的请求。例如，原生的<code>fetch</code>函数接受一个<code>AbortSignal</code>：</p>
+  <p>如果資源在載入過程中<code>params</code>計算發生更改，則資源會中止掛起的載入操作。</p>
+<p>您可以在<a href="/api/core/ResourceLoaderParams"><code>ResourceLoaderParams</code></a>中使用<code>abortSignal</code>來回應被中止的請求。例如，原生的<code>fetch</code>函式接受一個<code>AbortSignal</code>：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> userId</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/Signal">Signal</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> getUserId</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> userResource</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/resource">resource</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  params</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> ({id: </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">userId</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()}),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  loader</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: ({</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">params</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">abortSignal</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Promise</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">User</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // fetch cancels any outstanding HTTP requests when the given `AbortSignal`</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // indicates that the request has been aborted.</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> fetch</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`users/${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">params</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">id</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {<a href="/api/core/signal">signal</a>: abortSignal});</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
-  </div><p>有关使用 <code>AbortSignal</code> 取消请求的更多详细信息，请参见 MDN 上的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal" target="_blank"><code>AbortSignal</code></a>。</p>
+  </div><p>有關使用 <code>AbortSignal</code> 取消請求的更多詳細訊息，請參見 MDN 上的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal" target="_blank"><code>AbortSignal</code></a>。</p>
 
   <h3 id="reloading">
-    <a href="#reloading" class="docs-anchor" tabindex="-1" aria-label="Link to Reloading">重新加载</a>
+    <a href="#reloading" class="docs-anchor" tabindex="-1" aria-label="Link to Reloading">重新載入</a>
   </h3>
-  <p>你可以通过调用 <code>reload</code> 方法以编程方式触发资源的 <code>loader</code>。</p>
+  <p>你可以透過呼叫 <code>reload</code> 方法以程式設計方式觸發資源的 <code>loader</code>。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> userId</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/Signal">Signal</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> getUserId</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> userResource</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/resource">resource</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  params</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> ({id: </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">userId</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()}),</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  loader</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: ({</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">params</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> fetchUser</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(params),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// ...</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">userResource.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">reload</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span></code></pre>
   </div>
   <h2 id="resource-status">
-    <a href="#resource-status" class="docs-anchor" tabindex="-1" aria-label="Link to Resource status">资源状态</a>
+    <a href="#resource-status" class="docs-anchor" tabindex="-1" aria-label="Link to Resource status">資源狀態</a>
   </h2>
-  <p>资源对象具有多个 Signal 属性，用于读取异步加载器的状态。</p>
+  <p>資源物件具有多個 Signal 屬性，用於讀取非同步載入器的狀態。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th>属性</th>
+<th>屬性</th>
 <th>描述</th>
 </tr>
 
@@ -96,35 +96,35 @@
       <tbody>
         <tr>
 <td><code>value</code></td>
-<td>资源的最新值；如果未收到任何值，则为 <code>undefined</code>。</td>
+<td>資源的最新值；如果未收到任何值，則為 <code>undefined</code>。</td>
 </tr>
 <tr>
 <td><code>hasValue</code></td>
-<td>资源是否具有值。</td>
+<td>資源是否具有值。</td>
 </tr>
 <tr>
 <td><code>error</code></td>
-<td>在运行资源加载器时遇到的最新错误；如果未发生错误，则为 <code>undefined</code>。</td>
+<td>在執行資源載入器時遇到的最新錯誤；如果未發生錯誤，則為 <code>undefined</code>。</td>
 </tr>
 <tr>
 <td><code>isLoading</code></td>
-<td>资源加载器当前是否正在运行。</td>
+<td>資源載入器當前是否正在執行。</td>
 </tr>
 <tr>
 <td><code>status</code></td>
-<td>资源的特定<a href="/api/core/ResourceStatus"><code>ResourceStatus</code></a>，如下所述。</td>
+<td>資源的特定<a href="/api/core/ResourceStatus"><code>ResourceStatus</code></a>，如下所述。</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p><code>status</code>信号提供了一个特定的<a href="/api/core/ResourceStatus"><code>ResourceStatus</code></a>，它使用字符串常量来描述资源的状态。</p>
+  <p><code>status</code>訊號提供了一個特定的<a href="/api/core/ResourceStatus"><code>ResourceStatus</code></a>，它使用字串常數來描述資源的狀態。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th>状态</th>
+<th>狀態</th>
 <th align="left"><code>value()</code></th>
 <th>描述</th>
 </tr>
@@ -134,40 +134,40 @@
         <tr>
 <td><code>'idle'</code></td>
 <td align="left"><code>undefined</code></td>
-<td>资源没有有效的请求，并且加载器尚未运行。</td>
+<td>資源沒有有效的請求，並且載入器尚未執行。</td>
 </tr>
 <tr>
 <td><code>'error'</code></td>
 <td align="left"><code>undefined</code></td>
-<td>加载器遇到错误。</td>
+<td>載入器遇到錯誤。</td>
 </tr>
 <tr>
 <td><code>'loading'</code></td>
 <td align="left"><code>undefined</code></td>
-<td>由于 <code>params</code> 值发生更改，加载器正在运行。</td>
+<td>由於 <code>params</code> 值發生更改，載入器正在執行。</td>
 </tr>
 <tr>
 <td><code>'reloading'</code></td>
 <td align="left">先前的值</td>
-<td>加载器正在运行，原因是调用了资源的 <code>reload</code> 方法。</td>
+<td>載入器正在執行，原因是呼叫了資源的 <code>reload</code> 方法。</td>
 </tr>
 <tr>
 <td><code>'resolved'</code></td>
 <td align="left">已求解的值</td>
-<td>加载器已完成。</td>
+<td>載入器已完成。</td>
 </tr>
 <tr>
 <td><code>'local'</code></td>
-<td align="left">本地设置的值</td>
-<td>资源的值已通过 <code>.set()</code> 或 <code>.update()</code> 在本地设置</td>
+<td align="left">本地設定的值</td>
+<td>資源的值已透過 <code>.set()</code> 或 <code>.update()</code> 在本地設定</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p>你可以使用此状态信息有条件地显示用户界面元素，例如加载指示器和错误消息。</p>
+  <p>你可以使用此狀態訊息有條件地顯示使用者介面元素，例如載入指示器和錯誤訊息。</p>
 
   <h2 id="reactive-data-fetching-with-httpresource">
-    <a href="#reactive-data-fetching-with-httpresource" class="docs-anchor" tabindex="-1" aria-label="Link to Reactive data fetching with <code>httpResource</code>">使用 <code>httpResource</code> 进行响应式数据获取</a>
+    <a href="#reactive-data-fetching-with-httpresource" class="docs-anchor" tabindex="-1" aria-label="Link to Reactive data fetching with <code>httpResource</code>">使用 <code>httpResource</code> 進行回應式資料獲取</a>
   </h2>
-  <p><code>httpResource</code> 是 <code>HttpClient</code> 的封装器，可将请求状态和响应作为信号提供给您。它通过 Angular HTTP 堆栈（包括拦截器）发出 HTTP 请求。</p>
+  <p><code>httpResource</code> 是 <code>HttpClient</code> 的封裝器，可將請求狀態和回應作為訊號提供給您。它透過 Angular HTTP 堆疊（包括攔截器）發出 HTTP 請求。</p>

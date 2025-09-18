@@ -4,201 +4,201 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">路由过渡动画</h1>
+    <h1 tabindex="-1">路由轉場動畫</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/routing/route-transition-animations.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>路由过渡动画通过在 Angular 应用中导航不同视图时提供流畅的视觉过渡来增强用户体验。 <a href="/guide/routing/overview">Angular Router</a> 内置支持浏览器的视图过渡 API，可在支持的浏览器中实现路由更改之间的无缝动画。</p>
+    <p>路由轉場動畫透過在 Angular 應用中導向不同檢視時提供流暢的視覺轉場來增強使用者體驗。 <a href="/guide/routing/overview">Angular Router</a> 內建支援瀏覽器的檢視轉場 API，可在支援的瀏覽器中實現路由更改之間的無縫動畫。</p>
 
     <div class="docs-alert docs-alert-helpful">
-    <p><strong>有帮助：</strong> Router 的原生视图过渡集成目前处于 <a href="/reference/releases#developer-preview">开发者预览版</a>。原生视图过渡是一项相对较新的浏览器功能，在所有浏览器中的支持有限。</p>
+    <p><strong>有幫助：</strong> Router 的原生檢視轉場整合目前處於 <a href="/reference/releases#developer-preview">開發者預覽版</a>。原生檢視轉場是一項相對較新的瀏覽器功能，在所有瀏覽器中的支援有限。</p>
 
     </div>
     
   <h2 id="how-view-transitions-work">
-    <a href="#how-view-transitions-work" class="docs-anchor" tabindex="-1" aria-label="Link to How View Transitions work">视图过渡的工作原理</a>
+    <a href="#how-view-transitions-work" class="docs-anchor" tabindex="-1" aria-label="Link to How View Transitions work">檢視轉場的工作原理</a>
   </h2>
-  <p>视图过渡使用浏览器原生的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition" target="_blank"><code>document.startViewTransition</code> API</a> 在应用程序的不同状态之间创建流畅的动画。该 API 的工作方式是：</p>
+  <p>檢視轉場使用瀏覽器原生的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition" target="_blank"><code>document.startViewTransition</code> API</a> 在應用程式的不同狀態之間建立流暢的動畫。該 API 的工作方式是：</p>
 
     <ol class="docs-ordered-list">
-      <li><strong>捕获当前状态</strong> - 浏览器截取当前页面的屏幕截图</li>
-<li><strong>执行 DOM 更新</strong> - 您的回调函数运行以更新 DOM</li>
-<li><strong>捕获新状态</strong> - 浏览器捕获更新后的页面状态</li>
-<li><strong>播放过渡</strong> - 浏览器在旧状态和新状态之间进行动画处理</li>
+      <li><strong>捕獲當前狀態</strong> - 瀏覽器擷取當前頁面的螢幕截圖</li>
+<li><strong>執行 DOM 更新</strong> - 您的回呼函式執行以更新 DOM</li>
+<li><strong>捕獲新狀態</strong> - 瀏覽器捕獲更新後的頁面狀態</li>
+<li><strong>播放轉場</strong> - 瀏覽器在舊狀態和新狀態之間進行動畫處理</li>
 
     </ol>
-    <p>这是 <code>startViewTransition</code> API 的基本结构：</p>
+    <p>這是 <code>startViewTransition</code> API 的基本結構：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">document.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">startViewTransition</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">async</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  await</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> updateTheDOMSomehow</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
-  </div><p>有关浏览器 API 的更多详细信息，请参阅 <a href="https://developer.chrome.com/docs/web-platform/view-transitions" target="_blank">Chrome Explainer</a>。</p>
+  </div><p>有關瀏覽器 API 的更多詳細訊息，請參閱 <a href="https://developer.chrome.com/docs/web-platform/view-transitions" target="_blank">Chrome Explainer</a>。</p>
 
   <h2 id="how-the-router-uses-view-transitions">
-    <a href="#how-the-router-uses-view-transitions" class="docs-anchor" tabindex="-1" aria-label="Link to How the Router uses view transitions">Router 如何使用视图过渡</a>
+    <a href="#how-the-router-uses-view-transitions" class="docs-anchor" tabindex="-1" aria-label="Link to How the Router uses view transitions">Router 如何使用檢視轉場</a>
   </h2>
-  <p>Angular Router 将视图过渡集成到导航生命周期中，以创建无缝的路由更改。在导航期间，Router：</p>
+  <p>Angular Router 將檢視轉場整合到導向生命週期中，以建立無縫的路由更改。在導向期間，Router：</p>
 
     <ol class="docs-ordered-list">
-      <li><strong>完成导航准备</strong> - 路由匹配、<a href="/guide/routing/define-routes#lazily-loaded-components">惰性加载</a>、<a href="/guide/routing/route-guards">守卫</a>和<a href="/guide/routing/data-resolvers">解析器</a>执行</li>
-<li><strong>启动视图过渡</strong> - 当路由准备好激活时，Router 调用 <code>startViewTransition</code></li>
-<li><strong>更新 DOM</strong> - Router 在过渡回调中激活新路由并停用旧路由</li>
-<li><strong>完成过渡</strong> - 当 Angular 完成渲染时，过渡 Promise 求解</li>
+      <li><strong>完成導向準備</strong> - 路由對應、<a href="/guide/routing/define-routes#lazily-loaded-components">延遲載入</a>、<a href="/guide/routing/route-guards">守衛</a>和<a href="/guide/routing/data-resolvers">解析器</a>執行</li>
+<li><strong>啟動檢視轉場</strong> - 當路由準備好啟用時，Router 呼叫 <code>startViewTransition</code></li>
+<li><strong>更新 DOM</strong> - Router 在轉場回呼中啟用新路由並停用舊路由</li>
+<li><strong>完成轉場</strong> - 當 Angular 完成渲染時，轉場 Promise 求解</li>
 
     </ol>
-    <p>Router 的视图过渡集成充当<a href="https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement" target="_blank">渐进式增强</a>。当浏览器不支持视图过渡 API 时，Router 会执行正常的 DOM 更新而无需动画，确保您的应用程序在所有浏览器中都能正常运行。</p>
+    <p>Router 的檢視轉場整合充當<a href="https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement" target="_blank">漸進式增強</a>。當瀏覽器不支援檢視轉場 API 時，Router 會執行正常的 DOM 更新而無需動畫，確保您的應用程式在所有瀏覽器中都能正常執行。</p>
 
   <h2 id="enabling-view-transitions-in-the-router">
-    <a href="#enabling-view-transitions-in-the-router" class="docs-anchor" tabindex="-1" aria-label="Link to Enabling View Transitions in the Router">在 Router 中启用视图过渡</a>
+    <a href="#enabling-view-transitions-in-the-router" class="docs-anchor" tabindex="-1" aria-label="Link to Enabling View Transitions in the Router">在 Router 中啟用檢視轉場</a>
   </h2>
-  <p>通过将 <a href="/api/router/withViewTransitions"><code>withViewTransitions</code></a> 特性添加到您的 <a href="/guide/routing/define-routes#adding-the-router-to-your-application">路由配置</a> 中来启用视图过渡。Angular 支持独立引导和 NgModule 引导方法：</p>
+  <p>透過將 <a href="/api/router/withViewTransitions"><code>withViewTransitions</code></a> 屬性新增到您的 <a href="/guide/routing/define-routes#adding-the-router-to-your-application">路由設定</a> 中來啟用檢視轉場。Angular 支援獨立引導和 NgModule 引導方法：</p>
 
   <h3 id="standalone-bootstrap">
-    <a href="#standalone-bootstrap" class="docs-anchor" tabindex="-1" aria-label="Link to Standalone bootstrap">独立引导</a>
+    <a href="#standalone-bootstrap" class="docs-anchor" tabindex="-1" aria-label="Link to Standalone bootstrap">獨立引導</a>
   </h3>
   <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/platform-browser/bootstrapApplication">bootstrapApplication</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/platform-browser'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/provideRouter">provideRouter</a>, withViewTransitions } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { routes } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './app.routes'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/platform-browser/bootstrapApplication">bootstrapApplication</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(MyApp, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  providers: [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    <a href="/api/router/provideRouter">provideRouter</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(routes, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/router/withViewTransitions">withViewTransitions</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  ]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
   </div>
   <h3 id="ngmodule-bootstrap">
-    <a href="#ngmodule-bootstrap" class="docs-anchor" tabindex="-1" aria-label="Link to NgModule bootstrap">NgModule 引导</a>
+    <a href="#ngmodule-bootstrap" class="docs-anchor" tabindex="-1" aria-label="Link to NgModule bootstrap">NgModule 引導</a>
   </h3>
   <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/core/NgModule">NgModule</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/RouterModule">RouterModule</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/core/NgModule">NgModule</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  imports: [RouterModule.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">forRoot</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(routes, {enableViewTransitions: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> AppRouting</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {}</span></span></code></pre>
-  </div><p><a href="https://stackblitz.com/edit/stackblitz-starters-2dnvtm?file=src%2Fmain.ts" target="_blank">在 StackBlitz 上尝试“计数器”示例</a></p>
-<p>此示例演示了路由导航如何替换计数器更新的直接 <code>startViewTransition</code> 调用。</p>
+  </div><p><a href="https://stackblitz.com/edit/stackblitz-starters-2dnvtm?file=src%2Fmain.ts" target="_blank">在 StackBlitz 上嘗試『計數器』範例</a></p>
+<p>此範例示範了路由導向如何替換計數器更新的直接 <code>startViewTransition</code> 呼叫。</p>
 
   <h2 id="customizing-transitions-with-css">
-    <a href="#customizing-transitions-with-css" class="docs-anchor" tabindex="-1" aria-label="Link to Customizing transitions with CSS">使用 CSS 自定义过渡</a>
+    <a href="#customizing-transitions-with-css" class="docs-anchor" tabindex="-1" aria-label="Link to Customizing transitions with CSS">使用 CSS 自定義轉場</a>
   </h2>
-  <p>您可以使用 CSS 自定义视图过渡以创建独特的动画效果。浏览器会创建单独的过渡元素，您可以使用 CSS 选择器来定位它们。</p>
-<p>要创建自定义过渡：</p>
+  <p>您可以使用 CSS 自定義檢視轉場以建立獨特的動畫效果。瀏覽器會建立單獨的轉場元素，您可以使用 CSS 選擇器來定位它們。</p>
+<p>要建立自定義轉場：</p>
 
     <ol class="docs-ordered-list">
-      <li><strong>添加 view-transition-name</strong> - 为要设置动画的元素分配唯一名称</li>
-<li><strong>定义全局动画</strong> - 在全局样式中创建 CSS 动画</li>
-<li><strong>定位过渡伪元素</strong> - 使用 <code>::view-transition-old()</code> 和 <code>::view-transition-new()</code> 选择器</li>
+      <li><strong>新增 view-transition-name</strong> - 為要設定動畫的元素分配唯一名稱</li>
+<li><strong>定義全域動畫</strong> - 在全域樣式中建立 CSS 動畫</li>
+<li><strong>定位轉場偽元素</strong> - 使用 <code>::view-transition-old()</code> 和 <code>::view-transition-new()</code> 選擇器</li>
 
     </ol>
-    <p>这是一个为计数器元素添加旋转效果的示例：</p>
+    <p>這是一個為計數器元素新增旋轉效果的範例：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">/* Define keyframe animations */</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">@<a href="/api/animations/keyframes">keyframes</a></span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> rotate-out</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  to</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    transform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">rotate</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#24292E;--shiki-dark:#79B8FF">90</span><span style="--shiki-light:#24292E;--shiki-dark:#F97583">deg</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#F97583">@<a href="/api/animations/keyframes">keyframes</a></span><span style="--shiki-light:#24292E;--shiki-dark:#FFAB70"> rotate-in</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#B392F0">  from</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#79B8FF">    transform</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">rotate</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">-90</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">deg</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">/* Target view transition pseudo-elements */</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">::view-transition-old(count),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">::view-transition-new(count) {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  <a href="/api/animations/animation">animation</a>-duration</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">200</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">ms</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  <a href="/api/animations/animation">animation</a>-name</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: -ua-view-transition-fade-in, rotate-in;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">::view-transition-old(count) {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  <a href="/api/animations/animation">animation</a>-name</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: -ua-view-transition-fade-out, rotate-out;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
   </div>
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要提示：</strong> 在全局样式文件中定义视图过渡动画，而不是在组件样式中。Angular 的<a href="/guide/components/styling#view-encapsulation">视图封装</a>会限制组件样式的范围，这会阻止它们正确地定位过渡伪元素。</p>
+    <p><strong>重要提示：</strong> 在全域樣式檔案中定義檢視轉場動畫，而不是在元件樣式中。Angular 的<a href="/guide/components/styling#view-encapsulation">檢視封裝</a>會限制元件樣式的範圍，這會阻止它們正確地定位轉場偽元素。</p>
 
     </div>
-    <p><a href="https://stackblitz.com/edit/stackblitz-starters-fwn4i7?file=src%2Fmain.ts" target="_blank">在 StackBlitz 上尝试更新后的“计数器”示例</a></p>
+    <p><a href="https://stackblitz.com/edit/stackblitz-starters-fwn4i7?file=src%2Fmain.ts" target="_blank">在 StackBlitz 上嘗試更新後的『計數器』範例</a></p>
 
   <h2 id="advanced-transition-control-with-onviewtransitioncreated">
-    <a href="#advanced-transition-control-with-onviewtransitioncreated" class="docs-anchor" tabindex="-1" aria-label="Link to Advanced transition control with onViewTransitionCreated">使用 onViewTransitionCreated 进行高级过渡控制</a>
+    <a href="#advanced-transition-control-with-onviewtransitioncreated" class="docs-anchor" tabindex="-1" aria-label="Link to Advanced transition control with onViewTransitionCreated">使用 onViewTransitionCreated 進行高階轉場控制</a>
   </h2>
-  <p><code>withViewTransitions</code> 特性接受一个选项对象，其中包含一个 <code>onViewTransitionCreated</code> 回调，用于对视图过渡进行高级控制。此回调：</p>
+  <p><code>withViewTransitions</code> 屬性接受一個選項物件，其中包含一個 <code>onViewTransitionCreated</code> 回呼，用於對視圖轉場進行高階控制。此回呼：</p>
 
   <ul class="docs-list">
-    <li>在<a href="/guide/di/dependency-injection-context#run-within-an-injection-context">注入上下文</a>中运行</li>
-<li>接收一个包含以下内容的 <a href="/api/router/ViewTransitionInfo"></a><a href="/api/router/ViewTransitionInfo"><code>ViewTransitionInfo</code></a> 对象：<ul class="docs-list">
-    <li>来自 <code>startViewTransition</code> 的 <code>ViewTransition</code> 实例</li>
-<li>正在从中导航的路由的 <a href="/api/router/ActivatedRouteSnapshot"></a><a href="/api/router/ActivatedRouteSnapshot"><code>ActivatedRouteSnapshot</code></a></li>
-<li>正在导航到的路由的 <a href="/api/router/ActivatedRouteSnapshot"></a><a href="/api/router/ActivatedRouteSnapshot"><code>ActivatedRouteSnapshot</code></a></li>
+    <li>在<a href="/guide/di/dependency-injection-context#run-within-an-injection-context">注入上下文</a>中執行</li>
+<li>接收一個包含以下內容的 <a href="/api/router/ViewTransitionInfo"></a><a href="/api/router/ViewTransitionInfo"><code>ViewTransitionInfo</code></a> 物件：<ul class="docs-list">
+    <li>來自 <code>startViewTransition</code> 的 <code>ViewTransition</code> 實例</li>
+<li>正在從中導向的路由的 <a href="/api/router/ActivatedRouteSnapshot"></a><a href="/api/router/ActivatedRouteSnapshot"><code>ActivatedRouteSnapshot</code></a></li>
+<li>正在導向到的路由的 <a href="/api/router/ActivatedRouteSnapshot"></a><a href="/api/router/ActivatedRouteSnapshot"><code>ActivatedRouteSnapshot</code></a></li>
 
   </ul>
   </li>
 
   </ul>
-  <p>使用此回调根据导航上下文自定义过渡行为。例如，您可以跳过特定导航类型的过渡：</p>
+  <p>使用此回呼根據導向上下文自定義轉場行為。例如，您可以跳過特定導向型別的轉場：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { inject } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Router">Router</a>, withViewTransitions } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/router/withViewTransitions">withViewTransitions</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  onViewTransitionCreated</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: ({</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"><a href="/api/animations/transition">transition</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> router</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(<a href="/api/router/Router">Router</a>);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> targetUrl</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> router.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">getCurrentNavigation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">!</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.finalUrl</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">!</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // Skip transition if only fragment or query params change</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> config</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      paths: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'exact'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      matrixParams: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'exact'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      fragment: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'ignored'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      queryParams: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'ignored'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    };</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (router.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">isActive</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(targetUrl, config)) {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      <a href="/api/animations/transition">transition</a>.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">skipTransition</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span></code></pre>
-  </div><p>当导航仅更改<a href="/guide/routing/read-route-state#query-parameters">URL 片段或查询参数</a>（例如同一页面内的锚点链接）时，此示例将跳过视图过渡。<code>skipTransition()</code> 方法可防止动画，同时仍允许导航完成。</p>
+  </div><p>當導向僅更改<a href="/guide/routing/read-route-state#query-parameters">URL 片段或查詢引數</a>（例如同一頁面內的錨點連結）時，此範例將跳過檢視轉場。<code>skipTransition()</code> 方法可防止動畫，同時仍允許導向完成。</p>
 
   <h2 id="examples-from-the-chrome-explainer-adapted-to-angular">
-    <a href="#examples-from-the-chrome-explainer-adapted-to-angular" class="docs-anchor" tabindex="-1" aria-label="Link to Examples from the Chrome explainer adapted to Angular">Chrome 说明中改编到 Angular 的示例</a>
+    <a href="#examples-from-the-chrome-explainer-adapted-to-angular" class="docs-anchor" tabindex="-1" aria-label="Link to Examples from the Chrome explainer adapted to Angular">Chrome 說明中改編到 Angular 的範例</a>
   </h2>
-  <p>以下示例演示了从 Chrome 团队文档改编而来的各种视图过渡技术，以供 Angular Router 使用：</p>
+  <p>以下範例示範了從 Chrome 團隊文件改編而來的各種檢視轉場技術，以供 Angular Router 使用：</p>
 
   <h3 id="transitioning-elements-dont-need-to-be-the-same-dom-element">
-    <a href="#transitioning-elements-dont-need-to-be-the-same-dom-element" class="docs-anchor" tabindex="-1" aria-label="Link to Transitioning elements don't need to be the same DOM element">过渡元素不必是相同的 DOM 元素</a>
+    <a href="#transitioning-elements-dont-need-to-be-the-same-dom-element" class="docs-anchor" tabindex="-1" aria-label="Link to Transitioning elements don't need to be the same DOM element">轉場元素不必是相同的 DOM 元素</a>
   </h3>
-  <p>只要元素共享相同的 <code>view-transition-name</code>，它们就可以在不同的 DOM 元素之间平滑过渡。</p>
+  <p>只要元素共享相同的 <code>view-transition-name</code>，它們就可以在不同的 DOM 元素之間平滑轉場。</p>
 
   <ul class="docs-list">
-    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#transitioning_elements_dont_need_to_be_the_same_dom_element" target="_blank">Chrome 说明</a></li>
-<li><a href="https://stackblitz.com/edit/stackblitz-starters-dh8npr?file=src%2Fmain.ts" target="_blank">StackBlitz 上的 Angular 示例</a></li>
+    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#transitioning_elements_dont_need_to_be_the_same_dom_element" target="_blank">Chrome 說明</a></li>
+<li><a href="https://stackblitz.com/edit/stackblitz-starters-dh8npr?file=src%2Fmain.ts" target="_blank">StackBlitz 上的 Angular 範例</a></li>
 
   </ul>
   
   <h3 id="custom-entry-and-exit-animations">
-    <a href="#custom-entry-and-exit-animations" class="docs-anchor" tabindex="-1" aria-label="Link to Custom entry and exit animations">自定义进入和退出动画</a>
+    <a href="#custom-entry-and-exit-animations" class="docs-anchor" tabindex="-1" aria-label="Link to Custom entry and exit animations">自定義進入和退出動畫</a>
   </h3>
-  <p>为在路由过渡期间进入和离开视口的元素创建独特的动画。</p>
+  <p>為在路由轉場期間進入和離開視口的元素建立獨特的動畫。</p>
 
   <ul class="docs-list">
-    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#custom_entry_and_exit_transitions" target="_blank">Chrome 说明</a></li>
-<li><a href="https://stackblitz.com/edit/stackblitz-starters-8kly3o" target="_blank">StackBlitz 上的 Angular 示例</a></li>
+    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#custom_entry_and_exit_transitions" target="_blank">Chrome 說明</a></li>
+<li><a href="https://stackblitz.com/edit/stackblitz-starters-8kly3o" target="_blank">StackBlitz 上的 Angular 範例</a></li>
 
   </ul>
   
   <h3 id="async-dom-updates-and-waiting-for-content">
-    <a href="#async-dom-updates-and-waiting-for-content" class="docs-anchor" tabindex="-1" aria-label="Link to Async DOM updates and waiting for content">异步 DOM 更新和等待内容</a>
+    <a href="#async-dom-updates-and-waiting-for-content" class="docs-anchor" tabindex="-1" aria-label="Link to Async DOM updates and waiting for content">非同步 DOM 更新和等待內容</a>
   </h3>
-  <p>Angular Router 优先考虑即时过渡，而不是等待加载其他内容。</p>
+  <p>Angular Router 優先考慮即時轉場，而不是等待載入其他內容。</p>
 
   <ul class="docs-list">
-    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#async_dom_updates_and_waiting_for_content" target="_blank">Chrome 说明</a></li>
+    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#async_dom_updates_and_waiting_for_content" target="_blank">Chrome 說明</a></li>
 
   </ul>
   
     <div class="docs-alert docs-alert-note">
-    <p><strong>注意：</strong> Angular Router 不提供延迟视图过渡的方法。此设计选择可防止页面在等待额外内容时变得不可交互。正如 Chrome 文档所述：“在此期间，页面是冻结的，因此这里的延迟应保持在最低限度……在某些情况下，最好完全避免延迟，而是使用已有的内容。”</p>
+    <p><strong>注意：</strong> Angular Router 不提供延遲檢視轉場的方法。此設計選擇可防止頁面在等待額外內容時變得不可互動。正如 Chrome 文件所述：『在此期間，頁面是凍結的，因此這裡的延遲應保持在最低限度……在某些情況下，最好完全避免延遲，而是使用已有的內容。』</p>
 
     </div>
     
   <h3 id="handle-multiple-view-transition-styles-with-view-transition-types">
-    <a href="#handle-multiple-view-transition-styles-with-view-transition-types" class="docs-anchor" tabindex="-1" aria-label="Link to Handle multiple view transition styles with view transition types">使用视图过渡类型处理多种视图过渡样式</a>
+    <a href="#handle-multiple-view-transition-styles-with-view-transition-types" class="docs-anchor" tabindex="-1" aria-label="Link to Handle multiple view transition styles with view transition types">使用檢視轉場型別處理多種檢視轉場樣式</a>
   </h3>
-  <p>使用视图过渡类型根据导航上下文应用不同的动画样式。</p>
+  <p>使用檢視轉場型別根據導向上下文應用不同的動畫樣式。</p>
 
   <ul class="docs-list">
-    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#view-transition-types" target="_blank">Chrome 说明</a></li>
-<li><a href="https://stackblitz.com/edit/stackblitz-starters-vxzcam" target="_blank">StackBlitz 上的 Angular 示例</a></li>
+    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#view-transition-types" target="_blank">Chrome 說明</a></li>
+<li><a href="https://stackblitz.com/edit/stackblitz-starters-vxzcam" target="_blank">StackBlitz 上的 Angular 範例</a></li>
 
   </ul>
   
   <h3 id="handle-multiple-view-transition-styles-with-a-class-name-on-the-view-transition-root-deprecated">
-    <a href="#handle-multiple-view-transition-styles-with-a-class-name-on-the-view-transition-root-deprecated" class="docs-anchor" tabindex="-1" aria-label="Link to Handle multiple view transition styles with a class name on the view transition root (deprecated)">使用视图过渡根上的类名处理多种视图过渡样式（已弃用）</a>
+    <a href="#handle-multiple-view-transition-styles-with-a-class-name-on-the-view-transition-root-deprecated" class="docs-anchor" tabindex="-1" aria-label="Link to Handle multiple view transition styles with a class name on the view transition root (deprecated)">使用檢視轉場根上的類別名稱處理多種檢視轉場樣式（已棄用）</a>
   </h3>
-  <p>此方法使用过渡根元素上的 CSS 类来控制动画样式。</p>
+  <p>此方法使用轉場根元素上的 CSS 類來控制動畫樣式。</p>
 
   <ul class="docs-list">
-    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#changing-on-navigation-type" target="_blank">Chrome 说明</a></li>
-<li><a href="https://stackblitz.com/edit/stackblitz-starters-nmnzzg?file=src%2Fmain.ts" target="_blank">StackBlitz 上的 Angular 示例</a></li>
+    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#changing-on-navigation-type" target="_blank">Chrome 說明</a></li>
+<li><a href="https://stackblitz.com/edit/stackblitz-starters-nmnzzg?file=src%2Fmain.ts" target="_blank">StackBlitz 上的 Angular 範例</a></li>
 
   </ul>
   
   <h3 id="transitioning-without-freezing-other-animations">
-    <a href="#transitioning-without-freezing-other-animations" class="docs-anchor" tabindex="-1" aria-label="Link to Transitioning without freezing other animations">在不冻结其他动画的情况下进行过渡</a>
+    <a href="#transitioning-without-freezing-other-animations" class="docs-anchor" tabindex="-1" aria-label="Link to Transitioning without freezing other animations">在不凍結其他動畫的情況下進行轉場</a>
   </h3>
-  <p>在视图过渡期间保持其他页面动画，以创建更具动态性的用户体验。</p>
+  <p>在檢視轉場期間保持其他頁面動畫，以建立更具動態性的使用者體驗。</p>
 
   <ul class="docs-list">
-    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#transitioning-without-freezing" target="_blank">Chrome 说明</a></li>
-<li><a href="https://stackblitz.com/edit/stackblitz-starters-76kgww" target="_blank">StackBlitz 上的 Angular 示例</a></li>
+    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#transitioning-without-freezing" target="_blank">Chrome 說明</a></li>
+<li><a href="https://stackblitz.com/edit/stackblitz-starters-76kgww" target="_blank">StackBlitz 上的 Angular 範例</a></li>
 
   </ul>
   
   <h3 id="animating-with-javascript">
-    <a href="#animating-with-javascript" class="docs-anchor" tabindex="-1" aria-label="Link to Animating with JavaScript">使用 JavaScript 进行动画</a>
+    <a href="#animating-with-javascript" class="docs-anchor" tabindex="-1" aria-label="Link to Animating with JavaScript">使用 JavaScript 進行動畫</a>
   </h3>
-  <p>使用 JavaScript API 以编程方式控制视图过渡，以应对复杂的动画场景。</p>
+  <p>使用 JavaScript API 以程式設計方式控制檢視轉場，以應對複雜的動畫場景。</p>
 
   <ul class="docs-list">
-    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#animating-with-javascript" target="_blank">Chrome 说明</a></li>
-<li><a href="https://stackblitz.com/edit/stackblitz-starters-cklnkm" target="_blank">StackBlitz 上的 Angular 示例</a></li>
+    <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/same-document#animating-with-javascript" target="_blank">Chrome 說明</a></li>
+<li><a href="https://stackblitz.com/edit/stackblitz-starters-cklnkm" target="_blank">StackBlitz 上的 Angular 範例</a></li>
 
   </ul>
   

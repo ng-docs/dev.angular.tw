@@ -4,131 +4,131 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">发出 HTTP 请求</h1>
+    <h1 tabindex="-1">發出 HTTP 請求</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/http/making-requests.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p><code>HttpClient</code> 提供了对应不同 HTTP 动词的方法，用于发起请求以加载数据或在服务器上应用更改。每个方法都会返回一个 RxJS <code>Observable</code>，订阅该 Observable 后会发送请求，并在服务器响应时发出结果。</p>
+    <p><code>HttpClient</code> 提供了對應不同 HTTP 動詞的方法，用於發起請求以載入資料或在服務器上應用更改。每個方法都會回傳一個 RxJS <code>Observable</code>，訂閱該 Observable 後會傳送請求，並在伺服器回應時發出結果。</p>
 
     <div class="docs-alert docs-alert-note">
-    <p><strong>注意：</strong> 由 <code>HttpClient</code> 创建的 <code>Observable</code> 可以被订阅任意次数，并且每次订阅都会发起一个新的后端请求。</p>
+    <p><strong>注意：</strong> 由 <code>HttpClient</code> 建立的 <code>Observable</code> 可以被訂閱任意次數，並且每次訂閱都會發起一個新的後端請求。</p>
 
     </div>
-    <p>通过传递给请求方法的选项对象，可以调整请求的各种属性以及返回的响应类型。</p>
+    <p>透過傳遞給請求方法的選項物件，可以調整請求的各種屬性以及回傳的回應型別。</p>
 
   <h2 id="fetching-json-data">
-    <a href="#fetching-json-data" class="docs-anchor" tabindex="-1" aria-label="Link to Fetching JSON data">获取 JSON 数据</a>
+    <a href="#fetching-json-data" class="docs-anchor" tabindex="-1" aria-label="Link to Fetching JSON data">獲取 JSON 資料</a>
   </h2>
-  <p>从后端获取数据通常需要使用 <code>HttpClient.get()</code> 方法发起 GET 请求。此方法接受两个参数：要从中获取数据的字符串端点 URL，以及一个用于配置请求的<em>可选选项</em>对象。</p>
-<p>例如，使用 <code>HttpClient.get()</code> 方法从假设的 API 获取配置数据：</p>
+  <p>從後端獲取資料通常需要使用 <code>HttpClient.get()</code> 方法發起 GET 請求。此方法接受兩個引數：要從中獲取資料的字串端點 URL，以及一個用於設定請求的<em>可選選項</em>物件。</p>
+<p>例如，使用 <code>HttpClient.get()</code> 方法從假設的 API 獲取設定資料：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Config</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/config'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">config</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // process the configuration.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
-  </div><p>请注意泛型类型参数，它指定服务器返回的数据将为 <code>Config</code> 类型。此参数是可选的，如果省略它，则返回的数据将具有 <code>Object</code> 类型。</p>
+  </div><p>請注意泛型型別引數，它指定伺服器回傳的資料將為 <code>Config</code> 型別。此引數是可選的，如果省略它，則回傳的資料將具有 <code>Object</code> 型別。</p>
 
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong> 当处理结构不确定的数据以及潜在的 <code>undefined</code> 或 <code>null</code> 值时，请考虑使用 <code>unknown</code> 类型而不是 <code>Object</code> 作为响应类型。</p>
+    <p><strong>提示：</strong> 當處理結構不確定的資料以及潛在的 <code>undefined</code> 或 <code>null</code> 值時，請考慮使用 <code>unknown</code> 型別而不是 <code>Object</code> 作為回應型別。</p>
 
     </div>
     
     <div class="docs-alert docs-alert-critical">
-    <p><strong>重要：</strong>请求方法的泛型类型是对服务器返回数据的类型<strong>断言</strong>。<code>HttpClient</code> 不会验证实际返回数据是否与此类型匹配。</p>
+    <p><strong>重要：</strong>請求方法的泛型型別是對伺服器回傳資料的型別<strong>斷言</strong>。<code>HttpClient</code> 不會驗證實際回傳資料是否與此類型對應。</p>
 
     </div>
     
   <h2 id="fetching-other-types-of-data">
-    <a href="#fetching-other-types-of-data" class="docs-anchor" tabindex="-1" aria-label="Link to Fetching other types of data">获取其他类型的数据</a>
+    <a href="#fetching-other-types-of-data" class="docs-anchor" tabindex="-1" aria-label="Link to Fetching other types of data">獲取其他型別的資料</a>
   </h2>
-  <p>默认情况下，<code>HttpClient</code> 假定服务器返回 JSON 数据。在与非 JSON API 交互时，您可以告知 <code>HttpClient</code> 在发起请求时期望和返回的响应类型。这可以通过 <code>responseType</code> 选项来完成。</p>
+  <p>預設情況下，<code>HttpClient</code> 假定伺服器回傳 JSON 資料。在與非 JSON API 互動時，您可以告知 <code>HttpClient</code> 在發起請求時期望和回傳的回應型別。這可以透過 <code>responseType</code> 選項來完成。</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
 <th><strong><code>responseType</code> 值</strong></th>
-<th><strong>返回的响应类型</strong></th>
+<th><strong>回傳的回應型別</strong></th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
-<td><code>'json'</code> (默认值)</td>
-<td>给定泛型类型的 JSON 数据</td>
+<td><code>'json'</code> (預設值)</td>
+<td>給定泛型型別的 JSON 資料</td>
 </tr>
 <tr>
 <td><code>'text'</code></td>
-<td>字符串数据</td>
+<td>字串資料</td>
 </tr>
 <tr>
 <td><code>'arraybuffer'</code></td>
-<td><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer" target="_blank"><code>ArrayBuffer</code></a>，其中包含原始响应字节</td>
+<td><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer" target="_blank"><code>ArrayBuffer</code></a>，其中包含原始回應位元組</td>
 </tr>
 <tr>
 <td><code>'blob'</code></td>
-<td><a href="https://developer.mozilla.org/docs/Web/API/Blob" target="_blank"><code>Blob</code></a> 实例</td>
+<td><a href="https://developer.mozilla.org/docs/Web/API/Blob" target="_blank"><code>Blob</code></a> 實例</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p>例如，您可以要求 <code>HttpClient</code> 将 <code>.jpeg</code> 图像的原始字节下载到 <code>ArrayBuffer</code> 中：</p>
+  <p>例如，您可以要求 <code>HttpClient</code> 將 <code>.jpeg</code> 影象的原始位元組下載到 <code>ArrayBuffer</code> 中：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/images/dog.jpg'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {responseType: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'arraybuffer'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">buffer</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'The image is '</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> +</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> buffer.byteLength </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">+</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> ' bytes large'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
   </div>
     <div class="docs-callout docs-callout-important">
       <h3><code>responseType</code> 的字面量值</h3>
-      <p>由于 <code>responseType</code> 的值会影响 <code>HttpClient</code> 返回的类型，因此它必须是字面量类型，而不是 <code>string</code> 类型。</p>
-<p>如果传递给请求方法的选项对象是字面量对象，则会自动发生这种情况，但是如果您要将请求选项提取到变量或辅助函数中，则可能需要将其显式指定为字面量，例如 <code>responseType: 'text' as const</code>。</p>
+      <p>由於 <code>responseType</code> 的值會影響 <code>HttpClient</code> 回傳的型別，因此它必須是字面量型別，而不是 <code>string</code> 型別。</p>
+<p>如果傳遞給請求方法的選項物件是字面量物件，則會自動發生這種情況，但是如果您要將請求選項提取到變數或輔助函式中，則可能需要將其顯式指定為字面量，例如 <code>responseType: 'text' as const</code>。</p>
 
     </div>
     
   <h2 id="mutating-server-state">
-    <a href="#mutating-server-state" class="docs-anchor" tabindex="-1" aria-label="Link to Mutating server state">变更服务器状态</a>
+    <a href="#mutating-server-state" class="docs-anchor" tabindex="-1" aria-label="Link to Mutating server state">變更伺服器狀態</a>
   </h2>
-  <p>执行变更的服务器 API 通常需要发出 POST 请求，并在请求正文中指定新状态或要进行的更改。</p>
-<p><code>HttpClient.post()</code> 方法的行为与 <code>get()</code> 类似，并在其选项之前接受一个额外的 <code>body</code> 参数：</p>
+  <p>執行變更的伺服器 API 通常需要發出 POST 請求，並在請求正文中指定新狀態或要進行的更改。</p>
+<p><code>HttpClient.post()</code> 方法的行為與 <code>get()</code> 類似，並在其選項之前接受一個額外的 <code>body</code> 引數：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">post</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Config</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/config'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, newConfig).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">config</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Updated config:'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, config);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
-  </div><p>可以为请求的 <code>body</code> 提供许多不同类型的值，<code>HttpClient</code> 会相应地对其进行序列化：</p>
+  </div><p>可以為請求的 <code>body</code> 提供許多不同型別的值，<code>HttpClient</code> 會相應地對其進行序列化：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th><strong><code>body</code> 类型</strong></th>
-<th><strong>序列化为</strong></th>
+<th><strong><code>body</code> 型別</strong></th>
+<th><strong>序列化為</strong></th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td>string</td>
-<td>纯文本</td>
+<td>純文字</td>
 </tr>
 <tr>
-<td>数字、布尔值、数组或普通对象</td>
+<td>數字、布林值、陣列或普通物件</td>
 <td>JSON</td>
 </tr>
 <tr>
 <td><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer" target="_blank"><code>ArrayBuffer</code></a></td>
-<td>来自缓冲区的原始数据</td>
+<td>來自緩衝區的原始資料</td>
 </tr>
 <tr>
 <td><a href="https://developer.mozilla.org/docs/Web/API/Blob" target="_blank"><code>Blob</code></a></td>
-<td>具有 <code>Blob</code> 内容类型的原始数据</td>
+<td>具有 <code>Blob</code> 內容型別的原始資料</td>
 </tr>
 <tr>
 <td><a href="https://developer.mozilla.org/docs/Web/API/FormData" target="_blank"><code>FormData</code></a></td>
-<td><code>multipart/form-data</code> 编码的数据</td>
+<td><code>multipart/form-data</code> 編碼的資料</td>
 </tr>
 <tr>
 <td><code>HttpParams</code> 或 <code>URLSearchParams</code></td>
-<td><code>application/x-www-form-urlencoded</code> 格式化字符串</td>
+<td><code>application/x-www-form-urlencoded</code> 格式化字串</td>
 </tr>
 
       </tbody>
@@ -136,41 +136,41 @@
   </div>
   
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要提示：</strong> 请记住 <code>.subscribe()</code> 变更请求 <code>Observable</code>，以便实际触发请求。</p>
+    <p><strong>重要提示：</strong> 請記住 <code>.subscribe()</code> 變更請求 <code>Observable</code>，以便實際觸發請求。</p>
 
     </div>
     
   <h2 id="setting-url-parameters">
-    <a href="#setting-url-parameters" class="docs-anchor" tabindex="-1" aria-label="Link to Setting URL parameters">设置 URL 参数</a>
+    <a href="#setting-url-parameters" class="docs-anchor" tabindex="-1" aria-label="Link to Setting URL parameters">設定 URL 引數</a>
   </h2>
-  <p>使用 <code>params</code> 选项指定应包含在请求 URL 中的请求参数。</p>
-<p>传递对象字面量是配置 URL 参数的最简单方法：</p>
+  <p>使用 <code>params</code> 選項指定應包含在請求 URL 中的請求引數。</p>
+<p>傳遞物件字面量是設定 URL 引數的最簡單方法：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/config'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  params: {filter: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'all'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">},</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">config</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
-  </div><p>或者，如果你需要对参数的构造或序列化进行更多控制，可以传递一个 <a href="/api/common/http/HttpParams"><code>HttpParams</code></a> 实例。</p>
+  </div><p>或者，如果你需要對引數的構造或序列化進行更多控制，可以傳遞一個 <a href="/api/common/http/HttpParams"><code>HttpParams</code></a> 實例。</p>
 
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要提示：</strong><a href="/api/common/http/HttpParams"><code>HttpParams</code></a> 的实例是<em>不可变的</em>，不能直接更改。相反，像 <code>append()</code> 这样的变更方法会返回一个应用了变更的新 <a href="/api/common/http/HttpParams"><code>HttpParams</code></a> 实例。</p>
+    <p><strong>重要提示：</strong><a href="/api/common/http/HttpParams"><code>HttpParams</code></a> 的實例是<em>不可變的</em>，不能直接更改。相反，像 <code>append()</code> 這樣的變更方法會回傳一個應用了變更的新 <a href="/api/common/http/HttpParams"><code>HttpParams</code></a> 實例。</p>
 
     </div>
     <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> baseParams</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/common/http/HttpParams">HttpParams</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">().</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">set</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'filter'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'all'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/config'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  params: baseParams.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">set</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'details'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'enabled'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">config</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
-  </div><p>你可以使用自定义的 <a href="/api/common/http/HttpParameterCodec"><code>HttpParameterCodec</code></a> 来实例化 <a href="/api/common/http/HttpParams"><code>HttpParams</code></a>，该编解码器决定了 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 将如何将参数编码到 URL 中。</p>
+  </div><p>你可以使用自定義的 <a href="/api/common/http/HttpParameterCodec"><code>HttpParameterCodec</code></a> 來實例化 <a href="/api/common/http/HttpParams"><code>HttpParams</code></a>，該編解碼器決定了 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 將如何將引數編碼到 URL 中。</p>
 
   <h2 id="setting-request-headers">
-    <a href="#setting-request-headers" class="docs-anchor" tabindex="-1" aria-label="Link to Setting request headers">设置请求标头</a>
+    <a href="#setting-request-headers" class="docs-anchor" tabindex="-1" aria-label="Link to Setting request headers">設定請求標頭</a>
   </h2>
-  <p>使用 <code>headers</code> 选项指定应包含在请求中的请求标头。</p>
-<p>传递对象字面量是配置请求标头最简单的方法：</p>
+  <p>使用 <code>headers</code> 選項指定應包含在請求中的請求標頭。</p>
+<p>傳遞物件字面量是設定請求標頭最簡單的方法：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/config'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  headers: {</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    'X-Debug-Level'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'verbose'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">config</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
-  </div><p>或者，如果你需要对标头构造进行更多控制，可以传递一个 <a href="/api/common/http/HttpHeaders"><code>HttpHeaders</code></a> 实例。</p>
+  </div><p>或者，如果你需要對標頭構造進行更多控制，可以傳遞一個 <a href="/api/common/http/HttpHeaders"><code>HttpHeaders</code></a> 實例。</p>
 
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要提示：</strong><a href="/api/common/http/HttpHeaders"><code>HttpHeaders</code></a> 的实例是<em>不可变的</em>，不能直接更改。相反，像 <code>append()</code> 这样的变更方法会返回一个应用了变更的新 <a href="/api/common/http/HttpHeaders"><code>HttpHeaders</code></a> 实例。</p>
+    <p><strong>重要提示：</strong><a href="/api/common/http/HttpHeaders"><code>HttpHeaders</code></a> 的實例是<em>不可變的</em>，不能直接更改。相反，像 <code>append()</code> 這樣的變更方法會回傳一個應用了變更的新 <a href="/api/common/http/HttpHeaders"><code>HttpHeaders</code></a> 實例。</p>
 
     </div>
     <div class="docs-code">
@@ -178,77 +178,77 @@
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> baseHeaders</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/common/http/HttpHeaders">HttpHeaders</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">().</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">set</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'X-Debug-Level'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'minimal'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Config</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/config'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  headers: baseHeaders.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">set</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'X-Debug-Level'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'verbose'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">),</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">config</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
   </div>
   <h2 id="interacting-with-the-server-response-events">
-    <a href="#interacting-with-the-server-response-events" class="docs-anchor" tabindex="-1" aria-label="Link to Interacting with the server response events">与服务器响应事件交互</a>
+    <a href="#interacting-with-the-server-response-events" class="docs-anchor" tabindex="-1" aria-label="Link to Interacting with the server response events">與伺服器回應事件互動</a>
   </h2>
-  <p>为了方便起见，<a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 默认返回一个服务器返回的数据（响应体）的<code>Observable</code>。有时检查实际响应是可取的，例如检索特定的响应标头。</p>
-<p>要访问完整的响应，请将 <code>observe</code> 选项设置为 <code>'response'</code>：</p>
+  <p>為了方便起見，<a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 預設回傳一個伺服器回傳的資料（回應體）的<code>Observable</code>。有時檢查實際回應是可取的，例如檢索特定的回應標頭。</p>
+<p>要訪問完整的回應，請將 <code>observe</code> 選項設定為 <code>'response'</code>：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Config</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/config'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {observe: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'response'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">res</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Response status:'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, res.status);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Body:'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, res.body);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
   </div>
     <div class="docs-callout docs-callout-important">
       <h3><code>observe</code> 的字面量值</h3>
-      <p>因为 <code>observe</code> 的值会影响 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 返回的类型，所以它必须具有字面量类型而不是 <code>string</code> 类型。</p>
-<p>如果传递给请求方法的选项对象是字面量对象，则会自动发生这种情况；但是，如果要将请求选项提取到变量或辅助方法中，则可能需要显式地将其指定为字面量，例如 <code>observe: 'response' as const</code>。</p>
+      <p>因為 <code>observe</code> 的值會影響 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 回傳的型別，所以它必須具有字面量型別而不是 <code>string</code> 型別。</p>
+<p>如果傳遞給請求方法的選項物件是字面量物件，則會自動發生這種情況；但是，如果要將請求選項提取到變數或輔助方法中，則可能需要顯式地將其指定為字面量，例如 <code>observe: 'response' as const</code>。</p>
 
     </div>
     
   <h2 id="receiving-raw-progress-events">
-    <a href="#receiving-raw-progress-events" class="docs-anchor" tabindex="-1" aria-label="Link to Receiving raw progress events">接收原始进度事件</a>
+    <a href="#receiving-raw-progress-events" class="docs-anchor" tabindex="-1" aria-label="Link to Receiving raw progress events">接收原始進度事件</a>
   </h2>
-  <p>除了响应体或响应对象之外，<a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 还可以返回一个原始<em>事件</em>流，对应于请求生命周期中的特定时刻。这些事件包括请求发送时、响应标头返回时以及正文完成时。这些事件还可以包括<em>进度事件</em>，报告大型请求或响应体的上传和下载状态。</p>
-<p>默认情况下，进度事件处于禁用状态（因为它们会产生性能成本），但可以使用 <code>reportProgress</code> 选项启用。</p>
+  <p>除了回應體或回應物件之外，<a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 還可以回傳一個原始<em>事件</em>流，對應於請求生命週期中的特定時刻。這些事件包括請求傳送時、回應標頭回傳時以及正文完成時。這些事件還可以包括<em>進度事件</em>，報告大型請求或回應體的上傳和下載狀態。</p>
+<p>預設情況下，進度事件處於停用狀態（因為它們會產生效能成本），但可以使用 <code>reportProgress</code> 選項啟用。</p>
 
     <div class="docs-alert docs-alert-note">
-    <p><strong>注意：</strong><a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 的可选 <code>fetch</code> 实现不报告<em>上传</em>进度事件。</p>
+    <p><strong>注意：</strong><a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 的可選 <code>fetch</code> 實現不報告<em>上傳</em>進度事件。</p>
 
     </div>
-    <p>要观察事件流，请将 <code>observe</code> 选项设置为 <code>'events'</code>：</p>
+    <p>要觀察事件流，請將 <code>observe</code> 選項設定為 <code>'events'</code>：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">post</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/upload'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, myData, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  reportProgress: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  observe: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'events'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">event</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  switch</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (event.type) {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    case</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> <a href="/api/common/http/HttpEventType">HttpEventType</a>.UploadProgress:</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Uploaded '</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> +</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> event.loaded </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">+</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> ' out of '</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> +</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> event.total </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">+</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> ' bytes'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">      break</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    case</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> <a href="/api/common/http/HttpEventType">HttpEventType</a>.Response:</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Finished uploading!'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">      break</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
   </div>
     <div class="docs-callout docs-callout-important">
       <h3><code>observe</code> 的字面量值</h3>
-      <p>因为 <code>observe</code> 的值会影响 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 返回的类型，所以它必须具有字面量类型而不是 <code>string</code> 类型。</p>
-<p>如果传递给请求方法的选项对象是字面量对象，则会自动发生这种情况；但是，如果要将请求选项提取到变量或辅助方法中，则可能需要显式地将其指定为字面量，例如 <code>observe: 'events' as const</code>。</p>
+      <p>因為 <code>observe</code> 的值會影響 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 回傳的型別，所以它必須具有字面量型別而不是 <code>string</code> 型別。</p>
+<p>如果傳遞給請求方法的選項物件是字面量物件，則會自動發生這種情況；但是，如果要將請求選項提取到變數或輔助方法中，則可能需要顯式地將其指定為字面量，例如 <code>observe: 'events' as const</code>。</p>
 
     </div>
-    <p>事件流中报告的每个 <a href="/api/common/http/HttpEvent"><code>HttpEvent</code></a> 都有一个 <code>type</code>，用于区分事件代表的内容：</p>
+    <p>事件流中報告的每個 <a href="/api/common/http/HttpEvent"><code>HttpEvent</code></a> 都有一個 <code>type</code>，用於區分事件代表的內容：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
 <th><strong><code>type</code> 值</strong></th>
-<th><strong>事件含义</strong></th>
+<th><strong>事件含義</strong></th>
 </tr>
 
       </thead>
       <tbody>
         <tr>
 <td><a href="/api/common/http/HttpEventType#Sent"><code>HttpEventType.Sent</code></a></td>
-<td>请求已调度到服务器</td>
+<td>請求已排程到伺服器</td>
 </tr>
 <tr>
 <td><a href="/api/common/http/HttpEventType#UploadProgress"><code>HttpEventType.UploadProgress</code></a></td>
-<td>一个 <a href="/api/common/http/HttpUploadProgressEvent"><code>HttpUploadProgressEvent</code></a>，报告上传请求正文的进度</td>
+<td>一個 <a href="/api/common/http/HttpUploadProgressEvent"><code>HttpUploadProgressEvent</code></a>，報告上傳請求正文的進度</td>
 </tr>
 <tr>
 <td><a href="/api/common/http/HttpEventType#ResponseHeader"><code>HttpEventType.ResponseHeader</code></a></td>
-<td>已接收到响应头，包括状态和标头</td>
+<td>已接收到回應頭，包括狀態和標頭</td>
 </tr>
 <tr>
 <td><a href="/api/common/http/HttpEventType#DownloadProgress"><code>HttpEventType.DownloadProgress</code></a></td>
-<td>一个 <a href="/api/common/http/HttpDownloadProgressEvent"><code>HttpDownloadProgressEvent</code></a>，报告下载响应正文的进度</td>
+<td>一個 <a href="/api/common/http/HttpDownloadProgressEvent"><code>HttpDownloadProgressEvent</code></a>，報告下載回應正文的進度</td>
 </tr>
 <tr>
 <td><a href="/api/common/http/HttpEventType#Response"><code>HttpEventType.Response</code></a></td>
-<td>已接收到整个响应，包括响应主体</td>
+<td>已接收到整個回應，包括回應主體</td>
 </tr>
 <tr>
 <td><a href="/api/common/http/HttpEventType#User"><code>HttpEventType.User</code></a></td>
-<td>来自 Http 拦截机制的自定义事件。</td>
+<td>來自 Http 攔截機制的自定義事件。</td>
 </tr>
 
       </tbody>
@@ -256,28 +256,28 @@
   </div>
   
   <h2 id="handling-request-failure">
-    <a href="#handling-request-failure" class="docs-anchor" tabindex="-1" aria-label="Link to Handling request failure">处理请求失败</a>
+    <a href="#handling-request-failure" class="docs-anchor" tabindex="-1" aria-label="Link to Handling request failure">處理請求失敗</a>
   </h2>
-  <p>HTTP 请求可能失败的三种方式：</p>
+  <p>HTTP 請求可能失敗的三種方式：</p>
 
   <ul class="docs-list">
-    <li>网络或连接错误可能会阻止请求到达后端服务器。</li>
-<li>设置了 timeout 选项时，请求未及时响应。</li>
-<li>后端可以接收请求，但无法处理它，并返回错误响应。</li>
+    <li>網路或連線錯誤可能會阻止請求到達後端伺服器。</li>
+<li>設定了 timeout 選項時，請求未及時回應。</li>
+<li>後端可以接收請求，但無法處理它，並回傳錯誤回應。</li>
 
   </ul>
-  <p><a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 会将上述所有类型的错误捕获在 <a href="/api/common/http/HttpErrorResponse"><code>HttpErrorResponse</code></a> 中，并通过 <code>Observable</code> 的错误通道返回。网络和超时错误的状态码为 <code>0</code>，<code>error</code> 是 <a href="https://developer.mozilla.org/docs/Web/API/ProgressEvent" target="_blank"><code>ProgressEvent</code></a> 的实例。后端错误则具有后端返回的失败状态码，以及作为 <code>error</code> 的错误响应。检查响应以确定错误的根本原因和处理错误的适当操作。</p>
-<p><a href="https://rxjs.dev/" target="_blank">RxJS 库</a>提供了几个操作符，这些操作符对于错误处理非常有用。</p>
-<p>你可以使用 <code>catchError</code> 操作符将错误响应转换为 UI 的值。此值可以告知 UI 显示错误页面或值，并在必要时捕获错误的原因。</p>
-<p>有时，诸如网络中断之类的瞬时错误可能会导致请求意外失败，而只需重试请求即可使其成功。RxJS 提供了几个 <em>retry</em> 操作符，这些操作符在特定条件下会自动重新订阅失败的 <code>Observable</code>。例如，<code>retry()</code> 操作符将自动尝试重新订阅指定的次数。</p>
+  <p><a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 會將上述所有型別的錯誤捕獲在 <a href="/api/common/http/HttpErrorResponse"><code>HttpErrorResponse</code></a> 中，並透過 <code>Observable</code> 的錯誤通道回傳。網路和超時錯誤的狀態碼為 <code>0</code>，<code>error</code> 是 <a href="https://developer.mozilla.org/docs/Web/API/ProgressEvent" target="_blank"><code>ProgressEvent</code></a> 的實例。後端錯誤則具有後端回傳的失敗狀態碼，以及作為 <code>error</code> 的錯誤回應。檢查回應以確定錯誤的根本原因和處理錯誤的適當操作。</p>
+<p><a href="https://rxjs.dev/" target="_blank">RxJS 函式庫</a>提供了幾個運算子，這些運算子對於錯誤處理非常有用。</p>
+<p>你可以使用 <code>catchError</code> 運算子將錯誤回應轉換為 UI 的值。此值可以告知 UI 顯示錯誤頁面或值，並在必要時捕獲錯誤的原因。</p>
+<p>有時，諸如網路中斷之類的瞬時錯誤可能會導致請求意外失敗，而只需重試請求即可使其成功。RxJS 提供了幾個 <em>retry</em> 運算子，這些運算子在特定條件下會自動重新訂閱失敗的 <code>Observable</code>。例如，<code>retry()</code> 運算子將自動嘗試重新訂閱指定的次數。</p>
 
   <h3 id="timeouts">
-    <a href="#timeouts" class="docs-anchor" tabindex="-1" aria-label="Link to Timeouts">超时</a>
+    <a href="#timeouts" class="docs-anchor" tabindex="-1" aria-label="Link to Timeouts">超時</a>
   </h3>
-  <p>要为请求设置超时，可以在其他请求选项中将 <code>timeout</code> 选项设置为毫秒数。如果在指定时间内后端请求未完成，则请求将被中止并发出错误。</p>
+  <p>要為請求設定超時，可以在其他請求選項中將 <code>timeout</code> 選項設定為毫秒數。如果在指定時間內後端請求未完成，則請求將被中止併發出錯誤。</p>
 
     <div class="docs-alert docs-alert-note">
-    <p><strong>注意：</strong>超时仅适用于后端 HTTP 请求本身。它不是整个请求处理链的超时。因此，此选项不受拦截器引入的任何延迟影响。</p>
+    <p><strong>注意：</strong>超時僅適用於後端 HTTP 請求本身。它不是整個請求處理鏈的超時。因此，此選項不受攔截器引入的任何延遲影響。</p>
 
     </div>
     <div class="docs-code">
@@ -285,186 +285,186 @@
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/config'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  timeout: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">3000</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  next</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">config</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    console.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">log</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Config fetched successfully:'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, config);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  error</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">err</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // If the request times out, an error will have been emitted.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
   </div>
   <h2 id="advanced-fetch-options">
-    <a href="#advanced-fetch-options" class="docs-anchor" tabindex="-1" aria-label="Link to Advanced fetch options">高级 fetch 选项</a>
+    <a href="#advanced-fetch-options" class="docs-anchor" tabindex="-1" aria-label="Link to Advanced fetch options">高階 fetch 選項</a>
   </h2>
-  <p>在使用 <a href="/api/common/http/withFetch"><code>withFetch()</code></a> 提供者时，Angular 的 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 提供了对高级 fetch API 选项的访问，这些选项可以提高性能和用户体验。这些选项仅在使用 fetch 后端时可用。</p>
+  <p>在使用 <a href="/api/common/http/withFetch"><code>withFetch()</code></a> 提供者時，Angular 的 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 提供了對高階 fetch API 選項的訪問，這些選項可以提高效能和使用者體驗。這些選項僅在使用 fetch 後端時可用。</p>
 
   <h3 id="fetch-options">
-    <a href="#fetch-options" class="docs-anchor" tabindex="-1" aria-label="Link to Fetch options">Fetch 选项</a>
+    <a href="#fetch-options" class="docs-anchor" tabindex="-1" aria-label="Link to Fetch options">Fetch 選項</a>
   </h3>
-  <p>以下选项在使用 fetch 后端时提供对请求行为的细粒度控制。</p>
+  <p>以下選項在使用 fetch 後端時提供對請求行為的細粒度控制。</p>
 
   <h4 id="keep-alive-connections">
-    <a href="#keep-alive-connections" class="docs-anchor" tabindex="-1" aria-label="Link to Keep-alive connections">保持连接</a>
+    <a href="#keep-alive-connections" class="docs-anchor" tabindex="-1" aria-label="Link to Keep-alive connections">保持連線</a>
   </h4>
-  <p><code>keepalive</code> 选项允许请求的生存期超过发起它的页面。这对于需要即使在用户离开页面后也能完成的分析或日志记录请求特别有用。</p>
+  <p><code>keepalive</code> 選項允許請求的生存期超過發起它的頁面。這對於需要即使在使用者離開頁面後也能完成的分析或日誌記錄請求特別有用。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">post</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/analytics'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, analyticsData, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  keepalive: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">true</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span></code></pre>
   </div>
   <h4 id="http-caching-control">
-    <a href="#http-caching-control" class="docs-anchor" tabindex="-1" aria-label="Link to HTTP caching control">HTTP 缓存控制</a>
+    <a href="#http-caching-control" class="docs-anchor" tabindex="-1" aria-label="Link to HTTP caching control">HTTP 快取控制</a>
   </h4>
-  <p><code>cache</code> 选项控制请求如何与浏览器的 HTTP 缓存进行交互，这可以显著提高重复请求的性能。</p>
+  <p><code>cache</code> 選項控制請求如何與瀏覽器的 HTTP 快取進行互動，這可以顯著提高重複請求的效能。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">//  Use cached response regardless of freshness</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/config'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  cache: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'force-cache'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">config</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Always fetch from network, bypass cache</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/live-data'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  cache: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'no-cache'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Use cached response only, fail if not in cache</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/static-data'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  cache: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'only-if-cached'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
   </div>
   <h4 id="request-priority-for-core-web-vitals">
-    <a href="#request-priority-for-core-web-vitals" class="docs-anchor" tabindex="-1" aria-label="Link to Request priority for Core Web Vitals">Core Web Vitals 的请求优先级</a>
+    <a href="#request-priority-for-core-web-vitals" class="docs-anchor" tabindex="-1" aria-label="Link to Request priority for Core Web Vitals">Core Web Vitals 的請求優先級</a>
   </h4>
-  <p><code>priority</code> 选项允许你指示请求的相对重要性，帮助浏览器优化资源加载以获得更好的 Core Web Vitals 分数。</p>
+  <p><code>priority</code> 選項允許你指示請求的相對重要性，幫助瀏覽器最佳化資源載入以獲得更好的 Core Web Vitals 分數。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// High priority for critical resources</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/user-profile'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  priority: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'high'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">profile</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Low priority for non-critical resources</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/recommendations'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  priority: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'low'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">recommendations</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Auto priority (default) lets the browser decide</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/settings'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  priority: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'auto'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">settings</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
   </div><p>可用的 <code>priority</code> 值：</p>
 
   <ul class="docs-list">
-    <li><code>'high'</code>：高优先级，提前加载（例如，关键用户数据，首屏内容）</li>
-<li><code>'low'</code>：低优先级，在资源可用时加载（例如，分析，预取数据）</li>
-<li><code>'auto'</code>：浏览器根据请求上下文确定优先级（默认）</li>
+    <li><code>'high'</code>：高優先級，提前載入（例如，關鍵使用者資料，首屏內容）</li>
+<li><code>'low'</code>：低優先級，在資源可用時載入（例如，分析，預取資料）</li>
+<li><code>'auto'</code>：瀏覽器根據請求上下文確定優先級（預設）</li>
 
   </ul>
   
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong>对影响最大内容绘制 (LCP) 的请求使用 <code>priority: 'high'</code>，对不影响初始用户体验的请求使用 <code>priority: 'low'</code>。</p>
+    <p><strong>提示：</strong>對影響最大內容繪製 (LCP) 的請求使用 <code>priority: 'high'</code>，對不影響初始使用者體驗的請求使用 <code>priority: 'low'</code>。</p>
 
     </div>
     
   <h4 id="request-mode">
-    <a href="#request-mode" class="docs-anchor" tabindex="-1" aria-label="Link to Request mode">请求模式</a>
+    <a href="#request-mode" class="docs-anchor" tabindex="-1" aria-label="Link to Request mode">請求模式</a>
   </h4>
-  <p><code>mode</code> 选项控制请求如何处理跨域请求并确定响应类型。</p>
+  <p><code>mode</code> 選項控制請求如何處理跨域請求並確定回應型別。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Same-origin requests only</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/local-data'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  mode: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'same-origin'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// CORS-enabled cross-origin requests</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'https://api.external.com/data'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  mode: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'cors'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// No-CORS mode for simple cross-origin requests</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'https://external-api.com/public-data'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  mode: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'no-cors'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
   </div><p>可用的 <code>mode</code> 值：</p>
 
   <ul class="docs-list">
-    <li><code>'same-origin'</code>：仅允许同源请求，跨域请求失败</li>
-<li><code>'cors'</code>：允许带 CORS 的跨域请求（默认）</li>
-<li><code>'no-cors'</code>：允许不带 CORS 的简单跨域请求，响应是匿名的</li>
+    <li><code>'same-origin'</code>：僅允許同源請求，跨域請求失敗</li>
+<li><code>'cors'</code>：允許帶 CORS 的跨域請求（預設）</li>
+<li><code>'no-cors'</code>：允許不帶 CORS 的簡單跨域請求，回應是匿名的</li>
 
   </ul>
   
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong>对不应跨域的敏感请求使用 <code>mode: 'same-origin'</code>。</p>
+    <p><strong>提示：</strong>對不應跨域的敏感請求使用 <code>mode: 'same-origin'</code>。</p>
 
     </div>
     
   <h4 id="redirect-handling">
-    <a href="#redirect-handling" class="docs-anchor" tabindex="-1" aria-label="Link to Redirect handling">重定向处理</a>
+    <a href="#redirect-handling" class="docs-anchor" tabindex="-1" aria-label="Link to Redirect handling">重導向處理</a>
   </h4>
-  <p><code>redirect</code> 选项指定如何处理来自服务器的重定向响应。</p>
+  <p><code>redirect</code> 選項指定如何處理來自伺服器的重導向回應。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Follow redirects automatically (default behavior)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/resource'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  redirect: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'follow'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Prevent automatic redirects</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/resource'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  redirect: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'manual'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">response</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Handle redirect manually</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Treat redirects as errors</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/resource'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  redirect: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'error'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  next</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // Success response</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  error</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">err</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // Redirect responses will trigger this error handler</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
   </div><p>可用的 <code>redirect</code> 值：</p>
 
   <ul class="docs-list">
-    <li><code>'follow'</code>：自动跟随重定向（默认）</li>
-<li><code>'error'</code>：将重定向视为错误</li>
-<li><code>'manual'</code>：不自动跟踪重定向，返回重定向响应</li>
+    <li><code>'follow'</code>：自動跟隨重導向（預設）</li>
+<li><code>'error'</code>：將重導向視為錯誤</li>
+<li><code>'manual'</code>：不自動跟蹤重導向，回傳重導向回應</li>
 
   </ul>
   
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong>当您需要使用自定义逻辑处理重定向时，请使用 <code>redirect: 'manual'</code>。</p>
+    <p><strong>提示：</strong>當您需要使用自定義邏輯處理重導向時，請使用 <code>redirect: 'manual'</code>。</p>
 
     </div>
     
   <h4 id="credentials-handling">
-    <a href="#credentials-handling" class="docs-anchor" tabindex="-1" aria-label="Link to Credentials handling">凭证处理</a>
+    <a href="#credentials-handling" class="docs-anchor" tabindex="-1" aria-label="Link to Credentials handling">憑證處理</a>
   </h4>
-  <p><code>credentials</code> 选项控制是否将 cookie、授权标头和其他凭证与跨域请求一起发送。这对于身份验证场景尤其重要。</p>
+  <p><code>credentials</code> 選項控制是否將 cookie、授權標頭和其他憑證與跨域請求一起傳送。這對於身份驗證場景尤其重要。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Include credentials for cross-origin requests</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'https://api.example.com/protected-data'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  credentials: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'include'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Never send credentials (default for cross-origin)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'https://api.example.com/public-data'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  credentials: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'omit'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Send credentials only for same-origin requests</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/user-data'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  credentials: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'same-origin'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// withCredentials overrides credentials setting</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'https://api.example.com/data'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  credentials: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'omit'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,        </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// This will be ignored</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  withCredentials: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">true</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">       // This forces credentials: 'include'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Request will include credentials despite credentials: 'omit'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Legacy approach (still supported)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'https://api.example.com/data'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  withCredentials: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">true</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Equivalent to credentials: 'include'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
   </div>
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要提示：</strong><code>withCredentials</code> 选项优先于 <code>credentials</code> 选项。如果同时指定了两者，则 <code>withCredentials: true</code> 始终会导致 <code>credentials: 'include'</code>，而忽略显式的 <code>credentials</code> 值。</p>
+    <p><strong>重要提示：</strong><code>withCredentials</code> 選項優先於 <code>credentials</code> 選項。如果同時指定了兩者，則 <code>withCredentials: true</code> 始終會導致 <code>credentials: 'include'</code>，而忽略顯式的 <code>credentials</code> 值。</p>
 
     </div>
     <p>可用的 <code>credentials</code> 值：</p>
 
   <ul class="docs-list">
-    <li><code>'omit'</code>：从不发送凭证</li>
-<li><code>'same-origin'</code>：仅为同源请求发送凭证（默认）</li>
-<li><code>'include'</code>：始终发送凭证，即使是跨域请求</li>
+    <li><code>'omit'</code>：從不傳送憑證</li>
+<li><code>'same-origin'</code>：僅為同源請求傳送憑證（預設）</li>
+<li><code>'include'</code>：始終傳送憑證，即使是跨域請求</li>
 
   </ul>
   
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong>当您需要将身份验证 cookie 或标头发送到支持 CORS 的不同域时，请使用 <code>credentials: 'include'</code>。为避免混淆，请避免混合使用 <code>credentials</code> 和 <code>withCredentials</code> 选项。</p>
+    <p><strong>提示：</strong>當您需要將身份驗證 cookie 或標頭傳送到支援 CORS 的不同域時，請使用 <code>credentials: 'include'</code>。為避免混淆，請避免混合使用 <code>credentials</code> 和 <code>withCredentials</code> 選項。</p>
 
     </div>
     
   <h4 id="referrer">
     <a href="#referrer" class="docs-anchor" tabindex="-1" aria-label="Link to Referrer">引用者</a>
   </h4>
-  <p><code>referrer</code> 选项允许您控制随请求发送的引用者信息。这对于隐私和安全考虑很重要。</p>
+  <p><code>referrer</code> 選項允許您控制隨請求傳送的引用者訊息。這對於隱私和安全考慮很重要。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Send a specific referrer URL</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/data'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  referrer: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'https://example.com/page'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Use the current page as referrer (default behavior)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/analytics'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  referrer: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'about:client'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">data</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
-  </div><p><code>referrer</code> 选项接受：</p>
+  </div><p><code>referrer</code> 選項接受：</p>
 
   <ul class="docs-list">
-    <li>有效的 URL 字符串：设置要发送的特定引用者 URL</li>
-<li>空字符串 <code>''</code>：不发送引用者信息</li>
-<li><code>'about:client'</code>：使用默认引用者（当前页面 URL）</li>
+    <li>有效的 URL 字串：設定要傳送的特定引用者 URL</li>
+<li>空字串 <code>''</code>：不傳送引用者訊息</li>
+<li><code>'about:client'</code>：使用預設引用者（當前頁面 URL）</li>
 
   </ul>
   
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong>对于敏感请求，如果您不想泄露引用页面的 URL，请使用 <code>referrer: ''</code>。</p>
+    <p><strong>提示：</strong>對於敏感請求，如果您不想洩露引用頁面的 URL，請使用 <code>referrer: ''</code>。</p>
 
     </div>
     
   <h4 id="integrity">
     <a href="#integrity" class="docs-anchor" tabindex="-1" aria-label="Link to Integrity">完整性</a>
   </h4>
-  <p><code>integrity</code> 选项允许您通过提供预期内容的加密哈希来验证响应未被篡改。这对于从 CDN 加载脚本或其他资源特别有用。</p>
+  <p><code>integrity</code> 選項允許您透過提供預期內容的加密雜湊來驗證回應未被篡改。這對於從 CDN 載入指令碼或其他資源特別有用。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Verify response integrity with SHA-256 hash</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/api/script.js'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  integrity: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'sha256-ABC123...'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  responseType: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'text'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">subscribe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">script</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Script content is verified against the hash</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span></code></pre>
   </div>
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要提示：</strong><code>integrity</code> 选项要求响应内容与提供的哈希值完全匹配。如果内容不匹配，请求将因网络错误而失败。</p>
+    <p><strong>重要提示：</strong><code>integrity</code> 選項要求回應內容與提供的雜湊值完全對應。如果內容不對應，請求將因網路錯誤而失敗。</p>
 
     </div>
     
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong>从外部源加载关键资源时，请使用子资源完整性来确保它们未被修改。使用 <code>openssl</code> 等工具生成哈希值。</p>
+    <p><strong>提示：</strong>從外部源載入關鍵資源時，請使用子資源完整性來確保它們未被修改。使用 <code>openssl</code> 等工具生成雜湊值。</p>
 
     </div>
     
   <h2 id="http-observables">
     <a href="#http-observables" class="docs-anchor" tabindex="-1" aria-label="Link to Http <code>Observable</code>s">Http <code>Observable</code></a>
   </h2>
-  <p><a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 上的每个请求方法都会构造并返回所请求响应类型的 <code>Observable</code>。在使用 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 时，理解这些 <code>Observable</code> 的工作方式很重要。</p>
-<p><a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 生成的是 RxJS 所称的“冷”<code>Observable</code>，这意味着在订阅 <code>Observable</code> 之前不会发生实际的请求。只有那时，请求才会被实际分派到服务器。多次订阅同一个 <code>Observable</code> 会触发多个后端请求。每次订阅都是独立的。</p>
+  <p><a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 上的每個請求方法都會構造並回傳所請求回應型別的 <code>Observable</code>。在使用 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 時，理解這些 <code>Observable</code> 的工作方式很重要。</p>
+<p><a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 生成的是 RxJS 所稱的『冷』<code>Observable</code>，這意味著在訂閱 <code>Observable</code> 之前不會發生實際的請求。只有那時，請求才會被實際分派到伺服器。多次訂閱同一個 <code>Observable</code> 會觸發多個後端請求。每次訂閱都是獨立的。</p>
 
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong>您可以将 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> <code>Observable</code>s 视为实际服务器请求的<em>蓝图</em>。</p>
+    <p><strong>提示：</strong>您可以將 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> <code>Observable</code>s 視為實際伺服器請求的<em>藍圖</em>。</p>
 
     </div>
-    <p>一旦订阅，取消订阅将中止正在进行的请求。如果 <code>Observable</code> 是通过 <code>async</code> 管道订阅的，这将非常有用，因为它会在用户离开当前页面时自动取消请求。此外，如果将 <code>Observable</code> 与 RxJS 组合器（如 <code>switchMap</code>）一起使用，则此取消将清除任何过时的请求。</p>
-<p>响应返回后，来自 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 的 <code>Observable</code> 通常会完成（尽管拦截器可能会影响这一点）。</p>
-<p>由于自动完成，如果 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 订阅未被清理，通常没有内存泄漏的风险。但是，与任何异步操作一样，我们强烈建议在销毁使用它们的组件时清理订阅，因为否则订阅回调可能会在尝试与已销毁的组件交互时运行并遇到错误。</p>
+    <p>一旦訂閱，取消訂閱將中止正在進行的請求。如果 <code>Observable</code> 是透過 <code>async</code> 通道訂閱的，這將非常有用，因為它會在使用者離開當前頁面時自動取消請求。此外，如果將 <code>Observable</code> 與 RxJS 組合器（如 <code>switchMap</code>）一起使用，則此取消將清除任何過時的請求。</p>
+<p>回應回傳後，來自 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 的 <code>Observable</code> 通常會完成（儘管攔截器可能會影響這一點）。</p>
+<p>由於自動完成，如果 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 訂閱未被清理，通常沒有記憶體洩漏的風險。但是，與任何非同步操作一樣，我們強烈建議在銷燬使用它們的元件時清理訂閱，因為否則訂閱回呼可能會在嘗試與已銷燬的元件互動時運行並遇到錯誤。</p>
 
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong>使用 <code>async</code> 管道或 <a href="/api/core/rxjs-interop/toSignal"><code>toSignal</code></a> 操作来订阅 <code>Observable</code>s 可确保正确处理订阅。</p>
+    <p><strong>提示：</strong>使用 <code>async</code> 通道或 <a href="/api/core/rxjs-interop/toSignal"><code>toSignal</code></a> 操作來訂閱 <code>Observable</code>s 可確保正確處理訂閱。</p>
 
     </div>
     
   <h2 id="best-practices">
-    <a href="#best-practices" class="docs-anchor" tabindex="-1" aria-label="Link to Best practices">最佳实践</a>
+    <a href="#best-practices" class="docs-anchor" tabindex="-1" aria-label="Link to Best practices">最佳實踐</a>
   </h2>
-  <p>虽然 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 可以直接从组件注入和使用，但通常我们建议您创建可重用的、可注入的服务，这些服务可以隔离和封装数据访问逻辑。例如，此 <code>UserService</code> 封装了根据用户 ID 请求用户数据的逻辑：</p>
+  <p>雖然 <a href="/api/common/http/HttpClient"><code>HttpClient</code></a> 可以直接從元件注入和使用，但通常我們建議您建立可重用的、可注入的服務，這些服務可以隔離和封裝資料訪問邏輯。例如，此 <code>UserService</code> 封裝了根據使用者 ID 請求使用者資料的邏輯：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/core/Injectable">Injectable</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({providedIn: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'root'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> UserService</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> http</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(<a href="/api/common/http/HttpClient">HttpClient</a>);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  getUser</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">id</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Observable</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">User</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    return</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.http.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">get</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">User</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`/api/user/${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">id</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
-  </div><p>在组件中，你可以将 <code>@if</code> 与 <code>async</code> 管道结合使用，以便仅在数据加载完成后才渲染数据的 UI：</p>
+  </div><p>在元件中，你可以將 <code>@if</code> 與 <code>async</code> 通道結合使用，以便僅在資料載入完成後才渲染資料的 UI：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/common/AsyncPipe">AsyncPipe</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/common'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/core/Component">Component</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  imports: [AsyncPipe],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    @if (user$ | async; as user) {</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">      &lt;p&gt;Name: {{ user.name }}&lt;/p&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">      &lt;p&gt;Biography: {{ user.biography }}&lt;/p&gt;</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    }</span></span><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  `</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> UserProfileComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  userId</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> <a href="/api/core/input">input</a>.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">required</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;();</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  user$</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">!:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Observable</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">User</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  private</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> userService</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(UserService);</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  constructor</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> void</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    <a href="/api/core/effect">effect</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">      this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.user$ </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.userService.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">getUser</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">userId</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">());</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    });</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>

@@ -4,7 +4,7 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">使用守卫控制路由访问</h1>
+    <h1 tabindex="-1">使用守衛控制路由訪問</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/routing/route-guards.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
@@ -13,35 +13,35 @@
     </header>
     
     <div class="docs-alert docs-alert-critical">
-    <p><strong>严重警告：</strong>切勿将客户端守卫作为访问控制的唯一来源。在 Web 浏览器中运行的所有 JavaScript 都可能被运行浏览器的用户修改。除了任何客户端守卫之外，始终在服务器端强制执行用户授权。</p>
+    <p><strong>嚴重警告：</strong>切勿將用戶端守衛作為訪問控制的唯一來源。在 Web 瀏覽器中執行的所有 JavaScript 都可能被執行瀏覽器的使用者修改。除了任何用戶端守衛之外，始終在服務器端強制執行使用者授權。</p>
 
     </div>
-    <p>路由守卫是用于控制用户是否可以导航到某个路由或离开某个路由的函数。它们就像检查点一样，管理用户是否可以访问特定路由。使用路由守卫的常见示例包括身份验证和访问控制。</p>
+    <p>路由守衛是用於控制使用者是否可以導向到某個路由或離開某個路由的函式。它們就像檢查點一樣，管理使用者是否可以訪問特定路由。使用路由守衛的常見範例包括身份驗證和訪問控制。</p>
 
   <h2 id="creating-a-route-guard">
-    <a href="#creating-a-route-guard" class="docs-anchor" tabindex="-1" aria-label="Link to Creating a route guard">创建路由守卫</a>
+    <a href="#creating-a-route-guard" class="docs-anchor" tabindex="-1" aria-label="Link to Creating a route guard">建立路由守衛</a>
   </h2>
-  <p>你可以使用 Angular CLI 生成路由守卫：</p>
+  <p>你可以使用 Angular CLI 生成路由守衛：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> generate</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> guard</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> CUSTOM_NAME</span></span></code></pre>
-  </div><p>这将提示你选择要使用的<a href="#types-of-route-guards">路由守卫类型</a>，然后创建相应的 <code>CUSTOM_NAME-guard.ts</code> 文件。</p>
+  </div><p>這將提示你選擇要使用的<a href="#types-of-route-guards">路由守衛型別</a>，然後建立相應的 <code>CUSTOM_NAME-guard.ts</code> 檔案。</p>
 
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong>你也可以通过在 Angular 项目中创建单独的 TypeScript 文件来手动创建路由守卫。开发人员通常在文件名中添加 <code>-guard.ts</code> 后缀，以区别于其他文件。</p>
+    <p><strong>提示：</strong>你也可以透過在 Angular 專案中建立單獨的 TypeScript 檔案來手動建立路由守衛。開發人員通常在檔案名中新增 <code>-guard.ts</code> 字尾，以區別於其他檔案。</p>
 
     </div>
     
   <h2 id="route-guard-return-types">
-    <a href="#route-guard-return-types" class="docs-anchor" tabindex="-1" aria-label="Link to Route guard return types">路由守卫的返回值类型</a>
+    <a href="#route-guard-return-types" class="docs-anchor" tabindex="-1" aria-label="Link to Route guard return types">路由守衛的回傳值型別</a>
   </h2>
-  <p>所有路由守卫都共享相同的可能返回值类型。这使你在控制导航方面具有灵活性：</p>
+  <p>所有路由守衛都共享相同的可能回傳值型別。這使你在控制導向方面具有靈活性：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
       <thead>
         <tr>
-<th>返回值类型</th>
+<th>回傳值型別</th>
 <th>描述</th>
 </tr>
 
@@ -49,26 +49,26 @@
       <tbody>
         <tr>
 <td><code>boolean</code></td>
-<td><code>true</code> 允许导航，<code>false</code> 则阻止导航（请参阅<a href="/api/router/CanMatch"><code>CanMatch</code></a> 路由守卫的注释）</td>
+<td><code>true</code> 允許導向，<code>false</code> 則阻止導向（請參閱<a href="/api/router/CanMatch"><code>CanMatch</code></a> 路由守衛的註解）</td>
 </tr>
 <tr>
 <td><a href="/api/router/UrlTree"><code>UrlTree</code></a> 或 <a href="/api/router/RedirectCommand"><code>RedirectCommand</code></a></td>
-<td>重定向到另一个路由，而不是阻止导航</td>
+<td>重導向到另一個路由，而不是阻止導向</td>
 </tr>
 <tr>
 <td><code>Promise&lt;T&gt;</code> 或 <code>Observable&lt;T&gt;</code></td>
-<td>路由器使用第一个发出的值，然后取消订阅</td>
+<td>路由器使用第一個發出的值，然後取消訂閱</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p>注意：<a href="/api/router/CanMatch"><code>CanMatch</code></a> 的行为有所不同——当它返回 <code>false</code> 时，Angular 会尝试其他匹配的路由，而不是完全阻止导航。</p>
+  <p>注意：<a href="/api/router/CanMatch"><code>CanMatch</code></a> 的行為有所不同——當它回傳 <code>false</code> 時，Angular 會嘗試其他對應的路由，而不是完全阻止導向。</p>
 
   <h2 id="types-of-route-guards">
-    <a href="#types-of-route-guards" class="docs-anchor" tabindex="-1" aria-label="Link to Types of route guards">路由守卫的类型</a>
+    <a href="#types-of-route-guards" class="docs-anchor" tabindex="-1" aria-label="Link to Types of route guards">路由守衛的型別</a>
   </h2>
-  <p>Angular 提供了四种类型的路由守卫，每种都有不同的用途：</p>
+  <p>Angular 提供了四種型別的路由守衛，每種都有不同的用途：</p>
 
     <nav class="docs-pill-row">
       
@@ -94,84 +94,84 @@
   <h3 id="canactivate">
     <a href="#canactivate" class="docs-anchor" tabindex="-1" aria-label="Link to CanActivate">CanActivate</a>
   </h3>
-  <p><a href="/api/router/CanActivate"><code>CanActivate</code></a> 守卫决定用户是否可以访问某个路由。它最常用于身份验证和授权。</p>
-<p>它可以使用以下默认参数：</p>
+  <p><a href="/api/router/CanActivate"><code>CanActivate</code></a> 守衛決定使用者是否可以訪問某個路由。它最常用於身份驗證和授權。</p>
+<p>它可以使用以下預設引數：</p>
 
   <ul class="docs-list">
-    <li><code>route: ActivatedRouteSnapshot</code> - 包含有关正在激活的路由的信息</li>
-<li><code>state: RouterStateSnapshot</code> - 包含路由器的当前状态</li>
+    <li><code>route: ActivatedRouteSnapshot</code> - 包含有關正在啟用的路由的訊息</li>
+<li><code>state: RouterStateSnapshot</code> - 包含路由器的當前狀態</li>
 
   </ul>
-  <p>它可以返回<a href="#route-guard-return-types">标准的守卫返回值类型</a>。</p>
+  <p>它可以回傳<a href="#route-guard-return-types">標準的守衛回傳值型別</a>。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> authGuard</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/CanActivateFn">CanActivateFn</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">route</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/ActivatedRouteSnapshot">ActivatedRouteSnapshot</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"><a href="/api/animations/state">state</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/RouterStateSnapshot">RouterStateSnapshot</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> authService</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(AuthService);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> authService.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">isAuthenticated</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">};</span></span></code></pre>
-  </div><p>提示：如果你需要重定向用户，请返回一个 <a href="api/router/UrlTree"><code>URLTree</code></a> 或 <a href="api/router/RedirectCommand"></a><a href="/api/router/RedirectCommand"><code>RedirectCommand</code></a>。<strong>不要</strong>返回 <code>false</code> 然后再以编程方式 <code>navigate</code> 用户。</p>
-<p>有关更多信息，请查看 <a href="api/router/CanActivateFn">CanActivateFn 的 API 文档</a>。</p>
+  </div><p>提示：如果你需要重導向使用者，請回傳一個 <a href="api/router/UrlTree"><code>URLTree</code></a> 或 <a href="api/router/RedirectCommand"></a><a href="/api/router/RedirectCommand"><code>RedirectCommand</code></a>。<strong>不要</strong>回傳 <code>false</code> 然後再以程式設計方式 <code>navigate</code> 使用者。</p>
+<p>有關更多訊息，請檢視 <a href="api/router/CanActivateFn">CanActivateFn 的 API 文件</a>。</p>
 
   <h3 id="canactivatechild">
     <a href="#canactivatechild" class="docs-anchor" tabindex="-1" aria-label="Link to CanActivateChild">CanActivateChild</a>
   </h3>
-  <p><a href="/api/router/CanActivateChild"><code>CanActivateChild</code></a> 守卫决定用户是否可以访问某个父路由的子路由。当你想要保护嵌套路由的整个部分时，这会很有用。换句话说，<code>canActivateChild</code> 会为<em>所有</em>子路由运行。如果有一个子组件下面还有另一个子组件，<code>canActivateChild</code> 将为这两个组件各运行一次。</p>
-<p>它可以使用以下默认参数：</p>
+  <p><a href="/api/router/CanActivateChild"><code>CanActivateChild</code></a> 守衛決定使用者是否可以訪問某個父路由的子路由。當你想要保護巢狀路由的整個部分時，這會很有用。換句話說，<code>canActivateChild</code> 會為<em>所有</em>子路由執行。如果有一個子元件下面還有另一個子元件，<code>canActivateChild</code> 將為這兩個元件各執行一次。</p>
+<p>它可以使用以下預設引數：</p>
 
   <ul class="docs-list">
-    <li><code>childRoute: ActivatedRouteSnapshot</code> - 包含有关正在激活的子路由的“未来”快照（即路由器正在尝试导航到的状态）的信息</li>
-<li><code>state: RouterStateSnapshot</code> - 包含路由器的当前状态</li>
+    <li><code>childRoute: ActivatedRouteSnapshot</code> - 包含有關正在啟用的子路由的『未來』快照（即路由器正在嘗試導向到的狀態）的訊息</li>
+<li><code>state: RouterStateSnapshot</code> - 包含路由器的當前狀態</li>
 
   </ul>
-  <p>它可以返回<a href="#route-guard-return-types">标准的守卫返回值类型</a>。</p>
+  <p>它可以回傳<a href="#route-guard-return-types">標準的守衛回傳值型別</a>。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> adminChildGuard</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/CanActivateChildFn">CanActivateChildFn</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">childRoute</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/ActivatedRouteSnapshot">ActivatedRouteSnapshot</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"><a href="/api/animations/state">state</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/RouterStateSnapshot">RouterStateSnapshot</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> authService</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(AuthService);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> authService.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">hasRole</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'admin'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">};</span></span></code></pre>
-  </div><p>有关更多信息，请查看 <a href="api/router/CanActivateChildFn">CanActivateChildFn 的 API 文档</a>。</p>
+  </div><p>有關更多訊息，請檢視 <a href="api/router/CanActivateChildFn">CanActivateChildFn 的 API 文件</a>。</p>
 
   <h3 id="candeactivate">
     <a href="#candeactivate" class="docs-anchor" tabindex="-1" aria-label="Link to CanDeactivate">CanDeactivate</a>
   </h3>
-  <p><a href="/api/router/CanDeactivate"><code>CanDeactivate</code></a> 守卫决定用户是否可以离开某个路由。一个常见的场景是防止用户离开未保存表单的路由。</p>
-<p>它可以使用以下默认参数：</p>
+  <p><a href="/api/router/CanDeactivate"><code>CanDeactivate</code></a> 守衛決定使用者是否可以離開某個路由。一個常見的場景是防止使用者離開未儲存表單的路由。</p>
+<p>它可以使用以下預設引數：</p>
 
   <ul class="docs-list">
-    <li><code>component: T</code> - 正在停用的组件实例</li>
-<li><code>currentRoute: ActivatedRouteSnapshot</code> - 包含有关当前路由的信息</li>
-<li><code>currentState: RouterStateSnapshot</code> - 包含当前的路由器状态</li>
-<li><code>nextState: RouterStateSnapshot</code> - 包含正在导航到的下一个路由器状态</li>
+    <li><code>component: T</code> - 正在停用的元件實例</li>
+<li><code>currentRoute: ActivatedRouteSnapshot</code> - 包含有關當前路由的訊息</li>
+<li><code>currentState: RouterStateSnapshot</code> - 包含當前的路由器狀態</li>
+<li><code>nextState: RouterStateSnapshot</code> - 包含正在導向到的下一個路由器狀態</li>
 
   </ul>
-  <p>它可以返回<a href="#route-guard-return-types">标准的守卫返回值类型</a>。</p>
+  <p>它可以回傳<a href="#route-guard-return-types">標準的守衛回傳值型別</a>。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> unsavedChangesGuard</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/CanDeactivateFn">CanDeactivateFn</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">FormComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">component</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> FormComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">currentRoute</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/ActivatedRouteSnapshot">ActivatedRouteSnapshot</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">currentState</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/RouterStateSnapshot">RouterStateSnapshot</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">nextState</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/RouterStateSnapshot">RouterStateSnapshot</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> component.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">hasUnsavedChanges</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    ?</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> confirm</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'You have unsaved changes. Are you sure you want to leave?'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    :</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">};</span></span></code></pre>
-  </div><p>有关更多信息，请查看 <a href="api/router/CanDeactivateFn">CanDeactivateFn 的 API 文档</a>。</p>
+  </div><p>有關更多訊息，請檢視 <a href="api/router/CanDeactivateFn">CanDeactivateFn 的 API 文件</a>。</p>
 
   <h3 id="canmatch">
     <a href="#canmatch" class="docs-anchor" tabindex="-1" aria-label="Link to CanMatch">CanMatch</a>
   </h3>
-  <p><a href="/api/router/CanMatch"><code>CanMatch</code></a> 守卫在路径匹配期间确定路由是否可以匹配。与其他守卫不同，拒绝会继续尝试其他匹配的路由，而不是完全阻止导航。这对于功能标志、A/B 测试或条件路由加载非常有用。</p>
-<p>它可以使用以下默认参数：</p>
+  <p><a href="/api/router/CanMatch"><code>CanMatch</code></a> 守衛在路徑對應期間確定路由是否可以對應。與其他守衛不同，拒絕會繼續嘗試其他對應的路由，而不是完全阻止導向。這對於功能標誌、A/B 測試或條件路由載入非常有用。</p>
+<p>它可以使用以下預設引數：</p>
 
   <ul class="docs-list">
-    <li><code>route: Route</code> - 正在评估的路由配置</li>
-<li><code>segments: UrlSegment[]</code> - 尚未被先前父路由评估消耗的 URL 片段</li>
+    <li><code>route: Route</code> - 正在評估的路由設定</li>
+<li><code>segments: UrlSegment[]</code> - 尚未被先前父路由評估消耗的 URL 片段</li>
 
   </ul>
-  <p>它可以返回<a href="#route-guard-return-types">标准的守卫返回值类型</a>，但当它返回 <code>false</code> 时，Angular 会尝试其他匹配的路由，而不是完全阻止导航。</p>
+  <p>它可以回傳<a href="#route-guard-return-types">標準的守衛回傳值型別</a>，但當它回傳 <code>false</code> 時，Angular 會嘗試其他對應的路由，而不是完全阻止導向。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> featureToggleGuard</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/CanMatchFn">CanMatchFn</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">route</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Route">Route</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">segments</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/UrlSegment">UrlSegment</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[]) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> featureService</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> inject</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(FeatureService);</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> featureService.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">isFeatureEnabled</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'newDashboard'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">};</span></span></code></pre>
-  </div><p>它还可以让你为同一路径使用不同的组件。</p>
+  </div><p>它還可以讓你為同一路徑使用不同的元件。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// 📄 routes.ts</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'dashboard'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: AdminDashboard,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    canMatch: [adminGuard]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'dashboard'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: UserDashboard,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    canMatch: [userGuard]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span></span></code></pre>
-  </div><p>在此示例中，当用户访问 <code>/dashboard</code> 时，将使用第一个匹配正确守卫的路由。</p>
-<p>有关更多信息，请查看 <a href="api/router/CanMatchFn">CanMatchFn 的 API 文档</a>。</p>
+  </div><p>在此範例中，當用戶訪問 <code>/dashboard</code> 時，將使用第一個對應正確守衛的路由。</p>
+<p>有關更多訊息，請檢視 <a href="api/router/CanMatchFn">CanMatchFn 的 API 文件</a>。</p>
 
   <h2 id="applying-guards-to-routes">
-    <a href="#applying-guards-to-routes" class="docs-anchor" tabindex="-1" aria-label="Link to Applying guards to routes">将守卫应用于路由</a>
+    <a href="#applying-guards-to-routes" class="docs-anchor" tabindex="-1" aria-label="Link to Applying guards to routes">將守衛應用於路由</a>
   </h2>
-  <p>创建路由守卫后，你需要在路由定义中配置它们。</p>
-<p>守卫在路由配置中指定为数组，以便你可以将多个守卫应用于单个路由。它们按在数组中出现的顺序执行。</p>
+  <p>建立路由守衛後，你需要在路由定義中設定它們。</p>
+<p>守衛在路由設定中指定為數組，以便你可以將多個守衛應用於單個路由。它們按在陣列中出現的順序執行。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { authGuard } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './guards/auth.guard'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { adminGuard } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './guards/admin.guard'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { canDeactivateGuard } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './guards/can-deactivate.guard'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { featureToggleGuard } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './guards/feature-toggle.guard'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Basic CanActivate - requires authentication</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'dashboard'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: DashboardComponent,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    canActivate: [authGuard]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Multiple CanActivate guards - requires authentication AND admin role</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'admin'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: AdminComponent,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    canActivate: [authGuard, adminGuard]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // <a href="/api/router/CanActivate">CanActivate</a> + CanDeactivate - protected route with unsaved changes check</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'profile'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: ProfileComponent,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    canActivate: [authGuard],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    canDeactivate: [canDeactivateGuard]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // <a href="/api/router/CanActivateChild">CanActivateChild</a> - protects all child routes</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'users'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// /user - NOT protected</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    canActivateChild: [authGuard],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    children: [</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">      // /users/list - PROTECTED</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'list'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: UserListComponent },</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">      // /useres/detail/:id - PROTECTED</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'detail/:id'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: UserDetailComponent }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    ]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // <a href="/api/router/CanMatch">CanMatch</a> - conditionally matches route based on feature flag</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'beta-feature'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: BetaFeatureComponent,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    canMatch: [featureToggleGuard]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Fallback route if beta feature is disabled</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'beta-feature'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: ComingSoonComponent</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>

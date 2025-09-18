@@ -4,81 +4,81 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">分析你的应用</h1>
+    <h1 tabindex="-1">分析你的應用</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/tools/devtools/profiler.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p><strong>Profiler</strong>（分析器）选项卡可让你可视化 Angular 的变更检测执行情况。
-这对于确定变更检测何时以及如何影响你的应用性能非常有用。</p>
+    <p><strong>Profiler</strong>（分析器）頁籤可讓你視覺化 Angular 的變更檢測執行情況。
+這對於確定變更檢測何時以及如何影響你的應用效能非常有用。</p>
 <img src="assets/images/guide/devtools/profiler.png" alt="A screenshot of the 'Profiler' tab which reads 'Click the play button to start a new recording, or upload a json file containing profiler data.' Next to this is a record button to begin recording a new profile as well as a file picker to select an existing profile.">
 
-<p>Profiler（分析器）选项卡可让你开始分析当前应用或导入先前运行的现有分析。
-要开始分析你的应用，请将鼠标悬停在 Profiler（分析器）选项卡左上角的圆圈上，然后点击 <strong>Start recording</strong>（开始录制）。</p>
-<p>在分析期间，Angular DevTools 会捕获执行事件，例如变更检测和生命周期钩子执行。
-与你的应用进行交互以触发变更检测，并生成 Angular DevTools 可以使用的数据。
-要完成录制，请再次点击圆圈以 <strong>Stop recording</strong>（停止录制）。</p>
-<p>你还可以导入现有录制。
-在 <a href="tools/devtools#import-and-export-recordings">Import recording</a>（导入录制）部分了解此功能的更多信息。</p>
+<p>Profiler（分析器）頁籤可讓你開始分析當前應用或匯入先前執行的現有分析。
+要開始分析你的應用，請將滑鼠懸停在 Profiler（分析器）頁籤左上角的圓圈上，然後點選 <strong>Start recording</strong>（開始錄製）。</p>
+<p>在分析期間，Angular DevTools 會捕獲執行事件，例如變更檢測和生命週期鉤子執行。
+與你的應用進行互動以觸發變更檢測，並生成 Angular DevTools 可以使用的資料。
+要完成錄製，請再次點選圓圈以 <strong>Stop recording</strong>（停止錄製）。</p>
+<p>你還可以匯入現有錄製。
+在 <a href="tools/devtools#import-and-export-recordings">Import recording</a>（匯入錄製）部分瞭解此功能的更多訊息。</p>
 
   <h2 id="understand-your-applications-execution">
-    <a href="#understand-your-applications-execution" class="docs-anchor" tabindex="-1" aria-label="Link to Understand your application's execution">了解你的应用执行情况</a>
+    <a href="#understand-your-applications-execution" class="docs-anchor" tabindex="-1" aria-label="Link to Understand your application's execution">瞭解你的應用執行情況</a>
   </h2>
-  <p>录制或导入分析后，Angular DevTools 会显示变更检测周期的可视化图。</p>
+  <p>錄製或匯入分析後，Angular DevTools 會顯示變更檢測週期的視覺化圖。</p>
 <img src="assets/images/guide/devtools/default-profiler-view.png" alt="A screenshot of the 'Profiler' tab after a profile has been recorded or uploaded. It displays a bar chart illustrating various change detection cycles with some text which reads 'Select a bar to preview a particular change detection cycle'.">
 
-<p>序列中的每个条形代表你应用中的一个变更检测周期。
-条形越高，应用在此周期中运行变更检测的时间就越长。
-选择一个条形时，DevTools 会显示有关它的有用信息，包括：</p>
+<p>序列中的每個條形代表你應用中的一個變更檢測週期。
+條形越高，應用在此週期中執行變更檢測的時間就越長。
+選擇一個條形時，DevTools 會顯示有關它的有用訊息，包括：</p>
 
   <ul class="docs-list">
-    <li>一个条形图，显示在此周期中捕获的所有组件和指令</li>
-<li>Angular 在此周期中花费在运行变更检测上的时间。</li>
-<li>用户体验到的估计帧率。</li>
-<li>触发变更检测的源。</li>
+    <li>一個條形圖，顯示在此週期中捕獲的所有元件和指令</li>
+<li>Angular 在此週期中花費在執行變更檢測上的時間。</li>
+<li>使用者體驗到的估計幀率。</li>
+<li>觸發變更檢測的源。</li>
 
   </ul>
   <img src="assets/images/guide/devtools/profiler-selected-bar.png" alt="A screenshot of the 'Profiler' tab. A single bar has been selected by the user and a nearby dropdown menu displays 'Bar chart`, showing a second bar chart underneath it. The new chart has two bars which take up the majority of the space, one labeled `TodosComponent` and the other labeled `NgForOf`. The other bars are small enough to be negligible in comparison.">
 
 
   <h2 id="understand-component-execution">
-    <a href="#understand-component-execution" class="docs-anchor" tabindex="-1" aria-label="Link to Understand component execution">了解组件执行情况</a>
+    <a href="#understand-component-execution" class="docs-anchor" tabindex="-1" aria-label="Link to Understand component execution">瞭解元件執行情況</a>
   </h2>
-  <p>点击变更检测周期后显示的条形图会显示有关你的应用在该特定组件或指令中运行变更检测所花费时间的详细视图。</p>
-<p>此示例显示了 <a href="/api/common/NgForOf"><code>NgForOf</code></a> 指令花费的总时间以及在其上调用的方法。</p>
+  <p>點選變更檢測週期後顯示的條形圖會顯示有關你的應用在該特定元件或指令中執行變更檢測所花費時間的詳細檢視。</p>
+<p>此範例顯示了 <a href="/api/common/NgForOf"><code>NgForOf</code></a> 指令花費的總時間以及在其上呼叫的方法。</p>
 <img src="assets/images/guide/devtools/directive-details.png" alt="A screenshot of the 'Profiler' tab where the `NgForOf` bar is selected. A detailed view of `NgForOf` is visible to the right where it lists 'Total time spent: 1.76 ms'. It includes a with exactly one row, listing `NgForOf` as a directives with an `ngDoCheck` method which took 1.76 ms. It also includes a list labeled 'Parent Hierarchy' containing the parent components of this directive.">
 
 
   <h2 id="hierarchical-views">
-    <a href="#hierarchical-views" class="docs-anchor" tabindex="-1" aria-label="Link to Hierarchical views">分层视图</a>
+    <a href="#hierarchical-views" class="docs-anchor" tabindex="-1" aria-label="Link to Hierarchical views">分層檢視</a>
   </h2>
   <img src="assets/images/guide/devtools/flame-graph-view.png" alt="A screenshot of the 'Profiler' tab. A single bar has been selected by the user and a nearby dropdown menu now displays 'Flame graph', showing a flame graph underneath it. The flame graph starts with a row called 'Entire application' and another row called 'AppComponent'. Beneath those, the rows start to break up into multiple items, starting with `[RouterOutlet]` and `DemoAppComponent` on the third row. A few layers deep, one cell is highlighted red.">
 
-<p>你还可以以类似火焰图的视图可视化变更检测执行情况。</p>
-<p>图中的每个块代表渲染树中特定位置的屏幕元素。
-例如，考虑一个变更检测周期，其中移除了一个 <code>LoggedOutUserComponent</code>，并在其位置渲染了一个 <code>LoggedInUserComponent</code>。在这种情况下，两个组件都将显示在同一个块中。</p>
-<p>x 轴表示渲染此变更检测周期所花费的总时间。
-y 轴表示元素层级。为元素运行变更检测需要渲染其指令和子组件。
-总之，此图可视化了哪些组件渲染耗时最长以及时间花在哪里。</p>
-<p>每个块的颜色取决于 Angular 在其中花费的时间。
-Angular DevTools 根据相对于渲染耗时最多的块所花费的时间来确定颜色的强度。</p>
-<p>点击某个块时，你将在右侧面板中看到有关它的详细信息。
-双击该块会放大它，以便你可以更轻松地查看其嵌套的子项。</p>
+<p>你還可以以類似火焰圖的檢視視覺化變更檢測執行情況。</p>
+<p>圖中的每個區塊代表渲染樹中特定位置的螢幕元素。
+例如，考慮一個變更檢測週期，其中移除了一個 <code>LoggedOutUserComponent</code>，並在其位置渲染了一個 <code>LoggedInUserComponent</code>。在這種情況下，兩個元件都將顯示在同一個塊中。</p>
+<p>x 軸表示渲染此變更檢測週期所花費的總時間。
+y 軸表示元素層級。為元素執行變更檢測需要渲染其指令和子元件。
+總之，此圖視覺化了哪些元件渲染耗時最長以及時間花在哪裡。</p>
+<p>每個區塊的顏色取決於 Angular 在其中花費的時間。
+Angular DevTools 根據相對於渲染耗時最多的區塊所花費的時間來確定顏色的強度。</p>
+<p>點選某個區塊時，你將在右側面板中看到有關它的詳細訊息。
+雙擊該區塊會放大它，以便你可以更輕鬆地檢視其巢狀的子項。</p>
 
   <h2 id="debug-change-detection-and-onpush-components">
-    <a href="#debug-change-detection-and-onpush-components" class="docs-anchor" tabindex="-1" aria-label="Link to Debug change detection and <code>OnPush</code> components">调试变更检测和 <code>OnPush</code> 组件</a>
+    <a href="#debug-change-detection-and-onpush-components" class="docs-anchor" tabindex="-1" aria-label="Link to Debug change detection and <code>OnPush</code> components">除錯變更檢測和 <code>OnPush</code> 元件</a>
   </h2>
-  <p>通常，该图会可视化给定变更检测帧的应用<em>渲染</em>所需的时间。但是，某些组件（如 <code>OnPush</code> 组件）仅在其输入属性更改时才会重新渲染。对于特定的帧，在没有这些组件的情况下可视化火焰图可能很有用。</p>
-<p>要仅可视化变更检测帧中经历了变更检测过程的组件，请选择火焰图上方的 <strong>Change detection</strong>（变更检测）复选框。</p>
-<p>此视图突出显示了所有经过变更检测的组件，并将未经过的组件（例如未重新渲染的 <code>OnPush</code> 组件）以灰色显示。</p>
+  <p>通常，該圖會視覺化給定變更檢測幀的應用<em>渲染</em>所需的時間。但是，某些元件（如 <code>OnPush</code> 元件）僅在其輸入屬性更改時才會重新渲染。對於特定的幀，在沒有這些元件的情況下視覺化火焰圖可能很有用。</p>
+<p>要僅視覺化變更檢測幀中經歷了變更檢測過程的元件，請選擇火焰圖上方的 <strong>Change detection</strong>（變更檢測）複選框。</p>
+<p>此檢視突出顯示了所有經過變更檢測的元件，並將未經過的元件（例如未重新渲染的 <code>OnPush</code> 元件）以灰色顯示。</p>
 <img src="assets/images/guide/devtools/debugging-onpush.png" alt="A screenshot of the 'Profiler' tab displaying a flame chart visualization of a change detection cycle. A checkbox labeled 'Show only change detection' is now checked. The flame graph looks very similar to before, however the color of components has changed from orange to blue. Several tiles labeled `[RouterOutlet]` are no longer highlighted with any color.">
 
 
   <h2 id="import-and-export-recordings">
-    <a href="#import-and-export-recordings" class="docs-anchor" tabindex="-1" aria-label="Link to Import and export recordings">导入和导出录制</a>
+    <a href="#import-and-export-recordings" class="docs-anchor" tabindex="-1" aria-label="Link to Import and export recordings">匯入和匯出錄製</a>
   </h2>
-  <p>点击已录制的分析会话右上角的 <strong>Save Profile</strong>（保存分析）按钮，将其导出为 JSON 文件并保存到磁盘。
-稍后，通过点击 <strong>Choose file</strong>（选择文件）输入框在分析器的初始视图中导入该文件。</p>
+  <p>點選已錄製的分析會話右上角的 <strong>Save Profile</strong>（儲存分析）按鈕，將其匯出為 JSON 檔案並儲存到磁碟。
+稍後，透過點選 <strong>Choose file</strong>（選擇檔案）輸入框在分析器的初始檢視中匯入該檔案。</p>
 <img src="assets/images/guide/devtools/save-profile.png" alt="A screenshot of the 'Profiler' tab displaying change detection cycles. On the right side a 'Save Profile' button is visible.">

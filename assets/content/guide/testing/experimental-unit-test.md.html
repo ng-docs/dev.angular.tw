@@ -4,65 +4,65 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">实验性单元测试系统</h1>
+    <h1 tabindex="-1">實驗性單元測試系統</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/testing/experimental-unit-test.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>Angular CLI 提供了一个实验性单元测试系统，可以使用 <a href="https://vitest.dev/" target="_blank">Vitest</a> 作为测试运行器。</p>
+    <p>Angular CLI 提供了一個實驗性單元測試系統，可以使用 <a href="https://vitest.dev/" target="_blank">Vitest</a> 作為測試執行器。</p>
 
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要提示：</strong>此实验性单元测试系统要求使用 <code>application</code> 构建系统。
-<code>application</code> 构建系统是所有新创建项目的默认设置。</p>
+    <p><strong>重要提示：</strong>此實驗性單元測試系統要求使用 <code>application</code> 建立系統。
+<code>application</code> 建立系統是所有新創建專案的預設設定。</p>
 
     </div>
     
   <h2 id="installing-dependencies">
-    <a href="#installing-dependencies" class="docs-anchor" tabindex="-1" aria-label="Link to Installing dependencies">安装依赖项</a>
+    <a href="#installing-dependencies" class="docs-anchor" tabindex="-1" aria-label="Link to Installing dependencies">安裝依賴項</a>
   </h2>
-  <p>新构建器正常工作需要一些软件包。要安装新软件包，请运行以下命令：</p>
+  <p>新建構式正常工作需要一些軟體套件。要安裝新軟體套件，請執行以下指令：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> install</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> vitest</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> jsdom</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> --save-dev</span></span></code></pre>
-  </div><p>如果工作区中没有其他项目使用 Karma，请运行以下命令卸载相应的软件包：</p>
+  </div><p>如果工作區中沒有其他專案使用 Karma，請執行以下指令解除安裝相應的軟體套件：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> uninstall</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> karma</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> karma-chrome-launcher</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> karma-coverage</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> karma-jasmine</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> karma-jasmine-html-reporter</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> --save-dev</span></span></code></pre>
   </div>
   <h2 id="set-up-testing">
-    <a href="#set-up-testing" class="docs-anchor" tabindex="-1" aria-label="Link to Set up testing">设置测试</a>
+    <a href="#set-up-testing" class="docs-anchor" tabindex="-1" aria-label="Link to Set up testing">設定測試</a>
   </h2>
-  <p>Angular CLI 在新项目中包含了测试系统，但必须先进行配置才能使用。</p>
-<p>您使用 CLI 创建的项目默认设置为使用 <code>karma</code> 测试系统。
-要更改为实验性单元测试系统，请按以下方式更新 <code>test</code> 目标：</p>
+  <p>Angular CLI 在新專案中包含了測試系統，但必須先進行設定才能使用。</p>
+<p>您使用 CLI 建立的專案預設設定為使用 <code>karma</code> 測試系統。
+要更改為實驗性單元測試系統，請按以下方式更新 <code>test</code> 目標：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"test"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  "builder"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"@angular/build:unit-test"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  "options"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    "tsConfig"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"tsconfig.spec.json"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    "runner"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"vitest"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    "buildTarget"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"::development"</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
-  </div><p><code>buildTarget</code> 的操作方式与开发服务器可用的选项类似。
-<code>build</code> 目标为测试配置构建选项。
-如果项目中缺少 <code>development</code> 构建配置，或者您需要
-不同的测试选项，您可以创建并使用 <code>testing</code> 或名称类似的构建配置。</p>
-<p>要执行应用程序的测试，只需像以前一样运行 <a href="cli/test"><code>ng test</code></a> CLI 命令：</p>
+  </div><p><code>buildTarget</code> 的操作方式與開發伺服器可用的選項類似。
+<code>build</code> 目標為測試設定建立選項。
+如果專案中缺少 <code>development</code> 建立設定，或者您需要
+不同的測試選項，您可以建立並使用 <code>testing</code> 或名稱類似的建立設定。</p>
+<p>要執行應用程式的測試，只需像以前一樣執行 <a href="cli/test"><code>ng test</code></a> CLI 指令：</p>
 <div class="docs-code shell">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">ng</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> test</span></span></code></pre>
-  </div><p><code>ng test</code> 命令以<em>监视模式</em>构建应用程序，并启动配置的运行器。</p>
-<p>控制台输出如下所示：</p>
+  </div><p><code>ng test</code> 指令以<em>監視模式</em>建立應用程式，並啟動設定的執行器。</p>
+<p>控制台輸出如下所示：</p>
 <div class="docs-code shell">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">✓</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> spec-app-app.spec.js</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (2 </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">tests</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) 31ms</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">   ✓</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> App</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> &gt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> should</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> create</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> the</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> app</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 22ms</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">   ✓</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> App</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> &gt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> should</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> render</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> title</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 8ms</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Test</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> Files</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  1</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> passed</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (1)</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">      Tests</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  2</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> passed</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (2)</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">   Start</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> at</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  14:24:15</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">   Duration</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  1.16s</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (transform </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">628ms,</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> setup</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 703ms,</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> collect</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 64ms,</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> tests</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 31ms,</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> environment</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 188ms,</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> prepare</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> 33ms</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span></span></code></pre>
-  </div><p>当使用交互式终端且不在 CI 上运行时，默认启用监视模式。</p>
+  </div><p>當使用互動式終端且不在 CI 上執行時，預設啟用監視模式。</p>
 
   <h2 id="configuration">
-    <a href="#configuration" class="docs-anchor" tabindex="-1" aria-label="Link to Configuration">配置</a>
+    <a href="#configuration" class="docs-anchor" tabindex="-1" aria-label="Link to Configuration">設定</a>
   </h2>
-  <p>Angular CLI 会为您处理 Vitest 的配置。它根据 <code>angular.json</code> 文件中指定的选项，在内存中构建完整的配置。
-目前不支持直接自定义底层测试运行器的配置。</p>
+  <p>Angular CLI 會為您處理 Vitest 的設定。它根據 <code>angular.json</code> 檔案中指定的選項，在記憶體中建立完整的設定。
+目前不支援直接自定義底層測試執行器的設定。</p>
 
   <h2 id="bug-reports">
-    <a href="#bug-reports" class="docs-anchor" tabindex="-1" aria-label="Link to Bug reports">错误报告</a>
+    <a href="#bug-reports" class="docs-anchor" tabindex="-1" aria-label="Link to Bug reports">錯誤報告</a>
   </h2>
-  <p>请在 <a href="https://github.com/angular/angular-cli/issues" target="_blank">GitHub</a> 上报告问题和功能请求。</p>
-<p>请尽可能提供一个最小化的复现示例，以帮助团队解决问题。</p>
+  <p>請在 <a href="https://github.com/angular/angular-cli/issues" target="_blank">GitHub</a> 上報告問題和功能請求。</p>
+<p>請儘可能提供一個最小化的復現範例，以幫助團隊解決問題。</p>

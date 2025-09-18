@@ -4,55 +4,55 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">Angular 中的未处理错误</h1>
+    <h1 tabindex="-1">Angular 中的未處理錯誤</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/best-practices/error-handling.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>当你的 Angular 应用运行时，你的一些代码可能会抛出错误。如果这些错误未被处理，可能会导致意外行为和无响应的 UI。本指南涵盖了 Angular 如何处理那些未被你的应用代码显式捕获的错误。有关在你的应用中编写自己的错误处理逻辑的指导，请参考 JavaScript 和 Angular 中错误处理的最佳实践。</p>
-<p>Angular 的错误处理策略的一个基本原则是，错误应尽可能在调用点暴露给开发者。这种方法确保了发起操作的代码拥有理解错误、妥善处理错误以及决定应用状态所需的上下文。通过使错误在其源头可见，开发者可以实现针对失败操作的、具有相关信息以进行恢复或向最终用户提供信息反馈的错误处理。这也有助于避免“过于笼统的错误”的弊端，即错误被报告但缺乏足够的上下文来理解其原因。</p>
-<p>例如，考虑一个从 API 获取用户数据的组件。负责进行 API 调用的代码应包含错误处理（例如，使用 <code>try...catch</code> 块或 RxJS 中的 <code>catchError</code> 操作符）来管理潜在的网络问题或 API 返回的错误。这使得组件能够显示用户友好的错误消息或重试请求，而不是让错误未被处理地传播下去。</p>
+    <p>當你的 Angular 應用執行時，你的一些程式碼可能會丟擲錯誤。如果這些錯誤未被處理，可能會導致意外行為和無回應的 UI。本指南涵蓋了 Angular 如何處理那些未被你的應用程式碼顯式捕獲的錯誤。有關在你的應用中編寫自己的錯誤處理邏輯的指導，請參考 JavaScript 和 Angular 中錯誤處理的最佳實踐。</p>
+<p>Angular 的錯誤處理策略的一個基本原則是，錯誤應儘可能在呼叫點暴露給開發者。這種方法確保了發起操作的程式碼擁有理解錯誤、妥善處理錯誤以及決定應用狀態所需的上下文。透過使錯誤在其源頭可見，開發者可以實現針對失敗操作的、具有相關訊息以進行恢復或向最終使用者提供訊息反饋的錯誤處理。這也有助於避免『過於籠統的錯誤』的弊端，即錯誤被報告但缺乏足夠的上下文來理解其原因。</p>
+<p>例如，考慮一個從 API 獲取使用者資料的元件。負責進行 API 呼叫的程式碼應包含錯誤處理（例如，使用 <code>try...catch</code> 區塊或 RxJS 中的 <code>catchError</code> 運算子）來管理潛在的網路問題或 API 回傳的錯誤。這使得元件能夠顯示使用者友好的錯誤訊息或重試請求，而不是讓錯誤未被處理地傳播下去。</p>
 
   <h2 id="unhandled-errors-are-reported-to-the-errorhandler">
-    <a href="#unhandled-errors-are-reported-to-the-errorhandler" class="docs-anchor" tabindex="-1" aria-label="Link to Unhandled errors are reported to the <code>ErrorHandler</code>">未处理的错误会被报告给 <code>ErrorHandler</code></a>
+    <a href="#unhandled-errors-are-reported-to-the-errorhandler" class="docs-anchor" tabindex="-1" aria-label="Link to Unhandled errors are reported to the <code>ErrorHandler</code>">未處理的錯誤會被報告給 <code>ErrorHandler</code></a>
   </h2>
-  <p>Angular 会将未处理的错误报告给应用的根 <a href="api/core/ErrorHandler">ErrorHandler</a>。当提供自定义 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a> 时，请在调用 <a href="/api/platform-browser/bootstrapApplication"><code>bootstrapApplication</code></a> 时将其作为 <code>ApplicationConfig</code> 的一部分提供。</p>
-<p>在构建 Angular 应用时，你经常会编写一些代码，这些代码会被框架自动调用。例如，当一个组件出现在模板中时，Angular 负责调用该组件的构造函数和生命周期方法。当框架运行你的代码时，你无法合理地添加一个 <code>try</code> 块来优雅地处理错误。在这种情况下，Angular 会捕获错误并将它们发送到 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a>。</p>
-<p>Angular 不会捕获由你的代码直接调用的 API 中的错误。例如，如果你有一个服务，其中有一个方法会抛出错误，而你在组件中调用了该方法，Angular 不会自动捕获该错误。你需要使用 <code>try...catch</code> 等机制来处理它。</p>
-<p>Angular 仅在以下情况下捕获用户 Promise 或可观察者中的<em>异步</em>错误：</p>
+  <p>Angular 會將未處理的錯誤報告給應用的根 <a href="api/core/ErrorHandler">ErrorHandler</a>。當提供自定義 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a> 時，請在呼叫 <a href="/api/platform-browser/bootstrapApplication"><code>bootstrapApplication</code></a> 時將其作為 <code>ApplicationConfig</code> 的一部分提供。</p>
+<p>在建立 Angular 應用時，你經常會編寫一些程式碼，這些程式碼會被框架自動呼叫。例如，當一個元件出現在樣板中時，Angular 負責呼叫該組件的建構式函式和生命週期方法。當框架執行你的程式碼時，你無法合理地新增一個 <code>try</code> 區塊來優雅地處理錯誤。在這種情況下，Angular 會捕獲錯誤並將它們傳送到 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a>。</p>
+<p>Angular 不會捕獲由你的程式碼直接呼叫的 API 中的錯誤。例如，如果你有一個服務，其中有一個方法會丟擲錯誤，而你在元件中呼叫了該方法，Angular 不會自動捕獲該錯誤。你需要使用 <code>try...catch</code> 等機制來處理它。</p>
+<p>Angular 僅在以下情況下捕獲使用者 Promise 或可觀察者中的<em>非同步</em>錯誤：</p>
 
   <ul class="docs-list">
-    <li>存在一个明确的约定，要求 Angular 等待并使用异步操作的结果，并且</li>
-<li>当错误未在返回值或状态中呈现时。</li>
+    <li>存在一個明確的約定，要求 Angular 等待並使用非同步操作的結果，並且</li>
+<li>當錯誤未在回傳值或狀態中呈現時。</li>
 
   </ul>
-  <p>例如，<a href="/api/common/AsyncPipe"><code>AsyncPipe</code></a> 和 <a href="/api/core/PendingTasks#run"><code>PendingTasks.run</code></a> 会将错误转发给 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a>，而 <a href="/api/core/resource"><code>resource</code></a> 则在 <code>status</code> 和 <code>error</code> 属性中呈现错误。</p>
-<p>Angular 报告给 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a> 的错误是<em>意外</em>错误。这些错误可能是无法恢复的，或者表明应用程序状态已损坏。应用程序应尽可能在错误发生的地方使用 <code>try</code> 块或适当的错误处理操作符（如 RxJS 中的 <code>catchError</code>）来提供错误处理，而不是依赖 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a>。<code>ErrorHandler</code> 最常且最恰当地仅用作将潜在的致命错误报告给错误跟踪和日志记录基础设施的机制。</p>
+  <p>例如，<a href="/api/common/AsyncPipe"><code>AsyncPipe</code></a> 和 <a href="/api/core/PendingTasks#run"><code>PendingTasks.run</code></a> 會將錯誤轉發給 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a>，而 <a href="/api/core/resource"><code>resource</code></a> 則在 <code>status</code> 和 <code>error</code> 屬性中呈現錯誤。</p>
+<p>Angular 報告給 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a> 的錯誤是<em>意外</em>錯誤。這些錯誤可能是無法恢復的，或者表明應用程式狀態已損壞。應用程式應儘可能在錯誤發生的地方使用 <code>try</code> 區塊或適當的錯誤處理運算子（如 RxJS 中的 <code>catchError</code>）來提供錯誤處理，而不是依賴 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a>。<code>ErrorHandler</code> 最常且最恰當地僅用作將潛在的致命錯誤報告給錯誤跟蹤和日誌記錄基礎設施的機制。</p>
 
   <h3 id="testbed-rethrows-errors-by-default">
-    <a href="#testbed-rethrows-errors-by-default" class="docs-anchor" tabindex="-1" aria-label="Link to <code>TestBed</code> rethrows errors by default"><code>TestBed</code> 默认会重新抛出错误</a>
+    <a href="#testbed-rethrows-errors-by-default" class="docs-anchor" tabindex="-1" aria-label="Link to <code>TestBed</code> rethrows errors by default"><code>TestBed</code> 預設會重新丟擲錯誤</a>
   </h3>
-  <p>在许多情况下，<a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a> 可能只记录错误，并允许应用程序继续运行。然而，在测试中，你几乎总是希望暴露这些错误。Angular 的 <a href="/api/core/testing/TestBed"><code>TestBed</code></a> 会重新抛出意外错误，以确保框架捕获的错误不会被无意中遗漏或忽略。在极少数情况下，测试可能专门旨在确保错误不会导致应用程序无响应或崩溃。在这些情况下，你可以通过 <a href="/api/core/testing/TestBed#configureTestingModule({rethrowApplicationErrors: false})"><code>TestBed.configureTestingModule({rethrowApplicationErrors: false})</code></a> 来配置 <a href="/api/core/testing/TestBed"><code>TestBed</code></a>，使其<em>不</em>重新抛出应用错误。</p>
+  <p>在許多情況下，<a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a> 可能只記錄錯誤，並允許應用程式繼續執行。然而，在測試中，你幾乎總是希望暴露這些錯誤。Angular 的 <a href="/api/core/testing/TestBed"><code>TestBed</code></a> 會重新丟擲意外錯誤，以確保框架捕獲的錯誤不會被無意中遺漏或忽略。在極少數情況下，測試可能專門旨在確保錯誤不會導致應用程式無回應或崩潰。在這些情況下，你可以透過 <a href="/api/core/testing/TestBed#configureTestingModule({rethrowApplicationErrors: false})"><code>TestBed.configureTestingModule({rethrowApplicationErrors: false})</code></a> 來設定 <a href="/api/core/testing/TestBed"><code>TestBed</code></a>，使其<em>不</em>重新丟擲應用錯誤。</p>
 
   <h2 id="global-error-listeners">
-    <a href="#global-error-listeners" class="docs-anchor" tabindex="-1" aria-label="Link to Global error listeners">全局错误监听器</a>
+    <a href="#global-error-listeners" class="docs-anchor" tabindex="-1" aria-label="Link to Global error listeners">全域錯誤監聽器</a>
   </h2>
-  <p>既未被应用代码也未被框架的应用实例捕获的错误可能会到达全局范围。如果未加以考虑，到达全局范围的错误可能会产生意外后果。在非浏览器环境中，它们可能导致进程崩溃。在浏览器中，这些错误可能未被报告，并且网站访问者可能会在浏览器控制台中看到这些错误。Angular 为这两种环境提供了全局监听器来处理这些问题。</p>
+  <p>既未被應用程式碼也未被框架的應用實例捕獲的錯誤可能會到達全域範圍。如果未加以考慮，到達全域範圍的錯誤可能會產生意外後果。在非瀏覽器環境中，它們可能導致程序崩潰。在瀏覽器中，這些錯誤可能未被報告，並且網站訪問者可能會在瀏覽器控制台中看到這些錯誤。Angular 為這兩種環境提供了全域監聽器來處理這些問題。</p>
 
   <h3 id="client-side-rendering">
-    <a href="#client-side-rendering" class="docs-anchor" tabindex="-1" aria-label="Link to Client-side rendering">客户端渲染</a>
+    <a href="#client-side-rendering" class="docs-anchor" tabindex="-1" aria-label="Link to Client-side rendering">用戶端渲染</a>
   </h3>
-  <p>将 <a href="/api/core/provideBrowserGlobalErrorListeners"><code>provideBrowserGlobalErrorListeners()</code></a> 添加到 <a href="guide/di/dependency-injection#at-the-application-root-level-using-applicationconfig">ApplicationConfig</a> 会将 <code>'error'</code> 和 <code>'unhandledrejection'</code> 监听器添加到浏览器窗口，并将这些错误转发给 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a>。Angular CLI 默认会为新应用生成此提供者。Angular 团队建议大多数应用处理这些全局错误，无论是使用框架内置的监听器还是自定义监听器。如果你提供自定义监听器，可以移除 <a href="/api/core/provideBrowserGlobalErrorListeners"><code>provideBrowserGlobalErrorListeners</code></a>。</p>
+  <p>將 <a href="/api/core/provideBrowserGlobalErrorListeners"><code>provideBrowserGlobalErrorListeners()</code></a> 新增到 <a href="guide/di/dependency-injection#at-the-application-root-level-using-applicationconfig">ApplicationConfig</a> 會將 <code>'error'</code> 和 <code>'unhandledrejection'</code> 監聽器新增到瀏覽器視窗，並將這些錯誤轉發給 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a>。Angular CLI 預設會為新應用生成此提供者。Angular 團隊建議大多數應用處理這些全域錯誤，無論是使用框架內建的監聽器還是自定義監聽器。如果你提供自定義監聽器，可以移除 <a href="/api/core/provideBrowserGlobalErrorListeners"><code>provideBrowserGlobalErrorListeners</code></a>。</p>
 
   <h3 id="server-side-and-hybrid-rendering">
-    <a href="#server-side-and-hybrid-rendering" class="docs-anchor" tabindex="-1" aria-label="Link to Server-side and hybrid rendering">服务器端渲染和混合渲染</a>
+    <a href="#server-side-and-hybrid-rendering" class="docs-anchor" tabindex="-1" aria-label="Link to Server-side and hybrid rendering">伺服器端渲染和混合渲染</a>
   </h3>
-  <p>在使用 <a href="guide/ssr">Angular with SSR</a> 时，Angular 会自动将 <code>'unhandledRejection'</code> 和 <code>'uncaughtException'</code> 监听器添加到服务器进程。这些处理器可以防止服务器崩溃，而是将捕获的错误记录到控制台。</p>
+  <p>在使用 <a href="guide/ssr">Angular with SSR</a> 時，Angular 會自動將 <code>'unhandledRejection'</code> 和 <code>'uncaughtException'</code> 監聽器新增到伺服器程序。這些處理器可以防止伺服器崩潰，而是將捕獲的錯誤記錄到控制台。</p>
 
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要提示：</strong>如果应用正在使用 Zone.js，则只添加 <code>'unhandledRejection'</code> 处理器。当存在 Zone.js 时，应用 Zone 内的错误已转发到应用的 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a>，并且不会到达服务器进程。</p>
+    <p><strong>重要提示：</strong>如果應用正在使用 Zone.js，則只新增 <code>'unhandledRejection'</code> 處理器。當存在 Zone.js 時，應用 Zone 內的錯誤已轉發到應用的 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a>，並且不會到達伺服器程序。</p>
 
     </div>
     

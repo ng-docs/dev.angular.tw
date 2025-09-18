@@ -4,53 +4,53 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">定义路由</h1>
+    <h1 tabindex="-1">定義路由</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/routing/define-routes.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>路由是 Angular 应用中导航的基本构建块。</p>
+    <p>路由是 Angular 應用中導向的基本建立塊。</p>
 
   <h2 id="what-are-routes">
-    <a href="#what-are-routes" class="docs-anchor" tabindex="-1" aria-label="Link to What are routes?">什么是路由？</a>
+    <a href="#what-are-routes" class="docs-anchor" tabindex="-1" aria-label="Link to What are routes?">什麼是路由？</a>
   </h2>
-  <p>在 Angular 中，<strong>路由</strong>是一个对象，它定义了在特定 URL 路径或模式下应渲染哪个组件，以及当用户导航到该 URL 时会发生什么的其他配置选项。</p>
-<p>这是一个路由的基本示例：</p>
+  <p>在 Angular 中，<strong>路由</strong>是一個物件，它定義了在特定 URL 路徑或模式下應渲染哪個元件，以及當用戶導向到該 URL 時會發生甚麼的其他設定選項。</p>
+<p>這是一個路由的基本範例：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { AdminPage } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './app-admin/app-admin.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> adminPage</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'admin'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  component: AdminPage</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
-  </div><p>对于此路由，当用户访问 <code>/admin</code> 路径时，应用将显示 <code>AdminPage</code> 组件。</p>
+  </div><p>對於此路由，當用戶訪問 <code>/admin</code> 路徑時，應用將顯示 <code>AdminPage</code> 元件。</p>
 
   <h3 id="managing-routes-in-your-application">
-    <a href="#managing-routes-in-your-application" class="docs-anchor" tabindex="-1" aria-label="Link to Managing routes in your application">管理应用中的路由</a>
+    <a href="#managing-routes-in-your-application" class="docs-anchor" tabindex="-1" aria-label="Link to Managing routes in your application">管理應用中的路由</a>
   </h3>
-  <p>大多数项目在包含文件名中带有 <code>routes</code> 的单独文件中定义路由。</p>
-<p>路由集合看起来像这样：</p>
+  <p>大多數專案在包含檔案名中帶有 <code>routes</code> 的單獨檔案中定義路由。</p>
+<p>路由集合看起來像這樣：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { HomePage } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './home-page/home-page.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { AdminPage } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './about-page/admin-page.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">''</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: HomePage,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'admin'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: AdminPage,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>提示：如果您使用 Angular CLI 生成了项目，您的路由定义在 <code>src/app/app.routes.ts</code> 中。</p>
+  </div><p>提示：如果您使用 Angular CLI 生成了專案，您的路由定義在 <code>src/app/app.routes.ts</code> 中。</p>
 
   <h3 id="adding-the-router-to-your-application">
-    <a href="#adding-the-router-to-your-application" class="docs-anchor" tabindex="-1" aria-label="Link to Adding the router to your application">将路由器添加到您的应用</a>
+    <a href="#adding-the-router-to-your-application" class="docs-anchor" tabindex="-1" aria-label="Link to Adding the router to your application">將路由器新增到您的應用</a>
   </h3>
-  <p>在不使用 Angular CLI 引导 Angular 应用时，您可以传递一个包含 <code>providers</code> 数组的配置对象。</p>
-<p>在 <code>providers</code> 数组中，您可以通过调用带有路由的 <a href="/api/router/provideRouter"><code>provideRouter</code></a> 函数，将 Angular 路由器添加到您的应用中。</p>
+  <p>在不使用 Angular CLI 引導 Angular 應用時，您可以傳遞一個包含 <code>providers</code> 陣列的設定物件。</p>
+<p>在 <code>providers</code> 陣列中，您可以透過呼叫帶有路由的 <a href="/api/router/provideRouter"><code>provideRouter</code></a> 函式，將 Angular 路由器新增到您的應用中。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { ApplicationConfig } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/core'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/provideRouter">provideRouter</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { routes } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './app.routes'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> appConfig</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> ApplicationConfig</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  providers: [</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    <a href="/api/router/provideRouter">provideRouter</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(routes),</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">    // ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  ]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">};</span></span></code></pre>
   </div>
   <h2 id="route-url-paths">
-    <a href="#route-url-paths" class="docs-anchor" tabindex="-1" aria-label="Link to Route URL Paths">路由 URL 路径</a>
+    <a href="#route-url-paths" class="docs-anchor" tabindex="-1" aria-label="Link to Route URL Paths">路由 URL 路徑</a>
   </h2>
   
   <h3 id="static-url-paths">
-    <a href="#static-url-paths" class="docs-anchor" tabindex="-1" aria-label="Link to Static URL Paths">静态 URL 路径</a>
+    <a href="#static-url-paths" class="docs-anchor" tabindex="-1" aria-label="Link to Static URL Paths">靜態 URL 路徑</a>
   </h3>
-  <p>静态 URL 路径是指具有预定义路径的路由，这些路径不会根据动态参数而改变。这些路由会精确匹配一个 <code>path</code> 字符串并产生固定的结果。</p>
-<p>这包括的示例有：</p>
+  <p>靜態 URL 路徑是指具有預定義路徑的路由，這些路徑不會根據動態引數而改變。這些路由會精確對應一個 <code>path</code> 字串併產生固定的結果。</p>
+<p>這包括的範例有：</p>
 
   <ul class="docs-list">
     <li>"/admin"</li>
@@ -60,179 +60,179 @@
   </ul>
   
   <h3 id="define-url-paths-with-route-parameters">
-    <a href="#define-url-paths-with-route-parameters" class="docs-anchor" tabindex="-1" aria-label="Link to Define URL Paths with Route Parameters">使用路由参数定义 URL 路径</a>
+    <a href="#define-url-paths-with-route-parameters" class="docs-anchor" tabindex="-1" aria-label="Link to Define URL Paths with Route Parameters">使用路由引數定義 URL 路徑</a>
   </h3>
-  <p>参数化 URL 允许您定义动态路径，这些路径允许多个 URL 指向同一个组件，同时根据 URL 中的参数动态显示数据。</p>
-<p>您可以通过在路由的 <code>path</code> 字符串中添加参数，并在每个参数前加上冒号 (<code>:</code>) 字符来定义此类模式。</p>
+  <p>引數化 URL 允許您定義動態路徑，這些路徑允許多個 URL 指向同一個元件，同時根據 URL 中的引數動態顯示資料。</p>
+<p>您可以透過在路由的 <code>path</code> 字串中新增引數，並在每個引數前加上冒號 (<code>:</code>) 字元來定義此類模式。</p>
 
     <div class="docs-alert docs-alert-important">
-    <p><strong>重要提示：</strong>参数与 URL 的 <a href="https://en.wikipedia.org/wiki/Query_string" target="_blank">查询字符串</a>中的信息不同。
-在本指南中了解更多关于 <a href="/guide/routing/read-route-state#query-parameters">Angular 中的查询参数</a>。</p>
+    <p><strong>重要提示：</strong>引數與 URL 的 <a href="https://en.wikipedia.org/wiki/Query_string" target="_blank">查詢字串</a>中的訊息不同。
+在本指南中瞭解更多關於 <a href="/guide/routing/read-route-state#query-parameters">Angular 中的查詢引數</a>。</p>
 
     </div>
-    <p>以下示例根据通过 URL 传入的用户 ID 显示用户配置文件组件。</p>
+    <p>以下範例根據透過 URL 傳入的使用者 ID 顯示使用者設定檔案元件。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { UserProfile } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './user-profile/user-profile</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'user/:id'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: UserProfile }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>在此示例中，诸如 <code>/user/leeroy</code> 和 <code>/user/jenkins</code> 之类的 URL 会渲染 <code>UserProfile</code> 组件。然后，该组件可以读取 <code>id</code> 参数并使用它来执行其他工作，例如获取数据。有关读取路由参数的详细信息，请参阅 <a href="/guide/routing/read-route-state">读取路由状态指南</a>。</p>
-<p>有效的路由参数名称必须以字母 (a-z, A-Z) 开头，并且只能包含：</p>
+  </div><p>在此範例中，諸如 <code>/user/leeroy</code> 和 <code>/user/jenkins</code> 之類的 URL 會渲染 <code>UserProfile</code> 元件。然後，該組件可以讀取 <code>id</code> 引數並使用它來執行其他工作，例如獲取資料。有關讀取路由引數的詳細訊息，請參閱 <a href="/guide/routing/read-route-state">讀取路由狀態指南</a>。</p>
+<p>有效的路由引數名稱必須以字母 (a-z, A-Z) 開頭，並且只能包含：</p>
 
   <ul class="docs-list">
     <li>字母 (a-z, A-Z)</li>
-<li>数字 (0-9)</li>
-<li>下划线 (_)</li>
-<li>连字符 (-)</li>
+<li>數字 (0-9)</li>
+<li>下劃線 (_)</li>
+<li>連字元 (-)</li>
 
   </ul>
-  <p>您还可以定义带有多个参数的路径：</p>
+  <p>您還可以定義帶有多個引數的路徑：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { UserProfile } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './user-profile/user-profile.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { SocialMediaFeed } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './user-profile/social–media-feed.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'user/:id/:social-media'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: SocialMediaFeed },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'user/:id/'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: UserProfile },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>使用此新路径，用户可以访问 <code>/user/leeroy/youtube</code> 和 <code>/user/leeroy/bluesky</code>，并根据用户 leeroy 的参数查看各自的社交媒体信息流。</p>
-<p>有关读取路由参数的详细信息，请参阅 <a href="/guide/routing/read-route-state">读取路由状态</a>。</p>
+  </div><p>使用此新路徑，使用者可以訪問 <code>/user/leeroy/youtube</code> 和 <code>/user/leeroy/bluesky</code>，並根據使用者 leeroy 的引數檢視各自的社交媒體信息流。</p>
+<p>有關讀取路由引數的詳細訊息，請參閱 <a href="/guide/routing/read-route-state">讀取路由狀態</a>。</p>
 
   <h3 id="wildcards">
-    <a href="#wildcards" class="docs-anchor" tabindex="-1" aria-label="Link to Wildcards">通配符</a>
+    <a href="#wildcards" class="docs-anchor" tabindex="-1" aria-label="Link to Wildcards">萬用字元</a>
   </h3>
-  <p>当您需要捕获特定路径的所有路由时，解决方案是使用双星号 (<code>**</code>) 定义的通配符路由。</p>
-<p>一个常见的示例是定义一个“未找到页面”组件。</p>
+  <p>當您需要捕獲特定路徑的所有路由時，解決方案是使用雙星號 (<code>**</code>) 定義的萬用字元路由。</p>
+<p>一個常見的範例是定義一個『未找到頁面』元件。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { Home } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './home/home.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { UserProfile } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './user-profile/user-profile.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { NotFound } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './not-found/not-found.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'home'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: Home },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'user/:id'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: UserProfile },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'**'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: NotFound }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>在此路由数组中，当用户访问 <code>home</code> 和 <code>user/:id</code> 之外的任何路径时，应用将显示 <code>NotFound</code> 组件。</p>
-<p>提示：通配符路由通常放在路由数组的末尾。</p>
+  </div><p>在此路由陣列中，當用戶訪問 <code>home</code> 和 <code>user/:id</code> 之外的任何路徑時，應用將顯示 <code>NotFound</code> 元件。</p>
+<p>提示：萬用字元路由通常放在路由陣列的末尾。</p>
 
   <h2 id="how-angular-matches-urls">
-    <a href="#how-angular-matches-urls" class="docs-anchor" tabindex="-1" aria-label="Link to How Angular matches URLs">Angular 如何匹配 URL</a>
+    <a href="#how-angular-matches-urls" class="docs-anchor" tabindex="-1" aria-label="Link to How Angular matches URLs">Angular 如何對應 URL</a>
   </h2>
-  <p>定义路由时，顺序很重要，因为 Angular 使用“首次匹配获胜”策略。这意味着一旦 Angular 将 URL 与路由 <code>path</code> 匹配，它就会停止检查任何进一步的路由。因此，请始终将更具体的路由放在不太具体的路由之前。</p>
-<p>以下示例显示了从最具体到最不具体的路由定义：</p>
+  <p>定義路由時，順序很重要，因為 Angular 使用『首次對應獲勝』策略。這意味著一旦 Angular 將 URL 與路由 <code>path</code> 對應，它就會停止檢查任何進一步的路由。因此，請始終將更具體的路由放在不太具體的路由之前。</p>
+<p>以下範例顯示了從最具體到最不具體的路由定義：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">''</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: HomeComponent },              </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Empty path</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'users/new'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: NewUserComponent },  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Static, most specific</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'users/:id'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: UserDetailComponent }, </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Dynamic</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'users'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: UsersComponent },        </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Static, less specific</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'**'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: NotFoundComponent }         </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Wildcard - always last</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>如果用户访问 <code>/users/new</code>，Angular 路由器将执行以下步骤：</p>
+  </div><p>如果使用者訪問 <code>/users/new</code>，Angular 路由器將執行以下步驟：</p>
 
     <ol class="docs-ordered-list">
-      <li>检查 <code>''</code> - 不匹配</li>
-<li>检查 <code>users/new</code> - 匹配！在此停止</li>
-<li>即使可以匹配，也永远不会到达 <code>users/:id</code></li>
-<li>永远不会到达 <code>users</code></li>
-<li>永远不会到达 <code>**</code></li>
+      <li>檢查 <code>''</code> - 不對應</li>
+<li>檢查 <code>users/new</code> - 對應！在此停止</li>
+<li>即使可以對應，也永遠不會到達 <code>users/:id</code></li>
+<li>永遠不會到達 <code>users</code></li>
+<li>永遠不會到達 <code>**</code></li>
 
     </ol>
     
   <h2 id="loading-route-component-strategies">
-    <a href="#loading-route-component-strategies" class="docs-anchor" tabindex="-1" aria-label="Link to Loading Route Component Strategies">加载路由组件策略</a>
+    <a href="#loading-route-component-strategies" class="docs-anchor" tabindex="-1" aria-label="Link to Loading Route Component Strategies">載入路由元件策略</a>
   </h2>
-  <p>了解组件在 Angular 路由中如何以及何时加载对于构建响应式 Web 应用至关重要。Angular 提供了两种主要策略来控制组件加载行为：</p>
+  <p>瞭解元件在 Angular 路由中如何以及何時載入對於建立回應式 Web 應用至關重要。Angular 提供了兩種主要策略來控制組件載入行為：</p>
 
     <ol class="docs-ordered-list">
-      <li><strong>急性加载</strong>：立即加载的组件</li>
-<li><strong>惰性加载</strong>：仅在需要时加载的组件</li>
+      <li><strong>急性載入</strong>：立即載入的元件</li>
+<li><strong>延遲載入</strong>：僅在需要時載入的元件</li>
 
     </ol>
-    <p>每种方法都为不同的场景提供了独特的优势。</p>
+    <p>每種方法都為不同的場景提供了獨特的優勢。</p>
 
   <h3 id="eagerly-loaded-components">
-    <a href="#eagerly-loaded-components" class="docs-anchor" tabindex="-1" aria-label="Link to Eagerly loaded components">急性加载的组件</a>
+    <a href="#eagerly-loaded-components" class="docs-anchor" tabindex="-1" aria-label="Link to Eagerly loaded components">急性載入的元件</a>
   </h3>
-  <p>当您使用 <code>component</code> 属性定义路由时，引用的组件将作为路由配置的同一 JavaScript 捆绑包的一部分被急性加载。</p>
+  <p>當您使用 <code>component</code> 屬性定義路由時，引用的元件將作為路由設定的同一 JavaScript 捆綁包的一部分被急性載入。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> "@angular/router"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { HomePage } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> "./components/home/home-page"</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { LoginPage } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> "./components/auth/login-page"</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // HomePage and LoginPage are both directly referenced in this config,</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // so their code is eagerly included in the same JavaScript bundle as this file.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">""</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: HomePage</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"login"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: LoginPage</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span></span></code></pre>
-  </div><p>像这样急性加载路由组件意味着浏览器必须在初始页面加载时下载和解析这些组件的所有 JavaScript，但这些组件会立即提供给 Angular。</p>
-<p>虽然在初始页面加载中包含更多 JavaScript 会导致更慢的初始加载时间，但这可以为用户在应用程序中导航时提供更无缝的过渡。</p>
+  </div><p>像這樣急性載入路由元件意味著瀏覽器必須在初始頁面載入時下載和解析這些元件的所有 JavaScript，但這些元件會立即提供給 Angular。</p>
+<p>雖然在初始頁面載入中包含更多 JavaScript 會導致更慢的初始載入時間，但這可以為使用者在應用程式中導向時提供更無縫的轉場。</p>
 
   <h3 id="lazily-loaded-components">
-    <a href="#lazily-loaded-components" class="docs-anchor" tabindex="-1" aria-label="Link to Lazily loaded components">惰性加载的组件</a>
+    <a href="#lazily-loaded-components" class="docs-anchor" tabindex="-1" aria-label="Link to Lazily loaded components">延遲載入的元件</a>
   </h3>
-  <p>您可以使用 <code>loadComponent</code> 属性仅在路由变为活动状态时惰性加载该路由的 JavaScript。</p>
+  <p>您可以使用 <code>loadComponent</code> 屬性僅在路由變為活動狀態時延遲載入該路由的 JavaScript。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> "@angular/router"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // The HomePage and LoginPage components are loaded lazily at the point at which</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // their corresponding routes become active.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'login'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    loadComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'./components/auth/login-page'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">then</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">m</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> m.LoginPage)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">''</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    loadComponent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'./components/home/home-page'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">then</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">m</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> m.HomePage)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span></span></code></pre>
-  </div><p><code>loadComponent</code> 属性接受一个加载器函数，该函数返回一个解析为 Angular 组件的 Promise。在大多数情况下，此函数使用标准的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import" target="_blank">JavaScript 动态导入 API</a>。但是，您可以使用任何任意的异步加载器函数。</p>
-<p>惰性加载路由可以通过从初始捆绑包中删除大量 JavaScript 来显著提高 Angular 应用程序的加载速度。这些代码部分会编译成单独的 JavaScript “块”，路由器仅在用户访问相应路由时才请求它们。</p>
+  </div><p><code>loadComponent</code> 屬性接受一個載入器函式，該函式回傳一個解析為 Angular 元件的 Promise。在大多數情況下，此函式使用標準的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import" target="_blank">JavaScript 動態匯入 API</a>。但是，您可以使用任何任意的非同步載入器函式。</p>
+<p>延遲載入路由可以透過從初始捆綁包中刪除大量 JavaScript 來顯著提高 Angular 應用程式的載入速度。這些程式碼部分會編譯成單獨的 JavaScript 『區塊』，路由器僅在使用者訪問相應路由時才請求它們。</p>
 
   <h3 id="should-i-use-an-eager-or-a-lazy-route">
-    <a href="#should-i-use-an-eager-or-a-lazy-route" class="docs-anchor" tabindex="-1" aria-label="Link to Should I use an eager or a lazy route?">我应该使用急性路由还是惰性路由？</a>
+    <a href="#should-i-use-an-eager-or-a-lazy-route" class="docs-anchor" tabindex="-1" aria-label="Link to Should I use an eager or a lazy route?">我應該使用急性路由還是惰性路由？</a>
   </h3>
-  <p>在决定路由应该是急性的还是惰性的时，有许多因素需要考虑。</p>
-<p>总的来说，建议对主要登陆页面进行急性加载，而其他页面则进行惰性加载。</p>
-<p>注意：虽然惰性路由具有减少用户初始请求数据量的前期性能优势，但它会增加未来可能不希望出现的数据请求。在处理多层嵌套惰性加载时尤其如此，这会严重影响性能。</p>
+  <p>在決定路由應該是急性的還是惰性的時，有許多因素需要考慮。</p>
+<p>總的來說，建議對主要登入頁面進行急性載入，而其他頁面則進行延遲載入。</p>
+<p>注意：雖然惰性路由具有減少使用者初始請求資料量的前期效能優勢，但它會增加未來可能不希望出現的資料請求。在處理多層巢狀延遲載入時尤其如此，這會嚴重影響效能。</p>
 
   <h2 id="redirects">
-    <a href="#redirects" class="docs-anchor" tabindex="-1" aria-label="Link to Redirects">重定向</a>
+    <a href="#redirects" class="docs-anchor" tabindex="-1" aria-label="Link to Redirects">重導向</a>
   </h2>
-  <p>您可以定义一个路由，该路由重定向到另一个路由，而不是渲染组件：</p>
+  <p>您可以定義一個路由，該路由重導向到另一個路由，而不是渲染元件：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { BlogComponent } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './home/blog.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'articles'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    redirectTo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/blog'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'blog'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: BlogComponent</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>如果您修改或删除了路由，一些用户仍可能点击过时的链接或书签。您可以添加重定向，将这些用户引导到合适的替代路由，而不是“未找到”页面。</p>
+  </div><p>如果您修改或刪除了路由，一些使用者仍可能點選過時的連結或書籤。您可以新增重導向，將這些使用者引導到合適的替代路由，而不是『未找到』頁面。</p>
 
   <h2 id="page-titles">
-    <a href="#page-titles" class="docs-anchor" tabindex="-1" aria-label="Link to Page titles">页面标题</a>
+    <a href="#page-titles" class="docs-anchor" tabindex="-1" aria-label="Link to Page titles">頁面標題</a>
   </h2>
-  <p>您可以为每个路由关联一个 <strong>title</strong>。当路由激活时，Angular 会自动更新 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title" target="_blank">页面标题</a>。请始终为您的应用程序定义合适的页面标题，因为这些标题对于创建无障碍体验是必需的。</p>
+  <p>您可以為每個路由關聯一個 <strong>title</strong>。當路由啟用時，Angular 會自動更新 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title" target="_blank">頁面標題</a>。請始終為您的應用程式定義合適的頁面標題，因為這些標題對於建立無障礙體驗是必需的。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { HomeComponent } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './home/home.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { AboutComponent } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './about/about.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { ProductsComponent } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './products/products.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">''</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: HomeComponent,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    title: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'Home Page'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'about'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: AboutComponent,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    title: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'About Us'</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>页面 <code>title</code> 属性可以使用 <a href="/api/router/ResolveFn"><code>ResolveFn</code></a> 动态设置为解析器函数。</p>
+  </div><p>頁面 <code>title</code> 屬性可以使用 <a href="/api/router/ResolveFn"><code>ResolveFn</code></a> 動態設定為解析器函式。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> titleResolver</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/ResolveFn">ResolveFn</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">route</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> route.queryParams[</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'id'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">   ...</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'products'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: ProductsComponent,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    title: titleResolver,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>路由标题也可以通过扩展 <a href="/api/router/TitleStrategy"><code>TitleStrategy</code></a> 抽象类的服务来设置。默认情况下，Angular 使用 <a href="/api/router/DefaultTitleStrategy"><code>DefaultTitleStrategy</code></a>。</p>
+  </div><p>路由標題也可以透過擴充套件 <a href="/api/router/TitleStrategy"><code>TitleStrategy</code></a> 抽象類別的服務來設定。預設情況下，Angular 使用 <a href="/api/router/DefaultTitleStrategy"><code>DefaultTitleStrategy</code></a>。</p>
 
   <h2 id="route-level-providers-for-dependency-injection">
-    <a href="#route-level-providers-for-dependency-injection" class="docs-anchor" tabindex="-1" aria-label="Link to Route-level providers for dependency injection">用于依赖注入的路由级提供者</a>
+    <a href="#route-level-providers-for-dependency-injection" class="docs-anchor" tabindex="-1" aria-label="Link to Route-level providers for dependency injection">用於依賴注入的路由級提供者</a>
   </h2>
-  <p>每个路由都有一个 <code>providers</code> 属性，允许您通过 <a href="/guide/di">依赖注入</a> 为该路由的内容提供依赖项。</p>
-<p>这可能很有帮助的常见场景包括根据用户是否为管理员而具有不同服务的应用程序。</p>
+  <p>每個路由都有一個 <code>providers</code> 屬性，允許您透過 <a href="/guide/di">依賴注入</a> 為該路由的內容提供依賴項。</p>
+<p>這可能很有幫助的常見場景包括根據使用者是否為管理員而具有不同服務的應用程式。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> <a href="/api/router/ROUTES">ROUTES</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Route">Route</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">[] </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'admin'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    providers: [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      AdminService,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      {provide: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">ADMIN_API_KEY</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, useValue: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'12345'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">},</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    ],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    children: [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      {path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'users'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: AdminUsersComponent},</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      {path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'teams'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: AdminTeamsComponent},</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    ],</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // ... other application routes that don't</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  //     have access to ADMIN_API_KEY or AdminService.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>在此代码示例中，<code>admin</code> 路径包含一个受保护的 <code>ADMIN_API_KEY</code> 数据属性，该属性仅对该部分内的子项可用。因此，其他路径将无法访问通过 <code>ADMIN_API_KEY</code> 提供的数据。</p>
-<p>有关 Angular 中提供者和注入的更多信息，请参阅 <a href="/guide/di">依赖注入指南</a>。</p>
+  </div><p>在此程式碼範例中，<code>admin</code> 路徑包含一個受保護的 <code>ADMIN_API_KEY</code> 資料屬性，該屬性僅對該部分內的子項可用。因此，其他路徑將無法訪問透過 <code>ADMIN_API_KEY</code> 提供的資料。</p>
+<p>有關 Angular 中提供者和注入的更多訊息，請參閱 <a href="/guide/di">依賴注入指南</a>。</p>
 
   <h2 id="associating-data-with-routes">
-    <a href="#associating-data-with-routes" class="docs-anchor" tabindex="-1" aria-label="Link to Associating data with routes">将数据与路由关联</a>
+    <a href="#associating-data-with-routes" class="docs-anchor" tabindex="-1" aria-label="Link to Associating data with routes">將資料與路由關聯</a>
   </h2>
-  <p>路由数据使您能够将附加信息附加到路由。您可以根据这些数据配置组件的行为方式。</p>
-<p>有两种方法可以处理路由数据：保持不变的静态数据，以及根据运行时条件可能发生变化的动态数据。</p>
+  <p>路由資料使您能夠將附加訊息附加到路由。您可以根據這些資料設定元件的行為方式。</p>
+<p>有兩種方法可以處理路由資料：保持不變的靜態資料，以及根據執行時條件可能發生變化的動態資料。</p>
 
   <h3 id="static-data">
-    <a href="#static-data" class="docs-anchor" tabindex="-1" aria-label="Link to Static data">静态数据</a>
+    <a href="#static-data" class="docs-anchor" tabindex="-1" aria-label="Link to Static data">靜態資料</a>
   </h3>
-  <p>您可以通过 <code>data</code> 属性将任意静态数据与路由关联，以集中处理诸如特定于路由的元数据（例如，分析跟踪、权限等）之类的内容：</p>
+  <p>您可以透過 <code>data</code> 屬性將任意靜態資料與路由關聯，以集中處理諸如特定於路由的元資料（例如，分析跟蹤、許可權等）之類的內容：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { HomeComponent } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './home/home.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { AboutComponent } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './about/about.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { ProductsComponent } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './products/products.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'about'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: AboutComponent,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    data: { analyticsId: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'456'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">''</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: HomeComponent,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    data: { analyticsId: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'123'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>在此代码示例中，主页和关于页面都配置了特定的 <code>analyticsId</code>，这些 ID 将在各自的组件中用于页面跟踪分析。</p>
-<p>您可以通过注入 <a href="/api/router/ActivatedRoute"><code>ActivatedRoute</code></a> 来读取此静态数据。有关详细信息，请参阅 <a href="/guide/routing/read-route-state">读取路由状态</a>。</p>
+  </div><p>在此程式碼範例中，首頁和關於頁面都設定了特定的 <code>analyticsId</code>，這些 ID 將在各自的元件中用於頁面跟蹤分析。</p>
+<p>您可以透過注入 <a href="/api/router/ActivatedRoute"><code>ActivatedRoute</code></a> 來讀取此靜態資料。有關詳細訊息，請參閱 <a href="/guide/routing/read-route-state">讀取路由狀態</a>。</p>
 
   <h3 id="dynamic-data-with-data-resolvers">
-    <a href="#dynamic-data-with-data-resolvers" class="docs-anchor" tabindex="-1" aria-label="Link to Dynamic data with data resolvers">带数据解析器的动态数据</a>
+    <a href="#dynamic-data-with-data-resolvers" class="docs-anchor" tabindex="-1" aria-label="Link to Dynamic data with data resolvers">帶資料解析器的動態資料</a>
   </h3>
-  <p>当您需要为路由提供动态数据时，请查看 <a href="/guide/routing/data-resolvers">路由数据解析器指南</a>。</p>
+  <p>當您需要為路由提供動態資料時，請檢視 <a href="/guide/routing/data-resolvers">路由資料解析器指南</a>。</p>
 
   <h2 id="nested-routes">
-    <a href="#nested-routes" class="docs-anchor" tabindex="-1" aria-label="Link to Nested Routes">嵌套路由</a>
+    <a href="#nested-routes" class="docs-anchor" tabindex="-1" aria-label="Link to Nested Routes">巢狀路由</a>
   </h2>
-  <p>嵌套路由，也称为子路由，是一种管理更复杂导航路由的常用技术，其中组件具有基于 URL 更改的子视图。</p>
+  <p>巢狀路由，也稱為子路由，是一種管理更復雜導向路由的常用技術，其中元件具有基於 URL 更改的子檢視。</p>
 <img alt="Diagram to illustrate nested routes" src="assets/images/guide/router/nested-routing-diagram.svg">
 
-<p>您可以使用 <code>children</code> 属性将子路由添加到任何路由定义中：</p>
+<p>您可以使用 <code>children</code> 屬性將子路由新增到任何路由定義中：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'product/:id'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: ProductComponent,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    children: [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'info'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        component: ProductInfoComponent</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'reviews'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        component: ProductReviewsComponent</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    ]</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span></span></code></pre>
-  </div><p>上面的示例为产品页面定义了一个路由，该路由允许用户根据 URL 更改显示产品信息还是评论。</p>
-<p><code>children</code> 属性接受一个 <a href="/api/router/Route"><code>Route</code></a> 对象数组。</p>
-<p>要显示子路由，父组件（上面示例中的 <code>ProductComponent</code>）需要包含自己的 <code>&lt;router-outlet&gt;</code>。</p>
+  </div><p>上面的範例為產品頁面定義了一個路由，該路由允許使用者根據 URL 更改顯示產品訊息還是評論。</p>
+<p><code>children</code> 屬性接受一個 <a href="/api/router/Route"><code>Route</code></a> 物件陣列。</p>
+<p>要顯示子路由，父元件（上面範例中的 <code>ProductComponent</code>）需要包含自己的 <code>&lt;router-outlet&gt;</code>。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- ProductComponent --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">article</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Product {{ id }}&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">h1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">router-outlet</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> /&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">article</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
-  </div><p>在将子路由添加到配置并向组件添加 <code>&lt;router-outlet&gt;</code> 后，匹配子路由的 URL 之间的导航仅会更新嵌套的出口。</p>
+  </div><p>在將子路由新增到設定並向元件新增 <code>&lt;router-outlet&gt;</code> 後，對應子路由的 URL 之間的導向僅會更新巢狀的出口。</p>
 
   <h2 id="next-steps">
-    <a href="#next-steps" class="docs-anchor" tabindex="-1" aria-label="Link to Next steps">后续步骤</a>
+    <a href="#next-steps" class="docs-anchor" tabindex="-1" aria-label="Link to Next steps">後續步驟</a>
   </h2>
-  <p>了解如何 <a href="/guide/routing/show-routes-with-outlets">使用出口显示路由的内容</a>。</p>
+  <p>瞭解如何 <a href="/guide/routing/show-routes-with-outlets">使用出口顯示路由的內容</a>。</p>

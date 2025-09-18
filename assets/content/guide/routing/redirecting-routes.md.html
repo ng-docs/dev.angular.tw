@@ -4,36 +4,36 @@
       
   <!-- Page title -->
   <div class="docs-page-title">
-    <h1 tabindex="-1">重定向路由</h1>
+    <h1 tabindex="-1">重導向路由</h1>
     <a class="docs-github-links" target="_blank" href="https://github.com/angular/angular/edit/main/adev/src/content/guide/routing/redirecting-routes.md" title="Edit this page" aria-label="Edit this page">
       <!-- Pencil -->
       <docs-icon role="presentation">edit</docs-icon>
     </a>
   </div>
     </header>
-    <p>路由重定向允许您自动将用户从一个路由导航到另一个路由。可以将其想象成邮件转发，即寄往一个地址的邮件被发送到另一个地址。这对于处理旧版 URL、实现默认路由或管理访问控制非常有用。</p>
+    <p>路由重導向允許您自動將使用者從一個路由導向到另一個路由。可以將其想象成郵件轉發，即寄往一個地址的郵件被髮送到另一個地址。這對於處理舊版 URL、實現預設路由或管理訪問控制非常有用。</p>
 
   <h2 id="how-to-configure-redirects">
-    <a href="#how-to-configure-redirects" class="docs-anchor" tabindex="-1" aria-label="Link to How to configure redirects">如何配置重定向</a>
+    <a href="#how-to-configure-redirects" class="docs-anchor" tabindex="-1" aria-label="Link to How to configure redirects">如何設定重導向</a>
   </h2>
-  <p>您可以在路由配置中使用 <code>redirectTo</code> 属性来定义重定向。此属性接受一个字符串。</p>
+  <p>您可以在路由設定中使用 <code>redirectTo</code> 屬性來定義重導向。此屬性接受一個字串。</p>
 <div class="docs-code">
     
-    <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Simple redirect</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'marketing'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, redirectTo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'newsletter'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> },</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Redirect with path parameters</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'legacy-user/:id'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, redirectTo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'users/:id'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> },</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Redirect any other URLs that don’t match</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // (also known as a "wildcard" redirect)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'**'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, redirectTo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/login'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>在此示例中，有三个重定向：</p>
+    <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Simple redirect</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'marketing'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, redirectTo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'newsletter'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> },</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Redirect with path parameters</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'legacy-user/:id'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, redirectTo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'users/:id'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> },</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Redirect any other URLs that don」t match</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // (also known as a "wildcard" redirect)</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'**'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, redirectTo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/login'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
+  </div><p>在此範例中，有三個重導向：</p>
 
     <ol class="docs-ordered-list">
-      <li>当用户访问 <code>/marketing</code> 路径时，他们将被重定向到 <code>/newsletter</code>。</li>
-<li>当用户访问任何 <code>/legacy-user/:id</code> 路径时，他们将被路由到相应的 <code>/users/:id</code> 路径。</li>
-<li>当用户访问路由器中未定义的任何路径时，由于 <code>**</code> 通配符路径定义，他们将被重定向到登录页面。</li>
+      <li>當用戶訪問 <code>/marketing</code> 路徑時，他們將被重導向到 <code>/newsletter</code>。</li>
+<li>當用戶訪問任何 <code>/legacy-user/:id</code> 路徑時，他們將被路由到相應的 <code>/users/:id</code> 路徑。</li>
+<li>當用戶訪問路由器中未定義的任何路徑時，由於 <code>**</code> 萬用字元路徑定義，他們將被重導向到登入頁面。</li>
 
     </ol>
     
   <h2 id="understanding-pathmatch">
     <a href="#understanding-pathmatch" class="docs-anchor" tabindex="-1" aria-label="Link to Understanding <code>pathMatch</code>">理解 <code>pathMatch</code></a>
   </h2>
-  <p>路由上的 <code>pathMatch</code> 属性使开发人员能够控制 Angular 如何将 URL 与路由匹配。</p>
-<p><code>pathMatch</code> 接受两个值：</p>
+  <p>路由上的 <code>pathMatch</code> 屬性使開發人員能夠控制 Angular 如何將 URL 與路由對應。</p>
+<p><code>pathMatch</code> 接受兩個值：</p>
 
   <div class="docs-table docs-scroll-track-transparent">
     <table>
@@ -47,73 +47,73 @@
       <tbody>
         <tr>
 <td><code>'full'</code></td>
-<td>整个 URL 路径必须完全匹配</td>
+<td>整個 URL 路徑必須完全對應</td>
 </tr>
 <tr>
 <td><code>'prefix'</code></td>
-<td>只需要匹配 URL 的开头部分</td>
+<td>只需要對應 URL 的開頭部分</td>
 </tr>
 
       </tbody>
     </table>
   </div>
-  <p>默认情况下，所有重定向都使用 <code>prefix</code> 策略。</p>
+  <p>預設情況下，所有重導向都使用 <code>prefix</code> 策略。</p>
 
   <h3 id="pathmatch-prefix">
     <a href="#pathmatch-prefix" class="docs-anchor" tabindex="-1" aria-label="Link to <code>pathMatch: 'prefix'</code>"><code>pathMatch: 'prefix'</code></a>
   </h3>
-  <p><code>pathMatch: 'prefix'</code> 是默认策略，当您希望 Angular 路由器在触发重定向时匹配所有后续路由时，这是理想选择。</p>
+  <p><code>pathMatch: 'prefix'</code> 是預設策略，當您希望 Angular 路由器在觸發重導向時對應所有後續路由時，這是理想選擇。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // This redirect route is equivalent to…</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'news'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, redirectTo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'blog }</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic">,</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // This explicitly defined route redirect pathMatch</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'news'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, redirectTo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'blog'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, pathMatch: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'prefix'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>在此示例中，所有以 <code>news</code> 为前缀的路由都将被重定向到其等效的 <code>/blog</code> 路由。以下是一些用户在访问旧的 <code>news</code> 前缀时被重定向的示例：</p>
+  </div><p>在此範例中，所有以 <code>news</code> 為字首的路由都將被重導向到其等效的 <code>/blog</code> 路由。以下是一些使用者在訪問舊的 <code>news</code> 字首時被重導向的範例：</p>
 
   <ul class="docs-list">
-    <li><code>/news</code> 重定向到 <code>/blog</code></li>
-<li><code>/news/article</code> 重定向到 <code>/blog/article</code></li>
-<li><code>/news/article/:id</code> 重定向到 <code>/blog/article/:id</code></li>
+    <li><code>/news</code> 重導向到 <code>/blog</code></li>
+<li><code>/news/article</code> 重導向到 <code>/blog/article</code></li>
+<li><code>/news/article/:id</code> 重導向到 <code>/blog/article/:id</code></li>
 
   </ul>
   
   <h3 id="pathmatch-full">
     <a href="#pathmatch-full" class="docs-anchor" tabindex="-1" aria-label="Link to <code>pathMatch: 'full'</code>"><code>pathMatch: 'full'</code></a>
   </h3>
-  <p>另一方面，当您希望 Angular 路由器仅重定向特定路径时，<code>pathMatch: 'full'</code> 非常有用。</p>
+  <p>另一方面，當您希望 Angular 路由器僅重導向特定路徑時，<code>pathMatch: 'full'</code> 非常有用。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">''</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, redirectTo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/dashboard'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, pathMatch: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'full'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>在此示例中，每当用户访问根 URL（即 <code>''</code>）时，路由器都会将该用户重定向到 <code>'/dashboard'</code> 页面。</p>
-<p>任何后续页面（例如 <code>/login</code>、<code>/about</code>、<code>/product/id</code> 等）都将被忽略，并且不会触发重定向。</p>
+  </div><p>在此範例中，每當使用者訪問根 URL（即 <code>''</code>）時，路由器都會將該使用者重導向到 <code>'/dashboard'</code> 頁面。</p>
+<p>任何後續頁面（例如 <code>/login</code>、<code>/about</code>、<code>/product/id</code> 等）都將被忽略，並且不會觸發重導向。</p>
 
     <div class="docs-alert docs-alert-tip">
-    <p><strong>提示：</strong>在根页面（即 <code>"/"</code> 或 <code>""</code>）上配置重定向时要小心。如果您不设置 <code>pathMatch: 'full'</code>，路由器将重定向所有 URL。</p>
+    <p><strong>提示：</strong>在根頁面（即 <code>"/"</code> 或 <code>""</code>）上設定重導向時要小心。如果您不設定 <code>pathMatch: 'full'</code>，路由器將重導向所有 URL。</p>
 
     </div>
-    <p>为了进一步说明这一点，如果上一节中的 <code>news</code> 示例改用 <code>pathMatch: 'full'</code>：</p>
+    <p>為了進一步說明這一點，如果上一節中的 <code>news</code> 範例改用 <code>pathMatch: 'full'</code>：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'news'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, redirectTo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/blog'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, pathMatch: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'full'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>这意味着：</p>
+  </div><p>這意味著：</p>
 
     <ol class="docs-ordered-list">
-      <li>只有 <code>/news</code> 路径将被重定向到 <code>/blog</code>。</li>
-<li>任何后续的段，如 <code>/news/articles</code> 或 <code>/news/articles/1</code>，都不会使用新的 <code>/blog</code> 前缀进行重定向。</li>
+      <li>只有 <code>/news</code> 路徑將被重導向到 <code>/blog</code>。</li>
+<li>任何後續的段，如 <code>/news/articles</code> 或 <code>/news/articles/1</code>，都不會使用新的 <code>/blog</code> 字首進行重導向。</li>
 
     </ol>
     
   <h2 id="conditional-redirects">
-    <a href="#conditional-redirects" class="docs-anchor" tabindex="-1" aria-label="Link to Conditional redirects">条件重定向</a>
+    <a href="#conditional-redirects" class="docs-anchor" tabindex="-1" aria-label="Link to Conditional redirects">條件重導向</a>
   </h2>
-  <p><code>redirectTo</code> 属性还可以接受一个函数，以便为用户如何被重定向添加逻辑。</p>
-<p>该<a href="api/router/RedirectFunction">函数</a>只能访问<a href="api/router/ActivatedRouteSnapshot"></a><a href="/api/router/ActivatedRouteSnapshot"><code>ActivatedRouteSnapshot</code></a> 数据的一部分，因为在路由匹配阶段某些数据无法准确得知。例如：已解析的标题、惰性加载的组件等。</p>
-<p>它通常返回一个字符串或<a href="api/router/UrlTree"><code>URLTree</code></a>，但也可以返回一个可观察者或 Promise。</p>
-<p>这是一个根据一天中的时间将用户重定向到不同菜单的示例：</p>
+  <p><code>redirectTo</code> 屬性還可以接受一個函式，以便為使用者如何被重導向新增邏輯。</p>
+<p>該<a href="api/router/RedirectFunction">函式</a>只能訪問<a href="api/router/ActivatedRouteSnapshot"></a><a href="/api/router/ActivatedRouteSnapshot"><code>ActivatedRouteSnapshot</code></a> 資料的一部分，因為在路由對應階段某些資料無法準確得知。例如：已解析的標題、延遲載入的元件等。</p>
+<p>它通常回傳一個字串或<a href="api/router/UrlTree"><code>URLTree</code></a>，但也可以回傳一個可觀察者或 Promise。</p>
+<p>這是一個根據一天中的時間將使用者重導向到不同選單的範例：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { MenuComponent } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './menu/menu.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'restaurant/:location/menu'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">    redirectTo</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: (</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">activatedRouteSnapshot</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">      const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> location</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> activatedRouteSnapshot.params[</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'location'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">      const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> currentHour</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Date</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">().</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">getHours</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">      // Check if user requested a specific meal via query parameter</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">      if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (activatedRouteSnapshot.queryParams[</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'meal'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]) {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">        return</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> `/restaurant/${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">location</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}/menu/${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">queryParams</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">[</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'meal'</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">]</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      }</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">      // Auto-redirect based on time of day</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">      if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (currentHour </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">&gt;=</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 5</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> &amp;&amp;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> currentHour </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 11</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">        return</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> `/restaurant/${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">location</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}/menu/breakfast`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">else</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> (currentHour </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">&gt;=</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 11</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> &amp;&amp;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> currentHour </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> 17</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">        return</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> `/restaurant/${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">location</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}/menu/lunch`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">else</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">        return</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> `/restaurant/${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">location</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}/menu/dinner`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">      }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Destination routes</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'restaurant/:location/menu/breakfast'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: MenuComponent },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'restaurant/:location/menu/lunch'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: MenuComponent },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'restaurant/:location/menu/dinner'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: MenuComponent },</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // Default redirect</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">''</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, redirectTo: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'/restaurant/downtown/menu'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, pathMatch: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'full'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>要了解更多信息，请查看<a href="api/router/RedirectFunction">RedirectFunction 的 API 文档</a>。</p>
+  </div><p>要了解更多訊息，請檢視<a href="api/router/RedirectFunction">RedirectFunction 的 API 文件</a>。</p>
 
   <h2 id="next-steps">
-    <a href="#next-steps" class="docs-anchor" tabindex="-1" aria-label="Link to Next steps">后续步骤</a>
+    <a href="#next-steps" class="docs-anchor" tabindex="-1" aria-label="Link to Next steps">後續步驟</a>
   </h2>
-  <p>有关 <code>redirectTo</code> 属性的更多信息，请查看<a href="api/router/Route#redirectTo">API 文档</a>。</p>
+  <p>有關 <code>redirectTo</code> 屬性的更多訊息，請檢視<a href="api/router/Route#redirectTo">API 文件</a>。</p>
