@@ -13,7 +13,7 @@
     </header>
     <p>一個不允許在回應式上下文中執行的函式，卻從回應式上下文中被呼叫。</p>
 <p>例如，不能在 <a href="/api/core/computed"><code>computed</code></a> 或正在執行的 effect 中排程一個 <a href="/api/core/effect"><code>effect</code></a>。
-避免將 <a href="/api/core/effect"><code>effect</code></a> 等函式作為樣板表示式的一部分進行呼叫，因為這些表示式會在它們自己的回應式上下文中執行。</p>
+避免將 <a href="/api/core/effect"><code>effect</code></a> 等函式作為範本表示式的一部分進行呼叫，因為這些表示式會在它們自己的回應式上下文中執行。</p>
 <p>計算表示式應為純粹的。
 純粹意味著表示式不會觸發任何副作用。
 副作用是諸如排程 <a href="/api/core/afterNextRender"><code>afterNextRender</code></a>/<a href="/api/core/afterEveryRender"><code>afterEveryRender</code></a>、建立新的 <a href="/api/core/effect"><code>effect</code></a> 或訂閱可觀察者等操作。</p>
@@ -31,14 +31,14 @@
     <a href="#afternextrender-aftereveryrender" class="docs-anchor" tabindex="-1" aria-label="Link to <code>afterNextRender</code>/<code>afterEveryRender</code>"><code>afterNextRender</code>/<code>afterEveryRender</code></a>
   </h4>
   <p>將 <a href="/api/core/afterNextRender"><code>afterNextRender</code></a>/<a href="/api/core/afterEveryRender"><code>afterEveryRender</code></a> 的呼叫移出回應式上下文。</p>
-<p>排程渲染後鉤子的一個好地方是在元件的類建構式函式中。
+<p>排程渲染後鉤子的一個好地方是在元件的類別建構式函式中。
 或者，使用 <a href="/api/core/untracked"><code>untracked</code></a> 來離開回應式上下文並顯式選擇退出此錯誤。</p>
 
   <h4 id="effect">
     <a href="#effect" class="docs-anchor" tabindex="-1" aria-label="Link to <code>effect</code>"><code>effect</code></a>
   </h4>
   <p>將 <a href="/api/core/effect"><code>effect</code></a> 的呼叫移出回應式上下文。</p>
-<p>排程 effect 的一個好地方是在 <a href="/api/core/Component"><code>@Component</code></a> 的類建構式函式中。</p>
+<p>排程 effect 的一個好地方是在 <a href="/api/core/Component"><code>@Component</code></a> 的類別建構式函式中。</p>
 
   <h4 id="tosignal">
     <a href="#tosignal" class="docs-anchor" tabindex="-1" aria-label="Link to <code>toSignal</code>"><code>toSignal</code></a>

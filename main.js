@@ -530,7 +530,7 @@ var DOCS_SUB_NAVIGATION_DATA = [
             contentPath: "introduction/essentials/signals"
           },
           {
-            label: "使用樣板編寫動態介面",
+            label: "使用範本編寫動態介面",
             path: "essentials/templates",
             contentPath: "introduction/essentials/templates"
           },
@@ -547,7 +547,7 @@ var DOCS_SUB_NAVIGATION_DATA = [
         ]
       },
       {
-        label: "開始編碼！\u{1F680}",
+        label: "開始寫程式！\u{1F680}",
         path: "tutorials/learn-angular"
       }
     ]
@@ -651,7 +651,7 @@ var DOCS_SUB_NAVIGATION_DATA = [
         ]
       },
       {
-        label: "樣板",
+        label: "範本",
         children: [
           {
             label: "概覽",
@@ -689,7 +689,7 @@ var DOCS_SUB_NAVIGATION_DATA = [
             contentPath: "guide/templates/ng-content"
           },
           {
-            label: "使用 ng-template 建立樣板碎片",
+            label: "使用 ng-template 建立範本碎片",
             path: "guide/templates/ng-template",
             contentPath: "guide/templates/ng-template"
           },
@@ -699,7 +699,7 @@ var DOCS_SUB_NAVIGATION_DATA = [
             contentPath: "guide/templates/ng-container"
           },
           {
-            label: "樣板中的變數",
+            label: "範本中的變數",
             path: "guide/templates/variables",
             contentPath: "guide/templates/variables"
           },
@@ -714,7 +714,7 @@ var DOCS_SUB_NAVIGATION_DATA = [
             contentPath: "guide/templates/expression-syntax"
           },
           {
-            label: "樣板中的空白字元",
+            label: "範本中的空白字元",
             path: "guide/templates/whitespace",
             contentPath: "guide/templates/whitespace"
           }
@@ -903,7 +903,7 @@ var DOCS_SUB_NAVIGATION_DATA = [
             contentPath: "guide/forms/typed-forms"
           },
           {
-            label: "樣板驅動表單",
+            label: "範本驅動表單",
             path: "guide/forms/template-driven-forms",
             contentPath: "guide/forms/template-driven-forms"
           },
@@ -1242,7 +1242,7 @@ var DOCS_SUB_NAVIGATION_DATA = [
             contentPath: "tools/cli/schematics-for-libraries"
           },
           {
-            label: "樣板型別檢查",
+            label: "範本型別檢查",
             path: "tools/cli/template-typecheck",
             contentPath: "tools/cli/template-typecheck"
           },
@@ -1551,7 +1551,7 @@ var TUTORIALS_SUB_NAVIGATION_DATA = [
   {
     path: DEFAULT_PAGES.TUTORIALS,
     contentPath: "tutorials/home",
-    label: "教程"
+    label: "教學課程"
   }
 ];
 var REFERENCE_SUB_NAVIGATION_DATA = [
@@ -3218,7 +3218,7 @@ __publicField(_Navigation, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: 
     ɵɵelementEnd();
     ɵɵnamespaceHTML();
     ɵɵelementStart(57, "span", 41);
-    ɵɵtext(58, "教程");
+    ɵɵtext(58, "教學課程");
     ɵɵelementEnd()()();
     ɵɵelementStart(59, "li", 30)(60, "a", 38);
     ɵɵnamespaceSVG();
@@ -3227,7 +3227,7 @@ __publicField(_Navigation, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: 
     ɵɵelementEnd();
     ɵɵnamespaceHTML();
     ɵɵelementStart(63, "span", 41);
-    ɵɵtext(64, "演練場");
+    ɵɵtext(64, "練習場");
     ɵɵelementEnd()()();
     ɵɵelementStart(65, "li", 30)(66, "a", 38);
     ɵɵnamespaceSVG();
@@ -3580,7 +3580,7 @@ var Navigation = _Navigation;
               d="m5.668 10-5-5 5-5 1.187 1.188L3.022 5.02l3.813 3.812L5.668 10Zm6.667 0-1.188-1.188L14.98 4.98l-3.812-3.812L12.335 0l5 5-5 5Z"
             />
           </svg>
-          <span class="adev-nav-item__label">教程</span>
+          <span class="adev-nav-item__label">教學課程</span>
         </a>
       </li>
 
@@ -3595,7 +3595,7 @@ var Navigation = _Navigation;
               d="M450.001-611.691v-32.386q-39.385-9.923-64.692-41.897-25.308-31.975-25.308-74.025 0-49.922 35.038-84.96 35.039-35.038 84.961-35.038t84.961 35.038q35.038 35.038 35.038 84.96 0 42.05-25.308 74.025-25.307 31.974-64.692 41.897v32.386l273.846 157.538q17.173 9.912 26.663 26.582 9.491 16.671 9.491 36.495v62.152q0 19.824-9.491 36.495-9.49 16.67-26.663 26.582L516.154-111.771q-17.203 9.846-36.217 9.846t-36.091-9.846L176.155-265.847q-17.173-9.912-26.663-26.582-9.491-16.671-9.491-36.495v-62.152q0-19.824 9.491-36.495 9.49-16.67 26.663-26.582l273.846-157.538Zm-6.155 364.537L200-387.461v58.537q0 3.078 1.539 5.962 1.538 2.885 4.615 4.808l267.692 154.692q3.077 1.923 6.154 1.923t6.154-1.923l267.692-154.692q3.077-1.923 4.615-4.808 1.539-2.884 1.539-5.962v-58.537L516.154-247.154q-17.203 9.847-36.217 9.847t-36.091-9.847Zm6.155-162.847V-542.77L250.46-427.691l223.386 128.846q3.077 1.924 6.154 1.924t6.154-1.924l223.001-128.846L509.999-542.77v132.769h-59.998ZM480-699.999q25 0 42.5-17.5t17.5-42.5q0-25-17.5-42.5t-42.5-17.5q-25 0-42.5 17.5t-17.5 42.5q0 25 17.5 42.5t42.5 17.5Zm-2.308 538.46Z"
             />
           </svg>
-          <span class="adev-nav-item__label">演練場</span>
+          <span class="adev-nav-item__label">練習場</span>
         </a>
       </li>
 

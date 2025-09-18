@@ -226,7 +226,7 @@ var RECOMMENDATIONS = [
     possibleIn: 400,
     necessaryAsOf: 500,
     level: ApplicationComplexity.Basic,
-    step: "樣板標籤",
+    step: "範本標籤",
     action: "將你的 `template` 標籤重新命名為 `ng-template`。"
   },
   {
@@ -751,14 +751,14 @@ var RECOMMENDATIONS = [
     necessaryAsOf: 900,
     level: ApplicationComplexity.Medium,
     step: "更新樣式",
-    action: "以前，繫結的 CSS 樣式和類是採用『最後一次更改獲勝』的策略應用的，但現在遵循一個定義好的優先級。瞭解更多關於 [樣式優先級](https://angular.io/guide/attribute-binding#styling-precedence)。"
+    action: "以前，繫結的 CSS 樣式和類別是採用『最後一次更改獲勝』的策略應用的，但現在遵循一個定義好的優先級。瞭解更多關於 [樣式優先級](https://angular.io/guide/attribute-binding#styling-precedence)。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Advanced,
     step: "ModuleWithProviders",
-    action: "如果你是庫的作者，並且有一個回傳 `ModuleWithProviders` 的方法（通常是透過名為 `forRoot()` 的方法），則需要指定泛型型別。瞭解更多 [angular.io](https://v9.angular.io/guide/deprecations#modulewithproviders-type-without-a-generic)"
+    action: "如果你是函式庫的作者，並且有一個回傳 `ModuleWithProviders` 的方法（通常是透過名為 `forRoot()` 的方法），則需要指定泛型型別。瞭解更多 [angular.io](https://v9.angular.io/guide/deprecations#modulewithproviders-type-without-a-generic)"
   },
   {
     possibleIn: 800,
@@ -878,7 +878,7 @@ var RECOMMENDATIONS = [
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Medium,
     step: "classes-without-decorators",
-    action: "在 10 版本中，不帶有 Angular 裝飾器的類不再受支援。[瞭解更多](https://v10.angular.io/guide/migration-undecorated-classes)。`ng update` 將自動遷移你。"
+    action: "在 10 版本中，不帶有 Angular 裝飾器的類別不再受支援。[瞭解更多](https://v10.angular.io/guide/migration-undecorated-classes)。`ng update` 將自動遷移你。"
   },
   {
     possibleIn: 900,
@@ -1251,7 +1251,7 @@ var RECOMMENDATIONS = [
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Advanced,
     step: "v12 `emitEvent` in `FormArray` and `FormGroup`",
-    action: "如果你的應用程式具有自定義類，它們擴充套件了 `FormArray` 或 `FormGroup` 類，並覆蓋了上述方法，則可能需要更新你的實現。"
+    action: "如果你的應用程式具有自定義類別，它們擴充套件了 `FormArray` 或 `FormGroup` 類別，並覆蓋了上述方法，則可能需要更新你的實現。"
   },
   {
     possibleIn: 1200,
@@ -1265,7 +1265,7 @@ var RECOMMENDATIONS = [
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Advanced,
     step: "v12 `HttpParams` method params update",
-    action: "如果你擴充套件了 `HttpParams` 類，你可能需要更新其方法的簽名以反映引數型別的更改。"
+    action: "如果你擴充套件了 `HttpParams` 類別，你可能需要更新其方法的簽名以反映引數型別的更改。"
   },
   {
     possibleIn: 1200,
@@ -1520,7 +1520,7 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Advanced,
     material: true,
     step: "v14 mat-list-item-avatar",
-    action: "將 `mat-list-item-avatar` CSS 類重新命名為 `mat-list-item-with-avatar`。"
+    action: "將 `mat-list-item-avatar` CSS 類別重新命名為 `mat-list-item-with-avatar`。"
   },
   {
     possibleIn: 1400,
@@ -1544,7 +1544,7 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Advanced,
     material: true,
     step: "v14 MatSelectionList",
-    action: "如果你正在使用 `MatSelectionList`，請確保在其建構式函式中傳遞 `_focusMonitor`，因為現在它是必需的。此外，這個類不再具有 `tabIndex` 屬性和 `tabIndex` 建構式函式引數。"
+    action: "如果你正在使用 `MatSelectionList`，請確保在其建構式函式中傳遞 `_focusMonitor`，因為現在它是必需的。此外，這個類別不再具有 `tabIndex` 屬性和 `tabIndex` 建構式函式引數。"
   },
   {
     possibleIn: 1400,
@@ -1670,7 +1670,7 @@ var RECOMMENDATIONS = [
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Medium,
     step: "v15 iframe",
-    action: "現有的 `<iframe>` 實例可能已經應用了安全敏感屬性，作為屬性或屬性繫結。這些安全敏感屬性可能出現在樣板中或指令的宿主繫結中。這些情況需要更新，以確保符合對 `<iframe>` 繫結的新和更嚴格的規則。<a href='https://v15.angular.io/errors/NG0910' title='錯誤頁面的連結'>檢視更多訊息</a>"
+    action: "現有的 `<iframe>` 實例可能已經應用了安全敏感屬性，作為屬性或屬性繫結。這些安全敏感屬性可能出現在範本中或指令的宿主繫結中。這些情況需要更新，以確保符合對 `<iframe>` 繫結的新和更嚴格的規則。<a href='https://v15.angular.io/errors/NG0910' title='錯誤頁面的連結'>檢視更多訊息</a>"
   },
   {
     possibleIn: 1500,
@@ -1713,7 +1713,7 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     material: true,
     step: "v15 mat refactor",
-    action: '在 Angular Material v15 中，許多元件已被重構為基於官方 Material Design Components for Web (MDC)。這個變化影響了許多元件的 DOM 和 CSS 類。<a href="https://rc.material.angular.dev/guide/mdc-migration" title="有關此更改的更多訊息">繼續閱讀</a>'
+    action: '在 Angular Material v15 中，許多元件已被重構為基於官方 Material Design Components for Web (MDC)。這個變化影響了許多元件的 DOM 和 CSS 類別。<a href="https://rc.material.angular.dev/guide/mdc-migration" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
@@ -2129,7 +2129,7 @@ var RECOMMENDATIONS = [
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Medium,
     step: "18.0.0: Remove two-way binding expressions in writable bindings",
-    action: "刪除在使用 `[(ngModel)]` 的樣板中寫入屬性的表示式。"
+    action: "刪除在使用 `[(ngModel)]` 的範本中寫入屬性的表示式。"
   },
   {
     possibleIn: 1800,
@@ -2252,7 +2252,7 @@ var RECOMMENDATIONS = [
     step: "19.0.0-standalone-declarations"
   },
   {
-    action: "訪問樣板引用變數時移除 `this.` 字首。例如，將 `<div #foo></div>{{ this.foo }}` 重構為 `<div #foo></div>{{ foo }}`",
+    action: "訪問範本引用變數時移除 `this.` 字首。例如，將 `<div #foo></div>{{ this.foo }}` 重構為 `<div #foo></div>{{ foo }}`",
     level: ApplicationComplexity.Medium,
     necessaryAsOf: 1900,
     possibleIn: 1900,

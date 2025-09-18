@@ -41,15 +41,15 @@
   <h3 id="match-file-names-to-the-typescript-identifier-within">
     <a href="#match-file-names-to-the-typescript-identifier-within" class="docs-anchor" tabindex="-1" aria-label="Link to Match file names to the TypeScript identifier within">檔案名與內部的 TypeScript 識別符號對應</a>
   </h3>
-  <p>檔案名通常應描述檔案中程式碼的內容。當檔案包含一個 TypeScript 類時，檔案名應反映該類別名。例如，包含名為 <code>UserProfile</code> 的元件的檔案名為 <code>user-profile.ts</code>。</p>
+  <p>檔案名通常應描述檔案中程式碼的內容。當檔案包含一個 TypeScript 類別時，檔案名應反映該類別名。例如，包含名為 <code>UserProfile</code> 的元件的檔案名為 <code>user-profile.ts</code>。</p>
 <p>如果檔案包含多個主要的命名識別符號，請選擇一個描述其中程式碼的共同主題的名稱。
 如果檔案中的程式碼不適合通用主題或功能區域，請考慮將程式碼分解到不同的檔案中。
 避免使用過於通用的檔案名，如 <code>helpers.ts</code>、<code>utils.ts</code> 或 <code>common.ts</code>。</p>
 
   <h3 id="use-the-same-file-name-for-a-components-typescript-template-and-styles">
-    <a href="#use-the-same-file-name-for-a-components-typescript-template-and-styles" class="docs-anchor" tabindex="-1" aria-label="Link to Use the same file name for a component's TypeScript, template, and styles">為元件的 TypeScript、樣板和樣式使用相同的檔案名</a>
+    <a href="#use-the-same-file-name-for-a-components-typescript-template-and-styles" class="docs-anchor" tabindex="-1" aria-label="Link to Use the same file name for a component's TypeScript, template, and styles">為元件的 TypeScript、範本和樣式使用相同的檔案名</a>
   </h3>
-  <p>元件通常由一個 TypeScript 檔案、一個樣板檔案和一個樣式檔案組成。這些檔案應共享相同的名稱，但具有不同的檔案副檔名。例如，一個 <code>UserProfile</code> 元件可以擁有 <code>user-profile.ts</code>、<code>user-profile.html</code> 和 <code>user-profile.css</code> 檔案。</p>
+  <p>元件通常由一個 TypeScript 檔案、一個範本檔案和一個樣式檔案組成。這些檔案應共享相同的名稱，但具有不同的檔案副檔名。例如，一個 <code>UserProfile</code> 元件可以擁有 <code>user-profile.ts</code>、<code>user-profile.html</code> 和 <code>user-profile.css</code> 檔案。</p>
 <p>如果一個元件有多個樣式檔案，請在名稱後附加描述該檔案特有樣式的其他單詞。例如，<code>UserProfile</code> 可能有樣式檔案 <code>user-profile-settings.css</code> 和 <code>user-profile-subscription.css</code>。</p>
 
   <h2 id="project-structure">
@@ -71,7 +71,7 @@
   <h3 id="group-closely-related-files-together-in-the-same-directory">
     <a href="#group-closely-related-files-together-in-the-same-directory" class="docs-anchor" tabindex="-1" aria-label="Link to Group closely related files together in the same directory">將緊密相關的檔案的放在同一個目錄中</a>
   </h3>
-  <p>Angular 元件由一個 TypeScript 檔案以及可選的樣板和一或多個樣式檔案組成。您應該將它們分組在同一個目錄中。</p>
+  <p>Angular 元件由一個 TypeScript 檔案以及可選的範本和一或多個樣式檔案組成。您應該將它們分組在同一個目錄中。</p>
 <p>單元測試應與被測程式碼位於同一目錄中。避免將不相關的測試收集到一個單獨的 <code>tests</code> 目錄中。</p>
 
   <h3 id="organize-your-project-by-feature-areas">
@@ -88,7 +88,7 @@
   <h3 id="one-concept-per-file">
     <a href="#one-concept-per-file" class="docs-anchor" tabindex="-1" aria-label="Link to One concept per file">每個檔案一個概念</a>
   </h3>
-  <p>傾向於將源檔案集中於單個<em>概念</em>。對於 Angular 類來說，這通常意味著每個檔案包含一個元件、指令或服務。但是，如果你的類相對較小並且它們作為單個概念的一部分聯絡在一起，那麼一個檔案包含多個元件或指令也是可以的。</p>
+  <p>傾向於將源檔案集中於單個<em>概念</em>。對於 Angular 類別來說，這通常意味著每個檔案包含一個元件、指令或服務。但是，如果你的類別相對較小並且它們作為單個概念的一部分聯絡在一起，那麼一個檔案包含多個元件或指令也是可以的。</p>
 <p>如有疑問，請選擇能產生更小檔案的方案。</p>
 
   <h2 id="dependency-injection">
@@ -101,7 +101,7 @@
   <p>優先使用 <code>inject</code> 函式而非注入建構式函式引數。<code>inject</code> 函式的工作方式與建構式函式引數注入相同，但提供了幾個樣式上的優勢：</p>
 
   <ul class="docs-list">
-    <li><code>inject</code> 通常更具可讀性，尤其是在一個類注入了許多依賴項時。</li>
+    <li><code>inject</code> 通常更具可讀性，尤其是在一個類別注入了許多依賴項時。</li>
 <li>在注入的依賴項中新增註解在語法上更直接</li>
 <li><code>inject</code> 提供了更好的型別推斷。</li>
 <li>當使用 <a href="https://www.typescript.org/tsconfig/#useDefineForClassFields" target="_blank"><code>useDefineForClassFields</code></a> 目標為 ES2022+ 時，在讀取注入依賴項的欄位時，可以避免欄位宣告和初始化的分離。</li>
@@ -133,7 +133,7 @@
     <a href="#group-angular-specific-properties-before-methods" class="docs-anchor" tabindex="-1" aria-label="Link to Group Angular-specific properties before methods">在方法之前對 Angular 特定的屬性進行分組</a>
   </h3>
   <p>元件和指令應將 Angular 特定的屬性分組在一起，通常在類別宣告的頂部附近。這包括注入的依賴項、輸入、輸出和查詢。在類別的這些方法和其他屬性之前定義它們。</p>
-<p>這種做法使得查詢類別的樣板 API 和依賴項更加容易。</p>
+<p>這種做法使得查詢類別的範本 API 和依賴項更加容易。</p>
 
   <h3 id="keep-components-and-directives-focused-on-presentation">
     <a href="#keep-components-and-directives-focused-on-presentation" class="docs-anchor" tabindex="-1" aria-label="Link to Keep components and directives focused on presentation">保持元件和指令專注於表示</a>
@@ -141,16 +141,16 @@
   <p>元件和指令中的程式碼通常應與頁面上顯示的 UI 相關。對於有意義的、與 UI 分離的程式碼，請優先重構到其他檔案中。例如，可以將表單驗證規則或資料轉換分解到單獨的函式或類別中。</p>
 
   <h3 id="avoid-overly-complex-logic-in-templates">
-    <a href="#avoid-overly-complex-logic-in-templates" class="docs-anchor" tabindex="-1" aria-label="Link to Avoid overly complex logic in templates">避免在樣板中使用過於複雜的邏輯</a>
+    <a href="#avoid-overly-complex-logic-in-templates" class="docs-anchor" tabindex="-1" aria-label="Link to Avoid overly complex logic in templates">避免在範本中使用過於複雜的邏輯</a>
   </h3>
-  <p>Angular 樣板旨在支援<a href="guide/templates/expression-syntax">類似 JavaScript 的表示式</a>。您應該利用這些表示式將相對直接的邏輯直接包含在樣板表示式中。</p>
-<p>但是，當樣板中的程式碼變得過於複雜時，請將邏輯重構到 TypeScript 程式碼中（通常使用<a href="guide/signals#computed-signals">計算訊號</a>）。</p>
+  <p>Angular 範本旨在支援<a href="guide/templates/expression-syntax">類似 JavaScript 的表示式</a>。您應該利用這些表示式將相對直接的邏輯直接包含在範本表示式中。</p>
+<p>但是，當範本中的程式碼變得過於複雜時，請將邏輯重構到 TypeScript 程式碼中（通常使用<a href="guide/signals#computed-signals">計算訊號</a>）。</p>
 <p>對於什麼構成『複雜』，沒有一成不變的規則。請自行判斷。</p>
 
   <h3 id="use-protected-on-class-members-that-are-only-used-by-a-components-template">
-    <a href="#use-protected-on-class-members-that-are-only-used-by-a-components-template" class="docs-anchor" tabindex="-1" aria-label="Link to Use <code>protected</code> on class members that are only used by a component's template">對於僅被元件樣板使用的類別成員，請使用 <code>protected</code>。</a>
+    <a href="#use-protected-on-class-members-that-are-only-used-by-a-components-template" class="docs-anchor" tabindex="-1" aria-label="Link to Use <code>protected</code> on class members that are only used by a component's template">對於僅被元件範本使用的類別成員，請使用 <code>protected</code>。</a>
   </h3>
-  <p>元件類別的公共成員本身就定義了一個可以透過依賴注入和<a href="guide/components/queries">查詢</a>訪問的公共 API。對於旨在從元件樣板讀取的任何成員，請優先使用 <code>protected</code> 訪問。</p>
+  <p>元件類別的公共成員本身就定義了一個可以透過依賴注入和<a href="guide/components/queries">查詢</a>訪問的公共 API。對於旨在從元件範本讀取的任何成員，請優先使用 <code>protected</code> 訪問。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">@</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"><a href="/api/core/Component">Component</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">({</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  ...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  template: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">`&lt;p&gt;{{ fullName() }}&lt;/p&gt;`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">})</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> UserProfile</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  firstName</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/input">input</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">  lastName</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/input">input</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">();</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// `fullName` is not part of the component's public API, but is used in the template.</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  protected</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70"> fullName</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/core/computed">computed</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=&gt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> `${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">firstName</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">} ${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">this</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">lastName</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">()</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
@@ -174,7 +174,7 @@
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- PREFER --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [class.admin]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"isAdmin"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [class.dense]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"density === 'high'"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- OR --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [class]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"{admin: isAdmin, dense: density === 'high'}"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- AVOID --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">div</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> [ngClass]</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"{admin: isAdmin, dense: density === 'high'}"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
-  </div><p><code>class</code> 和 <a href="/api/animations/style"><code>style</code></a> 繫結都使用了更直接的語法，與標準 HTML 屬性非常相似。這使得您的樣板更易於閱讀和理解，特別是對於熟悉基本 HTML 的開發人員而言。</p>
+  </div><p><code>class</code> 和 <a href="/api/animations/style"><code>style</code></a> 繫結都使用了更直接的語法，與標準 HTML 屬性非常相似。這使得您的範本更易於閱讀和理解，特別是對於熟悉基本 HTML 的開發人員而言。</p>
 <p>此外，與內建的 <code>class</code> 和 <a href="/api/animations/style"><code>style</code></a> 綁定語法相比，<a href="/api/common/NgClass"><code>NgClass</code></a> 和 <a href="/api/common/NgStyle"><code>NgStyle</code></a> 指令會產生額外的效能開銷。</p>
 <p>有關更多詳細訊息，請參閱<a href="/guide/templates/binding#css-class-and-style-property-bindings">繫結指南</a>。</p>
 
@@ -185,7 +185,7 @@
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- PREFER --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> (click)</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"saveUserData()"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Save&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">&lt;!-- AVOID --&gt;</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> (click)</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"handleClick()"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;Save&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D">button</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&gt;</span></span></code></pre>
-  </div><p>使用有意義的名稱，可以更容易地從樣板中瞭解事件的作用。</p>
+  </div><p>使用有意義的名稱，可以更容易地從範本中瞭解事件的作用。</p>
 <p>對於鍵盤事件，您可以使用 Angular 的按鍵事件修飾符和特定的處理程式名稱：</p>
 <div class="docs-code">
     

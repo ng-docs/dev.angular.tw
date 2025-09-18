@@ -99,13 +99,13 @@ var _EmbeddedTutorialManager = class _EmbeddedTutorialManager {
   async fetchTutorialSourceCode(tutorial) {
     const tutorialSourceCode = await fetch(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/source-code.json`);
     if (!tutorialSourceCode.ok)
-      throw new Error(`缺少教程 ${tutorial} 的原始碼。`);
+      throw new Error(`缺少教學課程 ${tutorial} 的原始碼。`);
     return await tutorialSourceCode.json();
   }
   async fetchTutorialMetadata(tutorial) {
     const tutorialSourceCode = await fetch(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`);
     if (!tutorialSourceCode.ok)
-      throw new Error(`缺少教程 ${tutorial} 的元資料。`);
+      throw new Error(`缺少教學課程 ${tutorial} 的元資料。`);
     return await tutorialSourceCode.json();
   }
   /**

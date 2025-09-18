@@ -11,7 +11,7 @@
     </a>
   </div>
     </header>
-    <p>路由是 Angular 應用中導向的基本建立塊。</p>
+    <p>路由是 Angular 應用中導向的基本元素。</p>
 
   <h2 id="what-are-routes">
     <a href="#what-are-routes" class="docs-anchor" tabindex="-1" aria-label="Link to What are routes?">什麼是路由？</a>
@@ -63,7 +63,7 @@
     <a href="#define-url-paths-with-route-parameters" class="docs-anchor" tabindex="-1" aria-label="Link to Define URL Paths with Route Parameters">使用路由引數定義 URL 路徑</a>
   </h3>
   <p>引數化 URL 允許您定義動態路徑，這些路徑允許多個 URL 指向同一個元件，同時根據 URL 中的引數動態顯示資料。</p>
-<p>您可以透過在路由的 <code>path</code> 字串中新增引數，並在每個引數前加上冒號 (<code>:</code>) 字元來定義此類模式。</p>
+<p>您可以透過在路由的 <code>path</code> 字串中新增引數，並在每個引數前加上冒號 (<code>:</code>) 字元來定義此類別模式。</p>
 
     <div class="docs-alert docs-alert-important">
     <p><strong>重要提示：</strong>引數與 URL 的 <a href="https://en.wikipedia.org/wiki/Query_string" target="_blank">查詢字串</a>中的訊息不同。
@@ -74,7 +74,7 @@
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { UserProfile } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './user-profile/user-profile</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  { path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'user/:id'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, component: UserProfile }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>
-  </div><p>在此範例中，諸如 <code>/user/leeroy</code> 和 <code>/user/jenkins</code> 之類的 URL 會渲染 <code>UserProfile</code> 元件。然後，該組件可以讀取 <code>id</code> 引數並使用它來執行其他工作，例如獲取資料。有關讀取路由引數的詳細訊息，請參閱 <a href="/guide/routing/read-route-state">讀取路由狀態指南</a>。</p>
+  </div><p>在此範例中，諸如 <code>/user/leeroy</code> 和 <code>/user/jenkins</code> 之類別的 URL 會渲染 <code>UserProfile</code> 元件。然後，該組件可以讀取 <code>id</code> 引數並使用它來執行其他工作，例如獲取資料。有關讀取路由引數的詳細訊息，請參閱 <a href="/guide/routing/read-route-state">讀取路由狀態指南</a>。</p>
 <p>有效的路由引數名稱必須以字母 (a-z, A-Z) 開頭，並且只能包含：</p>
 
   <ul class="docs-list">
@@ -127,20 +127,20 @@
   <p>瞭解元件在 Angular 路由中如何以及何時載入對於建立回應式 Web 應用至關重要。Angular 提供了兩種主要策略來控制組件載入行為：</p>
 
     <ol class="docs-ordered-list">
-      <li><strong>急性載入</strong>：立即載入的元件</li>
+      <li><strong>預先載入</strong>：立即載入的元件</li>
 <li><strong>延遲載入</strong>：僅在需要時載入的元件</li>
 
     </ol>
     <p>每種方法都為不同的場景提供了獨特的優勢。</p>
 
   <h3 id="eagerly-loaded-components">
-    <a href="#eagerly-loaded-components" class="docs-anchor" tabindex="-1" aria-label="Link to Eagerly loaded components">急性載入的元件</a>
+    <a href="#eagerly-loaded-components" class="docs-anchor" tabindex="-1" aria-label="Link to Eagerly loaded components">預先載入的元件</a>
   </h3>
-  <p>當您使用 <code>component</code> 屬性定義路由時，引用的元件將作為路由設定的同一 JavaScript 捆綁包的一部分被急性載入。</p>
+  <p>當您使用 <code>component</code> 屬性定義路由時，引用的元件將作為路由設定的同一 JavaScript 捆綁包的一部分被預先載入。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> "@angular/router"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { HomePage } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> "./components/home/home-page"</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { LoginPage } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> "./components/auth/login-page"</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // HomePage and LoginPage are both directly referenced in this config,</span></span><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">  // so their code is eagerly included in the same JavaScript bundle as this file.</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">""</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: HomePage</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"login"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: LoginPage</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span></span></code></pre>
-  </div><p>像這樣急性載入路由元件意味著瀏覽器必須在初始頁面載入時下載和解析這些元件的所有 JavaScript，但這些元件會立即提供給 Angular。</p>
+  </div><p>像這樣預先載入路由元件意味著瀏覽器必須在初始頁面載入時下載和解析這些元件的所有 JavaScript，但這些元件會立即提供給 Angular。</p>
 <p>雖然在初始頁面載入中包含更多 JavaScript 會導致更慢的初始載入時間，但這可以為使用者在應用程式中導向時提供更無縫的轉場。</p>
 
   <h3 id="lazily-loaded-components">
@@ -157,7 +157,7 @@
     <a href="#should-i-use-an-eager-or-a-lazy-route" class="docs-anchor" tabindex="-1" aria-label="Link to Should I use an eager or a lazy route?">我應該使用急性路由還是惰性路由？</a>
   </h3>
   <p>在決定路由應該是急性的還是惰性的時，有許多因素需要考慮。</p>
-<p>總的來說，建議對主要登入頁面進行急性載入，而其他頁面則進行延遲載入。</p>
+<p>總的來說，建議對主要登入頁面進行預先載入，而其他頁面則進行延遲載入。</p>
 <p>注意：雖然惰性路由具有減少使用者初始請求資料量的前期效能優勢，但它會增加未來可能不希望出現的資料請求。在處理多層巢狀延遲載入時尤其如此，這會嚴重影響效能。</p>
 
   <h2 id="redirects">
@@ -202,7 +202,7 @@
   <h3 id="static-data">
     <a href="#static-data" class="docs-anchor" tabindex="-1" aria-label="Link to Static data">靜態資料</a>
   </h3>
-  <p>您可以透過 <code>data</code> 屬性將任意靜態資料與路由關聯，以集中處理諸如特定於路由的元資料（例如，分析跟蹤、許可權等）之類的內容：</p>
+  <p>您可以透過 <code>data</code> 屬性將任意靜態資料與路由關聯，以集中處理諸如特定於路由的元資料（例如，分析跟蹤、許可權等）之類別的內容：</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { <a href="/api/router/Routes">Routes</a> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> '@angular/router'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { HomeComponent } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './home/home.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { AboutComponent } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './about/about.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { ProductsComponent } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> './products/products.component'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> routes</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/router/Routes">Routes</a></span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'about'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: AboutComponent,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    data: { analyticsId: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'456'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  },</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  {</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    path: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">''</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    component: HomeComponent,</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    data: { analyticsId: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'123'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }</span></span><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">];</span></span></code></pre>

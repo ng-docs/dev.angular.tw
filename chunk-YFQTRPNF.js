@@ -211,7 +211,7 @@ var shortLabelsMap = {
 };
 var fullLabelsMap = {
   [ApiItemType.BLOCK]: "控制區塊",
-  [ApiItemType.CLASS]: "類",
+  [ApiItemType.CLASS]: "類別",
   [ApiItemType.CONST]: "常數",
   [ApiItemType.DECORATOR]: "裝飾器",
   [ApiItemType.DIRECTIVE]: "指令",

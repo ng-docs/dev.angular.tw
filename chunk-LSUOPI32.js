@@ -31929,7 +31929,7 @@ __name(PreviewError_Conditional_1_Template, "PreviewError_Conditional_1_Template
 function PreviewError_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
     ɵɵdomElementStart(0, "p");
-    ɵɵtext(1, " 我們無法啟動教程應用。請確保已為此站點啟用第三方 Cookie。 ");
+    ɵɵtext(1, " 我們無法啟動教學課程應用。請確保已為此站點啟用第三方 Cookie。 ");
     ɵɵdomElementEnd();
   }
 }
@@ -31937,7 +31937,7 @@ __name(PreviewError_Conditional_2_Template, "PreviewError_Conditional_2_Template
 function PreviewError_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
     ɵɵdomElementStart(0, "p");
-    ɵɵtext(1, " 我們無法啟動教程應用，因為你的瀏覽器記憶體不足。請關閉其他標籤頁或視窗中的 angular.cn 教程，並重新整理頁面以釋放記憶體。 ");
+    ɵɵtext(1, " 我們無法啟動教學課程應用，因為你的瀏覽器記憶體不足。請關閉其他標籤頁或視窗中的 angular.cn 教學課程，並重新整理頁面以釋放記憶體。 ");
     ɵɵdomElementEnd();
   }
 }
@@ -31988,7 +31988,7 @@ var PreviewError = _PreviewError;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PreviewError, [{
     type: Component,
-    args: [{ selector: "docs-tutorial-preview-error", changeDetection: ChangeDetectionStrategy.OnPush, template: '<div class="adev-preview-error docs-light-mode docs-mini-scroll-track">\n  @if (error()?.type === ErrorType.UNSUPPORTED_BROWSER_ENVIRONMENT) {\n    @if (isIos) {\n      <p>在桌面裝置上開啟 angular.dev，直接在瀏覽器中編寫程式碼。</p>\n    }\n  } @else if (error()?.type === ErrorType.COOKIES || error()?.type === ErrorType.UNKNOWN) {\n    <p>\n      我們無法啟動教程應用。請確保已為此站點啟用第三方 Cookie。\n    </p>\n  } @else if (error()?.type === ErrorType.OUT_OF_MEMORY) {\n    <p>\n      我們無法啟動教程應用，因為你的瀏覽器記憶體不足。請關閉其他標籤頁或視窗中的 angular.cn 教程，並重新整理頁面以釋放記憶體。\n    </p>\n  }\n\n  @if (error()?.message) {\n    <small>\n      錯誤訊息為：\n      <code>{{ error()!.message }}</code>\n    </small>\n  }\n</div>\n', styles: ['/* src/app/editor/preview/preview-error.component.scss */\n:host {\n  margin: 5% auto;\n}\n.adev-preview-error {\n  border: 1px solid var(--senary-contrast);\n  border-radius: 0.25rem;\n  padding: 1rem;\n}\n.adev-preview-error p {\n  display: flex;\n  gap: 0.5rem;\n  font-weight: 600;\n  margin-top: 0;\n}\n.adev-preview-error p::before {\n  content: "error";\n  font-family: var(--icons);\n  color: var(--orange-red);\n  font-size: 1.5rem;\n  font-weight: 500;\n}\n.adev-preview-error code:not(pre *) {\n  white-space: pre-wrap;\n  background:\n    linear-gradient(\n      90deg,\n      var(--hot-red) 0%,\n      var(--orange-red) 100%);\n  background-clip: text;\n  -webkit-background-clip: text;\n  color: transparent;\n}\n.adev-preview-error code:not(pre *)::before {\n  background: transparent;\n}\n/*# sourceMappingURL=preview-error.component.css.map */\n'] }]
+    args: [{ selector: "docs-tutorial-preview-error", changeDetection: ChangeDetectionStrategy.OnPush, template: '<div class="adev-preview-error docs-light-mode docs-mini-scroll-track">\n  @if (error()?.type === ErrorType.UNSUPPORTED_BROWSER_ENVIRONMENT) {\n    @if (isIos) {\n      <p>在桌面裝置上開啟 angular.dev，直接在瀏覽器中編寫程式碼。</p>\n    }\n  } @else if (error()?.type === ErrorType.COOKIES || error()?.type === ErrorType.UNKNOWN) {\n    <p>\n      我們無法啟動教學課程應用。請確保已為此站點啟用第三方 Cookie。\n    </p>\n  } @else if (error()?.type === ErrorType.OUT_OF_MEMORY) {\n    <p>\n      我們無法啟動教學課程應用，因為你的瀏覽器記憶體不足。請關閉其他標籤頁或視窗中的 angular.cn 教學課程，並重新整理頁面以釋放記憶體。\n    </p>\n  }\n\n  @if (error()?.message) {\n    <small>\n      錯誤訊息為：\n      <code>{{ error()!.message }}</code>\n    </small>\n  }\n</div>\n', styles: ['/* src/app/editor/preview/preview-error.component.scss */\n:host {\n  margin: 5% auto;\n}\n.adev-preview-error {\n  border: 1px solid var(--senary-contrast);\n  border-radius: 0.25rem;\n  padding: 1rem;\n}\n.adev-preview-error p {\n  display: flex;\n  gap: 0.5rem;\n  font-weight: 600;\n  margin-top: 0;\n}\n.adev-preview-error p::before {\n  content: "error";\n  font-family: var(--icons);\n  color: var(--orange-red);\n  font-size: 1.5rem;\n  font-weight: 500;\n}\n.adev-preview-error code:not(pre *) {\n  white-space: pre-wrap;\n  background:\n    linear-gradient(\n      90deg,\n      var(--hot-red) 0%,\n      var(--orange-red) 100%);\n  background-clip: text;\n  -webkit-background-clip: text;\n  color: transparent;\n}\n.adev-preview-error code:not(pre *)::before {\n  background: transparent;\n}\n/*# sourceMappingURL=preview-error.component.css.map */\n'] }]
   }], null, null);
 })();
 (() => {

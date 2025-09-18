@@ -6292,7 +6292,7 @@ var _AlertManager = class _AlertManager {
     let message = "";
     switch (reason) {
       case AlertReason.OUT_OF_MEMORY:
-        message = `你的瀏覽器當前限制了執行 Angular 教程或線上演練場所需的記憶體。如果你有多個標籤頁開啟了教程或線上演練場，請關閉其中的一些並重新整理此頁面。`;
+        message = `你的瀏覽器當前限制了執行 Angular 教學課程或線上練習場所需的記憶體。如果你有多個標籤頁開啟了教學課程或線上練習場，請關閉其中的一些並重新整理此頁面。`;
         break;
       case AlertReason.MOBILE:
         message = `你正在行動裝置上執行嵌入式編輯器，這可能會導致記憶體不足錯誤。`;
@@ -6729,7 +6729,7 @@ var _NodeRuntimeSandbox = class _NodeRuntimeSandbox {
     }
     try {
       if (!this.embeddedTutorialManager.type())
-        throw Error("教程型別不可用，無法初始化 NodeRuntimeSandbox。");
+        throw Error("教學課程型別不可用，無法初始化 NodeRuntimeSandbox。");
       console.time("載入時間");
       let webContainer;
       if (this.nodeRuntimeState.loadingStep() === LoadingStep.NOT_STARTED) {

@@ -19,7 +19,7 @@
     <a href="#unhandled-errors-are-reported-to-the-errorhandler" class="docs-anchor" tabindex="-1" aria-label="Link to Unhandled errors are reported to the <code>ErrorHandler</code>">未處理的錯誤會被報告給 <code>ErrorHandler</code></a>
   </h2>
   <p>Angular 會將未處理的錯誤報告給應用的根 <a href="api/core/ErrorHandler">ErrorHandler</a>。當提供自定義 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a> 時，請在呼叫 <a href="/api/platform-browser/bootstrapApplication"><code>bootstrapApplication</code></a> 時將其作為 <code>ApplicationConfig</code> 的一部分提供。</p>
-<p>在建立 Angular 應用時，你經常會編寫一些程式碼，這些程式碼會被框架自動呼叫。例如，當一個元件出現在樣板中時，Angular 負責呼叫該組件的建構式函式和生命週期方法。當框架執行你的程式碼時，你無法合理地新增一個 <code>try</code> 區塊來優雅地處理錯誤。在這種情況下，Angular 會捕獲錯誤並將它們傳送到 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a>。</p>
+<p>在建立 Angular 應用時，你經常會編寫一些程式碼，這些程式碼會被框架自動呼叫。例如，當一個元件出現在範本中時，Angular 負責呼叫該組件的建構式函式和生命週期方法。當框架執行你的程式碼時，你無法合理地新增一個 <code>try</code> 區塊來優雅地處理錯誤。在這種情況下，Angular 會捕獲錯誤並將它們傳送到 <a href="/api/core/ErrorHandler"><code>ErrorHandler</code></a>。</p>
 <p>Angular 不會捕獲由你的程式碼直接呼叫的 API 中的錯誤。例如，如果你有一個服務，其中有一個方法會丟擲錯誤，而你在元件中呼叫了該方法，Angular 不會自動捕獲該錯誤。你需要使用 <code>try...catch</code> 等機制來處理它。</p>
 <p>Angular 僅在以下情況下捕獲使用者 Promise 或可觀察者中的<em>非同步</em>錯誤：</p>
 

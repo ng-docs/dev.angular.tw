@@ -107,7 +107,7 @@
   <h3 id="filtering-harnesses">
     <a href="#filtering-harnesses" class="docs-anchor" tabindex="-1" aria-label="Link to Filtering harnesses">過濾測試工具</a>
   </h3>
-  <p>當頁面包含特定元件的多個實例時，您可能希望根據元件的某個屬性進行過濾以獲取特定的元件實例。為此，您可以使用<strong>測試工具謂詞</strong>，這是一個用於將 <a href="/api/cdk/testing/ComponentHarness"><code>ComponentHarness</code></a> 類與可用於過濾元件實例的謂詞函式關聯起來的類。</p>
+  <p>當頁面包含特定元件的多個實例時，您可能希望根據元件的某個屬性進行過濾以獲取特定的元件實例。為此，您可以使用<strong>測試工具謂詞</strong>，這是一個用於將 <a href="/api/cdk/testing/ComponentHarness"><code>ComponentHarness</code></a> 類別與可用於過濾元件實例的謂詞函式關聯起來的類別。</p>
 <p>當您向 <a href="/api/cdk/testing/HarnessLoader"><code>HarnessLoader</code></a> 請求測試工具時，您實際上是在提供一個 HarnessQuery。查詢可以是以下兩者之一：</p>
 
   <ul class="docs-list">
@@ -115,7 +115,7 @@
 <li>一個 <a href="/api/cdk/testing/HarnessPredicate"><code>HarnessPredicate</code></a>，它獲取基於一個或多個條件過濾的 harnesses</li>
 
   </ul>
-  <p><a href="/api/cdk/testing/HarnessPredicate"><code>HarnessPredicate</code></a> 支援一些基礎過濾器（選擇器、祖先選擇器），這些過濾器適用於任何擴充套件了 <a href="/api/cdk/testing/ComponentHarness"><code>ComponentHarness</code></a> 的類。</p>
+  <p><a href="/api/cdk/testing/HarnessPredicate"><code>HarnessPredicate</code></a> 支援一些基礎過濾器（選擇器、祖先選擇器），這些過濾器適用於任何擴充套件了 <a href="/api/cdk/testing/ComponentHarness"><code>ComponentHarness</code></a> 的類別。</p>
 <div class="docs-code">
     
     <pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D">// Example of loading a MyButtonComponentHarness with a harness predicate</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> disabledButtonPredicate</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> <a href="/api/cdk/testing/HarnessPredicate">HarnessPredicate</a></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(MyButtonComponentHarness, {selector: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">'[disabled]'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">});</span></span><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> disabledButton</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> loader.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">getHarness</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(disabledButtonPredicate);</span></span></code></pre>
@@ -128,7 +128,7 @@
   <h2 id="using-test-harness-apis">
     <a href="#using-test-harness-apis" class="docs-anchor" tabindex="-1" aria-label="Link to Using test harness APIs">使用測試工具 API</a>
   </h2>
-  <p>雖然每個 harness 都定義了與其對應元件特定的 API，但它們都共享一個通用基底類別 <a href="/api/cdk/testing/ComponentHarness">ComponentHarness</a>。這個基底類別定義了一個靜態屬性 <code>hostSelector</code>，它將 harness 類與 DOM 中的元件實例進行對應。</p>
+  <p>雖然每個 harness 都定義了與其對應元件特定的 API，但它們都共享一個通用基底類別 <a href="/api/cdk/testing/ComponentHarness">ComponentHarness</a>。這個基底類別定義了一個靜態屬性 <code>hostSelector</code>，它將 harness 類別與 DOM 中的元件實例進行對應。</p>
 <p>除此之外，任何給定測試工具的 API 都特定於其對應的元件；請參閱元件的文件以瞭解如何使用特定的測試工具。</p>
 <p>例如，以下是使用 <a href="https://material.angular.dev/components/slider/api#MatSliderHarness" target="_blank">Angular Material 滑區塊元件 harness</a> 的元件的測試：</p>
 <div class="docs-code">

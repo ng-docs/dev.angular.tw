@@ -378,7 +378,7 @@ __name(Tutorial_ng_template_6_Conditional_18_Template, "Tutorial_ng_template_6_C
 function Tutorial_ng_template_6_Conditional_19_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
     ɵɵelementStart(0, "a", 21);
-    ɵɵtext(1, "下一個教程");
+    ɵɵtext(1, "下一個教學課程");
     ɵɵelementEnd();
   }
   if (rf & 2) {
@@ -781,7 +781,7 @@ var Tutorial = _Tutorial;
             class="adev-nav-list"
           />
           @if (nextTutorialPath()) {
-            <a [routerLink]="'/' + nextTutorialPath()">下一個教程</a>
+            <a [routerLink]="'/' + nextTutorialPath()">下一個教學課程</a>
           }
         </div>
       }
