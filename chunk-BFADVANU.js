@@ -34,34 +34,34 @@ var _OpenCloseChildComponent = class _OpenCloseChildComponent {
   }
 };
 __name(_OpenCloseChildComponent, "OpenCloseChildComponent");
-__publicField(_OpenCloseChildComponent, "\u0275fac", /* @__PURE__ */ __name(function OpenCloseChildComponent_Factory(__ngFactoryType__) {
+__publicField(_OpenCloseChildComponent, "ɵfac", /* @__PURE__ */ __name(function OpenCloseChildComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _OpenCloseChildComponent)();
 }, "OpenCloseChildComponent_Factory"));
-__publicField(_OpenCloseChildComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _OpenCloseChildComponent, selectors: [["app-open-close-toggle"]], decls: 9, vars: 3, consts: [["type", "button", 3, "click"], [1, "open-close-container"]], template: /* @__PURE__ */ __name(function OpenCloseChildComponent_Template(rf, ctx) {
+__publicField(_OpenCloseChildComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _OpenCloseChildComponent, selectors: [["app-open-close-toggle"]], decls: 9, vars: 3, consts: [["type", "button", 3, "click"], [1, "open-close-container"]], template: /* @__PURE__ */ __name(function OpenCloseChildComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "nav")(1, "button", 0);
-    \u0275\u0275domListener("click", /* @__PURE__ */ __name(function OpenCloseChildComponent_Template_button_click_1_listener() {
+    ɵɵdomElementStart(0, "nav")(1, "button", 0);
+    ɵɵdomListener("click", /* @__PURE__ */ __name(function OpenCloseChildComponent_Template_button_click_1_listener() {
       return ctx.toggleAnimations();
     }, "OpenCloseChildComponent_Template_button_click_1_listener"));
-    \u0275\u0275text(2, "Toggle Animations");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(3, "button", 0);
-    \u0275\u0275domListener("click", /* @__PURE__ */ __name(function OpenCloseChildComponent_Template_button_click_3_listener() {
+    ɵɵtext(2, "Toggle Animations");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(3, "button", 0);
+    ɵɵdomListener("click", /* @__PURE__ */ __name(function OpenCloseChildComponent_Template_button_click_3_listener() {
       return ctx.toggle();
     }, "OpenCloseChildComponent_Template_button_click_3_listener"));
-    \u0275\u0275text(4, "Toggle Open/Closed");
-    \u0275\u0275domElementEnd()();
-    \u0275\u0275domElementStart(5, "div")(6, "div", 1)(7, "p");
-    \u0275\u0275text(8);
-    \u0275\u0275domElementEnd()()();
+    ɵɵtext(4, "Toggle Open/Closed");
+    ɵɵdomElementEnd()();
+    ɵɵdomElementStart(5, "div")(6, "div", 1)(7, "p");
+    ɵɵtext(8);
+    ɵɵdomElementEnd()()();
   }
   if (rf & 2) {
-    \u0275\u0275advance(5);
-    \u0275\u0275property("@.disabled", ctx.isDisabled);
-    \u0275\u0275advance();
-    \u0275\u0275property("@childAnimation", ctx.isOpen ? "open" : "closed");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1("The box is now ", ctx.isOpen ? "Open" : "Closed", "!");
+    ɵɵadvance(5);
+    ɵɵproperty("@.disabled", ctx.isDisabled);
+    ɵɵadvance();
+    ɵɵproperty("@childAnimation", ctx.isOpen ? "open" : "closed");
+    ɵɵadvance(2);
+    ɵɵtextInterpolate1("The box is now ", ctx.isOpen ? "Open" : "Closed", "!");
   }
 }, "OpenCloseChildComponent_Template"), styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  margin-top: 1rem;\n}\n.open-close-container[_ngcontent-%COMP%] {\n  border: 1px solid #dddddd;\n  margin-top: 1em;\n  padding: 20px 20px 0px 20px;\n  color: #000000;\n  font-weight: bold;\n  font-size: 20px;\n}\n/*# sourceMappingURL=open-close.component.css.map */"], data: { animation: [
   trigger("childAnimation", [
@@ -117,7 +117,7 @@ var OpenCloseChildComponent = _OpenCloseChildComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(OpenCloseChildComponent, { className: "OpenCloseChildComponent", filePath: "src/content/examples/animations/src/app/open-close.component.4.ts", lineNumber: 38 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(OpenCloseChildComponent, { className: "OpenCloseChildComponent", filePath: "src/content/examples/animations/src/app/open-close.component.4.ts", lineNumber: 38 });
 })();
 
 export {

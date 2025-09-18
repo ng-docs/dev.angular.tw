@@ -181,10 +181,10 @@ var _ApiLabel = class _ApiLabel {
   }
 };
 __name(_ApiLabel, "ApiLabel");
-__publicField(_ApiLabel, "\u0275fac", /* @__PURE__ */ __name(function ApiLabel_Factory(__ngFactoryType__) {
+__publicField(_ApiLabel, "ɵfac", /* @__PURE__ */ __name(function ApiLabel_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ApiLabel)();
 }, "ApiLabel_Factory"));
-__publicField(_ApiLabel, "\u0275pipe", /* @__PURE__ */ \u0275\u0275definePipe({ name: "adevApiLabel", type: _ApiLabel, pure: true }));
+__publicField(_ApiLabel, "ɵpipe", /* @__PURE__ */ ɵɵdefinePipe({ name: "adevApiLabel", type: _ApiLabel, pure: true }));
 var ApiLabel = _ApiLabel;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ApiLabel, [{
@@ -210,19 +210,19 @@ var shortLabelsMap = {
   [ApiItemType.INITIALIZER_API_FUNCTION]: "IA"
 };
 var fullLabelsMap = {
-  [ApiItemType.BLOCK]: "\u63A7\u5236\u5757",
-  [ApiItemType.CLASS]: "\u7C7B",
-  [ApiItemType.CONST]: "\u5E38\u91CF",
-  [ApiItemType.DECORATOR]: "\u88C5\u9970\u5668",
-  [ApiItemType.DIRECTIVE]: "\u6307\u4EE4",
-  [ApiItemType.ELEMENT]: "\u5143\u7D20",
-  [ApiItemType.ENUM]: "\u679A\u4E3E",
-  [ApiItemType.FUNCTION]: "\u51FD\u6570",
-  [ApiItemType.INTERFACE]: "\u63A5\u53E3",
-  [ApiItemType.PIPE]: "\u7BA1\u9053",
-  [ApiItemType.NG_MODULE]: "\u6A21\u5757",
-  [ApiItemType.TYPE_ALIAS]: "\u7C7B\u578B\u522B\u540D",
-  [ApiItemType.INITIALIZER_API_FUNCTION]: "\u521D\u59CB\u5316 API"
+  [ApiItemType.BLOCK]: "控制區塊",
+  [ApiItemType.CLASS]: "類",
+  [ApiItemType.CONST]: "常數",
+  [ApiItemType.DECORATOR]: "裝飾器",
+  [ApiItemType.DIRECTIVE]: "指令",
+  [ApiItemType.ELEMENT]: "元素",
+  [ApiItemType.ENUM]: "列舉",
+  [ApiItemType.FUNCTION]: "函式",
+  [ApiItemType.INTERFACE]: "介面",
+  [ApiItemType.PIPE]: "通道",
+  [ApiItemType.NG_MODULE]: "模組",
+  [ApiItemType.TYPE_ALIAS]: "型別別名",
+  [ApiItemType.INITIALIZER_API_FUNCTION]: "初始化 API"
 };
 
 // src/app/features/references/api-item-label/api-item-label.component.ts
@@ -232,19 +232,19 @@ var _ApiItemLabel = class _ApiItemLabel {
   clazz = computed(() => `type-${this.type()}`, ...ngDevMode ? [{ debugName: "clazz" }] : []);
 };
 __name(_ApiItemLabel, "ApiItemLabel");
-__publicField(_ApiItemLabel, "\u0275fac", /* @__PURE__ */ __name(function ApiItemLabel_Factory(__ngFactoryType__) {
+__publicField(_ApiItemLabel, "ɵfac", /* @__PURE__ */ __name(function ApiItemLabel_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ApiItemLabel)();
 }, "ApiItemLabel_Factory"));
-__publicField(_ApiItemLabel, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ApiItemLabel, selectors: [["docs-api-item-label"]], hostVars: 2, hostBindings: /* @__PURE__ */ __name(function ApiItemLabel_HostBindings(rf, ctx) {
+__publicField(_ApiItemLabel, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _ApiItemLabel, selectors: [["docs-api-item-label"]], hostVars: 2, hostBindings: /* @__PURE__ */ __name(function ApiItemLabel_HostBindings(rf, ctx) {
   if (rf & 2) {
-    \u0275\u0275classMap(ctx.clazz());
+    ɵɵclassMap(ctx.clazz());
   }
 }, "ApiItemLabel_HostBindings"), inputs: { type: [1, "type"] }, decls: 1, vars: 1, template: /* @__PURE__ */ __name(function ApiItemLabel_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275text(0);
+    ɵɵtext(0);
   }
   if (rf & 2) {
-    \u0275\u0275textInterpolate(ctx.label());
+    ɵɵtextInterpolate(ctx.label());
   }
 }, "ApiItemLabel_Template"), encapsulation: 2, changeDetection: 0 }));
 var ApiItemLabel = _ApiItemLabel;
@@ -262,65 +262,65 @@ var ApiItemLabel = _ApiItemLabel;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ApiItemLabel, { className: "ApiItemLabel", filePath: "src/app/features/references/api-item-label/api-item-label.component.ts", lineNumber: 21 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(ApiItemLabel, { className: "ApiItemLabel", filePath: "src/app/features/references/api-item-label/api-item-label.component.ts", lineNumber: 21 });
 })();
 
 // src/app/features/references/api-items-section/api-items-section.component.ts
 var _forTrack0 = /* @__PURE__ */ __name(($index, $item) => $item.url, "_forTrack0");
 function ApiItemsSection_For_6_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 8);
-    \u0275\u0275text(1, " <!> ");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span", 8);
+    ɵɵtext(1, " <!> ");
+    ɵɵelementEnd();
   }
 }
 __name(ApiItemsSection_For_6_Conditional_5_Template, "ApiItemsSection_For_6_Conditional_5_Template");
 function ApiItemsSection_For_6_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 9);
-    \u0275\u0275text(1, " \u{1F9EA} ");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span", 9);
+    ɵɵtext(1, " \u{1F9EA} ");
+    ɵɵelementEnd();
   }
 }
 __name(ApiItemsSection_For_6_Conditional_6_Template, "ApiItemsSection_For_6_Conditional_6_Template");
 function ApiItemsSection_For_6_Conditional_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 10);
-    \u0275\u0275text(1, " \u{1F6A7} ");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span", 10);
+    ɵɵtext(1, " \u{1F6A7} ");
+    ɵɵelementEnd();
   }
 }
 __name(ApiItemsSection_For_6_Conditional_7_Template, "ApiItemsSection_For_6_Conditional_7_Template");
 function ApiItemsSection_For_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "li")(1, "a", 5);
-    \u0275\u0275element(2, "docs-api-item-label", 6);
-    \u0275\u0275elementStart(3, "span", 7);
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275conditionalCreate(5, ApiItemsSection_For_6_Conditional_5_Template, 2, 0, "span", 8);
-    \u0275\u0275conditionalCreate(6, ApiItemsSection_For_6_Conditional_6_Template, 2, 0, "span", 9);
-    \u0275\u0275conditionalCreate(7, ApiItemsSection_For_6_Conditional_7_Template, 2, 0, "span", 10);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "li")(1, "a", 5);
+    ɵɵelement(2, "docs-api-item-label", 6);
+    ɵɵelementStart(3, "span", 7);
+    ɵɵtext(4);
+    ɵɵelementEnd()();
+    ɵɵconditionalCreate(5, ApiItemsSection_For_6_Conditional_5_Template, 2, 0, "span", 8);
+    ɵɵconditionalCreate(6, ApiItemsSection_For_6_Conditional_6_Template, 2, 0, "span", 9);
+    ɵɵconditionalCreate(7, ApiItemsSection_For_6_Conditional_7_Template, 2, 0, "span", 10);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const apiItem_r1 = ctx.$implicit;
-    \u0275\u0275classProp("adev-api-items-section-item-deprecated", apiItem_r1.deprecated);
-    \u0275\u0275advance();
-    \u0275\u0275property("routerLink", "/" + apiItem_r1.url);
-    \u0275\u0275attribute("aria-describedby", apiItem_r1.deprecated ? "deprecated-description" : null);
-    \u0275\u0275advance();
-    \u0275\u0275property("type", apiItem_r1.itemType);
-    \u0275\u0275advance();
-    \u0275\u0275attribute("title", apiItem_r1.title);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(apiItem_r1.title);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(apiItem_r1.deprecated ? 5 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(apiItem_r1.experimental ? 6 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(apiItem_r1.developerPreview ? 7 : -1);
+    ɵɵclassProp("adev-api-items-section-item-deprecated", apiItem_r1.deprecated);
+    ɵɵadvance();
+    ɵɵproperty("routerLink", "/" + apiItem_r1.url);
+    ɵɵattribute("aria-describedby", apiItem_r1.deprecated ? "deprecated-description" : null);
+    ɵɵadvance();
+    ɵɵproperty("type", apiItem_r1.itemType);
+    ɵɵadvance();
+    ɵɵattribute("title", apiItem_r1.title);
+    ɵɵadvance();
+    ɵɵtextInterpolate(apiItem_r1.title);
+    ɵɵadvance();
+    ɵɵconditional(apiItem_r1.deprecated ? 5 : -1);
+    ɵɵadvance();
+    ɵɵconditional(apiItem_r1.experimental ? 6 : -1);
+    ɵɵadvance();
+    ɵɵconditional(apiItem_r1.developerPreview ? 7 : -1);
   }
 }
 __name(ApiItemsSection_For_6_Template, "ApiItemsSection_For_6_Template");
@@ -328,27 +328,27 @@ var _ApiItemsSection = class _ApiItemsSection {
   group = input.required(...ngDevMode ? [{ debugName: "group" }] : []);
 };
 __name(_ApiItemsSection, "ApiItemsSection");
-__publicField(_ApiItemsSection, "\u0275fac", /* @__PURE__ */ __name(function ApiItemsSection_Factory(__ngFactoryType__) {
+__publicField(_ApiItemsSection, "ɵfac", /* @__PURE__ */ __name(function ApiItemsSection_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ApiItemsSection)();
 }, "ApiItemsSection_Factory"));
-__publicField(_ApiItemsSection, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ApiItemsSection, selectors: [["adev-api-items-section"]], inputs: { group: [1, "group"] }, decls: 7, vars: 3, consts: [[1, "adev-api-items-section-header"], [3, "id"], ["routerLink", "/api", "queryParamsHandling", "preserve", "tabindex", "-1", 1, "adev-api-anchor", 3, "fragment"], [1, "adev-api-items-section-grid"], [3, "adev-api-items-section-item-deprecated"], [1, "adev-api-items-section-item", 3, "routerLink"], ["mode", "short", "aria-hidden", "true", 1, "docs-api-item-label", 3, "type"], [1, "adev-item-title"], ["matTooltip", "Deprecated", 1, "adev-item-attribute"], ["matTooltip", "Experimental", 1, "adev-item-attribute"], ["matTooltip", "Developer Preview", 1, "adev-item-attribute"]], template: /* @__PURE__ */ __name(function ApiItemsSection_Template(rf, ctx) {
+__publicField(_ApiItemsSection, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _ApiItemsSection, selectors: [["adev-api-items-section"]], inputs: { group: [1, "group"] }, decls: 7, vars: 3, consts: [[1, "adev-api-items-section-header"], [3, "id"], ["routerLink", "/api", "queryParamsHandling", "preserve", "tabindex", "-1", 1, "adev-api-anchor", 3, "fragment"], [1, "adev-api-items-section-grid"], [3, "adev-api-items-section-item-deprecated"], [1, "adev-api-items-section-item", 3, "routerLink"], ["mode", "short", "aria-hidden", "true", 1, "docs-api-item-label", 3, "type"], [1, "adev-item-title"], ["matTooltip", "Deprecated", 1, "adev-item-attribute"], ["matTooltip", "Experimental", 1, "adev-item-attribute"], ["matTooltip", "Developer Preview", 1, "adev-item-attribute"]], template: /* @__PURE__ */ __name(function ApiItemsSection_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "header", 0)(1, "h3", 1)(2, "a", 2);
-    \u0275\u0275text(3);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(4, "ul", 3);
-    \u0275\u0275repeaterCreate(5, ApiItemsSection_For_6_Template, 8, 10, "li", 4, _forTrack0);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "header", 0)(1, "h3", 1)(2, "a", 2);
+    ɵɵtext(3);
+    ɵɵelementEnd()()();
+    ɵɵelementStart(4, "ul", 3);
+    ɵɵrepeaterCreate(5, ApiItemsSection_For_6_Template, 8, 10, "li", 4, _forTrack0);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275property("id", ctx.group().id);
-    \u0275\u0275advance();
-    \u0275\u0275property("fragment", ctx.group().id);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx.group().title, " ");
-    \u0275\u0275advance(2);
-    \u0275\u0275repeater(ctx.group().items);
+    ɵɵadvance();
+    ɵɵproperty("id", ctx.group().id);
+    ɵɵadvance();
+    ɵɵproperty("fragment", ctx.group().id);
+    ɵɵadvance();
+    ɵɵtextInterpolate1(" ", ctx.group().title, " ");
+    ɵɵadvance(2);
+    ɵɵrepeater(ctx.group().items);
   }
 }, "ApiItemsSection_Template"), dependencies: [ApiItemLabel, RouterLink, MatTooltipModule, MatTooltip], styles: ['\n\n.adev-api-items-section-header[_ngcontent-%COMP%] {\n  display: flex;\n}\n.adev-api-items-section-header[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  fill: var(--primary-contrast);\n}\n.adev-api-items-section-header[_ngcontent-%COMP%]   h3[_ngcontent-%COMP%] {\n  flex: 1;\n  display: flex;\n  gap: 0.75em;\n  align-items: flex-start;\n  margin-top: 1.43rem;\n  font-size: 1.25rem;\n}\n.adev-api-items-section-header[_ngcontent-%COMP%]   .adev-link-icon[_ngcontent-%COMP%] {\n  color: var(--quinary-contrast);\n  cursor: pointer;\n}\n.adev-api-items-section-header[_ngcontent-%COMP%]   .adev-link-icon[_ngcontent-%COMP%]:hover {\n  color: var(--primary-contrast);\n}\n.adev-api-items-section-grid[_ngcontent-%COMP%] {\n  column-count: 3;\n  column-gap: 0.5rem;\n  padding: 0;\n}\n@container api-ref-page (max-width: 798px) {\n  .adev-api-items-section-grid[_ngcontent-%COMP%] {\n    column-count: 2;\n  }\n}\n@container api-ref-page (max-width: 600px) {\n  .adev-api-items-section-grid[_ngcontent-%COMP%] {\n    column-count: 1;\n  }\n}\n.adev-api-items-section-grid[_ngcontent-%COMP%]   li[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  border-inline-start: 1px solid var(--senary-contrast);\n  padding: 0.3rem;\n  padding-inline-start: 0.75rem;\n  font-size: 0.875rem;\n  text-overflow: ellipsis;\n  box-sizing: border-box;\n  width: 100%;\n}\n.adev-api-items-section-grid[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--quaternary-contrast);\n  display: flex;\n  align-items: center;\n  overflow: hidden;\n  padding-block: 2px;\n}\n.adev-api-items-section-grid[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   .adev-item-title[_ngcontent-%COMP%] {\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.adev-api-items-section-grid[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]:hover {\n  border-inline-start: 1px solid var(--quaternary-contrast);\n  background-color: var(--septenary-contrast);\n}\n.adev-api-items-section-grid[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]:hover   a[_ngcontent-%COMP%] {\n  color: var(--primary-contrast);\n}\n.adev-api-items-section-item[_ngcontent-%COMP%] {\n  display: flex;\n  flex: 1;\n  gap: 1em;\n}\n.adev-item-attribute[_ngcontent-%COMP%] {\n  width: 24px;\n  text-align: center;\n  font-family: var(--code-font);\n  background-color: var(--senary-contrast);\n  color: var(--tertiary-contrast);\n  border-radius: 0.25rem;\n  padding: 0.001rem 0.2rem 0.005rem;\n  margin-inline-start: 0.5rem;\n}\n.adev-api-anchor[_ngcontent-%COMP%] {\n  color: inherit;\n}\n.adev-api-anchor[_ngcontent-%COMP%]::after {\n  content: "\\e157";\n  font-family: "Material Symbols Outlined";\n  opacity: 0;\n  margin-left: 8px;\n  vertical-align: middle;\n  color: var(--quaternary-contrast);\n  font-size: clamp(18px, 1.25em, 30px);\n  transition: opacity 0.3s ease;\n}\n.adev-api-anchor[_ngcontent-%COMP%]:hover::after {\n  opacity: 1;\n}\n/*# sourceMappingURL=api-items-section.component.css.map */'], changeDetection: 0 }));
 var ApiItemsSection = _ApiItemsSection;
@@ -401,7 +401,7 @@ var ApiItemsSection = _ApiItemsSection;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ApiItemsSection, { className: "ApiItemsSection", filePath: "src/app/features/references/api-items-section/api-items-section.component.ts", lineNumber: 22 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(ApiItemsSection, { className: "ApiItemsSection", filePath: "src/app/features/references/api-items-section/api-items-section.component.ts", lineNumber: 22 });
 })();
 
 // src/app/features/references/api-reference-list/api-reference-manager.service.ts
@@ -433,10 +433,10 @@ var _ApiReferenceManager = class _ApiReferenceManager {
   }
 };
 __name(_ApiReferenceManager, "ApiReferenceManager");
-__publicField(_ApiReferenceManager, "\u0275fac", /* @__PURE__ */ __name(function ApiReferenceManager_Factory(__ngFactoryType__) {
+__publicField(_ApiReferenceManager, "ɵfac", /* @__PURE__ */ __name(function ApiReferenceManager_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ApiReferenceManager)();
 }, "ApiReferenceManager_Factory"));
-__publicField(_ApiReferenceManager, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ApiReferenceManager, factory: _ApiReferenceManager.\u0275fac, providedIn: "root" }));
+__publicField(_ApiReferenceManager, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _ApiReferenceManager, factory: _ApiReferenceManager.ɵfac, providedIn: "root" }));
 var ApiReferenceManager = _ApiReferenceManager;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ApiReferenceManager, [{
@@ -452,37 +452,37 @@ var _c0 = ["*", [["mat-chip-avatar"], ["", "matChipAvatar", ""]], [["mat-chip-tr
 var _c1 = ["*", "mat-chip-avatar, [matChipAvatar]", "mat-chip-trailing-icon,[matChipRemove],[matChipTrailingIcon]"];
 function MatChip_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 3);
-    \u0275\u0275projection(1, 1);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span", 3);
+    ɵɵprojection(1, 1);
+    ɵɵelementEnd();
   }
 }
 __name(MatChip_Conditional_3_Template, "MatChip_Conditional_3_Template");
 function MatChip_Conditional_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 6);
-    \u0275\u0275projection(1, 2);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span", 6);
+    ɵɵprojection(1, 2);
+    ɵɵelementEnd();
   }
 }
 __name(MatChip_Conditional_7_Template, "MatChip_Conditional_7_Template");
 function MatChipOption_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 3);
-    \u0275\u0275projection(1, 1);
-    \u0275\u0275elementStart(2, "span", 7);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(3, "svg", 8);
-    \u0275\u0275element(4, "path", 9);
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(0, "span", 3);
+    ɵɵprojection(1, 1);
+    ɵɵelementStart(2, "span", 7);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(3, "svg", 8);
+    ɵɵelement(4, "path", 9);
+    ɵɵelementEnd()()();
   }
 }
 __name(MatChipOption_Conditional_3_Template, "MatChipOption_Conditional_3_Template");
 function MatChipOption_Conditional_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 6);
-    \u0275\u0275projection(1, 2);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span", 6);
+    ɵɵprojection(1, 2);
+    ɵɵelementEnd();
   }
 }
 __name(MatChipOption_Conditional_7_Template, "MatChipOption_Conditional_7_Template");
@@ -491,59 +491,59 @@ var _c3 = [[["", "matChipEdit", ""]], [["mat-chip-avatar"], ["", "matChipAvatar"
 var _c4 = ["[matChipEdit]", "mat-chip-avatar, [matChipAvatar]", "[matChipEditInput]", "*", "mat-chip-trailing-icon,[matChipRemove],[matChipTrailingIcon]"];
 function MatChipRow_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "span", 0);
+    ɵɵelement(0, "span", 0);
   }
 }
 __name(MatChipRow_Conditional_0_Template, "MatChipRow_Conditional_0_Template");
 function MatChipRow_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 1);
-    \u0275\u0275projection(1);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span", 1);
+    ɵɵprojection(1);
+    ɵɵelementEnd();
   }
 }
 __name(MatChipRow_Conditional_1_Template, "MatChipRow_Conditional_1_Template");
 function MatChipRow_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 3);
-    \u0275\u0275projection(1, 1);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span", 3);
+    ɵɵprojection(1, 1);
+    ɵɵelementEnd();
   }
 }
 __name(MatChipRow_Conditional_3_Template, "MatChipRow_Conditional_3_Template");
 function MatChipRow_Conditional_5_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275projection(0, 2);
+    ɵɵprojection(0, 2);
   }
 }
 __name(MatChipRow_Conditional_5_Conditional_0_Template, "MatChipRow_Conditional_5_Conditional_0_Template");
 function MatChipRow_Conditional_5_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "span", 7);
+    ɵɵelement(0, "span", 7);
   }
 }
 __name(MatChipRow_Conditional_5_Conditional_1_Template, "MatChipRow_Conditional_5_Conditional_1_Template");
 function MatChipRow_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, MatChipRow_Conditional_5_Conditional_0_Template, 1, 0)(1, MatChipRow_Conditional_5_Conditional_1_Template, 1, 0, "span", 7);
+    ɵɵconditionalCreate(0, MatChipRow_Conditional_5_Conditional_0_Template, 1, 0)(1, MatChipRow_Conditional_5_Conditional_1_Template, 1, 0, "span", 7);
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275conditional(ctx_r0.contentEditInput ? 0 : 1);
+    const ctx_r0 = ɵɵnextContext();
+    ɵɵconditional(ctx_r0.contentEditInput ? 0 : 1);
   }
 }
 __name(MatChipRow_Conditional_5_Template, "MatChipRow_Conditional_5_Template");
 function MatChipRow_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275projection(0, 3);
+    ɵɵprojection(0, 3);
   }
 }
 __name(MatChipRow_Conditional_6_Template, "MatChipRow_Conditional_6_Template");
 function MatChipRow_Conditional_8_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 6);
-    \u0275\u0275projection(1, 4);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span", 6);
+    ɵɵprojection(1, 4);
+    ɵɵelementEnd();
   }
 }
 __name(MatChipRow_Conditional_8_Template, "MatChipRow_Conditional_8_Template");
@@ -619,25 +619,25 @@ var _MatChipAction = class _MatChipAction {
   }
 };
 __name(_MatChipAction, "MatChipAction");
-__publicField(_MatChipAction, "\u0275fac", /* @__PURE__ */ __name(function MatChipAction_Factory(__ngFactoryType__) {
+__publicField(_MatChipAction, "ɵfac", /* @__PURE__ */ __name(function MatChipAction_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatChipAction)();
 }, "MatChipAction_Factory"));
-__publicField(_MatChipAction, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatChipAction, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatChipAction,
   selectors: [["", "matChipAction", ""]],
   hostAttrs: [1, "mdc-evolution-chip__action", "mat-mdc-chip-action"],
   hostVars: 11,
   hostBindings: /* @__PURE__ */ __name(function MatChipAction_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function MatChipAction_click_HostBindingHandler($event) {
+      ɵɵlistener("click", /* @__PURE__ */ __name(function MatChipAction_click_HostBindingHandler($event) {
         return ctx._handleClick($event);
       }, "MatChipAction_click_HostBindingHandler"))("keydown", /* @__PURE__ */ __name(function MatChipAction_keydown_HostBindingHandler($event) {
         return ctx._handleKeydown($event);
       }, "MatChipAction_keydown_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275attribute("tabindex", ctx._getTabindex())("disabled", ctx._getDisabledAttribute())("aria-disabled", ctx.disabled);
-      \u0275\u0275classProp("mdc-evolution-chip__action--primary", ctx._isPrimary)("mdc-evolution-chip__action--presentational", !ctx.isInteractive)("mdc-evolution-chip__action--secondary", !ctx._isPrimary)("mdc-evolution-chip__action--trailing", !ctx._isPrimary && !ctx._isLeading);
+      ɵɵattribute("tabindex", ctx._getTabindex())("disabled", ctx._getDisabledAttribute())("aria-disabled", ctx.disabled);
+      ɵɵclassProp("mdc-evolution-chip__action--primary", ctx._isPrimary)("mdc-evolution-chip__action--presentational", !ctx.isInteractive)("mdc-evolution-chip__action--secondary", !ctx._isPrimary)("mdc-evolution-chip__action--trailing", !ctx._isPrimary && !ctx._isLeading);
     }
   }, "MatChipAction_HostBindings"),
   inputs: {
@@ -690,14 +690,14 @@ var MatChipAction = _MatChipAction;
 var _MatChipAvatar = class _MatChipAvatar {
 };
 __name(_MatChipAvatar, "MatChipAvatar");
-__publicField(_MatChipAvatar, "\u0275fac", /* @__PURE__ */ __name(function MatChipAvatar_Factory(__ngFactoryType__) {
+__publicField(_MatChipAvatar, "ɵfac", /* @__PURE__ */ __name(function MatChipAvatar_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatChipAvatar)();
 }, "MatChipAvatar_Factory"));
-__publicField(_MatChipAvatar, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatChipAvatar, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatChipAvatar,
   selectors: [["mat-chip-avatar"], ["", "matChipAvatar", ""]],
   hostAttrs: ["role", "img", 1, "mat-mdc-chip-avatar", "mdc-evolution-chip__icon", "mdc-evolution-chip__icon--primary"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_CHIP_AVATAR,
     useExisting: _MatChipAvatar
   }])]
@@ -728,20 +728,20 @@ var _MatChipTrailingIcon = class _MatChipTrailingIcon extends MatChipAction {
   _isPrimary = false;
 };
 __name(_MatChipTrailingIcon, "MatChipTrailingIcon");
-__publicField(_MatChipTrailingIcon, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275MatChipTrailingIcon_BaseFactory;
+__publicField(_MatChipTrailingIcon, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵMatChipTrailingIcon_BaseFactory;
   return /* @__PURE__ */ __name(function MatChipTrailingIcon_Factory(__ngFactoryType__) {
-    return (\u0275MatChipTrailingIcon_BaseFactory || (\u0275MatChipTrailingIcon_BaseFactory = \u0275\u0275getInheritedFactory(_MatChipTrailingIcon)))(__ngFactoryType__ || _MatChipTrailingIcon);
+    return (ɵMatChipTrailingIcon_BaseFactory || (ɵMatChipTrailingIcon_BaseFactory = ɵɵgetInheritedFactory(_MatChipTrailingIcon)))(__ngFactoryType__ || _MatChipTrailingIcon);
   }, "MatChipTrailingIcon_Factory");
 })());
-__publicField(_MatChipTrailingIcon, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatChipTrailingIcon, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatChipTrailingIcon,
   selectors: [["mat-chip-trailing-icon"], ["", "matChipTrailingIcon", ""]],
   hostAttrs: ["aria-hidden", "true", 1, "mat-mdc-chip-trailing-icon", "mdc-evolution-chip__icon", "mdc-evolution-chip__icon--trailing"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_CHIP_TRAILING_ICON,
     useExisting: _MatChipTrailingIcon
-  }]), \u0275\u0275InheritDefinitionFeature]
+  }]), ɵɵInheritDefinitionFeature]
 }));
 var MatChipTrailingIcon = _MatChipTrailingIcon;
 (() => {
@@ -779,26 +779,26 @@ var _MatChipEdit = class _MatChipEdit extends MatChipAction {
   }
 };
 __name(_MatChipEdit, "MatChipEdit");
-__publicField(_MatChipEdit, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275MatChipEdit_BaseFactory;
+__publicField(_MatChipEdit, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵMatChipEdit_BaseFactory;
   return /* @__PURE__ */ __name(function MatChipEdit_Factory(__ngFactoryType__) {
-    return (\u0275MatChipEdit_BaseFactory || (\u0275MatChipEdit_BaseFactory = \u0275\u0275getInheritedFactory(_MatChipEdit)))(__ngFactoryType__ || _MatChipEdit);
+    return (ɵMatChipEdit_BaseFactory || (ɵMatChipEdit_BaseFactory = ɵɵgetInheritedFactory(_MatChipEdit)))(__ngFactoryType__ || _MatChipEdit);
   }, "MatChipEdit_Factory");
 })());
-__publicField(_MatChipEdit, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatChipEdit, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatChipEdit,
   selectors: [["", "matChipEdit", ""]],
   hostAttrs: ["role", "button", 1, "mat-mdc-chip-edit", "mat-mdc-chip-avatar", "mat-focus-indicator", "mdc-evolution-chip__icon", "mdc-evolution-chip__icon--primary"],
   hostVars: 1,
   hostBindings: /* @__PURE__ */ __name(function MatChipEdit_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("aria-hidden", null);
+      ɵɵattribute("aria-hidden", null);
     }
   }, "MatChipEdit_HostBindings"),
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_CHIP_EDIT,
     useExisting: _MatChipEdit
-  }]), \u0275\u0275InheritDefinitionFeature]
+  }]), ɵɵInheritDefinitionFeature]
 }));
 var MatChipEdit = _MatChipEdit;
 (() => {
@@ -836,26 +836,26 @@ var _MatChipRemove = class _MatChipRemove extends MatChipAction {
   }
 };
 __name(_MatChipRemove, "MatChipRemove");
-__publicField(_MatChipRemove, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275MatChipRemove_BaseFactory;
+__publicField(_MatChipRemove, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵMatChipRemove_BaseFactory;
   return /* @__PURE__ */ __name(function MatChipRemove_Factory(__ngFactoryType__) {
-    return (\u0275MatChipRemove_BaseFactory || (\u0275MatChipRemove_BaseFactory = \u0275\u0275getInheritedFactory(_MatChipRemove)))(__ngFactoryType__ || _MatChipRemove);
+    return (ɵMatChipRemove_BaseFactory || (ɵMatChipRemove_BaseFactory = ɵɵgetInheritedFactory(_MatChipRemove)))(__ngFactoryType__ || _MatChipRemove);
   }, "MatChipRemove_Factory");
 })());
-__publicField(_MatChipRemove, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatChipRemove, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatChipRemove,
   selectors: [["", "matChipRemove", ""]],
   hostAttrs: ["role", "button", 1, "mat-mdc-chip-remove", "mat-mdc-chip-trailing-icon", "mat-focus-indicator", "mdc-evolution-chip__icon", "mdc-evolution-chip__icon--trailing"],
   hostVars: 1,
   hostBindings: /* @__PURE__ */ __name(function MatChipRemove_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("aria-hidden", null);
+      ɵɵattribute("aria-hidden", null);
     }
   }, "MatChipRemove_HostBindings"),
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_CHIP_REMOVE,
     useExisting: _MatChipRemove
-  }]), \u0275\u0275InheritDefinitionFeature]
+  }]), ɵɵInheritDefinitionFeature]
 }));
 var MatChipRemove = _MatChipRemove;
 (() => {
@@ -1117,57 +1117,57 @@ var _MatChip = class _MatChip {
   }
 };
 __name(_MatChip, "MatChip");
-__publicField(_MatChip, "\u0275fac", /* @__PURE__ */ __name(function MatChip_Factory(__ngFactoryType__) {
+__publicField(_MatChip, "ɵfac", /* @__PURE__ */ __name(function MatChip_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatChip)();
 }, "MatChip_Factory"));
-__publicField(_MatChip, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatChip, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatChip,
   selectors: [["mat-basic-chip"], ["", "mat-basic-chip", ""], ["mat-chip"], ["", "mat-chip", ""]],
   contentQueries: /* @__PURE__ */ __name(function MatChip_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuery(dirIndex, MAT_CHIP_AVATAR, 5);
-      \u0275\u0275contentQuery(dirIndex, MAT_CHIP_EDIT, 5);
-      \u0275\u0275contentQuery(dirIndex, MAT_CHIP_TRAILING_ICON, 5);
-      \u0275\u0275contentQuery(dirIndex, MAT_CHIP_REMOVE, 5);
-      \u0275\u0275contentQuery(dirIndex, MAT_CHIP_AVATAR, 5);
-      \u0275\u0275contentQuery(dirIndex, MAT_CHIP_TRAILING_ICON, 5);
-      \u0275\u0275contentQuery(dirIndex, MAT_CHIP_EDIT, 5);
-      \u0275\u0275contentQuery(dirIndex, MAT_CHIP_REMOVE, 5);
+      ɵɵcontentQuery(dirIndex, MAT_CHIP_AVATAR, 5);
+      ɵɵcontentQuery(dirIndex, MAT_CHIP_EDIT, 5);
+      ɵɵcontentQuery(dirIndex, MAT_CHIP_TRAILING_ICON, 5);
+      ɵɵcontentQuery(dirIndex, MAT_CHIP_REMOVE, 5);
+      ɵɵcontentQuery(dirIndex, MAT_CHIP_AVATAR, 5);
+      ɵɵcontentQuery(dirIndex, MAT_CHIP_TRAILING_ICON, 5);
+      ɵɵcontentQuery(dirIndex, MAT_CHIP_EDIT, 5);
+      ɵɵcontentQuery(dirIndex, MAT_CHIP_REMOVE, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.leadingIcon = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.editIcon = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.trailingIcon = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.removeIcon = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._allLeadingIcons = _t);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._allTrailingIcons = _t);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._allEditIcons = _t);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._allRemoveIcons = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx.leadingIcon = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx.editIcon = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx.trailingIcon = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx.removeIcon = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._allLeadingIcons = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._allTrailingIcons = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._allEditIcons = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._allRemoveIcons = _t);
     }
   }, "MatChip_ContentQueries"),
   viewQuery: /* @__PURE__ */ __name(function MatChip_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(MatChipAction, 5);
+      ɵɵviewQuery(MatChipAction, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.primaryAction = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx.primaryAction = _t.first);
     }
   }, "MatChip_Query"),
   hostAttrs: [1, "mat-mdc-chip"],
   hostVars: 31,
   hostBindings: /* @__PURE__ */ __name(function MatChip_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("keydown", /* @__PURE__ */ __name(function MatChip_keydown_HostBindingHandler($event) {
+      ɵɵlistener("keydown", /* @__PURE__ */ __name(function MatChip_keydown_HostBindingHandler($event) {
         return ctx._handleKeydown($event);
       }, "MatChip_keydown_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275domProperty("id", ctx.id);
-      \u0275\u0275attribute("role", ctx.role)("aria-label", ctx.ariaLabel);
-      \u0275\u0275classMap("mat-" + (ctx.color || "primary"));
-      \u0275\u0275classProp("mdc-evolution-chip", !ctx._isBasicChip)("mdc-evolution-chip--disabled", ctx.disabled)("mdc-evolution-chip--with-trailing-action", ctx._hasTrailingIcon())("mdc-evolution-chip--with-primary-graphic", ctx.leadingIcon)("mdc-evolution-chip--with-primary-icon", ctx.leadingIcon)("mdc-evolution-chip--with-avatar", ctx.leadingIcon)("mat-mdc-chip-with-avatar", ctx.leadingIcon)("mat-mdc-chip-highlighted", ctx.highlighted)("mat-mdc-chip-disabled", ctx.disabled)("mat-mdc-basic-chip", ctx._isBasicChip)("mat-mdc-standard-chip", !ctx._isBasicChip)("mat-mdc-chip-with-trailing-icon", ctx._hasTrailingIcon())("_mat-animation-noopable", ctx._animationsDisabled);
+      ɵɵdomProperty("id", ctx.id);
+      ɵɵattribute("role", ctx.role)("aria-label", ctx.ariaLabel);
+      ɵɵclassMap("mat-" + (ctx.color || "primary"));
+      ɵɵclassProp("mdc-evolution-chip", !ctx._isBasicChip)("mdc-evolution-chip--disabled", ctx.disabled)("mdc-evolution-chip--with-trailing-action", ctx._hasTrailingIcon())("mdc-evolution-chip--with-primary-graphic", ctx.leadingIcon)("mdc-evolution-chip--with-primary-icon", ctx.leadingIcon)("mdc-evolution-chip--with-avatar", ctx.leadingIcon)("mat-mdc-chip-with-avatar", ctx.leadingIcon)("mat-mdc-chip-highlighted", ctx.highlighted)("mat-mdc-chip-disabled", ctx.disabled)("mat-mdc-basic-chip", ctx._isBasicChip)("mat-mdc-standard-chip", !ctx._isBasicChip)("mat-mdc-chip-with-trailing-icon", ctx._hasTrailingIcon())("_mat-animation-noopable", ctx._animationsDisabled);
     }
   }, "MatChip_HostBindings"),
   inputs: {
@@ -1187,7 +1187,7 @@ __publicField(_MatChip, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent
     destroyed: "destroyed"
   },
   exportAs: ["matChip"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_CHIP,
     useExisting: _MatChip
   }])],
@@ -1197,23 +1197,23 @@ __publicField(_MatChip, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent
   consts: [[1, "mat-mdc-chip-focus-overlay"], [1, "mdc-evolution-chip__cell", "mdc-evolution-chip__cell--primary"], ["matChipAction", "", 3, "isInteractive"], [1, "mdc-evolution-chip__graphic", "mat-mdc-chip-graphic"], [1, "mdc-evolution-chip__text-label", "mat-mdc-chip-action-label"], [1, "mat-mdc-chip-primary-focus-indicator", "mat-focus-indicator"], [1, "mdc-evolution-chip__cell", "mdc-evolution-chip__cell--trailing"]],
   template: /* @__PURE__ */ __name(function MatChip_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef(_c0);
-      \u0275\u0275element(0, "span", 0);
-      \u0275\u0275elementStart(1, "span", 1)(2, "span", 2);
-      \u0275\u0275conditionalCreate(3, MatChip_Conditional_3_Template, 2, 0, "span", 3);
-      \u0275\u0275elementStart(4, "span", 4);
-      \u0275\u0275projection(5);
-      \u0275\u0275element(6, "span", 5);
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275conditionalCreate(7, MatChip_Conditional_7_Template, 2, 0, "span", 6);
+      ɵɵprojectionDef(_c0);
+      ɵɵelement(0, "span", 0);
+      ɵɵelementStart(1, "span", 1)(2, "span", 2);
+      ɵɵconditionalCreate(3, MatChip_Conditional_3_Template, 2, 0, "span", 3);
+      ɵɵelementStart(4, "span", 4);
+      ɵɵprojection(5);
+      ɵɵelement(6, "span", 5);
+      ɵɵelementEnd()()();
+      ɵɵconditionalCreate(7, MatChip_Conditional_7_Template, 2, 0, "span", 6);
     }
     if (rf & 2) {
-      \u0275\u0275advance(2);
-      \u0275\u0275property("isInteractive", false);
-      \u0275\u0275advance();
-      \u0275\u0275conditional(ctx.leadingIcon ? 3 : -1);
-      \u0275\u0275advance(4);
-      \u0275\u0275conditional(ctx._hasTrailingIcon() ? 7 : -1);
+      ɵɵadvance(2);
+      ɵɵproperty("isInteractive", false);
+      ɵɵadvance();
+      ɵɵconditional(ctx.leadingIcon ? 3 : -1);
+      ɵɵadvance(4);
+      ɵɵconditional(ctx._hasTrailingIcon() ? 7 : -1);
     }
   }, "MatChip_Template"),
   dependencies: [MatChipAction],
@@ -1460,22 +1460,22 @@ var _MatChipOption = class _MatChipOption extends MatChip {
   }
 };
 __name(_MatChipOption, "MatChipOption");
-__publicField(_MatChipOption, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275MatChipOption_BaseFactory;
+__publicField(_MatChipOption, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵMatChipOption_BaseFactory;
   return /* @__PURE__ */ __name(function MatChipOption_Factory(__ngFactoryType__) {
-    return (\u0275MatChipOption_BaseFactory || (\u0275MatChipOption_BaseFactory = \u0275\u0275getInheritedFactory(_MatChipOption)))(__ngFactoryType__ || _MatChipOption);
+    return (ɵMatChipOption_BaseFactory || (ɵMatChipOption_BaseFactory = ɵɵgetInheritedFactory(_MatChipOption)))(__ngFactoryType__ || _MatChipOption);
   }, "MatChipOption_Factory");
 })());
-__publicField(_MatChipOption, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatChipOption, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatChipOption,
   selectors: [["mat-basic-chip-option"], ["", "mat-basic-chip-option", ""], ["mat-chip-option"], ["", "mat-chip-option", ""]],
   hostAttrs: [1, "mat-mdc-chip", "mat-mdc-chip-option"],
   hostVars: 37,
   hostBindings: /* @__PURE__ */ __name(function MatChipOption_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275domProperty("id", ctx.id);
-      \u0275\u0275attribute("tabindex", null)("aria-label", null)("aria-description", null)("role", ctx.role);
-      \u0275\u0275classProp("mdc-evolution-chip", !ctx._isBasicChip)("mdc-evolution-chip--filter", !ctx._isBasicChip)("mdc-evolution-chip--selectable", !ctx._isBasicChip)("mat-mdc-chip-selected", ctx.selected)("mat-mdc-chip-multiple", ctx._chipListMultiple)("mat-mdc-chip-disabled", ctx.disabled)("mat-mdc-chip-with-avatar", ctx.leadingIcon)("mdc-evolution-chip--disabled", ctx.disabled)("mdc-evolution-chip--selected", ctx.selected)("mdc-evolution-chip--selecting", !ctx._animationsDisabled)("mdc-evolution-chip--with-trailing-action", ctx._hasTrailingIcon())("mdc-evolution-chip--with-primary-icon", ctx.leadingIcon)("mdc-evolution-chip--with-primary-graphic", ctx._hasLeadingGraphic())("mdc-evolution-chip--with-avatar", ctx.leadingIcon)("mat-mdc-chip-highlighted", ctx.highlighted)("mat-mdc-chip-with-trailing-icon", ctx._hasTrailingIcon());
+      ɵɵdomProperty("id", ctx.id);
+      ɵɵattribute("tabindex", null)("aria-label", null)("aria-description", null)("role", ctx.role);
+      ɵɵclassProp("mdc-evolution-chip", !ctx._isBasicChip)("mdc-evolution-chip--filter", !ctx._isBasicChip)("mdc-evolution-chip--selectable", !ctx._isBasicChip)("mat-mdc-chip-selected", ctx.selected)("mat-mdc-chip-multiple", ctx._chipListMultiple)("mat-mdc-chip-disabled", ctx.disabled)("mat-mdc-chip-with-avatar", ctx.leadingIcon)("mdc-evolution-chip--disabled", ctx.disabled)("mdc-evolution-chip--selected", ctx.selected)("mdc-evolution-chip--selecting", !ctx._animationsDisabled)("mdc-evolution-chip--with-trailing-action", ctx._hasTrailingIcon())("mdc-evolution-chip--with-primary-icon", ctx.leadingIcon)("mdc-evolution-chip--with-primary-graphic", ctx._hasLeadingGraphic())("mdc-evolution-chip--with-avatar", ctx.leadingIcon)("mat-mdc-chip-highlighted", ctx.highlighted)("mat-mdc-chip-with-trailing-icon", ctx._hasTrailingIcon());
     }
   }, "MatChipOption_HostBindings"),
   inputs: {
@@ -1485,37 +1485,37 @@ __publicField(_MatChipOption, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCom
   outputs: {
     selectionChange: "selectionChange"
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MatChip,
     useExisting: _MatChipOption
   }, {
     provide: MAT_CHIP,
     useExisting: _MatChipOption
-  }]), \u0275\u0275InheritDefinitionFeature],
+  }]), ɵɵInheritDefinitionFeature],
   ngContentSelectors: _c1,
   decls: 8,
   vars: 6,
   consts: [[1, "mat-mdc-chip-focus-overlay"], [1, "mdc-evolution-chip__cell", "mdc-evolution-chip__cell--primary"], ["matChipAction", "", "role", "option", 3, "_allowFocusWhenDisabled"], [1, "mdc-evolution-chip__graphic", "mat-mdc-chip-graphic"], [1, "mdc-evolution-chip__text-label", "mat-mdc-chip-action-label"], [1, "mat-mdc-chip-primary-focus-indicator", "mat-focus-indicator"], [1, "mdc-evolution-chip__cell", "mdc-evolution-chip__cell--trailing"], [1, "mdc-evolution-chip__checkmark"], ["viewBox", "-2 -3 30 30", "focusable", "false", "aria-hidden", "true", 1, "mdc-evolution-chip__checkmark-svg"], ["fill", "none", "stroke", "currentColor", "d", "M1.73,12.91 8.1,19.28 22.79,4.59", 1, "mdc-evolution-chip__checkmark-path"]],
   template: /* @__PURE__ */ __name(function MatChipOption_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef(_c0);
-      \u0275\u0275element(0, "span", 0);
-      \u0275\u0275elementStart(1, "span", 1)(2, "button", 2);
-      \u0275\u0275conditionalCreate(3, MatChipOption_Conditional_3_Template, 5, 0, "span", 3);
-      \u0275\u0275elementStart(4, "span", 4);
-      \u0275\u0275projection(5);
-      \u0275\u0275element(6, "span", 5);
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275conditionalCreate(7, MatChipOption_Conditional_7_Template, 2, 0, "span", 6);
+      ɵɵprojectionDef(_c0);
+      ɵɵelement(0, "span", 0);
+      ɵɵelementStart(1, "span", 1)(2, "button", 2);
+      ɵɵconditionalCreate(3, MatChipOption_Conditional_3_Template, 5, 0, "span", 3);
+      ɵɵelementStart(4, "span", 4);
+      ɵɵprojection(5);
+      ɵɵelement(6, "span", 5);
+      ɵɵelementEnd()()();
+      ɵɵconditionalCreate(7, MatChipOption_Conditional_7_Template, 2, 0, "span", 6);
     }
     if (rf & 2) {
-      \u0275\u0275advance(2);
-      \u0275\u0275property("_allowFocusWhenDisabled", true);
-      \u0275\u0275attribute("aria-description", ctx.ariaDescription)("aria-label", ctx.ariaLabel)("aria-selected", ctx.ariaSelected);
-      \u0275\u0275advance();
-      \u0275\u0275conditional(ctx._hasLeadingGraphic() ? 3 : -1);
-      \u0275\u0275advance(4);
-      \u0275\u0275conditional(ctx._hasTrailingIcon() ? 7 : -1);
+      ɵɵadvance(2);
+      ɵɵproperty("_allowFocusWhenDisabled", true);
+      ɵɵattribute("aria-description", ctx.ariaDescription)("aria-label", ctx.ariaLabel)("aria-selected", ctx.ariaSelected);
+      ɵɵadvance();
+      ɵɵconditional(ctx._hasLeadingGraphic() ? 3 : -1);
+      ɵɵadvance(4);
+      ɵɵconditional(ctx._hasTrailingIcon() ? 7 : -1);
     }
   }, "MatChipOption_Template"),
   dependencies: [MatChipAction],
@@ -1617,10 +1617,10 @@ var _MatChipEditInput = class _MatChipEditInput {
   }
 };
 __name(_MatChipEditInput, "MatChipEditInput");
-__publicField(_MatChipEditInput, "\u0275fac", /* @__PURE__ */ __name(function MatChipEditInput_Factory(__ngFactoryType__) {
+__publicField(_MatChipEditInput, "ɵfac", /* @__PURE__ */ __name(function MatChipEditInput_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatChipEditInput)();
 }, "MatChipEditInput_Factory"));
-__publicField(_MatChipEditInput, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatChipEditInput, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatChipEditInput,
   selectors: [["span", "matChipEditInput", ""]],
   hostAttrs: ["role", "textbox", "tabindex", "-1", "contenteditable", "true", 1, "mat-chip-edit-input"]
@@ -1757,35 +1757,35 @@ var _MatChipRow = class _MatChipRow extends MatChip {
   }
 };
 __name(_MatChipRow, "MatChipRow");
-__publicField(_MatChipRow, "\u0275fac", /* @__PURE__ */ __name(function MatChipRow_Factory(__ngFactoryType__) {
+__publicField(_MatChipRow, "ɵfac", /* @__PURE__ */ __name(function MatChipRow_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatChipRow)();
 }, "MatChipRow_Factory"));
-__publicField(_MatChipRow, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatChipRow, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatChipRow,
   selectors: [["mat-chip-row"], ["", "mat-chip-row", ""], ["mat-basic-chip-row"], ["", "mat-basic-chip-row", ""]],
   contentQueries: /* @__PURE__ */ __name(function MatChipRow_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuery(dirIndex, MatChipEditInput, 5);
+      ɵɵcontentQuery(dirIndex, MatChipEditInput, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.contentEditInput = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx.contentEditInput = _t.first);
     }
   }, "MatChipRow_ContentQueries"),
   viewQuery: /* @__PURE__ */ __name(function MatChipRow_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(MatChipEditInput, 5);
+      ɵɵviewQuery(MatChipEditInput, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.defaultEditInput = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx.defaultEditInput = _t.first);
     }
   }, "MatChipRow_Query"),
   hostAttrs: [1, "mat-mdc-chip", "mat-mdc-chip-row", "mdc-evolution-chip"],
   hostVars: 29,
   hostBindings: /* @__PURE__ */ __name(function MatChipRow_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("focus", /* @__PURE__ */ __name(function MatChipRow_focus_HostBindingHandler() {
+      ɵɵlistener("focus", /* @__PURE__ */ __name(function MatChipRow_focus_HostBindingHandler() {
         return ctx._handleFocus();
       }, "MatChipRow_focus_HostBindingHandler"))("click", /* @__PURE__ */ __name(function MatChipRow_click_HostBindingHandler($event) {
         return ctx._handleClick($event);
@@ -1794,9 +1794,9 @@ __publicField(_MatChipRow, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompon
       }, "MatChipRow_dblclick_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275domProperty("id", ctx.id);
-      \u0275\u0275attribute("tabindex", ctx.disabled ? null : -1)("aria-label", null)("aria-description", null)("role", ctx.role);
-      \u0275\u0275classProp("mat-mdc-chip-with-avatar", ctx.leadingIcon)("mat-mdc-chip-disabled", ctx.disabled)("mat-mdc-chip-editing", ctx._isEditing)("mat-mdc-chip-editable", ctx.editable)("mdc-evolution-chip--disabled", ctx.disabled)("mdc-evolution-chip--with-leading-action", ctx._hasLeadingActionIcon())("mdc-evolution-chip--with-trailing-action", ctx._hasTrailingIcon())("mdc-evolution-chip--with-primary-graphic", ctx.leadingIcon)("mdc-evolution-chip--with-primary-icon", ctx.leadingIcon)("mdc-evolution-chip--with-avatar", ctx.leadingIcon)("mat-mdc-chip-highlighted", ctx.highlighted)("mat-mdc-chip-with-trailing-icon", ctx._hasTrailingIcon());
+      ɵɵdomProperty("id", ctx.id);
+      ɵɵattribute("tabindex", ctx.disabled ? null : -1)("aria-label", null)("aria-description", null)("role", ctx.role);
+      ɵɵclassProp("mat-mdc-chip-with-avatar", ctx.leadingIcon)("mat-mdc-chip-disabled", ctx.disabled)("mat-mdc-chip-editing", ctx._isEditing)("mat-mdc-chip-editable", ctx.editable)("mdc-evolution-chip--disabled", ctx.disabled)("mdc-evolution-chip--with-leading-action", ctx._hasLeadingActionIcon())("mdc-evolution-chip--with-trailing-action", ctx._hasTrailingIcon())("mdc-evolution-chip--with-primary-graphic", ctx.leadingIcon)("mdc-evolution-chip--with-primary-icon", ctx.leadingIcon)("mdc-evolution-chip--with-avatar", ctx.leadingIcon)("mat-mdc-chip-highlighted", ctx.highlighted)("mat-mdc-chip-with-trailing-icon", ctx._hasTrailingIcon());
     }
   }, "MatChipRow_HostBindings"),
   inputs: {
@@ -1805,43 +1805,43 @@ __publicField(_MatChipRow, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompon
   outputs: {
     edited: "edited"
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MatChip,
     useExisting: _MatChipRow
   }, {
     provide: MAT_CHIP,
     useExisting: _MatChipRow
-  }]), \u0275\u0275InheritDefinitionFeature],
+  }]), ɵɵInheritDefinitionFeature],
   ngContentSelectors: _c4,
   decls: 9,
   vars: 8,
   consts: [[1, "mat-mdc-chip-focus-overlay"], ["role", "gridcell", 1, "mdc-evolution-chip__cell", "mdc-evolution-chip__cell--leading"], ["role", "gridcell", "matChipAction", "", 1, "mdc-evolution-chip__cell", "mdc-evolution-chip__cell--primary", 3, "disabled"], [1, "mdc-evolution-chip__graphic", "mat-mdc-chip-graphic"], [1, "mdc-evolution-chip__text-label", "mat-mdc-chip-action-label"], ["aria-hidden", "true", 1, "mat-mdc-chip-primary-focus-indicator", "mat-focus-indicator"], ["role", "gridcell", 1, "mdc-evolution-chip__cell", "mdc-evolution-chip__cell--trailing"], ["matChipEditInput", ""]],
   template: /* @__PURE__ */ __name(function MatChipRow_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef(_c3);
-      \u0275\u0275conditionalCreate(0, MatChipRow_Conditional_0_Template, 1, 0, "span", 0);
-      \u0275\u0275conditionalCreate(1, MatChipRow_Conditional_1_Template, 2, 0, "span", 1);
-      \u0275\u0275elementStart(2, "span", 2);
-      \u0275\u0275conditionalCreate(3, MatChipRow_Conditional_3_Template, 2, 0, "span", 3);
-      \u0275\u0275elementStart(4, "span", 4);
-      \u0275\u0275conditionalCreate(5, MatChipRow_Conditional_5_Template, 2, 1)(6, MatChipRow_Conditional_6_Template, 1, 0);
-      \u0275\u0275element(7, "span", 5);
-      \u0275\u0275elementEnd()();
-      \u0275\u0275conditionalCreate(8, MatChipRow_Conditional_8_Template, 2, 0, "span", 6);
+      ɵɵprojectionDef(_c3);
+      ɵɵconditionalCreate(0, MatChipRow_Conditional_0_Template, 1, 0, "span", 0);
+      ɵɵconditionalCreate(1, MatChipRow_Conditional_1_Template, 2, 0, "span", 1);
+      ɵɵelementStart(2, "span", 2);
+      ɵɵconditionalCreate(3, MatChipRow_Conditional_3_Template, 2, 0, "span", 3);
+      ɵɵelementStart(4, "span", 4);
+      ɵɵconditionalCreate(5, MatChipRow_Conditional_5_Template, 2, 1)(6, MatChipRow_Conditional_6_Template, 1, 0);
+      ɵɵelement(7, "span", 5);
+      ɵɵelementEnd()();
+      ɵɵconditionalCreate(8, MatChipRow_Conditional_8_Template, 2, 0, "span", 6);
     }
     if (rf & 2) {
-      \u0275\u0275conditional(!ctx._isEditing ? 0 : -1);
-      \u0275\u0275advance();
-      \u0275\u0275conditional(ctx._hasLeadingActionIcon() ? 1 : -1);
-      \u0275\u0275advance();
-      \u0275\u0275property("disabled", ctx.disabled);
-      \u0275\u0275attribute("aria-description", ctx.ariaDescription)("aria-label", ctx.ariaLabel);
-      \u0275\u0275advance();
-      \u0275\u0275conditional(ctx.leadingIcon ? 3 : -1);
-      \u0275\u0275advance(2);
-      \u0275\u0275conditional(ctx._isEditing ? 5 : 6);
-      \u0275\u0275advance(3);
-      \u0275\u0275conditional(ctx._hasTrailingIcon() ? 8 : -1);
+      ɵɵconditional(!ctx._isEditing ? 0 : -1);
+      ɵɵadvance();
+      ɵɵconditional(ctx._hasLeadingActionIcon() ? 1 : -1);
+      ɵɵadvance();
+      ɵɵproperty("disabled", ctx.disabled);
+      ɵɵattribute("aria-description", ctx.ariaDescription)("aria-label", ctx.ariaLabel);
+      ɵɵadvance();
+      ɵɵconditional(ctx.leadingIcon ? 3 : -1);
+      ɵɵadvance(2);
+      ɵɵconditional(ctx._isEditing ? 5 : 6);
+      ɵɵadvance(3);
+      ɵɵconditional(ctx._hasTrailingIcon() ? 8 : -1);
     }
   }, "MatChipRow_Template"),
   dependencies: [MatChipAction, MatChipEditInput],
@@ -2117,31 +2117,31 @@ var _MatChipSet = class _MatChipSet {
   }
 };
 __name(_MatChipSet, "MatChipSet");
-__publicField(_MatChipSet, "\u0275fac", /* @__PURE__ */ __name(function MatChipSet_Factory(__ngFactoryType__) {
+__publicField(_MatChipSet, "ɵfac", /* @__PURE__ */ __name(function MatChipSet_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatChipSet)();
 }, "MatChipSet_Factory"));
-__publicField(_MatChipSet, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatChipSet, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatChipSet,
   selectors: [["mat-chip-set"]],
   contentQueries: /* @__PURE__ */ __name(function MatChipSet_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuery(dirIndex, MatChip, 5);
+      ɵɵcontentQuery(dirIndex, MatChip, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._chips = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._chips = _t);
     }
   }, "MatChipSet_ContentQueries"),
   hostAttrs: [1, "mat-mdc-chip-set", "mdc-evolution-chip-set"],
   hostVars: 1,
   hostBindings: /* @__PURE__ */ __name(function MatChipSet_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("keydown", /* @__PURE__ */ __name(function MatChipSet_keydown_HostBindingHandler($event) {
+      ɵɵlistener("keydown", /* @__PURE__ */ __name(function MatChipSet_keydown_HostBindingHandler($event) {
         return ctx._handleKeydown($event);
       }, "MatChipSet_keydown_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275attribute("role", ctx.role);
+      ɵɵattribute("role", ctx.role);
     }
   }, "MatChipSet_HostBindings"),
   inputs: {
@@ -2155,10 +2155,10 @@ __publicField(_MatChipSet, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompon
   consts: [["role", "presentation", 1, "mdc-evolution-chip-set__chips"]],
   template: /* @__PURE__ */ __name(function MatChipSet_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef();
-      \u0275\u0275domElementStart(0, "div", 0);
-      \u0275\u0275projection(1);
-      \u0275\u0275domElementEnd();
+      ɵɵprojectionDef();
+      ɵɵdomElementStart(0, "div", 0);
+      ɵɵprojection(1);
+      ɵɵdomElementEnd();
     }
   }, "MatChipSet_Template"),
   styles: [".mat-mdc-chip-set{display:flex}.mat-mdc-chip-set:focus{outline:none}.mat-mdc-chip-set .mdc-evolution-chip-set__chips{min-width:100%;margin-left:-8px;margin-right:0}.mat-mdc-chip-set .mdc-evolution-chip{margin:4px 0 4px 8px}[dir=rtl] .mat-mdc-chip-set .mdc-evolution-chip-set__chips{margin-left:0;margin-right:-8px}[dir=rtl] .mat-mdc-chip-set .mdc-evolution-chip{margin-left:0;margin-right:8px}.mdc-evolution-chip-set__chips{display:flex;flex-flow:wrap;min-width:0}.mat-mdc-chip-set-stacked{flex-direction:column;align-items:flex-start}.mat-mdc-chip-set-stacked .mat-mdc-chip{width:100%}.mat-mdc-chip-set-stacked .mdc-evolution-chip__graphic{flex-grow:0}.mat-mdc-chip-set-stacked .mdc-evolution-chip__action--primary{flex-basis:100%;justify-content:start}input.mat-mdc-chip-input{flex:1 0 150px;margin-left:8px}[dir=rtl] input.mat-mdc-chip-input{margin-left:0;margin-right:8px}.mat-mdc-form-field:not(.mat-form-field-hide-placeholder) input.mat-mdc-chip-input::placeholder{opacity:1}.mat-mdc-form-field:not(.mat-form-field-hide-placeholder) input.mat-mdc-chip-input::-moz-placeholder{opacity:1}.mat-mdc-form-field:not(.mat-form-field-hide-placeholder) input.mat-mdc-chip-input::-webkit-input-placeholder{opacity:1}.mat-mdc-form-field:not(.mat-form-field-hide-placeholder) input.mat-mdc-chip-input:-ms-input-placeholder{opacity:1}.mat-mdc-chip-set+input.mat-mdc-chip-input{margin-left:0;margin-right:0}\n"],
@@ -2482,29 +2482,29 @@ var _MatChipListbox = class _MatChipListbox extends MatChipSet {
   }
 };
 __name(_MatChipListbox, "MatChipListbox");
-__publicField(_MatChipListbox, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275MatChipListbox_BaseFactory;
+__publicField(_MatChipListbox, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵMatChipListbox_BaseFactory;
   return /* @__PURE__ */ __name(function MatChipListbox_Factory(__ngFactoryType__) {
-    return (\u0275MatChipListbox_BaseFactory || (\u0275MatChipListbox_BaseFactory = \u0275\u0275getInheritedFactory(_MatChipListbox)))(__ngFactoryType__ || _MatChipListbox);
+    return (ɵMatChipListbox_BaseFactory || (ɵMatChipListbox_BaseFactory = ɵɵgetInheritedFactory(_MatChipListbox)))(__ngFactoryType__ || _MatChipListbox);
   }, "MatChipListbox_Factory");
 })());
-__publicField(_MatChipListbox, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatChipListbox, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatChipListbox,
   selectors: [["mat-chip-listbox"]],
   contentQueries: /* @__PURE__ */ __name(function MatChipListbox_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuery(dirIndex, MatChipOption, 5);
+      ɵɵcontentQuery(dirIndex, MatChipOption, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._chips = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._chips = _t);
     }
   }, "MatChipListbox_ContentQueries"),
   hostAttrs: [1, "mdc-evolution-chip-set", "mat-mdc-chip-listbox"],
   hostVars: 10,
   hostBindings: /* @__PURE__ */ __name(function MatChipListbox_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("focus", /* @__PURE__ */ __name(function MatChipListbox_focus_HostBindingHandler() {
+      ɵɵlistener("focus", /* @__PURE__ */ __name(function MatChipListbox_focus_HostBindingHandler() {
         return ctx.focus();
       }, "MatChipListbox_focus_HostBindingHandler"))("blur", /* @__PURE__ */ __name(function MatChipListbox_blur_HostBindingHandler() {
         return ctx._blur();
@@ -2513,9 +2513,9 @@ __publicField(_MatChipListbox, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCo
       }, "MatChipListbox_keydown_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275domProperty("tabIndex", ctx.disabled || ctx.empty ? -1 : ctx.tabIndex);
-      \u0275\u0275attribute("role", ctx.role)("aria-required", ctx.role ? ctx.required : null)("aria-disabled", ctx.disabled.toString())("aria-multiselectable", ctx.multiple)("aria-orientation", ctx.ariaOrientation);
-      \u0275\u0275classProp("mat-mdc-chip-list-disabled", ctx.disabled)("mat-mdc-chip-list-required", ctx.required);
+      ɵɵdomProperty("tabIndex", ctx.disabled || ctx.empty ? -1 : ctx.tabIndex);
+      ɵɵattribute("role", ctx.role)("aria-required", ctx.role ? ctx.required : null)("aria-disabled", ctx.disabled.toString())("aria-multiselectable", ctx.multiple)("aria-orientation", ctx.ariaOrientation);
+      ɵɵclassProp("mat-mdc-chip-list-disabled", ctx.disabled)("mat-mdc-chip-list-required", ctx.required);
     }
   }, "MatChipListbox_HostBindings"),
   inputs: {
@@ -2530,17 +2530,17 @@ __publicField(_MatChipListbox, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCo
   outputs: {
     change: "change"
   },
-  features: [\u0275\u0275ProvidersFeature([MAT_CHIP_LISTBOX_CONTROL_VALUE_ACCESSOR]), \u0275\u0275InheritDefinitionFeature],
+  features: [ɵɵProvidersFeature([MAT_CHIP_LISTBOX_CONTROL_VALUE_ACCESSOR]), ɵɵInheritDefinitionFeature],
   ngContentSelectors: _c5,
   decls: 2,
   vars: 0,
   consts: [["role", "presentation", 1, "mdc-evolution-chip-set__chips"]],
   template: /* @__PURE__ */ __name(function MatChipListbox_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef();
-      \u0275\u0275domElementStart(0, "div", 0);
-      \u0275\u0275projection(1);
-      \u0275\u0275domElementEnd();
+      ɵɵprojectionDef();
+      ɵɵdomElementStart(0, "div", 0);
+      ɵɵprojection(1);
+      ɵɵdomElementEnd();
     }
   }, "MatChipListbox_Template"),
   styles: [_c6],
@@ -2961,34 +2961,34 @@ var _MatChipGrid = class _MatChipGrid extends MatChipSet {
   }
 };
 __name(_MatChipGrid, "MatChipGrid");
-__publicField(_MatChipGrid, "\u0275fac", /* @__PURE__ */ __name(function MatChipGrid_Factory(__ngFactoryType__) {
+__publicField(_MatChipGrid, "ɵfac", /* @__PURE__ */ __name(function MatChipGrid_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatChipGrid)();
 }, "MatChipGrid_Factory"));
-__publicField(_MatChipGrid, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatChipGrid, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatChipGrid,
   selectors: [["mat-chip-grid"]],
   contentQueries: /* @__PURE__ */ __name(function MatChipGrid_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuery(dirIndex, MatChipRow, 5);
+      ɵɵcontentQuery(dirIndex, MatChipRow, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._chips = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._chips = _t);
     }
   }, "MatChipGrid_ContentQueries"),
   hostAttrs: [1, "mat-mdc-chip-set", "mat-mdc-chip-grid", "mdc-evolution-chip-set"],
   hostVars: 10,
   hostBindings: /* @__PURE__ */ __name(function MatChipGrid_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("focus", /* @__PURE__ */ __name(function MatChipGrid_focus_HostBindingHandler() {
+      ɵɵlistener("focus", /* @__PURE__ */ __name(function MatChipGrid_focus_HostBindingHandler() {
         return ctx.focus();
       }, "MatChipGrid_focus_HostBindingHandler"))("blur", /* @__PURE__ */ __name(function MatChipGrid_blur_HostBindingHandler() {
         return ctx._blur();
       }, "MatChipGrid_blur_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275attribute("role", ctx.role)("tabindex", ctx.disabled || ctx._chips && ctx._chips.length === 0 ? -1 : ctx.tabIndex)("aria-disabled", ctx.disabled.toString())("aria-invalid", ctx.errorState);
-      \u0275\u0275classProp("mat-mdc-chip-list-disabled", ctx.disabled)("mat-mdc-chip-list-invalid", ctx.errorState)("mat-mdc-chip-list-required", ctx.required);
+      ɵɵattribute("role", ctx.role)("tabindex", ctx.disabled || ctx._chips && ctx._chips.length === 0 ? -1 : ctx.tabIndex)("aria-disabled", ctx.disabled.toString())("aria-invalid", ctx.errorState);
+      ɵɵclassProp("mat-mdc-chip-list-disabled", ctx.disabled)("mat-mdc-chip-list-invalid", ctx.errorState)("mat-mdc-chip-list-required", ctx.required);
     }
   }, "MatChipGrid_HostBindings"),
   inputs: {
@@ -3002,20 +3002,20 @@ __publicField(_MatChipGrid, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompo
     change: "change",
     valueChange: "valueChange"
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MatFormFieldControl,
     useExisting: _MatChipGrid
-  }]), \u0275\u0275InheritDefinitionFeature],
+  }]), ɵɵInheritDefinitionFeature],
   ngContentSelectors: _c5,
   decls: 2,
   vars: 0,
   consts: [["role", "presentation", 1, "mdc-evolution-chip-set__chips"]],
   template: /* @__PURE__ */ __name(function MatChipGrid_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef();
-      \u0275\u0275domElementStart(0, "div", 0);
-      \u0275\u0275projection(1);
-      \u0275\u0275domElementEnd();
+      ɵɵprojectionDef();
+      ɵɵdomElementStart(0, "div", 0);
+      ɵɵprojection(1);
+      ɵɵdomElementEnd();
     }
   }, "MatChipGrid_Template"),
   styles: [_c6],
@@ -3233,17 +3233,17 @@ var _MatChipInput = class _MatChipInput {
   }
 };
 __name(_MatChipInput, "MatChipInput");
-__publicField(_MatChipInput, "\u0275fac", /* @__PURE__ */ __name(function MatChipInput_Factory(__ngFactoryType__) {
+__publicField(_MatChipInput, "ɵfac", /* @__PURE__ */ __name(function MatChipInput_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatChipInput)();
 }, "MatChipInput_Factory"));
-__publicField(_MatChipInput, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatChipInput, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatChipInput,
   selectors: [["input", "matChipInputFor", ""]],
   hostAttrs: [1, "mat-mdc-chip-input", "mat-mdc-input-element", "mdc-text-field__input", "mat-input-element"],
   hostVars: 8,
   hostBindings: /* @__PURE__ */ __name(function MatChipInput_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("keydown", /* @__PURE__ */ __name(function MatChipInput_keydown_HostBindingHandler($event) {
+      ɵɵlistener("keydown", /* @__PURE__ */ __name(function MatChipInput_keydown_HostBindingHandler($event) {
         return ctx._keydown($event);
       }, "MatChipInput_keydown_HostBindingHandler"))("blur", /* @__PURE__ */ __name(function MatChipInput_blur_HostBindingHandler() {
         return ctx._blur();
@@ -3254,8 +3254,8 @@ __publicField(_MatChipInput, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDire
       }, "MatChipInput_input_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275domProperty("id", ctx.id);
-      \u0275\u0275attribute("disabled", ctx.disabled && !ctx.disabledInteractive ? "" : null)("placeholder", ctx.placeholder || null)("aria-invalid", ctx._chipGrid && ctx._chipGrid.ngControl ? ctx._chipGrid.ngControl.invalid : null)("aria-required", ctx._chipGrid && ctx._chipGrid.required || null)("aria-disabled", ctx.disabled && ctx.disabledInteractive ? "true" : null)("readonly", ctx._getReadonlyAttribute())("required", ctx._chipGrid && ctx._chipGrid.required || null);
+      ɵɵdomProperty("id", ctx.id);
+      ɵɵattribute("disabled", ctx.disabled && !ctx.disabledInteractive ? "" : null)("placeholder", ctx.placeholder || null)("aria-invalid", ctx._chipGrid && ctx._chipGrid.ngControl ? ctx._chipGrid.ngControl.invalid : null)("aria-required", ctx._chipGrid && ctx._chipGrid.required || null)("aria-disabled", ctx.disabled && ctx.disabledInteractive ? "true" : null)("readonly", ctx._getReadonlyAttribute())("required", ctx._chipGrid && ctx._chipGrid.required || null);
     }
   }, "MatChipInput_HostBindings"),
   inputs: {
@@ -3272,7 +3272,7 @@ __publicField(_MatChipInput, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDire
     chipEnd: "matChipInputTokenEnd"
   },
   exportAs: ["matChipInput", "matChipInputFor"],
-  features: [\u0275\u0275NgOnChangesFeature]
+  features: [ɵɵNgOnChangesFeature]
 }));
 var MatChipInput = _MatChipInput;
 (() => {
@@ -3351,15 +3351,15 @@ var CHIP_DECLARATIONS = [MatChip, MatChipAvatar, MatChipEdit, MatChipEditInput, 
 var _MatChipsModule = class _MatChipsModule {
 };
 __name(_MatChipsModule, "MatChipsModule");
-__publicField(_MatChipsModule, "\u0275fac", /* @__PURE__ */ __name(function MatChipsModule_Factory(__ngFactoryType__) {
+__publicField(_MatChipsModule, "ɵfac", /* @__PURE__ */ __name(function MatChipsModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatChipsModule)();
 }, "MatChipsModule_Factory"));
-__publicField(_MatChipsModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_MatChipsModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _MatChipsModule,
   imports: [MatCommonModule, MatRippleModule, MatChipAction, MatChip, MatChipAvatar, MatChipEdit, MatChipEditInput, MatChipGrid, MatChipInput, MatChipListbox, MatChipOption, MatChipRemove, MatChipRow, MatChipSet, MatChipTrailingIcon],
   exports: [MatCommonModule, MatChip, MatChipAvatar, MatChipEdit, MatChipEditInput, MatChipGrid, MatChipInput, MatChipListbox, MatChipOption, MatChipRemove, MatChipRow, MatChipSet, MatChipTrailingIcon]
 }));
-__publicField(_MatChipsModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_MatChipsModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   providers: [ErrorStateMatcher, {
     provide: MAT_CHIPS_DEFAULT_OPTIONS,
     useValue: {
@@ -3389,66 +3389,66 @@ var MatChipsModule = _MatChipsModule;
 var _forTrack02 = /* @__PURE__ */ __name(($index, $item) => $item.id, "_forTrack0");
 function ApiReferenceList_For_9_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-chip-option", 11);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function ApiReferenceList_For_9_Template_mat_chip_option_click_0_listener() {
-      const stat_r2 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.setStatus(stat_r2.value));
+    const _r1 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "mat-chip-option", 11);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function ApiReferenceList_For_9_Template_mat_chip_option_click_0_listener() {
+      const stat_r2 = ɵɵrestoreView(_r1).$implicit;
+      const ctx_r2 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r2.setStatus(stat_r2.value));
     }, "ApiReferenceList_For_9_Template_mat_chip_option_click_0_listener"));
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
+    ɵɵtext(1);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const stat_r2 = ctx.$implicit;
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275property("selected", ctx_r2.isStatusSelected(stat_r2.value));
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r2.statusLabels[stat_r2.value], " ");
+    const ctx_r2 = ɵɵnextContext();
+    ɵɵproperty("selected", ctx_r2.isStatusSelected(stat_r2.value));
+    ɵɵadvance();
+    ɵɵtextInterpolate1(" ", ctx_r2.statusLabels[stat_r2.value], " ");
   }
 }
 __name(ApiReferenceList_For_9_Template, "ApiReferenceList_For_9_Template");
 function ApiReferenceList_For_15_Template(rf, ctx) {
   if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "li", 12);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function ApiReferenceList_For_15_Template_li_click_0_listener() {
-      const itemType_r5 = \u0275\u0275restoreView(_r4).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.setItemType(itemType_r5));
+    const _r4 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "li", 12);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function ApiReferenceList_For_15_Template_li_click_0_listener() {
+      const itemType_r5 = ɵɵrestoreView(_r4).$implicit;
+      const ctx_r2 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r2.setItemType(itemType_r5));
     }, "ApiReferenceList_For_15_Template_li_click_0_listener"));
-    \u0275\u0275element(1, "docs-api-item-label", 13);
-    \u0275\u0275elementStart(2, "span", 14);
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "adevApiLabel");
-    \u0275\u0275elementEnd()();
+    ɵɵelement(1, "docs-api-item-label", 13);
+    ɵɵelementStart(2, "span", 14);
+    ɵɵtext(3);
+    ɵɵpipe(4, "adevApiLabel");
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
     const itemType_r5 = ctx.$implicit;
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275classProp("adev-reference-list-type-filter-item-active", ctx_r2.type() === itemType_r5);
-    \u0275\u0275advance();
-    \u0275\u0275property("type", itemType_r5);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(4, 4, itemType_r5, "full"));
+    const ctx_r2 = ɵɵnextContext();
+    ɵɵclassProp("adev-reference-list-type-filter-item-active", ctx_r2.type() === itemType_r5);
+    ɵɵadvance();
+    ɵɵproperty("type", itemType_r5);
+    ɵɵadvance(2);
+    ɵɵtextInterpolate(ɵɵpipeBind2(4, 4, itemType_r5, "full"));
   }
 }
 __name(ApiReferenceList_For_15_Template, "ApiReferenceList_For_15_Template");
 function ApiReferenceList_For_17_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "adev-api-items-section", 9);
+    ɵɵelement(0, "adev-api-items-section", 9);
   }
   if (rf & 2) {
     const group_r6 = ctx.$implicit;
-    \u0275\u0275property("group", group_r6);
+    ɵɵproperty("group", group_r6);
   }
 }
 __name(ApiReferenceList_For_17_Template, "ApiReferenceList_For_17_Template");
 function ApiReferenceList_ForEmpty_18_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 10)(1, "p");
-    \u0275\u0275text(2, "\u672A\u627E\u5230 API \u6761\u76EE\u3002");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "div", 10)(1, "p");
+    ɵɵtext(2, "未找到 API 條目。");
+    ɵɵelementEnd()();
   }
 }
 __name(ApiReferenceList_ForEmpty_18_Template, "ApiReferenceList_ForEmpty_18_Template");
@@ -3479,10 +3479,10 @@ var _ApiReferenceList = class _ApiReferenceList {
   itemTypes = Object.values(ApiItemType);
   statuses = STATUSES;
   statusLabels = {
-    [STATUSES.stable]: "\u7A33\u5B9A\u7248",
-    [STATUSES.developerPreview]: "\u5F00\u53D1\u8005\u9884\u89C8",
-    [STATUSES.experimental]: "\u8BD5\u9A8C",
-    [STATUSES.deprecated]: "\u5DF2\u5F03\u7528"
+    [STATUSES.stable]: "穩定版",
+    [STATUSES.developerPreview]: "開發者預覽",
+    [STATUSES.experimental]: "試驗",
+    [STATUSES.deprecated]: "已棄用"
   };
   filteredGroups = computed(() => {
     const query = this.query().toLocaleLowerCase();
@@ -3540,48 +3540,48 @@ var _ApiReferenceList = class _ApiReferenceList {
   }
 };
 __name(_ApiReferenceList, "ApiReferenceList");
-__publicField(_ApiReferenceList, "\u0275fac", /* @__PURE__ */ __name(function ApiReferenceList_Factory(__ngFactoryType__) {
+__publicField(_ApiReferenceList, "ɵfac", /* @__PURE__ */ __name(function ApiReferenceList_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ApiReferenceList)();
 }, "ApiReferenceList_Factory"));
-__publicField(_ApiReferenceList, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ApiReferenceList, selectors: [["adev-reference-list"]], viewQuery: /* @__PURE__ */ __name(function ApiReferenceList_Query(rf, ctx) {
+__publicField(_ApiReferenceList, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _ApiReferenceList, selectors: [["adev-reference-list"]], viewQuery: /* @__PURE__ */ __name(function ApiReferenceList_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx.filterInput, TextField, 5, ElementRef);
+    ɵɵviewQuerySignal(ctx.filterInput, TextField, 5, ElementRef);
   }
   if (rf & 2) {
-    \u0275\u0275queryAdvance();
+    ɵɵqueryAdvance();
   }
-}, "ApiReferenceList_Query"), inputs: { queryInput: [1, "query", "queryInput"], typeInput: [1, "type", "typeInput"], statusInput: [1, "status", "statusInput"] }, decls: 19, vars: 5, consts: [[1, "adev-reference-list-filter"], [1, "adev-reference-list-query-filter"], ["name", "query", "placeholder", "\u8FC7\u6EE4\u5668", 3, "ngModelChange", "ngModel"], [1, "adev-reference-list-status"], ["multiple", "true", "aria-label", "\u72B6\u6001\u9009\u62E9"], [3, "selected"], [1, "adev-reference-list-type-filter-label"], [1, "adev-reference-list-type-filter"], [1, "adev-reference-list-type-filter-item", 3, "adev-reference-list-type-filter-item-active"], [3, "group"], [1, "adev-reference-list-empty"], [3, "click", "selected"], [1, "adev-reference-list-type-filter-item", 3, "click"], ["mode", "short", 1, "docs-api-item-label", 3, "type"], [1, "docs-api-item-label-full"]], template: /* @__PURE__ */ __name(function ApiReferenceList_Template(rf, ctx) {
+}, "ApiReferenceList_Query"), inputs: { queryInput: [1, "query", "queryInput"], typeInput: [1, "type", "typeInput"], statusInput: [1, "status", "statusInput"] }, decls: 19, vars: 5, consts: [[1, "adev-reference-list-filter"], [1, "adev-reference-list-query-filter"], ["name", "query", "placeholder", "過濾器", 3, "ngModelChange", "ngModel"], [1, "adev-reference-list-status"], ["multiple", "true", "aria-label", "狀態選擇"], [3, "selected"], [1, "adev-reference-list-type-filter-label"], [1, "adev-reference-list-type-filter"], [1, "adev-reference-list-type-filter-item", 3, "adev-reference-list-type-filter-item-active"], [3, "group"], [1, "adev-reference-list-empty"], [3, "click", "selected"], [1, "adev-reference-list-type-filter-item", 3, "click"], ["mode", "short", 1, "docs-api-item-label", 3, "type"], [1, "docs-api-item-label-full"]], template: /* @__PURE__ */ __name(function ApiReferenceList_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "header")(1, "h1");
-    \u0275\u0275text(2, "API \u53C2\u8003\u624B\u518C");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(3, "div", 0)(4, "div", 1)(5, "docs-text-field", 2);
-    \u0275\u0275twoWayListener("ngModelChange", /* @__PURE__ */ __name(function ApiReferenceList_Template_docs_text_field_ngModelChange_5_listener($event) {
-      \u0275\u0275twoWayBindingSet(ctx.query, $event) || (ctx.query = $event);
+    ɵɵelementStart(0, "header")(1, "h1");
+    ɵɵtext(2, "API 參考手冊");
+    ɵɵelementEnd()();
+    ɵɵelementStart(3, "div", 0)(4, "div", 1)(5, "docs-text-field", 2);
+    ɵɵtwoWayListener("ngModelChange", /* @__PURE__ */ __name(function ApiReferenceList_Template_docs_text_field_ngModelChange_5_listener($event) {
+      ɵɵtwoWayBindingSet(ctx.query, $event) || (ctx.query = $event);
       return $event;
     }, "ApiReferenceList_Template_docs_text_field_ngModelChange_5_listener"));
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(6, "div", 3)(7, "mat-chip-listbox", 4);
-    \u0275\u0275repeaterCreate(8, ApiReferenceList_For_9_Template, 2, 2, "mat-chip-option", 5, \u0275\u0275repeaterTrackByIndex);
-    \u0275\u0275pipe(10, "keyvalue");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(11, "p", 6);
-    \u0275\u0275text(12, "\u6309\u6807\u8BC6\u7B26\u7C7B\u578B\u7B5B\u9009");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(13, "ul", 7);
-    \u0275\u0275repeaterCreate(14, ApiReferenceList_For_15_Template, 5, 7, "li", 8, \u0275\u0275repeaterTrackByIdentity);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275repeaterCreate(16, ApiReferenceList_For_17_Template, 1, 1, "adev-api-items-section", 9, _forTrack02, false, ApiReferenceList_ForEmpty_18_Template, 3, 0, "div", 10);
+    ɵɵelementEnd()();
+    ɵɵelementStart(6, "div", 3)(7, "mat-chip-listbox", 4);
+    ɵɵrepeaterCreate(8, ApiReferenceList_For_9_Template, 2, 2, "mat-chip-option", 5, ɵɵrepeaterTrackByIndex);
+    ɵɵpipe(10, "keyvalue");
+    ɵɵelementEnd()();
+    ɵɵelementStart(11, "p", 6);
+    ɵɵtext(12, "按識別符號型別篩選");
+    ɵɵelementEnd();
+    ɵɵelementStart(13, "ul", 7);
+    ɵɵrepeaterCreate(14, ApiReferenceList_For_15_Template, 5, 7, "li", 8, ɵɵrepeaterTrackByIdentity);
+    ɵɵelementEnd()();
+    ɵɵrepeaterCreate(16, ApiReferenceList_For_17_Template, 1, 1, "adev-api-items-section", 9, _forTrack02, false, ApiReferenceList_ForEmpty_18_Template, 3, 0, "div", 10);
   }
   if (rf & 2) {
-    \u0275\u0275advance(5);
-    \u0275\u0275twoWayProperty("ngModel", ctx.query);
-    \u0275\u0275advance(3);
-    \u0275\u0275repeater(\u0275\u0275pipeBind2(10, 2, ctx.statuses, null));
-    \u0275\u0275advance(6);
-    \u0275\u0275repeater(ctx.itemTypes);
-    \u0275\u0275advance(2);
-    \u0275\u0275repeater(ctx.filteredGroups());
+    ɵɵadvance(5);
+    ɵɵtwoWayProperty("ngModel", ctx.query);
+    ɵɵadvance(3);
+    ɵɵrepeater(ɵɵpipeBind2(10, 2, ctx.statuses, null));
+    ɵɵadvance(6);
+    ɵɵrepeater(ctx.itemTypes);
+    ɵɵadvance(2);
+    ɵɵrepeater(ctx.filteredGroups());
   }
 }, "ApiReferenceList_Template"), dependencies: [
   ApiItemsSection,
@@ -3611,16 +3611,16 @@ var ApiReferenceList = _ApiReferenceList;
       MatChipsModule,
       KeyValuePipe
     ], changeDetection: ChangeDetectionStrategy.OnPush, template: `<header>
-  <h1>API \u53C2\u8003\u624B\u518C</h1>
+  <h1>API 參考手冊</h1>
 </header>
 
 <div class="adev-reference-list-filter">
   <div class="adev-reference-list-query-filter">
-    <docs-text-field name="query" placeholder="\u8FC7\u6EE4\u5668" [(ngModel)]="query" />
+    <docs-text-field name="query" placeholder="過濾器" [(ngModel)]="query" />
   </div>
 
   <div class="adev-reference-list-status">
-    <mat-chip-listbox multiple="true" aria-label="\u72B6\u6001\u9009\u62E9">
+    <mat-chip-listbox multiple="true" aria-label="狀態選擇">
       <!-- null indicates to not re-order the object keys -->
       @for (stat of statuses | keyvalue:null; track $index) {
         <mat-chip-option [selected]="isStatusSelected(stat.value)" (click)="setStatus(stat.value)">
@@ -3630,7 +3630,7 @@ var ApiReferenceList = _ApiReferenceList;
     </mat-chip-listbox>
   </div>
 
-  <p class="adev-reference-list-type-filter-label">\u6309\u6807\u8BC6\u7B26\u7C7B\u578B\u7B5B\u9009</p>
+  <p class="adev-reference-list-type-filter-label">按識別符號型別篩選</p>
   <ul class="adev-reference-list-type-filter">
     @for (itemType of itemTypes; track itemType) {
       <li
@@ -3649,14 +3649,14 @@ var ApiReferenceList = _ApiReferenceList;
   <adev-api-items-section [group]="group" />
 } @empty {
   <div class="adev-reference-list-empty">
-    <p>\u672A\u627E\u5230 API \u6761\u76EE\u3002</p>
+    <p>未找到 API 條目。</p>
   </div>
 }
 `, styles: ["/* src/app/features/references/api-reference-list/api-reference-list.component.scss */\n:host {\n  padding: var(--layout-padding);\n  display: block;\n  container: api-ref-page/inline-size;\n}\n:host header {\n  margin-block-end: 2.75rem;\n}\n:host header h6 {\n  color: var(--quaternary-contrast);\n  font-weight: 500;\n  font-size: 0.875rem;\n  margin: 0;\n}\n:host header p {\n  max-width: 78ch;\n  color: var(--secondary-contrast);\n}\n:host .adev-reference-list-filter {\n  border-block-end: 1px solid var(--senary-contrast);\n  padding-block-end: 2rem;\n  margin-block-end: 1rem;\n}\n:host .adev-reference-list-filter .adev-reference-list-type-filter-label {\n  margin-block: 2.5rem 1rem;\n}\n:host .adev-reference-list-filter .adev-reference-list-type-filter {\n  display: grid;\n  grid-template-columns: repeat(6, 1fr);\n  margin-block: 0;\n  padding-inline: 0;\n  cursor: pointer;\n  width: 100%;\n  gap: 0.5rem;\n}\n@container api-ref-page (max-width: 775px) {\n  :host .adev-reference-list-filter .adev-reference-list-type-filter {\n    grid-template-columns: repeat(5, 1fr);\n  }\n}\n@container api-ref-page (max-width: 600px) {\n  :host .adev-reference-list-filter .adev-reference-list-type-filter {\n    grid-template-columns: repeat(4, 1fr);\n  }\n}\n@container api-ref-page (max-width: 500px) {\n  :host .adev-reference-list-filter .adev-reference-list-type-filter {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n@container api-ref-page (max-width: 350px) {\n  :host .adev-reference-list-filter .adev-reference-list-type-filter {\n    grid-template-columns: repeat(2, 1fr);\n  }\n}\n:host .adev-reference-list-filter .adev-reference-list-type-filter li {\n  display: flex;\n  gap: 0.5rem;\n  align-items: center;\n  padding: 0.3rem;\n  font-size: 0.875rem;\n  color: var(--quaternary-contrast);\n  font-weight: 500;\n  text-transform: capitalize;\n  border: 1px solid transparent;\n  border-radius: 0.25rem;\n  transition:\n    color 0.3s ease,\n    background 0.3s ease,\n    border 0.3s ease;\n}\n:host .adev-reference-list-filter .adev-reference-list-type-filter li:hover {\n  color: var(--primary-contrast);\n  border: 1px solid var(--senary-contrast);\n}\n:host .adev-reference-list-filter .adev-reference-list-type-filter li.adev-reference-list-type-filter-item-active {\n  background: var(--septenary-contrast);\n  border: 1px solid var(--quinary-contrast);\n  color: var(--primary-contrast);\n}\n:host .adev-reference-list-filter .adev-reference-list-type-filter li .docs-api-item-label-full {\n  white-space: nowrap;\n}\n:host .adev-reference-list-filter .adev-reference-list-query-filter {\n  display: flex;\n  gap: 1.5rem;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n}\n:host .adev-reference-list-empty {\n  text-align: center;\n  margin-block-start: 2rem;\n}\n:host .adev-reference-list-empty p {\n  font-size: 1rem;\n}\n:host adev-api-items-section {\n  width: 100%;\n}\n.adev-reference-list-empty {\n  flex-basis: 100%;\n}\n.adev-reference-list-empty p {\n  font-size: 1rem;\n}\n.docs-api-item-label-full {\n  white-space: nowrap;\n}\n.map-chip-option {\n  min-width: 190px;\n}\n.adev-reference-list-status {\n  display: flex;\n  align-items: center;\n  margin-top: 12px;\n}\n.adev-reference-list-status label {\n  margin-right: 8px;\n}\n/*# sourceMappingURL=api-reference-list.component.css.map */\n"] }]
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ApiReferenceList, { className: "ApiReferenceList", filePath: "src/app/features/references/api-reference-list/api-reference-list.component.ts", lineNumber: 60 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(ApiReferenceList, { className: "ApiReferenceList", filePath: "src/app/features/references/api-reference-list/api-reference-list.component.ts", lineNumber: 60 });
 })();
 function scheduleOnIdle(fn) {
   if (typeof requestIdleCallback !== "undefined") {

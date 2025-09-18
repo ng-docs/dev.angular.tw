@@ -162,43 +162,43 @@ var RECOMMENDATIONS = [
     possibleIn: 200,
     necessaryAsOf: 400,
     level: ApplicationComplexity.Basic,
-    step: "\u6269\u5C55 OnInit",
-    action: "\u786E\u4FDD\u4E0D\u8981\u4F7F\u7528 `extends OnInit`\uFF0C\u6216\u8005\u5C06 `extends` \u4E0E\u4EFB\u4F55\u751F\u547D\u5468\u671F\u4E8B\u4EF6\u5408\u7528\u3002\u800C\u5E94\u8BE5\u4F7F\u7528 `implements <\u751F\u547D\u5468\u671F\u4E8B\u4EF6>`\u3002"
+    step: "擴充套件 OnInit",
+    action: "確保不要使用 `extends OnInit`，或者將 `extends` 與任何生命週期事件合用。而應該使用 `implements <生命週期事件>`。"
   },
   {
     possibleIn: 200,
     necessaryAsOf: 400,
     level: ApplicationComplexity.Advanced,
-    step: "\u6DF1\u5C42\u5BFC\u5165",
-    action: "\u505C\u6B62\u4F7F\u7528\u6DF1\u5C42\u5BFC\u5165\uFF0C\u8FD9\u4E9B\u7B26\u53F7\u73B0\u5728\u5DF2\u6807\u8BB0\u4E3A \u0275\uFF0C\u5E76\u4E0D\u662F\u6211\u4EEC\u516C\u5171 API \u7684\u4E00\u90E8\u5206\u3002"
+    step: "深層匯入",
+    action: "停止使用深層匯入，這些符號現在已標記為 ɵ，並不是我們公共 API 的一部分。"
   },
   {
     possibleIn: 200,
     necessaryAsOf: 400,
     level: ApplicationComplexity.Advanced,
     step: "invokeElementMethod",
-    action: "\u505C\u6B62\u4F7F\u7528 `Renderer.invokeElementMethod`\uFF0C\u56E0\u4E3A\u8BE5\u65B9\u6CD5\u5DF2\u88AB\u79FB\u9664\u3002\u76EE\u524D\u6CA1\u6709\u66FF\u4EE3\u65B9\u6CD5\u3002"
+    action: "停止使用 `Renderer.invokeElementMethod`，因為該方法已被移除。目前沒有替代方法。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 400,
     level: ApplicationComplexity.Basic,
-    step: "\u975E\u52A8\u753B\u6A21\u5757",
-    action: "\u5982\u679C\u4F60\u7684\u5E94\u7528\u4E2D\u4F7F\u7528\u4E86\u52A8\u753B\uFF0C\u8BF7\u5728\u4F60\u7684\u5E94\u7528 `NgModule` \u4E2D\u4ECE `@angular/platform-browser/animations` \u5BFC\u5165 `BrowserAnimationsModule`\u3002"
+    step: "非動畫模組",
+    action: "如果你的應用中使用了動畫，請在你的應用 `NgModule` 中從 `@angular/platform-browser/animations` 匯入 `BrowserAnimationsModule`。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 400,
     level: ApplicationComplexity.Medium,
-    step: "\u539F\u751F\u8868\u5355\u9A8C\u8BC1",
-    action: "\u5F53\u4F60\u5305\u542B `FormsModule` \u65F6\uFF0CAngular \u5C31\u4F1A\u5F00\u59CB\u5411\u8868\u5355\u5143\u7D20\u6DFB\u52A0 `novalidate` \u5C5E\u6027\u3002\u8981\u91CD\u65B0\u542F\u7528\u539F\u751F\u8868\u5355\u884C\u4E3A\uFF0C\u8BF7\u4F7F\u7528 `ngNoForm` \u6216\u6DFB\u52A0 `ngNativeValidate`\u3002"
+    step: "原生表單驗證",
+    action: "當你包含 `FormsModule` 時，Angular 就會開始向表單元素新增 `novalidate` 屬性。要重新啟用原生表單行為，請使用 `ngNoForm` 或新增 `ngNativeValidate`。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 400,
     level: ApplicationComplexity.Advanced,
     step: "RootRenderer",
-    action: "\u7528 `RendererFactoryV2` \u66FF\u6362 `RootRenderer`\u3002"
+    action: "用 `RendererFactoryV2` 替換 `RootRenderer`。"
   },
   {
     possibleIn: 400,
@@ -206,222 +206,222 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Advanced,
     ngUpgrade: true,
     step: "downgradeInjectable",
-    action: "`upgrade/static/downgradeInjectable` \u7684\u8FD4\u56DE\u503C\u5DF2\u66F4\u6539\u3002"
+    action: "`upgrade/static/downgradeInjectable` 的回傳值已更改。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 400,
     level: ApplicationComplexity.Advanced,
-    step: "\u52A8\u753B\u6D4B\u8BD5",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528\u4E86\u52A8\u753B\u548C\u6D4B\u8BD5\uFF0C\u8BF7\u5728\u4F60\u7684 `TestBed.initTestEnvironment` \u8C03\u7528\u4E2D\u6DFB\u52A0 `mods[1].NoopAnimationsModule`\u3002"
+    step: "動畫測試",
+    action: "如果你使用了動畫和測試，請在你的 `TestBed.initTestEnvironment` 呼叫中新增 `mods[1].NoopAnimationsModule`。"
   },
   {
     possibleIn: 200,
     necessaryAsOf: 500,
     level: ApplicationComplexity.Advanced,
     step: "DefaultIterableDiffer",
-    action: "\u505C\u6B62\u4F7F\u7528 `DefaultIterableDiffer`\u3001`KeyValueDiffers#factories` \u6216 `IterableDiffers#factories`\u3002"
+    action: "停止使用 `DefaultIterableDiffer`、`KeyValueDiffers#factories` 或 `IterableDiffers#factories`。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 500,
     level: ApplicationComplexity.Basic,
-    step: "\u6A21\u677F\u6807\u7B7E",
-    action: "\u5C06\u4F60\u7684 `template` \u6807\u7B7E\u91CD\u547D\u540D\u4E3A `ng-template`\u3002"
+    step: "樣板標籤",
+    action: "將你的 `template` 標籤重新命名為 `ng-template`。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 500,
     level: ApplicationComplexity.Medium,
     step: "OpaqueToken",
-    action: "\u7528 `InjectionToken` \u66FF\u6362\u4EFB\u4F55 `OpaqueToken`\u3002"
+    action: "用 `InjectionToken` 替換任何 `OpaqueToken`。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 500,
     level: ApplicationComplexity.Advanced,
     step: "DifferFactory",
-    action: "\u5982\u679C\u8C03\u7528\u4E86 `DifferFactory.create(...)`\uFF0C\u5C31\u79FB\u9664 `ChangeDetectorRef` \u53C2\u6570\u3002"
+    action: "如果呼叫了 `DifferFactory.create(...)`，就移除 `ChangeDetectorRef` 引數。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 500,
     level: ApplicationComplexity.Advanced,
-    step: "ErrorHandler \u53C2\u6570",
-    action: "\u505C\u6B62\u5411 ErrorHandler \u6784\u9020\u51FD\u6570\u4F20\u9012\u4EFB\u4F55\u53C2\u6570\u3002"
+    step: "ErrorHandler 引數",
+    action: "停止向 ErrorHandler 建構式函式傳遞任何引數。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 500,
     level: ApplicationComplexity.Advanced,
     step: "ngProbeToken",
-    action: "\u5982\u679C\u4F7F\u7528\u4E86 ngProbeToken\uFF0C\u8BF7\u786E\u4FDD\u4ECE @angular/core \u800C\u4E0D\u662F @angular/platform-browser \u5BFC\u5165\u5B83\u3002"
+    action: "如果使用了 ngProbeToken，請確保從 @angular/core 而不是 @angular/platform-browser 匯入它。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 500,
     level: ApplicationComplexity.Advanced,
     step: "TrackByFn",
-    action: "\u5982\u679C\u4F7F\u7528\u4E86 TrackByFn\uFF0C\u6539\u7528 TrackByFunction\u3002"
+    action: "如果使用了 TrackByFn，改用 TrackByFunction。"
   },
   {
     possibleIn: 500,
     necessaryAsOf: 500,
     level: ApplicationComplexity.Basic,
-    step: "i18n \u7BA1\u9053\u66F4\u6539",
-    action: "\u5982\u679C\u4F9D\u8D56\u4E8E\u65E5\u671F\u3001\u8D27\u5E01\u3001\u5C0F\u6570\u6216\u767E\u5206\u6BD4\u7BA1\u9053\uFF0C\u5728 5 \u4E2D\u5C06\u770B\u5230\u683C\u5F0F\u7684\u8F7B\u5FAE\u66F4\u6539\u3002\u5BF9\u4E8E\u4F7F\u7528\u5176\u4ED6\u533A\u57DF\u8BBE\u7F6E\u800C\u4E0D\u662F en-us \u7684\u5E94\u7528\u7A0B\u5E8F\uFF0C\u4F60\u9700\u8981\u5BFC\u5165\u5B83\uFF0C\u53EF\u9009\u62E9\u4ECE `@angular/common/i18n_data/locale_fr` \u5BFC\u5165 `locale_extended_fr` \u5E76\u6CE8\u518C locale\u3002"
+    step: "i18n 通道更改",
+    action: "如果依賴於日期、貨幣、小數或百分比通道，在 5 中將看到格式的輕微更改。對於使用其他區域設定而不是 en-us 的應用程式，你需要匯入它，可選擇從 `@angular/common/i18n_data/locale_fr` 匯入 `locale_extended_fr` 並註冊 locale。"
   },
   {
     possibleIn: 500,
     necessaryAsOf: 500,
     level: ApplicationComplexity.Advanced,
     step: "gendir",
-    action: '\u4E0D\u8981\u4F9D\u8D56\u4E8E `gendir`\uFF0C\u800C\u662F\u8003\u8651\u4F7F\u7528 `skipTemplateCodeGen`\u3002 <a href=https://github.com/angular/angular/issues/19339#issuecomment-332607471" target="_blank">\u9605\u8BFB\u66F4\u591A</a>'
+    action: '不要依賴於 `gendir`，而是考慮使用 `skipTemplateCodeGen`。 <a href=https://github.com/angular/angular/issues/19339#issuecomment-332607471" target="_blank">閱讀更多</a>'
   },
   {
     possibleIn: 220,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Basic,
     ngUpgrade: true,
-    step: "\u52A8\u6001 ngUpgrade",
-    action: "\u7528 `@angular/upgrade/static` \u4E2D\u7684\u65B0\u7248\u672C\u66FF\u6362\u4ECE `@angular/upgrade` \u5BFC\u5165\u7684 `downgradeComponent`\u3001`downgradeInjectable`\u3001`UpgradeComponent` \u548C `UpgradeModule`\u3002"
+    step: "動態 ngUpgrade",
+    action: "用 `@angular/upgrade/static` 中的新版本替換從 `@angular/upgrade` 匯入的 `downgradeComponent`、`downgradeInjectable`、`UpgradeComponent` 和 `UpgradeModule`。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Medium,
-    step: "\u6838\u5FC3\u4E2D\u7684\u52A8\u753B",
-    action: "\u5982\u679C\u4ECE @angular/core \u5BFC\u5165\u4E86\u4EFB\u4F55\u52A8\u753B\u670D\u52A1\u6216\u5DE5\u5177\uFF0C\u5E94\u8BE5\u4ECE @angular/animations \u5BFC\u5165\u3002"
+    step: "核心中的動畫",
+    action: "如果從 @angular/core 匯入了任何動畫服務或工具，應該從 @angular/animations 匯入。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Advanced,
     step: "ngOutletContext",
-    action: "\u7528 `ngTemplateOutletContext` \u66FF\u6362 `ngOutletContext`\u3002"
+    action: "用 `ngTemplateOutletContext` 替換 `ngOutletContext`。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Advanced,
     step: "collectionChangeRecord",
-    action: "\u7528 `IterableChangeRecord` \u66FF\u6362 `CollectionChangeRecord`\u3002"
+    action: "用 `IterableChangeRecord` 替換 `CollectionChangeRecord`。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Advanced,
     step: "Renderer",
-    action: "\u4EFB\u4F55\u4F7F\u7528 Renderer \u7684\u5730\u65B9\uFF0C\u73B0\u5728\u4F7F\u7528 Renderer2\u3002"
+    action: "任何使用 Renderer 的地方，現在使用 Renderer2。"
   },
   {
     possibleIn: 400,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Advanced,
-    step: "\u8DEF\u7531\u5668\u67E5\u8BE2\u53C2\u6570",
-    action: "\u5982\u679C\u4F7F\u7528\u4E86 preserveQueryParams\uFF0C\u6539\u7528 queryParamsHandling\u3002"
+    step: "路由器查詢引數",
+    action: "如果使用了 preserveQueryParams，改用 queryParamsHandling。"
   },
   {
     possibleIn: 430,
     necessaryAsOf: 800,
     level: ApplicationComplexity.Basic,
     step: "Http",
-    action: "\u5982\u679C\u4F7F\u7528\u4F20\u7EDF\u7684 `HttpModule` \u548C `Http` \u670D\u52A1\uFF0C\u8BF7\u5207\u6362\u5230 `HttpClientModule` \u548C `HttpClient` \u670D\u52A1\u3002HttpClient \u7B80\u5316\u4E86\u9ED8\u8BA4\u7684\u4EBA\u4F53\u5DE5\u7A0B\u5B66\uFF08\u4F60\u4E0D\u518D\u9700\u8981\u6620\u5C04\u5230 JSON\uFF09\uFF0C\u73B0\u5728\u652F\u6301\u7C7B\u578B\u5316\u8FD4\u56DE\u503C\u548C\u62E6\u622A\u5668\u3002\u5728 [angular.dev](https://angular.io/guide/http) \u4E0A\u9605\u8BFB\u66F4\u591A\u3002"
+    action: "如果使用傳統的 `HttpModule` 和 `Http` 服務，請切換到 `HttpClientModule` 和 `HttpClient` 服務。HttpClient 簡化了預設的人體工程學（你不再需要對映到 JSON），現在支援型別化回傳值和攔截器。在 [angular.dev](https://angular.io/guide/http) 上閱讀更多。"
   },
   {
     possibleIn: 430,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Advanced,
-    step: "@angular/platform-browser \u4E2D\u7684 DOCUMENT",
-    action: "\u5982\u679C\u4F7F\u7528 @angular/platform-browser \u4E2D\u7684 DOCUMENT\uFF0C\u8BF7\u5F00\u59CB\u4ECE @angular/common \u5BFC\u5165\u3002"
+    step: "@angular/platform-browser 中的 DOCUMENT",
+    action: "如果使用 @angular/platform-browser 中的 DOCUMENT，請開始從 @angular/common 匯入。"
   },
   {
     possibleIn: 500,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Advanced,
     step: "ReflectiveInjector",
-    action: "\u4EFB\u4F55\u4F7F\u7528 ReflectiveInjector \u7684\u5730\u65B9\uFF0C\u73B0\u5728\u4F7F\u7528 StaticInjector\u3002"
+    action: "任何使用 ReflectiveInjector 的地方，現在使用 StaticInjector。"
   },
   {
     possibleIn: 500,
     necessaryAsOf: 550,
     level: ApplicationComplexity.Medium,
-    step: "\u7A7A\u767D\u5B57\u7B26",
-    action: "\u5728\u4F60\u7684 `tsconfig.json` \u7684 `angularCompilerOptions` \u952E\u4E0B\u9009\u62E9 `off` \u4F5C\u4E3A `preserveWhitespaces` \u7684\u503C\uFF0C\u4EE5\u83B7\u5F97\u6B64\u8BBE\u7F6E\u7684\u597D\u5904\uFF0C\u8BE5\u8BBE\u7F6E\u5728 v6 \u4E2D\u9ED8\u8BA4\u8BBE\u7F6E\u4E3A `off`\u3002"
+    step: "空白字元",
+    action: "在你的 `tsconfig.json` 的 `angularCompilerOptions` 鍵下選擇 `off` 作為 `preserveWhitespaces` 的值，以獲得此設定的好處，該設定在 v6 中預設設定為 `off`。"
   },
   {
     possibleIn: 600,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Basic,
     step: "Node 8",
-    action: '\u786E\u4FDD\u4F60\u6B63\u5728\u4F7F\u7528<a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 8\u6216\u66F4\u9AD8\u7248\u672C</a>\u3002'
+    action: '確保你正在使用<a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 8或更高版本</a>。'
   },
   {
     possibleIn: 600,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Basic,
     windows: false,
-    step: "\u66F4\u65B0\u5230 CLI v6",
-    action: '\u66F4\u65B0\u4F60\u7684 Angular CLI\uFF0C\u5E76\u5C06\u914D\u7F6E\u8FC1\u79FB\u5230<a href="https://github.com/angular/angular-cli/wiki/angular-workspace" target="_blank">\u65B0\u7684 angular.json \u683C\u5F0F</a>\uFF0C\u65B9\u6CD5\u5982\u4E0B\uFF1A<br/><br/>`NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@6 update @angular/cli@6`<br/>'
+    step: "更新到 CLI v6",
+    action: '更新你的 Angular CLI，並將設定遷移到<a href="https://github.com/angular/angular-cli/wiki/angular-workspace" target="_blank">新的 angular.json 格式</a>，方法如下：<br/><br/>`NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@6 update @angular/cli@6`<br/>'
   },
   {
     possibleIn: 600,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Basic,
     windows: true,
-    step: "\u66F4\u65B0\u5230 CLI v6",
-    action: '\u66F4\u65B0\u4F60\u7684 Angular CLI\uFF0C\u5E76\u5C06\u914D\u7F6E\u8FC1\u79FB\u5230<a href="https://github.com/angular/angular-cli/wiki/angular-workspace" target="_blank">\u65B0\u7684 angular.json \u683C\u5F0F</a>\uFF0C\u65B9\u6CD5\u5982\u4E0B\uFF1A<br/><br/>`cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@6 update @angular/cli@6 @angular/core@6"`<br/>'
+    step: "更新到 CLI v6",
+    action: '更新你的 Angular CLI，並將設定遷移到<a href="https://github.com/angular/angular-cli/wiki/angular-workspace" target="_blank">新的 angular.json 格式</a>，方法如下：<br/><br/>`cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@6 update @angular/cli@6 @angular/core@6"`<br/>'
   },
   {
     possibleIn: 600,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Medium,
-    step: "CLI v6 \u811A\u672C",
-    action: "\u66F4\u65B0\u4F60\u5728 `package.json` \u4E2D\u53EF\u80FD\u6709\u7684\u4EFB\u4F55 `scripts`\uFF0C\u4EE5\u4F7F\u7528\u6700\u65B0\u7684 Angular CLI \u547D\u4EE4\u3002\u6240\u6709 CLI \u547D\u4EE4\u73B0\u5728\u4F7F\u7528\u4E24\u4E2A\u77ED\u6A2A\u7EBF\u4F5C\u4E3A\u6807\u5FD7\uFF08\u4F8B\u5982 `ng build --prod --source-map`\uFF09\u4EE5\u7B26\u5408 POSIX \u89C4\u8303\u3002"
+    step: "CLI v6 指令碼",
+    action: "更新你在 `package.json` 中可能有的任何 `scripts`，以使用最新的 Angular CLI 指令。所有 CLI 指令現在使用兩個短橫線作為標誌（例如 `ng build --prod --source-map`）以符合 POSIX 規範。"
   },
   {
     possibleIn: 600,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Basic,
     windows: false,
-    step: "\u66F4\u65B0\u5230 Angular v6",
-    action: "\u5C06\u4F60\u7684\u6240\u6709 Angular \u6846\u67B6\u5305\u66F4\u65B0\u5230 v6\uFF0C\u5E76\u6B63\u786E\u5B89\u88C5 RxJS \u548C TypeScript \u7684\u7248\u672C\u3002<br/><br/>`NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@6 update @angular/core@6`<br/><br/>\u66F4\u65B0\u540E\uFF0CTypeScript \u548C RxJS \u5C06\u66F4\u51C6\u786E\u5730\u6D41\u7ECF\u4F60\u7684\u5E94\u7528\u7A0B\u5E8F\u7684\u7C7B\u578B\uFF0C\u8FD9\u53EF\u80FD\u4F1A\u66B4\u9732\u51FA\u5E94\u7528\u7A0B\u5E8F\u7C7B\u578B\u7684\u73B0\u6709\u9519\u8BEF"
+    step: "更新到 Angular v6",
+    action: "將你的所有 Angular 框架套件更新到 v6，並正確安裝 RxJS 和 TypeScript 的版本。<br/><br/>`NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@6 update @angular/core@6`<br/><br/>更新後，TypeScript 和 RxJS 將更準確地流經你的應用程式的型別，這可能會暴露出應用程式型別的現有錯誤"
   },
   {
     possibleIn: 600,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Basic,
     windows: true,
-    step: "\u66F4\u65B0\u5230 Angular v6",
-    action: '\u5C06\u4F60\u7684\u6240\u6709 Angular \u6846\u67B6\u5305\u66F4\u65B0\u5230 v6\uFF0C\u5E76\u6B63\u786E\u5B89\u88C5 RxJS \u548C TypeScript \u7684\u7248\u672C\u3002<br/><br/>`cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@6 update @angular/cli@6 @angular/core@6"`<br/><br/>\u66F4\u65B0\u540E\uFF0CTypeScript \u548C RxJS \u5C06\u66F4\u51C6\u786E\u5730\u6D41\u7ECF\u4F60\u7684\u5E94\u7528\u7A0B\u5E8F\u7684\u7C7B\u578B\uFF0C\u8FD9\u53EF\u80FD\u4F1A\u66B4\u9732\u51FA\u5E94\u7528\u7A0B\u5E8F\u7C7B\u578B\u7684\u73B0\u6709\u9519\u8BEF'
+    step: "更新到 Angular v6",
+    action: '將你的所有 Angular 框架套件更新到 v6，並正確安裝 RxJS 和 TypeScript 的版本。<br/><br/>`cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@6 update @angular/cli@6 @angular/core@6"`<br/><br/>更新後，TypeScript 和 RxJS 將更準確地流經你的應用程式的型別，這可能會暴露出應用程式型別的現有錯誤'
   },
   {
     possibleIn: 600,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Advanced,
     step: "forms v6",
-    action: "\u5728 Angular Forms \u4E2D\uFF0C\u5F53\u8C03\u7528 `AbstractControl#markAsPending` \u65F6\uFF0C`AbstractControl#statusChanges` \u73B0\u5728\u4F1A\u53D1\u51FA `PENDING` \u4E8B\u4EF6\u3002\u786E\u4FDD\u5982\u679C\u4F60\u5728\u8C03\u7528 `markAsPending` \u65F6\u8FC7\u6EE4\u6216\u68C0\u67E5 `statusChanges` \u4E8B\u4EF6\uFF0C\u4F60\u8981\u8003\u8651\u5230\u8C03\u7528 `markAsPending` \u65F6\u7684\u65B0\u4E8B\u4EF6\u3002"
+    action: "在 Angular Forms 中，當呼叫 `AbstractControl#markAsPending` 時，`AbstractControl#statusChanges` 現在會發出 `PENDING` 事件。確保如果你在呼叫 `markAsPending` 時過濾或檢查 `statusChanges` 事件，你要考慮到呼叫 `markAsPending` 時的新事件。"
   },
   {
     possibleIn: 600,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Advanced,
-    step: "\u52A8\u753B\u65F6\u5E8F",
-    action: "\u5982\u679C\u5728\u7981\u7528\u7684 Zone \u4E2D\u4F7F\u7528 `AnimationEvent` \u7684 `totalTime`\uFF0C\u5B83\u5C06\u4E0D\u518D\u62A5\u544A\u4E3A 0\u3002\u8981\u68C0\u6D4B\u52A8\u753B\u4E8B\u4EF6\u662F\u5426\u62A5\u544A\u4E3A\u7981\u7528\u7684\u52A8\u753B\uFF0C\u5219\u53EF\u4EE5\u4F7F\u7528 `event.disabled` \u5C5E\u6027\u3002"
+    step: "動畫時序",
+    action: "如果在停用的 Zone 中使用 `AnimationEvent` 的 `totalTime`，它將不再報告為 0。要檢測動畫事件是否報告為停用的動畫，則可以使用 `event.disabled` 屬性。"
   },
   {
     possibleIn: 600,
     necessaryAsOf: 700,
     level: ApplicationComplexity.Advanced,
-    step: "\u8868\u5355\u63A7\u4EF6\u4E0A\u7684 ngModel",
-    action: "\u5728 v6 \u4E2D\u5DF2\u5F03\u7528\u5E76\u5728 v7 \u4E2D\u5220\u9664\u4E86\u5BF9\u4F7F\u7528 ngModel \u8F93\u5165\u5C5E\u6027\u548C ngModelChange \u4E8B\u4EF6\u4E0E\u54CD\u5E94\u5F0F\u8868\u5355\u6307\u4EE4\u4E00\u8D77\u4F7F\u7528\u7684\u652F\u6301\u3002"
+    step: "表單控制元件上的 ngModel",
+    action: "在 v6 中已棄用並在 v7 中刪除了對使用 ngModel 輸入屬性和 ngModelChange 事件與回應式表單指令一起使用的支援。"
   },
   {
     possibleIn: 600,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Medium,
-    step: "ngModelChange \u987A\u5E8F",
-    action: "\u73B0\u5728\uFF0C\u5728\u66F4\u65B0\u63A7\u4EF6\u7684\u503C/\u6709\u6548\u6027\u540E\uFF0C`ngModelChange` \u88AB\u53D1\u51FA\uFF0C\u800C\u4E0D\u662F\u4E4B\u524D\uFF0C\u4EE5\u66F4\u597D\u5730\u5339\u914D\u9884\u671F\u3002\u5982\u679C\u4F60\u4F9D\u8D56\u4E8E\u8FD9\u4E9B\u4E8B\u4EF6\u7684\u987A\u5E8F\uFF0C\u4F60\u9700\u8981\u5F00\u59CB\u5728\u4F60\u7684\u7EC4\u4EF6\u4E2D\u8DDF\u8E2A\u65E7\u503C\u3002"
+    step: "ngModelChange 順序",
+    action: "現在，在更新控制元件的值/有效性後，`ngModelChange` 被髮出，而不是之前，以更好地對應預期。如果你依賴於這些事件的順序，你需要開始在你的元件中跟蹤舊值。"
   },
   {
     possibleIn: 600,
@@ -429,8 +429,8 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     windows: false,
     material: true,
-    step: "\u66F4\u65B0\u5230 v6 \u7684\u4F9D\u8D56\u9879",
-    action: "\u5C06 Angular Material \u66F4\u65B0\u5230\u6700\u65B0\u7248\u672C\u3002<br/><br/>`NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@6 update @angular/material@6`<br/><br/>\u8FD9\u4E5F\u5C06\u81EA\u52A8\u8FC1\u79FB\u5DF2\u5F03\u7528\u7684 API\u3002"
+    step: "更新到 v6 的依賴項",
+    action: "將 Angular Material 更新到最新版本。<br/><br/>`NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@6 update @angular/material@6`<br/><br/>這也將自動遷移已棄用的 API。"
   },
   {
     possibleIn: 600,
@@ -438,66 +438,66 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     windows: true,
     material: true,
-    step: "\u66F4\u65B0\u5230 v6 \u7684\u4F9D\u8D56\u9879",
-    action: '\u5C06 Angular Material \u66F4\u65B0\u5230\u6700\u65B0\u7248\u672C\u3002<br/><br/>`cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@6 update @angular/material@6"`<br/><br/>\u8FD9\u4E5F\u5C06\u81EA\u52A8\u8FC1\u79FB\u5DF2\u5F03\u7528\u7684 API\u3002'
+    step: "更新到 v6 的依賴項",
+    action: '將 Angular Material 更新到最新版本。<br/><br/>`cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@6 update @angular/material@6"`<br/><br/>這也將自動遷移已棄用的 API。'
   },
   {
     possibleIn: 600,
     necessaryAsOf: 600,
     level: ApplicationComplexity.Medium,
     step: "strictPropertyInitializer",
-    action: '\u5982\u679C TypeScript \u914D\u7F6E\u4E3A\u4E25\u683C\u6A21\u5F0F\uFF08\u5982\u679C\u4F60\u5728 `tsconfig.json` \u6587\u4EF6\u4E2D\u5C06 `strict` \u8BBE\u7F6E\u4E3A `true`\uFF09\uFF0C\u8BF7\u66F4\u65B0\u4F60\u7684 `tsconfig.json` \u4EE5\u7981\u7528 `strictPropertyInitialization` \u6216\u5C06\u5C5E\u6027\u521D\u59CB\u5316\u4ECE `ngOnInit` \u79FB\u52A8\u5230\u4F60\u7684\u6784\u9020\u51FD\u6570\u3002\u4F60\u53EF\u4EE5\u5728<a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#strict-class-initialization">TypeScript 2.7 \u53D1\u5E03\u8BF4\u660E</a>\u4E2D\u4E86\u89E3\u66F4\u591A\u5173\u4E8E\u6B64\u6807\u5FD7\u7684\u4FE1\u606F\u3002'
+    action: '如果 TypeScript 設定為嚴格模式（如果你在 `tsconfig.json` 檔案中將 `strict` 設定為 `true`），請更新你的 `tsconfig.json` 以停用 `strictPropertyInitialization` 或將屬性初始化從 `ngOnInit` 移動到你的建構式函式。你可以在<a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#strict-class-initialization">TypeScript 2.7 發布說明</a>中瞭解更多關於此標誌的訊息。'
   },
   {
     possibleIn: 600,
     necessaryAsOf: 700,
     level: ApplicationComplexity.Basic,
-    step: "\u66F4\u65B0\u5230 RxJS 6",
-    action: '\u4F7F\u7528<a href="https://github.com/ReactiveX/rxjs-tslint" target="_blank">rxjs-tslint \u81EA\u52A8\u66F4\u65B0\u89C4\u5219</a>\u5220\u9664\u5DF2\u5F03\u7528\u7684 RxJS 5 \u7279\u6027<br/><br/>\u5BF9\u4E8E\u5927\u591A\u6570\u5E94\u7528\u7A0B\u5E8F\uFF0C\u8FD9\u610F\u5473\u7740\u8FD0\u884C\u4EE5\u4E0B\u4E24\u4E2A\u547D\u4EE4\uFF1A<br/><br/>`npx rxjs-tslint`<br/>`rxjs-5-to-6-migrate -p src/tsconfig.app.json`'
+    step: "更新到 RxJS 6",
+    action: '使用<a href="https://github.com/ReactiveX/rxjs-tslint" target="_blank">rxjs-tslint 自動更新規則</a>刪除已棄用的 RxJS 5 屬性<br/><br/>對於大多數應用程式，這意味著執行以下兩個指令：<br/><br/>`npx rxjs-tslint`<br/>`rxjs-5-to-6-migrate -p src/tsconfig.app.json`'
   },
   {
     possibleIn: 600,
     necessaryAsOf: 800,
     level: ApplicationComplexity.Medium,
-    step: "\u79FB\u9664 rxjs-compat",
-    action: "\u4E00\u65E6\u4F60\u548C\u4F60\u6240\u6709\u7684\u4F9D\u8D56\u9879\u90FD\u5DF2\u66F4\u65B0\u5230 RxJS 6\uFF0C\u8BF7\u79FB\u9664 `rxjs-compat`\u3002"
+    step: "移除 rxjs-compat",
+    action: "一旦你和你所有的依賴項都已更新到 RxJS 6，請移除 `rxjs-compat`。"
   },
   {
     possibleIn: 610,
     necessaryAsOf: 800,
     level: ApplicationComplexity.Medium,
-    step: "\u4F7F\u7528\u6587\u4EF6\u800C\u4E0D\u662F versionedFiles",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528 Angular Service Worker\uFF0C\u8BF7\u5C06\u4EFB\u4F55 `versionedFiles` \u8FC1\u79FB\u5230 `files` \u6570\u7EC4\u4E2D\u3002\u884C\u4E3A\u662F\u4E00\u6837\u7684\u3002"
+    step: "使用檔案而不是 versionedFiles",
+    action: "如果你使用 Angular Service Worker，請將任何 `versionedFiles` 遷移到 `files` 陣列中。行為是一樣的。"
   },
   {
     possibleIn: 700,
     necessaryAsOf: 700,
     level: ApplicationComplexity.Basic,
     step: "TypeScript 3.1",
-    action: 'Angular \u73B0\u5728\u4F7F\u7528 TypeScript 3.1\uFF0C\u8BF7\u9605\u8BFB\u6709\u5173\u4EFB\u4F55\u6F5C\u5728\u7684\u7834\u574F\u6027\u53D8\u5316\uFF1A<a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-1.html">TypeScript 3.1 \u53D1\u5E03\u8BF4\u660E</a>'
+    action: 'Angular 現在使用 TypeScript 3.1，請閱讀有關任何潛在的破壞性變化：<a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-1.html">TypeScript 3.1 發布說明</a>'
   },
   {
     possibleIn: 700,
     necessaryAsOf: 700,
     level: ApplicationComplexity.Basic,
     step: "Node 10",
-    action: 'Angular \u73B0\u5728\u6DFB\u52A0\u4E86\u5BF9 Node 10 \u7684\u652F\u6301\uFF1A<a href="https://nodejs.org/en/blog/release/v10.0.0/" target="_blank">Node 10 \u53D1\u5E03\u8BF4\u660E</a>'
+    action: 'Angular 現在新增了對 Node 10 的支援：<a href="https://nodejs.org/en/blog/release/v10.0.0/" target="_blank">Node 10 發布說明</a>'
   },
   {
     possibleIn: 700,
     necessaryAsOf: 700,
     level: ApplicationComplexity.Basic,
     windows: false,
-    step: "\u66F4\u65B0\u5230 v7",
-    action: "\u5728\u7EC8\u7AEF\u4E2D\u8FD0\u884C`NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@7 update @angular/cli@7 @angular/core@7`\u6765\u66F4\u65B0\u6838\u5FC3\u6846\u67B6\u548C CLI \u5230 v7\u3002"
+    step: "更新到 v7",
+    action: "在終端中執行`NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@7 update @angular/cli@7 @angular/core@7`來更新核心框架和 CLI 到 v7。"
   },
   {
     possibleIn: 700,
     necessaryAsOf: 700,
     level: ApplicationComplexity.Basic,
     windows: true,
-    step: "\u66F4\u65B0\u5230 v7",
-    action: '\u5728\u7EC8\u7AEF\u4E2D\u8FD0\u884C`cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@7 update @angular/cli@7 @angular/core@7"`\u6765\u66F4\u65B0\u6838\u5FC3\u6846\u67B6\u548C CLI \u5230 v7\u3002'
+    step: "更新到 v7",
+    action: '在終端中執行`cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@7 update @angular/cli@7 @angular/core@7"`來更新核心框架和 CLI 到 v7。'
   },
   {
     possibleIn: 700,
@@ -505,8 +505,8 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     windows: false,
     material: true,
-    step: "\u66F4\u65B0\u5230 v7 \u7684 Material",
-    action: "\u5728\u7EC8\u7AEF\u4E2D\u8FD0\u884C`NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@7 update @angular/material@7`\u6765\u66F4\u65B0 Angular Material \u5230 v7\u3002\u4F60\u5E94\u8BE5\u6D4B\u8BD5\u4F60\u7684\u5E94\u7528\u7A0B\u5E8F\u662F\u5426\u6709\u5927\u5C0F\u548C\u5E03\u5C40\u7684\u53D8\u5316\u3002"
+    step: "更新到 v7 的 Material",
+    action: "在終端中執行`NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@7 update @angular/material@7`來更新 Angular Material 到 v7。你應該測試你的應用程式是否有大小和佈局的變化。"
   },
   {
     possibleIn: 700,
@@ -514,82 +514,82 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     windows: true,
     material: true,
-    step: "\u66F4\u65B0\u5230 v7 \u7684 Material",
-    action: '\u5728\u7EC8\u7AEF\u4E2D\u8FD0\u884C`cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@7 update @angular/material@7"`\u6765\u66F4\u65B0 Angular Material \u5230 v7\u3002\u4F60\u5E94\u8BE5\u6D4B\u8BD5\u4F60\u7684\u5E94\u7528\u7A0B\u5E8F\u662F\u5426\u6709\u5927\u5C0F\u548C\u5E03\u5C40\u7684\u53D8\u5316\u3002'
+    step: "更新到 v7 的 Material",
+    action: '在終端中執行`cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@7 update @angular/material@7"`來更新 Angular Material 到 v7。你應該測試你的應用程式是否有大小和佈局的變化。'
   },
   {
     possibleIn: 700,
     necessaryAsOf: 700,
     level: ApplicationComplexity.Medium,
     material: true,
-    step: "v7 \u7684 Material \u53D8\u5316",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528\u5C4F\u5E55\u622A\u56FE\u6D4B\u8BD5\uFF0C\u4F60\u9700\u8981\u91CD\u65B0\u751F\u6210\u4F60\u7684\u5C4F\u5E55\u622A\u56FE\u9EC4\u91D1\u6587\u4EF6\uFF0C\u56E0\u4E3A\u8BB8\u591A\u6B21\u8981\u7684\u89C6\u89C9\u8C03\u6574\u5DF2\u7ECF\u5B8C\u6210\u3002"
+    step: "v7 的 Material 變化",
+    action: "如果你使用螢幕截圖測試，你需要重新生成你的螢幕截圖黃金檔案，因為許多次要的視覺調整已經完成。"
   },
   {
     possibleIn: 700,
     necessaryAsOf: 800,
     level: ApplicationComplexity.Advanced,
     material: true,
-    step: "v7 \u7684 Material \u5F03\u7528",
-    action: "\u505C\u6B62\u4F7F\u7528 `matRippleSpeedFactor` \u548C `baseSpeedFactor` \u6765\u8FDB\u884C\u6D9F\u6F2A\uFF0C\u6539\u7528\u52A8\u753B\u914D\u7F6E\u3002"
+    step: "v7 的 Material 棄用",
+    action: "停止使用 `matRippleSpeedFactor` 和 `baseSpeedFactor` 來進行漣漪，改用動畫設定。"
   },
   {
     possibleIn: 800,
     necessaryAsOf: 800,
     level: ApplicationComplexity.Basic,
     windows: false,
-    step: "\u66F4\u65B0\u5230 v8",
-    action: "\u5728\u7EC8\u7AEF\u4E2D\u8FD0\u884C `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@8 update @angular/cli@8 @angular/core@8`\uFF0C\u7136\u540E\u67E5\u770B\u5E76\u63D0\u4EA4\u66F4\u6539\u3002"
+    step: "更新到 v8",
+    action: "在終端中執行 `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@8 update @angular/cli@8 @angular/core@8`，然後檢視並送出更改。"
   },
   {
     possibleIn: 800,
     necessaryAsOf: 800,
     level: ApplicationComplexity.Basic,
     windows: true,
-    step: "\u66F4\u65B0\u5230 v8",
-    action: '\u5728\u7EC8\u7AEF\u4E2D\u8FD0\u884C `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@8 update @angular/cli@8 @angular/core@8"`\uFF0C\u7136\u540E\u67E5\u770B\u5E76\u63D0\u4EA4\u66F4\u6539\u3002'
+    step: "更新到 v8",
+    action: '在終端中執行 `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@8 update @angular/cli@8 @angular/core@8"`，然後檢視並送出更改。'
   },
   {
     possibleIn: 800,
     necessaryAsOf: 800,
     level: ApplicationComplexity.Basic,
-    step: "\u4F7F\u7528 ::ng-deep \u66FF\u4EE3 /deep/",
-    action: "\u5728\u4F60\u7684\u6837\u5F0F\u4E2D\u7528 `::ng-deep` \u66FF\u6362 `/deep/`\uFF0C[\u4E86\u89E3\u66F4\u591A\u5173\u4E8E Angular \u7EC4\u4EF6\u6837\u5F0F\u548C ::ng-deep](https://angular.io/guide/component-styles#deprecated-deep--and-ng-deep)\u3002 `/deep/` \u548C `::ng-deep` \u90FD\u5DF2\u5F03\u7528\uFF0C\u4F46\u5728\u5B8C\u5168\u4ECE\u6D4F\u89C8\u5668\u548C\u5DE5\u5177\u4E2D\u79FB\u9664\u5F71\u5B50\u7A7F\u900F\u540E\uFF0C\u4F7F\u7528 `::ng-deep` \u66F4\u53EF\u53D6\u3002"
+    step: "使用 ::ng-deep 替代 /deep/",
+    action: "在你的樣式中用 `::ng-deep` 替換 `/deep/`，[瞭解更多關於 Angular 元件樣式和 ::ng-deep](https://angular.io/guide/component-styles#deprecated-deep--and-ng-deep)。 `/deep/` 和 `::ng-deep` 都已棄用，但在完全從瀏覽器和工具中移除影子穿透後，使用 `::ng-deep` 更可取。"
   },
   {
     possibleIn: 800,
     necessaryAsOf: 800,
     level: ApplicationComplexity.Basic,
     step: "TypeScript 3.4",
-    action: "Angular \u73B0\u5728\u4F7F\u7528 TypeScript 3.4\uFF0C[\u4E86\u89E3\u66F4\u591A\u53EF\u80FD\u7531\u6539\u8FDB\u7684\u7C7B\u578B\u68C0\u67E5\u5F15\u8D77\u7684\u9519\u8BEF](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html)\u3002"
+    action: "Angular 現在使用 TypeScript 3.4，[瞭解更多可能由改進的型別檢查引起的錯誤](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html)。"
   },
   {
     possibleIn: 800,
     necessaryAsOf: 800,
     level: ApplicationComplexity.Basic,
     step: "node 10",
-    action: '\u786E\u4FDD\u4F60\u6B63\u5728\u4F7F\u7528 <a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 10 \u6216\u66F4\u9AD8\u7248\u672C</a>\u3002'
+    action: '確保你正在使用 <a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 10 或更高版本</a>。'
   },
   {
     possibleIn: 800,
     necessaryAsOf: 800,
     level: ApplicationComplexity.Basic,
-    step: "\u5DEE\u5F02\u5316\u52A0\u8F7D",
-    action: "CLI \u7684\u6784\u5EFA\u547D\u4EE4\u73B0\u5728\u4F1A\u81EA\u52A8\u521B\u5EFA\u4E00\u4E2A\u73B0\u4EE3\u7684 ES2015 \u6784\u5EFA\uFF0C\u5E26\u6709\u6700\u5C0F\u7684 polyfills\uFF0C\u5E76\u4E3A\u65E7\u7248\u6D4F\u89C8\u5668\u521B\u5EFA\u517C\u5BB9\u7684 ES5 \u6784\u5EFA\uFF0C\u5E76\u6839\u636E\u6D4F\u89C8\u5668\u52A0\u8F7D\u9002\u5F53\u7684\u6587\u4EF6\u3002 \u4F60\u53EF\u4EE5\u901A\u8FC7\u5C06 `tsconfig.json` \u4E2D\u7684 `target` \u8BBE\u7F6E\u56DE `es5` \u6765\u9009\u62E9\u9000\u51FA\u6B64\u66F4\u6539\u3002\u5728 [angular.io](https://angular.io/guide/deployment#differential-loading) \u4E0A\u4E86\u89E3\u66F4\u591A\u3002"
+    step: "差異化載入",
+    action: "CLI 的建立指令現在會自動建立一個現代的 ES2015 建立，帶有最小的 polyfills，併為舊版瀏覽器建立相容的 ES5 建立，並根據瀏覽器載入適當的檔案。 你可以透過將 `tsconfig.json` 中的 `target` 設定回 `es5` 來選擇退出此更改。在 [angular.io](https://angular.io/guide/deployment#differential-loading) 上了解更多。"
   },
   {
     possibleIn: 800,
     necessaryAsOf: 800,
     level: ApplicationComplexity.Basic,
-    step: "CLI \u9065\u6D4B",
-    action: "\u4F7F\u7528 CLI \u7684\u65B0\u7248\u672C\u65F6\uFF0C\u4F60\u5C06\u88AB\u8BE2\u95EE\u662F\u5426\u8981\u9009\u62E9\u52A0\u5165\u5171\u4EAB CLI \u4F7F\u7528\u6570\u636E\u3002\u4F60\u4E5F\u53EF\u4EE5\u6DFB\u52A0\u81EA\u5DF1\u7684 Google Analytics \u5E10\u6237\u3002\u8FD9\u6837\u6211\u4EEC\u53EF\u4EE5\u66F4\u597D\u5730\u51B3\u5B9A\u4F18\u5148\u8003\u8651\u54EA\u4E9B CLI \u529F\u80FD\uFF0C\u5E76\u8861\u91CF\u6211\u4EEC\u6539\u8FDB\u7684\u5F71\u54CD\u3002\u5728 [angular.io](https://angular.io/analytics) \u4E0A\u4E86\u89E3\u66F4\u591A\u3002"
+    step: "CLI 遙測",
+    action: "使用 CLI 的新版本時，你將被詢問是否要選擇加入共享 CLI 使用資料。你也可以新增自己的 Google Analytics 帳戶。這樣我們可以更好地決定優先考慮哪些 CLI 功能，並衡量我們改進的影響。在 [angular.io](https://angular.io/analytics) 上了解更多。"
   },
   {
     possibleIn: 800,
     necessaryAsOf: 800,
     level: ApplicationComplexity.Basic,
-    step: "\u9759\u6001\u67E5\u8BE2\u65F6\u673A",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528 `ViewChild` \u6216 `ContentChild`\uFF0C\u6211\u4EEC\u6B63\u5728\u66F4\u65B0\u89E3\u6790\u8FD9\u4E9B\u67E5\u8BE2\u7684\u65B9\u5F0F\uFF0C\u4EE5\u7ED9\u5F00\u53D1\u8005\u66F4\u591A\u63A7\u5236\u3002\u4F60\u73B0\u5728\u5FC5\u987B\u6307\u5B9A\u53D8\u66F4\u68C0\u6D4B\u5E94\u8BE5\u5728\u8BBE\u7F6E\u7ED3\u679C\u4E4B\u524D\u8FD0\u884C\u3002\u793A\u4F8B\uFF1A`@ContentChild('foo', {static: false}) foo !: ElementRef;`\u3002 `ng update` \u5C06\u81EA\u52A8\u66F4\u65B0\u4F60\u7684\u67E5\u8BE2\uFF0C\u4F46\u5B83\u4F1A\u503E\u5411\u4E8E\u4F7F\u4F60\u7684\u67E5\u8BE2\u4E3A `static`\uFF0C\u4EE5\u4FDD\u8BC1\u517C\u5BB9\u6027\u3002\u5728 [angular.io](https://angular.io/guide/static-query-migration) \u4E0A\u4E86\u89E3\u66F4\u591A\u3002"
+    step: "靜態查詢時機",
+    action: "如果你使用 `ViewChild` 或 `ContentChild`，我們正在更新解析這些查詢的方式，以給開發者更多控制。你現在必須指定變更檢測應該在設定結果之前執行。範例：`@ContentChild('foo', {static: false}) foo !: ElementRef;`。 `ng update` 將自動更新你的查詢，但它會傾向於使你的查詢為 `static`，以保證相容性。在 [angular.io](https://angular.io/guide/static-query-migration) 上了解更多。"
   },
   {
     possibleIn: 800,
@@ -597,8 +597,8 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     windows: false,
     material: true,
-    step: "\u66F4\u65B0\u5230 v8 \u7684 Material",
-    action: "\u5728\u7EC8\u7AEF\u4E2D\u8FD0\u884C `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@8 update @angular/material@8`\u3002"
+    step: "更新到 v8 的 Material",
+    action: "在終端中執行 `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@8 update @angular/material@8`。"
   },
   {
     possibleIn: 800,
@@ -606,74 +606,74 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     windows: true,
     material: true,
-    step: "\u66F4\u65B0\u5230 v8 \u7684 Material",
-    action: '\u5728\u7EC8\u7AEF\u4E2D\u8FD0\u884C `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@8 update @angular/material@8"`\u3002'
+    step: "更新到 v8 的 Material",
+    action: '在終端中執行 `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@8 update @angular/material@8"`。'
   },
   {
     possibleIn: 800,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Basic,
     material: true,
-    step: "\u6DF1\u5EA6\u5BFC\u5165",
-    action: "\u4E0D\u8981\u76F4\u63A5\u4ECE `@angular/material` \u5BFC\u5165\uFF0C\u800C\u662F\u4ECE\u7279\u5B9A\u7EC4\u4EF6\u8FDB\u884C\u6DF1\u5EA6\u5BFC\u5165\u3002\u4F8B\u5982 `@angular/material/button`\u3002`ng update` \u5C06\u4E3A\u4F60\u81EA\u52A8\u5B8C\u6210\u6B64\u64CD\u4F5C\u3002"
+    step: "深度匯入",
+    action: "不要直接從 `@angular/material` 匯入，而是從特定元件進行深度匯入。例如 `@angular/material/button`。`ng update` 將為你自動完成此操作。"
   },
   {
     possibleIn: 800,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Basic,
-    step: "\u65B0\u7684 loadChildren",
-    action: "\u5BF9\u4E8E\u901A\u8FC7\u8DEF\u7531\u5668\u8FDB\u884C\u7684\u60F0\u6027\u52A0\u8F7D\u7684\u6A21\u5757\uFF0C\u8BF7\u786E\u4FDD\u4F60\u6B63\u5728[\u4F7F\u7528\u52A8\u6001\u5BFC\u5165](https://angular.io/guide/deprecations#loadchildren-string-syntax)\u3002\u5728 v9 \u4E2D\uFF0C\u901A\u8FC7\u5B57\u7B26\u4E32\u8FDB\u884C\u5BFC\u5165\u5DF2\u88AB\u79FB\u9664\u3002`ng update` \u5E94\u8BE5\u4F1A\u81EA\u52A8\u5904\u7406\u8FD9\u4E2A\u3002\u5728 [angular.io](https://angular.io/guide/deprecations#loadchildren-string-syntax) \u4E0A\u4E86\u89E3\u66F4\u591A\u3002"
+    step: "新的 loadChildren",
+    action: "對於透過路由器進行的延遲載入的模組，請確保你正在[使用動態匯入](https://angular.io/guide/deprecations#loadchildren-string-syntax)。在 v9 中，透過字串進行匯入已被移除。`ng update` 應該會自動處理這個。在 [angular.io](https://angular.io/guide/deprecations#loadchildren-string-syntax) 上了解更多。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Advanced,
-    step: "\u5E73\u53F0\u5E9F\u5F03",
-    action: "\u6211\u4EEC\u6B63\u5728\u5E9F\u5F03\u5BF9 `@angular/platform-webworker` \u7684\u652F\u6301\uFF0C\u56E0\u4E3A\u5B83\u4E0E CLI \u4E0D\u517C\u5BB9\u3002\u5728 Web Worker \u4E2D\u8FD0\u884C Angular \u7684\u6E32\u67D3\u67B6\u6784\u4E0D\u7B26\u5408\u5F00\u53D1\u8005\u7684\u9700\u6C42\u3002\u4F60\u4ECD\u7136\u53EF\u4EE5\u5728 Angular \u4E2D\u4F7F\u7528 Web Worker\u3002\u5728\u6211\u4EEC\u7684 [Web Worker \u6307\u5357](https://v9.angular.io/guide/web-worker) \u4E2D\u4E86\u89E3\u66F4\u591A\u3002\u5982\u679C\u4F60\u6709\u9700\u8981\u8FD9\u65B9\u9762\u7684\u7528\u4F8B\uFF0C\u8BF7\u901A\u8FC7 devrel@angular.io \u4E0E\u6211\u4EEC\u8054\u7CFB\uFF01"
+    step: "平台廢棄",
+    action: "我們正在廢棄對 `@angular/platform-webworker` 的支援，因為它與 CLI 不相容。在 Web Worker 中執行 Angular 的渲染架構不符合開發者的需求。你仍然可以在 Angular 中使用 Web Worker。在我們的 [Web Worker 指南](https://v9.angular.io/guide/web-worker) 中瞭解更多。如果你有需要這方面的用例，請透過 devrel@angular.io 與我們聯絡！"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Advanced,
     step: "node-sass",
-    action: "\u6211\u4EEC\u5DF2\u7ECF\u4ECE\u672C\u5730 Sass \u7F16\u8BD1\u5668\u5207\u6362\u5230 JavaScript \u7F16\u8BD1\u5668\u3002\u8981\u5207\u6362\u56DE\u672C\u5730\u7248\u672C\uFF0C\u8BF7\u5C06\u5176\u5B89\u88C5\u4E3A devDependency\uFF1A`npm install node-sass --save-dev`\u3002"
+    action: "我們已經從本地 Sass 編譯器切換到 JavaScript 編譯器。要切換回本地版本，請將其安裝為 devDependency：`npm install node-sass --save-dev`。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Advanced,
-    step: "schematics \u5F02\u6B65",
-    action: "\u5982\u679C\u4F60\u6B63\u5728\u6784\u5EFA\u81EA\u5DF1\u7684 Schematics\uFF0C\u5B83\u4EEC\u4E4B\u524D*\u53EF\u80FD*\u662F\u5F02\u6B65\u7684\u3002\u4ECE 8.0 \u5F00\u59CB\uFF0C\u6240\u6709\u7684 Schematics \u90FD\u5C06\u662F\u5F02\u6B65\u7684\u3002"
+    step: "schematics 非同步",
+    action: "如果你正在建立自己的 Schematics，它們之前*可能*是非同步的。從 8.0 開始，所有的 Schematics 都將是非同步的。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Basic,
     step: "node 10.13",
-    action: '\u786E\u4FDD\u4F60\u6B63\u5728\u4F7F\u7528 <a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 10.13 \u6216\u66F4\u9AD8\u7248\u672C</a>\u3002'
+    action: '確保你正在使用 <a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 10.13 或更高版本</a>。'
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Basic,
     windows: false,
-    step: "\u66F4\u65B0\u5230 CLI v8 \u6700\u65B0\u7248\u672C",
-    action: "\u5728\u4F60\u7684\u5DE5\u4F5C\u7A7A\u95F4\u76EE\u5F55\u4E2D\u8FD0\u884C `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@8 update @angular/core@8 @angular/cli@8`\uFF0C\u4EE5\u66F4\u65B0\u5230\u6700\u65B0\u7684 8.x \u7248\u672C\u7684 `@angular/core` \u548C `@angular/cli` \u5E76\u63D0\u4EA4\u8FD9\u4E9B\u66F4\u6539\u3002"
+    step: "更新到 CLI v8 最新版本",
+    action: "在你的工作空間目錄中執行 `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@8 update @angular/core@8 @angular/cli@8`，以更新到最新的 8.x 版本的 `@angular/core` 和 `@angular/cli` 並送出這些更改。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Basic,
     windows: true,
-    step: "\u66F4\u65B0\u5230 CLI v8 \u6700\u65B0\u7248\u672C",
-    action: '\u5728\u4F60\u7684\u5DE5\u4F5C\u7A7A\u95F4\u76EE\u5F55\u4E2D\u8FD0\u884C `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@8 update @angular/cli@8 @angular/core@8`\uFF0C\u4EE5\u66F4\u65B0\u5230\u6700\u65B0\u7684 8.x \u7248\u672C\u7684 `@angular/core` \u548C `@angular/cli` \u5E76\u63D0\u4EA4\u8FD9\u4E9B\u66F4\u6539\u3002'
+    step: "更新到 CLI v8 最新版本",
+    action: '在你的工作空間目錄中執行 `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@8 update @angular/cli@8 @angular/core@8`，以更新到最新的 8.x 版本的 `@angular/core` 和 `@angular/cli` 並送出這些更改。'
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Medium,
-    step: "\u521B\u5EFA\u63D0\u4EA4",
-    action: "\u4F60\u53EF\u4EE5\u9009\u62E9\u5411 [ng update](https://angular.io/cli/update) \u547D\u4EE4\u4F20\u9012 `--create-commits`\uFF08\u6216 `-C`\uFF09\u6807\u5FD7\uFF0C\u4EE5\u6BCF\u4E2A\u72EC\u7ACB\u8FC1\u79FB\u521B\u5EFA\u4E00\u4E2A git \u63D0\u4EA4\u3002"
+    step: "建立送出",
+    action: "你可以選擇向 [ng update](https://angular.io/cli/update) 指令傳遞 `--create-commits`（或 `-C`）標誌，以每個獨立遷移建立一個 git 送出。"
   },
   {
     possibleIn: 900,
@@ -681,7 +681,7 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     windows: false,
     step: "ng update v9",
-    action: "\u8FD0\u884C `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@9 update @angular/core@9 @angular/cli@9`\uFF0C\u5E94\u8BE5\u5C06\u4F60\u5347\u7EA7\u5230 Angular \u7684 9 \u7248\u672C\u3002"
+    action: "執行 `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@9 update @angular/core@9 @angular/cli@9`，應該將你升級到 Angular 的 9 版本。"
   },
   {
     possibleIn: 900,
@@ -689,14 +689,14 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     windows: true,
     step: "ng update v9",
-    action: '\u8FD0\u884C `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@9 update @angular/cli@9 @angular/core@9"`\uFF0C\u5E94\u8BE5\u5C06\u4F60\u5347\u7EA7\u5230 Angular \u7684 9 \u7248\u672C\u3002'
+    action: '執行 `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@9 update @angular/cli@9 @angular/core@9"`，應該將你升級到 Angular 的 9 版本。'
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Basic,
     step: "typescript 3.8",
-    action: "\u4F60\u7684\u9879\u76EE\u73B0\u5728\u5DF2\u66F4\u65B0\u5230 TypeScript 3.8\uFF0C\u8BF7\u9605\u8BFB\u6709\u5173\u65B0\u7F16\u8BD1\u5668\u68C0\u67E5\u548C\u53EF\u80FD\u9700\u8981\u4FEE\u590D\u4EE3\u7801\u4E2D\u95EE\u9898\u7684\u9519\u8BEF\u7684\u66F4\u591A\u4FE1\u606F\uFF0C\u53EF\u5728 [TypeScript 3.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html) \u6216 [TypeScript 3.8](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html) \u516C\u544A\u4E2D\u4E86\u89E3\u66F4\u591A\u3002"
+    action: "你的專案現在已更新到 TypeScript 3.8，請閱讀有關新編譯器檢查和可能需要修復程式碼中問題的錯誤的更多訊息，可在 [TypeScript 3.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html) 或 [TypeScript 3.8](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html) 公告中瞭解更多。"
   },
   {
     possibleIn: 900,
@@ -704,8 +704,8 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     windows: false,
     material: true,
-    step: "\u66F4\u65B0 @angular/material",
-    action: "\u8FD0\u884C `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@9 update @angular/material@9`\u3002"
+    step: "更新 @angular/material",
+    action: "執行 `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@9 update @angular/material@9`。"
   },
   {
     possibleIn: 900,
@@ -713,277 +713,277 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     windows: true,
     material: true,
-    step: "\u66F4\u65B0 @angular/material",
-    action: '\u8FD0\u884C `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@9 update @angular/material@9"`\u3002'
+    step: "更新 @angular/material",
+    action: '執行 `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@9 update @angular/material@9"`。'
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Advanced,
     windows: false,
-    step: "\u66F4\u65B0 @nguniversal/hapi-engine",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528 Angular Universal\uFF0C\u8BF7\u8FD0\u884C `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@9 update @nguniversal/hapi-engine@9` \u6216 `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@9 update @nguniversal/express-engine@9`\uFF0C\u5177\u4F53\u53D6\u51B3\u4E8E\u4F60\u4F7F\u7528\u7684\u5F15\u64CE\u3002\u5982\u679C\u4F60\u7684\u4EFB\u4F55\u7B2C\u4E09\u65B9\u4F9D\u8D56\u9879\u672A\u66F4\u65B0\u5176\u5BF9\u7B49\u4F9D\u8D56\u9879\u7684 Angular \u7248\u672C\uFF0C\u5219\u6B64\u6B65\u9AA4\u53EF\u80FD\u9700\u8981 `--force` \u6807\u5FD7\u3002"
+    step: "更新 @nguniversal/hapi-engine",
+    action: "如果你使用 Angular Universal，請執行 `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@9 update @nguniversal/hapi-engine@9` 或 `NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@9 update @nguniversal/express-engine@9`，具體取決於你使用的引擎。如果你的任何第三方依賴項未更新其對等依賴項的 Angular 版本，則此步驟可能需要 `--force` 標誌。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Advanced,
     windows: true,
-    step: "\u66F4\u65B0 @nguniversal/hapi-engine",
-    action: '\u5982\u679C\u4F60\u4F7F\u7528 Angular Universal\uFF0C\u8BF7\u8FD0\u884C `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@9 update @nguniversal/hapi-engine@9"` \u6216 `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@9 update @nguniversal/express-engine@9"`\uFF0C\u5177\u4F53\u53D6\u51B3\u4E8E\u4F60\u4F7F\u7528\u7684\u5F15\u64CE\u3002\u5982\u679C\u4F60\u7684\u4EFB\u4F55\u7B2C\u4E09\u65B9\u4F9D\u8D56\u9879\u672A\u66F4\u65B0\u5176\u5BF9\u7B49\u4F9D\u8D56\u9879\u7684 Angular \u7248\u672C\uFF0C\u5219\u6B64\u6B65\u9AA4\u53EF\u80FD\u9700\u8981 `--force` \u6807\u5FD7\u3002'
+    step: "更新 @nguniversal/hapi-engine",
+    action: '如果你使用 Angular Universal，請執行 `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@9 update @nguniversal/hapi-engine@9"` 或 `cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@9 update @nguniversal/express-engine@9"`，具體取決於你使用的引擎。如果你的任何第三方依賴項未更新其對等依賴項的 Angular 版本，則此步驟可能需要 `--force` 標誌。'
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Basic,
-    step: "\u66F4\u65B0\u4F9D\u8D56\u9879",
-    action: "\u5982\u679C\u4F60\u7684\u9879\u76EE\u4F9D\u8D56\u4E8E\u5176\u4ED6 Angular \u5E93\uFF0C\u6211\u4EEC\u5EFA\u8BAE\u4F60\u8003\u8651\u66F4\u65B0\u5230\u5B83\u4EEC\u7684\u6700\u65B0\u7248\u672C\u3002\u5728\u67D0\u4E9B\u60C5\u51B5\u4E0B\uFF0C\u6B64\u66F4\u65B0\u53EF\u80FD\u662F\u5FC5\u9700\u7684\uFF0C\u4EE5\u89E3\u51B3 API \u4E0D\u517C\u5BB9\u6027\u3002\u67E5\u9605 `ng update` \u6216 `npm outdated` \u4EE5\u4E86\u89E3\u4F60\u8FC7\u65F6\u7684\u5E93\u3002"
+    step: "更新依賴項",
+    action: "如果你的專案依賴於其他 Angular 函式庫，我們建議你考慮更新到它們的最新版本。在某些情況下，此更新可能是必需的，以解決 API 不相容性。查閱 `ng update` 或 `npm outdated` 以瞭解你過時的函式庫。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Basic,
-    step: "\u66F4\u65B0 Ivy",
-    action: "\u5728\u5347\u7EA7\u5230 9 \u7248\u672C\u671F\u95F4\uFF0C\u901A\u8FC7\u4EE3\u7801\u8FC1\u79FB\u5FC5\u8981\u5730\u8F6C\u6362\u4E86\u4F60\u7684\u9879\u76EE\uFF0C\u4EE5\u4ECE\u4EE3\u7801\u5E93\u4E2D\u79FB\u9664\u4EFB\u4F55\u4E0D\u517C\u5BB9\u6216\u5DF2\u5E9F\u5F03\u7684 API \u8C03\u7528\u3002\u73B0\u5728\u4F60\u53EF\u4EE5\u67E5\u770B\u8FD9\u4E9B\u66F4\u6539\uFF0C\u5E76\u67E5\u9605 [\u5347\u7EA7\u5230 9 \u7248\u672C\u6307\u5357](https://v9.angular.io/guide/updating-to-version-9) \u4EE5\u4E86\u89E3\u66F4\u591A\u8BE6\u60C5\u3002"
+    step: "更新 Ivy",
+    action: "在升級到 9 版本期間，透過程式碼遷移必要地轉換了你的專案，以從程式碼庫中移除任何不相容或已廢棄的 API 呼叫。現在你可以檢視這些更改，並查閱 [升級到 9 版本指南](https://v9.angular.io/guide/updating-to-version-9) 以瞭解更多詳情。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Medium,
-    step: "\u66F4\u65B0\u6837\u5F0F",
-    action: "\u4EE5\u524D\uFF0C\u7ED1\u5B9A\u7684 CSS \u6837\u5F0F\u548C\u7C7B\u662F\u91C7\u7528\u201C\u6700\u540E\u4E00\u6B21\u66F4\u6539\u83B7\u80DC\u201D\u7684\u7B56\u7565\u5E94\u7528\u7684\uFF0C\u4F46\u73B0\u5728\u9075\u5FAA\u4E00\u4E2A\u5B9A\u4E49\u597D\u7684\u4F18\u5148\u7EA7\u3002\u4E86\u89E3\u66F4\u591A\u5173\u4E8E [\u6837\u5F0F\u4F18\u5148\u7EA7](https://angular.io/guide/attribute-binding#styling-precedence)\u3002"
+    step: "更新樣式",
+    action: "以前，繫結的 CSS 樣式和類是採用『最後一次更改獲勝』的策略應用的，但現在遵循一個定義好的優先級。瞭解更多關於 [樣式優先級](https://angular.io/guide/attribute-binding#styling-precedence)。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Advanced,
     step: "ModuleWithProviders",
-    action: "\u5982\u679C\u4F60\u662F\u5E93\u7684\u4F5C\u8005\uFF0C\u5E76\u4E14\u6709\u4E00\u4E2A\u8FD4\u56DE `ModuleWithProviders` \u7684\u65B9\u6CD5\uFF08\u901A\u5E38\u662F\u901A\u8FC7\u540D\u4E3A `forRoot()` \u7684\u65B9\u6CD5\uFF09\uFF0C\u5219\u9700\u8981\u6307\u5B9A\u6CDB\u578B\u7C7B\u578B\u3002\u4E86\u89E3\u66F4\u591A [angular.io](https://v9.angular.io/guide/deprecations#modulewithproviders-type-without-a-generic)"
+    action: "如果你是庫的作者，並且有一個回傳 `ModuleWithProviders` 的方法（通常是透過名為 `forRoot()` 的方法），則需要指定泛型型別。瞭解更多 [angular.io](https://v9.angular.io/guide/deprecations#modulewithproviders-type-without-a-generic)"
   },
   {
     possibleIn: 800,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Advanced,
     step: "wtf",
-    action: "\u5728 Angular 8 \u4E2D\uFF0C\u652F\u6301 Web \u8FFD\u8E2A\u6846\u67B6\u5DF2\u5E9F\u5F03\u3002\u4F60\u5E94\u8BE5\u505C\u6B62\u4F7F\u7528\u4EFB\u4F55 `wtf*` API\u3002\u4E3A\u4E86\u8FDB\u884C\u6027\u80FD\u8FFD\u8E2A\uFF0C\u6211\u4EEC\u5EFA\u8BAE\u4F7F\u7528 [\u6D4F\u89C8\u5668\u6027\u80FD\u5DE5\u5177](https://developers.google.com/web/tools/lighthouse/audits/user-timing)\u3002"
+    action: "在 Angular 8 中，支援 Web 追蹤框架已廢棄。你應該停止使用任何 `wtf*` API。為了進行效能追蹤，我們建議使用 [瀏覽器效能工具](https://developers.google.com/web/tools/lighthouse/audits/user-timing)。"
   },
   {
     possibleIn: 800,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Medium,
-    step: "es5 \u6D4F\u89C8\u5668",
-    action: "\u5728\u4F60\u7684 `angular.json` \u4E2D\u5220\u9664\u4EFB\u4F55 `es5BrowserSupport` \u6807\u5FD7\uFF0C\u5E76\u5C06\u4F60\u7684 `tsconfig.json` \u4E2D\u7684 `target` \u8BBE\u7F6E\u4E3A `es2015`\u3002Angular \u73B0\u5728\u4F7F\u7528\u4F60\u7684 browserslist \u6765\u786E\u5B9A\u662F\u5426\u9700\u8981 ES5 \u6784\u5EFA\u3002`ng update` \u5C06\u81EA\u52A8\u8FC1\u79FB\u4F60\u3002"
+    step: "es5 瀏覽器",
+    action: "在你的 `angular.json` 中刪除任何 `es5BrowserSupport` 標誌，並將你的 `tsconfig.json` 中的 `target` 設定為 `es2015`。Angular 現在使用你的 browserslist 來確定是否需要 ES5 建立。`ng update` 將自動遷移你。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Medium,
-    step: "ngForm \u9009\u62E9\u5668",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528 `ngForm` \u5143\u7D20\u9009\u62E9\u5668\u521B\u5EFA Angular \u8868\u5355\uFF0C\u4F60\u5E94\u8BE5\u6539\u7528 `ng-form`\u3002"
+    step: "ngForm 選擇器",
+    action: "如果你使用 `ngForm` 元素選擇器建立 Angular 表單，你應該改用 `ng-form`。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Advanced,
-    step: "typings \u7F16\u8BD1",
-    action: "\u6211\u4EEC\u5DF2\u66F4\u65B0 `tsconfig.app.json` \u4EE5\u9650\u5236\u7F16\u8BD1\u7684\u6587\u4EF6\u3002\u5982\u679C\u4F60\u4F9D\u8D56\u4E8E\u5176\u4ED6\u6587\u4EF6\u88AB\u5305\u542B\u5728\u7F16\u8BD1\u4E2D\uFF0C\u6BD4\u5982\u4E00\u4E2A `typings.d.ts` \u6587\u4EF6\uFF0C\u4F60\u9700\u8981\u624B\u52A8\u5C06\u5176\u6DFB\u52A0\u5230\u7F16\u8BD1\u4E2D\u3002"
+    step: "typings 編譯",
+    action: "我們已更新 `tsconfig.app.json` 以限制編譯的檔案。如果你依賴於其他檔案被包含在編譯中，比如一個 `typings.d.ts` 檔案，你需要手動將其新增到編譯中。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Medium,
-    step: "\u8C03\u8BD5",
-    action: "\u968F\u7740 Angular 9\uFF0CIvy \u73B0\u5728\u662F\u9ED8\u8BA4\u7684\u6E32\u67D3\u5F15\u64CE\uFF0C\u9488\u5BF9\u53EF\u80FD\u51FA\u73B0\u7684\u4EFB\u4F55\u517C\u5BB9\u6027\u95EE\u9898\uFF0C\u9605\u8BFB [Ivy \u517C\u5BB9\u6027\u6307\u5357](https://v9.angular.io/guide/ivy-compatibility)\u3002"
+    step: "除錯",
+    action: "隨著 Angular 9，Ivy 現在是預設的渲染引擎，針對可能出現的任何相容性問題，閱讀 [Ivy 相容性指南](https://v9.angular.io/guide/ivy-compatibility)。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 900,
     level: ApplicationComplexity.Advanced,
     step: "express-universal-server",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528 Angular Universal \u4E0E `@nguniversal/express-engine` \u6216 `@nguniversal/hapi-engine`\uFF0C\u5C06\u4F1A\u521B\u5EFA\u51E0\u4E2A\u5907\u4EFD\u6587\u4EF6\u3002\u5176\u4E2D\u4E00\u4E2A\u662F\u7528\u4E8E `server.ts` \u7684\u3002\u5982\u679C\u6B64\u6587\u4EF6\u4E0E\u9ED8\u8BA4\u6587\u4EF6\u4E0D\u540C\uFF0C\u4F60\u53EF\u80FD\u9700\u8981\u624B\u52A8\u5C06\u4E00\u4E9B\u66F4\u6539\u4ECE `server.ts.bak` \u590D\u5236\u5230 `server.ts`\u3002"
+    action: "如果你使用 Angular Universal 與 `@nguniversal/express-engine` 或 `@nguniversal/hapi-engine`，將會建立幾個備份檔案。其中一個是用於 `server.ts` 的。如果此檔案與預設檔案不同，你可能需要手動將一些更改從 `server.ts.bak` 複製到 `server.ts`。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Basic,
     step: "ivy i18n",
-    action: "Angular 9 \u5F15\u5165\u4E86\u4E00\u4E2A\u5168\u5C40\u7684 `$localize()` \u51FD\u6570\uFF0C\u5982\u679C\u4F60\u4F9D\u8D56\u4E8E Angular \u7684\u56FD\u9645\u5316\uFF08i18n\uFF09\uFF0C\u5219\u9700\u8981\u52A0\u8F7D\u5B83\u3002\u8FD0\u884C `ng add @angular/localize` \u6765\u6DFB\u52A0\u5FC5\u8981\u7684\u5305\u548C\u4EE3\u7801\u4FEE\u6539\u3002\u67E5\u9605 [$localize \u5168\u5C40\u5BFC\u5165\u8FC1\u79FB\u6307\u5357](https://v9.angular.io/guide/migration-localize) \u4EE5\u4E86\u89E3\u66F4\u591A\u53D8\u5316\u3002"
+    action: "Angular 9 引入了一個全域的 `$localize()` 函式，如果你依賴於 Angular 的國際化（i18n），則需要載入它。執行 `ng add @angular/localize` 來新增必要的套件和程式碼修改。查閱 [$localize 全域匯入遷移指南](https://v9.angular.io/guide/migration-localize) 以瞭解更多變化。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Medium,
     step: "entryComponents",
-    action: "\u5728\u4F60\u7684\u5E94\u7528\u9879\u76EE\u4E2D\uFF0C\u4F60\u53EF\u4EE5\u5220\u9664 `entryComponents` NgModules \u548C\u4EFB\u4F55\u4F7F\u7528 `ANALYZE_FOR_ENTRY_COMPONENTS` \u7684\u5730\u65B9\u3002\u5B83\u4EEC\u5728 Ivy \u7F16\u8BD1\u5668\u548C\u8FD0\u884C\u65F6\u4E2D\u4E0D\u518D\u9700\u8981\u3002\u5982\u679C\u6784\u5EFA\u7684\u662F\u4E00\u4E2A\u5C06\u88AB View Engine \u5E94\u7528\u7A0B\u5E8F\u6D88\u8D39\u7684\u5E93\uFF0C\u53EF\u80FD\u9700\u8981\u4FDD\u7559\u8FD9\u4E9B\u3002"
+    action: "在你的應用專案中，你可以刪除 `entryComponents` NgModules 和任何使用 `ANALYZE_FOR_ENTRY_COMPONENTS` 的地方。它們在 Ivy 編譯器和執行時中不再需要。如果建立的是一個將被 View Engine 應用程式消費的函式庫，可能需要保留這些。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Medium,
     step: "testbed-get",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528 `TestBed.get`\uFF0C\u4F60\u5E94\u8BE5\u6539\u7528 `TestBed.inject`\u3002\u8FD9\u4E2A\u65B0\u65B9\u6CD5\u5177\u6709\u76F8\u540C\u7684\u884C\u4E3A\uFF0C\u4F46\u662F\u7C7B\u578B\u5B89\u5168\u3002"
+    action: "如果你使用 `TestBed.get`，你應該改用 `TestBed.inject`。這個新方法具有相同的行為，但是型別安全。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Medium,
     step: "$localize",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528 [Angular \u7684\u56FD\u9645\u5316\u652F\u6301](http://angular.io/guide/i18n)\uFF0C\u4F60\u5C06\u9700\u8981\u5F00\u59CB\u4F7F\u7528 `@angular/localize`\u3002\u4E86\u89E3\u66F4\u591A\u5173\u4E8E [$localize \u5168\u5C40\u5BFC\u5165\u8FC1\u79FB](https://v9.angular.io/guide/migration-localize)\u3002"
+    action: "如果你使用 [Angular 的國際化支援](http://angular.io/guide/i18n)，你將需要開始使用 `@angular/localize`。瞭解更多關於 [$localize 全域匯入遷移](https://v9.angular.io/guide/migration-localize)。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Basic,
     step: "v10 NodeJS 12",
-    action: '\u786E\u4FDD\u4F60\u6B63\u5728\u4F7F\u7528 <a href="https://nodejs.org/dist/latest-v12.x/" target="_blank">Node 12 \u6216\u66F4\u9AD8\u7248\u672C</a>\u3002'
+    action: '確保你正在使用 <a href="https://nodejs.org/dist/latest-v12.x/" target="_blank">Node 12 或更高版本</a>。'
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Basic,
     step: "ng update v10",
-    action: "\u8FD0\u884C `npx @angular/cli@10 update @angular/core@10 @angular/cli@10`\uFF0C\u8FD9\u5C06\u4F7F\u4F60\u7684 Angular \u7248\u672C\u5347\u7EA7\u5230 10\u3002"
+    action: "執行 `npx @angular/cli@10 update @angular/core@10 @angular/cli@10`，這將使你的 Angular 版本升級到 10。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Basic,
     material: true,
-    step: "\u66F4\u65B0 @angular/material",
-    action: "\u8FD0\u884C `npx @angular/cli@10 update @angular/material@10`\u3002"
+    step: "更新 @angular/material",
+    action: "執行 `npx @angular/cli@10 update @angular/material@10`。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Basic,
     step: "browserlist",
-    action: "\u65B0\u9879\u76EE\u4F7F\u7528\u6587\u4EF6\u540D `.browserslistrc`\uFF0C\u800C\u4E0D\u662F `browserslist`\u3002`ng update` \u5C06\u81EA\u52A8\u8FC1\u79FB\u4F60\u3002"
+    action: "新專案使用檔案名 `.browserslistrc`，而不是 `browserslist`。`ng update` 將自動遷移你。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Medium,
     step: "v10-versions",
-    action: "Angular \u73B0\u5728\u9700\u8981 `tslint` v6\u3001`tslib` v2 \u548C [TypeScript 3.9](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html)\u3002`ng update` \u5C06\u81EA\u52A8\u8FC1\u79FB\u4F60\u3002"
+    action: "Angular 現在需要 `tslint` v6、`tslib` v2 和 [TypeScript 3.9](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html)。`ng update` 將自動遷移你。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Advanced,
     step: "styleext",
-    action: "\u505C\u6B62\u5728\u4F60\u7684 Angular schematics \u4E2D\u4F7F\u7528 `styleext` \u6216 `spec`\u3002`ng update` \u5C06\u81EA\u52A8\u8FC1\u79FB\u4F60\u3002"
+    action: "停止在你的 Angular schematics 中使用 `styleext` 或 `spec`。`ng update` 將自動遷移你。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Medium,
     step: "classes-without-decorators",
-    action: "\u5728 10 \u7248\u672C\u4E2D\uFF0C\u4E0D\u5E26\u6709 Angular \u88C5\u9970\u5668\u7684\u7C7B\u4E0D\u518D\u53D7\u652F\u6301\u3002[\u4E86\u89E3\u66F4\u591A](https://v10.angular.io/guide/migration-undecorated-classes)\u3002`ng update` \u5C06\u81EA\u52A8\u8FC1\u79FB\u4F60\u3002"
+    action: "在 10 版本中，不帶有 Angular 裝飾器的類不再受支援。[瞭解更多](https://v10.angular.io/guide/migration-undecorated-classes)。`ng update` 將自動遷移你。"
   },
   {
     possibleIn: 900,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Medium,
     step: "injectable-definitions",
-    action: "\u4ECE Angular 9 \u5F00\u59CB\uFF0C\u5BF9\u4E8E DI\uFF0C@Injectable \u88C5\u9970\u5668\u7684\u6267\u884C\u66F4\u52A0\u4E25\u683C\uFF0C\u4E0D\u5B8C\u6574\u7684\u63D0\u4F9B\u7A0B\u5E8F\u5B9A\u4E49\u7684\u884C\u4E3A\u4F1A\u6709\u6240\u4E0D\u540C\u3002[\u4E86\u89E3\u66F4\u591A](https://v9.angular.io/guide/migration-injectable)\u3002`ng update` \u5C06\u81EA\u52A8\u8FC1\u79FB\u4F60\u3002"
+    action: "從 Angular 9 開始，對於 DI，@Injectable 裝飾器的執行更加嚴格，不完整的提供程式定義的行為會有所不同。[瞭解更多](https://v9.angular.io/guide/migration-injectable)。`ng update` 將自動遷移你。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Advanced,
     step: "closure-jsdoc-comments",
-    action: "Angular \u7684 NPM \u5305\u4E0D\u518D\u5305\u542B jsdoc \u6CE8\u91CA\uFF0C\u8FD9\u5728\u4E0E\u95ED\u5305\u7F16\u8BD1\u5668\u7684\u4F7F\u7528\u4E2D\u662F\u5FC5\u9700\u7684\uFF08\u6781\u5176\u7F55\u89C1\uFF09\u3002\u6B64\u652F\u6301\u662F\u5B9E\u9A8C\u6027\u7684\uFF0C\u5E76\u4E14\u53EA\u5728\u4E00\u4E9B\u60C5\u51B5\u4E0B\u8D77\u4F5C\u7528\u3002\u5F88\u5FEB\u5C06\u5BA3\u5E03\u66FF\u4EE3\u63A8\u8350\u8DEF\u5F84\u3002"
+    action: "Angular 的 NPM 套件不再包含 jsdoc 註解，這在與閉包編譯器的使用中是必需的（極其罕見）。此支援是實驗性的，並且只在一些情況下起作用。很快將宣佈替代推薦路徑。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Medium,
     step: "forms-number-input",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528 Angular \u8868\u5355\uFF0C`number` \u7C7B\u578B\u7684\u8F93\u5165\u4E0D\u518D\u76D1\u542C [change \u4E8B\u4EF6](https://developer.mozilla.org/docs/Web/API/HTMLElement/change_event)\uFF08\u8FD9\u4E9B\u4E8B\u4EF6\u4E0D\u4E00\u5B9A\u4F1A\u5728\u6BCF\u6B21\u66F4\u6539\u503C\u65F6\u89E6\u53D1\uFF09\uFF0C\u800C\u662F\u76D1\u542C [input \u4E8B\u4EF6](https://developer.mozilla.org/docs/Web/API/HTMLElement/input_event)\u3002"
+    action: "如果你使用 Angular 表單，`number` 型別的輸入不再監聽 [change 事件](https://developer.mozilla.org/docs/Web/API/HTMLElement/change_event)（這些事件不一定會在每次更改值時觸發），而是監聽 [input 事件](https://developer.mozilla.org/docs/Web/API/HTMLElement/input_event)。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Medium,
     step: "forms-length-input",
-    action: "\u5BF9\u4E8E Angular \u8868\u5355\u9A8C\u8BC1\uFF0C`minLength` \u548C `maxLength` \u9A8C\u8BC1\u5668\u73B0\u5728\u9A8C\u8BC1\u8868\u5355\u63A7\u4EF6\u7684\u503C\u662F\u5426\u5177\u6709\u6570\u5B57\u957F\u5EA6\u5C5E\u6027\uFF0C\u5E76\u4E14\u4EC5\u5728\u8FD9\u79CD\u60C5\u51B5\u4E0B\u9A8C\u8BC1\u957F\u5EA6\u3002"
+    action: "對於 Angular 表單驗證，`minLength` 和 `maxLength` 驗證器現在驗證表單控制元件的值是否具有數字長度屬性，並且僅在這種情況下驗證長度。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Medium,
     step: "esm5-bundles",
-    action: "Angular \u5305\u683C\u5F0F\u5DF2\u66F4\u65B0\uFF0C\u5220\u9664\u4E86 `esm5` \u548C `fesm5` \u683C\u5F0F\u3002\u8FD9\u4E9B\u4E0D\u518D\u5206\u53D1\u5728\u6211\u4EEC\u7684 npm \u5305\u4E2D\u3002\u5982\u679C\u4F60\u4E0D\u4F7F\u7528 CLI\uFF0C\u4F60\u53EF\u80FD\u9700\u8981\u81EA\u884C\u5C06 Angular \u4EE3\u7801\u964D\u7EA7\u5230 ES5\u3002"
+    action: "Angular 套件格式已更新，刪除了 `esm5` 和 `fesm5` 格式。這些不再分發在我們的 npm 套件中。如果你不使用 CLI，你可能需要自行將 Angular 程式碼降級到 ES5。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Medium,
     step: "console-errors",
-    action: "\u6709\u5173\u672A\u77E5\u5143\u7D20\u7684\u8B66\u544A\u73B0\u5728\u8BB0\u5F55\u4E3A\u9519\u8BEF\u3002\u8FD9\u4E0D\u4F1A\u7834\u574F\u4F60\u7684\u5E94\u7528\u7A0B\u5E8F\uFF0C\u4F46\u53EF\u80FD\u4F1A\u4F7F\u671F\u671B `console.error` \u4E0D\u8BB0\u5F55\u4EFB\u4F55\u5185\u5BB9\u7684\u5DE5\u5177\u53D7\u5230\u5F71\u54CD\u3002"
+    action: "有關未知元素的警告現在記錄為錯誤。這不會破壞你的應用程式，但可能會使期望 `console.error` 不記錄任何內容的工具受到影響。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Advanced,
     step: "router-resolver-empty",
-    action: "\u4EFB\u4F55\u8FD4\u56DE `EMPTY` \u7684\u89E3\u6790\u5668\u5C06\u53D6\u6D88\u5BFC\u822A\u3002\u5982\u679C\u4F60\u60F3\u8981\u5141\u8BB8\u5BFC\u822A\u7EE7\u7EED\uFF0C\u4F60\u9700\u8981\u66F4\u65B0\u89E3\u6790\u5668\u4EE5\u53D1\u51FA\u4E00\u4E9B\u503C\uFF08\u4F8B\u5982 `defaultIfEmpty(...)`\u3001`of(...)` \u7B49\uFF09\u3002"
+    action: "任何回傳 `EMPTY` 的解析器將取消導向。如果你想要允許導向繼續，你需要更新解析器以發出一些值（例如 `defaultIfEmpty(...)`、`of(...)` 等）。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Advanced,
     step: "sw-vary-headers",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528 Angular \u670D\u52A1\u5DE5\u4F5C\u5668\u5E76\u4F9D\u8D56\u4E8E\u5E26\u6709 [Vary](https://developer.mozilla.org/docs/Web/HTTP/Headers/Vary) \u6807\u5934\u7684\u8D44\u6E90\uFF0C\u8FD9\u4E9B\u6807\u5934\u73B0\u5728\u88AB\u5FFD\u7565\uFF0C\u4EE5\u907F\u514D\u5728\u5404\u4E2A\u6D4F\u89C8\u5668\u4E4B\u95F4\u51FA\u73B0\u4E0D\u53EF\u9884\u6D4B\u7684\u884C\u4E3A\u3002\u4E3A\u4E86\u907F\u514D\u8FD9\u79CD\u60C5\u51B5\uFF0C[\u914D\u7F6E](https://angular.io/guide/service-worker-config) \u4F60\u7684\u670D\u52A1\u5DE5\u4F5C\u5668\u4EE5\u907F\u514D\u7F13\u5B58\u8FD9\u4E9B\u8D44\u6E90\u3002"
+    action: "如果你使用 Angular 服務工作器並依賴於帶有 [Vary](https://developer.mozilla.org/docs/Web/HTTP/Headers/Vary) 標頭的資源，這些標頭現在被忽略，以避免在各個瀏覽器之間出現不可預測的行為。為了避免這種情況，[設定](https://angular.io/guide/service-worker-config) 你的服務工作器以避免快取這些資源。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Medium,
     step: "expression-changed-after-checked-new",
-    action: "\u5F53\u4F7F\u7528 `async` \u7BA1\u9053\u65F6\uFF0C\u4F60\u53EF\u80FD\u4F1A\u770B\u5230\u4E4B\u524D\u672A\u68C0\u6D4B\u5230\u7684 `ExpressionChangedAfterItHasBeenChecked` \u9519\u8BEF\u3002\u4EE5\u524D\u7684\u9519\u8BEF\u53EF\u80FD\u672A\u88AB\u68C0\u6D4B\u5230\uFF0C\u56E0\u4E3A\u4E24\u4E2A `WrappedValues` \u5728\u68C0\u67E5\u76EE\u7684\u4E0A\u88AB\u8BA4\u4E3A\u662F\u201C\u76F8\u7B49\u7684\u201D\uFF0C\u5373\u4F7F\u5B83\u4EEC\u5404\u81EA\u7684\u672A\u5305\u88C5\u503C\u4E0D\u76F8\u7B49\u3002\u5728\u7248\u672C 10 \u4E2D\uFF0C`WrappedValue` \u5DF2\u88AB\u79FB\u9664\u3002"
+    action: "當使用 `async` 通道時，你可能會看到之前未檢測到的 `ExpressionChangedAfterItHasBeenChecked` 錯誤。以前的錯誤可能未被檢測到，因為兩個 `WrappedValues` 在檢查目的上被認為是『相等的』，即使它們各自的未包裝值不相等。在版本 10 中，`WrappedValue` 已被移除。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Advanced,
     step: "property-binding-change-detection",
-    action: "\u5982\u679C\u4F60\u6709\u4E00\u4E2A\u5C5E\u6027\u7ED1\u5B9A\uFF0C\u4F8B\u5982 `[val]=(observable | async).someProperty`\uFF0C\u5982\u679C `someProperty` \u7684\u503C\u4E0E\u4E4B\u524D\u7684\u53D1\u5C04\u503C\u76F8\u540C\uFF0C\u8FD9\u5C06\u4E0D\u518D\u89E6\u53D1\u53D8\u66F4\u68C0\u6D4B\u3002\u5982\u679C\u4F60\u4F9D\u8D56\u4E8E\u6B64\u884C\u4E3A\uFF0C\u8981\u4E48\u624B\u52A8\u8BA2\u9605\u5E76\u6839\u636E\u9700\u8981\u8C03\u7528 `markForCheck`\uFF0C\u8981\u4E48\u66F4\u65B0\u7ED1\u5B9A\u4EE5\u786E\u4FDD\u5F15\u7528\u66F4\u6539\u3002"
+    action: "如果你有一個屬性繫結，例如 `[val]=(observable | async).someProperty`，如果 `someProperty` 的值與之前的發射值相同，這將不再觸發變更檢測。如果你依賴於此行為，要麼手動訂閱並根據需要呼叫 `markForCheck`，要麼更新繫結以確保引用更改。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Advanced,
     step: "day-periods-crossing-midnight",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528 `formatDate()` \u6216 `DatePipe`\uFF0C\u5E76\u4E14\u4F7F\u7528\u4E86\u4EFB\u4F55 `b` \u6216 `B` \u683C\u5F0F\u4EE3\u7801\uFF0C\u903B\u8F91\u5DF2\u66F4\u65B0\uFF0C\u4F7F\u5176\u5339\u914D\u8DE8\u8D8A\u5348\u591C\u7684\u4E00\u5929\u65F6\u6BB5\u5185\u7684\u65F6\u95F4\uFF0C\u56E0\u6B64\u73B0\u5728\u5C06\u6E32\u67D3\u6B63\u786E\u7684\u8F93\u51FA\uFF0C\u4F8B\u5982\u5728\u82F1\u6587\u73AF\u5883\u4E2D\u7684 `night`\u3002"
+    action: "如果你使用 `formatDate()` 或 `DatePipe`，並且使用了任何 `b` 或 `B` 格式程式碼，邏輯已更新，使其對應跨越午夜的一天時段內的時間，因此現在將渲染正確的輸出，例如在英文環境中的 `night`。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Advanced,
     step: "urlmatcher-null",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528 `UrlMatcher`\uFF0C\u73B0\u5728\u5176\u7C7B\u578B\u53CD\u6620\u4E86\u5B83\u53EF\u4EE5\u59CB\u7EC8\u8FD4\u56DE `null`\u3002"
+    action: "如果你使用 `UrlMatcher`，現在其型別反映了它可以始終回傳 `null`。"
   },
   {
     possibleIn: 1e3,
     necessaryAsOf: 1e3,
     level: ApplicationComplexity.Basic,
     step: "v10-more-details",
-    action: "\u6709\u5173\u505C\u7528\u3001\u81EA\u52A8\u8FC1\u79FB\u548C\u66F4\u6539\u7684\u66F4\u591A\u8BE6\u7EC6\u4FE1\u606F\uFF0C\u8BF7\u8BBF\u95EE [guide angular.io](https://v10.angular.io/guide/updating-to-version-10)"
+    action: "有關停用、自動遷移和更改的更多詳細訊息，請訪問 [guide angular.io](https://v10.angular.io/guide/updating-to-version-10)"
   },
   {
     possibleIn: 1020,
     necessaryAsOf: 1020,
     level: ApplicationComplexity.Medium,
     step: "universal-baseurl",
-    action: "\u5BF9\u4E8E Angular Universal \u7528\u6237\uFF0C\u5982\u679C\u4F60\u4F7F\u7528 `useAbsoluteUrl` \u6765\u8BBE\u7F6E `platform-server`\uFF0C\u73B0\u5728\u8FD8\u9700\u8981\u6307\u5B9A `baseUrl`\u3002"
+    action: "對於 Angular Universal 使用者，如果你使用 `useAbsoluteUrl` 來設定 `platform-server`，現在還需要指定 `baseUrl`。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Basic,
     step: "v11 ng update",
-    action: "\u8FD0\u884C `ng update @angular/core@11 @angular/cli@11` \u5C06\u628A\u4F60\u7684 Angular \u7248\u672C\u5347\u7EA7\u5230 11\u3002"
+    action: "執行 `ng update @angular/core@11 @angular/cli@11` 將把你的 Angular 版本升級到 11。"
   },
   {
     possibleIn: 1100,
@@ -991,196 +991,196 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     material: true,
     step: "update @angular/material",
-    action: "\u8FD0\u884C `ng update @angular/material@11`\u3002"
+    action: "執行 `ng update @angular/material@11`。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Basic,
     step: "v11 versions",
-    action: "Angular \u73B0\u5728\u9700\u8981 [TypeScript 4.0](https://devblogs.microsoft.com/typescript/announcing-typescript-4-0/)\u3002`ng update` \u5C06\u81EA\u52A8\u8FC1\u79FB\u4F60\u7684\u9879\u76EE\u3002"
+    action: "Angular 現在需要 [TypeScript 4.0](https://devblogs.microsoft.com/typescript/announcing-typescript-4-0/)。`ng update` 將自動遷移你的專案。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Basic,
     step: "v11 browser support",
-    action: "\u4E0D\u518D\u652F\u6301 IE9\u3001IE10 \u548C IE \u79FB\u52A8\u7248\u3002\u8FD9\u5728 [v10 \u66F4\u65B0](http://blog.angular.dev/version-10-of-angular-now-available-78960babd41#c357) \u4E2D\u5DF2\u7ECF\u5BA3\u5E03\u3002"
+    action: "不再支援 IE9、IE10 和 IE 移動版。這在 [v10 更新](http://blog.angular.dev/version-10-of-angular-now-available-78960babd41#c357) 中已經宣佈。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Medium,
     step: "webpack5 optin",
-    action: '\u4F60\u73B0\u5728\u53EF\u4EE5\u9009\u62E9\u4F7F\u7528 webpack 5\uFF0C\u4F7F\u7528 Yarn \u5E76\u5C06 `"resolutions": {"webpack": "^5.0.0"}` \u6DFB\u52A0\u5230\u4F60\u7684 `package.json`\u3002'
+    action: '你現在可以選擇使用 webpack 5，使用 Yarn 並將 `"resolutions": {"webpack": "^5.0.0"}` 新增到你的 `package.json`。'
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Medium,
     step: "ng new strict prompt",
-    action: "\u5F53\u751F\u6210\u65B0\u9879\u76EE\u65F6\uFF0C\u4F60\u5C06\u88AB\u8BE2\u95EE\u662F\u5426\u8981\u542F\u7528\u4E25\u683C\u6A21\u5F0F\u3002\u8FD9\u5C06\u4E3A TypeScript \u548C Angular \u7F16\u8BD1\u5668\u914D\u7F6E\u66F4\u4E25\u683C\u7684\u7C7B\u578B\u68C0\u67E5\uFF0C\u5E76\u9ED8\u8BA4\u5E94\u7528\u66F4\u5C0F\u7684\u6346\u7ED1\u9884\u7B97\u3002\u4F60\u53EF\u4EE5\u4F7F\u7528 `--strict=true` \u6216 `--strict=false` \u6765\u8DF3\u8FC7\u63D0\u793A\u3002"
+    action: "當生成新專案時，你將被詢問是否要啟用嚴格模式。這將為 TypeScript 和 Angular 編譯器設定更嚴格的型別檢查，並預設應用更小的捆綁預算。你可以使用 `--strict=true` 或 `--strict=false` 來跳過提示。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "v11 router relativeLinkResolution",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528\u8DEF\u7531\u5668\uFF0C`relativeLinkResolution` \u7684\u9ED8\u8BA4\u503C\u4ECE `legacy` \u6539\u4E3A `corrected`\u3002\u5982\u679C\u4F60\u7684\u5E94\u7528\u7A0B\u5E8F\u4EE5\u524D\u4F7F\u7528\u9ED8\u8BA4\u503C\u800C\u672A\u5728 `ExtraOptions` \u4E2D\u6307\u5B9A\u503C\uFF0C\u5E76\u4E14\u5728\u4ECE\u7A7A\u8DEF\u5F84\u8DEF\u7531\u7684\u5B50\u8DEF\u7531\u5BFC\u822A\u65F6\u4F7F\u7528\u76F8\u5BF9\u94FE\u63A5\uFF0C\u4F60\u9700\u8981\u66F4\u65B0\u4F60\u7684 `RouterModule` \u914D\u7F6E\uFF0C\u660E\u786E\u4E3A `relativeLinkResolution` \u6307\u5B9A `legacy`\u3002\u53C2\u89C1 [\u6587\u6863](https://v11.angular.io/api/router/ExtraOptions#relativeLinkResolution) \u4EE5\u83B7\u53D6\u66F4\u591A\u8BE6\u7EC6\u4FE1\u606F\u3002"
+    action: "如果你使用路由器，`relativeLinkResolution` 的預設值從 `legacy` 改為 `corrected`。如果你的應用程式以前使用預設值而未在 `ExtraOptions` 中指定值，並且在從空路徑路由的子路由導向時使用相對連結，你需要更新你的 `RouterModule` 設定，明確為 `relativeLinkResolution` 指定 `legacy`。參見 [文件](https://v11.angular.io/api/router/ExtraOptions#relativeLinkResolution) 以獲取更多詳細訊息。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "v11 router initialNavigation",
-    action: "\u5728 Angular \u8DEF\u7531\u5668\u4E2D\uFF0Cv4 \u4E2D\u5DF2\u5F03\u7528\u7684 `initialNavigation` \u9009\u9879\u5DF2\u88AB\u79FB\u9664\u3002\u5982\u679C\u4F60\u4EE5\u524D\u4F7F\u7528\u4E86 `enabled` \u6216 `true`\uFF0C\u73B0\u5728\u8BF7\u9009\u62E9 `enabledNonBlocking` \u6216 `enabledBlocking`\u3002\u5982\u679C\u4F60\u4EE5\u524D\u4F7F\u7528\u4E86 `false` \u6216 `legacy_disabled`\uFF0C\u73B0\u5728\u4F7F\u7528 `disabled`\u3002"
+    action: "在 Angular 路由器中，v4 中已棄用的 `initialNavigation` 選項已被移除。如果你以前使用了 `enabled` 或 `true`，現在請選擇 `enabledNonBlocking` 或 `enabledBlocking`。如果你以前使用了 `false` 或 `legacy_disabled`，現在使用 `disabled`。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Medium,
     step: "routerlink preserveQueryParams",
-    action: '\u5728 Angular \u8DEF\u7531\u5668\u7684 `routerLink` \u4E2D\uFF0C\u5DF2\u5220\u9664\u4E86 `preserveQueryParams`\uFF0C\u8BF7\u4F7F\u7528 `queryParamsHandling="preserve"`\u3002'
+    action: '在 Angular 路由器的 `routerLink` 中，已刪除了 `preserveQueryParams`，請使用 `queryParamsHandling="preserve"`。'
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "routerlink queryParams typing",
-    action: "\u5982\u679C\u4F60\u6B63\u5728\u8BBF\u95EE `routerLink` \u7684 `queryParams`\u3001`fragment` \u6216 `queryParamsHandling` \u503C\uFF0C\u4F60\u53EF\u80FD\u9700\u8981\u653E\u5BBD\u7C7B\u578B\u4EE5\u63A5\u53D7 `undefined` \u548C `null`\u3002"
+    action: "如果你正在訪問 `routerLink` 的 `queryParams`、`fragment` 或 `queryParamsHandling` 值，你可能需要放寬型別以接受 `undefined` 和 `null`。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "viewencapsulation native removed",
-    action: "\u7EC4\u4EF6\u89C6\u56FE\u5C01\u88C5\u9009\u9879 `ViewEncapsulation.Native` \u5DF2\u88AB\u79FB\u9664\u3002\u8BF7\u4F7F\u7528 `ViewEncapsulation.ShadowDom`\u3002`ng update` \u5C06\u81EA\u52A8\u8FC1\u79FB\u4F60\u3002"
+    action: "元件檢視封裝選項 `ViewEncapsulation.Native` 已被移除。請使用 `ViewEncapsulation.ShadowDom`。`ng update` 將自動遷移你。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "ICU expressions typechecked",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528 i18n\uFF0C\u5728 International Components for Unicode (ICUs) \u8868\u8FBE\u5F0F\u4E2D\u7684\u8868\u8FBE\u5F0F\u73B0\u5728\u518D\u6B21\u8FDB\u884C\u7C7B\u578B\u68C0\u67E5\u3002\u5982\u679C\u5728 ICU \u4E2D\u7684\u8868\u8FBE\u5F0F\u4E2D\u53D1\u73B0\u9519\u8BEF\uFF0C\u53EF\u80FD\u4F1A\u5BFC\u81F4\u7F16\u8BD1\u5931\u8D25\u3002"
+    action: "如果你使用 i18n，在 International Components for Unicode (ICUs) 表示式中的表示式現在再次進行型別檢查。如果在 ICU 中的表示式中發現錯誤，可能會導致編譯失敗。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "forms validators asyncValidators typing",
-    action: "\u5728 `@angular/forms` \u5305\u4E2D\u7684\u6307\u4EE4\u6784\u9020\u51FD\u6570\u4E2D\uFF0C\u9884\u671F\u7684 `validators` \u548C `asyncValidators` \u53C2\u6570\u7684\u7C7B\u578B\u66FE\u7ECF\u662F `any[]`\u3002\u73B0\u5728\u8FD9\u4E9B\u53C2\u6570\u5DF2\u7ECF\u88AB\u6B63\u786E\u5730\u7C7B\u578B\u5316\uFF0C\u56E0\u6B64\u5982\u679C\u4F60\u7684\u4EE3\u7801\u4F9D\u8D56\u4E8E\u8868\u5355\u6307\u4EE4\u6784\u9020\u51FD\u6570\u7C7B\u578B\uFF0C\u53EF\u80FD\u9700\u8981\u4E00\u4E9B\u66F4\u65B0\u6765\u63D0\u9AD8\u7C7B\u578B\u5B89\u5168\u6027\u3002"
+    action: "在 `@angular/forms` 套件中的指令建構式函式中，預期的 `validators` 和 `asyncValidators` 引數的型別曾經是 `any[]`。現在這些引數已經被正確地型別化，因此如果你的程式碼依賴於表單指令建構式函式型別，可能需要一些更新來提高型別安全性。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "forms AbstractFormControl",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528 Angular Forms\uFF0C`AbstractFormControl.parent` \u7684\u7C7B\u578B\u73B0\u5728\u5305\u62EC null\u3002`ng update` \u5C06\u81EA\u52A8\u8FC1\u79FB\u4F60\uFF0C\u4F46\u5728\u4E00\u4E2A\u4E0D\u592A\u53EF\u80FD\u7684\u60C5\u51B5\u4E0B\uFF0C\u5982\u679C\u4F60\u7684\u4EE3\u7801\u4F7F\u7528\u4E25\u683C\u76F8\u7B49\u5C06\u7236\u7EA7\u4E0E undefined \u8FDB\u884C\u6BD4\u8F83\uFF0C\u4F60\u9700\u8981\u6539\u4E3A\u4F7F\u7528 `=== null`\uFF0C\u56E0\u4E3A\u7236\u7EA7\u73B0\u5728\u660E\u786E\u521D\u59CB\u5316\u4E3A `null`\uFF0C\u800C\u4E0D\u662F\u4FDD\u7559\u4E3A undefined\u3002"
+    action: "如果你使用 Angular Forms，`AbstractFormControl.parent` 的型別現在包括 null。`ng update` 將自動遷移你，但在一個不太可能的情況下，如果你的程式碼使用嚴格相等將父級與 undefined 進行比較，你需要改為使用 `=== null`，因為父級現在明確初始化為 `null`，而不是保留為 undefined。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "platform-webworker",
-    action: "\u5F88\u5C11\u4F7F\u7528\u7684 `@angular/platform-webworker` \u548C `@angular/platform-webworker-dynamic` \u5728 v8 \u4E2D\u5DF2\u88AB\u5F03\u7528\u5E76\u79FB\u9664\u3002\u5728 web worker \u4E2D\u8FD0\u884C Angular \u7684\u90E8\u5206\u662F\u4E00\u4E2A\u4ECE\u672A\u5BF9\u5E38\u89C1\u7528\u4F8B\u4EA7\u751F\u826F\u597D\u6548\u679C\u7684\u5B9E\u9A8C\u3002Angular \u5BF9 [Web Workers](https://angular.io/guide/web-worker) \u4ECD\u7136\u6709\u5F88\u597D\u7684\u652F\u6301\u3002"
+    action: "很少使用的 `@angular/platform-webworker` 和 `@angular/platform-webworker-dynamic` 在 v8 中已被棄用並移除。在 web worker 中執行 Angular 的部分是一個從未對常見用例產生良好效果的實驗。Angular 對 [Web Workers](https://angular.io/guide/web-worker) 仍然有很好的支援。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "v11 slice pipe typing",
-    action: "\u73B0\u5728 `slice` \u7BA1\u9053\u5BF9\u4E8E\u672A\u5B9A\u4E49\u7684\u8F93\u5165\u503C\u8FD4\u56DE null\uFF0C\u8FD9\u4E0E\u5927\u591A\u6570\u7BA1\u9053\u7684\u884C\u4E3A\u4E00\u81F4\u3002"
+    action: "現在 `slice` 通道對於未定義的輸入值回傳 null，這與大多數通道的行為一致。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "v11 keyvalue typing",
-    action: "\u4FEE\u590D\u4E86 `keyvalue` \u7BA1\u9053\uFF0C\u5BF9\u4E8E\u5177\u6709\u6570\u5B57\u952E\u7684\u8F93\u5165\u5BF9\u8C61\uFF0C\u7ED3\u679C\u7C7B\u578B\u5C06\u5305\u542B\u952E\u7684\u5B57\u7B26\u4E32\u8868\u793A\u5F62\u5F0F\u3002\u8FD9\u5DF2\u7ECF\u662F\u73B0\u5B9E\uFF0C\u4EE3\u7801\u5DF2\u7ECF\u66F4\u65B0\u4EE5\u53CD\u6620\u8FD9\u4E00\u70B9\u3002\u5982\u679C\u7BA1\u9053\u8F93\u51FA\u7684\u4F7F\u7528\u65B9\u4F9D\u8D56\u4E8E\u4E0D\u6B63\u786E\u7684\u7C7B\u578B\uFF0C\u8BF7\u66F4\u65B0\u3002\u8BF7\u6CE8\u610F\uFF0C\u8FD9\u4E0D\u4F1A\u5F71\u54CD\u8F93\u5165\u503C\u4E3A `Map` \u7684\u7528\u4F8B\uFF0C\u56E0\u6B64\u5982\u679C\u4F60\u9700\u8981\u4FDD\u7559 `number`\uFF0C\u8FD9\u662F\u4E00\u79CD\u6709\u6548\u7684\u65B9\u6CD5\u3002"
+    action: "修復了 `keyvalue` 通道，對於具有數字鍵的輸入物件，結果型別將包含鍵的字串表示形式。這已經是現實，程式碼已經更新以反映這一點。如果通道輸出的使用方依賴於不正確的型別，請更新。請注意，這不會影響輸入值為 `Map` 的用例，因此如果你需要保留 `number`，這是一種有效的方法。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "v11 number pipe typing",
-    action: "\u6570\u5B57\u7BA1\u9053\uFF08`decimal`\u3001`percent`\u3001`currency` \u7B49\uFF09\u73B0\u5728\u660E\u786E\u6307\u5B9A\u63A5\u53D7\u7684\u7C7B\u578B\u3002"
+    action: "數字通道（`decimal`、`percent`、`currency` 等）現在明確指定接受的型別。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "v11 date pipe typing",
-    action: "\u65E5\u671F\u7BA1\u9053\u73B0\u5728\u660E\u786E\u6307\u5B9A\u63A5\u53D7\u7684\u7C7B\u578B\u3002"
+    action: "日期通道現在明確指定接受的型別。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "v11 datetime rounding",
-    action: "\u5F53\u5C06\u5E26\u6709\u6BEB\u79D2\u5206\u6570\u7684\u65E5\u671F\u65F6\u95F4\u683C\u5F0F\u7684\u5B57\u7B26\u4E32\u4F20\u9012\u7ED9 `DatePipe` \u65F6\uFF0C\u6BEB\u79D2\u73B0\u5728\u603B\u662F\u5411\u4E0B\u820D\u5165\uFF0C\u800C\u4E0D\u662F\u820D\u5165\u5230\u6700\u8FD1\u7684\u6BEB\u79D2\u3002\u5927\u591A\u6570\u5E94\u7528\u7A0B\u5E8F\u4E0D\u4F1A\u53D7\u5230\u6B64\u66F4\u6539\u7684\u5F71\u54CD\u3002\u5982\u679C\u8FD9\u4E0D\u662F\u9884\u671F\u7684\u884C\u4E3A\uFF0C\u8003\u8651\u5728\u5C06\u5B57\u7B26\u4E32\u4F20\u9012\u7ED9 `DatePipe` \u4E4B\u524D\u9884\u5904\u7406\u6BEB\u79D2\u90E8\u5206\u4EE5\u820D\u5165\u3002"
+    action: "當將帶有毫秒分數的日期時間格式的字串傳遞給 `DatePipe` 時，毫秒現在總是向下舍入，而不是舍入到最近的毫秒。大多數應用程式不會受到此更改的影響。如果這不是預期的行為，考慮在將字串傳遞給 `DatePipe` 之前預處理毫秒部分以舍入。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "v11 async pipe typing",
-    action: "`async` \u7BA1\u9053\u4E0D\u518D\u58F0\u79F0\u5BF9\u4E8E\u7C7B\u578B\u4E3A undefined \u7684\u8F93\u5165\u8FD4\u56DE undefined\u3002\u8BF7\u6CE8\u610F\uFF0C\u4EE3\u7801\u5B9E\u9645\u4E0A\u5BF9\u4E8E\u672A\u5B9A\u4E49\u7684\u8F93\u5165\u8FD4\u56DE null\u3002"
+    action: "`async` 通道不再聲稱對於型別為 undefined 的輸入回傳 undefined。請注意，程式碼實際上對於未定義的輸入回傳 null。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Medium,
     step: "v11 case pipe update",
-    action: "`uppercase` \u548C `lowercase` \u7BA1\u9053\u4E0D\u518D\u901A\u8FC7\u5047\u503C\u3002\u5B83\u4EEC\u73B0\u5728\u5C06 `null` \u548C `undefined` \u90FD\u6620\u5C04\u5230 `null`\uFF0C\u5E76\u5728\u65E0\u6548\u8F93\u5165\uFF08`0`\u3001`false`\u3001`NaN`\uFF09\u65F6\u5F15\u53D1\u5F02\u5E38\u3002\u8FD9\u4E0E\u5176\u4ED6 Angular \u7BA1\u9053\u7684\u884C\u4E3A\u76F8\u5339\u914D\u3002"
+    action: "`uppercase` 和 `lowercase` 通道不再透過假值。它們現在將 `null` 和 `undefined` 都對映到 `null`，並在無效輸入（`0`、`false`、`NaN`）時引發異常。這與其他 Angular 通道的行為相對應。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "v11 router NavigationExtras typing",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528\u5E26\u6709 `NavigationExtras` \u7684\u8DEF\u7531\u5668\uFF0C\u65B0\u7684\u7C7B\u578B\u5141\u8BB8\u4F20\u9012\u7C7B\u578B\u4E3A `NavigationExtras` \u7684\u53D8\u91CF\uFF0C\u4F46\u4E0D\u5141\u8BB8\u5BF9\u8C61\u5B57\u9762\u91CF\uFF0C\u56E0\u4E3A\u5B83\u4EEC\u53EA\u80FD\u6307\u5B9A\u5DF2\u77E5\u5C5E\u6027\u3002\u5B83\u4EEC\u4E5F\u4E0D\u63A5\u53D7\u4E0E `Pick` \u4E2D\u7684\u5C5E\u6027\u6CA1\u6709\u5171\u540C\u5C5E\u6027\u7684\u7C7B\u578B\u3002\u5982\u679C\u4F60\u53D7\u5230\u6B64\u66F4\u6539\u7684\u5F71\u54CD\uFF0C\u8BF7\u4EC5\u6307\u5B9A\u5728\u76F8\u5E94\u51FD\u6570\u8C03\u7528\u4E2D\u5B9E\u9645\u4F7F\u7528\u7684 NavigationExtras \u4E2D\u7684\u5C5E\u6027\uFF0C\u6216\u5728\u5BF9\u8C61\u6216\u53D8\u91CF\u4E0A\u4F7F\u7528\u7C7B\u578B\u65AD\u8A00\uFF1A`as NavigationExtras`\u3002"
+    action: "如果你使用帶有 `NavigationExtras` 的路由器，新的型別允許傳遞型別為 `NavigationExtras` 的變數，但不允許物件字面量，因為它們只能指定已知屬性。它們也不接受與 `Pick` 中的屬性沒有共同屬性的型別。如果你受到此更改的影響，請僅指定在相應函式呼叫中實際使用的 NavigationExtras 中的屬性，或在物件或變數上使用型別斷言：`as NavigationExtras`。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Medium,
     step: "v11 TestBed.overrideProvider",
-    action: "\u5982\u679C\u5728 TestBed \u521D\u59CB\u5316\u4E4B\u540E\u8C03\u7528 `TestBed.overrideProvider`\uFF0C\u5219\u4E0D\u518D\u5E94\u7528\u63D0\u4F9B\u8005\u8986\u76D6\u3002\u8FD9\u79CD\u884C\u4E3A\u4E0E\u5176\u4ED6\u8986\u76D6\u65B9\u6CD5\uFF08\u5982 `TestBed.overrideDirective` \u7B49\uFF09\u4E00\u81F4\uFF0C\u4F46\u4F1A\u5F15\u53D1\u9519\u8BEF\u4EE5\u6307\u793A\u3002\u4E4B\u524D\u5728 TestBed.overrideProvider \u51FD\u6570\u4E2D\u7F3A\u5C11\u6B64\u68C0\u67E5\u3002\u5982\u679C\u770B\u5230\u6B64\u9519\u8BEF\uFF0C\u8BF7\u786E\u4FDD\u5728 TestBed \u521D\u59CB\u5316\u5B8C\u6210\u4E4B\u524D\u79FB\u52A8 `TestBed.overrideProvider` \u8C03\u7528\u3002"
+    action: "如果在 TestBed 初始化之後呼叫 `TestBed.overrideProvider`，則不再應用提供者覆蓋。這種行為與其他覆蓋方法（如 `TestBed.overrideDirective` 等）一致，但會引發錯誤以指示。之前在 TestBed.overrideProvider 函式中缺少此檢查。如果看到此錯誤，請確保在 TestBed 初始化完成之前移動 `TestBed.overrideProvider` 呼叫。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Medium,
     step: "v11 router RouteReuseStrategy",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528\u8DEF\u7531\u5668\u7684 RouteReuseStrategy\uFF0C\u53C2\u6570\u987A\u5E8F\u5DF2\u66F4\u6539\u3002\u5728\u8C03\u7528 `RouteReuseStrategy#shouldReuseRoute` \u65F6\uFF0C\u4EE5\u524D\u5728\u8BC4\u4F30\u5B50\u8DEF\u7531\u65F6\uFF0C\u4F1A\u8C03\u7528 `future` \u548C `current` \u53C2\u6570\u7684\u987A\u5E8F\u5DF2\u66F4\u6539\u3002\u5982\u679C\u4F60\u7684 `RouteReuseStrategy` \u4E13\u95E8\u4F9D\u8D56\u4E8E\u5C06\u6765\u6216\u5F53\u524D\u5FEB\u7167\u72B6\u6001\uFF0C\u53EF\u80FD\u9700\u8981\u66F4\u65B0 `shouldReuseRoute` \u5B9E\u73B0\u5BF9 `future` \u548C `current` `ActivateRouteSnapshots` \u7684\u4F7F\u7528\u3002"
+    action: "如果你使用路由器的 RouteReuseStrategy，引數順序已更改。在呼叫 `RouteReuseStrategy#shouldReuseRoute` 時，以前在評估子路由時，會呼叫 `future` 和 `current` 引數的順序已更改。如果你的 `RouteReuseStrategy` 專門依賴於將來或當前快照狀態，可能需要更新 `shouldReuseRoute` 實現對 `future` 和 `current` `ActivateRouteSnapshots` 的使用。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "v11 locale data readonly",
-    action: "\u5982\u679C\u4F60\u4F7F\u7528\u533A\u57DF\u8BBE\u7F6E\u6570\u636E\u6570\u7EC4\uFF0C\u6B64 API \u73B0\u5728\u5C06\u8FD4\u56DE\u53EA\u8BFB\u6570\u7EC4\u3002\u5982\u679C\u4F60\u5BF9\u5176\u8FDB\u884C\u4E86\u66F4\u6539\uFF08\u4F8B\u5982\u8C03\u7528 `sort()`\u3001`push()`\u3001`splice()` \u7B49\uFF09\uFF0C\u90A3\u4E48\u4F60\u7684\u4EE3\u7801\u5C06\u4E0D\u518D\u7F16\u8BD1\u3002\u5982\u679C\u4F60\u9700\u8981\u66F4\u6539\u6570\u7EC4\uFF0C\u5219\u73B0\u5728\u5E94\u8BE5\u590D\u5236\u5B83\uFF08\u4F8B\u5982\u901A\u8FC7\u8C03\u7528 `slice()`\uFF09\u5E76\u66F4\u6539\u526F\u672C\u3002"
+    action: "如果你使用區域設定資料陣列，此 API 現在將回傳只讀陣列。如果你對其進行了更改（例如呼叫 `sort()`、`push()`、`splice()` 等），那麼你的程式碼將不再編譯。如果你需要更改陣列，則現在應該複製它（例如透過呼叫 `slice()`）並更改副本。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Advanced,
     step: "v11 CollectionChangeRecord",
-    action: "\u5728\u53D8\u66F4\u68C0\u6D4B\u4E2D\uFF0C\u5DF2\u79FB\u9664\u4E86 `CollectionChangeRecord`\uFF0C\u8BF7\u6539\u7528 `IterableChangeRecord`\u3002"
+    action: "在變更檢測中，已移除了 `CollectionChangeRecord`，請改用 `IterableChangeRecord`。"
   },
   {
     possibleIn: 1100,
     necessaryAsOf: 1100,
     level: ApplicationComplexity.Medium,
     step: "v11 forms async validators",
-    action: "\u5982\u679C\u4F60\u5728 `FormControl`\u3001`FormGroup` \u6216 `FormArray` \u7684\u7C7B\u5B9E\u4F8B\u7684\u521D\u59CB\u5316\u65F6\u95F4\u4E0A\u4F7F\u7528\u5F02\u6B65\u9A8C\u8BC1\u5668\u6765\u5B9A\u4E49\uFF0C\u5219\u5728\u5F02\u6B65\u9A8C\u8BC1\u5668\u5B8C\u6210\u540E\u5148\u524D\u672A\u53D1\u51FA\u72B6\u6001\u66F4\u6539\u4E8B\u4EF6\u3002\u5DF2\u66F4\u6539\u4E3A\u5C06\u72B6\u6001\u4E8B\u4EF6\u53D1\u51FA\u5230 `statusChanges` \u53EF\u89C2\u5BDF\u5BF9\u8C61\u4E2D\u3002\u5982\u679C\u4F60\u7684\u4EE3\u7801\u4F9D\u8D56\u4E8E\u65E7\u884C\u4E3A\uFF0C\u4F60\u53EF\u4EE5\u8FC7\u6EE4/\u5FFD\u7565\u6B64\u989D\u5916\u7684\u72B6\u6001\u66F4\u6539\u4E8B\u4EF6\u3002"
+    action: "如果你在 `FormControl`、`FormGroup` 或 `FormArray` 的類別實例的初始化時間上使用非同步驗證器來定義，則在非同步驗證器完成後先前未發出狀態更改事件。已更改為將狀態事件發出到 `statusChanges` 可觀察物件中。如果你的程式碼依賴於舊行為，你可以過濾/忽略此額外的狀態更改事件。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Basic,
     step: "v12 ng update",
-    action: "\u8FD0\u884C `ng update @angular/core@12 @angular/cli@12`\uFF0C\u8FD9\u5C06\u628A\u4F60\u7684 Angular \u7248\u672C\u5347\u7EA7\u5230 12\u3002"
+    action: "執行 `ng update @angular/core@12 @angular/cli@12`，這將把你的 Angular 版本升級到 12。"
   },
   {
     possibleIn: 1200,
@@ -1188,126 +1188,126 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     material: true,
     step: "update @angular/material",
-    action: "\u8FD0\u884C `ng update @angular/material@12`\u3002"
+    action: "執行 `ng update @angular/material@12`。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Basic,
     step: "v12 versions",
-    action: "Angular \u73B0\u5728\u8981\u6C42 [TypeScript 4.2](https://devblogs.microsoft.com/typescript/announcing-typescript-4-2/)\u3002`ng update` \u5C06\u81EA\u52A8\u66F4\u65B0\u4F60\u7684 TypeScript\u3002"
+    action: "Angular 現在要求 [TypeScript 4.2](https://devblogs.microsoft.com/typescript/announcing-typescript-4-2/)。`ng update` 將自動更新你的 TypeScript。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Basic,
     step: "v12 browser support",
-    action: "IE11 \u652F\u6301\u5DF2\u5F03\u7528\u3002\u5728 [IE11 \u5220\u9664 RFC](https://github.com/angular/angular/issues/41840) \u4E2D\u627E\u5230\u8BE6\u7EC6\u4FE1\u606F\u3002"
+    action: "IE11 支援已棄用。在 [IE11 刪除 RFC](https://github.com/angular/angular/issues/41840) 中找到詳細訊息。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Basic,
     step: "v12 minimum  Node.js version",
-    action: "\u4F60\u4E0D\u80FD\u518D\u4F7F\u7528 Node.js \u7248\u672C 10 \u6216\u66F4\u65E9\u7684\u7248\u672C\u3002"
+    action: "你不能再使用 Node.js 版本 10 或更早的版本。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Medium,
     step: "v12 `XhrFactory` relocation",
-    action: "\u5C06 `XhrFactory` \u7684\u5BFC\u5165\u4ECE `@angular/common/http` \u6539\u4E3A `@angular/common`\u3002"
+    action: "將 `XhrFactory` 的匯入從 `@angular/common/http` 改為 `@angular/common`。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Medium,
     step: "v12 i18n message ids",
-    action: "\u5982\u679C\u4F60\u4F9D\u8D56\u4E8E\u65E7\u7248 i18n \u6D88\u606F ID\uFF0C\u8BF7\u4F7F\u7528 `localize-migrate` \u5DE5\u5177[\u8FC1\u79FB\u81F3\u65B0\u7248](https://angular.io/guide/migration-legacy-message-id)\u3002"
+    action: "如果你依賴於舊版 i18n 訊息 ID，請使用 `localize-migrate` 工具[遷移至新版](https://angular.io/guide/migration-legacy-message-id)。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Medium,
     step: "v12 deprecates `emitDistinctChangesOnly`",
-    action: "\u5982\u679C\u4F60\u6B63\u5728\u4F7F\u7528 `emitDistinctChangesOnly` \u6765\u914D\u7F6E `@ContentChildren` \u548C `@ViewChildren` \u67E5\u8BE2\uFF0C\u53EF\u80FD\u9700\u8981\u5C06\u5176\u503C\u66F4\u65B0\u4E3A `false` \u4EE5\u4E0E\u5176\u5148\u524D\u884C\u4E3A\u5BF9\u9F50\u3002\u5728 v12 \u4E2D\uFF0C`emitDistinctChangesOnly` \u7684\u9ED8\u8BA4\u503C\u4E3A `true`\uFF0C\u5728\u5C06\u6765\u7684\u7248\u672C\u4E2D\uFF0C\u6211\u4EEC\u5C06\u5220\u9664\u6B64\u914D\u7F6E\u9009\u9879\uFF0C\u4EE5\u9632\u6B62\u89E6\u53D1\u4E0D\u5FC5\u8981\u7684\u66F4\u6539\u3002"
+    action: "如果你正在使用 `emitDistinctChangesOnly` 來設定 `@ContentChildren` 和 `@ViewChildren` 查詢，可能需要將其值更新為 `false` 以與其先前行為對齊。在 v12 中，`emitDistinctChangesOnly` 的預設值為 `true`，在將來的版本中，我們將刪除此設定選項，以防止觸發不必要的更改。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Medium,
     step: "v12 prod by default",
-    action: "\u4F60\u53EF\u4EE5\u8FD0\u884C\u53EF\u9009\u7684\u8FC1\u79FB\u4EE5\u5C06\u9ED8\u8BA4\u542F\u7528\u751F\u4EA7\u6784\u5EFA `ng update @angular/cli@12 --migrate-only production-by-default`\u3002"
+    action: "你可以執行可選的遷移以將預設啟用生產建立 `ng update @angular/cli@12 --migrate-only production-by-default`。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Advanced,
     step: "v12 min and max form attributes",
-    action: '\u5982\u679C\u4F60\u4F7F\u7528 Angular \u8868\u5355\uFF0C\u5728 `<input type="number">` \u4E0A\u4F7F\u7528 `min` \u548C `max` \u5C5E\u6027\u73B0\u5728\u5C06\u89E6\u53D1\u9A8C\u8BC1\u903B\u8F91\u3002'
+    action: '如果你使用 Angular 表單，在 `<input type="number">` 上使用 `min` 和 `max` 屬性現在將觸發驗證邏輯。'
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Advanced,
     step: "v12 `emitEvent` in `FormArray` and `FormGroup`",
-    action: "\u5982\u679C\u4F60\u7684\u5E94\u7528\u7A0B\u5E8F\u5177\u6709\u81EA\u5B9A\u4E49\u7C7B\uFF0C\u5B83\u4EEC\u6269\u5C55\u4E86 `FormArray` \u6216 `FormGroup` \u7C7B\uFF0C\u5E76\u8986\u76D6\u4E86\u4E0A\u8FF0\u65B9\u6CD5\uFF0C\u5219\u53EF\u80FD\u9700\u8981\u66F4\u65B0\u4F60\u7684\u5B9E\u73B0\u3002"
+    action: "如果你的應用程式具有自定義類，它們擴充套件了 `FormArray` 或 `FormGroup` 類，並覆蓋了上述方法，則可能需要更新你的實現。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Advanced,
     step: "v12 zone.js minimum version",
-    action: "\u5C06 zone.js \u66F4\u65B0\u5230\u7248\u672C 0.11.4\u3002`ng update` \u5C06\u81EA\u52A8\u66F4\u65B0\u6B64\u4F9D\u8D56\u9879\u3002"
+    action: "將 zone.js 更新到版本 0.11.4。`ng update` 將自動更新此依賴項。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Advanced,
     step: "v12 `HttpParams` method params update",
-    action: "\u5982\u679C\u4F60\u6269\u5C55\u4E86 `HttpParams` \u7C7B\uFF0C\u4F60\u53EF\u80FD\u9700\u8981\u66F4\u65B0\u5176\u65B9\u6CD5\u7684\u7B7E\u540D\u4EE5\u53CD\u6620\u53C2\u6570\u7C7B\u578B\u7684\u66F4\u6539\u3002"
+    action: "如果你擴充套件了 `HttpParams` 類，你可能需要更新其方法的簽名以反映引數型別的更改。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Advanced,
     step: "v12 `routerLinkActiveOptions`",
-    action: "`RouterLinkActive` \u7684 `routerLinkActiveOptions` \u5C5E\u6027\u73B0\u5728\u5177\u6709\u66F4\u5177\u4F53\u7684\u7C7B\u578B\u3002\u4F60\u53EF\u80FD\u9700\u8981\u66F4\u65B0\u8BBF\u95EE\u6B64\u5C5E\u6027\u7684\u4EE3\u7801\u4EE5\u4E0E\u66F4\u6539\u4FDD\u6301\u4E00\u81F4\u3002"
+    action: "`RouterLinkActive` 的 `routerLinkActiveOptions` 屬性現在具有更具體的型別。你可能需要更新訪問此屬性的程式碼以與更改保持一致。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Advanced,
     step: "v12 `APP_INITIALIZER` callback types",
-    action: "\u521D\u59CB\u5316\u56DE\u8C03\u73B0\u5728\u5177\u6709\u66F4\u5177\u4F53\u7684\u8FD4\u56DE\u7C7B\u578B\uFF0C\u5982\u679C\u4F60\u901A\u8FC7 `Injector.get` \u6216 `TestBed.inject` \u83B7\u53D6 `APP_INITIALIZER` \u5B9E\u4F8B\uFF0C\u5219\u53EF\u80FD\u9700\u8981\u66F4\u65B0\u4F60\u7684\u4EE3\u7801\u3002"
+    action: "初始化回呼現在具有更具體的回傳型別，如果你透過 `Injector.get` 或 `TestBed.inject` 獲取 `APP_INITIALIZER` 實例，則可能需要更新你的程式碼。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Advanced,
     step: "v12 fragment typings",
-    action: "\u8DEF\u7531\u5668\u7247\u6BB5\u73B0\u5728\u53EF\u80FD\u662F `null`\u3002\u6DFB\u52A0 `null` \u68C0\u67E5\u4EE5\u907F\u514D TypeScript \u4EA7\u751F\u7C7B\u578B\u9519\u8BEF\u3002"
+    action: "路由器片段現在可能是 `null`。新增 `null` 檢查以避免 TypeScript 產生型別錯誤。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Advanced,
     step: "v12 `ng.getDirectives`",
-    action: "\u786E\u4FDD\u4E0D\u4F9D\u8D56\u4E8E `ng.getDirectives` \u5982\u679C\u627E\u4E0D\u5230\u4E0E\u7279\u5B9A DOM \u8282\u70B9\u76F8\u5173\u8054\u7684\u6307\u4EE4\uFF0C\u5219\u5F15\u53D1\u9519\u8BEF\u3002"
+    action: "確保不依賴於 `ng.getDirectives` 如果找不到與特定 DOM 節點相關聯的指令，則引發錯誤。"
   },
   {
     possibleIn: 1200,
     necessaryAsOf: 1200,
     level: ApplicationComplexity.Advanced,
     step: "v12 `optimization.styles.inlineCritical`",
-    action: "\u68C0\u67E5\u4F60\u7684 angular.json \u6587\u4EF6\u4E2D\u7684 `optimization.styles.inlineCritical` \u9009\u9879\u3002\u73B0\u5728\u9ED8\u8BA4\u4E3A `true`\u3002\u8BF7\u8BB0\u4F4F\uFF0C\u6574\u4E2A `optimization` \u9009\u9879\u53EF\u4EE5\u8BBE\u7F6E\u4E3A\u5E03\u5C14\u503C\uFF0C\u8FD9\u5C06\u5C06\u6240\u6709\u5B50\u9009\u9879\u8BBE\u7F6E\u4E3A\u9ED8\u8BA4\u503C\u3002"
+    action: "檢查你的 angular.json 檔案中的 `optimization.styles.inlineCritical` 選項。現在預設為 `true`。請記住，整個 `optimization` 選項可以設定為布林值，這將將所有子選項設定為預設值。"
   },
   {
     possibleIn: 1300,
     necessaryAsOf: 1300,
     level: ApplicationComplexity.Basic,
     step: "v13 ng update",
-    action: "\u8FD0\u884C `ng update @angular/core@13 @angular/cli@13` \u5C06\u4F60\u7684 Angular \u7248\u672C\u66F4\u65B0\u81F3 13\u3002"
+    action: "執行 `ng update @angular/core@13 @angular/cli@13` 將你的 Angular 版本更新至 13。"
   },
   {
     possibleIn: 1300,
@@ -1315,84 +1315,84 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     material: true,
     step: "update @angular/material",
-    action: "\u8FD0\u884C `ng update @angular/material@13`\u3002"
+    action: "執行 `ng update @angular/material@13`。"
   },
   {
     possibleIn: 1300,
     necessaryAsOf: 1300,
     level: ApplicationComplexity.Basic,
     step: "TypeScript 4.4",
-    action: "Angular \u73B0\u5728\u4F7F\u7528 TypeScript 4.4\uFF0C\u8BF7\u9605\u8BFB\u6709\u5173\u4EFB\u4F55\u6F5C\u5728\u53D8\u66F4\u7684\u66F4\u591A\u4FE1\u606F\uFF1A[TypeScript 4.4 \u53D1\u5E03\u8BF4\u660E](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-4.html)"
+    action: "Angular 現在使用 TypeScript 4.4，請閱讀有關任何潛在變更的更多訊息：[TypeScript 4.4 發布說明](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-4.html)"
   },
   {
     possibleIn: 1300,
     necessaryAsOf: 1300,
     level: ApplicationComplexity.Basic,
     step: "v13 node",
-    action: '\u786E\u4FDD\u4F60\u4F7F\u7528\u7684\u662F <a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 12.20.0 \u6216\u66F4\u9AD8\u7248\u672C</a>\u3002'
+    action: '確保你使用的是 <a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 12.20.0 或更高版本</a>。'
   },
   {
     possibleIn: 1300,
     necessaryAsOf: 1300,
     level: ApplicationComplexity.Medium,
     step: "v13 routerLink",
-    action: "\u73B0\u5728\u53EF\u4EE5\u901A\u8FC7\u4F20\u9012 `undefined` \u548C `null` \u6765\u7981\u7528 `routerLink` \u7684\u5BFC\u822A\u3002\u4E4B\u524D\uFF0C`routerLink` \u6307\u4EE4\u63A5\u53D7\u8FD9\u4E24\u4E2A\u503C\u7B49\u540C\u4E8E\u7A7A\u5B57\u7B26\u4E32\u3002"
+    action: "現在可以透過傳遞 `undefined` 和 `null` 來停用 `routerLink` 的導向。之前，`routerLink` 指令接受這兩個值等同於空字串。"
   },
   {
     possibleIn: 1300,
     necessaryAsOf: 1300,
     level: ApplicationComplexity.Medium,
     step: "v13 router loadChildren",
-    action: "\u4E0D\u80FD\u518D\u901A\u8FC7\u5C06\u5B57\u7B26\u4E32\u503C\u8BBE\u7F6E\u4E3A `loadChildren` \u6765\u6307\u5B9A\u60F0\u6027\u52A0\u8F7D\u7684\u8DEF\u7531\u3002\u786E\u4FDD\u5207\u6362\u5230\u52A8\u6001 ESM \u5BFC\u5165\u8BED\u53E5\u3002"
+    action: "不能再透過將字串值設定為 `loadChildren` 來指定延遲載入的路由。確保切換到動態 ESM 匯入語句。"
   },
   {
     possibleIn: 1300,
     necessaryAsOf: 1300,
     level: ApplicationComplexity.Medium,
     step: "v13 service worker activated",
-    action: "`SwUpdate` \u7684 `activated` \u53EF\u89C2\u5BDF\u5BF9\u8C61\u73B0\u5DF2\u5F03\u7528\u3002\u8981\u68C0\u67E5\u670D\u52A1\u5DE5\u4F5C\u5668\u7684\u6FC0\u6D3B\u72B6\u6001\uFF0C\u8BF7\u6539\u7528 `activatedUpdate` \u65B9\u6CD5\u3002"
+    action: "`SwUpdate` 的 `activated` 可觀察物件現已棄用。要檢查服務工作器的啟用狀態，請改用 `activatedUpdate` 方法。"
   },
   {
     possibleIn: 1300,
     necessaryAsOf: 1300,
     level: ApplicationComplexity.Medium,
     step: "v13 service worker available",
-    action: "`SwUpdate` \u7684 `available` \u53EF\u89C2\u5BDF\u5BF9\u8C61\u73B0\u5DF2\u5F03\u7528\u3002\u8981\u83B7\u53D6\u76F8\u540C\u7684\u4FE1\u606F\uFF0C\u8BF7\u4F7F\u7528 `versionUpdates` \u5E76\u4EC5\u8FC7\u6EE4 `VersionReadyEvent` \u4E8B\u4EF6\u3002"
+    action: "`SwUpdate` 的 `available` 可觀察物件現已棄用。要獲取相同的訊息，請使用 `versionUpdates` 並僅過濾 `VersionReadyEvent` 事件。"
   },
   {
     possibleIn: 1300,
     necessaryAsOf: 1300,
     level: ApplicationComplexity.Medium,
     step: "v13 renderModuleFactory",
-    action: "`@angular/platform-server` \u4E2D\u7684 `renderModuleFactory` \u4E0D\u518D\u4E0E Ivy \u4E00\u8D77\u4F7F\u7528\u3002\u6539\u7528 `renderModule`\u3002"
+    action: "`@angular/platform-server` 中的 `renderModuleFactory` 不再與 Ivy 一起使用。改用 `renderModule`。"
   },
   {
     possibleIn: 1300,
     necessaryAsOf: 1300,
     level: ApplicationComplexity.Advanced,
     step: "v13 forms status",
-    action: "\u6211\u4EEC\u5C06 `AbstractControl.status` \u7684\u7C7B\u578B\u7F29\u5C0F\u4E3A `FormControlStatus`\uFF0C\u5E76\u5C06 `AbstractControl.status` \u7684\u7C7B\u578B\u7F29\u5C0F\u4E3A `Observable<FormControlStatus>`\u3002 `FormControlStatus` \u662F\u8868\u5355\u63A7\u4EF6\u7684\u6240\u6709\u53EF\u80FD\u72B6\u6001\u5B57\u7B26\u4E32\u7684\u8054\u5408\u3002"
+    action: "我們將 `AbstractControl.status` 的型別縮小為 `FormControlStatus`，並將 `AbstractControl.status` 的型別縮小為 `Observable<FormControlStatus>`。 `FormControlStatus` 是表單控制元件的所有可能狀態字串的聯合。"
   },
   {
     possibleIn: 1300,
     necessaryAsOf: 1300,
     level: ApplicationComplexity.Advanced,
     step: "v13 router serializer",
-    action: "\u73B0\u5728\uFF0CURL \u5E8F\u5217\u5316\u7A0B\u5E8F\u9075\u5B88 URI \u89C4\u8303\uFF0C\u4F1A\u8003\u8651\u67E5\u8BE2\u53C2\u6570\u4E2D\u7684\u95EE\u53F7\u3002\u4F8B\u5982\uFF0C`/path?q=hello?&q2=2` \u73B0\u5728\u5C06\u89E3\u6790\u4E3A `{ q: `hello?`, q2: 2 }`\u3002"
+    action: "現在，URL 序列化程式遵守 URI 規範，會考慮查詢引數中的問號。例如，`/path?q=hello?&q2=2` 現在將解析為 `{ q: `hello?`, q2: 2 }`。"
   },
   {
     possibleIn: 1300,
     necessaryAsOf: 1300,
     level: ApplicationComplexity.Advanced,
     step: "v13 host binding",
-    action: "`href` \u73B0\u5728\u662F\u5C5E\u6027\u7ED1\u5B9A\u3002\u8FD9\u610F\u5473\u7740 `DebugElement.properties['href']` \u73B0\u5728\u8FD4\u56DE\u539F\u751F\u5143\u7D20\u8FD4\u56DE\u7684 `href` \u503C\uFF0C\u800C\u4E0D\u662F `routerLink` \u7684 `href` \u5C5E\u6027\u7684\u5185\u90E8\u503C\u3002"
+    action: "`href` 現在是屬性繫結。這意味著 `DebugElement.properties['href']` 現在回傳原生元素回傳的 `href` 值，而不是 `routerLink` 的 `href` 屬性的內部值。"
   },
   {
     possibleIn: 1300,
     necessaryAsOf: 1300,
     level: ApplicationComplexity.Advanced,
     step: "v13 spy location",
-    action: "`SpyLocation` \u5728\u8C03\u7528 `location.go` \u65F6\u4E0D\u518D\u89E6\u53D1 `popstate` \u4E8B\u4EF6\u3002\u6B64\u5916\uFF0C`simulateHashChange` \u73B0\u5728\u89E6\u53D1 `haschange` \u548C `popstate`\u3002\u4F9D\u8D56\u4E8E `location.go` \u7684\u6D4B\u8BD5\u73B0\u5728\u53EF\u80FD\u9700\u8981\u4F7F\u7528 `simulateHashChange` \u6765\u6355\u83B7 `popstate`\u3002"
+    action: "`SpyLocation` 在呼叫 `location.go` 時不再觸發 `popstate` 事件。此外，`simulateHashChange` 現在觸發 `haschange` 和 `popstate`。依賴於 `location.go` 的測試現在可能需要使用 `simulateHashChange` 來捕獲 `popstate`。"
   },
   {
     possibleIn: 1300,
@@ -1400,21 +1400,21 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Advanced,
     ngUpgrade: true,
     step: "v13 router URL replacement",
-    action: "\u5F53\u65B0\u5BFC\u822A\u53D6\u6D88\u6B63\u5728\u8FDB\u884C\u7684\u5BFC\u822A\u65F6\uFF0C\u8DEF\u7531\u5668\u5C06\u4E0D\u518D\u66FF\u6362\u6D4F\u89C8\u5668 URL\u3002\u4F9D\u8D56\u4E8E Angular \u8DEF\u7531\u5668\u5904\u7406\u7684\u521D\u59CB\u5BFC\u822A\u4E0A\u5B58\u5728 `navigationId` \u7684\u6DF7\u5408\u5E94\u7528\u7A0B\u5E8F\u5E94\u8BE5\u8BA2\u9605 `NavigationCancel` \u4E8B\u4EF6\uFF0C\u5E76\u6267\u884C `location.replaceState` \u4EE5\u5C06 `navigationId` \u6DFB\u52A0\u5230 `Router` \u72B6\u6001\u4E2D\u3002\u6B64\u5916\uFF0C\u65AD\u8A00 `SpyLocation` \u4E0A\u7684 `urlChanges` \u7684\u6D4B\u8BD5\u53EF\u80FD\u9700\u8981\u8C03\u6574\u4EE5\u8003\u8651\u4E0D\u518D\u89E6\u53D1\u7684 `replaceState`\u3002"
+    action: "當新導向取消正在進行的導向時，路由器將不再替換瀏覽器 URL。依賴於 Angular 路由器處理的初始導向上存在 `navigationId` 的混合應用程式應該訂閱 `NavigationCancel` 事件，並執行 `location.replaceState` 以將 `navigationId` 新增到 `Router` 狀態中。此外，斷言 `SpyLocation` 上的 `urlChanges` 的測試可能需要調整以考慮不再觸發的 `replaceState`。"
   },
   {
     possibleIn: 1300,
     necessaryAsOf: 1300,
     level: ApplicationComplexity.Advanced,
     step: "v13 removed symbols",
-    action: "\u8DEF\u7531\u5668\u5305\u4E0D\u518D\u5BFC\u51FA `SpyNgModuleFactoryLoader` \u548C `DeprecatedLoadChildren`\u3002\u5982\u679C\u4F7F\u7528\u4E86\u5B83\u4EEC\uFF0C\u8BF7\u786E\u4FDD\u5220\u9664\u5176\u5BF9\u5E94\u7684\u5BFC\u5165\u8BED\u53E5\u3002"
+    action: "路由器套件不再匯出 `SpyNgModuleFactoryLoader` 和 `DeprecatedLoadChildren`。如果使用了它們，請確保刪除其對應的匯入語句。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Basic,
     step: "v14 ng update",
-    action: "\u8FD0\u884C `ng update @angular/core@14 @angular/cli@14` \u5C06\u4F60\u7684 Angular \u7248\u672C\u66F4\u65B0\u81F3 14\u3002"
+    action: "執行 `ng update @angular/core@14 @angular/cli@14` 將你的 Angular 版本更新至 14。"
   },
   {
     possibleIn: 1400,
@@ -1422,35 +1422,35 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     material: true,
     step: "update @angular/material",
-    action: "\u8FD0\u884C `ng update @angular/material@14`\u3002"
+    action: "執行 `ng update @angular/material@14`。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Basic,
     step: "TypeScript 4.6",
-    action: "Angular \u73B0\u5728\u4F7F\u7528 TypeScript 4.6\uFF0C\u8BF7\u9605\u8BFB\u6709\u5173\u4EFB\u4F55\u6F5C\u5728\u53D8\u66F4\u7684\u66F4\u591A\u4FE1\u606F\uFF1A[TypeScript 4.6 \u53D1\u5E03\u516C\u544A](https://devblogs.microsoft.com/typescript/announcing-typescript-4-6/)"
+    action: "Angular 現在使用 TypeScript 4.6，請閱讀有關任何潛在變更的更多訊息：[TypeScript 4.6 發布公告](https://devblogs.microsoft.com/typescript/announcing-typescript-4-6/)"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Basic,
     step: "v14 node",
-    action: '\u786E\u4FDD\u4F60\u4F7F\u7528\u7684\u662F <a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 14.15.0 \u6216\u66F4\u9AD8\u7248\u672C</a>\u3002'
+    action: '確保你使用的是 <a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 14.15.0 或更高版本</a>。'
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Medium,
     step: "v14 strict forms",
-    action: "\u8868\u5355\u6A21\u578B\u73B0\u5728\u9700\u8981\u4E00\u4E2A\u6CDB\u578B\u7C7B\u578B\u53C2\u6570\u3002\u4F60\u53EF\u4EE5\u9009\u62E9\u4F7F\u7528\u8868\u5355\u6A21\u578B\u7C7B\u7684\u4E0D\u5E26\u7C7B\u578B\u7684\u7248\u672C\u8FDB\u884C\u6E10\u8FDB\u5F0F\u8FC1\u79FB\u3002"
+    action: "表單模型現在需要一個泛型型別引數。你可以選擇使用表單模型類別的不帶型別的版本進行漸進式遷移。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Medium,
     step: "v14 aotSummaries",
-    action: "\u4ECE `TestBed` \u4E2D\u5220\u9664 `aotSummaries`\uFF0C\u56E0\u4E3A Angular \u4E0D\u518D\u5728 Ivy \u4E2D\u9700\u8981\u5B83\u4EEC\u3002"
+    action: "從 `TestBed` 中刪除 `aotSummaries`，因為 Angular 不再在 Ivy 中需要它們。"
   },
   {
     possibleIn: 1400,
@@ -1458,21 +1458,21 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Medium,
     material: true,
     step: "v14 MatVertical and Horizontal Stepper",
-    action: "\u5982\u679C\u4F60\u6B63\u5728\u4F7F\u7528 `MatVerticalStepper` \u6216 `MatHorizontalStepper`\uFF0C\u8BF7\u786E\u4FDD\u5207\u6362\u5230 `MatStepper`\u3002"
+    action: "如果你正在使用 `MatVerticalStepper` 或 `MatHorizontalStepper`，請確保切換到 `MatStepper`。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Medium,
     step: "v14 JSONP",
-    action: "\u4ECE JSONP \u8BF7\u6C42\u4E2D\u5220\u9664\u5934\u90E8\u3002JSONP \u4E0D\u652F\u6301\u5934\u90E8\uFF0C\u5982\u679C\u6307\u5B9A\u4E86\u5934\u90E8\uFF0CHTTP \u6A21\u5757\u73B0\u5728\u5C06\u629B\u51FA\u9519\u8BEF\u800C\u4E0D\u662F\u5FFD\u7565\u5B83\u4EEC\u3002"
+    action: "從 JSONP 請求中刪除頭部。JSONP 不支援頭部，如果指定了頭部，HTTP 模組現在將丟擲錯誤而不是忽略它們。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Medium,
     step: "v14 resolvers",
-    action: "\u89E3\u6790\u5668\u73B0\u5728\u5C06\u63A5\u6536\u5230\u7684 observable \u7684\u7B2C\u4E00\u4E2A\u53D1\u5C04\u503C\uFF0C\u5E76\u5728\u6B64\u4E4B\u540E\u8FDB\u884C\u5BFC\u822A\uFF0C\u4EE5\u66F4\u597D\u5730\u4E0E\u5176\u4ED6\u5B88\u536B\u4FDD\u6301\u4E00\u81F4\uFF0C\u800C\u4E0D\u662F\u53D6\u6700\u540E\u53D1\u5C04\u7684\u503C\u3002"
+    action: "解析器現在將接收到的 observable 的第一個發射值，並在此之後進行導向，以更好地與其他守衛保持一致，而不是取最後發射的值。"
   },
   {
     possibleIn: 1400,
@@ -1480,7 +1480,7 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Advanced,
     material: true,
     step: "v14 deprecate protractor entry",
-    action: "\u5DF2\u79FB\u9664\u5E9F\u5F03\u7684 `angular/cdk/testing/protractor` \u5165\u53E3\u70B9\u3002"
+    action: "已移除廢棄的 `angular/cdk/testing/protractor` 入口點。"
   },
   {
     possibleIn: 1400,
@@ -1488,7 +1488,7 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Advanced,
     material: true,
     step: "v14 chipInput",
-    action: "\u786E\u4FDD\u6307\u5B9A `MatChipInputEvent` \u7684 `chipInput`\uFF0C\u56E0\u4E3A\u73B0\u5728\u5B83\u662F\u5FC5\u9700\u7684\u3002"
+    action: "確保指定 `MatChipInputEvent` 的 `chipInput`，因為現在它是必需的。"
   },
   {
     possibleIn: 1400,
@@ -1496,7 +1496,7 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Advanced,
     material: true,
     step: "v14 mixinErrorState",
-    action: "\u5728\u4F7F\u7528 `mixinErrorState` \u7684\u62BD\u8C61\u7C7B\u4E2D\uFF0C\u4F60\u9700\u8981\u5B9E\u73B0 `stateChanges` \u7C7B\u6210\u5458\uFF0C\u56E0\u4E3A mixin \u4E0D\u518D\u63D0\u4F9B\u5B83\u3002"
+    action: "在使用 `mixinErrorState` 的抽象類別中，你需要實現 `stateChanges` 類別成員，因為 mixin 不再提供它。"
   },
   {
     possibleIn: 1400,
@@ -1504,7 +1504,7 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Advanced,
     material: true,
     step: "v14 CdkStepper orientation",
-    action: "\u4F7F\u7528 `CdkStepper.orientation`\uFF0C\u800C\u4E0D\u662F `CdkStepper._orientation`\u3002"
+    action: "使用 `CdkStepper.orientation`，而不是 `CdkStepper._orientation`。"
   },
   {
     possibleIn: 1400,
@@ -1512,7 +1512,7 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Advanced,
     material: true,
     step: "v14 CdkStepper and MatStepper",
-    action: "\u5982\u679C\u4F60\u5728\u6784\u9020\u51FD\u6570\u4E2D\u6269\u5C55\u6216\u4F7F\u7528 `CdkStepper` \u6216 `MatStepper`\uFF0C\u5219\u4E0D\u518D\u9700\u8981\u4F20\u9012 `_document` \u53C2\u6570\uFF0C\u56E0\u4E3A\u5B83\u73B0\u5728\u5DF2\u88AB\u79FB\u9664\u3002"
+    action: "如果你在建構式函式中擴充套件或使用 `CdkStepper` 或 `MatStepper`，則不再需要傳遞 `_document` 引數，因為它現在已被移除。"
   },
   {
     possibleIn: 1400,
@@ -1520,7 +1520,7 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Advanced,
     material: true,
     step: "v14 mat-list-item-avatar",
-    action: "\u5C06 `mat-list-item-avatar` CSS \u7C7B\u91CD\u547D\u540D\u4E3A `mat-list-item-with-avatar`\u3002"
+    action: "將 `mat-list-item-avatar` CSS 類重新命名為 `mat-list-item-with-avatar`。"
   },
   {
     possibleIn: 1400,
@@ -1528,7 +1528,7 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Advanced,
     material: true,
     step: "v14 MatSelectionListChange.option",
-    action: "\u4F7F\u7528 `MatSelectionListChange.options`\uFF0C\u800C\u4E0D\u662F `MatSelectionListChange.option`\u3002"
+    action: "使用 `MatSelectionListChange.options`，而不是 `MatSelectionListChange.option`。"
   },
   {
     possibleIn: 1400,
@@ -1536,7 +1536,7 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Advanced,
     material: true,
     step: "v14 getHarnessLoaderForContent",
-    action: "\u4F7F\u7528 `getChildLoader(MatListItemSection.CONTENT)`\uFF0C\u800C\u4E0D\u662F `getHarnessLoaderForContent`\u3002"
+    action: "使用 `getChildLoader(MatListItemSection.CONTENT)`，而不是 `getHarnessLoaderForContent`。"
   },
   {
     possibleIn: 1400,
@@ -1544,168 +1544,168 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Advanced,
     material: true,
     step: "v14 MatSelectionList",
-    action: "\u5982\u679C\u4F60\u6B63\u5728\u4F7F\u7528 `MatSelectionList`\uFF0C\u8BF7\u786E\u4FDD\u5728\u5176\u6784\u9020\u51FD\u6570\u4E2D\u4F20\u9012 `_focusMonitor`\uFF0C\u56E0\u4E3A\u73B0\u5728\u5B83\u662F\u5FC5\u9700\u7684\u3002\u6B64\u5916\uFF0C\u8FD9\u4E2A\u7C7B\u4E0D\u518D\u5177\u6709 `tabIndex` \u5C5E\u6027\u548C `tabIndex` \u6784\u9020\u51FD\u6570\u53C2\u6570\u3002"
+    action: "如果你正在使用 `MatSelectionList`，請確保在其建構式函式中傳遞 `_focusMonitor`，因為現在它是必需的。此外，這個類不再具有 `tabIndex` 屬性和 `tabIndex` 建構式函式引數。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Advanced,
     step: "v14 initialNavigation",
-    action: "\u5C06 `initialNavigation: 'enabled'` \u66F4\u65B0\u4E3A `initialNavigation: 'enabledBlocking'`\u3002"
+    action: "將 `initialNavigation: 'enabled'` 更新為 `initialNavigation: 'enabledBlocking'`。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Advanced,
     step: "v14 Route.pathMatch",
-    action: "\u5982\u679C\u4F60\u6B63\u5728\u5B9A\u4E49\u5E26\u6709 `pathMatch` \u7684\u8DEF\u7531\uFF0C\u53EF\u80FD\u9700\u8981\u5C06\u5176\u663E\u5F0F\u8F6C\u6362\u4E3A `Route` \u6216 `Routes`\u3002`Route.pathMatch` \u4E0D\u518D\u517C\u5BB9 `string` \u7C7B\u578B\u3002"
+    action: "如果你正在定義帶有 `pathMatch` 的路由，可能需要將其顯式轉換為 `Route` 或 `Routes`。`Route.pathMatch` 不再相容 `string` 型別。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Advanced,
     step: "v14 stricter LoadChildrenCallback",
-    action: "`LoadChildrenCallback` \u8FD4\u56DE\u7684 Promise \u73B0\u5728\u5177\u6709\u66F4\u4E25\u683C\u7684\u7C7B\u578B\u53C2\u6570 `Type<any>|NgModuleFactory<any>`\uFF0C\u800C\u4E0D\u662F `any`\u3002"
+    action: "`LoadChildrenCallback` 回傳的 Promise 現在具有更嚴格的型別引數 `Type<any>|NgModuleFactory<any>`，而不是 `any`。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Advanced,
     step: "v14 router scheduling",
-    action: "\u8DEF\u7531\u5668\u4E0D\u518D\u5728 `setTimeout` \u5185\u5B89\u6392\u91CD\u5B9A\u5411\u5BFC\u822A\u3002\u786E\u4FDD\u4F60\u7684\u6D4B\u8BD5\u4E0D\u4F9D\u8D56\u4E8E\u8FD9\u79CD\u884C\u4E3A\u3002"
+    action: "路由器不再在 `setTimeout` 內安排重導向導向。確保你的測試不依賴於這種行為。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Advanced,
     step: "v14 LocationStrategy",
-    action: "\u73B0\u5728\u5B9E\u73B0 `LocationStrategy` \u63A5\u53E3\u9700\u8981\u5B9A\u4E49 `getState()`\u3002"
+    action: "現在實現 `LocationStrategy` 介面需要定義 `getState()`。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Advanced,
     step: "v14 http queries",
-    action: "\u53D1\u9001\u67E5\u8BE2\u65F6\u4E0D\u518D\u9700\u8981\u5BF9 `+` \u8FDB\u884C\u5904\u7406\uFF0C\u56E0\u4E3A `+` \u4E0D\u518D\u53D1\u9001\u7A7A\u683C\u3002"
+    action: "傳送查詢時不再需要對 `+` 進行處理，因為 `+` 不再傳送空格。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Advanced,
     step: "v14 AnimationDriver.getParentElement",
-    action: "\u73B0\u5728\u5B9E\u73B0 `AnimationDriver` \u9700\u8981 `getParentElement` \u65B9\u6CD5\u3002"
+    action: "現在實現 `AnimationDriver` 需要 `getParentElement` 方法。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Advanced,
     step: "v14 invalid config",
-    action: "\u61D2\u52A0\u8F7D\u6A21\u5757\u7684\u65E0\u6548\u8DEF\u7531\u914D\u7F6E\u73B0\u5728\u4F1A\u5F15\u53D1\u9519\u8BEF\uFF0C\u800C\u4E0D\u662F\u88AB\u5FFD\u7565\u3002"
+    action: "延遲載入模組的無效路由設定現在會引發錯誤，而不是被忽略。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Advanced,
     step: "v14 router resolver",
-    action: "\u4ECE `RouterOutletContract.activateWith` \u51FD\u6570\u4E2D\u79FB\u9664 `resolver`\uFF0C\u4EE5\u53CA\u4ECE `OutletContext` \u7C7B\u4E2D\u79FB\u9664 `resolver`\uFF0C\u56E0\u4E3A\u4E0D\u518D\u9700\u8981\u5DE5\u5382\u89E3\u6790\u5668\u3002"
+    action: "從 `RouterOutletContract.activateWith` 函式中移除 `resolver`，以及從 `OutletContext` 類別中移除 `resolver`，因為不再需要工廠解析器。"
   },
   {
     possibleIn: 1400,
     necessaryAsOf: 1400,
     level: ApplicationComplexity.Advanced,
     step: "v14 initialUrl",
-    action: "`Router.initialUrl` \u53EA\u63A5\u53D7 `UrlTree`\uFF0C\u4EE5\u9632\u6B62\u901A\u8FC7\u5206\u914D `string` \u503C\u6765\u8BEF\u7528 API\u3002"
+    action: "`Router.initialUrl` 只接受 `UrlTree`，以防止透過分配 `string` 值來誤用 API。"
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Medium,
     step: "v15 base-decorators",
-    action: '\u786E\u4FDD\u5728\u5177\u6709\u7EE7\u627F\u6784\u9020\u51FD\u6570\u548C\u4F7F\u7528\u4F9D\u8D56\u6CE8\u5165\u7684\u5B50\u7C7B\u4E2D\u4F7F\u7528\u57FA\u7C7B\u4E2D\u7684\u88C5\u9970\u5668\u3002\u8FD9\u6837\u7684\u57FA\u7C7B\u5E94\u8BE5\u7528 `@Injectable` \u6216 `@Directive` \u88C5\u9970\uFF0C\u5426\u5219\u7F16\u8BD1\u5668\u4F1A\u8FD4\u56DE\u9519\u8BEF\u3002<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-05" title="\u6709\u5173\u6B64\u66F4\u6539\u7684\u66F4\u591A\u4FE1\u606F">\u7EE7\u7EED\u9605\u8BFB</a>'
+    action: '確保在具有繼承建構式函式和使用依賴注入的子類別中使用基底類別中的裝飾器。這樣的基底類別應該用 `@Injectable` 或 `@Directive` 裝飾，否則編譯器會回傳錯誤。<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-05" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Medium,
     step: "v15 setDisabledState",
-    action: '\u5728 v15 \u4E2D\uFF0C\u5F53\u9644\u52A0 `ControlValueAccessor` \u65F6\uFF0C\u59CB\u7EC8\u8C03\u7528 `setDisabledState`\u3002\u8981\u9000\u51FA\u6B64\u884C\u4E3A\uFF0C\u4F7F\u7528 `FormsModule.withConfig` \u6216 `ReactiveFormsModule.withConfig`\u3002<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-06" title="\u6709\u5173\u6B64\u66F4\u6539\u7684\u66F4\u591A\u4FE1\u606F">\u7EE7\u7EED\u9605\u8BFB</a>'
+    action: '在 v15 中，當附加 `ControlValueAccessor` 時，始終呼叫 `setDisabledState`。要退出此行為，使用 `FormsModule.withConfig` 或 `ReactiveFormsModule.withConfig`。<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-06" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Advanced,
     step: "v15 canParse",
-    action: '\u4F7F\u7528 `canParse` \u7684\u5E94\u7528\u7A0B\u5E8F\u5E94\u8BE5\u6539\u4E3A\u4F7F\u7528 `@angular/localize/tools` \u4E2D\u7684 `analyze`\u3002\u5728 v15 \u4E2D\uFF0C\u4ECE `@angular/localize/tools` \u7684\u6240\u6709\u7FFB\u8BD1\u89E3\u6790\u5668\u4E2D\u5220\u9664\u4E86 `canParse` \u65B9\u6CD5\u3002<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-07" title="\u6709\u5173\u6B64\u66F4\u6539\u7684\u66F4\u591A\u4FE1\u606F">\u7EE7\u7EED\u9605\u8BFB</a>'
+    action: '使用 `canParse` 的應用程式應該改為使用 `@angular/localize/tools` 中的 `analyze`。在 v15 中，從 `@angular/localize/tools` 的所有翻譯解析器中刪除了 `canParse` 方法。<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-07" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Basic,
     step: "v15 ActivatedRoutSnapshot",
-    action: '\u786E\u4FDD\u6240\u6709 `ActivatedRouteSnapshot` \u5BF9\u8C61\u90FD\u6709 `title` \u5C5E\u6027\u3002\u5728 v15 \u4E2D\uFF0C`title` \u5C5E\u6027\u662F `ActivatedRouteSnapshot` \u7684\u5FC5\u9700\u5C5E\u6027\u3002<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-08" title="\u6709\u5173\u6B64\u66F4\u6539\u7684\u66F4\u591A\u4FE1\u606F">\u7EE7\u7EED\u9605\u8BFB</a>'
+    action: '確保所有 `ActivatedRouteSnapshot` 物件都有 `title` 屬性。在 v15 中，`title` 屬性是 `ActivatedRouteSnapshot` 的必需屬性。<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-08" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Advanced,
     step: "v15 RouterOutlet",
-    action: '\u5982\u679C\u4F60\u7684 `RouterOutlet` \u6D4B\u8BD5\u51FA\u73B0\u95EE\u9898\uFF0C\u8BF7\u786E\u4FDD\u5B83\u4EEC\u4E0D\u4F9D\u8D56\u4E8E\u4E0E\u53D8\u66F4\u68C0\u6D4B\u76F8\u5173\u7684\u76F8\u5E94\u7EC4\u4EF6\u7684\u5B9E\u4F8B\u5316\u987A\u5E8F\u3002\u5728 v15 \u4E2D\uFF0C`RouterOutlet` \u5728\u53D8\u66F4\u68C0\u6D4B\u4E4B\u540E\u5B9E\u4F8B\u5316\u7EC4\u4EF6\u3002<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-09" title="\u6709\u5173\u6B64\u66F4\u6539\u7684\u66F4\u591A\u4FE1\u606F">\u7EE7\u7EED\u9605\u8BFB</a>'
+    action: '如果你的 `RouterOutlet` 測試出現問題，請確保它們不依賴於與變更檢測相關的相應元件的實例化順序。在 v15 中，`RouterOutlet` 在變更檢測之後實例化元件。<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-09" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Basic,
     step: "v15 relativeLinkResolution",
-    action: '\u5728 v15 \u4E2D\uFF0C`relativeLinkResolution` \u5728\u8DEF\u7531\u5668\u4E2D\u4E0D\u53EF\u914D\u7F6E\u3002\u5B83\u7528\u4E8E\u9000\u51FA\u5148\u524D\u7684\u9519\u8BEF\u4FEE\u590D\uFF0C\u73B0\u5728\u5DF2\u6210\u4E3A\u6807\u51C6\u3002<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-10" title="\u6709\u5173\u6B64\u66F4\u6539\u7684\u66F4\u591A\u4FE1\u606F">\u7EE7\u7EED\u9605\u8BFB</a>'
+    action: '在 v15 中，`relativeLinkResolution` 在路由器中不可設定。它用於退出先前的錯誤修復，現在已成為標準。<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-10" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Medium,
     step: "v15 DATE_PIPE_DEFAULT_OPTIONS",
-    action: '\u5C06 `DATE_PIPE_DEFAULT_TIMEZONE` \u4EE4\u724C\u7684\u5B9E\u4F8B\u66F4\u6539\u4E3A\u4F7F\u7528 `DATE_PIPE_DEFAULT_OPTIONS` \u914D\u7F6E\u65F6\u533A\u3002\u5728 v15 \u4E2D\uFF0C`DATE_PIPE_DEFAULT_TIMEZONE` \u4EE4\u724C\u5DF2\u8FC7\u65F6\u3002<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-01" title="\u6709\u5173\u6B64\u66F4\u6539\u7684\u66F4\u591A\u4FE1\u606F">\u7EE7\u7EED\u9605\u8BFB</a>'
+    action: '將 `DATE_PIPE_DEFAULT_TIMEZONE` 令牌的實例更改為使用 `DATE_PIPE_DEFAULT_OPTIONS` 設定時區。在 v15 中，`DATE_PIPE_DEFAULT_TIMEZONE` 令牌已過時。<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-01" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Medium,
     step: "v15 iframe",
-    action: "\u73B0\u6709\u7684 `<iframe>` \u5B9E\u4F8B\u53EF\u80FD\u5DF2\u7ECF\u5E94\u7528\u4E86\u5B89\u5168\u654F\u611F\u5C5E\u6027\uFF0C\u4F5C\u4E3A\u5C5E\u6027\u6216\u5C5E\u6027\u7ED1\u5B9A\u3002\u8FD9\u4E9B\u5B89\u5168\u654F\u611F\u5C5E\u6027\u53EF\u80FD\u51FA\u73B0\u5728\u6A21\u677F\u4E2D\u6216\u6307\u4EE4\u7684\u5BBF\u4E3B\u7ED1\u5B9A\u4E2D\u3002\u8FD9\u4E9B\u60C5\u51B5\u9700\u8981\u66F4\u65B0\uFF0C\u4EE5\u786E\u4FDD\u7B26\u5408\u5BF9 `<iframe>` \u7ED1\u5B9A\u7684\u65B0\u548C\u66F4\u4E25\u683C\u7684\u89C4\u5219\u3002<a href='https://v15.angular.io/errors/NG0910' title='\u9519\u8BEF\u9875\u9762\u7684\u94FE\u63A5'>\u67E5\u770B\u66F4\u591A\u4FE1\u606F</a>"
+    action: "現有的 `<iframe>` 實例可能已經應用了安全敏感屬性，作為屬性或屬性繫結。這些安全敏感屬性可能出現在樣板中或指令的宿主繫結中。這些情況需要更新，以確保符合對 `<iframe>` 繫結的新和更嚴格的規則。<a href='https://v15.angular.io/errors/NG0910' title='錯誤頁面的連結'>檢視更多訊息</a>"
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Medium,
     step: "v15 Injector.get",
-    action: '\u66F4\u65B0\u4F7F\u7528 `InjectFlags` \u53C2\u6570\u7684 `Injector.get()` \u7684\u5B9E\u4F8B\uFF0C\u4EE5\u4F7F\u7528 `InjectOptions` \u53C2\u6570\u3002\u5728 v15 \u4E2D\uFF0C`Injector.get()` \u7684 `InjectFlags` \u53C2\u6570\u5DF2\u8FC7\u65F6\u3002<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-02" title="\u6709\u5173\u6B64\u66F4\u6539\u7684\u66F4\u591A\u4FE1\u606F">\u7EE7\u7EED\u9605\u8BFB</a>'
+    action: '更新使用 `InjectFlags` 引數的 `Injector.get()` 的實例，以使用 `InjectOptions` 引數。在 v15 中，`Injector.get()` 的 `InjectFlags` 引數已過時。<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-02" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Basic,
     step: "v15 TestBed.inject",
-    action: '\u66F4\u65B0\u4F7F\u7528 `InjectFlags` \u53C2\u6570\u7684 `TestBed.inject()` \u7684\u5B9E\u4F8B\uFF0C\u4EE5\u4F7F\u7528 `InjectOptions` \u53C2\u6570\u3002\u5728 v15 \u4E2D\uFF0C`TestBed.inject()` \u7684 `InjectFlags` \u53C2\u6570\u5DF2\u8FC7\u65F6\u3002<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-01" title="\u6709\u5173\u6B64\u66F4\u6539\u7684\u66F4\u591A\u4FE1\u606F">\u7EE7\u7EED\u9605\u8BFB</a>'
+    action: '更新使用 `InjectFlags` 引數的 `TestBed.inject()` 的實例，以使用 `InjectOptions` 引數。在 v15 中，`TestBed.inject()` 的 `InjectFlags` 引數已過時。<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-01" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Medium,
     step: "v15 ngModule in providedIn",
-    action: '\u5728 v15 \u4E2D\uFF0C\u5BF9 `@Injectable` \u548C `InjectionToken` \u4F7F\u7528 `providedIn: ngModule` \u5DF2\u8FC7\u65F6\u3002<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-04" title="\u6709\u5173\u6B64\u66F4\u6539\u7684\u66F4\u591A\u4FE1\u606F">\u7EE7\u7EED\u9605\u8BFB</a>'
+    action: '在 v15 中，對 `@Injectable` 和 `InjectionToken` 使用 `providedIn: ngModule` 已過時。<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-04" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Basic,
     step: "v15 providedIn any",
-    action: '\u5728 v15 \u4E2D\uFF0C\u5BF9 `@Injectable` \u6216 `InjectionToken` \u4F7F\u7528 `providedIn: \'any\'` \u5DF2\u8FC7\u65F6\u3002<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-05" title="\u6709\u5173\u6B64\u66F4\u6539\u7684\u66F4\u591A\u4FE1\u606F">\u7EE7\u7EED\u9605\u8BFB</a>'
+    action: '在 v15 中，對 `@Injectable` 或 `InjectionToken` 使用 `providedIn: \'any\'` 已過時。<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-05" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Medium,
     step: "v15 RouterLinkWithHref",
-    action: '\u66F4\u65B0 `RouterLinkWithHref` \u6307\u4EE4\u7684\u5B9E\u4F8B\u4EE5\u4F7F\u7528 `RouterLink` \u6307\u4EE4\u3002`RouterLinkWithHref` \u6307\u4EE4\u5728 v15 \u4E2D\u5DF2\u8FC7\u65F6\u3002<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-06" title="\u6709\u5173\u6B64\u66F4\u6539\u7684\u66F4\u591A\u4FE1\u606F">\u7EE7\u7EED\u9605\u8BFB</a>'
+    action: '更新 `RouterLinkWithHref` 指令的實例以使用 `RouterLink` 指令。`RouterLinkWithHref` 指令在 v15 中已過時。<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-06" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
@@ -1713,35 +1713,35 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     material: true,
     step: "v15 mat refactor",
-    action: '\u5728 Angular Material v15 \u4E2D\uFF0C\u8BB8\u591A\u7EC4\u4EF6\u5DF2\u88AB\u91CD\u6784\u4E3A\u57FA\u4E8E\u5B98\u65B9 Material Design Components for Web (MDC)\u3002\u8FD9\u4E2A\u53D8\u5316\u5F71\u54CD\u4E86\u8BB8\u591A\u7EC4\u4EF6\u7684 DOM \u548C CSS \u7C7B\u3002<a href="https://rc.material.angular.dev/guide/mdc-migration" title="\u6709\u5173\u6B64\u66F4\u6539\u7684\u66F4\u591A\u4FE1\u606F">\u7EE7\u7EED\u9605\u8BFB</a>'
+    action: '在 Angular Material v15 中，許多元件已被重構為基於官方 Material Design Components for Web (MDC)。這個變化影響了許多元件的 DOM 和 CSS 類。<a href="https://rc.material.angular.dev/guide/mdc-migration" title="有關此更改的更多訊息">繼續閱讀</a>'
   },
   {
     possibleIn: 1500,
     necessaryAsOf: 1500,
     level: ApplicationComplexity.Basic,
     step: "v15 visual review",
-    action: "\u5728\u5C06\u5E94\u7528\u7A0B\u5E8F\u66F4\u65B0\u5230 v15 \u540E\uFF0C\u901A\u8FC7\u89C6\u89C9\u5BA1\u67E5\u5E94\u7528\u7A0B\u5E8F\u53CA\u5176\u4EA4\u4E92\uFF0C\u786E\u4FDD\u4E00\u5207\u6B63\u5E38\u8FD0\u884C\u3002"
+    action: "在將應用程式更新到 v15 後，透過視覺審查應用程式及其互動，確保一切正常執行。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Basic,
     step: "v16 node support",
-    action: "\u786E\u4FDD\u5728\u5347\u7EA7\u5E94\u7528\u7A0B\u5E8F\u4E4B\u524D\u4F7F\u7528\u53D7\u652F\u6301\u7684 node.js \u7248\u672C\u3002Angular v16 \u652F\u6301 node.js \u7248\u672C\uFF1Av16 \u548C v18\u3002"
+    action: "確保在升級應用程式之前使用受支援的 node.js 版本。Angular v16 支援 node.js 版本：v16 和 v18。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Basic,
     step: "v16 ts support",
-    action: "\u786E\u4FDD\u5728\u5347\u7EA7\u5E94\u7528\u7A0B\u5E8F\u4E4B\u524D\u4F7F\u7528\u53D7\u652F\u6301\u7684 TypeScript \u7248\u672C\u3002Angular v16 \u652F\u6301 TypeScript \u7248\u672C 4.9.3 \u6216\u66F4\u9AD8\u7248\u672C\u3002"
+    action: "確保在升級應用程式之前使用受支援的 TypeScript 版本。Angular v16 支援 TypeScript 版本 4.9.3 或更高版本。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Basic,
     step: "v16 ng update",
-    action: "\u5728\u5E94\u7528\u7A0B\u5E8F\u7684\u9879\u76EE\u76EE\u5F55\u4E2D\uFF0C\u8FD0\u884C `ng update @angular/core@16 @angular/cli@16`\uFF0C\u5C06\u5E94\u7528\u7A0B\u5E8F\u66F4\u65B0\u5230 Angular v16\u3002"
+    action: "在應用程式的專案目錄中，執行 `ng update @angular/core@16 @angular/cli@16`，將應用程式更新到 Angular v16。"
   },
   {
     possibleIn: 1600,
@@ -1749,224 +1749,224 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     material: true,
     step: "update @angular/material",
-    action: "\u8FD0\u884C `ng update @angular/material@16`\u3002"
+    action: "執行 `ng update @angular/material@16`。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Basic,
     step: "v16 zone.js support",
-    action: "\u5728\u5347\u7EA7\u5E94\u7528\u7A0B\u5E8F\u4E4B\u524D\uFF0C\u8BF7\u786E\u4FDD\u4F7F\u7528\u53D7\u652F\u6301\u7684 Zone.js \u7248\u672C\u3002Angular v16 \u652F\u6301 Zone.js \u7248\u672C 0.13.x \u6216\u66F4\u9AD8\u7248\u672C\u3002"
+    action: "在升級應用程式之前，請確保使用受支援的 Zone.js 版本。Angular v16 支援 Zone.js 版本 0.13.x 或更高版本。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Advanced,
     step: "v16 RouterEvent",
-    action: "Event \u8054\u5408\u4F53\u4E0D\u518D\u5305\u542B `RouterEvent`\uFF0C\u8FD9\u610F\u5473\u7740\u5982\u679C\u4F60\u6B63\u5728\u4F7F\u7528 Event \u7C7B\u578B\uFF0C\u5219\u53EF\u80FD\u5FC5\u987B\u5C06\u7C7B\u578B\u5B9A\u4E49\u4ECE `(e: Event)` \u66F4\u6539\u4E3A `(e: Event|RouterEvent)`"
+    action: "Event 聯合體不再包含 `RouterEvent`，這意味著如果你正在使用 Event 型別，則可能必須將型別定義從 `(e: Event)` 更改為 `(e: Event|RouterEvent)`"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Advanced,
     step: "v16 routerEvent prop type",
-    action: "\u9664\u4E86 `NavigationEnd`\uFF0C`routerEvent` \u5C5E\u6027\u73B0\u5728\u8FD8\u63A5\u53D7\u7C7B\u578B `NavigationSkipped`"
+    action: "除了 `NavigationEnd`，`routerEvent` 屬性現在還接受型別 `NavigationSkipped`"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Advanced,
     step: "v16 RendererType2",
-    action: "\u4EC5\u5C06\u6241\u5E73\u6570\u7EC4\u4F20\u9012\u7ED9 `RendererType2.styles`\uFF0C\u56E0\u4E3A\u5B83\u4E0D\u518D\u63A5\u53D7\u5D4C\u5957\u6570\u7EC4"
+    action: "僅將扁平陣列傳遞給 `RendererType2.styles`，因為它不再接受巢狀陣列"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Medium,
     step: "v16 BrowserPlatformLocation",
-    action: "\u4F60\u53EF\u80FD\u9700\u8981\u66F4\u65B0\u4F7F\u7528 `BrowserPlatformLocation` \u7684\u6D4B\u8BD5\uFF0C\u56E0\u4E3A `MockPlatformLocation` \u73B0\u5728\u9ED8\u8BA4\u5728\u6D4B\u8BD5\u4E2D\u63D0\u4F9B\u3002[\u7EE7\u7EED\u9605\u8BFB](https://github.com/angular/angular/blob/main/CHANGELOG.md#common-9)"
+    action: "你可能需要更新使用 `BrowserPlatformLocation` 的測試，因為 `MockPlatformLocation` 現在預設在測試中提供。[繼續閱讀](https://github.com/angular/angular/blob/main/CHANGELOG.md#common-9)"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Basic,
     step: "v16 ngcc",
-    action: "\u7531\u4E8E\u5728 v16 \u4E2D\u5220\u9664\u4E86 Angular Compatibility Compiler (ngcc)\uFF0C\u56E0\u6B64 v16 \u53CA\u66F4\u9AD8\u7248\u672C\u7684\u9879\u76EE\u4E0D\u518D\u652F\u6301 View Engine \u5E93\u3002"
+    action: "由於在 v16 中刪除了 Angular Compatibility Compiler (ngcc)，因此 v16 及更高版本的專案不再支援 View Engine 函式庫。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Medium,
     step: "v16 createUrlTree",
-    action: "\u5728 `Router.createUrlTree` \u4E2D\u7684\u9519\u8BEF\u4FEE\u590D\u540E\uFF0C\u4F60\u53EF\u80FD\u9700\u8981\u8C03\u6574\u6A21\u62DF `ActivatedRoute` \u7684\u6D4B\u8BD5\u3002[\u7EE7\u7EED\u9605\u8BFB](https://github.com/angular/angular/blob/main/CHANGELOG.md#1600-2023-05-03)"
+    action: "在 `Router.createUrlTree` 中的錯誤修復後，你可能需要調整模擬 `ActivatedRoute` 的測試。[繼續閱讀](https://github.com/angular/angular/blob/main/CHANGELOG.md#1600-2023-05-03)"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Medium,
     step: "v16 ApplicationConfig imports",
-    action: "\u5C06 `ApplicationConfig` \u7684\u5BFC\u5165\u66F4\u6539\u4E3A\u6765\u81EA `@angular/core`\u3002"
+    action: "將 `ApplicationConfig` 的匯入更改為來自 `@angular/core`。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Advanced,
     step: "v16 renderModule",
-    action: "\u4FEE\u6539\u4EE3\u7801\u4EE5\u4F7F\u7528 `renderModule` \u800C\u4E0D\u662F `renderModuleFactory`\uFF0C\u56E0\u4E3A\u540E\u8005\u5DF2\u88AB\u5220\u9664\u3002"
+    action: "修改程式碼以使用 `renderModule` 而不是 `renderModuleFactory`，因為後者已被刪除。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Medium,
     step: "v16 XhrFactory",
-    action: "\u4FEE\u6539\u4EE3\u7801\uFF0C\u4F7F\u7528 `@angular/common` \u4E2D\u7684 `XhrFactory` \u800C\u4E0D\u662F\u6765\u81EA `@angular/common/http` \u7684 `XhrFactory`\u3002"
+    action: "修改程式碼，使用 `@angular/common` 中的 `XhrFactory` 而不是來自 `@angular/common/http` 的 `XhrFactory`。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Medium,
     step: "v16 withServerTransition",
-    action: "\u5982\u679C\u4F60\u5728\u540C\u4E00\u9875\u4E0A\u8FD0\u884C\u591A\u4E2A Angular \u5E94\u7528\u7A0B\u5E8F\uFF0C\u5E76\u4E14\u4F7F\u7528\u4E86 `BrowserModule.withServerTransition({ appId: 'serverApp' })`\uFF0C\u8BF7\u786E\u4FDD\u8BBE\u7F6E `APP_ID`\uFF0C\u56E0\u4E3A `withServerTransition` \u73B0\u5DF2\u8FC7\u65F6\u3002[\u7EE7\u7EED\u9605\u8BFB](https://github.com/angular/angular/blob/main/CHANGELOG.md#platform-browser-4)"
+    action: "如果你在同一頁上執行多個 Angular 應用程式，並且使用了 `BrowserModule.withServerTransition({ appId: 'serverApp' })`，請確保設定 `APP_ID`，因為 `withServerTransition` 現已過時。[繼續閱讀](https://github.com/angular/angular/blob/main/CHANGELOG.md#platform-browser-4)"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Advanced,
     step: "v16 EnvironmentInjector",
-    action: "\u5C06 `EnvironmentInjector.runInContext` \u66F4\u6539\u4E3A `runInInjectionContext`\uFF0C\u5E76\u5C06\u73AF\u5883\u6CE8\u5165\u5668\u4F5C\u4E3A\u7B2C\u4E00\u4E2A\u53C2\u6570\u4F20\u9012\u3002"
+    action: "將 `EnvironmentInjector.runInContext` 更改為 `runInInjectionContext`，並將環境注入器作為第一個引數傳遞。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Advanced,
     step: "v16 ViewContainerRef.createComponent",
-    action: "\u66F4\u65B0\u4F60\u7684\u4EE3\u7801\uFF0C\u4F7F\u7528 `ViewContainerRef.createComponent` \u800C\u4E0D\u4F7F\u7528\u5DE5\u5382\u89E3\u6790\u5668\u3002`ComponentFactoryResolver` \u5DF2\u4ECE Router API \u4E2D\u79FB\u9664\u3002"
+    action: "更新你的程式碼，使用 `ViewContainerRef.createComponent` 而不使用工廠解析器。`ComponentFactoryResolver` 已從 Router API 中移除。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Advanced,
     step: "v16 APP_ID",
-    action: "\u5982\u679C\u5728\u540C\u4E00\u9875\u4E0A\u5F15\u5BFC\u591A\u4E2A\u5E94\u7528\u7A0B\u5E8F\uFF0C\u8BF7\u786E\u4FDD\u8BBE\u7F6E\u552F\u4E00\u7684 `APP_IDs`\u3002"
+    action: "如果在同一頁上引導多個應用程式，請確保設定唯一的 `APP_IDs`。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Advanced,
     step: "v16 server renderApplication",
-    action: "\u66F4\u65B0\u4F60\u7684\u4EE3\u7801\uFF0C\u4FEE\u8BA2 `renderApplication` \u65B9\u6CD5\uFF0C\u56E0\u4E3A\u5B83\u4E0D\u518D\u63A5\u53D7\u6839\u7EC4\u4EF6\u4F5C\u4E3A\u7B2C\u4E00\u4E2A\u53C2\u6570\uFF0C\u800C\u662F\u5E94\u8BE5\u5F15\u5BFC\u4F60\u7684\u5E94\u7528\u7A0B\u5E8F\u7684\u56DE\u8C03\u51FD\u6570\u3002[\u7EE7\u7EED\u9605\u8BFB](https://github.com/angular/angular/blob/main/CHANGELOG.md#platform-server-3)"
+    action: "更新你的程式碼，修訂 `renderApplication` 方法，因為它不再接受根元件作為第一個引數，而是應該引導你的應用程式的回呼函式。[繼續閱讀](https://github.com/angular/angular/blob/main/CHANGELOG.md#platform-server-3)"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Advanced,
     step: "v16 PlatformConfig.baseUrl",
-    action: "\u66F4\u65B0\u4F60\u7684\u4EE3\u7801\uFF0C\u5220\u9664\u5BF9 `PlatformConfig.baseUrl` \u548C `PlatformConfig.useAbsoluteUrl` platform-server \u914D\u7F6E\u9009\u9879\u7684\u4EFB\u4F55\u5F15\u7528\uFF0C\u56E0\u4E3A\u5B83\u5DF2\u88AB\u5F03\u7528\u3002"
+    action: "更新你的程式碼，刪除對 `PlatformConfig.baseUrl` 和 `PlatformConfig.useAbsoluteUrl` platform-server 設定選項的任何引用，因為它已被棄用。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Basic,
     step: "v16 moduleid",
-    action: "\u66F4\u65B0\u4F60\u7684\u4EE3\u7801\uFF0C\u5220\u9664\u5BF9 `@Directive`/`@Component` `moduleId` \u5C5E\u6027\u7684\u4EFB\u4F55\u5F15\u7528\uFF0C\u56E0\u4E3A\u5B83\u4E0D\u8D77\u4F5C\u7528\uFF0C\u5C06\u5728 v17 \u4E2D\u5220\u9664\u3002"
+    action: "更新你的程式碼，刪除對 `@Directive`/`@Component` `moduleId` 屬性的任何引用，因為它不起作用，將在 v17 中刪除。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Medium,
     step: "v16 transfer state imports",
-    action: "\u4ECE `import {makeStateKey, StateKey, TransferState} from '@angular/platform-browser'` \u66F4\u65B0\u5BFC\u5165\u5230 `import {makeStateKey, StateKey, TransferState} from '@angular/core'`"
+    action: "從 `import {makeStateKey, StateKey, TransferState} from '@angular/platform-browser'` 更新匯入到 `import {makeStateKey, StateKey, TransferState} from '@angular/core'`"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Advanced,
     step: "v16 ComponentRef",
-    action: "\u5982\u679C\u4F9D\u8D56\u4E8E `ComponentRef.setInput` \u6765\u8BBE\u7F6E\u7EC4\u4EF6\u8F93\u5165\uFF0C\u5373\u4F7F\u5B83\u57FA\u4E8E `Object.is` \u76F8\u7B49\u6027\u68C0\u67E5\u662F\u76F8\u540C\u7684\uFF0C\u8BF7\u786E\u4FDD\u590D\u5236\u5176\u503C\u3002"
+    action: "如果依賴於 `ComponentRef.setInput` 來設定元件輸入，即使它基於 `Object.is` 相等性檢查是相同的，請確保複製其值。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Advanced,
     step: "v16 ANALYZE_FOR_ENTRY_COMPONENTS",
-    action: "\u66F4\u65B0\u4F60\u7684\u4EE3\u7801\uFF0C\u5220\u9664\u5BF9 `ANALYZE_FOR_ENTRY_COMPONENTS` \u6CE8\u5165\u4EE4\u724C\u7684\u4EFB\u4F55\u5F15\u7528\uFF0C\u56E0\u4E3A\u5B83\u5DF2\u88AB\u5220\u9664\u3002"
+    action: "更新你的程式碼，刪除對 `ANALYZE_FOR_ENTRY_COMPONENTS` 注入令牌的任何引用，因為它已被刪除。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Basic,
     step: "v16 entry components",
-    action: "`entryComponents` \u4E0D\u518D\u53EF\u7528\uFF0C\u5E76\u4E14\u53EF\u4EE5\u4ECE `@NgModule` \u548C `@Component` \u516C\u5171 API \u4E2D\u5220\u9664\u4EFB\u4F55\u5BF9\u5B83\u7684\u5F15\u7528\u3002"
+    action: "`entryComponents` 不再可用，並且可以從 `@NgModule` 和 `@Component` 公共 API 中刪除任何對它的引用。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Medium,
     step: "v16 ngTemplateOutletContext",
-    action: "ngTemplateOutletContext \u5177\u6709\u66F4\u4E25\u683C\u7684\u7C7B\u578B\u68C0\u67E5\uFF0C\u9700\u8981\u4F60\u5728\u76F8\u5E94\u5BF9\u8C61\u4E2D\u58F0\u660E\u6240\u6709\u5C5E\u6027\u3002[\u7EE7\u7EED\u9605\u8BFB](https://github.com/angular/angular/blob/main/CHANGELOG.md#common-1)."
+    action: "ngTemplateOutletContext 具有更嚴格的型別檢查，需要你在相應物件中宣告所有屬性。[繼續閱讀](https://github.com/angular/angular/blob/main/CHANGELOG.md#common-1)."
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Medium,
     step: "v16 APF",
-    action: "Angular \u5305\u4E0D\u518D\u5305\u62EC FESM2015\uFF0C\u5E76\u4E14\u5206\u5E03\u5F0F ECMScript \u5DF2\u4ECE 2020 \u66F4\u65B0\u5230 2022\u3002"
+    action: "Angular 套件不再包括 FESM2015，並且分散式 ECMScript 已從 2020 更新到 2022。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Advanced,
     step: "v16 EventManager",
-    action: "\u5DF2\u5220\u9664\u5DF2\u5F03\u7528\u7684 `EventManager` \u65B9\u6CD5 `addGlobalEventListener`\uFF0C\u56E0\u4E3A\u5B83\u672A\u88AB Ivy \u4F7F\u7528\u3002"
+    action: "已刪除已棄用的 `EventManager` 方法 `addGlobalEventListener`，因為它未被 Ivy 使用。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Medium,
     step: "v16 BrowserTransferStateModule",
-    action: "`BrowserTransferStateModule` \u4E0D\u518D\u53EF\u7528\uFF0C\u5E76\u4E14\u53EF\u4EE5\u4ECE\u4F60\u7684\u5E94\u7528\u7A0B\u5E8F\u4E2D\u5220\u9664\u4EFB\u4F55\u5BF9\u5B83\u7684\u5F15\u7528\u3002"
+    action: "`BrowserTransferStateModule` 不再可用，並且可以從你的應用程式中刪除任何對它的引用。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Medium,
     step: "v16 ReflectiveInjector",
-    action: "\u66F4\u65B0\u4F60\u7684\u4EE3\u7801\uFF0C\u4F7F\u7528 `Injector.create` \u800C\u4E0D\u662F `ReflectiveInjector`\uFF0C\u56E0\u4E3A `ReflectiveInjector` \u5DF2\u88AB\u79FB\u9664\u3002"
+    action: "更新你的程式碼，使用 `Injector.create` 而不是 `ReflectiveInjector`，因為 `ReflectiveInjector` 已被移除。"
   },
   {
     possibleIn: 1600,
     necessaryAsOf: 1600,
     level: ApplicationComplexity.Basic,
     step: "v16 QueryList",
-    action: "`QueryList.filter` \u73B0\u5728\u652F\u6301\u7C7B\u578B\u4FDD\u62A4\u51FD\u6570\u3002\u7531\u4E8E\u7C7B\u578B\u5C06\u88AB\u7F29\u5C0F\uFF0C\u4F60\u53EF\u80FD\u9700\u8981\u66F4\u65B0\u4F9D\u8D56\u4E8E\u65E7\u884C\u4E3A\u7684\u5E94\u7528\u7A0B\u5E8F\u4EE3\u7801\u3002"
+    action: "`QueryList.filter` 現在支援型別保護函式。由於型別將被縮小，你可能需要更新依賴於舊行為的應用程式程式碼。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Basic,
     step: "v17 node support",
-    action: "\u5728\u5347\u7EA7\u5E94\u7528\u7A0B\u5E8F\u4E4B\u524D\uFF0C\u8BF7\u786E\u4FDD\u4F60\u6B63\u5728\u4F7F\u7528\u53D7\u652F\u6301\u7684 node.js \u7248\u672C\u3002Angular v17 \u652F\u6301 node.js \u7248\u672C\uFF1Av18.13.0 \u53CA\u66F4\u9AD8\u7248\u672C\u3002"
+    action: "在升級應用程式之前，請確保你正在使用受支援的 node.js 版本。Angular v17 支援 node.js 版本：v18.13.0 及更高版本。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Basic,
     step: "v17 ts support",
-    action: "\u5728\u5347\u7EA7\u5E94\u7528\u7A0B\u5E8F\u4E4B\u524D\uFF0C\u8BF7\u786E\u4FDD\u4F60\u6B63\u5728\u4F7F\u7528\u53D7\u652F\u6301\u7684 TypeScript \u7248\u672C\u3002Angular v17 \u652F\u6301 TypeScript \u7248\u672C 5.2 \u6216\u66F4\u9AD8\u7248\u672C\u3002"
+    action: "在升級應用程式之前，請確保你正在使用受支援的 TypeScript 版本。Angular v17 支援 TypeScript 版本 5.2 或更高版本。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Basic,
     step: "v17 zone.js support",
-    action: "\u5728\u5347\u7EA7\u5E94\u7528\u7A0B\u5E8F\u4E4B\u524D\uFF0C\u8BF7\u786E\u4FDD\u4F60\u6B63\u5728\u4F7F\u7528\u53D7\u652F\u6301\u7684 Zone.js \u7248\u672C\u3002Angular v17 \u652F\u6301 Zone.js \u7248\u672C 0.14.x \u6216\u66F4\u9AD8\u7248\u672C\u3002"
+    action: "在升級應用程式之前，請確保你正在使用受支援的 Zone.js 版本。Angular v17 支援 Zone.js 版本 0.14.x 或更高版本。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Basic,
     step: "v17 ng update",
-    action: "\u5728\u5E94\u7528\u7A0B\u5E8F\u7684\u9879\u76EE\u76EE\u5F55\u4E2D\u8FD0\u884C `ng update @angular/core@17 @angular/cli@17`\uFF0C\u5C06\u4F60\u7684\u5E94\u7528\u7A0B\u5E8F\u5347\u7EA7\u5230 Angular v17\u3002"
+    action: "在應用程式的專案目錄中執行 `ng update @angular/core@17 @angular/cli@17`，將你的應用程式升級到 Angular v17。"
   },
   {
     possibleIn: 1700,
@@ -1974,98 +1974,98 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     material: true,
     step: "update @angular/material",
-    action: "\u8FD0\u884C `ng update @angular/material@17`\u3002"
+    action: "執行 `ng update @angular/material@17`。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Medium,
     step: "v17 style removal",
-    action: "Angular \u73B0\u5728\u4F1A\u81EA\u52A8\u5220\u9664\u9500\u6BC1\u7EC4\u4EF6\u7684\u6837\u5F0F\uFF0C\u8FD9\u53EF\u80FD\u4F1A\u5F71\u54CD\u5230\u4F60\u73B0\u6709\u7684\u5E94\u7528\u7A0B\u5E8F\uFF0C\u7279\u522B\u662F\u5728\u4F60\u4F9D\u8D56\u4E8E\u6CC4\u6F0F\u6837\u5F0F\u7684\u60C5\u51B5\u4E0B\u3002\u8981\u66F4\u6539\u6B64\u8BBE\u7F6E\uFF0C\u8BF7\u5C06 `REMOVE_STYLES_ON_COMPONENT_DESTROY` \u63D0\u4F9B\u7A0B\u5E8F\u7684\u503C\u66F4\u6539\u4E3A `false`\u3002"
+    action: "Angular 現在會自動刪除銷燬元件的樣式，這可能會影響到你現有的應用程式，特別是在你依賴於洩漏樣式的情況下。要更改此設定，請將 `REMOVE_STYLES_ON_COMPONENT_DESTROY` 提供程式的值更改為 `false`。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Basic,
     step: "v17 router removals",
-    action: "\u786E\u4FDD\u4F60\u5728 `provideRouter` \u6216 `RouterModule.forRoot` \u4E2D\u914D\u7F6E `setupTestingRouter`\u3001`canceledNavigationResolution`\u3001`paramsInheritanceStrategy`\u3001`titleStrategy`\u3001`urlUpdateStrategy`\u3001`urlHandlingStrategy` \u548C `malformedUriErrorHandler`\uFF0C\u56E0\u4E3A\u8FD9\u4E9B\u5C5E\u6027\u73B0\u5728\u4E0D\u518D\u662F `Router` \u7684\u516C\u5171 API \u7684\u4E00\u90E8\u5206\u3002"
+    action: "確保你在 `provideRouter` 或 `RouterModule.forRoot` 中設定 `setupTestingRouter`、`canceledNavigationResolution`、`paramsInheritanceStrategy`、`titleStrategy`、`urlUpdateStrategy`、`urlHandlingStrategy` 和 `malformedUriErrorHandler`，因為這些屬性現在不再是 `Router` 的公共 API 的一部分。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Advanced,
     step: "v17 ngDoCheck dynamic components",
-    action: "\u5BF9\u4E8E\u52A8\u6001\u5B9E\u4F8B\u5316\u7684\u7EC4\u4EF6\uFF0C\u6211\u4EEC\u73B0\u5728\u5728\u53D8\u66F4\u68C0\u6D4B\u671F\u95F4\u6267\u884C `ngDoCheck`\uFF0C\u5982\u679C\u7EC4\u4EF6\u88AB\u6807\u8BB0\u4E3A\u810F\uFF0C\u5219\u53EF\u80FD\u9700\u8981\u66F4\u65B0\u52A8\u6001\u5B9E\u4F8B\u5316\u7EC4\u4EF6\u7684\u6D4B\u8BD5\u6216 `ngDoCheck` \u4E2D\u7684\u903B\u8F91\u3002"
+    action: "對於動態實例化的元件，我們現在在變更檢測期間執行 `ngDoCheck`，如果元件被標記為髒，則可能需要更新動態實例化元件的測試或 `ngDoCheck` 中的邏輯。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Medium,
     step: "v17 malformedUriErrorHandler",
-    action: "\u5728 `UrlSerializer.parse` \u4E2D\u5904\u7406 URL \u89E3\u6790\u9519\u8BEF\uFF0C\u800C\u4E0D\u662F `malformedUriErrorHandler`\uFF0C\u56E0\u4E3A\u5B83\u73B0\u5728\u662F\u516C\u5171 API \u7684\u4E00\u90E8\u5206\u3002"
+    action: "在 `UrlSerializer.parse` 中處理 URL 解析錯誤，而不是 `malformedUriErrorHandler`，因為它現在是公共 API 的一部分。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Medium,
     step: "v17 zone deep imports",
-    action: "\u5C06 Zone.js \u7684\u6DF1\u5EA6\u5BFC\u5165\uFF08\u5982 `zone.js/bundles/zone-testing.js` \u548C `zone.js/dist/zone`\uFF09\u66F4\u6539\u4E3A `zone.js` \u548C `zone.js/testing`\u3002"
+    action: "將 Zone.js 的深度匯入（如 `zone.js/bundles/zone-testing.js` 和 `zone.js/dist/zone`）更改為 `zone.js` 和 `zone.js/testing`。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Advanced,
     step: "v17 absolute redirects",
-    action: "\u4F60\u53EF\u80FD\u9700\u8981\u8C03\u6574\u8DEF\u7531\u5668\u914D\u7F6E\u4EE5\u9632\u6B62\u7EDD\u5BF9\u91CD\u5B9A\u5411\u540E\u7684\u65E0\u9650\u91CD\u5B9A\u5411\u3002\u5728 v17 \u4E2D\uFF0C\u6211\u4EEC\u4E0D\u518D\u5728\u7EDD\u5BF9\u91CD\u5B9A\u5411\u540E\u963B\u6B62\u989D\u5916\u7684\u91CD\u5B9A\u5411\u3002"
+    action: "你可能需要調整路由器設定以防止絕對重導向後的無限重導向。在 v17 中，我們不再在絕對重導向後阻止額外的重導向。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Medium,
     step: "v17 AnimationDriver",
-    action: "\u5C06\u5BF9 `AnimationDriver.NOOP` \u7684\u5F15\u7528\u66F4\u6539\u4E3A\u4F7F\u7528 `NoopAnimationDriver`\uFF0C\u56E0\u4E3A `AnimationDriver.NOOP` \u73B0\u5728\u5DF2\u88AB\u5F03\u7528\u3002"
+    action: "將對 `AnimationDriver.NOOP` 的引用更改為使用 `NoopAnimationDriver`，因為 `AnimationDriver.NOOP` 現在已被棄用。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Basic,
     step: "v17 switch strictness",
-    action: "\u4F60\u53EF\u80FD\u9700\u8981\u8C03\u6574 `NgSwitch` \u7684\u76F8\u7B49\u6027\u68C0\u67E5\uFF0C\u56E0\u4E3A\u73B0\u5728\u9ED8\u8BA4\u91C7\u7528\u66F4\u4E25\u683C\u7684 `===` \u800C\u4E0D\u662F `==`\u3002Angular \u5C06\u4E3A\u9700\u8981\u63D0\u4F9B\u8C03\u6574\u7684\u7528\u6CD5\u8BB0\u5F55\u8B66\u544A\u6D88\u606F\u3002"
+    action: "你可能需要調整 `NgSwitch` 的相等性檢查，因為現在預設採用更嚴格的 `===` 而不是 `==`。Angular 將為需要提供調整的用法記錄警告訊息。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Advanced,
     step: "v17 mutate in signals",
-    action: "\u5728 Angular \u4FE1\u53F7\u4E2D\u4F7F\u7528 `update` \u4EE3\u66FF `mutate`\u3002\u4F8B\u5982\uFF0C`items.mutate(itemsArray => itemsArray.push(newItem));` \u73B0\u5728\u662F `items.update(itemsArray => [itemsArray, \u2026newItem]);`"
+    action: "在 Angular 訊號中使用 `update` 代替 `mutate`。例如，`items.mutate(itemsArray => itemsArray.push(newItem));` 現在是 `items.update(itemsArray => [itemsArray, …newItem]);`"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Medium,
     step: "v17 withNoDomReuse",
-    action: "\u8981\u7981\u7528\u6C34\u5408\u4F5C\u7528\uFF0C\u8BF7\u4F7F\u7528 `ngSkipHydration` \u6216\u4ECE\u63D0\u4F9B\u7A0B\u5E8F\u5217\u8868\u4E2D\u5220\u9664 `provideClientHydration` \u8C03\u7528\uFF0C\u56E0\u4E3A `withNoDomReuse` \u4E0D\u518D\u662F\u516C\u5171 API \u7684\u4E00\u90E8\u5206\u3002"
+    action: "要停用水合作用，請使用 `ngSkipHydration` 或從提供程式清單中刪除 `provideClientHydration` 呼叫，因為 `withNoDomReuse` 不再是公共 API 的一部分。"
   },
   {
     possibleIn: 1700,
     necessaryAsOf: 1700,
     level: ApplicationComplexity.Basic,
     step: "v17 paramsInheritanceStrategy",
-    action: "\u5982\u679C\u4F60\u5E0C\u671B `loadComponent` \u8DEF\u7531\u7684\u5B50\u8DEF\u7531\u4ECE\u5176\u7236\u8DEF\u7531\u7EE7\u627F\u6570\u636E\uFF0C\u8BF7\u5C06 `paramsInheritanceStrategy` \u6307\u5B9A\u4E3A `always`\uFF0C\u5728 v17 \u4E2D\uFF0C\u73B0\u5728\u8BBE\u7F6E\u4E3A `emptyOnly`\u3002"
+    action: "如果你希望 `loadComponent` 路由的子路由從其父路由繼承資料，請將 `paramsInheritanceStrategy` 指定為 `always`，在 v17 中，現在設定為 `emptyOnly`。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Basic,
     step: "v18 node support",
-    action: "\u5728\u5347\u7EA7\u5E94\u7528\u7A0B\u5E8F\u4E4B\u524D\uFF0C\u8BF7\u786E\u4FDD\u4F60\u6B63\u5728\u4F7F\u7528\u53D7\u652F\u6301\u7684 node.js \u7248\u672C\u3002Angular v18 \u652F\u6301 node.js \u7248\u672C\uFF1Av18.19.0 \u53CA\u66F4\u9AD8\u7248\u672C\u3002"
+    action: "在升級應用程式之前，請確保你正在使用受支援的 node.js 版本。Angular v18 支援 node.js 版本：v18.19.0 及更高版本。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Basic,
     step: "v18 ng update",
-    action: "\u5728\u5E94\u7528\u7A0B\u5E8F\u7684\u9879\u76EE\u76EE\u5F55\u4E2D\u8FD0\u884C `ng update @angular/core@18 @angular/cli@18`\uFF0C\u5C06\u4F60\u7684\u5E94\u7528\u7A0B\u5E8F\u5347\u7EA7\u5230 Angular v18\u3002"
+    action: "在應用程式的專案目錄中執行 `ng update @angular/core@18 @angular/cli@18`，將你的應用程式升級到 Angular v18。"
   },
   {
     possibleIn: 1800,
@@ -2073,164 +2073,164 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     material: true,
     step: "update @angular/material",
-    action: "\u8FD0\u884C `ng update @angular/material@18`\u3002"
+    action: "執行 `ng update @angular/material@18`。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Basic,
     step: "18.0.0 Upgrade TypeScript",
-    action: "\u5C06 TypeScript \u66F4\u65B0\u5230 5.4 \u7248\u672C\u6216\u66F4\u9AD8\u7248\u672C\u3002"
+    action: "將 TypeScript 更新到 5.4 版本或更高版本。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: "18.0.0: async has been removed, use `waitForAsync` instead",
-    action: "\u4ECE `@angular/core` \u4E2D\u66FF\u6362 `async` \u4E3A `waitForAsync`\u3002"
+    action: "從 `@angular/core` 中替換 `async` 為 `waitForAsync`。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: "18.0.0: Deprecated matchesElement method removed from AnimationDriver",
-    action: "\u5220\u9664\u5BF9 `matchesElement` \u7684\u8C03\u7528\uFF0C\u56E0\u4E3A\u5B83\u73B0\u5728\u4E0D\u518D\u662F `AnimationDriver` \u7684\u4E00\u90E8\u5206\u3002"
+    action: "刪除對 `matchesElement` 的呼叫，因為它現在不再是 `AnimationDriver` 的一部分。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Medium,
     step: "18.0.0. Use `@angular/core` StateKey and TransferState",
-    action: "\u4ECE `@angular/core` \u4E2D\u5BFC\u5165 `StateKey` \u548C `TransferState`\uFF0C\u800C\u4E0D\u662F `@angular/platform-browser`\u3002"
+    action: "從 `@angular/core` 中匯入 `StateKey` 和 `TransferState`，而不是 `@angular/platform-browser`。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Medium,
     step: "18.0.0. Opt-in of caching for HTTP requests with auth headers",
-    action: "\u5728 `withHttpTransferCache` \u4E2D\u4F7F\u7528 `includeRequestsWithAuthHeaders: true` \u4EE5\u9009\u62E9\u4E0D\u7F13\u5B58\u9700\u8981\u6388\u6743\u7684 HTTP \u8BF7\u6C42\u3002"
+    action: "在 `withHttpTransferCache` 中使用 `includeRequestsWithAuthHeaders: true` 以選擇不快取需要授權的 HTTP 請求。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: "18.0.0.REMOVE_OBSOLETE_IS_WORKER",
-    action: "\u66F4\u65B0\u5E94\u7528\u7A0B\u5E8F\u4EE5\u5220\u9664 `isPlatformWorkerUi` \u548C `isPlatformWorkerApp`\uFF0C\u56E0\u4E3A\u5B83\u4EEC\u662F\u5E73\u53F0 WebWorker \u7684\u4E00\u90E8\u5206\uFF0C\u800C\u73B0\u5728\u4E0D\u518D\u662F Angular \u7684\u4E00\u90E8\u5206\u3002"
+    action: "更新應用程式以刪除 `isPlatformWorkerUi` 和 `isPlatformWorkerApp`，因為它們是平台 WebWorker 的一部分，而現在不再是 Angular 的一部分。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Medium,
     step: "18.0.0.FORCE_ZONE_CHANGE_DETECTION",
-    action: "\u6D4B\u8BD5\u53EF\u80FD\u9700\u8981\u8FD0\u884C\u989D\u5916\u7684\u53D8\u66F4\u68C0\u6D4B\u8F6E\u6B21\uFF0C\u4EE5\u5B8C\u5168\u53CD\u6620 DOM \u4E2D\u7684\u6D4B\u8BD5\u72B6\u6001\u3002\u4F5C\u4E3A\u6700\u540E\u7684\u624B\u6BB5\uFF0C\u901A\u8FC7\u5C06 `provideZoneChangeDetection({ignoreChangesOutsideZone: true})` \u6DFB\u52A0\u5230 TestBed \u7684\u63D0\u4F9B\u7A0B\u5E8F\u4E2D\uFF0C\u6062\u590D\u65E7\u7684\u884C\u4E3A\u3002"
+    action: "測試可能需要執行額外的變更檢測輪次，以完全反映 DOM 中的測試狀態。作為最後的手段，透過將 `provideZoneChangeDetection({ignoreChangesOutsideZone: true})` 新增到 TestBed 的提供程式中，恢復舊的行為。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Medium,
     step: "18.0.0: Remove two-way binding expressions in writable bindings",
-    action: "\u5220\u9664\u5728\u4F7F\u7528 `[(ngModel)]` \u7684\u6A21\u677F\u4E2D\u5199\u5165\u5C5E\u6027\u7684\u8868\u8FBE\u5F0F\u3002"
+    action: "刪除在使用 `[(ngModel)]` 的樣板中寫入屬性的表示式。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: "18.0.0: Use zones to track pending requests",
-    action: "\u5220\u9664\u5BF9 `Testability` \u65B9\u6CD5 `increasePendingRequestCount`\u3001`decreasePendingRequestCount` \u548C `getPendingRequestCount` \u7684\u8C03\u7528\u3002\u8FD9\u4E9B\u4FE1\u606F\u7531 ZoneJS \u8DDF\u8E2A\u3002"
+    action: "刪除對 `Testability` 方法 `increasePendingRequestCount`、`decreasePendingRequestCount` 和 `getPendingRequestCount` 的呼叫。這些訊息由 ZoneJS 跟蹤。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Medium,
     step: "18.0.0: Move shared providers to the routed component",
-    action: "\u5C06\u5E94\u8BE5\u5BF9\u8DEF\u7531\u7EC4\u4EF6\u53EF\u7528\u7684\u4EFB\u4F55\u73AF\u5883\u63D0\u4F9B\u8005\u4ECE\u5B9A\u4E49 `RouterOutlet` \u7684\u7EC4\u4EF6\u79FB\u52A8\u5230 `bootstrapApplication` \u6216 `Route` \u914D\u7F6E\u7684\u63D0\u4F9B\u8005\u4E2D\u3002"
+    action: "將應該對路由元件可用的任何環境提供者從定義 `RouterOutlet` 的元件移動到 `bootstrapApplication` 或 `Route` 設定的提供者中。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: "18.0.0 Use RedirectCommand or new NavigationBehaviorOptions",
-    action: "\u5F53\u5B88\u536B\u5C06 `UrlTree` \u4F5C\u4E3A\u91CD\u5B9A\u5411\u8FD4\u56DE\u65F6\uFF0C\u91CD\u5B9A\u5411\u5BFC\u822A\u73B0\u5728\u5C06\u4F7F\u7528 `replaceUrl`\uFF0C\u5982\u679C\u521D\u59CB\u5BFC\u822A\u4E5F\u4F7F\u7528\u4E86 `replaceUrl` \u9009\u9879\u3002\u5982\u679C\u4F60\u5E0C\u671B\u4FDD\u7559\u4EE5\u524D\u7684\u884C\u4E3A\uFF0C\u8BF7\u4F7F\u7528\u65B0\u7684 `NavigationBehaviorOptions` \u914D\u7F6E\u91CD\u5B9A\u5411\uFF0C\u65B9\u6CD5\u662F\u8FD4\u56DE\u5177\u6709\u6240\u9700\u9009\u9879\u7684 `RedirectCommand` \u800C\u4E0D\u662F `UrlTree`\u3002"
+    action: "當守衛將 `UrlTree` 作為重導向回傳時，重導向導向現在將使用 `replaceUrl`，如果初始導向也使用了 `replaceUrl` 選項。如果你希望保留以前的行為，請使用新的 `NavigationBehaviorOptions` 設定重導向，方法是回傳具有所需選項的 `RedirectCommand` 而不是 `UrlTree`。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: "18.0.0: Remove deprecated resource cache providers",
-    action: "\u5220\u9664 `RESOURCE_CACHE_PROVIDER` \u7684\u4F9D\u8D56\u9879\uFF0C\u56E0\u4E3A\u5B83\u4E0D\u518D\u662F Angular \u8FD0\u884C\u65F6\u7684\u4E00\u90E8\u5206\u3002"
+    action: "刪除 `RESOURCE_CACHE_PROVIDER` 的依賴項，因為它不再是 Angular 執行時的一部分。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: "18.0.0: Update Node.js URL parsing in `ServerPlatformLocation`",
-    action: "\u5728 `@angular/platform-server` \u4E2D\uFF0C\u73B0\u5728 `pathname` \u603B\u662F\u4EE5 `/` \u7ED3\u5C3E\uFF0C\u800C http: \u548C https: \u7684\u9ED8\u8BA4\u7AEF\u53E3\u5206\u522B\u662F 80 \u548C 443\u3002"
+    action: "在 `@angular/platform-server` 中，現在 `pathname` 總是以 `/` 結尾，而 http: 和 https: 的預設連接埠分別是 80 和 443。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Medium,
     step: "18.0.0. Use absolute URLs",
-    action: "\u63D0\u4F9B\u7EDD\u5BF9 `url`\uFF0C\u800C\u4E0D\u662F\u4F7F\u7528 `PlatformConfig` \u4E2D\u7684 `useAbsoluteUrl` \u548C `baseUrl`\u3002"
+    action: "提供絕對 `url`，而不是使用 `PlatformConfig` 中的 `useAbsoluteUrl` 和 `baseUrl`。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: "18.0.0. Switch from `platformDynamicServer` to `platformServer`.",
-    action: "\u5C06 `platformDynamicServer` \u7684\u7528\u6CD5\u66FF\u6362\u4E3A `platformServer`\u3002\u53E6\u5916\uFF0C\u6DFB\u52A0\u4E00\u4E2A `import @angular/compiler`\u3002"
+    action: "將 `platformDynamicServer` 的用法替換為 `platformServer`。另外，新增一個 `import @angular/compiler`。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Medium,
     step: "18.0.0. Remove `ServerTransferStateModule` from app imports",
-    action: "\u4ECE\u5E94\u7528\u7A0B\u5E8F\u4E2D\u5220\u9664\u6240\u6709\u5BF9 `ServerTransferStateModule` \u7684\u5BFC\u5165\u3002\u5B83\u4E0D\u518D\u9700\u8981\u3002"
+    action: "從應用程式中刪除所有對 `ServerTransferStateModule` 的匯入。它不再需要。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: "18.0.0. Update `Route.redirectTo` to accept functions",
-    action: "`Route.redirectTo` \u73B0\u5728\u53EF\u4EE5\u63A5\u53D7\u51FD\u6570\uFF0C\u800C\u4E0D\u4EC5\u4EC5\u662F\u5B57\u7B26\u4E32\u3002\u4EFB\u4F55\u76F4\u63A5\u8BFB\u53D6 `Route` \u5BF9\u8C61\u5E76\u671F\u671B `redirectTo` \u662F\u5B57\u7B26\u4E32\u7684\u4EE3\u7801\u53EF\u80FD\u9700\u8981\u66F4\u65B0\uFF0C\u4EE5\u8003\u8651\u51FD\u6570\u3002"
+    action: "`Route.redirectTo` 現在可以接受函式，而不僅僅是字串。任何直接讀取 `Route` 物件並期望 `redirectTo` 是字串的程式碼可能需要更新，以考慮函式。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: "18.0.0: Guards can return `RedirectCommand`",
-    action: "\u9664\u4E86 `UrlTree` \u548C `boolean`\uFF0C`Route` \u5B88\u536B\u548C\u89E3\u6790\u5668\u73B0\u5728\u8FD8\u53EF\u4EE5\u8FD4\u56DE\u4E00\u4E2A `RedirectCommand` \u5BF9\u8C61\u3002\u4EFB\u4F55\u76F4\u63A5\u8BFB\u53D6 `Route` \u5BF9\u8C61\u5E76\u671F\u671B\u53EA\u6709 `boolean` \u6216 `UrlTree` \u7684\u4EE3\u7801\u53EF\u80FD\u9700\u8981\u66F4\u65B0\uFF0C\u4EE5\u8003\u8651 `RedirectCommand`\u3002"
+    action: "除了 `UrlTree` 和 `boolean`，`Route` 守衛和解析器現在還可以回傳一個 `RedirectCommand` 物件。任何直接讀取 `Route` 物件並期望只有 `boolean` 或 `UrlTree` 的程式碼可能需要更新，以考慮 `RedirectCommand`。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Medium,
     step: "18.0.0: Mark `OnPush` views dirty",
-    action: "\u5BF9\u4E8E\u4F7F\u7528 `OnPush` \u53D8\u66F4\u68C0\u6D4B\u7684\u4EFB\u4F55\u7EC4\u4EF6\uFF0C\u8BF7\u786E\u4FDD\u5B83\u4EEC\u88AB\u6B63\u786E\u6807\u8BB0\u4E3A\u810F\uFF0C\u4EE5\u542F\u7528\u5BBF\u4E3B\u7ED1\u5B9A\u66F4\u65B0\u3002"
+    action: "對於使用 `OnPush` 變更檢測的任何元件，請確保它們被正確標記為髒，以啟用宿主繫結更新。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: "18.0.0-Refresh-Newly-Created-Views",
-    action: "\u8BF7\u6CE8\u610F\uFF0C\u65B0\u521B\u5EFA\u7684\u89C6\u56FE\u6216\u5728\u53D8\u66F4\u68C0\u6D4B\u671F\u95F4\u6807\u8BB0\u4E3A\u68C0\u67E5\u5E76\u91CD\u65B0\u9644\u52A0\u7684\u89C6\u56FE\u73B0\u5728\u4FDD\u8BC1\u5728\u540C\u4E00\u53D8\u66F4\u68C0\u6D4B\u5468\u671F\u4E2D\u5237\u65B0\u3002"
+    action: "請注意，新創建的檢視或在變更檢測期間標記為檢查並重新附加的檢視現在保證在同一變更檢測週期中重新整理。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: "18.0.0: `ComponentFixture.whenStable` matches `ApplicationRef.isStable`",
-    action: "\u5728\u8C03\u6574 `ComponentFixture.whenStable` \u548C `ApplicationRef.isStable` \u8BED\u4E49\u540E\uFF0C\u4F7F\u7528 `whenStable` \u65F6\u4F60\u7684\u6D4B\u8BD5\u53EF\u80FD\u9700\u8981\u66F4\u957F\u65F6\u95F4\u7B49\u5F85\u3002"
+    action: "在調整 `ComponentFixture.whenStable` 和 `ApplicationRef.isStable` 語義後，使用 `whenStable` 時你的測試可能需要更長時間等待。"
   },
   {
     possibleIn: 1800,
     necessaryAsOf: 1800,
     level: ApplicationComplexity.Advanced,
     step: "18.0.0. `ComponentFixture.autoDetect` behavior more closely matches Application behavior",
-    action: "\u5982\u679C\u4F60\u7684\u6D4B\u8BD5\u4F9D\u8D56\u4E8E `ComponentFixture.autoDetect` \u7684\u53D8\u66F4\u68C0\u6D4B\u6267\u884C\u987A\u5E8F\uFF0C\u53EF\u80FD\u4F1A\u9047\u5230\u6D4B\u8BD5\u5931\u8D25\uFF0C\u56E0\u4E3A\u5B83\u73B0\u5728\u4F1A\u5728 `ApplicationRef.tick` \u4E2D\u6267\u884C\u6D4B\u8BD5\u5939\u5177\u7684\u53D8\u66F4\u68C0\u6D4B\u3002\u4F8B\u5982\uFF0C\u8FD9\u5C06\u5BFC\u81F4\u6D4B\u8BD5\u5939\u5177\u5728\u521B\u5EFA\u4EFB\u4F55\u5BF9\u8BDD\u6846\u4E4B\u524D\u5237\u65B0\uFF0C\u800C\u4EE5\u524D\u53EF\u80FD\u76F8\u53CD\u3002"
+    action: "如果你的測試依賴於 `ComponentFixture.autoDetect` 的變更檢測執行順序，可能會遇到測試失敗，因為它現在會在 `ApplicationRef.tick` 中執行測試夾具的變更檢測。例如，這將導致測試夾具在建立任何對話框之前重新整理，而以前可能相反。"
   },
   {
-    action: "\u5728\u5E94\u7528\u7A0B\u5E8F\u7684\u9879\u76EE\u76EE\u5F55\u4E2D\uFF0C\u8FD0\u884C `ng update @angular/core@19 @angular/cli@19` \u4EE5\u5C06\u5E94\u7528\u5347\u7EA7\u5230Angular v19\u3002",
+    action: "在應用程式的專案目錄中，執行 `ng update @angular/core@19 @angular/cli@19` 以將應用升級到Angular v19。",
     level: ApplicationComplexity.Basic,
     necessaryAsOf: 1900,
     possibleIn: 1900,
@@ -2242,108 +2242,108 @@ var RECOMMENDATIONS = [
     level: ApplicationComplexity.Basic,
     material: true,
     step: "update @angular/material",
-    action: "\u8FD0\u884C `ng update @angular/material@19`\u3002"
+    action: "執行 `ng update @angular/material@19`。"
   },
   {
-    action: "Angular\u6307\u4EE4\u3001\u7EC4\u4EF6\u548C\u7BA1\u9053\u73B0\u5728\u9ED8\u8BA4\u662F\u72EC\u7ACB\u7684\u3002\u5BF9\u4E8E\u5F53\u524D\u5728NgModule\u4E2D\u58F0\u660E\u7684\u58F0\u660E\uFF0C\u9700\u660E\u786E\u6307\u5B9A `standalone: false`\u3002Angular CLI\u5C06\u81EA\u52A8\u66F4\u65B0\u4EE3\u7801\u4EE5\u53CD\u6620\u6B64\u53D8\u66F4\u3002",
+    action: "Angular指令、元件和通道現在預設是獨立的。對於當前在NgModule中宣告的宣告，需明確指定 `standalone: false`。Angular CLI將自動更新程式碼以反映此變更。",
     level: ApplicationComplexity.Basic,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0-standalone-declarations"
   },
   {
-    action: "\u8BBF\u95EE\u6A21\u677F\u5F15\u7528\u53D8\u91CF\u65F6\u79FB\u9664 `this.` \u524D\u7F00\u3002\u4F8B\u5982\uFF0C\u5C06 `<div #foo></div>{{ this.foo }}` \u91CD\u6784\u4E3A `<div #foo></div>{{ foo }}`",
+    action: "訪問樣板引用變數時移除 `this.` 字首。例如，將 `<div #foo></div>{{ this.foo }}` 重構為 `<div #foo></div>{{ foo }}`",
     level: ApplicationComplexity.Medium,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0-remove-this"
   },
   {
-    action: "\u5C06 `BrowserModule.withServerTransition()` \u7684\u7528\u6CD5\u66FF\u6362\u4E3A\u6CE8\u5165 `APP_ID` \u4EE4\u724C\u6765\u8BBE\u7F6E\u5E94\u7528 `id`\u3002",
+    action: "將 `BrowserModule.withServerTransition()` 的用法替換為注入 `APP_ID` 令牌來設定應用 `id`。",
     level: ApplicationComplexity.Basic,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0-remove-browser-module-with-server-transition"
   },
   {
-    action: "`KeyValueDiffers` \u4E2D\u7684 `factories` \u5C5E\u6027\u5DF2\u88AB\u79FB\u9664\u3002",
+    action: "`KeyValueDiffers` 中的 `factories` 屬性已被移除。",
     level: ApplicationComplexity.Advanced,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0-remove-key-value-differs-factories"
   },
   {
-    action: "\u5728angular.json\u4E2D\uFF0C\u5C06 `@angular/localize` \u6784\u5EFA\u5668\u7684 `name` \u9009\u9879\u66FF\u6362\u4E3A `project`\u3002",
+    action: "在angular.json中，將 `@angular/localize` 建構式的 `name` 選項替換為 `project`。",
     level: ApplicationComplexity.Medium,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0_localize_builder_project_option"
   },
   {
-    action: "\u5C06 `ExperimentalPendingTasks` \u91CD\u547D\u540D\u4E3A `PendingTasks`\u3002",
+    action: "將 `ExperimentalPendingTasks` 重新命名為 `PendingTasks`。",
     level: ApplicationComplexity.Advanced,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0_rename_experimental_pending_tasks"
   },
   {
-    action: "\u66F4\u65B0\u4F9D\u8D56effects\u7684 `Promise` \u65F6\u5E8F\u7684\u6D4B\u8BD5\uFF0C\u6539\u7528 `await whenStable()` \u6216\u8C03\u7528 `.detectChanges()` \u6765\u89E6\u53D1effects\u3002\u5BF9\u4E8E\u5728\u53D8\u66F4\u68C0\u6D4B\u671F\u95F4\u89E6\u53D1\u7684effects\uFF0C\u786E\u4FDD\u5B83\u4EEC\u4E0D\u4F9D\u8D56\u5E94\u7528\u5B8C\u5168\u6E32\u67D3\uFF0C\u6216\u8003\u8651\u4F7F\u7528 `afterRenderEffect()`\u3002\u4F7F\u7528\u6A21\u62DF\u65F6\u949F\u7684\u6D4B\u8BD5\u53EF\u80FD\u9700\u8981\u5FEB\u8FDB/\u6E05\u7A7A\u65F6\u949F\u3002",
+    action: "更新依賴effects的 `Promise` 時序的測試，改用 `await whenStable()` 或呼叫 `.detectChanges()` 來觸發effects。對於在變更檢測期間觸發的effects，確保它們不依賴應用完全渲染，或考慮使用 `afterRenderEffect()`。使用模擬時鐘的測試可能需要快進/清空時鐘。",
     level: ApplicationComplexity.Medium,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0.1"
   },
   {
-    action: "\u5347\u7EA7\u81F3TypeScript 5.5\u6216\u66F4\u9AD8\u7248\u672C\u3002",
+    action: "升級至TypeScript 5.5或更高版本。",
     level: ApplicationComplexity.Basic,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0.2"
   },
   {
-    action: "\u66F4\u65B0\u4F7F\u7528 `fakeAsync` \u7684\u6D4B\u8BD5\uFF1A\u5F53\u53D8\u66F4\u53D1\u751F\u5728 Angular Zone \u5916\u90E8\u65F6\uFF08\u6DF7\u5408\u6A21\u5F0F\u8C03\u5EA6\uFF09\uFF0C\u539F\u6D4B\u8BD5\u4F9D\u8D56\u7684 Zone \u5408\u5E76\u548C\u8C03\u5EA6\u7684\u7279\u5B9A\u65F6\u5E8F\u53EF\u80FD\u53D7\u5230\u5F71\u54CD\uFF0C\u56E0\u4E3A\u73B0\u5728\u8FD9\u4E9B\u8BA1\u65F6\u5668\u4F1A\u53D7 `tick` \u548C `flush` \u5F71\u54CD\u3002",
+    action: "更新使用 `fakeAsync` 的測試：當變更發生在 Angular Zone 外部時（混合模式排程），原測試依賴的 Zone 合併和排程的特定時序可能受到影響，因為現在這些計時器會受 `tick` 和 `flush` 影響。",
     level: ApplicationComplexity.Advanced,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0-timers-in-zone"
   },
   {
-    action: "\u4F7F\u7528 `createComponent` API\u4E14\u672A\u4F20\u9012\u7B2C\u4E00\u4E2A `ng-content` \u7684\u5185\u5BB9\u65F6\uFF0C\u9700\u63D0\u4F9B `document.createTextNode('')` \u4F5C\u4E3A `projectableNode` \u4EE5\u9632\u6B62\u6E32\u67D3\u9ED8\u8BA4\u56DE\u9000\u5185\u5BB9\u3002",
+    action: "使用 `createComponent` API且未傳遞第一個 `ng-content` 的內容時，需提供 `document.createTextNode('')` 作為 `projectableNode` 以防止渲染預設回退內容。",
     level: ApplicationComplexity.Medium,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0-render-default-fallback"
   },
   {
-    action: "\u66F4\u65B0\u4F9D\u8D56\u81EA\u5B9A\u4E49\u5143\u7D20\u5468\u8FB9\u53D8\u66F4\u68C0\u6D4B\u7279\u5B9A\u65F6\u5E8F\u6216\u987A\u5E8F\u7684\u6D4B\u8BD5\uFF0C\u7531\u4E8E\u5207\u6362\u81F3\u6DF7\u5408\u8C03\u5EA6\u5668\uFF0C\u65F6\u5E8F\u53EF\u80FD\u5DF2\u53D1\u751F\u53D8\u5316\u3002",
+    action: "更新依賴自定義元素周邊變更檢測特定時序或順序的測試，由於切換至混合排程器，時序可能已發生變化。",
     level: ApplicationComplexity.Advanced,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0-hybrid-scheduler-timing"
   },
   {
-    action: "\u4ECE\u4F7F\u7528 `Router.errorHandler` \u8FC1\u79FB\u5230 `provideRouter` \u7684 `withNavigationErrorHandler` \u6216 `RouterModule.forRoot` \u7684 `errorHandler`\u3002",
+    action: "從使用 `Router.errorHandler` 遷移到 `provideRouter` 的 `withNavigationErrorHandler` 或 `RouterModule.forRoot` 的 `errorHandler`。",
     level: ApplicationComplexity.Basic,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0-router-error-handler"
   },
   {
-    action: "\u66F4\u65B0\u6D4B\u8BD5\u4EE5\u5904\u7406 `ApplicationRef.tick` \u671F\u95F4\u629B\u51FA\u7684\u9519\u8BEF\uFF1A\u53EF\u901A\u8FC7\u540C\u6B65\u89E6\u53D1\u53D8\u66F4\u68C0\u6D4B\u6216\u62D2\u7EDD\u672A\u5B8C\u6210\u7684 `ComponentFixture.whenStable` Promise\u6765\u5B9E\u73B0\u3002",
+    action: "更新測試以處理 `ApplicationRef.tick` 期間丟擲的錯誤：可透過同步觸發變更檢測或拒絕未完成的 `ComponentFixture.whenStable` Promise來實現。",
     level: ApplicationComplexity.Advanced,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0-testbed-error-handling"
   },
   {
-    action: "\u66F4\u65B0 `Resolve` \u63A5\u53E3\u7684\u7528\u6CD5\uFF0C\u5728\u5176\u8FD4\u56DE\u7C7B\u578B\u4E2D\u5305\u542B `RedirectCommand`\u3002",
+    action: "更新 `Resolve` 介面的用法，在其回傳型別中包含 `RedirectCommand`。",
     level: ApplicationComplexity.Medium,
     necessaryAsOf: 1900,
     possibleIn: 1900,
     step: "19.0.0-update-resolve-interface-return-type"
   },
   {
-    action: "`fakeAsync` \u73B0\u5728\u9ED8\u8BA4\u4F1A\u6E05\u7A7A\u5F85\u5904\u7406\u8BA1\u65F6\u5668\u3002\u82E5\u6D4B\u8BD5\u9700\u8981\u539F\u6709\u884C\u4E3A\uFF0C\u9700\u5728\u9009\u9879\u53C2\u6570\u4E2D\u663E\u5F0F\u4F20\u9012 `{flush: false}`\u3002",
+    action: "`fakeAsync` 現在預設會清空待處理計時器。若測試需要原有行為，需在選項引數中顯式傳遞 `{flush: false}`。",
     level: ApplicationComplexity.Advanced,
     necessaryAsOf: 1900,
     possibleIn: 1900,
@@ -2542,17 +2542,17 @@ var __MatInternalFormField = class __MatInternalFormField {
   labelPosition;
 };
 __name(__MatInternalFormField, "_MatInternalFormField");
-__publicField(__MatInternalFormField, "\u0275fac", /* @__PURE__ */ __name(function _MatInternalFormField_Factory(__ngFactoryType__) {
+__publicField(__MatInternalFormField, "ɵfac", /* @__PURE__ */ __name(function _MatInternalFormField_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || __MatInternalFormField)();
 }, "_MatInternalFormField_Factory"));
-__publicField(__MatInternalFormField, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(__MatInternalFormField, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: __MatInternalFormField,
   selectors: [["div", "mat-internal-form-field", ""]],
   hostAttrs: [1, "mdc-form-field", "mat-internal-form-field"],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function _MatInternalFormField_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("mdc-form-field--align-end", ctx.labelPosition === "before");
+      ɵɵclassProp("mdc-form-field--align-end", ctx.labelPosition === "before");
     }
   }, "_MatInternalFormField_HostBindings"),
   inputs: {
@@ -2564,8 +2564,8 @@ __publicField(__MatInternalFormField, "\u0275cmp", /* @__PURE__ */ \u0275\u0275d
   vars: 0,
   template: /* @__PURE__ */ __name(function _MatInternalFormField_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef();
-      \u0275\u0275projection(0);
+      ɵɵprojectionDef();
+      ɵɵprojection(0);
     }
   }, "_MatInternalFormField_Template"),
   styles: [".mat-internal-form-field{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-flex;align-items:center;vertical-align:middle}.mat-internal-form-field>label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0;order:0}[dir=rtl] .mat-internal-form-field>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px}.mdc-form-field--align-end>label{margin-left:auto;margin-right:0;padding-left:0;padding-right:4px;order:-1}[dir=rtl] .mdc-form-field--align-end .mdc-form-field--align-end label{margin-left:0;margin-right:auto;padding-left:4px;padding-right:0}\n"],
@@ -2949,31 +2949,31 @@ var _MatCheckbox = class _MatCheckbox {
   }
 };
 __name(_MatCheckbox, "MatCheckbox");
-__publicField(_MatCheckbox, "\u0275fac", /* @__PURE__ */ __name(function MatCheckbox_Factory(__ngFactoryType__) {
+__publicField(_MatCheckbox, "ɵfac", /* @__PURE__ */ __name(function MatCheckbox_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCheckbox)();
 }, "MatCheckbox_Factory"));
-__publicField(_MatCheckbox, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatCheckbox, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatCheckbox,
   selectors: [["mat-checkbox"]],
   viewQuery: /* @__PURE__ */ __name(function MatCheckbox_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c02, 5);
-      \u0275\u0275viewQuery(_c12, 5);
+      ɵɵviewQuery(_c02, 5);
+      ɵɵviewQuery(_c12, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._inputElement = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._labelElement = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._inputElement = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._labelElement = _t.first);
     }
   }, "MatCheckbox_Query"),
   hostAttrs: [1, "mat-mdc-checkbox"],
   hostVars: 16,
   hostBindings: /* @__PURE__ */ __name(function MatCheckbox_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275domProperty("id", ctx.id);
-      \u0275\u0275attribute("tabindex", null)("aria-label", null)("aria-labelledby", null);
-      \u0275\u0275classMap(ctx.color ? "mat-" + ctx.color : "mat-accent");
-      \u0275\u0275classProp("_mat-animation-noopable", ctx._animationsDisabled)("mdc-checkbox--disabled", ctx.disabled)("mat-mdc-checkbox-disabled", ctx.disabled)("mat-mdc-checkbox-checked", ctx.checked)("mat-mdc-checkbox-disabled-interactive", ctx.disabledInteractive);
+      ɵɵdomProperty("id", ctx.id);
+      ɵɵattribute("tabindex", null)("aria-label", null)("aria-labelledby", null);
+      ɵɵclassMap(ctx.color ? "mat-" + ctx.color : "mat-accent");
+      ɵɵclassProp("_mat-animation-noopable", ctx._animationsDisabled)("mdc-checkbox--disabled", ctx.disabled)("mat-mdc-checkbox-disabled", ctx.disabled)("mat-mdc-checkbox-checked", ctx.checked)("mat-mdc-checkbox-disabled-interactive", ctx.disabledInteractive);
     }
   }, "MatCheckbox_HostBindings"),
   inputs: {
@@ -3001,7 +3001,7 @@ __publicField(_MatCheckbox, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompo
     indeterminateChange: "indeterminateChange"
   },
   exportAs: ["matCheckbox"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => _MatCheckbox),
     multi: true
@@ -3009,64 +3009,64 @@ __publicField(_MatCheckbox, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompo
     provide: NG_VALIDATORS,
     useExisting: _MatCheckbox,
     multi: true
-  }]), \u0275\u0275NgOnChangesFeature],
+  }]), ɵɵNgOnChangesFeature],
   ngContentSelectors: _c2,
   decls: 15,
   vars: 23,
   consts: [["checkbox", ""], ["input", ""], ["label", ""], ["mat-internal-form-field", "", 3, "click", "labelPosition"], [1, "mdc-checkbox"], [1, "mat-mdc-checkbox-touch-target", 3, "click"], ["type", "checkbox", 1, "mdc-checkbox__native-control", 3, "blur", "click", "change", "checked", "indeterminate", "disabled", "id", "required", "tabIndex"], [1, "mdc-checkbox__ripple"], [1, "mdc-checkbox__background"], ["focusable", "false", "viewBox", "0 0 24 24", "aria-hidden", "true", 1, "mdc-checkbox__checkmark"], ["fill", "none", "d", "M1.73,12.91 8.1,19.28 22.79,4.59", 1, "mdc-checkbox__checkmark-path"], [1, "mdc-checkbox__mixedmark"], ["mat-ripple", "", 1, "mat-mdc-checkbox-ripple", "mat-focus-indicator", 3, "matRippleTrigger", "matRippleDisabled", "matRippleCentered"], [1, "mdc-label", 3, "for"]],
   template: /* @__PURE__ */ __name(function MatCheckbox_Template(rf, ctx) {
     if (rf & 1) {
-      const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275projectionDef();
-      \u0275\u0275elementStart(0, "div", 3);
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function MatCheckbox_Template_div_click_0_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._preventBubblingFromLabel($event));
+      const _r1 = ɵɵgetCurrentView();
+      ɵɵprojectionDef();
+      ɵɵelementStart(0, "div", 3);
+      ɵɵlistener("click", /* @__PURE__ */ __name(function MatCheckbox_Template_div_click_0_listener($event) {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._preventBubblingFromLabel($event));
       }, "MatCheckbox_Template_div_click_0_listener"));
-      \u0275\u0275elementStart(1, "div", 4, 0)(3, "div", 5);
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function MatCheckbox_Template_div_click_3_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._onTouchTargetClick());
+      ɵɵelementStart(1, "div", 4, 0)(3, "div", 5);
+      ɵɵlistener("click", /* @__PURE__ */ __name(function MatCheckbox_Template_div_click_3_listener() {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._onTouchTargetClick());
       }, "MatCheckbox_Template_div_click_3_listener"));
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(4, "input", 6, 1);
-      \u0275\u0275listener("blur", /* @__PURE__ */ __name(function MatCheckbox_Template_input_blur_4_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._onBlur());
+      ɵɵelementEnd();
+      ɵɵelementStart(4, "input", 6, 1);
+      ɵɵlistener("blur", /* @__PURE__ */ __name(function MatCheckbox_Template_input_blur_4_listener() {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._onBlur());
       }, "MatCheckbox_Template_input_blur_4_listener"))("click", /* @__PURE__ */ __name(function MatCheckbox_Template_input_click_4_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._onInputClick());
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._onInputClick());
       }, "MatCheckbox_Template_input_click_4_listener"))("change", /* @__PURE__ */ __name(function MatCheckbox_Template_input_change_4_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._onInteractionEvent($event));
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._onInteractionEvent($event));
       }, "MatCheckbox_Template_input_change_4_listener"));
-      \u0275\u0275elementEnd();
-      \u0275\u0275element(6, "div", 7);
-      \u0275\u0275elementStart(7, "div", 8);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(8, "svg", 9);
-      \u0275\u0275element(9, "path", 10);
-      \u0275\u0275elementEnd();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275element(10, "div", 11);
-      \u0275\u0275elementEnd();
-      \u0275\u0275element(11, "div", 12);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(12, "label", 13, 2);
-      \u0275\u0275projection(14);
-      \u0275\u0275elementEnd()();
+      ɵɵelementEnd();
+      ɵɵelement(6, "div", 7);
+      ɵɵelementStart(7, "div", 8);
+      ɵɵnamespaceSVG();
+      ɵɵelementStart(8, "svg", 9);
+      ɵɵelement(9, "path", 10);
+      ɵɵelementEnd();
+      ɵɵnamespaceHTML();
+      ɵɵelement(10, "div", 11);
+      ɵɵelementEnd();
+      ɵɵelement(11, "div", 12);
+      ɵɵelementEnd();
+      ɵɵelementStart(12, "label", 13, 2);
+      ɵɵprojection(14);
+      ɵɵelementEnd()();
     }
     if (rf & 2) {
-      const checkbox_r2 = \u0275\u0275reference(2);
-      \u0275\u0275property("labelPosition", ctx.labelPosition);
-      \u0275\u0275advance(4);
-      \u0275\u0275classProp("mdc-checkbox--selected", ctx.checked);
-      \u0275\u0275property("checked", ctx.checked)("indeterminate", ctx.indeterminate)("disabled", ctx.disabled && !ctx.disabledInteractive)("id", ctx.inputId)("required", ctx.required)("tabIndex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex);
-      \u0275\u0275attribute("aria-label", ctx.ariaLabel || null)("aria-labelledby", ctx.ariaLabelledby)("aria-describedby", ctx.ariaDescribedby)("aria-checked", ctx.indeterminate ? "mixed" : null)("aria-controls", ctx.ariaControls)("aria-disabled", ctx.disabled && ctx.disabledInteractive ? true : null)("aria-expanded", ctx.ariaExpanded)("aria-owns", ctx.ariaOwns)("name", ctx.name)("value", ctx.value);
-      \u0275\u0275advance(7);
-      \u0275\u0275property("matRippleTrigger", checkbox_r2)("matRippleDisabled", ctx.disableRipple || ctx.disabled)("matRippleCentered", true);
-      \u0275\u0275advance();
-      \u0275\u0275property("for", ctx.inputId);
+      const checkbox_r2 = ɵɵreference(2);
+      ɵɵproperty("labelPosition", ctx.labelPosition);
+      ɵɵadvance(4);
+      ɵɵclassProp("mdc-checkbox--selected", ctx.checked);
+      ɵɵproperty("checked", ctx.checked)("indeterminate", ctx.indeterminate)("disabled", ctx.disabled && !ctx.disabledInteractive)("id", ctx.inputId)("required", ctx.required)("tabIndex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex);
+      ɵɵattribute("aria-label", ctx.ariaLabel || null)("aria-labelledby", ctx.ariaLabelledby)("aria-describedby", ctx.ariaDescribedby)("aria-checked", ctx.indeterminate ? "mixed" : null)("aria-controls", ctx.ariaControls)("aria-disabled", ctx.disabled && ctx.disabledInteractive ? true : null)("aria-expanded", ctx.ariaExpanded)("aria-owns", ctx.ariaOwns)("name", ctx.name)("value", ctx.value);
+      ɵɵadvance(7);
+      ɵɵproperty("matRippleTrigger", checkbox_r2)("matRippleDisabled", ctx.disableRipple || ctx.disabled)("matRippleCentered", true);
+      ɵɵadvance();
+      ɵɵproperty("for", ctx.inputId);
     }
   }, "MatCheckbox_Template"),
   dependencies: [MatRipple, _MatInternalFormField],
@@ -3267,15 +3267,15 @@ var MatCheckbox = _MatCheckbox;
 var _MatCheckboxModule = class _MatCheckboxModule {
 };
 __name(_MatCheckboxModule, "MatCheckboxModule");
-__publicField(_MatCheckboxModule, "\u0275fac", /* @__PURE__ */ __name(function MatCheckboxModule_Factory(__ngFactoryType__) {
+__publicField(_MatCheckboxModule, "ɵfac", /* @__PURE__ */ __name(function MatCheckboxModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCheckboxModule)();
 }, "MatCheckboxModule_Factory"));
-__publicField(_MatCheckboxModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_MatCheckboxModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _MatCheckboxModule,
   imports: [MatCheckbox, MatCommonModule],
   exports: [MatCheckbox, MatCommonModule]
 }));
-__publicField(_MatCheckboxModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_MatCheckboxModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   imports: [MatCheckbox, MatCommonModule, MatCommonModule]
 }));
 var MatCheckboxModule = _MatCheckboxModule;
@@ -3293,10 +3293,10 @@ var MatCheckboxModule = _MatCheckboxModule;
 var __CdkTextFieldStyleLoader = class __CdkTextFieldStyleLoader {
 };
 __name(__CdkTextFieldStyleLoader, "_CdkTextFieldStyleLoader");
-__publicField(__CdkTextFieldStyleLoader, "\u0275fac", /* @__PURE__ */ __name(function _CdkTextFieldStyleLoader_Factory(__ngFactoryType__) {
+__publicField(__CdkTextFieldStyleLoader, "ɵfac", /* @__PURE__ */ __name(function _CdkTextFieldStyleLoader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || __CdkTextFieldStyleLoader)();
 }, "_CdkTextFieldStyleLoader_Factory"));
-__publicField(__CdkTextFieldStyleLoader, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(__CdkTextFieldStyleLoader, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: __CdkTextFieldStyleLoader,
   selectors: [["ng-component"]],
   hostAttrs: ["cdk-text-field-style-loader", ""],
@@ -3387,12 +3387,12 @@ var _AutofillMonitor = class _AutofillMonitor {
   }
 };
 __name(_AutofillMonitor, "AutofillMonitor");
-__publicField(_AutofillMonitor, "\u0275fac", /* @__PURE__ */ __name(function AutofillMonitor_Factory(__ngFactoryType__) {
+__publicField(_AutofillMonitor, "ɵfac", /* @__PURE__ */ __name(function AutofillMonitor_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AutofillMonitor)();
 }, "AutofillMonitor_Factory"));
-__publicField(_AutofillMonitor, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_AutofillMonitor, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _AutofillMonitor,
-  factory: _AutofillMonitor.\u0275fac,
+  factory: _AutofillMonitor.ɵfac,
   providedIn: "root"
 }));
 var AutofillMonitor = _AutofillMonitor;
@@ -3419,10 +3419,10 @@ var _CdkAutofill = class _CdkAutofill {
   }
 };
 __name(_CdkAutofill, "CdkAutofill");
-__publicField(_CdkAutofill, "\u0275fac", /* @__PURE__ */ __name(function CdkAutofill_Factory(__ngFactoryType__) {
+__publicField(_CdkAutofill, "ɵfac", /* @__PURE__ */ __name(function CdkAutofill_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkAutofill)();
 }, "CdkAutofill_Factory"));
-__publicField(_CdkAutofill, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkAutofill, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkAutofill,
   selectors: [["", "cdkAutofill", ""]],
   outputs: {
@@ -3678,16 +3678,16 @@ var _CdkTextareaAutosize = class _CdkTextareaAutosize {
   }
 };
 __name(_CdkTextareaAutosize, "CdkTextareaAutosize");
-__publicField(_CdkTextareaAutosize, "\u0275fac", /* @__PURE__ */ __name(function CdkTextareaAutosize_Factory(__ngFactoryType__) {
+__publicField(_CdkTextareaAutosize, "ɵfac", /* @__PURE__ */ __name(function CdkTextareaAutosize_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkTextareaAutosize)();
 }, "CdkTextareaAutosize_Factory"));
-__publicField(_CdkTextareaAutosize, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkTextareaAutosize, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkTextareaAutosize,
   selectors: [["textarea", "cdkTextareaAutosize", ""]],
   hostAttrs: ["rows", "1", 1, "cdk-textarea-autosize"],
   hostBindings: /* @__PURE__ */ __name(function CdkTextareaAutosize_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("input", /* @__PURE__ */ __name(function CdkTextareaAutosize_input_HostBindingHandler() {
+      ɵɵlistener("input", /* @__PURE__ */ __name(function CdkTextareaAutosize_input_HostBindingHandler() {
         return ctx._noopInputHandler();
       }, "CdkTextareaAutosize_input_HostBindingHandler"));
     }
@@ -3739,15 +3739,15 @@ var CdkTextareaAutosize = _CdkTextareaAutosize;
 var _TextFieldModule = class _TextFieldModule {
 };
 __name(_TextFieldModule, "TextFieldModule");
-__publicField(_TextFieldModule, "\u0275fac", /* @__PURE__ */ __name(function TextFieldModule_Factory(__ngFactoryType__) {
+__publicField(_TextFieldModule, "ɵfac", /* @__PURE__ */ __name(function TextFieldModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _TextFieldModule)();
 }, "TextFieldModule_Factory"));
-__publicField(_TextFieldModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_TextFieldModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _TextFieldModule,
   imports: [CdkAutofill, CdkTextareaAutosize],
   exports: [CdkAutofill, CdkTextareaAutosize]
 }));
-__publicField(_TextFieldModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({}));
+__publicField(_TextFieldModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({}));
 var TextFieldModule = _TextFieldModule;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TextFieldModule, [{
@@ -3766,15 +3766,15 @@ var MAT_INPUT_VALUE_ACCESSOR = new InjectionToken("MAT_INPUT_VALUE_ACCESSOR");
 var _MatFormFieldModule = class _MatFormFieldModule {
 };
 __name(_MatFormFieldModule, "MatFormFieldModule");
-__publicField(_MatFormFieldModule, "\u0275fac", /* @__PURE__ */ __name(function MatFormFieldModule_Factory(__ngFactoryType__) {
+__publicField(_MatFormFieldModule, "ɵfac", /* @__PURE__ */ __name(function MatFormFieldModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatFormFieldModule)();
 }, "MatFormFieldModule_Factory"));
-__publicField(_MatFormFieldModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_MatFormFieldModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _MatFormFieldModule,
   imports: [MatCommonModule, ObserversModule, MatFormField, MatLabel, MatError, MatHint, MatPrefix, MatSuffix],
   exports: [MatFormField, MatLabel, MatHint, MatError, MatPrefix, MatSuffix, MatCommonModule]
 }));
-__publicField(_MatFormFieldModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_MatFormFieldModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   imports: [MatCommonModule, ObserversModule, MatFormField, MatCommonModule]
 }));
 var MatFormFieldModule = _MatFormFieldModule;
@@ -4167,17 +4167,17 @@ var _MatInput = class _MatInput {
   }
 };
 __name(_MatInput, "MatInput");
-__publicField(_MatInput, "\u0275fac", /* @__PURE__ */ __name(function MatInput_Factory(__ngFactoryType__) {
+__publicField(_MatInput, "ɵfac", /* @__PURE__ */ __name(function MatInput_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatInput)();
 }, "MatInput_Factory"));
-__publicField(_MatInput, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatInput, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatInput,
   selectors: [["input", "matInput", ""], ["textarea", "matInput", ""], ["select", "matNativeControl", ""], ["input", "matNativeControl", ""], ["textarea", "matNativeControl", ""]],
   hostAttrs: [1, "mat-mdc-input-element"],
   hostVars: 21,
   hostBindings: /* @__PURE__ */ __name(function MatInput_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("focus", /* @__PURE__ */ __name(function MatInput_focus_HostBindingHandler() {
+      ɵɵlistener("focus", /* @__PURE__ */ __name(function MatInput_focus_HostBindingHandler() {
         return ctx._focusChanged(true);
       }, "MatInput_focus_HostBindingHandler"))("blur", /* @__PURE__ */ __name(function MatInput_blur_HostBindingHandler() {
         return ctx._focusChanged(false);
@@ -4186,9 +4186,9 @@ __publicField(_MatInput, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirectiv
       }, "MatInput_input_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275domProperty("id", ctx.id)("disabled", ctx.disabled && !ctx.disabledInteractive)("required", ctx.required);
-      \u0275\u0275attribute("name", ctx.name || null)("readonly", ctx._getReadonlyAttribute())("aria-disabled", ctx.disabled && ctx.disabledInteractive ? "true" : null)("aria-invalid", ctx.empty && ctx.required ? null : ctx.errorState)("aria-required", ctx.required)("id", ctx.id);
-      \u0275\u0275classProp("mat-input-server", ctx._isServer)("mat-mdc-form-field-textarea-control", ctx._isInFormField && ctx._isTextarea)("mat-mdc-form-field-input-control", ctx._isInFormField)("mat-mdc-input-disabled-interactive", ctx.disabledInteractive)("mdc-text-field__input", ctx._isInFormField)("mat-mdc-native-select-inline", ctx._isInlineSelect());
+      ɵɵdomProperty("id", ctx.id)("disabled", ctx.disabled && !ctx.disabledInteractive)("required", ctx.required);
+      ɵɵattribute("name", ctx.name || null)("readonly", ctx._getReadonlyAttribute())("aria-disabled", ctx.disabled && ctx.disabledInteractive ? "true" : null)("aria-invalid", ctx.empty && ctx.required ? null : ctx.errorState)("aria-required", ctx.required)("id", ctx.id);
+      ɵɵclassProp("mat-input-server", ctx._isServer)("mat-mdc-form-field-textarea-control", ctx._isInFormField && ctx._isTextarea)("mat-mdc-form-field-input-control", ctx._isInFormField)("mat-mdc-input-disabled-interactive", ctx.disabledInteractive)("mdc-text-field__input", ctx._isInFormField)("mat-mdc-native-select-inline", ctx._isInlineSelect());
     }
   }, "MatInput_HostBindings"),
   inputs: {
@@ -4205,10 +4205,10 @@ __publicField(_MatInput, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirectiv
     disabledInteractive: [2, "disabledInteractive", "disabledInteractive", booleanAttribute]
   },
   exportAs: ["matInput"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MatFormFieldControl,
     useExisting: _MatInput
-  }]), \u0275\u0275NgOnChangesFeature]
+  }]), ɵɵNgOnChangesFeature]
 }));
 var MatInput = _MatInput;
 (() => {
@@ -4296,15 +4296,15 @@ var MatInput = _MatInput;
 var _MatInputModule = class _MatInputModule {
 };
 __name(_MatInputModule, "MatInputModule");
-__publicField(_MatInputModule, "\u0275fac", /* @__PURE__ */ __name(function MatInputModule_Factory(__ngFactoryType__) {
+__publicField(_MatInputModule, "ɵfac", /* @__PURE__ */ __name(function MatInputModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatInputModule)();
 }, "MatInputModule_Factory"));
-__publicField(_MatInputModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_MatInputModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _MatInputModule,
   imports: [MatCommonModule, MatFormFieldModule, MatInput],
   exports: [MatInput, MatFormFieldModule, TextFieldModule, MatCommonModule]
 }));
-__publicField(_MatInputModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_MatInputModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   imports: [MatCommonModule, MatFormFieldModule, MatFormFieldModule, TextFieldModule, MatCommonModule]
 }));
 var MatInputModule = _MatInputModule;
@@ -4335,17 +4335,17 @@ var _MatCard = class _MatCard {
   }
 };
 __name(_MatCard, "MatCard");
-__publicField(_MatCard, "\u0275fac", /* @__PURE__ */ __name(function MatCard_Factory(__ngFactoryType__) {
+__publicField(_MatCard, "ɵfac", /* @__PURE__ */ __name(function MatCard_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCard)();
 }, "MatCard_Factory"));
-__publicField(_MatCard, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatCard, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatCard,
   selectors: [["mat-card"]],
   hostAttrs: [1, "mat-mdc-card", "mdc-card"],
   hostVars: 8,
   hostBindings: /* @__PURE__ */ __name(function MatCard_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("mat-mdc-card-outlined", ctx.appearance === "outlined")("mdc-card--outlined", ctx.appearance === "outlined")("mat-mdc-card-filled", ctx.appearance === "filled")("mdc-card--filled", ctx.appearance === "filled");
+      ɵɵclassProp("mat-mdc-card-outlined", ctx.appearance === "outlined")("mdc-card--outlined", ctx.appearance === "outlined")("mat-mdc-card-filled", ctx.appearance === "filled")("mdc-card--filled", ctx.appearance === "filled");
     }
   }, "MatCard_HostBindings"),
   inputs: {
@@ -4357,8 +4357,8 @@ __publicField(_MatCard, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent
   vars: 0,
   template: /* @__PURE__ */ __name(function MatCard_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef();
-      \u0275\u0275projection(0);
+      ɵɵprojectionDef();
+      ɵɵprojection(0);
     }
   }, "MatCard_Template"),
   styles: ['.mat-mdc-card{display:flex;flex-direction:column;box-sizing:border-box;position:relative;border-style:solid;border-width:0;background-color:var(--mat-card-elevated-container-color, var(--mat-sys-surface-container-low));border-color:var(--mat-card-elevated-container-color, var(--mat-sys-surface-container-low));border-radius:var(--mat-card-elevated-container-shape, var(--mat-sys-corner-medium));box-shadow:var(--mat-card-elevated-container-elevation, var(--mat-sys-level1))}.mat-mdc-card::after{position:absolute;top:0;left:0;width:100%;height:100%;border:solid 1px rgba(0,0,0,0);content:"";display:block;pointer-events:none;box-sizing:border-box;border-radius:var(--mat-card-elevated-container-shape, var(--mat-sys-corner-medium))}.mat-mdc-card-outlined{background-color:var(--mat-card-outlined-container-color, var(--mat-sys-surface));border-radius:var(--mat-card-outlined-container-shape, var(--mat-sys-corner-medium));border-width:var(--mat-card-outlined-outline-width, 1px);border-color:var(--mat-card-outlined-outline-color, var(--mat-sys-outline-variant));box-shadow:var(--mat-card-outlined-container-elevation, var(--mat-sys-level0))}.mat-mdc-card-outlined::after{border:none}.mat-mdc-card-filled{background-color:var(--mat-card-filled-container-color, var(--mat-sys-surface-container-highest));border-radius:var(--mat-card-filled-container-shape, var(--mat-sys-corner-medium));box-shadow:var(--mat-card-filled-container-elevation, var(--mat-sys-level0))}.mdc-card__media{position:relative;box-sizing:border-box;background-repeat:no-repeat;background-position:center;background-size:cover}.mdc-card__media::before{display:block;content:""}.mdc-card__media:first-child{border-top-left-radius:inherit;border-top-right-radius:inherit}.mdc-card__media:last-child{border-bottom-left-radius:inherit;border-bottom-right-radius:inherit}.mat-mdc-card-actions{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;min-height:52px;padding:8px}.mat-mdc-card-title{font-family:var(--mat-card-title-text-font, var(--mat-sys-title-large-font));line-height:var(--mat-card-title-text-line-height, var(--mat-sys-title-large-line-height));font-size:var(--mat-card-title-text-size, var(--mat-sys-title-large-size));letter-spacing:var(--mat-card-title-text-tracking, var(--mat-sys-title-large-tracking));font-weight:var(--mat-card-title-text-weight, var(--mat-sys-title-large-weight))}.mat-mdc-card-subtitle{color:var(--mat-card-subtitle-text-color, var(--mat-sys-on-surface));font-family:var(--mat-card-subtitle-text-font, var(--mat-sys-title-medium-font));line-height:var(--mat-card-subtitle-text-line-height, var(--mat-sys-title-medium-line-height));font-size:var(--mat-card-subtitle-text-size, var(--mat-sys-title-medium-size));letter-spacing:var(--mat-card-subtitle-text-tracking, var(--mat-sys-title-medium-tracking));font-weight:var(--mat-card-subtitle-text-weight, var(--mat-sys-title-medium-weight))}.mat-mdc-card-title,.mat-mdc-card-subtitle{display:block;margin:0}.mat-mdc-card-avatar~.mat-mdc-card-header-text .mat-mdc-card-title,.mat-mdc-card-avatar~.mat-mdc-card-header-text .mat-mdc-card-subtitle{padding:16px 16px 0}.mat-mdc-card-header{display:flex;padding:16px 16px 0}.mat-mdc-card-content{display:block;padding:0 16px}.mat-mdc-card-content:first-child{padding-top:16px}.mat-mdc-card-content:last-child{padding-bottom:16px}.mat-mdc-card-title-group{display:flex;justify-content:space-between;width:100%}.mat-mdc-card-avatar{height:40px;width:40px;border-radius:50%;flex-shrink:0;margin-bottom:16px;object-fit:cover}.mat-mdc-card-avatar~.mat-mdc-card-header-text .mat-mdc-card-subtitle,.mat-mdc-card-avatar~.mat-mdc-card-header-text .mat-mdc-card-title{line-height:normal}.mat-mdc-card-sm-image{width:80px;height:80px}.mat-mdc-card-md-image{width:112px;height:112px}.mat-mdc-card-lg-image{width:152px;height:152px}.mat-mdc-card-xl-image{width:240px;height:240px}.mat-mdc-card-subtitle~.mat-mdc-card-title,.mat-mdc-card-title~.mat-mdc-card-subtitle,.mat-mdc-card-header .mat-mdc-card-header-text .mat-mdc-card-title,.mat-mdc-card-header .mat-mdc-card-header-text .mat-mdc-card-subtitle,.mat-mdc-card-title-group .mat-mdc-card-title,.mat-mdc-card-title-group .mat-mdc-card-subtitle{padding-top:0}.mat-mdc-card-content>:last-child:not(.mat-mdc-card-footer){margin-bottom:0}.mat-mdc-card-actions-align-end{justify-content:flex-end}\n'],
@@ -4393,10 +4393,10 @@ var MatCard = _MatCard;
 var _MatCardTitle = class _MatCardTitle {
 };
 __name(_MatCardTitle, "MatCardTitle");
-__publicField(_MatCardTitle, "\u0275fac", /* @__PURE__ */ __name(function MatCardTitle_Factory(__ngFactoryType__) {
+__publicField(_MatCardTitle, "ɵfac", /* @__PURE__ */ __name(function MatCardTitle_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardTitle)();
 }, "MatCardTitle_Factory"));
-__publicField(_MatCardTitle, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatCardTitle, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatCardTitle,
   selectors: [["mat-card-title"], ["", "mat-card-title", ""], ["", "matCardTitle", ""]],
   hostAttrs: [1, "mat-mdc-card-title"]
@@ -4416,10 +4416,10 @@ var MatCardTitle = _MatCardTitle;
 var _MatCardTitleGroup = class _MatCardTitleGroup {
 };
 __name(_MatCardTitleGroup, "MatCardTitleGroup");
-__publicField(_MatCardTitleGroup, "\u0275fac", /* @__PURE__ */ __name(function MatCardTitleGroup_Factory(__ngFactoryType__) {
+__publicField(_MatCardTitleGroup, "ɵfac", /* @__PURE__ */ __name(function MatCardTitleGroup_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardTitleGroup)();
 }, "MatCardTitleGroup_Factory"));
-__publicField(_MatCardTitleGroup, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatCardTitleGroup, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatCardTitleGroup,
   selectors: [["mat-card-title-group"]],
   hostAttrs: [1, "mat-mdc-card-title-group"],
@@ -4428,12 +4428,12 @@ __publicField(_MatCardTitleGroup, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defin
   vars: 0,
   template: /* @__PURE__ */ __name(function MatCardTitleGroup_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef(_c13);
-      \u0275\u0275domElementStart(0, "div");
-      \u0275\u0275projection(1);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275projection(2, 1);
-      \u0275\u0275projection(3, 2);
+      ɵɵprojectionDef(_c13);
+      ɵɵdomElementStart(0, "div");
+      ɵɵprojection(1);
+      ɵɵdomElementEnd();
+      ɵɵprojection(2, 1);
+      ɵɵprojection(3, 2);
     }
   }, "MatCardTitleGroup_Template"),
   encapsulation: 2,
@@ -4457,10 +4457,10 @@ var MatCardTitleGroup = _MatCardTitleGroup;
 var _MatCardContent = class _MatCardContent {
 };
 __name(_MatCardContent, "MatCardContent");
-__publicField(_MatCardContent, "\u0275fac", /* @__PURE__ */ __name(function MatCardContent_Factory(__ngFactoryType__) {
+__publicField(_MatCardContent, "ɵfac", /* @__PURE__ */ __name(function MatCardContent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardContent)();
 }, "MatCardContent_Factory"));
-__publicField(_MatCardContent, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatCardContent, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatCardContent,
   selectors: [["mat-card-content"]],
   hostAttrs: [1, "mat-mdc-card-content"]
@@ -4480,10 +4480,10 @@ var MatCardContent = _MatCardContent;
 var _MatCardSubtitle = class _MatCardSubtitle {
 };
 __name(_MatCardSubtitle, "MatCardSubtitle");
-__publicField(_MatCardSubtitle, "\u0275fac", /* @__PURE__ */ __name(function MatCardSubtitle_Factory(__ngFactoryType__) {
+__publicField(_MatCardSubtitle, "ɵfac", /* @__PURE__ */ __name(function MatCardSubtitle_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardSubtitle)();
 }, "MatCardSubtitle_Factory"));
-__publicField(_MatCardSubtitle, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatCardSubtitle, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatCardSubtitle,
   selectors: [["mat-card-subtitle"], ["", "mat-card-subtitle", ""], ["", "matCardSubtitle", ""]],
   hostAttrs: [1, "mat-mdc-card-subtitle"]
@@ -4507,17 +4507,17 @@ var _MatCardActions = class _MatCardActions {
   align = "start";
 };
 __name(_MatCardActions, "MatCardActions");
-__publicField(_MatCardActions, "\u0275fac", /* @__PURE__ */ __name(function MatCardActions_Factory(__ngFactoryType__) {
+__publicField(_MatCardActions, "ɵfac", /* @__PURE__ */ __name(function MatCardActions_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardActions)();
 }, "MatCardActions_Factory"));
-__publicField(_MatCardActions, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatCardActions, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatCardActions,
   selectors: [["mat-card-actions"]],
   hostAttrs: [1, "mat-mdc-card-actions", "mdc-card__actions"],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function MatCardActions_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("mat-mdc-card-actions-align-end", ctx.align === "end");
+      ɵɵclassProp("mat-mdc-card-actions-align-end", ctx.align === "end");
     }
   }, "MatCardActions_HostBindings"),
   inputs: {
@@ -4546,10 +4546,10 @@ var MatCardActions = _MatCardActions;
 var _MatCardHeader = class _MatCardHeader {
 };
 __name(_MatCardHeader, "MatCardHeader");
-__publicField(_MatCardHeader, "\u0275fac", /* @__PURE__ */ __name(function MatCardHeader_Factory(__ngFactoryType__) {
+__publicField(_MatCardHeader, "ɵfac", /* @__PURE__ */ __name(function MatCardHeader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardHeader)();
 }, "MatCardHeader_Factory"));
-__publicField(_MatCardHeader, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatCardHeader, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatCardHeader,
   selectors: [["mat-card-header"]],
   hostAttrs: [1, "mat-mdc-card-header"],
@@ -4559,12 +4559,12 @@ __publicField(_MatCardHeader, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCom
   consts: [[1, "mat-mdc-card-header-text"]],
   template: /* @__PURE__ */ __name(function MatCardHeader_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef(_c3);
-      \u0275\u0275projection(0);
-      \u0275\u0275domElementStart(1, "div", 0);
-      \u0275\u0275projection(2, 1);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275projection(3, 2);
+      ɵɵprojectionDef(_c3);
+      ɵɵprojection(0);
+      ɵɵdomElementStart(1, "div", 0);
+      ɵɵprojection(2, 1);
+      ɵɵdomElementEnd();
+      ɵɵprojection(3, 2);
     }
   }, "MatCardHeader_Template"),
   encapsulation: 2,
@@ -4588,10 +4588,10 @@ var MatCardHeader = _MatCardHeader;
 var _MatCardFooter = class _MatCardFooter {
 };
 __name(_MatCardFooter, "MatCardFooter");
-__publicField(_MatCardFooter, "\u0275fac", /* @__PURE__ */ __name(function MatCardFooter_Factory(__ngFactoryType__) {
+__publicField(_MatCardFooter, "ɵfac", /* @__PURE__ */ __name(function MatCardFooter_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardFooter)();
 }, "MatCardFooter_Factory"));
-__publicField(_MatCardFooter, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatCardFooter, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatCardFooter,
   selectors: [["mat-card-footer"]],
   hostAttrs: [1, "mat-mdc-card-footer"]
@@ -4611,10 +4611,10 @@ var MatCardFooter = _MatCardFooter;
 var _MatCardImage = class _MatCardImage {
 };
 __name(_MatCardImage, "MatCardImage");
-__publicField(_MatCardImage, "\u0275fac", /* @__PURE__ */ __name(function MatCardImage_Factory(__ngFactoryType__) {
+__publicField(_MatCardImage, "ɵfac", /* @__PURE__ */ __name(function MatCardImage_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardImage)();
 }, "MatCardImage_Factory"));
-__publicField(_MatCardImage, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatCardImage, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatCardImage,
   selectors: [["", "mat-card-image", ""], ["", "matCardImage", ""]],
   hostAttrs: [1, "mat-mdc-card-image", "mdc-card__media"]
@@ -4634,10 +4634,10 @@ var MatCardImage = _MatCardImage;
 var _MatCardSmImage = class _MatCardSmImage {
 };
 __name(_MatCardSmImage, "MatCardSmImage");
-__publicField(_MatCardSmImage, "\u0275fac", /* @__PURE__ */ __name(function MatCardSmImage_Factory(__ngFactoryType__) {
+__publicField(_MatCardSmImage, "ɵfac", /* @__PURE__ */ __name(function MatCardSmImage_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardSmImage)();
 }, "MatCardSmImage_Factory"));
-__publicField(_MatCardSmImage, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatCardSmImage, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatCardSmImage,
   selectors: [["", "mat-card-sm-image", ""], ["", "matCardImageSmall", ""]],
   hostAttrs: [1, "mat-mdc-card-sm-image", "mdc-card__media"]
@@ -4657,10 +4657,10 @@ var MatCardSmImage = _MatCardSmImage;
 var _MatCardMdImage = class _MatCardMdImage {
 };
 __name(_MatCardMdImage, "MatCardMdImage");
-__publicField(_MatCardMdImage, "\u0275fac", /* @__PURE__ */ __name(function MatCardMdImage_Factory(__ngFactoryType__) {
+__publicField(_MatCardMdImage, "ɵfac", /* @__PURE__ */ __name(function MatCardMdImage_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardMdImage)();
 }, "MatCardMdImage_Factory"));
-__publicField(_MatCardMdImage, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatCardMdImage, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatCardMdImage,
   selectors: [["", "mat-card-md-image", ""], ["", "matCardImageMedium", ""]],
   hostAttrs: [1, "mat-mdc-card-md-image", "mdc-card__media"]
@@ -4680,10 +4680,10 @@ var MatCardMdImage = _MatCardMdImage;
 var _MatCardLgImage = class _MatCardLgImage {
 };
 __name(_MatCardLgImage, "MatCardLgImage");
-__publicField(_MatCardLgImage, "\u0275fac", /* @__PURE__ */ __name(function MatCardLgImage_Factory(__ngFactoryType__) {
+__publicField(_MatCardLgImage, "ɵfac", /* @__PURE__ */ __name(function MatCardLgImage_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardLgImage)();
 }, "MatCardLgImage_Factory"));
-__publicField(_MatCardLgImage, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatCardLgImage, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatCardLgImage,
   selectors: [["", "mat-card-lg-image", ""], ["", "matCardImageLarge", ""]],
   hostAttrs: [1, "mat-mdc-card-lg-image", "mdc-card__media"]
@@ -4703,10 +4703,10 @@ var MatCardLgImage = _MatCardLgImage;
 var _MatCardXlImage = class _MatCardXlImage {
 };
 __name(_MatCardXlImage, "MatCardXlImage");
-__publicField(_MatCardXlImage, "\u0275fac", /* @__PURE__ */ __name(function MatCardXlImage_Factory(__ngFactoryType__) {
+__publicField(_MatCardXlImage, "ɵfac", /* @__PURE__ */ __name(function MatCardXlImage_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardXlImage)();
 }, "MatCardXlImage_Factory"));
-__publicField(_MatCardXlImage, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatCardXlImage, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatCardXlImage,
   selectors: [["", "mat-card-xl-image", ""], ["", "matCardImageXLarge", ""]],
   hostAttrs: [1, "mat-mdc-card-xl-image", "mdc-card__media"]
@@ -4726,10 +4726,10 @@ var MatCardXlImage = _MatCardXlImage;
 var _MatCardAvatar = class _MatCardAvatar {
 };
 __name(_MatCardAvatar, "MatCardAvatar");
-__publicField(_MatCardAvatar, "\u0275fac", /* @__PURE__ */ __name(function MatCardAvatar_Factory(__ngFactoryType__) {
+__publicField(_MatCardAvatar, "ɵfac", /* @__PURE__ */ __name(function MatCardAvatar_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardAvatar)();
 }, "MatCardAvatar_Factory"));
-__publicField(_MatCardAvatar, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatCardAvatar, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatCardAvatar,
   selectors: [["", "mat-card-avatar", ""], ["", "matCardAvatar", ""]],
   hostAttrs: [1, "mat-mdc-card-avatar"]
@@ -4750,15 +4750,15 @@ var CARD_DIRECTIVES = [MatCard, MatCardActions, MatCardAvatar, MatCardContent, M
 var _MatCardModule = class _MatCardModule {
 };
 __name(_MatCardModule, "MatCardModule");
-__publicField(_MatCardModule, "\u0275fac", /* @__PURE__ */ __name(function MatCardModule_Factory(__ngFactoryType__) {
+__publicField(_MatCardModule, "ɵfac", /* @__PURE__ */ __name(function MatCardModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCardModule)();
 }, "MatCardModule_Factory"));
-__publicField(_MatCardModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_MatCardModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _MatCardModule,
   imports: [MatCommonModule, MatCard, MatCardActions, MatCardAvatar, MatCardContent, MatCardFooter, MatCardHeader, MatCardImage, MatCardLgImage, MatCardMdImage, MatCardSmImage, MatCardSubtitle, MatCardTitle, MatCardTitleGroup, MatCardXlImage],
   exports: [MatCard, MatCardActions, MatCardAvatar, MatCardContent, MatCardFooter, MatCardHeader, MatCardImage, MatCardLgImage, MatCardMdImage, MatCardSmImage, MatCardSubtitle, MatCardTitle, MatCardTitleGroup, MatCardXlImage, MatCommonModule]
 }));
-__publicField(_MatCardModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_MatCardModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   imports: [MatCommonModule, MatCommonModule]
 }));
 var MatCardModule = _MatCardModule;
@@ -4883,10 +4883,10 @@ var TilePosition = _TilePosition;
 var _MatLine = class _MatLine {
 };
 __name(_MatLine, "MatLine");
-__publicField(_MatLine, "\u0275fac", /* @__PURE__ */ __name(function MatLine_Factory(__ngFactoryType__) {
+__publicField(_MatLine, "ɵfac", /* @__PURE__ */ __name(function MatLine_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatLine)();
 }, "MatLine_Factory"));
-__publicField(_MatLine, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatLine, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatLine,
   selectors: [["", "mat-line", ""], ["", "matLine", ""]],
   hostAttrs: [1, "mat-line"]
@@ -4925,15 +4925,15 @@ __name(setClass, "setClass");
 var _MatLineModule = class _MatLineModule {
 };
 __name(_MatLineModule, "MatLineModule");
-__publicField(_MatLineModule, "\u0275fac", /* @__PURE__ */ __name(function MatLineModule_Factory(__ngFactoryType__) {
+__publicField(_MatLineModule, "ɵfac", /* @__PURE__ */ __name(function MatLineModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatLineModule)();
 }, "MatLineModule_Factory"));
-__publicField(_MatLineModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_MatLineModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _MatLineModule,
   imports: [MatCommonModule, MatLine],
   exports: [MatLine, MatCommonModule]
 }));
-__publicField(_MatLineModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_MatLineModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   imports: [MatCommonModule, MatCommonModule]
 }));
 var MatLineModule = _MatLineModule;
@@ -4985,17 +4985,17 @@ var _MatGridTile = class _MatGridTile {
   }
 };
 __name(_MatGridTile, "MatGridTile");
-__publicField(_MatGridTile, "\u0275fac", /* @__PURE__ */ __name(function MatGridTile_Factory(__ngFactoryType__) {
+__publicField(_MatGridTile, "ɵfac", /* @__PURE__ */ __name(function MatGridTile_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatGridTile)();
 }, "MatGridTile_Factory"));
-__publicField(_MatGridTile, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatGridTile, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatGridTile,
   selectors: [["mat-grid-tile"]],
   hostAttrs: [1, "mat-grid-tile"],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function MatGridTile_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("rowspan", ctx.rowspan)("colspan", ctx.colspan);
+      ɵɵattribute("rowspan", ctx.rowspan)("colspan", ctx.colspan);
     }
   }, "MatGridTile_HostBindings"),
   inputs: {
@@ -5009,10 +5009,10 @@ __publicField(_MatGridTile, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompo
   consts: [[1, "mat-grid-tile-content"]],
   template: /* @__PURE__ */ __name(function MatGridTile_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef();
-      \u0275\u0275domElementStart(0, "div", 0);
-      \u0275\u0275projection(1);
-      \u0275\u0275domElementEnd();
+      ɵɵprojectionDef();
+      ɵɵdomElementStart(0, "div", 0);
+      ɵɵprojection(1);
+      ɵɵdomElementEnd();
     }
   }, "MatGridTile_Template"),
   styles: [".mat-grid-list{display:block;position:relative}.mat-grid-tile{display:block;position:absolute;overflow:hidden}.mat-grid-tile .mat-grid-tile-header,.mat-grid-tile .mat-grid-tile-footer{display:flex;align-items:center;height:48px;color:#fff;background:rgba(0,0,0,.38);overflow:hidden;padding:0 16px;position:absolute;left:0;right:0}.mat-grid-tile .mat-grid-tile-header>*,.mat-grid-tile .mat-grid-tile-footer>*{margin:0;padding:0;font-weight:normal;font-size:inherit}.mat-grid-tile .mat-grid-tile-header.mat-2-line,.mat-grid-tile .mat-grid-tile-footer.mat-2-line{height:68px}.mat-grid-tile .mat-grid-list-text{display:flex;flex-direction:column;flex:auto;box-sizing:border-box;overflow:hidden}.mat-grid-tile .mat-grid-list-text>*{margin:0;padding:0;font-weight:normal;font-size:inherit}.mat-grid-tile .mat-grid-list-text:empty{display:none}.mat-grid-tile .mat-grid-tile-header{top:0}.mat-grid-tile .mat-grid-tile-footer{bottom:0}.mat-grid-tile .mat-grid-avatar{padding-right:16px}[dir=rtl] .mat-grid-tile .mat-grid-avatar{padding-right:0;padding-left:16px}.mat-grid-tile .mat-grid-avatar:empty{display:none}.mat-grid-tile-header{font-size:var(--mat-grid-list-tile-header-primary-text-size, var(--mat-sys-body-large))}.mat-grid-tile-header .mat-line{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;box-sizing:border-box}.mat-grid-tile-header .mat-line:nth-child(n+2){font-size:var(--mat-grid-list-tile-header-secondary-text-size, var(--mat-sys-body-medium))}.mat-grid-tile-footer{font-size:var(--mat-grid-list-tile-footer-primary-text-size, var(--mat-sys-body-large))}.mat-grid-tile-footer .mat-line{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;box-sizing:border-box}.mat-grid-tile-footer .mat-line:nth-child(n+2){font-size:var(--mat-grid-list-tile-footer-secondary-text-size, var(--mat-sys-body-medium))}.mat-grid-tile-content{top:0;left:0;right:0;bottom:0;position:absolute;display:flex;align-items:center;justify-content:center;height:100%;padding:0;margin:0}\n"],
@@ -5057,19 +5057,19 @@ var _MatGridTileText = class _MatGridTileText {
   }
 };
 __name(_MatGridTileText, "MatGridTileText");
-__publicField(_MatGridTileText, "\u0275fac", /* @__PURE__ */ __name(function MatGridTileText_Factory(__ngFactoryType__) {
+__publicField(_MatGridTileText, "ɵfac", /* @__PURE__ */ __name(function MatGridTileText_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatGridTileText)();
 }, "MatGridTileText_Factory"));
-__publicField(_MatGridTileText, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatGridTileText, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatGridTileText,
   selectors: [["mat-grid-tile-header"], ["mat-grid-tile-footer"]],
   contentQueries: /* @__PURE__ */ __name(function MatGridTileText_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuery(dirIndex, MatLine, 5);
+      ɵɵcontentQuery(dirIndex, MatLine, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._lines = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._lines = _t);
     }
   }, "MatGridTileText_ContentQueries"),
   ngContentSelectors: _c23,
@@ -5078,12 +5078,12 @@ __publicField(_MatGridTileText, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineC
   consts: [[1, "mat-grid-list-text"]],
   template: /* @__PURE__ */ __name(function MatGridTileText_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef(_c14);
-      \u0275\u0275projection(0);
-      \u0275\u0275domElementStart(1, "div", 0);
-      \u0275\u0275projection(2, 1);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275projection(3, 2);
+      ɵɵprojectionDef(_c14);
+      ɵɵprojection(0);
+      ɵɵdomElementStart(1, "div", 0);
+      ɵɵprojection(2, 1);
+      ɵɵdomElementEnd();
+      ɵɵprojection(3, 2);
     }
   }, "MatGridTileText_Template"),
   encapsulation: 2,
@@ -5111,10 +5111,10 @@ var MatGridTileText = _MatGridTileText;
 var _MatGridAvatarCssMatStyler = class _MatGridAvatarCssMatStyler {
 };
 __name(_MatGridAvatarCssMatStyler, "MatGridAvatarCssMatStyler");
-__publicField(_MatGridAvatarCssMatStyler, "\u0275fac", /* @__PURE__ */ __name(function MatGridAvatarCssMatStyler_Factory(__ngFactoryType__) {
+__publicField(_MatGridAvatarCssMatStyler, "ɵfac", /* @__PURE__ */ __name(function MatGridAvatarCssMatStyler_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatGridAvatarCssMatStyler)();
 }, "MatGridAvatarCssMatStyler_Factory"));
-__publicField(_MatGridAvatarCssMatStyler, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatGridAvatarCssMatStyler, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatGridAvatarCssMatStyler,
   selectors: [["", "mat-grid-avatar", ""], ["", "matGridAvatar", ""]],
   hostAttrs: [1, "mat-grid-avatar"]
@@ -5134,10 +5134,10 @@ var MatGridAvatarCssMatStyler = _MatGridAvatarCssMatStyler;
 var _MatGridTileHeaderCssMatStyler = class _MatGridTileHeaderCssMatStyler {
 };
 __name(_MatGridTileHeaderCssMatStyler, "MatGridTileHeaderCssMatStyler");
-__publicField(_MatGridTileHeaderCssMatStyler, "\u0275fac", /* @__PURE__ */ __name(function MatGridTileHeaderCssMatStyler_Factory(__ngFactoryType__) {
+__publicField(_MatGridTileHeaderCssMatStyler, "ɵfac", /* @__PURE__ */ __name(function MatGridTileHeaderCssMatStyler_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatGridTileHeaderCssMatStyler)();
 }, "MatGridTileHeaderCssMatStyler_Factory"));
-__publicField(_MatGridTileHeaderCssMatStyler, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatGridTileHeaderCssMatStyler, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatGridTileHeaderCssMatStyler,
   selectors: [["mat-grid-tile-header"]],
   hostAttrs: [1, "mat-grid-tile-header"]
@@ -5157,10 +5157,10 @@ var MatGridTileHeaderCssMatStyler = _MatGridTileHeaderCssMatStyler;
 var _MatGridTileFooterCssMatStyler = class _MatGridTileFooterCssMatStyler {
 };
 __name(_MatGridTileFooterCssMatStyler, "MatGridTileFooterCssMatStyler");
-__publicField(_MatGridTileFooterCssMatStyler, "\u0275fac", /* @__PURE__ */ __name(function MatGridTileFooterCssMatStyler_Factory(__ngFactoryType__) {
+__publicField(_MatGridTileFooterCssMatStyler, "ɵfac", /* @__PURE__ */ __name(function MatGridTileFooterCssMatStyler_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatGridTileFooterCssMatStyler)();
 }, "MatGridTileFooterCssMatStyler_Factory"));
-__publicField(_MatGridTileFooterCssMatStyler, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatGridTileFooterCssMatStyler, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatGridTileFooterCssMatStyler,
   selectors: [["mat-grid-tile-footer"]],
   hostAttrs: [1, "mat-grid-tile-footer"]
@@ -5474,26 +5474,26 @@ var _MatGridList = class _MatGridList {
   }
 };
 __name(_MatGridList, "MatGridList");
-__publicField(_MatGridList, "\u0275fac", /* @__PURE__ */ __name(function MatGridList_Factory(__ngFactoryType__) {
+__publicField(_MatGridList, "ɵfac", /* @__PURE__ */ __name(function MatGridList_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatGridList)();
 }, "MatGridList_Factory"));
-__publicField(_MatGridList, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatGridList, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatGridList,
   selectors: [["mat-grid-list"]],
   contentQueries: /* @__PURE__ */ __name(function MatGridList_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuery(dirIndex, MatGridTile, 5);
+      ɵɵcontentQuery(dirIndex, MatGridTile, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._tiles = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._tiles = _t);
     }
   }, "MatGridList_ContentQueries"),
   hostAttrs: [1, "mat-grid-list"],
   hostVars: 1,
   hostBindings: /* @__PURE__ */ __name(function MatGridList_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("cols", ctx.cols);
+      ɵɵattribute("cols", ctx.cols);
     }
   }, "MatGridList_HostBindings"),
   inputs: {
@@ -5502,7 +5502,7 @@ __publicField(_MatGridList, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompo
     rowHeight: "rowHeight"
   },
   exportAs: ["matGridList"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_GRID_LIST,
     useExisting: _MatGridList
   }])],
@@ -5511,10 +5511,10 @@ __publicField(_MatGridList, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompo
   vars: 0,
   template: /* @__PURE__ */ __name(function MatGridList_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef();
-      \u0275\u0275domElementStart(0, "div");
-      \u0275\u0275projection(1);
-      \u0275\u0275domElementEnd();
+      ɵɵprojectionDef();
+      ɵɵdomElementStart(0, "div");
+      ɵɵprojection(1);
+      ɵɵdomElementEnd();
     }
   }, "MatGridList_Template"),
   styles: [_c32],
@@ -5564,15 +5564,15 @@ var MatGridList = _MatGridList;
 var _MatGridListModule = class _MatGridListModule {
 };
 __name(_MatGridListModule, "MatGridListModule");
-__publicField(_MatGridListModule, "\u0275fac", /* @__PURE__ */ __name(function MatGridListModule_Factory(__ngFactoryType__) {
+__publicField(_MatGridListModule, "ɵfac", /* @__PURE__ */ __name(function MatGridListModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatGridListModule)();
 }, "MatGridListModule_Factory"));
-__publicField(_MatGridListModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_MatGridListModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _MatGridListModule,
   imports: [MatLineModule, MatCommonModule, MatGridList, MatGridTile, MatGridTileText, MatGridTileHeaderCssMatStyler, MatGridTileFooterCssMatStyler, MatGridAvatarCssMatStyler],
   exports: [MatGridList, MatGridTile, MatGridTileText, MatLineModule, MatCommonModule, MatGridTileHeaderCssMatStyler, MatGridTileFooterCssMatStyler, MatGridAvatarCssMatStyler]
 }));
-__publicField(_MatGridListModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_MatGridListModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   imports: [MatLineModule, MatCommonModule, MatLineModule, MatCommonModule]
 }));
 var MatGridListModule = _MatGridListModule;
@@ -5809,17 +5809,17 @@ var _MatPseudoCheckbox = class _MatPseudoCheckbox {
   }
 };
 __name(_MatPseudoCheckbox, "MatPseudoCheckbox");
-__publicField(_MatPseudoCheckbox, "\u0275fac", /* @__PURE__ */ __name(function MatPseudoCheckbox_Factory(__ngFactoryType__) {
+__publicField(_MatPseudoCheckbox, "ɵfac", /* @__PURE__ */ __name(function MatPseudoCheckbox_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatPseudoCheckbox)();
 }, "MatPseudoCheckbox_Factory"));
-__publicField(_MatPseudoCheckbox, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatPseudoCheckbox, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatPseudoCheckbox,
   selectors: [["mat-pseudo-checkbox"]],
   hostAttrs: [1, "mat-pseudo-checkbox"],
   hostVars: 12,
   hostBindings: /* @__PURE__ */ __name(function MatPseudoCheckbox_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("mat-pseudo-checkbox-indeterminate", ctx.state === "indeterminate")("mat-pseudo-checkbox-checked", ctx.state === "checked")("mat-pseudo-checkbox-disabled", ctx.disabled)("mat-pseudo-checkbox-minimal", ctx.appearance === "minimal")("mat-pseudo-checkbox-full", ctx.appearance === "full")("_mat-animation-noopable", ctx._animationsDisabled);
+      ɵɵclassProp("mat-pseudo-checkbox-indeterminate", ctx.state === "indeterminate")("mat-pseudo-checkbox-checked", ctx.state === "checked")("mat-pseudo-checkbox-disabled", ctx.disabled)("mat-pseudo-checkbox-minimal", ctx.appearance === "minimal")("mat-pseudo-checkbox-full", ctx.appearance === "full")("_mat-animation-noopable", ctx._animationsDisabled);
     }
   }, "MatPseudoCheckbox_HostBindings"),
   inputs: {
@@ -5873,14 +5873,14 @@ var _c05 = ["button"];
 var _c15 = ["*"];
 function MatButtonToggle_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 2);
-    \u0275\u0275element(1, "mat-pseudo-checkbox", 6);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 2);
+    ɵɵelement(1, "mat-pseudo-checkbox", 6);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("disabled", ctx_r1.disabled);
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵadvance();
+    ɵɵproperty("disabled", ctx_r1.disabled);
   }
 }
 __name(MatButtonToggle_Conditional_2_Template, "MatButtonToggle_Conditional_2_Template");
@@ -6235,32 +6235,32 @@ var _MatButtonToggleGroup = class _MatButtonToggleGroup {
   }
 };
 __name(_MatButtonToggleGroup, "MatButtonToggleGroup");
-__publicField(_MatButtonToggleGroup, "\u0275fac", /* @__PURE__ */ __name(function MatButtonToggleGroup_Factory(__ngFactoryType__) {
+__publicField(_MatButtonToggleGroup, "ɵfac", /* @__PURE__ */ __name(function MatButtonToggleGroup_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatButtonToggleGroup)();
 }, "MatButtonToggleGroup_Factory"));
-__publicField(_MatButtonToggleGroup, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatButtonToggleGroup, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatButtonToggleGroup,
   selectors: [["mat-button-toggle-group"]],
   contentQueries: /* @__PURE__ */ __name(function MatButtonToggleGroup_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuery(dirIndex, MatButtonToggle, 5);
+      ɵɵcontentQuery(dirIndex, MatButtonToggle, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._buttonToggles = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._buttonToggles = _t);
     }
   }, "MatButtonToggleGroup_ContentQueries"),
   hostAttrs: [1, "mat-button-toggle-group"],
   hostVars: 6,
   hostBindings: /* @__PURE__ */ __name(function MatButtonToggleGroup_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("keydown", /* @__PURE__ */ __name(function MatButtonToggleGroup_keydown_HostBindingHandler($event) {
+      ɵɵlistener("keydown", /* @__PURE__ */ __name(function MatButtonToggleGroup_keydown_HostBindingHandler($event) {
         return ctx._keydown($event);
       }, "MatButtonToggleGroup_keydown_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275attribute("role", ctx.multiple ? "group" : "radiogroup")("aria-disabled", ctx.disabled);
-      \u0275\u0275classProp("mat-button-toggle-vertical", ctx.vertical)("mat-button-toggle-group-appearance-standard", ctx.appearance === "standard");
+      ɵɵattribute("role", ctx.multiple ? "group" : "radiogroup")("aria-disabled", ctx.disabled);
+      ɵɵclassProp("mat-button-toggle-vertical", ctx.vertical)("mat-button-toggle-group-appearance-standard", ctx.appearance === "standard");
     }
   }, "MatButtonToggleGroup_HostBindings"),
   inputs: {
@@ -6279,7 +6279,7 @@ __publicField(_MatButtonToggleGroup, "\u0275dir", /* @__PURE__ */ \u0275\u0275de
     change: "change"
   },
   exportAs: ["matButtonToggleGroup"],
-  features: [\u0275\u0275ProvidersFeature([MAT_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR, {
+  features: [ɵɵProvidersFeature([MAT_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR, {
     provide: MAT_BUTTON_TOGGLE_GROUP,
     useExisting: _MatButtonToggleGroup
   }])]
@@ -6536,32 +6536,32 @@ var _MatButtonToggle = class _MatButtonToggle {
   }
 };
 __name(_MatButtonToggle, "MatButtonToggle");
-__publicField(_MatButtonToggle, "\u0275fac", /* @__PURE__ */ __name(function MatButtonToggle_Factory(__ngFactoryType__) {
+__publicField(_MatButtonToggle, "ɵfac", /* @__PURE__ */ __name(function MatButtonToggle_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatButtonToggle)();
 }, "MatButtonToggle_Factory"));
-__publicField(_MatButtonToggle, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatButtonToggle, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatButtonToggle,
   selectors: [["mat-button-toggle"]],
   viewQuery: /* @__PURE__ */ __name(function MatButtonToggle_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c05, 5);
+      ɵɵviewQuery(_c05, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._buttonElement = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._buttonElement = _t.first);
     }
   }, "MatButtonToggle_Query"),
   hostAttrs: ["role", "presentation", 1, "mat-button-toggle"],
   hostVars: 14,
   hostBindings: /* @__PURE__ */ __name(function MatButtonToggle_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("focus", /* @__PURE__ */ __name(function MatButtonToggle_focus_HostBindingHandler() {
+      ɵɵlistener("focus", /* @__PURE__ */ __name(function MatButtonToggle_focus_HostBindingHandler() {
         return ctx.focus();
       }, "MatButtonToggle_focus_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275attribute("aria-label", null)("aria-labelledby", null)("id", ctx.id)("name", null);
-      \u0275\u0275classProp("mat-button-toggle-standalone", !ctx.buttonToggleGroup)("mat-button-toggle-checked", ctx.checked)("mat-button-toggle-disabled", ctx.disabled)("mat-button-toggle-disabled-interactive", ctx.disabledInteractive)("mat-button-toggle-appearance-standard", ctx.appearance === "standard");
+      ɵɵattribute("aria-label", null)("aria-labelledby", null)("id", ctx.id)("name", null);
+      ɵɵclassProp("mat-button-toggle-standalone", !ctx.buttonToggleGroup)("mat-button-toggle-checked", ctx.checked)("mat-button-toggle-disabled", ctx.disabled)("mat-button-toggle-disabled-interactive", ctx.disabledInteractive)("mat-button-toggle-appearance-standard", ctx.appearance === "standard");
     }
   }, "MatButtonToggle_HostBindings"),
   inputs: {
@@ -6587,27 +6587,27 @@ __publicField(_MatButtonToggle, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineC
   consts: [["button", ""], ["type", "button", 1, "mat-button-toggle-button", "mat-focus-indicator", 3, "click", "id", "disabled"], [1, "mat-button-toggle-checkbox-wrapper"], [1, "mat-button-toggle-label-content"], [1, "mat-button-toggle-focus-overlay"], ["matRipple", "", 1, "mat-button-toggle-ripple", 3, "matRippleTrigger", "matRippleDisabled"], ["state", "checked", "aria-hidden", "true", "appearance", "minimal", 3, "disabled"]],
   template: /* @__PURE__ */ __name(function MatButtonToggle_Template(rf, ctx) {
     if (rf & 1) {
-      const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275projectionDef();
-      \u0275\u0275elementStart(0, "button", 1, 0);
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function MatButtonToggle_Template_button_click_0_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._onButtonClick());
+      const _r1 = ɵɵgetCurrentView();
+      ɵɵprojectionDef();
+      ɵɵelementStart(0, "button", 1, 0);
+      ɵɵlistener("click", /* @__PURE__ */ __name(function MatButtonToggle_Template_button_click_0_listener() {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._onButtonClick());
       }, "MatButtonToggle_Template_button_click_0_listener"));
-      \u0275\u0275conditionalCreate(2, MatButtonToggle_Conditional_2_Template, 2, 1, "div", 2);
-      \u0275\u0275elementStart(3, "span", 3);
-      \u0275\u0275projection(4);
-      \u0275\u0275elementEnd()();
-      \u0275\u0275element(5, "span", 4)(6, "span", 5);
+      ɵɵconditionalCreate(2, MatButtonToggle_Conditional_2_Template, 2, 1, "div", 2);
+      ɵɵelementStart(3, "span", 3);
+      ɵɵprojection(4);
+      ɵɵelementEnd()();
+      ɵɵelement(5, "span", 4)(6, "span", 5);
     }
     if (rf & 2) {
-      const button_r3 = \u0275\u0275reference(1);
-      \u0275\u0275property("id", ctx.buttonId)("disabled", ctx.disabled && !ctx.disabledInteractive || null);
-      \u0275\u0275attribute("role", ctx.isSingleSelector() ? "radio" : "button")("tabindex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex)("aria-pressed", !ctx.isSingleSelector() ? ctx.checked : null)("aria-checked", ctx.isSingleSelector() ? ctx.checked : null)("name", ctx._getButtonName())("aria-label", ctx.ariaLabel)("aria-labelledby", ctx.ariaLabelledby)("aria-disabled", ctx.disabled && ctx.disabledInteractive ? "true" : null);
-      \u0275\u0275advance(2);
-      \u0275\u0275conditional(ctx.buttonToggleGroup && (!ctx.buttonToggleGroup.multiple && !ctx.buttonToggleGroup.hideSingleSelectionIndicator || ctx.buttonToggleGroup.multiple && !ctx.buttonToggleGroup.hideMultipleSelectionIndicator) ? 2 : -1);
-      \u0275\u0275advance(4);
-      \u0275\u0275property("matRippleTrigger", button_r3)("matRippleDisabled", ctx.disableRipple || ctx.disabled);
+      const button_r3 = ɵɵreference(1);
+      ɵɵproperty("id", ctx.buttonId)("disabled", ctx.disabled && !ctx.disabledInteractive || null);
+      ɵɵattribute("role", ctx.isSingleSelector() ? "radio" : "button")("tabindex", ctx.disabled && !ctx.disabledInteractive ? -1 : ctx.tabIndex)("aria-pressed", !ctx.isSingleSelector() ? ctx.checked : null)("aria-checked", ctx.isSingleSelector() ? ctx.checked : null)("name", ctx._getButtonName())("aria-label", ctx.ariaLabel)("aria-labelledby", ctx.ariaLabelledby)("aria-disabled", ctx.disabled && ctx.disabledInteractive ? "true" : null);
+      ɵɵadvance(2);
+      ɵɵconditional(ctx.buttonToggleGroup && (!ctx.buttonToggleGroup.multiple && !ctx.buttonToggleGroup.hideSingleSelectionIndicator || ctx.buttonToggleGroup.multiple && !ctx.buttonToggleGroup.hideMultipleSelectionIndicator) ? 2 : -1);
+      ɵɵadvance(4);
+      ɵɵproperty("matRippleTrigger", button_r3)("matRippleDisabled", ctx.disableRipple || ctx.disabled);
     }
   }, "MatButtonToggle_Template"),
   dependencies: [MatRipple, MatPseudoCheckbox],
@@ -6738,15 +6738,15 @@ var MatButtonToggle = _MatButtonToggle;
 var _MatButtonToggleModule = class _MatButtonToggleModule {
 };
 __name(_MatButtonToggleModule, "MatButtonToggleModule");
-__publicField(_MatButtonToggleModule, "\u0275fac", /* @__PURE__ */ __name(function MatButtonToggleModule_Factory(__ngFactoryType__) {
+__publicField(_MatButtonToggleModule, "ɵfac", /* @__PURE__ */ __name(function MatButtonToggleModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatButtonToggleModule)();
 }, "MatButtonToggleModule_Factory"));
-__publicField(_MatButtonToggleModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_MatButtonToggleModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _MatButtonToggleModule,
   imports: [MatCommonModule, MatRippleModule, MatButtonToggleGroup, MatButtonToggle],
   exports: [MatCommonModule, MatButtonToggleGroup, MatButtonToggle]
 }));
-__publicField(_MatButtonToggleModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_MatButtonToggleModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   imports: [MatCommonModule, MatRippleModule, MatButtonToggle, MatCommonModule]
 }));
 var MatButtonToggleModule = _MatButtonToggleModule;
@@ -6763,292 +6763,292 @@ var MatButtonToggleModule = _MatButtonToggleModule;
 // src/app/features/update/update.component.ts
 function UpdateComponent_ng_template_17_For_2_Template(rf, ctx) {
   if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "li")(1, "button", 14);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function UpdateComponent_ng_template_17_For_2_Template_button_click_1_listener() {
-      const version_r3 = \u0275\u0275restoreView(_r2).$implicit;
-      const ctx_r3 = \u0275\u0275nextContext(2);
+    const _r2 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "li")(1, "button", 14);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function UpdateComponent_ng_template_17_For_2_Template_button_click_1_listener() {
+      const version_r3 = ɵɵrestoreView(_r2).$implicit;
+      const ctx_r3 = ɵɵnextContext(2);
       ctx_r3.from = version_r3;
-      return \u0275\u0275resetView(ctx_r3.showUpdatePath());
+      return ɵɵresetView(ctx_r3.showUpdatePath());
     }, "UpdateComponent_ng_template_17_For_2_Template_button_click_1_listener"));
-    \u0275\u0275elementStart(2, "span");
-    \u0275\u0275text(3);
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(2, "span");
+    ɵɵtext(3);
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
     const version_r3 = ctx.$implicit;
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(version_r3.name);
+    ɵɵadvance(3);
+    ɵɵtextInterpolate(version_r3.name);
   }
 }
 __name(UpdateComponent_ng_template_17_For_2_Template, "UpdateComponent_ng_template_17_For_2_Template");
 function UpdateComponent_ng_template_17_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "ul", 13);
-    \u0275\u0275repeaterCreate(1, UpdateComponent_ng_template_17_For_2_Template, 4, 1, "li", null, \u0275\u0275repeaterTrackByIndex);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "ul", 13);
+    ɵɵrepeaterCreate(1, UpdateComponent_ng_template_17_For_2_Template, 4, 1, "li", null, ɵɵrepeaterTrackByIndex);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275repeater(ctx_r3.versions);
+    const ctx_r3 = ɵɵnextContext();
+    ɵɵadvance();
+    ɵɵrepeater(ctx_r3.versions);
   }
 }
 __name(UpdateComponent_ng_template_17_Template, "UpdateComponent_ng_template_17_Template");
 function UpdateComponent_ng_template_27_For_2_Template(rf, ctx) {
   if (rf & 1) {
-    const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "li")(1, "button", 14);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function UpdateComponent_ng_template_27_For_2_Template_button_click_1_listener() {
-      const version_r6 = \u0275\u0275restoreView(_r5).$implicit;
-      const ctx_r3 = \u0275\u0275nextContext(2);
+    const _r5 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "li")(1, "button", 14);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function UpdateComponent_ng_template_27_For_2_Template_button_click_1_listener() {
+      const version_r6 = ɵɵrestoreView(_r5).$implicit;
+      const ctx_r3 = ɵɵnextContext(2);
       ctx_r3.to = version_r6;
-      return \u0275\u0275resetView(ctx_r3.showUpdatePath());
+      return ɵɵresetView(ctx_r3.showUpdatePath());
     }, "UpdateComponent_ng_template_27_For_2_Template_button_click_1_listener"));
-    \u0275\u0275elementStart(2, "span");
-    \u0275\u0275text(3);
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(2, "span");
+    ɵɵtext(3);
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
     const version_r6 = ctx.$implicit;
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(version_r6.name);
+    ɵɵadvance(3);
+    ɵɵtextInterpolate(version_r6.name);
   }
 }
 __name(UpdateComponent_ng_template_27_For_2_Template, "UpdateComponent_ng_template_27_For_2_Template");
 function UpdateComponent_ng_template_27_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "ul", 13);
-    \u0275\u0275repeaterCreate(1, UpdateComponent_ng_template_27_For_2_Template, 4, 1, "li", null, \u0275\u0275repeaterTrackByIndex);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "ul", 13);
+    ɵɵrepeaterCreate(1, UpdateComponent_ng_template_27_For_2_Template, 4, 1, "li", null, ɵɵrepeaterTrackByIndex);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275repeater(ctx_r3.versions);
+    const ctx_r3 = ɵɵnextContext();
+    ɵɵadvance();
+    ɵɵrepeater(ctx_r3.versions);
   }
 }
 __name(UpdateComponent_ng_template_27_Template, "UpdateComponent_ng_template_27_Template");
 function UpdateComponent_Conditional_29_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 8)(1, "p")(2, "strong");
-    \u0275\u0275text(3, "\u8B66\u544A\uFF1A");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(4, " \u5F53\u524D\u4E3B\u8981\u7248\u672C\u4E4B\u540E\u7684\u53D1\u5E03\u8BA1\u5212\u5C1A\u672A\u6700\u7EC8\u786E\u5B9A\uFF0C\u53EF\u80FD\u4F1A\u6709\u53D8\u5316\u3002\u8FD9\u4E9B\u5EFA\u8BAE\u662F\u57FA\u4E8E\u8BA1\u5212\u4E2D\u7684\u5F03\u7528\u60C5\u51B5\u3002 ");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "div", 8)(1, "p")(2, "strong");
+    ɵɵtext(3, "警告：");
+    ɵɵelementEnd();
+    ɵɵtext(4, " 當前主要版本之後的發布計劃尚未最終確定，可能會有變化。這些建議是基於計劃中的棄用情況。 ");
+    ɵɵelementEnd()();
   }
 }
 __name(UpdateComponent_Conditional_29_Template, "UpdateComponent_Conditional_29_Template");
 function UpdateComponent_Conditional_30_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 8)(1, "p")(2, "strong");
-    \u0275\u0275text(3, "\u8B66\u544A\uFF1A");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(4, " \u6211\u4EEC\u4E0D\u652F\u6301\u964D\u7EA7 Angular \u7248\u672C\u3002 ");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "div", 8)(1, "p")(2, "strong");
+    ɵɵtext(3, "警告：");
+    ɵɵelementEnd();
+    ɵɵtext(4, " 我們不支援降級 Angular 版本。 ");
+    ɵɵelementEnd()();
   }
 }
 __name(UpdateComponent_Conditional_30_Template, "UpdateComponent_Conditional_30_Template");
 function UpdateComponent_Conditional_31_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 8)(1, "p")(2, "strong");
-    \u0275\u0275text(3, "\u8B66\u544A\uFF1A");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(4, " \u786E\u4FDD\u6309\u7167\u4EE5\u4E0B\u6307\u5357\u628A\u4F60\u7684\u5E94\u7528\u7A0B\u5E8F\u8FC1\u79FB\u5230\u65B0\u7248\u672C\u3002\u4F60\u6BCF\u6B21\u8FD0\u884C ");
-    \u0275\u0275elementStart(5, "code");
-    \u0275\u0275text(6, "ng update");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(7, " \u65F6\u4E0D\u5E94\u8BE5\u8DF3\u8FC7\u4EFB\u4F55\u4E3B\u8981\u7248\u672C\u6765\u66F4\u65B0 Angular \u5E94\u7528\u7A0B\u5E8F\u3002 ");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "div", 8)(1, "p")(2, "strong");
+    ɵɵtext(3, "警告：");
+    ɵɵelementEnd();
+    ɵɵtext(4, " 確保按照以下指南把你的應用程式遷移到新版本。你每次執行 ");
+    ɵɵelementStart(5, "code");
+    ɵɵtext(6, "ng update");
+    ɵɵelementEnd();
+    ɵɵtext(7, " 時不應該跳過任何主要版本來更新 Angular 應用程式。 ");
+    ɵɵelementEnd()();
   }
 }
 __name(UpdateComponent_Conditional_31_Template, "UpdateComponent_Conditional_31_Template");
 function UpdateComponent_Conditional_41_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p");
-    \u0275\u0275text(1, "\u5C55\u793A\u6240\u6709 Angular \u5F00\u53D1\u8005\u90FD\u611F\u5174\u8DA3\u7684\u4FE1\u606F\u3002");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "p");
+    ɵɵtext(1, "展示所有 Angular 開發者都感興趣的訊息。");
+    ɵɵelementEnd();
   }
 }
 __name(UpdateComponent_Conditional_41_Template, "UpdateComponent_Conditional_41_Template");
 function UpdateComponent_Conditional_42_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p");
-    \u0275\u0275text(1, "\u5C55\u793A\u66F4\u9AD8\u7EA7 Angular \u5F00\u53D1\u8005\u4F1A\u611F\u5174\u8DA3\u7684\u4FE1\u606F\u3002");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "p");
+    ɵɵtext(1, "展示更高階 Angular 開發者會感興趣的訊息。");
+    ɵɵelementEnd();
   }
 }
 __name(UpdateComponent_Conditional_42_Template, "UpdateComponent_Conditional_42_Template");
 function UpdateComponent_Conditional_43_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p");
-    \u0275\u0275text(1, "\u5C55\u793A\u5173\u4E8E\u8FD9\u4E2A\u66F4\u65B0\u7684\u6240\u6709\u4FE1\u606F\u3002");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "p");
+    ɵɵtext(1, "展示關於這個更新的所有訊息。");
+    ɵɵelementEnd();
   }
 }
 __name(UpdateComponent_Conditional_43_Template, "UpdateComponent_Conditional_43_Template");
 function UpdateComponent_For_47_Template(rf, ctx) {
   if (rf & 1) {
-    const _r7 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div")(1, "mat-checkbox", 15);
-    \u0275\u0275listener("change", /* @__PURE__ */ __name(function UpdateComponent_For_47_Template_mat_checkbox_change_1_listener($event) {
-      const option_r8 = \u0275\u0275restoreView(_r7).$implicit;
-      const ctx_r3 = \u0275\u0275nextContext();
+    const _r7 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "div")(1, "mat-checkbox", 15);
+    ɵɵlistener("change", /* @__PURE__ */ __name(function UpdateComponent_For_47_Template_mat_checkbox_change_1_listener($event) {
+      const option_r8 = ɵɵrestoreView(_r7).$implicit;
+      const ctx_r3 = ɵɵnextContext();
       ctx_r3.options[option_r8.id] = $event.checked;
-      return \u0275\u0275resetView(ctx_r3.showUpdatePath());
+      return ɵɵresetView(ctx_r3.showUpdatePath());
     }, "UpdateComponent_For_47_Template_mat_checkbox_change_1_listener"));
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd()();
+    ɵɵtext(2);
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
     const option_r8 = ctx.$implicit;
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("checked", ctx_r3.options[option_r8.id]);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate2("\u6211\u4F7F\u7528 ", option_r8.name, " ", option_r8.description);
+    const ctx_r3 = ɵɵnextContext();
+    ɵɵadvance();
+    ɵɵproperty("checked", ctx_r3.options[option_r8.id]);
+    ɵɵadvance();
+    ɵɵtextInterpolate2("我使用 ", option_r8.name, " ", option_r8.description);
   }
 }
 __name(UpdateComponent_For_47_Template, "UpdateComponent_For_47_Template");
 function UpdateComponent_Conditional_48_Template(rf, ctx) {
   if (rf & 1) {
-    const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "h4");
-    \u0275\u0275text(1, "\u5305\u7BA1\u7406\u5668");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "mat-button-toggle-group", 16);
-    \u0275\u0275listener("change", /* @__PURE__ */ __name(function UpdateComponent_Conditional_48_Template_mat_button_toggle_group_change_2_listener($event) {
-      \u0275\u0275restoreView(_r9);
-      const ctx_r3 = \u0275\u0275nextContext();
+    const _r9 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "h4");
+    ɵɵtext(1, "套件管理器");
+    ɵɵelementEnd();
+    ɵɵelementStart(2, "mat-button-toggle-group", 16);
+    ɵɵlistener("change", /* @__PURE__ */ __name(function UpdateComponent_Conditional_48_Template_mat_button_toggle_group_change_2_listener($event) {
+      ɵɵrestoreView(_r9);
+      const ctx_r3 = ɵɵnextContext();
       ctx_r3.packageManager = $event.value;
-      return \u0275\u0275resetView(ctx_r3.showUpdatePath());
+      return ɵɵresetView(ctx_r3.showUpdatePath());
     }, "UpdateComponent_Conditional_48_Template_mat_button_toggle_group_change_2_listener"));
-    \u0275\u0275elementStart(3, "mat-button-toggle", 17);
-    \u0275\u0275text(4, "npm");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "mat-button-toggle", 18);
-    \u0275\u0275text(6, "yarn");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(3, "mat-button-toggle", 17);
+    ɵɵtext(4, "npm");
+    ɵɵelementEnd();
+    ɵɵelementStart(5, "mat-button-toggle", 18);
+    ɵɵtext(6, "yarn");
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275advance(2);
-    \u0275\u0275property("value", ctx_r3.packageManager);
+    const ctx_r3 = ɵɵnextContext();
+    ɵɵadvance(2);
+    ɵɵproperty("value", ctx_r3.packageManager);
   }
 }
 __name(UpdateComponent_Conditional_48_Template, "UpdateComponent_Conditional_48_Template");
 function UpdateComponent_Conditional_52_For_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 19);
-    \u0275\u0275element(1, "mat-checkbox")(2, "div", 20);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 19);
+    ɵɵelement(1, "mat-checkbox")(2, "div", 20);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const r_r10 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275property("innerHTML", r_r10.renderedStep, \u0275\u0275sanitizeHtml);
+    ɵɵadvance(2);
+    ɵɵproperty("innerHTML", r_r10.renderedStep, ɵɵsanitizeHtml);
   }
 }
 __name(UpdateComponent_Conditional_52_For_6_Template, "UpdateComponent_Conditional_52_For_6_Template");
 function UpdateComponent_Conditional_52_Conditional_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div")(1, "em");
-    \u0275\u0275text(2, "\u5728\u8FD9\u4E9B\u7248\u672C\u4E4B\u95F4\u5207\u6362\u4E4B\u524D\uFF0C\u4F60\u65E0\u9700\u8FDB\u884C\u4EFB\u4F55\u64CD\u4F5C\u3002");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "div")(1, "em");
+    ɵɵtext(2, "在這些版本之間切換之前，你無需進行任何操作。");
+    ɵɵelementEnd()();
   }
 }
 __name(UpdateComponent_Conditional_52_Conditional_7_Template, "UpdateComponent_Conditional_52_Conditional_7_Template");
 function UpdateComponent_Conditional_52_Conditional_10_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div")(1, "em");
-    \u0275\u0275text(2, "\u8BF7\u5BA1\u6838\u8FD9\u4E9B\u66F4\u6539\u5E76\u6267\u884C\u8FD9\u4E9B\u64CD\u4F5C\u6765\u66F4\u65B0\u5E94\u7528\u7A0B\u5E8F\u3002");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "div")(1, "em");
+    ɵɵtext(2, "請稽核這些更改並執行這些操作來更新應用程式。");
+    ɵɵelementEnd()();
   }
 }
 __name(UpdateComponent_Conditional_52_Conditional_10_Template, "UpdateComponent_Conditional_52_Conditional_10_Template");
 function UpdateComponent_Conditional_52_For_12_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 19);
-    \u0275\u0275element(1, "mat-checkbox")(2, "div", 20);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 19);
+    ɵɵelement(1, "mat-checkbox")(2, "div", 20);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const r_r11 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275property("innerHTML", r_r11.renderedStep, \u0275\u0275sanitizeHtml);
+    ɵɵadvance(2);
+    ɵɵproperty("innerHTML", r_r11.renderedStep, ɵɵsanitizeHtml);
   }
 }
 __name(UpdateComponent_Conditional_52_For_12_Template, "UpdateComponent_Conditional_52_For_12_Template");
 function UpdateComponent_Conditional_52_Conditional_13_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div")(1, "em");
-    \u0275\u0275text(2, "\u5BF9\u8FD9\u4E9B\u7248\u672C\u4E4B\u95F4\u7684\u79FB\u52A8\uFF0C\u6CA1\u6709\u4EFB\u4F55\u5EFA\u8BAE\u3002");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "div")(1, "em");
+    ɵɵtext(2, "對這些版本之間的移動，沒有任何建議。");
+    ɵɵelementEnd()();
   }
 }
 __name(UpdateComponent_Conditional_52_Conditional_13_Template, "UpdateComponent_Conditional_52_Conditional_13_Template");
 function UpdateComponent_Conditional_52_For_17_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 19);
-    \u0275\u0275element(1, "mat-checkbox")(2, "div", 20);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 19);
+    ɵɵelement(1, "mat-checkbox")(2, "div", 20);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const r_r12 = ctx.$implicit;
-    \u0275\u0275advance(2);
-    \u0275\u0275property("innerHTML", r_r12.renderedStep, \u0275\u0275sanitizeHtml);
+    ɵɵadvance(2);
+    ɵɵproperty("innerHTML", r_r12.renderedStep, ɵɵsanitizeHtml);
   }
 }
 __name(UpdateComponent_Conditional_52_For_17_Template, "UpdateComponent_Conditional_52_For_17_Template");
 function UpdateComponent_Conditional_52_Conditional_18_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div")(1, "em");
-    \u0275\u0275text(2, "\u5728\u5207\u6362\u8FD9\u4E9B\u7248\u672C\u4E4B\u540E\uFF0C\u4F60\u65E0\u9700\u8FDB\u884C\u4EFB\u4F55\u64CD\u4F5C\u3002");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "div")(1, "em");
+    ɵɵtext(2, "在切換這些版本之後，你無需進行任何操作。");
+    ɵɵelementEnd()();
   }
 }
 __name(UpdateComponent_Conditional_52_Conditional_18_Template, "UpdateComponent_Conditional_52_Conditional_18_Template");
 function UpdateComponent_Conditional_52_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 12)(1, "h2");
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "h3");
-    \u0275\u0275text(4, "\u5728\u66F4\u65B0\u4E4B\u524D");
-    \u0275\u0275elementEnd();
-    \u0275\u0275repeaterCreate(5, UpdateComponent_Conditional_52_For_6_Template, 3, 1, "div", 19, \u0275\u0275repeaterTrackByIndex);
-    \u0275\u0275conditionalCreate(7, UpdateComponent_Conditional_52_Conditional_7_Template, 3, 0, "div");
-    \u0275\u0275elementStart(8, "h3");
-    \u0275\u0275text(9, "\u66F4\u65B0\u5230\u65B0\u7248\u672C");
-    \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(10, UpdateComponent_Conditional_52_Conditional_10_Template, 3, 0, "div");
-    \u0275\u0275repeaterCreate(11, UpdateComponent_Conditional_52_For_12_Template, 3, 1, "div", 19, \u0275\u0275repeaterTrackByIndex);
-    \u0275\u0275conditionalCreate(13, UpdateComponent_Conditional_52_Conditional_13_Template, 3, 0, "div");
-    \u0275\u0275elementStart(14, "h3");
-    \u0275\u0275text(15, "\u66F4\u65B0\u4E4B\u540E");
-    \u0275\u0275elementEnd();
-    \u0275\u0275repeaterCreate(16, UpdateComponent_Conditional_52_For_17_Template, 3, 1, "div", 19, \u0275\u0275repeaterTrackByIndex);
-    \u0275\u0275conditionalCreate(18, UpdateComponent_Conditional_52_Conditional_18_Template, 3, 0, "div");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 12)(1, "h2");
+    ɵɵtext(2);
+    ɵɵelementEnd();
+    ɵɵelementStart(3, "h3");
+    ɵɵtext(4, "在更新之前");
+    ɵɵelementEnd();
+    ɵɵrepeaterCreate(5, UpdateComponent_Conditional_52_For_6_Template, 3, 1, "div", 19, ɵɵrepeaterTrackByIndex);
+    ɵɵconditionalCreate(7, UpdateComponent_Conditional_52_Conditional_7_Template, 3, 0, "div");
+    ɵɵelementStart(8, "h3");
+    ɵɵtext(9, "更新到新版本");
+    ɵɵelementEnd();
+    ɵɵconditionalCreate(10, UpdateComponent_Conditional_52_Conditional_10_Template, 3, 0, "div");
+    ɵɵrepeaterCreate(11, UpdateComponent_Conditional_52_For_12_Template, 3, 1, "div", 19, ɵɵrepeaterTrackByIndex);
+    ɵɵconditionalCreate(13, UpdateComponent_Conditional_52_Conditional_13_Template, 3, 0, "div");
+    ɵɵelementStart(14, "h3");
+    ɵɵtext(15, "更新之後");
+    ɵɵelementEnd();
+    ɵɵrepeaterCreate(16, UpdateComponent_Conditional_52_For_17_Template, 3, 1, "div", 19, ɵɵrepeaterTrackByIndex);
+    ɵɵconditionalCreate(18, UpdateComponent_Conditional_52_Conditional_18_Template, 3, 0, "div");
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r3.title());
-    \u0275\u0275advance(3);
-    \u0275\u0275repeater(ctx_r3.beforeRecommendations);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx_r3.beforeRecommendations.length <= 0 ? 7 : -1);
-    \u0275\u0275advance(3);
-    \u0275\u0275conditional(ctx_r3.duringRecommendations.length > 0 ? 10 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275repeater(ctx_r3.duringRecommendations);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx_r3.duringRecommendations.length <= 0 ? 13 : -1);
-    \u0275\u0275advance(3);
-    \u0275\u0275repeater(ctx_r3.afterRecommendations);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx_r3.afterRecommendations.length <= 0 ? 18 : -1);
+    const ctx_r3 = ɵɵnextContext();
+    ɵɵadvance(2);
+    ɵɵtextInterpolate(ctx_r3.title());
+    ɵɵadvance(3);
+    ɵɵrepeater(ctx_r3.beforeRecommendations);
+    ɵɵadvance(2);
+    ɵɵconditional(ctx_r3.beforeRecommendations.length <= 0 ? 7 : -1);
+    ɵɵadvance(3);
+    ɵɵconditional(ctx_r3.duringRecommendations.length > 0 ? 10 : -1);
+    ɵɵadvance();
+    ɵɵrepeater(ctx_r3.duringRecommendations);
+    ɵɵadvance(2);
+    ɵɵconditional(ctx_r3.duringRecommendations.length <= 0 ? 13 : -1);
+    ɵɵadvance(3);
+    ɵɵrepeater(ctx_r3.afterRecommendations);
+    ɵɵadvance(2);
+    ɵɵconditional(ctx_r3.afterRecommendations.length <= 0 ? 18 : -1);
   }
 }
 __name(UpdateComponent_Conditional_52_Template, "UpdateComponent_Conditional_52_Template");
@@ -7062,7 +7062,7 @@ var _UpdateComponent = class _UpdateComponent {
     windows: isWindows()
   };
   optionList = [
-    { id: "ngUpgrade", name: "ngUpgrade", description: "\u5408\u5E76 AngularJS \u4E0E Angular" },
+    { id: "ngUpgrade", name: "ngUpgrade", description: "合併 AngularJS 與 Angular" },
     { id: "material", name: "Angular Material", description: "" },
     { id: "windows", name: "Windows", description: "" }
   ];
@@ -7137,13 +7137,13 @@ var _UpdateComponent = class _UpdateComponent {
     this.duringRecommendations = [];
     this.afterRecommendations = [];
     if (this.to.number < this.from.number) {
-      alert("\u6211\u4EEC\u4E0D\u652F\u6301\u964D\u7EA7 Angular \u7248\u672C\u3002");
+      alert("我們不支援降級 Angular 版本。");
       return;
     }
-    const labelTitle = "Angular \u5E94\u7528\u7A0B\u5E8F\u66F4\u65B0\u6307\u5357";
-    const labelBasic = "\u57FA\u7840\u5E94\u7528";
-    const labelMedium = "\u4E2D\u7B49\u5E94\u7528";
-    const labelAdvanced = "\u9AD8\u7EA7\u5E94\u7528";
+    const labelTitle = "Angular 應用程式更新指南";
+    const labelBasic = "基礎應用";
+    const labelMedium = "中等應用";
+    const labelAdvanced = "高階應用";
     this.title.set(`${labelTitle} v${this.from.name} -> v${this.to.name}
     for
     ${this.level < 2 ? labelBasic : this.level < 3 ? labelMedium : labelAdvanced}`);
@@ -7214,22 +7214,22 @@ var _UpdateComponent = class _UpdateComponent {
       "router"
     ];
     if (this.to.number < 600) {
-      const actionMessage = `\u5C06\u6240\u6709\u4F9D\u8D56\u9879\u66F4\u65B0\u5230\u6700\u65B0\u7684 Angular \u548C\u6B63\u786E\u7248\u672C\u7684 TypeScript\u3002`;
+      const actionMessage = `將所有依賴項更新到最新的 Angular 和正確版本的 TypeScript。`;
       if (isWindows()) {
         const packages = angularPackages.map((packageName) => `@angular/${packageName}@${angularVersion}`).join(" ") + " " + additionalDeps;
         upgradeStep = {
-          step: "\u4E00\u822C\u66F4\u65B0",
+          step: "一般更新",
           action: `${actionMessage}
-          \u5982\u679C\u4F60\u6B63\u5728\u4F7F\u7528 Windows\uFF0C\u5219\u53EF\u4EE5\u7528\uFF1A
+          如果你正在使用 Windows，則可以用：
 
 \`${this.packageManager} ${packages}\``
         };
       } else {
         const packages = `@angular/{${angularPackages.join(",")}}@${angularVersion} ${additionalDeps}`;
         upgradeStep = {
-          step: "\u4E00\u822C\u66F4\u65B0",
+          step: "一般更新",
           action: `${actionMessage}
-          \u5982\u679C\u4F60\u6B63\u5728\u4F7F\u7528 Linux/Mac\uFF0C\u5219\u53EF\u4EE5\u7528\uFF1A
+          如果你正在使用 Linux/Mac，則可以用：
 
 \`${this.packageManager} ${packages}\``
         };
@@ -7251,120 +7251,120 @@ var _UpdateComponent = class _UpdateComponent {
   }
 };
 __name(_UpdateComponent, "UpdateComponent");
-__publicField(_UpdateComponent, "\u0275fac", /* @__PURE__ */ __name(function UpdateComponent_Factory(__ngFactoryType__) {
+__publicField(_UpdateComponent, "ɵfac", /* @__PURE__ */ __name(function UpdateComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _UpdateComponent)();
 }, "UpdateComponent_Factory"));
-__publicField(_UpdateComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _UpdateComponent, selectors: [["adev-update-guide"]], hostBindings: /* @__PURE__ */ __name(function UpdateComponent_HostBindings(rf, ctx) {
+__publicField(_UpdateComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _UpdateComponent, selectors: [["adev-update-guide"]], hostBindings: /* @__PURE__ */ __name(function UpdateComponent_HostBindings(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function UpdateComponent_click_HostBindingHandler($event) {
+    ɵɵlistener("click", /* @__PURE__ */ __name(function UpdateComponent_click_HostBindingHandler($event) {
       return ctx.copyCode($event.target);
     }, "UpdateComponent_click_HostBindingHandler"));
   }
 }, "UpdateComponent_HostBindings"), decls: 53, vars: 15, consts: [["templatesMenuFrom", ""], ["templatesMenuTo", ""], [1, "page", "docs-viewer"], ["tabindex", "-1", 1, "page-header"], [1, "wizard"], [1, "adev-version-selector"], [1, "adev-template-select"], [3, "cdkMenuTriggerFor"], [1, "docs-alert", "docs-alert-critical"], [2, "margin-bottom", "16px", 3, "change", "value"], [3, "value"], ["type", "button", 1, "docs-primary-btn", "show-button", 3, "click"], [1, "recommendations"], ["cdkMenu", "", 1, "adev-template-dropdown"], ["cdkMenuItem", "", "type", "button", 3, "click"], [3, "change", "checked"], [3, "change", "value"], ["value", "npm install"], ["value", "yarn add"], [1, "adev-recommendation-item"], [3, "innerHTML"]], template: /* @__PURE__ */ __name(function UpdateComponent_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 2)(1, "h1", 3);
-    \u0275\u0275text(2, "\u66F4\u65B0\u6307\u5357");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "div", 4)(4, "div")(5, "h2");
-    \u0275\u0275text(6, "\u9009\u62E9\u4E0E\u4F60\u7684\u66F4\u65B0\u76F8\u5339\u914D\u7684\u9009\u9879");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "h3");
-    \u0275\u0275text(8, "Angular \u7248\u672C");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(9, "div", 5)(10, "span", 6);
-    \u0275\u0275text(11, " \u4ECE v. ");
-    \u0275\u0275elementStart(12, "button", 7)(13, "span");
-    \u0275\u0275text(14);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(15, "docs-icon");
-    \u0275\u0275text(16, "expand_more");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(17, UpdateComponent_ng_template_17_Template, 3, 0, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(19, "span")(20, "span", 6);
-    \u0275\u0275text(21, " \u5230 v. ");
-    \u0275\u0275elementStart(22, "button", 7)(23, "span");
-    \u0275\u0275text(24);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(25, "docs-icon");
-    \u0275\u0275text(26, "expand_more");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(27, UpdateComponent_ng_template_27_Template, 3, 0, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275conditionalCreate(29, UpdateComponent_Conditional_29_Template, 5, 0, "div", 8);
-    \u0275\u0275conditionalCreate(30, UpdateComponent_Conditional_30_Template, 5, 0, "div", 8);
-    \u0275\u0275conditionalCreate(31, UpdateComponent_Conditional_31_Template, 8, 0, "div", 8);
-    \u0275\u0275elementStart(32, "h3");
-    \u0275\u0275text(33, "\u5E94\u7528\u7A0B\u5E8F\u590D\u6742\u6027");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(34, "mat-button-toggle-group", 9);
-    \u0275\u0275listener("change", /* @__PURE__ */ __name(function UpdateComponent_Template_mat_button_toggle_group_change_34_listener($event) {
-      \u0275\u0275restoreView(_r1);
+    const _r1 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "div", 2)(1, "h1", 3);
+    ɵɵtext(2, "更新指南");
+    ɵɵelementEnd();
+    ɵɵelementStart(3, "div", 4)(4, "div")(5, "h2");
+    ɵɵtext(6, "選擇與你的更新相對應的選項");
+    ɵɵelementEnd();
+    ɵɵelementStart(7, "h3");
+    ɵɵtext(8, "Angular 版本");
+    ɵɵelementEnd();
+    ɵɵelementStart(9, "div", 5)(10, "span", 6);
+    ɵɵtext(11, " 從 v. ");
+    ɵɵelementStart(12, "button", 7)(13, "span");
+    ɵɵtext(14);
+    ɵɵelementEnd();
+    ɵɵelementStart(15, "docs-icon");
+    ɵɵtext(16, "expand_more");
+    ɵɵelementEnd()();
+    ɵɵtemplate(17, UpdateComponent_ng_template_17_Template, 3, 0, "ng-template", null, 0, ɵɵtemplateRefExtractor);
+    ɵɵelementEnd();
+    ɵɵelementStart(19, "span")(20, "span", 6);
+    ɵɵtext(21, " 到 v. ");
+    ɵɵelementStart(22, "button", 7)(23, "span");
+    ɵɵtext(24);
+    ɵɵelementEnd();
+    ɵɵelementStart(25, "docs-icon");
+    ɵɵtext(26, "expand_more");
+    ɵɵelementEnd()();
+    ɵɵtemplate(27, UpdateComponent_ng_template_27_Template, 3, 0, "ng-template", null, 1, ɵɵtemplateRefExtractor);
+    ɵɵelementEnd()()();
+    ɵɵconditionalCreate(29, UpdateComponent_Conditional_29_Template, 5, 0, "div", 8);
+    ɵɵconditionalCreate(30, UpdateComponent_Conditional_30_Template, 5, 0, "div", 8);
+    ɵɵconditionalCreate(31, UpdateComponent_Conditional_31_Template, 8, 0, "div", 8);
+    ɵɵelementStart(32, "h3");
+    ɵɵtext(33, "應用程式複雜性");
+    ɵɵelementEnd();
+    ɵɵelementStart(34, "mat-button-toggle-group", 9);
+    ɵɵlistener("change", /* @__PURE__ */ __name(function UpdateComponent_Template_mat_button_toggle_group_change_34_listener($event) {
+      ɵɵrestoreView(_r1);
       ctx.level = $event.value;
-      return \u0275\u0275resetView(ctx.showUpdatePath());
+      return ɵɵresetView(ctx.showUpdatePath());
     }, "UpdateComponent_Template_mat_button_toggle_group_change_34_listener"));
-    \u0275\u0275elementStart(35, "mat-button-toggle", 10);
-    \u0275\u0275text(36, "\u57FA\u7840");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(37, "mat-button-toggle", 10);
-    \u0275\u0275text(38, "\u4E2D\u7B49");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(39, "mat-button-toggle", 10);
-    \u0275\u0275text(40, "\u9AD8\u7EA7");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275conditionalCreate(41, UpdateComponent_Conditional_41_Template, 2, 0, "p")(42, UpdateComponent_Conditional_42_Template, 2, 0, "p")(43, UpdateComponent_Conditional_43_Template, 2, 0, "p");
-    \u0275\u0275elementStart(44, "h3");
-    \u0275\u0275text(45, "\u5176\u4ED6\u4F9D\u8D56");
-    \u0275\u0275elementEnd();
-    \u0275\u0275repeaterCreate(46, UpdateComponent_For_47_Template, 3, 3, "div", null, \u0275\u0275repeaterTrackByIndex);
-    \u0275\u0275conditionalCreate(48, UpdateComponent_Conditional_48_Template, 7, 1);
-    \u0275\u0275elementStart(49, "button", 11);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function UpdateComponent_Template_button_click_49_listener() {
-      \u0275\u0275restoreView(_r1);
-      return \u0275\u0275resetView(ctx.showUpdatePath());
+    ɵɵelementStart(35, "mat-button-toggle", 10);
+    ɵɵtext(36, "基礎");
+    ɵɵelementEnd();
+    ɵɵelementStart(37, "mat-button-toggle", 10);
+    ɵɵtext(38, "中等");
+    ɵɵelementEnd();
+    ɵɵelementStart(39, "mat-button-toggle", 10);
+    ɵɵtext(40, "高階");
+    ɵɵelementEnd()();
+    ɵɵconditionalCreate(41, UpdateComponent_Conditional_41_Template, 2, 0, "p")(42, UpdateComponent_Conditional_42_Template, 2, 0, "p")(43, UpdateComponent_Conditional_43_Template, 2, 0, "p");
+    ɵɵelementStart(44, "h3");
+    ɵɵtext(45, "其他依賴");
+    ɵɵelementEnd();
+    ɵɵrepeaterCreate(46, UpdateComponent_For_47_Template, 3, 3, "div", null, ɵɵrepeaterTrackByIndex);
+    ɵɵconditionalCreate(48, UpdateComponent_Conditional_48_Template, 7, 1);
+    ɵɵelementStart(49, "button", 11);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function UpdateComponent_Template_button_click_49_listener() {
+      ɵɵrestoreView(_r1);
+      return ɵɵresetView(ctx.showUpdatePath());
     }, "UpdateComponent_Template_button_click_49_listener"));
-    \u0275\u0275text(50, " \u544A\u8BC9\u6211\u5982\u4F55\u66F4\u65B0 ");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275element(51, "hr");
-    \u0275\u0275conditionalCreate(52, UpdateComponent_Conditional_52_Template, 19, 5, "div", 12);
-    \u0275\u0275elementEnd();
+    ɵɵtext(50, " 告訴我如何更新 ");
+    ɵɵelementEnd()()();
+    ɵɵelement(51, "hr");
+    ɵɵconditionalCreate(52, UpdateComponent_Conditional_52_Template, 19, 5, "div", 12);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const templatesMenuFrom_r13 = \u0275\u0275reference(18);
-    const templatesMenuTo_r14 = \u0275\u0275reference(28);
-    \u0275\u0275advance(12);
-    \u0275\u0275property("cdkMenuTriggerFor", templatesMenuFrom_r13);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx.from.name);
-    \u0275\u0275advance(8);
-    \u0275\u0275property("cdkMenuTriggerFor", templatesMenuTo_r14);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx.to.name);
-    \u0275\u0275advance(5);
-    \u0275\u0275conditional(ctx.from.number >= ctx.futureVersion || ctx.to.number >= ctx.futureVersion ? 29 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.from.number > ctx.to.number ? 30 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.to.number - ctx.from.number > 150 && ctx.from.number > 240 ? 31 : -1);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("value", ctx.level);
-    \u0275\u0275advance();
-    \u0275\u0275property("value", 1);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("value", 2);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("value", 3);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx.level === 1 ? 41 : ctx.level === 2 ? 42 : ctx.level === 3 ? 43 : -1);
-    \u0275\u0275advance(5);
-    \u0275\u0275repeater(ctx.optionList);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx.from.number < 600 ? 48 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275attribute("text", "\u544A\u8BC9\u6211\u5982\u4F55\u66F4\u65B0\uFF01");
-    \u0275\u0275advance(3);
-    \u0275\u0275conditional(ctx.beforeRecommendations.length > 0 || ctx.duringRecommendations.length > 0 || ctx.afterRecommendations.length > 0 ? 52 : -1);
+    const templatesMenuFrom_r13 = ɵɵreference(18);
+    const templatesMenuTo_r14 = ɵɵreference(28);
+    ɵɵadvance(12);
+    ɵɵproperty("cdkMenuTriggerFor", templatesMenuFrom_r13);
+    ɵɵadvance(2);
+    ɵɵtextInterpolate(ctx.from.name);
+    ɵɵadvance(8);
+    ɵɵproperty("cdkMenuTriggerFor", templatesMenuTo_r14);
+    ɵɵadvance(2);
+    ɵɵtextInterpolate(ctx.to.name);
+    ɵɵadvance(5);
+    ɵɵconditional(ctx.from.number >= ctx.futureVersion || ctx.to.number >= ctx.futureVersion ? 29 : -1);
+    ɵɵadvance();
+    ɵɵconditional(ctx.from.number > ctx.to.number ? 30 : -1);
+    ɵɵadvance();
+    ɵɵconditional(ctx.to.number - ctx.from.number > 150 && ctx.from.number > 240 ? 31 : -1);
+    ɵɵadvance(3);
+    ɵɵproperty("value", ctx.level);
+    ɵɵadvance();
+    ɵɵproperty("value", 1);
+    ɵɵadvance(2);
+    ɵɵproperty("value", 2);
+    ɵɵadvance(2);
+    ɵɵproperty("value", 3);
+    ɵɵadvance(2);
+    ɵɵconditional(ctx.level === 1 ? 41 : ctx.level === 2 ? 42 : ctx.level === 3 ? 43 : -1);
+    ɵɵadvance(5);
+    ɵɵrepeater(ctx.optionList);
+    ɵɵadvance(2);
+    ɵɵconditional(ctx.from.number < 600 ? 48 : -1);
+    ɵɵadvance();
+    ɵɵattribute("text", "告訴我如何更新！");
+    ɵɵadvance(3);
+    ɵɵconditional(ctx.beforeRecommendations.length > 0 || ctx.duringRecommendations.length > 0 || ctx.afterRecommendations.length > 0 ? 52 : -1);
   }
 }, "UpdateComponent_Template"), dependencies: [
   MatCheckboxModule,
@@ -7394,16 +7394,16 @@ var UpdateComponent = _UpdateComponent;
       CdkMenuModule,
       IconComponent
     ], changeDetection: ChangeDetectionStrategy.OnPush, template: `<div class="page docs-viewer">
-  <h1 class="page-header" tabindex="-1">\u66F4\u65B0\u6307\u5357</h1>
+  <h1 class="page-header" tabindex="-1">更新指南</h1>
   <div class="wizard">
     <div>
-      <h2>\u9009\u62E9\u4E0E\u4F60\u7684\u66F4\u65B0\u76F8\u5339\u914D\u7684\u9009\u9879</h2>
+      <h2>選擇與你的更新相對應的選項</h2>
 
-      <h3>Angular \u7248\u672C</h3>
+      <h3>Angular 版本</h3>
 
       <div class="adev-version-selector">
         <span class="adev-template-select">
-          \u4ECE v.
+          從 v.
 
           <button [cdkMenuTriggerFor]="templatesMenuFrom">
             <span>{{ from.name }}</span>
@@ -7425,7 +7425,7 @@ var UpdateComponent = _UpdateComponent;
 
         <span>
           <span class="adev-template-select">
-            \u5230 v.
+            到 v.
             <button [cdkMenuTriggerFor]="templatesMenuTo">
               <span>{{ to.name }}</span>
               <docs-icon>expand_more</docs-icon>
@@ -7449,8 +7449,8 @@ var UpdateComponent = _UpdateComponent;
       @if (from.number >= futureVersion || to.number >= futureVersion) {
         <div class="docs-alert docs-alert-critical">
           <p>
-            <strong>\u8B66\u544A\uFF1A</strong>
-            \u5F53\u524D\u4E3B\u8981\u7248\u672C\u4E4B\u540E\u7684\u53D1\u5E03\u8BA1\u5212\u5C1A\u672A\u6700\u7EC8\u786E\u5B9A\uFF0C\u53EF\u80FD\u4F1A\u6709\u53D8\u5316\u3002\u8FD9\u4E9B\u5EFA\u8BAE\u662F\u57FA\u4E8E\u8BA1\u5212\u4E2D\u7684\u5F03\u7528\u60C5\u51B5\u3002
+            <strong>警告：</strong>
+            當前主要版本之後的發布計劃尚未最終確定，可能會有變化。這些建議是基於計劃中的棄用情況。
           </p>
         </div>
       }
@@ -7458,8 +7458,8 @@ var UpdateComponent = _UpdateComponent;
       @if (from.number > to.number) {
         <div class="docs-alert docs-alert-critical">
           <p>
-            <strong>\u8B66\u544A\uFF1A</strong>
-            \u6211\u4EEC\u4E0D\u652F\u6301\u964D\u7EA7 Angular \u7248\u672C\u3002
+            <strong>警告：</strong>
+            我們不支援降級 Angular 版本。
           </p>
         </div>
       }
@@ -7467,43 +7467,43 @@ var UpdateComponent = _UpdateComponent;
       @if ((to.number - from.number > 150) && from.number > 240) {
         <div class="docs-alert docs-alert-critical">
           <p>
-            <strong>\u8B66\u544A\uFF1A</strong>
-            \u786E\u4FDD\u6309\u7167\u4EE5\u4E0B\u6307\u5357\u628A\u4F60\u7684\u5E94\u7528\u7A0B\u5E8F\u8FC1\u79FB\u5230\u65B0\u7248\u672C\u3002\u4F60\u6BCF\u6B21\u8FD0\u884C <code>ng update</code> \u65F6\u4E0D\u5E94\u8BE5\u8DF3\u8FC7\u4EFB\u4F55\u4E3B\u8981\u7248\u672C\u6765\u66F4\u65B0 Angular \u5E94\u7528\u7A0B\u5E8F\u3002
+            <strong>警告：</strong>
+            確保按照以下指南把你的應用程式遷移到新版本。你每次執行 <code>ng update</code> 時不應該跳過任何主要版本來更新 Angular 應用程式。
           </p>
         </div>
       }
 
-      <h3>\u5E94\u7528\u7A0B\u5E8F\u590D\u6742\u6027</h3>
+      <h3>應用程式複雜性</h3>
       <mat-button-toggle-group
         (change)="level = $event.value; showUpdatePath()"
         [value]="level"
         style="margin-bottom:16px;"
       >
-        <mat-button-toggle [value]="1">\u57FA\u7840</mat-button-toggle>
-        <mat-button-toggle [value]="2">\u4E2D\u7B49</mat-button-toggle>
-        <mat-button-toggle [value]="3">\u9AD8\u7EA7</mat-button-toggle>
+        <mat-button-toggle [value]="1">基礎</mat-button-toggle>
+        <mat-button-toggle [value]="2">中等</mat-button-toggle>
+        <mat-button-toggle [value]="3">高階</mat-button-toggle>
       </mat-button-toggle-group>
       @if (level === 1) {
-        <p>\u5C55\u793A\u6240\u6709 Angular \u5F00\u53D1\u8005\u90FD\u611F\u5174\u8DA3\u7684\u4FE1\u606F\u3002</p>
+        <p>展示所有 Angular 開發者都感興趣的訊息。</p>
       } @else if (level === 2) {
-        <p>\u5C55\u793A\u66F4\u9AD8\u7EA7 Angular \u5F00\u53D1\u8005\u4F1A\u611F\u5174\u8DA3\u7684\u4FE1\u606F\u3002</p>
+        <p>展示更高階 Angular 開發者會感興趣的訊息。</p>
       } @else if (level === 3) {
-        <p>\u5C55\u793A\u5173\u4E8E\u8FD9\u4E2A\u66F4\u65B0\u7684\u6240\u6709\u4FE1\u606F\u3002</p>
+        <p>展示關於這個更新的所有訊息。</p>
       }
 
-      <h3>\u5176\u4ED6\u4F9D\u8D56</h3>
+      <h3>其他依賴</h3>
       @for (option of optionList; track $index) {
         <div>
           <mat-checkbox
             (change)="options[option.id] = $event.checked; showUpdatePath()"
             [checked]="options[option.id]"
-            >\u6211\u4F7F\u7528 {{option.name}} {{option.description}}</mat-checkbox
+            >我使用 {{option.name}} {{option.description}}</mat-checkbox
           >
         </div>
       }
 
       @if (from.number < 600) {
-        <h4>\u5305\u7BA1\u7406\u5668</h4>
+        <h4>套件管理器</h4>
         <mat-button-toggle-group
           (change)="packageManager = $event.value; showUpdatePath()"
           [value]="packageManager"
@@ -7517,9 +7517,9 @@ var UpdateComponent = _UpdateComponent;
         type="button"
         (click)="showUpdatePath()"
         class="docs-primary-btn show-button"
-        [attr.text]="'\u544A\u8BC9\u6211\u5982\u4F55\u66F4\u65B0\uFF01'"
+        [attr.text]="'告訴我如何更新！'"
       >
-        \u544A\u8BC9\u6211\u5982\u4F55\u66F4\u65B0
+        告訴我如何更新
       </button>
     </div>
   </div>
@@ -7533,7 +7533,7 @@ var UpdateComponent = _UpdateComponent;
     <div class="recommendations">
       <h2>{{title()}}</h2>
 
-      <h3>\u5728\u66F4\u65B0\u4E4B\u524D</h3>
+      <h3>在更新之前</h3>
       @for (r  of beforeRecommendations; track $index) {
         <div class="adev-recommendation-item">
           <mat-checkbox />
@@ -7542,14 +7542,14 @@ var UpdateComponent = _UpdateComponent;
       }
       @if (beforeRecommendations.length <= 0) {
         <div>
-          <em>\u5728\u8FD9\u4E9B\u7248\u672C\u4E4B\u95F4\u5207\u6362\u4E4B\u524D\uFF0C\u4F60\u65E0\u9700\u8FDB\u884C\u4EFB\u4F55\u64CD\u4F5C\u3002</em>
+          <em>在這些版本之間切換之前，你無需進行任何操作。</em>
         </div>
       }
 
-      <h3>\u66F4\u65B0\u5230\u65B0\u7248\u672C</h3>
+      <h3>更新到新版本</h3>
       @if (duringRecommendations.length > 0) {
         <div>
-          <em>\u8BF7\u5BA1\u6838\u8FD9\u4E9B\u66F4\u6539\u5E76\u6267\u884C\u8FD9\u4E9B\u64CD\u4F5C\u6765\u66F4\u65B0\u5E94\u7528\u7A0B\u5E8F\u3002</em>
+          <em>請稽核這些更改並執行這些操作來更新應用程式。</em>
         </div>
       }
 
@@ -7561,11 +7561,11 @@ var UpdateComponent = _UpdateComponent;
       }
       @if (duringRecommendations.length <= 0) {
         <div>
-          <em>\u5BF9\u8FD9\u4E9B\u7248\u672C\u4E4B\u95F4\u7684\u79FB\u52A8\uFF0C\u6CA1\u6709\u4EFB\u4F55\u5EFA\u8BAE\u3002</em>
+          <em>對這些版本之間的移動，沒有任何建議。</em>
         </div>
       }
 
-      <h3>\u66F4\u65B0\u4E4B\u540E</h3>
+      <h3>更新之後</h3>
       @for (r of afterRecommendations; track $index) {
         <div class="adev-recommendation-item">
           <mat-checkbox />
@@ -7574,7 +7574,7 @@ var UpdateComponent = _UpdateComponent;
       }
       @if (afterRecommendations.length <= 0) {
         <div>
-          <em>\u5728\u5207\u6362\u8FD9\u4E9B\u7248\u672C\u4E4B\u540E\uFF0C\u4F60\u65E0\u9700\u8FDB\u884C\u4EFB\u4F55\u64CD\u4F5C\u3002</em>
+          <em>在切換這些版本之後，你無需進行任何操作。</em>
         </div>
       }
     </div>
@@ -7587,7 +7587,7 @@ var UpdateComponent = _UpdateComponent;
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(UpdateComponent, { className: "UpdateComponent", filePath: "src/app/features/update/update.component.ts", lineNumber: 44 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(UpdateComponent, { className: "UpdateComponent", filePath: "src/app/features/update/update.component.ts", lineNumber: 44 });
 })();
 function isWindows() {
   if (typeof navigator === "undefined") {

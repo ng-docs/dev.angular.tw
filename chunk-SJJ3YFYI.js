@@ -23,19 +23,19 @@ var _BirthdayComponent = class _BirthdayComponent {
 };
 __name(_BirthdayComponent, "BirthdayComponent");
 // April 15, 1988 -- since month parameter is zero-based
-__publicField(_BirthdayComponent, "\u0275fac", /* @__PURE__ */ __name(function BirthdayComponent_Factory(__ngFactoryType__) {
+__publicField(_BirthdayComponent, "ɵfac", /* @__PURE__ */ __name(function BirthdayComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _BirthdayComponent)();
 }, "BirthdayComponent_Factory"));
-__publicField(_BirthdayComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BirthdayComponent, selectors: [["app-birthday"]], decls: 3, vars: 3, template: /* @__PURE__ */ __name(function BirthdayComponent_Template(rf, ctx) {
+__publicField(_BirthdayComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _BirthdayComponent, selectors: [["app-birthday"]], decls: 3, vars: 3, template: /* @__PURE__ */ __name(function BirthdayComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "p");
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "date");
-    \u0275\u0275domElementEnd();
+    ɵɵdomElementStart(0, "p");
+    ɵɵtext(1);
+    ɵɵpipe(2, "date");
+    ɵɵdomElementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1("The hero's birthday is ", \u0275\u0275pipeBind1(2, 1, ctx.birthday));
+    ɵɵadvance();
+    ɵɵtextInterpolate1("The hero's birthday is ", ɵɵpipeBind1(2, 1, ctx.birthday));
   }
 }, "BirthdayComponent_Template"), dependencies: [DatePipe], encapsulation: 2 }));
 var BirthdayComponent = _BirthdayComponent;
@@ -46,7 +46,7 @@ var BirthdayComponent = _BirthdayComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BirthdayComponent, { className: "BirthdayComponent", filePath: "src/content/examples/pipes/src/app/birthday.component.ts", lineNumber: 9 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(BirthdayComponent, { className: "BirthdayComponent", filePath: "src/content/examples/pipes/src/app/birthday.component.ts", lineNumber: 9 });
 })();
 
 export {

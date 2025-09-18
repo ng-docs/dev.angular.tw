@@ -89,12 +89,12 @@ var _ShowOnDirtyErrorStateMatcher = class _ShowOnDirtyErrorStateMatcher {
   }
 };
 __name(_ShowOnDirtyErrorStateMatcher, "ShowOnDirtyErrorStateMatcher");
-__publicField(_ShowOnDirtyErrorStateMatcher, "\u0275fac", /* @__PURE__ */ __name(function ShowOnDirtyErrorStateMatcher_Factory(__ngFactoryType__) {
+__publicField(_ShowOnDirtyErrorStateMatcher, "ɵfac", /* @__PURE__ */ __name(function ShowOnDirtyErrorStateMatcher_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ShowOnDirtyErrorStateMatcher)();
 }, "ShowOnDirtyErrorStateMatcher_Factory"));
-__publicField(_ShowOnDirtyErrorStateMatcher, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_ShowOnDirtyErrorStateMatcher, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _ShowOnDirtyErrorStateMatcher,
-  factory: _ShowOnDirtyErrorStateMatcher.\u0275fac
+  factory: _ShowOnDirtyErrorStateMatcher.ɵfac
 }));
 var ShowOnDirtyErrorStateMatcher = _ShowOnDirtyErrorStateMatcher;
 (() => {
@@ -108,12 +108,12 @@ var _ErrorStateMatcher = class _ErrorStateMatcher {
   }
 };
 __name(_ErrorStateMatcher, "ErrorStateMatcher");
-__publicField(_ErrorStateMatcher, "\u0275fac", /* @__PURE__ */ __name(function ErrorStateMatcher_Factory(__ngFactoryType__) {
+__publicField(_ErrorStateMatcher, "ɵfac", /* @__PURE__ */ __name(function ErrorStateMatcher_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ErrorStateMatcher)();
 }, "ErrorStateMatcher_Factory"));
-__publicField(_ErrorStateMatcher, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_ErrorStateMatcher, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _ErrorStateMatcher,
-  factory: _ErrorStateMatcher.\u0275fac,
+  factory: _ErrorStateMatcher.ɵfac,
   providedIn: "root"
 }));
 var ErrorStateMatcher = _ErrorStateMatcher;
@@ -173,39 +173,39 @@ var _c8 = ["*", [["mat-label"]], [["", "matPrefix", ""], ["", "matIconPrefix", "
 var _c9 = ["*", "mat-label", "[matPrefix], [matIconPrefix]", "[matTextPrefix]", "[matTextSuffix]", "[matSuffix], [matIconSuffix]", "mat-error, [matError]", "mat-hint:not([align='end'])", "mat-hint[align='end']"];
 function MatFormField_ng_template_0_Conditional_0_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "span", 20);
+    ɵɵelement(0, "span", 20);
   }
 }
 __name(MatFormField_ng_template_0_Conditional_0_Conditional_2_Template, "MatFormField_ng_template_0_Conditional_0_Conditional_2_Template");
 function MatFormField_ng_template_0_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "label", 19);
-    \u0275\u0275projection(1, 1);
-    \u0275\u0275conditionalCreate(2, MatFormField_ng_template_0_Conditional_0_Conditional_2_Template, 1, 0, "span", 20);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "label", 19);
+    ɵɵprojection(1, 1);
+    ɵɵconditionalCreate(2, MatFormField_ng_template_0_Conditional_0_Conditional_2_Template, 1, 0, "span", 20);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("floating", ctx_r1._shouldLabelFloat())("monitorResize", ctx_r1._hasOutline())("id", ctx_r1._labelId);
-    \u0275\u0275attribute("for", ctx_r1._control.disableAutomaticLabeling ? null : ctx_r1._control.id);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(!ctx_r1.hideRequiredMarker && ctx_r1._control.required ? 2 : -1);
+    const ctx_r1 = ɵɵnextContext(2);
+    ɵɵproperty("floating", ctx_r1._shouldLabelFloat())("monitorResize", ctx_r1._hasOutline())("id", ctx_r1._labelId);
+    ɵɵattribute("for", ctx_r1._control.disableAutomaticLabeling ? null : ctx_r1._control.id);
+    ɵɵadvance(2);
+    ɵɵconditional(!ctx_r1.hideRequiredMarker && ctx_r1._control.required ? 2 : -1);
   }
 }
 __name(MatFormField_ng_template_0_Conditional_0_Template, "MatFormField_ng_template_0_Conditional_0_Template");
 function MatFormField_ng_template_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, MatFormField_ng_template_0_Conditional_0_Template, 3, 5, "label", 19);
+    ɵɵconditionalCreate(0, MatFormField_ng_template_0_Conditional_0_Template, 3, 5, "label", 19);
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275conditional(ctx_r1._hasFloatingLabel() ? 0 : -1);
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵconditional(ctx_r1._hasFloatingLabel() ? 0 : -1);
   }
 }
 __name(MatFormField_ng_template_0_Template, "MatFormField_ng_template_0_Template");
 function MatFormField_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "div", 7);
+    ɵɵelement(0, "div", 7);
   }
 }
 __name(MatFormField_Conditional_4_Template, "MatFormField_Conditional_4_Template");
@@ -214,42 +214,42 @@ function MatFormField_Conditional_6_Conditional_1_ng_template_0_Template(rf, ctx
 __name(MatFormField_Conditional_6_Conditional_1_ng_template_0_Template, "MatFormField_Conditional_6_Conditional_1_ng_template_0_Template");
 function MatFormField_Conditional_6_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275template(0, MatFormField_Conditional_6_Conditional_1_ng_template_0_Template, 0, 0, "ng-template", 13);
+    ɵɵtemplate(0, MatFormField_Conditional_6_Conditional_1_ng_template_0_Template, 0, 0, "ng-template", 13);
   }
   if (rf & 2) {
-    \u0275\u0275nextContext(2);
-    const labelTemplate_r3 = \u0275\u0275reference(1);
-    \u0275\u0275property("ngTemplateOutlet", labelTemplate_r3);
+    ɵɵnextContext(2);
+    const labelTemplate_r3 = ɵɵreference(1);
+    ɵɵproperty("ngTemplateOutlet", labelTemplate_r3);
   }
 }
 __name(MatFormField_Conditional_6_Conditional_1_Template, "MatFormField_Conditional_6_Conditional_1_Template");
 function MatFormField_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 9);
-    \u0275\u0275conditionalCreate(1, MatFormField_Conditional_6_Conditional_1_Template, 1, 1, null, 13);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 9);
+    ɵɵconditionalCreate(1, MatFormField_Conditional_6_Conditional_1_Template, 1, 1, null, 13);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("matFormFieldNotchedOutlineOpen", ctx_r1._shouldLabelFloat());
-    \u0275\u0275advance();
-    \u0275\u0275conditional(!ctx_r1._forceDisplayInfixLabel() ? 1 : -1);
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵproperty("matFormFieldNotchedOutlineOpen", ctx_r1._shouldLabelFloat());
+    ɵɵadvance();
+    ɵɵconditional(!ctx_r1._forceDisplayInfixLabel() ? 1 : -1);
   }
 }
 __name(MatFormField_Conditional_6_Template, "MatFormField_Conditional_6_Template");
 function MatFormField_Conditional_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 10, 2);
-    \u0275\u0275projection(2, 2);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 10, 2);
+    ɵɵprojection(2, 2);
+    ɵɵelementEnd();
   }
 }
 __name(MatFormField_Conditional_7_Template, "MatFormField_Conditional_7_Template");
 function MatFormField_Conditional_8_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 11, 3);
-    \u0275\u0275projection(2, 3);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 11, 3);
+    ɵɵprojection(2, 3);
+    ɵɵelementEnd();
   }
 }
 __name(MatFormField_Conditional_8_Template, "MatFormField_Conditional_8_Template");
@@ -258,77 +258,77 @@ function MatFormField_Conditional_10_ng_template_0_Template(rf, ctx) {
 __name(MatFormField_Conditional_10_ng_template_0_Template, "MatFormField_Conditional_10_ng_template_0_Template");
 function MatFormField_Conditional_10_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275template(0, MatFormField_Conditional_10_ng_template_0_Template, 0, 0, "ng-template", 13);
+    ɵɵtemplate(0, MatFormField_Conditional_10_ng_template_0_Template, 0, 0, "ng-template", 13);
   }
   if (rf & 2) {
-    \u0275\u0275nextContext();
-    const labelTemplate_r3 = \u0275\u0275reference(1);
-    \u0275\u0275property("ngTemplateOutlet", labelTemplate_r3);
+    ɵɵnextContext();
+    const labelTemplate_r3 = ɵɵreference(1);
+    ɵɵproperty("ngTemplateOutlet", labelTemplate_r3);
   }
 }
 __name(MatFormField_Conditional_10_Template, "MatFormField_Conditional_10_Template");
 function MatFormField_Conditional_12_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 14, 4);
-    \u0275\u0275projection(2, 4);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 14, 4);
+    ɵɵprojection(2, 4);
+    ɵɵelementEnd();
   }
 }
 __name(MatFormField_Conditional_12_Template, "MatFormField_Conditional_12_Template");
 function MatFormField_Conditional_13_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 15, 5);
-    \u0275\u0275projection(2, 5);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 15, 5);
+    ɵɵprojection(2, 5);
+    ɵɵelementEnd();
   }
 }
 __name(MatFormField_Conditional_13_Template, "MatFormField_Conditional_13_Template");
 function MatFormField_Conditional_14_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "div", 16);
+    ɵɵelement(0, "div", 16);
   }
 }
 __name(MatFormField_Conditional_14_Template, "MatFormField_Conditional_14_Template");
 function MatFormField_Case_17_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275projection(0, 6);
+    ɵɵprojection(0, 6);
   }
 }
 __name(MatFormField_Case_17_Template, "MatFormField_Case_17_Template");
 function MatFormField_Case_18_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-hint", 21);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "mat-hint", 21);
+    ɵɵtext(1);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("id", ctx_r1._hintLabelId);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r1.hintLabel);
+    const ctx_r1 = ɵɵnextContext(2);
+    ɵɵproperty("id", ctx_r1._hintLabelId);
+    ɵɵadvance();
+    ɵɵtextInterpolate(ctx_r1.hintLabel);
   }
 }
 __name(MatFormField_Case_18_Conditional_0_Template, "MatFormField_Case_18_Conditional_0_Template");
 function MatFormField_Case_18_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, MatFormField_Case_18_Conditional_0_Template, 2, 2, "mat-hint", 21);
-    \u0275\u0275projection(1, 7);
-    \u0275\u0275element(2, "div", 22);
-    \u0275\u0275projection(3, 8);
+    ɵɵconditionalCreate(0, MatFormField_Case_18_Conditional_0_Template, 2, 2, "mat-hint", 21);
+    ɵɵprojection(1, 7);
+    ɵɵelement(2, "div", 22);
+    ɵɵprojection(3, 8);
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275conditional(ctx_r1.hintLabel ? 0 : -1);
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵconditional(ctx_r1.hintLabel ? 0 : -1);
   }
 }
 __name(MatFormField_Case_18_Template, "MatFormField_Case_18_Template");
 var _MatLabel = class _MatLabel {
 };
 __name(_MatLabel, "MatLabel");
-__publicField(_MatLabel, "\u0275fac", /* @__PURE__ */ __name(function MatLabel_Factory(__ngFactoryType__) {
+__publicField(_MatLabel, "ɵfac", /* @__PURE__ */ __name(function MatLabel_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatLabel)();
 }, "MatLabel_Factory"));
-__publicField(_MatLabel, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatLabel, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatLabel,
   selectors: [["mat-label"]]
 }));
@@ -348,23 +348,23 @@ var _MatError = class _MatError {
   }
 };
 __name(_MatError, "MatError");
-__publicField(_MatError, "\u0275fac", /* @__PURE__ */ __name(function MatError_Factory(__ngFactoryType__) {
+__publicField(_MatError, "ɵfac", /* @__PURE__ */ __name(function MatError_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatError)();
 }, "MatError_Factory"));
-__publicField(_MatError, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatError, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatError,
   selectors: [["mat-error"], ["", "matError", ""]],
   hostAttrs: [1, "mat-mdc-form-field-error", "mat-mdc-form-field-bottom-align"],
   hostVars: 1,
   hostBindings: /* @__PURE__ */ __name(function MatError_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275domProperty("id", ctx.id);
+      ɵɵdomProperty("id", ctx.id);
     }
   }, "MatError_HostBindings"),
   inputs: {
     id: "id"
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_ERROR,
     useExisting: _MatError
   }])]
@@ -397,19 +397,19 @@ var _MatHint = class _MatHint {
   id = inject(_IdGenerator).getId("mat-mdc-hint-");
 };
 __name(_MatHint, "MatHint");
-__publicField(_MatHint, "\u0275fac", /* @__PURE__ */ __name(function MatHint_Factory(__ngFactoryType__) {
+__publicField(_MatHint, "ɵfac", /* @__PURE__ */ __name(function MatHint_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatHint)();
 }, "MatHint_Factory"));
-__publicField(_MatHint, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatHint, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatHint,
   selectors: [["mat-hint"]],
   hostAttrs: [1, "mat-mdc-form-field-hint", "mat-mdc-form-field-bottom-align"],
   hostVars: 4,
   hostBindings: /* @__PURE__ */ __name(function MatHint_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275domProperty("id", ctx.id);
-      \u0275\u0275attribute("align", null);
-      \u0275\u0275classProp("mat-mdc-form-field-hint-end", ctx.align === "end");
+      ɵɵdomProperty("id", ctx.id);
+      ɵɵattribute("align", null);
+      ɵɵclassProp("mat-mdc-form-field-hint-end", ctx.align === "end");
     }
   }, "MatHint_HostBindings"),
   inputs: {
@@ -448,16 +448,16 @@ var _MatPrefix = class _MatPrefix {
   _isText = false;
 };
 __name(_MatPrefix, "MatPrefix");
-__publicField(_MatPrefix, "\u0275fac", /* @__PURE__ */ __name(function MatPrefix_Factory(__ngFactoryType__) {
+__publicField(_MatPrefix, "ɵfac", /* @__PURE__ */ __name(function MatPrefix_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatPrefix)();
 }, "MatPrefix_Factory"));
-__publicField(_MatPrefix, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatPrefix, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatPrefix,
   selectors: [["", "matPrefix", ""], ["", "matIconPrefix", ""], ["", "matTextPrefix", ""]],
   inputs: {
     _isTextSelector: [0, "matTextPrefix", "_isTextSelector"]
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_PREFIX,
     useExisting: _MatPrefix
   }])]
@@ -488,16 +488,16 @@ var _MatSuffix = class _MatSuffix {
   _isText = false;
 };
 __name(_MatSuffix, "MatSuffix");
-__publicField(_MatSuffix, "\u0275fac", /* @__PURE__ */ __name(function MatSuffix_Factory(__ngFactoryType__) {
+__publicField(_MatSuffix, "ɵfac", /* @__PURE__ */ __name(function MatSuffix_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatSuffix)();
 }, "MatSuffix_Factory"));
-__publicField(_MatSuffix, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatSuffix, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatSuffix,
   selectors: [["", "matSuffix", ""], ["", "matIconSuffix", ""], ["", "matTextSuffix", ""]],
   inputs: {
     _isTextSelector: [0, "matTextSuffix", "_isTextSelector"]
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_SUFFIX,
     useExisting: _MatSuffix
   }])]
@@ -583,17 +583,17 @@ var _MatFormFieldFloatingLabel = class _MatFormFieldFloatingLabel {
   }
 };
 __name(_MatFormFieldFloatingLabel, "MatFormFieldFloatingLabel");
-__publicField(_MatFormFieldFloatingLabel, "\u0275fac", /* @__PURE__ */ __name(function MatFormFieldFloatingLabel_Factory(__ngFactoryType__) {
+__publicField(_MatFormFieldFloatingLabel, "ɵfac", /* @__PURE__ */ __name(function MatFormFieldFloatingLabel_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatFormFieldFloatingLabel)();
 }, "MatFormFieldFloatingLabel_Factory"));
-__publicField(_MatFormFieldFloatingLabel, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatFormFieldFloatingLabel, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatFormFieldFloatingLabel,
   selectors: [["label", "matFormFieldFloatingLabel", ""]],
   hostAttrs: [1, "mdc-floating-label", "mat-mdc-floating-label"],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function MatFormFieldFloatingLabel_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("mdc-floating-label--float-above", ctx.floating);
+      ɵɵclassProp("mdc-floating-label--float-above", ctx.floating);
     }
   }, "MatFormFieldFloatingLabel_HostBindings"),
   inputs: {
@@ -667,10 +667,10 @@ var _MatFormFieldLineRipple = class _MatFormFieldLineRipple {
   }
 };
 __name(_MatFormFieldLineRipple, "MatFormFieldLineRipple");
-__publicField(_MatFormFieldLineRipple, "\u0275fac", /* @__PURE__ */ __name(function MatFormFieldLineRipple_Factory(__ngFactoryType__) {
+__publicField(_MatFormFieldLineRipple, "ɵfac", /* @__PURE__ */ __name(function MatFormFieldLineRipple_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatFormFieldLineRipple)();
 }, "MatFormFieldLineRipple_Factory"));
-__publicField(_MatFormFieldLineRipple, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatFormFieldLineRipple, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatFormFieldLineRipple,
   selectors: [["div", "matFormFieldLineRipple", ""]],
   hostAttrs: [1, "mdc-line-ripple"]
@@ -723,26 +723,26 @@ var _MatFormFieldNotchedOutline = class _MatFormFieldNotchedOutline {
   }
 };
 __name(_MatFormFieldNotchedOutline, "MatFormFieldNotchedOutline");
-__publicField(_MatFormFieldNotchedOutline, "\u0275fac", /* @__PURE__ */ __name(function MatFormFieldNotchedOutline_Factory(__ngFactoryType__) {
+__publicField(_MatFormFieldNotchedOutline, "ɵfac", /* @__PURE__ */ __name(function MatFormFieldNotchedOutline_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatFormFieldNotchedOutline)();
 }, "MatFormFieldNotchedOutline_Factory"));
-__publicField(_MatFormFieldNotchedOutline, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatFormFieldNotchedOutline, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatFormFieldNotchedOutline,
   selectors: [["div", "matFormFieldNotchedOutline", ""]],
   viewQuery: /* @__PURE__ */ __name(function MatFormFieldNotchedOutline_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c0, 5);
+      ɵɵviewQuery(_c0, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._notch = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._notch = _t.first);
     }
   }, "MatFormFieldNotchedOutline_Query"),
   hostAttrs: [1, "mdc-notched-outline"],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function MatFormFieldNotchedOutline_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("mdc-notched-outline--notched", ctx.open);
+      ɵɵclassProp("mdc-notched-outline--notched", ctx.open);
     }
   }, "MatFormFieldNotchedOutline_HostBindings"),
   inputs: {
@@ -755,12 +755,12 @@ __publicField(_MatFormFieldNotchedOutline, "\u0275cmp", /* @__PURE__ */ \u0275\u
   consts: [["notch", ""], [1, "mat-mdc-notch-piece", "mdc-notched-outline__leading"], [1, "mat-mdc-notch-piece", "mdc-notched-outline__notch"], [1, "mat-mdc-notch-piece", "mdc-notched-outline__trailing"]],
   template: /* @__PURE__ */ __name(function MatFormFieldNotchedOutline_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef();
-      \u0275\u0275domElement(0, "div", 1);
-      \u0275\u0275domElementStart(1, "div", 2, 0);
-      \u0275\u0275projection(3);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275domElement(4, "div", 3);
+      ɵɵprojectionDef();
+      ɵɵdomElement(0, "div", 1);
+      ɵɵdomElementStart(1, "div", 2, 0);
+      ɵɵprojection(3);
+      ɵɵdomElementEnd();
+      ɵɵdomElement(4, "div", 3);
     }
   }, "MatFormFieldNotchedOutline_Template"),
   encapsulation: 2,
@@ -845,10 +845,10 @@ var _MatFormFieldControl = class _MatFormFieldControl {
   describedByIds;
 };
 __name(_MatFormFieldControl, "MatFormFieldControl");
-__publicField(_MatFormFieldControl, "\u0275fac", /* @__PURE__ */ __name(function MatFormFieldControl_Factory(__ngFactoryType__) {
+__publicField(_MatFormFieldControl, "ɵfac", /* @__PURE__ */ __name(function MatFormFieldControl_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatFormFieldControl)();
 }, "MatFormFieldControl_Factory"));
-__publicField(_MatFormFieldControl, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatFormFieldControl, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatFormFieldControl
 }));
 var MatFormFieldControl = _MatFormFieldControl;
@@ -1355,64 +1355,64 @@ var _MatFormField = class _MatFormField {
   }
 };
 __name(_MatFormField, "MatFormField");
-__publicField(_MatFormField, "\u0275fac", /* @__PURE__ */ __name(function MatFormField_Factory(__ngFactoryType__) {
+__publicField(_MatFormField, "ɵfac", /* @__PURE__ */ __name(function MatFormField_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatFormField)();
 }, "MatFormField_Factory"));
-__publicField(_MatFormField, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatFormField, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatFormField,
   selectors: [["mat-form-field"]],
   contentQueries: /* @__PURE__ */ __name(function MatFormField_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuerySignal(dirIndex, ctx._labelChild, MatLabel, 5);
-      \u0275\u0275contentQuery(dirIndex, MatFormFieldControl, 5);
-      \u0275\u0275contentQuery(dirIndex, MAT_PREFIX, 5);
-      \u0275\u0275contentQuery(dirIndex, MAT_SUFFIX, 5);
-      \u0275\u0275contentQuery(dirIndex, MAT_ERROR, 5);
-      \u0275\u0275contentQuery(dirIndex, MatHint, 5);
+      ɵɵcontentQuerySignal(dirIndex, ctx._labelChild, MatLabel, 5);
+      ɵɵcontentQuery(dirIndex, MatFormFieldControl, 5);
+      ɵɵcontentQuery(dirIndex, MAT_PREFIX, 5);
+      ɵɵcontentQuery(dirIndex, MAT_SUFFIX, 5);
+      ɵɵcontentQuery(dirIndex, MAT_ERROR, 5);
+      ɵɵcontentQuery(dirIndex, MatHint, 5);
     }
     if (rf & 2) {
-      \u0275\u0275queryAdvance();
+      ɵɵqueryAdvance();
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._formFieldControl = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._prefixChildren = _t);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._suffixChildren = _t);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._errorChildren = _t);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._hintChildren = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._formFieldControl = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._prefixChildren = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._suffixChildren = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._errorChildren = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._hintChildren = _t);
     }
   }, "MatFormField_ContentQueries"),
   viewQuery: /* @__PURE__ */ __name(function MatFormField_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuerySignal(ctx._iconPrefixContainerSignal, _c3, 5);
-      \u0275\u0275viewQuerySignal(ctx._textPrefixContainerSignal, _c4, 5);
-      \u0275\u0275viewQuerySignal(ctx._iconSuffixContainerSignal, _c5, 5);
-      \u0275\u0275viewQuerySignal(ctx._textSuffixContainerSignal, _c6, 5);
-      \u0275\u0275viewQuery(_c7, 5);
-      \u0275\u0275viewQuery(_c3, 5);
-      \u0275\u0275viewQuery(_c4, 5);
-      \u0275\u0275viewQuery(_c5, 5);
-      \u0275\u0275viewQuery(_c6, 5);
-      \u0275\u0275viewQuery(MatFormFieldFloatingLabel, 5);
-      \u0275\u0275viewQuery(MatFormFieldNotchedOutline, 5);
-      \u0275\u0275viewQuery(MatFormFieldLineRipple, 5);
+      ɵɵviewQuerySignal(ctx._iconPrefixContainerSignal, _c3, 5);
+      ɵɵviewQuerySignal(ctx._textPrefixContainerSignal, _c4, 5);
+      ɵɵviewQuerySignal(ctx._iconSuffixContainerSignal, _c5, 5);
+      ɵɵviewQuerySignal(ctx._textSuffixContainerSignal, _c6, 5);
+      ɵɵviewQuery(_c7, 5);
+      ɵɵviewQuery(_c3, 5);
+      ɵɵviewQuery(_c4, 5);
+      ɵɵviewQuery(_c5, 5);
+      ɵɵviewQuery(_c6, 5);
+      ɵɵviewQuery(MatFormFieldFloatingLabel, 5);
+      ɵɵviewQuery(MatFormFieldNotchedOutline, 5);
+      ɵɵviewQuery(MatFormFieldLineRipple, 5);
     }
     if (rf & 2) {
-      \u0275\u0275queryAdvance(4);
+      ɵɵqueryAdvance(4);
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._textField = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._iconPrefixContainer = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._textPrefixContainer = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._iconSuffixContainer = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._textSuffixContainer = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._floatingLabel = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._notchedOutline = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._lineRipple = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._textField = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._iconPrefixContainer = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._textPrefixContainer = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._iconSuffixContainer = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._textSuffixContainer = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._floatingLabel = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._notchedOutline = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._lineRipple = _t.first);
     }
   }, "MatFormField_Query"),
   hostAttrs: [1, "mat-mdc-form-field"],
   hostVars: 38,
   hostBindings: /* @__PURE__ */ __name(function MatFormField_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("mat-mdc-form-field-label-always-float", ctx._shouldAlwaysFloat())("mat-mdc-form-field-has-icon-prefix", ctx._hasIconPrefix)("mat-mdc-form-field-has-icon-suffix", ctx._hasIconSuffix)("mat-form-field-invalid", ctx._control.errorState)("mat-form-field-disabled", ctx._control.disabled)("mat-form-field-autofilled", ctx._control.autofilled)("mat-form-field-appearance-fill", ctx.appearance == "fill")("mat-form-field-appearance-outline", ctx.appearance == "outline")("mat-form-field-hide-placeholder", ctx._hasFloatingLabel() && !ctx._shouldLabelFloat())("mat-primary", ctx.color !== "accent" && ctx.color !== "warn")("mat-accent", ctx.color === "accent")("mat-warn", ctx.color === "warn")("ng-untouched", ctx._shouldForward("untouched"))("ng-touched", ctx._shouldForward("touched"))("ng-pristine", ctx._shouldForward("pristine"))("ng-dirty", ctx._shouldForward("dirty"))("ng-valid", ctx._shouldForward("valid"))("ng-invalid", ctx._shouldForward("invalid"))("ng-pending", ctx._shouldForward("pending"));
+      ɵɵclassProp("mat-mdc-form-field-label-always-float", ctx._shouldAlwaysFloat())("mat-mdc-form-field-has-icon-prefix", ctx._hasIconPrefix)("mat-mdc-form-field-has-icon-suffix", ctx._hasIconSuffix)("mat-form-field-invalid", ctx._control.errorState)("mat-form-field-disabled", ctx._control.disabled)("mat-form-field-autofilled", ctx._control.autofilled)("mat-form-field-appearance-fill", ctx.appearance == "fill")("mat-form-field-appearance-outline", ctx.appearance == "outline")("mat-form-field-hide-placeholder", ctx._hasFloatingLabel() && !ctx._shouldLabelFloat())("mat-primary", ctx.color !== "accent" && ctx.color !== "warn")("mat-accent", ctx.color === "accent")("mat-warn", ctx.color === "warn")("ng-untouched", ctx._shouldForward("untouched"))("ng-touched", ctx._shouldForward("touched"))("ng-pristine", ctx._shouldForward("pristine"))("ng-dirty", ctx._shouldForward("dirty"))("ng-valid", ctx._shouldForward("valid"))("ng-invalid", ctx._shouldForward("invalid"))("ng-pending", ctx._shouldForward("pending"));
     }
   }, "MatFormField_HostBindings"),
   inputs: {
@@ -1424,7 +1424,7 @@ __publicField(_MatFormField, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComp
     hintLabel: "hintLabel"
   },
   exportAs: ["matFormField"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_FORM_FIELD,
     useExisting: _MatFormField
   }, {
@@ -1437,59 +1437,59 @@ __publicField(_MatFormField, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComp
   consts: [["labelTemplate", ""], ["textField", ""], ["iconPrefixContainer", ""], ["textPrefixContainer", ""], ["textSuffixContainer", ""], ["iconSuffixContainer", ""], [1, "mat-mdc-text-field-wrapper", "mdc-text-field", 3, "click"], [1, "mat-mdc-form-field-focus-overlay"], [1, "mat-mdc-form-field-flex"], ["matFormFieldNotchedOutline", "", 3, "matFormFieldNotchedOutlineOpen"], [1, "mat-mdc-form-field-icon-prefix"], [1, "mat-mdc-form-field-text-prefix"], [1, "mat-mdc-form-field-infix"], [3, "ngTemplateOutlet"], [1, "mat-mdc-form-field-text-suffix"], [1, "mat-mdc-form-field-icon-suffix"], ["matFormFieldLineRipple", ""], [1, "mat-mdc-form-field-subscript-wrapper", "mat-mdc-form-field-bottom-align"], ["aria-atomic", "true", "aria-live", "polite"], ["matFormFieldFloatingLabel", "", 3, "floating", "monitorResize", "id"], ["aria-hidden", "true", 1, "mat-mdc-form-field-required-marker", "mdc-floating-label--required"], [3, "id"], [1, "mat-mdc-form-field-hint-spacer"]],
   template: /* @__PURE__ */ __name(function MatFormField_Template(rf, ctx) {
     if (rf & 1) {
-      const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275projectionDef(_c8);
-      \u0275\u0275template(0, MatFormField_ng_template_0_Template, 1, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-      \u0275\u0275elementStart(2, "div", 6, 1);
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function MatFormField_Template_div_click_2_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._control.onContainerClick($event));
+      const _r1 = ɵɵgetCurrentView();
+      ɵɵprojectionDef(_c8);
+      ɵɵtemplate(0, MatFormField_ng_template_0_Template, 1, 1, "ng-template", null, 0, ɵɵtemplateRefExtractor);
+      ɵɵelementStart(2, "div", 6, 1);
+      ɵɵlistener("click", /* @__PURE__ */ __name(function MatFormField_Template_div_click_2_listener($event) {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._control.onContainerClick($event));
       }, "MatFormField_Template_div_click_2_listener"));
-      \u0275\u0275conditionalCreate(4, MatFormField_Conditional_4_Template, 1, 0, "div", 7);
-      \u0275\u0275elementStart(5, "div", 8);
-      \u0275\u0275conditionalCreate(6, MatFormField_Conditional_6_Template, 2, 2, "div", 9);
-      \u0275\u0275conditionalCreate(7, MatFormField_Conditional_7_Template, 3, 0, "div", 10);
-      \u0275\u0275conditionalCreate(8, MatFormField_Conditional_8_Template, 3, 0, "div", 11);
-      \u0275\u0275elementStart(9, "div", 12);
-      \u0275\u0275conditionalCreate(10, MatFormField_Conditional_10_Template, 1, 1, null, 13);
-      \u0275\u0275projection(11);
-      \u0275\u0275elementEnd();
-      \u0275\u0275conditionalCreate(12, MatFormField_Conditional_12_Template, 3, 0, "div", 14);
-      \u0275\u0275conditionalCreate(13, MatFormField_Conditional_13_Template, 3, 0, "div", 15);
-      \u0275\u0275elementEnd();
-      \u0275\u0275conditionalCreate(14, MatFormField_Conditional_14_Template, 1, 0, "div", 16);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(15, "div", 17)(16, "div", 18);
-      \u0275\u0275conditionalCreate(17, MatFormField_Case_17_Template, 1, 0)(18, MatFormField_Case_18_Template, 4, 1);
-      \u0275\u0275elementEnd()();
+      ɵɵconditionalCreate(4, MatFormField_Conditional_4_Template, 1, 0, "div", 7);
+      ɵɵelementStart(5, "div", 8);
+      ɵɵconditionalCreate(6, MatFormField_Conditional_6_Template, 2, 2, "div", 9);
+      ɵɵconditionalCreate(7, MatFormField_Conditional_7_Template, 3, 0, "div", 10);
+      ɵɵconditionalCreate(8, MatFormField_Conditional_8_Template, 3, 0, "div", 11);
+      ɵɵelementStart(9, "div", 12);
+      ɵɵconditionalCreate(10, MatFormField_Conditional_10_Template, 1, 1, null, 13);
+      ɵɵprojection(11);
+      ɵɵelementEnd();
+      ɵɵconditionalCreate(12, MatFormField_Conditional_12_Template, 3, 0, "div", 14);
+      ɵɵconditionalCreate(13, MatFormField_Conditional_13_Template, 3, 0, "div", 15);
+      ɵɵelementEnd();
+      ɵɵconditionalCreate(14, MatFormField_Conditional_14_Template, 1, 0, "div", 16);
+      ɵɵelementEnd();
+      ɵɵelementStart(15, "div", 17)(16, "div", 18);
+      ɵɵconditionalCreate(17, MatFormField_Case_17_Template, 1, 0)(18, MatFormField_Case_18_Template, 4, 1);
+      ɵɵelementEnd()();
     }
     if (rf & 2) {
       let tmp_19_0;
-      \u0275\u0275advance(2);
-      \u0275\u0275classProp("mdc-text-field--filled", !ctx._hasOutline())("mdc-text-field--outlined", ctx._hasOutline())("mdc-text-field--no-label", !ctx._hasFloatingLabel())("mdc-text-field--disabled", ctx._control.disabled)("mdc-text-field--invalid", ctx._control.errorState);
-      \u0275\u0275advance(2);
-      \u0275\u0275conditional(!ctx._hasOutline() && !ctx._control.disabled ? 4 : -1);
-      \u0275\u0275advance(2);
-      \u0275\u0275conditional(ctx._hasOutline() ? 6 : -1);
-      \u0275\u0275advance();
-      \u0275\u0275conditional(ctx._hasIconPrefix ? 7 : -1);
-      \u0275\u0275advance();
-      \u0275\u0275conditional(ctx._hasTextPrefix ? 8 : -1);
-      \u0275\u0275advance(2);
-      \u0275\u0275conditional(!ctx._hasOutline() || ctx._forceDisplayInfixLabel() ? 10 : -1);
-      \u0275\u0275advance(2);
-      \u0275\u0275conditional(ctx._hasTextSuffix ? 12 : -1);
-      \u0275\u0275advance();
-      \u0275\u0275conditional(ctx._hasIconSuffix ? 13 : -1);
-      \u0275\u0275advance();
-      \u0275\u0275conditional(!ctx._hasOutline() ? 14 : -1);
-      \u0275\u0275advance();
-      \u0275\u0275classProp("mat-mdc-form-field-subscript-dynamic-size", ctx.subscriptSizing === "dynamic");
+      ɵɵadvance(2);
+      ɵɵclassProp("mdc-text-field--filled", !ctx._hasOutline())("mdc-text-field--outlined", ctx._hasOutline())("mdc-text-field--no-label", !ctx._hasFloatingLabel())("mdc-text-field--disabled", ctx._control.disabled)("mdc-text-field--invalid", ctx._control.errorState);
+      ɵɵadvance(2);
+      ɵɵconditional(!ctx._hasOutline() && !ctx._control.disabled ? 4 : -1);
+      ɵɵadvance(2);
+      ɵɵconditional(ctx._hasOutline() ? 6 : -1);
+      ɵɵadvance();
+      ɵɵconditional(ctx._hasIconPrefix ? 7 : -1);
+      ɵɵadvance();
+      ɵɵconditional(ctx._hasTextPrefix ? 8 : -1);
+      ɵɵadvance(2);
+      ɵɵconditional(!ctx._hasOutline() || ctx._forceDisplayInfixLabel() ? 10 : -1);
+      ɵɵadvance(2);
+      ɵɵconditional(ctx._hasTextSuffix ? 12 : -1);
+      ɵɵadvance();
+      ɵɵconditional(ctx._hasIconSuffix ? 13 : -1);
+      ɵɵadvance();
+      ɵɵconditional(!ctx._hasOutline() ? 14 : -1);
+      ɵɵadvance();
+      ɵɵclassProp("mat-mdc-form-field-subscript-dynamic-size", ctx.subscriptSizing === "dynamic");
       const subscriptMessageType_r4 = ctx._getSubscriptMessageType();
-      \u0275\u0275advance();
-      \u0275\u0275classProp("mat-mdc-form-field-error-wrapper", subscriptMessageType_r4 === "error")("mat-mdc-form-field-hint-wrapper", subscriptMessageType_r4 === "hint");
-      \u0275\u0275advance();
-      \u0275\u0275conditional((tmp_19_0 = subscriptMessageType_r4) === "error" ? 17 : tmp_19_0 === "hint" ? 18 : -1);
+      ɵɵadvance();
+      ɵɵclassProp("mat-mdc-form-field-error-wrapper", subscriptMessageType_r4 === "error")("mat-mdc-form-field-hint-wrapper", subscriptMessageType_r4 === "hint");
+      ɵɵadvance();
+      ɵɵconditional((tmp_19_0 = subscriptMessageType_r4) === "error" ? 17 : tmp_19_0 === "hint" ? 18 : -1);
     }
   }, "MatFormField_Template"),
   dependencies: [MatFormFieldFloatingLabel, MatFormFieldNotchedOutline, NgTemplateOutlet, MatFormFieldLineRipple, MatHint],

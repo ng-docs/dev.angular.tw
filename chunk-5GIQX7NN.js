@@ -28,23 +28,23 @@ var _HeroListEnterLeavePageComponent = class _HeroListEnterLeavePageComponent {
   }
 };
 __name(_HeroListEnterLeavePageComponent, "HeroListEnterLeavePageComponent");
-__publicField(_HeroListEnterLeavePageComponent, "\u0275fac", /* @__PURE__ */ __name(function HeroListEnterLeavePageComponent_Factory(__ngFactoryType__) {
+__publicField(_HeroListEnterLeavePageComponent, "ɵfac", /* @__PURE__ */ __name(function HeroListEnterLeavePageComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HeroListEnterLeavePageComponent)();
 }, "HeroListEnterLeavePageComponent_Factory"));
-__publicField(_HeroListEnterLeavePageComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HeroListEnterLeavePageComponent, selectors: [["app-hero-list-enter-leave-page"]], decls: 4, vars: 1, consts: [[3, "remove", "heroes"]], template: /* @__PURE__ */ __name(function HeroListEnterLeavePageComponent_Template(rf, ctx) {
+__publicField(_HeroListEnterLeavePageComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _HeroListEnterLeavePageComponent, selectors: [["app-hero-list-enter-leave-page"]], decls: 4, vars: 1, consts: [[3, "remove", "heroes"]], template: /* @__PURE__ */ __name(function HeroListEnterLeavePageComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "section")(1, "h2");
-    \u0275\u0275text(2, "Enter/Leave");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "app-hero-list-enter-leave", 0);
-    \u0275\u0275listener("remove", /* @__PURE__ */ __name(function HeroListEnterLeavePageComponent_Template_app_hero_list_enter_leave_remove_3_listener($event) {
+    ɵɵelementStart(0, "section")(1, "h2");
+    ɵɵtext(2, "Enter/Leave");
+    ɵɵelementEnd();
+    ɵɵelementStart(3, "app-hero-list-enter-leave", 0);
+    ɵɵlistener("remove", /* @__PURE__ */ __name(function HeroListEnterLeavePageComponent_Template_app_hero_list_enter_leave_remove_3_listener($event) {
       return ctx.onRemove($event);
     }, "HeroListEnterLeavePageComponent_Template_app_hero_list_enter_leave_remove_3_listener"));
-    \u0275\u0275elementEnd()();
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
-    \u0275\u0275advance(3);
-    \u0275\u0275property("heroes", ctx.heroes);
+    ɵɵadvance(3);
+    ɵɵproperty("heroes", ctx.heroes);
   }
 }, "HeroListEnterLeavePageComponent_Template"), dependencies: [HeroListEnterLeaveComponent], encapsulation: 2 }));
 var HeroListEnterLeavePageComponent = _HeroListEnterLeavePageComponent;
@@ -65,7 +65,7 @@ var HeroListEnterLeavePageComponent = _HeroListEnterLeavePageComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HeroListEnterLeavePageComponent, { className: "HeroListEnterLeavePageComponent", filePath: "src/content/examples/animations/src/app/hero-list-enter-leave-page.component.ts", lineNumber: 16 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(HeroListEnterLeavePageComponent, { className: "HeroListEnterLeavePageComponent", filePath: "src/content/examples/animations/src/app/hero-list-enter-leave-page.component.ts", lineNumber: 16 });
 })();
 export {
   HeroListEnterLeavePageComponent

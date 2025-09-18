@@ -24,82 +24,82 @@ var _AppComponent = class _AppComponent {
   color = "";
 };
 __name(_AppComponent, "AppComponent");
-__publicField(_AppComponent, "\u0275fac", /* @__PURE__ */ __name(function AppComponent_Factory(__ngFactoryType__) {
+__publicField(_AppComponent, "ɵfac", /* @__PURE__ */ __name(function AppComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AppComponent)();
 }, "AppComponent_Factory"));
-__publicField(_AppComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], decls: 33, vars: 4, consts: [["type", "radio", "name", "colors", 3, "click"], [3, "appHighlight"], ["defaultColor", "violet", 3, "appHighlight"], ["appHighlight", "orange"]], template: /* @__PURE__ */ __name(function AppComponent_Template(rf, ctx) {
+__publicField(_AppComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _AppComponent, selectors: [["app-root"]], decls: 33, vars: 4, consts: [["type", "radio", "name", "colors", 3, "click"], [3, "appHighlight"], ["defaultColor", "violet", 3, "appHighlight"], ["appHighlight", "orange"]], template: /* @__PURE__ */ __name(function AppComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "h1");
-    \u0275\u0275text(1, "My First Attribute Directive");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "h2");
-    \u0275\u0275text(3, "Pick a highlight color");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "div")(5, "input", 0);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function AppComponent_Template_input_click_5_listener() {
+    ɵɵelementStart(0, "h1");
+    ɵɵtext(1, "My First Attribute Directive");
+    ɵɵelementEnd();
+    ɵɵelementStart(2, "h2");
+    ɵɵtext(3, "Pick a highlight color");
+    ɵɵelementEnd();
+    ɵɵelementStart(4, "div")(5, "input", 0);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function AppComponent_Template_input_click_5_listener() {
       return ctx.color = "lightgreen";
     }, "AppComponent_Template_input_click_5_listener"));
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(6, "Green ");
-    \u0275\u0275elementStart(7, "input", 0);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function AppComponent_Template_input_click_7_listener() {
+    ɵɵelementEnd();
+    ɵɵtext(6, "Green ");
+    ɵɵelementStart(7, "input", 0);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function AppComponent_Template_input_click_7_listener() {
       return ctx.color = "yellow";
     }, "AppComponent_Template_input_click_7_listener"));
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(8, "Yellow ");
-    \u0275\u0275elementStart(9, "input", 0);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function AppComponent_Template_input_click_9_listener() {
+    ɵɵelementEnd();
+    ɵɵtext(8, "Yellow ");
+    ɵɵelementStart(9, "input", 0);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function AppComponent_Template_input_click_9_listener() {
       return ctx.color = "cyan";
     }, "AppComponent_Template_input_click_9_listener"));
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(10, "Cyan\n");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(11, "p", 1);
-    \u0275\u0275text(12, "Highlight me!");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(13, "p", 2);
-    \u0275\u0275text(14, " Highlight me too!\n");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(15, "hr");
-    \u0275\u0275elementStart(16, "h2");
-    \u0275\u0275text(17, "Mouse over the following lines to see fixed highlights");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(18, "p", 1);
-    \u0275\u0275text(19, "Highlighted in yellow");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(20, "p", 3);
-    \u0275\u0275text(21, "Highlighted in orange");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(22, "hr");
-    \u0275\u0275elementStart(23, "h2");
-    \u0275\u0275text(24, "ngNonBindable");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(25, "p");
-    \u0275\u0275text(26, "Use ngNonBindable to stop evaluation.");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(27, "p");
-    \u0275\u0275disableBindings();
-    \u0275\u0275text(28, "This should not evaluate: {{ 1 + 1 }}");
-    \u0275\u0275enableBindings();
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(29, "h3");
-    \u0275\u0275text(30, "ngNonBindable with a directive");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(31, "div", 1);
-    \u0275\u0275disableBindings();
-    \u0275\u0275text(32, "This should not evaluate: {{ 1 +1 }}, but will highlight yellow.\n");
-    \u0275\u0275enableBindings();
-    \u0275\u0275elementEnd();
+    ɵɵelementEnd();
+    ɵɵtext(10, "Cyan\n");
+    ɵɵelementEnd();
+    ɵɵelementStart(11, "p", 1);
+    ɵɵtext(12, "Highlight me!");
+    ɵɵelementEnd();
+    ɵɵelementStart(13, "p", 2);
+    ɵɵtext(14, " Highlight me too!\n");
+    ɵɵelementEnd();
+    ɵɵelement(15, "hr");
+    ɵɵelementStart(16, "h2");
+    ɵɵtext(17, "Mouse over the following lines to see fixed highlights");
+    ɵɵelementEnd();
+    ɵɵelementStart(18, "p", 1);
+    ɵɵtext(19, "Highlighted in yellow");
+    ɵɵelementEnd();
+    ɵɵelementStart(20, "p", 3);
+    ɵɵtext(21, "Highlighted in orange");
+    ɵɵelementEnd();
+    ɵɵelement(22, "hr");
+    ɵɵelementStart(23, "h2");
+    ɵɵtext(24, "ngNonBindable");
+    ɵɵelementEnd();
+    ɵɵelementStart(25, "p");
+    ɵɵtext(26, "Use ngNonBindable to stop evaluation.");
+    ɵɵelementEnd();
+    ɵɵelementStart(27, "p");
+    ɵɵdisableBindings();
+    ɵɵtext(28, "This should not evaluate: {{ 1 + 1 }}");
+    ɵɵenableBindings();
+    ɵɵelementEnd();
+    ɵɵelementStart(29, "h3");
+    ɵɵtext(30, "ngNonBindable with a directive");
+    ɵɵelementEnd();
+    ɵɵelementStart(31, "div", 1);
+    ɵɵdisableBindings();
+    ɵɵtext(32, "This should not evaluate: {{ 1 +1 }}, but will highlight yellow.\n");
+    ɵɵenableBindings();
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance(11);
-    \u0275\u0275property("appHighlight", ctx.color);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("appHighlight", ctx.color);
-    \u0275\u0275advance(5);
-    \u0275\u0275property("appHighlight", "yellow");
-    \u0275\u0275advance(13);
-    \u0275\u0275property("appHighlight", "yellow");
+    ɵɵadvance(11);
+    ɵɵproperty("appHighlight", ctx.color);
+    ɵɵadvance(2);
+    ɵɵproperty("appHighlight", ctx.color);
+    ɵɵadvance(5);
+    ɵɵproperty("appHighlight", "yellow");
+    ɵɵadvance(13);
+    ɵɵproperty("appHighlight", "yellow");
   }
 }, "AppComponent_Template"), dependencies: [HighlightDirective], encapsulation: 2 }));
 var AppComponent = _AppComponent;
@@ -148,7 +148,7 @@ var AppComponent = _AppComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/content/examples/attribute-directives/src/app/app.component.ts", lineNumber: 11 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/content/examples/attribute-directives/src/app/app.component.ts", lineNumber: 11 });
 })();
 export {
   AppComponent

@@ -29,35 +29,35 @@ var _IncrementDecrementComponent = class _IncrementDecrementComponent {
   }
 };
 __name(_IncrementDecrementComponent, "IncrementDecrementComponent");
-__publicField(_IncrementDecrementComponent, "\u0275fac", /* @__PURE__ */ __name(function IncrementDecrementComponent_Factory(__ngFactoryType__) {
+__publicField(_IncrementDecrementComponent, "ɵfac", /* @__PURE__ */ __name(function IncrementDecrementComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _IncrementDecrementComponent)();
 }, "IncrementDecrementComponent_Factory"));
-__publicField(_IncrementDecrementComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _IncrementDecrementComponent, selectors: [["app-increment-decrement"]], decls: 10, vars: 2, consts: [[1, "controls"], ["type", "button", 3, "click"]], template: /* @__PURE__ */ __name(function IncrementDecrementComponent_Template(rf, ctx) {
+__publicField(_IncrementDecrementComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _IncrementDecrementComponent, selectors: [["app-increment-decrement"]], decls: 10, vars: 2, consts: [[1, "controls"], ["type", "button", 3, "click"]], template: /* @__PURE__ */ __name(function IncrementDecrementComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "h3");
-    \u0275\u0275text(1, "Increment and Decrement Example");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(2, "section")(3, "p");
-    \u0275\u0275text(4);
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(5, "div", 0)(6, "button", 1);
-    \u0275\u0275domListener("click", /* @__PURE__ */ __name(function IncrementDecrementComponent_Template_button_click_6_listener() {
+    ɵɵdomElementStart(0, "h3");
+    ɵɵtext(1, "Increment and Decrement Example");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(2, "section")(3, "p");
+    ɵɵtext(4);
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(5, "div", 0)(6, "button", 1);
+    ɵɵdomListener("click", /* @__PURE__ */ __name(function IncrementDecrementComponent_Template_button_click_6_listener() {
       return ctx.modify(1);
     }, "IncrementDecrementComponent_Template_button_click_6_listener"));
-    \u0275\u0275text(7, "+");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(8, "button", 1);
-    \u0275\u0275domListener("click", /* @__PURE__ */ __name(function IncrementDecrementComponent_Template_button_click_8_listener() {
+    ɵɵtext(7, "+");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(8, "button", 1);
+    ɵɵdomListener("click", /* @__PURE__ */ __name(function IncrementDecrementComponent_Template_button_click_8_listener() {
       return ctx.modify(-1);
     }, "IncrementDecrementComponent_Template_button_click_8_listener"));
-    \u0275\u0275text(9, "-");
-    \u0275\u0275domElementEnd()()();
+    ɵɵtext(9, "-");
+    ɵɵdomElementEnd()()();
   }
   if (rf & 2) {
-    \u0275\u0275advance(3);
-    \u0275\u0275property("@incrementAnimation", ctx.num());
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1("Number ", ctx.num());
+    ɵɵadvance(3);
+    ɵɵproperty("@incrementAnimation", ctx.num());
+    ɵɵadvance();
+    ɵɵtextInterpolate1("Number ", ctx.num());
   }
 }, "IncrementDecrementComponent_Template"), styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  font-size: 32px;\n  margin: 20px;\n  text-align: center;\n}\nsection[_ngcontent-%COMP%] {\n  border: 1px solid lightgray;\n  border-radius: 50px;\n}\np[_ngcontent-%COMP%] {\n  display: inline-block;\n  margin: 2rem 0;\n  text-transform: uppercase;\n}\n.controls[_ngcontent-%COMP%] {\n  padding-bottom: 2rem;\n}\nbutton[_ngcontent-%COMP%] {\n  font: inherit;\n  border: 0;\n  background: lightgray;\n  width: 50px;\n  border-radius: 10px;\n}\nbutton[_ngcontent-%COMP%]    + button[_ngcontent-%COMP%] {\n  margin-left: 10px;\n}\n/*# sourceMappingURL=increment-decrement.component.css.map */"], data: { animation: [
   trigger("incrementAnimation", [
@@ -86,7 +86,7 @@ var IncrementDecrementComponent = _IncrementDecrementComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(IncrementDecrementComponent, { className: "IncrementDecrementComponent", filePath: "src/content/examples/animations/src/app/animations-package/increment-decrement.component.ts", lineNumber: 21 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(IncrementDecrementComponent, { className: "IncrementDecrementComponent", filePath: "src/content/examples/animations/src/app/animations-package/increment-decrement.component.ts", lineNumber: 21 });
 })();
 export {
   IncrementDecrementComponent

@@ -116,12 +116,12 @@ var _UniqueSelectionDispatcher = class _UniqueSelectionDispatcher {
   }
 };
 __name(_UniqueSelectionDispatcher, "UniqueSelectionDispatcher");
-__publicField(_UniqueSelectionDispatcher, "\u0275fac", /* @__PURE__ */ __name(function UniqueSelectionDispatcher_Factory(__ngFactoryType__) {
+__publicField(_UniqueSelectionDispatcher, "ɵfac", /* @__PURE__ */ __name(function UniqueSelectionDispatcher_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _UniqueSelectionDispatcher)();
 }, "UniqueSelectionDispatcher_Factory"));
-__publicField(_UniqueSelectionDispatcher, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_UniqueSelectionDispatcher, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _UniqueSelectionDispatcher,
-  factory: _UniqueSelectionDispatcher.\u0275fac,
+  factory: _UniqueSelectionDispatcher.ɵfac,
   providedIn: "root"
 }));
 var UniqueSelectionDispatcher = _UniqueSelectionDispatcher;
@@ -138,15 +138,15 @@ var UniqueSelectionDispatcher = _UniqueSelectionDispatcher;
 var _CdkMenuGroup = class _CdkMenuGroup {
 };
 __name(_CdkMenuGroup, "CdkMenuGroup");
-__publicField(_CdkMenuGroup, "\u0275fac", /* @__PURE__ */ __name(function CdkMenuGroup_Factory(__ngFactoryType__) {
+__publicField(_CdkMenuGroup, "ɵfac", /* @__PURE__ */ __name(function CdkMenuGroup_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkMenuGroup)();
 }, "CdkMenuGroup_Factory"));
-__publicField(_CdkMenuGroup, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkMenuGroup, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkMenuGroup,
   selectors: [["", "cdkMenuGroup", ""]],
   hostAttrs: ["role", "group", 1, "cdk-menu-group"],
   exportAs: ["cdkMenuGroup"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: UniqueSelectionDispatcher,
     useClass: UniqueSelectionDispatcher
   }])]
@@ -317,12 +317,12 @@ var _MenuStack = class _MenuStack {
   }
 };
 __name(_MenuStack, "MenuStack");
-__publicField(_MenuStack, "\u0275fac", /* @__PURE__ */ __name(function MenuStack_Factory(__ngFactoryType__) {
+__publicField(_MenuStack, "ɵfac", /* @__PURE__ */ __name(function MenuStack_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MenuStack)();
 }, "MenuStack_Factory"));
-__publicField(_MenuStack, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_MenuStack, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _MenuStack,
-  factory: _MenuStack.\u0275fac
+  factory: _MenuStack.ɵfac
 }));
 var MenuStack = _MenuStack;
 (() => {
@@ -353,12 +353,12 @@ var _MenuTracker = class _MenuTracker {
 __name(_MenuTracker, "MenuTracker");
 /** The last open menu trigger. */
 __publicField(_MenuTracker, "_openMenuTrigger");
-__publicField(_MenuTracker, "\u0275fac", /* @__PURE__ */ __name(function MenuTracker_Factory(__ngFactoryType__) {
+__publicField(_MenuTracker, "ɵfac", /* @__PURE__ */ __name(function MenuTracker_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MenuTracker)();
 }, "MenuTracker_Factory"));
-__publicField(_MenuTracker, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_MenuTracker, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _MenuTracker,
-  factory: _MenuTracker.\u0275fac,
+  factory: _MenuTracker.ɵfac,
   providedIn: "root"
 }));
 var MenuTracker = _MenuTracker;
@@ -464,15 +464,15 @@ var _CdkMenuTriggerBase = class _CdkMenuTriggerBase {
   }
 };
 __name(_CdkMenuTriggerBase, "CdkMenuTriggerBase");
-__publicField(_CdkMenuTriggerBase, "\u0275fac", /* @__PURE__ */ __name(function CdkMenuTriggerBase_Factory(__ngFactoryType__) {
+__publicField(_CdkMenuTriggerBase, "ɵfac", /* @__PURE__ */ __name(function CdkMenuTriggerBase_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkMenuTriggerBase)();
 }, "CdkMenuTriggerBase_Factory"));
-__publicField(_CdkMenuTriggerBase, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkMenuTriggerBase, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkMenuTriggerBase,
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function CdkMenuTriggerBase_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("aria-controls", ctx.childMenu == null ? null : ctx.childMenu.id)("data-cdk-menu-stack-id", ctx.menuStack.id);
+      ɵɵattribute("aria-controls", ctx.childMenu == null ? null : ctx.childMenu.id)("data-cdk-menu-stack-id", ctx.menuStack.id);
     }
   }, "CdkMenuTriggerBase_HostBindings")
 }));
@@ -642,12 +642,12 @@ var _TargetMenuAim = class _TargetMenuAim {
   }
 };
 __name(_TargetMenuAim, "TargetMenuAim");
-__publicField(_TargetMenuAim, "\u0275fac", /* @__PURE__ */ __name(function TargetMenuAim_Factory(__ngFactoryType__) {
+__publicField(_TargetMenuAim, "ɵfac", /* @__PURE__ */ __name(function TargetMenuAim_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _TargetMenuAim)();
 }, "TargetMenuAim_Factory"));
-__publicField(_TargetMenuAim, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_TargetMenuAim, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _TargetMenuAim,
-  factory: _TargetMenuAim.\u0275fac
+  factory: _TargetMenuAim.ɵfac
 }));
 var TargetMenuAim = _TargetMenuAim;
 (() => {
@@ -658,14 +658,14 @@ var TargetMenuAim = _TargetMenuAim;
 var _CdkTargetMenuAim = class _CdkTargetMenuAim {
 };
 __name(_CdkTargetMenuAim, "CdkTargetMenuAim");
-__publicField(_CdkTargetMenuAim, "\u0275fac", /* @__PURE__ */ __name(function CdkTargetMenuAim_Factory(__ngFactoryType__) {
+__publicField(_CdkTargetMenuAim, "ɵfac", /* @__PURE__ */ __name(function CdkTargetMenuAim_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkTargetMenuAim)();
 }, "CdkTargetMenuAim_Factory"));
-__publicField(_CdkTargetMenuAim, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkTargetMenuAim, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkTargetMenuAim,
   selectors: [["", "cdkTargetMenuAim", ""]],
   exportAs: ["cdkTargetMenuAim"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MENU_AIM,
     useClass: TargetMenuAim
   }])]
@@ -950,17 +950,17 @@ var _CdkMenuTrigger = class _CdkMenuTrigger extends CdkMenuTriggerBase {
   }
 };
 __name(_CdkMenuTrigger, "CdkMenuTrigger");
-__publicField(_CdkMenuTrigger, "\u0275fac", /* @__PURE__ */ __name(function CdkMenuTrigger_Factory(__ngFactoryType__) {
+__publicField(_CdkMenuTrigger, "ɵfac", /* @__PURE__ */ __name(function CdkMenuTrigger_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkMenuTrigger)();
 }, "CdkMenuTrigger_Factory"));
-__publicField(_CdkMenuTrigger, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkMenuTrigger, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkMenuTrigger,
   selectors: [["", "cdkMenuTriggerFor", ""]],
   hostAttrs: [1, "cdk-menu-trigger"],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function CdkMenuTrigger_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("focusin", /* @__PURE__ */ __name(function CdkMenuTrigger_focusin_HostBindingHandler() {
+      ɵɵlistener("focusin", /* @__PURE__ */ __name(function CdkMenuTrigger_focusin_HostBindingHandler() {
         return ctx._setHasFocus(true);
       }, "CdkMenuTrigger_focusin_HostBindingHandler"))("focusout", /* @__PURE__ */ __name(function CdkMenuTrigger_focusout_HostBindingHandler() {
         return ctx._setHasFocus(false);
@@ -971,7 +971,7 @@ __publicField(_CdkMenuTrigger, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDi
       }, "CdkMenuTrigger_click_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275attribute("aria-haspopup", ctx.menuTemplateRef ? "menu" : null)("aria-expanded", ctx.menuTemplateRef == null ? null : ctx.isOpen());
+      ɵɵattribute("aria-haspopup", ctx.menuTemplateRef ? "menu" : null)("aria-expanded", ctx.menuTemplateRef == null ? null : ctx.isOpen());
     }
   }, "CdkMenuTrigger_HostBindings"),
   inputs: {
@@ -984,10 +984,10 @@ __publicField(_CdkMenuTrigger, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDi
     closed: "cdkMenuClosed"
   },
   exportAs: ["cdkMenuTriggerFor"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MENU_TRIGGER,
     useExisting: _CdkMenuTrigger
-  }, PARENT_OR_NEW_MENU_STACK_PROVIDER]), \u0275\u0275InheritDefinitionFeature, \u0275\u0275NgOnChangesFeature]
+  }, PARENT_OR_NEW_MENU_STACK_PROVIDER]), ɵɵInheritDefinitionFeature, ɵɵNgOnChangesFeature]
 }));
 var CdkMenuTrigger = _CdkMenuTrigger;
 (() => {
@@ -1262,17 +1262,17 @@ var _CdkMenuItem = class _CdkMenuItem {
   }
 };
 __name(_CdkMenuItem, "CdkMenuItem");
-__publicField(_CdkMenuItem, "\u0275fac", /* @__PURE__ */ __name(function CdkMenuItem_Factory(__ngFactoryType__) {
+__publicField(_CdkMenuItem, "ɵfac", /* @__PURE__ */ __name(function CdkMenuItem_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkMenuItem)();
 }, "CdkMenuItem_Factory"));
-__publicField(_CdkMenuItem, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkMenuItem, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkMenuItem,
   selectors: [["", "cdkMenuItem", ""]],
   hostAttrs: ["role", "menuitem", 1, "cdk-menu-item"],
   hostVars: 4,
   hostBindings: /* @__PURE__ */ __name(function CdkMenuItem_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("blur", /* @__PURE__ */ __name(function CdkMenuItem_blur_HostBindingHandler() {
+      ɵɵlistener("blur", /* @__PURE__ */ __name(function CdkMenuItem_blur_HostBindingHandler() {
         return ctx._resetTabIndex();
       }, "CdkMenuItem_blur_HostBindingHandler"))("focus", /* @__PURE__ */ __name(function CdkMenuItem_focus_HostBindingHandler() {
         return ctx._setTabIndex();
@@ -1283,9 +1283,9 @@ __publicField(_CdkMenuItem, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirec
       }, "CdkMenuItem_keydown_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275domProperty("tabIndex", ctx._tabindex);
-      \u0275\u0275attribute("aria-disabled", ctx.disabled || null);
-      \u0275\u0275classProp("cdk-menu-item-disabled", ctx.disabled);
+      ɵɵdomProperty("tabIndex", ctx._tabindex);
+      ɵɵattribute("aria-disabled", ctx.disabled || null);
+      ɵɵclassProp("cdk-menu-item-disabled", ctx.disabled);
     }
   }, "CdkMenuItem_HostBindings"),
   inputs: {
@@ -1568,42 +1568,42 @@ var _CdkMenuBase = class _CdkMenuBase extends CdkMenuGroup {
   }
 };
 __name(_CdkMenuBase, "CdkMenuBase");
-__publicField(_CdkMenuBase, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275CdkMenuBase_BaseFactory;
+__publicField(_CdkMenuBase, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵCdkMenuBase_BaseFactory;
   return /* @__PURE__ */ __name(function CdkMenuBase_Factory(__ngFactoryType__) {
-    return (\u0275CdkMenuBase_BaseFactory || (\u0275CdkMenuBase_BaseFactory = \u0275\u0275getInheritedFactory(_CdkMenuBase)))(__ngFactoryType__ || _CdkMenuBase);
+    return (ɵCdkMenuBase_BaseFactory || (ɵCdkMenuBase_BaseFactory = ɵɵgetInheritedFactory(_CdkMenuBase)))(__ngFactoryType__ || _CdkMenuBase);
   }, "CdkMenuBase_Factory");
 })());
-__publicField(_CdkMenuBase, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkMenuBase, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkMenuBase,
   contentQueries: /* @__PURE__ */ __name(function CdkMenuBase_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuery(dirIndex, CdkMenuItem, 5);
+      ɵɵcontentQuery(dirIndex, CdkMenuItem, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._allItems = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._allItems = _t);
     }
   }, "CdkMenuBase_ContentQueries"),
   hostAttrs: ["role", "menu"],
   hostVars: 4,
   hostBindings: /* @__PURE__ */ __name(function CdkMenuBase_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("focusin", /* @__PURE__ */ __name(function CdkMenuBase_focusin_HostBindingHandler() {
+      ɵɵlistener("focusin", /* @__PURE__ */ __name(function CdkMenuBase_focusin_HostBindingHandler() {
         return ctx.menuStack.setHasFocus(true);
       }, "CdkMenuBase_focusin_HostBindingHandler"))("focusout", /* @__PURE__ */ __name(function CdkMenuBase_focusout_HostBindingHandler() {
         return ctx.menuStack.setHasFocus(false);
       }, "CdkMenuBase_focusout_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275domProperty("tabIndex", ctx._getTabIndex())("id", ctx.id);
-      \u0275\u0275attribute("aria-orientation", ctx.orientation)("data-cdk-menu-stack-id", ctx.menuStack.id);
+      ɵɵdomProperty("tabIndex", ctx._getTabIndex())("id", ctx.id);
+      ɵɵattribute("aria-orientation", ctx.orientation)("data-cdk-menu-stack-id", ctx.menuStack.id);
     }
   }, "CdkMenuBase_HostBindings"),
   inputs: {
     id: "id"
   },
-  features: [\u0275\u0275InheritDefinitionFeature]
+  features: [ɵɵInheritDefinitionFeature]
 }));
 var CdkMenuBase = _CdkMenuBase;
 (() => {
@@ -1721,35 +1721,35 @@ var _CdkMenu = class _CdkMenu extends CdkMenuBase {
   }
 };
 __name(_CdkMenu, "CdkMenu");
-__publicField(_CdkMenu, "\u0275fac", /* @__PURE__ */ __name(function CdkMenu_Factory(__ngFactoryType__) {
+__publicField(_CdkMenu, "ɵfac", /* @__PURE__ */ __name(function CdkMenu_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkMenu)();
 }, "CdkMenu_Factory"));
-__publicField(_CdkMenu, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkMenu, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkMenu,
   selectors: [["", "cdkMenu", ""]],
   hostAttrs: ["role", "menu", 1, "cdk-menu"],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function CdkMenu_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("keydown", /* @__PURE__ */ __name(function CdkMenu_keydown_HostBindingHandler($event) {
+      ɵɵlistener("keydown", /* @__PURE__ */ __name(function CdkMenu_keydown_HostBindingHandler($event) {
         return ctx._handleKeyEvent($event);
       }, "CdkMenu_keydown_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275classProp("cdk-menu-inline", ctx.isInline);
+      ɵɵclassProp("cdk-menu-inline", ctx.isInline);
     }
   }, "CdkMenu_HostBindings"),
   outputs: {
     closed: "closed"
   },
   exportAs: ["cdkMenu"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: CdkMenuGroup,
     useExisting: _CdkMenu
   }, {
     provide: CDK_MENU,
     useExisting: _CdkMenu
-  }, PARENT_OR_NEW_INLINE_MENU_STACK_PROVIDER("vertical")]), \u0275\u0275InheritDefinitionFeature]
+  }, PARENT_OR_NEW_INLINE_MENU_STACK_PROVIDER("vertical")]), ɵɵInheritDefinitionFeature]
 }));
 var CdkMenu = _CdkMenu;
 (() => {
@@ -1859,25 +1859,25 @@ var _CdkMenuBar = class _CdkMenuBar extends CdkMenuBase {
   }
 };
 __name(_CdkMenuBar, "CdkMenuBar");
-__publicField(_CdkMenuBar, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275CdkMenuBar_BaseFactory;
+__publicField(_CdkMenuBar, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵCdkMenuBar_BaseFactory;
   return /* @__PURE__ */ __name(function CdkMenuBar_Factory(__ngFactoryType__) {
-    return (\u0275CdkMenuBar_BaseFactory || (\u0275CdkMenuBar_BaseFactory = \u0275\u0275getInheritedFactory(_CdkMenuBar)))(__ngFactoryType__ || _CdkMenuBar);
+    return (ɵCdkMenuBar_BaseFactory || (ɵCdkMenuBar_BaseFactory = ɵɵgetInheritedFactory(_CdkMenuBar)))(__ngFactoryType__ || _CdkMenuBar);
   }, "CdkMenuBar_Factory");
 })());
-__publicField(_CdkMenuBar, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkMenuBar, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkMenuBar,
   selectors: [["", "cdkMenuBar", ""]],
   hostAttrs: ["role", "menubar", 1, "cdk-menu-bar"],
   hostBindings: /* @__PURE__ */ __name(function CdkMenuBar_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("keydown", /* @__PURE__ */ __name(function CdkMenuBar_keydown_HostBindingHandler($event) {
+      ɵɵlistener("keydown", /* @__PURE__ */ __name(function CdkMenuBar_keydown_HostBindingHandler($event) {
         return ctx._handleKeyEvent($event);
       }, "CdkMenuBar_keydown_HostBindingHandler"));
     }
   }, "CdkMenuBar_HostBindings"),
   exportAs: ["cdkMenuBar"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: CdkMenuGroup,
     useExisting: _CdkMenuBar
   }, {
@@ -1886,7 +1886,7 @@ __publicField(_CdkMenuBar, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirect
   }, {
     provide: MENU_STACK,
     useFactory: /* @__PURE__ */ __name(() => MenuStack.inline("horizontal"), "useFactory")
-  }]), \u0275\u0275InheritDefinitionFeature]
+  }]), ɵɵInheritDefinitionFeature]
 }));
 var CdkMenuBar = _CdkMenuBar;
 (() => {
@@ -1920,24 +1920,24 @@ var _CdkMenuItemSelectable = class _CdkMenuItemSelectable extends CdkMenuItem {
   closeOnSpacebarTrigger = false;
 };
 __name(_CdkMenuItemSelectable, "CdkMenuItemSelectable");
-__publicField(_CdkMenuItemSelectable, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275CdkMenuItemSelectable_BaseFactory;
+__publicField(_CdkMenuItemSelectable, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵCdkMenuItemSelectable_BaseFactory;
   return /* @__PURE__ */ __name(function CdkMenuItemSelectable_Factory(__ngFactoryType__) {
-    return (\u0275CdkMenuItemSelectable_BaseFactory || (\u0275CdkMenuItemSelectable_BaseFactory = \u0275\u0275getInheritedFactory(_CdkMenuItemSelectable)))(__ngFactoryType__ || _CdkMenuItemSelectable);
+    return (ɵCdkMenuItemSelectable_BaseFactory || (ɵCdkMenuItemSelectable_BaseFactory = ɵɵgetInheritedFactory(_CdkMenuItemSelectable)))(__ngFactoryType__ || _CdkMenuItemSelectable);
   }, "CdkMenuItemSelectable_Factory");
 })());
-__publicField(_CdkMenuItemSelectable, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkMenuItemSelectable, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkMenuItemSelectable,
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function CdkMenuItemSelectable_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("aria-checked", !!ctx.checked)("aria-disabled", ctx.disabled || null);
+      ɵɵattribute("aria-checked", !!ctx.checked)("aria-disabled", ctx.disabled || null);
     }
   }, "CdkMenuItemSelectable_HostBindings"),
   inputs: {
     checked: [2, "cdkMenuItemChecked", "checked", booleanAttribute]
   },
-  features: [\u0275\u0275InheritDefinitionFeature]
+  features: [ɵɵInheritDefinitionFeature]
 }));
 var CdkMenuItemSelectable = _CdkMenuItemSelectable;
 (() => {
@@ -1993,27 +1993,27 @@ var _CdkMenuItemRadio = class _CdkMenuItemRadio extends CdkMenuItemSelectable {
   }
 };
 __name(_CdkMenuItemRadio, "CdkMenuItemRadio");
-__publicField(_CdkMenuItemRadio, "\u0275fac", /* @__PURE__ */ __name(function CdkMenuItemRadio_Factory(__ngFactoryType__) {
+__publicField(_CdkMenuItemRadio, "ɵfac", /* @__PURE__ */ __name(function CdkMenuItemRadio_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkMenuItemRadio)();
 }, "CdkMenuItemRadio_Factory"));
-__publicField(_CdkMenuItemRadio, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkMenuItemRadio, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkMenuItemRadio,
   selectors: [["", "cdkMenuItemRadio", ""]],
   hostAttrs: ["role", "menuitemradio"],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function CdkMenuItemRadio_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("cdk-menu-item-radio", true);
+      ɵɵclassProp("cdk-menu-item-radio", true);
     }
   }, "CdkMenuItemRadio_HostBindings"),
   exportAs: ["cdkMenuItemRadio"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: CdkMenuItemSelectable,
     useExisting: _CdkMenuItemRadio
   }, {
     provide: CdkMenuItem,
     useExisting: CdkMenuItemSelectable
-  }]), \u0275\u0275InheritDefinitionFeature]
+  }]), ɵɵInheritDefinitionFeature]
 }));
 var CdkMenuItemRadio = _CdkMenuItemRadio;
 (() => {
@@ -2050,30 +2050,30 @@ var _CdkMenuItemCheckbox = class _CdkMenuItemCheckbox extends CdkMenuItemSelecta
   }
 };
 __name(_CdkMenuItemCheckbox, "CdkMenuItemCheckbox");
-__publicField(_CdkMenuItemCheckbox, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275CdkMenuItemCheckbox_BaseFactory;
+__publicField(_CdkMenuItemCheckbox, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵCdkMenuItemCheckbox_BaseFactory;
   return /* @__PURE__ */ __name(function CdkMenuItemCheckbox_Factory(__ngFactoryType__) {
-    return (\u0275CdkMenuItemCheckbox_BaseFactory || (\u0275CdkMenuItemCheckbox_BaseFactory = \u0275\u0275getInheritedFactory(_CdkMenuItemCheckbox)))(__ngFactoryType__ || _CdkMenuItemCheckbox);
+    return (ɵCdkMenuItemCheckbox_BaseFactory || (ɵCdkMenuItemCheckbox_BaseFactory = ɵɵgetInheritedFactory(_CdkMenuItemCheckbox)))(__ngFactoryType__ || _CdkMenuItemCheckbox);
   }, "CdkMenuItemCheckbox_Factory");
 })());
-__publicField(_CdkMenuItemCheckbox, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkMenuItemCheckbox, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkMenuItemCheckbox,
   selectors: [["", "cdkMenuItemCheckbox", ""]],
   hostAttrs: ["role", "menuitemcheckbox"],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function CdkMenuItemCheckbox_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("cdk-menu-item-checkbox", true);
+      ɵɵclassProp("cdk-menu-item-checkbox", true);
     }
   }, "CdkMenuItemCheckbox_HostBindings"),
   exportAs: ["cdkMenuItemCheckbox"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: CdkMenuItemSelectable,
     useExisting: _CdkMenuItemCheckbox
   }, {
     provide: CdkMenuItem,
     useExisting: CdkMenuItemSelectable
-  }]), \u0275\u0275InheritDefinitionFeature]
+  }]), ɵɵInheritDefinitionFeature]
 }));
 var CdkMenuItemCheckbox = _CdkMenuItemCheckbox;
 (() => {
@@ -2242,21 +2242,21 @@ var _CdkContextMenuTrigger = class _CdkContextMenuTrigger extends CdkMenuTrigger
   }
 };
 __name(_CdkContextMenuTrigger, "CdkContextMenuTrigger");
-__publicField(_CdkContextMenuTrigger, "\u0275fac", /* @__PURE__ */ __name(function CdkContextMenuTrigger_Factory(__ngFactoryType__) {
+__publicField(_CdkContextMenuTrigger, "ɵfac", /* @__PURE__ */ __name(function CdkContextMenuTrigger_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkContextMenuTrigger)();
 }, "CdkContextMenuTrigger_Factory"));
-__publicField(_CdkContextMenuTrigger, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkContextMenuTrigger, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkContextMenuTrigger,
   selectors: [["", "cdkContextMenuTriggerFor", ""]],
   hostVars: 1,
   hostBindings: /* @__PURE__ */ __name(function CdkContextMenuTrigger_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("contextmenu", /* @__PURE__ */ __name(function CdkContextMenuTrigger_contextmenu_HostBindingHandler($event) {
+      ɵɵlistener("contextmenu", /* @__PURE__ */ __name(function CdkContextMenuTrigger_contextmenu_HostBindingHandler($event) {
         return ctx._openOnContextMenu($event);
       }, "CdkContextMenuTrigger_contextmenu_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275attribute("data-cdk-menu-stack-id", null);
+      ɵɵattribute("data-cdk-menu-stack-id", null);
     }
   }, "CdkContextMenuTrigger_HostBindings"),
   inputs: {
@@ -2270,13 +2270,13 @@ __publicField(_CdkContextMenuTrigger, "\u0275dir", /* @__PURE__ */ \u0275\u0275d
     closed: "cdkContextMenuClosed"
   },
   exportAs: ["cdkContextMenuTriggerFor"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MENU_TRIGGER,
     useExisting: _CdkContextMenuTrigger
   }, {
     provide: MENU_STACK,
     useClass: MenuStack
-  }]), \u0275\u0275InheritDefinitionFeature]
+  }]), ɵɵInheritDefinitionFeature]
 }));
 var CdkContextMenuTrigger = _CdkContextMenuTrigger;
 (() => {
@@ -2322,15 +2322,15 @@ var MENU_DIRECTIVES = [CdkMenuBar, CdkMenu, CdkMenuItem, CdkMenuItemRadio, CdkMe
 var _CdkMenuModule = class _CdkMenuModule {
 };
 __name(_CdkMenuModule, "CdkMenuModule");
-__publicField(_CdkMenuModule, "\u0275fac", /* @__PURE__ */ __name(function CdkMenuModule_Factory(__ngFactoryType__) {
+__publicField(_CdkMenuModule, "ɵfac", /* @__PURE__ */ __name(function CdkMenuModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkMenuModule)();
 }, "CdkMenuModule_Factory"));
-__publicField(_CdkMenuModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_CdkMenuModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _CdkMenuModule,
   imports: [OverlayModule, CdkMenuBar, CdkMenu, CdkMenuItem, CdkMenuItemRadio, CdkMenuItemCheckbox, CdkMenuTrigger, CdkMenuGroup, CdkContextMenuTrigger, CdkTargetMenuAim],
   exports: [CdkMenuBar, CdkMenu, CdkMenuItem, CdkMenuItemRadio, CdkMenuItemCheckbox, CdkMenuTrigger, CdkMenuGroup, CdkContextMenuTrigger, CdkTargetMenuAim]
 }));
-__publicField(_CdkMenuModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_CdkMenuModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   imports: [OverlayModule]
 }));
 var CdkMenuModule = _CdkMenuModule;

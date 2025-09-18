@@ -2755,7 +2755,7 @@ function setCurrentInjector(injector) {
 __name(setCurrentInjector, "setCurrentInjector");
 var NOT_FOUND = Symbol("NotFound");
 function isNotFound(e) {
-  return e === NOT_FOUND || e?.name === "\u0275NotFound";
+  return e === NOT_FOUND || e?.name === "ɵNotFound";
 }
 __name(isNotFound, "isNotFound");
 
@@ -3547,7 +3547,7 @@ function assertNotReactive(fn) {
   }
 }
 __name(assertNotReactive, "assertNotReactive");
-function \u0275\u0275defineInjectable(opts) {
+function ɵɵdefineInjectable(opts) {
   return {
     token: opts.token,
     providedIn: opts.providedIn || null,
@@ -3555,11 +3555,11 @@ function \u0275\u0275defineInjectable(opts) {
     value: void 0
   };
 }
-__name(\u0275\u0275defineInjectable, "\u0275\u0275defineInjectable");
-function \u0275\u0275defineInjector(options) {
+__name(ɵɵdefineInjectable, "ɵɵdefineInjectable");
+function ɵɵdefineInjector(options) {
   return { providers: options.providers || [], imports: options.imports || [] };
 }
-__name(\u0275\u0275defineInjector, "\u0275\u0275defineInjector");
+__name(ɵɵdefineInjector, "ɵɵdefineInjector");
 function getInjectableDef(type) {
   return getOwnDefinition(type, NG_PROV_DEF);
 }
@@ -3587,13 +3587,13 @@ function getInjectorDef(type) {
   return type && type.hasOwnProperty(NG_INJ_DEF) ? type[NG_INJ_DEF] : null;
 }
 __name(getInjectorDef, "getInjectorDef");
-var NG_PROV_DEF = getClosureSafeProperty({ \u0275prov: getClosureSafeProperty });
-var NG_INJ_DEF = getClosureSafeProperty({ \u0275inj: getClosureSafeProperty });
+var NG_PROV_DEF = getClosureSafeProperty({ ɵprov: getClosureSafeProperty });
+var NG_INJ_DEF = getClosureSafeProperty({ ɵinj: getClosureSafeProperty });
 var _InjectionToken = class _InjectionToken {
   _desc;
   /** @internal */
   ngMetadataName = "InjectionToken";
-  \u0275prov;
+  ɵprov;
   /**
    * @param _desc   Description for the token,
    *                used only for debugging purposes,
@@ -3602,12 +3602,12 @@ var _InjectionToken = class _InjectionToken {
    */
   constructor(_desc, options) {
     this._desc = _desc;
-    this.\u0275prov = void 0;
+    this.ɵprov = void 0;
     if (typeof options == "number") {
       (typeof ngDevMode === "undefined" || ngDevMode) && assertLessThan(options, 0, "Only negative numbers are supported here");
       this.__NG_ELEMENT_ID__ = options;
     } else if (options !== void 0) {
-      this.\u0275prov = \u0275\u0275defineInjectable({
+      this.ɵprov = ɵɵdefineInjectable({
         token: this,
         providedIn: options.providedIn || "root",
         factory: options.factory
@@ -3682,7 +3682,7 @@ function emitProviderConfiguredEvent(eventProvider, isViewProvider = false) {
   }
   let provider = eventProvider;
   if (eventProvider instanceof InjectionToken) {
-    provider = eventProvider.\u0275prov || eventProvider;
+    provider = eventProvider.ɵprov || eventProvider;
   }
   injectorProfiler({
     type: 2,
@@ -3738,14 +3738,14 @@ function runInInjectorProfilerContext(injector, token, callback) {
 }
 __name(runInInjectorProfilerContext, "runInInjectorProfilerContext");
 function isEnvironmentProviders(value) {
-  return value && !!value.\u0275providers;
+  return value && !!value.ɵproviders;
 }
 __name(isEnvironmentProviders, "isEnvironmentProviders");
-var NG_COMP_DEF = getClosureSafeProperty({ \u0275cmp: getClosureSafeProperty });
-var NG_DIR_DEF = getClosureSafeProperty({ \u0275dir: getClosureSafeProperty });
-var NG_PIPE_DEF = getClosureSafeProperty({ \u0275pipe: getClosureSafeProperty });
-var NG_MOD_DEF = getClosureSafeProperty({ \u0275mod: getClosureSafeProperty });
-var NG_FACTORY_DEF = getClosureSafeProperty({ \u0275fac: getClosureSafeProperty });
+var NG_COMP_DEF = getClosureSafeProperty({ ɵcmp: getClosureSafeProperty });
+var NG_DIR_DEF = getClosureSafeProperty({ ɵdir: getClosureSafeProperty });
+var NG_PIPE_DEF = getClosureSafeProperty({ ɵpipe: getClosureSafeProperty });
+var NG_MOD_DEF = getClosureSafeProperty({ ɵmod: getClosureSafeProperty });
+var NG_FACTORY_DEF = getClosureSafeProperty({ ɵfac: getClosureSafeProperty });
 var NG_ELEMENT_ID = getClosureSafeProperty({
   __NG_ELEMENT_ID__: getClosureSafeProperty
 });
@@ -3788,7 +3788,7 @@ function throwInvalidProviderError(ngModuleType, providers, provider) {
     const providerDetail = providers.map((v) => v == provider ? "?" + provider + "?" : "...");
     throw new Error(`Invalid provider for the NgModule '${stringify(ngModuleType)}' - only instances of Provider and Type are allowed, got: [${providerDetail.join(", ")}]`);
   } else if (isEnvironmentProviders(provider)) {
-    if (provider.\u0275fromNgModule) {
+    if (provider.ɵfromNgModule) {
       throw new RuntimeError(207, `Invalid providers from 'importProvidersFrom' present in a non-environment injector. 'importProvidersFrom' can't be used for component providers.`);
     } else {
       throw new RuntimeError(207, `Invalid providers present in a non-environment injector. 'EnvironmentProviders' can't be used for component providers.`);
@@ -3873,7 +3873,7 @@ function injectRootLimpMode(token, notFoundValue, flags) {
 }
 __name(injectRootLimpMode, "injectRootLimpMode");
 function assertInjectImplementationNotEqual(fn) {
-  ngDevMode && assertNotEqual(_injectImplementation, fn, "Calling \u0275\u0275inject would cause infinite recursion");
+  ngDevMode && assertNotEqual(_injectImplementation, fn, "Calling ɵɵinject would cause infinite recursion");
 }
 __name(assertInjectImplementationNotEqual, "assertInjectImplementationNotEqual");
 var _THROW_IF_NOT_FOUND = {};
@@ -3923,19 +3923,19 @@ function injectInjectorOnly(token, flags = 0) {
   }
 }
 __name(injectInjectorOnly, "injectInjectorOnly");
-function \u0275\u0275inject(token, flags = 0) {
+function ɵɵinject(token, flags = 0) {
   return (getInjectImplementation() || injectInjectorOnly)(resolveForwardRef(token), flags);
 }
-__name(\u0275\u0275inject, "\u0275\u0275inject");
-function \u0275\u0275invalidFactoryDep(index) {
+__name(ɵɵinject, "ɵɵinject");
+function ɵɵinvalidFactoryDep(index) {
   throw new RuntimeError(202, ngDevMode && `This constructor is not compatible with Angular Dependency Injection because its dependency at index ${index} of the parameter list is invalid.
 This can happen if the dependency type is a primitive like a string or if an ancestor of this class is missing an Angular decorator.
 
 Please check that 1) the type for the parameter at index ${index} is correct and 2) the correct Angular decorators are defined for this class and its ancestors.`);
 }
-__name(\u0275\u0275invalidFactoryDep, "\u0275\u0275invalidFactoryDep");
+__name(ɵɵinvalidFactoryDep, "ɵɵinvalidFactoryDep");
 function inject2(token, options) {
-  return \u0275\u0275inject(token, convertToBitFlags(options));
+  return ɵɵinject(token, convertToBitFlags(options));
 }
 __name(inject2, "inject");
 function convertToBitFlags(flags) {
@@ -3978,9 +3978,9 @@ function injectArgs(types) {
           type = meta;
         }
       }
-      args.push(\u0275\u0275inject(type, flags));
+      args.push(ɵɵinject(type, flags));
     } else {
-      args.push(\u0275\u0275inject(arg));
+      args.push(ɵɵinject(arg));
     }
   }
   return args;
@@ -3999,7 +3999,7 @@ __name(getInjectFlag, "getInjectFlag");
 function getFactoryDef(type, throwNotFound) {
   const hasFactoryDef = type.hasOwnProperty(NG_FACTORY_DEF);
   if (!hasFactoryDef && throwNotFound === true && ngDevMode) {
-    throw new Error(`Type ${stringify(type)} does not have '\u0275fac' property.`);
+    throw new Error(`Type ${stringify(type)} does not have 'ɵfac' property.`);
   }
   return hasFactoryDef ? type[NG_FACTORY_DEF] : null;
 }
@@ -4150,7 +4150,7 @@ var _NullInjector = class _NullInjector {
         -201
         /* RuntimeErrorCode.PROVIDER_NOT_FOUND */
       );
-      error.name = "\u0275NotFound";
+      error.name = "ɵNotFound";
       throw error;
     }
     return notFoundValue;
@@ -4165,7 +4165,7 @@ __name(getNgModuleDef, "getNgModuleDef");
 function getNgModuleDefOrThrow(type) {
   const ngModuleDef = getNgModuleDef(type);
   if (!ngModuleDef) {
-    throw new RuntimeError(915, (typeof ngDevMode === "undefined" || ngDevMode) && `Type ${stringify(type)} does not have '\u0275mod' property.`);
+    throw new RuntimeError(915, (typeof ngDevMode === "undefined" || ngDevMode) && `Type ${stringify(type)} does not have 'ɵmod' property.`);
   }
   return ngModuleDef;
 }
@@ -4177,7 +4177,7 @@ __name(getComponentDef, "getComponentDef");
 function getDirectiveDefOrThrow(type) {
   const def = getDirectiveDef(type);
   if (!def) {
-    throw new RuntimeError(916, (typeof ngDevMode === "undefined" || ngDevMode) && `Type ${stringify(type)} does not have '\u0275dir' property.`);
+    throw new RuntimeError(916, (typeof ngDevMode === "undefined" || ngDevMode) && `Type ${stringify(type)} does not have 'ɵdir' property.`);
   }
   return def;
 }
@@ -4197,7 +4197,7 @@ function isStandalone(type) {
 __name(isStandalone, "isStandalone");
 function makeEnvironmentProviders(providers) {
   return {
-    \u0275providers: providers
+    ɵproviders: providers
   };
 }
 __name(makeEnvironmentProviders, "makeEnvironmentProviders");
@@ -4213,8 +4213,8 @@ function provideEnvironmentInitializer(initializerFn) {
 __name(provideEnvironmentInitializer, "provideEnvironmentInitializer");
 function importProvidersFrom(...sources) {
   return {
-    \u0275providers: internalImportProvidersFrom(true, sources),
-    \u0275fromNgModule: true
+    ɵproviders: internalImportProvidersFrom(true, sources),
+    ɵfromNgModule: true
   };
 }
 __name(importProvidersFrom, "importProvidersFrom");
@@ -4314,7 +4314,7 @@ function walkProviderTree(container, visitor, parents, dedup) {
       const factory = getFactoryDef(defType) || (() => new defType());
       visitor({ provide: defType, useFactory: factory, deps: EMPTY_ARRAY }, defType);
       visitor({ provide: INJECTOR_DEF_TYPES, useValue: defType, multi: true }, defType);
-      visitor({ provide: ENVIRONMENT_INITIALIZER, useValue: /* @__PURE__ */ __name(() => \u0275\u0275inject(defType), "useValue"), multi: true }, defType);
+      visitor({ provide: ENVIRONMENT_INITIALIZER, useValue: /* @__PURE__ */ __name(() => ɵɵinject(defType), "useValue"), multi: true }, defType);
     }
     const defProviders = injDef.providers;
     if (defProviders != null && !isDuplicate) {
@@ -4343,7 +4343,7 @@ __name(validateProvider, "validateProvider");
 function deepForEachProvider(providers, fn) {
   for (let provider of providers) {
     if (isEnvironmentProviders(provider)) {
-      provider = provider.\u0275providers;
+      provider = provider.ɵproviders;
     }
     if (Array.isArray(provider)) {
       deepForEachProvider(provider, fn);
@@ -4674,7 +4674,7 @@ function injectableDefOrInjectorDefFactory(token) {
     return factory;
   }
   if (token instanceof InjectionToken) {
-    throw new RuntimeError(204, ngDevMode && `Token ${stringify(token)} is missing a \u0275prov definition.`);
+    throw new RuntimeError(204, ngDevMode && `Token ${stringify(token)} is missing a ɵprov definition.`);
   }
   if (token instanceof Function) {
     return getUndecoratedInjectableFactory(token);
@@ -4718,7 +4718,7 @@ function providerToFactory(provider, ngModuleType, providers) {
     } else if (isFactoryProvider(provider)) {
       factory = /* @__PURE__ */ __name(() => provider.useFactory(...injectArgs(provider.deps || [])), "factory");
     } else if (isExistingProvider(provider)) {
-      factory = /* @__PURE__ */ __name((_, flags) => \u0275\u0275inject(resolveForwardRef(provider.useExisting), flags !== void 0 && flags & 8 ? 8 : void 0), "factory");
+      factory = /* @__PURE__ */ __name((_, flags) => ɵɵinject(resolveForwardRef(provider.useExisting), flags !== void 0 && flags & 8 ? 8 : void 0), "factory");
     } else {
       const classRef = resolveForwardRef(provider && (provider.useClass || provider.provide));
       if (ngDevMode && !classRef) {
@@ -4765,7 +4765,7 @@ function forEachSingleProvider(providers, fn) {
     if (Array.isArray(provider)) {
       forEachSingleProvider(provider, fn);
     } else if (provider && isEnvironmentProviders(provider)) {
-      forEachSingleProvider(provider.\u0275providers, fn);
+      forEachSingleProvider(provider.ɵproviders, fn);
     } else {
       fn(provider);
     }
@@ -4906,13 +4906,13 @@ function assertTIcu(tIcu) {
   }
 }
 __name(assertTIcu, "assertTIcu");
-function assertComponentType(actual, msg = "Type passed in is not ComponentType, it does not have '\u0275cmp' property.") {
+function assertComponentType(actual, msg = "Type passed in is not ComponentType, it does not have 'ɵcmp' property.") {
   if (!getComponentDef(actual)) {
     throwError2(msg);
   }
 }
 __name(assertComponentType, "assertComponentType");
-function assertNgModuleType(actual, msg = "Type passed in is not NgModuleType, it does not have '\u0275mod' property.") {
+function assertNgModuleType(actual, msg = "Type passed in is not NgModuleType, it does not have 'ɵmod' property.") {
   if (!getNgModuleDef(actual)) {
     throwError2(msg);
   }
@@ -5215,18 +5215,18 @@ function isSkipHydrationRootTNode(tNode) {
   return instructionState.skipHydrationRootTNode === tNode;
 }
 __name(isSkipHydrationRootTNode, "isSkipHydrationRootTNode");
-function \u0275\u0275enableBindings() {
+function ɵɵenableBindings() {
   instructionState.bindingsEnabled = true;
 }
-__name(\u0275\u0275enableBindings, "\u0275\u0275enableBindings");
+__name(ɵɵenableBindings, "ɵɵenableBindings");
 function enterSkipHydrationBlock(tNode) {
   instructionState.skipHydrationRootTNode = tNode;
 }
 __name(enterSkipHydrationBlock, "enterSkipHydrationBlock");
-function \u0275\u0275disableBindings() {
+function ɵɵdisableBindings() {
   instructionState.bindingsEnabled = false;
 }
-__name(\u0275\u0275disableBindings, "\u0275\u0275disableBindings");
+__name(ɵɵdisableBindings, "ɵɵdisableBindings");
 function leaveSkipHydrationBlock() {
   instructionState.skipHydrationRootTNode = null;
 }
@@ -5239,16 +5239,16 @@ function getTView() {
   return instructionState.lFrame.tView;
 }
 __name(getTView, "getTView");
-function \u0275\u0275restoreView(viewToRestore) {
+function ɵɵrestoreView(viewToRestore) {
   instructionState.lFrame.contextLView = viewToRestore;
   return viewToRestore[CONTEXT];
 }
-__name(\u0275\u0275restoreView, "\u0275\u0275restoreView");
-function \u0275\u0275resetView(value) {
+__name(ɵɵrestoreView, "ɵɵrestoreView");
+function ɵɵresetView(value) {
   instructionState.lFrame.contextLView = null;
   return value;
 }
-__name(\u0275\u0275resetView, "\u0275\u0275resetView");
+__name(ɵɵresetView, "ɵɵresetView");
 function getCurrentTNode() {
   let currentTNode = getCurrentTNodePlaceholderOk();
   while (currentTNode !== null && currentTNode.type === 64) {
@@ -5522,18 +5522,18 @@ function getSelectedTNode() {
   return getTNode(lFrame.tView, lFrame.selectedIndex);
 }
 __name(getSelectedTNode, "getSelectedTNode");
-function \u0275\u0275namespaceSVG() {
+function ɵɵnamespaceSVG() {
   instructionState.lFrame.currentNamespace = SVG_NAMESPACE;
 }
-__name(\u0275\u0275namespaceSVG, "\u0275\u0275namespaceSVG");
-function \u0275\u0275namespaceMathML() {
+__name(ɵɵnamespaceSVG, "ɵɵnamespaceSVG");
+function ɵɵnamespaceMathML() {
   instructionState.lFrame.currentNamespace = MATH_ML_NAMESPACE;
 }
-__name(\u0275\u0275namespaceMathML, "\u0275\u0275namespaceMathML");
-function \u0275\u0275namespaceHTML() {
+__name(ɵɵnamespaceMathML, "ɵɵnamespaceMathML");
+function ɵɵnamespaceHTML() {
   namespaceHTMLInternal();
 }
-__name(\u0275\u0275namespaceHTML, "\u0275\u0275namespaceHTML");
+__name(ɵɵnamespaceHTML, "ɵɵnamespaceHTML");
 function namespaceHTMLInternal() {
   instructionState.lFrame.currentNamespace = null;
 }
@@ -5579,12 +5579,12 @@ __publicField(_Injector, "NULL", new NullInjector());
 /** @nocollapse */
 __publicField(
   _Injector,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _Injector,
     providedIn: "any",
-    factory: /* @__PURE__ */ __name(() => \u0275\u0275inject(INJECTOR$1), "factory")
+    factory: /* @__PURE__ */ __name(() => ɵɵinject(INJECTOR$1), "factory")
   })
 );
 /**
@@ -5816,9 +5816,9 @@ __name(_PendingTasksInternal, "PendingTasksInternal");
 /** @nocollapse */
 __publicField(
   _PendingTasksInternal,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _PendingTasksInternal,
     providedIn: "root",
     factory: /* @__PURE__ */ __name(() => new _PendingTasksInternal(), "factory")
@@ -5868,9 +5868,9 @@ __name(_PendingTasks, "PendingTasks");
 /** @nocollapse */
 __publicField(
   _PendingTasks,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _PendingTasks,
     providedIn: "root",
     factory: /* @__PURE__ */ __name(() => new _PendingTasks(), "factory")
@@ -5886,9 +5886,9 @@ __name(_EffectScheduler, "EffectScheduler");
 /** @nocollapse */
 __publicField(
   _EffectScheduler,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _EffectScheduler,
     providedIn: "root",
     factory: /* @__PURE__ */ __name(() => new ZoneAwareEffectScheduler(), "factory")
@@ -6116,8 +6116,8 @@ var Host = (
 );
 function getCompilerFacade(request) {
   const globalNg = _global["ng"];
-  if (globalNg && globalNg.\u0275compilerFacade) {
-    return globalNg.\u0275compilerFacade;
+  if (globalNg && globalNg.ɵcompilerFacade) {
+    return globalNg.ɵcompilerFacade;
   }
   if (typeof ngDevMode === "undefined" || ngDevMode) {
     console.error(`JIT compilation failed for ${request.kind}`, request.type);
@@ -6146,10 +6146,10 @@ function getCompilerFacade(request) {
 }
 __name(getCompilerFacade, "getCompilerFacade");
 var angularCoreDiEnv = {
-  "\u0275\u0275defineInjectable": \u0275\u0275defineInjectable,
-  "\u0275\u0275defineInjector": \u0275\u0275defineInjector,
-  "\u0275\u0275inject": \u0275\u0275inject,
-  "\u0275\u0275invalidFactoryDep": \u0275\u0275invalidFactoryDep,
+  "ɵɵdefineInjectable": ɵɵdefineInjectable,
+  "ɵɵdefineInjector": ɵɵdefineInjector,
+  "ɵɵinject": ɵɵinject,
+  "ɵɵinvalidFactoryDep": ɵɵinvalidFactoryDep,
   "resolveForwardRef": resolveForwardRef
 };
 var Type = Function;
@@ -6355,10 +6355,10 @@ function applyValueToInputField(instance, inputSignalNode, privateName, value) {
   }
 }
 __name(applyValueToInputField, "applyValueToInputField");
-var \u0275\u0275NgOnChangesFeature = /* @__PURE__ */ (() => {
-  const \u0275\u0275NgOnChangesFeatureImpl = /* @__PURE__ */ __name(() => NgOnChangesFeatureImpl, "\u0275\u0275NgOnChangesFeatureImpl");
-  \u0275\u0275NgOnChangesFeatureImpl.ngInherit = true;
-  return \u0275\u0275NgOnChangesFeatureImpl;
+var ɵɵNgOnChangesFeature = /* @__PURE__ */ (() => {
+  const ɵɵNgOnChangesFeatureImpl = /* @__PURE__ */ __name(() => NgOnChangesFeatureImpl, "ɵɵNgOnChangesFeatureImpl");
+  ɵɵNgOnChangesFeatureImpl.ngInherit = true;
+  return ɵɵNgOnChangesFeatureImpl;
 })();
 function NgOnChangesFeatureImpl(definition) {
   if (definition.type.prototype.ngOnChanges) {
@@ -7245,7 +7245,7 @@ function createNodeInjector() {
   return new NodeInjector(getCurrentTNode(), getLView());
 }
 __name(createNodeInjector, "createNodeInjector");
-function \u0275\u0275getInheritedFactory(type) {
+function ɵɵgetInheritedFactory(type) {
   return noSideEffects(() => {
     const ownConstructor = type.prototype.constructor;
     const ownFactory = ownConstructor[NG_FACTORY_DEF] || getFactoryOf(ownConstructor);
@@ -7261,7 +7261,7 @@ function \u0275\u0275getInheritedFactory(type) {
     return (t) => new t();
   });
 }
-__name(\u0275\u0275getInheritedFactory, "\u0275\u0275getInheritedFactory");
+__name(ɵɵgetInheritedFactory, "ɵɵgetInheritedFactory");
 function getFactoryOf(type) {
   if (isForwardRef(type)) {
     return () => {
@@ -7310,13 +7310,13 @@ function getTNodeFromLView(lView) {
   return null;
 }
 __name(getTNodeFromLView, "getTNodeFromLView");
-function \u0275\u0275injectAttribute(attrNameToInject) {
+function ɵɵinjectAttribute(attrNameToInject) {
   return injectAttributeImpl(getCurrentTNode(), attrNameToInject);
 }
-__name(\u0275\u0275injectAttribute, "\u0275\u0275injectAttribute");
+__name(ɵɵinjectAttribute, "ɵɵinjectAttribute");
 var Attribute = makeParamDecorator("Attribute", (attributeName) => ({
   attributeName,
-  __NG_ELEMENT_ID__: /* @__PURE__ */ __name(() => \u0275\u0275injectAttribute(attributeName), "__NG_ELEMENT_ID__")
+  __NG_ELEMENT_ID__: /* @__PURE__ */ __name(() => ɵɵinjectAttribute(attributeName), "__NG_ELEMENT_ID__")
 }));
 var _reflect = null;
 function getReflect() {
@@ -7386,7 +7386,7 @@ function compileInjectable(type, meta) {
             kind: "injectable",
             type
           });
-          ngInjectableDef = compiler.compileInjectable(angularCoreDiEnv, `ng:///${type.name}/\u0275prov.js`, getInjectableMetadata(type, meta));
+          ngInjectableDef = compiler.compileInjectable(angularCoreDiEnv, `ng:///${type.name}/ɵprov.js`, getInjectableMetadata(type, meta));
         }
         return ngInjectableDef;
       }, "get")
@@ -7401,7 +7401,7 @@ function compileInjectable(type, meta) {
             kind: "injectable",
             type
           });
-          ngFactoryDef = compiler.compileFactory(angularCoreDiEnv, `ng:///${type.name}/\u0275fac.js`, {
+          ngFactoryDef = compiler.compileFactory(angularCoreDiEnv, `ng:///${type.name}/ɵfac.js`, {
             name: type.name,
             type,
             typeArgumentCount: 0,
@@ -7843,11 +7843,11 @@ function readPatchedLView(target) {
 }
 __name(readPatchedLView, "readPatchedLView");
 function isComponentInstance(instance) {
-  return instance && instance.constructor && instance.constructor.\u0275cmp;
+  return instance && instance.constructor && instance.constructor.ɵcmp;
 }
 __name(isComponentInstance, "isComponentInstance");
 function isDirectiveInstance(instance) {
-  return instance && instance.constructor && instance.constructor.\u0275dir;
+  return instance && instance.constructor && instance.constructor.ɵdir;
 }
 __name(isDirectiveInstance, "isDirectiveInstance");
 function findViaNativeElement(lView, target) {
@@ -8233,16 +8233,16 @@ var _TransferState = class _TransferState {
         }
       }
     }
-    return JSON.stringify(this.store).replace(/</g, "\\u003C");
+    return JSON.stringify(this.store).replace(/</g, "\<");
   }
 };
 __name(_TransferState, "TransferState");
 /** @nocollapse */
 __publicField(
   _TransferState,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _TransferState,
     providedIn: "root",
     factory: initTransferState
@@ -9087,7 +9087,7 @@ function clobberedElementError(node) {
   return new Error(`Failed to sanitize html because the element is clobbered: ${node.outerHTML}`);
 }
 __name(clobberedElementError, "clobberedElementError");
-var SURROGATE_PAIR_REGEXP = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
+var SURROGATE_PAIR_REGEXP = /[���-���][���-���]/g;
 var NON_ALPHANUMERIC_REGEXP = /([^\#-~ |!])/g;
 function encodeEntities(value) {
   return value.replace(/&/g, "&amp;").replace(SURROGATE_PAIR_REGEXP, function(match) {
@@ -9150,7 +9150,7 @@ var SecurityContext;
   SecurityContext2[SecurityContext2["URL"] = 4] = "URL";
   SecurityContext2[SecurityContext2["RESOURCE_URL"] = 5] = "RESOURCE_URL";
 })(SecurityContext || (SecurityContext = {}));
-function \u0275\u0275sanitizeHtml(unsafeHtml) {
+function ɵɵsanitizeHtml(unsafeHtml) {
   const sanitizer = getSanitizer();
   if (sanitizer) {
     return trustedHTMLFromStringBypass(sanitizer.sanitize(SecurityContext.HTML, unsafeHtml) || "");
@@ -9164,8 +9164,8 @@ function \u0275\u0275sanitizeHtml(unsafeHtml) {
   }
   return _sanitizeHtml(getDocument(), renderStringify(unsafeHtml));
 }
-__name(\u0275\u0275sanitizeHtml, "\u0275\u0275sanitizeHtml");
-function \u0275\u0275sanitizeStyle(unsafeStyle) {
+__name(ɵɵsanitizeHtml, "ɵɵsanitizeHtml");
+function ɵɵsanitizeStyle(unsafeStyle) {
   const sanitizer = getSanitizer();
   if (sanitizer) {
     return sanitizer.sanitize(SecurityContext.STYLE, unsafeStyle) || "";
@@ -9179,8 +9179,8 @@ function \u0275\u0275sanitizeStyle(unsafeStyle) {
   }
   return renderStringify(unsafeStyle);
 }
-__name(\u0275\u0275sanitizeStyle, "\u0275\u0275sanitizeStyle");
-function \u0275\u0275sanitizeUrl(unsafeUrl) {
+__name(ɵɵsanitizeStyle, "ɵɵsanitizeStyle");
+function ɵɵsanitizeUrl(unsafeUrl) {
   const sanitizer = getSanitizer();
   if (sanitizer) {
     return sanitizer.sanitize(SecurityContext.URL, unsafeUrl) || "";
@@ -9194,8 +9194,8 @@ function \u0275\u0275sanitizeUrl(unsafeUrl) {
   }
   return _sanitizeUrl(renderStringify(unsafeUrl));
 }
-__name(\u0275\u0275sanitizeUrl, "\u0275\u0275sanitizeUrl");
-function \u0275\u0275sanitizeResourceUrl(unsafeResourceUrl) {
+__name(ɵɵsanitizeUrl, "ɵɵsanitizeUrl");
+function ɵɵsanitizeResourceUrl(unsafeResourceUrl) {
   const sanitizer = getSanitizer();
   if (sanitizer) {
     return trustedScriptURLFromStringBypass(sanitizer.sanitize(SecurityContext.RESOURCE_URL, unsafeResourceUrl) || "");
@@ -9209,8 +9209,8 @@ function \u0275\u0275sanitizeResourceUrl(unsafeResourceUrl) {
   }
   throw new RuntimeError(904, ngDevMode && `unsafe value used in a resource URL context (see ${XSS_SECURITY_URL})`);
 }
-__name(\u0275\u0275sanitizeResourceUrl, "\u0275\u0275sanitizeResourceUrl");
-function \u0275\u0275sanitizeScript(unsafeScript) {
+__name(ɵɵsanitizeResourceUrl, "ɵɵsanitizeResourceUrl");
+function ɵɵsanitizeScript(unsafeScript) {
   const sanitizer = getSanitizer();
   if (sanitizer) {
     return trustedScriptFromStringBypass(sanitizer.sanitize(SecurityContext.SCRIPT, unsafeScript) || "");
@@ -9224,32 +9224,32 @@ function \u0275\u0275sanitizeScript(unsafeScript) {
   }
   throw new RuntimeError(905, ngDevMode && "unsafe value used in a script context");
 }
-__name(\u0275\u0275sanitizeScript, "\u0275\u0275sanitizeScript");
-function \u0275\u0275trustConstantHtml(html) {
+__name(ɵɵsanitizeScript, "ɵɵsanitizeScript");
+function ɵɵtrustConstantHtml(html) {
   if (ngDevMode && (!Array.isArray(html) || !Array.isArray(html.raw) || html.length !== 1)) {
     throw new Error(`Unexpected interpolation in trusted HTML constant: ${html.join("?")}`);
   }
   return trustedHTMLFromString(html[0]);
 }
-__name(\u0275\u0275trustConstantHtml, "\u0275\u0275trustConstantHtml");
-function \u0275\u0275trustConstantResourceUrl(url) {
+__name(ɵɵtrustConstantHtml, "ɵɵtrustConstantHtml");
+function ɵɵtrustConstantResourceUrl(url) {
   if (ngDevMode && (!Array.isArray(url) || !Array.isArray(url.raw) || url.length !== 1)) {
     throw new Error(`Unexpected interpolation in trusted URL constant: ${url.join("?")}`);
   }
   return trustedScriptURLFromString(url[0]);
 }
-__name(\u0275\u0275trustConstantResourceUrl, "\u0275\u0275trustConstantResourceUrl");
+__name(ɵɵtrustConstantResourceUrl, "ɵɵtrustConstantResourceUrl");
 function getUrlSanitizer(tag, prop) {
   if (prop === "src" && (tag === "embed" || tag === "frame" || tag === "iframe" || tag === "media" || tag === "script") || prop === "href" && (tag === "base" || tag === "link")) {
-    return \u0275\u0275sanitizeResourceUrl;
+    return ɵɵsanitizeResourceUrl;
   }
-  return \u0275\u0275sanitizeUrl;
+  return ɵɵsanitizeUrl;
 }
 __name(getUrlSanitizer, "getUrlSanitizer");
-function \u0275\u0275sanitizeUrlOrResourceUrl(unsafeUrl, tag, prop) {
+function ɵɵsanitizeUrlOrResourceUrl(unsafeUrl, tag, prop) {
   return getUrlSanitizer(tag, prop)(unsafeUrl);
 }
-__name(\u0275\u0275sanitizeUrlOrResourceUrl, "\u0275\u0275sanitizeUrlOrResourceUrl");
+__name(ɵɵsanitizeUrlOrResourceUrl, "ɵɵsanitizeUrlOrResourceUrl");
 function validateAgainstEventProperties(name) {
   if (name.toLowerCase().startsWith("on")) {
     const errorMessage = `Binding to event property '${name}' is disallowed for security reasons, please use (${name.slice(2)})=...
@@ -9272,7 +9272,7 @@ function getSanitizer() {
 __name(getSanitizer, "getSanitizer");
 var COMMENT_DISALLOWED = /^>|^->|<!--|-->|--!>|<!-$/g;
 var COMMENT_DELIMITER = /(<|>)/g;
-var COMMENT_DELIMITER_ESCAPED = "\u200B$1\u200B";
+var COMMENT_DELIMITER_ESCAPED = "​$1​";
 function escapeCommentText(value) {
   return value.replace(COMMENT_DISALLOWED, (text) => text.replace(COMMENT_DELIMITER, COMMENT_DELIMITER_ESCAPED));
 }
@@ -9427,19 +9427,19 @@ function matchingSchemas(schemas, tagName) {
   return false;
 }
 __name(matchingSchemas, "matchingSchemas");
-function \u0275\u0275resolveWindow(element) {
+function ɵɵresolveWindow(element) {
   return element.ownerDocument.defaultView;
 }
-__name(\u0275\u0275resolveWindow, "\u0275\u0275resolveWindow");
-function \u0275\u0275resolveDocument(element) {
+__name(ɵɵresolveWindow, "ɵɵresolveWindow");
+function ɵɵresolveDocument(element) {
   return element.ownerDocument;
 }
-__name(\u0275\u0275resolveDocument, "\u0275\u0275resolveDocument");
-function \u0275\u0275resolveBody(element) {
+__name(ɵɵresolveDocument, "ɵɵresolveDocument");
+function ɵɵresolveBody(element) {
   return element.ownerDocument.body;
 }
-__name(\u0275\u0275resolveBody, "\u0275\u0275resolveBody");
-var INTERPOLATION_DELIMITER = `\uFFFD`;
+__name(ɵɵresolveBody, "ɵɵresolveBody");
+var INTERPOLATION_DELIMITER = `�`;
 function maybeUnwrapFn(value) {
   if (value instanceof Function) {
     return value();
@@ -9486,7 +9486,7 @@ function formatValue(value) {
     }
   } catch (error) {
   }
-  return strValue.length > VALUE_STRING_LENGTH_LIMIT ? strValue.substring(0, VALUE_STRING_LENGTH_LIMIT) + "\u2026" : strValue;
+  return strValue.length > VALUE_STRING_LENGTH_LIMIT ? strValue.substring(0, VALUE_STRING_LENGTH_LIMIT) + "…" : strValue;
 }
 __name(formatValue, "formatValue");
 function constructDetailsForInterpolation(lView, rootIndex, expressionIndex, meta, changedValue) {
@@ -10012,11 +10012,11 @@ function addToEndOfViewTree(lView, lViewOrLContainer) {
   return lViewOrLContainer;
 }
 __name(addToEndOfViewTree, "addToEndOfViewTree");
-function \u0275\u0275advance(delta = 1) {
+function ɵɵadvance(delta = 1) {
   ngDevMode && assertGreaterThan(delta, 0, "Can only advance forward");
   selectIndexInternal(getTView(), getLView(), getSelectedIndex() + delta, !!ngDevMode && isInCheckNoChangesMode());
 }
-__name(\u0275\u0275advance, "\u0275\u0275advance");
+__name(ɵɵadvance, "ɵɵadvance");
 function selectIndexInternal(tView, lView, index, checkNoChangesMode) {
   ngDevMode && assertIndexInDeclRange(lView[TVIEW], index);
   if (!checkNoChangesMode) {
@@ -12286,7 +12286,7 @@ function stringifyRNodeAttrs(rNode) {
   return results.join(" ");
 }
 __name(stringifyRNodeAttrs, "stringifyRNodeAttrs");
-function describeTNode(tNode, innerContent = "\u2026") {
+function describeTNode(tNode, innerContent = "…") {
   switch (tNode.type) {
     case 1:
       const content = tNode.value ? `(${tNode.value})` : "";
@@ -12305,7 +12305,7 @@ function describeTNode(tNode, innerContent = "\u2026") {
   }
 }
 __name(describeTNode, "describeTNode");
-function describeRNode(rNode, innerContent = "\u2026") {
+function describeRNode(rNode, innerContent = "…") {
   const node = rNode;
   switch (node.nodeType) {
     case Node.ELEMENT_NODE:
@@ -12326,10 +12326,10 @@ function describeExpectedDom(lView, tNode, isViewContainerAnchor) {
   const spacer = "  ";
   let content = "";
   if (tNode.prev) {
-    content += spacer + "\u2026\n";
+    content += spacer + "…\n";
     content += spacer + describeTNode(tNode.prev) + "\n";
   } else if (tNode.type && tNode.type & 12) {
-    content += spacer + "\u2026\n";
+    content += spacer + "…\n";
   }
   if (isViewContainerAnchor) {
     content += spacer + describeTNode(tNode) + "\n";
@@ -12339,7 +12339,7 @@ function describeExpectedDom(lView, tNode, isViewContainerAnchor) {
     content += spacer + describeTNode(tNode) + `  ${AT_THIS_LOCATION}
 `;
   }
-  content += spacer + "\u2026\n";
+  content += spacer + "…\n";
   const parentRNode = tNode.type ? getParentRElement(lView[TVIEW], tNode, lView) : null;
   if (parentRNode) {
     content = describeRNode(parentRNode, "\n" + content);
@@ -12352,13 +12352,13 @@ function describeDomFromNode(node) {
   let content = "";
   const currentNode = node;
   if (currentNode.previousSibling) {
-    content += spacer + "\u2026\n";
+    content += spacer + "…\n";
     content += spacer + describeRNode(currentNode.previousSibling) + "\n";
   }
   content += spacer + describeRNode(currentNode) + `  ${AT_THIS_LOCATION}
 `;
   if (node.nextSibling) {
-    content += spacer + "\u2026\n";
+    content += spacer + "…\n";
   }
   if (node.parentNode) {
     content = describeRNode(currentNode.parentNode, "\n" + content);
@@ -12403,7 +12403,7 @@ function shorten(input2, maxLength = 50) {
     return "";
   }
   input2 = stripNewlines(input2);
-  return input2.length > maxLength ? `${input2.substring(0, maxLength - 1)}\u2026` : input2;
+  return input2.length > maxLength ? `${input2.substring(0, maxLength - 1)}…` : input2;
 }
 __name(shorten, "shorten");
 function getInsertInFrontOfRNodeWithI18n(parentTNode, currentTNode, lView) {
@@ -12828,7 +12828,7 @@ function locateRNodeByPath(path, lView) {
   if (referenceNode === REFERENCE_NODE_HOST) {
     ref = lView[DECLARATION_COMPONENT_VIEW][HOST];
   } else if (referenceNode === REFERENCE_NODE_BODY) {
-    ref = \u0275\u0275resolveBody(lView[DECLARATION_COMPONENT_VIEW][HOST]);
+    ref = ɵɵresolveBody(lView[DECLARATION_COMPONENT_VIEW][HOST]);
   } else {
     const parentElementId = Number(referenceNode);
     ref = unwrapRNode(lView[parentElementId + HEADER_OFFSET]);
@@ -13108,9 +13108,9 @@ __name(_Sanitizer, "Sanitizer");
 /** @nocollapse */
 __publicField(
   _Sanitizer,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _Sanitizer,
     providedIn: "root",
     factory: /* @__PURE__ */ __name(() => null, "factory")
@@ -13412,23 +13412,23 @@ function computeStaticStyling(tNode, attrs, writeToHost) {
   writeToHost ? tNode.classes = classes : tNode.classesWithoutHost = classes;
 }
 __name(computeStaticStyling, "computeStaticStyling");
-function \u0275\u0275directiveInject(token, flags = 0) {
+function ɵɵdirectiveInject(token, flags = 0) {
   const lView = getLView();
   if (lView === null) {
-    ngDevMode && assertInjectImplementationNotEqual(\u0275\u0275directiveInject);
-    return \u0275\u0275inject(token, flags);
+    ngDevMode && assertInjectImplementationNotEqual(ɵɵdirectiveInject);
+    return ɵɵinject(token, flags);
   }
   const tNode = getCurrentTNode();
   const value = getOrCreateInjectable(tNode, lView, resolveForwardRef(token), flags);
   ngDevMode && emitInjectEvent(token, value, flags);
   return value;
 }
-__name(\u0275\u0275directiveInject, "\u0275\u0275directiveInject");
-function \u0275\u0275invalidFactory() {
+__name(ɵɵdirectiveInject, "ɵɵdirectiveInject");
+function ɵɵinvalidFactory() {
   const msg = ngDevMode ? `This constructor was not compatible with Dependency Injection.` : "invalid";
   throw new Error(msg);
 }
-__name(\u0275\u0275invalidFactory, "\u0275\u0275invalidFactory");
+__name(ɵɵinvalidFactory, "ɵɵinvalidFactory");
 function resolveDirectives(tView, lView, tNode, localRefs, directiveMatcher) {
   ngDevMode && assertFirstCreatePass(tView);
   const exportsMap = localRefs === null ? null : { "": -1 };
@@ -13637,7 +13637,7 @@ function configureViewWithDirective(tView, tNode, lView, directiveIndex, def) {
   ngDevMode && assertGreaterThanOrEqual(directiveIndex, HEADER_OFFSET, "Must be in Expando section");
   tView.data[directiveIndex] = def;
   const directiveFactory = def.factory || (def.factory = getFactoryDef(def.type, true));
-  const nodeInjectorFactory = new NodeInjectorFactory(directiveFactory, isComponentDef(def), \u0275\u0275directiveInject, ngDevMode ? def.type.name : null);
+  const nodeInjectorFactory = new NodeInjectorFactory(directiveFactory, isComponentDef(def), ɵɵdirectiveInject, ngDevMode ? def.type.name : null);
   tView.blueprint[directiveIndex] = nodeInjectorFactory;
   lView[directiveIndex] = nodeInjectorFactory;
   registerHostBindingOpCodes(tView, tNode, directiveIndex, allocExpando(tView, lView, def.hostVars, NO_CHANGE), def);
@@ -15119,7 +15119,7 @@ function registerNgModuleType(ngModuleType, id) {
   modules.set(id, ngModuleType);
 }
 __name(registerNgModuleType, "registerNgModuleType");
-function \u0275\u0275validateIframeAttribute(attrValue, tagName, attrName) {
+function ɵɵvalidateIframeAttribute(attrValue, tagName, attrName) {
   const lView = getLView();
   const tNode = getSelectedTNode();
   const element = getNativeByTNode(tNode, lView);
@@ -15134,7 +15134,7 @@ To fix this, switch the \`${attrName}\` binding to a static attribute in a templ
   }
   return attrValue;
 }
-__name(\u0275\u0275validateIframeAttribute, "\u0275\u0275validateIframeAttribute");
+__name(ɵɵvalidateIframeAttribute, "ɵɵvalidateIframeAttribute");
 var markedFeatures = /* @__PURE__ */ new Set();
 function performanceMarkFeature(feature) {
   if (markedFeatures.has(feature)) {
@@ -15293,16 +15293,16 @@ __name(_StandaloneService, "StandaloneService");
 /** @nocollapse */
 __publicField(
   _StandaloneService,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _StandaloneService,
     providedIn: "environment",
-    factory: /* @__PURE__ */ __name(() => new _StandaloneService(\u0275\u0275inject(EnvironmentInjector)), "factory")
+    factory: /* @__PURE__ */ __name(() => new _StandaloneService(ɵɵinject(EnvironmentInjector)), "factory")
   })
 );
 var StandaloneService = _StandaloneService;
-function \u0275\u0275defineComponent(componentDefinition) {
+function ɵɵdefineComponent(componentDefinition) {
   return noSideEffects(() => {
     (typeof ngDevMode === "undefined" || ngDevMode) && initNgDevMode();
     const baseDef = getNgDirectiveDef(componentDefinition);
@@ -15342,12 +15342,12 @@ function \u0275\u0275defineComponent(componentDefinition) {
     return def;
   });
 }
-__name(\u0275\u0275defineComponent, "\u0275\u0275defineComponent");
+__name(ɵɵdefineComponent, "ɵɵdefineComponent");
 function extractDirectiveDef(type) {
   return getComponentDef(type) || getDirectiveDef(type);
 }
 __name(extractDirectiveDef, "extractDirectiveDef");
-function \u0275\u0275defineNgModule(def) {
+function ɵɵdefineNgModule(def) {
   return noSideEffects(() => {
     const res = {
       type: def.type,
@@ -15362,7 +15362,7 @@ function \u0275\u0275defineNgModule(def) {
     return res;
   });
 }
-__name(\u0275\u0275defineNgModule, "\u0275\u0275defineNgModule");
+__name(ɵɵdefineNgModule, "ɵɵdefineNgModule");
 function parseAndConvertInputsForDefinition(obj, declaredInputs) {
   if (obj == null)
     return EMPTY_OBJ;
@@ -15404,15 +15404,15 @@ function parseAndConvertOutputsForDefinition(obj) {
   return newLookup;
 }
 __name(parseAndConvertOutputsForDefinition, "parseAndConvertOutputsForDefinition");
-function \u0275\u0275defineDirective(directiveDefinition) {
+function ɵɵdefineDirective(directiveDefinition) {
   return noSideEffects(() => {
     const def = getNgDirectiveDef(directiveDefinition);
     initFeatures(def);
     return def;
   });
 }
-__name(\u0275\u0275defineDirective, "\u0275\u0275defineDirective");
-function \u0275\u0275definePipe(pipeDef) {
+__name(ɵɵdefineDirective, "ɵɵdefineDirective");
+function ɵɵdefinePipe(pipeDef) {
   return {
     type: pipeDef.type,
     name: pipeDef.name,
@@ -15422,7 +15422,7 @@ function \u0275\u0275definePipe(pipeDef) {
     onDestroy: pipeDef.type.prototype.ngOnDestroy || null
   };
 }
-__name(\u0275\u0275definePipe, "\u0275\u0275definePipe");
+__name(ɵɵdefinePipe, "ɵɵdefinePipe");
 function getNgDirectiveDef(directiveDefinition) {
   const declaredInputs = {};
   return {
@@ -15522,19 +15522,19 @@ function getSuperType(type) {
   return Object.getPrototypeOf(type.prototype).constructor;
 }
 __name(getSuperType, "getSuperType");
-function \u0275\u0275InheritDefinitionFeature(definition) {
+function ɵɵInheritDefinitionFeature(definition) {
   let superType = getSuperType(definition.type);
   let shouldInheritFields = true;
   const inheritanceChain = [definition];
   while (superType) {
     let superDef = void 0;
     if (isComponentDef(definition)) {
-      superDef = superType.\u0275cmp || superType.\u0275dir;
+      superDef = superType.ɵcmp || superType.ɵdir;
     } else {
-      if (superType.\u0275cmp) {
+      if (superType.ɵcmp) {
         throw new RuntimeError(903, ngDevMode && `Directives cannot inherit Components. Directive ${stringifyForError(definition.type)} is attempting to extend component ${stringifyForError(superType)}`);
       }
-      superDef = superType.\u0275dir;
+      superDef = superType.ɵdir;
     }
     if (superDef) {
       if (shouldInheritFields) {
@@ -15563,7 +15563,7 @@ function \u0275\u0275InheritDefinitionFeature(definition) {
           if (feature && feature.ngInherit) {
             feature(definition);
           }
-          if (feature === \u0275\u0275InheritDefinitionFeature) {
+          if (feature === ɵɵInheritDefinitionFeature) {
             shouldInheritFields = false;
           }
         }
@@ -15573,7 +15573,7 @@ function \u0275\u0275InheritDefinitionFeature(definition) {
   }
   mergeHostAttrsAcrossInheritance(inheritanceChain);
 }
-__name(\u0275\u0275InheritDefinitionFeature, "\u0275\u0275InheritDefinitionFeature");
+__name(ɵɵInheritDefinitionFeature, "ɵɵInheritDefinitionFeature");
 function mergeInputsWithTransforms(target, source) {
   for (const key in source.inputs) {
     if (!source.inputs.hasOwnProperty(key)) {
@@ -15667,13 +15667,13 @@ var COPY_COMPONENT_FIELDS = [
   // The child class should be checked by the runtime in the same way as its parent.
   "schemas"
 ];
-function \u0275\u0275CopyDefinitionFeature(definition) {
+function ɵɵCopyDefinitionFeature(definition) {
   let superType = getSuperType(definition.type);
   let superDef = void 0;
   if (isComponentDef(definition)) {
-    superDef = superType.\u0275cmp;
+    superDef = superType.ɵcmp;
   } else {
-    superDef = superType.\u0275dir;
+    superDef = superType.ɵdir;
   }
   const defAny = definition;
   for (const field of COPY_DIRECTIVE_FIELDS) {
@@ -15685,8 +15685,8 @@ function \u0275\u0275CopyDefinitionFeature(definition) {
     }
   }
 }
-__name(\u0275\u0275CopyDefinitionFeature, "\u0275\u0275CopyDefinitionFeature");
-function \u0275\u0275HostDirectivesFeature(rawHostDirectives) {
+__name(ɵɵCopyDefinitionFeature, "ɵɵCopyDefinitionFeature");
+function ɵɵHostDirectivesFeature(rawHostDirectives) {
   const feature = /* @__PURE__ */ __name((definition) => {
     const isEager = Array.isArray(rawHostDirectives);
     if (definition.hostDirectives === null) {
@@ -15701,7 +15701,7 @@ function \u0275\u0275HostDirectivesFeature(rawHostDirectives) {
   feature.ngInherit = true;
   return feature;
 }
-__name(\u0275\u0275HostDirectivesFeature, "\u0275\u0275HostDirectivesFeature");
+__name(ɵɵHostDirectivesFeature, "ɵɵHostDirectivesFeature");
 function resolveHostDirectives(matches) {
   const allDirectiveDefs = [];
   let hasComponent = false;
@@ -15897,22 +15897,22 @@ function declareNoDirectiveHostTemplate(declarationLView, declarationTView, inde
   return tNode;
 }
 __name(declareNoDirectiveHostTemplate, "declareNoDirectiveHostTemplate");
-function \u0275\u0275template(index, templateFn, decls, vars, tagName, attrsIndex, localRefsIndex, localRefExtractor) {
+function ɵɵtemplate(index, templateFn, decls, vars, tagName, attrsIndex, localRefsIndex, localRefExtractor) {
   const lView = getLView();
   const tView = getTView();
   const attrs = getConstant(tView.consts, attrsIndex);
   declareDirectiveHostTemplate(lView, tView, index, templateFn, decls, vars, tagName, attrs, void 0, localRefsIndex, localRefExtractor);
-  return \u0275\u0275template;
+  return ɵɵtemplate;
 }
-__name(\u0275\u0275template, "\u0275\u0275template");
-function \u0275\u0275domTemplate(index, templateFn, decls, vars, tagName, attrsIndex, localRefsIndex, localRefExtractor) {
+__name(ɵɵtemplate, "ɵɵtemplate");
+function ɵɵdomTemplate(index, templateFn, decls, vars, tagName, attrsIndex, localRefsIndex, localRefExtractor) {
   const lView = getLView();
   const tView = getTView();
   const attrs = getConstant(tView.consts, attrsIndex);
   declareNoDirectiveHostTemplate(lView, tView, index, templateFn, decls, vars, tagName, attrs, void 0, localRefsIndex, localRefExtractor);
-  return \u0275\u0275domTemplate;
+  return ɵɵdomTemplate;
 }
-__name(\u0275\u0275domTemplate, "\u0275\u0275domTemplate");
+__name(ɵɵdomTemplate, "ɵɵdomTemplate");
 var _locateOrCreateContainerAnchor = createContainerAnchorImpl;
 function createContainerAnchorImpl(tView, lView, tNode, index) {
   lastNodeWasCreated(true);
@@ -16483,9 +16483,9 @@ __name(_AfterRenderManager, "AfterRenderManager");
 /** @nocollapse */
 __publicField(
   _AfterRenderManager,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _AfterRenderManager,
     providedIn: "root",
     factory: /* @__PURE__ */ __name(() => new _AfterRenderManager(), "factory")
@@ -16603,9 +16603,9 @@ __name(_AfterRenderImpl, "AfterRenderImpl");
 /** @nocollapse */
 __publicField(
   _AfterRenderImpl,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _AfterRenderImpl,
     providedIn: "root",
     factory: /* @__PURE__ */ __name(() => new _AfterRenderImpl(), "factory")
@@ -16956,9 +16956,9 @@ __name(_IdleScheduler, "IdleScheduler");
 /** @nocollapse */
 __publicField(
   _IdleScheduler,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _IdleScheduler,
     providedIn: "root",
     factory: /* @__PURE__ */ __name(() => new _IdleScheduler(), "factory")
@@ -17106,9 +17106,9 @@ __name(_TimerScheduler, "TimerScheduler");
 /** @nocollapse */
 __publicField(
   _TimerScheduler,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _TimerScheduler,
     providedIn: "root",
     factory: /* @__PURE__ */ __name(() => new _TimerScheduler(), "factory")
@@ -17140,9 +17140,9 @@ __name(_CachedInjectorService, "CachedInjectorService");
 /** @nocollapse */
 __publicField(
   _CachedInjectorService,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _CachedInjectorService,
     providedIn: "environment",
     factory: /* @__PURE__ */ __name(() => new _CachedInjectorService(), "factory")
@@ -17317,7 +17317,7 @@ function renderDeferStateAfterResourceLoading(tDetails, tNode, lContainer) {
 }
 __name(renderDeferStateAfterResourceLoading, "renderDeferStateAfterResourceLoading");
 var applyDeferBlockStateWithSchedulingImpl = null;
-function \u0275\u0275deferEnableTimerScheduling(tView, tDetails, placeholderConfigIndex, loadingConfigIndex) {
+function ɵɵdeferEnableTimerScheduling(tView, tDetails, placeholderConfigIndex, loadingConfigIndex) {
   const tViewConsts = tView.consts;
   if (placeholderConfigIndex != null) {
     tDetails.placeholderBlockConfig = getConstant(tViewConsts, placeholderConfigIndex);
@@ -17329,7 +17329,7 @@ function \u0275\u0275deferEnableTimerScheduling(tView, tDetails, placeholderConf
     applyDeferBlockStateWithSchedulingImpl = applyDeferBlockStateWithScheduling;
   }
 }
-__name(\u0275\u0275deferEnableTimerScheduling, "\u0275\u0275deferEnableTimerScheduling");
+__name(ɵɵdeferEnableTimerScheduling, "ɵɵdeferEnableTimerScheduling");
 var ASYNC_COMPONENT_METADATA_FN = "__ngAsyncComponentMetadataFn__";
 function setClassMetadataAsync(type, dependencyLoaderFn, metadataSetterFn) {
   const componentClass = type;
@@ -17374,10 +17374,10 @@ var _Console = class _Console {
   }
 };
 __name(_Console, "Console");
-__publicField(_Console, "\u0275fac", /* @__PURE__ */ __name(function Console_Factory(__ngFactoryType__) {
+__publicField(_Console, "ɵfac", /* @__PURE__ */ __name(function Console_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Console)();
 }, "Console_Factory"));
-__publicField(_Console, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _Console, factory: _Console.\u0275fac, providedIn: "platform" }));
+__publicField(_Console, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _Console, factory: _Console.ɵfac, providedIn: "platform" }));
 var Console = _Console;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Console, [{
@@ -18087,7 +18087,7 @@ function measureEnd(startEvent, entryName, color) {
   const top = eventsStack.pop();
   assertDefined(top, "Profiling error: could not find start event entry " + startEvent);
   assertEqual(top[0], startEvent, `Profiling error: expected to see ${startEvent} event but got ${top[0]}`);
-  console.timeStamp(entryName, "Event_" + top[0] + "_" + top[1], void 0, "\u{1F170}\uFE0F Angular", void 0, color);
+  console.timeStamp(entryName, "Event_" + top[0] + "_" + top[1], void 0, "\u{1F170}️ Angular", void 0, color);
 }
 __name(measureEnd, "measureEnd");
 var chromeDevToolsInjectorProfiler = /* @__PURE__ */ __name((event) => {
@@ -18227,14 +18227,14 @@ var globalUtilsFunctions = {
    * in application's code. The contract of those functions might be changed in any release and/or a
    * function can be removed completely.
    */
-  "\u0275getDependenciesFromInjectable": getDependenciesFromInjectable,
-  "\u0275getInjectorProviders": getInjectorProviders,
-  "\u0275getInjectorResolutionPath": getInjectorResolutionPath,
-  "\u0275getInjectorMetadata": getInjectorMetadata,
-  "\u0275setProfiler": setProfiler,
-  "\u0275getSignalGraph": getSignalGraph,
-  "\u0275getDeferBlocks": getDeferBlocks,
-  "\u0275getTransferState": getTransferState,
+  "ɵgetDependenciesFromInjectable": getDependenciesFromInjectable,
+  "ɵgetInjectorProviders": getInjectorProviders,
+  "ɵgetInjectorResolutionPath": getInjectorResolutionPath,
+  "ɵgetInjectorMetadata": getInjectorMetadata,
+  "ɵsetProfiler": setProfiler,
+  "ɵgetSignalGraph": getSignalGraph,
+  "ɵgetDeferBlocks": getDeferBlocks,
+  "ɵgetTransferState": getTransferState,
   "getDirectiveMetadata": getDirectiveMetadata$1,
   "getComponent": getComponent,
   "getContext": getContext,
@@ -18416,10 +18416,10 @@ var _Testability = class _Testability {
   }
 };
 __name(_Testability, "Testability");
-__publicField(_Testability, "\u0275fac", /* @__PURE__ */ __name(function Testability_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _Testability)(\u0275\u0275inject(NgZone), \u0275\u0275inject(TestabilityRegistry), \u0275\u0275inject(TESTABILITY_GETTER));
+__publicField(_Testability, "ɵfac", /* @__PURE__ */ __name(function Testability_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _Testability)(ɵɵinject(NgZone), ɵɵinject(TestabilityRegistry), ɵɵinject(TESTABILITY_GETTER));
 }, "Testability_Factory"));
-__publicField(_Testability, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _Testability, factory: _Testability.\u0275fac }));
+__publicField(_Testability, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _Testability, factory: _Testability.ɵfac }));
 var Testability = _Testability;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Testability, [{
@@ -18483,10 +18483,10 @@ var _TestabilityRegistry = class _TestabilityRegistry {
   }
 };
 __name(_TestabilityRegistry, "TestabilityRegistry");
-__publicField(_TestabilityRegistry, "\u0275fac", /* @__PURE__ */ __name(function TestabilityRegistry_Factory(__ngFactoryType__) {
+__publicField(_TestabilityRegistry, "ɵfac", /* @__PURE__ */ __name(function TestabilityRegistry_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _TestabilityRegistry)();
 }, "TestabilityRegistry_Factory"));
-__publicField(_TestabilityRegistry, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _TestabilityRegistry, factory: _TestabilityRegistry.\u0275fac, providedIn: "platform" }));
+__publicField(_TestabilityRegistry, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _TestabilityRegistry, factory: _TestabilityRegistry.ɵfac, providedIn: "platform" }));
 var TestabilityRegistry = _TestabilityRegistry;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TestabilityRegistry, [{
@@ -18569,10 +18569,10 @@ var _ApplicationInitStatus = class _ApplicationInitStatus {
   }
 };
 __name(_ApplicationInitStatus, "ApplicationInitStatus");
-__publicField(_ApplicationInitStatus, "\u0275fac", /* @__PURE__ */ __name(function ApplicationInitStatus_Factory(__ngFactoryType__) {
+__publicField(_ApplicationInitStatus, "ɵfac", /* @__PURE__ */ __name(function ApplicationInitStatus_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ApplicationInitStatus)();
 }, "ApplicationInitStatus_Factory"));
-__publicField(_ApplicationInitStatus, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ApplicationInitStatus, factory: _ApplicationInitStatus.\u0275fac, providedIn: "root" }));
+__publicField(_ApplicationInitStatus, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _ApplicationInitStatus, factory: _ApplicationInitStatus.ɵfac, providedIn: "root" }));
 var ApplicationInitStatus = _ApplicationInitStatus;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ApplicationInitStatus, [{
@@ -19013,10 +19013,10 @@ var _ApplicationRef = class _ApplicationRef {
   }
 };
 __name(_ApplicationRef, "ApplicationRef");
-__publicField(_ApplicationRef, "\u0275fac", /* @__PURE__ */ __name(function ApplicationRef_Factory(__ngFactoryType__) {
+__publicField(_ApplicationRef, "ɵfac", /* @__PURE__ */ __name(function ApplicationRef_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ApplicationRef)();
 }, "ApplicationRef_Factory"));
-__publicField(_ApplicationRef, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ApplicationRef, factory: _ApplicationRef.\u0275fac, providedIn: "root" }));
+__publicField(_ApplicationRef, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _ApplicationRef, factory: _ApplicationRef.ɵfac, providedIn: "root" }));
 var ApplicationRef = _ApplicationRef;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ApplicationRef, [{
@@ -19339,7 +19339,7 @@ function getHydrateTriggers(tView, tNode) {
   return tDetails.hydrateTriggers ??= /* @__PURE__ */ new Map();
 }
 __name(getHydrateTriggers, "getHydrateTriggers");
-function \u0275\u0275defer(index, primaryTmplIndex, dependencyResolverFn, loadingTmplIndex, placeholderTmplIndex, errorTmplIndex, loadingConfigIndex, placeholderConfigIndex, enableTimerScheduling, flags) {
+function ɵɵdefer(index, primaryTmplIndex, dependencyResolverFn, loadingTmplIndex, placeholderTmplIndex, errorTmplIndex, loadingConfigIndex, placeholderConfigIndex, enableTimerScheduling, flags) {
   const lView = getLView();
   const tView = getTView();
   const adjustedIndex = index + HEADER_OFFSET;
@@ -19419,8 +19419,8 @@ function \u0275\u0275defer(index, primaryTmplIndex, dependencyResolverFn, loadin
   storeTriggerCleanupFn(0, lDetails, () => removeLViewOnDestroy(lView, onLViewDestroy));
   storeLViewOnDestroy(lView, onLViewDestroy);
 }
-__name(\u0275\u0275defer, "\u0275\u0275defer");
-function \u0275\u0275deferWhen(rawValue) {
+__name(ɵɵdefer, "ɵɵdefer");
+function ɵɵdeferWhen(rawValue) {
   const lView = getLView();
   const tNode = getSelectedTNode();
   if (ngDevMode) {
@@ -19445,8 +19445,8 @@ function \u0275\u0275deferWhen(rawValue) {
     }
   }
 }
-__name(\u0275\u0275deferWhen, "\u0275\u0275deferWhen");
-function \u0275\u0275deferPrefetchWhen(rawValue) {
+__name(ɵɵdeferWhen, "ɵɵdeferWhen");
+function ɵɵdeferPrefetchWhen(rawValue) {
   const lView = getLView();
   const tNode = getSelectedTNode();
   if (ngDevMode) {
@@ -19470,8 +19470,8 @@ function \u0275\u0275deferPrefetchWhen(rawValue) {
     }
   }
 }
-__name(\u0275\u0275deferPrefetchWhen, "\u0275\u0275deferPrefetchWhen");
-function \u0275\u0275deferHydrateWhen(rawValue) {
+__name(ɵɵdeferPrefetchWhen, "ɵɵdeferPrefetchWhen");
+function ɵɵdeferHydrateWhen(rawValue) {
   const lView = getLView();
   const tNode = getSelectedTNode();
   if (ngDevMode) {
@@ -19503,8 +19503,8 @@ function \u0275\u0275deferHydrateWhen(rawValue) {
     }
   }
 }
-__name(\u0275\u0275deferHydrateWhen, "\u0275\u0275deferHydrateWhen");
-function \u0275\u0275deferHydrateNever() {
+__name(ɵɵdeferHydrateWhen, "ɵɵdeferHydrateWhen");
+function ɵɵdeferHydrateNever() {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19518,8 +19518,8 @@ function \u0275\u0275deferHydrateNever() {
     triggerDeferBlock(2, lView, tNode);
   }
 }
-__name(\u0275\u0275deferHydrateNever, "\u0275\u0275deferHydrateNever");
-function \u0275\u0275deferOnIdle() {
+__name(ɵɵdeferHydrateNever, "ɵɵdeferHydrateNever");
+function ɵɵdeferOnIdle() {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19529,8 +19529,8 @@ function \u0275\u0275deferOnIdle() {
     return;
   scheduleDelayedTrigger(onIdle);
 }
-__name(\u0275\u0275deferOnIdle, "\u0275\u0275deferOnIdle");
-function \u0275\u0275deferPrefetchOnIdle() {
+__name(ɵɵdeferOnIdle, "ɵɵdeferOnIdle");
+function ɵɵdeferPrefetchOnIdle() {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19540,8 +19540,8 @@ function \u0275\u0275deferPrefetchOnIdle() {
     return;
   scheduleDelayedPrefetching(onIdle);
 }
-__name(\u0275\u0275deferPrefetchOnIdle, "\u0275\u0275deferPrefetchOnIdle");
-function \u0275\u0275deferHydrateOnIdle() {
+__name(ɵɵdeferPrefetchOnIdle, "ɵɵdeferPrefetchOnIdle");
+function ɵɵdeferHydrateOnIdle() {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19557,8 +19557,8 @@ function \u0275\u0275deferHydrateOnIdle() {
     scheduleDelayedHydrating(onIdle, lView, tNode);
   }
 }
-__name(\u0275\u0275deferHydrateOnIdle, "\u0275\u0275deferHydrateOnIdle");
-function \u0275\u0275deferOnImmediate() {
+__name(ɵɵdeferHydrateOnIdle, "ɵɵdeferHydrateOnIdle");
+function ɵɵdeferOnImmediate() {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19572,8 +19572,8 @@ function \u0275\u0275deferOnImmediate() {
   }
   triggerDeferBlock(0, lView, tNode);
 }
-__name(\u0275\u0275deferOnImmediate, "\u0275\u0275deferOnImmediate");
-function \u0275\u0275deferPrefetchOnImmediate() {
+__name(ɵɵdeferOnImmediate, "ɵɵdeferOnImmediate");
+function ɵɵdeferPrefetchOnImmediate() {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19587,8 +19587,8 @@ function \u0275\u0275deferPrefetchOnImmediate() {
     triggerResourceLoading(tDetails, lView, tNode);
   }
 }
-__name(\u0275\u0275deferPrefetchOnImmediate, "\u0275\u0275deferPrefetchOnImmediate");
-function \u0275\u0275deferHydrateOnImmediate() {
+__name(ɵɵdeferPrefetchOnImmediate, "ɵɵdeferPrefetchOnImmediate");
+function ɵɵdeferHydrateOnImmediate() {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19608,8 +19608,8 @@ function \u0275\u0275deferHydrateOnImmediate() {
     triggerHydrationFromBlockName(injector, ssrUniqueId);
   }
 }
-__name(\u0275\u0275deferHydrateOnImmediate, "\u0275\u0275deferHydrateOnImmediate");
-function \u0275\u0275deferOnTimer(delay2) {
+__name(ɵɵdeferHydrateOnImmediate, "ɵɵdeferHydrateOnImmediate");
+function ɵɵdeferOnTimer(delay2) {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19619,8 +19619,8 @@ function \u0275\u0275deferOnTimer(delay2) {
     return;
   scheduleDelayedTrigger(onTimer(delay2));
 }
-__name(\u0275\u0275deferOnTimer, "\u0275\u0275deferOnTimer");
-function \u0275\u0275deferPrefetchOnTimer(delay2) {
+__name(ɵɵdeferOnTimer, "ɵɵdeferOnTimer");
+function ɵɵdeferPrefetchOnTimer(delay2) {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19630,8 +19630,8 @@ function \u0275\u0275deferPrefetchOnTimer(delay2) {
     return;
   scheduleDelayedPrefetching(onTimer(delay2));
 }
-__name(\u0275\u0275deferPrefetchOnTimer, "\u0275\u0275deferPrefetchOnTimer");
-function \u0275\u0275deferHydrateOnTimer(delay2) {
+__name(ɵɵdeferPrefetchOnTimer, "ɵɵdeferPrefetchOnTimer");
+function ɵɵdeferHydrateOnTimer(delay2) {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19647,8 +19647,8 @@ function \u0275\u0275deferHydrateOnTimer(delay2) {
     scheduleDelayedHydrating(onTimer(delay2), lView, tNode);
   }
 }
-__name(\u0275\u0275deferHydrateOnTimer, "\u0275\u0275deferHydrateOnTimer");
-function \u0275\u0275deferOnHover(triggerIndex, walkUpTimes) {
+__name(ɵɵdeferHydrateOnTimer, "ɵɵdeferHydrateOnTimer");
+function ɵɵdeferOnHover(triggerIndex, walkUpTimes) {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19670,8 +19670,8 @@ function \u0275\u0275deferOnHover(triggerIndex, walkUpTimes) {
     );
   }
 }
-__name(\u0275\u0275deferOnHover, "\u0275\u0275deferOnHover");
-function \u0275\u0275deferPrefetchOnHover(triggerIndex, walkUpTimes) {
+__name(ɵɵdeferOnHover, "ɵɵdeferOnHover");
+function ɵɵdeferPrefetchOnHover(triggerIndex, walkUpTimes) {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19694,8 +19694,8 @@ function \u0275\u0275deferPrefetchOnHover(triggerIndex, walkUpTimes) {
     );
   }
 }
-__name(\u0275\u0275deferPrefetchOnHover, "\u0275\u0275deferPrefetchOnHover");
-function \u0275\u0275deferHydrateOnHover() {
+__name(ɵɵdeferPrefetchOnHover, "ɵɵdeferPrefetchOnHover");
+function ɵɵdeferHydrateOnHover() {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19709,8 +19709,8 @@ function \u0275\u0275deferHydrateOnHover() {
     triggerDeferBlock(2, lView, tNode);
   }
 }
-__name(\u0275\u0275deferHydrateOnHover, "\u0275\u0275deferHydrateOnHover");
-function \u0275\u0275deferOnInteraction(triggerIndex, walkUpTimes) {
+__name(ɵɵdeferHydrateOnHover, "ɵɵdeferHydrateOnHover");
+function ɵɵdeferOnInteraction(triggerIndex, walkUpTimes) {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19732,8 +19732,8 @@ function \u0275\u0275deferOnInteraction(triggerIndex, walkUpTimes) {
     );
   }
 }
-__name(\u0275\u0275deferOnInteraction, "\u0275\u0275deferOnInteraction");
-function \u0275\u0275deferPrefetchOnInteraction(triggerIndex, walkUpTimes) {
+__name(ɵɵdeferOnInteraction, "ɵɵdeferOnInteraction");
+function ɵɵdeferPrefetchOnInteraction(triggerIndex, walkUpTimes) {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19756,8 +19756,8 @@ function \u0275\u0275deferPrefetchOnInteraction(triggerIndex, walkUpTimes) {
     );
   }
 }
-__name(\u0275\u0275deferPrefetchOnInteraction, "\u0275\u0275deferPrefetchOnInteraction");
-function \u0275\u0275deferHydrateOnInteraction() {
+__name(ɵɵdeferPrefetchOnInteraction, "ɵɵdeferPrefetchOnInteraction");
+function ɵɵdeferHydrateOnInteraction() {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19771,8 +19771,8 @@ function \u0275\u0275deferHydrateOnInteraction() {
     triggerDeferBlock(2, lView, tNode);
   }
 }
-__name(\u0275\u0275deferHydrateOnInteraction, "\u0275\u0275deferHydrateOnInteraction");
-function \u0275\u0275deferOnViewport(triggerIndex, walkUpTimes) {
+__name(ɵɵdeferHydrateOnInteraction, "ɵɵdeferHydrateOnInteraction");
+function ɵɵdeferOnViewport(triggerIndex, walkUpTimes) {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19794,8 +19794,8 @@ function \u0275\u0275deferOnViewport(triggerIndex, walkUpTimes) {
     );
   }
 }
-__name(\u0275\u0275deferOnViewport, "\u0275\u0275deferOnViewport");
-function \u0275\u0275deferPrefetchOnViewport(triggerIndex, walkUpTimes) {
+__name(ɵɵdeferOnViewport, "ɵɵdeferOnViewport");
+function ɵɵdeferPrefetchOnViewport(triggerIndex, walkUpTimes) {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19818,8 +19818,8 @@ function \u0275\u0275deferPrefetchOnViewport(triggerIndex, walkUpTimes) {
     );
   }
 }
-__name(\u0275\u0275deferPrefetchOnViewport, "\u0275\u0275deferPrefetchOnViewport");
-function \u0275\u0275deferHydrateOnViewport() {
+__name(ɵɵdeferPrefetchOnViewport, "ɵɵdeferPrefetchOnViewport");
+function ɵɵdeferHydrateOnViewport() {
   const lView = getLView();
   const tNode = getCurrentTNode();
   if (ngDevMode) {
@@ -19833,9 +19833,9 @@ function \u0275\u0275deferHydrateOnViewport() {
     triggerDeferBlock(2, lView, tNode);
   }
 }
-__name(\u0275\u0275deferHydrateOnViewport, "\u0275\u0275deferHydrateOnViewport");
+__name(ɵɵdeferHydrateOnViewport, "ɵɵdeferHydrateOnViewport");
 var ARIA_PREFIX = "aria";
-function \u0275\u0275ariaProperty(name, value) {
+function ɵɵariaProperty(name, value) {
   const lView = getLView();
   const bindingIndex = nextBindingIndex();
   if (bindingUpdated(lView, bindingIndex, value)) {
@@ -19857,14 +19857,14 @@ function \u0275\u0275ariaProperty(name, value) {
     }
     ngDevMode && storePropertyBindingMetadata(tView.data, tNode, name, bindingIndex);
   }
-  return \u0275\u0275ariaProperty;
+  return ɵɵariaProperty;
 }
-__name(\u0275\u0275ariaProperty, "\u0275\u0275ariaProperty");
+__name(ɵɵariaProperty, "ɵɵariaProperty");
 function ariaAttrName(name) {
   return name.charAt(ARIA_PREFIX.length) !== "-" ? ARIA_PREFIX + "-" + name.slice(ARIA_PREFIX.length).toLowerCase() : name;
 }
 __name(ariaAttrName, "ariaAttrName");
-function \u0275\u0275attribute(name, value, sanitizer, namespace) {
+function ɵɵattribute(name, value, sanitizer, namespace) {
   const lView = getLView();
   const bindingIndex = nextBindingIndex();
   if (bindingUpdated(lView, bindingIndex, value)) {
@@ -19873,9 +19873,9 @@ function \u0275\u0275attribute(name, value, sanitizer, namespace) {
     elementAttributeInternal(tNode, lView, name, value, sanitizer, namespace);
     ngDevMode && storePropertyBindingMetadata(tView.data, tNode, "attr." + name, bindingIndex);
   }
-  return \u0275\u0275attribute;
+  return ɵɵattribute;
 }
-__name(\u0275\u0275attribute, "\u0275\u0275attribute");
+__name(ɵɵattribute, "ɵɵattribute");
 var ANIMATIONS_DISABLED = new InjectionToken(typeof ngDevMode !== "undefined" && ngDevMode ? "AnimationsDisabled" : "", {
   providedIn: "root",
   factory: /* @__PURE__ */ __name(() => false, "factory")
@@ -19960,22 +19960,22 @@ function getClassListFromValue(value) {
   return classList;
 }
 __name(getClassListFromValue, "getClassListFromValue");
-function \u0275\u0275animateEnter(value) {
+function ɵɵanimateEnter(value) {
   performanceMarkFeature("NgAnimateEnter");
   if (!areAnimationSupported) {
-    return \u0275\u0275animateEnter;
+    return ɵɵanimateEnter;
   }
   ngDevMode && assertAnimationTypes(value, "animate.enter");
   const lView = getLView();
   if (areAnimationsDisabled(lView)) {
-    return \u0275\u0275animateEnter;
+    return ɵɵanimateEnter;
   }
   const tNode = getCurrentTNode();
   cancelLeavingNodes(tNode, lView);
   getLViewEnterAnimations(lView).push(() => runEnterAnimation(lView, tNode, value));
-  return \u0275\u0275animateEnter;
+  return ɵɵanimateEnter;
 }
-__name(\u0275\u0275animateEnter, "\u0275\u0275animateEnter");
+__name(ɵɵanimateEnter, "ɵɵanimateEnter");
 function runEnterAnimation(lView, tNode, value) {
   const nativeElement = getNativeByTNode(tNode, lView);
   ngDevMode && assertElementNodes(nativeElement, "animate.enter");
@@ -20029,44 +20029,44 @@ function trackEnterClasses(el, classList, cleanupFns) {
   }
 }
 __name(trackEnterClasses, "trackEnterClasses");
-function \u0275\u0275animateEnterListener(value) {
+function ɵɵanimateEnterListener(value) {
   performanceMarkFeature("NgAnimateEnter");
   if (!areAnimationSupported) {
-    return \u0275\u0275animateEnterListener;
+    return ɵɵanimateEnterListener;
   }
   ngDevMode && assertAnimationTypes(value, "animate.enter");
   const lView = getLView();
   if (areAnimationsDisabled(lView)) {
-    return \u0275\u0275animateEnterListener;
+    return ɵɵanimateEnterListener;
   }
   const tNode = getCurrentTNode();
   cancelLeavingNodes(tNode, lView);
   getLViewEnterAnimations(lView).push(() => runEnterAnimationFunction(lView, tNode, value));
-  return \u0275\u0275animateEnterListener;
+  return ɵɵanimateEnterListener;
 }
-__name(\u0275\u0275animateEnterListener, "\u0275\u0275animateEnterListener");
+__name(ɵɵanimateEnterListener, "ɵɵanimateEnterListener");
 function runEnterAnimationFunction(lView, tNode, value) {
   const nativeElement = getNativeByTNode(tNode, lView);
   ngDevMode && assertElementNodes(nativeElement, "animate.enter");
   value.call(lView[CONTEXT], { target: nativeElement, animationComplete: noOpAnimationComplete });
 }
 __name(runEnterAnimationFunction, "runEnterAnimationFunction");
-function \u0275\u0275animateLeave(value) {
+function ɵɵanimateLeave(value) {
   performanceMarkFeature("NgAnimateLeave");
   if (!areAnimationSupported) {
-    return \u0275\u0275animateLeave;
+    return ɵɵanimateLeave;
   }
   ngDevMode && assertAnimationTypes(value, "animate.leave");
   const lView = getLView();
   const animationsDisabled = areAnimationsDisabled(lView);
   if (animationsDisabled) {
-    return \u0275\u0275animateLeave;
+    return ɵɵanimateLeave;
   }
   const tNode = getCurrentTNode();
   getLViewLeaveAnimations(lView).push(() => runLeaveAnimations(lView, tNode, value, animationsDisabled));
-  return \u0275\u0275animateLeave;
+  return ɵɵanimateLeave;
 }
-__name(\u0275\u0275animateLeave, "\u0275\u0275animateLeave");
+__name(ɵɵanimateLeave, "ɵɵanimateLeave");
 function runLeaveAnimations(lView, tNode, value, animationsDisabled) {
   const { promise, resolve } = Promise.withResolvers();
   const nativeElement = getNativeByTNode(tNode, lView);
@@ -20083,19 +20083,19 @@ function runLeaveAnimations(lView, tNode, value, animationsDisabled) {
   return promise;
 }
 __name(runLeaveAnimations, "runLeaveAnimations");
-function \u0275\u0275animateLeaveListener(value) {
+function ɵɵanimateLeaveListener(value) {
   performanceMarkFeature("NgAnimateLeave");
   if (!areAnimationSupported) {
-    return \u0275\u0275animateLeaveListener;
+    return ɵɵanimateLeaveListener;
   }
   ngDevMode && assertAnimationTypes(value, "animate.leave");
   const lView = getLView();
   const tNode = getCurrentTNode();
   allLeavingAnimations.add(lView);
   getLViewLeaveAnimations(lView).push(() => runLeaveAnimationFunction(lView, tNode, value));
-  return \u0275\u0275animateLeaveListener;
+  return ɵɵanimateLeaveListener;
 }
-__name(\u0275\u0275animateLeaveListener, "\u0275\u0275animateLeaveListener");
+__name(ɵɵanimateLeaveListener, "ɵɵanimateLeaveListener");
 function runLeaveAnimationFunction(lView, tNode, value) {
   const { promise, resolve } = Promise.withResolvers();
   const nativeElement = getNativeByTNode(tNode, lView);
@@ -20219,12 +20219,12 @@ function animateLeaveClassRunner(el, tNode, classList, renderer, animationsDisab
   });
 }
 __name(animateLeaveClassRunner, "animateLeaveClassRunner");
-function \u0275\u0275componentInstance() {
+function ɵɵcomponentInstance() {
   const instance = getLView()[DECLARATION_COMPONENT_VIEW][CONTEXT];
   ngDevMode && assertDefined(instance, "Expected component instance to be defined");
   return instance;
 }
-__name(\u0275\u0275componentInstance, "\u0275\u0275componentInstance");
+__name(ɵɵcomponentInstance, "ɵɵcomponentInstance");
 var _LiveCollection = class _LiveCollection {
   destroy(item) {
   }
@@ -20491,25 +20491,25 @@ var _UniqueValueMultiKeyMap = class _UniqueValueMultiKeyMap {
 };
 __name(_UniqueValueMultiKeyMap, "UniqueValueMultiKeyMap");
 var UniqueValueMultiKeyMap = _UniqueValueMultiKeyMap;
-function \u0275\u0275conditionalCreate(index, templateFn, decls, vars, tagName, attrsIndex, localRefsIndex, localRefExtractor) {
+function ɵɵconditionalCreate(index, templateFn, decls, vars, tagName, attrsIndex, localRefsIndex, localRefExtractor) {
   performanceMarkFeature("NgControlFlow");
   const lView = getLView();
   const tView = getTView();
   const attrs = getConstant(tView.consts, attrsIndex);
   declareNoDirectiveHostTemplate(lView, tView, index, templateFn, decls, vars, tagName, attrs, 256, localRefsIndex, localRefExtractor);
-  return \u0275\u0275conditionalBranchCreate;
+  return ɵɵconditionalBranchCreate;
 }
-__name(\u0275\u0275conditionalCreate, "\u0275\u0275conditionalCreate");
-function \u0275\u0275conditionalBranchCreate(index, templateFn, decls, vars, tagName, attrsIndex, localRefsIndex, localRefExtractor) {
+__name(ɵɵconditionalCreate, "ɵɵconditionalCreate");
+function ɵɵconditionalBranchCreate(index, templateFn, decls, vars, tagName, attrsIndex, localRefsIndex, localRefExtractor) {
   performanceMarkFeature("NgControlFlow");
   const lView = getLView();
   const tView = getTView();
   const attrs = getConstant(tView.consts, attrsIndex);
   declareNoDirectiveHostTemplate(lView, tView, index, templateFn, decls, vars, tagName, attrs, 512, localRefsIndex, localRefExtractor);
-  return \u0275\u0275conditionalBranchCreate;
+  return ɵɵconditionalBranchCreate;
 }
-__name(\u0275\u0275conditionalBranchCreate, "\u0275\u0275conditionalBranchCreate");
-function \u0275\u0275conditional(matchingTemplateIndex, contextValue) {
+__name(ɵɵconditionalBranchCreate, "ɵɵconditionalBranchCreate");
+function ɵɵconditional(matchingTemplateIndex, contextValue) {
   performanceMarkFeature("NgControlFlow");
   const hostLView = getLView();
   const bindingIndex = nextBindingIndex();
@@ -20542,7 +20542,7 @@ function \u0275\u0275conditional(matchingTemplateIndex, contextValue) {
     }
   }
 }
-__name(\u0275\u0275conditional, "\u0275\u0275conditional");
+__name(ɵɵconditional, "ɵɵconditional");
 var _RepeaterContext = class _RepeaterContext {
   lContainer;
   $implicit;
@@ -20558,14 +20558,14 @@ var _RepeaterContext = class _RepeaterContext {
 };
 __name(_RepeaterContext, "RepeaterContext");
 var RepeaterContext = _RepeaterContext;
-function \u0275\u0275repeaterTrackByIndex(index) {
+function ɵɵrepeaterTrackByIndex(index) {
   return index;
 }
-__name(\u0275\u0275repeaterTrackByIndex, "\u0275\u0275repeaterTrackByIndex");
-function \u0275\u0275repeaterTrackByIdentity(_, value) {
+__name(ɵɵrepeaterTrackByIndex, "ɵɵrepeaterTrackByIndex");
+function ɵɵrepeaterTrackByIdentity(_, value) {
   return value;
 }
-__name(\u0275\u0275repeaterTrackByIdentity, "\u0275\u0275repeaterTrackByIdentity");
+__name(ɵɵrepeaterTrackByIdentity, "ɵɵrepeaterTrackByIdentity");
 var _RepeaterMetadata = class _RepeaterMetadata {
   hasEmptyBlock;
   trackByFn;
@@ -20578,7 +20578,7 @@ var _RepeaterMetadata = class _RepeaterMetadata {
 };
 __name(_RepeaterMetadata, "RepeaterMetadata");
 var RepeaterMetadata = _RepeaterMetadata;
-function \u0275\u0275repeaterCreate(index, templateFn, decls, vars, tagName, attrsIndex, trackByFn, trackByUsesComponentInstance, emptyTemplateFn, emptyDecls, emptyVars, emptyTagName, emptyAttrsIndex) {
+function ɵɵrepeaterCreate(index, templateFn, decls, vars, tagName, attrsIndex, trackByFn, trackByUsesComponentInstance, emptyTemplateFn, emptyDecls, emptyVars, emptyTagName, emptyAttrsIndex) {
   performanceMarkFeature("NgControlFlow");
   ngDevMode && assertFunction(trackByFn, `A track expression must be a function, was ${typeof trackByFn} instead.`);
   const lView = getLView();
@@ -20621,7 +20621,7 @@ function \u0275\u0275repeaterCreate(index, templateFn, decls, vars, tagName, att
     );
   }
 }
-__name(\u0275\u0275repeaterCreate, "\u0275\u0275repeaterCreate");
+__name(ɵɵrepeaterCreate, "ɵɵrepeaterCreate");
 function isViewExpensiveToRecreate(lView) {
   return lView.length - HEADER_OFFSET > 2;
 }
@@ -20714,7 +20714,7 @@ var _LiveCollectionLContainerImpl = class _LiveCollectionLContainerImpl extends 
 };
 __name(_LiveCollectionLContainerImpl, "LiveCollectionLContainerImpl");
 var LiveCollectionLContainerImpl = _LiveCollectionLContainerImpl;
-function \u0275\u0275repeater(collection) {
+function ɵɵrepeater(collection) {
   const prevConsumer = setActiveConsumer(null);
   const metadataSlotIdx = getSelectedIndex();
   try {
@@ -20731,7 +20731,7 @@ function \u0275\u0275repeater(collection) {
     }
     const liveCollection = metadata.liveCollection;
     reconcile(liveCollection, collection, metadata.trackByFn);
-    if (ngDevMode && metadata.trackByFn === \u0275\u0275repeaterTrackByIdentity && liveCollection.operationsCounter?.wasReCreated(liveCollection.length) && isViewExpensiveToRecreate(getExistingLViewFromLContainer(lContainer, 0))) {
+    if (ngDevMode && metadata.trackByFn === ɵɵrepeaterTrackByIdentity && liveCollection.operationsCounter?.wasReCreated(liveCollection.length) && isViewExpensiveToRecreate(getExistingLViewFromLContainer(lContainer, 0))) {
       const message = formatRuntimeError(-956, `The configured tracking expression (track by identity) caused re-creation of the entire collection of size ${liveCollection.length}. This is an expensive operation requiring destruction and subsequent creation of DOM nodes, directives, components etc. Please review the "track expression" and make sure that it uniquely identifies items in a collection.`);
       console.warn(message);
     }
@@ -20759,7 +20759,7 @@ function \u0275\u0275repeater(collection) {
     setActiveConsumer(prevConsumer);
   }
 }
-__name(\u0275\u0275repeater, "\u0275\u0275repeater");
+__name(ɵɵrepeater, "ɵɵrepeater");
 function getLContainer(lView, index) {
   const lContainer = lView[index];
   ngDevMode && assertLContainer(lContainer);
@@ -20784,7 +20784,7 @@ function getExistingTNode(tView, index) {
   return tNode;
 }
 __name(getExistingTNode, "getExistingTNode");
-function \u0275\u0275property(propName, value, sanitizer) {
+function ɵɵproperty(propName, value, sanitizer) {
   const lView = getLView();
   const bindingIndex = nextBindingIndex();
   if (bindingUpdated(lView, bindingIndex, value)) {
@@ -20793,14 +20793,14 @@ function \u0275\u0275property(propName, value, sanitizer) {
     setPropertyAndInputs(tNode, lView, propName, value, lView[RENDERER], sanitizer);
     ngDevMode && storePropertyBindingMetadata(tView.data, tNode, propName, bindingIndex);
   }
-  return \u0275\u0275property;
+  return ɵɵproperty;
 }
-__name(\u0275\u0275property, "\u0275\u0275property");
+__name(ɵɵproperty, "ɵɵproperty");
 function setDirectiveInputsWhichShadowsStyling(tView, tNode, lView, value, isClassBased) {
   setAllInputsForProperty(tNode, tView, lView, isClassBased ? "class" : "style", value);
 }
 __name(setDirectiveInputsWhichShadowsStyling, "setDirectiveInputsWhichShadowsStyling");
-function \u0275\u0275elementStart(index, name, attrsIndex, localRefsIndex) {
+function ɵɵelementStart(index, name, attrsIndex, localRefsIndex) {
   const lView = getLView();
   ngDevMode && assertTNodeCreationIndex(lView, index);
   const tView = lView[TVIEW];
@@ -20818,10 +20818,10 @@ function \u0275\u0275elementStart(index, name, attrsIndex, localRefsIndex) {
   if (ngDevMode && lView[TVIEW].firstCreatePass) {
     validateElementIsKnown(lView, tNode);
   }
-  return \u0275\u0275elementStart;
+  return ɵɵelementStart;
 }
-__name(\u0275\u0275elementStart, "\u0275\u0275elementStart");
-function \u0275\u0275elementEnd() {
+__name(ɵɵelementStart, "ɵɵelementStart");
+function ɵɵelementEnd() {
   const tView = getTView();
   const initialTNode = getCurrentTNode();
   ngDevMode && assertDefined(initialTNode, "No parent node to close.");
@@ -20844,16 +20844,16 @@ function \u0275\u0275elementEnd() {
   if (currentTNode.stylesWithoutHost != null && hasStyleInput(currentTNode)) {
     setDirectiveInputsWhichShadowsStyling(tView, currentTNode, getLView(), currentTNode.stylesWithoutHost, false);
   }
-  return \u0275\u0275elementEnd;
+  return ɵɵelementEnd;
 }
-__name(\u0275\u0275elementEnd, "\u0275\u0275elementEnd");
-function \u0275\u0275element(index, name, attrsIndex, localRefsIndex) {
-  \u0275\u0275elementStart(index, name, attrsIndex, localRefsIndex);
-  \u0275\u0275elementEnd();
-  return \u0275\u0275element;
+__name(ɵɵelementEnd, "ɵɵelementEnd");
+function ɵɵelement(index, name, attrsIndex, localRefsIndex) {
+  ɵɵelementStart(index, name, attrsIndex, localRefsIndex);
+  ɵɵelementEnd();
+  return ɵɵelement;
 }
-__name(\u0275\u0275element, "\u0275\u0275element");
-function \u0275\u0275domElementStart(index, name, attrsIndex, localRefsIndex) {
+__name(ɵɵelement, "ɵɵelement");
+function ɵɵdomElementStart(index, name, attrsIndex, localRefsIndex) {
   const lView = getLView();
   ngDevMode && assertTNodeCreationIndex(lView, index);
   const tView = lView[TVIEW];
@@ -20866,10 +20866,10 @@ function \u0275\u0275domElementStart(index, name, attrsIndex, localRefsIndex) {
   if (ngDevMode && lView[TVIEW].firstCreatePass) {
     validateElementIsKnown(lView, tNode);
   }
-  return \u0275\u0275domElementStart;
+  return ɵɵdomElementStart;
 }
-__name(\u0275\u0275domElementStart, "\u0275\u0275domElementStart");
-function \u0275\u0275domElementEnd() {
+__name(ɵɵdomElementStart, "ɵɵdomElementStart");
+function ɵɵdomElementEnd() {
   const initialTNode = getCurrentTNode();
   ngDevMode && assertDefined(initialTNode, "No parent node to close.");
   const currentTNode = elementLikeEndShared(initialTNode);
@@ -20882,15 +20882,15 @@ function \u0275\u0275domElementEnd() {
     leaveSkipHydrationBlock();
   }
   decreaseElementDepthCount();
-  return \u0275\u0275domElementEnd;
+  return ɵɵdomElementEnd;
 }
-__name(\u0275\u0275domElementEnd, "\u0275\u0275domElementEnd");
-function \u0275\u0275domElement(index, name, attrsIndex, localRefsIndex) {
-  \u0275\u0275domElementStart(index, name, attrsIndex, localRefsIndex);
-  \u0275\u0275domElementEnd();
-  return \u0275\u0275domElement;
+__name(ɵɵdomElementEnd, "ɵɵdomElementEnd");
+function ɵɵdomElement(index, name, attrsIndex, localRefsIndex) {
+  ɵɵdomElementStart(index, name, attrsIndex, localRefsIndex);
+  ɵɵdomElementEnd();
+  return ɵɵdomElement;
 }
-__name(\u0275\u0275domElement, "\u0275\u0275domElement");
+__name(ɵɵdomElement, "ɵɵdomElement");
 var _locateOrCreateElementNode = /* @__PURE__ */ __name((tView, lView, tNode, name, index) => {
   lastNodeWasCreated(true);
   return createElementNode(lView[RENDERER], name, getNamespace());
@@ -20925,7 +20925,7 @@ function enableLocateOrCreateElementNodeImpl() {
   _locateOrCreateElementNode = locateOrCreateElementNodeImpl;
 }
 __name(enableLocateOrCreateElementNodeImpl, "enableLocateOrCreateElementNodeImpl");
-function \u0275\u0275elementContainerStart(index, attrsIndex, localRefsIndex) {
+function ɵɵelementContainerStart(index, attrsIndex, localRefsIndex) {
   const lView = getLView();
   ngDevMode && assertTNodeCreationIndex(lView, index);
   const tView = lView[TVIEW];
@@ -20940,10 +20940,10 @@ function \u0275\u0275elementContainerStart(index, attrsIndex, localRefsIndex) {
   if (localRefsIndex != null) {
     saveResolvedLocalsInData(lView, tNode);
   }
-  return \u0275\u0275elementContainerStart;
+  return ɵɵelementContainerStart;
 }
-__name(\u0275\u0275elementContainerStart, "\u0275\u0275elementContainerStart");
-function \u0275\u0275elementContainerEnd() {
+__name(ɵɵelementContainerStart, "ɵɵelementContainerStart");
+function ɵɵelementContainerEnd() {
   const tView = getTView();
   const initialTNode = getCurrentTNode();
   ngDevMode && assertDefined(initialTNode, "No parent node to close.");
@@ -20956,16 +20956,16 @@ function \u0275\u0275elementContainerEnd() {
     8
     /* TNodeType.ElementContainer */
   );
-  return \u0275\u0275elementContainerEnd;
+  return ɵɵelementContainerEnd;
 }
-__name(\u0275\u0275elementContainerEnd, "\u0275\u0275elementContainerEnd");
-function \u0275\u0275elementContainer(index, attrsIndex, localRefsIndex) {
-  \u0275\u0275elementContainerStart(index, attrsIndex, localRefsIndex);
-  \u0275\u0275elementContainerEnd();
-  return \u0275\u0275elementContainer;
+__name(ɵɵelementContainerEnd, "ɵɵelementContainerEnd");
+function ɵɵelementContainer(index, attrsIndex, localRefsIndex) {
+  ɵɵelementContainerStart(index, attrsIndex, localRefsIndex);
+  ɵɵelementContainerEnd();
+  return ɵɵelementContainer;
 }
-__name(\u0275\u0275elementContainer, "\u0275\u0275elementContainer");
-function \u0275\u0275domElementContainerStart(index, attrsIndex, localRefsIndex) {
+__name(ɵɵelementContainer, "ɵɵelementContainer");
+function ɵɵdomElementContainerStart(index, attrsIndex, localRefsIndex) {
   const lView = getLView();
   ngDevMode && assertTNodeCreationIndex(lView, index);
   const tView = lView[TVIEW];
@@ -20975,10 +20975,10 @@ function \u0275\u0275domElementContainerStart(index, attrsIndex, localRefsIndex)
   if (localRefsIndex != null) {
     saveResolvedLocalsInData(lView, tNode);
   }
-  return \u0275\u0275domElementContainerStart;
+  return ɵɵdomElementContainerStart;
 }
-__name(\u0275\u0275domElementContainerStart, "\u0275\u0275domElementContainerStart");
-function \u0275\u0275domElementContainerEnd() {
+__name(ɵɵdomElementContainerStart, "ɵɵdomElementContainerStart");
+function ɵɵdomElementContainerEnd() {
   const initialTNode = getCurrentTNode();
   ngDevMode && assertDefined(initialTNode, "No parent node to close.");
   const currentTNode = elementLikeEndShared(initialTNode);
@@ -20987,15 +20987,15 @@ function \u0275\u0275domElementContainerEnd() {
     8
     /* TNodeType.ElementContainer */
   );
-  return \u0275\u0275elementContainerEnd;
+  return ɵɵelementContainerEnd;
 }
-__name(\u0275\u0275domElementContainerEnd, "\u0275\u0275domElementContainerEnd");
-function \u0275\u0275domElementContainer(index, attrsIndex, localRefsIndex) {
-  \u0275\u0275domElementContainerStart(index, attrsIndex, localRefsIndex);
-  \u0275\u0275domElementContainerEnd();
-  return \u0275\u0275domElementContainer;
+__name(ɵɵdomElementContainerEnd, "ɵɵdomElementContainerEnd");
+function ɵɵdomElementContainer(index, attrsIndex, localRefsIndex) {
+  ɵɵdomElementContainerStart(index, attrsIndex, localRefsIndex);
+  ɵɵdomElementContainerEnd();
+  return ɵɵdomElementContainer;
 }
-__name(\u0275\u0275domElementContainer, "\u0275\u0275domElementContainer");
+__name(ɵɵdomElementContainer, "ɵɵdomElementContainer");
 var _locateOrCreateElementContainerNode = /* @__PURE__ */ __name((tView, lView, tNode, commentText, index) => {
   lastNodeWasCreated(true);
   return createCommentNode(lView[RENDERER], ngDevMode ? commentText : "");
@@ -21025,11 +21025,11 @@ function enableLocateOrCreateElementContainerNodeImpl() {
   _locateOrCreateElementContainerNode = locateOrCreateElementContainerNode;
 }
 __name(enableLocateOrCreateElementContainerNodeImpl, "enableLocateOrCreateElementContainerNodeImpl");
-function \u0275\u0275getCurrentView() {
+function ɵɵgetCurrentView() {
   return getLView();
 }
-__name(\u0275\u0275getCurrentView, "\u0275\u0275getCurrentView");
-function \u0275\u0275domProperty(propName, value, sanitizer) {
+__name(ɵɵgetCurrentView, "ɵɵgetCurrentView");
+function ɵɵdomProperty(propName, value, sanitizer) {
   const lView = getLView();
   const bindingIndex = nextBindingIndex();
   if (bindingUpdated(lView, bindingIndex, value)) {
@@ -21038,10 +21038,10 @@ function \u0275\u0275domProperty(propName, value, sanitizer) {
     setDomProperty(tNode, lView, propName, value, lView[RENDERER], sanitizer);
     ngDevMode && storePropertyBindingMetadata(tView.data, tNode, propName, bindingIndex);
   }
-  return \u0275\u0275domProperty;
+  return ɵɵdomProperty;
 }
-__name(\u0275\u0275domProperty, "\u0275\u0275domProperty");
-function \u0275\u0275syntheticHostProperty(propName, value, sanitizer) {
+__name(ɵɵdomProperty, "ɵɵdomProperty");
+function ɵɵsyntheticHostProperty(propName, value, sanitizer) {
   const lView = getLView();
   const bindingIndex = nextBindingIndex();
   if (bindingUpdated(lView, bindingIndex, value)) {
@@ -21052,9 +21052,9 @@ function \u0275\u0275syntheticHostProperty(propName, value, sanitizer) {
     setDomProperty(tNode, lView, propName, value, renderer, sanitizer);
     ngDevMode && storePropertyBindingMetadata(tView.data, tNode, propName, bindingIndex);
   }
-  return \u0275\u0275syntheticHostProperty;
+  return ɵɵsyntheticHostProperty;
 }
-__name(\u0275\u0275syntheticHostProperty, "\u0275\u0275syntheticHostProperty");
+__name(ɵɵsyntheticHostProperty, "ɵɵsyntheticHostProperty");
 var u = void 0;
 function plural(val) {
   const i = Math.floor(Math.abs(val)), v = val.toString().replace(/^[^.]*\.?/, "").length;
@@ -21063,7 +21063,7 @@ function plural(val) {
   return 5;
 }
 __name(plural, "plural");
-var localeEn = ["en", [["a", "p"], ["AM", "PM"], u], [["AM", "PM"], u, u], [["S", "M", "T", "W", "T", "F", "S"], ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]], u, [["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"], ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]], u, [["B", "A"], ["BC", "AD"], ["Before Christ", "Anno Domini"]], 0, [6, 0], ["M/d/yy", "MMM d, y", "MMMM d, y", "EEEE, MMMM d, y"], ["h:mm a", "h:mm:ss a", "h:mm:ss a z", "h:mm:ss a zzzz"], ["{1}, {0}", u, "{1} 'at' {0}", u], [".", ",", ";", "%", "+", "-", "E", "\xD7", "\u2030", "\u221E", "NaN", ":"], ["#,##0.###", "#,##0%", "\xA4#,##0.00", "#E0"], "USD", "$", "US Dollar", {}, "ltr", plural];
+var localeEn = ["en", [["a", "p"], ["AM", "PM"], u], [["AM", "PM"], u, u], [["S", "M", "T", "W", "T", "F", "S"], ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]], u, [["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"], ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]], u, [["B", "A"], ["BC", "AD"], ["Before Christ", "Anno Domini"]], 0, [6, 0], ["M/d/yy", "MMM d, y", "MMMM d, y", "EEEE, MMMM d, y"], ["h:mm a", "h:mm:ss a", "h:mm:ss a z", "h:mm:ss a zzzz"], ["{1}, {0}", u, "{1} 'at' {0}", u], [".", ",", ";", "%", "+", "-", "E", "\xD7", "‰", "∞", "NaN", ":"], ["#,##0.###", "#,##0%", "\xA4#,##0.00", "#E0"], "USD", "$", "US Dollar", {}, "ltr", plural];
 var LOCALE_DATA = {};
 function findLocaleData(locale) {
   const normalizedLocale = normalizeLocale(locale);
@@ -21587,10 +21587,10 @@ var BINDING_REGEXP = /�(\d+):?\d*�/gi;
 var ICU_REGEXP = /({\s*�\d+:?\d*�\s*,\s*\S{6}\s*,[\s\S]*})/gi;
 var NESTED_ICU = /�(\d+)�/;
 var ICU_BLOCK_REGEXP = /^\s*(�\d+:?\d*�)\s*,\s*(select|plural)\s*,/;
-var MARKER = `\uFFFD`;
+var MARKER = `�`;
 var SUBTEMPLATE_REGEXP = /�\/?\*(\d+:\d+)�/gi;
 var PH_REGEXP = /�(\/?[#*]\d+):?\d*�/gi;
-var NGSP_UNICODE_REGEXP = /\uE500/g;
+var NGSP_UNICODE_REGEXP = //g;
 function replaceNgsp(value) {
   return value.replace(NGSP_UNICODE_REGEXP, " ");
 }
@@ -21837,7 +21837,7 @@ function icuStart(ast, tView, lView, updateOpCodes, parentIdx, icuExpression, an
       const value = valueArr[j];
       if (typeof value !== "string") {
         const icuIndex = nestedIcus.push(value) - 1;
-        valueArr[j] = `<!--\uFFFD${icuIndex}\uFFFD-->`;
+        valueArr[j] = `<!--�${icuIndex}�-->`;
       }
     }
     const caseAst = [];
@@ -22128,7 +22128,7 @@ function i18nPostprocess(message, replacements = {}) {
   return result;
 }
 __name(i18nPostprocess, "i18nPostprocess");
-function \u0275\u0275i18nStart(index, messageIndex, subTemplateIndex = -1) {
+function ɵɵi18nStart(index, messageIndex, subTemplateIndex = -1) {
   const tView = getTView();
   const lView = getLView();
   const adjustedIndex = HEADER_OFFSET + index;
@@ -22152,65 +22152,65 @@ function \u0275\u0275i18nStart(index, messageIndex, subTemplateIndex = -1) {
   applyCreateOpCodes(lView, tI18n.create, parentRNode, insertInFrontOf);
   setInI18nBlock(true);
 }
-__name(\u0275\u0275i18nStart, "\u0275\u0275i18nStart");
-function \u0275\u0275i18nEnd() {
+__name(ɵɵi18nStart, "ɵɵi18nStart");
+function ɵɵi18nEnd() {
   setInI18nBlock(false);
 }
-__name(\u0275\u0275i18nEnd, "\u0275\u0275i18nEnd");
-function \u0275\u0275i18n(index, messageIndex, subTemplateIndex) {
-  \u0275\u0275i18nStart(index, messageIndex, subTemplateIndex);
-  \u0275\u0275i18nEnd();
+__name(ɵɵi18nEnd, "ɵɵi18nEnd");
+function ɵɵi18n(index, messageIndex, subTemplateIndex) {
+  ɵɵi18nStart(index, messageIndex, subTemplateIndex);
+  ɵɵi18nEnd();
 }
-__name(\u0275\u0275i18n, "\u0275\u0275i18n");
-function \u0275\u0275i18nAttributes(index, attrsIndex) {
+__name(ɵɵi18n, "ɵɵi18n");
+function ɵɵi18nAttributes(index, attrsIndex) {
   const tView = getTView();
   ngDevMode && assertDefined(tView, `tView should be defined`);
   const attrs = getConstant(tView.consts, attrsIndex);
   i18nAttributesFirstPass(tView, index + HEADER_OFFSET, attrs);
 }
-__name(\u0275\u0275i18nAttributes, "\u0275\u0275i18nAttributes");
-function \u0275\u0275i18nExp(value) {
+__name(ɵɵi18nAttributes, "ɵɵi18nAttributes");
+function ɵɵi18nExp(value) {
   const lView = getLView();
   setMaskBit(bindingUpdated(lView, nextBindingIndex(), value));
-  return \u0275\u0275i18nExp;
+  return ɵɵi18nExp;
 }
-__name(\u0275\u0275i18nExp, "\u0275\u0275i18nExp");
-function \u0275\u0275i18nApply(index) {
+__name(ɵɵi18nExp, "ɵɵi18nExp");
+function ɵɵi18nApply(index) {
   applyI18n(getTView(), getLView(), index + HEADER_OFFSET);
 }
-__name(\u0275\u0275i18nApply, "\u0275\u0275i18nApply");
-function \u0275\u0275i18nPostprocess(message, replacements = {}) {
+__name(ɵɵi18nApply, "ɵɵi18nApply");
+function ɵɵi18nPostprocess(message, replacements = {}) {
   return i18nPostprocess(message, replacements);
 }
-__name(\u0275\u0275i18nPostprocess, "\u0275\u0275i18nPostprocess");
-function \u0275\u0275listener(eventName, listenerFn, eventTargetResolver) {
+__name(ɵɵi18nPostprocess, "ɵɵi18nPostprocess");
+function ɵɵlistener(eventName, listenerFn, eventTargetResolver) {
   const lView = getLView();
   const tView = getTView();
   const tNode = getCurrentTNode();
   listenerInternal(tView, lView, lView[RENDERER], tNode, eventName, listenerFn, eventTargetResolver);
-  return \u0275\u0275listener;
+  return ɵɵlistener;
 }
-__name(\u0275\u0275listener, "\u0275\u0275listener");
-function \u0275\u0275syntheticHostListener(eventName, listenerFn) {
+__name(ɵɵlistener, "ɵɵlistener");
+function ɵɵsyntheticHostListener(eventName, listenerFn) {
   const tNode = getCurrentTNode();
   const lView = getLView();
   const tView = getTView();
   const currentDef = getCurrentDirectiveDef(tView.data);
   const renderer = loadComponentRenderer(currentDef, tNode, lView);
   listenerInternal(tView, lView, renderer, tNode, eventName, listenerFn);
-  return \u0275\u0275syntheticHostListener;
+  return ɵɵsyntheticHostListener;
 }
-__name(\u0275\u0275syntheticHostListener, "\u0275\u0275syntheticHostListener");
-function \u0275\u0275domListener(eventName, listenerFn, eventTargetResolver) {
+__name(ɵɵsyntheticHostListener, "ɵɵsyntheticHostListener");
+function ɵɵdomListener(eventName, listenerFn, eventTargetResolver) {
   const lView = getLView();
   const tView = getTView();
   const tNode = getCurrentTNode();
   if (tNode.type & 3 || eventTargetResolver) {
     listenToDomEvent(tNode, tView, lView, eventTargetResolver, lView[RENDERER], eventName, listenerFn, wrapListener(tNode, lView, listenerFn));
   }
-  return \u0275\u0275domListener;
+  return ɵɵdomListener;
 }
-__name(\u0275\u0275domListener, "\u0275\u0275domListener");
+__name(ɵɵdomListener, "ɵɵdomListener");
 function listenerInternal(tView, lView, renderer, tNode, eventName, listenerFn, eventTargetResolver) {
   ngDevMode && assertTNodeType(
     tNode,
@@ -22246,10 +22246,10 @@ function listenerInternal(tView, lView, renderer, tNode, eventName, listenerFn, 
   }
 }
 __name(listenerInternal, "listenerInternal");
-function \u0275\u0275nextContext(level = 1) {
+function ɵɵnextContext(level = 1) {
   return nextContextImpl(level);
 }
-__name(\u0275\u0275nextContext, "\u0275\u0275nextContext");
+__name(ɵɵnextContext, "ɵɵnextContext");
 function matchingProjectionSlotIndex(tNode, projectionSlots) {
   let wildcardNgContentIndex = null;
   const ngProjectAsAttrVal = getProjectAsAttrValue(tNode);
@@ -22271,7 +22271,7 @@ function matchingProjectionSlotIndex(tNode, projectionSlots) {
   return wildcardNgContentIndex;
 }
 __name(matchingProjectionSlotIndex, "matchingProjectionSlotIndex");
-function \u0275\u0275projectionDef(projectionSlots) {
+function ɵɵprojectionDef(projectionSlots) {
   const componentNode = getLView()[DECLARATION_COMPONENT_VIEW][T_HOST];
   if (!componentNode.projection) {
     const numProjectionSlots = projectionSlots ? projectionSlots.length : 1;
@@ -22294,8 +22294,8 @@ function \u0275\u0275projectionDef(projectionSlots) {
     }
   }
 }
-__name(\u0275\u0275projectionDef, "\u0275\u0275projectionDef");
-function \u0275\u0275projection(nodeIndex, selectorIndex = 0, attrs, fallbackTemplateFn, fallbackDecls, fallbackVars) {
+__name(ɵɵprojectionDef, "ɵɵprojectionDef");
+function ɵɵprojection(nodeIndex, selectorIndex = 0, attrs, fallbackTemplateFn, fallbackDecls, fallbackVars) {
   const lView = getLView();
   const tView = getTView();
   const fallbackIndex = fallbackTemplateFn ? nodeIndex + 1 : null;
@@ -22317,7 +22317,7 @@ function \u0275\u0275projection(nodeIndex, selectorIndex = 0, attrs, fallbackTem
     applyProjection(tView, lView, tProjectionNode);
   }
 }
-__name(\u0275\u0275projection, "\u0275\u0275projection");
+__name(ɵɵprojection, "ɵɵprojection");
 function insertFallbackContent(lView, tView, fallbackIndex) {
   const adjustedIndex = HEADER_OFFSET + fallbackIndex;
   const fallbackTNode = tView.data[adjustedIndex];
@@ -22331,15 +22331,15 @@ function insertFallbackContent(lView, tView, fallbackIndex) {
   addLViewToLContainer(fallbackLContainer, fallbackLView, 0, shouldAddViewToDom(fallbackTNode, dehydratedView));
 }
 __name(insertFallbackContent, "insertFallbackContent");
-function \u0275\u0275contentQuery(directiveIndex, predicate, flags, read) {
+function ɵɵcontentQuery(directiveIndex, predicate, flags, read) {
   createContentQuery(directiveIndex, predicate, flags, read);
 }
-__name(\u0275\u0275contentQuery, "\u0275\u0275contentQuery");
-function \u0275\u0275viewQuery(predicate, flags, read) {
+__name(ɵɵcontentQuery, "ɵɵcontentQuery");
+function ɵɵviewQuery(predicate, flags, read) {
   createViewQuery(predicate, flags, read);
 }
-__name(\u0275\u0275viewQuery, "\u0275\u0275viewQuery");
-function \u0275\u0275queryRefresh(queryList) {
+__name(ɵɵviewQuery, "ɵɵviewQuery");
+function ɵɵqueryRefresh(queryList) {
   const lView = getLView();
   const tView = getTView();
   const queryIndex = getCurrentQueryIndex();
@@ -22357,28 +22357,28 @@ function \u0275\u0275queryRefresh(queryList) {
   }
   return false;
 }
-__name(\u0275\u0275queryRefresh, "\u0275\u0275queryRefresh");
-function \u0275\u0275loadQuery() {
+__name(ɵɵqueryRefresh, "ɵɵqueryRefresh");
+function ɵɵloadQuery() {
   return loadQueryInternal(getLView(), getCurrentQueryIndex());
 }
-__name(\u0275\u0275loadQuery, "\u0275\u0275loadQuery");
-function \u0275\u0275contentQuerySignal(directiveIndex, target, predicate, flags, read) {
+__name(ɵɵloadQuery, "ɵɵloadQuery");
+function ɵɵcontentQuerySignal(directiveIndex, target, predicate, flags, read) {
   bindQueryToSignal(target, createContentQuery(directiveIndex, predicate, flags, read));
 }
-__name(\u0275\u0275contentQuerySignal, "\u0275\u0275contentQuerySignal");
-function \u0275\u0275viewQuerySignal(target, predicate, flags, read) {
+__name(ɵɵcontentQuerySignal, "ɵɵcontentQuerySignal");
+function ɵɵviewQuerySignal(target, predicate, flags, read) {
   bindQueryToSignal(target, createViewQuery(predicate, flags, read));
 }
-__name(\u0275\u0275viewQuerySignal, "\u0275\u0275viewQuerySignal");
-function \u0275\u0275queryAdvance(indexOffset = 1) {
+__name(ɵɵviewQuerySignal, "ɵɵviewQuerySignal");
+function ɵɵqueryAdvance(indexOffset = 1) {
   setCurrentQueryIndex(getCurrentQueryIndex() + indexOffset);
 }
-__name(\u0275\u0275queryAdvance, "\u0275\u0275queryAdvance");
-function \u0275\u0275reference(index) {
+__name(ɵɵqueryAdvance, "ɵɵqueryAdvance");
+function ɵɵreference(index) {
   const contextLView = getContextLView();
   return load(contextLView, HEADER_OFFSET + index);
 }
-__name(\u0275\u0275reference, "\u0275\u0275reference");
+__name(ɵɵreference, "ɵɵreference");
 function toTStylingRange(prev, next) {
   ngDevMode && assertNumberInRange(
     prev,
@@ -22693,30 +22693,30 @@ function malformedStyleError(text, expecting, index) {
   throw throwError2(`Malformed style at location ${index} in string '` + text.substring(0, index) + "[>>" + text.substring(index, index + 1) + "<<]" + text.slice(index + 1) + `'. Expecting '${expecting}'.`);
 }
 __name(malformedStyleError, "malformedStyleError");
-function \u0275\u0275styleProp(prop, value, suffix) {
+function ɵɵstyleProp(prop, value, suffix) {
   checkStylingProperty(prop, value, suffix, false);
-  return \u0275\u0275styleProp;
+  return ɵɵstyleProp;
 }
-__name(\u0275\u0275styleProp, "\u0275\u0275styleProp");
-function \u0275\u0275classProp(className, value) {
+__name(ɵɵstyleProp, "ɵɵstyleProp");
+function ɵɵclassProp(className, value) {
   checkStylingProperty(className, value, null, true);
-  return \u0275\u0275classProp;
+  return ɵɵclassProp;
 }
-__name(\u0275\u0275classProp, "\u0275\u0275classProp");
-function \u0275\u0275styleMap(styles) {
+__name(ɵɵclassProp, "ɵɵclassProp");
+function ɵɵstyleMap(styles) {
   checkStylingMap(styleKeyValueArraySet, styleStringParser, styles, false);
 }
-__name(\u0275\u0275styleMap, "\u0275\u0275styleMap");
+__name(ɵɵstyleMap, "ɵɵstyleMap");
 function styleStringParser(keyValueArray, text) {
   for (let i = parseStyle(text); i >= 0; i = parseStyleNext(text, i)) {
     styleKeyValueArraySet(keyValueArray, getLastParsedKey(text), getLastParsedValue(text));
   }
 }
 __name(styleStringParser, "styleStringParser");
-function \u0275\u0275classMap(classes) {
+function ɵɵclassMap(classes) {
   checkStylingMap(classKeyValueArraySet, classStringParser, classes, true);
 }
-__name(\u0275\u0275classMap, "\u0275\u0275classMap");
+__name(ɵɵclassMap, "ɵɵclassMap");
 function classStringParser(keyValueArray, text) {
   for (let i = parseClassName(text); i >= 0; i = parseClassNameNext(text, i)) {
     keyValueArraySet(keyValueArray, getLastParsedKey(text), true);
@@ -23026,7 +23026,7 @@ function hasStylingInputShadow(tNode, isClassBased) {
   return (tNode.flags & (isClassBased ? 8 : 16)) !== 0;
 }
 __name(hasStylingInputShadow, "hasStylingInputShadow");
-function \u0275\u0275text(index, value = "") {
+function ɵɵtext(index, value = "") {
   const lView = getLView();
   const tView = getTView();
   const adjustedIndex = index + HEADER_OFFSET;
@@ -23039,7 +23039,7 @@ function \u0275\u0275text(index, value = "") {
   }
   setCurrentTNode(tNode, false);
 }
-__name(\u0275\u0275text, "\u0275\u0275text");
+__name(ɵɵtext, "ɵɵtext");
 var _locateOrCreateTextNode = /* @__PURE__ */ __name((tView, lView, tNode, value, index) => {
   lastNodeWasCreated(true);
   return createTextNode(lView[RENDERER], value);
@@ -23137,92 +23137,92 @@ function interpolation8(lView, prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v
   return different ? prefix + renderStringify(v0) + i0 + renderStringify(v1) + i1 + renderStringify(v2) + i2 + renderStringify(v3) + i3 + renderStringify(v4) + i4 + renderStringify(v5) + i5 + renderStringify(v6) + i6 + renderStringify(v7) + suffix : NO_CHANGE;
 }
 __name(interpolation8, "interpolation8");
-function \u0275\u0275textInterpolate(v0) {
-  \u0275\u0275textInterpolate1("", v0);
-  return \u0275\u0275textInterpolate;
+function ɵɵtextInterpolate(v0) {
+  ɵɵtextInterpolate1("", v0);
+  return ɵɵtextInterpolate;
 }
-__name(\u0275\u0275textInterpolate, "\u0275\u0275textInterpolate");
-function \u0275\u0275textInterpolate1(prefix, v0, suffix) {
+__name(ɵɵtextInterpolate, "ɵɵtextInterpolate");
+function ɵɵtextInterpolate1(prefix, v0, suffix) {
   const lView = getLView();
   const interpolated = interpolation1(lView, prefix, v0, suffix);
   if (interpolated !== NO_CHANGE) {
     textBindingInternal(lView, getSelectedIndex(), interpolated);
   }
-  return \u0275\u0275textInterpolate1;
+  return ɵɵtextInterpolate1;
 }
-__name(\u0275\u0275textInterpolate1, "\u0275\u0275textInterpolate1");
-function \u0275\u0275textInterpolate2(prefix, v0, i0, v1, suffix) {
+__name(ɵɵtextInterpolate1, "ɵɵtextInterpolate1");
+function ɵɵtextInterpolate2(prefix, v0, i0, v1, suffix) {
   const lView = getLView();
   const interpolated = interpolation2(lView, prefix, v0, i0, v1, suffix);
   if (interpolated !== NO_CHANGE) {
     textBindingInternal(lView, getSelectedIndex(), interpolated);
   }
-  return \u0275\u0275textInterpolate2;
+  return ɵɵtextInterpolate2;
 }
-__name(\u0275\u0275textInterpolate2, "\u0275\u0275textInterpolate2");
-function \u0275\u0275textInterpolate3(prefix, v0, i0, v1, i1, v2, suffix) {
+__name(ɵɵtextInterpolate2, "ɵɵtextInterpolate2");
+function ɵɵtextInterpolate3(prefix, v0, i0, v1, i1, v2, suffix) {
   const lView = getLView();
   const interpolated = interpolation3(lView, prefix, v0, i0, v1, i1, v2, suffix);
   if (interpolated !== NO_CHANGE) {
     textBindingInternal(lView, getSelectedIndex(), interpolated);
   }
-  return \u0275\u0275textInterpolate3;
+  return ɵɵtextInterpolate3;
 }
-__name(\u0275\u0275textInterpolate3, "\u0275\u0275textInterpolate3");
-function \u0275\u0275textInterpolate4(prefix, v0, i0, v1, i1, v2, i2, v3, suffix) {
+__name(ɵɵtextInterpolate3, "ɵɵtextInterpolate3");
+function ɵɵtextInterpolate4(prefix, v0, i0, v1, i1, v2, i2, v3, suffix) {
   const lView = getLView();
   const interpolated = interpolation4(lView, prefix, v0, i0, v1, i1, v2, i2, v3, suffix);
   if (interpolated !== NO_CHANGE) {
     textBindingInternal(lView, getSelectedIndex(), interpolated);
   }
-  return \u0275\u0275textInterpolate4;
+  return ɵɵtextInterpolate4;
 }
-__name(\u0275\u0275textInterpolate4, "\u0275\u0275textInterpolate4");
-function \u0275\u0275textInterpolate5(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, suffix) {
+__name(ɵɵtextInterpolate4, "ɵɵtextInterpolate4");
+function ɵɵtextInterpolate5(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, suffix) {
   const lView = getLView();
   const interpolated = interpolation5(lView, prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, suffix);
   if (interpolated !== NO_CHANGE) {
     textBindingInternal(lView, getSelectedIndex(), interpolated);
   }
-  return \u0275\u0275textInterpolate5;
+  return ɵɵtextInterpolate5;
 }
-__name(\u0275\u0275textInterpolate5, "\u0275\u0275textInterpolate5");
-function \u0275\u0275textInterpolate6(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, suffix) {
+__name(ɵɵtextInterpolate5, "ɵɵtextInterpolate5");
+function ɵɵtextInterpolate6(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, suffix) {
   const lView = getLView();
   const interpolated = interpolation6(lView, prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, suffix);
   if (interpolated !== NO_CHANGE) {
     textBindingInternal(lView, getSelectedIndex(), interpolated);
   }
-  return \u0275\u0275textInterpolate6;
+  return ɵɵtextInterpolate6;
 }
-__name(\u0275\u0275textInterpolate6, "\u0275\u0275textInterpolate6");
-function \u0275\u0275textInterpolate7(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, i5, v6, suffix) {
+__name(ɵɵtextInterpolate6, "ɵɵtextInterpolate6");
+function ɵɵtextInterpolate7(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, i5, v6, suffix) {
   const lView = getLView();
   const interpolated = interpolation7(lView, prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, i5, v6, suffix);
   if (interpolated !== NO_CHANGE) {
     textBindingInternal(lView, getSelectedIndex(), interpolated);
   }
-  return \u0275\u0275textInterpolate7;
+  return ɵɵtextInterpolate7;
 }
-__name(\u0275\u0275textInterpolate7, "\u0275\u0275textInterpolate7");
-function \u0275\u0275textInterpolate8(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, i5, v6, i6, v7, suffix) {
+__name(ɵɵtextInterpolate7, "ɵɵtextInterpolate7");
+function ɵɵtextInterpolate8(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, i5, v6, i6, v7, suffix) {
   const lView = getLView();
   const interpolated = interpolation8(lView, prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, i5, v6, i6, v7, suffix);
   if (interpolated !== NO_CHANGE) {
     textBindingInternal(lView, getSelectedIndex(), interpolated);
   }
-  return \u0275\u0275textInterpolate8;
+  return ɵɵtextInterpolate8;
 }
-__name(\u0275\u0275textInterpolate8, "\u0275\u0275textInterpolate8");
-function \u0275\u0275textInterpolateV(values) {
+__name(ɵɵtextInterpolate8, "ɵɵtextInterpolate8");
+function ɵɵtextInterpolateV(values) {
   const lView = getLView();
   const interpolated = interpolationV(lView, values);
   if (interpolated !== NO_CHANGE) {
     textBindingInternal(lView, getSelectedIndex(), interpolated);
   }
-  return \u0275\u0275textInterpolateV;
+  return ɵɵtextInterpolateV;
 }
-__name(\u0275\u0275textInterpolateV, "\u0275\u0275textInterpolateV");
+__name(ɵɵtextInterpolateV, "ɵɵtextInterpolateV");
 function textBindingInternal(lView, index, value) {
   ngDevMode && assertString(value, "Value should be a string");
   ngDevMode && assertNotSame(value, NO_CHANGE, "value should not be NO_CHANGE");
@@ -23232,7 +23232,7 @@ function textBindingInternal(lView, index, value) {
   updateTextNode(lView[RENDERER], element, value);
 }
 __name(textBindingInternal, "textBindingInternal");
-function \u0275\u0275twoWayProperty(propName, value, sanitizer) {
+function ɵɵtwoWayProperty(propName, value, sanitizer) {
   if (isWritableSignal(value)) {
     value = value();
   }
@@ -23244,35 +23244,35 @@ function \u0275\u0275twoWayProperty(propName, value, sanitizer) {
     setPropertyAndInputs(tNode, lView, propName, value, lView[RENDERER], sanitizer);
     ngDevMode && storePropertyBindingMetadata(tView.data, tNode, propName, bindingIndex);
   }
-  return \u0275\u0275twoWayProperty;
+  return ɵɵtwoWayProperty;
 }
-__name(\u0275\u0275twoWayProperty, "\u0275\u0275twoWayProperty");
-function \u0275\u0275twoWayBindingSet(target, value) {
+__name(ɵɵtwoWayProperty, "ɵɵtwoWayProperty");
+function ɵɵtwoWayBindingSet(target, value) {
   const canWrite = isWritableSignal(target);
   canWrite && target.set(value);
   return canWrite;
 }
-__name(\u0275\u0275twoWayBindingSet, "\u0275\u0275twoWayBindingSet");
-function \u0275\u0275twoWayListener(eventName, listenerFn) {
+__name(ɵɵtwoWayBindingSet, "ɵɵtwoWayBindingSet");
+function ɵɵtwoWayListener(eventName, listenerFn) {
   const lView = getLView();
   const tView = getTView();
   const tNode = getCurrentTNode();
   listenerInternal(tView, lView, lView[RENDERER], tNode, eventName, listenerFn);
-  return \u0275\u0275twoWayListener;
+  return ɵɵtwoWayListener;
 }
-__name(\u0275\u0275twoWayListener, "\u0275\u0275twoWayListener");
+__name(ɵɵtwoWayListener, "ɵɵtwoWayListener");
 var UNINITIALIZED_LET = {};
-function \u0275\u0275declareLet(index) {
+function ɵɵdeclareLet(index) {
   const tView = getTView();
   const lView = getLView();
   const adjustedIndex = index + HEADER_OFFSET;
   const tNode = getOrCreateTNode(tView, adjustedIndex, 128, null, null);
   setCurrentTNode(tNode, false);
   store(tView, lView, adjustedIndex, UNINITIALIZED_LET);
-  return \u0275\u0275declareLet;
+  return ɵɵdeclareLet;
 }
-__name(\u0275\u0275declareLet, "\u0275\u0275declareLet");
-function \u0275\u0275storeLet(value) {
+__name(ɵɵdeclareLet, "ɵɵdeclareLet");
+function ɵɵstoreLet(value) {
   performanceMarkFeature("NgLet");
   const tView = getTView();
   const lView = getLView();
@@ -23280,8 +23280,8 @@ function \u0275\u0275storeLet(value) {
   store(tView, lView, index, value);
   return value;
 }
-__name(\u0275\u0275storeLet, "\u0275\u0275storeLet");
-function \u0275\u0275readContextLet(index) {
+__name(ɵɵstoreLet, "ɵɵstoreLet");
+function ɵɵreadContextLet(index) {
   const contextLView = getContextLView();
   const value = load(contextLView, HEADER_OFFSET + index);
   if (value === UNINITIALIZED_LET) {
@@ -23289,8 +23289,8 @@ function \u0275\u0275readContextLet(index) {
   }
   return value;
 }
-__name(\u0275\u0275readContextLet, "\u0275\u0275readContextLet");
-function \u0275\u0275attachSourceLocations(templatePath, locations) {
+__name(ɵɵreadContextLet, "ɵɵreadContextLet");
+function ɵɵattachSourceLocations(templatePath, locations) {
   const tView = getTView();
   const lView = getLView();
   const renderer = lView[RENDERER];
@@ -23309,47 +23309,47 @@ function \u0275\u0275attachSourceLocations(templatePath, locations) {
     }
   }
 }
-__name(\u0275\u0275attachSourceLocations, "\u0275\u0275attachSourceLocations");
-function \u0275\u0275interpolate(v0) {
+__name(ɵɵattachSourceLocations, "ɵɵattachSourceLocations");
+function ɵɵinterpolate(v0) {
   return bindingUpdated(getLView(), nextBindingIndex(), v0) ? renderStringify(v0) : NO_CHANGE;
 }
-__name(\u0275\u0275interpolate, "\u0275\u0275interpolate");
-function \u0275\u0275interpolate1(prefix, v0, suffix = "") {
+__name(ɵɵinterpolate, "ɵɵinterpolate");
+function ɵɵinterpolate1(prefix, v0, suffix = "") {
   return interpolation1(getLView(), prefix, v0, suffix);
 }
-__name(\u0275\u0275interpolate1, "\u0275\u0275interpolate1");
-function \u0275\u0275interpolate2(prefix, v0, i0, v1, suffix = "") {
+__name(ɵɵinterpolate1, "ɵɵinterpolate1");
+function ɵɵinterpolate2(prefix, v0, i0, v1, suffix = "") {
   return interpolation2(getLView(), prefix, v0, i0, v1, suffix);
 }
-__name(\u0275\u0275interpolate2, "\u0275\u0275interpolate2");
-function \u0275\u0275interpolate3(prefix, v0, i0, v1, i1, v2, suffix = "") {
+__name(ɵɵinterpolate2, "ɵɵinterpolate2");
+function ɵɵinterpolate3(prefix, v0, i0, v1, i1, v2, suffix = "") {
   return interpolation3(getLView(), prefix, v0, i0, v1, i1, v2, suffix);
 }
-__name(\u0275\u0275interpolate3, "\u0275\u0275interpolate3");
-function \u0275\u0275interpolate4(prefix, v0, i0, v1, i1, v2, i2, v3, suffix = "") {
+__name(ɵɵinterpolate3, "ɵɵinterpolate3");
+function ɵɵinterpolate4(prefix, v0, i0, v1, i1, v2, i2, v3, suffix = "") {
   return interpolation4(getLView(), prefix, v0, i0, v1, i1, v2, i2, v3, suffix);
 }
-__name(\u0275\u0275interpolate4, "\u0275\u0275interpolate4");
-function \u0275\u0275interpolate5(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, suffix = "") {
+__name(ɵɵinterpolate4, "ɵɵinterpolate4");
+function ɵɵinterpolate5(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, suffix = "") {
   return interpolation5(getLView(), prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, suffix);
 }
-__name(\u0275\u0275interpolate5, "\u0275\u0275interpolate5");
-function \u0275\u0275interpolate6(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, suffix = "") {
+__name(ɵɵinterpolate5, "ɵɵinterpolate5");
+function ɵɵinterpolate6(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, suffix = "") {
   return interpolation6(getLView(), prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, suffix);
 }
-__name(\u0275\u0275interpolate6, "\u0275\u0275interpolate6");
-function \u0275\u0275interpolate7(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, i5, v6, suffix = "") {
+__name(ɵɵinterpolate6, "ɵɵinterpolate6");
+function ɵɵinterpolate7(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, i5, v6, suffix = "") {
   return interpolation7(getLView(), prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, i5, v6, suffix);
 }
-__name(\u0275\u0275interpolate7, "\u0275\u0275interpolate7");
-function \u0275\u0275interpolate8(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, i5, v6, i6, v7, suffix = "") {
+__name(ɵɵinterpolate7, "ɵɵinterpolate7");
+function ɵɵinterpolate8(prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, i5, v6, i6, v7, suffix = "") {
   return interpolation8(getLView(), prefix, v0, i0, v1, i1, v2, i2, v3, i3, v4, i4, v5, i5, v6, i6, v7, suffix);
 }
-__name(\u0275\u0275interpolate8, "\u0275\u0275interpolate8");
-function \u0275\u0275interpolateV(values) {
+__name(ɵɵinterpolate8, "ɵɵinterpolate8");
+function ɵɵinterpolateV(values) {
   return interpolationV(getLView(), values);
 }
-__name(\u0275\u0275interpolateV, "\u0275\u0275interpolateV");
+__name(ɵɵinterpolateV, "ɵɵinterpolateV");
 function providersResolver(def, providers, viewProviders) {
   const tView = getTView();
   if (tView.firstCreatePass) {
@@ -23381,7 +23381,7 @@ function resolveProvider(provider, tInjectables, lInjectablesBlueprint, isCompon
     const endIndex = tNode.directiveStart;
     const cptViewProvidersCount = tNode.providerIndexes >> 20;
     if (isTypeProvider(provider) || !provider.multi) {
-      const factory = new NodeInjectorFactory(providerFactory, isViewProvider, \u0275\u0275directiveInject, ngDevMode ? providerName(provider) : null);
+      const factory = new NodeInjectorFactory(providerFactory, isViewProvider, ɵɵdirectiveInject, ngDevMode ? providerName(provider) : null);
       const existingFactoryIndex = indexOf(token, tInjectables, isViewProvider ? beginIndex : beginIndex + cptViewProvidersCount, endIndex);
       if (existingFactoryIndex === -1) {
         diPublicInInjector(getOrCreateNodeInjectorForNode(tNode, lView), tView, token);
@@ -23499,7 +23499,7 @@ function multiResolve(factories, result) {
 }
 __name(multiResolve, "multiResolve");
 function multiFactory(factoryFn, index, isViewProvider, isComponent2, f, provider) {
-  const factory = new NodeInjectorFactory(factoryFn, isViewProvider, \u0275\u0275directiveInject, ngDevMode ? providerName(provider) : null);
+  const factory = new NodeInjectorFactory(factoryFn, isViewProvider, ɵɵdirectiveInject, ngDevMode ? providerName(provider) : null);
   factory.multi = [];
   factory.index = index;
   factory.componentProviders = 0;
@@ -23527,7 +23527,7 @@ function providerName(provider) {
   }
 }
 __name(providerName, "providerName");
-function \u0275\u0275ProvidersFeature(providers, viewProviders = []) {
+function ɵɵProvidersFeature(providers, viewProviders = []) {
   return (definition) => {
     definition.providersResolver = (def, processProvidersFn) => {
       return providersResolver(
@@ -23540,8 +23540,8 @@ function \u0275\u0275ProvidersFeature(providers, viewProviders = []) {
     };
   };
 }
-__name(\u0275\u0275ProvidersFeature, "\u0275\u0275ProvidersFeature");
-function \u0275\u0275ExternalStylesFeature(styleUrls) {
+__name(ɵɵProvidersFeature, "ɵɵProvidersFeature");
+function ɵɵExternalStylesFeature(styleUrls) {
   return (definition) => {
     if (styleUrls.length < 1) {
       return;
@@ -23552,14 +23552,14 @@ function \u0275\u0275ExternalStylesFeature(styleUrls) {
     };
   };
 }
-__name(\u0275\u0275ExternalStylesFeature, "\u0275\u0275ExternalStylesFeature");
-function \u0275\u0275setComponentScope(type, directives, pipes) {
-  const def = type.\u0275cmp;
+__name(ɵɵExternalStylesFeature, "ɵɵExternalStylesFeature");
+function ɵɵsetComponentScope(type, directives, pipes) {
+  const def = type.ɵcmp;
   def.directiveDefs = extractDefListOrFactory(directives, extractDirectiveDef);
   def.pipeDefs = extractDefListOrFactory(pipes, getPipeDef);
 }
-__name(\u0275\u0275setComponentScope, "\u0275\u0275setComponentScope");
-function \u0275\u0275setNgModuleScope(type, scope) {
+__name(ɵɵsetComponentScope, "ɵɵsetComponentScope");
+function ɵɵsetNgModuleScope(type, scope) {
   return noSideEffects(() => {
     const ngModuleDef = getNgModuleDefOrThrow(type);
     ngModuleDef.declarations = convertToTypeArray(scope.declarations || EMPTY_ARRAY);
@@ -23571,7 +23571,7 @@ function \u0275\u0275setNgModuleScope(type, scope) {
     depsTracker.registerNgModule(type, scope);
   });
 }
-__name(\u0275\u0275setNgModuleScope, "\u0275\u0275setNgModuleScope");
+__name(ɵɵsetNgModuleScope, "ɵɵsetNgModuleScope");
 function convertToTypeArray(values) {
   if (typeof values === "function") {
     return values;
@@ -23588,60 +23588,60 @@ function maybeUnwrapModuleWithProviders(value) {
   return isModuleWithProviders(value) ? value.ngModule : value;
 }
 __name(maybeUnwrapModuleWithProviders, "maybeUnwrapModuleWithProviders");
-function \u0275\u0275pureFunction0(slotOffset, pureFn, thisArg) {
+function ɵɵpureFunction0(slotOffset, pureFn, thisArg) {
   const bindingIndex = getBindingRoot() + slotOffset;
   const lView = getLView();
   return lView[bindingIndex] === NO_CHANGE ? updateBinding(lView, bindingIndex, thisArg ? pureFn.call(thisArg) : pureFn()) : getBinding(lView, bindingIndex);
 }
-__name(\u0275\u0275pureFunction0, "\u0275\u0275pureFunction0");
-function \u0275\u0275pureFunction1(slotOffset, pureFn, exp, thisArg) {
+__name(ɵɵpureFunction0, "ɵɵpureFunction0");
+function ɵɵpureFunction1(slotOffset, pureFn, exp, thisArg) {
   return pureFunction1Internal(getLView(), getBindingRoot(), slotOffset, pureFn, exp, thisArg);
 }
-__name(\u0275\u0275pureFunction1, "\u0275\u0275pureFunction1");
-function \u0275\u0275pureFunction2(slotOffset, pureFn, exp1, exp2, thisArg) {
+__name(ɵɵpureFunction1, "ɵɵpureFunction1");
+function ɵɵpureFunction2(slotOffset, pureFn, exp1, exp2, thisArg) {
   return pureFunction2Internal(getLView(), getBindingRoot(), slotOffset, pureFn, exp1, exp2, thisArg);
 }
-__name(\u0275\u0275pureFunction2, "\u0275\u0275pureFunction2");
-function \u0275\u0275pureFunction3(slotOffset, pureFn, exp1, exp2, exp3, thisArg) {
+__name(ɵɵpureFunction2, "ɵɵpureFunction2");
+function ɵɵpureFunction3(slotOffset, pureFn, exp1, exp2, exp3, thisArg) {
   return pureFunction3Internal(getLView(), getBindingRoot(), slotOffset, pureFn, exp1, exp2, exp3, thisArg);
 }
-__name(\u0275\u0275pureFunction3, "\u0275\u0275pureFunction3");
-function \u0275\u0275pureFunction4(slotOffset, pureFn, exp1, exp2, exp3, exp4, thisArg) {
+__name(ɵɵpureFunction3, "ɵɵpureFunction3");
+function ɵɵpureFunction4(slotOffset, pureFn, exp1, exp2, exp3, exp4, thisArg) {
   return pureFunction4Internal(getLView(), getBindingRoot(), slotOffset, pureFn, exp1, exp2, exp3, exp4, thisArg);
 }
-__name(\u0275\u0275pureFunction4, "\u0275\u0275pureFunction4");
-function \u0275\u0275pureFunction5(slotOffset, pureFn, exp1, exp2, exp3, exp4, exp5, thisArg) {
+__name(ɵɵpureFunction4, "ɵɵpureFunction4");
+function ɵɵpureFunction5(slotOffset, pureFn, exp1, exp2, exp3, exp4, exp5, thisArg) {
   const bindingIndex = getBindingRoot() + slotOffset;
   const lView = getLView();
   const different = bindingUpdated4(lView, bindingIndex, exp1, exp2, exp3, exp4);
   return bindingUpdated(lView, bindingIndex + 4, exp5) || different ? updateBinding(lView, bindingIndex + 5, thisArg ? pureFn.call(thisArg, exp1, exp2, exp3, exp4, exp5) : pureFn(exp1, exp2, exp3, exp4, exp5)) : getBinding(lView, bindingIndex + 5);
 }
-__name(\u0275\u0275pureFunction5, "\u0275\u0275pureFunction5");
-function \u0275\u0275pureFunction6(slotOffset, pureFn, exp1, exp2, exp3, exp4, exp5, exp6, thisArg) {
+__name(ɵɵpureFunction5, "ɵɵpureFunction5");
+function ɵɵpureFunction6(slotOffset, pureFn, exp1, exp2, exp3, exp4, exp5, exp6, thisArg) {
   const bindingIndex = getBindingRoot() + slotOffset;
   const lView = getLView();
   const different = bindingUpdated4(lView, bindingIndex, exp1, exp2, exp3, exp4);
   return bindingUpdated2(lView, bindingIndex + 4, exp5, exp6) || different ? updateBinding(lView, bindingIndex + 6, thisArg ? pureFn.call(thisArg, exp1, exp2, exp3, exp4, exp5, exp6) : pureFn(exp1, exp2, exp3, exp4, exp5, exp6)) : getBinding(lView, bindingIndex + 6);
 }
-__name(\u0275\u0275pureFunction6, "\u0275\u0275pureFunction6");
-function \u0275\u0275pureFunction7(slotOffset, pureFn, exp1, exp2, exp3, exp4, exp5, exp6, exp7, thisArg) {
+__name(ɵɵpureFunction6, "ɵɵpureFunction6");
+function ɵɵpureFunction7(slotOffset, pureFn, exp1, exp2, exp3, exp4, exp5, exp6, exp7, thisArg) {
   const bindingIndex = getBindingRoot() + slotOffset;
   const lView = getLView();
   let different = bindingUpdated4(lView, bindingIndex, exp1, exp2, exp3, exp4);
   return bindingUpdated3(lView, bindingIndex + 4, exp5, exp6, exp7) || different ? updateBinding(lView, bindingIndex + 7, thisArg ? pureFn.call(thisArg, exp1, exp2, exp3, exp4, exp5, exp6, exp7) : pureFn(exp1, exp2, exp3, exp4, exp5, exp6, exp7)) : getBinding(lView, bindingIndex + 7);
 }
-__name(\u0275\u0275pureFunction7, "\u0275\u0275pureFunction7");
-function \u0275\u0275pureFunction8(slotOffset, pureFn, exp1, exp2, exp3, exp4, exp5, exp6, exp7, exp8, thisArg) {
+__name(ɵɵpureFunction7, "ɵɵpureFunction7");
+function ɵɵpureFunction8(slotOffset, pureFn, exp1, exp2, exp3, exp4, exp5, exp6, exp7, exp8, thisArg) {
   const bindingIndex = getBindingRoot() + slotOffset;
   const lView = getLView();
   const different = bindingUpdated4(lView, bindingIndex, exp1, exp2, exp3, exp4);
   return bindingUpdated4(lView, bindingIndex + 4, exp5, exp6, exp7, exp8) || different ? updateBinding(lView, bindingIndex + 8, thisArg ? pureFn.call(thisArg, exp1, exp2, exp3, exp4, exp5, exp6, exp7, exp8) : pureFn(exp1, exp2, exp3, exp4, exp5, exp6, exp7, exp8)) : getBinding(lView, bindingIndex + 8);
 }
-__name(\u0275\u0275pureFunction8, "\u0275\u0275pureFunction8");
-function \u0275\u0275pureFunctionV(slotOffset, pureFn, exps, thisArg) {
+__name(ɵɵpureFunction8, "ɵɵpureFunction8");
+function ɵɵpureFunctionV(slotOffset, pureFn, exps, thisArg) {
   return pureFunctionVInternal(getLView(), getBindingRoot(), slotOffset, pureFn, exps, thisArg);
 }
-__name(\u0275\u0275pureFunctionV, "\u0275\u0275pureFunctionV");
+__name(ɵɵpureFunctionV, "ɵɵpureFunctionV");
 function getPureFunctionReturnValue(lView, returnValueIndex) {
   ngDevMode && assertIndexInRange(lView, returnValueIndex);
   const lastReturnValue = lView[returnValueIndex];
@@ -23677,7 +23677,7 @@ function pureFunctionVInternal(lView, bindingRoot, slotOffset, pureFn, exps, thi
   return different ? updateBinding(lView, bindingIndex, pureFn.apply(thisArg, exps)) : getPureFunctionReturnValue(lView, bindingIndex);
 }
 __name(pureFunctionVInternal, "pureFunctionVInternal");
-function \u0275\u0275pipe(index, pipeName) {
+function ɵɵpipe(index, pipeName) {
   const tView = getTView();
   let pipeDef;
   const adjustedIndex = index + HEADER_OFFSET;
@@ -23698,7 +23698,7 @@ function \u0275\u0275pipe(index, pipeName) {
       token: pipeDef.type
     });
   }
-  const previousInjectImplementation = setInjectImplementation(\u0275\u0275directiveInject);
+  const previousInjectImplementation = setInjectImplementation(ɵɵdirectiveInject);
   try {
     const previousIncludeViewProviders = setIncludeViewProviders(false);
     const pipeInstance = pipeFactory();
@@ -23710,7 +23710,7 @@ function \u0275\u0275pipe(index, pipeName) {
     ngDevMode && setInjectorProfilerContext(previousInjectorProfilerContext);
   }
 }
-__name(\u0275\u0275pipe, "\u0275\u0275pipe");
+__name(ɵɵpipe, "ɵɵpipe");
 function getPipeDef2(name, registry) {
   if (registry) {
     if (ngDevMode) {
@@ -23754,50 +23754,50 @@ function getPipeNotFoundErrorMessage(name) {
   return errorMessage;
 }
 __name(getPipeNotFoundErrorMessage, "getPipeNotFoundErrorMessage");
-function \u0275\u0275pipeBind1(index, offset, v1) {
+function ɵɵpipeBind1(index, offset, v1) {
   const adjustedIndex = index + HEADER_OFFSET;
   const lView = getLView();
   const pipeInstance = load(lView, adjustedIndex);
   return isPure(lView, adjustedIndex) ? pureFunction1Internal(lView, getBindingRoot(), offset, pipeInstance.transform, v1, pipeInstance) : pipeInstance.transform(v1);
 }
-__name(\u0275\u0275pipeBind1, "\u0275\u0275pipeBind1");
-function \u0275\u0275pipeBind2(index, slotOffset, v1, v2) {
+__name(ɵɵpipeBind1, "ɵɵpipeBind1");
+function ɵɵpipeBind2(index, slotOffset, v1, v2) {
   const adjustedIndex = index + HEADER_OFFSET;
   const lView = getLView();
   const pipeInstance = load(lView, adjustedIndex);
   return isPure(lView, adjustedIndex) ? pureFunction2Internal(lView, getBindingRoot(), slotOffset, pipeInstance.transform, v1, v2, pipeInstance) : pipeInstance.transform(v1, v2);
 }
-__name(\u0275\u0275pipeBind2, "\u0275\u0275pipeBind2");
-function \u0275\u0275pipeBind3(index, slotOffset, v1, v2, v3) {
+__name(ɵɵpipeBind2, "ɵɵpipeBind2");
+function ɵɵpipeBind3(index, slotOffset, v1, v2, v3) {
   const adjustedIndex = index + HEADER_OFFSET;
   const lView = getLView();
   const pipeInstance = load(lView, adjustedIndex);
   return isPure(lView, adjustedIndex) ? pureFunction3Internal(lView, getBindingRoot(), slotOffset, pipeInstance.transform, v1, v2, v3, pipeInstance) : pipeInstance.transform(v1, v2, v3);
 }
-__name(\u0275\u0275pipeBind3, "\u0275\u0275pipeBind3");
-function \u0275\u0275pipeBind4(index, slotOffset, v1, v2, v3, v4) {
+__name(ɵɵpipeBind3, "ɵɵpipeBind3");
+function ɵɵpipeBind4(index, slotOffset, v1, v2, v3, v4) {
   const adjustedIndex = index + HEADER_OFFSET;
   const lView = getLView();
   const pipeInstance = load(lView, adjustedIndex);
   return isPure(lView, adjustedIndex) ? pureFunction4Internal(lView, getBindingRoot(), slotOffset, pipeInstance.transform, v1, v2, v3, v4, pipeInstance) : pipeInstance.transform(v1, v2, v3, v4);
 }
-__name(\u0275\u0275pipeBind4, "\u0275\u0275pipeBind4");
-function \u0275\u0275pipeBindV(index, slotOffset, values) {
+__name(ɵɵpipeBind4, "ɵɵpipeBind4");
+function ɵɵpipeBindV(index, slotOffset, values) {
   const adjustedIndex = index + HEADER_OFFSET;
   const lView = getLView();
   const pipeInstance = load(lView, adjustedIndex);
   return isPure(lView, adjustedIndex) ? pureFunctionVInternal(lView, getBindingRoot(), slotOffset, pipeInstance.transform, values, pipeInstance) : pipeInstance.transform.apply(pipeInstance, values);
 }
-__name(\u0275\u0275pipeBindV, "\u0275\u0275pipeBindV");
+__name(ɵɵpipeBindV, "ɵɵpipeBindV");
 function isPure(lView, index) {
   return lView[TVIEW].data[index].pure;
 }
 __name(isPure, "isPure");
-function \u0275\u0275templateRefExtractor(tNode, lView) {
+function ɵɵtemplateRefExtractor(tNode, lView) {
   return createTemplateRef(tNode, lView);
 }
-__name(\u0275\u0275templateRefExtractor, "\u0275\u0275templateRefExtractor");
-function \u0275\u0275getComponentDepsFactory(type, rawImports) {
+__name(ɵɵtemplateRefExtractor, "ɵɵtemplateRefExtractor");
+function ɵɵgetComponentDepsFactory(type, rawImports) {
   return () => {
     try {
       return depsTracker.getComponentDependencies(type, rawImports).dependencies;
@@ -23807,20 +23807,20 @@ function \u0275\u0275getComponentDepsFactory(type, rawImports) {
     }
   };
 }
-__name(\u0275\u0275getComponentDepsFactory, "\u0275\u0275getComponentDepsFactory");
-function \u0275setClassDebugInfo(type, debugInfo) {
+__name(ɵɵgetComponentDepsFactory, "ɵɵgetComponentDepsFactory");
+function ɵsetClassDebugInfo(type, debugInfo) {
   const def = getComponentDef(type);
   if (def !== null) {
     def.debugInfo = debugInfo;
   }
 }
-__name(\u0275setClassDebugInfo, "\u0275setClassDebugInfo");
-function \u0275\u0275getReplaceMetadataURL(id, timestamp, base) {
+__name(ɵsetClassDebugInfo, "ɵsetClassDebugInfo");
+function ɵɵgetReplaceMetadataURL(id, timestamp, base) {
   const url = `./@ng/component?c=${id}&t=${encodeURIComponent(timestamp)}`;
   return new URL(url, base).href;
 }
-__name(\u0275\u0275getReplaceMetadataURL, "\u0275\u0275getReplaceMetadataURL");
-function \u0275\u0275replaceMetadata(type, applyMetadata, namespaces, locals, importMeta = null, id = null) {
+__name(ɵɵgetReplaceMetadataURL, "ɵɵgetReplaceMetadataURL");
+function ɵɵreplaceMetadata(type, applyMetadata, namespaces, locals, importMeta = null, id = null) {
   ngDevMode && assertComponentDef(type);
   const currentDef = getComponentDef(type);
   applyMetadata.apply(null, [type, namespaces, ...locals]);
@@ -23835,7 +23835,7 @@ function \u0275\u0275replaceMetadata(type, applyMetadata, namespaces, locals, im
     }
   }
 }
-__name(\u0275\u0275replaceMetadata, "\u0275\u0275replaceMetadata");
+__name(ɵɵreplaceMetadata, "ɵɵreplaceMetadata");
 function mergeWithExistingDefinition(currentDef, newDef) {
   const clone = __spreadValues({}, currentDef);
   const replacement = Object.assign(currentDef, newDef, {
@@ -23979,179 +23979,179 @@ function resetProjectionState(tNode) {
 }
 __name(resetProjectionState, "resetProjectionState");
 var angularCoreEnv = /* @__PURE__ */ (() => ({
-  "\u0275\u0275animateEnter": \u0275\u0275animateEnter,
-  "\u0275\u0275animateEnterListener": \u0275\u0275animateEnterListener,
-  "\u0275\u0275animateLeave": \u0275\u0275animateLeave,
-  "\u0275\u0275animateLeaveListener": \u0275\u0275animateLeaveListener,
-  "\u0275\u0275attribute": \u0275\u0275attribute,
-  "\u0275\u0275defineComponent": \u0275\u0275defineComponent,
-  "\u0275\u0275defineDirective": \u0275\u0275defineDirective,
-  "\u0275\u0275defineInjectable": \u0275\u0275defineInjectable,
-  "\u0275\u0275defineInjector": \u0275\u0275defineInjector,
-  "\u0275\u0275defineNgModule": \u0275\u0275defineNgModule,
-  "\u0275\u0275definePipe": \u0275\u0275definePipe,
-  "\u0275\u0275directiveInject": \u0275\u0275directiveInject,
-  "\u0275\u0275getInheritedFactory": \u0275\u0275getInheritedFactory,
-  "\u0275\u0275inject": \u0275\u0275inject,
-  "\u0275\u0275injectAttribute": \u0275\u0275injectAttribute,
-  "\u0275\u0275invalidFactory": \u0275\u0275invalidFactory,
-  "\u0275\u0275invalidFactoryDep": \u0275\u0275invalidFactoryDep,
-  "\u0275\u0275templateRefExtractor": \u0275\u0275templateRefExtractor,
-  "\u0275\u0275resetView": \u0275\u0275resetView,
-  "\u0275\u0275HostDirectivesFeature": \u0275\u0275HostDirectivesFeature,
-  "\u0275\u0275NgOnChangesFeature": \u0275\u0275NgOnChangesFeature,
-  "\u0275\u0275ProvidersFeature": \u0275\u0275ProvidersFeature,
-  "\u0275\u0275CopyDefinitionFeature": \u0275\u0275CopyDefinitionFeature,
-  "\u0275\u0275InheritDefinitionFeature": \u0275\u0275InheritDefinitionFeature,
-  "\u0275\u0275ExternalStylesFeature": \u0275\u0275ExternalStylesFeature,
-  "\u0275\u0275nextContext": \u0275\u0275nextContext,
-  "\u0275\u0275namespaceHTML": \u0275\u0275namespaceHTML,
-  "\u0275\u0275namespaceMathML": \u0275\u0275namespaceMathML,
-  "\u0275\u0275namespaceSVG": \u0275\u0275namespaceSVG,
-  "\u0275\u0275enableBindings": \u0275\u0275enableBindings,
-  "\u0275\u0275disableBindings": \u0275\u0275disableBindings,
-  "\u0275\u0275elementStart": \u0275\u0275elementStart,
-  "\u0275\u0275elementEnd": \u0275\u0275elementEnd,
-  "\u0275\u0275element": \u0275\u0275element,
-  "\u0275\u0275elementContainerStart": \u0275\u0275elementContainerStart,
-  "\u0275\u0275elementContainerEnd": \u0275\u0275elementContainerEnd,
-  "\u0275\u0275domElement": \u0275\u0275domElement,
-  "\u0275\u0275domElementStart": \u0275\u0275domElementStart,
-  "\u0275\u0275domElementEnd": \u0275\u0275domElementEnd,
-  "\u0275\u0275domElementContainer": \u0275\u0275domElementContainer,
-  "\u0275\u0275domElementContainerStart": \u0275\u0275domElementContainerStart,
-  "\u0275\u0275domElementContainerEnd": \u0275\u0275domElementContainerEnd,
-  "\u0275\u0275domTemplate": \u0275\u0275domTemplate,
-  "\u0275\u0275domListener": \u0275\u0275domListener,
-  "\u0275\u0275elementContainer": \u0275\u0275elementContainer,
-  "\u0275\u0275pureFunction0": \u0275\u0275pureFunction0,
-  "\u0275\u0275pureFunction1": \u0275\u0275pureFunction1,
-  "\u0275\u0275pureFunction2": \u0275\u0275pureFunction2,
-  "\u0275\u0275pureFunction3": \u0275\u0275pureFunction3,
-  "\u0275\u0275pureFunction4": \u0275\u0275pureFunction4,
-  "\u0275\u0275pureFunction5": \u0275\u0275pureFunction5,
-  "\u0275\u0275pureFunction6": \u0275\u0275pureFunction6,
-  "\u0275\u0275pureFunction7": \u0275\u0275pureFunction7,
-  "\u0275\u0275pureFunction8": \u0275\u0275pureFunction8,
-  "\u0275\u0275pureFunctionV": \u0275\u0275pureFunctionV,
-  "\u0275\u0275getCurrentView": \u0275\u0275getCurrentView,
-  "\u0275\u0275restoreView": \u0275\u0275restoreView,
-  "\u0275\u0275listener": \u0275\u0275listener,
-  "\u0275\u0275projection": \u0275\u0275projection,
-  "\u0275\u0275syntheticHostProperty": \u0275\u0275syntheticHostProperty,
-  "\u0275\u0275syntheticHostListener": \u0275\u0275syntheticHostListener,
-  "\u0275\u0275pipeBind1": \u0275\u0275pipeBind1,
-  "\u0275\u0275pipeBind2": \u0275\u0275pipeBind2,
-  "\u0275\u0275pipeBind3": \u0275\u0275pipeBind3,
-  "\u0275\u0275pipeBind4": \u0275\u0275pipeBind4,
-  "\u0275\u0275pipeBindV": \u0275\u0275pipeBindV,
-  "\u0275\u0275projectionDef": \u0275\u0275projectionDef,
-  "\u0275\u0275domProperty": \u0275\u0275domProperty,
-  "\u0275\u0275ariaProperty": \u0275\u0275ariaProperty,
-  "\u0275\u0275property": \u0275\u0275property,
-  "\u0275\u0275pipe": \u0275\u0275pipe,
-  "\u0275\u0275queryRefresh": \u0275\u0275queryRefresh,
-  "\u0275\u0275queryAdvance": \u0275\u0275queryAdvance,
-  "\u0275\u0275viewQuery": \u0275\u0275viewQuery,
-  "\u0275\u0275viewQuerySignal": \u0275\u0275viewQuerySignal,
-  "\u0275\u0275loadQuery": \u0275\u0275loadQuery,
-  "\u0275\u0275contentQuery": \u0275\u0275contentQuery,
-  "\u0275\u0275contentQuerySignal": \u0275\u0275contentQuerySignal,
-  "\u0275\u0275reference": \u0275\u0275reference,
-  "\u0275\u0275classMap": \u0275\u0275classMap,
-  "\u0275\u0275styleMap": \u0275\u0275styleMap,
-  "\u0275\u0275styleProp": \u0275\u0275styleProp,
-  "\u0275\u0275classProp": \u0275\u0275classProp,
-  "\u0275\u0275advance": \u0275\u0275advance,
-  "\u0275\u0275template": \u0275\u0275template,
-  "\u0275\u0275conditional": \u0275\u0275conditional,
-  "\u0275\u0275conditionalCreate": \u0275\u0275conditionalCreate,
-  "\u0275\u0275conditionalBranchCreate": \u0275\u0275conditionalBranchCreate,
-  "\u0275\u0275defer": \u0275\u0275defer,
-  "\u0275\u0275deferWhen": \u0275\u0275deferWhen,
-  "\u0275\u0275deferOnIdle": \u0275\u0275deferOnIdle,
-  "\u0275\u0275deferOnImmediate": \u0275\u0275deferOnImmediate,
-  "\u0275\u0275deferOnTimer": \u0275\u0275deferOnTimer,
-  "\u0275\u0275deferOnHover": \u0275\u0275deferOnHover,
-  "\u0275\u0275deferOnInteraction": \u0275\u0275deferOnInteraction,
-  "\u0275\u0275deferOnViewport": \u0275\u0275deferOnViewport,
-  "\u0275\u0275deferPrefetchWhen": \u0275\u0275deferPrefetchWhen,
-  "\u0275\u0275deferPrefetchOnIdle": \u0275\u0275deferPrefetchOnIdle,
-  "\u0275\u0275deferPrefetchOnImmediate": \u0275\u0275deferPrefetchOnImmediate,
-  "\u0275\u0275deferPrefetchOnTimer": \u0275\u0275deferPrefetchOnTimer,
-  "\u0275\u0275deferPrefetchOnHover": \u0275\u0275deferPrefetchOnHover,
-  "\u0275\u0275deferPrefetchOnInteraction": \u0275\u0275deferPrefetchOnInteraction,
-  "\u0275\u0275deferPrefetchOnViewport": \u0275\u0275deferPrefetchOnViewport,
-  "\u0275\u0275deferHydrateWhen": \u0275\u0275deferHydrateWhen,
-  "\u0275\u0275deferHydrateNever": \u0275\u0275deferHydrateNever,
-  "\u0275\u0275deferHydrateOnIdle": \u0275\u0275deferHydrateOnIdle,
-  "\u0275\u0275deferHydrateOnImmediate": \u0275\u0275deferHydrateOnImmediate,
-  "\u0275\u0275deferHydrateOnTimer": \u0275\u0275deferHydrateOnTimer,
-  "\u0275\u0275deferHydrateOnHover": \u0275\u0275deferHydrateOnHover,
-  "\u0275\u0275deferHydrateOnInteraction": \u0275\u0275deferHydrateOnInteraction,
-  "\u0275\u0275deferHydrateOnViewport": \u0275\u0275deferHydrateOnViewport,
-  "\u0275\u0275deferEnableTimerScheduling": \u0275\u0275deferEnableTimerScheduling,
-  "\u0275\u0275repeater": \u0275\u0275repeater,
-  "\u0275\u0275repeaterCreate": \u0275\u0275repeaterCreate,
-  "\u0275\u0275repeaterTrackByIndex": \u0275\u0275repeaterTrackByIndex,
-  "\u0275\u0275repeaterTrackByIdentity": \u0275\u0275repeaterTrackByIdentity,
-  "\u0275\u0275componentInstance": \u0275\u0275componentInstance,
-  "\u0275\u0275text": \u0275\u0275text,
-  "\u0275\u0275textInterpolate": \u0275\u0275textInterpolate,
-  "\u0275\u0275textInterpolate1": \u0275\u0275textInterpolate1,
-  "\u0275\u0275textInterpolate2": \u0275\u0275textInterpolate2,
-  "\u0275\u0275textInterpolate3": \u0275\u0275textInterpolate3,
-  "\u0275\u0275textInterpolate4": \u0275\u0275textInterpolate4,
-  "\u0275\u0275textInterpolate5": \u0275\u0275textInterpolate5,
-  "\u0275\u0275textInterpolate6": \u0275\u0275textInterpolate6,
-  "\u0275\u0275textInterpolate7": \u0275\u0275textInterpolate7,
-  "\u0275\u0275textInterpolate8": \u0275\u0275textInterpolate8,
-  "\u0275\u0275textInterpolateV": \u0275\u0275textInterpolateV,
-  "\u0275\u0275i18n": \u0275\u0275i18n,
-  "\u0275\u0275i18nAttributes": \u0275\u0275i18nAttributes,
-  "\u0275\u0275i18nExp": \u0275\u0275i18nExp,
-  "\u0275\u0275i18nStart": \u0275\u0275i18nStart,
-  "\u0275\u0275i18nEnd": \u0275\u0275i18nEnd,
-  "\u0275\u0275i18nApply": \u0275\u0275i18nApply,
-  "\u0275\u0275i18nPostprocess": \u0275\u0275i18nPostprocess,
-  "\u0275\u0275resolveWindow": \u0275\u0275resolveWindow,
-  "\u0275\u0275resolveDocument": \u0275\u0275resolveDocument,
-  "\u0275\u0275resolveBody": \u0275\u0275resolveBody,
-  "\u0275\u0275setComponentScope": \u0275\u0275setComponentScope,
-  "\u0275\u0275setNgModuleScope": \u0275\u0275setNgModuleScope,
-  "\u0275\u0275registerNgModuleType": registerNgModuleType,
-  "\u0275\u0275getComponentDepsFactory": \u0275\u0275getComponentDepsFactory,
-  "\u0275setClassDebugInfo": \u0275setClassDebugInfo,
-  "\u0275\u0275declareLet": \u0275\u0275declareLet,
-  "\u0275\u0275storeLet": \u0275\u0275storeLet,
-  "\u0275\u0275readContextLet": \u0275\u0275readContextLet,
-  "\u0275\u0275attachSourceLocations": \u0275\u0275attachSourceLocations,
-  "\u0275\u0275interpolate": \u0275\u0275interpolate,
-  "\u0275\u0275interpolate1": \u0275\u0275interpolate1,
-  "\u0275\u0275interpolate2": \u0275\u0275interpolate2,
-  "\u0275\u0275interpolate3": \u0275\u0275interpolate3,
-  "\u0275\u0275interpolate4": \u0275\u0275interpolate4,
-  "\u0275\u0275interpolate5": \u0275\u0275interpolate5,
-  "\u0275\u0275interpolate6": \u0275\u0275interpolate6,
-  "\u0275\u0275interpolate7": \u0275\u0275interpolate7,
-  "\u0275\u0275interpolate8": \u0275\u0275interpolate8,
-  "\u0275\u0275interpolateV": \u0275\u0275interpolateV,
-  "\u0275\u0275sanitizeHtml": \u0275\u0275sanitizeHtml,
-  "\u0275\u0275sanitizeStyle": \u0275\u0275sanitizeStyle,
-  "\u0275\u0275sanitizeResourceUrl": \u0275\u0275sanitizeResourceUrl,
-  "\u0275\u0275sanitizeScript": \u0275\u0275sanitizeScript,
-  "\u0275\u0275sanitizeUrl": \u0275\u0275sanitizeUrl,
-  "\u0275\u0275sanitizeUrlOrResourceUrl": \u0275\u0275sanitizeUrlOrResourceUrl,
-  "\u0275\u0275trustConstantHtml": \u0275\u0275trustConstantHtml,
-  "\u0275\u0275trustConstantResourceUrl": \u0275\u0275trustConstantResourceUrl,
-  "\u0275\u0275validateIframeAttribute": \u0275\u0275validateIframeAttribute,
+  "ɵɵanimateEnter": ɵɵanimateEnter,
+  "ɵɵanimateEnterListener": ɵɵanimateEnterListener,
+  "ɵɵanimateLeave": ɵɵanimateLeave,
+  "ɵɵanimateLeaveListener": ɵɵanimateLeaveListener,
+  "ɵɵattribute": ɵɵattribute,
+  "ɵɵdefineComponent": ɵɵdefineComponent,
+  "ɵɵdefineDirective": ɵɵdefineDirective,
+  "ɵɵdefineInjectable": ɵɵdefineInjectable,
+  "ɵɵdefineInjector": ɵɵdefineInjector,
+  "ɵɵdefineNgModule": ɵɵdefineNgModule,
+  "ɵɵdefinePipe": ɵɵdefinePipe,
+  "ɵɵdirectiveInject": ɵɵdirectiveInject,
+  "ɵɵgetInheritedFactory": ɵɵgetInheritedFactory,
+  "ɵɵinject": ɵɵinject,
+  "ɵɵinjectAttribute": ɵɵinjectAttribute,
+  "ɵɵinvalidFactory": ɵɵinvalidFactory,
+  "ɵɵinvalidFactoryDep": ɵɵinvalidFactoryDep,
+  "ɵɵtemplateRefExtractor": ɵɵtemplateRefExtractor,
+  "ɵɵresetView": ɵɵresetView,
+  "ɵɵHostDirectivesFeature": ɵɵHostDirectivesFeature,
+  "ɵɵNgOnChangesFeature": ɵɵNgOnChangesFeature,
+  "ɵɵProvidersFeature": ɵɵProvidersFeature,
+  "ɵɵCopyDefinitionFeature": ɵɵCopyDefinitionFeature,
+  "ɵɵInheritDefinitionFeature": ɵɵInheritDefinitionFeature,
+  "ɵɵExternalStylesFeature": ɵɵExternalStylesFeature,
+  "ɵɵnextContext": ɵɵnextContext,
+  "ɵɵnamespaceHTML": ɵɵnamespaceHTML,
+  "ɵɵnamespaceMathML": ɵɵnamespaceMathML,
+  "ɵɵnamespaceSVG": ɵɵnamespaceSVG,
+  "ɵɵenableBindings": ɵɵenableBindings,
+  "ɵɵdisableBindings": ɵɵdisableBindings,
+  "ɵɵelementStart": ɵɵelementStart,
+  "ɵɵelementEnd": ɵɵelementEnd,
+  "ɵɵelement": ɵɵelement,
+  "ɵɵelementContainerStart": ɵɵelementContainerStart,
+  "ɵɵelementContainerEnd": ɵɵelementContainerEnd,
+  "ɵɵdomElement": ɵɵdomElement,
+  "ɵɵdomElementStart": ɵɵdomElementStart,
+  "ɵɵdomElementEnd": ɵɵdomElementEnd,
+  "ɵɵdomElementContainer": ɵɵdomElementContainer,
+  "ɵɵdomElementContainerStart": ɵɵdomElementContainerStart,
+  "ɵɵdomElementContainerEnd": ɵɵdomElementContainerEnd,
+  "ɵɵdomTemplate": ɵɵdomTemplate,
+  "ɵɵdomListener": ɵɵdomListener,
+  "ɵɵelementContainer": ɵɵelementContainer,
+  "ɵɵpureFunction0": ɵɵpureFunction0,
+  "ɵɵpureFunction1": ɵɵpureFunction1,
+  "ɵɵpureFunction2": ɵɵpureFunction2,
+  "ɵɵpureFunction3": ɵɵpureFunction3,
+  "ɵɵpureFunction4": ɵɵpureFunction4,
+  "ɵɵpureFunction5": ɵɵpureFunction5,
+  "ɵɵpureFunction6": ɵɵpureFunction6,
+  "ɵɵpureFunction7": ɵɵpureFunction7,
+  "ɵɵpureFunction8": ɵɵpureFunction8,
+  "ɵɵpureFunctionV": ɵɵpureFunctionV,
+  "ɵɵgetCurrentView": ɵɵgetCurrentView,
+  "ɵɵrestoreView": ɵɵrestoreView,
+  "ɵɵlistener": ɵɵlistener,
+  "ɵɵprojection": ɵɵprojection,
+  "ɵɵsyntheticHostProperty": ɵɵsyntheticHostProperty,
+  "ɵɵsyntheticHostListener": ɵɵsyntheticHostListener,
+  "ɵɵpipeBind1": ɵɵpipeBind1,
+  "ɵɵpipeBind2": ɵɵpipeBind2,
+  "ɵɵpipeBind3": ɵɵpipeBind3,
+  "ɵɵpipeBind4": ɵɵpipeBind4,
+  "ɵɵpipeBindV": ɵɵpipeBindV,
+  "ɵɵprojectionDef": ɵɵprojectionDef,
+  "ɵɵdomProperty": ɵɵdomProperty,
+  "ɵɵariaProperty": ɵɵariaProperty,
+  "ɵɵproperty": ɵɵproperty,
+  "ɵɵpipe": ɵɵpipe,
+  "ɵɵqueryRefresh": ɵɵqueryRefresh,
+  "ɵɵqueryAdvance": ɵɵqueryAdvance,
+  "ɵɵviewQuery": ɵɵviewQuery,
+  "ɵɵviewQuerySignal": ɵɵviewQuerySignal,
+  "ɵɵloadQuery": ɵɵloadQuery,
+  "ɵɵcontentQuery": ɵɵcontentQuery,
+  "ɵɵcontentQuerySignal": ɵɵcontentQuerySignal,
+  "ɵɵreference": ɵɵreference,
+  "ɵɵclassMap": ɵɵclassMap,
+  "ɵɵstyleMap": ɵɵstyleMap,
+  "ɵɵstyleProp": ɵɵstyleProp,
+  "ɵɵclassProp": ɵɵclassProp,
+  "ɵɵadvance": ɵɵadvance,
+  "ɵɵtemplate": ɵɵtemplate,
+  "ɵɵconditional": ɵɵconditional,
+  "ɵɵconditionalCreate": ɵɵconditionalCreate,
+  "ɵɵconditionalBranchCreate": ɵɵconditionalBranchCreate,
+  "ɵɵdefer": ɵɵdefer,
+  "ɵɵdeferWhen": ɵɵdeferWhen,
+  "ɵɵdeferOnIdle": ɵɵdeferOnIdle,
+  "ɵɵdeferOnImmediate": ɵɵdeferOnImmediate,
+  "ɵɵdeferOnTimer": ɵɵdeferOnTimer,
+  "ɵɵdeferOnHover": ɵɵdeferOnHover,
+  "ɵɵdeferOnInteraction": ɵɵdeferOnInteraction,
+  "ɵɵdeferOnViewport": ɵɵdeferOnViewport,
+  "ɵɵdeferPrefetchWhen": ɵɵdeferPrefetchWhen,
+  "ɵɵdeferPrefetchOnIdle": ɵɵdeferPrefetchOnIdle,
+  "ɵɵdeferPrefetchOnImmediate": ɵɵdeferPrefetchOnImmediate,
+  "ɵɵdeferPrefetchOnTimer": ɵɵdeferPrefetchOnTimer,
+  "ɵɵdeferPrefetchOnHover": ɵɵdeferPrefetchOnHover,
+  "ɵɵdeferPrefetchOnInteraction": ɵɵdeferPrefetchOnInteraction,
+  "ɵɵdeferPrefetchOnViewport": ɵɵdeferPrefetchOnViewport,
+  "ɵɵdeferHydrateWhen": ɵɵdeferHydrateWhen,
+  "ɵɵdeferHydrateNever": ɵɵdeferHydrateNever,
+  "ɵɵdeferHydrateOnIdle": ɵɵdeferHydrateOnIdle,
+  "ɵɵdeferHydrateOnImmediate": ɵɵdeferHydrateOnImmediate,
+  "ɵɵdeferHydrateOnTimer": ɵɵdeferHydrateOnTimer,
+  "ɵɵdeferHydrateOnHover": ɵɵdeferHydrateOnHover,
+  "ɵɵdeferHydrateOnInteraction": ɵɵdeferHydrateOnInteraction,
+  "ɵɵdeferHydrateOnViewport": ɵɵdeferHydrateOnViewport,
+  "ɵɵdeferEnableTimerScheduling": ɵɵdeferEnableTimerScheduling,
+  "ɵɵrepeater": ɵɵrepeater,
+  "ɵɵrepeaterCreate": ɵɵrepeaterCreate,
+  "ɵɵrepeaterTrackByIndex": ɵɵrepeaterTrackByIndex,
+  "ɵɵrepeaterTrackByIdentity": ɵɵrepeaterTrackByIdentity,
+  "ɵɵcomponentInstance": ɵɵcomponentInstance,
+  "ɵɵtext": ɵɵtext,
+  "ɵɵtextInterpolate": ɵɵtextInterpolate,
+  "ɵɵtextInterpolate1": ɵɵtextInterpolate1,
+  "ɵɵtextInterpolate2": ɵɵtextInterpolate2,
+  "ɵɵtextInterpolate3": ɵɵtextInterpolate3,
+  "ɵɵtextInterpolate4": ɵɵtextInterpolate4,
+  "ɵɵtextInterpolate5": ɵɵtextInterpolate5,
+  "ɵɵtextInterpolate6": ɵɵtextInterpolate6,
+  "ɵɵtextInterpolate7": ɵɵtextInterpolate7,
+  "ɵɵtextInterpolate8": ɵɵtextInterpolate8,
+  "ɵɵtextInterpolateV": ɵɵtextInterpolateV,
+  "ɵɵi18n": ɵɵi18n,
+  "ɵɵi18nAttributes": ɵɵi18nAttributes,
+  "ɵɵi18nExp": ɵɵi18nExp,
+  "ɵɵi18nStart": ɵɵi18nStart,
+  "ɵɵi18nEnd": ɵɵi18nEnd,
+  "ɵɵi18nApply": ɵɵi18nApply,
+  "ɵɵi18nPostprocess": ɵɵi18nPostprocess,
+  "ɵɵresolveWindow": ɵɵresolveWindow,
+  "ɵɵresolveDocument": ɵɵresolveDocument,
+  "ɵɵresolveBody": ɵɵresolveBody,
+  "ɵɵsetComponentScope": ɵɵsetComponentScope,
+  "ɵɵsetNgModuleScope": ɵɵsetNgModuleScope,
+  "ɵɵregisterNgModuleType": registerNgModuleType,
+  "ɵɵgetComponentDepsFactory": ɵɵgetComponentDepsFactory,
+  "ɵsetClassDebugInfo": ɵsetClassDebugInfo,
+  "ɵɵdeclareLet": ɵɵdeclareLet,
+  "ɵɵstoreLet": ɵɵstoreLet,
+  "ɵɵreadContextLet": ɵɵreadContextLet,
+  "ɵɵattachSourceLocations": ɵɵattachSourceLocations,
+  "ɵɵinterpolate": ɵɵinterpolate,
+  "ɵɵinterpolate1": ɵɵinterpolate1,
+  "ɵɵinterpolate2": ɵɵinterpolate2,
+  "ɵɵinterpolate3": ɵɵinterpolate3,
+  "ɵɵinterpolate4": ɵɵinterpolate4,
+  "ɵɵinterpolate5": ɵɵinterpolate5,
+  "ɵɵinterpolate6": ɵɵinterpolate6,
+  "ɵɵinterpolate7": ɵɵinterpolate7,
+  "ɵɵinterpolate8": ɵɵinterpolate8,
+  "ɵɵinterpolateV": ɵɵinterpolateV,
+  "ɵɵsanitizeHtml": ɵɵsanitizeHtml,
+  "ɵɵsanitizeStyle": ɵɵsanitizeStyle,
+  "ɵɵsanitizeResourceUrl": ɵɵsanitizeResourceUrl,
+  "ɵɵsanitizeScript": ɵɵsanitizeScript,
+  "ɵɵsanitizeUrl": ɵɵsanitizeUrl,
+  "ɵɵsanitizeUrlOrResourceUrl": ɵɵsanitizeUrlOrResourceUrl,
+  "ɵɵtrustConstantHtml": ɵɵtrustConstantHtml,
+  "ɵɵtrustConstantResourceUrl": ɵɵtrustConstantResourceUrl,
+  "ɵɵvalidateIframeAttribute": ɵɵvalidateIframeAttribute,
   "forwardRef": forwardRef,
   "resolveForwardRef": resolveForwardRef,
-  "\u0275\u0275twoWayProperty": \u0275\u0275twoWayProperty,
-  "\u0275\u0275twoWayBindingSet": \u0275\u0275twoWayBindingSet,
-  "\u0275\u0275twoWayListener": \u0275\u0275twoWayListener,
-  "\u0275\u0275replaceMetadata": \u0275\u0275replaceMetadata,
-  "\u0275\u0275getReplaceMetadataURL": \u0275\u0275getReplaceMetadataURL
+  "ɵɵtwoWayProperty": ɵɵtwoWayProperty,
+  "ɵɵtwoWayBindingSet": ɵɵtwoWayBindingSet,
+  "ɵɵtwoWayListener": ɵɵtwoWayListener,
+  "ɵɵreplaceMetadata": ɵɵreplaceMetadata,
+  "ɵɵgetReplaceMetadataURL": ɵɵgetReplaceMetadataURL
 }))();
 var jitOptions = null;
 function setJitOptions(options) {
@@ -24227,7 +24227,7 @@ function compileNgModuleDefs(moduleType, ngModule, allowDuplicateDeclarationsInR
           kind: "NgModule",
           type: moduleType
         });
-        ngModuleDef = compiler.compileNgModule(angularCoreEnv, `ng:///${moduleType.name}/\u0275mod.js`, {
+        ngModuleDef = compiler.compileNgModule(angularCoreEnv, `ng:///${moduleType.name}/ɵmod.js`, {
           type: moduleType,
           bootstrap: flatten(ngModule.bootstrap || EMPTY_ARRAY).map(resolveForwardRef),
           declarations: declarations.map(resolveForwardRef),
@@ -24252,7 +24252,7 @@ function compileNgModuleDefs(moduleType, ngModule, allowDuplicateDeclarationsInR
           kind: "NgModule",
           type: moduleType
         });
-        ngFactoryDef = compiler.compileFactory(angularCoreEnv, `ng:///${moduleType.name}/\u0275fac.js`, {
+        ngFactoryDef = compiler.compileFactory(angularCoreEnv, `ng:///${moduleType.name}/ɵfac.js`, {
           name: moduleType.name,
           type: moduleType,
           deps: reflectDependencies(moduleType),
@@ -24284,7 +24284,7 @@ function compileNgModuleDefs(moduleType, ngModule, allowDuplicateDeclarationsInR
           kind: "NgModule",
           type: moduleType
         });
-        ngInjectorDef = compiler.compileInjector(angularCoreEnv, `ng:///${moduleType.name}/\u0275inj.js`, meta);
+        ngInjectorDef = compiler.compileInjector(angularCoreEnv, `ng:///${moduleType.name}/ɵinj.js`, meta);
       }
       return ngInjectorDef;
     }, "get"),
@@ -24534,7 +24534,7 @@ function transitiveScopesFor(type) {
       };
     }
   }
-  throw new Error(`${type.name} does not have a module def (\u0275mod property)`);
+  throw new Error(`${type.name} does not have a module def (ɵmod property)`);
 }
 __name(transitiveScopesFor, "transitiveScopesFor");
 function expandModuleWithProviders(value) {
@@ -24713,7 +24713,7 @@ function compileDirective(type, directive) {
 __name(compileDirective, "compileDirective");
 function getDirectiveMetadata(type, metadata) {
   const name = type && type.name;
-  const sourceMapUrl = `ng:///${name}/\u0275dir.js`;
+  const sourceMapUrl = `ng:///${name}/ɵdir.js`;
   const compiler = getCompilerFacade({ usage: 0, kind: "directive", type });
   const facade = directiveMetadata(type, metadata);
   facade.typeSourceSpan = compiler.createParseSourceSpan("Directive", name, sourceMapUrl);
@@ -24734,7 +24734,7 @@ function addDirectiveFactoryDef(type, metadata) {
           kind: "directive",
           type
         });
-        ngFactoryDef = compiler.compileFactory(angularCoreEnv, `ng:///${type.name}/\u0275fac.js`, {
+        ngFactoryDef = compiler.compileFactory(angularCoreEnv, `ng:///${type.name}/ɵfac.js`, {
           name: meta.metadata.name,
           type: meta.metadata.type,
           typeArgumentCount: 0,
@@ -24889,7 +24889,7 @@ function compilePipe(type, meta) {
           kind: "pipe",
           type: metadata.type
         });
-        ngFactoryDef = compiler.compileFactory(angularCoreEnv, `ng:///${metadata.name}/\u0275fac.js`, {
+        ngFactoryDef = compiler.compileFactory(angularCoreEnv, `ng:///${metadata.name}/ɵfac.js`, {
           name: metadata.name,
           type: metadata.type,
           typeArgumentCount: 0,
@@ -24911,7 +24911,7 @@ function compilePipe(type, meta) {
           kind: "pipe",
           type: metadata.type
         });
-        ngPipeDef = compiler.compilePipe(angularCoreEnv, `ng:///${metadata.name}/\u0275pipe.js`, metadata);
+        ngPipeDef = compiler.compilePipe(angularCoreEnv, `ng:///${metadata.name}/ɵpipe.js`, metadata);
       }
       return ngPipeDef;
     }, "get"),
@@ -25021,10 +25021,10 @@ var _Compiler = class _Compiler {
   }
 };
 __name(_Compiler, "Compiler");
-__publicField(_Compiler, "\u0275fac", /* @__PURE__ */ __name(function Compiler_Factory(__ngFactoryType__) {
+__publicField(_Compiler, "ɵfac", /* @__PURE__ */ __name(function Compiler_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Compiler)();
 }, "Compiler_Factory"));
-__publicField(_Compiler, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _Compiler, factory: _Compiler.\u0275fac, providedIn: "root" }));
+__publicField(_Compiler, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _Compiler, factory: _Compiler.ɵfac, providedIn: "root" }));
 var Compiler = _Compiler;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Compiler, [{
@@ -25064,10 +25064,10 @@ var _NgZoneChangeDetectionScheduler = class _NgZoneChangeDetectionScheduler {
   }
 };
 __name(_NgZoneChangeDetectionScheduler, "NgZoneChangeDetectionScheduler");
-__publicField(_NgZoneChangeDetectionScheduler, "\u0275fac", /* @__PURE__ */ __name(function NgZoneChangeDetectionScheduler_Factory(__ngFactoryType__) {
+__publicField(_NgZoneChangeDetectionScheduler, "ɵfac", /* @__PURE__ */ __name(function NgZoneChangeDetectionScheduler_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _NgZoneChangeDetectionScheduler)();
 }, "NgZoneChangeDetectionScheduler_Factory"));
-__publicField(_NgZoneChangeDetectionScheduler, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _NgZoneChangeDetectionScheduler, factory: _NgZoneChangeDetectionScheduler.\u0275fac, providedIn: "root" }));
+__publicField(_NgZoneChangeDetectionScheduler, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _NgZoneChangeDetectionScheduler, factory: _NgZoneChangeDetectionScheduler.ɵfac, providedIn: "root" }));
 var NgZoneChangeDetectionScheduler = _NgZoneChangeDetectionScheduler;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NgZoneChangeDetectionScheduler, [{
@@ -25176,10 +25176,10 @@ var _ZoneStablePendingTask = class _ZoneStablePendingTask {
   }
 };
 __name(_ZoneStablePendingTask, "ZoneStablePendingTask");
-__publicField(_ZoneStablePendingTask, "\u0275fac", /* @__PURE__ */ __name(function ZoneStablePendingTask_Factory(__ngFactoryType__) {
+__publicField(_ZoneStablePendingTask, "ɵfac", /* @__PURE__ */ __name(function ZoneStablePendingTask_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ZoneStablePendingTask)();
 }, "ZoneStablePendingTask_Factory"));
-__publicField(_ZoneStablePendingTask, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ZoneStablePendingTask, factory: _ZoneStablePendingTask.\u0275fac, providedIn: "root" }));
+__publicField(_ZoneStablePendingTask, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _ZoneStablePendingTask, factory: _ZoneStablePendingTask.ɵfac, providedIn: "root" }));
 var ZoneStablePendingTask = _ZoneStablePendingTask;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ZoneStablePendingTask, [{
@@ -25366,10 +25366,10 @@ var _ChangeDetectionSchedulerImpl = class _ChangeDetectionSchedulerImpl {
   }
 };
 __name(_ChangeDetectionSchedulerImpl, "ChangeDetectionSchedulerImpl");
-__publicField(_ChangeDetectionSchedulerImpl, "\u0275fac", /* @__PURE__ */ __name(function ChangeDetectionSchedulerImpl_Factory(__ngFactoryType__) {
+__publicField(_ChangeDetectionSchedulerImpl, "ɵfac", /* @__PURE__ */ __name(function ChangeDetectionSchedulerImpl_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ChangeDetectionSchedulerImpl)();
 }, "ChangeDetectionSchedulerImpl_Factory"));
-__publicField(_ChangeDetectionSchedulerImpl, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ChangeDetectionSchedulerImpl, factory: _ChangeDetectionSchedulerImpl.\u0275fac, providedIn: "root" }));
+__publicField(_ChangeDetectionSchedulerImpl, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _ChangeDetectionSchedulerImpl, factory: _ChangeDetectionSchedulerImpl.ɵfac, providedIn: "root" }));
 var ChangeDetectionSchedulerImpl = _ChangeDetectionSchedulerImpl;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ChangeDetectionSchedulerImpl, [{
@@ -25991,7 +25991,7 @@ var _HostAttributeToken = class _HostAttributeToken {
     this.attributeName = attributeName;
   }
   /** @internal */
-  __NG_ELEMENT_ID__ = /* @__PURE__ */ __name(() => \u0275\u0275injectAttribute(this.attributeName), "__NG_ELEMENT_ID__");
+  __NG_ELEMENT_ID__ = /* @__PURE__ */ __name(() => ɵɵinjectAttribute(this.attributeName), "__NG_ELEMENT_ID__");
   toString() {
     return `HostAttributeToken ${this.attributeName}`;
   }
@@ -26318,10 +26318,10 @@ var _ImagePerformanceWarning = class _ImagePerformanceWarning {
   }
 };
 __name(_ImagePerformanceWarning, "ImagePerformanceWarning");
-__publicField(_ImagePerformanceWarning, "\u0275fac", /* @__PURE__ */ __name(function ImagePerformanceWarning_Factory(__ngFactoryType__) {
+__publicField(_ImagePerformanceWarning, "ɵfac", /* @__PURE__ */ __name(function ImagePerformanceWarning_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ImagePerformanceWarning)();
 }, "ImagePerformanceWarning_Factory"));
-__publicField(_ImagePerformanceWarning, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ImagePerformanceWarning, factory: _ImagePerformanceWarning.\u0275fac, providedIn: "root" }));
+__publicField(_ImagePerformanceWarning, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _ImagePerformanceWarning, factory: _ImagePerformanceWarning.ɵfac, providedIn: "root" }));
 var ImagePerformanceWarning = _ImagePerformanceWarning;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ImagePerformanceWarning, [{
@@ -26549,10 +26549,10 @@ var _PlatformRef = class _PlatformRef {
   }
 };
 __name(_PlatformRef, "PlatformRef");
-__publicField(_PlatformRef, "\u0275fac", /* @__PURE__ */ __name(function PlatformRef_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _PlatformRef)(\u0275\u0275inject(Injector));
+__publicField(_PlatformRef, "ɵfac", /* @__PURE__ */ __name(function PlatformRef_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _PlatformRef)(ɵɵinject(Injector));
 }, "PlatformRef_Factory"));
-__publicField(_PlatformRef, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _PlatformRef, factory: _PlatformRef.\u0275fac, providedIn: "platform" }));
+__publicField(_PlatformRef, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _PlatformRef, factory: _PlatformRef.ɵfac, providedIn: "platform" }));
 var PlatformRef = _PlatformRef;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PlatformRef, [{
@@ -27545,9 +27545,9 @@ __name(_IterableDiffers, "IterableDiffers");
 /** @nocollapse */
 __publicField(
   _IterableDiffers,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _IterableDiffers,
     providedIn: "root",
     factory: defaultIterableDiffersFactory
@@ -27615,9 +27615,9 @@ __name(_KeyValueDiffers, "KeyValueDiffers");
 /** @nocollapse */
 __publicField(
   _KeyValueDiffers,
-  "\u0275prov",
+  "ɵprov",
   /** @pureOrBreakMyCode */
-  /* @__PURE__ */ \u0275\u0275defineInjectable({
+  /* @__PURE__ */ ɵɵdefineInjectable({
     token: _KeyValueDiffers,
     providedIn: "root",
     factory: defaultKeyValueDiffersFactory
@@ -27635,11 +27635,11 @@ var _ApplicationModule = class _ApplicationModule {
   }
 };
 __name(_ApplicationModule, "ApplicationModule");
-__publicField(_ApplicationModule, "\u0275fac", /* @__PURE__ */ __name(function ApplicationModule_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _ApplicationModule)(\u0275\u0275inject(ApplicationRef));
+__publicField(_ApplicationModule, "ɵfac", /* @__PURE__ */ __name(function ApplicationModule_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _ApplicationModule)(ɵɵinject(ApplicationRef));
 }, "ApplicationModule_Factory"));
-__publicField(_ApplicationModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _ApplicationModule }));
-__publicField(_ApplicationModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({}));
+__publicField(_ApplicationModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({ type: _ApplicationModule }));
+__publicField(_ApplicationModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({}));
 var ApplicationModule = _ApplicationModule;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ApplicationModule, [{

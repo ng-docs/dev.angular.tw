@@ -32,31 +32,31 @@ var _BirthdayFormattingComponent = class _BirthdayFormattingComponent {
   }
 };
 __name(_BirthdayFormattingComponent, "BirthdayFormattingComponent");
-__publicField(_BirthdayFormattingComponent, "\u0275fac", /* @__PURE__ */ __name(function BirthdayFormattingComponent_Factory(__ngFactoryType__) {
+__publicField(_BirthdayFormattingComponent, "ɵfac", /* @__PURE__ */ __name(function BirthdayFormattingComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _BirthdayFormattingComponent)();
 }, "BirthdayFormattingComponent_Factory"));
-__publicField(_BirthdayFormattingComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _BirthdayFormattingComponent, selectors: [["app-birthday-formatting"]], decls: 8, vars: 9, consts: [["type", "button", 3, "click"]], template: /* @__PURE__ */ __name(function BirthdayFormattingComponent_Template(rf, ctx) {
+__publicField(_BirthdayFormattingComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _BirthdayFormattingComponent, selectors: [["app-birthday-formatting"]], decls: 8, vars: 9, consts: [["type", "button", 3, "click"]], template: /* @__PURE__ */ __name(function BirthdayFormattingComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "p");
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "date");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(3, "p");
-    \u0275\u0275text(4);
-    \u0275\u0275pipe(5, "date");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(6, "button", 0);
-    \u0275\u0275domListener("click", /* @__PURE__ */ __name(function BirthdayFormattingComponent_Template_button_click_6_listener() {
+    ɵɵdomElementStart(0, "p");
+    ɵɵtext(1);
+    ɵɵpipe(2, "date");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(3, "p");
+    ɵɵtext(4);
+    ɵɵpipe(5, "date");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(6, "button", 0);
+    ɵɵdomListener("click", /* @__PURE__ */ __name(function BirthdayFormattingComponent_Template_button_click_6_listener() {
       return ctx.toggleFormat();
     }, "BirthdayFormattingComponent_Template_button_click_6_listener"));
-    \u0275\u0275text(7, "Toggle Format");
-    \u0275\u0275domElementEnd();
+    ɵɵtext(7, "Toggle Format");
+    ɵɵdomElementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1("The hero's birthday is ", \u0275\u0275pipeBind2(2, 3, ctx.birthday, "shortDate"), ' in the "shortDate" format.');
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate2("The hero's birthday is ", \u0275\u0275pipeBind2(5, 6, ctx.birthday, ctx.format), ' in "', ctx.format, '" format. Click the toggle button to change formats.');
+    ɵɵadvance();
+    ɵɵtextInterpolate1("The hero's birthday is ", ɵɵpipeBind2(2, 3, ctx.birthday, "shortDate"), ' in the "shortDate" format.');
+    ɵɵadvance(3);
+    ɵɵtextInterpolate2("The hero's birthday is ", ɵɵpipeBind2(5, 6, ctx.birthday, ctx.format), ' in "', ctx.format, '" format. Click the toggle button to change formats.');
   }
 }, "BirthdayFormattingComponent_Template"), dependencies: [DatePipe], encapsulation: 2 }));
 var BirthdayFormattingComponent = _BirthdayFormattingComponent;
@@ -73,7 +73,7 @@ var BirthdayFormattingComponent = _BirthdayFormattingComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(BirthdayFormattingComponent, { className: "BirthdayFormattingComponent", filePath: "src/content/examples/pipes/src/app/birthday-formatting.component.ts", lineNumber: 9 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(BirthdayFormattingComponent, { className: "BirthdayFormattingComponent", filePath: "src/content/examples/pipes/src/app/birthday-formatting.component.ts", lineNumber: 9 });
 })();
 
 export {

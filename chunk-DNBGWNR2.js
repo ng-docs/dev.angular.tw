@@ -50,10 +50,10 @@ var _QuestionControlService = class _QuestionControlService {
   }
 };
 __name(_QuestionControlService, "QuestionControlService");
-__publicField(_QuestionControlService, "\u0275fac", /* @__PURE__ */ __name(function QuestionControlService_Factory(__ngFactoryType__) {
+__publicField(_QuestionControlService, "ɵfac", /* @__PURE__ */ __name(function QuestionControlService_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _QuestionControlService)();
 }, "QuestionControlService_Factory"));
-__publicField(_QuestionControlService, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _QuestionControlService, factory: _QuestionControlService.\u0275fac }));
+__publicField(_QuestionControlService, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _QuestionControlService, factory: _QuestionControlService.ɵfac }));
 var QuestionControlService = _QuestionControlService;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(QuestionControlService, [{
@@ -64,31 +64,31 @@ var QuestionControlService = _QuestionControlService;
 // src/content/examples/dynamic-form/src/app/dynamic-form.component.ts
 function DynamicFormComponent_For_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 1);
-    \u0275\u0275element(1, "app-question", 3);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 1);
+    ɵɵelement(1, "app-question", 3);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const question_r1 = ctx.$implicit;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("question", question_r1)("form", ctx_r1.form());
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵadvance();
+    ɵɵproperty("question", question_r1)("form", ctx_r1.form());
   }
 }
 __name(DynamicFormComponent_For_3_Template, "DynamicFormComponent_For_3_Template");
 function DynamicFormComponent_Conditional_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 1)(1, "strong");
-    \u0275\u0275text(2, "Saved the following values");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(3, "br");
-    \u0275\u0275text(4);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 1)(1, "strong");
+    ɵɵtext(2, "Saved the following values");
+    ɵɵelementEnd();
+    ɵɵelement(3, "br");
+    ɵɵtext(4);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(ctx_r1.payLoad);
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵadvance(4);
+    ɵɵtextInterpolate(ctx_r1.payLoad);
   }
 }
 __name(DynamicFormComponent_Conditional_7_Template, "DynamicFormComponent_Conditional_7_Template");
@@ -102,33 +102,33 @@ var _DynamicFormComponent = class _DynamicFormComponent {
   }
 };
 __name(_DynamicFormComponent, "DynamicFormComponent");
-__publicField(_DynamicFormComponent, "\u0275fac", /* @__PURE__ */ __name(function DynamicFormComponent_Factory(__ngFactoryType__) {
+__publicField(_DynamicFormComponent, "ɵfac", /* @__PURE__ */ __name(function DynamicFormComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _DynamicFormComponent)();
 }, "DynamicFormComponent_Factory"));
-__publicField(_DynamicFormComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DynamicFormComponent, selectors: [["app-dynamic-form"]], inputs: { questions: [1, "questions"] }, features: [\u0275\u0275ProvidersFeature([QuestionControlService])], decls: 8, vars: 3, consts: [[3, "ngSubmit", "formGroup"], [1, "form-row"], ["type", "submit", 3, "disabled"], [3, "question", "form"]], template: /* @__PURE__ */ __name(function DynamicFormComponent_Template(rf, ctx) {
+__publicField(_DynamicFormComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _DynamicFormComponent, selectors: [["app-dynamic-form"]], inputs: { questions: [1, "questions"] }, features: [ɵɵProvidersFeature([QuestionControlService])], decls: 8, vars: 3, consts: [[3, "ngSubmit", "formGroup"], [1, "form-row"], ["type", "submit", 3, "disabled"], [3, "question", "form"]], template: /* @__PURE__ */ __name(function DynamicFormComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div")(1, "form", 0);
-    \u0275\u0275listener("ngSubmit", /* @__PURE__ */ __name(function DynamicFormComponent_Template_form_ngSubmit_1_listener() {
+    ɵɵelementStart(0, "div")(1, "form", 0);
+    ɵɵlistener("ngSubmit", /* @__PURE__ */ __name(function DynamicFormComponent_Template_form_ngSubmit_1_listener() {
       return ctx.onSubmit();
     }, "DynamicFormComponent_Template_form_ngSubmit_1_listener"));
-    \u0275\u0275repeaterCreate(2, DynamicFormComponent_For_3_Template, 2, 2, "div", 1, \u0275\u0275repeaterTrackByIdentity);
-    \u0275\u0275elementStart(4, "div", 1)(5, "button", 2);
-    \u0275\u0275text(6, "Save");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275conditionalCreate(7, DynamicFormComponent_Conditional_7_Template, 5, 1, "div", 1);
-    \u0275\u0275elementEnd();
+    ɵɵrepeaterCreate(2, DynamicFormComponent_For_3_Template, 2, 2, "div", 1, ɵɵrepeaterTrackByIdentity);
+    ɵɵelementStart(4, "div", 1)(5, "button", 2);
+    ɵɵtext(6, "Save");
+    ɵɵelementEnd()()();
+    ɵɵconditionalCreate(7, DynamicFormComponent_Conditional_7_Template, 5, 1, "div", 1);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275property("formGroup", ctx.form());
-    \u0275\u0275advance();
-    \u0275\u0275repeater(ctx.questions());
-    \u0275\u0275advance(3);
-    \u0275\u0275property("disabled", !ctx.form().valid);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx.payLoad ? 7 : -1);
+    ɵɵadvance();
+    ɵɵproperty("formGroup", ctx.form());
+    ɵɵadvance();
+    ɵɵrepeater(ctx.questions());
+    ɵɵadvance(3);
+    ɵɵproperty("disabled", !ctx.form().valid);
+    ɵɵadvance(2);
+    ɵɵconditional(ctx.payLoad ? 7 : -1);
   }
-}, "DynamicFormComponent_Template"), dependencies: [DynamicFormQuestionComponent, ReactiveFormsModule, \u0275NgNoValidate, NgControlStatusGroup, FormGroupDirective], encapsulation: 2 }));
+}, "DynamicFormComponent_Template"), dependencies: [DynamicFormQuestionComponent, ReactiveFormsModule, ɵNgNoValidate, NgControlStatusGroup, FormGroupDirective], encapsulation: 2 }));
 var DynamicFormComponent = _DynamicFormComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DynamicFormComponent, [{
@@ -137,7 +137,7 @@ var DynamicFormComponent = _DynamicFormComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DynamicFormComponent, { className: "DynamicFormComponent", filePath: "src/content/examples/dynamic-form/src/app/dynamic-form.component.ts", lineNumber: 16 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(DynamicFormComponent, { className: "DynamicFormComponent", filePath: "src/content/examples/dynamic-form/src/app/dynamic-form.component.ts", lineNumber: 16 });
 })();
 
 export {

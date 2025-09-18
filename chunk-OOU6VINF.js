@@ -19,16 +19,16 @@ import {
 var _StatusSliderPageComponent = class _StatusSliderPageComponent {
 };
 __name(_StatusSliderPageComponent, "StatusSliderPageComponent");
-__publicField(_StatusSliderPageComponent, "\u0275fac", /* @__PURE__ */ __name(function StatusSliderPageComponent_Factory(__ngFactoryType__) {
+__publicField(_StatusSliderPageComponent, "ɵfac", /* @__PURE__ */ __name(function StatusSliderPageComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _StatusSliderPageComponent)();
 }, "StatusSliderPageComponent_Factory"));
-__publicField(_StatusSliderPageComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _StatusSliderPageComponent, selectors: [["app-status-slider-page"]], decls: 4, vars: 0, template: /* @__PURE__ */ __name(function StatusSliderPageComponent_Template(rf, ctx) {
+__publicField(_StatusSliderPageComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _StatusSliderPageComponent, selectors: [["app-status-slider-page"]], decls: 4, vars: 0, template: /* @__PURE__ */ __name(function StatusSliderPageComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "section")(1, "h2");
-    \u0275\u0275text(2, "Status Slider");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(3, "app-status-slider");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "section")(1, "h2");
+    ɵɵtext(2, "Status Slider");
+    ɵɵelementEnd();
+    ɵɵelement(3, "app-status-slider");
+    ɵɵelementEnd();
   }
 }, "StatusSliderPageComponent_Template"), dependencies: [StatusSliderComponent], encapsulation: 2 }));
 var StatusSliderPageComponent = _StatusSliderPageComponent;
@@ -48,7 +48,7 @@ var StatusSliderPageComponent = _StatusSliderPageComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(StatusSliderPageComponent, { className: "StatusSliderPageComponent", filePath: "src/content/examples/animations/src/app/status-slider-page.component.ts", lineNumber: 14 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(StatusSliderPageComponent, { className: "StatusSliderPageComponent", filePath: "src/content/examples/animations/src/app/status-slider-page.component.ts", lineNumber: 14 });
 })();
 export {
   StatusSliderPageComponent

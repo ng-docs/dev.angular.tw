@@ -145,12 +145,12 @@ var _EventManager = class _EventManager {
   }
 };
 __name(_EventManager, "EventManager");
-__publicField(_EventManager, "\u0275fac", /* @__PURE__ */ __name(function EventManager_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _EventManager)(\u0275\u0275inject(EVENT_MANAGER_PLUGINS), \u0275\u0275inject(NgZone));
+__publicField(_EventManager, "ɵfac", /* @__PURE__ */ __name(function EventManager_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _EventManager)(ɵɵinject(EVENT_MANAGER_PLUGINS), ɵɵinject(NgZone));
 }, "EventManager_Factory"));
-__publicField(_EventManager, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_EventManager, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _EventManager,
-  factory: _EventManager.\u0275fac
+  factory: _EventManager.ɵfac
 }));
 var EventManager = _EventManager;
 (() => {
@@ -327,12 +327,12 @@ var _SharedStylesHost = class _SharedStylesHost {
   }
 };
 __name(_SharedStylesHost, "SharedStylesHost");
-__publicField(_SharedStylesHost, "\u0275fac", /* @__PURE__ */ __name(function SharedStylesHost_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _SharedStylesHost)(\u0275\u0275inject(DOCUMENT), \u0275\u0275inject(APP_ID), \u0275\u0275inject(CSP_NONCE, 8), \u0275\u0275inject(PLATFORM_ID));
+__publicField(_SharedStylesHost, "ɵfac", /* @__PURE__ */ __name(function SharedStylesHost_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _SharedStylesHost)(ɵɵinject(DOCUMENT), ɵɵinject(APP_ID), ɵɵinject(CSP_NONCE, 8), ɵɵinject(PLATFORM_ID));
 }, "SharedStylesHost_Factory"));
-__publicField(_SharedStylesHost, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_SharedStylesHost, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _SharedStylesHost,
-  factory: _SharedStylesHost.\u0275fac
+  factory: _SharedStylesHost.ɵfac
 }));
 var SharedStylesHost = _SharedStylesHost;
 (() => {
@@ -498,12 +498,12 @@ var _DomRendererFactory2 = class _DomRendererFactory2 {
   }
 };
 __name(_DomRendererFactory2, "DomRendererFactory2");
-__publicField(_DomRendererFactory2, "\u0275fac", /* @__PURE__ */ __name(function DomRendererFactory2_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _DomRendererFactory2)(\u0275\u0275inject(EventManager), \u0275\u0275inject(SharedStylesHost), \u0275\u0275inject(APP_ID), \u0275\u0275inject(REMOVE_STYLES_ON_COMPONENT_DESTROY), \u0275\u0275inject(DOCUMENT), \u0275\u0275inject(PLATFORM_ID), \u0275\u0275inject(NgZone), \u0275\u0275inject(CSP_NONCE), \u0275\u0275inject(TracingService, 8));
+__publicField(_DomRendererFactory2, "ɵfac", /* @__PURE__ */ __name(function DomRendererFactory2_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _DomRendererFactory2)(ɵɵinject(EventManager), ɵɵinject(SharedStylesHost), ɵɵinject(APP_ID), ɵɵinject(REMOVE_STYLES_ON_COMPONENT_DESTROY), ɵɵinject(DOCUMENT), ɵɵinject(PLATFORM_ID), ɵɵinject(NgZone), ɵɵinject(CSP_NONCE), ɵɵinject(TracingService, 8));
 }, "DomRendererFactory2_Factory"));
-__publicField(_DomRendererFactory2, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_DomRendererFactory2, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _DomRendererFactory2,
-  factory: _DomRendererFactory2.\u0275fac
+  factory: _DomRendererFactory2.ɵfac
 }));
 var DomRendererFactory2 = _DomRendererFactory2;
 (() => {
@@ -952,12 +952,12 @@ var _BrowserXhr = class _BrowserXhr {
   }
 };
 __name(_BrowserXhr, "BrowserXhr");
-__publicField(_BrowserXhr, "\u0275fac", /* @__PURE__ */ __name(function BrowserXhr_Factory(__ngFactoryType__) {
+__publicField(_BrowserXhr, "ɵfac", /* @__PURE__ */ __name(function BrowserXhr_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _BrowserXhr)();
 }, "BrowserXhr_Factory"));
-__publicField(_BrowserXhr, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_BrowserXhr, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _BrowserXhr,
-  factory: _BrowserXhr.\u0275fac
+  factory: _BrowserXhr.ɵfac
 }));
 var BrowserXhr = _BrowserXhr;
 (() => {
@@ -983,12 +983,12 @@ var _DomEventsPlugin = class _DomEventsPlugin extends EventManagerPlugin {
   }
 };
 __name(_DomEventsPlugin, "DomEventsPlugin");
-__publicField(_DomEventsPlugin, "\u0275fac", /* @__PURE__ */ __name(function DomEventsPlugin_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _DomEventsPlugin)(\u0275\u0275inject(DOCUMENT));
+__publicField(_DomEventsPlugin, "ɵfac", /* @__PURE__ */ __name(function DomEventsPlugin_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _DomEventsPlugin)(ɵɵinject(DOCUMENT));
 }, "DomEventsPlugin_Factory"));
-__publicField(_DomEventsPlugin, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_DomEventsPlugin, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _DomEventsPlugin,
-  factory: _DomEventsPlugin.\u0275fac
+  factory: _DomEventsPlugin.ɵfac
 }));
 var DomEventsPlugin = _DomEventsPlugin;
 (() => {
@@ -1148,12 +1148,12 @@ var _KeyEventsPlugin = class _KeyEventsPlugin extends EventManagerPlugin {
   }
 };
 __name(_KeyEventsPlugin, "KeyEventsPlugin");
-__publicField(_KeyEventsPlugin, "\u0275fac", /* @__PURE__ */ __name(function KeyEventsPlugin_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _KeyEventsPlugin)(\u0275\u0275inject(DOCUMENT));
+__publicField(_KeyEventsPlugin, "ɵfac", /* @__PURE__ */ __name(function KeyEventsPlugin_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _KeyEventsPlugin)(ɵɵinject(DOCUMENT));
 }, "KeyEventsPlugin_Factory"));
-__publicField(_KeyEventsPlugin, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_KeyEventsPlugin, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _KeyEventsPlugin,
-  factory: _KeyEventsPlugin.\u0275fac
+  factory: _KeyEventsPlugin.ɵfac
 }));
 var KeyEventsPlugin = _KeyEventsPlugin;
 (() => {
@@ -1267,14 +1267,14 @@ var _BrowserModule = class _BrowserModule {
   }
 };
 __name(_BrowserModule, "BrowserModule");
-__publicField(_BrowserModule, "\u0275fac", /* @__PURE__ */ __name(function BrowserModule_Factory(__ngFactoryType__) {
+__publicField(_BrowserModule, "ɵfac", /* @__PURE__ */ __name(function BrowserModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _BrowserModule)();
 }, "BrowserModule_Factory"));
-__publicField(_BrowserModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_BrowserModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _BrowserModule,
   exports: [CommonModule, ApplicationModule]
 }));
-__publicField(_BrowserModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_BrowserModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   providers: [...BROWSER_MODULE_PROVIDERS, ...TESTABILITY_PROVIDERS],
   imports: [CommonModule, ApplicationModule]
 }));
@@ -2587,12 +2587,12 @@ var _HttpClient = class _HttpClient {
   }
 };
 __name(_HttpClient, "HttpClient");
-__publicField(_HttpClient, "\u0275fac", /* @__PURE__ */ __name(function HttpClient_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _HttpClient)(\u0275\u0275inject(HttpHandler));
+__publicField(_HttpClient, "ɵfac", /* @__PURE__ */ __name(function HttpClient_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _HttpClient)(ɵɵinject(HttpHandler));
 }, "HttpClient_Factory"));
-__publicField(_HttpClient, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_HttpClient, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _HttpClient,
-  factory: _HttpClient.\u0275fac
+  factory: _HttpClient.ɵfac
 }));
 var HttpClient = _HttpClient;
 (() => {
@@ -2836,12 +2836,12 @@ var _FetchBackend = class _FetchBackend {
   }
 };
 __name(_FetchBackend, "FetchBackend");
-__publicField(_FetchBackend, "\u0275fac", /* @__PURE__ */ __name(function FetchBackend_Factory(__ngFactoryType__) {
+__publicField(_FetchBackend, "ɵfac", /* @__PURE__ */ __name(function FetchBackend_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _FetchBackend)();
 }, "FetchBackend_Factory"));
-__publicField(_FetchBackend, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_FetchBackend, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _FetchBackend,
-  factory: _FetchBackend.\u0275fac
+  factory: _FetchBackend.ɵfac
 }));
 var FetchBackend = _FetchBackend;
 (() => {
@@ -2940,12 +2940,12 @@ var _HttpInterceptorHandler = class _HttpInterceptorHandler extends HttpHandler 
   }
 };
 __name(_HttpInterceptorHandler, "HttpInterceptorHandler");
-__publicField(_HttpInterceptorHandler, "\u0275fac", /* @__PURE__ */ __name(function HttpInterceptorHandler_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _HttpInterceptorHandler)(\u0275\u0275inject(HttpBackend), \u0275\u0275inject(EnvironmentInjector));
+__publicField(_HttpInterceptorHandler, "ɵfac", /* @__PURE__ */ __name(function HttpInterceptorHandler_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _HttpInterceptorHandler)(ɵɵinject(HttpBackend), ɵɵinject(EnvironmentInjector));
 }, "HttpInterceptorHandler_Factory"));
-__publicField(_HttpInterceptorHandler, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_HttpInterceptorHandler, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _HttpInterceptorHandler,
-  factory: _HttpInterceptorHandler.\u0275fac
+  factory: _HttpInterceptorHandler.ɵfac
 }));
 var HttpInterceptorHandler = _HttpInterceptorHandler;
 (() => {
@@ -3074,12 +3074,12 @@ var _JsonpClientBackend = class _JsonpClientBackend {
   }
 };
 __name(_JsonpClientBackend, "JsonpClientBackend");
-__publicField(_JsonpClientBackend, "\u0275fac", /* @__PURE__ */ __name(function JsonpClientBackend_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _JsonpClientBackend)(\u0275\u0275inject(JsonpCallbackContext), \u0275\u0275inject(DOCUMENT));
+__publicField(_JsonpClientBackend, "ɵfac", /* @__PURE__ */ __name(function JsonpClientBackend_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _JsonpClientBackend)(ɵɵinject(JsonpCallbackContext), ɵɵinject(DOCUMENT));
 }, "JsonpClientBackend_Factory"));
-__publicField(_JsonpClientBackend, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_JsonpClientBackend, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _JsonpClientBackend,
-  factory: _JsonpClientBackend.\u0275fac
+  factory: _JsonpClientBackend.ɵfac
 }));
 var JsonpClientBackend = _JsonpClientBackend;
 (() => {
@@ -3119,12 +3119,12 @@ var _JsonpInterceptor = class _JsonpInterceptor {
   }
 };
 __name(_JsonpInterceptor, "JsonpInterceptor");
-__publicField(_JsonpInterceptor, "\u0275fac", /* @__PURE__ */ __name(function JsonpInterceptor_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _JsonpInterceptor)(\u0275\u0275inject(EnvironmentInjector));
+__publicField(_JsonpInterceptor, "ɵfac", /* @__PURE__ */ __name(function JsonpInterceptor_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _JsonpInterceptor)(ɵɵinject(EnvironmentInjector));
 }, "JsonpInterceptor_Factory"));
-__publicField(_JsonpInterceptor, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_JsonpInterceptor, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _JsonpInterceptor,
-  factory: _JsonpInterceptor.\u0275fac
+  factory: _JsonpInterceptor.ɵfac
 }));
 var JsonpInterceptor = _JsonpInterceptor;
 (() => {
@@ -3212,7 +3212,7 @@ var _HttpXhrBackend = class _HttpXhrBackend {
       // This branching is redundant.
       // The `ngServerMode` guard also enables tree-shaking of the `from()`
       // function from the common bundle, as it's only used in server code.
-      false ? from(xhrFactory.\u0275loadImpl()) : of(null)
+      false ? from(xhrFactory.ɵloadImpl()) : of(null)
     );
     return source.pipe(switchMap(() => {
       return new Observable((observer) => {
@@ -3395,12 +3395,12 @@ var _HttpXhrBackend = class _HttpXhrBackend {
   }
 };
 __name(_HttpXhrBackend, "HttpXhrBackend");
-__publicField(_HttpXhrBackend, "\u0275fac", /* @__PURE__ */ __name(function HttpXhrBackend_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _HttpXhrBackend)(\u0275\u0275inject(XhrFactory));
+__publicField(_HttpXhrBackend, "ɵfac", /* @__PURE__ */ __name(function HttpXhrBackend_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _HttpXhrBackend)(ɵɵinject(XhrFactory));
 }, "HttpXhrBackend_Factory"));
-__publicField(_HttpXhrBackend, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_HttpXhrBackend, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _HttpXhrBackend,
-  factory: _HttpXhrBackend.\u0275fac
+  factory: _HttpXhrBackend.ɵfac
 }));
 var HttpXhrBackend = _HttpXhrBackend;
 (() => {
@@ -3452,12 +3452,12 @@ var _HttpXsrfCookieExtractor = class _HttpXsrfCookieExtractor {
   }
 };
 __name(_HttpXsrfCookieExtractor, "HttpXsrfCookieExtractor");
-__publicField(_HttpXsrfCookieExtractor, "\u0275fac", /* @__PURE__ */ __name(function HttpXsrfCookieExtractor_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _HttpXsrfCookieExtractor)(\u0275\u0275inject(DOCUMENT), \u0275\u0275inject(XSRF_COOKIE_NAME));
+__publicField(_HttpXsrfCookieExtractor, "ɵfac", /* @__PURE__ */ __name(function HttpXsrfCookieExtractor_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _HttpXsrfCookieExtractor)(ɵɵinject(DOCUMENT), ɵɵinject(XSRF_COOKIE_NAME));
 }, "HttpXsrfCookieExtractor_Factory"));
-__publicField(_HttpXsrfCookieExtractor, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_HttpXsrfCookieExtractor, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _HttpXsrfCookieExtractor,
-  factory: _HttpXsrfCookieExtractor.\u0275fac
+  factory: _HttpXsrfCookieExtractor.ɵfac
 }));
 var HttpXsrfCookieExtractor = _HttpXsrfCookieExtractor;
 (() => {
@@ -3502,12 +3502,12 @@ var _HttpXsrfInterceptor = class _HttpXsrfInterceptor {
   }
 };
 __name(_HttpXsrfInterceptor, "HttpXsrfInterceptor");
-__publicField(_HttpXsrfInterceptor, "\u0275fac", /* @__PURE__ */ __name(function HttpXsrfInterceptor_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _HttpXsrfInterceptor)(\u0275\u0275inject(EnvironmentInjector));
+__publicField(_HttpXsrfInterceptor, "ɵfac", /* @__PURE__ */ __name(function HttpXsrfInterceptor_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _HttpXsrfInterceptor)(ɵɵinject(EnvironmentInjector));
 }, "HttpXsrfInterceptor_Factory"));
-__publicField(_HttpXsrfInterceptor, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_HttpXsrfInterceptor, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _HttpXsrfInterceptor,
-  factory: _HttpXsrfInterceptor.\u0275fac
+  factory: _HttpXsrfInterceptor.ɵfac
 }));
 var HttpXsrfInterceptor = _HttpXsrfInterceptor;
 (() => {
@@ -3529,14 +3529,14 @@ var HttpFeatureKind;
 })(HttpFeatureKind || (HttpFeatureKind = {}));
 function makeHttpFeature(kind, providers) {
   return {
-    \u0275kind: kind,
-    \u0275providers: providers
+    ɵkind: kind,
+    ɵproviders: providers
   };
 }
 __name(makeHttpFeature, "makeHttpFeature");
 function provideHttpClient(...features) {
   if (ngDevMode) {
-    const featureKinds = new Set(features.map((f) => f.\u0275kind));
+    const featureKinds = new Set(features.map((f) => f.ɵkind));
     if (featureKinds.has(HttpFeatureKind.NoXsrfProtection) && featureKinds.has(HttpFeatureKind.CustomXsrfConfiguration)) {
       throw new Error(ngDevMode ? `Configuration error: found both withXsrfConfiguration() and withNoXsrfProtection() in the same call to provideHttpClient(), which is a contradiction.` : "");
     }
@@ -3563,7 +3563,7 @@ function provideHttpClient(...features) {
     useClass: HttpXsrfCookieExtractor
   }];
   for (const feature of features) {
-    providers.push(...feature.\u0275providers);
+    providers.push(...feature.ɵproviders);
   }
   return makeEnvironmentProviders(providers);
 }
@@ -3635,7 +3635,7 @@ var _HttpClientXsrfModule = class _HttpClientXsrfModule {
   static disable() {
     return {
       ngModule: _HttpClientXsrfModule,
-      providers: [withNoXsrfProtection().\u0275providers]
+      providers: [withNoXsrfProtection().ɵproviders]
     };
   }
   /**
@@ -3649,18 +3649,18 @@ var _HttpClientXsrfModule = class _HttpClientXsrfModule {
   static withOptions(options = {}) {
     return {
       ngModule: _HttpClientXsrfModule,
-      providers: withXsrfConfiguration(options).\u0275providers
+      providers: withXsrfConfiguration(options).ɵproviders
     };
   }
 };
 __name(_HttpClientXsrfModule, "HttpClientXsrfModule");
-__publicField(_HttpClientXsrfModule, "\u0275fac", /* @__PURE__ */ __name(function HttpClientXsrfModule_Factory(__ngFactoryType__) {
+__publicField(_HttpClientXsrfModule, "ɵfac", /* @__PURE__ */ __name(function HttpClientXsrfModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HttpClientXsrfModule)();
 }, "HttpClientXsrfModule_Factory"));
-__publicField(_HttpClientXsrfModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_HttpClientXsrfModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _HttpClientXsrfModule
 }));
-__publicField(_HttpClientXsrfModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_HttpClientXsrfModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   providers: [HttpXsrfInterceptor, {
     provide: HTTP_INTERCEPTORS,
     useExisting: HttpXsrfInterceptor,
@@ -3671,7 +3671,7 @@ __publicField(_HttpClientXsrfModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275de
   }, withXsrfConfiguration({
     cookieName: XSRF_DEFAULT_COOKIE_NAME,
     headerName: XSRF_DEFAULT_HEADER_NAME
-  }).\u0275providers, {
+  }).ɵproviders, {
     provide: XSRF_ENABLED,
     useValue: true
   }]
@@ -3691,7 +3691,7 @@ var HttpClientXsrfModule = _HttpClientXsrfModule;
       }, withXsrfConfiguration({
         cookieName: XSRF_DEFAULT_COOKIE_NAME,
         headerName: XSRF_DEFAULT_HEADER_NAME
-      }).\u0275providers, {
+      }).ɵproviders, {
         provide: XSRF_ENABLED,
         useValue: true
       }]
@@ -3701,13 +3701,13 @@ var HttpClientXsrfModule = _HttpClientXsrfModule;
 var _HttpClientModule = class _HttpClientModule {
 };
 __name(_HttpClientModule, "HttpClientModule");
-__publicField(_HttpClientModule, "\u0275fac", /* @__PURE__ */ __name(function HttpClientModule_Factory(__ngFactoryType__) {
+__publicField(_HttpClientModule, "ɵfac", /* @__PURE__ */ __name(function HttpClientModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HttpClientModule)();
 }, "HttpClientModule_Factory"));
-__publicField(_HttpClientModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_HttpClientModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _HttpClientModule
 }));
-__publicField(_HttpClientModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_HttpClientModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   providers: [provideHttpClient(withInterceptorsFromDi())]
 }));
 var HttpClientModule = _HttpClientModule;
@@ -3726,21 +3726,21 @@ var HttpClientModule = _HttpClientModule;
 var _HttpClientJsonpModule = class _HttpClientJsonpModule {
 };
 __name(_HttpClientJsonpModule, "HttpClientJsonpModule");
-__publicField(_HttpClientJsonpModule, "\u0275fac", /* @__PURE__ */ __name(function HttpClientJsonpModule_Factory(__ngFactoryType__) {
+__publicField(_HttpClientJsonpModule, "ɵfac", /* @__PURE__ */ __name(function HttpClientJsonpModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HttpClientJsonpModule)();
 }, "HttpClientJsonpModule_Factory"));
-__publicField(_HttpClientJsonpModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_HttpClientJsonpModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _HttpClientJsonpModule
 }));
-__publicField(_HttpClientJsonpModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
-  providers: [withJsonpSupport().\u0275providers]
+__publicField(_HttpClientJsonpModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
+  providers: [withJsonpSupport().ɵproviders]
 }));
 var HttpClientJsonpModule = _HttpClientJsonpModule;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(HttpClientJsonpModule, [{
     type: NgModule,
     args: [{
-      providers: [withJsonpSupport().\u0275providers]
+      providers: [withJsonpSupport().ɵproviders]
     }]
   }], null, null);
 })();
@@ -4148,12 +4148,12 @@ var _Meta = class _Meta {
   }
 };
 __name(_Meta, "Meta");
-__publicField(_Meta, "\u0275fac", /* @__PURE__ */ __name(function Meta_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _Meta)(\u0275\u0275inject(DOCUMENT));
+__publicField(_Meta, "ɵfac", /* @__PURE__ */ __name(function Meta_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _Meta)(ɵɵinject(DOCUMENT));
 }, "Meta_Factory"));
-__publicField(_Meta, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_Meta, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _Meta,
-  factory: _Meta.\u0275fac,
+  factory: _Meta.ɵfac,
   providedIn: "root"
 }));
 var Meta = _Meta;
@@ -4194,12 +4194,12 @@ var _Title = class _Title {
   }
 };
 __name(_Title, "Title");
-__publicField(_Title, "\u0275fac", /* @__PURE__ */ __name(function Title_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _Title)(\u0275\u0275inject(DOCUMENT));
+__publicField(_Title, "ɵfac", /* @__PURE__ */ __name(function Title_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _Title)(ɵɵinject(DOCUMENT));
 }, "Title_Factory"));
-__publicField(_Title, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_Title, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _Title,
-  factory: _Title.\u0275fac,
+  factory: _Title.ɵfac,
   providedIn: "root"
 }));
 var Title = _Title;
@@ -4310,12 +4310,12 @@ var _HammerGestureConfig = class _HammerGestureConfig {
   }
 };
 __name(_HammerGestureConfig, "HammerGestureConfig");
-__publicField(_HammerGestureConfig, "\u0275fac", /* @__PURE__ */ __name(function HammerGestureConfig_Factory(__ngFactoryType__) {
+__publicField(_HammerGestureConfig, "ɵfac", /* @__PURE__ */ __name(function HammerGestureConfig_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HammerGestureConfig)();
 }, "HammerGestureConfig_Factory"));
-__publicField(_HammerGestureConfig, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_HammerGestureConfig, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _HammerGestureConfig,
-  factory: _HammerGestureConfig.\u0275fac
+  factory: _HammerGestureConfig.ɵfac
 }));
 var HammerGestureConfig = _HammerGestureConfig;
 (() => {
@@ -4402,12 +4402,12 @@ var _HammerGesturesPlugin = class _HammerGesturesPlugin extends EventManagerPlug
   }
 };
 __name(_HammerGesturesPlugin, "HammerGesturesPlugin");
-__publicField(_HammerGesturesPlugin, "\u0275fac", /* @__PURE__ */ __name(function HammerGesturesPlugin_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _HammerGesturesPlugin)(\u0275\u0275inject(DOCUMENT), \u0275\u0275inject(HAMMER_GESTURE_CONFIG), \u0275\u0275inject(Injector), \u0275\u0275inject(HAMMER_LOADER, 8));
+__publicField(_HammerGesturesPlugin, "ɵfac", /* @__PURE__ */ __name(function HammerGesturesPlugin_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _HammerGesturesPlugin)(ɵɵinject(DOCUMENT), ɵɵinject(HAMMER_GESTURE_CONFIG), ɵɵinject(Injector), ɵɵinject(HAMMER_LOADER, 8));
 }, "HammerGesturesPlugin_Factory"));
-__publicField(_HammerGesturesPlugin, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_HammerGesturesPlugin, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _HammerGesturesPlugin,
-  factory: _HammerGesturesPlugin.\u0275fac
+  factory: _HammerGesturesPlugin.ɵfac
 }));
 var HammerGesturesPlugin = _HammerGesturesPlugin;
 (() => {
@@ -4440,13 +4440,13 @@ var HammerGesturesPlugin = _HammerGesturesPlugin;
 var _HammerModule = class _HammerModule {
 };
 __name(_HammerModule, "HammerModule");
-__publicField(_HammerModule, "\u0275fac", /* @__PURE__ */ __name(function HammerModule_Factory(__ngFactoryType__) {
+__publicField(_HammerModule, "ɵfac", /* @__PURE__ */ __name(function HammerModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HammerModule)();
 }, "HammerModule_Factory"));
-__publicField(_HammerModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_HammerModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _HammerModule
 }));
-__publicField(_HammerModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_HammerModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   providers: [{
     provide: EVENT_MANAGER_PLUGINS,
     useClass: HammerGesturesPlugin,
@@ -4477,17 +4477,17 @@ var HammerModule = _HammerModule;
 var _DomSanitizer = class _DomSanitizer {
 };
 __name(_DomSanitizer, "DomSanitizer");
-__publicField(_DomSanitizer, "\u0275fac", /* @__PURE__ */ __name(function DomSanitizer_Factory(__ngFactoryType__) {
+__publicField(_DomSanitizer, "ɵfac", /* @__PURE__ */ __name(function DomSanitizer_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _DomSanitizer)();
 }, "DomSanitizer_Factory"));
-__publicField(_DomSanitizer, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_DomSanitizer, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _DomSanitizer,
   factory: /* @__PURE__ */ __name(function DomSanitizer_Factory(__ngFactoryType__) {
     let __ngConditionalFactory__ = null;
     if (__ngFactoryType__) {
       __ngConditionalFactory__ = new (__ngFactoryType__ || _DomSanitizer)();
     } else {
-      __ngConditionalFactory__ = \u0275\u0275inject(DomSanitizerImpl);
+      __ngConditionalFactory__ = ɵɵinject(DomSanitizerImpl);
     }
     return __ngConditionalFactory__;
   }, "DomSanitizer_Factory"),
@@ -4580,12 +4580,12 @@ var _DomSanitizerImpl = class _DomSanitizerImpl extends DomSanitizer {
   }
 };
 __name(_DomSanitizerImpl, "DomSanitizerImpl");
-__publicField(_DomSanitizerImpl, "\u0275fac", /* @__PURE__ */ __name(function DomSanitizerImpl_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _DomSanitizerImpl)(\u0275\u0275inject(DOCUMENT));
+__publicField(_DomSanitizerImpl, "ɵfac", /* @__PURE__ */ __name(function DomSanitizerImpl_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _DomSanitizerImpl)(ɵɵinject(DOCUMENT));
 }, "DomSanitizerImpl_Factory"));
-__publicField(_DomSanitizerImpl, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_DomSanitizerImpl, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _DomSanitizerImpl,
-  factory: _DomSanitizerImpl.\u0275fac,
+  factory: _DomSanitizerImpl.ɵfac,
   providedIn: "root"
 }));
 var DomSanitizerImpl = _DomSanitizerImpl;
@@ -4648,12 +4648,12 @@ function provideClientHydration(...features) {
   const providers = [];
   const featuresKind = /* @__PURE__ */ new Set();
   for (const {
-    \u0275providers,
-    \u0275kind
+    ɵproviders,
+    ɵkind
   } of features) {
-    featuresKind.add(\u0275kind);
-    if (\u0275providers.length) {
-      providers.push(\u0275providers);
+    featuresKind.add(ɵkind);
+    if (ɵproviders.length) {
+      providers.push(ɵproviders);
     }
   }
   const hasHttpTransferCacheOptions = featuresKind.has(HydrationFeatureKind.HttpTransferCacheOptions);

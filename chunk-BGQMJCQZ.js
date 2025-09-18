@@ -45,10 +45,10 @@ var _FlyingHeroesPipe = class _FlyingHeroesPipe {
   }
 };
 __name(_FlyingHeroesPipe, "FlyingHeroesPipe");
-__publicField(_FlyingHeroesPipe, "\u0275fac", /* @__PURE__ */ __name(function FlyingHeroesPipe_Factory(__ngFactoryType__) {
+__publicField(_FlyingHeroesPipe, "ɵfac", /* @__PURE__ */ __name(function FlyingHeroesPipe_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _FlyingHeroesPipe)();
 }, "FlyingHeroesPipe_Factory"));
-__publicField(_FlyingHeroesPipe, "\u0275pipe", /* @__PURE__ */ \u0275\u0275definePipe({ name: "flyingHeroes", type: _FlyingHeroesPipe, pure: true }));
+__publicField(_FlyingHeroesPipe, "ɵpipe", /* @__PURE__ */ ɵɵdefinePipe({ name: "flyingHeroes", type: _FlyingHeroesPipe, pure: true }));
 var FlyingHeroesPipe = _FlyingHeroesPipe;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FlyingHeroesPipe, [{
@@ -61,13 +61,13 @@ var FlyingHeroesPipe = _FlyingHeroesPipe;
 var _FlyingHeroesImpurePipe = class _FlyingHeroesImpurePipe extends FlyingHeroesPipe {
 };
 __name(_FlyingHeroesImpurePipe, "FlyingHeroesImpurePipe");
-__publicField(_FlyingHeroesImpurePipe, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275FlyingHeroesImpurePipe_BaseFactory;
+__publicField(_FlyingHeroesImpurePipe, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵFlyingHeroesImpurePipe_BaseFactory;
   return /* @__PURE__ */ __name(function FlyingHeroesImpurePipe_Factory(__ngFactoryType__) {
-    return (\u0275FlyingHeroesImpurePipe_BaseFactory || (\u0275FlyingHeroesImpurePipe_BaseFactory = \u0275\u0275getInheritedFactory(_FlyingHeroesImpurePipe)))(__ngFactoryType__ || _FlyingHeroesImpurePipe);
+    return (ɵFlyingHeroesImpurePipe_BaseFactory || (ɵFlyingHeroesImpurePipe_BaseFactory = ɵɵgetInheritedFactory(_FlyingHeroesImpurePipe)))(__ngFactoryType__ || _FlyingHeroesImpurePipe);
   }, "FlyingHeroesImpurePipe_Factory");
 })());
-__publicField(_FlyingHeroesImpurePipe, "\u0275pipe", /* @__PURE__ */ \u0275\u0275definePipe({ name: "flyingHeroesImpure", type: _FlyingHeroesImpurePipe, pure: false }));
+__publicField(_FlyingHeroesImpurePipe, "ɵpipe", /* @__PURE__ */ ɵɵdefinePipe({ name: "flyingHeroesImpure", type: _FlyingHeroesImpurePipe, pure: false }));
 var FlyingHeroesImpurePipe = _FlyingHeroesImpurePipe;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FlyingHeroesImpurePipe, [{
@@ -90,53 +90,53 @@ var HEROES = [
 // src/content/examples/pipes/src/app/flying-heroes.component.ts
 function FlyingHeroesComponent_For_22_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div");
+    ɵɵtext(1);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const hero_r3 = ctx.$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(hero_r3.name);
+    ɵɵadvance();
+    ɵɵtextInterpolate(hero_r3.name);
   }
 }
 __name(FlyingHeroesComponent_For_22_Template, "FlyingHeroesComponent_For_22_Template");
 function FlyingHeroesComponent_For_28_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div");
+    ɵɵtext(1);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const hero_r4 = ctx.$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(hero_r4.name);
+    ɵɵadvance();
+    ɵɵtextInterpolate(hero_r4.name);
   }
 }
 __name(FlyingHeroesComponent_For_28_Template, "FlyingHeroesComponent_For_28_Template");
 function FlyingHeroesImpureComponent_For_19_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div");
+    ɵɵtext(1);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const hero_r3 = ctx.$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(hero_r3.name);
+    ɵɵadvance();
+    ɵɵtextInterpolate(hero_r3.name);
   }
 }
 __name(FlyingHeroesImpureComponent_For_19_Template, "FlyingHeroesImpureComponent_For_19_Template");
 function FlyingHeroesImpureComponent_For_25_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div");
+    ɵɵtext(1);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const hero_r4 = ctx.$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(hero_r4.name);
+    ɵɵadvance();
+    ɵɵtextInterpolate(hero_r4.name);
   }
 }
 __name(FlyingHeroesImpureComponent_For_25_Template, "FlyingHeroesImpureComponent_For_25_Template");
@@ -167,81 +167,81 @@ var _FlyingHeroesComponent = class _FlyingHeroesComponent {
   }
 };
 __name(_FlyingHeroesComponent, "FlyingHeroesComponent");
-__publicField(_FlyingHeroesComponent, "\u0275fac", /* @__PURE__ */ __name(function FlyingHeroesComponent_Factory(__ngFactoryType__) {
+__publicField(_FlyingHeroesComponent, "ɵfac", /* @__PURE__ */ __name(function FlyingHeroesComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _FlyingHeroesComponent)();
 }, "FlyingHeroesComponent_Factory"));
-__publicField(_FlyingHeroesComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FlyingHeroesComponent, selectors: [["app-flying-heroes"]], decls: 29, vars: 5, consts: [["box", ""], ["for", "hero-name"], ["type", "text", "id", "hero-name", "placeholder", "hero name", 3, "keyup.enter"], ["id", "can-fly", "type", "checkbox", 3, "ngModelChange", "ngModel"], ["for", "can-fly"], ["id", "mutate", "type", "checkbox", 3, "ngModelChange", "ngModel"], ["for", "mutate"], ["type", "button", 3, "click"], ["id", "flyers"], ["id", "all"]], template: /* @__PURE__ */ __name(function FlyingHeroesComponent_Template(rf, ctx) {
+__publicField(_FlyingHeroesComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _FlyingHeroesComponent, selectors: [["app-flying-heroes"]], decls: 29, vars: 5, consts: [["box", ""], ["for", "hero-name"], ["type", "text", "id", "hero-name", "placeholder", "hero name", 3, "keyup.enter"], ["id", "can-fly", "type", "checkbox", 3, "ngModelChange", "ngModel"], ["for", "can-fly"], ["id", "mutate", "type", "checkbox", 3, "ngModelChange", "ngModel"], ["for", "mutate"], ["type", "button", 3, "click"], ["id", "flyers"], ["id", "all"]], template: /* @__PURE__ */ __name(function FlyingHeroesComponent_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "h2");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "p");
-    \u0275\u0275text(3, "Create a new hero and press enter to add it to the list. ");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "label", 1);
-    \u0275\u0275text(5, "New hero name: ");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "input", 2, 0);
-    \u0275\u0275listener("keyup.enter", /* @__PURE__ */ __name(function FlyingHeroesComponent_Template_input_keyup_enter_6_listener() {
-      \u0275\u0275restoreView(_r1);
-      const box_r2 = \u0275\u0275reference(7);
+    const _r1 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "h2");
+    ɵɵtext(1);
+    ɵɵelementEnd();
+    ɵɵelementStart(2, "p");
+    ɵɵtext(3, "Create a new hero and press enter to add it to the list. ");
+    ɵɵelementEnd();
+    ɵɵelementStart(4, "label", 1);
+    ɵɵtext(5, "New hero name: ");
+    ɵɵelementEnd();
+    ɵɵelementStart(6, "input", 2, 0);
+    ɵɵlistener("keyup.enter", /* @__PURE__ */ __name(function FlyingHeroesComponent_Template_input_keyup_enter_6_listener() {
+      ɵɵrestoreView(_r1);
+      const box_r2 = ɵɵreference(7);
       ctx.addHero(box_r2.value);
-      return \u0275\u0275resetView(box_r2.value = "");
+      return ɵɵresetView(box_r2.value = "");
     }, "FlyingHeroesComponent_Template_input_keyup_enter_6_listener"));
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "div")(9, "input", 3);
-    \u0275\u0275twoWayListener("ngModelChange", /* @__PURE__ */ __name(function FlyingHeroesComponent_Template_input_ngModelChange_9_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      \u0275\u0275twoWayBindingSet(ctx.canFly, $event) || (ctx.canFly = $event);
-      return \u0275\u0275resetView($event);
+    ɵɵelementEnd();
+    ɵɵelementStart(8, "div")(9, "input", 3);
+    ɵɵtwoWayListener("ngModelChange", /* @__PURE__ */ __name(function FlyingHeroesComponent_Template_input_ngModelChange_9_listener($event) {
+      ɵɵrestoreView(_r1);
+      ɵɵtwoWayBindingSet(ctx.canFly, $event) || (ctx.canFly = $event);
+      return ɵɵresetView($event);
     }, "FlyingHeroesComponent_Template_input_ngModelChange_9_listener"));
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "label", 4);
-    \u0275\u0275text(11, "Hero can fly");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(12, "div")(13, "input", 5);
-    \u0275\u0275twoWayListener("ngModelChange", /* @__PURE__ */ __name(function FlyingHeroesComponent_Template_input_ngModelChange_13_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      \u0275\u0275twoWayBindingSet(ctx.mutate, $event) || (ctx.mutate = $event);
-      return \u0275\u0275resetView($event);
+    ɵɵelementEnd();
+    ɵɵelementStart(10, "label", 4);
+    ɵɵtext(11, "Hero can fly");
+    ɵɵelementEnd()();
+    ɵɵelementStart(12, "div")(13, "input", 5);
+    ɵɵtwoWayListener("ngModelChange", /* @__PURE__ */ __name(function FlyingHeroesComponent_Template_input_ngModelChange_13_listener($event) {
+      ɵɵrestoreView(_r1);
+      ɵɵtwoWayBindingSet(ctx.mutate, $event) || (ctx.mutate = $event);
+      return ɵɵresetView($event);
     }, "FlyingHeroesComponent_Template_input_ngModelChange_13_listener"));
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(14, "label", 6);
-    \u0275\u0275text(15, "Mutate array");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(16, "button", 7);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function FlyingHeroesComponent_Template_button_click_16_listener() {
-      \u0275\u0275restoreView(_r1);
-      return \u0275\u0275resetView(ctx.reset());
+    ɵɵelementEnd();
+    ɵɵelementStart(14, "label", 6);
+    ɵɵtext(15, "Mutate array");
+    ɵɵelementEnd();
+    ɵɵelementStart(16, "button", 7);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function FlyingHeroesComponent_Template_button_click_16_listener() {
+      ɵɵrestoreView(_r1);
+      return ɵɵresetView(ctx.reset());
     }, "FlyingHeroesComponent_Template_button_click_16_listener"));
-    \u0275\u0275text(17, "Reset list of heroes");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(18, "h3");
-    \u0275\u0275text(19, "Heroes who fly (piped)");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(20, "div", 8);
-    \u0275\u0275repeaterCreate(21, FlyingHeroesComponent_For_22_Template, 2, 1, "div", null, \u0275\u0275repeaterTrackByIdentity);
-    \u0275\u0275pipe(23, "flyingHeroes");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(24, "h3");
-    \u0275\u0275text(25, "All Heroes (no pipe)");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(26, "div", 9);
-    \u0275\u0275repeaterCreate(27, FlyingHeroesComponent_For_28_Template, 2, 1, "div", null, \u0275\u0275repeaterTrackByIdentity);
-    \u0275\u0275elementEnd();
+    ɵɵtext(17, "Reset list of heroes");
+    ɵɵelementEnd()();
+    ɵɵelementStart(18, "h3");
+    ɵɵtext(19, "Heroes who fly (piped)");
+    ɵɵelementEnd();
+    ɵɵelementStart(20, "div", 8);
+    ɵɵrepeaterCreate(21, FlyingHeroesComponent_For_22_Template, 2, 1, "div", null, ɵɵrepeaterTrackByIdentity);
+    ɵɵpipe(23, "flyingHeroes");
+    ɵɵelementEnd();
+    ɵɵelementStart(24, "h3");
+    ɵɵtext(25, "All Heroes (no pipe)");
+    ɵɵelementEnd();
+    ɵɵelementStart(26, "div", 9);
+    ɵɵrepeaterCreate(27, FlyingHeroesComponent_For_28_Template, 2, 1, "div", null, ɵɵrepeaterTrackByIdentity);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx.title);
-    \u0275\u0275advance(8);
-    \u0275\u0275twoWayProperty("ngModel", ctx.canFly);
-    \u0275\u0275advance(4);
-    \u0275\u0275twoWayProperty("ngModel", ctx.mutate);
-    \u0275\u0275advance(8);
-    \u0275\u0275repeater(\u0275\u0275pipeBind1(23, 3, ctx.heroes));
-    \u0275\u0275advance(6);
-    \u0275\u0275repeater(ctx.heroes);
+    ɵɵadvance();
+    ɵɵtextInterpolate(ctx.title);
+    ɵɵadvance(8);
+    ɵɵtwoWayProperty("ngModel", ctx.canFly);
+    ɵɵadvance(4);
+    ɵɵtwoWayProperty("ngModel", ctx.mutate);
+    ɵɵadvance(8);
+    ɵɵrepeater(ɵɵpipeBind1(23, 3, ctx.heroes));
+    ɵɵadvance(6);
+    ɵɵrepeater(ctx.heroes);
   }
 }, "FlyingHeroesComponent_Template"), dependencies: [CommonModule, FormsModule, CheckboxControlValueAccessor, NgControlStatus, NgModel, FlyingHeroesPipe], styles: ["\n\n#flyers[_ngcontent-%COMP%], \n#all[_ngcontent-%COMP%] {\n  font-style: italic;\n}\nbutton[_ngcontent-%COMP%] {\n  display: block;\n}\ninput[_ngcontent-%COMP%] {\n  margin: 0.25rem 0.25rem 0.5rem 0;\n}\n/*# sourceMappingURL=flying-heroes.component.css.map */"] }));
 var FlyingHeroesComponent = _FlyingHeroesComponent;
@@ -289,85 +289,85 @@ var FlyingHeroesComponent = _FlyingHeroesComponent;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FlyingHeroesComponent, { className: "FlyingHeroesComponent", filePath: "src/content/examples/pipes/src/app/flying-heroes.component.ts", lineNumber: 23 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(FlyingHeroesComponent, { className: "FlyingHeroesComponent", filePath: "src/content/examples/pipes/src/app/flying-heroes.component.ts", lineNumber: 23 });
 })();
 var _FlyingHeroesImpureComponent = class _FlyingHeroesImpureComponent extends FlyingHeroesComponent {
   title = "Flying Heroes (impure pipe)";
 };
 __name(_FlyingHeroesImpureComponent, "FlyingHeroesImpureComponent");
-__publicField(_FlyingHeroesImpureComponent, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275FlyingHeroesImpureComponent_BaseFactory;
+__publicField(_FlyingHeroesImpureComponent, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵFlyingHeroesImpureComponent_BaseFactory;
   return /* @__PURE__ */ __name(function FlyingHeroesImpureComponent_Factory(__ngFactoryType__) {
-    return (\u0275FlyingHeroesImpureComponent_BaseFactory || (\u0275FlyingHeroesImpureComponent_BaseFactory = \u0275\u0275getInheritedFactory(_FlyingHeroesImpureComponent)))(__ngFactoryType__ || _FlyingHeroesImpureComponent);
+    return (ɵFlyingHeroesImpureComponent_BaseFactory || (ɵFlyingHeroesImpureComponent_BaseFactory = ɵɵgetInheritedFactory(_FlyingHeroesImpureComponent)))(__ngFactoryType__ || _FlyingHeroesImpureComponent);
   }, "FlyingHeroesImpureComponent_Factory");
 })());
-__publicField(_FlyingHeroesImpureComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FlyingHeroesImpureComponent, selectors: [["app-flying-heroes-impure"]], features: [\u0275\u0275InheritDefinitionFeature], decls: 26, vars: 5, consts: [["box", ""], ["for", "hero-name"], ["type", "text", "id", "hero-name", "placeholder", "hero name", 3, "keyup.enter"], ["id", "can-fly", "type", "checkbox", 3, "ngModelChange", "ngModel"], ["for", "can-fly"], ["id", "mutate", "type", "checkbox", 3, "ngModelChange", "ngModel"], ["type", "button", 3, "click"], ["id", "flyers"], ["id", "all"]], template: /* @__PURE__ */ __name(function FlyingHeroesImpureComponent_Template(rf, ctx) {
+__publicField(_FlyingHeroesImpureComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _FlyingHeroesImpureComponent, selectors: [["app-flying-heroes-impure"]], features: [ɵɵInheritDefinitionFeature], decls: 26, vars: 5, consts: [["box", ""], ["for", "hero-name"], ["type", "text", "id", "hero-name", "placeholder", "hero name", 3, "keyup.enter"], ["id", "can-fly", "type", "checkbox", 3, "ngModelChange", "ngModel"], ["for", "can-fly"], ["id", "mutate", "type", "checkbox", 3, "ngModelChange", "ngModel"], ["type", "button", 3, "click"], ["id", "flyers"], ["id", "all"]], template: /* @__PURE__ */ __name(function FlyingHeroesImpureComponent_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "h2");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "label", 1);
-    \u0275\u0275text(3, "New hero: ");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "input", 2, 0);
-    \u0275\u0275listener("keyup.enter", /* @__PURE__ */ __name(function FlyingHeroesImpureComponent_Template_input_keyup_enter_4_listener() {
-      \u0275\u0275restoreView(_r1);
-      const box_r2 = \u0275\u0275reference(5);
+    const _r1 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "h2");
+    ɵɵtext(1);
+    ɵɵelementEnd();
+    ɵɵelementStart(2, "label", 1);
+    ɵɵtext(3, "New hero: ");
+    ɵɵelementEnd();
+    ɵɵelementStart(4, "input", 2, 0);
+    ɵɵlistener("keyup.enter", /* @__PURE__ */ __name(function FlyingHeroesImpureComponent_Template_input_keyup_enter_4_listener() {
+      ɵɵrestoreView(_r1);
+      const box_r2 = ɵɵreference(5);
       ctx.addHero(box_r2.value);
-      return \u0275\u0275resetView(box_r2.value = "");
+      return ɵɵresetView(box_r2.value = "");
     }, "FlyingHeroesImpureComponent_Template_input_keyup_enter_4_listener"));
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "div")(7, "input", 3);
-    \u0275\u0275twoWayListener("ngModelChange", /* @__PURE__ */ __name(function FlyingHeroesImpureComponent_Template_input_ngModelChange_7_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      \u0275\u0275twoWayBindingSet(ctx.canFly, $event) || (ctx.canFly = $event);
-      return \u0275\u0275resetView($event);
+    ɵɵelementEnd();
+    ɵɵelementStart(6, "div")(7, "input", 3);
+    ɵɵtwoWayListener("ngModelChange", /* @__PURE__ */ __name(function FlyingHeroesImpureComponent_Template_input_ngModelChange_7_listener($event) {
+      ɵɵrestoreView(_r1);
+      ɵɵtwoWayBindingSet(ctx.canFly, $event) || (ctx.canFly = $event);
+      return ɵɵresetView($event);
     }, "FlyingHeroesImpureComponent_Template_input_ngModelChange_7_listener"));
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "label", 4);
-    \u0275\u0275text(9, "can fly");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(10, "div")(11, "input", 5);
-    \u0275\u0275twoWayListener("ngModelChange", /* @__PURE__ */ __name(function FlyingHeroesImpureComponent_Template_input_ngModelChange_11_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      \u0275\u0275twoWayBindingSet(ctx.mutate, $event) || (ctx.mutate = $event);
-      return \u0275\u0275resetView($event);
+    ɵɵelementEnd();
+    ɵɵelementStart(8, "label", 4);
+    ɵɵtext(9, "can fly");
+    ɵɵelementEnd()();
+    ɵɵelementStart(10, "div")(11, "input", 5);
+    ɵɵtwoWayListener("ngModelChange", /* @__PURE__ */ __name(function FlyingHeroesImpureComponent_Template_input_ngModelChange_11_listener($event) {
+      ɵɵrestoreView(_r1);
+      ɵɵtwoWayBindingSet(ctx.mutate, $event) || (ctx.mutate = $event);
+      return ɵɵresetView($event);
     }, "FlyingHeroesImpureComponent_Template_input_ngModelChange_11_listener"));
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(12, "Mutate array ");
-    \u0275\u0275elementStart(13, "button", 6);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function FlyingHeroesImpureComponent_Template_button_click_13_listener() {
-      \u0275\u0275restoreView(_r1);
-      return \u0275\u0275resetView(ctx.reset());
+    ɵɵelementEnd();
+    ɵɵtext(12, "Mutate array ");
+    ɵɵelementStart(13, "button", 6);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function FlyingHeroesImpureComponent_Template_button_click_13_listener() {
+      ɵɵrestoreView(_r1);
+      return ɵɵresetView(ctx.reset());
     }, "FlyingHeroesImpureComponent_Template_button_click_13_listener"));
-    \u0275\u0275text(14, "Reset");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(15, "h3");
-    \u0275\u0275text(16, "Heroes who fly (piped)");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(17, "div", 7);
-    \u0275\u0275repeaterCreate(18, FlyingHeroesImpureComponent_For_19_Template, 2, 1, "div", null, \u0275\u0275repeaterTrackByIdentity);
-    \u0275\u0275pipe(20, "flyingHeroesImpure");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(21, "h3");
-    \u0275\u0275text(22, "All Heroes (no pipe)");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(23, "div", 8);
-    \u0275\u0275repeaterCreate(24, FlyingHeroesImpureComponent_For_25_Template, 2, 1, "div", null, \u0275\u0275repeaterTrackByIdentity);
-    \u0275\u0275elementEnd();
+    ɵɵtext(14, "Reset");
+    ɵɵelementEnd()();
+    ɵɵelementStart(15, "h3");
+    ɵɵtext(16, "Heroes who fly (piped)");
+    ɵɵelementEnd();
+    ɵɵelementStart(17, "div", 7);
+    ɵɵrepeaterCreate(18, FlyingHeroesImpureComponent_For_19_Template, 2, 1, "div", null, ɵɵrepeaterTrackByIdentity);
+    ɵɵpipe(20, "flyingHeroesImpure");
+    ɵɵelementEnd();
+    ɵɵelementStart(21, "h3");
+    ɵɵtext(22, "All Heroes (no pipe)");
+    ɵɵelementEnd();
+    ɵɵelementStart(23, "div", 8);
+    ɵɵrepeaterCreate(24, FlyingHeroesImpureComponent_For_25_Template, 2, 1, "div", null, ɵɵrepeaterTrackByIdentity);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx.title);
-    \u0275\u0275advance(6);
-    \u0275\u0275twoWayProperty("ngModel", ctx.canFly);
-    \u0275\u0275advance(4);
-    \u0275\u0275twoWayProperty("ngModel", ctx.mutate);
-    \u0275\u0275advance(7);
-    \u0275\u0275repeater(\u0275\u0275pipeBind1(20, 3, ctx.heroes));
-    \u0275\u0275advance(6);
-    \u0275\u0275repeater(ctx.heroes);
+    ɵɵadvance();
+    ɵɵtextInterpolate(ctx.title);
+    ɵɵadvance(6);
+    ɵɵtwoWayProperty("ngModel", ctx.canFly);
+    ɵɵadvance(4);
+    ɵɵtwoWayProperty("ngModel", ctx.mutate);
+    ɵɵadvance(7);
+    ɵɵrepeater(ɵɵpipeBind1(20, 3, ctx.heroes));
+    ɵɵadvance(6);
+    ɵɵrepeater(ctx.heroes);
   }
 }, "FlyingHeroesImpureComponent_Template"), dependencies: [CommonModule, FormsModule, CheckboxControlValueAccessor, NgControlStatus, NgModel, FlyingHeroesImpurePipe], styles: ["\n\n#flyers[_ngcontent-%COMP%], \n#all[_ngcontent-%COMP%] {\n  font-style: italic;\n}\n/*# sourceMappingURL=flying-heroes.component.css.map */", "\n\nbutton[_ngcontent-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=flying-heroes.component.css.map */", "\n\ninput[_ngcontent-%COMP%] {\n  margin: 0.25rem 0.25rem 0.5rem 0;\n}\n/*# sourceMappingURL=flying-heroes.component.css.map */"] }));
 var FlyingHeroesImpureComponent = _FlyingHeroesImpureComponent;
@@ -409,7 +409,7 @@ var FlyingHeroesImpureComponent = _FlyingHeroesImpureComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FlyingHeroesImpureComponent, { className: "FlyingHeroesImpureComponent", filePath: "src/content/examples/pipes/src/app/flying-heroes.component.ts", lineNumber: 74 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(FlyingHeroesImpureComponent, { className: "FlyingHeroesImpureComponent", filePath: "src/content/examples/pipes/src/app/flying-heroes.component.ts", lineNumber: 74 });
 })();
 
 export {

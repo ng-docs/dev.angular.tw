@@ -759,10 +759,10 @@ var _AnimationCreatorService = class _AnimationCreatorService {
   }
 };
 __name(_AnimationCreatorService, "AnimationCreatorService");
-__publicField(_AnimationCreatorService, "\u0275fac", /* @__PURE__ */ __name(function AnimationCreatorService_Factory(__ngFactoryType__) {
+__publicField(_AnimationCreatorService, "ɵfac", /* @__PURE__ */ __name(function AnimationCreatorService_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AnimationCreatorService)();
 }, "AnimationCreatorService_Factory"));
-__publicField(_AnimationCreatorService, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _AnimationCreatorService, factory: _AnimationCreatorService.\u0275fac, providedIn: "root" }));
+__publicField(_AnimationCreatorService, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _AnimationCreatorService, factory: _AnimationCreatorService.ɵfac, providedIn: "root" }));
 var AnimationCreatorService = _AnimationCreatorService;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AnimationCreatorService, [{
@@ -777,10 +777,10 @@ var _AnimationLayerDirective = class _AnimationLayerDirective {
   id = input.required(...ngDevMode ? [{ debugName: "id", alias: "layerId" }] : [{ alias: "layerId" }]);
 };
 __name(_AnimationLayerDirective, "AnimationLayerDirective");
-__publicField(_AnimationLayerDirective, "\u0275fac", /* @__PURE__ */ __name(function AnimationLayerDirective_Factory(__ngFactoryType__) {
+__publicField(_AnimationLayerDirective, "ɵfac", /* @__PURE__ */ __name(function AnimationLayerDirective_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AnimationLayerDirective)();
 }, "AnimationLayerDirective_Factory"));
-__publicField(_AnimationLayerDirective, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({ type: _AnimationLayerDirective, selectors: [["", "adevAnimationLayer", ""]], inputs: { id: [1, "layerId", "id"] } }));
+__publicField(_AnimationLayerDirective, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({ type: _AnimationLayerDirective, selectors: [["", "adevAnimationLayer", ""]], inputs: { id: [1, "layerId", "id"] } }));
 var AnimationLayerDirective = _AnimationLayerDirective;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AnimationLayerDirective, [{
@@ -1212,51 +1212,51 @@ __name(generateHomeAnimationDefinition, "generateHomeAnimationDefinition");
 var _c0 = /* @__PURE__ */ __name((a0, a1) => ["meteor", a0, a1], "_c0");
 function HomeAnimationComponent_Conditional_18_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 11);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(1, "svg", 18)(2, "defs")(3, "linearGradient", 19);
-    \u0275\u0275element(4, "stop", 20)(5, "stop", 21)(6, "stop", 22)(7, "stop", 23)(8, "animateTransform", 24);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(9, "g", 25)(10, "g", 26)(11, "g", 27);
-    \u0275\u0275element(12, "path", 28)(13, "path", 29)(14, "path", 30)(15, "path", 31);
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(16, "path", 32)(17, "path", 33)(18, "path", 34)(19, "path", 35)(20, "rect", 36)(21, "path", 37)(22, "path", 38);
-    \u0275\u0275elementEnd()()()();
+    ɵɵelementStart(0, "div", 11);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(1, "svg", 18)(2, "defs")(3, "linearGradient", 19);
+    ɵɵelement(4, "stop", 20)(5, "stop", 21)(6, "stop", 22)(7, "stop", 23)(8, "animateTransform", 24);
+    ɵɵelementEnd()();
+    ɵɵelementStart(9, "g", 25)(10, "g", 26)(11, "g", 27);
+    ɵɵelement(12, "path", 28)(13, "path", 29)(14, "path", 30)(15, "path", 31);
+    ɵɵelementEnd();
+    ɵɵelement(16, "path", 32)(17, "path", 33)(18, "path", 34)(19, "path", 35)(20, "rect", 36)(21, "path", 37)(22, "path", 38);
+    ɵɵelementEnd()()()();
   }
 }
 __name(HomeAnimationComponent_Conditional_18_Template, "HomeAnimationComponent_Conditional_18_Template");
 function HomeAnimationComponent_Conditional_19_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 12);
-    \u0275\u0275element(1, "img", 39);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 12);
+    ɵɵelement(1, "img", 39);
+    ɵɵelementEnd();
   }
 }
 __name(HomeAnimationComponent_Conditional_19_Template, "HomeAnimationComponent_Conditional_19_Template");
 function HomeAnimationComponent_Conditional_25_For_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "div");
+    ɵɵelement(0, "div");
   }
   if (rf & 2) {
     const type_r1 = ctx.$implicit;
     const $index_r2 = ctx.$index;
-    \u0275\u0275classMap(\u0275\u0275pureFunction2(2, _c0, "type-" + type_r1, "mt-" + ($index_r2 + 1)));
+    ɵɵclassMap(ɵɵpureFunction2(2, _c0, "type-" + type_r1, "mt-" + ($index_r2 + 1)));
   }
 }
 __name(HomeAnimationComponent_Conditional_25_For_3_Template, "HomeAnimationComponent_Conditional_25_For_3_Template");
 function HomeAnimationComponent_Conditional_25_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 14)(1, "div", 40);
-    \u0275\u0275repeaterCreate(2, HomeAnimationComponent_Conditional_25_For_3_Template, 1, 5, "div", 41, \u0275\u0275repeaterTrackByIndex);
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "div", 14)(1, "div", 40);
+    ɵɵrepeaterCreate(2, HomeAnimationComponent_Conditional_25_For_3_Template, 1, 5, "div", 41, ɵɵrepeaterTrackByIndex);
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
     const meteorFieldData_r3 = ctx;
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275styleProp("width", meteorFieldData_r3.width + "px")("height", meteorFieldData_r3.height + "px")("margin-left", meteorFieldData_r3.marginLeft + "px")("margin-top", meteorFieldData_r3.marginTop + "px");
-    \u0275\u0275advance();
-    \u0275\u0275repeater(ctx_r3.meteors());
+    const ctx_r3 = ɵɵnextContext();
+    ɵɵadvance();
+    ɵɵstyleProp("width", meteorFieldData_r3.width + "px")("height", meteorFieldData_r3.height + "px")("margin-left", meteorFieldData_r3.marginLeft + "px")("margin-top", meteorFieldData_r3.marginTop + "px");
+    ɵɵadvance();
+    ɵɵrepeater(ctx_r3.meteors());
   }
 }
 __name(HomeAnimationComponent_Conditional_25_Template, "HomeAnimationComponent_Conditional_25_Template");
@@ -1353,67 +1353,67 @@ var _HomeAnimationComponent = class _HomeAnimationComponent {
   }
 };
 __name(_HomeAnimationComponent, "HomeAnimationComponent");
-__publicField(_HomeAnimationComponent, "\u0275fac", /* @__PURE__ */ __name(function HomeAnimationComponent_Factory(__ngFactoryType__) {
+__publicField(_HomeAnimationComponent, "ɵfac", /* @__PURE__ */ __name(function HomeAnimationComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HomeAnimationComponent)();
 }, "HomeAnimationComponent_Factory"));
-__publicField(_HomeAnimationComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HomeAnimationComponent, selectors: [["adev-home-animation"]], viewQuery: /* @__PURE__ */ __name(function HomeAnimationComponent_Query(rf, ctx) {
+__publicField(_HomeAnimationComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _HomeAnimationComponent, selectors: [["adev-home-animation"]], viewQuery: /* @__PURE__ */ __name(function HomeAnimationComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx.animationLayers, AnimationLayerDirective, 5);
+    ɵɵviewQuerySignal(ctx.animationLayers, AnimationLayerDirective, 5);
   }
   if (rf & 2) {
-    \u0275\u0275queryAdvance();
+    ɵɵqueryAdvance();
   }
-}, "HomeAnimationComponent_Query"), inputs: { isUwu: [1, "isUwu"] }, outputs: { ready: "ready" }, decls: 36, vars: 6, consts: [[1, "animation"], ["adevAnimationLayer", "", "layerId", "banners", 1, "banners-layer", "layer"], [1, "adev-banner-container"], ["href", "https://blog.angular.dev/announcing-angular-v20-b5c9c06cf301", "target", "_blank", 1, "adev-banner"], ["tabindex", "-1"], [1, "adev-banner-cta"], ["href", "https://goo.gle/angular-ai-update", "target", "_blank", 1, "adev-banner"], [1, "learn-angular"], [1, "adev-cta", 3, "routerLink"], ["aria-label", "\u5B66\u4E60 Angular", 1, "docs-primary-btn"], [1, "adev-arrow"], ["adevAnimationLayer", "", "layerId", "logo", 1, "logo-layer", "layer"], ["adevAnimationLayer", "", "layerId", "uwu", 1, "uwu-layer", "layer"], ["adevAnimationLayer", "", "layerId", "works-at-any-scale", 1, "works-at-any-scale-layer", "layer"], ["adevAnimationLayer", "", "layerId", "meteor-field", 1, "meteor-field-layer", "layer"], ["adevAnimationLayer", "", "layerId", "loved-by-millions", 1, "loved-by-millions-layer", "layer"], ["adevAnimationLayer", "", "layerId", "build-for-everyone", 1, "build-for-everyone-layer", "layer"], [1, "title"], ["viewBox", "0 0 1280 400", "xmlns", "http://www.w3.org/2000/svg", 1, "svg"], ["id", "gradient", "gradientUnits", "userSpaceOnUse", "gradientTransform", "rotate(0 640 125)"], ["offset", "0", "stop-color", "#ed0100"], ["offset", "0.25", "stop-color", "#e449b4"], ["offset", "0.5", "stop-color", "#ae3bfc"], ["offset", "1", "stop-color", "#7f15fd"], ["attributeName", "gradientTransform", "type", "rotate", "from", "0 640 125", "to", "360 640 125", "dur", "6.5s", "repeatCount", "indefinite"], ["fill", "url(#gradient)", 1, "wrapper"], [1, "logo"], [1, "shield"], ["d", "M311.8,101.7L302,255.6L208.3,53.8L311.8,101.7ZM246.9,300.7L176.1,341.1L105.3,300.7L246.9,300.7ZM50.1,255.6L40.4,101.7L143.9,53.8L50.1,255.6Z", 1, "shield-base"], ["d", "M176.1,130.4L213.2,220.6L139,220.6L176.1,130.4Z", 1, "shield-middle"], ["d", "M106.419,301.339L105.3,300.7L119.7,265.8L232.5,265.8L246.9,300.7L245.781,301.339L106.419,301.339Z", 1, "shield-bottom-a-arc"], ["d", "M245.78,301.339L106.42,301.339L68.889,279.923L283.311,279.923L245.78,301.339Z", 1, "shield-bottom-extension"], ["d", "M515.4,288L553.1,288L484.4,92.7L440.7,92.7L372,288L409.7,288L425.8,239.9L499.2,239.9L515.4,288ZM435.4,211.4L461.8,132.8L463.3,132.8L489.7,211.4L435.4,211.4Z", 1, "capt-a-letter", "letter"], ["d", "M590.4,202.2L590.4,288L555.9,288L555.9,141.6L588.9,141.6L588.9,166.5L590.6,166.5C594,158.3 599.4,151.8 606.8,147C614.2,142.2 623.4,139.8 634.3,139.8C644.4,139.8 653.2,142 660.8,146.3C668.3,150.6 674.2,156.9 678.3,165.1C682.5,173.3 684.5,183.2 684.4,194.9L684.4,288L649.9,288L649.9,200.1C649.9,190.3 647.4,182.7 642.3,177.1C637.2,171.6 630.3,168.8 621.4,168.8C615.4,168.8 610,170.1 605.3,172.8C600.6,175.4 597,179.2 594.3,184.2C591.8,189.1 590.4,195.1 590.4,202.2Z", 1, "n-letter", "letter"], ["d", "M760.5,345.9C748.1,345.9 737.5,344.2 728.6,340.9C719.7,337.6 712.6,333.1 707.2,327.5C701.8,321.9 698,315.7 696,308.9L727.1,301.4C728.5,304.3 730.5,307.1 733.2,309.9C735.9,312.7 739.5,315.1 744,317C748.5,318.9 754.3,319.8 761.2,319.8C771,319.8 779.1,317.4 785.5,312.7C791.9,308 795.1,300.2 795.1,289.4L795.1,261.7L793.4,261.7C791.6,265.3 789,268.9 785.6,272.7C782.2,276.5 777.7,279.6 772.2,282.1C766.6,284.6 759.7,285.9 751.3,285.9C740.1,285.9 729.9,283.2 720.7,277.9C711.6,272.6 704.3,264.6 699,254.1C693.6,243.5 690.9,230.3 690.9,214.3C690.9,198.2 693.6,184.6 699,173.5C704.4,162.4 711.6,154 720.8,148.2C730,142.4 740.2,139.6 751.4,139.6C760,139.6 767.1,141 772.6,143.9C778.2,146.8 782.6,150.3 785.9,154.3C789.2,158.3 791.7,162.1 793.4,165.7L795.3,165.7L795.3,141.5L829.3,141.5L829.3,290.3C829.3,302.8 826.3,313.2 820.3,321.4C814.3,329.6 806.2,335.7 795.8,339.8C785.4,343.9 773.6,345.9 760.5,345.9ZM760.8,258.8C768.1,258.8 774.3,257 779.5,253.5C784.6,249.9 788.6,244.8 791.2,238.2C793.9,231.5 795.2,223.5 795.2,214.2C795.2,205 793.9,196.9 791.2,190C788.6,183.1 784.7,177.7 779.6,173.8C774.5,170 768.2,168 760.8,168C753.1,168 746.7,170 741.5,174C736.4,178 732.5,183.5 729.9,190.4C727.3,197.4 726,205.3 726,214.1C726,223.1 727.3,230.9 730,237.6C732.6,244.3 736.5,249.5 741.7,253.2C746.8,256.9 753.2,258.8 760.8,258.8Z", 1, "g-letter", "letter"], ["d", "M933.8,226.4L933.8,141.6L968.3,141.6L968.3,288L934.8,288L934.8,262L933.3,262C930,270.2 924.6,276.9 917,282.1C909.5,287.3 900.2,289.9 889.2,289.9C879.6,289.9 871.1,287.8 863.8,283.5C856.5,279.2 850.7,273 846.6,264.7C842.5,256.5 840.4,246.5 840.4,234.8L840.4,141.6L875,141.6L875,229.5C875,238.8 877.5,246.2 882.6,251.6C887.7,257.1 894.4,259.8 902.6,259.8C907.7,259.8 912.6,258.6 917.4,256.1C922.2,253.6 926.1,249.9 929.2,245C932.3,240 933.8,233.8 933.8,226.4Z", 1, "u-letter", "letter"], ["x", "979.6", "y", "92.7", "width", "34.5", "height", "195.3", 1, "l-letter", "letter"], ["d", "M1068.9,290.9C1059.6,290.9 1051.3,289.2 1043.9,285.9C1036.5,282.6 1030.6,277.6 1026.4,271.1C1022.1,264.6 1020,256.5 1020,246.9C1020,238.6 1021.5,231.8 1024.6,226.4C1027.7,221 1031.8,216.7 1037.1,213.4C1042.4,210.2 1048.3,207.7 1055,206C1061.6,204.3 1068.5,203.1 1075.6,202.3C1084.2,201.4 1091.1,200.6 1096.5,199.9C1101.8,199.2 1105.7,198 1108.2,196.5C1110.6,194.9 1111.9,192.5 1111.9,189.2L1111.9,188.6C1111.9,181.4 1109.8,175.9 1105.5,171.9C1101.2,168 1095.1,166 1087.1,166C1078.6,166 1072,167.8 1067,171.5C1062.1,175.2 1058.8,179.5 1057,184.6L1024.8,180C1027.3,171.1 1031.5,163.7 1037.4,157.6C1043.2,151.6 1050.4,147.1 1058.8,144.1C1067.3,141.1 1076.6,139.6 1086.8,139.6C1093.9,139.6 1100.9,140.4 1107.9,142.1C1114.9,143.8 1121.3,146.5 1127.1,150.3C1132.9,154.1 1137.5,159.2 1141.1,165.7C1144.6,172.2 1146.4,180.3 1146.4,190L1146.4,288L1113.2,288L1113.2,267.9L1112.1,267.9C1110,272 1107.1,275.8 1103.3,279.3C1099.5,282.8 1094.8,285.7 1089.1,287.8C1083.2,289.9 1076.6,290.9 1068.9,290.9ZM1077.9,265.6C1084.8,265.6 1090.8,264.2 1095.9,261.5C1101,258.7 1104.9,255.1 1107.7,250.5C1110.5,245.9 1111.8,240.9 1111.8,235.5L1111.8,218.2C1110.7,219.1 1108.9,219.9 1106.3,220.7C1103.7,221.5 1100.9,222.1 1097.7,222.7C1094.5,223.3 1091.4,223.8 1088.3,224.2C1085.2,224.6 1082.5,225 1080.2,225.3C1075.1,226 1070.4,227.1 1066.4,228.7C1062.3,230.3 1059.1,232.5 1056.8,235.3C1054.4,238.1 1053.3,241.8 1053.3,246.2C1053.3,252.6 1055.6,257.4 1060.3,260.6C1064.8,264 1070.7,265.6 1077.9,265.6Z", 1, "a-letter", "letter"], ["d", "M1156.9,288L1156.9,141.6L1190.4,141.6L1190.4,166L1191.9,166C1194.6,157.5 1199.2,151 1205.7,146.4C1212.2,141.8 1219.7,139.5 1228.1,139.5C1230,139.5 1232.2,139.6 1234.5,139.7C1236.9,139.9 1238.9,140.1 1240.5,140.4L1240.5,172.1C1239,171.6 1236.7,171.1 1233.6,170.7C1230.5,170.3 1227.4,170.1 1224.5,170.1C1218.2,170.1 1212.6,171.5 1207.6,174.2C1202.6,176.9 1198.7,180.6 1195.8,185.4C1192.9,190.2 1191.5,195.7 1191.5,201.9L1191.5,288L1156.9,288Z", 1, "r-letter", "letter"], ["src", "assets/images/uwu.png", "alt", "Angular logo"], [1, "field"], [3, "class"]], template: /* @__PURE__ */ __name(function HomeAnimationComponent_Template(rf, ctx) {
+}, "HomeAnimationComponent_Query"), inputs: { isUwu: [1, "isUwu"] }, outputs: { ready: "ready" }, decls: 36, vars: 6, consts: [[1, "animation"], ["adevAnimationLayer", "", "layerId", "banners", 1, "banners-layer", "layer"], [1, "adev-banner-container"], ["href", "https://blog.angular.dev/announcing-angular-v20-b5c9c06cf301", "target", "_blank", 1, "adev-banner"], ["tabindex", "-1"], [1, "adev-banner-cta"], ["href", "https://goo.gle/angular-ai-update", "target", "_blank", 1, "adev-banner"], [1, "learn-angular"], [1, "adev-cta", 3, "routerLink"], ["aria-label", "學習 Angular", 1, "docs-primary-btn"], [1, "adev-arrow"], ["adevAnimationLayer", "", "layerId", "logo", 1, "logo-layer", "layer"], ["adevAnimationLayer", "", "layerId", "uwu", 1, "uwu-layer", "layer"], ["adevAnimationLayer", "", "layerId", "works-at-any-scale", 1, "works-at-any-scale-layer", "layer"], ["adevAnimationLayer", "", "layerId", "meteor-field", 1, "meteor-field-layer", "layer"], ["adevAnimationLayer", "", "layerId", "loved-by-millions", 1, "loved-by-millions-layer", "layer"], ["adevAnimationLayer", "", "layerId", "build-for-everyone", 1, "build-for-everyone-layer", "layer"], [1, "title"], ["viewBox", "0 0 1280 400", "xmlns", "http://www.w3.org/2000/svg", 1, "svg"], ["id", "gradient", "gradientUnits", "userSpaceOnUse", "gradientTransform", "rotate(0 640 125)"], ["offset", "0", "stop-color", "#ed0100"], ["offset", "0.25", "stop-color", "#e449b4"], ["offset", "0.5", "stop-color", "#ae3bfc"], ["offset", "1", "stop-color", "#7f15fd"], ["attributeName", "gradientTransform", "type", "rotate", "from", "0 640 125", "to", "360 640 125", "dur", "6.5s", "repeatCount", "indefinite"], ["fill", "url(#gradient)", 1, "wrapper"], [1, "logo"], [1, "shield"], ["d", "M311.8,101.7L302,255.6L208.3,53.8L311.8,101.7ZM246.9,300.7L176.1,341.1L105.3,300.7L246.9,300.7ZM50.1,255.6L40.4,101.7L143.9,53.8L50.1,255.6Z", 1, "shield-base"], ["d", "M176.1,130.4L213.2,220.6L139,220.6L176.1,130.4Z", 1, "shield-middle"], ["d", "M106.419,301.339L105.3,300.7L119.7,265.8L232.5,265.8L246.9,300.7L245.781,301.339L106.419,301.339Z", 1, "shield-bottom-a-arc"], ["d", "M245.78,301.339L106.42,301.339L68.889,279.923L283.311,279.923L245.78,301.339Z", 1, "shield-bottom-extension"], ["d", "M515.4,288L553.1,288L484.4,92.7L440.7,92.7L372,288L409.7,288L425.8,239.9L499.2,239.9L515.4,288ZM435.4,211.4L461.8,132.8L463.3,132.8L489.7,211.4L435.4,211.4Z", 1, "capt-a-letter", "letter"], ["d", "M590.4,202.2L590.4,288L555.9,288L555.9,141.6L588.9,141.6L588.9,166.5L590.6,166.5C594,158.3 599.4,151.8 606.8,147C614.2,142.2 623.4,139.8 634.3,139.8C644.4,139.8 653.2,142 660.8,146.3C668.3,150.6 674.2,156.9 678.3,165.1C682.5,173.3 684.5,183.2 684.4,194.9L684.4,288L649.9,288L649.9,200.1C649.9,190.3 647.4,182.7 642.3,177.1C637.2,171.6 630.3,168.8 621.4,168.8C615.4,168.8 610,170.1 605.3,172.8C600.6,175.4 597,179.2 594.3,184.2C591.8,189.1 590.4,195.1 590.4,202.2Z", 1, "n-letter", "letter"], ["d", "M760.5,345.9C748.1,345.9 737.5,344.2 728.6,340.9C719.7,337.6 712.6,333.1 707.2,327.5C701.8,321.9 698,315.7 696,308.9L727.1,301.4C728.5,304.3 730.5,307.1 733.2,309.9C735.9,312.7 739.5,315.1 744,317C748.5,318.9 754.3,319.8 761.2,319.8C771,319.8 779.1,317.4 785.5,312.7C791.9,308 795.1,300.2 795.1,289.4L795.1,261.7L793.4,261.7C791.6,265.3 789,268.9 785.6,272.7C782.2,276.5 777.7,279.6 772.2,282.1C766.6,284.6 759.7,285.9 751.3,285.9C740.1,285.9 729.9,283.2 720.7,277.9C711.6,272.6 704.3,264.6 699,254.1C693.6,243.5 690.9,230.3 690.9,214.3C690.9,198.2 693.6,184.6 699,173.5C704.4,162.4 711.6,154 720.8,148.2C730,142.4 740.2,139.6 751.4,139.6C760,139.6 767.1,141 772.6,143.9C778.2,146.8 782.6,150.3 785.9,154.3C789.2,158.3 791.7,162.1 793.4,165.7L795.3,165.7L795.3,141.5L829.3,141.5L829.3,290.3C829.3,302.8 826.3,313.2 820.3,321.4C814.3,329.6 806.2,335.7 795.8,339.8C785.4,343.9 773.6,345.9 760.5,345.9ZM760.8,258.8C768.1,258.8 774.3,257 779.5,253.5C784.6,249.9 788.6,244.8 791.2,238.2C793.9,231.5 795.2,223.5 795.2,214.2C795.2,205 793.9,196.9 791.2,190C788.6,183.1 784.7,177.7 779.6,173.8C774.5,170 768.2,168 760.8,168C753.1,168 746.7,170 741.5,174C736.4,178 732.5,183.5 729.9,190.4C727.3,197.4 726,205.3 726,214.1C726,223.1 727.3,230.9 730,237.6C732.6,244.3 736.5,249.5 741.7,253.2C746.8,256.9 753.2,258.8 760.8,258.8Z", 1, "g-letter", "letter"], ["d", "M933.8,226.4L933.8,141.6L968.3,141.6L968.3,288L934.8,288L934.8,262L933.3,262C930,270.2 924.6,276.9 917,282.1C909.5,287.3 900.2,289.9 889.2,289.9C879.6,289.9 871.1,287.8 863.8,283.5C856.5,279.2 850.7,273 846.6,264.7C842.5,256.5 840.4,246.5 840.4,234.8L840.4,141.6L875,141.6L875,229.5C875,238.8 877.5,246.2 882.6,251.6C887.7,257.1 894.4,259.8 902.6,259.8C907.7,259.8 912.6,258.6 917.4,256.1C922.2,253.6 926.1,249.9 929.2,245C932.3,240 933.8,233.8 933.8,226.4Z", 1, "u-letter", "letter"], ["x", "979.6", "y", "92.7", "width", "34.5", "height", "195.3", 1, "l-letter", "letter"], ["d", "M1068.9,290.9C1059.6,290.9 1051.3,289.2 1043.9,285.9C1036.5,282.6 1030.6,277.6 1026.4,271.1C1022.1,264.6 1020,256.5 1020,246.9C1020,238.6 1021.5,231.8 1024.6,226.4C1027.7,221 1031.8,216.7 1037.1,213.4C1042.4,210.2 1048.3,207.7 1055,206C1061.6,204.3 1068.5,203.1 1075.6,202.3C1084.2,201.4 1091.1,200.6 1096.5,199.9C1101.8,199.2 1105.7,198 1108.2,196.5C1110.6,194.9 1111.9,192.5 1111.9,189.2L1111.9,188.6C1111.9,181.4 1109.8,175.9 1105.5,171.9C1101.2,168 1095.1,166 1087.1,166C1078.6,166 1072,167.8 1067,171.5C1062.1,175.2 1058.8,179.5 1057,184.6L1024.8,180C1027.3,171.1 1031.5,163.7 1037.4,157.6C1043.2,151.6 1050.4,147.1 1058.8,144.1C1067.3,141.1 1076.6,139.6 1086.8,139.6C1093.9,139.6 1100.9,140.4 1107.9,142.1C1114.9,143.8 1121.3,146.5 1127.1,150.3C1132.9,154.1 1137.5,159.2 1141.1,165.7C1144.6,172.2 1146.4,180.3 1146.4,190L1146.4,288L1113.2,288L1113.2,267.9L1112.1,267.9C1110,272 1107.1,275.8 1103.3,279.3C1099.5,282.8 1094.8,285.7 1089.1,287.8C1083.2,289.9 1076.6,290.9 1068.9,290.9ZM1077.9,265.6C1084.8,265.6 1090.8,264.2 1095.9,261.5C1101,258.7 1104.9,255.1 1107.7,250.5C1110.5,245.9 1111.8,240.9 1111.8,235.5L1111.8,218.2C1110.7,219.1 1108.9,219.9 1106.3,220.7C1103.7,221.5 1100.9,222.1 1097.7,222.7C1094.5,223.3 1091.4,223.8 1088.3,224.2C1085.2,224.6 1082.5,225 1080.2,225.3C1075.1,226 1070.4,227.1 1066.4,228.7C1062.3,230.3 1059.1,232.5 1056.8,235.3C1054.4,238.1 1053.3,241.8 1053.3,246.2C1053.3,252.6 1055.6,257.4 1060.3,260.6C1064.8,264 1070.7,265.6 1077.9,265.6Z", 1, "a-letter", "letter"], ["d", "M1156.9,288L1156.9,141.6L1190.4,141.6L1190.4,166L1191.9,166C1194.6,157.5 1199.2,151 1205.7,146.4C1212.2,141.8 1219.7,139.5 1228.1,139.5C1230,139.5 1232.2,139.6 1234.5,139.7C1236.9,139.9 1238.9,140.1 1240.5,140.4L1240.5,172.1C1239,171.6 1236.7,171.1 1233.6,170.7C1230.5,170.3 1227.4,170.1 1224.5,170.1C1218.2,170.1 1212.6,171.5 1207.6,174.2C1202.6,176.9 1198.7,180.6 1195.8,185.4C1192.9,190.2 1191.5,195.7 1191.5,201.9L1191.5,288L1156.9,288Z", 1, "r-letter", "letter"], ["src", "assets/images/uwu.png", "alt", "Angular logo"], [1, "field"], [3, "class"]], template: /* @__PURE__ */ __name(function HomeAnimationComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "a", 3)(4, "h1", 4);
-    \u0275\u0275text(5, "\u53C2\u52A0 Angular AI \u5F00\u53D1\u8005\u6D3B\u52A8");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "p", 5);
-    \u0275\u0275text(7, "2025\u5E749\u670817\u65E5 0\u70B9");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(8, "a", 6)(9, "h1", 4);
-    \u0275\u0275text(10, "\u5DF2\u53EF\u7528\uFF1A");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(11, "p", 5);
-    \u0275\u0275text(12, "AI \u4E0E Angular \u7684\u63D0\u793A\u8BCD\u548C\u6700\u4F73\u5B9E\u8DF5");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(13, "div", 7)(14, "a", 8)(15, "button", 9);
-    \u0275\u0275text(16, " \u5B66\u4E60 Angular ");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275element(17, "div", 10);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275conditionalCreate(18, HomeAnimationComponent_Conditional_18_Template, 23, 0, "div", 11)(19, HomeAnimationComponent_Conditional_19_Template, 2, 0, "div", 12);
-    \u0275\u0275elementStart(20, "div", 13)(21, "h2");
-    \u0275\u0275text(22, "\u9002\u7528\u4E8E\u4EFB\u4F55\u89C4\u6A21");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(23, "p");
-    \u0275\u0275text(24, " Angular \u8BA9\u4F60\u4ECE\u5C0F\u89C4\u6A21\u5F00\u59CB\uFF0C\u4E8E\u5766\u9014\u4E4B\u4E0A\u6210\u957F\uFF0C\u5E76\u968F\u7740\u4F60\u7684\u56E2\u961F\u548C\u5E94\u7528\u7A0B\u5E8F\u7684\u53D1\u5C55\u800C\u63D0\u4F9B\u652F\u6301\u3002 ");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275conditionalCreate(25, HomeAnimationComponent_Conditional_25_Template, 4, 8, "div", 14);
-    \u0275\u0275elementStart(26, "div", 15)(27, "h2");
-    \u0275\u0275text(28, "\u6DF1\u53D7\u6570\u767E\u4E07\u5F00\u53D1\u8005\u559C\u7231");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(29, "p");
-    \u0275\u0275text(30, " \u52A0\u5165\u5168\u7403\u6570\u767E\u4E07\u4F7F\u7528 Angular \u6784\u5EFA\u5E94\u7528\u7684\u5F00\u53D1\u8005\uFF0C\u6210\u4E3A\u8FD9\u4E2A\u5145\u6EE1\u6D3B\u529B\u548C\u53CB\u597D\u7684\u793E\u533A\u7684\u4E00\u5458\u3002 ");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(31, "div", 16)(32, "h2", 17);
-    \u0275\u0275text(33, "\u4E3A\u6240\u6709\u4EBA\u6784\u5EFA");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(34, "p");
-    \u0275\u0275text(35, " \u4F9D\u9760 Angular \u5185\u7F6E\u7684\u6C34\u5408\u3001\u56FD\u9645\u5316\u3001\u5B89\u5168\u6027\u548C\u65E0\u969C\u788D\u6027\u652F\u6301\uFF0C\u4E3A\u5168\u7403\u6240\u6709\u4EBA\u6784\u5EFA\u5E94\u7528\u3002 ");
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "a", 3)(4, "h1", 4);
+    ɵɵtext(5, "參加 Angular AI 開發者活動");
+    ɵɵelementEnd();
+    ɵɵelementStart(6, "p", 5);
+    ɵɵtext(7, "2025年9月17日 0點");
+    ɵɵelementEnd()();
+    ɵɵelementStart(8, "a", 6)(9, "h1", 4);
+    ɵɵtext(10, "已可用：");
+    ɵɵelementEnd();
+    ɵɵelementStart(11, "p", 5);
+    ɵɵtext(12, "AI 與 Angular 的提示詞和最佳實踐");
+    ɵɵelementEnd()()();
+    ɵɵelementStart(13, "div", 7)(14, "a", 8)(15, "button", 9);
+    ɵɵtext(16, " 學習 Angular ");
+    ɵɵelementEnd()();
+    ɵɵelement(17, "div", 10);
+    ɵɵelementEnd()();
+    ɵɵconditionalCreate(18, HomeAnimationComponent_Conditional_18_Template, 23, 0, "div", 11)(19, HomeAnimationComponent_Conditional_19_Template, 2, 0, "div", 12);
+    ɵɵelementStart(20, "div", 13)(21, "h2");
+    ɵɵtext(22, "適用於任何規模");
+    ɵɵelementEnd();
+    ɵɵelementStart(23, "p");
+    ɵɵtext(24, " Angular 讓你從小規模開始，於坦途之上成長，並隨著你的團隊和應用程式的發展而提供支援。 ");
+    ɵɵelementEnd()();
+    ɵɵconditionalCreate(25, HomeAnimationComponent_Conditional_25_Template, 4, 8, "div", 14);
+    ɵɵelementStart(26, "div", 15)(27, "h2");
+    ɵɵtext(28, "深受數百萬開發者喜愛");
+    ɵɵelementEnd();
+    ɵɵelementStart(29, "p");
+    ɵɵtext(30, " 加入全球數百萬使用 Angular 建立應用的開發者，成為這個充滿活力和友好的社群的一員。 ");
+    ɵɵelementEnd()();
+    ɵɵelementStart(31, "div", 16)(32, "h2", 17);
+    ɵɵtext(33, "為所有人建立");
+    ɵɵelementEnd();
+    ɵɵelementStart(34, "p");
+    ɵɵtext(35, " 依靠 Angular 內建的水合、國際化、安全性和無障礙性支援，為全球所有人建立應用。 ");
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
     let tmp_4_0;
-    \u0275\u0275classProp("reduced-motion", ctx.reducedMotion());
-    \u0275\u0275advance(14);
-    \u0275\u0275property("routerLink", ctx.ctaLink);
-    \u0275\u0275advance();
-    \u0275\u0275attribute("text", "\u5B66\u4E60 Angular");
-    \u0275\u0275advance(3);
-    \u0275\u0275conditional(!ctx.isUwu() ? 18 : 19);
-    \u0275\u0275advance(7);
-    \u0275\u0275conditional((tmp_4_0 = ctx.meteorFieldData()) ? 25 : -1, tmp_4_0);
+    ɵɵclassProp("reduced-motion", ctx.reducedMotion());
+    ɵɵadvance(14);
+    ɵɵproperty("routerLink", ctx.ctaLink);
+    ɵɵadvance();
+    ɵɵattribute("text", "學習 Angular");
+    ɵɵadvance(3);
+    ɵɵconditional(!ctx.isUwu() ? 18 : 19);
+    ɵɵadvance(7);
+    ɵɵconditional((tmp_4_0 = ctx.meteorFieldData()) ? 25 : -1, tmp_4_0);
   }
 }, "HomeAnimationComponent_Template"), dependencies: [AnimationLayerDirective, RouterLink], styles: ['\n\n[_nghost-%COMP%] {\n  display: block;\n  position: relative;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%] {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  left: 0;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .layer[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .layer[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  font-size: 4vw;\n  font-weight: 600;\n  white-space: nowrap;\n  margin-top: 0;\n  margin-bottom: 0.5em;\n  z-index: 1;\n}\n@media (max-width: 900px) {\n  [_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .layer[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n    font-size: 2rem;\n  }\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .layer[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  font-weight: 400;\n  color: var(--quaternary-contrast);\n  font-size: clamp(1rem, 1vw, 2rem);\n  line-height: 1.5;\n  width: clamp(345px, 50%, 600px);\n  margin: 0 auto;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .layer[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%], \n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .layer[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  background-color: var(--page-background);\n  box-shadow: 0 0 20px 20px var(--page-background);\n}\n@media (max-width: 1200px) {\n  [_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .layer[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%], \n   [_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .layer[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n    box-shadow: 0 0 10px 10px var(--page-background);\n  }\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%] {\n  z-index: 10;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .adev-banner-container[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n  position: absolute;\n  transition:\n    background 0.3s ease,\n    border 0.3s ease,\n    transform 200ms linear;\n  top: var(--layout-padding);\n  left: calc(var(--layout-padding) + var(--primary-nav-width));\n}\n@media (max-width: 900px) {\n  [_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .adev-banner-container[_ngcontent-%COMP%] {\n    top: 6rem;\n    left: var(--layout-padding);\n    max-width: calc(100% - var(--layout-padding) * 2);\n  }\n}\n@media (max-width: 700px) {\n  [_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .adev-banner-container[_ngcontent-%COMP%] {\n    top: 5rem;\n  }\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .adev-banner[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 0.5rem;\n  border: 1px solid var(--senary-contrast);\n  background: var(--page-background);\n  border-radius: 0.25rem;\n  padding: 10px;\n  max-width: 100%;\n  width: fit-content;\n  box-sizing: border-box;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .adev-banner[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%], \n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .adev-banner[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  display: inline;\n  font-size: 0.875rem;\n  margin: 0;\n  background-image: var(--red-to-pink-to-purple-horizontal-gradient);\n  -webkit-background-clip: text;\n  background-clip: text;\n  color: transparent;\n  width: fit-content;\n  font-weight: 500;\n  box-shadow: none;\n  position: relative;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .adev-banner[_ngcontent-%COMP%]   h1.adev-banner-cta[_ngcontent-%COMP%], \n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .adev-banner[_ngcontent-%COMP%]   p.adev-banner-cta[_ngcontent-%COMP%] {\n  color: var(--tertiary-contrast);\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .adev-banner[_ngcontent-%COMP%]   h1.adev-banner-cta[_ngcontent-%COMP%]::after, \n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .adev-banner[_ngcontent-%COMP%]   p.adev-banner-cta[_ngcontent-%COMP%]::after {\n  content: "";\n  position: absolute;\n  width: 100%;\n  transform: scaleX(0);\n  height: 1px;\n  bottom: -2px;\n  left: 0;\n  background: var(--red-to-pink-to-purple-horizontal-gradient);\n  transform-origin: bottom right;\n  transition: transform 0.3s ease;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .adev-banner[_ngcontent-%COMP%]:hover   .adev-banner-cta[_ngcontent-%COMP%]::after {\n  transform: scaleX(1);\n  transform-origin: bottom left;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .learn-angular[_ngcontent-%COMP%] {\n  position: absolute;\n  left: 50%;\n  bottom: 5%;\n  transform: translateX(-50%);\n  transition: opacity 200ms linear;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n  gap: 50px;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .learn-angular[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  font-size: 1rem;\n  padding: 1rem 1.75rem;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .learn-angular[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]::after {\n  font-size: 1rem;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .learn-angular[_ngcontent-%COMP%]   .adev-arrow[_ngcontent-%COMP%] {\n  transform: rotate(45deg);\n  border: solid var(--primary-contrast);\n  border-width: 0 2px 2px 0;\n  display: inline-block;\n  padding: 7px;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%] {\n  -webkit-user-select: none;\n  user-select: none;\n  pointer-events: none;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%]   .svg[_ngcontent-%COMP%] {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  fill-rule: evenodd;\n  clip-rule: evenodd;\n  stroke-linejoin: round;\n  stroke-miterlimit: 2;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%]   .wrapper[_ngcontent-%COMP%] {\n  transform: scale(0.55);\n  transform-origin: 50% 50%;\n}\n@media (max-width: 775px) {\n  [_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%]   .wrapper[_ngcontent-%COMP%] {\n    transform: scale(0.8);\n  }\n}\n@media (min-width: 1800.01px) {\n  [_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%]   .wrapper[_ngcontent-%COMP%] {\n    transform: scale(0.5);\n  }\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%]   .wrapper[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%] {\n  transition: transform 200ms linear;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%]   .wrapper[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%]   .shield[_ngcontent-%COMP%] {\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%]   .wrapper[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%]   .shield[_ngcontent-%COMP%], \n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%]   .wrapper[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%]   .shield[_ngcontent-%COMP%]   .shield-middle[_ngcontent-%COMP%] {\n  transform-origin: 177px 200px;\n  transition: transform 200ms linear;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%]   .wrapper[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%]   .shield[_ngcontent-%COMP%]   .shield-bottom-a-arc[_ngcontent-%COMP%] {\n  transform-origin: 0 302px;\n  transition: transform 200ms linear;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%]   .wrapper[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%]   .shield[_ngcontent-%COMP%]   .shield-bottom-extension[_ngcontent-%COMP%] {\n  transform-origin: 177px 340px;\n  transition: transform 200ms linear;\n  transform: scale(0);\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%]   .wrapper[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%]   .letter[_ngcontent-%COMP%] {\n  transition: opacity 200ms linear;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .uwu-layer[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: transform 200ms linear, opacity 200ms linear;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .uwu-layer[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  -webkit-user-select: none;\n  user-select: none;\n  width: max(700 * min(100vw, 2560px) / 1470, 350px);\n  height: auto;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .works-at-any-scale-layer[_ngcontent-%COMP%], \n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .loved-by-millions-layer[_ngcontent-%COMP%], \n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .build-for-everyone-layer[_ngcontent-%COMP%] {\n  -webkit-user-select: none;\n  user-select: none;\n  pointer-events: none;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  text-align: center;\n  opacity: 0;\n  z-index: 1;\n  transition: transform 200ms linear, opacity 200ms linear;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .works-at-any-scale-layer[_ngcontent-%COMP%] {\n  transform: scale(0);\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .loved-by-millions-layer[_ngcontent-%COMP%], \n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .build-for-everyone-layer[_ngcontent-%COMP%] {\n  transform: scale(0.75);\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .build-for-everyone-layer[_ngcontent-%COMP%]   .title[_ngcontent-%COMP%] {\n  color: transparent;\n  display: inline-block;\n  background:\n    linear-gradient(\n      110deg,\n      #f31a5b 0,\n      #8737e9 50%,\n      #3a373f 0%);\n  background-size: 205% 100%;\n  -webkit-background-clip: text;\n  background-clip: text;\n  background-size: 205% 100%;\n  background-position-x: 100%;\n  transition: background-position-x 200ms linear;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .meteor-field-layer[_ngcontent-%COMP%] {\n  overflow: hidden;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .meteor-field-layer[_ngcontent-%COMP%]   .field[_ngcontent-%COMP%] {\n  --math-pi: 3.1415926536rad;\n  position: absolute;\n  flex-wrap: wrap;\n  align-content: flex-start;\n  gap: var(--meteor-gap);\n  display: none;\n  transform: scale(1.42);\n  top: 0;\n  left: 0;\n  transform-origin: 50% 50%;\n  transition: opacity 200ms linear, transform 200ms linear;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .meteor-field-layer[_ngcontent-%COMP%]   .field[_ngcontent-%COMP%]   .meteor[_ngcontent-%COMP%] {\n  position: relative;\n  width: var(--meteor-width);\n  height: var(--meteor-height);\n  opacity: 0;\n  transform: translate(200%, 200%) scale(0.3);\n  transition: opacity 200ms linear, transform 200ms linear;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .meteor-field-layer[_ngcontent-%COMP%]   .field[_ngcontent-%COMP%]   .meteor[_ngcontent-%COMP%]::after {\n  content: "";\n  position: absolute;\n  width: 4px;\n  height: var(--meteor-tail-length);\n  border-radius: 2px;\n  transform-origin: top center;\n  transform: rotate(var(--meteor-tilt-angle));\n  top: 0;\n  left: 0;\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .meteor-field-layer[_ngcontent-%COMP%]   .field[_ngcontent-%COMP%]   .meteor.type-1[_ngcontent-%COMP%]::after {\n  background:\n    linear-gradient(\n      calc(var(--math-pi) + var(--meteor-tilt-angle)),\n      rgb(228, 49, 85) 0,\n      rgb(219, 64, 219) 66%,\n      transparent 100%);\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .meteor-field-layer[_ngcontent-%COMP%]   .field[_ngcontent-%COMP%]   .meteor.type-2[_ngcontent-%COMP%]::after {\n  background:\n    linear-gradient(\n      calc(var(--math-pi) + var(--meteor-tilt-angle)),\n      rgb(152, 56, 226) 0,\n      rgb(217, 18, 167) 66%,\n      transparent 100%);\n}\n[_nghost-%COMP%]   .animation[_ngcontent-%COMP%]   .meteor-field-layer[_ngcontent-%COMP%]   .field[_ngcontent-%COMP%]   .meteor.type-3[_ngcontent-%COMP%]::after {\n  background:\n    linear-gradient(\n      calc(var(--math-pi) + var(--meteor-tilt-angle)),\n      rgb(214, 53, 150) 0,\n      rgb(229, 91, 229) 66%,\n      transparent 100%);\n}\n[_nghost-%COMP%]   .animation.reduced-motion[_ngcontent-%COMP%] {\n  position: relative;\n}\n[_nghost-%COMP%]   .animation.reduced-motion[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%] {\n  height: 100vh;\n}\n@media (max-width: 700px) {\n  [_nghost-%COMP%]   .animation.reduced-motion[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .adev-banner[_ngcontent-%COMP%] {\n    top: 6rem;\n  }\n}\n@media (min-width: 900.01px) {\n  [_nghost-%COMP%]   .animation.reduced-motion[_ngcontent-%COMP%]   .banners-layer[_ngcontent-%COMP%]   .adev-banner[_ngcontent-%COMP%] {\n    left: var(--layout-padding);\n  }\n}\n[_nghost-%COMP%]   .animation.reduced-motion[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%] {\n  position: relative;\n  height: 100vh;\n}\n@media (max-width: 900px) {\n  [_nghost-%COMP%]   .animation.reduced-motion[_ngcontent-%COMP%]   .logo-layer[_ngcontent-%COMP%] {\n    margin-top: -75px;\n  }\n}\n[_nghost-%COMP%]   .animation.reduced-motion[_ngcontent-%COMP%]   .works-at-any-scale-layer[_ngcontent-%COMP%], \n[_nghost-%COMP%]   .animation.reduced-motion[_ngcontent-%COMP%]   .loved-by-millions-layer[_ngcontent-%COMP%], \n[_nghost-%COMP%]   .animation.reduced-motion[_ngcontent-%COMP%]   .build-for-everyone-layer[_ngcontent-%COMP%] {\n  position: relative;\n  height: 120vh;\n  opacity: 1;\n  transform: scale(1);\n}\n[_nghost-%COMP%]   .animation.reduced-motion[_ngcontent-%COMP%]   .build-for-everyone-layer[_ngcontent-%COMP%]    > .title[_ngcontent-%COMP%] {\n  background-position-x: 0;\n}\n/*# sourceMappingURL=home-animation.component.css.map */'], changeDetection: 0 }));
 var HomeAnimationComponent = _HomeAnimationComponent;
@@ -1429,22 +1429,22 @@ var HomeAnimationComponent = _HomeAnimationComponent;
         class="adev-banner"
         target="_blank"
       >
-        <h1 tabindex="-1">\u53C2\u52A0 Angular AI \u5F00\u53D1\u8005\u6D3B\u52A8</h1>
-        <p class="adev-banner-cta">2025\u5E749\u670817\u65E5 0\u70B9</p>
+        <h1 tabindex="-1">參加 Angular AI 開發者活動</h1>
+        <p class="adev-banner-cta">2025年9月17日 0點</p>
       </a>
       <a
         href="https://goo.gle/angular-ai-update"
         class="adev-banner"
         target="_blank"
       >
-        <h1 tabindex="-1">\u5DF2\u53EF\u7528\uFF1A</h1>
-        <p class="adev-banner-cta">AI \u4E0E Angular \u7684\u63D0\u793A\u8BCD\u548C\u6700\u4F73\u5B9E\u8DF5</p>
+        <h1 tabindex="-1">已可用：</h1>
+        <p class="adev-banner-cta">AI 與 Angular 的提示詞和最佳實踐</p>
       </a>
     </div>
     <div class="learn-angular">
       <a [routerLink]="ctaLink" class="adev-cta">
-        <button class="docs-primary-btn" [attr.text]="'\u5B66\u4E60 Angular'" aria-label="\u5B66\u4E60 Angular">
-          \u5B66\u4E60 Angular
+        <button class="docs-primary-btn" [attr.text]="'學習 Angular'" aria-label="學習 Angular">
+          學習 Angular
         </button>
       </a>
       <div class="adev-arrow"></div>
@@ -1531,9 +1531,9 @@ var HomeAnimationComponent = _HomeAnimationComponent;
 
   <!-- Works at any scale -->
   <div adevAnimationLayer layerId="works-at-any-scale" class="works-at-any-scale-layer layer">
-    <h2>\u9002\u7528\u4E8E\u4EFB\u4F55\u89C4\u6A21</h2>
+    <h2>適用於任何規模</h2>
     <p>
-      Angular \u8BA9\u4F60\u4ECE\u5C0F\u89C4\u6A21\u5F00\u59CB\uFF0C\u4E8E\u5766\u9014\u4E4B\u4E0A\u6210\u957F\uFF0C\u5E76\u968F\u7740\u4F60\u7684\u56E2\u961F\u548C\u5E94\u7528\u7A0B\u5E8F\u7684\u53D1\u5C55\u800C\u63D0\u4F9B\u652F\u6301\u3002
+      Angular 讓你從小規模開始，於坦途之上成長，並隨著你的團隊和應用程式的發展而提供支援。
     </p>
   </div>
 
@@ -1556,17 +1556,17 @@ var HomeAnimationComponent = _HomeAnimationComponent;
 
   <!-- Loved by millions -->
   <div adevAnimationLayer layerId="loved-by-millions" class="loved-by-millions-layer layer">
-    <h2>\u6DF1\u53D7\u6570\u767E\u4E07\u5F00\u53D1\u8005\u559C\u7231</h2>
+    <h2>深受數百萬開發者喜愛</h2>
     <p>
-      \u52A0\u5165\u5168\u7403\u6570\u767E\u4E07\u4F7F\u7528 Angular \u6784\u5EFA\u5E94\u7528\u7684\u5F00\u53D1\u8005\uFF0C\u6210\u4E3A\u8FD9\u4E2A\u5145\u6EE1\u6D3B\u529B\u548C\u53CB\u597D\u7684\u793E\u533A\u7684\u4E00\u5458\u3002
+      加入全球數百萬使用 Angular 建立應用的開發者，成為這個充滿活力和友好的社群的一員。
     </p>
   </div>
 
   <!-- Build for everyone -->
   <div adevAnimationLayer layerId="build-for-everyone" class="build-for-everyone-layer layer">
-    <h2 class="title">\u4E3A\u6240\u6709\u4EBA\u6784\u5EFA</h2>
+    <h2 class="title">為所有人建立</h2>
     <p>
-      \u4F9D\u9760 Angular \u5185\u7F6E\u7684\u6C34\u5408\u3001\u56FD\u9645\u5316\u3001\u5B89\u5168\u6027\u548C\u65E0\u969C\u788D\u6027\u652F\u6301\uFF0C\u4E3A\u5168\u7403\u6240\u6709\u4EBA\u6784\u5EFA\u5E94\u7528\u3002
+      依靠 Angular 內建的水合、國際化、安全性和無障礙性支援，為全球所有人建立應用。
     </p>
   </div>
 </div>
@@ -1574,30 +1574,30 @@ var HomeAnimationComponent = _HomeAnimationComponent;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HomeAnimationComponent, { className: "HomeAnimationComponent", filePath: "src/app/features/home/components/home-animation/home-animation.component.ts", lineNumber: 63 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(HomeAnimationComponent, { className: "HomeAnimationComponent", filePath: "src/app/features/home/components/home-animation/home-animation.component.ts", lineNumber: 63 });
 })();
 
 // src/app/features/home/home.component.ts
 var Home_Defer_6_DepsFn = /* @__PURE__ */ __name(() => [import("./chunk-HL5LEJFE.js").then((m) => m.CodeEditorComponent)], "Home_Defer_6_DepsFn");
 function Home_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "div", 1);
+    ɵɵelement(0, "div", 1);
   }
 }
 __name(Home_Conditional_1_Template, "Home_Conditional_1_Template");
 function Home_Defer_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "adev-code-editor", 4);
+    ɵɵelement(0, "adev-code-editor", 4);
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275property("tutorialFiles", ctx_r0.tutorialFiles);
+    const ctx_r0 = ɵɵnextContext();
+    ɵɵproperty("tutorialFiles", ctx_r0.tutorialFiles);
   }
 }
 __name(Home_Defer_4_Template, "Home_Defer_4_Template");
 function Home_DeferLoading_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "img", 5);
+    ɵɵelement(0, "img", 5);
   }
 }
 __name(Home_DeferLoading_5_Template, "Home_DeferLoading_5_Template");
@@ -1627,29 +1627,29 @@ var _Home = class _Home {
   }
 };
 __name(_Home, "Home");
-__publicField(_Home, "\u0275fac", /* @__PURE__ */ __name(function Home_Factory(__ngFactoryType__) {
+__publicField(_Home, "ɵfac", /* @__PURE__ */ __name(function Home_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Home)();
 }, "Home_Factory"));
-__publicField(_Home, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _Home, selectors: [["adev-home"]], decls: 8, vars: 4, consts: [[3, "ready", "isUwu"], [1, "spacer"], [1, "adev-editor-scroll-container"], [1, "adev-code-editor"], [3, "tutorialFiles"], ["alt", "\u4EE3\u7801\u7F16\u8F91\u5668"]], template: /* @__PURE__ */ __name(function Home_Template(rf, ctx) {
+__publicField(_Home, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _Home, selectors: [["adev-home"]], decls: 8, vars: 4, consts: [[3, "ready", "isUwu"], [1, "spacer"], [1, "adev-editor-scroll-container"], [1, "adev-code-editor"], [3, "tutorialFiles"], ["alt", "程式碼編輯器"]], template: /* @__PURE__ */ __name(function Home_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "adev-home-animation", 0);
-    \u0275\u0275listener("ready", /* @__PURE__ */ __name(function Home_Template_adev_home_animation_ready_0_listener($event) {
+    ɵɵelementStart(0, "adev-home-animation", 0);
+    ɵɵlistener("ready", /* @__PURE__ */ __name(function Home_Template_adev_home_animation_ready_0_listener($event) {
       return ctx.onAnimationReady($event);
     }, "Home_Template_adev_home_animation_ready_0_listener"));
-    \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(1, Home_Conditional_1_Template, 1, 0, "div", 1);
-    \u0275\u0275elementStart(2, "div", 2)(3, "div", 3);
-    \u0275\u0275domTemplate(4, Home_Defer_4_Template, 1, 1)(5, Home_DeferLoading_5_Template, 1, 0);
-    \u0275\u0275defer(6, 4, Home_Defer_6_DepsFn, 5);
-    \u0275\u0275elementEnd()();
+    ɵɵelementEnd();
+    ɵɵconditionalCreate(1, Home_Conditional_1_Template, 1, 0, "div", 1);
+    ɵɵelementStart(2, "div", 2)(3, "div", 3);
+    ɵɵdomTemplate(4, Home_Defer_4_Template, 1, 1)(5, Home_DeferLoading_5_Template, 1, 0);
+    ɵɵdefer(6, 4, Home_Defer_6_DepsFn, 5);
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
-    \u0275\u0275property("isUwu", ctx.isUwu);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(!ctx.animationReady() ? 1 : -1);
-    \u0275\u0275advance(5);
-    \u0275\u0275deferWhen(ctx.showEditor());
-    \u0275\u0275deferPrefetchWhen(ctx.prefetchEditor());
+    ɵɵproperty("isUwu", ctx.isUwu);
+    ɵɵadvance();
+    ɵɵconditional(!ctx.animationReady() ? 1 : -1);
+    ɵɵadvance(5);
+    ɵɵdeferWhen(ctx.showEditor());
+    ɵɵdeferPrefetchWhen(ctx.prefetchEditor());
   }
 }, "Home_Template"), dependencies: [HomeAnimationComponent], styles: ['\n\n[_nghost-%COMP%] {\n  width: 100%;\n  position: relative;\n}\n.docs-dark-mode   [_nghost-%COMP%]   .adev-editor-scroll-container[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  content: url("./media/editor-dark-horizontal.svg");\n}\n@media (max-width: 775px) {\n  .docs-dark-mode   [_nghost-%COMP%]   .adev-editor-scroll-container[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n    content: url("./media/editor-dark-vertical.svg");\n  }\n}\n.docs-light-mode   [_nghost-%COMP%]   .adev-editor-scroll-container[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  content: url("./media/editor-light-horizontal.svg");\n}\n@media (max-width: 775px) {\n  .docs-light-mode   [_nghost-%COMP%]   .adev-editor-scroll-container[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n    content: url("./media/editor-light-vertical.svg");\n  }\n}\n[_nghost-%COMP%]   .spacer[_ngcontent-%COMP%] {\n  height: 100vh;\n}\n[_nghost-%COMP%]   .adev-editor-scroll-container[_ngcontent-%COMP%] {\n  position: relative;\n  height: 300vh;\n  background-color: var(--page-background);\n}\n[_nghost-%COMP%]   .adev-editor-scroll-container[_ngcontent-%COMP%]   .adev-code-editor[_ngcontent-%COMP%] {\n  background-color: var(--page-background);\n  padding-bottom: 60px;\n  position: sticky;\n  top: calc((100vh - (100vh - 110px)) / 2);\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  [_nghost-%COMP%]   .adev-editor-scroll-container[_ngcontent-%COMP%]   .adev-code-editor[_ngcontent-%COMP%] {\n    top: calc((100vh - (100vh - 110px)) / 2 + 36px);\n  }\n}\n@media (max-width: 700px) {\n  [_nghost-%COMP%]   .adev-editor-scroll-container[_ngcontent-%COMP%]   .adev-code-editor[_ngcontent-%COMP%] {\n    top: calc((100vh - (100vh - 110px)) / 2 + 25px);\n  }\n}\n[_nghost-%COMP%]   .adev-editor-scroll-container[_ngcontent-%COMP%]   .adev-code-editor[_ngcontent-%COMP%]     embedded-editor {\n  margin: 0 auto;\n  display: flex;\n  width: 75vw;\n  height: calc(100vh - 110px);\n}\n@media (max-width: 700px) {\n  [_nghost-%COMP%]   .adev-editor-scroll-container[_ngcontent-%COMP%]   .adev-code-editor[_ngcontent-%COMP%]     embedded-editor {\n    width: 95vw;\n  }\n}\n[_nghost-%COMP%]   .adev-editor-scroll-container[_ngcontent-%COMP%]   .adev-code-editor[_ngcontent-%COMP%]     embedded-editor .adev-editor-container {\n  width: 100%;\n}\n[_nghost-%COMP%]   .adev-editor-scroll-container[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: auto;\n  min-height: 60vh;\n  width: 75vw;\n}\n/*# sourceMappingURL=home.component.css.map */'], changeDetection: 0 }));
 var Home = _Home;
@@ -1670,7 +1670,7 @@ var Home = _Home;
     @defer (when showEditor(); prefetch when prefetchEditor()) {
       <adev-code-editor [tutorialFiles]="tutorialFiles" />
     } @loading {
-      <img alt="\u4EE3\u7801\u7F16\u8F91\u5668" />
+      <img alt="程式碼編輯器" />
     }
   </div>
 </div>
@@ -1679,7 +1679,7 @@ var Home = _Home;
   });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(Home, { className: "Home", filePath: "src/app/features/home/home.component.ts", lineNumber: 34 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(Home, { className: "Home", filePath: "src/app/features/home/home.component.ts", lineNumber: 34 });
 })();
 export {
   TUTORIALS_HOMEPAGE_DIRECTORY,

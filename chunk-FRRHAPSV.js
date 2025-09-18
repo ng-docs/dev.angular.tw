@@ -21,15 +21,15 @@ import {
 // src/content/examples/animations/src/app/native-css/reorder.component.ts
 function ReorderComponent_For_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "li", 2);
-    \u0275\u0275animateLeave("fade");
-    \u0275\u0275text(1);
-    \u0275\u0275domElementEnd();
+    ɵɵdomElementStart(0, "li", 2);
+    ɵɵanimateLeave("fade");
+    ɵɵtext(1);
+    ɵɵdomElementEnd();
   }
   if (rf & 2) {
     const item_r1 = ctx.$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(item_r1);
+    ɵɵadvance();
+    ɵɵtextInterpolate(item_r1);
   }
 }
 __name(ReorderComponent_For_6_Template, "ReorderComponent_For_6_Template");
@@ -48,27 +48,27 @@ var _ReorderComponent = class _ReorderComponent {
   }
 };
 __name(_ReorderComponent, "ReorderComponent");
-__publicField(_ReorderComponent, "\u0275fac", /* @__PURE__ */ __name(function ReorderComponent_Factory(__ngFactoryType__) {
+__publicField(_ReorderComponent, "ɵfac", /* @__PURE__ */ __name(function ReorderComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ReorderComponent)();
 }, "ReorderComponent_Factory"));
-__publicField(_ReorderComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ReorderComponent, selectors: [["app-reorder"]], decls: 7, vars: 0, consts: [["type", "button", 3, "click"], [1, "items"], [1, "item"]], template: /* @__PURE__ */ __name(function ReorderComponent_Template(rf, ctx) {
+__publicField(_ReorderComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _ReorderComponent, selectors: [["app-reorder"]], decls: 7, vars: 0, consts: [["type", "button", 3, "click"], [1, "items"], [1, "item"]], template: /* @__PURE__ */ __name(function ReorderComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "h1");
-    \u0275\u0275text(1, "Reordering List Example");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(2, "button", 0);
-    \u0275\u0275domListener("click", /* @__PURE__ */ __name(function ReorderComponent_Template_button_click_2_listener() {
+    ɵɵdomElementStart(0, "h1");
+    ɵɵtext(1, "Reordering List Example");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(2, "button", 0);
+    ɵɵdomListener("click", /* @__PURE__ */ __name(function ReorderComponent_Template_button_click_2_listener() {
       return ctx.randomize();
     }, "ReorderComponent_Template_button_click_2_listener"));
-    \u0275\u0275text(3, "Randomize");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(4, "ul", 1);
-    \u0275\u0275repeaterCreate(5, ReorderComponent_For_6_Template, 2, 1, "li", 2, \u0275\u0275repeaterTrackByIdentity);
-    \u0275\u0275domElementEnd();
+    ɵɵtext(3, "Randomize");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(4, "ul", 1);
+    ɵɵrepeaterCreate(5, ReorderComponent_For_6_Template, 2, 1, "li", 2, ɵɵrepeaterTrackByIdentity);
+    ɵɵdomElementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance(5);
-    \u0275\u0275repeater(ctx.items);
+    ɵɵadvance(5);
+    ɵɵrepeater(ctx.items);
   }
 }, "ReorderComponent_Template"), styles: ["\n\n.items[_ngcontent-%COMP%] {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n}\n.items[_ngcontent-%COMP%]   .item[_ngcontent-%COMP%] {\n  transition-property: opacity, transform;\n  transition-duration: 500ms;\n}\n@starting-style {\n  .items[_ngcontent-%COMP%]   .item[_ngcontent-%COMP%] {\n    opacity: 0;\n    transform: translateX(-10px);\n  }\n}\n.items[_ngcontent-%COMP%]   .item.fade[_ngcontent-%COMP%] {\n  animation: _ngcontent-%COMP%_fade-out 500ms;\n}\n@keyframes _ngcontent-%COMP%_fade-out {\n  from {\n    opacity: 1;\n  }\n  to {\n    opacity: 0;\n  }\n}\n/*# sourceMappingURL=reorder.component.css.map */"] }));
 var ReorderComponent = _ReorderComponent;
@@ -79,7 +79,7 @@ var ReorderComponent = _ReorderComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ReorderComponent, { className: "ReorderComponent", filePath: "src/content/examples/animations/src/app/native-css/reorder.component.ts", lineNumber: 9 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(ReorderComponent, { className: "ReorderComponent", filePath: "src/content/examples/animations/src/app/native-css/reorder.component.ts", lineNumber: 9 });
 })();
 export {
   ReorderComponent

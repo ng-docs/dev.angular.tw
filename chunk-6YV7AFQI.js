@@ -20,32 +20,32 @@ var _AppComponent = class _AppComponent {
   color = "yellow";
 };
 __name(_AppComponent, "AppComponent");
-__publicField(_AppComponent, "\u0275fac", /* @__PURE__ */ __name(function AppComponent_Factory(__ngFactoryType__) {
+__publicField(_AppComponent, "ɵfac", /* @__PURE__ */ __name(function AppComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AppComponent)();
 }, "AppComponent_Factory"));
-__publicField(_AppComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], decls: 10, vars: 2, consts: [["appHighlight", ""], ["appHighlight", "yellow"], [3, "appHighlight"]], template: /* @__PURE__ */ __name(function AppComponent_Template(rf, ctx) {
+__publicField(_AppComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _AppComponent, selectors: [["app-root"]], decls: 10, vars: 2, consts: [["appHighlight", ""], ["appHighlight", "yellow"], [3, "appHighlight"]], template: /* @__PURE__ */ __name(function AppComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "h1");
-    \u0275\u0275text(1, "My First Attribute Directive");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "p", 0);
-    \u0275\u0275text(3, "Highlight me!");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "p", 1);
-    \u0275\u0275text(5, "Highlighted in yellow");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "p", 2);
-    \u0275\u0275text(7, "Highlighted in orange");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "p", 2);
-    \u0275\u0275text(9, "Highlighted with parent component's color");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "h1");
+    ɵɵtext(1, "My First Attribute Directive");
+    ɵɵelementEnd();
+    ɵɵelementStart(2, "p", 0);
+    ɵɵtext(3, "Highlight me!");
+    ɵɵelementEnd();
+    ɵɵelementStart(4, "p", 1);
+    ɵɵtext(5, "Highlighted in yellow");
+    ɵɵelementEnd();
+    ɵɵelementStart(6, "p", 2);
+    ɵɵtext(7, "Highlighted in orange");
+    ɵɵelementEnd();
+    ɵɵelementStart(8, "p", 2);
+    ɵɵtext(9, "Highlighted with parent component's color");
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance(6);
-    \u0275\u0275property("appHighlight", "orange");
-    \u0275\u0275advance(2);
-    \u0275\u0275property("appHighlight", ctx.color);
+    ɵɵadvance(6);
+    ɵɵproperty("appHighlight", "orange");
+    ɵɵadvance(2);
+    ɵɵproperty("appHighlight", ctx.color);
   }
 }, "AppComponent_Template"), dependencies: [HighlightDirective], encapsulation: 2 }));
 var AppComponent = _AppComponent;
@@ -66,7 +66,7 @@ var AppComponent = _AppComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/content/examples/attribute-directives/src/app/app.component.1.ts", lineNumber: 10 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/content/examples/attribute-directives/src/app/app.component.1.ts", lineNumber: 10 });
 })();
 export {
   AppComponent

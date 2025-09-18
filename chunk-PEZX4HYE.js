@@ -28,7 +28,7 @@ function mapApiManifestToRoutes() {
           label: api.name,
           displaySecondaryNav: true
         }
-      }, false ? { \u0275entryName: "src/app/features/references/api-reference-details-page/api-reference-details-page.component.ts" } : {}));
+      }, false ? { ɵentryName: "src/app/features/references/api-reference-details-page/api-reference-details-page.component.ts" } : {}));
     }
   }
   return apiRoutes;

@@ -384,14 +384,14 @@ var _CdkPortal = class _CdkPortal extends TemplatePortal {
   }
 };
 __name(_CdkPortal, "CdkPortal");
-__publicField(_CdkPortal, "\u0275fac", /* @__PURE__ */ __name(function CdkPortal_Factory(__ngFactoryType__) {
+__publicField(_CdkPortal, "ɵfac", /* @__PURE__ */ __name(function CdkPortal_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkPortal)();
 }, "CdkPortal_Factory"));
-__publicField(_CdkPortal, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkPortal, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkPortal,
   selectors: [["", "cdkPortal", ""]],
   exportAs: ["cdkPortal"],
-  features: [\u0275\u0275InheritDefinitionFeature]
+  features: [ɵɵInheritDefinitionFeature]
 }));
 var CdkPortal = _CdkPortal;
 (() => {
@@ -406,20 +406,20 @@ var CdkPortal = _CdkPortal;
 var _TemplatePortalDirective = class _TemplatePortalDirective extends CdkPortal {
 };
 __name(_TemplatePortalDirective, "TemplatePortalDirective");
-__publicField(_TemplatePortalDirective, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275TemplatePortalDirective_BaseFactory;
+__publicField(_TemplatePortalDirective, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵTemplatePortalDirective_BaseFactory;
   return /* @__PURE__ */ __name(function TemplatePortalDirective_Factory(__ngFactoryType__) {
-    return (\u0275TemplatePortalDirective_BaseFactory || (\u0275TemplatePortalDirective_BaseFactory = \u0275\u0275getInheritedFactory(_TemplatePortalDirective)))(__ngFactoryType__ || _TemplatePortalDirective);
+    return (ɵTemplatePortalDirective_BaseFactory || (ɵTemplatePortalDirective_BaseFactory = ɵɵgetInheritedFactory(_TemplatePortalDirective)))(__ngFactoryType__ || _TemplatePortalDirective);
   }, "TemplatePortalDirective_Factory");
 })());
-__publicField(_TemplatePortalDirective, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_TemplatePortalDirective, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _TemplatePortalDirective,
   selectors: [["", "cdk-portal", ""], ["", "portal", ""]],
   exportAs: ["cdkPortal"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: CdkPortal,
     useExisting: _TemplatePortalDirective
-  }]), \u0275\u0275InheritDefinitionFeature]
+  }]), ɵɵInheritDefinitionFeature]
 }));
 var TemplatePortalDirective = _TemplatePortalDirective;
 (() => {
@@ -546,10 +546,10 @@ var _CdkPortalOutlet = class _CdkPortalOutlet extends BasePortalOutlet {
   }
 };
 __name(_CdkPortalOutlet, "CdkPortalOutlet");
-__publicField(_CdkPortalOutlet, "\u0275fac", /* @__PURE__ */ __name(function CdkPortalOutlet_Factory(__ngFactoryType__) {
+__publicField(_CdkPortalOutlet, "ɵfac", /* @__PURE__ */ __name(function CdkPortalOutlet_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkPortalOutlet)();
 }, "CdkPortalOutlet_Factory"));
-__publicField(_CdkPortalOutlet, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkPortalOutlet, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkPortalOutlet,
   selectors: [["", "cdkPortalOutlet", ""]],
   inputs: {
@@ -559,7 +559,7 @@ __publicField(_CdkPortalOutlet, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineD
     attached: "attached"
   },
   exportAs: ["cdkPortalOutlet"],
-  features: [\u0275\u0275InheritDefinitionFeature]
+  features: [ɵɵInheritDefinitionFeature]
 }));
 var CdkPortalOutlet = _CdkPortalOutlet;
 (() => {
@@ -582,23 +582,23 @@ var CdkPortalOutlet = _CdkPortalOutlet;
 var _PortalHostDirective = class _PortalHostDirective extends CdkPortalOutlet {
 };
 __name(_PortalHostDirective, "PortalHostDirective");
-__publicField(_PortalHostDirective, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275PortalHostDirective_BaseFactory;
+__publicField(_PortalHostDirective, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵPortalHostDirective_BaseFactory;
   return /* @__PURE__ */ __name(function PortalHostDirective_Factory(__ngFactoryType__) {
-    return (\u0275PortalHostDirective_BaseFactory || (\u0275PortalHostDirective_BaseFactory = \u0275\u0275getInheritedFactory(_PortalHostDirective)))(__ngFactoryType__ || _PortalHostDirective);
+    return (ɵPortalHostDirective_BaseFactory || (ɵPortalHostDirective_BaseFactory = ɵɵgetInheritedFactory(_PortalHostDirective)))(__ngFactoryType__ || _PortalHostDirective);
   }, "PortalHostDirective_Factory");
 })());
-__publicField(_PortalHostDirective, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_PortalHostDirective, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _PortalHostDirective,
   selectors: [["", "cdkPortalHost", ""], ["", "portalHost", ""]],
   inputs: {
     portal: [0, "cdkPortalHost", "portal"]
   },
   exportAs: ["cdkPortalHost"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: CdkPortalOutlet,
     useExisting: _PortalHostDirective
-  }]), \u0275\u0275InheritDefinitionFeature]
+  }]), ɵɵInheritDefinitionFeature]
 }));
 var PortalHostDirective = _PortalHostDirective;
 (() => {
@@ -621,15 +621,15 @@ var PortalHostDirective = _PortalHostDirective;
 var _PortalModule = class _PortalModule {
 };
 __name(_PortalModule, "PortalModule");
-__publicField(_PortalModule, "\u0275fac", /* @__PURE__ */ __name(function PortalModule_Factory(__ngFactoryType__) {
+__publicField(_PortalModule, "ɵfac", /* @__PURE__ */ __name(function PortalModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _PortalModule)();
 }, "PortalModule_Factory"));
-__publicField(_PortalModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_PortalModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _PortalModule,
   imports: [CdkPortal, CdkPortalOutlet, TemplatePortalDirective, PortalHostDirective],
   exports: [CdkPortal, CdkPortalOutlet, TemplatePortalDirective, PortalHostDirective]
 }));
-__publicField(_PortalModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({}));
+__publicField(_PortalModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({}));
 var PortalModule = _PortalModule;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PortalModule, [{
@@ -958,12 +958,12 @@ var _ScrollStrategyOptions = class _ScrollStrategyOptions {
   reposition = /* @__PURE__ */ __name((config) => createRepositionScrollStrategy(this._injector, config), "reposition");
 };
 __name(_ScrollStrategyOptions, "ScrollStrategyOptions");
-__publicField(_ScrollStrategyOptions, "\u0275fac", /* @__PURE__ */ __name(function ScrollStrategyOptions_Factory(__ngFactoryType__) {
+__publicField(_ScrollStrategyOptions, "ɵfac", /* @__PURE__ */ __name(function ScrollStrategyOptions_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ScrollStrategyOptions)();
 }, "ScrollStrategyOptions_Factory"));
-__publicField(_ScrollStrategyOptions, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_ScrollStrategyOptions, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _ScrollStrategyOptions,
-  factory: _ScrollStrategyOptions.\u0275fac,
+  factory: _ScrollStrategyOptions.ɵfac,
   providedIn: "root"
 }));
 var ScrollStrategyOptions = _ScrollStrategyOptions;
@@ -1097,12 +1097,12 @@ var _BaseOverlayDispatcher = class _BaseOverlayDispatcher {
   }
 };
 __name(_BaseOverlayDispatcher, "BaseOverlayDispatcher");
-__publicField(_BaseOverlayDispatcher, "\u0275fac", /* @__PURE__ */ __name(function BaseOverlayDispatcher_Factory(__ngFactoryType__) {
+__publicField(_BaseOverlayDispatcher, "ɵfac", /* @__PURE__ */ __name(function BaseOverlayDispatcher_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _BaseOverlayDispatcher)();
 }, "BaseOverlayDispatcher_Factory"));
-__publicField(_BaseOverlayDispatcher, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_BaseOverlayDispatcher, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _BaseOverlayDispatcher,
-  factory: _BaseOverlayDispatcher.\u0275fac,
+  factory: _BaseOverlayDispatcher.ɵfac,
   providedIn: "root"
 }));
 var BaseOverlayDispatcher = _BaseOverlayDispatcher;
@@ -1147,15 +1147,15 @@ var _OverlayKeyboardDispatcher = class _OverlayKeyboardDispatcher extends BaseOv
   }, "_keydownListener");
 };
 __name(_OverlayKeyboardDispatcher, "OverlayKeyboardDispatcher");
-__publicField(_OverlayKeyboardDispatcher, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275OverlayKeyboardDispatcher_BaseFactory;
+__publicField(_OverlayKeyboardDispatcher, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵOverlayKeyboardDispatcher_BaseFactory;
   return /* @__PURE__ */ __name(function OverlayKeyboardDispatcher_Factory(__ngFactoryType__) {
-    return (\u0275OverlayKeyboardDispatcher_BaseFactory || (\u0275OverlayKeyboardDispatcher_BaseFactory = \u0275\u0275getInheritedFactory(_OverlayKeyboardDispatcher)))(__ngFactoryType__ || _OverlayKeyboardDispatcher);
+    return (ɵOverlayKeyboardDispatcher_BaseFactory || (ɵOverlayKeyboardDispatcher_BaseFactory = ɵɵgetInheritedFactory(_OverlayKeyboardDispatcher)))(__ngFactoryType__ || _OverlayKeyboardDispatcher);
   }, "OverlayKeyboardDispatcher_Factory");
 })());
-__publicField(_OverlayKeyboardDispatcher, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_OverlayKeyboardDispatcher, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _OverlayKeyboardDispatcher,
-  factory: _OverlayKeyboardDispatcher.\u0275fac,
+  factory: _OverlayKeyboardDispatcher.ɵfac,
   providedIn: "root"
 }));
 var OverlayKeyboardDispatcher = _OverlayKeyboardDispatcher;
@@ -1233,15 +1233,15 @@ var _OverlayOutsideClickDispatcher = class _OverlayOutsideClickDispatcher extend
   }, "_clickListener");
 };
 __name(_OverlayOutsideClickDispatcher, "OverlayOutsideClickDispatcher");
-__publicField(_OverlayOutsideClickDispatcher, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275OverlayOutsideClickDispatcher_BaseFactory;
+__publicField(_OverlayOutsideClickDispatcher, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵOverlayOutsideClickDispatcher_BaseFactory;
   return /* @__PURE__ */ __name(function OverlayOutsideClickDispatcher_Factory(__ngFactoryType__) {
-    return (\u0275OverlayOutsideClickDispatcher_BaseFactory || (\u0275OverlayOutsideClickDispatcher_BaseFactory = \u0275\u0275getInheritedFactory(_OverlayOutsideClickDispatcher)))(__ngFactoryType__ || _OverlayOutsideClickDispatcher);
+    return (ɵOverlayOutsideClickDispatcher_BaseFactory || (ɵOverlayOutsideClickDispatcher_BaseFactory = ɵɵgetInheritedFactory(_OverlayOutsideClickDispatcher)))(__ngFactoryType__ || _OverlayOutsideClickDispatcher);
   }, "OverlayOutsideClickDispatcher_Factory");
 })());
-__publicField(_OverlayOutsideClickDispatcher, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_OverlayOutsideClickDispatcher, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _OverlayOutsideClickDispatcher,
-  factory: _OverlayOutsideClickDispatcher.\u0275fac,
+  factory: _OverlayOutsideClickDispatcher.ɵfac,
   providedIn: "root"
 }));
 var OverlayOutsideClickDispatcher = _OverlayOutsideClickDispatcher;
@@ -1268,10 +1268,10 @@ __name(containsPierceShadowDom, "containsPierceShadowDom");
 var __CdkOverlayStyleLoader = class __CdkOverlayStyleLoader {
 };
 __name(__CdkOverlayStyleLoader, "_CdkOverlayStyleLoader");
-__publicField(__CdkOverlayStyleLoader, "\u0275fac", /* @__PURE__ */ __name(function _CdkOverlayStyleLoader_Factory(__ngFactoryType__) {
+__publicField(__CdkOverlayStyleLoader, "ɵfac", /* @__PURE__ */ __name(function _CdkOverlayStyleLoader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || __CdkOverlayStyleLoader)();
 }, "_CdkOverlayStyleLoader_Factory"));
-__publicField(__CdkOverlayStyleLoader, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(__CdkOverlayStyleLoader, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: __CdkOverlayStyleLoader,
   selectors: [["ng-component"]],
   hostAttrs: ["cdk-overlay-style-loader", ""],
@@ -1349,12 +1349,12 @@ var _OverlayContainer = class _OverlayContainer {
   }
 };
 __name(_OverlayContainer, "OverlayContainer");
-__publicField(_OverlayContainer, "\u0275fac", /* @__PURE__ */ __name(function OverlayContainer_Factory(__ngFactoryType__) {
+__publicField(_OverlayContainer, "ɵfac", /* @__PURE__ */ __name(function OverlayContainer_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _OverlayContainer)();
 }, "OverlayContainer_Factory"));
-__publicField(_OverlayContainer, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_OverlayContainer, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _OverlayContainer,
-  factory: _OverlayContainer.\u0275fac,
+  factory: _OverlayContainer.ɵfac,
   providedIn: "root"
 }));
 var OverlayContainer = _OverlayContainer;
@@ -2941,12 +2941,12 @@ var _OverlayPositionBuilder = class _OverlayPositionBuilder {
   }
 };
 __name(_OverlayPositionBuilder, "OverlayPositionBuilder");
-__publicField(_OverlayPositionBuilder, "\u0275fac", /* @__PURE__ */ __name(function OverlayPositionBuilder_Factory(__ngFactoryType__) {
+__publicField(_OverlayPositionBuilder, "ɵfac", /* @__PURE__ */ __name(function OverlayPositionBuilder_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _OverlayPositionBuilder)();
 }, "OverlayPositionBuilder_Factory"));
-__publicField(_OverlayPositionBuilder, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_OverlayPositionBuilder, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _OverlayPositionBuilder,
-  factory: _OverlayPositionBuilder.\u0275fac,
+  factory: _OverlayPositionBuilder.ɵfac,
   providedIn: "root"
 }));
 var OverlayPositionBuilder = _OverlayPositionBuilder;
@@ -3006,12 +3006,12 @@ var _Overlay = class _Overlay {
   }
 };
 __name(_Overlay, "Overlay");
-__publicField(_Overlay, "\u0275fac", /* @__PURE__ */ __name(function Overlay_Factory(__ngFactoryType__) {
+__publicField(_Overlay, "ɵfac", /* @__PURE__ */ __name(function Overlay_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Overlay)();
 }, "Overlay_Factory"));
-__publicField(_Overlay, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_Overlay, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _Overlay,
-  factory: _Overlay.\u0275fac,
+  factory: _Overlay.ɵfac,
   providedIn: "root"
 }));
 var Overlay = _Overlay;
@@ -3057,10 +3057,10 @@ var _CdkOverlayOrigin = class _CdkOverlayOrigin {
   }
 };
 __name(_CdkOverlayOrigin, "CdkOverlayOrigin");
-__publicField(_CdkOverlayOrigin, "\u0275fac", /* @__PURE__ */ __name(function CdkOverlayOrigin_Factory(__ngFactoryType__) {
+__publicField(_CdkOverlayOrigin, "ɵfac", /* @__PURE__ */ __name(function CdkOverlayOrigin_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkOverlayOrigin)();
 }, "CdkOverlayOrigin_Factory"));
-__publicField(_CdkOverlayOrigin, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkOverlayOrigin, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkOverlayOrigin,
   selectors: [["", "cdk-overlay-origin", ""], ["", "overlay-origin", ""], ["", "cdkOverlayOrigin", ""]],
   exportAs: ["cdkOverlayOrigin"]
@@ -3339,10 +3339,10 @@ var _CdkConnectedOverlay = class _CdkConnectedOverlay {
   }
 };
 __name(_CdkConnectedOverlay, "CdkConnectedOverlay");
-__publicField(_CdkConnectedOverlay, "\u0275fac", /* @__PURE__ */ __name(function CdkConnectedOverlay_Factory(__ngFactoryType__) {
+__publicField(_CdkConnectedOverlay, "ɵfac", /* @__PURE__ */ __name(function CdkConnectedOverlay_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkConnectedOverlay)();
 }, "CdkConnectedOverlay_Factory"));
-__publicField(_CdkConnectedOverlay, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkConnectedOverlay, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkConnectedOverlay,
   selectors: [["", "cdk-connected-overlay", ""], ["", "connected-overlay", ""], ["", "cdkConnectedOverlay", ""]],
   inputs: {
@@ -3378,7 +3378,7 @@ __publicField(_CdkConnectedOverlay, "\u0275dir", /* @__PURE__ */ \u0275\u0275def
     overlayOutsideClick: "overlayOutsideClick"
   },
   exportAs: ["cdkConnectedOverlay"],
-  features: [\u0275\u0275NgOnChangesFeature]
+  features: [ɵɵNgOnChangesFeature]
 }));
 var CdkConnectedOverlay = _CdkConnectedOverlay;
 (() => {
@@ -3527,15 +3527,15 @@ var CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER = {
 var _OverlayModule = class _OverlayModule {
 };
 __name(_OverlayModule, "OverlayModule");
-__publicField(_OverlayModule, "\u0275fac", /* @__PURE__ */ __name(function OverlayModule_Factory(__ngFactoryType__) {
+__publicField(_OverlayModule, "ɵfac", /* @__PURE__ */ __name(function OverlayModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _OverlayModule)();
 }, "OverlayModule_Factory"));
-__publicField(_OverlayModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_OverlayModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _OverlayModule,
   imports: [BidiModule, PortalModule, ScrollingModule, CdkConnectedOverlay, CdkOverlayOrigin],
   exports: [CdkConnectedOverlay, CdkOverlayOrigin, ScrollingModule]
 }));
-__publicField(_OverlayModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_OverlayModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   providers: [Overlay, CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER],
   imports: [BidiModule, PortalModule, ScrollingModule, ScrollingModule]
 }));
@@ -3606,12 +3606,12 @@ var _FullscreenOverlayContainer = class _FullscreenOverlayContainer extends Over
   }
 };
 __name(_FullscreenOverlayContainer, "FullscreenOverlayContainer");
-__publicField(_FullscreenOverlayContainer, "\u0275fac", /* @__PURE__ */ __name(function FullscreenOverlayContainer_Factory(__ngFactoryType__) {
+__publicField(_FullscreenOverlayContainer, "ɵfac", /* @__PURE__ */ __name(function FullscreenOverlayContainer_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _FullscreenOverlayContainer)();
 }, "FullscreenOverlayContainer_Factory"));
-__publicField(_FullscreenOverlayContainer, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_FullscreenOverlayContainer, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _FullscreenOverlayContainer,
-  factory: _FullscreenOverlayContainer.\u0275fac,
+  factory: _FullscreenOverlayContainer.ɵfac,
   providedIn: "root"
 }));
 var FullscreenOverlayContainer = _FullscreenOverlayContainer;

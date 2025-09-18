@@ -88,10 +88,10 @@ __name(stagger, "stagger");
 var _AnimationBuilder = class _AnimationBuilder {
 };
 __name(_AnimationBuilder, "AnimationBuilder");
-__publicField(_AnimationBuilder, "\u0275fac", /* @__PURE__ */ __name(function AnimationBuilder_Factory(__ngFactoryType__) {
+__publicField(_AnimationBuilder, "ɵfac", /* @__PURE__ */ __name(function AnimationBuilder_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AnimationBuilder)();
 }, "AnimationBuilder_Factory"));
-__publicField(_AnimationBuilder, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_AnimationBuilder, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _AnimationBuilder,
   factory: /* @__PURE__ */ __name(() => (() => inject(BrowserAnimationBuilder))(), "factory"),
   providedIn: "root"
@@ -140,12 +140,12 @@ var _BrowserAnimationBuilder = class _BrowserAnimationBuilder extends AnimationB
   }
 };
 __name(_BrowserAnimationBuilder, "BrowserAnimationBuilder");
-__publicField(_BrowserAnimationBuilder, "\u0275fac", /* @__PURE__ */ __name(function BrowserAnimationBuilder_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _BrowserAnimationBuilder)(\u0275\u0275inject(RendererFactory2), \u0275\u0275inject(DOCUMENT));
+__publicField(_BrowserAnimationBuilder, "ɵfac", /* @__PURE__ */ __name(function BrowserAnimationBuilder_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _BrowserAnimationBuilder)(ɵɵinject(RendererFactory2), ɵɵinject(DOCUMENT));
 }, "BrowserAnimationBuilder_Factory"));
-__publicField(_BrowserAnimationBuilder, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_BrowserAnimationBuilder, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _BrowserAnimationBuilder,
-  factory: _BrowserAnimationBuilder.\u0275fac,
+  factory: _BrowserAnimationBuilder.ɵfac,
   providedIn: "root"
 }));
 var BrowserAnimationBuilder = _BrowserAnimationBuilder;
@@ -247,7 +247,7 @@ function issueAnimationCommand(renderer, element, id, command, args) {
 }
 __name(issueAnimationCommand, "issueAnimationCommand");
 function unwrapAnimationRenderer(renderer) {
-  const type = renderer.\u0275type;
+  const type = renderer.ɵtype;
   if (type === 0) {
     return renderer;
   } else if (type === 1) {
@@ -257,7 +257,7 @@ function unwrapAnimationRenderer(renderer) {
 }
 __name(unwrapAnimationRenderer, "unwrapAnimationRenderer");
 function isAnimationRenderer(renderer) {
-  const type = renderer.\u0275type;
+  const type = renderer.ɵtype;
   return type === 0 || type === 1;
 }
 __name(isAnimationRenderer, "isAnimationRenderer");

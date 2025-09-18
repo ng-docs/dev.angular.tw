@@ -28,23 +28,23 @@ var _HeroListGroupPageComponent = class _HeroListGroupPageComponent {
   }
 };
 __name(_HeroListGroupPageComponent, "HeroListGroupPageComponent");
-__publicField(_HeroListGroupPageComponent, "\u0275fac", /* @__PURE__ */ __name(function HeroListGroupPageComponent_Factory(__ngFactoryType__) {
+__publicField(_HeroListGroupPageComponent, "ɵfac", /* @__PURE__ */ __name(function HeroListGroupPageComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HeroListGroupPageComponent)();
 }, "HeroListGroupPageComponent_Factory"));
-__publicField(_HeroListGroupPageComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HeroListGroupPageComponent, selectors: [["app-hero-list-groups-page"]], decls: 4, vars: 1, consts: [[3, "remove", "heroes"]], template: /* @__PURE__ */ __name(function HeroListGroupPageComponent_Template(rf, ctx) {
+__publicField(_HeroListGroupPageComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _HeroListGroupPageComponent, selectors: [["app-hero-list-groups-page"]], decls: 4, vars: 1, consts: [[3, "remove", "heroes"]], template: /* @__PURE__ */ __name(function HeroListGroupPageComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "section")(1, "h2");
-    \u0275\u0275text(2, "Hero List Group");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "app-hero-list-groups", 0);
-    \u0275\u0275listener("remove", /* @__PURE__ */ __name(function HeroListGroupPageComponent_Template_app_hero_list_groups_remove_3_listener($event) {
+    ɵɵelementStart(0, "section")(1, "h2");
+    ɵɵtext(2, "Hero List Group");
+    ɵɵelementEnd();
+    ɵɵelementStart(3, "app-hero-list-groups", 0);
+    ɵɵlistener("remove", /* @__PURE__ */ __name(function HeroListGroupPageComponent_Template_app_hero_list_groups_remove_3_listener($event) {
       return ctx.onRemove($event);
     }, "HeroListGroupPageComponent_Template_app_hero_list_groups_remove_3_listener"));
-    \u0275\u0275elementEnd()();
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
-    \u0275\u0275advance(3);
-    \u0275\u0275property("heroes", ctx.heroes);
+    ɵɵadvance(3);
+    ɵɵproperty("heroes", ctx.heroes);
   }
 }, "HeroListGroupPageComponent_Template"), dependencies: [HeroListGroupsComponent], encapsulation: 2 }));
 var HeroListGroupPageComponent = _HeroListGroupPageComponent;
@@ -65,7 +65,7 @@ var HeroListGroupPageComponent = _HeroListGroupPageComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HeroListGroupPageComponent, { className: "HeroListGroupPageComponent", filePath: "src/content/examples/animations/src/app/hero-list-group-page.component.ts", lineNumber: 16 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(HeroListGroupPageComponent, { className: "HeroListGroupPageComponent", filePath: "src/content/examples/animations/src/app/hero-list-group-page.component.ts", lineNumber: 16 });
 })();
 export {
   HeroListGroupPageComponent

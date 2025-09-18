@@ -25,22 +25,22 @@ var _FavoriteColorTemplateComponent = class _FavoriteColorTemplateComponent {
   favoriteColor = "";
 };
 __name(_FavoriteColorTemplateComponent, "FavoriteColorTemplateComponent");
-__publicField(_FavoriteColorTemplateComponent, "\u0275fac", /* @__PURE__ */ __name(function FavoriteColorTemplateComponent_Factory(__ngFactoryType__) {
+__publicField(_FavoriteColorTemplateComponent, "ɵfac", /* @__PURE__ */ __name(function FavoriteColorTemplateComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _FavoriteColorTemplateComponent)();
 }, "FavoriteColorTemplateComponent_Factory"));
-__publicField(_FavoriteColorTemplateComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FavoriteColorTemplateComponent, selectors: [["app-template-favorite-color"]], decls: 2, vars: 1, consts: [["type", "text", 3, "ngModelChange", "ngModel"]], template: /* @__PURE__ */ __name(function FavoriteColorTemplateComponent_Template(rf, ctx) {
+__publicField(_FavoriteColorTemplateComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _FavoriteColorTemplateComponent, selectors: [["app-template-favorite-color"]], decls: 2, vars: 1, consts: [["type", "text", 3, "ngModelChange", "ngModel"]], template: /* @__PURE__ */ __name(function FavoriteColorTemplateComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275text(0, " Favorite Color: ");
-    \u0275\u0275elementStart(1, "input", 0);
-    \u0275\u0275twoWayListener("ngModelChange", /* @__PURE__ */ __name(function FavoriteColorTemplateComponent_Template_input_ngModelChange_1_listener($event) {
-      \u0275\u0275twoWayBindingSet(ctx.favoriteColor, $event) || (ctx.favoriteColor = $event);
+    ɵɵtext(0, " Favorite Color: ");
+    ɵɵelementStart(1, "input", 0);
+    ɵɵtwoWayListener("ngModelChange", /* @__PURE__ */ __name(function FavoriteColorTemplateComponent_Template_input_ngModelChange_1_listener($event) {
+      ɵɵtwoWayBindingSet(ctx.favoriteColor, $event) || (ctx.favoriteColor = $event);
       return $event;
     }, "FavoriteColorTemplateComponent_Template_input_ngModelChange_1_listener"));
-    \u0275\u0275elementEnd();
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275twoWayProperty("ngModel", ctx.favoriteColor);
+    ɵɵadvance();
+    ɵɵtwoWayProperty("ngModel", ctx.favoriteColor);
   }
 }, "FavoriteColorTemplateComponent_Template"), dependencies: [FormsModule, DefaultValueAccessor, NgControlStatus, NgModel], encapsulation: 2 }));
 var FavoriteColorTemplateComponent = _FavoriteColorTemplateComponent;
@@ -57,7 +57,7 @@ var FavoriteColorTemplateComponent = _FavoriteColorTemplateComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FavoriteColorTemplateComponent, { className: "FavoriteColorTemplateComponent", filePath: "src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.ts", lineNumber: 11 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(FavoriteColorTemplateComponent, { className: "FavoriteColorTemplateComponent", filePath: "src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.ts", lineNumber: 11 });
 })();
 
 export {

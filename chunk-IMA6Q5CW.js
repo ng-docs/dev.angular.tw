@@ -30,29 +30,29 @@ var _AutoHeightComponent = class _AutoHeightComponent {
   }
 };
 __name(_AutoHeightComponent, "AutoHeightComponent");
-__publicField(_AutoHeightComponent, "\u0275fac", /* @__PURE__ */ __name(function AutoHeightComponent_Factory(__ngFactoryType__) {
+__publicField(_AutoHeightComponent, "ɵfac", /* @__PURE__ */ __name(function AutoHeightComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AutoHeightComponent)();
 }, "AutoHeightComponent_Factory"));
-__publicField(_AutoHeightComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AutoHeightComponent, selectors: [["app-open-close"]], decls: 8, vars: 2, consts: [["type", "button", 3, "click"], [1, "container"], [1, "content"]], template: /* @__PURE__ */ __name(function AutoHeightComponent_Template(rf, ctx) {
+__publicField(_AutoHeightComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _AutoHeightComponent, selectors: [["app-open-close"]], decls: 8, vars: 2, consts: [["type", "button", 3, "click"], [1, "container"], [1, "content"]], template: /* @__PURE__ */ __name(function AutoHeightComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "h2");
-    \u0275\u0275text(1, "Auto Height Example");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(2, "button", 0);
-    \u0275\u0275domListener("click", /* @__PURE__ */ __name(function AutoHeightComponent_Template_button_click_2_listener() {
+    ɵɵdomElementStart(0, "h2");
+    ɵɵtext(1, "Auto Height Example");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(2, "button", 0);
+    ɵɵdomListener("click", /* @__PURE__ */ __name(function AutoHeightComponent_Template_button_click_2_listener() {
       return ctx.toggle();
     }, "AutoHeightComponent_Template_button_click_2_listener"));
-    \u0275\u0275text(3, "Toggle Open/Close");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(4, "div", 1)(5, "div", 2)(6, "p");
-    \u0275\u0275text(7);
-    \u0275\u0275domElementEnd()()();
+    ɵɵtext(3, "Toggle Open/Close");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(4, "div", 1)(5, "div", 2)(6, "p");
+    ɵɵtext(7);
+    ɵɵdomElementEnd()()();
   }
   if (rf & 2) {
-    \u0275\u0275advance(4);
-    \u0275\u0275property("@openClose", ctx.isOpen() ? true : false);
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("The box is now ", ctx.isOpen() ? "Open" : "Closed", "!");
+    ɵɵadvance(4);
+    ɵɵproperty("@openClose", ctx.isOpen() ? true : false);
+    ɵɵadvance(3);
+    ɵɵtextInterpolate1("The box is now ", ctx.isOpen() ? "Open" : "Closed", "!");
   }
 }, "AutoHeightComponent_Template"), styles: ["\n\n.container[_ngcontent-%COMP%] {\n  display: block;\n  overflow: hidden;\n}\n.container[_ngcontent-%COMP%]   .content[_ngcontent-%COMP%] {\n  padding: 20px;\n  margin-top: 1em;\n  font-weight: bold;\n  font-size: 20px;\n  background-color: blue;\n  color: #ebebeb;\n}\n/*# sourceMappingURL=auto-height.component.css.map */"], data: { animation: [
   trigger("openClose", [
@@ -85,7 +85,7 @@ var AutoHeightComponent = _AutoHeightComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AutoHeightComponent, { className: "AutoHeightComponent", filePath: "src/content/examples/animations/src/app/animations-package/auto-height.component.ts", lineNumber: 16 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(AutoHeightComponent, { className: "AutoHeightComponent", filePath: "src/content/examples/animations/src/app/animations-package/auto-height.component.ts", lineNumber: 16 });
 })();
 export {
   AutoHeightComponent

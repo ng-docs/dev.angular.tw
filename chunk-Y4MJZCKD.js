@@ -65,15 +65,15 @@ import {
 // node_modules/ngx-progressbar/fesm2022/ngx-progressbar.mjs
 function NgProgressbar_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElement(0, "div", 3);
+    ɵɵdomElement(0, "div", 3);
   }
 }
 __name(NgProgressbar_Conditional_3_Template, "NgProgressbar_Conditional_3_Template");
 function NgProgressbar_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "div", 4);
-    \u0275\u0275domElement(1, "div", 5);
-    \u0275\u0275domElementEnd();
+    ɵɵdomElementStart(0, "div", 4);
+    ɵɵdomElement(1, "div", 5);
+    ɵɵdomElementEnd();
   }
 }
 __name(NgProgressbar_Conditional_4_Template, "NgProgressbar_Conditional_4_Template");
@@ -252,10 +252,10 @@ var _NgProgressRef = class _NgProgressRef {
   }
 };
 __name(_NgProgressRef, "NgProgressRef");
-_NgProgressRef.\u0275fac = /* @__PURE__ */ __name(function NgProgressRef_Factory(__ngFactoryType__) {
+_NgProgressRef.ɵfac = /* @__PURE__ */ __name(function NgProgressRef_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _NgProgressRef)();
 }, "NgProgressRef_Factory");
-_NgProgressRef.\u0275dir = /* @__PURE__ */ \u0275\u0275defineDirective({
+_NgProgressRef.ɵdir = /* @__PURE__ */ ɵɵdefineDirective({
   type: _NgProgressRef,
   selectors: [["", "ngProgressRef", ""]],
   inputs: {
@@ -308,19 +308,19 @@ var _NgProgressbar = class _NgProgressbar {
   }
 };
 __name(_NgProgressbar, "NgProgressbar");
-_NgProgressbar.\u0275fac = /* @__PURE__ */ __name(function NgProgressbar_Factory(__ngFactoryType__) {
+_NgProgressbar.ɵfac = /* @__PURE__ */ __name(function NgProgressbar_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _NgProgressbar)();
 }, "NgProgressbar_Factory");
-_NgProgressbar.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+_NgProgressbar.ɵcmp = /* @__PURE__ */ ɵɵdefineComponent({
   type: _NgProgressbar,
   selectors: [["ng-progress"]],
   hostAttrs: ["role", "progressbar"],
   hostVars: 12,
   hostBindings: /* @__PURE__ */ __name(function NgProgressbar_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("spinnerPosition", ctx.spinnerPosition())("direction", ctx.direction());
-      \u0275\u0275styleProp("--_ng-progress-speed", ctx.progressRef.speed() + "ms")("--_ng-progress-fade-out-speed", ctx.progressRef.fadeOutSpeed() + "ms");
-      \u0275\u0275classProp("ng-progress-bar", true)("ng-progress-bar-active", ctx.progressRef.active())("ng-progress-bar-relative", ctx.relative());
+      ɵɵattribute("spinnerPosition", ctx.spinnerPosition())("direction", ctx.direction());
+      ɵɵstyleProp("--_ng-progress-speed", ctx.progressRef.speed() + "ms")("--_ng-progress-fade-out-speed", ctx.progressRef.fadeOutSpeed() + "ms");
+      ɵɵclassProp("ng-progress-bar", true)("ng-progress-bar-active", ctx.progressRef.active())("ng-progress-bar-relative", ctx.relative());
     }
   }, "NgProgressbar_HostBindings"),
   inputs: {
@@ -331,7 +331,7 @@ _NgProgressbar.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
     direction: [1, "direction"]
   },
   exportAs: ["ngProgress"],
-  features: [\u0275\u0275HostDirectivesFeature([{
+  features: [ɵɵHostDirectivesFeature([{
     directive: NgProgressRef,
     inputs: ["min", "min", "max", "max", "speed", "speed", "trickleSpeed", "trickleSpeed", "fadeOutSpeed", "fadeOutSpeed", "debounceTime", "debounceTime"],
     outputs: ["started", "started", "completed", "completed"]
@@ -341,19 +341,19 @@ _NgProgressbar.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
   consts: [[1, "ng-progress-bar-wrapper"], [1, "ng-bar-placeholder"], [1, "ng-bar"], [1, "ng-meteor"], [1, "ng-spinner"], [1, "ng-spinner-icon"]],
   template: /* @__PURE__ */ __name(function NgProgressbar_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275domElementStart(0, "div", 0)(1, "div", 1)(2, "div", 2);
-      \u0275\u0275conditionalCreate(3, NgProgressbar_Conditional_3_Template, 1, 0, "div", 3);
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275conditionalCreate(4, NgProgressbar_Conditional_4_Template, 2, 0, "div", 4);
-      \u0275\u0275domElementEnd();
+      ɵɵdomElementStart(0, "div", 0)(1, "div", 1)(2, "div", 2);
+      ɵɵconditionalCreate(3, NgProgressbar_Conditional_3_Template, 1, 0, "div", 3);
+      ɵɵdomElementEnd()();
+      ɵɵconditionalCreate(4, NgProgressbar_Conditional_4_Template, 2, 0, "div", 4);
+      ɵɵdomElementEnd();
     }
     if (rf & 2) {
-      \u0275\u0275advance(2);
-      \u0275\u0275styleProp("transform", ctx.progressTransform());
-      \u0275\u0275advance();
-      \u0275\u0275conditional(!ctx.flat() ? 3 : -1);
-      \u0275\u0275advance();
-      \u0275\u0275conditional(ctx.spinner() ? 4 : -1);
+      ɵɵadvance(2);
+      ɵɵstyleProp("transform", ctx.progressTransform());
+      ɵɵadvance();
+      ɵɵconditional(!ctx.flat() ? 3 : -1);
+      ɵɵadvance();
+      ɵɵconditional(ctx.spinner() ? 4 : -1);
     }
   }, "NgProgressbar_Template"),
   styles: ['[_nghost-%COMP%]{--_ng-progress-thickness: var(--ng-progress-thickness, 2);--_ng-progress-thickness-px: calc(var(--_ng-progress-thickness) * 1px);--_ng-progress-thickness-add-one: calc(var(--_ng-progress-thickness) + 1);--_ng-progress-meteor-position-px: calc(var(--_ng-progress-thickness-add-one) * -1px);--_ng-progress-color: var(--ng-progress-color, #1B95E0);--_ng-progress-holder-color: var(--ng-progress-holder-color, transparent);--_ng-progress-ease: var(--ng-progress-ease, linear);--_ng-progress-spinner-thickness: var(--ng-progress-spinner-thickness, 2);--_ng-progress-spinner-thickness-px: calc(var(--_ng-progress-spinner-thickness) * 1px);--_ng-progress-spinner-spacing: var(--ng-progress-spinner-spacing, 15);--_ng-progress-spinner-spacing-px: calc(var(--_ng-progress-spinner-spacing) * 1px);--_ng-progress-spinner-size: var(--ng-progress-spinner-size, 18);--_ng-progress-spinner-size-px: calc(var(--_ng-progress-spinner-size) * 1px);--_ng-progress-spinner-speed: var(--ng-progress-spinner-speed, .25s);z-index:999999;pointer-events:none}.ng-progress-bar-active[_nghost-%COMP%]   .ng-progress-bar-wrapper[_ngcontent-%COMP%]{filter:alpha(opacity=100);opacity:1;transition:none}.ng-progress-bar-active[_nghost-%COMP%]   .ng-bar[_ngcontent-%COMP%]{transition:all var(--_ng-progress-speed) var(--_ng-progress-ease)}.ng-progress-bar-relative[_nghost-%COMP%]   .ng-progress-bar-wrapper[_ngcontent-%COMP%]{position:relative}[direction="ltr+"][_nghost-%COMP%]   .ng-meteor[_ngcontent-%COMP%], [direction=ltr-][_nghost-%COMP%]   .ng-meteor[_ngcontent-%COMP%]{rotate:calc(var(--_ng-progress-thickness-add-one) * 1deg)}[direction="ltr+"][_nghost-%COMP%]   .ng-bar[_ngcontent-%COMP%], [direction="rtl+"][_nghost-%COMP%]   .ng-bar[_ngcontent-%COMP%]{margin-left:-100%}[direction="ltr+"][_nghost-%COMP%]   .ng-meteor[_ngcontent-%COMP%], [direction="rtl+"][_nghost-%COMP%]   .ng-meteor[_ngcontent-%COMP%]{right:0}[direction="ltr+"][_nghost-%COMP%]   .ng-meteor[_ngcontent-%COMP%], [direction=rtl-][_nghost-%COMP%]   .ng-meteor[_ngcontent-%COMP%]{top:var(--_ng-progress-meteor-position-px)}[direction=ltr-][_nghost-%COMP%]   .ng-meteor[_ngcontent-%COMP%], [direction="rtl+"][_nghost-%COMP%]   .ng-meteor[_ngcontent-%COMP%]{bottom:var(--_ng-progress-meteor-position-px)}[direction=ltr-][_nghost-%COMP%]   .ng-bar-placeholder[_ngcontent-%COMP%], [direction="rtl+"][_nghost-%COMP%]   .ng-bar-placeholder[_ngcontent-%COMP%]{transform:rotate(180deg)}[direction=ltr-][_nghost-%COMP%]   .ng-spinner-icon[_ngcontent-%COMP%], [direction="rtl+"][_nghost-%COMP%]   .ng-spinner-icon[_ngcontent-%COMP%]{animation-direction:reverse}[direction="rtl+"][_nghost-%COMP%]   .ng-meteor[_ngcontent-%COMP%], [direction=rtl-][_nghost-%COMP%]   .ng-meteor[_ngcontent-%COMP%]{rotate:calc(var(--_ng-progress-thickness-add-one) * -1deg)}[_nghost-%COMP%]   .ng-spinner[_ngcontent-%COMP%]{top:var(--_ng-progress-spinner-spacing-px)}[spinnerPosition=left][_nghost-%COMP%]   .ng-spinner[_ngcontent-%COMP%]{left:var(--_ng-progress-spinner-spacing-px)}[spinnerPosition=right][_nghost-%COMP%]   .ng-spinner[_ngcontent-%COMP%]{right:var(--_ng-progress-spinner-spacing-px)}.ng-progress-bar-wrapper[_ngcontent-%COMP%]{position:fixed;z-index:999999;top:0;left:0;width:100%;transform:scale(1);filter:alpha(opacity=0);opacity:0;transition:opacity var(--_ng-progress-fade-out-speed) linear}.ng-bar-placeholder[_ngcontent-%COMP%]{position:absolute;height:var(--_ng-progress-thickness-px);width:100%}.ng-bar[_ngcontent-%COMP%]{width:100%;height:100%;transform:translate(-100%,0,0);background:var(--_ng-progress-color)}.ng-meteor[_ngcontent-%COMP%]{display:block;position:absolute;width:100px;height:100%;opacity:1;box-shadow:0 0 10px var(--_ng-progress-color),0 0 5px var(--_ng-progress-color)}.ng-spinner[_ngcontent-%COMP%]{position:absolute;display:block;z-index:1031;top:10px}.ng-spinner-icon[_ngcontent-%COMP%]{box-sizing:border-box;animation:_ngcontent-%COMP%_spinner-animation var(--_ng-progress-spinner-speed) linear infinite;border-style:solid;border-color:transparent;border-radius:50%;border-top-color:var(--_ng-progress-color);border-left-color:var(--_ng-progress-color);width:var(--_ng-progress-spinner-size-px);height:var(--_ng-progress-spinner-size-px);border-width:var(--_ng-progress-spinner-thickness-px)}@keyframes _ngcontent-%COMP%_spinner-animation{0%{transform:rotate(0)}to{transform:rotate(360deg)}}'],
@@ -435,19 +435,19 @@ var _ProgressBarComponent = class _ProgressBarComponent {
   }
 };
 __name(_ProgressBarComponent, "ProgressBarComponent");
-__publicField(_ProgressBarComponent, "\u0275fac", /* @__PURE__ */ __name(function ProgressBarComponent_Factory(__ngFactoryType__) {
+__publicField(_ProgressBarComponent, "ɵfac", /* @__PURE__ */ __name(function ProgressBarComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ProgressBarComponent)();
 }, "ProgressBarComponent_Factory"));
-__publicField(_ProgressBarComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ProgressBarComponent, selectors: [["adev-progress-bar"]], viewQuery: /* @__PURE__ */ __name(function ProgressBarComponent_Query(rf, ctx) {
+__publicField(_ProgressBarComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _ProgressBarComponent, selectors: [["adev-progress-bar"]], viewQuery: /* @__PURE__ */ __name(function ProgressBarComponent_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx.progressBar, NgProgressRef, 5);
+    ɵɵviewQuerySignal(ctx.progressBar, NgProgressRef, 5);
   }
   if (rf & 2) {
-    \u0275\u0275queryAdvance();
+    ɵɵqueryAdvance();
   }
-}, "ProgressBarComponent_Query"), decls: 1, vars: 0, consts: [["aria-label", "\u9875\u9762\u52A0\u8F7D\u8FDB\u5EA6"]], template: /* @__PURE__ */ __name(function ProgressBarComponent_Template(rf, ctx) {
+}, "ProgressBarComponent_Query"), decls: 1, vars: 0, consts: [["aria-label", "頁面載入進度"]], template: /* @__PURE__ */ __name(function ProgressBarComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "ng-progress", 0);
+    ɵɵelement(0, "ng-progress", 0);
   }
 }, "ProgressBarComponent_Template"), dependencies: [NgProgressbar], encapsulation: 2, changeDetection: 0 }));
 var ProgressBarComponent = _ProgressBarComponent;
@@ -457,13 +457,13 @@ var ProgressBarComponent = _ProgressBarComponent;
     args: [{
       selector: "adev-progress-bar",
       imports: [NgProgressbar],
-      template: `<ng-progress aria-label="\u9875\u9762\u52A0\u8F7D\u8FDB\u5EA6" />`,
+      template: `<ng-progress aria-label="頁面載入進度" />`,
       changeDetection: ChangeDetectionStrategy.OnPush
     }]
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ProgressBarComponent, { className: "ProgressBarComponent", filePath: "src/app/core/layout/progress-bar/progress-bar.component.ts", lineNumber: 31 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(ProgressBarComponent, { className: "ProgressBarComponent", filePath: "src/app/core/layout/progress-bar/progress-bar.component.ts", lineNumber: 31 });
 })();
 export {
   PROGRESS_BAR_DELAY,

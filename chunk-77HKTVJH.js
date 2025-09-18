@@ -33,25 +33,25 @@ var _ErrorSnackBar = class _ErrorSnackBar {
   }
 };
 __name(_ErrorSnackBar, "ErrorSnackBar");
-__publicField(_ErrorSnackBar, "\u0275fac", /* @__PURE__ */ __name(function ErrorSnackBar_Factory(__ngFactoryType__) {
+__publicField(_ErrorSnackBar, "ɵfac", /* @__PURE__ */ __name(function ErrorSnackBar_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ErrorSnackBar)();
 }, "ErrorSnackBar_Factory"));
-__publicField(_ErrorSnackBar, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ErrorSnackBar, selectors: [["error-snack-bar"]], decls: 3, vars: 3, consts: [["type", "button", "matSnackBarAction", "", 1, "docs-primary-btn", 3, "click"]], template: /* @__PURE__ */ __name(function ErrorSnackBar_Template(rf, ctx) {
+__publicField(_ErrorSnackBar, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _ErrorSnackBar, selectors: [["error-snack-bar"]], decls: 3, vars: 3, consts: [["type", "button", "matSnackBarAction", "", 1, "docs-primary-btn", 3, "click"]], template: /* @__PURE__ */ __name(function ErrorSnackBar_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275text(0);
-    \u0275\u0275elementStart(1, "button", 0);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function ErrorSnackBar_Template_button_click_1_listener() {
+    ɵɵtext(0);
+    ɵɵelementStart(1, "button", 0);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function ErrorSnackBar_Template_button_click_1_listener() {
       return ctx.snackBarRef.dismissWithAction();
     }, "ErrorSnackBar_Template_button_click_1_listener"));
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
+    ɵɵtext(2);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275textInterpolate1(" ", ctx.message, " ");
-    \u0275\u0275advance();
-    \u0275\u0275attribute("text", ctx.actionText);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx.actionText, " ");
+    ɵɵtextInterpolate1(" ", ctx.message, " ");
+    ɵɵadvance();
+    ɵɵattribute("text", ctx.actionText);
+    ɵɵadvance();
+    ɵɵtextInterpolate1(" ", ctx.actionText, " ");
   }
 }, "ErrorSnackBar_Template"), dependencies: [MatSnackBarAction], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  align-items: center;\n}\n[_nghost-%COMP%]   button[_ngcontent-%COMP%] {\n  margin-left: 16px;\n}\n/*# sourceMappingURL=error-snack-bar.css.map */"], changeDetection: 0 }));
 var ErrorSnackBar = _ErrorSnackBar;
@@ -73,7 +73,7 @@ var ErrorSnackBar = _ErrorSnackBar;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ErrorSnackBar, { className: "ErrorSnackBar", filePath: "src/app/core/services/errors-handling/error-snack-bar.ts", lineNumber: 35 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(ErrorSnackBar, { className: "ErrorSnackBar", filePath: "src/app/core/services/errors-handling/error-snack-bar.ts", lineNumber: 35 });
 })();
 
 export {

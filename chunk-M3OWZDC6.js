@@ -52,10 +52,10 @@ var _IfLoadedDirective = class _IfLoadedDirective {
   }
 };
 __name(_IfLoadedDirective, "IfLoadedDirective");
-__publicField(_IfLoadedDirective, "\u0275fac", /* @__PURE__ */ __name(function IfLoadedDirective_Factory(__ngFactoryType__) {
-  return new (__ngFactoryType__ || _IfLoadedDirective)(\u0275\u0275directiveInject(ViewContainerRef), \u0275\u0275directiveInject(TemplateRef));
+__publicField(_IfLoadedDirective, "ɵfac", /* @__PURE__ */ __name(function IfLoadedDirective_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _IfLoadedDirective)(ɵɵdirectiveInject(ViewContainerRef), ɵɵdirectiveInject(TemplateRef));
 }, "IfLoadedDirective_Factory"));
-__publicField(_IfLoadedDirective, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({ type: _IfLoadedDirective, selectors: [["", "appIfLoaded", ""]], inputs: { state: [1, "appIfLoaded", "state"] } }));
+__publicField(_IfLoadedDirective, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({ type: _IfLoadedDirective, selectors: [["", "appIfLoaded", ""]], inputs: { state: [1, "appIfLoaded", "state"] } }));
 var IfLoadedDirective = _IfLoadedDirective;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(IfLoadedDirective, [{
@@ -77,15 +77,15 @@ var heroes = [
 // src/content/examples/structural-directives/src/app/hero.component.ts
 function HeroComponent_p_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p");
-    \u0275\u0275text(1);
-    \u0275\u0275pipe(2, "json");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "p");
+    ɵɵtext(1);
+    ɵɵpipe(2, "json");
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(2, 1, ctx_r0.heroLoadingState.data));
+    const ctx_r0 = ɵɵnextContext();
+    ɵɵadvance();
+    ɵɵtextInterpolate(ɵɵpipeBind1(2, 1, ctx_r0.heroLoadingState.data));
   }
 }
 __name(HeroComponent_p_2_Template, "HeroComponent_p_2_Template");
@@ -96,22 +96,22 @@ var _HeroComponent = class _HeroComponent {
   }
 };
 __name(_HeroComponent, "HeroComponent");
-__publicField(_HeroComponent, "\u0275fac", /* @__PURE__ */ __name(function HeroComponent_Factory(__ngFactoryType__) {
+__publicField(_HeroComponent, "ɵfac", /* @__PURE__ */ __name(function HeroComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HeroComponent)();
 }, "HeroComponent_Factory"));
-__publicField(_HeroComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HeroComponent, selectors: [["app-hero"]], decls: 3, vars: 1, consts: [[3, "click"], [4, "appIfLoaded"]], template: /* @__PURE__ */ __name(function HeroComponent_Template(rf, ctx) {
+__publicField(_HeroComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _HeroComponent, selectors: [["app-hero"]], decls: 3, vars: 1, consts: [[3, "click"], [4, "appIfLoaded"]], template: /* @__PURE__ */ __name(function HeroComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "button", 0);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function HeroComponent_Template_button_click_0_listener() {
+    ɵɵelementStart(0, "button", 0);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function HeroComponent_Template_button_click_0_listener() {
       return ctx.onLoadHero();
     }, "HeroComponent_Template_button_click_0_listener"));
-    \u0275\u0275text(1, "Load Hero");
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(2, HeroComponent_p_2_Template, 3, 3, "p", 1);
+    ɵɵtext(1, "Load Hero");
+    ɵɵelementEnd();
+    ɵɵtemplate(2, HeroComponent_p_2_Template, 3, 3, "p", 1);
   }
   if (rf & 2) {
-    \u0275\u0275advance(2);
-    \u0275\u0275property("appIfLoaded", ctx.heroLoadingState);
+    ɵɵadvance(2);
+    ɵɵproperty("appIfLoaded", ctx.heroLoadingState);
   }
 }, "HeroComponent_Template"), dependencies: [IfLoadedDirective, JsonPipe], encapsulation: 2 }));
 var HeroComponent = _HeroComponent;
@@ -129,7 +129,7 @@ var HeroComponent = _HeroComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HeroComponent, { className: "HeroComponent", filePath: "src/content/examples/structural-directives/src/app/hero.component.ts", lineNumber: 17 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(HeroComponent, { className: "HeroComponent", filePath: "src/content/examples/structural-directives/src/app/hero.component.ts", lineNumber: 17 });
 })();
 
 export {

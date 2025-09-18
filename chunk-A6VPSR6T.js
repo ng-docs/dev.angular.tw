@@ -2668,12 +2668,12 @@ var _Clipboard = class _Clipboard {
   }
 };
 __name(_Clipboard, "Clipboard");
-__publicField(_Clipboard, "\u0275fac", /* @__PURE__ */ __name(function Clipboard_Factory(__ngFactoryType__) {
+__publicField(_Clipboard, "ɵfac", /* @__PURE__ */ __name(function Clipboard_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Clipboard)();
 }, "Clipboard_Factory"));
-__publicField(_Clipboard, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_Clipboard, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _Clipboard,
-  factory: _Clipboard.\u0275fac,
+  factory: _Clipboard.ɵfac,
   providedIn: "root"
 }));
 var Clipboard = _Clipboard;
@@ -2747,15 +2747,15 @@ var _CdkCopyToClipboard = class _CdkCopyToClipboard {
   }
 };
 __name(_CdkCopyToClipboard, "CdkCopyToClipboard");
-__publicField(_CdkCopyToClipboard, "\u0275fac", /* @__PURE__ */ __name(function CdkCopyToClipboard_Factory(__ngFactoryType__) {
+__publicField(_CdkCopyToClipboard, "ɵfac", /* @__PURE__ */ __name(function CdkCopyToClipboard_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkCopyToClipboard)();
 }, "CdkCopyToClipboard_Factory"));
-__publicField(_CdkCopyToClipboard, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkCopyToClipboard, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkCopyToClipboard,
   selectors: [["", "cdkCopyToClipboard", ""]],
   hostBindings: /* @__PURE__ */ __name(function CdkCopyToClipboard_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function CdkCopyToClipboard_click_HostBindingHandler() {
+      ɵɵlistener("click", /* @__PURE__ */ __name(function CdkCopyToClipboard_click_HostBindingHandler() {
         return ctx.copy();
       }, "CdkCopyToClipboard_click_HostBindingHandler"));
     }
@@ -2796,15 +2796,15 @@ var CdkCopyToClipboard = _CdkCopyToClipboard;
 var _ClipboardModule = class _ClipboardModule {
 };
 __name(_ClipboardModule, "ClipboardModule");
-__publicField(_ClipboardModule, "\u0275fac", /* @__PURE__ */ __name(function ClipboardModule_Factory(__ngFactoryType__) {
+__publicField(_ClipboardModule, "ɵfac", /* @__PURE__ */ __name(function ClipboardModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ClipboardModule)();
 }, "ClipboardModule_Factory"));
-__publicField(_ClipboardModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_ClipboardModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _ClipboardModule,
   imports: [CdkCopyToClipboard],
   exports: [CdkCopyToClipboard]
 }));
-__publicField(_ClipboardModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({}));
+__publicField(_ClipboardModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({}));
 var ClipboardModule = _ClipboardModule;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ClipboardModule, [{
@@ -3924,12 +3924,12 @@ var _InputModalityDetector = class _InputModalityDetector {
   }
 };
 __name(_InputModalityDetector, "InputModalityDetector");
-__publicField(_InputModalityDetector, "\u0275fac", /* @__PURE__ */ __name(function InputModalityDetector_Factory(__ngFactoryType__) {
+__publicField(_InputModalityDetector, "ɵfac", /* @__PURE__ */ __name(function InputModalityDetector_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _InputModalityDetector)();
 }, "InputModalityDetector_Factory"));
-__publicField(_InputModalityDetector, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_InputModalityDetector, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _InputModalityDetector,
-  factory: _InputModalityDetector.\u0275fac,
+  factory: _InputModalityDetector.ɵfac,
   providedIn: "root"
 }));
 var InputModalityDetector = _InputModalityDetector;
@@ -4249,12 +4249,12 @@ var _FocusMonitor = class _FocusMonitor {
   }
 };
 __name(_FocusMonitor, "FocusMonitor");
-__publicField(_FocusMonitor, "\u0275fac", /* @__PURE__ */ __name(function FocusMonitor_Factory(__ngFactoryType__) {
+__publicField(_FocusMonitor, "ɵfac", /* @__PURE__ */ __name(function FocusMonitor_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _FocusMonitor)();
 }, "FocusMonitor_Factory"));
-__publicField(_FocusMonitor, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_FocusMonitor, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _FocusMonitor,
-  factory: _FocusMonitor.\u0275fac,
+  factory: _FocusMonitor.ɵfac,
   providedIn: "root"
 }));
 var FocusMonitor = _FocusMonitor;
@@ -4292,10 +4292,10 @@ var _CdkMonitorFocus = class _CdkMonitorFocus {
   }
 };
 __name(_CdkMonitorFocus, "CdkMonitorFocus");
-__publicField(_CdkMonitorFocus, "\u0275fac", /* @__PURE__ */ __name(function CdkMonitorFocus_Factory(__ngFactoryType__) {
+__publicField(_CdkMonitorFocus, "ɵfac", /* @__PURE__ */ __name(function CdkMonitorFocus_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkMonitorFocus)();
 }, "CdkMonitorFocus_Factory"));
-__publicField(_CdkMonitorFocus, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkMonitorFocus, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkMonitorFocus,
   selectors: [["", "cdkMonitorElementFocus", ""], ["", "cdkMonitorSubtreeFocus", ""]],
   outputs: {
@@ -4322,10 +4322,10 @@ var CdkMonitorFocus = _CdkMonitorFocus;
 var __VisuallyHiddenLoader = class __VisuallyHiddenLoader {
 };
 __name(__VisuallyHiddenLoader, "_VisuallyHiddenLoader");
-__publicField(__VisuallyHiddenLoader, "\u0275fac", /* @__PURE__ */ __name(function _VisuallyHiddenLoader_Factory(__ngFactoryType__) {
+__publicField(__VisuallyHiddenLoader, "ɵfac", /* @__PURE__ */ __name(function _VisuallyHiddenLoader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || __VisuallyHiddenLoader)();
 }, "_VisuallyHiddenLoader_Factory"));
-__publicField(__VisuallyHiddenLoader, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(__VisuallyHiddenLoader, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: __VisuallyHiddenLoader,
   selectors: [["ng-component"]],
   exportAs: ["cdkVisuallyHidden"],
@@ -4382,12 +4382,12 @@ var _MediaMatcher = class _MediaMatcher {
   }
 };
 __name(_MediaMatcher, "MediaMatcher");
-__publicField(_MediaMatcher, "\u0275fac", /* @__PURE__ */ __name(function MediaMatcher_Factory(__ngFactoryType__) {
+__publicField(_MediaMatcher, "ɵfac", /* @__PURE__ */ __name(function MediaMatcher_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MediaMatcher)();
 }, "MediaMatcher_Factory"));
-__publicField(_MediaMatcher, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_MediaMatcher, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _MediaMatcher,
-  factory: _MediaMatcher.\u0275fac,
+  factory: _MediaMatcher.ɵfac,
   providedIn: "root"
 }));
 var MediaMatcher = _MediaMatcher;
@@ -4508,12 +4508,12 @@ var _BreakpointObserver = class _BreakpointObserver {
   }
 };
 __name(_BreakpointObserver, "BreakpointObserver");
-__publicField(_BreakpointObserver, "\u0275fac", /* @__PURE__ */ __name(function BreakpointObserver_Factory(__ngFactoryType__) {
+__publicField(_BreakpointObserver, "ɵfac", /* @__PURE__ */ __name(function BreakpointObserver_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _BreakpointObserver)();
 }, "BreakpointObserver_Factory"));
-__publicField(_BreakpointObserver, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_BreakpointObserver, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _BreakpointObserver,
-  factory: _BreakpointObserver.\u0275fac,
+  factory: _BreakpointObserver.ɵfac,
   providedIn: "root"
 }));
 var BreakpointObserver = _BreakpointObserver;
@@ -4557,12 +4557,12 @@ var _MutationObserverFactory = class _MutationObserverFactory {
   }
 };
 __name(_MutationObserverFactory, "MutationObserverFactory");
-__publicField(_MutationObserverFactory, "\u0275fac", /* @__PURE__ */ __name(function MutationObserverFactory_Factory(__ngFactoryType__) {
+__publicField(_MutationObserverFactory, "ɵfac", /* @__PURE__ */ __name(function MutationObserverFactory_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MutationObserverFactory)();
 }, "MutationObserverFactory_Factory"));
-__publicField(_MutationObserverFactory, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_MutationObserverFactory, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _MutationObserverFactory,
-  factory: _MutationObserverFactory.\u0275fac,
+  factory: _MutationObserverFactory.ɵfac,
   providedIn: "root"
 }));
 var MutationObserverFactory = _MutationObserverFactory;
@@ -4654,12 +4654,12 @@ var _ContentObserver = class _ContentObserver {
   }
 };
 __name(_ContentObserver, "ContentObserver");
-__publicField(_ContentObserver, "\u0275fac", /* @__PURE__ */ __name(function ContentObserver_Factory(__ngFactoryType__) {
+__publicField(_ContentObserver, "ɵfac", /* @__PURE__ */ __name(function ContentObserver_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ContentObserver)();
 }, "ContentObserver_Factory"));
-__publicField(_ContentObserver, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_ContentObserver, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _ContentObserver,
-  factory: _ContentObserver.\u0275fac,
+  factory: _ContentObserver.ɵfac,
   providedIn: "root"
 }));
 var ContentObserver = _ContentObserver;
@@ -4718,10 +4718,10 @@ var _CdkObserveContent = class _CdkObserveContent {
   }
 };
 __name(_CdkObserveContent, "CdkObserveContent");
-__publicField(_CdkObserveContent, "\u0275fac", /* @__PURE__ */ __name(function CdkObserveContent_Factory(__ngFactoryType__) {
+__publicField(_CdkObserveContent, "ɵfac", /* @__PURE__ */ __name(function CdkObserveContent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkObserveContent)();
 }, "CdkObserveContent_Factory"));
-__publicField(_CdkObserveContent, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkObserveContent, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkObserveContent,
   selectors: [["", "cdkObserveContent", ""]],
   inputs: {
@@ -4761,15 +4761,15 @@ var CdkObserveContent = _CdkObserveContent;
 var _ObserversModule = class _ObserversModule {
 };
 __name(_ObserversModule, "ObserversModule");
-__publicField(_ObserversModule, "\u0275fac", /* @__PURE__ */ __name(function ObserversModule_Factory(__ngFactoryType__) {
+__publicField(_ObserversModule, "ɵfac", /* @__PURE__ */ __name(function ObserversModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ObserversModule)();
 }, "ObserversModule_Factory"));
-__publicField(_ObserversModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_ObserversModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _ObserversModule,
   imports: [CdkObserveContent],
   exports: [CdkObserveContent]
 }));
-__publicField(_ObserversModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_ObserversModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   providers: [MutationObserverFactory]
 }));
 var ObserversModule = _ObserversModule;
@@ -4869,12 +4869,12 @@ var _InteractivityChecker = class _InteractivityChecker {
   }
 };
 __name(_InteractivityChecker, "InteractivityChecker");
-__publicField(_InteractivityChecker, "\u0275fac", /* @__PURE__ */ __name(function InteractivityChecker_Factory(__ngFactoryType__) {
+__publicField(_InteractivityChecker, "ɵfac", /* @__PURE__ */ __name(function InteractivityChecker_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _InteractivityChecker)();
 }, "InteractivityChecker_Factory"));
-__publicField(_InteractivityChecker, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_InteractivityChecker, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _InteractivityChecker,
-  factory: _InteractivityChecker.\u0275fac,
+  factory: _InteractivityChecker.ɵfac,
   providedIn: "root"
 }));
 var InteractivityChecker = _InteractivityChecker;
@@ -5220,12 +5220,12 @@ var _FocusTrapFactory = class _FocusTrapFactory {
   }
 };
 __name(_FocusTrapFactory, "FocusTrapFactory");
-__publicField(_FocusTrapFactory, "\u0275fac", /* @__PURE__ */ __name(function FocusTrapFactory_Factory(__ngFactoryType__) {
+__publicField(_FocusTrapFactory, "ɵfac", /* @__PURE__ */ __name(function FocusTrapFactory_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _FocusTrapFactory)();
 }, "FocusTrapFactory_Factory"));
-__publicField(_FocusTrapFactory, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_FocusTrapFactory, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _FocusTrapFactory,
-  factory: _FocusTrapFactory.\u0275fac,
+  factory: _FocusTrapFactory.ɵfac,
   providedIn: "root"
 }));
 var FocusTrapFactory = _FocusTrapFactory;
@@ -5294,10 +5294,10 @@ var _CdkTrapFocus = class _CdkTrapFocus {
   }
 };
 __name(_CdkTrapFocus, "CdkTrapFocus");
-__publicField(_CdkTrapFocus, "\u0275fac", /* @__PURE__ */ __name(function CdkTrapFocus_Factory(__ngFactoryType__) {
+__publicField(_CdkTrapFocus, "ɵfac", /* @__PURE__ */ __name(function CdkTrapFocus_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkTrapFocus)();
 }, "CdkTrapFocus_Factory"));
-__publicField(_CdkTrapFocus, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkTrapFocus, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkTrapFocus,
   selectors: [["", "cdkTrapFocus", ""]],
   inputs: {
@@ -5305,7 +5305,7 @@ __publicField(_CdkTrapFocus, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDire
     autoCapture: [2, "cdkTrapFocusAutoCapture", "autoCapture", booleanAttribute]
   },
   exportAs: ["cdkTrapFocus"],
-  features: [\u0275\u0275NgOnChangesFeature]
+  features: [ɵɵNgOnChangesFeature]
 }));
 var CdkTrapFocus = _CdkTrapFocus;
 (() => {
@@ -5446,12 +5446,12 @@ var _LiveAnnouncer = class _LiveAnnouncer {
   }
 };
 __name(_LiveAnnouncer, "LiveAnnouncer");
-__publicField(_LiveAnnouncer, "\u0275fac", /* @__PURE__ */ __name(function LiveAnnouncer_Factory(__ngFactoryType__) {
+__publicField(_LiveAnnouncer, "ɵfac", /* @__PURE__ */ __name(function LiveAnnouncer_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _LiveAnnouncer)();
 }, "LiveAnnouncer_Factory"));
-__publicField(_LiveAnnouncer, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_LiveAnnouncer, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _LiveAnnouncer,
-  factory: _LiveAnnouncer.\u0275fac,
+  factory: _LiveAnnouncer.ɵfac,
   providedIn: "root"
 }));
 var LiveAnnouncer = _LiveAnnouncer;
@@ -5506,10 +5506,10 @@ var _CdkAriaLive = class _CdkAriaLive {
   }
 };
 __name(_CdkAriaLive, "CdkAriaLive");
-__publicField(_CdkAriaLive, "\u0275fac", /* @__PURE__ */ __name(function CdkAriaLive_Factory(__ngFactoryType__) {
+__publicField(_CdkAriaLive, "ɵfac", /* @__PURE__ */ __name(function CdkAriaLive_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkAriaLive)();
 }, "CdkAriaLive_Factory"));
-__publicField(_CdkAriaLive, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkAriaLive, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkAriaLive,
   selectors: [["", "cdkAriaLive", ""]],
   inputs: {
@@ -5610,12 +5610,12 @@ var _HighContrastModeDetector = class _HighContrastModeDetector {
   }
 };
 __name(_HighContrastModeDetector, "HighContrastModeDetector");
-__publicField(_HighContrastModeDetector, "\u0275fac", /* @__PURE__ */ __name(function HighContrastModeDetector_Factory(__ngFactoryType__) {
+__publicField(_HighContrastModeDetector, "ɵfac", /* @__PURE__ */ __name(function HighContrastModeDetector_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HighContrastModeDetector)();
 }, "HighContrastModeDetector_Factory"));
-__publicField(_HighContrastModeDetector, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_HighContrastModeDetector, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _HighContrastModeDetector,
-  factory: _HighContrastModeDetector.\u0275fac,
+  factory: _HighContrastModeDetector.ɵfac,
   providedIn: "root"
 }));
 var HighContrastModeDetector = _HighContrastModeDetector;
@@ -5633,15 +5633,15 @@ var _A11yModule = class _A11yModule {
   }
 };
 __name(_A11yModule, "A11yModule");
-__publicField(_A11yModule, "\u0275fac", /* @__PURE__ */ __name(function A11yModule_Factory(__ngFactoryType__) {
+__publicField(_A11yModule, "ɵfac", /* @__PURE__ */ __name(function A11yModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _A11yModule)();
 }, "A11yModule_Factory"));
-__publicField(_A11yModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_A11yModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _A11yModule,
   imports: [ObserversModule, CdkAriaLive, CdkTrapFocus, CdkMonitorFocus],
   exports: [CdkAriaLive, CdkTrapFocus, CdkMonitorFocus]
 }));
-__publicField(_A11yModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_A11yModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   imports: [ObserversModule]
 }));
 var A11yModule = _A11yModule;
@@ -6276,12 +6276,12 @@ var _AriaDescriber = class _AriaDescriber {
   }
 };
 __name(_AriaDescriber, "AriaDescriber");
-__publicField(_AriaDescriber, "\u0275fac", /* @__PURE__ */ __name(function AriaDescriber_Factory(__ngFactoryType__) {
+__publicField(_AriaDescriber, "ɵfac", /* @__PURE__ */ __name(function AriaDescriber_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AriaDescriber)();
 }, "AriaDescriber_Factory"));
-__publicField(_AriaDescriber, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_AriaDescriber, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _AriaDescriber,
-  factory: _AriaDescriber.\u0275fac,
+  factory: _AriaDescriber.ɵfac,
   providedIn: "root"
 }));
 var AriaDescriber = _AriaDescriber;
@@ -6419,12 +6419,12 @@ var _FocusTrapManager = class _FocusTrapManager {
   }
 };
 __name(_FocusTrapManager, "FocusTrapManager");
-__publicField(_FocusTrapManager, "\u0275fac", /* @__PURE__ */ __name(function FocusTrapManager_Factory(__ngFactoryType__) {
+__publicField(_FocusTrapManager, "ɵfac", /* @__PURE__ */ __name(function FocusTrapManager_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _FocusTrapManager)();
 }, "FocusTrapManager_Factory"));
-__publicField(_FocusTrapManager, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_FocusTrapManager, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _FocusTrapManager,
-  factory: _FocusTrapManager.\u0275fac,
+  factory: _FocusTrapManager.ɵfac,
   providedIn: "root"
 }));
 var FocusTrapManager = _FocusTrapManager;
@@ -6464,12 +6464,12 @@ var _ConfigurableFocusTrapFactory = class _ConfigurableFocusTrapFactory {
   }
 };
 __name(_ConfigurableFocusTrapFactory, "ConfigurableFocusTrapFactory");
-__publicField(_ConfigurableFocusTrapFactory, "\u0275fac", /* @__PURE__ */ __name(function ConfigurableFocusTrapFactory_Factory(__ngFactoryType__) {
+__publicField(_ConfigurableFocusTrapFactory, "ɵfac", /* @__PURE__ */ __name(function ConfigurableFocusTrapFactory_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ConfigurableFocusTrapFactory)();
 }, "ConfigurableFocusTrapFactory_Factory"));
-__publicField(_ConfigurableFocusTrapFactory, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_ConfigurableFocusTrapFactory, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _ConfigurableFocusTrapFactory,
-  factory: _ConfigurableFocusTrapFactory.\u0275fac,
+  factory: _ConfigurableFocusTrapFactory.ɵfac,
   providedIn: "root"
 }));
 var ConfigurableFocusTrapFactory = _ConfigurableFocusTrapFactory;
@@ -6581,12 +6581,12 @@ var _SharedResizeObserver = class _SharedResizeObserver {
   }
 };
 __name(_SharedResizeObserver, "SharedResizeObserver");
-__publicField(_SharedResizeObserver, "\u0275fac", /* @__PURE__ */ __name(function SharedResizeObserver_Factory(__ngFactoryType__) {
+__publicField(_SharedResizeObserver, "ɵfac", /* @__PURE__ */ __name(function SharedResizeObserver_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _SharedResizeObserver)();
 }, "SharedResizeObserver_Factory"));
-__publicField(_SharedResizeObserver, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_SharedResizeObserver, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _SharedResizeObserver,
-  factory: _SharedResizeObserver.\u0275fac,
+  factory: _SharedResizeObserver.ɵfac,
   providedIn: "root"
 }));
 var SharedResizeObserver = _SharedResizeObserver;
@@ -6603,13 +6603,13 @@ var SharedResizeObserver = _SharedResizeObserver;
 var _PlatformModule = class _PlatformModule {
 };
 __name(_PlatformModule, "PlatformModule");
-__publicField(_PlatformModule, "\u0275fac", /* @__PURE__ */ __name(function PlatformModule_Factory(__ngFactoryType__) {
+__publicField(_PlatformModule, "ɵfac", /* @__PURE__ */ __name(function PlatformModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _PlatformModule)();
 }, "PlatformModule_Factory"));
-__publicField(_PlatformModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_PlatformModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _PlatformModule
 }));
-__publicField(_PlatformModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({}));
+__publicField(_PlatformModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({}));
 var PlatformModule = _PlatformModule;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PlatformModule, [{
@@ -6667,13 +6667,13 @@ __name(getSupportedInputTypes, "getSupportedInputTypes");
 var _LayoutModule = class _LayoutModule {
 };
 __name(_LayoutModule, "LayoutModule");
-__publicField(_LayoutModule, "\u0275fac", /* @__PURE__ */ __name(function LayoutModule_Factory(__ngFactoryType__) {
+__publicField(_LayoutModule, "ɵfac", /* @__PURE__ */ __name(function LayoutModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _LayoutModule)();
 }, "LayoutModule_Factory"));
-__publicField(_LayoutModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_LayoutModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _LayoutModule
 }));
-__publicField(_LayoutModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({}));
+__publicField(_LayoutModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({}));
 var LayoutModule = _LayoutModule;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LayoutModule, [{
@@ -6718,10 +6718,10 @@ __name(_animationsDisabled, "_animationsDisabled");
 var __StructuralStylesLoader = class __StructuralStylesLoader {
 };
 __name(__StructuralStylesLoader, "_StructuralStylesLoader");
-__publicField(__StructuralStylesLoader, "\u0275fac", /* @__PURE__ */ __name(function _StructuralStylesLoader_Factory(__ngFactoryType__) {
+__publicField(__StructuralStylesLoader, "ɵfac", /* @__PURE__ */ __name(function _StructuralStylesLoader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || __StructuralStylesLoader)();
 }, "_StructuralStylesLoader_Factory"));
-__publicField(__StructuralStylesLoader, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(__StructuralStylesLoader, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: __StructuralStylesLoader,
   selectors: [["structural-styles"]],
   decls: 0,
@@ -6850,10 +6850,10 @@ var pointerUpEvents = ["mouseup", "mouseleave", "touchend", "touchcancel"];
 var __MatRippleStylesLoader = class __MatRippleStylesLoader {
 };
 __name(__MatRippleStylesLoader, "_MatRippleStylesLoader");
-__publicField(__MatRippleStylesLoader, "\u0275fac", /* @__PURE__ */ __name(function _MatRippleStylesLoader_Factory(__ngFactoryType__) {
+__publicField(__MatRippleStylesLoader, "ɵfac", /* @__PURE__ */ __name(function _MatRippleStylesLoader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || __MatRippleStylesLoader)();
 }, "_MatRippleStylesLoader_Factory"));
-__publicField(__MatRippleStylesLoader, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(__MatRippleStylesLoader, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: __MatRippleStylesLoader,
   selectors: [["ng-component"]],
   hostAttrs: ["mat-ripple-style-loader", ""],
@@ -7269,17 +7269,17 @@ var _MatRipple = class _MatRipple {
   }
 };
 __name(_MatRipple, "MatRipple");
-__publicField(_MatRipple, "\u0275fac", /* @__PURE__ */ __name(function MatRipple_Factory(__ngFactoryType__) {
+__publicField(_MatRipple, "ɵfac", /* @__PURE__ */ __name(function MatRipple_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatRipple)();
 }, "MatRipple_Factory"));
-__publicField(_MatRipple, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatRipple, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatRipple,
   selectors: [["", "mat-ripple", ""], ["", "matRipple", ""]],
   hostAttrs: [1, "mat-ripple"],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function MatRipple_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("mat-ripple-unbounded", ctx.unbounded);
+      ɵɵclassProp("mat-ripple-unbounded", ctx.unbounded);
     }
   }, "MatRipple_HostBindings"),
   inputs: {
@@ -7348,15 +7348,15 @@ var _MatCommonModule = class _MatCommonModule {
   }
 };
 __name(_MatCommonModule, "MatCommonModule");
-__publicField(_MatCommonModule, "\u0275fac", /* @__PURE__ */ __name(function MatCommonModule_Factory(__ngFactoryType__) {
+__publicField(_MatCommonModule, "ɵfac", /* @__PURE__ */ __name(function MatCommonModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatCommonModule)();
 }, "MatCommonModule_Factory"));
-__publicField(_MatCommonModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_MatCommonModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _MatCommonModule,
   imports: [BidiModule],
   exports: [BidiModule]
 }));
-__publicField(_MatCommonModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_MatCommonModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   imports: [BidiModule, BidiModule]
 }));
 var MatCommonModule = _MatCommonModule;
@@ -7374,7 +7374,7 @@ var MatCommonModule = _MatCommonModule;
 var _c0 = ["*"];
 function MatTab_ng_template_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275projection(0);
+    ɵɵprojection(0);
   }
 }
 __name(MatTab_ng_template_0_Template, "MatTab_ng_template_0_Template");
@@ -7394,93 +7394,93 @@ function MatTabGroup_For_3_Conditional_6_ng_template_0_Template(rf, ctx) {
 __name(MatTabGroup_For_3_Conditional_6_ng_template_0_Template, "MatTabGroup_For_3_Conditional_6_ng_template_0_Template");
 function MatTabGroup_For_3_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275template(0, MatTabGroup_For_3_Conditional_6_ng_template_0_Template, 0, 0, "ng-template", 12);
+    ɵɵtemplate(0, MatTabGroup_For_3_Conditional_6_ng_template_0_Template, 0, 0, "ng-template", 12);
   }
   if (rf & 2) {
-    const tab_r4 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275property("cdkPortalOutlet", tab_r4.templateLabel);
+    const tab_r4 = ɵɵnextContext().$implicit;
+    ɵɵproperty("cdkPortalOutlet", tab_r4.templateLabel);
   }
 }
 __name(MatTabGroup_For_3_Conditional_6_Template, "MatTabGroup_For_3_Conditional_6_Template");
 function MatTabGroup_For_3_Conditional_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275text(0);
+    ɵɵtext(0);
   }
   if (rf & 2) {
-    const tab_r4 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275textInterpolate(tab_r4.textLabel);
+    const tab_r4 = ɵɵnextContext().$implicit;
+    ɵɵtextInterpolate(tab_r4.textLabel);
   }
 }
 __name(MatTabGroup_For_3_Conditional_7_Template, "MatTabGroup_For_3_Conditional_7_Template");
 function MatTabGroup_For_3_Template(rf, ctx) {
   if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 7, 2);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function MatTabGroup_For_3_Template_div_click_0_listener() {
-      const ctx_r2 = \u0275\u0275restoreView(_r2);
+    const _r2 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "div", 7, 2);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function MatTabGroup_For_3_Template_div_click_0_listener() {
+      const ctx_r2 = ɵɵrestoreView(_r2);
       const tab_r4 = ctx_r2.$implicit;
       const $index_r5 = ctx_r2.$index;
-      const ctx_r5 = \u0275\u0275nextContext();
-      const tabHeader_r7 = \u0275\u0275reference(1);
-      return \u0275\u0275resetView(ctx_r5._handleClick(tab_r4, tabHeader_r7, $index_r5));
+      const ctx_r5 = ɵɵnextContext();
+      const tabHeader_r7 = ɵɵreference(1);
+      return ɵɵresetView(ctx_r5._handleClick(tab_r4, tabHeader_r7, $index_r5));
     }, "MatTabGroup_For_3_Template_div_click_0_listener"))("cdkFocusChange", /* @__PURE__ */ __name(function MatTabGroup_For_3_Template_div_cdkFocusChange_0_listener($event) {
-      const $index_r5 = \u0275\u0275restoreView(_r2).$index;
-      const ctx_r5 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r5._tabFocusChanged($event, $index_r5));
+      const $index_r5 = ɵɵrestoreView(_r2).$index;
+      const ctx_r5 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r5._tabFocusChanged($event, $index_r5));
     }, "MatTabGroup_For_3_Template_div_cdkFocusChange_0_listener"));
-    \u0275\u0275element(2, "span", 8)(3, "div", 9);
-    \u0275\u0275elementStart(4, "span", 10)(5, "span", 11);
-    \u0275\u0275conditionalCreate(6, MatTabGroup_For_3_Conditional_6_Template, 1, 1, null, 12)(7, MatTabGroup_For_3_Conditional_7_Template, 1, 1);
-    \u0275\u0275elementEnd()()();
+    ɵɵelement(2, "span", 8)(3, "div", 9);
+    ɵɵelementStart(4, "span", 10)(5, "span", 11);
+    ɵɵconditionalCreate(6, MatTabGroup_For_3_Conditional_6_Template, 1, 1, null, 12)(7, MatTabGroup_For_3_Conditional_7_Template, 1, 1);
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
     const tab_r4 = ctx.$implicit;
     const $index_r5 = ctx.$index;
-    const tabNode_r8 = \u0275\u0275reference(1);
-    const ctx_r5 = \u0275\u0275nextContext();
-    \u0275\u0275classMap(tab_r4.labelClass);
-    \u0275\u0275classProp("mdc-tab--active", ctx_r5.selectedIndex === $index_r5);
-    \u0275\u0275property("id", ctx_r5._getTabLabelId(tab_r4, $index_r5))("disabled", tab_r4.disabled)("fitInkBarToContent", ctx_r5.fitInkBarToContent);
-    \u0275\u0275attribute("tabIndex", ctx_r5._getTabIndex($index_r5))("aria-posinset", $index_r5 + 1)("aria-setsize", ctx_r5._tabs.length)("aria-controls", ctx_r5._getTabContentId($index_r5))("aria-selected", ctx_r5.selectedIndex === $index_r5)("aria-label", tab_r4.ariaLabel || null)("aria-labelledby", !tab_r4.ariaLabel && tab_r4.ariaLabelledby ? tab_r4.ariaLabelledby : null);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("matRippleTrigger", tabNode_r8)("matRippleDisabled", tab_r4.disabled || ctx_r5.disableRipple);
-    \u0275\u0275advance(3);
-    \u0275\u0275conditional(tab_r4.templateLabel ? 6 : 7);
+    const tabNode_r8 = ɵɵreference(1);
+    const ctx_r5 = ɵɵnextContext();
+    ɵɵclassMap(tab_r4.labelClass);
+    ɵɵclassProp("mdc-tab--active", ctx_r5.selectedIndex === $index_r5);
+    ɵɵproperty("id", ctx_r5._getTabLabelId(tab_r4, $index_r5))("disabled", tab_r4.disabled)("fitInkBarToContent", ctx_r5.fitInkBarToContent);
+    ɵɵattribute("tabIndex", ctx_r5._getTabIndex($index_r5))("aria-posinset", $index_r5 + 1)("aria-setsize", ctx_r5._tabs.length)("aria-controls", ctx_r5._getTabContentId($index_r5))("aria-selected", ctx_r5.selectedIndex === $index_r5)("aria-label", tab_r4.ariaLabel || null)("aria-labelledby", !tab_r4.ariaLabel && tab_r4.ariaLabelledby ? tab_r4.ariaLabelledby : null);
+    ɵɵadvance(3);
+    ɵɵproperty("matRippleTrigger", tabNode_r8)("matRippleDisabled", tab_r4.disabled || ctx_r5.disableRipple);
+    ɵɵadvance(3);
+    ɵɵconditional(tab_r4.templateLabel ? 6 : 7);
   }
 }
 __name(MatTabGroup_For_3_Template, "MatTabGroup_For_3_Template");
 function MatTabGroup_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275projection(0);
+    ɵɵprojection(0);
   }
 }
 __name(MatTabGroup_Conditional_4_Template, "MatTabGroup_Conditional_4_Template");
 function MatTabGroup_For_8_Template(rf, ctx) {
   if (rf & 1) {
-    const _r9 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "mat-tab-body", 13);
-    \u0275\u0275listener("_onCentered", /* @__PURE__ */ __name(function MatTabGroup_For_8_Template_mat_tab_body__onCentered_0_listener() {
-      \u0275\u0275restoreView(_r9);
-      const ctx_r5 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r5._removeTabBodyWrapperHeight());
+    const _r9 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "mat-tab-body", 13);
+    ɵɵlistener("_onCentered", /* @__PURE__ */ __name(function MatTabGroup_For_8_Template_mat_tab_body__onCentered_0_listener() {
+      ɵɵrestoreView(_r9);
+      const ctx_r5 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r5._removeTabBodyWrapperHeight());
     }, "MatTabGroup_For_8_Template_mat_tab_body__onCentered_0_listener"))("_onCentering", /* @__PURE__ */ __name(function MatTabGroup_For_8_Template_mat_tab_body__onCentering_0_listener($event) {
-      \u0275\u0275restoreView(_r9);
-      const ctx_r5 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r5._setTabBodyWrapperHeight($event));
+      ɵɵrestoreView(_r9);
+      const ctx_r5 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r5._setTabBodyWrapperHeight($event));
     }, "MatTabGroup_For_8_Template_mat_tab_body__onCentering_0_listener"))("_beforeCentering", /* @__PURE__ */ __name(function MatTabGroup_For_8_Template_mat_tab_body__beforeCentering_0_listener($event) {
-      \u0275\u0275restoreView(_r9);
-      const ctx_r5 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r5._bodyCentered($event));
+      ɵɵrestoreView(_r9);
+      const ctx_r5 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r5._bodyCentered($event));
     }, "MatTabGroup_For_8_Template_mat_tab_body__beforeCentering_0_listener"));
-    \u0275\u0275elementEnd();
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const tab_r10 = ctx.$implicit;
     const $index_r11 = ctx.$index;
-    const ctx_r5 = \u0275\u0275nextContext();
-    \u0275\u0275classMap(tab_r10.bodyClass);
-    \u0275\u0275property("id", ctx_r5._getTabContentId($index_r11))("content", tab_r10.content)("position", tab_r10.position)("animationDuration", ctx_r5.animationDuration)("preserveContent", ctx_r5.preserveContent);
-    \u0275\u0275attribute("tabindex", ctx_r5.contentTabIndex != null && ctx_r5.selectedIndex === $index_r11 ? ctx_r5.contentTabIndex : null)("aria-labelledby", ctx_r5._getTabLabelId(tab_r10, $index_r11))("aria-hidden", ctx_r5.selectedIndex !== $index_r11);
+    const ctx_r5 = ɵɵnextContext();
+    ɵɵclassMap(tab_r10.bodyClass);
+    ɵɵproperty("id", ctx_r5._getTabContentId($index_r11))("content", tab_r10.content)("position", tab_r10.position)("animationDuration", ctx_r5.animationDuration)("preserveContent", ctx_r5.preserveContent);
+    ɵɵattribute("tabindex", ctx_r5.contentTabIndex != null && ctx_r5.selectedIndex === $index_r11 ? ctx_r5.contentTabIndex : null)("aria-labelledby", ctx_r5._getTabLabelId(tab_r10, $index_r11))("aria-hidden", ctx_r5.selectedIndex !== $index_r11);
   }
 }
 __name(MatTabGroup_For_8_Template, "MatTabGroup_For_8_Template");
@@ -7493,13 +7493,13 @@ var _MatTabContent = class _MatTabContent {
   }
 };
 __name(_MatTabContent, "MatTabContent");
-__publicField(_MatTabContent, "\u0275fac", /* @__PURE__ */ __name(function MatTabContent_Factory(__ngFactoryType__) {
+__publicField(_MatTabContent, "ɵfac", /* @__PURE__ */ __name(function MatTabContent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatTabContent)();
 }, "MatTabContent_Factory"));
-__publicField(_MatTabContent, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatTabContent, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatTabContent,
   selectors: [["", "matTabContent", ""]],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_TAB_CONTENT,
     useExisting: _MatTabContent
   }])]
@@ -7525,19 +7525,19 @@ var _MatTabLabel = class _MatTabLabel extends CdkPortal {
   });
 };
 __name(_MatTabLabel, "MatTabLabel");
-__publicField(_MatTabLabel, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275MatTabLabel_BaseFactory;
+__publicField(_MatTabLabel, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵMatTabLabel_BaseFactory;
   return /* @__PURE__ */ __name(function MatTabLabel_Factory(__ngFactoryType__) {
-    return (\u0275MatTabLabel_BaseFactory || (\u0275MatTabLabel_BaseFactory = \u0275\u0275getInheritedFactory(_MatTabLabel)))(__ngFactoryType__ || _MatTabLabel);
+    return (ɵMatTabLabel_BaseFactory || (ɵMatTabLabel_BaseFactory = ɵɵgetInheritedFactory(_MatTabLabel)))(__ngFactoryType__ || _MatTabLabel);
   }, "MatTabLabel_Factory");
 })());
-__publicField(_MatTabLabel, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatTabLabel, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatTabLabel,
   selectors: [["", "mat-tab-label", ""], ["", "matTabLabel", ""]],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_TAB_LABEL,
     useExisting: _MatTabLabel
-  }]), \u0275\u0275InheritDefinitionFeature]
+  }]), ɵɵInheritDefinitionFeature]
 }));
 var MatTabLabel = _MatTabLabel;
 (() => {
@@ -7642,37 +7642,37 @@ var _MatTab = class _MatTab {
   }
 };
 __name(_MatTab, "MatTab");
-__publicField(_MatTab, "\u0275fac", /* @__PURE__ */ __name(function MatTab_Factory(__ngFactoryType__) {
+__publicField(_MatTab, "ɵfac", /* @__PURE__ */ __name(function MatTab_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatTab)();
 }, "MatTab_Factory"));
-__publicField(_MatTab, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatTab, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatTab,
   selectors: [["mat-tab"]],
   contentQueries: /* @__PURE__ */ __name(function MatTab_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuery(dirIndex, MatTabLabel, 5);
-      \u0275\u0275contentQuery(dirIndex, MatTabContent, 7, TemplateRef);
+      ɵɵcontentQuery(dirIndex, MatTabLabel, 5);
+      ɵɵcontentQuery(dirIndex, MatTabContent, 7, TemplateRef);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.templateLabel = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._explicitContent = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx.templateLabel = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._explicitContent = _t.first);
     }
   }, "MatTab_ContentQueries"),
   viewQuery: /* @__PURE__ */ __name(function MatTab_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(TemplateRef, 7);
+      ɵɵviewQuery(TemplateRef, 7);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._implicitContent = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._implicitContent = _t.first);
     }
   }, "MatTab_Query"),
   hostAttrs: ["hidden", ""],
   hostVars: 1,
   hostBindings: /* @__PURE__ */ __name(function MatTab_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("id", null);
+      ɵɵattribute("id", null);
     }
   }, "MatTab_HostBindings"),
   inputs: {
@@ -7685,17 +7685,17 @@ __publicField(_MatTab, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent(
     id: "id"
   },
   exportAs: ["matTab"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_TAB,
     useExisting: _MatTab
-  }]), \u0275\u0275NgOnChangesFeature],
+  }]), ɵɵNgOnChangesFeature],
   ngContentSelectors: _c0,
   decls: 1,
   vars: 0,
   template: /* @__PURE__ */ __name(function MatTab_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef();
-      \u0275\u0275domTemplate(0, MatTab_ng_template_0_Template, 1, 0, "ng-template");
+      ɵɵprojectionDef();
+      ɵɵdomTemplate(0, MatTab_ng_template_0_Template, 1, 0, "ng-template");
     }
   }, "MatTab_Template"),
   encapsulation: 2
@@ -7873,10 +7873,10 @@ var _InkBarItem = class _InkBarItem {
   }
 };
 __name(_InkBarItem, "InkBarItem");
-__publicField(_InkBarItem, "\u0275fac", /* @__PURE__ */ __name(function InkBarItem_Factory(__ngFactoryType__) {
+__publicField(_InkBarItem, "ɵfac", /* @__PURE__ */ __name(function InkBarItem_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _InkBarItem)();
 }, "InkBarItem_Factory"));
-__publicField(_InkBarItem, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_InkBarItem, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _InkBarItem,
   inputs: {
     fitInkBarToContent: [2, "fitInkBarToContent", "fitInkBarToContent", booleanAttribute]
@@ -7923,26 +7923,26 @@ var _MatTabLabelWrapper = class _MatTabLabelWrapper extends InkBarItem {
   }
 };
 __name(_MatTabLabelWrapper, "MatTabLabelWrapper");
-__publicField(_MatTabLabelWrapper, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275MatTabLabelWrapper_BaseFactory;
+__publicField(_MatTabLabelWrapper, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵMatTabLabelWrapper_BaseFactory;
   return /* @__PURE__ */ __name(function MatTabLabelWrapper_Factory(__ngFactoryType__) {
-    return (\u0275MatTabLabelWrapper_BaseFactory || (\u0275MatTabLabelWrapper_BaseFactory = \u0275\u0275getInheritedFactory(_MatTabLabelWrapper)))(__ngFactoryType__ || _MatTabLabelWrapper);
+    return (ɵMatTabLabelWrapper_BaseFactory || (ɵMatTabLabelWrapper_BaseFactory = ɵɵgetInheritedFactory(_MatTabLabelWrapper)))(__ngFactoryType__ || _MatTabLabelWrapper);
   }, "MatTabLabelWrapper_Factory");
 })());
-__publicField(_MatTabLabelWrapper, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatTabLabelWrapper, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatTabLabelWrapper,
   selectors: [["", "matTabLabelWrapper", ""]],
   hostVars: 3,
   hostBindings: /* @__PURE__ */ __name(function MatTabLabelWrapper_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("aria-disabled", !!ctx.disabled);
-      \u0275\u0275classProp("mat-mdc-tab-disabled", ctx.disabled);
+      ɵɵattribute("aria-disabled", !!ctx.disabled);
+      ɵɵclassProp("mat-mdc-tab-disabled", ctx.disabled);
     }
   }, "MatTabLabelWrapper_HostBindings"),
   inputs: {
     disabled: [2, "disabled", "disabled", booleanAttribute]
   },
-  features: [\u0275\u0275InheritDefinitionFeature]
+  features: [ɵɵInheritDefinitionFeature]
 }));
 var MatTabLabelWrapper = _MatTabLabelWrapper;
 (() => {
@@ -8383,10 +8383,10 @@ var _MatPaginatedTabHeader = class _MatPaginatedTabHeader {
   }
 };
 __name(_MatPaginatedTabHeader, "MatPaginatedTabHeader");
-__publicField(_MatPaginatedTabHeader, "\u0275fac", /* @__PURE__ */ __name(function MatPaginatedTabHeader_Factory(__ngFactoryType__) {
+__publicField(_MatPaginatedTabHeader, "ɵfac", /* @__PURE__ */ __name(function MatPaginatedTabHeader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatPaginatedTabHeader)();
 }, "MatPaginatedTabHeader_Factory"));
-__publicField(_MatPaginatedTabHeader, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatPaginatedTabHeader, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatPaginatedTabHeader,
   inputs: {
     disablePagination: [2, "disablePagination", "disablePagination", booleanAttribute],
@@ -8445,46 +8445,46 @@ var _MatTabHeader = class _MatTabHeader extends MatPaginatedTabHeader {
   }
 };
 __name(_MatTabHeader, "MatTabHeader");
-__publicField(_MatTabHeader, "\u0275fac", /* @__PURE__ */ (() => {
-  let \u0275MatTabHeader_BaseFactory;
+__publicField(_MatTabHeader, "ɵfac", /* @__PURE__ */ (() => {
+  let ɵMatTabHeader_BaseFactory;
   return /* @__PURE__ */ __name(function MatTabHeader_Factory(__ngFactoryType__) {
-    return (\u0275MatTabHeader_BaseFactory || (\u0275MatTabHeader_BaseFactory = \u0275\u0275getInheritedFactory(_MatTabHeader)))(__ngFactoryType__ || _MatTabHeader);
+    return (ɵMatTabHeader_BaseFactory || (ɵMatTabHeader_BaseFactory = ɵɵgetInheritedFactory(_MatTabHeader)))(__ngFactoryType__ || _MatTabHeader);
   }, "MatTabHeader_Factory");
 })());
-__publicField(_MatTabHeader, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatTabHeader, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatTabHeader,
   selectors: [["mat-tab-header"]],
   contentQueries: /* @__PURE__ */ __name(function MatTabHeader_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuery(dirIndex, MatTabLabelWrapper, 4);
+      ɵɵcontentQuery(dirIndex, MatTabLabelWrapper, 4);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._items = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._items = _t);
     }
   }, "MatTabHeader_ContentQueries"),
   viewQuery: /* @__PURE__ */ __name(function MatTabHeader_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c1, 7);
-      \u0275\u0275viewQuery(_c2, 7);
-      \u0275\u0275viewQuery(_c3, 7);
-      \u0275\u0275viewQuery(_c4, 5);
-      \u0275\u0275viewQuery(_c5, 5);
+      ɵɵviewQuery(_c1, 7);
+      ɵɵviewQuery(_c2, 7);
+      ɵɵviewQuery(_c3, 7);
+      ɵɵviewQuery(_c4, 5);
+      ɵɵviewQuery(_c5, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._tabListContainer = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._tabList = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._tabListInner = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._nextPaginator = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._previousPaginator = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._tabListContainer = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._tabList = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._tabListInner = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._nextPaginator = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._previousPaginator = _t.first);
     }
   }, "MatTabHeader_Query"),
   hostAttrs: [1, "mat-mdc-tab-header"],
   hostVars: 4,
   hostBindings: /* @__PURE__ */ __name(function MatTabHeader_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("mat-mdc-tab-header-pagination-controls-enabled", ctx._showPaginationControls)("mat-mdc-tab-header-rtl", ctx._getLayoutDirection() == "rtl");
+      ɵɵclassProp("mat-mdc-tab-header-pagination-controls-enabled", ctx._showPaginationControls)("mat-mdc-tab-header-rtl", ctx._getLayoutDirection() == "rtl");
     }
   }, "MatTabHeader_HostBindings"),
   inputs: {
@@ -8492,65 +8492,65 @@ __publicField(_MatTabHeader, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComp
     ariaLabelledby: [0, "aria-labelledby", "ariaLabelledby"],
     disableRipple: [2, "disableRipple", "disableRipple", booleanAttribute]
   },
-  features: [\u0275\u0275InheritDefinitionFeature],
+  features: [ɵɵInheritDefinitionFeature],
   ngContentSelectors: _c0,
   decls: 13,
   vars: 10,
   consts: [["previousPaginator", ""], ["tabListContainer", ""], ["tabList", ""], ["tabListInner", ""], ["nextPaginator", ""], ["mat-ripple", "", 1, "mat-mdc-tab-header-pagination", "mat-mdc-tab-header-pagination-before", 3, "click", "mousedown", "touchend", "matRippleDisabled"], [1, "mat-mdc-tab-header-pagination-chevron"], [1, "mat-mdc-tab-label-container", 3, "keydown"], ["role", "tablist", 1, "mat-mdc-tab-list", 3, "cdkObserveContent"], [1, "mat-mdc-tab-labels"], ["mat-ripple", "", 1, "mat-mdc-tab-header-pagination", "mat-mdc-tab-header-pagination-after", 3, "mousedown", "click", "touchend", "matRippleDisabled"]],
   template: /* @__PURE__ */ __name(function MatTabHeader_Template(rf, ctx) {
     if (rf & 1) {
-      const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275projectionDef();
-      \u0275\u0275elementStart(0, "div", 5, 0);
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function MatTabHeader_Template_div_click_0_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._handlePaginatorClick("before"));
+      const _r1 = ɵɵgetCurrentView();
+      ɵɵprojectionDef();
+      ɵɵelementStart(0, "div", 5, 0);
+      ɵɵlistener("click", /* @__PURE__ */ __name(function MatTabHeader_Template_div_click_0_listener() {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._handlePaginatorClick("before"));
       }, "MatTabHeader_Template_div_click_0_listener"))("mousedown", /* @__PURE__ */ __name(function MatTabHeader_Template_div_mousedown_0_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._handlePaginatorPress("before", $event));
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._handlePaginatorPress("before", $event));
       }, "MatTabHeader_Template_div_mousedown_0_listener"))("touchend", /* @__PURE__ */ __name(function MatTabHeader_Template_div_touchend_0_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._stopInterval());
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._stopInterval());
       }, "MatTabHeader_Template_div_touchend_0_listener"));
-      \u0275\u0275element(2, "div", 6);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(3, "div", 7, 1);
-      \u0275\u0275listener("keydown", /* @__PURE__ */ __name(function MatTabHeader_Template_div_keydown_3_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._handleKeydown($event));
+      ɵɵelement(2, "div", 6);
+      ɵɵelementEnd();
+      ɵɵelementStart(3, "div", 7, 1);
+      ɵɵlistener("keydown", /* @__PURE__ */ __name(function MatTabHeader_Template_div_keydown_3_listener($event) {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._handleKeydown($event));
       }, "MatTabHeader_Template_div_keydown_3_listener"));
-      \u0275\u0275elementStart(5, "div", 8, 2);
-      \u0275\u0275listener("cdkObserveContent", /* @__PURE__ */ __name(function MatTabHeader_Template_div_cdkObserveContent_5_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._onContentChanges());
+      ɵɵelementStart(5, "div", 8, 2);
+      ɵɵlistener("cdkObserveContent", /* @__PURE__ */ __name(function MatTabHeader_Template_div_cdkObserveContent_5_listener() {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._onContentChanges());
       }, "MatTabHeader_Template_div_cdkObserveContent_5_listener"));
-      \u0275\u0275elementStart(7, "div", 9, 3);
-      \u0275\u0275projection(9);
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(10, "div", 10, 4);
-      \u0275\u0275listener("mousedown", /* @__PURE__ */ __name(function MatTabHeader_Template_div_mousedown_10_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._handlePaginatorPress("after", $event));
+      ɵɵelementStart(7, "div", 9, 3);
+      ɵɵprojection(9);
+      ɵɵelementEnd()()();
+      ɵɵelementStart(10, "div", 10, 4);
+      ɵɵlistener("mousedown", /* @__PURE__ */ __name(function MatTabHeader_Template_div_mousedown_10_listener($event) {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._handlePaginatorPress("after", $event));
       }, "MatTabHeader_Template_div_mousedown_10_listener"))("click", /* @__PURE__ */ __name(function MatTabHeader_Template_div_click_10_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._handlePaginatorClick("after"));
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._handlePaginatorClick("after"));
       }, "MatTabHeader_Template_div_click_10_listener"))("touchend", /* @__PURE__ */ __name(function MatTabHeader_Template_div_touchend_10_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._stopInterval());
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._stopInterval());
       }, "MatTabHeader_Template_div_touchend_10_listener"));
-      \u0275\u0275element(12, "div", 6);
-      \u0275\u0275elementEnd();
+      ɵɵelement(12, "div", 6);
+      ɵɵelementEnd();
     }
     if (rf & 2) {
-      \u0275\u0275classProp("mat-mdc-tab-header-pagination-disabled", ctx._disableScrollBefore);
-      \u0275\u0275property("matRippleDisabled", ctx._disableScrollBefore || ctx.disableRipple);
-      \u0275\u0275advance(3);
-      \u0275\u0275classProp("_mat-animation-noopable", ctx._animationsDisabled);
-      \u0275\u0275advance(2);
-      \u0275\u0275attribute("aria-label", ctx.ariaLabel || null)("aria-labelledby", ctx.ariaLabelledby || null);
-      \u0275\u0275advance(5);
-      \u0275\u0275classProp("mat-mdc-tab-header-pagination-disabled", ctx._disableScrollAfter);
-      \u0275\u0275property("matRippleDisabled", ctx._disableScrollAfter || ctx.disableRipple);
+      ɵɵclassProp("mat-mdc-tab-header-pagination-disabled", ctx._disableScrollBefore);
+      ɵɵproperty("matRippleDisabled", ctx._disableScrollBefore || ctx.disableRipple);
+      ɵɵadvance(3);
+      ɵɵclassProp("_mat-animation-noopable", ctx._animationsDisabled);
+      ɵɵadvance(2);
+      ɵɵattribute("aria-label", ctx.ariaLabel || null)("aria-labelledby", ctx.ariaLabelledby || null);
+      ɵɵadvance(5);
+      ɵɵclassProp("mat-mdc-tab-header-pagination-disabled", ctx._disableScrollAfter);
+      ɵɵproperty("matRippleDisabled", ctx._disableScrollAfter || ctx.disableRipple);
     }
   }, "MatTabHeader_Template"),
   dependencies: [MatRipple, CdkObserveContent],
@@ -8698,13 +8698,13 @@ var _MatTabBodyPortal = class _MatTabBodyPortal extends CdkPortalOutlet {
   }
 };
 __name(_MatTabBodyPortal, "MatTabBodyPortal");
-__publicField(_MatTabBodyPortal, "\u0275fac", /* @__PURE__ */ __name(function MatTabBodyPortal_Factory(__ngFactoryType__) {
+__publicField(_MatTabBodyPortal, "ɵfac", /* @__PURE__ */ __name(function MatTabBodyPortal_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatTabBodyPortal)();
 }, "MatTabBodyPortal_Factory"));
-__publicField(_MatTabBodyPortal, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatTabBodyPortal, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatTabBodyPortal,
   selectors: [["", "matTabBodyHost", ""]],
-  features: [\u0275\u0275InheritDefinitionFeature]
+  features: [ɵɵInheritDefinitionFeature]
 }));
 var MatTabBodyPortal = _MatTabBodyPortal;
 (() => {
@@ -8863,28 +8863,28 @@ var _MatTabBody = class _MatTabBody {
   }
 };
 __name(_MatTabBody, "MatTabBody");
-__publicField(_MatTabBody, "\u0275fac", /* @__PURE__ */ __name(function MatTabBody_Factory(__ngFactoryType__) {
+__publicField(_MatTabBody, "ɵfac", /* @__PURE__ */ __name(function MatTabBody_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatTabBody)();
 }, "MatTabBody_Factory"));
-__publicField(_MatTabBody, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatTabBody, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatTabBody,
   selectors: [["mat-tab-body"]],
   viewQuery: /* @__PURE__ */ __name(function MatTabBody_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(MatTabBodyPortal, 5);
-      \u0275\u0275viewQuery(_c6, 5);
+      ɵɵviewQuery(MatTabBodyPortal, 5);
+      ɵɵviewQuery(_c6, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._portalHost = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._contentElement = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._portalHost = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._contentElement = _t.first);
     }
   }, "MatTabBody_Query"),
   hostAttrs: [1, "mat-mdc-tab-body"],
   hostVars: 1,
   hostBindings: /* @__PURE__ */ __name(function MatTabBody_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("inert", ctx._position === "center" ? null : "");
+      ɵɵattribute("inert", ctx._position === "center" ? null : "");
     }
   }, "MatTabBody_HostBindings"),
   inputs: {
@@ -8903,12 +8903,12 @@ __publicField(_MatTabBody, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompon
   consts: [["content", ""], ["cdkScrollable", "", 1, "mat-mdc-tab-body-content"], ["matTabBodyHost", ""]],
   template: /* @__PURE__ */ __name(function MatTabBody_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "div", 1, 0);
-      \u0275\u0275template(2, MatTabBody_ng_template_2_Template, 0, 0, "ng-template", 2);
-      \u0275\u0275elementEnd();
+      ɵɵelementStart(0, "div", 1, 0);
+      ɵɵtemplate(2, MatTabBody_ng_template_2_Template, 0, 0, "ng-template", 2);
+      ɵɵelementEnd();
     }
     if (rf & 2) {
-      \u0275\u0275classProp("mat-tab-body-content-left", ctx._position === "left")("mat-tab-body-content-right", ctx._position === "right")("mat-tab-body-content-can-animate", ctx._position === "center" || ctx._previousPosition === "center");
+      ɵɵclassProp("mat-tab-body-content-left", ctx._position === "left")("mat-tab-body-content-right", ctx._position === "right")("mat-tab-body-content-can-animate", ctx._position === "center" || ctx._previousPosition === "center");
     }
   }, "MatTabBody_Template"),
   dependencies: [MatTabBodyPortal, CdkScrollable],
@@ -9319,42 +9319,42 @@ var _MatTabGroup = class _MatTabGroup {
   }
 };
 __name(_MatTabGroup, "MatTabGroup");
-__publicField(_MatTabGroup, "\u0275fac", /* @__PURE__ */ __name(function MatTabGroup_Factory(__ngFactoryType__) {
+__publicField(_MatTabGroup, "ɵfac", /* @__PURE__ */ __name(function MatTabGroup_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatTabGroup)();
 }, "MatTabGroup_Factory"));
-__publicField(_MatTabGroup, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatTabGroup, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatTabGroup,
   selectors: [["mat-tab-group"]],
   contentQueries: /* @__PURE__ */ __name(function MatTabGroup_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuery(dirIndex, MatTab, 5);
+      ɵɵcontentQuery(dirIndex, MatTab, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._allTabs = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._allTabs = _t);
     }
   }, "MatTabGroup_ContentQueries"),
   viewQuery: /* @__PURE__ */ __name(function MatTabGroup_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c7, 5);
-      \u0275\u0275viewQuery(_c8, 5);
-      \u0275\u0275viewQuery(MatTabBody, 5);
+      ɵɵviewQuery(_c7, 5);
+      ɵɵviewQuery(_c8, 5);
+      ɵɵviewQuery(MatTabBody, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._tabBodyWrapper = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._tabHeader = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._tabBodies = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._tabBodyWrapper = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._tabHeader = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._tabBodies = _t);
     }
   }, "MatTabGroup_Query"),
   hostAttrs: [1, "mat-mdc-tab-group"],
   hostVars: 11,
   hostBindings: /* @__PURE__ */ __name(function MatTabGroup_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("mat-align-tabs", ctx.alignTabs);
-      \u0275\u0275classMap("mat-" + (ctx.color || "primary"));
-      \u0275\u0275styleProp("--mat-tab-animation-duration", ctx.animationDuration);
-      \u0275\u0275classProp("mat-mdc-tab-group-dynamic-height", ctx.dynamicHeight)("mat-mdc-tab-group-inverted-header", ctx.headerPosition === "below")("mat-mdc-tab-group-stretch-tabs", ctx.stretchTabs);
+      ɵɵattribute("mat-align-tabs", ctx.alignTabs);
+      ɵɵclassMap("mat-" + (ctx.color || "primary"));
+      ɵɵstyleProp("--mat-tab-animation-duration", ctx.animationDuration);
+      ɵɵclassProp("mat-mdc-tab-group-dynamic-height", ctx.dynamicHeight)("mat-mdc-tab-group-inverted-header", ctx.headerPosition === "below")("mat-mdc-tab-group-stretch-tabs", ctx.stretchTabs);
     }
   }, "MatTabGroup_HostBindings"),
   inputs: {
@@ -9381,7 +9381,7 @@ __publicField(_MatTabGroup, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompo
     selectedTabChange: "selectedTabChange"
   },
   exportAs: ["matTabGroup"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: MAT_TAB_GROUP,
     useExisting: _MatTabGroup
   }])],
@@ -9391,34 +9391,34 @@ __publicField(_MatTabGroup, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompo
   consts: [["tabHeader", ""], ["tabBodyWrapper", ""], ["tabNode", ""], [3, "indexFocused", "selectFocusedIndex", "selectedIndex", "disableRipple", "disablePagination", "aria-label", "aria-labelledby"], ["role", "tab", "matTabLabelWrapper", "", "cdkMonitorElementFocus", "", 1, "mdc-tab", "mat-mdc-tab", "mat-focus-indicator", 3, "id", "mdc-tab--active", "class", "disabled", "fitInkBarToContent"], [1, "mat-mdc-tab-body-wrapper"], ["role", "tabpanel", 3, "id", "class", "content", "position", "animationDuration", "preserveContent"], ["role", "tab", "matTabLabelWrapper", "", "cdkMonitorElementFocus", "", 1, "mdc-tab", "mat-mdc-tab", "mat-focus-indicator", 3, "click", "cdkFocusChange", "id", "disabled", "fitInkBarToContent"], [1, "mdc-tab__ripple"], ["mat-ripple", "", 1, "mat-mdc-tab-ripple", 3, "matRippleTrigger", "matRippleDisabled"], [1, "mdc-tab__content"], [1, "mdc-tab__text-label"], [3, "cdkPortalOutlet"], ["role", "tabpanel", 3, "_onCentered", "_onCentering", "_beforeCentering", "id", "content", "position", "animationDuration", "preserveContent"]],
   template: /* @__PURE__ */ __name(function MatTabGroup_Template(rf, ctx) {
     if (rf & 1) {
-      const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275projectionDef();
-      \u0275\u0275elementStart(0, "mat-tab-header", 3, 0);
-      \u0275\u0275listener("indexFocused", /* @__PURE__ */ __name(function MatTabGroup_Template_mat_tab_header_indexFocused_0_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._focusChanged($event));
+      const _r1 = ɵɵgetCurrentView();
+      ɵɵprojectionDef();
+      ɵɵelementStart(0, "mat-tab-header", 3, 0);
+      ɵɵlistener("indexFocused", /* @__PURE__ */ __name(function MatTabGroup_Template_mat_tab_header_indexFocused_0_listener($event) {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._focusChanged($event));
       }, "MatTabGroup_Template_mat_tab_header_indexFocused_0_listener"))("selectFocusedIndex", /* @__PURE__ */ __name(function MatTabGroup_Template_mat_tab_header_selectFocusedIndex_0_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx.selectedIndex = $event);
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx.selectedIndex = $event);
       }, "MatTabGroup_Template_mat_tab_header_selectFocusedIndex_0_listener"));
-      \u0275\u0275repeaterCreate(2, MatTabGroup_For_3_Template, 8, 17, "div", 4, \u0275\u0275repeaterTrackByIdentity);
-      \u0275\u0275elementEnd();
-      \u0275\u0275conditionalCreate(4, MatTabGroup_Conditional_4_Template, 1, 0);
-      \u0275\u0275elementStart(5, "div", 5, 1);
-      \u0275\u0275repeaterCreate(7, MatTabGroup_For_8_Template, 1, 10, "mat-tab-body", 6, \u0275\u0275repeaterTrackByIdentity);
-      \u0275\u0275elementEnd();
+      ɵɵrepeaterCreate(2, MatTabGroup_For_3_Template, 8, 17, "div", 4, ɵɵrepeaterTrackByIdentity);
+      ɵɵelementEnd();
+      ɵɵconditionalCreate(4, MatTabGroup_Conditional_4_Template, 1, 0);
+      ɵɵelementStart(5, "div", 5, 1);
+      ɵɵrepeaterCreate(7, MatTabGroup_For_8_Template, 1, 10, "mat-tab-body", 6, ɵɵrepeaterTrackByIdentity);
+      ɵɵelementEnd();
     }
     if (rf & 2) {
-      \u0275\u0275property("selectedIndex", ctx.selectedIndex || 0)("disableRipple", ctx.disableRipple)("disablePagination", ctx.disablePagination);
-      \u0275\u0275ariaProperty("aria-label", ctx.ariaLabel)("aria-labelledby", ctx.ariaLabelledby);
-      \u0275\u0275advance(2);
-      \u0275\u0275repeater(ctx._tabs);
-      \u0275\u0275advance(2);
-      \u0275\u0275conditional(ctx._isServer ? 4 : -1);
-      \u0275\u0275advance();
-      \u0275\u0275classProp("_mat-animation-noopable", ctx._animationsDisabled());
-      \u0275\u0275advance(2);
-      \u0275\u0275repeater(ctx._tabs);
+      ɵɵproperty("selectedIndex", ctx.selectedIndex || 0)("disableRipple", ctx.disableRipple)("disablePagination", ctx.disablePagination);
+      ɵɵariaProperty("aria-label", ctx.ariaLabel)("aria-labelledby", ctx.ariaLabelledby);
+      ɵɵadvance(2);
+      ɵɵrepeater(ctx._tabs);
+      ɵɵadvance(2);
+      ɵɵconditional(ctx._isServer ? 4 : -1);
+      ɵɵadvance();
+      ɵɵclassProp("_mat-animation-noopable", ctx._animationsDisabled());
+      ɵɵadvance(2);
+      ɵɵrepeater(ctx._tabs);
     }
   }, "MatTabGroup_Template"),
   dependencies: [MatTabHeader, MatTabLabelWrapper, CdkMonitorFocus, MatRipple, CdkPortalOutlet, MatTabBody],
@@ -9691,45 +9691,45 @@ var _MatTabNav = class _MatTabNav extends MatPaginatedTabHeader {
   }
 };
 __name(_MatTabNav, "MatTabNav");
-__publicField(_MatTabNav, "\u0275fac", /* @__PURE__ */ __name(function MatTabNav_Factory(__ngFactoryType__) {
+__publicField(_MatTabNav, "ɵfac", /* @__PURE__ */ __name(function MatTabNav_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatTabNav)();
 }, "MatTabNav_Factory"));
-__publicField(_MatTabNav, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatTabNav, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatTabNav,
   selectors: [["", "mat-tab-nav-bar", ""]],
   contentQueries: /* @__PURE__ */ __name(function MatTabNav_ContentQueries(rf, ctx, dirIndex) {
     if (rf & 1) {
-      \u0275\u0275contentQuery(dirIndex, MatTabLink, 5);
+      ɵɵcontentQuery(dirIndex, MatTabLink, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._items = _t);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._items = _t);
     }
   }, "MatTabNav_ContentQueries"),
   viewQuery: /* @__PURE__ */ __name(function MatTabNav_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c1, 7);
-      \u0275\u0275viewQuery(_c2, 7);
-      \u0275\u0275viewQuery(_c3, 7);
-      \u0275\u0275viewQuery(_c4, 5);
-      \u0275\u0275viewQuery(_c5, 5);
+      ɵɵviewQuery(_c1, 7);
+      ɵɵviewQuery(_c2, 7);
+      ɵɵviewQuery(_c3, 7);
+      ɵɵviewQuery(_c4, 5);
+      ɵɵviewQuery(_c5, 5);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._tabListContainer = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._tabList = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._tabListInner = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._nextPaginator = _t.first);
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._previousPaginator = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._tabListContainer = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._tabList = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._tabListInner = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._nextPaginator = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._previousPaginator = _t.first);
     }
   }, "MatTabNav_Query"),
   hostAttrs: [1, "mat-mdc-tab-nav-bar", "mat-mdc-tab-header"],
   hostVars: 17,
   hostBindings: /* @__PURE__ */ __name(function MatTabNav_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("role", ctx._getRole());
-      \u0275\u0275styleProp("--mat-tab-animation-duration", ctx.animationDuration);
-      \u0275\u0275classProp("mat-mdc-tab-header-pagination-controls-enabled", ctx._showPaginationControls)("mat-mdc-tab-header-rtl", ctx._getLayoutDirection() == "rtl")("mat-mdc-tab-nav-bar-stretch-tabs", ctx.stretchTabs)("mat-primary", ctx.color !== "warn" && ctx.color !== "accent")("mat-accent", ctx.color === "accent")("mat-warn", ctx.color === "warn")("_mat-animation-noopable", ctx._animationsDisabled);
+      ɵɵattribute("role", ctx._getRole());
+      ɵɵstyleProp("--mat-tab-animation-duration", ctx.animationDuration);
+      ɵɵclassProp("mat-mdc-tab-header-pagination-controls-enabled", ctx._showPaginationControls)("mat-mdc-tab-header-rtl", ctx._getLayoutDirection() == "rtl")("mat-mdc-tab-nav-bar-stretch-tabs", ctx.stretchTabs)("mat-primary", ctx.color !== "warn" && ctx.color !== "accent")("mat-accent", ctx.color === "accent")("mat-warn", ctx.color === "warn")("_mat-animation-noopable", ctx._animationsDisabled);
     }
   }, "MatTabNav_HostBindings"),
   inputs: {
@@ -9742,7 +9742,7 @@ __publicField(_MatTabNav, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompone
     tabPanel: "tabPanel"
   },
   exportAs: ["matTabNavBar", "matTabNav"],
-  features: [\u0275\u0275InheritDefinitionFeature],
+  features: [ɵɵInheritDefinitionFeature],
   attrs: _c9,
   ngContentSelectors: _c0,
   decls: 13,
@@ -9750,54 +9750,54 @@ __publicField(_MatTabNav, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompone
   consts: [["previousPaginator", ""], ["tabListContainer", ""], ["tabList", ""], ["tabListInner", ""], ["nextPaginator", ""], ["mat-ripple", "", 1, "mat-mdc-tab-header-pagination", "mat-mdc-tab-header-pagination-before", 3, "click", "mousedown", "touchend", "matRippleDisabled"], [1, "mat-mdc-tab-header-pagination-chevron"], [1, "mat-mdc-tab-link-container", 3, "keydown"], [1, "mat-mdc-tab-list", 3, "cdkObserveContent"], [1, "mat-mdc-tab-links"], ["mat-ripple", "", 1, "mat-mdc-tab-header-pagination", "mat-mdc-tab-header-pagination-after", 3, "mousedown", "click", "touchend", "matRippleDisabled"]],
   template: /* @__PURE__ */ __name(function MatTabNav_Template(rf, ctx) {
     if (rf & 1) {
-      const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275projectionDef();
-      \u0275\u0275elementStart(0, "div", 5, 0);
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function MatTabNav_Template_div_click_0_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._handlePaginatorClick("before"));
+      const _r1 = ɵɵgetCurrentView();
+      ɵɵprojectionDef();
+      ɵɵelementStart(0, "div", 5, 0);
+      ɵɵlistener("click", /* @__PURE__ */ __name(function MatTabNav_Template_div_click_0_listener() {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._handlePaginatorClick("before"));
       }, "MatTabNav_Template_div_click_0_listener"))("mousedown", /* @__PURE__ */ __name(function MatTabNav_Template_div_mousedown_0_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._handlePaginatorPress("before", $event));
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._handlePaginatorPress("before", $event));
       }, "MatTabNav_Template_div_mousedown_0_listener"))("touchend", /* @__PURE__ */ __name(function MatTabNav_Template_div_touchend_0_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._stopInterval());
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._stopInterval());
       }, "MatTabNav_Template_div_touchend_0_listener"));
-      \u0275\u0275element(2, "div", 6);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(3, "div", 7, 1);
-      \u0275\u0275listener("keydown", /* @__PURE__ */ __name(function MatTabNav_Template_div_keydown_3_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._handleKeydown($event));
+      ɵɵelement(2, "div", 6);
+      ɵɵelementEnd();
+      ɵɵelementStart(3, "div", 7, 1);
+      ɵɵlistener("keydown", /* @__PURE__ */ __name(function MatTabNav_Template_div_keydown_3_listener($event) {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._handleKeydown($event));
       }, "MatTabNav_Template_div_keydown_3_listener"));
-      \u0275\u0275elementStart(5, "div", 8, 2);
-      \u0275\u0275listener("cdkObserveContent", /* @__PURE__ */ __name(function MatTabNav_Template_div_cdkObserveContent_5_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._onContentChanges());
+      ɵɵelementStart(5, "div", 8, 2);
+      ɵɵlistener("cdkObserveContent", /* @__PURE__ */ __name(function MatTabNav_Template_div_cdkObserveContent_5_listener() {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._onContentChanges());
       }, "MatTabNav_Template_div_cdkObserveContent_5_listener"));
-      \u0275\u0275elementStart(7, "div", 9, 3);
-      \u0275\u0275projection(9);
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(10, "div", 10, 4);
-      \u0275\u0275listener("mousedown", /* @__PURE__ */ __name(function MatTabNav_Template_div_mousedown_10_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._handlePaginatorPress("after", $event));
+      ɵɵelementStart(7, "div", 9, 3);
+      ɵɵprojection(9);
+      ɵɵelementEnd()()();
+      ɵɵelementStart(10, "div", 10, 4);
+      ɵɵlistener("mousedown", /* @__PURE__ */ __name(function MatTabNav_Template_div_mousedown_10_listener($event) {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._handlePaginatorPress("after", $event));
       }, "MatTabNav_Template_div_mousedown_10_listener"))("click", /* @__PURE__ */ __name(function MatTabNav_Template_div_click_10_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._handlePaginatorClick("after"));
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._handlePaginatorClick("after"));
       }, "MatTabNav_Template_div_click_10_listener"))("touchend", /* @__PURE__ */ __name(function MatTabNav_Template_div_touchend_10_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._stopInterval());
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._stopInterval());
       }, "MatTabNav_Template_div_touchend_10_listener"));
-      \u0275\u0275element(12, "div", 6);
-      \u0275\u0275elementEnd();
+      ɵɵelement(12, "div", 6);
+      ɵɵelementEnd();
     }
     if (rf & 2) {
-      \u0275\u0275classProp("mat-mdc-tab-header-pagination-disabled", ctx._disableScrollBefore);
-      \u0275\u0275property("matRippleDisabled", ctx._disableScrollBefore || ctx.disableRipple);
-      \u0275\u0275advance(10);
-      \u0275\u0275classProp("mat-mdc-tab-header-pagination-disabled", ctx._disableScrollAfter);
-      \u0275\u0275property("matRippleDisabled", ctx._disableScrollAfter || ctx.disableRipple);
+      ɵɵclassProp("mat-mdc-tab-header-pagination-disabled", ctx._disableScrollBefore);
+      ɵɵproperty("matRippleDisabled", ctx._disableScrollBefore || ctx.disableRipple);
+      ɵɵadvance(10);
+      ɵɵclassProp("mat-mdc-tab-header-pagination-disabled", ctx._disableScrollAfter);
+      ɵɵproperty("matRippleDisabled", ctx._disableScrollAfter || ctx.disableRipple);
     }
   }, "MatTabNav_Template"),
   dependencies: [MatRipple, CdkObserveContent],
@@ -10044,25 +10044,25 @@ var _MatTabLink = class _MatTabLink extends InkBarItem {
   }
 };
 __name(_MatTabLink, "MatTabLink");
-__publicField(_MatTabLink, "\u0275fac", /* @__PURE__ */ __name(function MatTabLink_Factory(__ngFactoryType__) {
+__publicField(_MatTabLink, "ɵfac", /* @__PURE__ */ __name(function MatTabLink_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatTabLink)();
 }, "MatTabLink_Factory"));
-__publicField(_MatTabLink, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatTabLink, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatTabLink,
   selectors: [["", "mat-tab-link", ""], ["", "matTabLink", ""]],
   hostAttrs: [1, "mdc-tab", "mat-mdc-tab-link", "mat-focus-indicator"],
   hostVars: 11,
   hostBindings: /* @__PURE__ */ __name(function MatTabLink_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("focus", /* @__PURE__ */ __name(function MatTabLink_focus_HostBindingHandler() {
+      ɵɵlistener("focus", /* @__PURE__ */ __name(function MatTabLink_focus_HostBindingHandler() {
         return ctx._handleFocus();
       }, "MatTabLink_focus_HostBindingHandler"))("keydown", /* @__PURE__ */ __name(function MatTabLink_keydown_HostBindingHandler($event) {
         return ctx._handleKeydown($event);
       }, "MatTabLink_keydown_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275attribute("aria-controls", ctx._getAriaControls())("aria-current", ctx._getAriaCurrent())("aria-disabled", ctx.disabled)("aria-selected", ctx._getAriaSelected())("id", ctx.id)("tabIndex", ctx._tabIndex())("role", ctx._getRole());
-      \u0275\u0275classProp("mat-mdc-tab-disabled", ctx.disabled)("mdc-tab--active", ctx.active);
+      ɵɵattribute("aria-controls", ctx._getAriaControls())("aria-current", ctx._getAriaCurrent())("aria-disabled", ctx.disabled)("aria-selected", ctx._getAriaSelected())("id", ctx.id)("tabIndex", ctx._tabIndex())("role", ctx._getRole());
+      ɵɵclassProp("mat-mdc-tab-disabled", ctx.disabled)("mdc-tab--active", ctx.active);
     }
   }, "MatTabLink_HostBindings"),
   inputs: {
@@ -10073,7 +10073,7 @@ __publicField(_MatTabLink, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompon
     id: "id"
   },
   exportAs: ["matTabLink"],
-  features: [\u0275\u0275InheritDefinitionFeature],
+  features: [ɵɵInheritDefinitionFeature],
   attrs: _c10,
   ngContentSelectors: _c0,
   decls: 5,
@@ -10081,15 +10081,15 @@ __publicField(_MatTabLink, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompon
   consts: [[1, "mdc-tab__ripple"], ["mat-ripple", "", 1, "mat-mdc-tab-ripple", 3, "matRippleTrigger", "matRippleDisabled"], [1, "mdc-tab__content"], [1, "mdc-tab__text-label"]],
   template: /* @__PURE__ */ __name(function MatTabLink_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef();
-      \u0275\u0275element(0, "span", 0)(1, "div", 1);
-      \u0275\u0275elementStart(2, "span", 2)(3, "span", 3);
-      \u0275\u0275projection(4);
-      \u0275\u0275elementEnd()();
+      ɵɵprojectionDef();
+      ɵɵelement(0, "span", 0)(1, "div", 1);
+      ɵɵelementStart(2, "span", 2)(3, "span", 3);
+      ɵɵprojection(4);
+      ɵɵelementEnd()();
     }
     if (rf & 2) {
-      \u0275\u0275advance();
-      \u0275\u0275property("matRippleTrigger", ctx.elementRef.nativeElement)("matRippleDisabled", ctx.rippleDisabled);
+      ɵɵadvance();
+      ɵɵproperty("matRippleTrigger", ctx.elementRef.nativeElement)("matRippleDisabled", ctx.rippleDisabled);
     }
   }, "MatTabLink_Template"),
   dependencies: [MatRipple],
@@ -10161,17 +10161,17 @@ var _MatTabNavPanel = class _MatTabNavPanel {
   _activeTabId;
 };
 __name(_MatTabNavPanel, "MatTabNavPanel");
-__publicField(_MatTabNavPanel, "\u0275fac", /* @__PURE__ */ __name(function MatTabNavPanel_Factory(__ngFactoryType__) {
+__publicField(_MatTabNavPanel, "ɵfac", /* @__PURE__ */ __name(function MatTabNavPanel_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatTabNavPanel)();
 }, "MatTabNavPanel_Factory"));
-__publicField(_MatTabNavPanel, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_MatTabNavPanel, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _MatTabNavPanel,
   selectors: [["mat-tab-nav-panel"]],
   hostAttrs: ["role", "tabpanel", 1, "mat-mdc-tab-nav-panel"],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function MatTabNavPanel_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("aria-labelledby", ctx._activeTabId)("id", ctx.id);
+      ɵɵattribute("aria-labelledby", ctx._activeTabId)("id", ctx.id);
     }
   }, "MatTabNavPanel_HostBindings"),
   inputs: {
@@ -10183,8 +10183,8 @@ __publicField(_MatTabNavPanel, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCo
   vars: 0,
   template: /* @__PURE__ */ __name(function MatTabNavPanel_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef();
-      \u0275\u0275projection(0);
+      ɵɵprojectionDef();
+      ɵɵprojection(0);
     }
   }, "MatTabNavPanel_Template"),
   encapsulation: 2,
@@ -10216,15 +10216,15 @@ var MatTabNavPanel = _MatTabNavPanel;
 var _MatTabsModule = class _MatTabsModule {
 };
 __name(_MatTabsModule, "MatTabsModule");
-__publicField(_MatTabsModule, "\u0275fac", /* @__PURE__ */ __name(function MatTabsModule_Factory(__ngFactoryType__) {
+__publicField(_MatTabsModule, "ɵfac", /* @__PURE__ */ __name(function MatTabsModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatTabsModule)();
 }, "MatTabsModule_Factory"));
-__publicField(_MatTabsModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_MatTabsModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _MatTabsModule,
   imports: [MatCommonModule, MatTabContent, MatTabLabel, MatTab, MatTabGroup, MatTabNav, MatTabNavPanel, MatTabLink],
   exports: [MatCommonModule, MatTabContent, MatTabLabel, MatTab, MatTabGroup, MatTabNav, MatTabNavPanel, MatTabLink]
 }));
-__publicField(_MatTabsModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_MatTabsModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   imports: [MatCommonModule, MatCommonModule]
 }));
 var MatTabsModule = _MatTabsModule;
@@ -10858,17 +10858,17 @@ var _MatTooltip = class _MatTooltip {
   }
 };
 __name(_MatTooltip, "MatTooltip");
-__publicField(_MatTooltip, "\u0275fac", /* @__PURE__ */ __name(function MatTooltip_Factory(__ngFactoryType__) {
+__publicField(_MatTooltip, "ɵfac", /* @__PURE__ */ __name(function MatTooltip_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatTooltip)();
 }, "MatTooltip_Factory"));
-__publicField(_MatTooltip, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_MatTooltip, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _MatTooltip,
   selectors: [["", "matTooltip", ""]],
   hostAttrs: [1, "mat-mdc-tooltip-trigger"],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function MatTooltip_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("mat-mdc-tooltip-disabled", ctx.disabled);
+      ɵɵclassProp("mat-mdc-tooltip-disabled", ctx.disabled);
     }
   }, "MatTooltip_HostBindings"),
   inputs: {
@@ -11098,25 +11098,25 @@ var _TooltipComponent = class _TooltipComponent {
   }
 };
 __name(_TooltipComponent, "TooltipComponent");
-__publicField(_TooltipComponent, "\u0275fac", /* @__PURE__ */ __name(function TooltipComponent_Factory(__ngFactoryType__) {
+__publicField(_TooltipComponent, "ɵfac", /* @__PURE__ */ __name(function TooltipComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _TooltipComponent)();
 }, "TooltipComponent_Factory"));
-__publicField(_TooltipComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_TooltipComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _TooltipComponent,
   selectors: [["mat-tooltip-component"]],
   viewQuery: /* @__PURE__ */ __name(function TooltipComponent_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c02, 7);
+      ɵɵviewQuery(_c02, 7);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._tooltip = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._tooltip = _t.first);
     }
   }, "TooltipComponent_Query"),
   hostAttrs: ["aria-hidden", "true"],
   hostBindings: /* @__PURE__ */ __name(function TooltipComponent_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("mouseleave", /* @__PURE__ */ __name(function TooltipComponent_mouseleave_HostBindingHandler($event) {
+      ɵɵlistener("mouseleave", /* @__PURE__ */ __name(function TooltipComponent_mouseleave_HostBindingHandler($event) {
         return ctx._handleMouseLeave($event);
       }, "TooltipComponent_mouseleave_HostBindingHandler"));
     }
@@ -11126,21 +11126,21 @@ __publicField(_TooltipComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275define
   consts: [["tooltip", ""], [1, "mdc-tooltip", "mat-mdc-tooltip", 3, "animationend", "ngClass"], [1, "mat-mdc-tooltip-surface", "mdc-tooltip__surface"]],
   template: /* @__PURE__ */ __name(function TooltipComponent_Template(rf, ctx) {
     if (rf & 1) {
-      const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275elementStart(0, "div", 1, 0);
-      \u0275\u0275listener("animationend", /* @__PURE__ */ __name(function TooltipComponent_Template_div_animationend_0_listener($event) {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx._handleAnimationEnd($event));
+      const _r1 = ɵɵgetCurrentView();
+      ɵɵelementStart(0, "div", 1, 0);
+      ɵɵlistener("animationend", /* @__PURE__ */ __name(function TooltipComponent_Template_div_animationend_0_listener($event) {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx._handleAnimationEnd($event));
       }, "TooltipComponent_Template_div_animationend_0_listener"));
-      \u0275\u0275elementStart(2, "div", 2);
-      \u0275\u0275text(3);
-      \u0275\u0275elementEnd()();
+      ɵɵelementStart(2, "div", 2);
+      ɵɵtext(3);
+      ɵɵelementEnd()();
     }
     if (rf & 2) {
-      \u0275\u0275classProp("mdc-tooltip--multiline", ctx._isMultiline);
-      \u0275\u0275property("ngClass", ctx.tooltipClass);
-      \u0275\u0275advance(3);
-      \u0275\u0275textInterpolate(ctx.message);
+      ɵɵclassProp("mdc-tooltip--multiline", ctx._isMultiline);
+      ɵɵproperty("ngClass", ctx.tooltipClass);
+      ɵɵadvance(3);
+      ɵɵtextInterpolate(ctx.message);
     }
   }, "TooltipComponent_Template"),
   dependencies: [NgClass],
@@ -11180,15 +11180,15 @@ var TooltipComponent = _TooltipComponent;
 var _MatTooltipModule = class _MatTooltipModule {
 };
 __name(_MatTooltipModule, "MatTooltipModule");
-__publicField(_MatTooltipModule, "\u0275fac", /* @__PURE__ */ __name(function MatTooltipModule_Factory(__ngFactoryType__) {
+__publicField(_MatTooltipModule, "ɵfac", /* @__PURE__ */ __name(function MatTooltipModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatTooltipModule)();
 }, "MatTooltipModule_Factory"));
-__publicField(_MatTooltipModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_MatTooltipModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _MatTooltipModule,
   imports: [A11yModule, OverlayModule, MatCommonModule, MatTooltip, TooltipComponent],
   exports: [MatTooltip, TooltipComponent, MatCommonModule, CdkScrollableModule]
 }));
-__publicField(_MatTooltipModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_MatTooltipModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   providers: [MAT_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
   imports: [A11yModule, OverlayModule, MatCommonModule, MatCommonModule, CdkScrollableModule]
 }));
@@ -12031,83 +12031,83 @@ var _c03 = ["*"];
 var _forTrack0 = /* @__PURE__ */ __name(($index, $item) => $item.id, "_forTrack0");
 function TableOfContents_For_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "li", 5)(1, "a", 6);
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "li", 5)(1, "a", 6);
+    ɵɵtext(2);
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
     const item_r1 = ctx.$implicit;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275classProp("docs-toc-item-h2", item_r1.level === ctx_r1.TableOfContentsLevel.H2)("docs-toc-item-h3", item_r1.level === ctx_r1.TableOfContentsLevel.H3);
-    \u0275\u0275advance();
-    \u0275\u0275classProp("docs-faceted-list-item-active", item_r1.id === ctx_r1.activeItemId());
-    \u0275\u0275property("href", ctx_r1.location.path() + "#" + item_r1.id, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", item_r1.title, " ");
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵclassProp("docs-toc-item-h2", item_r1.level === ctx_r1.TableOfContentsLevel.H2)("docs-toc-item-h3", item_r1.level === ctx_r1.TableOfContentsLevel.H3);
+    ɵɵadvance();
+    ɵɵclassProp("docs-faceted-list-item-active", item_r1.id === ctx_r1.activeItemId());
+    ɵɵproperty("href", ctx_r1.location.path() + "#" + item_r1.id, ɵɵsanitizeUrl);
+    ɵɵadvance();
+    ɵɵtextInterpolate1(" ", item_r1.title, " ");
   }
 }
 __name(TableOfContents_For_7_Template, "TableOfContents_For_7_Template");
 function Breadcrumb_For_1_Conditional_1_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "a", 1);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "a", 1);
+    ɵɵtext(1);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const breadcrumb_r1 = \u0275\u0275nextContext(2).$implicit;
-    \u0275\u0275property("href", breadcrumb_r1.path, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(breadcrumb_r1.label);
+    const breadcrumb_r1 = ɵɵnextContext(2).$implicit;
+    ɵɵproperty("href", breadcrumb_r1.path, ɵɵsanitizeUrl);
+    ɵɵadvance();
+    ɵɵtextInterpolate(breadcrumb_r1.label);
   }
 }
 __name(Breadcrumb_For_1_Conditional_1_Conditional_0_Template, "Breadcrumb_For_1_Conditional_1_Conditional_0_Template");
 function Breadcrumb_For_1_Conditional_1_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "a", 2);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "a", 2);
+    ɵɵtext(1);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const breadcrumb_r1 = \u0275\u0275nextContext(2).$implicit;
-    \u0275\u0275property("routerLink", "/" + breadcrumb_r1.path);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(breadcrumb_r1.label);
+    const breadcrumb_r1 = ɵɵnextContext(2).$implicit;
+    ɵɵproperty("routerLink", "/" + breadcrumb_r1.path);
+    ɵɵadvance();
+    ɵɵtextInterpolate(breadcrumb_r1.label);
   }
 }
 __name(Breadcrumb_For_1_Conditional_1_Conditional_1_Template, "Breadcrumb_For_1_Conditional_1_Conditional_1_Template");
 function Breadcrumb_For_1_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, Breadcrumb_For_1_Conditional_1_Conditional_0_Template, 2, 2, "a", 1)(1, Breadcrumb_For_1_Conditional_1_Conditional_1_Template, 2, 2, "a", 2);
+    ɵɵconditionalCreate(0, Breadcrumb_For_1_Conditional_1_Conditional_0_Template, 2, 2, "a", 1)(1, Breadcrumb_For_1_Conditional_1_Conditional_1_Template, 2, 2, "a", 2);
   }
   if (rf & 2) {
-    const breadcrumb_r1 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275conditional(breadcrumb_r1.isExternal ? 0 : 1);
+    const breadcrumb_r1 = ɵɵnextContext().$implicit;
+    ɵɵconditional(breadcrumb_r1.isExternal ? 0 : 1);
   }
 }
 __name(Breadcrumb_For_1_Conditional_1_Template, "Breadcrumb_For_1_Conditional_1_Template");
 function Breadcrumb_For_1_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span");
+    ɵɵtext(1);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const breadcrumb_r1 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(breadcrumb_r1.label);
+    const breadcrumb_r1 = ɵɵnextContext().$implicit;
+    ɵɵadvance();
+    ɵɵtextInterpolate(breadcrumb_r1.label);
   }
 }
 __name(Breadcrumb_For_1_Conditional_2_Template, "Breadcrumb_For_1_Conditional_2_Template");
 function Breadcrumb_For_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 0);
-    \u0275\u0275conditionalCreate(1, Breadcrumb_For_1_Conditional_1_Template, 2, 1)(2, Breadcrumb_For_1_Conditional_2_Template, 2, 1, "span");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 0);
+    ɵɵconditionalCreate(1, Breadcrumb_For_1_Conditional_1_Template, 2, 1)(2, Breadcrumb_For_1_Conditional_2_Template, 2, 1, "span");
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const breadcrumb_r1 = ctx.$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275conditional(breadcrumb_r1.path ? 1 : 2);
+    ɵɵadvance();
+    ɵɵconditional(breadcrumb_r1.path ? 1 : 2);
   }
 }
 __name(Breadcrumb_For_1_Template, "Breadcrumb_For_1_Template");
@@ -12115,226 +12115,226 @@ var _c12 = ["docs-copy-source-code", ""];
 var _c22 = ["codeTabs"];
 function ExampleViewer_Conditional_2_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span");
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span");
+    ɵɵtext(1);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     let tmp_3_0;
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate((tmp_3_0 = ctx_r1.exampleMetadata()) == null ? null : tmp_3_0.title);
+    const ctx_r1 = ɵɵnextContext(2);
+    ɵɵadvance();
+    ɵɵtextInterpolate((tmp_3_0 = ctx_r1.exampleMetadata()) == null ? null : tmp_3_0.title);
   }
 }
 __name(ExampleViewer_Conditional_2_Conditional_0_Template, "ExampleViewer_Conditional_2_Conditional_0_Template");
 function ExampleViewer_Conditional_2_Conditional_1_For_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "mat-tab", 15);
+    ɵɵelement(0, "mat-tab", 15);
   }
   if (rf & 2) {
     const tab_r3 = ctx.$implicit;
-    \u0275\u0275property("label", tab_r3.name);
+    ɵɵproperty("label", tab_r3.name);
   }
 }
 __name(ExampleViewer_Conditional_2_Conditional_1_For_3_Template, "ExampleViewer_Conditional_2_Conditional_1_For_3_Template");
 function ExampleViewer_Conditional_2_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "mat-tab-group", 14, 1);
-    \u0275\u0275repeaterCreate(2, ExampleViewer_Conditional_2_Conditional_1_For_3_Template, 1, 1, "mat-tab", 15, \u0275\u0275repeaterTrackByIdentity);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "mat-tab-group", 14, 1);
+    ɵɵrepeaterCreate(2, ExampleViewer_Conditional_2_Conditional_1_For_3_Template, 1, 1, "mat-tab", 15, ɵɵrepeaterTrackByIdentity);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(2);
-    \u0275\u0275repeater(ctx_r1.tabs());
+    const ctx_r1 = ɵɵnextContext(2);
+    ɵɵadvance(2);
+    ɵɵrepeater(ctx_r1.tabs());
   }
 }
 __name(ExampleViewer_Conditional_2_Conditional_1_Template, "ExampleViewer_Conditional_2_Conditional_1_Template");
 function ExampleViewer_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, ExampleViewer_Conditional_2_Conditional_0_Template, 2, 1, "span");
-    \u0275\u0275conditionalCreate(1, ExampleViewer_Conditional_2_Conditional_1_Template, 4, 0, "mat-tab-group", 14);
+    ɵɵconditionalCreate(0, ExampleViewer_Conditional_2_Conditional_0_Template, 2, 1, "span");
+    ɵɵconditionalCreate(1, ExampleViewer_Conditional_2_Conditional_1_Template, 4, 0, "mat-tab-group", 14);
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275conditional(ctx_r1.view() === ctx_r1.CodeExampleViewMode.SNIPPET ? 0 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx_r1.view() === ctx_r1.CodeExampleViewMode.MULTI_FILE ? 1 : -1);
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵconditional(ctx_r1.view() === ctx_r1.CodeExampleViewMode.SNIPPET ? 0 : -1);
+    ɵɵadvance();
+    ɵɵconditional(ctx_r1.view() === ctx_r1.CodeExampleViewMode.MULTI_FILE ? 1 : -1);
   }
 }
 __name(ExampleViewer_Conditional_2_Template, "ExampleViewer_Conditional_2_Template");
 function ExampleViewer_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 4);
-    \u0275\u0275text(1, "\xA0");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span", 4);
+    ɵɵtext(1, "\xA0");
+    ɵɵelementEnd();
   }
 }
 __name(ExampleViewer_Conditional_3_Template, "ExampleViewer_Conditional_3_Template");
 function ExampleViewer_ng_container_12_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
+    ɵɵelementContainer(0);
   }
 }
 __name(ExampleViewer_ng_container_12_Template, "ExampleViewer_ng_container_12_Template");
 function ExampleViewer_Conditional_13_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(0, "svg", 17);
-    \u0275\u0275element(1, "path", 19);
-    \u0275\u0275elementEnd();
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(0, "svg", 17);
+    ɵɵelement(1, "path", 19);
+    ɵɵelementEnd();
   }
 }
 __name(ExampleViewer_Conditional_13_Conditional_2_Template, "ExampleViewer_Conditional_13_Conditional_2_Template");
 function ExampleViewer_Conditional_13_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(0, "svg", 18);
-    \u0275\u0275element(1, "path", 20);
-    \u0275\u0275elementEnd();
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(0, "svg", 18);
+    ɵɵelement(1, "path", 20);
+    ɵɵelementEnd();
   }
 }
 __name(ExampleViewer_Conditional_13_Conditional_3_Template, "ExampleViewer_Conditional_13_Conditional_3_Template");
 function ExampleViewer_Conditional_13_Template(rf, ctx) {
   if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 16);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function ExampleViewer_Conditional_13_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.toggleExampleVisibility());
+    const _r4 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "button", 16);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function ExampleViewer_Conditional_13_Template_button_click_0_listener() {
+      ɵɵrestoreView(_r4);
+      const ctx_r1 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r1.toggleExampleVisibility());
     }, "ExampleViewer_Conditional_13_Template_button_click_0_listener"));
-    \u0275\u0275elementStart(1, "i", 4);
-    \u0275\u0275conditionalCreate(2, ExampleViewer_Conditional_13_Conditional_2_Template, 2, 0, ":svg:svg", 17)(3, ExampleViewer_Conditional_13_Conditional_3_Template, 2, 0, ":svg:svg", 18);
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(1, "i", 4);
+    ɵɵconditionalCreate(2, ExampleViewer_Conditional_13_Conditional_2_Template, 2, 0, ":svg:svg", 17)(3, ExampleViewer_Conditional_13_Conditional_3_Template, 2, 0, ":svg:svg", 18);
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("matTooltip", \u0275\u0275interpolate1("", ctx_r1.expanded() ? "Collapse" : "Expand", " example"));
-    \u0275\u0275attribute("aria-label", (ctx_r1.expanded() ? "Collapse" : "Expand") + " code example");
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(!ctx_r1.expanded() ? 2 : 3);
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵproperty("matTooltip", ɵɵinterpolate1("", ctx_r1.expanded() ? "Collapse" : "Expand", " example"));
+    ɵɵattribute("aria-label", (ctx_r1.expanded() ? "Collapse" : "Expand") + " code example");
+    ɵɵadvance(2);
+    ɵɵconditional(!ctx_r1.expanded() ? 2 : 3);
   }
 }
 __name(ExampleViewer_Conditional_13_Template, "ExampleViewer_Conditional_13_Template");
 function ExampleViewer_Conditional_14_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "div", 23);
+    ɵɵelement(0, "div", 23);
   }
   if (rf & 2) {
-    \u0275\u0275property("innerHTML", ctx, \u0275\u0275sanitizeHtml);
+    ɵɵproperty("innerHTML", ctx, ɵɵsanitizeHtml);
   }
 }
 __name(ExampleViewer_Conditional_14_Conditional_2_Template, "ExampleViewer_Conditional_14_Conditional_2_Template");
 function ExampleViewer_Conditional_14_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 21);
-    \u0275\u0275element(1, "button", 22);
-    \u0275\u0275conditionalCreate(2, ExampleViewer_Conditional_14_Conditional_2_Template, 1, 1, "div", 23);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 21);
+    ɵɵelement(1, "button", 22);
+    ɵɵconditionalCreate(2, ExampleViewer_Conditional_14_Conditional_2_Template, 1, 1, "div", 23);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     let tmp_4_0;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275classProp("docs-example-viewer-snippet", ctx_r1.view() === ctx_r1.CodeExampleViewMode.SNIPPET)("docs-example-viewer-multi-file", ctx_r1.view() === ctx_r1.CodeExampleViewMode.MULTI_FILE);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional((tmp_4_0 = (tmp_4_0 = ctx_r1.snippetCode()) == null ? null : tmp_4_0.sanitizedContent) ? 2 : -1, tmp_4_0);
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵclassProp("docs-example-viewer-snippet", ctx_r1.view() === ctx_r1.CodeExampleViewMode.SNIPPET)("docs-example-viewer-multi-file", ctx_r1.view() === ctx_r1.CodeExampleViewMode.MULTI_FILE);
+    ɵɵadvance(2);
+    ɵɵconditional((tmp_4_0 = (tmp_4_0 = ctx_r1.snippetCode()) == null ? null : tmp_4_0.sanitizedContent) ? 2 : -1, tmp_4_0);
   }
 }
 __name(ExampleViewer_Conditional_14_Template, "ExampleViewer_Conditional_14_Template");
 function ExampleViewer_Conditional_15_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
+    ɵɵelementContainer(0);
   }
 }
 __name(ExampleViewer_Conditional_15_ng_container_1_Template, "ExampleViewer_Conditional_15_ng_container_1_Template");
 function ExampleViewer_Conditional_15_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 13);
-    \u0275\u0275template(1, ExampleViewer_Conditional_15_ng_container_1_Template, 1, 0, "ng-container", 24);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 13);
+    ɵɵtemplate(1, ExampleViewer_Conditional_15_ng_container_1_Template, 1, 0, "ng-container", 24);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngComponentOutlet", ctx_r1.exampleComponent);
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵadvance();
+    ɵɵproperty("ngComponentOutlet", ctx_r1.exampleComponent);
   }
 }
 __name(ExampleViewer_Conditional_15_Template, "ExampleViewer_Conditional_15_Template");
 function ExampleViewer_ng_template_16_Conditional_0_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "a", 25)(1, "i", 4);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(2, "svg", 8);
-    \u0275\u0275element(3, "path", 27);
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(0, "a", 25)(1, "i", 4);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(2, "svg", 8);
+    ɵɵelement(3, "path", 27);
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("href", ctx_r1.githubUrl(), \u0275\u0275sanitizeUrl);
+    const ctx_r1 = ɵɵnextContext(3);
+    ɵɵproperty("href", ctx_r1.githubUrl(), ɵɵsanitizeUrl);
   }
 }
 __name(ExampleViewer_ng_template_16_Conditional_0_Conditional_0_Template, "ExampleViewer_ng_template_16_Conditional_0_Conditional_0_Template");
 function ExampleViewer_ng_template_16_Conditional_0_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "a", 26)(1, "i", 4);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(2, "svg", 28);
-    \u0275\u0275element(3, "path", 29);
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(0, "a", 26)(1, "i", 4);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(2, "svg", 28);
+    ɵɵelement(3, "path", 29);
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("href", ctx_r1.stackblitzUrl(), \u0275\u0275sanitizeUrl);
+    const ctx_r1 = ɵɵnextContext(3);
+    ɵɵproperty("href", ctx_r1.stackblitzUrl(), ɵɵsanitizeUrl);
   }
 }
 __name(ExampleViewer_ng_template_16_Conditional_0_Conditional_1_Template, "ExampleViewer_ng_template_16_Conditional_0_Conditional_1_Template");
 function ExampleViewer_ng_template_16_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, ExampleViewer_ng_template_16_Conditional_0_Conditional_0_Template, 4, 1, "a", 25);
-    \u0275\u0275conditionalCreate(1, ExampleViewer_ng_template_16_Conditional_0_Conditional_1_Template, 4, 1, "a", 26);
+    ɵɵconditionalCreate(0, ExampleViewer_ng_template_16_Conditional_0_Conditional_0_Template, 4, 1, "a", 25);
+    ɵɵconditionalCreate(1, ExampleViewer_ng_template_16_Conditional_0_Conditional_1_Template, 4, 1, "a", 26);
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275conditional(ctx_r1.githubUrl() ? 0 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx_r1.stackblitzUrl() ? 1 : -1);
+    const ctx_r1 = ɵɵnextContext(2);
+    ɵɵconditional(ctx_r1.githubUrl() ? 0 : -1);
+    ɵɵadvance();
+    ɵɵconditional(ctx_r1.stackblitzUrl() ? 1 : -1);
   }
 }
 __name(ExampleViewer_ng_template_16_Conditional_0_Template, "ExampleViewer_ng_template_16_Conditional_0_Template");
 function ExampleViewer_ng_template_16_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, ExampleViewer_ng_template_16_Conditional_0_Template, 2, 2);
+    ɵɵconditionalCreate(0, ExampleViewer_ng_template_16_Conditional_0_Template, 2, 2);
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275conditional(ctx_r1.exampleComponent ? 0 : -1);
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵconditional(ctx_r1.exampleComponent ? 0 : -1);
   }
 }
 __name(ExampleViewer_ng_template_16_Template, "ExampleViewer_ng_template_16_Template");
 function CookiePopup_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275domElementStart(0, "div", 0)(1, "p");
-    \u0275\u0275text(2, "\u672C\u7F51\u7AD9\u4F7F\u7528 Google \u7684 Cookie \u6765\u63D0\u4F9B\u670D\u52A1\u5E76\u5206\u6790\u6D41\u91CF\u3002");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(3, "div")(4, "a", 1)(5, "button", 2);
-    \u0275\u0275text(6, " \u4E86\u89E3\u66F4\u591A ");
-    \u0275\u0275domElementEnd()();
-    \u0275\u0275domElementStart(7, "button", 3);
-    \u0275\u0275domListener("click", /* @__PURE__ */ __name(function CookiePopup_Conditional_0_Template_button_click_7_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.accept());
+    const _r1 = ɵɵgetCurrentView();
+    ɵɵdomElementStart(0, "div", 0)(1, "p");
+    ɵɵtext(2, "本網站使用 Google 的 Cookie 來提供服務並分析流量。");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(3, "div")(4, "a", 1)(5, "button", 2);
+    ɵɵtext(6, " 瞭解更多 ");
+    ɵɵdomElementEnd()();
+    ɵɵdomElementStart(7, "button", 3);
+    ɵɵdomListener("click", /* @__PURE__ */ __name(function CookiePopup_Conditional_0_Template_button_click_7_listener() {
+      ɵɵrestoreView(_r1);
+      const ctx_r1 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r1.accept());
     }, "CookiePopup_Conditional_0_Template_button_click_7_listener"));
-    \u0275\u0275text(8, " \u597D\u7684\uFF0C\u6211\u77E5\u9053\u4E86 ");
-    \u0275\u0275domElementEnd()()();
+    ɵɵtext(8, " 好的，我知道了 ");
+    ɵɵdomElementEnd()()();
   }
   if (rf & 2) {
-    \u0275\u0275advance(5);
-    \u0275\u0275attribute("text", "\u4E86\u89E3\u66F4\u591A");
-    \u0275\u0275advance(2);
-    \u0275\u0275attribute("text", "\u597D\u7684\uFF0C\u6211\u77E5\u9053\u4E86");
+    ɵɵadvance(5);
+    ɵɵattribute("text", "瞭解更多");
+    ɵɵadvance(2);
+    ɵɵattribute("text", "好的，我知道了");
   }
 }
 __name(CookiePopup_Conditional_0_Template, "CookiePopup_Conditional_0_Template");
@@ -12346,586 +12346,586 @@ var _c42 = /* @__PURE__ */ __name(() => ({
 }), "_c4");
 function NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_ng_container_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
+    ɵɵelementContainer(0);
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_ng_container_3_Template, "NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_ng_container_3_Template");
 function NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "docs-icon");
-    \u0275\u0275text(1, "chevron_right");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "docs-icon");
+    ɵɵtext(1, "chevron_right");
+    ɵɵelementEnd();
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_Conditional_4_Template, "NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_Conditional_4_Template");
 function NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "a", 5)(1, "span", 7);
-    \u0275\u0275text(2);
-    \u0275\u0275template(3, NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_ng_container_3_Template, 1, 0, "ng-container", 2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(4, NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_Conditional_4_Template, 2, 0, "docs-icon");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "a", 5)(1, "span", 7);
+    ɵɵtext(2);
+    ɵɵtemplate(3, NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_ng_container_3_Template, 1, 0, "ng-container", 2);
+    ɵɵelementEnd();
+    ɵɵconditionalCreate(4, NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_Conditional_4_Template, 2, 0, "docs-icon");
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const item_r1 = \u0275\u0275nextContext(2).$implicit;
-    \u0275\u0275nextContext(2);
-    const itemStatus_r2 = \u0275\u0275reference(4);
-    \u0275\u0275property("href", item_r1.path, \u0275\u0275sanitizeUrl)("matTooltip", item_r1.label)("matTooltipDisabled", item_r1.label.length < 27)("matTooltipClass", "API-tooltip");
-    \u0275\u0275attribute("aria-label", item_r1.label);
-    \u0275\u0275advance();
-    \u0275\u0275classProp("docs-external-link", item_r1.isExternal);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", item_r1.label, " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", itemStatus_r2)("ngTemplateOutletContext", \u0275\u0275pureFunction1(11, _c32, item_r1));
-    \u0275\u0275advance();
-    \u0275\u0275conditional(item_r1.children && item_r1.level > 1 && !item_r1.isExpanded ? 4 : -1);
+    const item_r1 = ɵɵnextContext(2).$implicit;
+    ɵɵnextContext(2);
+    const itemStatus_r2 = ɵɵreference(4);
+    ɵɵproperty("href", item_r1.path, ɵɵsanitizeUrl)("matTooltip", item_r1.label)("matTooltipDisabled", item_r1.label.length < 27)("matTooltipClass", "API-tooltip");
+    ɵɵattribute("aria-label", item_r1.label);
+    ɵɵadvance();
+    ɵɵclassProp("docs-external-link", item_r1.isExternal);
+    ɵɵadvance();
+    ɵɵtextInterpolate1(" ", item_r1.label, " ");
+    ɵɵadvance();
+    ɵɵproperty("ngTemplateOutlet", itemStatus_r2)("ngTemplateOutletContext", ɵɵpureFunction1(11, _c32, item_r1));
+    ɵɵadvance();
+    ɵɵconditional(item_r1.children && item_r1.level > 1 && !item_r1.isExpanded ? 4 : -1);
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_Template, "NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_Template");
 function NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_ng_container_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
+    ɵɵelementContainer(0);
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_ng_container_3_Template, "NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_ng_container_3_Template");
 function NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "docs-icon");
-    \u0275\u0275text(1, "chevron_right");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "docs-icon");
+    ɵɵtext(1, "chevron_right");
+    ɵɵelementEnd();
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_Conditional_4_Template, "NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_Conditional_4_Template");
 function NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "a", 8);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_Template_a_click_0_listener() {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r3 = \u0275\u0275nextContext(4);
-      return \u0275\u0275resetView(ctx_r3.emitClickOnLink());
+    const _r3 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "a", 8);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_Template_a_click_0_listener() {
+      ɵɵrestoreView(_r3);
+      const ctx_r3 = ɵɵnextContext(4);
+      return ɵɵresetView(ctx_r3.emitClickOnLink());
     }, "NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_Template_a_click_0_listener"));
-    \u0275\u0275elementStart(1, "span", 7);
-    \u0275\u0275text(2);
-    \u0275\u0275template(3, NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_ng_container_3_Template, 1, 0, "ng-container", 2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(4, NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_Conditional_4_Template, 2, 0, "docs-icon");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(1, "span", 7);
+    ɵɵtext(2);
+    ɵɵtemplate(3, NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_ng_container_3_Template, 1, 0, "ng-container", 2);
+    ɵɵelementEnd();
+    ɵɵconditionalCreate(4, NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_Conditional_4_Template, 2, 0, "docs-icon");
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const item_r1 = \u0275\u0275nextContext(2).$implicit;
-    \u0275\u0275nextContext(2);
-    const itemStatus_r2 = \u0275\u0275reference(4);
-    \u0275\u0275property("routerLink", "/" + item_r1.path)("routerLinkActiveOptions", \u0275\u0275pureFunction0(10, _c42))("matTooltip", item_r1.label)("matTooltipDisabled", item_r1.label.length < 27)("matTooltipClass", "API-tooltip");
-    \u0275\u0275attribute("aria-label", item_r1.label);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", item_r1.label, " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", itemStatus_r2)("ngTemplateOutletContext", \u0275\u0275pureFunction1(11, _c32, item_r1));
-    \u0275\u0275advance();
-    \u0275\u0275conditional(item_r1.children && !item_r1.isExpanded ? 4 : -1);
+    const item_r1 = ɵɵnextContext(2).$implicit;
+    ɵɵnextContext(2);
+    const itemStatus_r2 = ɵɵreference(4);
+    ɵɵproperty("routerLink", "/" + item_r1.path)("routerLinkActiveOptions", ɵɵpureFunction0(10, _c42))("matTooltip", item_r1.label)("matTooltipDisabled", item_r1.label.length < 27)("matTooltipClass", "API-tooltip");
+    ɵɵattribute("aria-label", item_r1.label);
+    ɵɵadvance(2);
+    ɵɵtextInterpolate1(" ", item_r1.label, " ");
+    ɵɵadvance();
+    ɵɵproperty("ngTemplateOutlet", itemStatus_r2)("ngTemplateOutletContext", ɵɵpureFunction1(11, _c32, item_r1));
+    ɵɵadvance();
+    ɵɵconditional(item_r1.children && !item_r1.isExpanded ? 4 : -1);
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_Template, "NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_Template");
 function NavigationList_ng_template_0_For_2_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_Template, 5, 13, "a", 5)(1, NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_Template, 5, 13, "a", 6);
+    ɵɵconditionalCreate(0, NavigationList_ng_template_0_For_2_Conditional_1_Conditional_0_Template, 5, 13, "a", 5)(1, NavigationList_ng_template_0_For_2_Conditional_1_Conditional_1_Template, 5, 13, "a", 6);
   }
   if (rf & 2) {
-    const item_r1 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275conditional(item_r1.isExternal ? 0 : 1);
+    const item_r1 = ɵɵnextContext().$implicit;
+    ɵɵconditional(item_r1.isExternal ? 0 : 1);
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_1_Template, "NavigationList_ng_template_0_For_2_Conditional_1_Template");
 function NavigationList_ng_template_0_For_2_Conditional_2_Conditional_0_ng_container_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
+    ɵɵelementContainer(0);
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_2_Conditional_0_ng_container_3_Template, "NavigationList_ng_template_0_For_2_Conditional_2_Conditional_0_ng_container_3_Template");
 function NavigationList_ng_template_0_For_2_Conditional_2_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 9)(1, "span", 7);
-    \u0275\u0275text(2);
-    \u0275\u0275template(3, NavigationList_ng_template_0_For_2_Conditional_2_Conditional_0_ng_container_3_Template, 1, 0, "ng-container", 2);
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "div", 9)(1, "span", 7);
+    ɵɵtext(2);
+    ɵɵtemplate(3, NavigationList_ng_template_0_For_2_Conditional_2_Conditional_0_ng_container_3_Template, 1, 0, "ng-container", 2);
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
-    const item_r1 = \u0275\u0275nextContext(2).$implicit;
-    \u0275\u0275nextContext(2);
-    const itemStatus_r2 = \u0275\u0275reference(4);
-    \u0275\u0275property("matTooltip", item_r1.label)("matTooltipDisabled", item_r1.label.length < 27)("matTooltipClass", "API-tooltip");
-    \u0275\u0275attribute("aria-label", item_r1.label);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", item_r1.label, " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", itemStatus_r2)("ngTemplateOutletContext", \u0275\u0275pureFunction1(7, _c32, item_r1));
+    const item_r1 = ɵɵnextContext(2).$implicit;
+    ɵɵnextContext(2);
+    const itemStatus_r2 = ɵɵreference(4);
+    ɵɵproperty("matTooltip", item_r1.label)("matTooltipDisabled", item_r1.label.length < 27)("matTooltipClass", "API-tooltip");
+    ɵɵattribute("aria-label", item_r1.label);
+    ɵɵadvance(2);
+    ɵɵtextInterpolate1(" ", item_r1.label, " ");
+    ɵɵadvance();
+    ɵɵproperty("ngTemplateOutlet", itemStatus_r2)("ngTemplateOutletContext", ɵɵpureFunction1(7, _c32, item_r1));
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_2_Conditional_0_Template, "NavigationList_ng_template_0_For_2_Conditional_2_Conditional_0_Template");
 function NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "docs-icon");
-    \u0275\u0275text(1, "arrow_back");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "docs-icon");
+    ɵɵtext(1, "arrow_back");
+    ɵɵelementEnd();
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_Conditional_2_Template, "NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_Conditional_2_Template");
 function NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_ng_container_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
+    ɵɵelementContainer(0);
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_ng_container_5_Template, "NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_ng_container_5_Template");
 function NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 11);
-    \u0275\u0275pipe(1, "isActiveNavigationItem");
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r5);
-      const item_r1 = \u0275\u0275nextContext(2).$implicit;
-      const ctx_r3 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r3.toggle(item_r1));
+    const _r5 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "button", 11);
+    ɵɵpipe(1, "isActiveNavigationItem");
+    ɵɵlistener("click", /* @__PURE__ */ __name(function NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_Template_button_click_0_listener() {
+      ɵɵrestoreView(_r5);
+      const item_r1 = ɵɵnextContext(2).$implicit;
+      const ctx_r3 = ɵɵnextContext(2);
+      return ɵɵresetView(ctx_r3.toggle(item_r1));
     }, "NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_Template_button_click_0_listener"));
-    \u0275\u0275conditionalCreate(2, NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_Conditional_2_Template, 2, 0, "docs-icon");
-    \u0275\u0275elementStart(3, "span", 7);
-    \u0275\u0275text(4);
-    \u0275\u0275template(5, NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_ng_container_5_Template, 1, 0, "ng-container", 2);
-    \u0275\u0275elementEnd()();
+    ɵɵconditionalCreate(2, NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_Conditional_2_Template, 2, 0, "docs-icon");
+    ɵɵelementStart(3, "span", 7);
+    ɵɵtext(4);
+    ɵɵtemplate(5, NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_ng_container_5_Template, 1, 0, "ng-container", 2);
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
-    const item_r1 = \u0275\u0275nextContext(2).$implicit;
-    const ctx_r3 = \u0275\u0275nextContext(2);
-    const itemStatus_r2 = \u0275\u0275reference(4);
-    \u0275\u0275classProp("docs-faceted-list-item-active", \u0275\u0275pipeBind2(1, 18, item_r1, ctx_r3.activeItem()))("docs-expanded-button", item_r1.children && item_r1.level == ctx_r3.collapsableLevel())("docs-not-expanded-button", item_r1.children && item_r1.level === ctx_r3.expandableLevel())("docs-nav-item-has-icon", item_r1.children && item_r1.level === ctx_r3.expandableLevel() && !item_r1.isExpanded);
-    \u0275\u0275property("matTooltip", item_r1.label)("matTooltipDisabled", item_r1.label.length < 27)("matTooltipClass", "API-tooltip");
-    \u0275\u0275attribute("aria-label", (item_r1.isExpanded ? "\u6536\u8D77" : "\u5C55\u5F00") + " " + item_r1.label)("aria-expanded", item_r1.isExpanded)("aria-label", item_r1.label);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(item_r1.children && item_r1.level === ctx_r3.collapsableLevel() ? 2 : -1);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", item_r1.label, " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", itemStatus_r2)("ngTemplateOutletContext", \u0275\u0275pureFunction1(21, _c32, item_r1));
+    const item_r1 = ɵɵnextContext(2).$implicit;
+    const ctx_r3 = ɵɵnextContext(2);
+    const itemStatus_r2 = ɵɵreference(4);
+    ɵɵclassProp("docs-faceted-list-item-active", ɵɵpipeBind2(1, 18, item_r1, ctx_r3.activeItem()))("docs-expanded-button", item_r1.children && item_r1.level == ctx_r3.collapsableLevel())("docs-not-expanded-button", item_r1.children && item_r1.level === ctx_r3.expandableLevel())("docs-nav-item-has-icon", item_r1.children && item_r1.level === ctx_r3.expandableLevel() && !item_r1.isExpanded);
+    ɵɵproperty("matTooltip", item_r1.label)("matTooltipDisabled", item_r1.label.length < 27)("matTooltipClass", "API-tooltip");
+    ɵɵattribute("aria-label", (item_r1.isExpanded ? "收起" : "展開") + " " + item_r1.label)("aria-expanded", item_r1.isExpanded)("aria-label", item_r1.label);
+    ɵɵadvance(2);
+    ɵɵconditional(item_r1.children && item_r1.level === ctx_r3.collapsableLevel() ? 2 : -1);
+    ɵɵadvance(2);
+    ɵɵtextInterpolate1(" ", item_r1.label, " ");
+    ɵɵadvance();
+    ɵɵproperty("ngTemplateOutlet", itemStatus_r2)("ngTemplateOutletContext", ɵɵpureFunction1(21, _c32, item_r1));
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_Template, "NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_Template");
 function NavigationList_ng_template_0_For_2_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, NavigationList_ng_template_0_For_2_Conditional_2_Conditional_0_Template, 4, 9, "div", 9);
-    \u0275\u0275conditionalCreate(1, NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_Template, 6, 23, "button", 10);
+    ɵɵconditionalCreate(0, NavigationList_ng_template_0_For_2_Conditional_2_Conditional_0_Template, 4, 9, "div", 9);
+    ɵɵconditionalCreate(1, NavigationList_ng_template_0_For_2_Conditional_2_Conditional_1_Template, 6, 23, "button", 10);
   }
   if (rf & 2) {
-    const item_r1 = \u0275\u0275nextContext().$implicit;
-    const ctx_r3 = \u0275\u0275nextContext(2);
-    \u0275\u0275conditional(item_r1.level !== ctx_r3.collapsableLevel() && item_r1.level !== ctx_r3.expandableLevel() ? 0 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(item_r1.children && item_r1.level === ctx_r3.expandableLevel() || item_r1.level === ctx_r3.collapsableLevel() ? 1 : -1);
+    const item_r1 = ɵɵnextContext().$implicit;
+    const ctx_r3 = ɵɵnextContext(2);
+    ɵɵconditional(item_r1.level !== ctx_r3.collapsableLevel() && item_r1.level !== ctx_r3.expandableLevel() ? 0 : -1);
+    ɵɵadvance();
+    ɵɵconditional(item_r1.children && item_r1.level === ctx_r3.expandableLevel() || item_r1.level === ctx_r3.collapsableLevel() ? 1 : -1);
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_2_Template, "NavigationList_ng_template_0_For_2_Conditional_2_Template");
 function NavigationList_ng_template_0_For_2_Conditional_3_ng_container_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
+    ɵɵelementContainer(0);
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_3_ng_container_0_Template, "NavigationList_ng_template_0_For_2_Conditional_3_ng_container_0_Template");
 function NavigationList_ng_template_0_For_2_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275template(0, NavigationList_ng_template_0_For_2_Conditional_3_ng_container_0_Template, 1, 0, "ng-container", 2);
+    ɵɵtemplate(0, NavigationList_ng_template_0_For_2_Conditional_3_ng_container_0_Template, 1, 0, "ng-container", 2);
   }
   if (rf & 2) {
-    const item_r1 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275nextContext(2);
-    const navigationList_r6 = \u0275\u0275reference(1);
-    \u0275\u0275property("ngTemplateOutlet", navigationList_r6)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c32, item_r1.children));
+    const item_r1 = ɵɵnextContext().$implicit;
+    ɵɵnextContext(2);
+    const navigationList_r6 = ɵɵreference(1);
+    ɵɵproperty("ngTemplateOutlet", navigationList_r6)("ngTemplateOutletContext", ɵɵpureFunction1(2, _c32, item_r1.children));
   }
 }
 __name(NavigationList_ng_template_0_For_2_Conditional_3_Template, "NavigationList_ng_template_0_For_2_Conditional_3_Template");
 function NavigationList_ng_template_0_For_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "li", 4);
-    \u0275\u0275conditionalCreate(1, NavigationList_ng_template_0_For_2_Conditional_1_Template, 2, 1)(2, NavigationList_ng_template_0_For_2_Conditional_2_Template, 2, 2);
-    \u0275\u0275conditionalCreate(3, NavigationList_ng_template_0_For_2_Conditional_3_Template, 1, 4, "ng-container");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "li", 4);
+    ɵɵconditionalCreate(1, NavigationList_ng_template_0_For_2_Conditional_1_Template, 2, 1)(2, NavigationList_ng_template_0_For_2_Conditional_2_Template, 2, 2);
+    ɵɵconditionalCreate(3, NavigationList_ng_template_0_For_2_Conditional_3_Template, 1, 4, "ng-container");
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const item_r1 = ctx.$implicit;
-    const ctx_r3 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(item_r1.path ? 1 : 2);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx_r3.displayItemsToLevel() > item_r1.level && (item_r1.children == null ? null : item_r1.children.length) > 0 ? 3 : -1);
+    const ctx_r3 = ɵɵnextContext(2);
+    ɵɵadvance();
+    ɵɵconditional(item_r1.path ? 1 : 2);
+    ɵɵadvance(2);
+    ɵɵconditional(ctx_r3.displayItemsToLevel() > item_r1.level && (item_r1.children == null ? null : item_r1.children.length) > 0 ? 3 : -1);
   }
 }
 __name(NavigationList_ng_template_0_For_2_Template, "NavigationList_ng_template_0_For_2_Template");
 function NavigationList_ng_template_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "ul", 3);
-    \u0275\u0275repeaterCreate(1, NavigationList_ng_template_0_For_2_Template, 4, 2, "li", 4, \u0275\u0275repeaterTrackByIndex);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "ul", 3);
+    ɵɵrepeaterCreate(1, NavigationList_ng_template_0_For_2_Template, 4, 2, "li", 4, ɵɵrepeaterTrackByIndex);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const navigationItems_r7 = ctx.$implicit;
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275classProp("docs-navigation-list-dropdown", ctx_r3.isDropdownView());
-    \u0275\u0275advance();
-    \u0275\u0275repeater(navigationItems_r7);
+    const ctx_r3 = ɵɵnextContext();
+    ɵɵclassProp("docs-navigation-list-dropdown", ctx_r3.isDropdownView());
+    ɵɵadvance();
+    ɵɵrepeater(navigationItems_r7);
   }
 }
 __name(NavigationList_ng_template_0_Template, "NavigationList_ng_template_0_Template");
 function NavigationList_ng_container_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
+    ɵɵelementContainer(0);
   }
 }
 __name(NavigationList_ng_container_2_Template, "NavigationList_ng_container_2_Template");
 function NavigationList_ng_template_3_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 12);
-    \u0275\u0275text(1, "New");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span", 12);
+    ɵɵtext(1, "New");
+    ɵɵelementEnd();
   }
 }
 __name(NavigationList_ng_template_3_Conditional_0_Template, "NavigationList_ng_template_3_Conditional_0_Template");
 function NavigationList_ng_template_3_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 13);
-    \u0275\u0275text(1, "Updated");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span", 13);
+    ɵɵtext(1, "Updated");
+    ɵɵelementEnd();
   }
 }
 __name(NavigationList_ng_template_3_Conditional_1_Template, "NavigationList_ng_template_3_Conditional_1_Template");
 function NavigationList_ng_template_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, NavigationList_ng_template_3_Conditional_0_Template, 2, 0, "span", 12)(1, NavigationList_ng_template_3_Conditional_1_Template, 2, 0, "span", 13);
+    ɵɵconditionalCreate(0, NavigationList_ng_template_3_Conditional_0_Template, 2, 0, "span", 12)(1, NavigationList_ng_template_3_Conditional_1_Template, 2, 0, "span", 13);
   }
   if (rf & 2) {
     const item_r8 = ctx.$implicit;
-    \u0275\u0275conditional(item_r8.status === "new" ? 0 : item_r8.status === "updated" ? 1 : -1);
+    ɵɵconditional(item_r8.status === "new" ? 0 : item_r8.status === "updated" ? 1 : -1);
   }
 }
 __name(NavigationList_ng_template_3_Template, "NavigationList_ng_template_3_Template");
 function Select_For_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "option", 1);
-    \u0275\u0275text(1);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "option", 1);
+    ɵɵtext(1);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const item_r1 = ctx.$implicit;
-    \u0275\u0275property("value", item_r1.value);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate(item_r1.label);
+    ɵɵproperty("value", item_r1.value);
+    ɵɵadvance();
+    ɵɵtextInterpolate(item_r1.label);
   }
 }
 __name(Select_For_2_Template, "Select_For_2_Template");
 var _c52 = ["inputRef"];
 function TextField_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "docs-icon", 1);
-    \u0275\u0275text(1, "search");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "docs-icon", 1);
+    ɵɵtext(1, "search");
+    ɵɵelementEnd();
   }
 }
 __name(TextField_Conditional_0_Template, "TextField_Conditional_0_Template");
 function TextField_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 4);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function TextField_Conditional_3_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r3 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r3.clearTextField());
+    const _r3 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "button", 4);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function TextField_Conditional_3_Template_button_click_0_listener() {
+      ɵɵrestoreView(_r3);
+      const ctx_r3 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r3.clearTextField());
     }, "TextField_Conditional_3_Template_button_click_0_listener"));
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(1, "svg", 5);
-    \u0275\u0275element(2, "path", 6);
-    \u0275\u0275elementEnd()();
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(1, "svg", 5);
+    ɵɵelement(2, "path", 6);
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275property("title", ctx_r3.resetLabel());
-    \u0275\u0275attribute("aria-label", ctx_r3.resetLabel());
+    const ctx_r3 = ɵɵnextContext();
+    ɵɵproperty("title", ctx_r3.resetLabel());
+    ɵɵattribute("aria-label", ctx_r3.resetLabel());
   }
 }
 __name(TextField_Conditional_3_Template, "TextField_Conditional_3_Template");
 function SearchHistoryComponent_Conditional_1_For_4_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "li", 3);
-    \u0275\u0275listener("mouseenter", /* @__PURE__ */ __name(function SearchHistoryComponent_Conditional_1_For_4_Template_li_mouseenter_0_listener($event) {
-      const \u0275$index_8_r2 = \u0275\u0275restoreView(_r1).$index;
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r2.onMouseEnter($event, \u0275$index_8_r2));
+    const _r1 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "li", 3);
+    ɵɵlistener("mouseenter", /* @__PURE__ */ __name(function SearchHistoryComponent_Conditional_1_For_4_Template_li_mouseenter_0_listener($event) {
+      const ɵ$index_8_r2 = ɵɵrestoreView(_r1).$index;
+      const ctx_r2 = ɵɵnextContext(2);
+      return ɵɵresetView(ctx_r2.onMouseEnter($event, ɵ$index_8_r2));
     }, "SearchHistoryComponent_Conditional_1_For_4_Template_li_mouseenter_0_listener"));
-    \u0275\u0275elementStart(1, "a", 4);
-    \u0275\u0275pipe(2, "relativeLink");
-    \u0275\u0275pipe(3, "relativeLink");
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function SearchHistoryComponent_Conditional_1_For_4_Template_a_click_1_listener() {
-      const item_r4 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r2.history.addItem(item_r4));
+    ɵɵelementStart(1, "a", 4);
+    ɵɵpipe(2, "relativeLink");
+    ɵɵpipe(3, "relativeLink");
+    ɵɵlistener("click", /* @__PURE__ */ __name(function SearchHistoryComponent_Conditional_1_For_4_Template_a_click_1_listener() {
+      const item_r4 = ɵɵrestoreView(_r1).$implicit;
+      const ctx_r2 = ɵɵnextContext(2);
+      return ɵɵresetView(ctx_r2.history.addItem(item_r4));
     }, "SearchHistoryComponent_Conditional_1_For_4_Template_a_click_1_listener"));
-    \u0275\u0275elementStart(4, "i", 5);
-    \u0275\u0275text(5, " history ");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(6, "span", 6);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "button", 7);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function SearchHistoryComponent_Conditional_1_For_4_Template_button_click_7_listener() {
-      const item_r4 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r2.history.makeFavorite(item_r4));
+    ɵɵelementStart(4, "i", 5);
+    ɵɵtext(5, " history ");
+    ɵɵelementEnd();
+    ɵɵelement(6, "span", 6);
+    ɵɵelementEnd();
+    ɵɵelementStart(7, "button", 7);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function SearchHistoryComponent_Conditional_1_For_4_Template_button_click_7_listener() {
+      const item_r4 = ɵɵrestoreView(_r1).$implicit;
+      const ctx_r2 = ɵɵnextContext(2);
+      return ɵɵresetView(ctx_r2.history.makeFavorite(item_r4));
     }, "SearchHistoryComponent_Conditional_1_For_4_Template_button_click_7_listener"));
-    \u0275\u0275elementStart(8, "i", 5);
-    \u0275\u0275text(9, " star ");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(10, "button", 8);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function SearchHistoryComponent_Conditional_1_For_4_Template_button_click_10_listener() {
-      const item_r4 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r2.history.removeItem(item_r4));
+    ɵɵelementStart(8, "i", 5);
+    ɵɵtext(9, " star ");
+    ɵɵelementEnd()();
+    ɵɵelementStart(10, "button", 8);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function SearchHistoryComponent_Conditional_1_For_4_Template_button_click_10_listener() {
+      const item_r4 = ɵɵrestoreView(_r1).$implicit;
+      const ctx_r2 = ɵɵnextContext(2);
+      return ɵɵresetView(ctx_r2.history.removeItem(item_r4));
     }, "SearchHistoryComponent_Conditional_1_For_4_Template_button_click_10_listener"));
-    \u0275\u0275elementStart(11, "i", 5);
-    \u0275\u0275text(12, " close ");
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(11, "i", 5);
+    ɵɵtext(12, " close ");
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
     const item_r4 = ctx.$implicit;
-    \u0275\u0275property("item", item_r4);
-    \u0275\u0275advance();
-    \u0275\u0275property("routerLink", \u0275\u0275pipeBind2(2, 4, "/" + item_r4.url, "pathname"))("fragment", \u0275\u0275pipeBind2(3, 7, item_r4.url, "hash"));
-    \u0275\u0275advance(5);
-    \u0275\u0275property("innerHTML", item_r4.labelHtml, \u0275\u0275sanitizeHtml);
+    ɵɵproperty("item", item_r4);
+    ɵɵadvance();
+    ɵɵproperty("routerLink", ɵɵpipeBind2(2, 4, "/" + item_r4.url, "pathname"))("fragment", ɵɵpipeBind2(3, 7, item_r4.url, "hash"));
+    ɵɵadvance(5);
+    ɵɵproperty("innerHTML", item_r4.labelHtml, ɵɵsanitizeHtml);
   }
 }
 __name(SearchHistoryComponent_Conditional_1_For_4_Template, "SearchHistoryComponent_Conditional_1_For_4_Template");
 function SearchHistoryComponent_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 0);
-    \u0275\u0275text(1, "Recent");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "ul", 1);
-    \u0275\u0275repeaterCreate(3, SearchHistoryComponent_Conditional_1_For_4_Template, 13, 10, "li", 2, _forTrack0);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "p", 0);
+    ɵɵtext(1, "Recent");
+    ɵɵelementEnd();
+    ɵɵelementStart(2, "ul", 1);
+    ɵɵrepeaterCreate(3, SearchHistoryComponent_Conditional_1_For_4_Template, 13, 10, "li", 2, _forTrack0);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275nextContext();
-    const items_r5 = \u0275\u0275readContextLet(0);
-    \u0275\u0275advance(3);
-    \u0275\u0275repeater(items_r5.recent);
+    ɵɵnextContext();
+    const items_r5 = ɵɵreadContextLet(0);
+    ɵɵadvance(3);
+    ɵɵrepeater(items_r5.recent);
   }
 }
 __name(SearchHistoryComponent_Conditional_1_Template, "SearchHistoryComponent_Conditional_1_Template");
 function SearchHistoryComponent_Conditional_2_For_4_Template(rf, ctx) {
   if (rf & 1) {
-    const _r6 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "li", 3);
-    \u0275\u0275listener("mouseenter", /* @__PURE__ */ __name(function SearchHistoryComponent_Conditional_2_For_4_Template_li_mouseenter_0_listener($event) {
-      const \u0275$index_36_r7 = \u0275\u0275restoreView(_r6).$index;
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      const items_r5 = \u0275\u0275readContextLet(0);
-      return \u0275\u0275resetView(ctx_r2.onMouseEnter($event, items_r5.recent.length + \u0275$index_36_r7));
+    const _r6 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "li", 3);
+    ɵɵlistener("mouseenter", /* @__PURE__ */ __name(function SearchHistoryComponent_Conditional_2_For_4_Template_li_mouseenter_0_listener($event) {
+      const ɵ$index_36_r7 = ɵɵrestoreView(_r6).$index;
+      const ctx_r2 = ɵɵnextContext(2);
+      const items_r5 = ɵɵreadContextLet(0);
+      return ɵɵresetView(ctx_r2.onMouseEnter($event, items_r5.recent.length + ɵ$index_36_r7));
     }, "SearchHistoryComponent_Conditional_2_For_4_Template_li_mouseenter_0_listener"));
-    \u0275\u0275elementStart(1, "a", 10);
-    \u0275\u0275pipe(2, "relativeLink");
-    \u0275\u0275pipe(3, "relativeLink");
-    \u0275\u0275elementStart(4, "i", 5);
-    \u0275\u0275text(5, " star ");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(6, "span", 6);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "button", 8);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function SearchHistoryComponent_Conditional_2_For_4_Template_button_click_7_listener() {
-      const item_r8 = \u0275\u0275restoreView(_r6).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r2.history.removeItem(item_r8));
+    ɵɵelementStart(1, "a", 10);
+    ɵɵpipe(2, "relativeLink");
+    ɵɵpipe(3, "relativeLink");
+    ɵɵelementStart(4, "i", 5);
+    ɵɵtext(5, " star ");
+    ɵɵelementEnd();
+    ɵɵelement(6, "span", 6);
+    ɵɵelementEnd();
+    ɵɵelementStart(7, "button", 8);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function SearchHistoryComponent_Conditional_2_For_4_Template_button_click_7_listener() {
+      const item_r8 = ɵɵrestoreView(_r6).$implicit;
+      const ctx_r2 = ɵɵnextContext(2);
+      return ɵɵresetView(ctx_r2.history.removeItem(item_r8));
     }, "SearchHistoryComponent_Conditional_2_For_4_Template_button_click_7_listener"));
-    \u0275\u0275elementStart(8, "i", 5);
-    \u0275\u0275text(9, " close ");
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(8, "i", 5);
+    ɵɵtext(9, " close ");
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
     const item_r8 = ctx.$implicit;
-    \u0275\u0275property("item", item_r8);
-    \u0275\u0275advance();
-    \u0275\u0275property("routerLink", \u0275\u0275pipeBind2(2, 4, "/" + item_r8.url, "pathname"))("fragment", \u0275\u0275pipeBind2(3, 7, item_r8.url, "hash"));
-    \u0275\u0275advance(5);
-    \u0275\u0275property("innerHTML", item_r8.labelHtml, \u0275\u0275sanitizeHtml);
+    ɵɵproperty("item", item_r8);
+    ɵɵadvance();
+    ɵɵproperty("routerLink", ɵɵpipeBind2(2, 4, "/" + item_r8.url, "pathname"))("fragment", ɵɵpipeBind2(3, 7, item_r8.url, "hash"));
+    ɵɵadvance(5);
+    ɵɵproperty("innerHTML", item_r8.labelHtml, ɵɵsanitizeHtml);
   }
 }
 __name(SearchHistoryComponent_Conditional_2_For_4_Template, "SearchHistoryComponent_Conditional_2_For_4_Template");
 function SearchHistoryComponent_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 0);
-    \u0275\u0275text(1, "Favorite");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "ul", 9);
-    \u0275\u0275repeaterCreate(3, SearchHistoryComponent_Conditional_2_For_4_Template, 10, 10, "li", 2, _forTrack0);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "p", 0);
+    ɵɵtext(1, "Favorite");
+    ɵɵelementEnd();
+    ɵɵelementStart(2, "ul", 9);
+    ɵɵrepeaterCreate(3, SearchHistoryComponent_Conditional_2_For_4_Template, 10, 10, "li", 2, _forTrack0);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275nextContext();
-    const items_r5 = \u0275\u0275readContextLet(0);
-    \u0275\u0275advance(3);
-    \u0275\u0275repeater(items_r5.favorite);
+    ɵɵnextContext();
+    const items_r5 = ɵɵreadContextLet(0);
+    ɵɵadvance(3);
+    ɵɵrepeater(items_r5.favorite);
   }
 }
 __name(SearchHistoryComponent_Conditional_2_Template, "SearchHistoryComponent_Conditional_2_Template");
 var _c62 = ["searchDialog"];
 function SearchDialog_Conditional_4_For_2_Conditional_10_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "span", 24);
+    ɵɵelement(0, "span", 24);
   }
   if (rf & 2) {
-    const result_r3 = \u0275\u0275nextContext().$implicit;
-    \u0275\u0275property("innerHtml", result_r3.subLabelHtml, \u0275\u0275sanitizeHtml);
+    const result_r3 = ɵɵnextContext().$implicit;
+    ɵɵproperty("innerHtml", result_r3.subLabelHtml, ɵɵsanitizeHtml);
   }
 }
 __name(SearchDialog_Conditional_4_For_2_Conditional_10_Template, "SearchDialog_Conditional_4_For_2_Conditional_10_Template");
 function SearchDialog_Conditional_4_For_2_Template(rf, ctx) {
   if (rf & 1) {
-    const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "li", 18)(1, "a", 19);
-    \u0275\u0275pipe(2, "relativeLink");
-    \u0275\u0275pipe(3, "relativeLink");
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function SearchDialog_Conditional_4_For_2_Template_a_click_1_listener() {
-      const result_r3 = \u0275\u0275restoreView(_r2).$implicit;
-      const ctx_r3 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r3.history.addItem(result_r3));
+    const _r2 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "li", 18)(1, "a", 19);
+    ɵɵpipe(2, "relativeLink");
+    ɵɵpipe(3, "relativeLink");
+    ɵɵlistener("click", /* @__PURE__ */ __name(function SearchDialog_Conditional_4_For_2_Template_a_click_1_listener() {
+      const result_r3 = ɵɵrestoreView(_r2).$implicit;
+      const ctx_r3 = ɵɵnextContext(2);
+      return ɵɵresetView(ctx_r3.history.addItem(result_r3));
     }, "SearchDialog_Conditional_4_For_2_Template_a_click_1_listener"));
-    \u0275\u0275elementStart(4, "div")(5, "div", 20)(6, "span", 21)(7, "i", 22);
-    \u0275\u0275text(8);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275element(9, "span", 23);
-    \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(10, SearchDialog_Conditional_4_For_2_Conditional_10_Template, 1, 1, "span", 24);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(11, "span", 25);
-    \u0275\u0275text(12);
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(4, "div")(5, "div", 20)(6, "span", 21)(7, "i", 22);
+    ɵɵtext(8);
+    ɵɵelementEnd()();
+    ɵɵelement(9, "span", 23);
+    ɵɵelementEnd();
+    ɵɵconditionalCreate(10, SearchDialog_Conditional_4_For_2_Conditional_10_Template, 1, 1, "span", 24);
+    ɵɵelementEnd();
+    ɵɵelementStart(11, "span", 25);
+    ɵɵtext(12);
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
     const result_r3 = ctx.$implicit;
-    \u0275\u0275property("item", result_r3);
-    \u0275\u0275advance();
-    \u0275\u0275property("routerLink", \u0275\u0275pipeBind2(2, 7, "/" + result_r3.url, "pathname"))("fragment", \u0275\u0275pipeBind2(3, 10, result_r3.url, "hash"));
-    \u0275\u0275advance(7);
-    \u0275\u0275textInterpolate1(" ", result_r3.type === "code" ? "code" : "description", " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("innerHtml", result_r3.labelHtml, \u0275\u0275sanitizeHtml);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(result_r3.subLabelHtml ? 10 : -1);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(result_r3.category);
+    ɵɵproperty("item", result_r3);
+    ɵɵadvance();
+    ɵɵproperty("routerLink", ɵɵpipeBind2(2, 7, "/" + result_r3.url, "pathname"))("fragment", ɵɵpipeBind2(3, 10, result_r3.url, "hash"));
+    ɵɵadvance(7);
+    ɵɵtextInterpolate1(" ", result_r3.type === "code" ? "code" : "description", " ");
+    ɵɵadvance();
+    ɵɵproperty("innerHtml", result_r3.labelHtml, ɵɵsanitizeHtml);
+    ɵɵadvance();
+    ɵɵconditional(result_r3.subLabelHtml ? 10 : -1);
+    ɵɵadvance(2);
+    ɵɵtextInterpolate(result_r3.category);
   }
 }
 __name(SearchDialog_Conditional_4_For_2_Template, "SearchDialog_Conditional_4_For_2_Template");
 function SearchDialog_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "ul", 3);
-    \u0275\u0275repeaterCreate(1, SearchDialog_Conditional_4_For_2_Template, 13, 13, "li", 18, _forTrack0);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "ul", 3);
+    ɵɵrepeaterCreate(1, SearchDialog_Conditional_4_For_2_Template, 13, 13, "li", 18, _forTrack0);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275repeater(ctx_r3.searchResults());
+    const ctx_r3 = ɵɵnextContext();
+    ɵɵadvance();
+    ɵɵrepeater(ctx_r3.searchResults());
   }
 }
 __name(SearchDialog_Conditional_4_Template, "SearchDialog_Conditional_4_Template");
 function SearchDialog_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "docs-search-history");
+    ɵɵelement(0, "docs-search-history");
   }
 }
 __name(SearchDialog_Conditional_5_Template, "SearchDialog_Conditional_5_Template");
 function SearchDialog_Conditional_6_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 26)(1, "span");
-    \u0275\u0275text(2, "\u5F00\u59CB\u8F93\u5165\u4EE5\u67E5\u770B\u7ED3\u679C");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "div", 26)(1, "span");
+    ɵɵtext(2, "開始輸入以檢視結果");
+    ɵɵelementEnd()();
   }
 }
 __name(SearchDialog_Conditional_6_Conditional_1_Template, "SearchDialog_Conditional_6_Conditional_1_Template");
 function SearchDialog_Conditional_6_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 27)(1, "span");
-    \u0275\u0275text(2, "\u672A\u627E\u5230\u7ED3\u679C");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "div", 27)(1, "span");
+    ɵɵtext(2, "未找到結果");
+    ɵɵelementEnd()();
   }
 }
 __name(SearchDialog_Conditional_6_Conditional_2_Template, "SearchDialog_Conditional_6_Conditional_2_Template");
 function SearchDialog_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 3);
-    \u0275\u0275conditionalCreate(1, SearchDialog_Conditional_6_Conditional_1_Template, 3, 0, "div", 26)(2, SearchDialog_Conditional_6_Conditional_2_Template, 3, 0, "div", 27);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 3);
+    ɵɵconditionalCreate(1, SearchDialog_Conditional_6_Conditional_1_Template, 3, 0, "div", 26)(2, SearchDialog_Conditional_6_Conditional_2_Template, 3, 0, "div", 27);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r3 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275conditional(!ctx_r3.resultsResource.hasValue() ? 1 : ctx_r3.searchResults().length === 0 ? 2 : -1);
+    const ctx_r3 = ɵɵnextContext();
+    ɵɵadvance();
+    ɵɵconditional(!ctx_r3.resultsResource.hasValue() ? 1 : ctx_r3.searchResults().length === 0 ? 2 : -1);
   }
 }
 __name(SearchDialog_Conditional_6_Template, "SearchDialog_Conditional_6_Template");
 function TopLevelBannerComponent_Conditional_0_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "a", 0)(1, "h1", 4);
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "h1", 5)(4, "span", 6);
-    \u0275\u0275text(5);
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(0, "a", 0)(1, "h1", 4);
+    ɵɵtext(2);
+    ɵɵelementEnd();
+    ɵɵelementStart(3, "h1", 5)(4, "span", 6);
+    ɵɵtext(5);
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("href", ctx_r1.link(), \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r1.text());
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(ctx_r1.text());
+    const ctx_r1 = ɵɵnextContext(2);
+    ɵɵproperty("href", ctx_r1.link(), ɵɵsanitizeUrl);
+    ɵɵadvance(2);
+    ɵɵtextInterpolate(ctx_r1.text());
+    ɵɵadvance(3);
+    ɵɵtextInterpolate(ctx_r1.text());
   }
 }
 __name(TopLevelBannerComponent_Conditional_0_Conditional_0_Template, "TopLevelBannerComponent_Conditional_0_Conditional_0_Template");
 function TopLevelBannerComponent_Conditional_0_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 1)(1, "h1", 4);
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "h1", 5)(4, "span", 6);
-    \u0275\u0275text(5);
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(0, "div", 1)(1, "h1", 4);
+    ɵɵtext(2);
+    ɵɵelementEnd();
+    ɵɵelementStart(3, "h1", 5)(4, "span", 6);
+    ɵɵtext(5);
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r1.text());
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(ctx_r1.text());
+    const ctx_r1 = ɵɵnextContext(2);
+    ɵɵadvance(2);
+    ɵɵtextInterpolate(ctx_r1.text());
+    ɵɵadvance(3);
+    ɵɵtextInterpolate(ctx_r1.text());
   }
 }
 __name(TopLevelBannerComponent_Conditional_0_Conditional_1_Template, "TopLevelBannerComponent_Conditional_0_Conditional_1_Template");
 function TopLevelBannerComponent_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275conditionalCreate(0, TopLevelBannerComponent_Conditional_0_Conditional_0_Template, 6, 3, "a", 0)(1, TopLevelBannerComponent_Conditional_0_Conditional_1_Template, 6, 2, "div", 1);
-    \u0275\u0275elementStart(2, "button", 2);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function TopLevelBannerComponent_Conditional_0_Template_button_click_2_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.close());
+    const _r1 = ɵɵgetCurrentView();
+    ɵɵconditionalCreate(0, TopLevelBannerComponent_Conditional_0_Conditional_0_Template, 6, 3, "a", 0)(1, TopLevelBannerComponent_Conditional_0_Conditional_1_Template, 6, 2, "div", 1);
+    ɵɵelementStart(2, "button", 2);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function TopLevelBannerComponent_Conditional_0_Template_button_click_2_listener() {
+      ɵɵrestoreView(_r1);
+      const ctx_r1 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r1.close());
     }, "TopLevelBannerComponent_Conditional_0_Template_button_click_2_listener"));
-    \u0275\u0275elementStart(3, "docs-icon", 3);
-    \u0275\u0275text(4, "close");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(3, "docs-icon", 3);
+    ɵɵtext(4, "close");
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275conditional(ctx_r1.link() ? 0 : 1);
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵconditional(ctx_r1.link() ? 0 : 1);
   }
 }
 __name(TopLevelBannerComponent_Conditional_0_Template, "TopLevelBannerComponent_Conditional_0_Template");
@@ -12955,17 +12955,17 @@ var _ClickOutside = class _ClickOutside {
   }
 };
 __name(_ClickOutside, "ClickOutside");
-__publicField(_ClickOutside, "\u0275fac", /* @__PURE__ */ __name(function ClickOutside_Factory(__ngFactoryType__) {
+__publicField(_ClickOutside, "ɵfac", /* @__PURE__ */ __name(function ClickOutside_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ClickOutside)();
 }, "ClickOutside_Factory"));
-__publicField(_ClickOutside, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_ClickOutside, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _ClickOutside,
   selectors: [["", "docsClickOutside", ""]],
   hostBindings: /* @__PURE__ */ __name(function ClickOutside_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function ClickOutside_click_HostBindingHandler($event) {
+      ɵɵlistener("click", /* @__PURE__ */ __name(function ClickOutside_click_HostBindingHandler($event) {
         return ctx.onClick($event);
-      }, "ClickOutside_click_HostBindingHandler"), \u0275\u0275resolveDocument);
+      }, "ClickOutside_click_HostBindingHandler"), ɵɵresolveDocument);
     }
   }, "ClickOutside_HostBindings"),
   inputs: {
@@ -13261,16 +13261,16 @@ var _ExternalLink = class _ExternalLink {
   }
 };
 __name(_ExternalLink, "ExternalLink");
-__publicField(_ExternalLink, "\u0275fac", /* @__PURE__ */ __name(function ExternalLink_Factory(__ngFactoryType__) {
+__publicField(_ExternalLink, "ɵfac", /* @__PURE__ */ __name(function ExternalLink_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ExternalLink)();
 }, "ExternalLink_Factory"));
-__publicField(_ExternalLink, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_ExternalLink, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _ExternalLink,
   selectors: [["a", "href", "", 3, "noBlankForExternalLink", ""]],
   hostVars: 1,
   hostBindings: /* @__PURE__ */ __name(function ExternalLink_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("target", ctx.target);
+      ɵɵattribute("target", ctx.target);
     }
   }, "ExternalLink_HostBindings")
 }));
@@ -13313,16 +13313,16 @@ var _SearchItem = class _SearchItem {
   }
 };
 __name(_SearchItem, "SearchItem");
-__publicField(_SearchItem, "\u0275fac", /* @__PURE__ */ __name(function SearchItem_Factory(__ngFactoryType__) {
+__publicField(_SearchItem, "ɵfac", /* @__PURE__ */ __name(function SearchItem_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _SearchItem)();
 }, "SearchItem_Factory"));
-__publicField(_SearchItem, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_SearchItem, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _SearchItem,
   selectors: [["", "docsSearchItem", ""]],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function SearchItem_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("active", ctx.isActive);
+      ɵɵclassProp("active", ctx.isActive);
     }
   }, "SearchItem_HostBindings"),
   inputs: {
@@ -13429,12 +13429,12 @@ var _NavigationState = class _NavigationState {
   }
 };
 __name(_NavigationState, "NavigationState");
-__publicField(_NavigationState, "\u0275fac", /* @__PURE__ */ __name(function NavigationState_Factory(__ngFactoryType__) {
+__publicField(_NavigationState, "ɵfac", /* @__PURE__ */ __name(function NavigationState_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _NavigationState)();
 }, "NavigationState_Factory"));
-__publicField(_NavigationState, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_NavigationState, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _NavigationState,
-  factory: _NavigationState.\u0275fac,
+  factory: _NavigationState.ɵfac,
   providedIn: "root"
 }));
 var NavigationState = _NavigationState;
@@ -13504,12 +13504,12 @@ var _TableOfContentsLoader = class _TableOfContentsLoader {
   }
 };
 __name(_TableOfContentsLoader, "TableOfContentsLoader");
-__publicField(_TableOfContentsLoader, "\u0275fac", /* @__PURE__ */ __name(function TableOfContentsLoader_Factory(__ngFactoryType__) {
+__publicField(_TableOfContentsLoader, "ɵfac", /* @__PURE__ */ __name(function TableOfContentsLoader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _TableOfContentsLoader)();
 }, "TableOfContentsLoader_Factory"));
-__publicField(_TableOfContentsLoader, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_TableOfContentsLoader, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _TableOfContentsLoader,
-  factory: _TableOfContentsLoader.\u0275fac,
+  factory: _TableOfContentsLoader.ɵfac,
   providedIn: "root"
 }));
 var TableOfContentsLoader = _TableOfContentsLoader;
@@ -13551,9 +13551,9 @@ var _Search = class _Search {
           maxValuesPerFacet: MAX_VALUE_PER_FACET,
           attributesToRetrieve: ["hierarchy.lvl0", "hierarchy.lvl1", "hierarchy.lvl2", "hierarchy.lvl3", "hierarchy.lvl4", "hierarchy.lvl5", "hierarchy.lvl6", "content", "type", "url"],
           hitsPerPage: 20,
-          snippetEllipsisText: "\u2026",
-          highlightPreTag: "<\u0275>",
-          highlightPostTag: "</\u0275>",
+          snippetEllipsisText: "…",
+          highlightPreTag: "<ɵ>",
+          highlightPostTag: "</ɵ>",
           attributesToHighlight: [],
           attributesToSnippet: ["hierarchy.lvl1:10", "hierarchy.lvl2:10", "hierarchy.lvl3:10", "hierarchy.lvl4:10", "hierarchy.lvl5:10", "hierarchy.lvl6:10", "content:10"]
         },
@@ -13633,9 +13633,9 @@ var _Search = class _Search {
       return null;
     }
     const parts = [];
-    while (label.indexOf("<\u0275>") !== -1) {
-      const beforeMatch = label.substring(0, label.indexOf("<\u0275>"));
-      const match = label.substring(label.indexOf("<\u0275>") + 3, label.indexOf("</\u0275>"));
+    while (label.indexOf("<ɵ>") !== -1) {
+      const beforeMatch = label.substring(0, label.indexOf("<ɵ>"));
+      const match = label.substring(label.indexOf("<ɵ>") + 3, label.indexOf("</ɵ>"));
       parts.push({
         highlight: false,
         text: beforeMatch
@@ -13644,7 +13644,7 @@ var _Search = class _Search {
         highlight: true,
         text: match
       });
-      label = label.substring(label.indexOf("</\u0275>") + 4);
+      label = label.substring(label.indexOf("</ɵ>") + 4);
     }
     parts.push({
       highlight: false,
@@ -13656,12 +13656,12 @@ var _Search = class _Search {
   }
 };
 __name(_Search, "Search");
-__publicField(_Search, "\u0275fac", /* @__PURE__ */ __name(function Search_Factory(__ngFactoryType__) {
+__publicField(_Search, "ɵfac", /* @__PURE__ */ __name(function Search_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Search)();
 }, "Search_Factory"));
-__publicField(_Search, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_Search, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _Search,
-  factory: _Search.\u0275fac,
+  factory: _Search.ɵfac,
   providedIn: "root"
 }));
 var Search = _Search;
@@ -13770,12 +13770,12 @@ var _SearchHistory = class _SearchHistory {
   }
 };
 __name(_SearchHistory, "SearchHistory");
-__publicField(_SearchHistory, "\u0275fac", /* @__PURE__ */ __name(function SearchHistory_Factory(__ngFactoryType__) {
+__publicField(_SearchHistory, "ɵfac", /* @__PURE__ */ __name(function SearchHistory_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _SearchHistory)();
 }, "SearchHistory_Factory"));
-__publicField(_SearchHistory, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_SearchHistory, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _SearchHistory,
-  factory: _SearchHistory.\u0275fac,
+  factory: _SearchHistory.ɵfac,
   providedIn: "root"
 }));
 var SearchHistory = _SearchHistory;
@@ -13814,17 +13814,17 @@ __publicField(_IconComponent, "isFontLoaded", signal(false, ...ngDevMode ? [{
 }] : []));
 /** Share the same promise across different instances of the component */
 __publicField(_IconComponent, "whenFontLoad");
-__publicField(_IconComponent, "\u0275fac", /* @__PURE__ */ __name(function IconComponent_Factory(__ngFactoryType__) {
+__publicField(_IconComponent, "ɵfac", /* @__PURE__ */ __name(function IconComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _IconComponent)();
 }, "IconComponent_Factory"));
-__publicField(_IconComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_IconComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _IconComponent,
   selectors: [["docs-icon"]],
   hostAttrs: ["aria-hidden", "true", "translate", "no", 1, "material-symbols-outlined"],
   hostVars: 2,
   hostBindings: /* @__PURE__ */ __name(function IconComponent_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275styleProp("font-size", ctx.fontSize(), "px");
+      ɵɵstyleProp("font-size", ctx.fontSize(), "px");
     }
   }, "IconComponent_HostBindings"),
   ngContentSelectors: _c03,
@@ -13832,8 +13832,8 @@ __publicField(_IconComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCom
   vars: 0,
   template: /* @__PURE__ */ __name(function IconComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef();
-      \u0275\u0275projection(0);
+      ɵɵprojectionDef();
+      ɵɵprojection(0);
     }
   }, "IconComponent_Template"),
   styles: [".docs-icon_high-contrast[_ngcontent-%COMP%]{color:var(--primary-contrast)}/*# sourceMappingURL=icon.component.css.map */"],
@@ -13891,10 +13891,10 @@ var _TableOfContents = class _TableOfContents {
   }
 };
 __name(_TableOfContents, "TableOfContents");
-__publicField(_TableOfContents, "\u0275fac", /* @__PURE__ */ __name(function TableOfContents_Factory(__ngFactoryType__) {
+__publicField(_TableOfContents, "ɵfac", /* @__PURE__ */ __name(function TableOfContents_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _TableOfContents)();
 }, "TableOfContents_Factory"));
-__publicField(_TableOfContents, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_TableOfContents, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _TableOfContents,
   selectors: [["docs-table-of-contents"]],
   inputs: {
@@ -13905,25 +13905,25 @@ __publicField(_TableOfContents, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineC
   consts: [[1, "docs-title"], [1, "docs-faceted-list"], [1, "docs-faceted-list-item", 3, "docs-toc-item-h2", "docs-toc-item-h3"], ["type", "button", 3, "click"], ["role", "presentation"], [1, "docs-faceted-list-item"], [3, "href"]],
   template: /* @__PURE__ */ __name(function TableOfContents_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "aside")(1, "nav")(2, "header")(3, "h2", 0);
-      \u0275\u0275text(4, "\u5728\u672C\u9875\u4E2D");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(5, "ul", 1);
-      \u0275\u0275repeaterCreate(6, TableOfContents_For_7_Template, 3, 8, "li", 2, _forTrack0);
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(8, "button", 3);
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function TableOfContents_Template_button_click_8_listener() {
+      ɵɵelementStart(0, "aside")(1, "nav")(2, "header")(3, "h2", 0);
+      ɵɵtext(4, "在本頁中");
+      ɵɵelementEnd()();
+      ɵɵelementStart(5, "ul", 1);
+      ɵɵrepeaterCreate(6, TableOfContents_For_7_Template, 3, 8, "li", 2, _forTrack0);
+      ɵɵelementEnd()();
+      ɵɵelementStart(8, "button", 3);
+      ɵɵlistener("click", /* @__PURE__ */ __name(function TableOfContents_Template_button_click_8_listener() {
         return ctx.scrollToTop();
       }, "TableOfContents_Template_button_click_8_listener"));
-      \u0275\u0275elementStart(9, "docs-icon", 4);
-      \u0275\u0275text(10, "arrow_upward_alt");
-      \u0275\u0275elementEnd();
-      \u0275\u0275text(11, " \u8FD4\u56DE\u9876\u90E8 ");
-      \u0275\u0275elementEnd()();
+      ɵɵelementStart(9, "docs-icon", 4);
+      ɵɵtext(10, "arrow_upward_alt");
+      ɵɵelementEnd();
+      ɵɵtext(11, " 回傳頂部 ");
+      ɵɵelementEnd()();
     }
     if (rf & 2) {
-      \u0275\u0275advance(6);
-      \u0275\u0275repeater(ctx.tableOfContentItems());
+      ɵɵadvance(6);
+      ɵɵrepeater(ctx.tableOfContentItems());
     }
   }, "TableOfContents_Template"),
   dependencies: [IconComponent],
@@ -13941,7 +13941,7 @@ var TableOfContents = _TableOfContents;
       template: `<aside>
   <nav>
     <header>
-      <h2 class="docs-title">\u5728\u672C\u9875\u4E2D</h2>
+      <h2 class="docs-title">在本頁中</h2>
     </header>
     <ul class="docs-faceted-list">
       <!-- TODO: Hide li elements with class docs-toc-item-h3 for laptop, table and phone screen resolutions  -->
@@ -13958,7 +13958,7 @@ var TableOfContents = _TableOfContents;
   </nav>
   <button type="button" (click)="scrollToTop()">
     <docs-icon role="presentation">arrow_upward_alt</docs-icon>
-    \u8FD4\u56DE\u9876\u90E8
+    回傳頂部
   </button>
 </aside>
 `,
@@ -13981,10 +13981,10 @@ var _Breadcrumb = class _Breadcrumb {
   }] : []);
 };
 __name(_Breadcrumb, "Breadcrumb");
-__publicField(_Breadcrumb, "\u0275fac", /* @__PURE__ */ __name(function Breadcrumb_Factory(__ngFactoryType__) {
+__publicField(_Breadcrumb, "ɵfac", /* @__PURE__ */ __name(function Breadcrumb_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Breadcrumb)();
 }, "Breadcrumb_Factory"));
-__publicField(_Breadcrumb, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_Breadcrumb, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _Breadcrumb,
   selectors: [["docs-breadcrumb"]],
   decls: 2,
@@ -13992,10 +13992,10 @@ __publicField(_Breadcrumb, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompon
   consts: [[1, "docs-breadcrumb"], [3, "href"], [3, "routerLink"]],
   template: /* @__PURE__ */ __name(function Breadcrumb_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275repeaterCreate(0, Breadcrumb_For_1_Template, 3, 1, "div", 0, \u0275\u0275repeaterTrackByIndex);
+      ɵɵrepeaterCreate(0, Breadcrumb_For_1_Template, 3, 1, "div", 0, ɵɵrepeaterTrackByIndex);
     }
     if (rf & 2) {
-      \u0275\u0275repeater(ctx.breadcrumbItems());
+      ɵɵrepeater(ctx.breadcrumbItems());
     }
   }, "Breadcrumb_Template"),
   dependencies: [RouterLink],
@@ -14071,22 +14071,22 @@ var _CopySourceCodeButton = class _CopySourceCodeButton {
   }
 };
 __name(_CopySourceCodeButton, "CopySourceCodeButton");
-__publicField(_CopySourceCodeButton, "\u0275fac", /* @__PURE__ */ __name(function CopySourceCodeButton_Factory(__ngFactoryType__) {
+__publicField(_CopySourceCodeButton, "ɵfac", /* @__PURE__ */ __name(function CopySourceCodeButton_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CopySourceCodeButton)();
 }, "CopySourceCodeButton_Factory"));
-__publicField(_CopySourceCodeButton, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_CopySourceCodeButton, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _CopySourceCodeButton,
   selectors: [["button", "docs-copy-source-code", ""]],
   hostAttrs: ["type", "button", "aria-label", "Copy example source to clipboard", "title", "Copy example source"],
   hostVars: 4,
   hostBindings: /* @__PURE__ */ __name(function CopySourceCodeButton_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function CopySourceCodeButton_click_HostBindingHandler() {
+      ɵɵlistener("click", /* @__PURE__ */ __name(function CopySourceCodeButton_click_HostBindingHandler() {
         return ctx.copySourceCode();
       }, "CopySourceCodeButton_click_HostBindingHandler"));
     }
     if (rf & 2) {
-      \u0275\u0275classProp("docs-copy-source-code-button-success", ctx.showCopySuccess())("docs-copy-source-code-button-failed", ctx.showCopyFailure());
+      ɵɵclassProp("docs-copy-source-code-button-success", ctx.showCopySuccess())("docs-copy-source-code-button-failed", ctx.showCopyFailure());
     }
   }, "CopySourceCodeButton_HostBindings"),
   attrs: _c12,
@@ -14095,15 +14095,15 @@ __publicField(_CopySourceCodeButton, "\u0275cmp", /* @__PURE__ */ \u0275\u0275de
   consts: [["aria-hidden", "true", "width", "24", "height", "24", "viewBox", "0 0 24 24", "fill", "none", "xmlns", "http://www.w3.org/2000/svg", 1, "docs-copy"], ["d", "M5 22C4.45 22 3.97917 21.8042 3.5875 21.4125C3.19583 21.0208 3 20.55 3 20V6H5V20H16V22H5ZM9 18C8.45 18 7.97917 17.8042 7.5875 17.4125C7.19583 17.0208 7 16.55 7 16V4C7 3.45 7.19583 2.97917 7.5875 2.5875C7.97917 2.19583 8.45 2 9 2H18C18.55 2 19.0208 2.19583 19.4125 2.5875C19.8042 2.97917 20 3.45 20 4V16C20 16.55 19.8042 17.0208 19.4125 17.4125C19.0208 17.8042 18.55 18 18 18H9ZM9 16H18V4H9V16Z", "fill", "#A39FA9"], [1, "docs-check"]],
   template: /* @__PURE__ */ __name(function CopySourceCodeButton_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "i");
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(1, "svg", 0);
-      \u0275\u0275element(2, "path", 1);
-      \u0275\u0275elementEnd()();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(3, "docs-icon", 2);
-      \u0275\u0275text(4, "check");
-      \u0275\u0275elementEnd();
+      ɵɵelementStart(0, "i");
+      ɵɵnamespaceSVG();
+      ɵɵelementStart(1, "svg", 0);
+      ɵɵelement(2, "path", 1);
+      ɵɵelementEnd()();
+      ɵɵnamespaceHTML();
+      ɵɵelementStart(3, "docs-icon", 2);
+      ɵɵtext(4, "check");
+      ɵɵelementEnd();
     }
   }, "CopySourceCodeButton_Template"),
   dependencies: [CommonModule, IconComponent],
@@ -14289,18 +14289,18 @@ var _ExampleViewer = class _ExampleViewer {
   }
 };
 __name(_ExampleViewer, "ExampleViewer");
-__publicField(_ExampleViewer, "\u0275fac", /* @__PURE__ */ __name(function ExampleViewer_Factory(__ngFactoryType__) {
+__publicField(_ExampleViewer, "ɵfac", /* @__PURE__ */ __name(function ExampleViewer_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ExampleViewer)();
 }, "ExampleViewer_Factory"));
-__publicField(_ExampleViewer, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_ExampleViewer, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _ExampleViewer,
   selectors: [["docs-example-viewer"]],
   viewQuery: /* @__PURE__ */ __name(function ExampleViewer_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuerySignal(ctx.matTabGroup, _c22, 5);
+      ɵɵviewQuerySignal(ctx.matTabGroup, _c22, 5);
     }
     if (rf & 2) {
-      \u0275\u0275queryAdvance();
+      ɵɵqueryAdvance();
     }
   }, "ExampleViewer_Query"),
   inputs: {
@@ -14313,55 +14313,55 @@ __publicField(_ExampleViewer, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCom
   consts: [["openCodeInExternalProvider", ""], ["codeTabs", ""], ["role", "group", 1, "docs-example-viewer"], [1, "docs-example-viewer-actions"], ["aria-hidden", "true"], [1, "docs-example-viewer-icons"], ["type", "button", "role", "switch", "matTooltipPosition", "above", 1, "docs-example-code-toggle", 3, "click", "matTooltip"], ["type", "button", "matTooltip", "Copy link to example", "matTooltipPosition", "above", 1, "docs-example-copy-link", 3, "click"], ["aria-hidden", "true", "width", "24", "height", "24", "viewBox", "0 0 24 24", "fill", "inherit", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M11 17H7C5.61667 17 4.4375 16.5125 3.4625 15.5375C2.4875 14.5625 2 13.3833 2 12C2 10.6167 2.4875 9.4375 3.4625 8.4625C4.4375 7.4875 5.61667 7 7 7H11V9H7C6.16667 9 5.45833 9.29167 4.875 9.875C4.29167 10.4583 4 11.1667 4 12C4 12.8333 4.29167 13.5417 4.875 14.125C5.45833 14.7083 6.16667 15 7 15H11V17ZM8 13V11H16V13H8ZM13 17V15H17C17.8333 15 18.5417 14.7083 19.125 14.125C19.7083 13.5417 20 12.8333 20 12C20 11.1667 19.7083 10.4583 19.125 9.875C18.5417 9.29167 17.8333 9 17 9H13V7H17C18.3833 7 19.5625 7.4875 20.5375 8.4625C21.5125 9.4375 22 10.6167 22 12C22 13.3833 21.5125 14.5625 20.5375 15.5375C19.5625 16.5125 18.3833 17 17 17H13Z", "fill", "inherit"], [4, "ngTemplateOutlet"], ["type", "button", "matTooltipPosition", "above", 3, "matTooltip"], [1, "docs-example-viewer-code-wrapper", 3, "docs-example-viewer-snippet", "docs-example-viewer-multi-file"], [1, "docs-example-viewer-preview"], ["animationDuration", "0ms", "mat-stretch-tabs", "false"], [3, "label"], ["type", "button", "matTooltipPosition", "above", 3, "click", "matTooltip"], ["aria-hidden", "true", "xmlns", "http://www.w3.org/2000/svg", "width", "24", "height", "24", "viewBox", "0 0 24 24", "fill", "none"], ["aria-hidden", "true", "xmlns", "http://www.w3.org/2000/svg", "width", "24", "height", "24", "fill", "none"], ["d", "M3 21v-8h2v4.6L17.6 5H13V3h8v8h-2V6.4L6.4 19H11v2H3Z"], ["fill", "var(--gray-400)", "d", "M3.4 22 2 20.6 8.6 14H4v-2h8v8h-2v-4.6L3.4 22ZM12 12V4h2v4.6L20.6 2 22 3.4 15.4 10H20v2h-8Z"], [1, "docs-example-viewer-code-wrapper"], ["docs-copy-source-code", ""], [3, "innerHTML"], [4, "ngComponentOutlet"], ["target", "_blank", "aria-label", "Open example on GitHub", "matTooltip", "Open example on GitHub", "matTooltipPosition", "above", 1, "docs-example-github-link", 3, "href"], ["target", "_blank", "aria-label", "Edit example in StackBlitz", "matTooltip", "Edit example in StackBlitz", "matTooltipPosition", "above", 1, "docs-example-stackblitz-link", 3, "href"], ["fill-rule", "evenodd", "clip-rule", "evenodd", "d", "M9.16141 22.8681C9.16141 22.5894 9.15159 21.8509 9.14614 20.8707C5.96014 21.5798 5.28759 19.296 5.28759 19.296C4.76668 17.9389 4.01559 17.5778 4.01559 17.5778C2.97541 16.8485 4.09414 16.8638 4.09414 16.8638C5.24396 16.9467 5.84886 18.0747 5.84886 18.0747C6.8705 19.8692 8.52923 19.3516 9.18268 19.0505C9.28686 18.2912 9.5825 17.7736 9.90977 17.4801C7.36632 17.184 4.69196 16.176 4.69196 11.6754C4.69196 10.3936 5.13868 9.34523 5.87123 8.52377C5.75396 8.22705 5.36014 7.03305 5.98359 5.41577C5.98359 5.41577 6.94577 5.09996 9.13359 6.61959C10.0467 6.35941 11.0269 6.2285 12.0016 6.22414C12.9741 6.2285 13.9538 6.35941 14.869 6.61959C17.0558 5.09996 18.0163 5.41577 18.0163 5.41577C18.6414 7.0325 18.2481 8.2265 18.1298 8.52377C18.864 9.34523 19.3069 10.3936 19.3069 11.6754C19.3069 16.1874 16.6287 17.1801 14.077 17.4709C14.4889 17.8336 14.8543 18.5503 14.8543 19.6461C14.8543 21.2165 14.8396 22.4836 14.8396 22.8681C14.8396 23.1829 15.0463 23.5478 15.6278 23.4327C20.1758 21.877 23.4545 17.4774 23.4545 12.2907C23.4545 5.80359 18.3256 0.54541 11.9994 0.54541C5.67432 0.54541 0.54541 5.80359 0.54541 12.2907C0.545956 17.479 3.82796 21.8814 8.37977 23.4343C8.95196 23.5418 9.16141 23.179 9.16141 22.8681Z", "fill", "inherit"], ["width", "24", "height", "24", "viewBox", "0 0 356 511", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["fill-rule", "evenodd", "clip-rule", "evenodd", "d", "M138.719 150.22C62.6928 232.614 0.340573 300.4 0.158928 300.856C-0.0227172 301.311 33.9559 301.799 75.6665 301.939L151.505 302.195L117.656 396.511C74.7852 515.966 76.7972 510.288 77.3522 510.288C78.2145 510.288 355.296 209.735 355.296 208.799C355.296 208.245 325.263 207.879 279.943 207.879C233.709 207.879 204.591 207.518 204.591 206.943C204.591 206.428 220.136 162.751 239.137 109.883C279.06 -1.20153 278.545 0.264614 277.638 0.347453C277.26 0.382384 214.746 67.8247 138.719 150.22Z"]],
   template: /* @__PURE__ */ __name(function ExampleViewer_Template(rf, ctx) {
     if (rf & 1) {
-      const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275elementStart(0, "div", 2)(1, "header", 3);
-      \u0275\u0275conditionalCreate(2, ExampleViewer_Conditional_2_Template, 2, 2)(3, ExampleViewer_Conditional_3_Template, 2, 0, "span", 4);
-      \u0275\u0275elementStart(4, "div", 5)(5, "button", 6);
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function ExampleViewer_Template_button_click_5_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx.showCode.set(!ctx.showCode()));
+      const _r1 = ɵɵgetCurrentView();
+      ɵɵelementStart(0, "div", 2)(1, "header", 3);
+      ɵɵconditionalCreate(2, ExampleViewer_Conditional_2_Template, 2, 2)(3, ExampleViewer_Conditional_3_Template, 2, 0, "span", 4);
+      ɵɵelementStart(4, "div", 5)(5, "button", 6);
+      ɵɵlistener("click", /* @__PURE__ */ __name(function ExampleViewer_Template_button_click_5_listener() {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx.showCode.set(!ctx.showCode()));
       }, "ExampleViewer_Template_button_click_5_listener"));
-      \u0275\u0275elementStart(6, "docs-icon");
-      \u0275\u0275text(7);
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(8, "button", 7);
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function ExampleViewer_Template_button_click_8_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx.copyLink());
+      ɵɵelementStart(6, "docs-icon");
+      ɵɵtext(7);
+      ɵɵelementEnd()();
+      ɵɵelementStart(8, "button", 7);
+      ɵɵlistener("click", /* @__PURE__ */ __name(function ExampleViewer_Template_button_click_8_listener() {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx.copyLink());
       }, "ExampleViewer_Template_button_click_8_listener"));
-      \u0275\u0275elementStart(9, "i", 4);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(10, "svg", 8);
-      \u0275\u0275element(11, "path", 9);
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275template(12, ExampleViewer_ng_container_12_Template, 1, 0, "ng-container", 10);
-      \u0275\u0275conditionalCreate(13, ExampleViewer_Conditional_13_Template, 4, 4, "button", 11);
-      \u0275\u0275elementEnd()();
-      \u0275\u0275conditionalCreate(14, ExampleViewer_Conditional_14_Template, 3, 5, "div", 12);
-      \u0275\u0275conditionalCreate(15, ExampleViewer_Conditional_15_Template, 2, 1, "div", 13);
-      \u0275\u0275template(16, ExampleViewer_ng_template_16_Template, 1, 1, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-      \u0275\u0275elementEnd();
+      ɵɵelementStart(9, "i", 4);
+      ɵɵnamespaceSVG();
+      ɵɵelementStart(10, "svg", 8);
+      ɵɵelement(11, "path", 9);
+      ɵɵelementEnd()()();
+      ɵɵtemplate(12, ExampleViewer_ng_container_12_Template, 1, 0, "ng-container", 10);
+      ɵɵconditionalCreate(13, ExampleViewer_Conditional_13_Template, 4, 4, "button", 11);
+      ɵɵelementEnd()();
+      ɵɵconditionalCreate(14, ExampleViewer_Conditional_14_Template, 3, 5, "div", 12);
+      ɵɵconditionalCreate(15, ExampleViewer_Conditional_15_Template, 2, 1, "div", 13);
+      ɵɵtemplate(16, ExampleViewer_ng_template_16_Template, 1, 1, "ng-template", null, 0, ɵɵtemplateRefExtractor);
+      ɵɵelementEnd();
     }
     if (rf & 2) {
       let tmp_6_0;
-      const openCodeInExternalProvider_r5 = \u0275\u0275reference(17);
-      \u0275\u0275advance(2);
-      \u0275\u0275conditional(ctx.showCode() ? 2 : 3);
-      \u0275\u0275advance(3);
-      \u0275\u0275property("matTooltip", ctx.showCode() ? "Hide code" : "Show code");
-      \u0275\u0275attribute("aria-checked", ctx.showCode())("aria-label", ctx.showCode() ? "Hide code" : "Show code");
-      \u0275\u0275advance(2);
-      \u0275\u0275textInterpolate(ctx.showCode() ? "code_off" : "code");
-      \u0275\u0275advance();
-      \u0275\u0275attribute("aria-label", "Copy link to " + ((tmp_6_0 = ctx.exampleMetadata()) == null ? null : tmp_6_0.title) + " example to the clipboard");
-      \u0275\u0275advance(4);
-      \u0275\u0275property("ngTemplateOutlet", openCodeInExternalProvider_r5);
-      \u0275\u0275advance();
-      \u0275\u0275conditional(ctx.expandable() ? 13 : -1);
-      \u0275\u0275advance();
-      \u0275\u0275conditional(ctx.showCode() ? 14 : -1);
-      \u0275\u0275advance();
-      \u0275\u0275conditional(ctx.exampleComponent ? 15 : -1);
+      const openCodeInExternalProvider_r5 = ɵɵreference(17);
+      ɵɵadvance(2);
+      ɵɵconditional(ctx.showCode() ? 2 : 3);
+      ɵɵadvance(3);
+      ɵɵproperty("matTooltip", ctx.showCode() ? "Hide code" : "Show code");
+      ɵɵattribute("aria-checked", ctx.showCode())("aria-label", ctx.showCode() ? "Hide code" : "Show code");
+      ɵɵadvance(2);
+      ɵɵtextInterpolate(ctx.showCode() ? "code_off" : "code");
+      ɵɵadvance();
+      ɵɵattribute("aria-label", "Copy link to " + ((tmp_6_0 = ctx.exampleMetadata()) == null ? null : tmp_6_0.title) + " example to the clipboard");
+      ɵɵadvance(4);
+      ɵɵproperty("ngTemplateOutlet", openCodeInExternalProvider_r5);
+      ɵɵadvance();
+      ɵɵconditional(ctx.expandable() ? 13 : -1);
+      ɵɵadvance();
+      ɵɵconditional(ctx.showCode() ? 14 : -1);
+      ɵɵadvance();
+      ɵɵconditional(ctx.exampleComponent ? 15 : -1);
     }
   }, "ExampleViewer_Template"),
   dependencies: [CommonModule, NgComponentOutlet, NgTemplateOutlet, CopySourceCodeButton, MatTabsModule, MatTab, MatTabGroup, MatTooltipModule, MatTooltip, IconComponent],
@@ -14775,16 +14775,16 @@ var _DocViewer = class _DocViewer {
   }
 };
 __name(_DocViewer, "DocViewer");
-__publicField(_DocViewer, "\u0275fac", /* @__PURE__ */ __name(function DocViewer_Factory(__ngFactoryType__) {
+__publicField(_DocViewer, "ɵfac", /* @__PURE__ */ __name(function DocViewer_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _DocViewer)();
 }, "DocViewer_Factory"));
-__publicField(_DocViewer, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_DocViewer, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _DocViewer,
   selectors: [["docs-viewer"], ["main", "docsViewer", ""]],
   hostVars: 4,
   hostBindings: /* @__PURE__ */ __name(function DocViewer_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("docs-animate-content", ctx.animateContent)("docs-with-TOC", ctx.hasToc());
+      ɵɵclassProp("docs-animate-content", ctx.animateContent)("docs-with-TOC", ctx.hasToc());
     }
   }, "DocViewer_HostBindings"),
   inputs: {
@@ -14798,7 +14798,7 @@ __publicField(_DocViewer, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompone
   vars: 0,
   template: /* @__PURE__ */ __name(function DocViewer_Template(rf, ctx) {
   }, "DocViewer_Template"),
-  styles: ['\uFEFF:host{--translate-y: clamp(5px, 0.25em, 7px)}.docs-viewer{display:flex;flex-direction:column;padding:0px;box-sizing:border-box;padding-inline:var(--layout-padding)}@media(max-width: 1430px){.docs-viewer{container:docs-content/inline-size}}@media(min-width: 1800.01px){.docs-viewer{max-width:var(--page-width)}}@media(min-width: 1430.01px){.docs-viewer{margin-left:-16rem;width:calc(100% - 16rem)}}.docs-viewer>*:not(docs-table-of-contents){max-width:calc(1800px - var(--secondary-nav-width) - var(--primary-nav-width) - var(--layout-padding)*2)}.docs-viewer pre{margin-block:0}.docs-viewer h1 .docs-anchor,.docs-viewer h2 .docs-anchor,.docs-viewer h3 .docs-anchor,.docs-viewer h4 .docs-anchor,.docs-viewer h5 .docs-anchor,.docs-viewer h6 .docs-anchor{margin-block-start:.75rem;display:inline-block;color:inherit}.docs-viewer h1 .docs-anchor::after,.docs-viewer h2 .docs-anchor::after,.docs-viewer h3 .docs-anchor::after,.docs-viewer h4 .docs-anchor::after,.docs-viewer h5 .docs-anchor::after,.docs-viewer h6 .docs-anchor::after{content:"\uE157";font-family:"Material Symbols Outlined";opacity:0;margin-left:8px;vertical-align:middle;color:var(--quaternary-contrast);font-size:clamp(18px,1.25em,30px);transition:opacity .3s ease}.docs-viewer h1 .docs-anchor:hover::after,.docs-viewer h2 .docs-anchor:hover::after,.docs-viewer h3 .docs-anchor:hover::after,.docs-viewer h4 .docs-anchor:hover::after,.docs-viewer h5 .docs-anchor:hover::after,.docs-viewer h6 .docs-anchor:hover::after{opacity:1}.docs-viewer h1{font-size:2.5rem;margin-block-end:0}.docs-viewer h2{font-size:2rem;margin-block-end:.5rem}.docs-viewer h3{font-size:1.5rem;margin-block-end:.5rem}.docs-viewer h4{font-size:1.25rem;margin-block-end:.5rem}.docs-viewer h5{font-size:1rem;margin-block-end:0}.docs-viewer h6{font-size:.875rem;margin-block-end:0}.docs-viewer>:last-child{margin-block-end:0}.docs-viewer a:not(.docs-github-links):not(.docs-card):not(.docs-pill):not(.docs-example-github-link)[href^="http:"]::after,.docs-viewer a:not(.docs-github-links):not(.docs-card):not(.docs-pill):not(.docs-example-github-link)[href^="https:"]::after{display:inline-block;content:"\uE89E";font-family:"Material Symbols Outlined";margin-left:.2rem;vertical-align:middle}.docs-viewer-scroll-margin-large h2,.docs-viewer-scroll-margin-large h3{scroll-margin:5em}.docs-header{margin-block-end:1rem}.docs-header>p:first-child{color:var(--quaternary-contrast);font-weight:500;margin:0}.docs-page-title{display:flex;justify-content:space-between}.docs-page-title h1{margin-block:0;font-size:2.25rem}.docs-page-title a{color:var(--primary-contrast);height:fit-content}.docs-page-title a docs-icon{color:var(--gray-400);transition:color .3s ease}.docs-page-title a:hover docs-icon{color:var(--primary-contrast)}/*# sourceMappingURL=docs-viewer.component.css.map */\n'],
+  styles: ['﻿:host{--translate-y: clamp(5px, 0.25em, 7px)}.docs-viewer{display:flex;flex-direction:column;padding:0px;box-sizing:border-box;padding-inline:var(--layout-padding)}@media(max-width: 1430px){.docs-viewer{container:docs-content/inline-size}}@media(min-width: 1800.01px){.docs-viewer{max-width:var(--page-width)}}@media(min-width: 1430.01px){.docs-viewer{margin-left:-16rem;width:calc(100% - 16rem)}}.docs-viewer>*:not(docs-table-of-contents){max-width:calc(1800px - var(--secondary-nav-width) - var(--primary-nav-width) - var(--layout-padding)*2)}.docs-viewer pre{margin-block:0}.docs-viewer h1 .docs-anchor,.docs-viewer h2 .docs-anchor,.docs-viewer h3 .docs-anchor,.docs-viewer h4 .docs-anchor,.docs-viewer h5 .docs-anchor,.docs-viewer h6 .docs-anchor{margin-block-start:.75rem;display:inline-block;color:inherit}.docs-viewer h1 .docs-anchor::after,.docs-viewer h2 .docs-anchor::after,.docs-viewer h3 .docs-anchor::after,.docs-viewer h4 .docs-anchor::after,.docs-viewer h5 .docs-anchor::after,.docs-viewer h6 .docs-anchor::after{content:"";font-family:"Material Symbols Outlined";opacity:0;margin-left:8px;vertical-align:middle;color:var(--quaternary-contrast);font-size:clamp(18px,1.25em,30px);transition:opacity .3s ease}.docs-viewer h1 .docs-anchor:hover::after,.docs-viewer h2 .docs-anchor:hover::after,.docs-viewer h3 .docs-anchor:hover::after,.docs-viewer h4 .docs-anchor:hover::after,.docs-viewer h5 .docs-anchor:hover::after,.docs-viewer h6 .docs-anchor:hover::after{opacity:1}.docs-viewer h1{font-size:2.5rem;margin-block-end:0}.docs-viewer h2{font-size:2rem;margin-block-end:.5rem}.docs-viewer h3{font-size:1.5rem;margin-block-end:.5rem}.docs-viewer h4{font-size:1.25rem;margin-block-end:.5rem}.docs-viewer h5{font-size:1rem;margin-block-end:0}.docs-viewer h6{font-size:.875rem;margin-block-end:0}.docs-viewer>:last-child{margin-block-end:0}.docs-viewer a:not(.docs-github-links):not(.docs-card):not(.docs-pill):not(.docs-example-github-link)[href^="http:"]::after,.docs-viewer a:not(.docs-github-links):not(.docs-card):not(.docs-pill):not(.docs-example-github-link)[href^="https:"]::after{display:inline-block;content:"";font-family:"Material Symbols Outlined";margin-left:.2rem;vertical-align:middle}.docs-viewer-scroll-margin-large h2,.docs-viewer-scroll-margin-large h3{scroll-margin:5em}.docs-header{margin-block-end:1rem}.docs-header>p:first-child{color:var(--quaternary-contrast);font-weight:500;margin:0}.docs-page-title{display:flex;justify-content:space-between}.docs-page-title h1{margin-block:0;font-size:2.25rem}.docs-page-title a{color:var(--primary-contrast);height:fit-content}.docs-page-title a docs-icon{color:var(--gray-400);transition:color .3s ease}.docs-page-title a:hover docs-icon{color:var(--primary-contrast)}/*# sourceMappingURL=docs-viewer.component.css.map */\n'],
   encapsulation: 2,
   changeDetection: 0
 }));
@@ -14815,7 +14815,7 @@ var DocViewer = _DocViewer;
         "[class.docs-animate-content]": "animateContent",
         "[class.docs-with-TOC]": "hasToc()"
       },
-      styles: ['\uFEFF:host{--translate-y: clamp(5px, 0.25em, 7px)}.docs-viewer{display:flex;flex-direction:column;padding:0px;box-sizing:border-box;padding-inline:var(--layout-padding)}@media(max-width: 1430px){.docs-viewer{container:docs-content/inline-size}}@media(min-width: 1800.01px){.docs-viewer{max-width:var(--page-width)}}@media(min-width: 1430.01px){.docs-viewer{margin-left:-16rem;width:calc(100% - 16rem)}}.docs-viewer>*:not(docs-table-of-contents){max-width:calc(1800px - var(--secondary-nav-width) - var(--primary-nav-width) - var(--layout-padding)*2)}.docs-viewer pre{margin-block:0}.docs-viewer h1 .docs-anchor,.docs-viewer h2 .docs-anchor,.docs-viewer h3 .docs-anchor,.docs-viewer h4 .docs-anchor,.docs-viewer h5 .docs-anchor,.docs-viewer h6 .docs-anchor{margin-block-start:.75rem;display:inline-block;color:inherit}.docs-viewer h1 .docs-anchor::after,.docs-viewer h2 .docs-anchor::after,.docs-viewer h3 .docs-anchor::after,.docs-viewer h4 .docs-anchor::after,.docs-viewer h5 .docs-anchor::after,.docs-viewer h6 .docs-anchor::after{content:"\uE157";font-family:"Material Symbols Outlined";opacity:0;margin-left:8px;vertical-align:middle;color:var(--quaternary-contrast);font-size:clamp(18px,1.25em,30px);transition:opacity .3s ease}.docs-viewer h1 .docs-anchor:hover::after,.docs-viewer h2 .docs-anchor:hover::after,.docs-viewer h3 .docs-anchor:hover::after,.docs-viewer h4 .docs-anchor:hover::after,.docs-viewer h5 .docs-anchor:hover::after,.docs-viewer h6 .docs-anchor:hover::after{opacity:1}.docs-viewer h1{font-size:2.5rem;margin-block-end:0}.docs-viewer h2{font-size:2rem;margin-block-end:.5rem}.docs-viewer h3{font-size:1.5rem;margin-block-end:.5rem}.docs-viewer h4{font-size:1.25rem;margin-block-end:.5rem}.docs-viewer h5{font-size:1rem;margin-block-end:0}.docs-viewer h6{font-size:.875rem;margin-block-end:0}.docs-viewer>:last-child{margin-block-end:0}.docs-viewer a:not(.docs-github-links):not(.docs-card):not(.docs-pill):not(.docs-example-github-link)[href^="http:"]::after,.docs-viewer a:not(.docs-github-links):not(.docs-card):not(.docs-pill):not(.docs-example-github-link)[href^="https:"]::after{display:inline-block;content:"\uE89E";font-family:"Material Symbols Outlined";margin-left:.2rem;vertical-align:middle}.docs-viewer-scroll-margin-large h2,.docs-viewer-scroll-margin-large h3{scroll-margin:5em}.docs-header{margin-block-end:1rem}.docs-header>p:first-child{color:var(--quaternary-contrast);font-weight:500;margin:0}.docs-page-title{display:flex;justify-content:space-between}.docs-page-title h1{margin-block:0;font-size:2.25rem}.docs-page-title a{color:var(--primary-contrast);height:fit-content}.docs-page-title a docs-icon{color:var(--gray-400);transition:color .3s ease}.docs-page-title a:hover docs-icon{color:var(--primary-contrast)}/*# sourceMappingURL=docs-viewer.component.css.map */\n']
+      styles: ['﻿:host{--translate-y: clamp(5px, 0.25em, 7px)}.docs-viewer{display:flex;flex-direction:column;padding:0px;box-sizing:border-box;padding-inline:var(--layout-padding)}@media(max-width: 1430px){.docs-viewer{container:docs-content/inline-size}}@media(min-width: 1800.01px){.docs-viewer{max-width:var(--page-width)}}@media(min-width: 1430.01px){.docs-viewer{margin-left:-16rem;width:calc(100% - 16rem)}}.docs-viewer>*:not(docs-table-of-contents){max-width:calc(1800px - var(--secondary-nav-width) - var(--primary-nav-width) - var(--layout-padding)*2)}.docs-viewer pre{margin-block:0}.docs-viewer h1 .docs-anchor,.docs-viewer h2 .docs-anchor,.docs-viewer h3 .docs-anchor,.docs-viewer h4 .docs-anchor,.docs-viewer h5 .docs-anchor,.docs-viewer h6 .docs-anchor{margin-block-start:.75rem;display:inline-block;color:inherit}.docs-viewer h1 .docs-anchor::after,.docs-viewer h2 .docs-anchor::after,.docs-viewer h3 .docs-anchor::after,.docs-viewer h4 .docs-anchor::after,.docs-viewer h5 .docs-anchor::after,.docs-viewer h6 .docs-anchor::after{content:"";font-family:"Material Symbols Outlined";opacity:0;margin-left:8px;vertical-align:middle;color:var(--quaternary-contrast);font-size:clamp(18px,1.25em,30px);transition:opacity .3s ease}.docs-viewer h1 .docs-anchor:hover::after,.docs-viewer h2 .docs-anchor:hover::after,.docs-viewer h3 .docs-anchor:hover::after,.docs-viewer h4 .docs-anchor:hover::after,.docs-viewer h5 .docs-anchor:hover::after,.docs-viewer h6 .docs-anchor:hover::after{opacity:1}.docs-viewer h1{font-size:2.5rem;margin-block-end:0}.docs-viewer h2{font-size:2rem;margin-block-end:.5rem}.docs-viewer h3{font-size:1.5rem;margin-block-end:.5rem}.docs-viewer h4{font-size:1.25rem;margin-block-end:.5rem}.docs-viewer h5{font-size:1rem;margin-block-end:0}.docs-viewer h6{font-size:.875rem;margin-block-end:0}.docs-viewer>:last-child{margin-block-end:0}.docs-viewer a:not(.docs-github-links):not(.docs-card):not(.docs-pill):not(.docs-example-github-link)[href^="http:"]::after,.docs-viewer a:not(.docs-github-links):not(.docs-card):not(.docs-pill):not(.docs-example-github-link)[href^="https:"]::after{display:inline-block;content:"";font-family:"Material Symbols Outlined";margin-left:.2rem;vertical-align:middle}.docs-viewer-scroll-margin-large h2,.docs-viewer-scroll-margin-large h3{scroll-margin:5em}.docs-header{margin-block-end:1rem}.docs-header>p:first-child{color:var(--quaternary-contrast);font-weight:500;margin:0}.docs-page-title{display:flex;justify-content:space-between}.docs-page-title h1{margin-block:0;font-size:2.25rem}.docs-page-title a{color:var(--primary-contrast);height:fit-content}.docs-page-title a docs-icon{color:var(--gray-400);transition:color .3s ease}.docs-page-title a:hover docs-icon{color:var(--primary-contrast)}/*# sourceMappingURL=docs-viewer.component.css.map */\n']
     }]
   }], () => [], null);
 })();
@@ -14844,21 +14844,21 @@ var _CookiePopup = class _CookiePopup {
   }
 };
 __name(_CookiePopup, "CookiePopup");
-__publicField(_CookiePopup, "\u0275fac", /* @__PURE__ */ __name(function CookiePopup_Factory(__ngFactoryType__) {
+__publicField(_CookiePopup, "ɵfac", /* @__PURE__ */ __name(function CookiePopup_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CookiePopup)();
 }, "CookiePopup_Factory"));
-__publicField(_CookiePopup, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_CookiePopup, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _CookiePopup,
   selectors: [["docs-cookie-popup"]],
   decls: 1,
   vars: 1,
-  consts: [[1, "docs-cookies-popup", "docs-invert-mode"], ["href", "https://policies.google.com/technologies/cookies", "target", "_blank", "rel", "noopener"], ["aria-label", "\u4E86\u89E3\u66F4\u591A", 1, "docs-primary-btn"], ["type", "button", "aria-label", "\u597D\u7684\uFF0C\u6211\u77E5\u9053\u4E86", 1, "docs-primary-btn", 3, "click"]],
+  consts: [[1, "docs-cookies-popup", "docs-invert-mode"], ["href", "https://policies.google.com/technologies/cookies", "target", "_blank", "rel", "noopener"], ["aria-label", "瞭解更多", 1, "docs-primary-btn"], ["type", "button", "aria-label", "好的，我知道了", 1, "docs-primary-btn", 3, "click"]],
   template: /* @__PURE__ */ __name(function CookiePopup_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275conditionalCreate(0, CookiePopup_Conditional_0_Template, 9, 2, "div", 0);
+      ɵɵconditionalCreate(0, CookiePopup_Conditional_0_Template, 9, 2, "div", 0);
     }
     if (rf & 2) {
-      \u0275\u0275conditional(!ctx.hasAccepted() ? 0 : -1);
+      ɵɵconditional(!ctx.hasAccepted() ? 0 : -1);
     }
   }, "CookiePopup_Template"),
   styles: ["[_nghost-%COMP%]{position:fixed;bottom:.5rem;right:.5rem;z-index:var(--z-index-cookie-consent);opacity:0;visibility:hidden;animation:1s linear forwards .5s _ngcontent-%COMP%_fadeIn}.docs-cookies-popup[_ngcontent-%COMP%]{padding:1rem;background-color:var(--page-background);border:1px solid var(--senary-contrast);border-radius:.25rem;font-size:.875rem;max-width:265px;transition:background-color .3s ease,border-color .3s ease,color .3s ease;box-shadow:0 0 10px 0 rgba(0,0,0,.1)}.docs-cookies-popup[_ngcontent-%COMP%] > div[_ngcontent-%COMP%]{display:flex;gap:.5rem;align-items:center;width:100%;margin-block-start:1rem}.docs-cookies-popup[_ngcontent-%COMP%]   p[_ngcontent-%COMP%]{margin-block:0;color:var(--primary-contrast)}@keyframes _ngcontent-%COMP%_fadeIn{100%{opacity:100%;visibility:visible}}/*# sourceMappingURL=cookie-popup.component.css.map */"],
@@ -14873,22 +14873,22 @@ var CookiePopup = _CookiePopup;
       changeDetection: ChangeDetectionStrategy.OnPush,
       template: `@if (!hasAccepted()) {
 <div class="docs-cookies-popup docs-invert-mode">
-  <p>\u672C\u7F51\u7AD9\u4F7F\u7528 Google \u7684 Cookie \u6765\u63D0\u4F9B\u670D\u52A1\u5E76\u5206\u6790\u6D41\u91CF\u3002</p>
+  <p>本網站使用 Google 的 Cookie 來提供服務並分析流量。</p>
 
   <div>
     <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">
-      <button class="docs-primary-btn" [attr.text]="'\u4E86\u89E3\u66F4\u591A'" aria-label="\u4E86\u89E3\u66F4\u591A">
-        \u4E86\u89E3\u66F4\u591A
+      <button class="docs-primary-btn" [attr.text]="'瞭解更多'" aria-label="瞭解更多">
+        瞭解更多
       </button>
     </a>
     <button
       type="button"
       (click)="accept()"
       class="docs-primary-btn"
-      [attr.text]="'\u597D\u7684\uFF0C\u6211\u77E5\u9053\u4E86'"
-      aria-label="\u597D\u7684\uFF0C\u6211\u77E5\u9053\u4E86"
+      [attr.text]="'好的，我知道了'"
+      aria-label="好的，我知道了"
     >
-      \u597D\u7684\uFF0C\u6211\u77E5\u9053\u4E86
+      好的，我知道了
     </button>
   </div>
 </div>
@@ -14913,10 +14913,10 @@ var _IsActiveNavigationItem = class _IsActiveNavigationItem {
   }
 };
 __name(_IsActiveNavigationItem, "IsActiveNavigationItem");
-__publicField(_IsActiveNavigationItem, "\u0275fac", /* @__PURE__ */ __name(function IsActiveNavigationItem_Factory(__ngFactoryType__) {
+__publicField(_IsActiveNavigationItem, "ɵfac", /* @__PURE__ */ __name(function IsActiveNavigationItem_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _IsActiveNavigationItem)();
 }, "IsActiveNavigationItem_Factory"));
-__publicField(_IsActiveNavigationItem, "\u0275pipe", /* @__PURE__ */ \u0275\u0275definePipe({
+__publicField(_IsActiveNavigationItem, "ɵpipe", /* @__PURE__ */ ɵɵdefinePipe({
   name: "isActiveNavigationItem",
   type: _IsActiveNavigationItem,
   pure: true
@@ -14943,10 +14943,10 @@ var _RelativeLink = class _RelativeLink {
   }
 };
 __name(_RelativeLink, "RelativeLink");
-__publicField(_RelativeLink, "\u0275fac", /* @__PURE__ */ __name(function RelativeLink_Factory(__ngFactoryType__) {
+__publicField(_RelativeLink, "ɵfac", /* @__PURE__ */ __name(function RelativeLink_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _RelativeLink)();
 }, "RelativeLink_Factory"));
-__publicField(_RelativeLink, "\u0275pipe", /* @__PURE__ */ \u0275\u0275definePipe({
+__publicField(_RelativeLink, "ɵpipe", /* @__PURE__ */ ɵɵdefinePipe({
   name: "relativeLink",
   type: _RelativeLink,
   pure: true
@@ -14990,10 +14990,10 @@ var _NavigationList = class _NavigationList {
   }
 };
 __name(_NavigationList, "NavigationList");
-__publicField(_NavigationList, "\u0275fac", /* @__PURE__ */ __name(function NavigationList_Factory(__ngFactoryType__) {
+__publicField(_NavigationList, "ɵfac", /* @__PURE__ */ __name(function NavigationList_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _NavigationList)();
 }, "NavigationList_Factory"));
-__publicField(_NavigationList, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_NavigationList, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _NavigationList,
   selectors: [["docs-navigation-list"]],
   inputs: {
@@ -15011,12 +15011,12 @@ __publicField(_NavigationList, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCo
   consts: [["navigationList", ""], ["itemStatus", ""], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], [1, "docs-navigation-list", "docs-faceted-list"], [1, "docs-faceted-list-item"], ["target", "_blank", "matTooltipPosition", "after", 3, "href", "matTooltip", "matTooltipDisabled", "matTooltipClass"], ["routerLinkActive", "docs-faceted-list-item-active", "matTooltipPosition", "after", 3, "routerLink", "routerLinkActiveOptions", "matTooltip", "matTooltipDisabled", "matTooltipClass"], [1, "docs-faceted-list-item-text"], ["routerLinkActive", "docs-faceted-list-item-active", "matTooltipPosition", "after", 3, "click", "routerLink", "routerLinkActiveOptions", "matTooltip", "matTooltipDisabled", "matTooltipClass"], ["matTooltipPosition", "after", 1, "docs-secondary-nav-header", 3, "matTooltip", "matTooltipDisabled", "matTooltipClass"], ["type", "button", "matTooltipPosition", "after", 1, "docs-secondary-nav-button", 3, "docs-faceted-list-item-active", "docs-expanded-button", "docs-not-expanded-button", "docs-nav-item-has-icon", "matTooltip", "matTooltipDisabled", "matTooltipClass"], ["type", "button", "matTooltipPosition", "after", 1, "docs-secondary-nav-button", 3, "click", "matTooltip", "matTooltipDisabled", "matTooltipClass"], [1, "tag", "docs-new-item"], [1, "tag", "docs-updated-item"]],
   template: /* @__PURE__ */ __name(function NavigationList_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275template(0, NavigationList_ng_template_0_Template, 3, 2, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(2, NavigationList_ng_container_2_Template, 1, 0, "ng-container", 2)(3, NavigationList_ng_template_3_Template, 2, 1, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+      ɵɵtemplate(0, NavigationList_ng_template_0_Template, 3, 2, "ng-template", null, 0, ɵɵtemplateRefExtractor)(2, NavigationList_ng_container_2_Template, 1, 0, "ng-container", 2)(3, NavigationList_ng_template_3_Template, 2, 1, "ng-template", null, 1, ɵɵtemplateRefExtractor);
     }
     if (rf & 2) {
-      const navigationList_r6 = \u0275\u0275reference(1);
-      \u0275\u0275advance(2);
-      \u0275\u0275property("ngTemplateOutlet", navigationList_r6)("ngTemplateOutletContext", \u0275\u0275pureFunction1(2, _c32, ctx.navigationItems()));
+      const navigationList_r6 = ɵɵreference(1);
+      ɵɵadvance(2);
+      ɵɵproperty("ngTemplateOutlet", navigationList_r6)("ngTemplateOutletContext", ɵɵpureFunction1(2, _c32, ctx.navigationItems()));
     }
   }, "NavigationList_Template"),
   dependencies: [RouterLink, RouterLinkActive, IconComponent, NgTemplateOutlet, MatTooltipModule, MatTooltip, IsActiveNavigationItem],
@@ -15108,7 +15108,7 @@ var NavigationList = _NavigationList;
             <button
               type="button"
               (click)="toggle(item)"
-              [attr.aria-label]="(item.isExpanded ? '\u6536\u8D77' : '\u5C55\u5F00') + ' ' + item.label"
+              [attr.aria-label]="(item.isExpanded ? '收起' : '展開') + ' ' + item.label"
               [attr.aria-expanded]="item.isExpanded"
               class="docs-secondary-nav-button"
               [class.docs-faceted-list-item-active]="item | isActiveNavigationItem: activeItem()"
@@ -15204,10 +15204,10 @@ var _Select = class _Select {
   }
 };
 __name(_Select, "Select");
-__publicField(_Select, "\u0275fac", /* @__PURE__ */ __name(function Select_Factory(__ngFactoryType__) {
+__publicField(_Select, "ɵfac", /* @__PURE__ */ __name(function Select_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Select)();
 }, "Select_Factory"));
-__publicField(_Select, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_Select, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _Select,
   selectors: [["docs-select"]],
   hostAttrs: [1, "docs-form-element"],
@@ -15220,7 +15220,7 @@ __publicField(_Select, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent(
   outputs: {
     disabled: "disabledChange"
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => _Select),
     multi: true
@@ -15230,21 +15230,21 @@ __publicField(_Select, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent(
   consts: [[3, "ngModelChange", "ngModel"], [3, "value"]],
   template: /* @__PURE__ */ __name(function Select_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "select", 0);
-      \u0275\u0275listener("ngModelChange", /* @__PURE__ */ __name(function Select_Template_select_ngModelChange_0_listener($event) {
+      ɵɵelementStart(0, "select", 0);
+      ɵɵlistener("ngModelChange", /* @__PURE__ */ __name(function Select_Template_select_ngModelChange_0_listener($event) {
         return ctx.setOption($event);
       }, "Select_Template_select_ngModelChange_0_listener"));
-      \u0275\u0275repeaterCreate(1, Select_For_2_Template, 2, 2, "option", 1, \u0275\u0275repeaterTrackByIdentity);
-      \u0275\u0275elementEnd();
+      ɵɵrepeaterCreate(1, Select_For_2_Template, 2, 2, "option", 1, ɵɵrepeaterTrackByIdentity);
+      ɵɵelementEnd();
     }
     if (rf & 2) {
-      \u0275\u0275property("ngModel", ctx.selectedOption());
-      \u0275\u0275attribute("id", ctx.id())("name", ctx.name());
-      \u0275\u0275advance();
-      \u0275\u0275repeater(ctx.options());
+      ɵɵproperty("ngModel", ctx.selectedOption());
+      ɵɵattribute("id", ctx.id())("name", ctx.name());
+      ɵɵadvance();
+      ɵɵrepeater(ctx.options());
     }
   }, "Select_Template"),
-  dependencies: [CommonModule, FormsModule, NgSelectOption, \u0275NgSelectMultipleOption, SelectControlValueAccessor, NgControlStatus, NgModel],
+  dependencies: [CommonModule, FormsModule, NgSelectOption, ɵNgSelectMultipleOption, SelectControlValueAccessor, NgControlStatus, NgModel],
   styles: ["/*# sourceMappingURL=select.component.css.map */"],
   changeDetection: 0
 }));
@@ -15314,10 +15314,10 @@ var _SlideToggle = class _SlideToggle {
   }
 };
 __name(_SlideToggle, "SlideToggle");
-__publicField(_SlideToggle, "\u0275fac", /* @__PURE__ */ __name(function SlideToggle_Factory(__ngFactoryType__) {
+__publicField(_SlideToggle, "ɵfac", /* @__PURE__ */ __name(function SlideToggle_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _SlideToggle)();
 }, "SlideToggle_Factory"));
-__publicField(_SlideToggle, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_SlideToggle, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _SlideToggle,
   selectors: [["docs-slide-toggle"]],
   inputs: {
@@ -15328,7 +15328,7 @@ __publicField(_SlideToggle, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompo
   outputs: {
     disabled: "disabledChange"
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => _SlideToggle),
     multi: true
@@ -15338,24 +15338,24 @@ __publicField(_SlideToggle, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompo
   consts: [[1, "docs-label"], [1, "docs-toggle"], ["type", "checkbox", "role", "switch", 3, "click", "id", "checked"], [1, "docs-slider"]],
   template: /* @__PURE__ */ __name(function SlideToggle_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "label")(1, "span", 0);
-      \u0275\u0275text(2);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(3, "div", 1)(4, "input", 2);
-      \u0275\u0275listener("click", /* @__PURE__ */ __name(function SlideToggle_Template_input_click_4_listener() {
+      ɵɵelementStart(0, "label")(1, "span", 0);
+      ɵɵtext(2);
+      ɵɵelementEnd();
+      ɵɵelementStart(3, "div", 1)(4, "input", 2);
+      ɵɵlistener("click", /* @__PURE__ */ __name(function SlideToggle_Template_input_click_4_listener() {
         return ctx.toggle();
       }, "SlideToggle_Template_input_click_4_listener"));
-      \u0275\u0275elementEnd();
-      \u0275\u0275element(5, "span", 3);
-      \u0275\u0275elementEnd()();
+      ɵɵelementEnd();
+      ɵɵelement(5, "span", 3);
+      ɵɵelementEnd()();
     }
     if (rf & 2) {
-      \u0275\u0275attribute("for", ctx.buttonId());
-      \u0275\u0275advance(2);
-      \u0275\u0275textInterpolate(ctx.label());
-      \u0275\u0275advance(2);
-      \u0275\u0275classProp("docs-toggle-active", ctx.checked());
-      \u0275\u0275property("id", ctx.buttonId())("checked", ctx.checked());
+      ɵɵattribute("for", ctx.buttonId());
+      ɵɵadvance(2);
+      ɵɵtextInterpolate(ctx.label());
+      ɵɵadvance(2);
+      ɵɵclassProp("docs-toggle-active", ctx.checked());
+      ɵɵproperty("id", ctx.buttonId())("checked", ctx.checked());
     }
   }, "SlideToggle_Template"),
   dependencies: [CommonModule],
@@ -15444,18 +15444,18 @@ var _TextField = class _TextField {
   }
 };
 __name(_TextField, "TextField");
-__publicField(_TextField, "\u0275fac", /* @__PURE__ */ __name(function TextField_Factory(__ngFactoryType__) {
+__publicField(_TextField, "ɵfac", /* @__PURE__ */ __name(function TextField_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _TextField)();
 }, "TextField_Factory"));
-__publicField(_TextField, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_TextField, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _TextField,
   selectors: [["docs-text-field"]],
   viewQuery: /* @__PURE__ */ __name(function TextField_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuerySignal(ctx.input, _c52, 5);
+      ɵɵviewQuerySignal(ctx.input, _c52, 5);
     }
     if (rf & 2) {
-      \u0275\u0275queryAdvance();
+      ɵɵqueryAdvance();
     }
   }, "TextField_Query"),
   hostAttrs: [1, "docs-form-element"],
@@ -15470,7 +15470,7 @@ __publicField(_TextField, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompone
   outputs: {
     disabled: "disabledChange"
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => _TextField),
     multi: true
@@ -15480,25 +15480,25 @@ __publicField(_TextField, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompone
   consts: [["inputRef", ""], [1, "docs-icon_high-contrast"], ["type", "text", 1, "docs-text-field", 3, "input", "value"], ["type", "reset", 1, "docs-text-reset", 3, "title"], ["type", "reset", 1, "docs-text-reset", 3, "click", "title"], ["width", "20", "height", "20", "viewBox", "0 0 20 20"], ["d", "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z", "stroke", "currentColor", "fill", "none", "fill-rule", "evenodd", "stroke-linecap", "round", "stroke-linejoin", "round"]],
   template: /* @__PURE__ */ __name(function TextField_Template(rf, ctx) {
     if (rf & 1) {
-      const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275conditionalCreate(0, TextField_Conditional_0_Template, 2, 0, "docs-icon", 1);
-      \u0275\u0275elementStart(1, "input", 2, 0);
-      \u0275\u0275listener("input", /* @__PURE__ */ __name(function TextField_Template_input_input_1_listener() {
-        \u0275\u0275restoreView(_r1);
-        const inputRef_r2 = \u0275\u0275reference(2);
-        return \u0275\u0275resetView(ctx.setValue(inputRef_r2.value));
+      const _r1 = ɵɵgetCurrentView();
+      ɵɵconditionalCreate(0, TextField_Conditional_0_Template, 2, 0, "docs-icon", 1);
+      ɵɵelementStart(1, "input", 2, 0);
+      ɵɵlistener("input", /* @__PURE__ */ __name(function TextField_Template_input_input_1_listener() {
+        ɵɵrestoreView(_r1);
+        const inputRef_r2 = ɵɵreference(2);
+        return ɵɵresetView(ctx.setValue(inputRef_r2.value));
       }, "TextField_Template_input_input_1_listener"));
-      \u0275\u0275elementEnd();
-      \u0275\u0275conditionalCreate(3, TextField_Conditional_3_Template, 3, 2, "button", 3);
+      ɵɵelementEnd();
+      ɵɵconditionalCreate(3, TextField_Conditional_3_Template, 3, 2, "button", 3);
     }
     if (rf & 2) {
-      const inputRef_r2 = \u0275\u0275reference(2);
-      \u0275\u0275conditional(!ctx.hideIcon() ? 0 : -1);
-      \u0275\u0275advance();
-      \u0275\u0275property("value", ctx.value());
-      \u0275\u0275attribute("placeholder", ctx.placeholder())("name", ctx.name());
-      \u0275\u0275advance(2);
-      \u0275\u0275conditional(ctx.resetLabel() && inputRef_r2.value.length > 0 ? 3 : -1);
+      const inputRef_r2 = ɵɵreference(2);
+      ɵɵconditional(!ctx.hideIcon() ? 0 : -1);
+      ɵɵadvance();
+      ɵɵproperty("value", ctx.value());
+      ɵɵattribute("placeholder", ctx.placeholder())("name", ctx.name());
+      ɵɵadvance(2);
+      ɵɵconditional(ctx.resetLabel() && inputRef_r2.value.length > 0 ? 3 : -1);
     }
   }, "TextField_Template"),
   dependencies: [CommonModule, FormsModule, IconComponent],
@@ -15529,10 +15529,10 @@ var TextField = _TextField;
 var _AlgoliaIcon = class _AlgoliaIcon {
 };
 __name(_AlgoliaIcon, "AlgoliaIcon");
-__publicField(_AlgoliaIcon, "\u0275fac", /* @__PURE__ */ __name(function AlgoliaIcon_Factory(__ngFactoryType__) {
+__publicField(_AlgoliaIcon, "ɵfac", /* @__PURE__ */ __name(function AlgoliaIcon_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AlgoliaIcon)();
 }, "AlgoliaIcon_Factory"));
-__publicField(_AlgoliaIcon, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_AlgoliaIcon, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _AlgoliaIcon,
   selectors: [["docs-algolia-icon"]],
   decls: 13,
@@ -15540,12 +15540,12 @@ __publicField(_AlgoliaIcon, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineCompo
   consts: [["id", "Layer_1", "xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 2196.2 500", 1, "docs-algolia-logo"], ["d", "M1070.38,275.3V5.91c0-3.63-3.24-6.39-6.82-5.83l-50.46,7.94c-2.87,.45-4.99,2.93-4.99,5.84l.17,273.22c0,12.92,0,92.7,95.97,95.49,3.33,.1,6.09-2.58,6.09-5.91v-40.78c0-2.96-2.19-5.51-5.12-5.84-34.85-4.01-34.85-47.57-34.85-54.72Z", 1, "cls-2"], ["x", "1845.88", "y", "104.73", "width", "62.58", "height", "277.9", "rx", "5.9", "ry", "5.9", 1, "cls-1"], ["d", "M1851.78,71.38h50.77c3.26,0,5.9-2.64,5.9-5.9V5.9c0-3.62-3.24-6.39-6.82-5.83l-50.77,7.95c-2.87,.45-4.99,2.92-4.99,5.83v51.62c0,3.26,2.64,5.9,5.9,5.9Z", 1, "cls-2"], ["d", "M1764.03,275.3V5.91c0-3.63-3.24-6.39-6.82-5.83l-50.46,7.94c-2.87,.45-4.99,2.93-4.99,5.84l.17,273.22c0,12.92,0,92.7,95.97,95.49,3.33,.1,6.09-2.58,6.09-5.91v-40.78c0-2.96-2.19-5.51-5.12-5.84-34.85-4.01-34.85-47.57-34.85-54.72Z", 1, "cls-2"], ["d", "M1631.95,142.72c-11.14-12.25-24.83-21.65-40.78-28.31-15.92-6.53-33.26-9.85-52.07-9.85-18.78,0-36.15,3.17-51.92,9.85-15.59,6.66-29.29,16.05-40.76,28.31-11.47,12.23-20.38,26.87-26.76,44.03-6.38,17.17-9.24,37.37-9.24,58.36,0,20.99,3.19,36.87,9.55,54.21,6.38,17.32,15.14,32.11,26.45,44.36,11.29,12.23,24.83,21.62,40.6,28.46,15.77,6.83,40.12,10.33,52.4,10.48,12.25,0,36.78-3.82,52.7-10.48,15.92-6.68,29.46-16.23,40.78-28.46,11.29-12.25,20.05-27.04,26.25-44.36,6.22-17.34,9.24-33.22,9.24-54.21,0-20.99-3.34-41.19-10.03-58.36-6.38-17.17-15.14-31.8-26.43-44.03Zm-44.43,163.75c-11.47,15.75-27.56,23.7-48.09,23.7-20.55,0-36.63-7.8-48.1-23.7-11.47-15.75-17.21-34.01-17.21-61.2,0-26.89,5.59-49.14,17.06-64.87,11.45-15.75,27.54-23.52,48.07-23.52,20.55,0,36.63,7.78,48.09,23.52,11.47,15.57,17.36,37.98,17.36,64.87,0,27.19-5.72,45.3-17.19,61.2Z", 1, "cls-2"], ["d", "M894.42,104.73h-49.33c-48.36,0-90.91,25.48-115.75,64.1-14.52,22.58-22.99,49.63-22.99,78.73,0,44.89,20.13,84.92,51.59,111.1,2.93,2.6,6.05,4.98,9.31,7.14,12.86,8.49,28.11,13.47,44.52,13.47,1.23,0,2.46-.03,3.68-.09,.36-.02,.71-.05,1.07-.07,.87-.05,1.75-.11,2.62-.2,.34-.03,.68-.08,1.02-.12,.91-.1,1.82-.21,2.73-.34,.21-.03,.42-.07,.63-.1,32.89-5.07,61.56-30.82,70.9-62.81v57.83c0,3.26,2.64,5.9,5.9,5.9h50.42c3.26,0,5.9-2.64,5.9-5.9V110.63c0-3.26-2.64-5.9-5.9-5.9h-56.32Zm0,206.92c-12.2,10.16-27.97,13.98-44.84,15.12-.16,.01-.33,.03-.49,.04-1.12,.07-2.24,.1-3.36,.1-42.24,0-77.12-35.89-77.12-79.37,0-10.25,1.96-20.01,5.42-28.98,11.22-29.12,38.77-49.74,71.06-49.74h49.33v142.83Z", 1, "cls-2"], ["d", "M2133.97,104.73h-49.33c-48.36,0-90.91,25.48-115.75,64.1-14.52,22.58-22.99,49.63-22.99,78.73,0,44.89,20.13,84.92,51.59,111.1,2.93,2.6,6.05,4.98,9.31,7.14,12.86,8.49,28.11,13.47,44.52,13.47,1.23,0,2.46-.03,3.68-.09,.36-.02,.71-.05,1.07-.07,.87-.05,1.75-.11,2.62-.2,.34-.03,.68-.08,1.02-.12,.91-.1,1.82-.21,2.73-.34,.21-.03,.42-.07,.63-.1,32.89-5.07,61.56-30.82,70.9-62.81v57.83c0,3.26,2.64,5.9,5.9,5.9h50.42c3.26,0,5.9-2.64,5.9-5.9V110.63c0-3.26-2.64-5.9-5.9-5.9h-56.32Zm0,206.92c-12.2,10.16-27.97,13.98-44.84,15.12-.16,.01-.33,.03-.49,.04-1.12,.07-2.24,.1-3.36,.1-42.24,0-77.12-35.89-77.12-79.37,0-10.25,1.96-20.01,5.42-28.98,11.22-29.12,38.77-49.74,71.06-49.74h49.33v142.83Z", 1, "cls-2"], ["d", "M1314.05,104.73h-49.33c-48.36,0-90.91,25.48-115.75,64.1-11.79,18.34-19.6,39.64-22.11,62.59-.58,5.3-.88,10.68-.88,16.14s.31,11.15,.93,16.59c4.28,38.09,23.14,71.61,50.66,94.52,2.93,2.6,6.05,4.98,9.31,7.14,12.86,8.49,28.11,13.47,44.52,13.47h0c17.99,0,34.61-5.93,48.16-15.97,16.29-11.58,28.88-28.54,34.48-47.75v50.26h-.11v11.08c0,21.84-5.71,38.27-17.34,49.36-11.61,11.08-31.04,16.63-58.25,16.63-11.12,0-28.79-.59-46.6-2.41-2.83-.29-5.46,1.5-6.27,4.22l-12.78,43.11c-1.02,3.46,1.27,7.02,4.83,7.53,21.52,3.08,42.52,4.68,54.65,4.68,48.91,0,85.16-10.75,108.89-32.21,21.48-19.41,33.15-48.89,35.2-88.52V110.63c0-3.26-2.64-5.9-5.9-5.9h-56.32Zm0,64.1s.65,139.13,0,143.36c-12.08,9.77-27.11,13.59-43.49,14.7-.16,.01-.33,.03-.49,.04-1.12,.07-2.24,.1-3.36,.1-1.32,0-2.63-.03-3.94-.1-40.41-2.11-74.52-37.26-74.52-79.38,0-10.25,1.96-20.01,5.42-28.98,11.22-29.12,38.77-49.74,71.06-49.74h49.33Z", 1, "cls-2"], ["d", "M249.83,0C113.3,0,2,110.09,.03,246.16c-2,138.19,110.12,252.7,248.33,253.5,42.68,.25,83.79-10.19,120.3-30.03,3.56-1.93,4.11-6.83,1.08-9.51l-23.38-20.72c-4.75-4.21-11.51-5.4-17.36-2.92-25.48,10.84-53.17,16.38-81.71,16.03-111.68-1.37-201.91-94.29-200.13-205.96,1.76-110.26,92-199.41,202.67-199.41h202.69V407.41l-115-102.18c-3.72-3.31-9.42-2.66-12.42,1.31-18.46,24.44-48.53,39.64-81.93,37.34-46.33-3.2-83.87-40.5-87.34-86.81-4.15-55.24,39.63-101.52,94-101.52,49.18,0,89.68,37.85,93.91,85.95,.38,4.28,2.31,8.27,5.52,11.12l29.95,26.55c3.4,3.01,8.79,1.17,9.63-3.3,2.16-11.55,2.92-23.58,2.07-35.92-4.82-70.34-61.8-126.93-132.17-131.26-80.68-4.97-148.13,58.14-150.27,137.25-2.09,77.1,61.08,143.56,138.19,145.26,32.19,.71,62.03-9.41,86.14-26.95l150.26,133.2c6.44,5.71,16.61,1.14,16.61-7.47V9.48C499.66,4.25,495.42,0,490.18,0H249.83Z", 1, "cls-1"]],
   template: /* @__PURE__ */ __name(function AlgoliaIcon_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275domElementStart(0, "svg", 0)(1, "defs")(2, "style");
-      \u0275\u0275text(3, " .cls-1, .cls-2 { fill: #003dff; } .cls-2 { fill-rule: evenodd; } ");
-      \u0275\u0275domElementEnd()();
-      \u0275\u0275domElement(4, "path", 1)(5, "rect", 2)(6, "path", 3)(7, "path", 4)(8, "path", 5)(9, "path", 6)(10, "path", 7)(11, "path", 8)(12, "path", 9);
-      \u0275\u0275domElementEnd();
+      ɵɵnamespaceSVG();
+      ɵɵdomElementStart(0, "svg", 0)(1, "defs")(2, "style");
+      ɵɵtext(3, " .cls-1, .cls-2 { fill: #003dff; } .cls-2 { fill-rule: evenodd; } ");
+      ɵɵdomElementEnd()();
+      ɵɵdomElement(4, "path", 1)(5, "rect", 2)(6, "path", 3)(7, "path", 4)(8, "path", 5)(9, "path", 6)(10, "path", 7)(11, "path", 8)(12, "path", 9);
+      ɵɵdomElementEnd();
     }
   }, "AlgoliaIcon_Template"),
   encapsulation: 2,
@@ -15623,27 +15623,27 @@ var _SearchHistoryComponent = class _SearchHistoryComponent {
   }
 };
 __name(_SearchHistoryComponent, "SearchHistoryComponent");
-__publicField(_SearchHistoryComponent, "\u0275fac", /* @__PURE__ */ __name(function SearchHistoryComponent_Factory(__ngFactoryType__) {
+__publicField(_SearchHistoryComponent, "ɵfac", /* @__PURE__ */ __name(function SearchHistoryComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _SearchHistoryComponent)();
 }, "SearchHistoryComponent_Factory"));
-__publicField(_SearchHistoryComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_SearchHistoryComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _SearchHistoryComponent,
   selectors: [["docs-search-history"]],
   viewQuery: /* @__PURE__ */ __name(function SearchHistoryComponent_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuerySignal(ctx.items, SearchItem, 5);
+      ɵɵviewQuerySignal(ctx.items, SearchItem, 5);
     }
     if (rf & 2) {
-      \u0275\u0275queryAdvance();
+      ɵɵqueryAdvance();
     }
   }, "SearchHistoryComponent_Query"),
   hostBindings: /* @__PURE__ */ __name(function SearchHistoryComponent_HostBindings(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275listener("keydown", /* @__PURE__ */ __name(function SearchHistoryComponent_keydown_HostBindingHandler($event) {
+      ɵɵlistener("keydown", /* @__PURE__ */ __name(function SearchHistoryComponent_keydown_HostBindingHandler($event) {
         return ctx.onKeydown($event);
-      }, "SearchHistoryComponent_keydown_HostBindingHandler"), \u0275\u0275resolveDocument)("mousemove", /* @__PURE__ */ __name(function SearchHistoryComponent_mousemove_HostBindingHandler($event) {
+      }, "SearchHistoryComponent_keydown_HostBindingHandler"), ɵɵresolveDocument)("mousemove", /* @__PURE__ */ __name(function SearchHistoryComponent_mousemove_HostBindingHandler($event) {
         return ctx.onMouseMove($event);
-      }, "SearchHistoryComponent_mousemove_HostBindingHandler"), \u0275\u0275resolveDocument);
+      }, "SearchHistoryComponent_mousemove_HostBindingHandler"), ɵɵresolveDocument);
     }
   }, "SearchHistoryComponent_HostBindings"),
   decls: 3,
@@ -15651,16 +15651,16 @@ __publicField(_SearchHistoryComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275
   consts: [[1, "title"], [1, "history-results", "recent"], ["docsSearchItem", "", 3, "item"], ["docsSearchItem", "", 3, "mouseenter", "item"], [3, "click", "routerLink", "fragment"], ["role", "presentation", "aria-hidden", "true", 1, "material-symbols-outlined"], [3, "innerHTML"], ["type", "button", "title", "Make favorite", 1, "fav-btn", 3, "click"], ["type", "button", "title", "Remove item", 1, "remove-btn", 3, "click"], [1, "history-results", "favorite"], [3, "routerLink", "fragment"]],
   template: /* @__PURE__ */ __name(function SearchHistoryComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275declareLet(0);
-      \u0275\u0275conditionalCreate(1, SearchHistoryComponent_Conditional_1_Template, 5, 0);
-      \u0275\u0275conditionalCreate(2, SearchHistoryComponent_Conditional_2_Template, 5, 0);
+      ɵɵdeclareLet(0);
+      ɵɵconditionalCreate(1, SearchHistoryComponent_Conditional_1_Template, 5, 0);
+      ɵɵconditionalCreate(2, SearchHistoryComponent_Conditional_2_Template, 5, 0);
     }
     if (rf & 2) {
-      const items_r9 = \u0275\u0275storeLet(ctx.history.items());
-      \u0275\u0275advance();
-      \u0275\u0275conditional(items_r9.recent.length ? 1 : -1);
-      \u0275\u0275advance();
-      \u0275\u0275conditional(items_r9.favorite.length ? 2 : -1);
+      const items_r9 = ɵɵstoreLet(ctx.history.items());
+      ɵɵadvance();
+      ɵɵconditional(items_r9.recent.length ? 1 : -1);
+      ɵɵadvance();
+      ɵɵconditional(items_r9.favorite.length ? 2 : -1);
     }
   }, "SearchHistoryComponent_Template"),
   dependencies: [RouterLink, SearchItem, RelativeLink],
@@ -15819,20 +15819,20 @@ var _SearchDialog = class _SearchDialog {
   }
 };
 __name(_SearchDialog, "SearchDialog");
-__publicField(_SearchDialog, "\u0275fac", /* @__PURE__ */ __name(function SearchDialog_Factory(__ngFactoryType__) {
+__publicField(_SearchDialog, "ɵfac", /* @__PURE__ */ __name(function SearchDialog_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _SearchDialog)();
 }, "SearchDialog_Factory"));
-__publicField(_SearchDialog, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_SearchDialog, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _SearchDialog,
   selectors: [["docs-search-dialog"]],
   viewQuery: /* @__PURE__ */ __name(function SearchDialog_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuerySignal(ctx.dialog, _c62, 5);
-      \u0275\u0275viewQuerySignal(ctx.items, SearchItem, 5);
-      \u0275\u0275viewQuerySignal(ctx.textField, TextField, 5);
+      ɵɵviewQuerySignal(ctx.dialog, _c62, 5);
+      ɵɵviewQuerySignal(ctx.items, SearchItem, 5);
+      ɵɵviewQuerySignal(ctx.textField, TextField, 5);
     }
     if (rf & 2) {
-      \u0275\u0275queryAdvance(3);
+      ɵɵqueryAdvance(3);
     }
   }, "SearchDialog_Query"),
   outputs: {
@@ -15840,65 +15840,65 @@ __publicField(_SearchDialog, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComp
   },
   decls: 41,
   vars: 5,
-  consts: [["searchDialog", ""], [1, "docs-search-container", 3, "docsClickOutside"], ["placeholder", "\u641C\u7D22\u6587\u6863", 1, "docs-search-input", 3, "autofocus", "hideIcon", "formControl", "resetLabel"], [1, "docs-search-results", "docs-mini-scroll-track"], [1, "docs-search-footer"], [1, "docs-search-commands"], [1, "docs-search-commands-key"], ["width", "15", "height", "15", "aria-label", "\u56DE\u8F66\u952E", "role", "img"], ["fill", "none", "stroke", "currentColor", "stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "1.2"], ["d", "M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3"], ["width", "15", "height", "15", "aria-label", "Arrow down", "role", "img"], ["d", "M7.5 3.5v8M10.5 8.5l-3 3-3-3"], ["width", "15", "height", "15", "aria-label", "Arrow up", "role", "img"], ["d", "M7.5 11.5v-8M10.5 6.5l-3-3-3 3"], ["width", "15", "height", "15", "aria-label", "Escape key", "role", "img"], ["d", "M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"], [1, "docs-algolia"], ["target", "_blank", "rel", "noopener", "href", "https://www.algolia.com/developers/?utm_source=angular.dev&utm_medium=referral&utm_content=powered_by&utm_campaign=docsearch"], ["docsSearchItem", "", 3, "item"], [3, "click", "routerLink", "fragment"], [1, "docs-result-icon-and-type"], ["aria-hidden", "true", 1, "docs-search-result-icon"], ["role", "presentation", 1, "material-symbols-outlined", "docs-icon-small"], [1, "docs-search-results__type", 3, "innerHtml"], [1, "docs-search-results__type", "docs-search-results__lvl2", 3, "innerHtml"], [1, "docs-result-page-title"], [1, "docs-search-results__start-typing"], [1, "docs-search-results__no-results"]],
+  consts: [["searchDialog", ""], [1, "docs-search-container", 3, "docsClickOutside"], ["placeholder", "搜尋文件", 1, "docs-search-input", 3, "autofocus", "hideIcon", "formControl", "resetLabel"], [1, "docs-search-results", "docs-mini-scroll-track"], [1, "docs-search-footer"], [1, "docs-search-commands"], [1, "docs-search-commands-key"], ["width", "15", "height", "15", "aria-label", "回車鍵", "role", "img"], ["fill", "none", "stroke", "currentColor", "stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "1.2"], ["d", "M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3"], ["width", "15", "height", "15", "aria-label", "Arrow down", "role", "img"], ["d", "M7.5 3.5v8M10.5 8.5l-3 3-3-3"], ["width", "15", "height", "15", "aria-label", "Arrow up", "role", "img"], ["d", "M7.5 11.5v-8M10.5 6.5l-3-3-3 3"], ["width", "15", "height", "15", "aria-label", "Escape key", "role", "img"], ["d", "M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"], [1, "docs-algolia"], ["target", "_blank", "rel", "noopener", "href", "https://www.algolia.com/developers/?utm_source=angular.dev&utm_medium=referral&utm_content=powered_by&utm_campaign=docsearch"], ["docsSearchItem", "", 3, "item"], [3, "click", "routerLink", "fragment"], [1, "docs-result-icon-and-type"], ["aria-hidden", "true", 1, "docs-search-result-icon"], ["role", "presentation", 1, "material-symbols-outlined", "docs-icon-small"], [1, "docs-search-results__type", 3, "innerHtml"], [1, "docs-search-results__type", "docs-search-results__lvl2", 3, "innerHtml"], [1, "docs-result-page-title"], [1, "docs-search-results__start-typing"], [1, "docs-search-results__no-results"]],
   template: /* @__PURE__ */ __name(function SearchDialog_Template(rf, ctx) {
     if (rf & 1) {
-      const _r1 = \u0275\u0275getCurrentView();
-      \u0275\u0275elementStart(0, "dialog", null, 0)(2, "div", 1);
-      \u0275\u0275listener("docsClickOutside", /* @__PURE__ */ __name(function SearchDialog_Template_div_docsClickOutside_2_listener() {
-        \u0275\u0275restoreView(_r1);
-        return \u0275\u0275resetView(ctx.closeSearchDialog());
+      const _r1 = ɵɵgetCurrentView();
+      ɵɵelementStart(0, "dialog", null, 0)(2, "div", 1);
+      ɵɵlistener("docsClickOutside", /* @__PURE__ */ __name(function SearchDialog_Template_div_docsClickOutside_2_listener() {
+        ɵɵrestoreView(_r1);
+        return ɵɵresetView(ctx.closeSearchDialog());
       }, "SearchDialog_Template_div_docsClickOutside_2_listener"));
-      \u0275\u0275element(3, "docs-text-field", 2);
-      \u0275\u0275conditionalCreate(4, SearchDialog_Conditional_4_Template, 3, 0, "ul", 3)(5, SearchDialog_Conditional_5_Template, 1, 0, "docs-search-history")(6, SearchDialog_Conditional_6_Template, 3, 1, "div", 3);
-      \u0275\u0275elementStart(7, "div", 4)(8, "ul", 5)(9, "li")(10, "kbd", 6);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(11, "svg", 7)(12, "g", 8);
-      \u0275\u0275element(13, "path", 9);
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(14, "span");
-      \u0275\u0275text(15, "to select");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(16, "li")(17, "kbd", 6);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(18, "svg", 10)(19, "g", 8);
-      \u0275\u0275element(20, "path", 11);
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(21, "kbd", 6);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(22, "svg", 12)(23, "g", 8);
-      \u0275\u0275element(24, "path", 13);
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(25, "span");
-      \u0275\u0275text(26, "to navigate");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(27, "li")(28, "kbd", 6);
-      \u0275\u0275namespaceSVG();
-      \u0275\u0275elementStart(29, "svg", 14)(30, "g", 8);
-      \u0275\u0275element(31, "path", 15);
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275namespaceHTML();
-      \u0275\u0275elementStart(32, "span");
-      \u0275\u0275text(33, "\u5173\u95ED");
-      \u0275\u0275elementEnd()()();
-      \u0275\u0275elementStart(34, "div", 16)(35, "span");
-      \u0275\u0275text(36, "\u7531");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(37, "a", 17);
-      \u0275\u0275element(38, "docs-algolia-icon");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(39, "span");
-      \u0275\u0275text(40, "\u63D0\u4F9B\u641C\u7D22\u652F\u6301");
-      \u0275\u0275elementEnd()()()()();
+      ɵɵelement(3, "docs-text-field", 2);
+      ɵɵconditionalCreate(4, SearchDialog_Conditional_4_Template, 3, 0, "ul", 3)(5, SearchDialog_Conditional_5_Template, 1, 0, "docs-search-history")(6, SearchDialog_Conditional_6_Template, 3, 1, "div", 3);
+      ɵɵelementStart(7, "div", 4)(8, "ul", 5)(9, "li")(10, "kbd", 6);
+      ɵɵnamespaceSVG();
+      ɵɵelementStart(11, "svg", 7)(12, "g", 8);
+      ɵɵelement(13, "path", 9);
+      ɵɵelementEnd()()();
+      ɵɵnamespaceHTML();
+      ɵɵelementStart(14, "span");
+      ɵɵtext(15, "to select");
+      ɵɵelementEnd()();
+      ɵɵelementStart(16, "li")(17, "kbd", 6);
+      ɵɵnamespaceSVG();
+      ɵɵelementStart(18, "svg", 10)(19, "g", 8);
+      ɵɵelement(20, "path", 11);
+      ɵɵelementEnd()()();
+      ɵɵnamespaceHTML();
+      ɵɵelementStart(21, "kbd", 6);
+      ɵɵnamespaceSVG();
+      ɵɵelementStart(22, "svg", 12)(23, "g", 8);
+      ɵɵelement(24, "path", 13);
+      ɵɵelementEnd()()();
+      ɵɵnamespaceHTML();
+      ɵɵelementStart(25, "span");
+      ɵɵtext(26, "to navigate");
+      ɵɵelementEnd()();
+      ɵɵelementStart(27, "li")(28, "kbd", 6);
+      ɵɵnamespaceSVG();
+      ɵɵelementStart(29, "svg", 14)(30, "g", 8);
+      ɵɵelement(31, "path", 15);
+      ɵɵelementEnd()()();
+      ɵɵnamespaceHTML();
+      ɵɵelementStart(32, "span");
+      ɵɵtext(33, "關閉");
+      ɵɵelementEnd()()();
+      ɵɵelementStart(34, "div", 16)(35, "span");
+      ɵɵtext(36, "由");
+      ɵɵelementEnd();
+      ɵɵelementStart(37, "a", 17);
+      ɵɵelement(38, "docs-algolia-icon");
+      ɵɵelementEnd();
+      ɵɵelementStart(39, "span");
+      ɵɵtext(40, "提供搜尋支援");
+      ɵɵelementEnd()()()()();
     }
     if (rf & 2) {
-      \u0275\u0275advance(3);
-      \u0275\u0275property("autofocus", true)("hideIcon", true)("formControl", ctx.searchControl)("resetLabel", "Clear the search");
-      \u0275\u0275advance();
-      \u0275\u0275conditional(ctx.searchResults().length ? 4 : ctx.history.hasItems() && !ctx.searchControl.value.length ? 5 : 6);
+      ɵɵadvance(3);
+      ɵɵproperty("autofocus", true)("hideIcon", true)("formControl", ctx.searchControl)("resetLabel", "Clear the search");
+      ɵɵadvance();
+      ɵɵconditional(ctx.searchResults().length ? 4 : ctx.history.hasItems() && !ctx.searchControl.value.length ? 5 : 6);
     }
   }, "SearchDialog_Template"),
   dependencies: [ClickOutside, TextField, ReactiveFormsModule, NgControlStatus, FormControlDirective, SearchItem, AlgoliaIcon, RouterLink, SearchHistoryComponent, RelativeLink],
@@ -15921,7 +15921,7 @@ var SearchDialog = _SearchDialog;
       [formControl]="searchControl"
       [resetLabel]="'Clear the search'"
       class="docs-search-input"
-      placeholder="\u641C\u7D22\u6587\u6863"
+      placeholder="搜尋文件"
     />
 
     @if (searchResults().length) {
@@ -15966,11 +15966,11 @@ var SearchDialog = _SearchDialog;
       <div class="docs-search-results docs-mini-scroll-track">
         @if (!resultsResource.hasValue()) {
           <div class="docs-search-results__start-typing">
-            <span>\u5F00\u59CB\u8F93\u5165\u4EE5\u67E5\u770B\u7ED3\u679C</span>
+            <span>開始輸入以檢視結果</span>
           </div>
         } @else if (searchResults().length === 0) {
           <div class="docs-search-results__no-results">
-            <span>\u672A\u627E\u5230\u7ED3\u679C</span>
+            <span>未找到結果</span>
           </div>
         }
       </div>
@@ -15980,7 +15980,7 @@ var SearchDialog = _SearchDialog;
       <ul class="docs-search-commands">
         <li>
           <kbd class="docs-search-commands-key">
-            <svg width="15" height="15" aria-label="\u56DE\u8F66\u952E" role="img">
+            <svg width="15" height="15" aria-label="回車鍵" role="img">
               <g
                 fill="none"
                 stroke="currentColor"
@@ -16039,11 +16039,11 @@ var SearchDialog = _SearchDialog;
               </g>
             </svg>
           </kbd>
-          <span>\u5173\u95ED</span>
+          <span>關閉</span>
         </li>
       </ul>
       <div class="docs-algolia">
-        <span>\u7531</span>
+        <span>由</span>
         <a
           target="_blank"
           rel="noopener"
@@ -16051,7 +16051,7 @@ var SearchDialog = _SearchDialog;
         >
           <docs-algolia-icon />
         </a>
-        <span>\u63D0\u4F9B\u641C\u7D22\u652F\u6301</span>
+        <span>提供搜尋支援</span>
       </div>
     </div>
   </div>
@@ -16107,10 +16107,10 @@ var _TopLevelBannerComponent = class _TopLevelBannerComponent {
   }
 };
 __name(_TopLevelBannerComponent, "TopLevelBannerComponent");
-__publicField(_TopLevelBannerComponent, "\u0275fac", /* @__PURE__ */ __name(function TopLevelBannerComponent_Factory(__ngFactoryType__) {
+__publicField(_TopLevelBannerComponent, "ɵfac", /* @__PURE__ */ __name(function TopLevelBannerComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _TopLevelBannerComponent)();
 }, "TopLevelBannerComponent_Factory"));
-__publicField(_TopLevelBannerComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_TopLevelBannerComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _TopLevelBannerComponent,
   selectors: [["docs-top-level-banner"]],
   inputs: {
@@ -16124,10 +16124,10 @@ __publicField(_TopLevelBannerComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u027
   consts: [[1, "docs-top-level-banner", 3, "href"], [1, "docs-top-level-banner"], ["type", "button", 1, "docs-top-level-banner-close", 3, "click"], [1, "docs-icon_high-contrast"], ["tabindex", "-1", 1, "docs-top-level-banner-cta", "shimmer"], ["tabindex", "0", 1, "docs-top-level-banner-cta", "background"], [1, "docs-top-level-banner-cta__text"]],
   template: /* @__PURE__ */ __name(function TopLevelBannerComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275conditionalCreate(0, TopLevelBannerComponent_Conditional_0_Template, 5, 1);
+      ɵɵconditionalCreate(0, TopLevelBannerComponent_Conditional_0_Template, 5, 1);
     }
     if (rf & 2) {
-      \u0275\u0275conditional(!ctx.hasClosed() ? 0 : -1);
+      ɵɵconditional(!ctx.hasClosed() ? 0 : -1);
     }
   }, "TopLevelBannerComponent_Template"),
   dependencies: [ExternalLink, IconComponent],

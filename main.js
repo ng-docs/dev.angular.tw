@@ -372,10 +372,10 @@ var _AnalyticsService = class _AnalyticsService {
   }
 };
 __name(_AnalyticsService, "AnalyticsService");
-__publicField(_AnalyticsService, "\u0275fac", /* @__PURE__ */ __name(function AnalyticsService_Factory(__ngFactoryType__) {
+__publicField(_AnalyticsService, "ɵfac", /* @__PURE__ */ __name(function AnalyticsService_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AnalyticsService)();
 }, "AnalyticsService_Factory"));
-__publicField(_AnalyticsService, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _AnalyticsService, factory: _AnalyticsService.\u0275fac, providedIn: "root" }));
+__publicField(_AnalyticsService, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _AnalyticsService, factory: _AnalyticsService.ɵfac, providedIn: "root" }));
 var AnalyticsService = _AnalyticsService;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AnalyticsService, [{
@@ -411,10 +411,10 @@ var _ContentLoader = class _ContentLoader {
   }
 };
 __name(_ContentLoader, "ContentLoader");
-__publicField(_ContentLoader, "\u0275fac", /* @__PURE__ */ __name(function ContentLoader_Factory(__ngFactoryType__) {
+__publicField(_ContentLoader, "ɵfac", /* @__PURE__ */ __name(function ContentLoader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ContentLoader)();
 }, "ContentLoader_Factory"));
-__publicField(_ContentLoader, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ContentLoader, factory: _ContentLoader.\u0275fac }));
+__publicField(_ContentLoader, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _ContentLoader, factory: _ContentLoader.ɵfac }));
 var ContentLoader = _ContentLoader;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ContentLoader, [{
@@ -448,8 +448,8 @@ var _CustomErrorHandler = class _CustomErrorHandler {
     this.snackBar.openFromComponent(ErrorSnackBar, {
       panelClass: "docs-invert-mode",
       data: {
-        message: `\u6211\u4EEC\u7684\u6587\u6863\u5DF2\u66F4\u65B0\uFF0C\u8BF7\u5237\u65B0\u9875\u9762\u4EE5\u67E5\u770B\u6700\u65B0\u5185\u5BB9\u3002`,
-        actionText: `\u91CD\u65B0\u52A0\u8F7D`
+        message: `我們的文件已更新，請重新整理頁面以檢視最新內容。`,
+        actionText: `重新載入`
       }
     }).onAction().subscribe(() => {
       this.document.location.reload();
@@ -467,10 +467,10 @@ var _ExampleContentLoader = class _ExampleContentLoader {
   }
 };
 __name(_ExampleContentLoader, "ExampleContentLoader");
-__publicField(_ExampleContentLoader, "\u0275fac", /* @__PURE__ */ __name(function ExampleContentLoader_Factory(__ngFactoryType__) {
+__publicField(_ExampleContentLoader, "ɵfac", /* @__PURE__ */ __name(function ExampleContentLoader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ExampleContentLoader)();
 }, "ExampleContentLoader_Factory"));
-__publicField(_ExampleContentLoader, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ExampleContentLoader, factory: _ExampleContentLoader.\u0275fac }));
+__publicField(_ExampleContentLoader, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _ExampleContentLoader, factory: _ExampleContentLoader.ɵfac }));
 var ExampleContentLoader = _ExampleContentLoader;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ExampleContentLoader, [{
@@ -482,7 +482,7 @@ var ExampleContentLoader = _ExampleContentLoader;
 var routes_default = { path: "tutorials/first-app", label: "Your first Angular app", contentPath: "tutorials/first-app/intro/README", tutorialData: { step: 0, title: "Your first Angular app", type: "editor", nextStep: "tutorials/first-app/01-hello-world", restrictedMode: true }, children: [{ label: "Hello world!", path: "tutorials/first-app/01-hello-world", contentPath: "tutorials/first-app/steps/01-hello-world/README", tutorialData: { title: "Hello world!", type: "editor", step: 1, restrictedMode: true, nextStep: "tutorials/first-app/02-Home" } }, { label: "Create home component", path: "tutorials/first-app/02-Home", contentPath: "tutorials/first-app/steps/02-Home/README", tutorialData: { title: "Create home component", type: "editor", step: 2, restrictedMode: true, previousStep: "tutorials/first-app/01-hello-world", nextStep: "tutorials/first-app/03-HousingLocation" } }, { label: "Create housing location component", path: "tutorials/first-app/03-HousingLocation", contentPath: "tutorials/first-app/steps/03-HousingLocation/README", tutorialData: { title: "Create housing location component", type: "editor", step: 3, restrictedMode: true, previousStep: "tutorials/first-app/02-Home", nextStep: "tutorials/first-app/04-interfaces" } }, { label: "Create an interface", path: "tutorials/first-app/04-interfaces", contentPath: "tutorials/first-app/steps/04-interfaces/README", tutorialData: { title: "Create an interface", type: "editor", step: 4, restrictedMode: true, previousStep: "tutorials/first-app/03-HousingLocation", nextStep: "tutorials/first-app/05-inputs" } }, { label: "Add inputs to components", path: "tutorials/first-app/05-inputs", contentPath: "tutorials/first-app/steps/05-inputs/README", tutorialData: { title: "Add inputs to components", type: "editor", step: 5, restrictedMode: true, previousStep: "tutorials/first-app/04-interfaces", nextStep: "tutorials/first-app/06-property-binding" } }, { label: "Add property binding to components", path: "tutorials/first-app/06-property-binding", contentPath: "tutorials/first-app/steps/06-property-binding/README", tutorialData: { title: "Add property binding to components", type: "editor", step: 6, restrictedMode: true, previousStep: "tutorials/first-app/05-inputs", nextStep: "tutorials/first-app/07-dynamic-template-values" } }, { label: "Add dynamic values to templates", path: "tutorials/first-app/07-dynamic-template-values", contentPath: "tutorials/first-app/steps/07-dynamic-template-values/README", tutorialData: { title: "Add dynamic values to templates", type: "editor", step: 7, restrictedMode: true, previousStep: "tutorials/first-app/06-property-binding", nextStep: "tutorials/first-app/08-ngFor" } }, { label: "Use the `@for` block in templates", path: "tutorials/first-app/08-ngFor", contentPath: "tutorials/first-app/steps/08-ngFor/README", tutorialData: { title: "Use the `@for` block in templates", type: "editor", step: 8, restrictedMode: true, previousStep: "tutorials/first-app/07-dynamic-template-values", nextStep: "tutorials/first-app/09-services" } }, { label: "Angular services", path: "tutorials/first-app/09-services", contentPath: "tutorials/first-app/steps/09-services/README", tutorialData: { title: "Angular services", type: "editor", step: 9, restrictedMode: true, previousStep: "tutorials/first-app/08-ngFor", nextStep: "tutorials/first-app/10-routing" } }, { label: "Add routing", path: "tutorials/first-app/10-routing", contentPath: "tutorials/first-app/steps/10-routing/README", tutorialData: { title: "Add routing", type: "local", step: 10, restrictedMode: true, previousStep: "tutorials/first-app/09-services", nextStep: "tutorials/first-app/11-details-page" } }, { label: "Customize the details page", path: "tutorials/first-app/11-details-page", contentPath: "tutorials/first-app/steps/11-details-page/README", tutorialData: { title: "Customize the details page", type: "local", step: 11, restrictedMode: true, previousStep: "tutorials/first-app/10-routing", nextStep: "tutorials/first-app/12-forms" } }, { label: "Integrate Angular forms", path: "tutorials/first-app/12-forms", contentPath: "tutorials/first-app/steps/12-forms/README", tutorialData: { title: "Integrate Angular forms", type: "local", step: 12, restrictedMode: true, previousStep: "tutorials/first-app/11-details-page", nextStep: "tutorials/first-app/13-search" } }, { label: "Add search functionality", path: "tutorials/first-app/13-search", contentPath: "tutorials/first-app/steps/13-search/README", tutorialData: { title: "Add search functionality", type: "local", step: 13, restrictedMode: true, previousStep: "tutorials/first-app/12-forms", nextStep: "tutorials/first-app/14-http" } }, { label: "Add HTTP communication", path: "tutorials/first-app/14-http", contentPath: "tutorials/first-app/steps/14-http/README", tutorialData: { title: "Add HTTP communication", type: "local", step: 14, restrictedMode: true, previousStep: "tutorials/first-app/13-search" } }] };
 
 // src/assets/tutorials/learn-angular/routes.json
-var routes_default2 = { path: "tutorials/learn-angular", label: "\u5B66\u4E60 Angular", contentPath: "tutorials/learn-angular/intro/README", tutorialData: { step: 0, title: "\u5B66\u4E60 Angular", type: "editor", nextStep: "tutorials/learn-angular/1-components-in-angular", restrictedMode: true }, children: [{ label: "\u7EC4\u4EF6\u7684\u7ED3\u6784", path: "tutorials/learn-angular/1-components-in-angular", contentPath: "tutorials/learn-angular/steps/1-components-in-angular/README", tutorialData: { title: "\u7EC4\u4EF6\u7684\u7ED3\u6784", type: "editor", step: 1, restrictedMode: true, nextStep: "tutorials/learn-angular/2-updating-the-component-class" } }, { label: "\u66F4\u65B0\u7EC4\u4EF6", path: "tutorials/learn-angular/2-updating-the-component-class", contentPath: "tutorials/learn-angular/steps/2-updating-the-component-class/README", tutorialData: { title: "\u66F4\u65B0\u7EC4\u4EF6", type: "editor", step: 2, restrictedMode: true, previousStep: "tutorials/learn-angular/1-components-in-angular", nextStep: "tutorials/learn-angular/3-composing-components" } }, { label: "\u7EC4\u4EF6\u7EC4\u5408", path: "tutorials/learn-angular/3-composing-components", contentPath: "tutorials/learn-angular/steps/3-composing-components/README", tutorialData: { title: "\u7EC4\u4EF6\u7EC4\u5408", type: "editor", step: 3, restrictedMode: true, previousStep: "tutorials/learn-angular/2-updating-the-component-class", nextStep: "tutorials/learn-angular/4-control-flow-if" } }, { label: "\u7EC4\u4EF6\u4E2D\u7684\u63A7\u5236\u6D41 - @if", path: "tutorials/learn-angular/4-control-flow-if", contentPath: "tutorials/learn-angular/steps/4-control-flow-if/README", tutorialData: { title: "\u7EC4\u4EF6\u4E2D\u7684\u63A7\u5236\u6D41 - @if", type: "editor", step: 4, restrictedMode: true, previousStep: "tutorials/learn-angular/3-composing-components", nextStep: "tutorials/learn-angular/5-control-flow-for" } }, { label: "\u63A7\u5236\u6D41 - @for", path: "tutorials/learn-angular/5-control-flow-for", contentPath: "tutorials/learn-angular/steps/5-control-flow-for/README", tutorialData: { title: "\u63A7\u5236\u6D41 - @for", type: "editor", step: 5, restrictedMode: true, previousStep: "tutorials/learn-angular/4-control-flow-if", nextStep: "tutorials/learn-angular/6-property-binding" } }, { label: "\u5C5E\u6027\u7ED1\u5B9A", path: "tutorials/learn-angular/6-property-binding", contentPath: "tutorials/learn-angular/steps/6-property-binding/README", tutorialData: { title: "\u5C5E\u6027\u7ED1\u5B9A", type: "editor", step: 6, restrictedMode: true, previousStep: "tutorials/learn-angular/5-control-flow-for", nextStep: "tutorials/learn-angular/7-event-handling" } }, { label: "\u4E8B\u4EF6\u5904\u7406", path: "tutorials/learn-angular/7-event-handling", contentPath: "tutorials/learn-angular/steps/7-event-handling/README", tutorialData: { title: "\u4E8B\u4EF6\u5904\u7406", type: "editor", step: 7, restrictedMode: true, previousStep: "tutorials/learn-angular/6-property-binding", nextStep: "tutorials/learn-angular/8-input" } }, { label: "\u7EC4\u4EF6\u7684\u8F93\u5165\u5C5E\u6027", path: "tutorials/learn-angular/8-input", contentPath: "tutorials/learn-angular/steps/8-input/README", tutorialData: { title: "\u7EC4\u4EF6\u7684\u8F93\u5165\u5C5E\u6027", type: "editor", step: 8, restrictedMode: true, previousStep: "tutorials/learn-angular/7-event-handling", nextStep: "tutorials/learn-angular/9-output" } }, { label: "\u7EC4\u4EF6\u7684\u8F93\u51FA\u5C5E\u6027", path: "tutorials/learn-angular/9-output", contentPath: "tutorials/learn-angular/steps/9-output/README", tutorialData: { title: "\u7EC4\u4EF6\u7684\u8F93\u51FA\u5C5E\u6027", type: "editor", step: 9, restrictedMode: true, previousStep: "tutorials/learn-angular/8-input", nextStep: "tutorials/learn-angular/10-deferrable-views" } }, { label: "\u53EF\u5EF6\u8FDF\u89C6\u56FE", path: "tutorials/learn-angular/10-deferrable-views", contentPath: "tutorials/learn-angular/steps/10-deferrable-views/README", tutorialData: { title: "\u53EF\u5EF6\u8FDF\u89C6\u56FE", type: "editor", step: 10, restrictedMode: true, previousStep: "tutorials/learn-angular/9-output", nextStep: "tutorials/learn-angular/11-optimizing-images" } }, { label: "\u4F18\u5316\u56FE\u7247", path: "tutorials/learn-angular/11-optimizing-images", contentPath: "tutorials/learn-angular/steps/11-optimizing-images/README", tutorialData: { title: "\u4F18\u5316\u56FE\u7247", type: "editor", step: 11, restrictedMode: true, previousStep: "tutorials/learn-angular/10-deferrable-views", nextStep: "tutorials/learn-angular/12-enable-routing" } }, { label: "\u542F\u7528\u8DEF\u7531", path: "tutorials/learn-angular/12-enable-routing", contentPath: "tutorials/learn-angular/steps/12-enable-routing/README", tutorialData: { title: "\u542F\u7528\u8DEF\u7531", type: "editor", step: 12, restrictedMode: true, previousStep: "tutorials/learn-angular/11-optimizing-images", nextStep: "tutorials/learn-angular/13-define-a-route" } }, { label: "\u5B9A\u4E49\u8DEF\u7531", path: "tutorials/learn-angular/13-define-a-route", contentPath: "tutorials/learn-angular/steps/13-define-a-route/README", tutorialData: { title: "\u5B9A\u4E49\u8DEF\u7531", type: "editor", step: 13, restrictedMode: true, previousStep: "tutorials/learn-angular/12-enable-routing", nextStep: "tutorials/learn-angular/14-routerLink" } }, { label: "\u4F7F\u7528 RouterLink \u94FE\u63A5\u5230\u8DEF\u7531", path: "tutorials/learn-angular/14-routerLink", contentPath: "tutorials/learn-angular/steps/14-routerLink/README", tutorialData: { title: "\u4F7F\u7528 RouterLink \u94FE\u63A5\u5230\u8DEF\u7531", type: "editor", step: 14, restrictedMode: true, previousStep: "tutorials/learn-angular/13-define-a-route", nextStep: "tutorials/learn-angular/15-forms" } }, { label: "\u8868\u5355", path: "tutorials/learn-angular/15-forms", contentPath: "tutorials/learn-angular/steps/15-forms/README", tutorialData: { title: "\u8868\u5355", type: "editor", step: 15, restrictedMode: true, previousStep: "tutorials/learn-angular/14-routerLink", nextStep: "tutorials/learn-angular/16-form-control-values" } }, { label: "\u83B7\u53D6\u8868\u5355\u63A7\u4EF6\u503C", path: "tutorials/learn-angular/16-form-control-values", contentPath: "tutorials/learn-angular/steps/16-form-control-values/README", tutorialData: { title: "\u83B7\u53D6\u8868\u5355\u63A7\u4EF6\u503C", type: "editor", step: 16, restrictedMode: true, previousStep: "tutorials/learn-angular/15-forms", nextStep: "tutorials/learn-angular/17-reactive-forms" } }, { label: "\u54CD\u5E94\u5F0F\u8868\u5355", path: "tutorials/learn-angular/17-reactive-forms", contentPath: "tutorials/learn-angular/steps/17-reactive-forms/README", tutorialData: { title: "\u54CD\u5E94\u5F0F\u8868\u5355", type: "editor", step: 17, restrictedMode: true, previousStep: "tutorials/learn-angular/16-form-control-values", nextStep: "tutorials/learn-angular/18-forms-validation" } }, { label: "\u8868\u5355\u9A8C\u8BC1", path: "tutorials/learn-angular/18-forms-validation", contentPath: "tutorials/learn-angular/steps/18-forms-validation/README", tutorialData: { title: "\u8868\u5355\u9A8C\u8BC1", type: "editor", step: 18, restrictedMode: true, previousStep: "tutorials/learn-angular/17-reactive-forms", nextStep: "tutorials/learn-angular/19-creating-an-injectable-service" } }, { label: "\u521B\u5EFA\u53EF\u6CE8\u5165\u670D\u52A1", path: "tutorials/learn-angular/19-creating-an-injectable-service", contentPath: "tutorials/learn-angular/steps/19-creating-an-injectable-service/README", tutorialData: { title: "\u521B\u5EFA\u53EF\u6CE8\u5165\u670D\u52A1", type: "editor", step: 19, restrictedMode: true, previousStep: "tutorials/learn-angular/18-forms-validation", nextStep: "tutorials/learn-angular/20-inject-based-di" } }, { label: "\u6CE8\u5165\u4F9D\u8D56", path: "tutorials/learn-angular/20-inject-based-di", contentPath: "tutorials/learn-angular/steps/20-inject-based-di/README", tutorialData: { title: "\u6CE8\u5165\u4F9D\u8D56", type: "editor", step: 20, restrictedMode: true, previousStep: "tutorials/learn-angular/19-creating-an-injectable-service", nextStep: "tutorials/learn-angular/22-pipes" } }, { label: "\u7BA1\u9053", path: "tutorials/learn-angular/22-pipes", contentPath: "tutorials/learn-angular/steps/22-pipes/README", tutorialData: { title: "\u7BA1\u9053", type: "editor", step: 21, restrictedMode: true, previousStep: "tutorials/learn-angular/20-inject-based-di", nextStep: "tutorials/learn-angular/23-pipes-format-data" } }, { label: "\u4F7F\u7528\u7BA1\u9053\u683C\u5F0F\u5316\u6570\u636E", path: "tutorials/learn-angular/23-pipes-format-data", contentPath: "tutorials/learn-angular/steps/23-pipes-format-data/README", tutorialData: { title: "\u4F7F\u7528\u7BA1\u9053\u683C\u5F0F\u5316\u6570\u636E", type: "editor", step: 22, restrictedMode: true, previousStep: "tutorials/learn-angular/22-pipes", nextStep: "tutorials/learn-angular/24-create-a-pipe" } }, { label: "\u521B\u5EFA\u7BA1\u9053", path: "tutorials/learn-angular/24-create-a-pipe", contentPath: "tutorials/learn-angular/steps/24-create-a-pipe/README", tutorialData: { title: "\u521B\u5EFA\u7BA1\u9053", type: "editor", step: 23, restrictedMode: true, previousStep: "tutorials/learn-angular/23-pipes-format-data", nextStep: "tutorials/learn-angular/25-next-steps" } }, { label: "\u4E0B\u4E00\u6B65", path: "tutorials/learn-angular/25-next-steps", contentPath: "tutorials/learn-angular/steps/25-next-steps/README", tutorialData: { title: "\u4E0B\u4E00\u6B65", step: 24, restrictedMode: true, previousStep: "tutorials/learn-angular/24-create-a-pipe" } }] };
+var routes_default2 = { path: "tutorials/learn-angular", label: "學習 Angular", contentPath: "tutorials/learn-angular/intro/README", tutorialData: { step: 0, title: "學習 Angular", type: "editor", nextStep: "tutorials/learn-angular/1-components-in-angular", restrictedMode: true }, children: [{ label: "元件的結構", path: "tutorials/learn-angular/1-components-in-angular", contentPath: "tutorials/learn-angular/steps/1-components-in-angular/README", tutorialData: { title: "元件的結構", type: "editor", step: 1, restrictedMode: true, nextStep: "tutorials/learn-angular/2-updating-the-component-class" } }, { label: "更新元件", path: "tutorials/learn-angular/2-updating-the-component-class", contentPath: "tutorials/learn-angular/steps/2-updating-the-component-class/README", tutorialData: { title: "更新元件", type: "editor", step: 2, restrictedMode: true, previousStep: "tutorials/learn-angular/1-components-in-angular", nextStep: "tutorials/learn-angular/3-composing-components" } }, { label: "元件組合", path: "tutorials/learn-angular/3-composing-components", contentPath: "tutorials/learn-angular/steps/3-composing-components/README", tutorialData: { title: "元件組合", type: "editor", step: 3, restrictedMode: true, previousStep: "tutorials/learn-angular/2-updating-the-component-class", nextStep: "tutorials/learn-angular/4-control-flow-if" } }, { label: "元件中的控制流 - @if", path: "tutorials/learn-angular/4-control-flow-if", contentPath: "tutorials/learn-angular/steps/4-control-flow-if/README", tutorialData: { title: "元件中的控制流 - @if", type: "editor", step: 4, restrictedMode: true, previousStep: "tutorials/learn-angular/3-composing-components", nextStep: "tutorials/learn-angular/5-control-flow-for" } }, { label: "控制流 - @for", path: "tutorials/learn-angular/5-control-flow-for", contentPath: "tutorials/learn-angular/steps/5-control-flow-for/README", tutorialData: { title: "控制流 - @for", type: "editor", step: 5, restrictedMode: true, previousStep: "tutorials/learn-angular/4-control-flow-if", nextStep: "tutorials/learn-angular/6-property-binding" } }, { label: "屬性繫結", path: "tutorials/learn-angular/6-property-binding", contentPath: "tutorials/learn-angular/steps/6-property-binding/README", tutorialData: { title: "屬性繫結", type: "editor", step: 6, restrictedMode: true, previousStep: "tutorials/learn-angular/5-control-flow-for", nextStep: "tutorials/learn-angular/7-event-handling" } }, { label: "事件處理", path: "tutorials/learn-angular/7-event-handling", contentPath: "tutorials/learn-angular/steps/7-event-handling/README", tutorialData: { title: "事件處理", type: "editor", step: 7, restrictedMode: true, previousStep: "tutorials/learn-angular/6-property-binding", nextStep: "tutorials/learn-angular/8-input" } }, { label: "元件的輸入屬性", path: "tutorials/learn-angular/8-input", contentPath: "tutorials/learn-angular/steps/8-input/README", tutorialData: { title: "元件的輸入屬性", type: "editor", step: 8, restrictedMode: true, previousStep: "tutorials/learn-angular/7-event-handling", nextStep: "tutorials/learn-angular/9-output" } }, { label: "元件的輸出屬性", path: "tutorials/learn-angular/9-output", contentPath: "tutorials/learn-angular/steps/9-output/README", tutorialData: { title: "元件的輸出屬性", type: "editor", step: 9, restrictedMode: true, previousStep: "tutorials/learn-angular/8-input", nextStep: "tutorials/learn-angular/10-deferrable-views" } }, { label: "可延遲檢視", path: "tutorials/learn-angular/10-deferrable-views", contentPath: "tutorials/learn-angular/steps/10-deferrable-views/README", tutorialData: { title: "可延遲檢視", type: "editor", step: 10, restrictedMode: true, previousStep: "tutorials/learn-angular/9-output", nextStep: "tutorials/learn-angular/11-optimizing-images" } }, { label: "最佳化圖片", path: "tutorials/learn-angular/11-optimizing-images", contentPath: "tutorials/learn-angular/steps/11-optimizing-images/README", tutorialData: { title: "最佳化圖片", type: "editor", step: 11, restrictedMode: true, previousStep: "tutorials/learn-angular/10-deferrable-views", nextStep: "tutorials/learn-angular/12-enable-routing" } }, { label: "啟用路由", path: "tutorials/learn-angular/12-enable-routing", contentPath: "tutorials/learn-angular/steps/12-enable-routing/README", tutorialData: { title: "啟用路由", type: "editor", step: 12, restrictedMode: true, previousStep: "tutorials/learn-angular/11-optimizing-images", nextStep: "tutorials/learn-angular/13-define-a-route" } }, { label: "定義路由", path: "tutorials/learn-angular/13-define-a-route", contentPath: "tutorials/learn-angular/steps/13-define-a-route/README", tutorialData: { title: "定義路由", type: "editor", step: 13, restrictedMode: true, previousStep: "tutorials/learn-angular/12-enable-routing", nextStep: "tutorials/learn-angular/14-routerLink" } }, { label: "使用 RouterLink 連結到路由", path: "tutorials/learn-angular/14-routerLink", contentPath: "tutorials/learn-angular/steps/14-routerLink/README", tutorialData: { title: "使用 RouterLink 連結到路由", type: "editor", step: 14, restrictedMode: true, previousStep: "tutorials/learn-angular/13-define-a-route", nextStep: "tutorials/learn-angular/15-forms" } }, { label: "表單", path: "tutorials/learn-angular/15-forms", contentPath: "tutorials/learn-angular/steps/15-forms/README", tutorialData: { title: "表單", type: "editor", step: 15, restrictedMode: true, previousStep: "tutorials/learn-angular/14-routerLink", nextStep: "tutorials/learn-angular/16-form-control-values" } }, { label: "獲取表單控制元件值", path: "tutorials/learn-angular/16-form-control-values", contentPath: "tutorials/learn-angular/steps/16-form-control-values/README", tutorialData: { title: "獲取表單控制元件值", type: "editor", step: 16, restrictedMode: true, previousStep: "tutorials/learn-angular/15-forms", nextStep: "tutorials/learn-angular/17-reactive-forms" } }, { label: "回應式表單", path: "tutorials/learn-angular/17-reactive-forms", contentPath: "tutorials/learn-angular/steps/17-reactive-forms/README", tutorialData: { title: "回應式表單", type: "editor", step: 17, restrictedMode: true, previousStep: "tutorials/learn-angular/16-form-control-values", nextStep: "tutorials/learn-angular/18-forms-validation" } }, { label: "表單驗證", path: "tutorials/learn-angular/18-forms-validation", contentPath: "tutorials/learn-angular/steps/18-forms-validation/README", tutorialData: { title: "表單驗證", type: "editor", step: 18, restrictedMode: true, previousStep: "tutorials/learn-angular/17-reactive-forms", nextStep: "tutorials/learn-angular/19-creating-an-injectable-service" } }, { label: "建立可注入服務", path: "tutorials/learn-angular/19-creating-an-injectable-service", contentPath: "tutorials/learn-angular/steps/19-creating-an-injectable-service/README", tutorialData: { title: "建立可注入服務", type: "editor", step: 19, restrictedMode: true, previousStep: "tutorials/learn-angular/18-forms-validation", nextStep: "tutorials/learn-angular/20-inject-based-di" } }, { label: "注入依賴", path: "tutorials/learn-angular/20-inject-based-di", contentPath: "tutorials/learn-angular/steps/20-inject-based-di/README", tutorialData: { title: "注入依賴", type: "editor", step: 20, restrictedMode: true, previousStep: "tutorials/learn-angular/19-creating-an-injectable-service", nextStep: "tutorials/learn-angular/22-pipes" } }, { label: "通道", path: "tutorials/learn-angular/22-pipes", contentPath: "tutorials/learn-angular/steps/22-pipes/README", tutorialData: { title: "通道", type: "editor", step: 21, restrictedMode: true, previousStep: "tutorials/learn-angular/20-inject-based-di", nextStep: "tutorials/learn-angular/23-pipes-format-data" } }, { label: "使用通道格式化資料", path: "tutorials/learn-angular/23-pipes-format-data", contentPath: "tutorials/learn-angular/steps/23-pipes-format-data/README", tutorialData: { title: "使用通道格式化資料", type: "editor", step: 22, restrictedMode: true, previousStep: "tutorials/learn-angular/22-pipes", nextStep: "tutorials/learn-angular/24-create-a-pipe" } }, { label: "建立通道", path: "tutorials/learn-angular/24-create-a-pipe", contentPath: "tutorials/learn-angular/steps/24-create-a-pipe/README", tutorialData: { title: "建立通道", type: "editor", step: 23, restrictedMode: true, previousStep: "tutorials/learn-angular/23-pipes-format-data", nextStep: "tutorials/learn-angular/25-next-steps" } }, { label: "下一步", path: "tutorials/learn-angular/25-next-steps", contentPath: "tutorials/learn-angular/steps/25-next-steps/README", tutorialData: { title: "下一步", step: 24, restrictedMode: true, previousStep: "tutorials/learn-angular/24-create-a-pipe" } }] };
 
 // src/assets/tutorials/deferrable-views/routes.json
 var routes_default3 = { path: "tutorials/deferrable-views", label: "Deferrable Views", contentPath: "tutorials/deferrable-views/intro/README", tutorialData: { step: 0, title: "Deferrable Views", type: "editor", nextStep: "tutorials/deferrable-views/1-what-are-deferrable-views", restrictedMode: true }, children: [{ label: "What are deferrable views", path: "tutorials/deferrable-views/1-what-are-deferrable-views", contentPath: "tutorials/deferrable-views/steps/1-what-are-deferrable-views/README", tutorialData: { title: "What are deferrable views", type: "editor", step: 1, restrictedMode: true, nextStep: "tutorials/deferrable-views/2-loading-error-placeholder" } }, { label: "@loading, @error and @placeholder blocks", path: "tutorials/deferrable-views/2-loading-error-placeholder", contentPath: "tutorials/deferrable-views/steps/2-loading-error-placeholder/README", tutorialData: { title: "@loading, @error and @placeholder blocks", type: "editor", step: 2, restrictedMode: true, previousStep: "tutorials/deferrable-views/1-what-are-deferrable-views", nextStep: "tutorials/deferrable-views/3-defer-triggers" } }, { label: "Defer triggers", path: "tutorials/deferrable-views/3-defer-triggers", contentPath: "tutorials/deferrable-views/steps/3-defer-triggers/README", tutorialData: { title: "Defer triggers", type: "editor", step: 3, restrictedMode: true, previousStep: "tutorials/deferrable-views/2-loading-error-placeholder" } }] };
@@ -499,441 +499,441 @@ var routes_default6 = [{ label: "NG8101: Invalid Banana-in-Box", path: "extended
 // src/app/sub-navigation-data.ts
 var DOCS_SUB_NAVIGATION_DATA = [
   {
-    label: "\u7B80\u4ECB",
+    label: "簡介",
     children: [
       {
-        label: "\u4EC0\u4E48\u662F Angular\uFF1F",
+        label: "什麼是 Angular？",
         path: "overview",
         contentPath: "introduction/what-is-angular"
       },
       {
-        label: "\u5B89\u88C5",
+        label: "安裝",
         path: "installation",
         contentPath: "introduction/installation"
       },
       {
-        label: "\u57FA\u672C\u8981\u70B9",
+        label: "基本要點",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "essentials",
             contentPath: "introduction/essentials/overview"
           },
           {
-            label: "\u7528\u7EC4\u4EF6\u642D\u5EFA\u5E94\u7528",
+            label: "用元件搭建應用",
             path: "essentials/components",
             contentPath: "introduction/essentials/components"
           },
           {
-            label: "\u4F7F\u7528 Signals \u8FDB\u884C\u54CD\u5E94\u5F0F\u7F16\u7A0B",
+            label: "使用 Signals 進行回應式程式設計",
             path: "essentials/signals",
             contentPath: "introduction/essentials/signals"
           },
           {
-            label: "\u4F7F\u7528\u6A21\u677F\u7F16\u5199\u52A8\u6001\u754C\u9762",
+            label: "使用樣板編寫動態介面",
             path: "essentials/templates",
             contentPath: "introduction/essentials/templates"
           },
           {
-            label: "\u4F7F\u7528\u4F9D\u8D56\u6CE8\u5165\u8FDB\u884C\u6A21\u5757\u5316\u8BBE\u8BA1",
+            label: "使用依賴注入進行模組化設計",
             path: "essentials/dependency-injection",
             contentPath: "introduction/essentials/dependency-injection"
           },
           {
-            label: "\u540E\u7EED\u6B65\u9AA4",
+            label: "後續步驟",
             path: "essentials/next-steps",
             contentPath: "introduction/essentials/next-steps"
           }
         ]
       },
       {
-        label: "\u5F00\u59CB\u7F16\u7801\uFF01\u{1F680}",
+        label: "開始編碼！\u{1F680}",
         path: "tutorials/learn-angular"
       }
     ]
   },
   {
-    label: "\u6DF1\u5EA6\u6307\u5357",
+    label: "深度指南",
     children: [
       {
-        label: "\u4FE1\u53F7",
+        label: "訊號",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "guide/signals",
             contentPath: "guide/signals/overview"
           },
           {
-            label: "\u4F7F\u7528 linkedSignal \u7BA1\u7406\u72B6\u6001\u4F9D\u8D56",
+            label: "使用 linkedSignal 管理狀態依賴",
             path: "guide/signals/linked-signal",
             contentPath: "guide/signals/linked-signal"
           },
           {
-            label: "\u7528 resources \u5904\u7406\u5F02\u6B65\u54CD\u5E94",
+            label: "用 resources 處理非同步回應",
             path: "guide/signals/resource",
             contentPath: "guide/signals/resource"
           }
         ]
       },
       {
-        label: "\u7EC4\u4EF6",
+        label: "元件",
         children: [
           {
-            label: "\u7EC4\u4EF6\u7684\u5256\u6790",
+            label: "元件的剖析",
             path: "guide/components",
             contentPath: "guide/components/anatomy-of-components"
           },
           {
-            label: "\u9009\u62E9\u5668",
+            label: "選擇器",
             path: "guide/components/selectors",
             contentPath: "guide/components/selectors"
           },
           {
-            label: "\u6307\u5B9A\u6837\u5F0F",
+            label: "指定樣式",
             path: "guide/components/styling",
             contentPath: "guide/components/styling"
           },
           {
-            label: "\u901A\u8FC7\u8F93\u5165\u5C5E\u6027\u63A5\u6536\u6570\u636E",
+            label: "透過輸入屬性接收資料",
             path: "guide/components/inputs",
             contentPath: "guide/components/inputs"
           },
           {
-            label: "\u4F7F\u7528\u8F93\u51FA\u5C5E\u6027\u81EA\u5B9A\u4E49\u4E8B\u4EF6",
+            label: "使用輸出屬性自定義事件",
             path: "guide/components/outputs",
             contentPath: "guide/components/outputs"
           },
           {
-            label: "\u4F7F\u7528 ng-content \u8FDB\u884C\u5185\u5BB9\u6295\u5F71",
+            label: "使用 ng-content 進行內容投影",
             path: "guide/components/content-projection",
             contentPath: "guide/components/content-projection"
           },
           {
-            label: "\u5BBF\u4E3B\u5143\u7D20",
+            label: "宿主元素",
             path: "guide/components/host-elements",
             contentPath: "guide/components/host-elements"
           },
           {
-            label: "\u751F\u547D\u5468\u671F",
+            label: "生命週期",
             path: "guide/components/lifecycle",
             contentPath: "guide/components/lifecycle"
           },
           {
-            label: "\u4F7F\u7528\u67E5\u8BE2\u5F15\u7528\u7EC4\u4EF6\u7684\u5B50\u5143\u7D20",
+            label: "使用查詢引用元件的子元素",
             path: "guide/components/queries",
             contentPath: "guide/components/queries"
           },
           {
-            label: "\u4F7F\u7528 DOM API",
+            label: "使用 DOM API",
             path: "guide/components/dom-apis",
             contentPath: "guide/components/dom-apis"
           },
           {
-            label: "\u7EE7\u627F",
+            label: "繼承",
             path: "guide/components/inheritance",
             contentPath: "guide/components/inheritance"
           },
           {
-            label: "\u4EE5\u7F16\u7A0B\u65B9\u5F0F\u6E32\u67D3\u7EC4\u4EF6",
+            label: "以程式設計方式渲染元件",
             path: "guide/components/programmatic-rendering",
             contentPath: "guide/components/programmatic-rendering"
           },
           {
-            label: "\u9AD8\u7EA7\u914D\u7F6E",
+            label: "高階設定",
             path: "guide/components/advanced-configuration",
             contentPath: "guide/components/advanced-configuration"
           },
           {
-            label: "\u81EA\u5B9A\u4E49\u5143\u7D20",
+            label: "自定義元素",
             path: "guide/elements",
             contentPath: "guide/elements"
           }
         ]
       },
       {
-        label: "\u6A21\u677F",
+        label: "樣板",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "guide/templates",
             contentPath: "guide/templates/overview"
           },
           {
-            label: "\u7ED1\u5B9A\u52A8\u6001\u6587\u672C\u3001\u5C5E\u6027\u3001Attribute",
+            label: "繫結動態文字、屬性、Attribute",
             path: "guide/templates/binding",
             contentPath: "guide/templates/binding"
           },
           {
-            label: "\u6DFB\u52A0\u4E8B\u4EF6\u76D1\u542C\u5668",
+            label: "新增事件監聽器",
             path: "guide/templates/event-listeners",
             contentPath: "guide/templates/event-listeners"
           },
           {
-            label: "\u53CC\u5411\u7ED1\u5B9A",
+            label: "雙向繫結",
             path: "guide/templates/two-way-binding",
             contentPath: "guide/templates/two-way-binding"
           },
           {
-            label: "\u63A7\u5236\u6D41",
+            label: "控制流",
             path: "guide/templates/control-flow",
             contentPath: "guide/templates/control-flow"
           },
           {
-            label: "\u7BA1\u9053",
+            label: "通道",
             path: "guide/templates/pipes",
             contentPath: "guide/templates/pipes"
           },
           {
-            label: "\u4F7F\u7528 ng-content \u5B9E\u73B0\u5B50\u5185\u5BB9\u63D2\u69FD\uFF08slot\uFF09",
+            label: "使用 ng-content 實現子內容插槽（slot）",
             path: "guide/templates/ng-content",
             contentPath: "guide/templates/ng-content"
           },
           {
-            label: "\u4F7F\u7528 ng-template \u521B\u5EFA\u6A21\u677F\u788E\u7247",
+            label: "使用 ng-template 建立樣板碎片",
             path: "guide/templates/ng-template",
             contentPath: "guide/templates/ng-template"
           },
           {
-            label: "\u4F7F\u7528 ng-container \u5BF9\u5143\u7D20\u8FDB\u884C\u5206\u7EC4",
+            label: "使用 ng-container 對元素進行分組",
             path: "guide/templates/ng-container",
             contentPath: "guide/templates/ng-container"
           },
           {
-            label: "\u6A21\u677F\u4E2D\u7684\u53D8\u91CF",
+            label: "樣板中的變數",
             path: "guide/templates/variables",
             contentPath: "guide/templates/variables"
           },
           {
-            label: "\u4F7F\u7528 @defer \u8FDB\u884C\u5EF6\u8FDF\u52A0\u8F7D",
+            label: "使用 @defer 進行延遲載入",
             path: "guide/templates/defer",
             contentPath: "guide/templates/defer"
           },
           {
-            label: "\u8868\u8FBE\u5F0F\u8BED\u6CD5",
+            label: "表示式語法",
             path: "guide/templates/expression-syntax",
             contentPath: "guide/templates/expression-syntax"
           },
           {
-            label: "\u6A21\u677F\u4E2D\u7684\u7A7A\u767D\u5B57\u7B26",
+            label: "樣板中的空白字元",
             path: "guide/templates/whitespace",
             contentPath: "guide/templates/whitespace"
           }
         ]
       },
       {
-        label: "\u6307\u4EE4",
+        label: "指令",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "guide/directives",
             contentPath: "guide/directives/overview"
           },
           {
-            label: "\u5C5E\u6027\u578B\u6307\u4EE4",
+            label: "屬性型指令",
             path: "guide/directives/attribute-directives",
             contentPath: "guide/directives/attribute-directives"
           },
           {
-            label: "\u7ED3\u6784\u578B\u6307\u4EE4",
+            label: "結構型指令",
             path: "guide/directives/structural-directives",
             contentPath: "guide/directives/structural-directives"
           },
           {
-            label: "\u6307\u4EE4\u7EC4\u5408 API",
+            label: "指令組合 API",
             path: "guide/directives/directive-composition-api",
             contentPath: "guide/directives/directive-composition-api"
           },
           {
-            label: "\u7528 NgOptimizedImage \u4F18\u5316\u56FE\u7247\u52A0\u8F7D",
+            label: "用 NgOptimizedImage 最佳化圖片載入",
             path: "guide/image-optimization",
             contentPath: "guide/image-optimization"
           }
         ]
       },
       {
-        label: "\u4F9D\u8D56\u6CE8\u5165",
+        label: "依賴注入",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "guide/di",
             contentPath: "guide/di/overview"
           },
           {
-            label: "\u7406\u89E3\u4F9D\u8D56\u6CE8\u5165",
+            label: "理解依賴注入",
             path: "guide/di/dependency-injection",
             contentPath: "guide/di/dependency-injection"
           },
           {
-            label: "\u521B\u5EFA\u53EF\u6CE8\u5165\u670D\u52A1",
+            label: "建立可注入服務",
             path: "guide/di/creating-injectable-service",
             contentPath: "guide/di/creating-injectable-service"
           },
           {
-            label: "\u5B9A\u4E49\u4F9D\u8D56\u63D0\u4F9B\u8005",
+            label: "定義依賴提供者",
             path: "guide/di/dependency-injection-providers",
             contentPath: "guide/di/dependency-injection-providers"
           },
           {
-            label: "\u6CE8\u5165\u4E0A\u4E0B\u6587",
+            label: "注入上下文",
             path: "guide/di/dependency-injection-context",
             contentPath: "guide/di/dependency-injection-context"
           },
           {
-            label: "\u5206\u5C42\u6CE8\u5165\u5668",
+            label: "分層注入器",
             path: "guide/di/hierarchical-dependency-injection",
             contentPath: "guide/di/hierarchical-dependency-injection"
           },
           {
-            label: "\u4F18\u5316\u6CE8\u5165\u4EE4\u724C",
+            label: "最佳化注入令牌",
             path: "guide/di/lightweight-injection-tokens",
             contentPath: "guide/di/lightweight-injection-tokens"
           },
           {
-            label: "DI \u7684\u5B9E\u9645\u5E94\u7528",
+            label: "DI 的實際應用",
             path: "guide/di/di-in-action",
             contentPath: "guide/di/di-in-action"
           }
         ]
       },
       {
-        label: "\u8DEF\u7531",
+        label: "路由",
         status: "updated",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "guide/routing",
             contentPath: "guide/routing/overview"
           },
           {
-            label: "\u5B9A\u4E49\u8DEF\u7531",
+            label: "定義路由",
             path: "guide/routing/define-routes",
             contentPath: "guide/routing/define-routes"
           },
           {
-            label: "\u4EE5\u8DEF\u7531\u51FA\u53E3\u5C55\u793A\u8DEF\u7531",
+            label: "以路由出口展示路由",
             path: "guide/routing/show-routes-with-outlets",
             contentPath: "guide/routing/show-routes-with-outlets"
           },
           {
-            label: "\u5BFC\u822A\u5230\u8DEF\u7531",
+            label: "導向到路由",
             path: "guide/routing/navigate-to-routes",
             contentPath: "guide/routing/navigate-to-routes"
           },
           {
-            label: "\u8BFB\u53D6\u8DEF\u7531\u72B6\u6001",
+            label: "讀取路由狀態",
             path: "guide/routing/read-route-state",
             contentPath: "guide/routing/read-route-state"
           },
           {
-            label: "\u91CD\u5B9A\u5411\u8DEF\u7531",
+            label: "重導向路由",
             path: "guide/routing/redirecting-routes",
             contentPath: "guide/routing/redirecting-routes"
           },
           {
-            label: "\u4F7F\u7528\u5B88\u536B\u63A7\u5236\u8DEF\u7531\u8BBF\u95EE",
+            label: "使用守衛控制路由訪問",
             path: "guide/routing/route-guards",
             contentPath: "guide/routing/route-guards"
           },
           {
-            label: "\u8DEF\u7531\u6570\u636E\u89E3\u6790\u5668",
+            label: "路由資料解析器",
             path: "guide/routing/data-resolvers",
             contentPath: "guide/routing/data-resolvers"
           },
           {
-            label: "\u751F\u547D\u5468\u671F\u4E0E\u4E8B\u4EF6",
+            label: "生命週期與事件",
             path: "guide/routing/lifecycle-and-events",
             contentPath: "guide/routing/lifecycle-and-events"
           },
           {
-            label: "\u6D4B\u8BD5\u8DEF\u7531\u4E0E\u5BFC\u822A",
+            label: "測試路由與導向",
             path: "guide/routing/testing",
             contentPath: "guide/routing/testing",
             status: "new"
           },
           {
-            label: "\u5176\u4ED6\u8DEF\u7531\u4EFB\u52A1",
+            label: "其他路由任務",
             path: "guide/routing/common-router-tasks",
             contentPath: "guide/routing/common-router-tasks"
           },
           {
-            label: "\u521B\u5EFA\u81EA\u5B9A\u4E49\u8DEF\u7531\u5339\u914D\u5668",
+            label: "建立自定義路由對應器",
             path: "guide/routing/routing-with-urlmatcher",
             contentPath: "guide/routing/routing-with-urlmatcher"
           },
           {
-            label: "\u6E32\u67D3\u7B56\u7565",
+            label: "渲染策略",
             path: "guide/routing/rendering-strategies",
             contentPath: "guide/routing/rendering-strategies",
             status: "new"
           },
           {
-            label: "\u81EA\u5B9A\u4E49\u8DEF\u7531\u884C\u4E3A",
+            label: "自定義路由行為",
             path: "guide/routing/customizing-route-behavior",
             contentPath: "guide/routing/customizing-route-behavior",
             status: "new"
           },
           {
-            label: "\u8DEF\u7531\u5668\u53C2\u8003\u624B\u518C",
+            label: "路由器參考手冊",
             path: "guide/routing/router-reference",
             contentPath: "guide/routing/router-reference"
           },
           {
-            label: "\u8DEF\u7531\u8F6C\u6362\u52A8\u753B",
+            label: "路由轉換動畫",
             path: "guide/routing/route-transition-animations",
             contentPath: "guide/routing/route-transition-animations"
           }
         ]
       },
       {
-        label: "\u8868\u5355",
+        label: "表單",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "guide/forms",
             contentPath: "guide/forms/overview"
           },
           {
-            label: "\u54CD\u5E94\u5F0F\u8868\u5355",
+            label: "回應式表單",
             path: "guide/forms/reactive-forms",
             contentPath: "guide/forms/reactive-forms"
           },
           {
-            label: "\u4E25\u683C\u7C7B\u578B\u5316\u7684\u54CD\u5E94\u5F0F\u8868\u5355",
+            label: "嚴格型別化的回應式表單",
             path: "guide/forms/typed-forms",
             contentPath: "guide/forms/typed-forms"
           },
           {
-            label: "\u6A21\u677F\u9A71\u52A8\u8868\u5355",
+            label: "樣板驅動表單",
             path: "guide/forms/template-driven-forms",
             contentPath: "guide/forms/template-driven-forms"
           },
           {
-            label: "\u9A8C\u8BC1\u8868\u5355\u8F93\u5165",
+            label: "驗證表單輸入",
             path: "guide/forms/form-validation",
             contentPath: "guide/forms/form-validation"
           },
           {
-            label: "\u7ED1\u5B9A\u52A8\u6001\u8868\u5355",
+            label: "繫結動態表單",
             path: "guide/forms/dynamic-forms",
             contentPath: "guide/forms/dynamic-forms"
           }
         ]
       },
       {
-        label: "HTTP \u5BA2\u6237\u7AEF",
+        label: "HTTP 用戶端",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "guide/http",
             contentPath: "guide/http/overview"
           },
           {
-            label: "\u8BBE\u7F6E HttpClient",
+            label: "設定 HttpClient",
             path: "guide/http/setup",
             contentPath: "guide/http/setup"
           },
           {
-            label: "\u53D1\u8D77\u8BF7\u6C42",
+            label: "發起請求",
             path: "guide/http/making-requests",
             contentPath: "guide/http/making-requests"
           },
@@ -943,77 +943,77 @@ var DOCS_SUB_NAVIGATION_DATA = [
             contentPath: "guide/http/http-resource"
           },
           {
-            label: "\u62E6\u622A\u8BF7\u6C42\u4E0E\u54CD\u5E94",
+            label: "攔截請求與回應",
             path: "guide/http/interceptors",
             contentPath: "guide/http/interceptors"
           },
           {
-            label: "\u6D4B\u8BD5",
+            label: "測試",
             path: "guide/http/testing",
             contentPath: "guide/http/testing"
           }
         ]
       },
       {
-        label: "\u670D\u52A1\u7AEF\u6E32\u67D3\u4E0E\u6DF7\u5408\u6E32\u67D3",
+        label: "伺服器端渲染與混合渲染",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "guide/performance",
             contentPath: "guide/performance/overview"
           },
           {
-            label: "\u670D\u52A1\u7AEF\u6E32\u67D3\u4E0E\u6DF7\u5408\u6E32\u67D3",
+            label: "伺服器端渲染與混合渲染",
             path: "guide/ssr",
             contentPath: "guide/ssr"
           },
           {
-            label: "\u6C34\u5408",
+            label: "水合",
             path: "guide/hydration",
             contentPath: "guide/hydration"
           },
           {
-            label: "\u589E\u91CF\u6C34\u5408",
+            label: "增量水合",
             path: "guide/incremental-hydration",
             contentPath: "guide/incremental-hydration"
           }
         ]
       },
       {
-        label: "\u6D4B\u8BD5",
+        label: "測試",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "guide/testing",
             contentPath: "guide/testing/overview"
           },
           {
-            label: "\u6D4B\u8BD5\u8986\u76D6\u7387",
+            label: "測試覆蓋率",
             path: "guide/testing/code-coverage",
             contentPath: "guide/testing/code-coverage"
           },
           {
-            label: "\u6D4B\u8BD5\u670D\u52A1",
+            label: "測試服務",
             path: "guide/testing/services",
             contentPath: "guide/testing/services"
           },
           {
-            label: "\u7EC4\u4EF6\u6D4B\u8BD5\u57FA\u7840",
+            label: "元件測試基礎",
             path: "guide/testing/components-basics",
             contentPath: "guide/testing/components-basics"
           },
           {
-            label: "\u7EC4\u4EF6\u6D4B\u8BD5\u573A\u666F",
+            label: "元件測試場景",
             path: "guide/testing/components-scenarios",
             contentPath: "guide/testing/components-scenarios"
           },
           {
-            label: "\u6D4B\u8BD5\u5C5E\u6027\u578B\u6307\u4EE4",
+            label: "測試屬性型指令",
             path: "guide/testing/attribute-directives",
             contentPath: "guide/testing/attribute-directives"
           },
           {
-            label: "\u6D4B\u8BD5\u7BA1\u9053",
+            label: "測試通道",
             path: "guide/testing/pipes",
             contentPath: "guide/testing/pipes"
           },
@@ -1024,12 +1024,12 @@ var DOCS_SUB_NAVIGATION_DATA = [
             status: "new"
           },
           {
-            label: "\u8C03\u8BD5\u6D4B\u8BD5\u4EE3\u7801",
+            label: "除錯測試程式碼",
             path: "guide/testing/debugging",
             contentPath: "guide/testing/debugging"
           },
           {
-            label: "\u6D4B\u8BD5\u5B9E\u7528\u5DE5\u5177 API",
+            label: "測試實用工具 API",
             path: "guide/testing/utility-apis",
             contentPath: "guide/testing/utility-apis"
           },
@@ -1039,265 +1039,265 @@ var DOCS_SUB_NAVIGATION_DATA = [
             contentPath: "guide/testing/experimental-unit-test"
           },
           {
-            label: "\u7EC4\u4EF6\u6D4B\u8BD5\u5DE5\u5177\u6982\u89C8",
+            label: "元件測試工具概覽",
             path: "guide/testing/component-harnesses-overview",
             contentPath: "guide/testing/component-harnesses-overview"
           },
           {
-            label: "\u5728\u6D4B\u8BD5\u4E2D\u4F7F\u7528\u7EC4\u4EF6\u6D4B\u8BD5\u5DE5\u5177",
+            label: "在測試中使用元件測試工具",
             path: "guide/testing/using-component-harnesses",
             contentPath: "guide/testing/using-component-harnesses"
           },
           {
-            label: "\u4E3A\u4F60\u7684\u7EC4\u4EF6\u521B\u5EFA\u7EC4\u4EF6\u6D4B\u8BD5\u5DE5\u5177",
+            label: "為你的元件建立元件測試工具",
             path: "guide/testing/creating-component-harnesses",
             contentPath: "guide/testing/creating-component-harnesses"
           },
           {
-            label: "\u4E3A\u5176\u4ED6\u6D4B\u8BD5\u73AF\u5883\u6DFB\u52A0\u7EC4\u4EF6\u6D4B\u8BD5\u5DE5\u5177\u7684\u652F\u6301",
+            label: "為其他測試環境新增元件測試工具的支援",
             path: "guide/testing/component-harnesses-testing-environments",
             contentPath: "guide/testing/component-harnesses-testing-environments"
           }
         ]
       },
       {
-        label: "\u56FD\u9645\u5316",
+        label: "國際化",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "guide/i18n",
             contentPath: "guide/i18n/overview"
           },
           {
-            label: "\u6DFB\u52A0 localize \u5305",
+            label: "新增 localize 套件",
             path: "guide/i18n/add-package",
             contentPath: "guide/i18n/add-package"
           },
           {
-            label: "\u901A\u8FC7 ID \u5F15\u7528\u8BED\u8A00\u73AF\u5883",
+            label: "透過 ID 引用語言環境",
             path: "guide/i18n/locale-id",
             contentPath: "guide/i18n/locale-id"
           },
           {
-            label: "\u57FA\u4E8E\u8BED\u8A00\u73AF\u5883\u683C\u5F0F\u5316\u6570\u636E",
+            label: "基於語言環境格式化資料",
             path: "guide/i18n/format-data-locale",
             contentPath: "guide/i18n/format-data-locale"
           },
           {
-            label: "\u4E3A\u7FFB\u8BD1\u51C6\u5907\u7EC4\u4EF6",
+            label: "為翻譯準備元件",
             path: "guide/i18n/prepare",
             contentPath: "guide/i18n/prepare"
           },
           {
-            label: "\u4F7F\u7528\u7FFB\u8BD1\u7ED3\u679C\u6587\u4EF6",
+            label: "使用翻譯結果檔案",
             path: "guide/i18n/translation-files",
             contentPath: "guide/i18n/translation-files"
           },
           {
-            label: "\u628A\u7FFB\u8BD1\u7ED3\u679C\u5E76\u5165\u5E94\u7528",
+            label: "把翻譯結果併入應用",
             path: "guide/i18n/merge",
             contentPath: "guide/i18n/merge"
           },
           {
-            label: "\u90E8\u7F72\u591A\u4E2A\u8BED\u8A00\u73AF\u5883",
+            label: "部署多個語言環境",
             path: "guide/i18n/deploy",
             contentPath: "guide/i18n/deploy"
           },
           {
-            label: "\u5BFC\u5165\u8BED\u8A00\u73AF\u5883\u6570\u636E\u7684\u5168\u5C40\u53D8\u4F53",
+            label: "匯入語言環境資料的全域變體",
             path: "guide/i18n/import-global-variants",
             contentPath: "guide/i18n/import-global-variants"
           },
           {
-            label: "\u4F7F\u7528\u81EA\u5B9A\u4E49 ID \u7BA1\u7406\u5DF2\u6807\u8BB0\u7684\u6587\u672C",
+            label: "使用自定義 ID 管理已標記的文字",
             path: "guide/i18n/manage-marked-text",
             contentPath: "guide/i18n/manage-marked-text"
           },
           {
-            label: "\u8303\u4F8B Angular \u5E94\u7528",
+            label: "範例 Angular 應用",
             path: "guide/i18n/example",
             contentPath: "guide/i18n/example"
           }
         ]
       },
       {
-        label: "\u52A8\u753B",
+        label: "動畫",
         status: "updated",
         children: [
           {
-            label: "\u8FDB\u573A\u4E0E\u79BB\u573A\u52A8\u753B",
+            label: "進場與離場動畫",
             path: "guide/animations",
             contentPath: "guide/animations/enter-and-leave",
             status: "new"
           },
           {
-            label: "\u4F7F\u7528 CSS \u5B9E\u73B0\u590D\u6742\u52A8\u753B",
+            label: "使用 CSS 實現複雜動畫",
             path: "guide/animations/css",
             contentPath: "guide/animations/css"
           },
           {
-            label: "\u8DEF\u7531\u8FC7\u6E21\u52A8\u753B",
+            label: "路由轉場動畫",
             path: "guide/routing/route-transition-animations",
             contentPath: "guide/routing/route-transition-animations"
           }
         ]
       },
       {
-        label: "\u62D6\u653E",
+        label: "拖放",
         path: "guide/drag-drop",
         contentPath: "guide/drag-drop"
       }
     ]
   },
   {
-    label: "\u5229\u7528 AI \u6784\u5EFA",
+    label: "利用 AI 建立",
     status: "new",
     children: [
       {
-        label: "\u5FEB\u901F\u4E0A\u624B",
+        label: "快速上手",
         path: "ai",
         contentPath: "ai/overview"
       },
       {
-        label: "LLM \u63D0\u793A\u8BCD\u548C AI IDE \u8BBE\u7F6E",
+        label: "LLM 提示詞和 AI IDE 設定",
         path: "ai/develop-with-ai",
         contentPath: "ai/develop-with-ai"
       },
       {
-        label: "\u8BBE\u8BA1\u6A21\u5F0F",
+        label: "設計模式",
         path: "ai/design-patterns",
         contentPath: "ai/design-patterns"
       },
       {
-        label: "Angular CLI MCP \u670D\u52A1\u5668\u8BBE\u7F6E",
+        label: "Angular CLI MCP 伺服器設定",
         path: "ai/mcp",
         contentPath: "ai/mcp-server-setup"
       }
     ]
   },
   {
-    label: "\u5F00\u53D1\u8005\u5DE5\u5177",
+    label: "開發者工具",
     children: [
       {
         label: "Angular CLI",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "tools/cli",
             contentPath: "tools/cli/overview"
           },
           {
-            label: "\u672C\u5730\u5B89\u88C5",
+            label: "本地安裝",
             path: "tools/cli/setup-local",
             contentPath: "tools/cli/setup-local"
           },
           {
-            label: "\u6784\u5EFA Angular \u5E94\u7528",
+            label: "建立 Angular 應用",
             path: "tools/cli/build",
             contentPath: "tools/cli/build"
           },
           {
-            label: "\u4E3A Angular \u5E94\u7528\u542F\u52A8\u5F00\u53D1\u670D\u52A1\u5668",
+            label: "為 Angular 應用啟動開發伺服器",
             path: "tools/cli/serve",
             contentPath: "tools/cli/serve"
           },
           {
-            label: "\u90E8\u7F72",
+            label: "部署",
             path: "tools/cli/deployment",
             contentPath: "tools/cli/deployment"
           },
           {
-            label: "\u7AEF\u5230\u7AEF\u6D4B\u8BD5",
+            label: "端到端測試",
             path: "tools/cli/end-to-end",
             contentPath: "tools/cli/end-to-end"
           },
           {
-            label: "\u8FC1\u79FB\u5230\u65B0\u7684\u6784\u5EFA\u4F53\u7CFB",
+            label: "遷移到新的建立體系",
             path: "tools/cli/build-system-migration",
             contentPath: "tools/cli/build-system-migration"
           },
           {
-            label: "\u6784\u5EFA\u73AF\u5883",
+            label: "建立環境",
             path: "tools/cli/environments",
             contentPath: "tools/cli/environments"
           },
           {
-            label: "Angular CLI \u6784\u5EFA\u5668",
+            label: "Angular CLI 建構式",
             path: "tools/cli/cli-builder",
             contentPath: "tools/cli/cli-builder"
           },
           {
-            label: "\u4F7F\u7528\u539F\u7406\u56FE\u751F\u6210\u4EE3\u7801",
+            label: "使用原理圖生成程式碼",
             path: "tools/cli/schematics",
             contentPath: "tools/cli/schematics"
           },
           {
-            label: "\u5236\u4F5C\u539F\u7406\u56FE",
+            label: "製作原理圖",
             path: "tools/cli/schematics-authoring",
             contentPath: "tools/cli/schematics-authoring"
           },
           {
-            label: "\u5404\u79CD\u5E93\u7684\u539F\u7406\u56FE",
+            label: "各種函式庫的原理圖",
             path: "tools/cli/schematics-for-libraries",
             contentPath: "tools/cli/schematics-for-libraries"
           },
           {
-            label: "\u6A21\u677F\u7C7B\u578B\u68C0\u67E5",
+            label: "樣板型別檢查",
             path: "tools/cli/template-typecheck",
             contentPath: "tools/cli/template-typecheck"
           },
           {
-            label: "\u9884\u5148\u7F16\u8BD1\uFF08AOT\uFF09",
+            label: "預先編譯（AOT）",
             path: "tools/cli/aot-compiler",
             contentPath: "tools/cli/aot-compiler"
           },
           {
-            label: "AOT \u5143\u6570\u636E\u9519\u8BEF",
+            label: "AOT 元資料錯誤",
             path: "tools/cli/aot-metadata-errors",
             contentPath: "tools/cli/aot-metadata-errors"
           }
         ]
       },
       {
-        label: "\u5E93",
+        label: "函式庫",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "tools/libraries",
             contentPath: "tools/libraries/overview"
           },
           {
-            label: "\u521B\u5EFA\u5E93",
+            label: "建立函式庫",
             path: "tools/libraries/creating-libraries",
             contentPath: "tools/libraries/creating-libraries"
           },
           {
-            label: "\u4F7F\u7528\u5E93",
+            label: "使用函式庫",
             path: "tools/libraries/using-libraries",
             contentPath: "tools/libraries/using-libraries"
           },
           {
-            label: "Angular \u5305\u683C\u5F0F",
+            label: "Angular 套件格式",
             path: "tools/libraries/angular-package-format",
             contentPath: "tools/libraries/angular-package-format"
           }
         ]
       },
       {
-        label: "\u5F00\u53D1\u5DE5\u5177",
+        label: "開發工具",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "tools/devtools",
             contentPath: "tools/devtools/overview"
           },
           {
-            label: "\u7EC4\u4EF6",
+            label: "元件",
             path: "tools/devtools/component",
             contentPath: "tools/devtools/component"
           },
           {
-            label: "\u5256\u6790\u5668",
+            label: "剖析器",
             path: "tools/devtools/profiler",
             contentPath: "tools/devtools/profiler"
           }
@@ -1316,62 +1316,62 @@ var DOCS_SUB_NAVIGATION_DATA = [
         ]
       },
       {
-        label: "\u8BED\u8A00\u670D\u52A1",
+        label: "語言服務",
         path: "tools/language-service",
         contentPath: "tools/language-service"
       }
     ]
   },
   {
-    label: "\u6700\u4F73\u5B9E\u8DF5",
+    label: "最佳實踐",
     children: [
       {
-        label: "\u98CE\u683C\u6307\u5357",
+        label: "風格指南",
         path: "style-guide",
         contentPath: "best-practices/style-guide",
         status: "updated"
       },
       {
-        label: "\u5B89\u5168\u6027",
+        label: "安全性",
         path: "best-practices/security",
         contentPath: "guide/security"
         // Have not refactored due to build issues
       },
       {
-        label: "\u65E0\u969C\u788D\u6027",
+        label: "無障礙性",
         path: "best-practices/a11y",
         contentPath: "best-practices/a11y"
       },
       {
-        label: "Angular \u4E2D\u7684\u672A\u5904\u7406\u9519\u8BEF",
+        label: "Angular 中的未處理錯誤",
         path: "best-practices/error-handling",
         contentPath: "best-practices/error-handling"
       },
       {
-        label: "\u6027\u80FD",
+        label: "效能",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "best-practices/runtime-performance",
             contentPath: "best-practices/runtime-performance/overview"
           },
           {
-            label: "Zone \u6C61\u67D3",
+            label: "Zone 汙染",
             path: "best-practices/zone-pollution",
             contentPath: "best-practices/runtime-performance/zone-pollution"
           },
           {
-            label: "\u6162\u901F\u8BA1\u7B97",
+            label: "慢速計算",
             path: "best-practices/slow-computations",
             contentPath: "best-practices/runtime-performance/slow-computations"
           },
           {
-            label: "\u8DF3\u8FC7\u7EC4\u4EF6\u7684\u5B50\u6811",
+            label: "跳過元件的子樹",
             path: "best-practices/skipping-subtrees",
             contentPath: "best-practices/runtime-performance/skipping-subtrees"
           },
           {
-            label: "\u4F7F\u7528 Chrome DevTools \u8FDB\u884C\u5256\u6790",
+            label: "使用 Chrome DevTools 進行剖析",
             path: "best-practices/profiling-with-chrome-devtools",
             contentPath: "best-practices/runtime-performance/profiling-with-chrome-devtools"
           },
@@ -1379,14 +1379,14 @@ var DOCS_SUB_NAVIGATION_DATA = [
         ]
       },
       {
-        label: "\u4FDD\u6301\u66F4\u65B0",
+        label: "保持更新",
         path: "update",
         contentPath: "best-practices/update"
       }
     ]
   },
   {
-    label: "\u6269\u5C55\u751F\u6001\u7CFB\u7EDF",
+    label: "擴充套件生態系統",
     children: [
       {
         label: "NgModules",
@@ -1394,45 +1394,45 @@ var DOCS_SUB_NAVIGATION_DATA = [
         contentPath: "guide/ngmodules/overview"
       },
       {
-        label: "\u52A8\u753B\u6280\u672F\uFF08\u9057\u7559\uFF09",
+        label: "動畫技術（遺留）",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "guide/legacy-animations",
             contentPath: "guide/animations/overview"
           },
           {
-            label: "\u8FC7\u6E21\u52A8\u753B\u4E0E\u89E6\u53D1\u5668",
+            label: "轉場動畫與觸發器",
             path: "guide/legacy-animations/transition-and-triggers",
             contentPath: "guide/animations/transition-and-triggers"
           },
           {
-            label: "\u590D\u6742\u5E8F\u5217",
+            label: "複雜序列",
             path: "guide/legacy-animations/complex-sequences",
             contentPath: "guide/animations/complex-sequences"
           },
           {
-            label: "\u53EF\u590D\u7528\u52A8\u753B",
+            label: "可複用動畫",
             path: "guide/legacy-animations/reusable-animations",
             contentPath: "guide/animations/reusable-animations"
           },
           {
-            label: "\u8FC1\u79FB\u5230\u539F\u751F CSS \u52A8\u753B",
+            label: "遷移到原生 CSS 動畫",
             path: "guide/animations/migration",
             contentPath: "guide/animations/migration"
           }
         ]
       },
       {
-        label: "\u5728 Angular \u4E2D\u4F7F\u7528 RxJS",
+        label: "在 Angular 中使用 RxJS",
         children: [
           {
-            label: "\u4E0E\u4FE1\u53F7\u4E92\u64CD\u4F5C",
+            label: "與訊號互操作",
             path: "ecosystem/rxjs-interop",
             contentPath: "ecosystem/rxjs-interop/signals-interop"
           },
           {
-            label: "\u4E0E\u7EC4\u4EF6\u7684\u8F93\u51FA\u5C5E\u6027\u4E92\u64CD\u4F5C",
+            label: "與元件的輸出屬性互操作",
             path: "ecosystem/rxjs-interop/output-interop",
             contentPath: "ecosystem/rxjs-interop/output-interop"
           },
@@ -1444,15 +1444,15 @@ var DOCS_SUB_NAVIGATION_DATA = [
         ]
       },
       {
-        label: "Service Worker \u4E0E PWA",
+        label: "Service Worker 與 PWA",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "ecosystem/service-workers",
             contentPath: "ecosystem/service-workers/overview"
           },
           {
-            label: "\u5FEB\u901F\u4E0A\u624B",
+            label: "快速上手",
             path: "ecosystem/service-workers/getting-started",
             contentPath: "ecosystem/service-workers/getting-started"
           },
@@ -1462,27 +1462,27 @@ var DOCS_SUB_NAVIGATION_DATA = [
             contentPath: "ecosystem/service-workers/custom-service-worker-scripts"
           },
           {
-            label: "\u914D\u7F6E\u6587\u4EF6",
+            label: "設定檔案",
             path: "ecosystem/service-workers/config",
             contentPath: "ecosystem/service-workers/config"
           },
           {
-            label: "\u4E0E Service Worker \u901A\u8BAF",
+            label: "與 Service Worker 通訊",
             path: "ecosystem/service-workers/communications",
             contentPath: "ecosystem/service-workers/communications"
           },
           {
-            label: "\u63A8\u9001\u901A\u77E5",
+            label: "推送通知",
             path: "ecosystem/service-workers/push-notifications",
             contentPath: "ecosystem/service-workers/push-notifications"
           },
           {
-            label: "Service Worker \u7684 DevOps",
+            label: "Service Worker 的 DevOps",
             path: "ecosystem/service-workers/devops",
             contentPath: "ecosystem/service-workers/devops"
           },
           {
-            label: "App \u5916\u58F3\u6A21\u5F0F",
+            label: "App 外殼模式",
             path: "ecosystem/service-workers/app-shell",
             contentPath: "ecosystem/service-workers/app-shell"
           }
@@ -1494,7 +1494,7 @@ var DOCS_SUB_NAVIGATION_DATA = [
         contentPath: "ecosystem/web-workers"
       },
       {
-        label: "\u81EA\u5B9A\u4E49\u6784\u5EFA\u6D41\u6C34\u7EBF",
+        label: "自定義建立流水線",
         path: "ecosystem/custom-build-pipeline",
         contentPath: "ecosystem/custom-build-pipeline"
       },
@@ -1509,15 +1509,15 @@ var DOCS_SUB_NAVIGATION_DATA = [
         path: "https://github.com/angular/angularfire#readme"
       },
       {
-        label: "Google \u5730\u56FE",
+        label: "Google 地圖",
         path: "https://github.com/angular/components/tree/main/src/google-maps#readme"
       },
       {
-        label: "Google \u652F\u4ED8",
+        label: "Google 支付",
         path: "https://github.com/google-pay/google-pay-button#angular"
       },
       {
-        label: "YouTube \u64AD\u653E\u5668",
+        label: "YouTube 播放器",
         path: "https://github.com/angular/components/blob/main/src/youtube-player/README.md"
       },
       {
@@ -1532,10 +1532,10 @@ var DOCS_SUB_NAVIGATION_DATA = [
   },
   ...isDevMode() ? [
     {
-      label: "Adev \u5F00\u53D1\u8005\u6307\u5357",
+      label: "Adev 開發者指南",
       children: [
         {
-          label: "\u5927\u6742\u70E9",
+          label: "大雜燴",
           path: "kitchen-sink",
           contentPath: "kitchen-sink"
         }
@@ -1551,34 +1551,34 @@ var TUTORIALS_SUB_NAVIGATION_DATA = [
   {
     path: DEFAULT_PAGES.TUTORIALS,
     contentPath: "tutorials/home",
-    label: "\u6559\u7A0B"
+    label: "教程"
   }
 ];
 var REFERENCE_SUB_NAVIGATION_DATA = [
   {
-    label: "\u8DEF\u7EBF\u56FE",
+    label: "路線圖",
     path: "roadmap",
     contentPath: "reference/roadmap"
   },
   {
-    label: "\u53C2\u4E0E\u5F00\u53D1",
+    label: "參與開發",
     path: "https://github.com/angular/angular/blob/main/CONTRIBUTING.md"
   },
   {
-    label: "API \u53C2\u8003\u624B\u518C",
+    label: "API 參考手冊",
     children: [
       {
-        label: "\u6982\u89C8",
+        label: "概覽",
         path: "api"
       },
       ...getApiNavigationItems()
     ]
   },
   {
-    label: "CLI \u53C2\u8003\u624B\u518C",
+    label: "CLI 參考手冊",
     children: [
       {
-        label: "\u6982\u89C8",
+        label: "概覽",
         path: "cli",
         contentPath: "reference/cli"
       },
@@ -1590,7 +1590,7 @@ var REFERENCE_SUB_NAVIGATION_DATA = [
         label: "ng analytics",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "cli/analytics"
           },
           {
@@ -1619,7 +1619,7 @@ var REFERENCE_SUB_NAVIGATION_DATA = [
         label: "ng cache",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "cli/cache"
           },
           {
@@ -1644,7 +1644,7 @@ var REFERENCE_SUB_NAVIGATION_DATA = [
         label: "ng completion",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "cli/completion"
           },
           {
@@ -1673,7 +1673,7 @@ var REFERENCE_SUB_NAVIGATION_DATA = [
         label: "ng generate",
         children: [
           {
-            label: "\u6982\u89C8",
+            label: "概覽",
             path: "cli/generate"
           },
           {
@@ -1785,10 +1785,10 @@ var REFERENCE_SUB_NAVIGATION_DATA = [
     ]
   },
   {
-    label: "\u9519\u8BEF\u767E\u79D1",
+    label: "錯誤百科",
     children: [
       {
-        label: "\u6982\u89C8",
+        label: "概覽",
         path: "errors",
         contentPath: "reference/errors/overview"
       },
@@ -1796,10 +1796,10 @@ var REFERENCE_SUB_NAVIGATION_DATA = [
     ]
   },
   {
-    label: "\u6269\u5C55\u8BCA\u65AD",
+    label: "擴充套件診斷",
     children: [
       {
-        label: "\u6982\u89C8",
+        label: "概覽",
         path: "extended-diagnostics",
         contentPath: "reference/extended-diagnostics/overview"
       },
@@ -1807,94 +1807,94 @@ var REFERENCE_SUB_NAVIGATION_DATA = [
     ]
   },
   {
-    label: "\u7248\u672C\u4E0E\u53D1\u5E03",
+    label: "版本與發布",
     path: "reference/releases",
     contentPath: "reference/releases"
   },
   {
-    label: "\u7248\u672C\u517C\u5BB9\u6027",
+    label: "版本相容性",
     path: "reference/versions",
     contentPath: "reference/versions"
   },
   {
-    label: "\u66F4\u65B0\u6307\u5357",
+    label: "更新指南",
     path: "update-guide"
   },
   {
-    label: "\u914D\u7F6E",
+    label: "設定",
     children: [
       {
-        label: "\u6587\u4EF6\u7ED3\u6784",
+        label: "檔案結構",
         path: "reference/configs/file-structure",
         contentPath: "reference/configs/file-structure"
       },
       {
-        label: "\u5DE5\u4F5C\u533A\u914D\u7F6E",
+        label: "工作區設定",
         path: "reference/configs/workspace-config",
         contentPath: "reference/configs/workspace-config"
       },
       {
-        label: "Angular \u7F16\u8BD1\u5668\u9009\u9879",
+        label: "Angular 編譯器選項",
         path: "reference/configs/angular-compiler-options",
         contentPath: "reference/configs/angular-compiler-options"
       },
       {
-        label: "npm \u4F9D\u8D56",
+        label: "npm 依賴",
         path: "reference/configs/npm-packages",
         contentPath: "reference/configs/npm-packages"
       }
     ]
   },
   {
-    label: "\u8FC1\u79FB",
+    label: "遷移",
     children: [
       {
-        label: "\u6982\u89C8",
+        label: "概覽",
         path: "reference/migrations",
         contentPath: "reference/migrations/overview"
       },
       {
-        label: "\u72EC\u7ACB\u7248",
+        label: "獨立版",
         path: "reference/migrations/standalone",
         contentPath: "reference/migrations/standalone"
       },
       {
-        label: "\u63A7\u5236\u6D41\u8BED\u6CD5",
+        label: "控制流語法",
         path: "reference/migrations/control-flow",
         contentPath: "reference/migrations/control-flow"
       },
       {
-        label: "inject() \u51FD\u6570",
+        label: "inject() 函式",
         path: "reference/migrations/inject-function",
         contentPath: "reference/migrations/inject-function"
       },
       {
-        label: "\u60F0\u6027\u52A0\u8F7D\u8DEF\u7531",
+        label: "延遲載入路由",
         path: "reference/migrations/route-lazy-loading",
         contentPath: "reference/migrations/route-lazy-loading"
       },
       {
-        label: "\u4FE1\u53F7\u578B\u8F93\u5165\u5C5E\u6027",
+        label: "訊號型輸入屬性",
         path: "reference/migrations/signal-inputs",
         contentPath: "reference/migrations/signal-inputs"
       },
       {
-        label: "\u8F93\u51FA\u5C5E\u6027",
+        label: "輸出屬性",
         path: "reference/migrations/outputs",
         contentPath: "reference/migrations/outputs"
       },
       {
-        label: "\u4FE1\u53F7\u578B\u67E5\u8BE2",
+        label: "訊號型查詢",
         path: "reference/migrations/signal-queries",
         contentPath: "reference/migrations/signal-queries"
       },
       {
-        label: "\u6E05\u7406\u672A\u7528\u5BFC\u5165",
+        label: "清理未用匯入",
         path: "reference/migrations/cleanup-unused-imports",
         contentPath: "reference/migrations/cleanup-unused-imports"
       },
       {
-        label: "\u81EA\u95ED\u5408\u6807\u7B7E",
+        label: "自閉合標籤",
         path: "reference/migrations/self-closing-tags",
         contentPath: "reference/migrations/self-closing-tags"
       }
@@ -1903,12 +1903,12 @@ var REFERENCE_SUB_NAVIGATION_DATA = [
 ];
 var FOOTER_NAVIGATION_DATA = [
   {
-    label: "\u5BA3\u4F20\u8D44\u6599",
+    label: "宣傳資料",
     path: "press-kit",
     contentPath: "reference/press-kit"
   },
   {
-    label: "\u6388\u6743\u65B9\u5F0F",
+    label: "授權方式",
     path: "license",
     contentPath: "reference/license"
   }
@@ -1936,12 +1936,12 @@ var _MainComponent = class _MainComponent {
   }
 };
 __name(_MainComponent, "MainComponent");
-__publicField(_MainComponent, "\u0275fac", /* @__PURE__ */ __name(function MainComponent_Factory(__ngFactoryType__) {
+__publicField(_MainComponent, "ɵfac", /* @__PURE__ */ __name(function MainComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MainComponent)();
 }, "MainComponent_Factory"));
-__publicField(_MainComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _MainComponent, selectors: [["adev-main"]], inputs: { search: [1, "search"] }, outputs: { search: "searchChange" }, decls: 1, vars: 0, template: /* @__PURE__ */ __name(function MainComponent_Template(rf, ctx) {
+__publicField(_MainComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _MainComponent, selectors: [["adev-main"]], inputs: { search: [1, "search"] }, outputs: { search: "searchChange" }, decls: 1, vars: 0, template: /* @__PURE__ */ __name(function MainComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "router-outlet");
+    ɵɵelement(0, "router-outlet");
   }
 }, "MainComponent_Template"), dependencies: [RouterOutlet], encapsulation: 2 }));
 var MainComponent = _MainComponent;
@@ -1957,7 +1957,7 @@ var MainComponent = _MainComponent;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(MainComponent, { className: "MainComponent", filePath: "src/app/main.component.ts", lineNumber: 19 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(MainComponent, { className: "MainComponent", filePath: "src/app/main.component.ts", lineNumber: 19 });
 })();
 
 // src/app/routes.ts
@@ -1966,7 +1966,7 @@ var DOCS_ROUTES = mapNavigationItemsToRoutes(flatNavigationData(SUB_NAVIGATION_D
   data: {
     displaySecondaryNav: true
   }
-}, false ? { \u0275entryName: "src/app/features/docs/docs.component.ts" } : {}));
+}, false ? { ɵentryName: "src/app/features/docs/docs.component.ts" } : {}));
 var referenceNavigationItems = flatNavigationData(SUB_NAVIGATION_DATA.reference);
 var commonReferenceRouteData = {
   displaySecondaryNav: true
@@ -1974,16 +1974,16 @@ var commonReferenceRouteData = {
 var referencePageRoutes = mapNavigationItemsToRoutes(referenceNavigationItems.filter((r) => r.path === DEFAULT_PAGES.REFERENCE), __spreadValues({
   loadComponent: /* @__PURE__ */ __name(() => import("./chunk-3WUAYQCQ.js"), "loadComponent"),
   data: commonReferenceRouteData
-}, false ? { \u0275entryName: "src/app/features/references/api-reference-list/api-reference-list.component.ts" } : {}));
+}, false ? { ɵentryName: "src/app/features/references/api-reference-list/api-reference-list.component.ts" } : {}));
 var updateGuidePageRoute = __spreadValues({
   path: referenceNavigationItems.find((r) => r.path === DEFAULT_PAGES.UPDATE).path,
   loadComponent: /* @__PURE__ */ __name(() => import("./chunk-HLQ4X4FP.js"), "loadComponent"),
   data: commonReferenceRouteData
-}, false ? { \u0275entryName: "src/app/features/update/update.component.ts" } : {});
+}, false ? { ɵentryName: "src/app/features/update/update.component.ts" } : {});
 var cliReferencePageRoutes = mapNavigationItemsToRoutes(referenceNavigationItems.filter((r) => r.path?.startsWith(`${PAGE_PREFIX.CLI}/`)), __spreadValues({
   loadComponent: /* @__PURE__ */ __name(() => import("./chunk-BM7OP7FY.js"), "loadComponent"),
   data: commonReferenceRouteData
-}, false ? { \u0275entryName: "src/app/features/references/cli-reference-details-page/cli-reference-details-page.component.ts" } : {})).map((route) => __spreadProps(__spreadValues({}, route), {
+}, false ? { ɵentryName: "src/app/features/references/cli-reference-details-page/cli-reference-details-page.component.ts" } : {})).map((route) => __spreadProps(__spreadValues({}, route), {
   resolve: {
     docContent: contentResolver(`${route.path}.html`)
   }
@@ -1991,7 +1991,7 @@ var cliReferencePageRoutes = mapNavigationItemsToRoutes(referenceNavigationItems
 var docsReferencePageRoutes = mapNavigationItemsToRoutes(referenceNavigationItems.filter((r) => r.path !== DEFAULT_PAGES.REFERENCE && r.path !== DEFAULT_PAGES.UPDATE && !r.path?.startsWith(`${PAGE_PREFIX.API}/`) && !r.path?.startsWith(`${PAGE_PREFIX.CLI}/`)), __spreadValues({
   loadComponent: /* @__PURE__ */ __name(() => import("./chunk-ISB5AJOI.js"), "loadComponent"),
   data: __spreadValues({}, commonReferenceRouteData)
-}, false ? { \u0275entryName: "src/app/features/docs/docs.component.ts" } : {}));
+}, false ? { ɵentryName: "src/app/features/docs/docs.component.ts" } : {}));
 var REFERENCE_ROUTES = [
   ...referencePageRoutes,
   ...docsReferencePageRoutes,
@@ -2004,18 +2004,18 @@ var commonTutorialRouteData = {
 var docsTutorialsRoutes = mapNavigationItemsToRoutes(tutorialsNavigationItems.filter((route) => route.path === DEFAULT_PAGES.TUTORIALS), __spreadValues({
   loadComponent: /* @__PURE__ */ __name(() => import("./chunk-ISB5AJOI.js"), "loadComponent"),
   data: __spreadValues({}, commonTutorialRouteData)
-}, false ? { \u0275entryName: "src/app/features/docs/docs.component.ts" } : {}));
+}, false ? { ɵentryName: "src/app/features/docs/docs.component.ts" } : {}));
 var tutorialComponentRoutes = mapNavigationItemsToRoutes(tutorialsNavigationItems.filter((route) => route.path !== DEFAULT_PAGES.TUTORIALS), __spreadValues({
   loadComponent: /* @__PURE__ */ __name(() => import("./chunk-3BGK2WSD.js"), "loadComponent"),
   data: __spreadValues({}, commonTutorialRouteData)
-}, false ? { \u0275entryName: "src/app/features/tutorial/tutorial.component.ts" } : {}));
+}, false ? { ɵentryName: "src/app/features/tutorial/tutorial.component.ts" } : {}));
 var TUTORIALS_ROUTES = [...docsTutorialsRoutes, ...tutorialComponentRoutes];
 var SUB_NAVIGATION_ROUTES = [
   ...DOCS_ROUTES,
   ...REFERENCE_ROUTES,
   ...TUTORIALS_ROUTES
 ];
-var FOOTER_ROUTES = mapNavigationItemsToRoutes(flatNavigationData(SUB_NAVIGATION_DATA.footer), __spreadValues({ loadComponent: /* @__PURE__ */ __name(() => import("./chunk-ISB5AJOI.js"), "loadComponent") }, false ? { \u0275entryName: "src/app/features/docs/docs.component.ts" } : {}));
+var FOOTER_ROUTES = mapNavigationItemsToRoutes(flatNavigationData(SUB_NAVIGATION_DATA.footer), __spreadValues({ loadComponent: /* @__PURE__ */ __name(() => import("./chunk-ISB5AJOI.js"), "loadComponent") }, false ? { ɵentryName: "src/app/features/docs/docs.component.ts" } : {}));
 var API_REFERENCE_ROUTES = mapApiManifestToRoutes();
 var REDIRECT_ROUTES = [
   {
@@ -2165,7 +2165,7 @@ var routes = [
         path: "",
         loadComponent: /* @__PURE__ */ __name(() => import("./chunk-UVMHHQTK.js"), "loadComponent"),
         data: { label: "Home" }
-      }, false ? { \u0275entryName: "src/app/features/home/home.component.ts" } : {}),
+      }, false ? { ɵentryName: "src/app/features/home/home.component.ts" } : {}),
       {
         path: PAGE_PREFIX.DOCS,
         redirectTo: DEFAULT_PAGES.DOCS
@@ -2178,7 +2178,7 @@ var routes = [
         path: PAGE_PREFIX.PLAYGROUND,
         loadComponent: /* @__PURE__ */ __name(() => import("./chunk-TNYENHQP.js"), "loadComponent"),
         data: __spreadProps(__spreadValues({}, commonTutorialRouteData), { label: "Playground" })
-      }, false ? { \u0275entryName: "src/app/features/playground/playground.component.ts" } : {}),
+      }, false ? { ɵentryName: "src/app/features/playground/playground.component.ts" } : {}),
       ...SUB_NAVIGATION_ROUTES,
       ...API_REFERENCE_ROUTES,
       ...FOOTER_ROUTES,
@@ -2191,13 +2191,13 @@ var routes = [
     path: "**",
     loadComponent: /* @__PURE__ */ __name(() => import("./chunk-ISB5AJOI.js"), "loadComponent"),
     resolve: { "docContent": contentResolver("error") }
-  }, false ? { \u0275entryName: "src/app/features/docs/docs.component.ts" } : {})
+  }, false ? { ɵentryName: "src/app/features/docs/docs.component.ts" } : {})
 ];
 
 // src/app/core/services/a-dev-title-strategy.ts
 var TITLE_SUFFIX = "Angular";
-var TITLE_SEPARATOR = " \u2022 ";
-var DEFAULT_PAGE_TITLE = "\u6982\u89C8";
+var TITLE_SEPARATOR = " • ";
+var DEFAULT_PAGE_TITLE = "概覽";
 var _ADevTitleStrategy = class _ADevTitleStrategy extends TitleStrategy {
   title = inject(Title);
   constructor() {
@@ -2221,10 +2221,10 @@ var _ADevTitleStrategy = class _ADevTitleStrategy extends TitleStrategy {
   }
 };
 __name(_ADevTitleStrategy, "ADevTitleStrategy");
-__publicField(_ADevTitleStrategy, "\u0275fac", /* @__PURE__ */ __name(function ADevTitleStrategy_Factory(__ngFactoryType__) {
+__publicField(_ADevTitleStrategy, "ɵfac", /* @__PURE__ */ __name(function ADevTitleStrategy_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ADevTitleStrategy)();
 }, "ADevTitleStrategy_Factory"));
-__publicField(_ADevTitleStrategy, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ADevTitleStrategy, factory: _ADevTitleStrategy.\u0275fac, providedIn: "root" }));
+__publicField(_ADevTitleStrategy, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _ADevTitleStrategy, factory: _ADevTitleStrategy.ɵfac, providedIn: "root" }));
 var ADevTitleStrategy = _ADevTitleStrategy;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ADevTitleStrategy, [{
@@ -2312,10 +2312,10 @@ var _AppScroller = class _AppScroller {
   }
 };
 __name(_AppScroller, "AppScroller");
-__publicField(_AppScroller, "\u0275fac", /* @__PURE__ */ __name(function AppScroller_Factory(__ngFactoryType__) {
+__publicField(_AppScroller, "ɵfac", /* @__PURE__ */ __name(function AppScroller_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AppScroller)();
 }, "AppScroller_Factory"));
-__publicField(_AppScroller, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _AppScroller, factory: _AppScroller.\u0275fac, providedIn: "root" }));
+__publicField(_AppScroller, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _AppScroller, factory: _AppScroller.ɵfac, providedIn: "root" }));
 var AppScroller = _AppScroller;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppScroller, [{
@@ -2441,115 +2441,115 @@ var _Footer = class _Footer {
   ngLinks = ANGULAR_LINKS;
 };
 __name(_Footer, "Footer");
-__publicField(_Footer, "\u0275fac", /* @__PURE__ */ __name(function Footer_Factory(__ngFactoryType__) {
+__publicField(_Footer, "ɵfac", /* @__PURE__ */ __name(function Footer_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Footer)();
 }, "Footer_Factory"));
-__publicField(_Footer, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _Footer, selectors: [["footer", "adev-footer", ""]], attrs: _c0, decls: 80, vars: 7, consts: [[1, "adev-footer-container"], [1, "adev-footer-columns"], ["title", "Angular \u535A\u5BA2", 3, "href"], ["title", "X (\u524D Twitter)", 3, "href"], ["title", "Bluesky", 3, "href"], ["title", "YouTube", 3, "href"], ["title", "\u52A0\u5165 Angular \u793E\u533A Discord \u670D\u52A1\u5668\u7684\u8BA8\u8BBA\u5427\uFF01", 3, "href"], ["title", "GitHub", 3, "href"], ["title", "Stack Overflow\uFF1A\u793E\u533A\u4E3A\u4F60\u89E3\u7B54\u6280\u672F\u4E0A\u7684 Angular \u95EE\u9898\u3002", 3, "href"], ["href", "https://github.com/angular/angular/blob/main/CONTRIBUTING.md", "title", "\u5411 Angular \u505A\u8D21\u732E"], ["href", "https://github.com/angular/code-of-conduct/blob/main/CODE_OF_CONDUCT.md", "title", "\u5F7C\u6B64\u5C0A\u91CD"], ["href", "https://github.com/angular/angular/issues", "title", "\u5728 Github \u4E0A\u62A5\u544A\u95EE\u9898\u6216\u63D0\u5EFA\u8BAE"], ["href", "https://devlibrary.withgoogle.com/products/angular?sort=updated", "title", "Google \u7684\u5F00\u53D1\u5E93"], ["href", "https://developers.google.com/community/experts/directory?specialization=angular", "title", "Angular Google \u5F00\u53D1\u6280\u672F\u4E13\u5BB6"], ["routerLink", "/press-kit", "title", "\u5A92\u4F53\u8054\u7CFB\u3001\u6807\u5FD7\u548C\u54C1\u724C\u5F62\u8C61\u3002"], ["routerLink", "/roadmap", "title", "\u8DEF\u7EBF\u56FE"], ["href", "https://angular.dev/", "title", "English Version"], ["href", "https://dev.angular.tw/", "title", "\u6B63\u9AD4\u4E2D\u6587\u7248"], ["href", "https://angular.jp/", "title", "\u65E5\u672C\u8A9E\u7248"], ["href", "https://angular.kr/", "title", "\uD55C\uAD6D\uC5B4"], [1, "docs-license"], ["routerLink", "/license", "title", "\u534F\u8BAE\u6587\u672C"], ["href", "https://creativecommons.org/licenses/by/4.0/"]], template: /* @__PURE__ */ __name(function Footer_Template(rf, ctx) {
+__publicField(_Footer, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _Footer, selectors: [["footer", "adev-footer", ""]], attrs: _c0, decls: 80, vars: 7, consts: [[1, "adev-footer-container"], [1, "adev-footer-columns"], ["title", "Angular 部落格", 3, "href"], ["title", "X (前 Twitter)", 3, "href"], ["title", "Bluesky", 3, "href"], ["title", "YouTube", 3, "href"], ["title", "加入 Angular 社群 Discord 伺服器的討論吧！", 3, "href"], ["title", "GitHub", 3, "href"], ["title", "Stack Overflow：社群為你解答技術上的 Angular 問題。", 3, "href"], ["href", "https://github.com/angular/angular/blob/main/CONTRIBUTING.md", "title", "向 Angular 做貢獻"], ["href", "https://github.com/angular/code-of-conduct/blob/main/CODE_OF_CONDUCT.md", "title", "彼此尊重"], ["href", "https://github.com/angular/angular/issues", "title", "在 Github 上報告問題或提建議"], ["href", "https://devlibrary.withgoogle.com/products/angular?sort=updated", "title", "Google 的開發函式庫"], ["href", "https://developers.google.com/community/experts/directory?specialization=angular", "title", "Angular Google 開發技術專家"], ["routerLink", "/press-kit", "title", "媒體聯絡、標誌和品牌形象。"], ["routerLink", "/roadmap", "title", "路線圖"], ["href", "https://angular.dev/", "title", "English Version"], ["href", "https://dev.angular.tw/", "title", "正體中文版"], ["href", "https://angular.jp/", "title", "日本語版"], ["href", "https://angular.kr/", "title", "한국어"], [1, "docs-license"], ["routerLink", "/license", "title", "協定文字"], ["href", "https://creativecommons.org/licenses/by/4.0/"]], template: /* @__PURE__ */ __name(function Footer_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "div")(3, "h2");
-    \u0275\u0275text(4, "\u793E\u4EA4\u5A92\u4F53");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "ul")(6, "li")(7, "a", 2);
-    \u0275\u0275text(8, "\u535A\u5BA2");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(9, "li")(10, "a", 3);
-    \u0275\u0275text(11, "X (\u524D Twitter)");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(12, "li")(13, "a", 4);
-    \u0275\u0275text(14, "Bluesky");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(15, "li")(16, "a", 5);
-    \u0275\u0275text(17, "YouTube");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(18, "li")(19, "a", 6);
-    \u0275\u0275text(20, " Discord ");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(21, "li")(22, "a", 7);
-    \u0275\u0275text(23, "GitHub");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(24, "li")(25, "a", 8);
-    \u0275\u0275text(26, " Stack Overflow ");
-    \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(27, "div")(28, "h2");
-    \u0275\u0275text(29, "\u793E\u533A");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(30, "ul")(31, "li")(32, "a", 9);
-    \u0275\u0275text(33, " \u505A\u8D21\u732E ");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(34, "li")(35, "a", 10);
-    \u0275\u0275text(36, " \u884C\u4E3A\u51C6\u5219 ");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(37, "li")(38, "a", 11);
-    \u0275\u0275text(39, " \u62A5\u544A\u95EE\u9898 ");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(40, "li")(41, "a", 12);
-    \u0275\u0275text(42, " Google \u7684 \u5F00\u53D1\u5E93 ");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(43, "li")(44, "a", 13);
-    \u0275\u0275text(45, " Angular Google \u5F00\u53D1\u6280\u672F\u4E13\u5BB6 ");
-    \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(46, "div")(47, "h2");
-    \u0275\u0275text(48, "\u8D44\u6E90");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(49, "ul")(50, "li")(51, "a", 14);
-    \u0275\u0275text(52, "\u5BA3\u4F20\u8D44\u6599");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(53, "li")(54, "a", 15);
-    \u0275\u0275text(55, "\u8DEF\u7EBF\u56FE");
-    \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(56, "div")(57, "h2");
-    \u0275\u0275text(58, "\u591A\u8BED\u8A00");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(59, "ul")(60, "li")(61, "a", 16);
-    \u0275\u0275text(62, "English Version");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(63, "li")(64, "a", 17);
-    \u0275\u0275text(65, "\u6B63\u9AD4\u4E2D\u6587\u7248");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(66, "li")(67, "a", 18);
-    \u0275\u0275text(68, "\u65E5\u672C\u8A9E\u7248");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(69, "li")(70, "a", 19);
-    \u0275\u0275text(71, "\uD55C\uAD6D\uC5B4");
-    \u0275\u0275elementEnd()()()()();
-    \u0275\u0275elementStart(72, "p", 20);
-    \u0275\u0275text(73, " \u7531 Google \u5F3A\u529B\u8D4B\u80FD \xA92010-2025\u3002\u4EE3\u7801\u4EE5");
-    \u0275\u0275elementStart(74, "a", 21);
-    \u0275\u0275text(75, "MIT-style \u534F\u8BAE");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(76, "\u6388\u6743\u3002\u6587\u6863\u4EE5 ");
-    \u0275\u0275elementStart(77, "a", 22);
-    \u0275\u0275text(78, "CC BY 4.0");
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(79, " \u6388\u6743\u3002 ");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "div", 0)(1, "div", 1)(2, "div")(3, "h2");
+    ɵɵtext(4, "社交媒體");
+    ɵɵelementEnd();
+    ɵɵelementStart(5, "ul")(6, "li")(7, "a", 2);
+    ɵɵtext(8, "部落格");
+    ɵɵelementEnd()();
+    ɵɵelementStart(9, "li")(10, "a", 3);
+    ɵɵtext(11, "X (前 Twitter)");
+    ɵɵelementEnd()();
+    ɵɵelementStart(12, "li")(13, "a", 4);
+    ɵɵtext(14, "Bluesky");
+    ɵɵelementEnd()();
+    ɵɵelementStart(15, "li")(16, "a", 5);
+    ɵɵtext(17, "YouTube");
+    ɵɵelementEnd()();
+    ɵɵelementStart(18, "li")(19, "a", 6);
+    ɵɵtext(20, " Discord ");
+    ɵɵelementEnd()();
+    ɵɵelementStart(21, "li")(22, "a", 7);
+    ɵɵtext(23, "GitHub");
+    ɵɵelementEnd()();
+    ɵɵelementStart(24, "li")(25, "a", 8);
+    ɵɵtext(26, " Stack Overflow ");
+    ɵɵelementEnd()()()();
+    ɵɵelementStart(27, "div")(28, "h2");
+    ɵɵtext(29, "社群");
+    ɵɵelementEnd();
+    ɵɵelementStart(30, "ul")(31, "li")(32, "a", 9);
+    ɵɵtext(33, " 做貢獻 ");
+    ɵɵelementEnd()();
+    ɵɵelementStart(34, "li")(35, "a", 10);
+    ɵɵtext(36, " 行為準則 ");
+    ɵɵelementEnd()();
+    ɵɵelementStart(37, "li")(38, "a", 11);
+    ɵɵtext(39, " 報告問題 ");
+    ɵɵelementEnd()();
+    ɵɵelementStart(40, "li")(41, "a", 12);
+    ɵɵtext(42, " Google 的 開發函式庫 ");
+    ɵɵelementEnd()();
+    ɵɵelementStart(43, "li")(44, "a", 13);
+    ɵɵtext(45, " Angular Google 開發技術專家 ");
+    ɵɵelementEnd()()()();
+    ɵɵelementStart(46, "div")(47, "h2");
+    ɵɵtext(48, "資源");
+    ɵɵelementEnd();
+    ɵɵelementStart(49, "ul")(50, "li")(51, "a", 14);
+    ɵɵtext(52, "宣傳資料");
+    ɵɵelementEnd()();
+    ɵɵelementStart(53, "li")(54, "a", 15);
+    ɵɵtext(55, "路線圖");
+    ɵɵelementEnd()()()();
+    ɵɵelementStart(56, "div")(57, "h2");
+    ɵɵtext(58, "多語言");
+    ɵɵelementEnd();
+    ɵɵelementStart(59, "ul")(60, "li")(61, "a", 16);
+    ɵɵtext(62, "English Version");
+    ɵɵelementEnd()();
+    ɵɵelementStart(63, "li")(64, "a", 17);
+    ɵɵtext(65, "正體中文版");
+    ɵɵelementEnd()();
+    ɵɵelementStart(66, "li")(67, "a", 18);
+    ɵɵtext(68, "日本語版");
+    ɵɵelementEnd()();
+    ɵɵelementStart(69, "li")(70, "a", 19);
+    ɵɵtext(71, "한국어");
+    ɵɵelementEnd()()()()();
+    ɵɵelementStart(72, "p", 20);
+    ɵɵtext(73, " 由 Google 強力賦能 \xA92010-2025。程式碼以");
+    ɵɵelementStart(74, "a", 21);
+    ɵɵtext(75, "MIT-style 協定");
+    ɵɵelementEnd();
+    ɵɵtext(76, "授權。文件以 ");
+    ɵɵelementStart(77, "a", 22);
+    ɵɵtext(78, "CC BY 4.0");
+    ɵɵelementEnd();
+    ɵɵtext(79, " 授權。 ");
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
-    \u0275\u0275advance(7);
-    \u0275\u0275property("href", ctx.ngLinks.MEDIUM, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("href", ctx.ngLinks.X, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("href", ctx.ngLinks.BLUESKY, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("href", ctx.ngLinks.YOUTUBE, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("href", ctx.ngLinks.DISCORD, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("href", ctx.ngLinks.GITHUB, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("href", ctx.ngLinks.STACKOVERFLOW, \u0275\u0275sanitizeUrl);
+    ɵɵadvance(7);
+    ɵɵproperty("href", ctx.ngLinks.MEDIUM, ɵɵsanitizeUrl);
+    ɵɵadvance(3);
+    ɵɵproperty("href", ctx.ngLinks.X, ɵɵsanitizeUrl);
+    ɵɵadvance(3);
+    ɵɵproperty("href", ctx.ngLinks.BLUESKY, ɵɵsanitizeUrl);
+    ɵɵadvance(3);
+    ɵɵproperty("href", ctx.ngLinks.YOUTUBE, ɵɵsanitizeUrl);
+    ɵɵadvance(3);
+    ɵɵproperty("href", ctx.ngLinks.DISCORD, ɵɵsanitizeUrl);
+    ɵɵadvance(3);
+    ɵɵproperty("href", ctx.ngLinks.GITHUB, ɵɵsanitizeUrl);
+    ɵɵadvance(3);
+    ɵɵproperty("href", ctx.ngLinks.STACKOVERFLOW, ɵɵsanitizeUrl);
   }
 }, "Footer_Template"), dependencies: [ExternalLink, RouterLink], styles: ["\n\n.adev-footer-columns[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 2rem;\n}\n@container footer (max-width: 600px) {\n  .adev-footer-columns[_ngcontent-%COMP%] {\n    grid-template-columns: repeat(2, 1fr) !important;\n  }\n}\n.adev-footer-container[_ngcontent-%COMP%] {\n  container: footer/inline-size;\n  position: relative;\n  justify-content: center;\n  padding: var(--layout-padding);\n  padding-inline-end: 1rem;\n  background-color: var(--page-background);\n  transition: background-color 0.3s ease;\n}\n@media (min-width: 1430.01px) {\n  .adev-footer-container[_ngcontent-%COMP%] {\n    width: calc(100% - 195px - var(--layout-padding) * 3);\n  }\n}\n.adev-footer-container[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  font-size: 0.875rem;\n  font-weight: 600;\n  margin-block-end: 1.75rem;\n  letter-spacing: -0.00875rem;\n}\n.adev-footer-container[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%] {\n  list-style: none;\n  padding: 0;\n  display: flex;\n  flex-direction: column;\n  gap: 0.95rem;\n}\n.adev-footer-container[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li[_ngcontent-%COMP%] {\n  font-size: 0.8125rem;\n}\n.adev-footer-container[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--quaternary-contrast);\n  font-weight: 300;\n  transition: color 0.3s ease;\n}\n.adev-footer-container[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n  color: var(--primary-contrast);\n}\n.adev-footer-container[_ngcontent-%COMP%]   p.docs-license[_ngcontent-%COMP%] {\n  transition: color 0.3s ease;\n  color: var(--quaternary-contrast);\n  font-weight: 300;\n  grid-column: span 4;\n  font-size: 0.75rem;\n  margin-block-start: 2rem;\n}\n/*# sourceMappingURL=footer.component.css.map */"], changeDetection: 0 }));
 var Footer = _Footer;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Footer, [{
     type: Component,
-    args: [{ selector: "footer[adev-footer]", imports: [ExternalLink, RouterLink], changeDetection: ChangeDetectionStrategy.OnPush, template: '<div class="adev-footer-container">\n  <div class="adev-footer-columns">\n    <div>\n      <h2>\u793E\u4EA4\u5A92\u4F53</h2>\n      <ul>\n        <li>\n          <a [href]="ngLinks.MEDIUM" title="Angular \u535A\u5BA2">\u535A\u5BA2</a>\n        </li>\n        <li>\n          <a [href]="ngLinks.X" title="X (\u524D Twitter)">X (\u524D Twitter)</a>\n        </li>\n        <li>\n          <a [href]="ngLinks.BLUESKY" title="Bluesky">Bluesky</a>\n        </li>\n        <li>\n          <a [href]="ngLinks.YOUTUBE" title="YouTube">YouTube</a>\n        </li>\n        <li>\n          <a\n            [href]="ngLinks.DISCORD"\n            title="\u52A0\u5165 Angular \u793E\u533A Discord \u670D\u52A1\u5668\u7684\u8BA8\u8BBA\u5427\uFF01"\n          >\n            Discord\n          </a>\n        </li>\n        <li>\n          <a [href]="ngLinks.GITHUB" title="GitHub">GitHub</a>\n        </li>\n        <li>\n          <a\n            [href]="ngLinks.STACKOVERFLOW"\n            title="Stack Overflow\uFF1A\u793E\u533A\u4E3A\u4F60\u89E3\u7B54\u6280\u672F\u4E0A\u7684 Angular \u95EE\u9898\u3002"\n          >\n            Stack Overflow\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div>\n      <h2>\u793E\u533A</h2>\n      <ul>\n        <li>\n          <a\n            href="https://github.com/angular/angular/blob/main/CONTRIBUTING.md"\n            title="\u5411 Angular \u505A\u8D21\u732E"\n          >\n            \u505A\u8D21\u732E\n          </a>\n        </li>\n        <li>\n          <a\n            href="https://github.com/angular/code-of-conduct/blob/main/CODE_OF_CONDUCT.md"\n            title="\u5F7C\u6B64\u5C0A\u91CD"\n          >\n            \u884C\u4E3A\u51C6\u5219\n          </a>\n        </li>\n        <li>\n          <a\n            href="https://github.com/angular/angular/issues"\n            title="\u5728 Github \u4E0A\u62A5\u544A\u95EE\u9898\u6216\u63D0\u5EFA\u8BAE"\n          >\n            \u62A5\u544A\u95EE\u9898\n          </a>\n        </li>\n        <li>\n          <a\n            href="https://devlibrary.withgoogle.com/products/angular?sort=updated"\n            title="Google \u7684\u5F00\u53D1\u5E93"\n          >\n            Google \u7684 \u5F00\u53D1\u5E93\n          </a>\n        </li>\n        <li>\n          <a\n            href="https://developers.google.com/community/experts/directory?specialization=angular"\n            title="Angular Google \u5F00\u53D1\u6280\u672F\u4E13\u5BB6"\n          >\n            Angular Google \u5F00\u53D1\u6280\u672F\u4E13\u5BB6\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div>\n      <h2>\u8D44\u6E90</h2>\n      <ul>\n        <li>\n          <a routerLink="/press-kit" title="\u5A92\u4F53\u8054\u7CFB\u3001\u6807\u5FD7\u548C\u54C1\u724C\u5F62\u8C61\u3002">\u5BA3\u4F20\u8D44\u6599</a>\n        </li>\n        <li>\n          <a routerLink="/roadmap" title="\u8DEF\u7EBF\u56FE">\u8DEF\u7EBF\u56FE</a>\n        </li>\n      </ul>\n    </div>\n    <div>\n      <h2>\u591A\u8BED\u8A00</h2>\n      <ul>\n        <li>\n          <a href="https://angular.dev/" title="English Version">English Version</a>\n        </li>\n        <li>\n          <a href="https://dev.angular.tw/" title="\u6B63\u9AD4\u4E2D\u6587\u7248">\u6B63\u9AD4\u4E2D\u6587\u7248</a>\n        </li>\n        <li>\n          <a href="https://angular.jp/" title="\u65E5\u672C\u8A9E\u7248">\u65E5\u672C\u8A9E\u7248</a>\n        </li>\n        <li>\n          <a href="https://angular.kr/" title="\uD55C\uAD6D\uC5B4">\uD55C\uAD6D\uC5B4</a>\n        </li>\n      </ul>\n    </div>\n  </div>\n  <p class="docs-license">\n    \u7531 Google \u5F3A\u529B\u8D4B\u80FD \xA92010-2025\u3002\u4EE3\u7801\u4EE5<a routerLink="/license" title="\u534F\u8BAE\u6587\u672C">MIT-style \u534F\u8BAE</a>\u6388\u6743\u3002\u6587\u6863\u4EE5\n    <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> \u6388\u6743\u3002\n  </p>\n</div>\n', styles: ["/* src/app/core/layout/footer/footer.component.scss */\n.adev-footer-columns {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 2rem;\n}\n@container footer (max-width: 600px) {\n  .adev-footer-columns {\n    grid-template-columns: repeat(2, 1fr) !important;\n  }\n}\n.adev-footer-container {\n  container: footer/inline-size;\n  position: relative;\n  justify-content: center;\n  padding: var(--layout-padding);\n  padding-inline-end: 1rem;\n  background-color: var(--page-background);\n  transition: background-color 0.3s ease;\n}\n@media (min-width: 1430.01px) {\n  .adev-footer-container {\n    width: calc(100% - 195px - var(--layout-padding) * 3);\n  }\n}\n.adev-footer-container h2 {\n  font-size: 0.875rem;\n  font-weight: 600;\n  margin-block-end: 1.75rem;\n  letter-spacing: -0.00875rem;\n}\n.adev-footer-container ul {\n  list-style: none;\n  padding: 0;\n  display: flex;\n  flex-direction: column;\n  gap: 0.95rem;\n}\n.adev-footer-container ul li {\n  font-size: 0.8125rem;\n}\n.adev-footer-container a {\n  color: var(--quaternary-contrast);\n  font-weight: 300;\n  transition: color 0.3s ease;\n}\n.adev-footer-container a:hover {\n  color: var(--primary-contrast);\n}\n.adev-footer-container p.docs-license {\n  transition: color 0.3s ease;\n  color: var(--quaternary-contrast);\n  font-weight: 300;\n  grid-column: span 4;\n  font-size: 0.75rem;\n  margin-block-start: 2rem;\n}\n/*# sourceMappingURL=footer.component.css.map */\n"] }]
+    args: [{ selector: "footer[adev-footer]", imports: [ExternalLink, RouterLink], changeDetection: ChangeDetectionStrategy.OnPush, template: '<div class="adev-footer-container">\n  <div class="adev-footer-columns">\n    <div>\n      <h2>社交媒體</h2>\n      <ul>\n        <li>\n          <a [href]="ngLinks.MEDIUM" title="Angular 部落格">部落格</a>\n        </li>\n        <li>\n          <a [href]="ngLinks.X" title="X (前 Twitter)">X (前 Twitter)</a>\n        </li>\n        <li>\n          <a [href]="ngLinks.BLUESKY" title="Bluesky">Bluesky</a>\n        </li>\n        <li>\n          <a [href]="ngLinks.YOUTUBE" title="YouTube">YouTube</a>\n        </li>\n        <li>\n          <a\n            [href]="ngLinks.DISCORD"\n            title="加入 Angular 社群 Discord 伺服器的討論吧！"\n          >\n            Discord\n          </a>\n        </li>\n        <li>\n          <a [href]="ngLinks.GITHUB" title="GitHub">GitHub</a>\n        </li>\n        <li>\n          <a\n            [href]="ngLinks.STACKOVERFLOW"\n            title="Stack Overflow：社群為你解答技術上的 Angular 問題。"\n          >\n            Stack Overflow\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div>\n      <h2>社群</h2>\n      <ul>\n        <li>\n          <a\n            href="https://github.com/angular/angular/blob/main/CONTRIBUTING.md"\n            title="向 Angular 做貢獻"\n          >\n            做貢獻\n          </a>\n        </li>\n        <li>\n          <a\n            href="https://github.com/angular/code-of-conduct/blob/main/CODE_OF_CONDUCT.md"\n            title="彼此尊重"\n          >\n            行為準則\n          </a>\n        </li>\n        <li>\n          <a\n            href="https://github.com/angular/angular/issues"\n            title="在 Github 上報告問題或提建議"\n          >\n            報告問題\n          </a>\n        </li>\n        <li>\n          <a\n            href="https://devlibrary.withgoogle.com/products/angular?sort=updated"\n            title="Google 的開發函式庫"\n          >\n            Google 的 開發函式庫\n          </a>\n        </li>\n        <li>\n          <a\n            href="https://developers.google.com/community/experts/directory?specialization=angular"\n            title="Angular Google 開發技術專家"\n          >\n            Angular Google 開發技術專家\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div>\n      <h2>資源</h2>\n      <ul>\n        <li>\n          <a routerLink="/press-kit" title="媒體聯絡、標誌和品牌形象。">宣傳資料</a>\n        </li>\n        <li>\n          <a routerLink="/roadmap" title="路線圖">路線圖</a>\n        </li>\n      </ul>\n    </div>\n    <div>\n      <h2>多語言</h2>\n      <ul>\n        <li>\n          <a href="https://angular.dev/" title="English Version">English Version</a>\n        </li>\n        <li>\n          <a href="https://dev.angular.tw/" title="正體中文版">正體中文版</a>\n        </li>\n        <li>\n          <a href="https://angular.jp/" title="日本語版">日本語版</a>\n        </li>\n        <li>\n          <a href="https://angular.kr/" title="한국어">한국어</a>\n        </li>\n      </ul>\n    </div>\n  </div>\n  <p class="docs-license">\n    由 Google 強力賦能 \xA92010-2025。程式碼以<a routerLink="/license" title="協定文字">MIT-style 協定</a>授權。文件以\n    <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> 授權。\n  </p>\n</div>\n', styles: ["/* src/app/core/layout/footer/footer.component.scss */\n.adev-footer-columns {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 2rem;\n}\n@container footer (max-width: 600px) {\n  .adev-footer-columns {\n    grid-template-columns: repeat(2, 1fr) !important;\n  }\n}\n.adev-footer-container {\n  container: footer/inline-size;\n  position: relative;\n  justify-content: center;\n  padding: var(--layout-padding);\n  padding-inline-end: 1rem;\n  background-color: var(--page-background);\n  transition: background-color 0.3s ease;\n}\n@media (min-width: 1430.01px) {\n  .adev-footer-container {\n    width: calc(100% - 195px - var(--layout-padding) * 3);\n  }\n}\n.adev-footer-container h2 {\n  font-size: 0.875rem;\n  font-weight: 600;\n  margin-block-end: 1.75rem;\n  letter-spacing: -0.00875rem;\n}\n.adev-footer-container ul {\n  list-style: none;\n  padding: 0;\n  display: flex;\n  flex-direction: column;\n  gap: 0.95rem;\n}\n.adev-footer-container ul li {\n  font-size: 0.8125rem;\n}\n.adev-footer-container a {\n  color: var(--quaternary-contrast);\n  font-weight: 300;\n  transition: color 0.3s ease;\n}\n.adev-footer-container a:hover {\n  color: var(--primary-contrast);\n}\n.adev-footer-container p.docs-license {\n  transition: color 0.3s ease;\n  color: var(--quaternary-contrast);\n  font-weight: 300;\n  grid-column: span 4;\n  font-size: 0.75rem;\n  margin-block-start: 2rem;\n}\n/*# sourceMappingURL=footer.component.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(Footer, { className: "Footer", filePath: "src/app/core/layout/footer/footer.component.ts", lineNumber: 21 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(Footer, { className: "Footer", filePath: "src/app/core/layout/footer/footer.component.ts", lineNumber: 21 });
 })();
 
 // src/app/core/services/theme-manager.service.ts
@@ -2613,10 +2613,10 @@ var _ThemeManager = class _ThemeManager {
   }
 };
 __name(_ThemeManager, "ThemeManager");
-__publicField(_ThemeManager, "\u0275fac", /* @__PURE__ */ __name(function ThemeManager_Factory(__ngFactoryType__) {
+__publicField(_ThemeManager, "ɵfac", /* @__PURE__ */ __name(function ThemeManager_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ThemeManager)();
 }, "ThemeManager_Factory"));
-__publicField(_ThemeManager, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _ThemeManager, factory: _ThemeManager.\u0275fac, providedIn: "root" }));
+__publicField(_ThemeManager, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _ThemeManager, factory: _ThemeManager.ɵfac, providedIn: "root" }));
 var ThemeManager = _ThemeManager;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ThemeManager, [{
@@ -2765,10 +2765,10 @@ var _VersionManager = class _VersionManager {
   }, ...ngDevMode ? [{ debugName: "currentDocsVersion" }] : []);
 };
 __name(_VersionManager, "VersionManager");
-__publicField(_VersionManager, "\u0275fac", /* @__PURE__ */ __name(function VersionManager_Factory(__ngFactoryType__) {
+__publicField(_VersionManager, "ɵfac", /* @__PURE__ */ __name(function VersionManager_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _VersionManager)();
 }, "VersionManager_Factory"));
-__publicField(_VersionManager, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _VersionManager, factory: _VersionManager.\u0275fac, providedIn: "root" }));
+__publicField(_VersionManager, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _VersionManager, factory: _VersionManager.ɵfac, providedIn: "root" }));
 var VersionManager = _VersionManager;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(VersionManager, [{
@@ -2794,219 +2794,219 @@ var _c02 = ["class", "adev-nav"];
 var _c1 = /* @__PURE__ */ __name((a0) => [a0], "_c1");
 function Navigation_Conditional_29_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(0, "svg", 28)(1, "g", 50);
-    \u0275\u0275element(2, "path", 51)(3, "path", 52);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "defs")(5, "linearGradient", 53);
-    \u0275\u0275element(6, "stop", 11)(7, "stop", 12)(8, "stop", 13)(9, "stop", 14)(10, "stop", 15)(11, "stop", 16);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(12, "linearGradient", 54);
-    \u0275\u0275element(13, "stop", 18)(14, "stop", 19);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(15, "clipPath", 55);
-    \u0275\u0275element(16, "path", 21);
-    \u0275\u0275elementEnd()()();
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(0, "svg", 28)(1, "g", 50);
+    ɵɵelement(2, "path", 51)(3, "path", 52);
+    ɵɵelementEnd();
+    ɵɵelementStart(4, "defs")(5, "linearGradient", 53);
+    ɵɵelement(6, "stop", 11)(7, "stop", 12)(8, "stop", 13)(9, "stop", 14)(10, "stop", 15)(11, "stop", 16);
+    ɵɵelementEnd();
+    ɵɵelementStart(12, "linearGradient", 54);
+    ɵɵelement(13, "stop", 18)(14, "stop", 19);
+    ɵɵelementEnd();
+    ɵɵelementStart(15, "clipPath", 55);
+    ɵɵelement(16, "path", 21);
+    ɵɵelementEnd()()();
   }
 }
 __name(Navigation_Conditional_29_Template, "Navigation_Conditional_29_Template");
 function Navigation_Conditional_30_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "img", 29);
+    ɵɵelement(0, "img", 29);
   }
 }
 __name(Navigation_Conditional_30_Template, "Navigation_Conditional_30_Template");
 function Navigation_ng_template_36_For_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "li")(1, "a", 57)(2, "span");
-    \u0275\u0275text(3);
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(0, "li")(1, "a", 57)(2, "span");
+    ɵɵtext(3);
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
     const item_r2 = ctx.$implicit;
-    \u0275\u0275advance();
-    \u0275\u0275property("href", item_r2.url, \u0275\u0275sanitizeUrl);
-    \u0275\u0275attribute("aria-label", item_r2.displayName);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(item_r2.displayName);
+    ɵɵadvance();
+    ɵɵproperty("href", item_r2.url, ɵɵsanitizeUrl);
+    ɵɵattribute("aria-label", item_r2.displayName);
+    ɵɵadvance(2);
+    ɵɵtextInterpolate(item_r2.displayName);
   }
 }
 __name(Navigation_ng_template_36_For_2_Template, "Navigation_ng_template_36_For_2_Template");
 function Navigation_ng_template_36_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "ul", 56);
-    \u0275\u0275repeaterCreate(1, Navigation_ng_template_36_For_2_Template, 4, 3, "li", null, \u0275\u0275repeaterTrackByIdentity);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "ul", 56);
+    ɵɵrepeaterCreate(1, Navigation_ng_template_36_For_2_Template, 4, 3, "li", null, ɵɵrepeaterTrackByIdentity);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275repeater(ctx_r2.versions());
+    const ctx_r2 = ɵɵnextContext();
+    ɵɵadvance();
+    ɵɵrepeater(ctx_r2.versions());
   }
 }
 __name(Navigation_ng_template_36_Template, "Navigation_ng_template_36_Template");
 function Navigation_ng_template_76_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "ul", 58)(1, "li")(2, "a", 59);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(3, "svg", 60);
-    \u0275\u0275element(4, "path", 61);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(5, "li")(6, "a", 62);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(7, "svg", 63);
-    \u0275\u0275element(8, "path", 64);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(9, "li")(10, "a", 65);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(11, "svg", 66);
-    \u0275\u0275element(12, "path", 67);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(13, "li")(14, "a", 68);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(15, "svg", 69);
-    \u0275\u0275element(16, "path", 70);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(17, "li")(18, "a", 71);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(19, "svg", 72);
-    \u0275\u0275element(20, "path", 73);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(21, "li")(22, "a", 74);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(23, "svg", 75);
-    \u0275\u0275element(24, "path", 76);
-    \u0275\u0275elementEnd()()()();
+    ɵɵelementStart(0, "ul", 58)(1, "li")(2, "a", 59);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(3, "svg", 60);
+    ɵɵelement(4, "path", 61);
+    ɵɵelementEnd()()();
+    ɵɵnamespaceHTML();
+    ɵɵelementStart(5, "li")(6, "a", 62);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(7, "svg", 63);
+    ɵɵelement(8, "path", 64);
+    ɵɵelementEnd()()();
+    ɵɵnamespaceHTML();
+    ɵɵelementStart(9, "li")(10, "a", 65);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(11, "svg", 66);
+    ɵɵelement(12, "path", 67);
+    ɵɵelementEnd()()();
+    ɵɵnamespaceHTML();
+    ɵɵelementStart(13, "li")(14, "a", 68);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(15, "svg", 69);
+    ɵɵelement(16, "path", 70);
+    ɵɵelementEnd()()();
+    ɵɵnamespaceHTML();
+    ɵɵelementStart(17, "li")(18, "a", 71);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(19, "svg", 72);
+    ɵɵelement(20, "path", 73);
+    ɵɵelementEnd()()();
+    ɵɵnamespaceHTML();
+    ɵɵelementStart(21, "li")(22, "a", 74);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(23, "svg", 75);
+    ɵɵelement(24, "path", 76);
+    ɵɵelementEnd()()()();
   }
   if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance(2);
-    \u0275\u0275property("href", ctx_r2.ngLinks.YOUTUBE, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("href", ctx_r2.ngLinks.X, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("href", ctx_r2.ngLinks.BLUESKY, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("href", ctx_r2.ngLinks.MEDIUM, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("href", ctx_r2.ngLinks.GITHUB, \u0275\u0275sanitizeUrl);
-    \u0275\u0275advance(4);
-    \u0275\u0275property("href", ctx_r2.ngLinks.DISCORD, \u0275\u0275sanitizeUrl);
+    const ctx_r2 = ɵɵnextContext();
+    ɵɵadvance(2);
+    ɵɵproperty("href", ctx_r2.ngLinks.YOUTUBE, ɵɵsanitizeUrl);
+    ɵɵadvance(4);
+    ɵɵproperty("href", ctx_r2.ngLinks.X, ɵɵsanitizeUrl);
+    ɵɵadvance(4);
+    ɵɵproperty("href", ctx_r2.ngLinks.BLUESKY, ɵɵsanitizeUrl);
+    ɵɵadvance(4);
+    ɵɵproperty("href", ctx_r2.ngLinks.MEDIUM, ɵɵsanitizeUrl);
+    ɵɵadvance(4);
+    ɵɵproperty("href", ctx_r2.ngLinks.GITHUB, ɵɵsanitizeUrl);
+    ɵɵadvance(4);
+    ɵɵproperty("href", ctx_r2.ngLinks.DISCORD, ɵɵsanitizeUrl);
   }
 }
 __name(Navigation_ng_template_76_Template, "Navigation_ng_template_76_Template");
 function Navigation_Case_81_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275text(0);
+    ɵɵtext(0);
   }
   if (rf & 2) {
-    \u0275\u0275textInterpolate1(" ", "light_mode", " ");
+    ɵɵtextInterpolate1(" ", "light_mode", " ");
   }
 }
 __name(Navigation_Case_81_Template, "Navigation_Case_81_Template");
 function Navigation_Case_82_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275text(0);
+    ɵɵtext(0);
   }
   if (rf & 2) {
-    \u0275\u0275textInterpolate1(" ", "dark_mode", " ");
+    ɵɵtextInterpolate1(" ", "dark_mode", " ");
   }
 }
 __name(Navigation_Case_82_Template, "Navigation_Case_82_Template");
 function Navigation_Case_83_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275text(0);
+    ɵɵtext(0);
   }
   if (rf & 2) {
-    \u0275\u0275textInterpolate1(" ", "routine", " ");
+    ɵɵtextInterpolate1(" ", "routine", " ");
   }
 }
 __name(Navigation_Case_83_Template, "Navigation_Case_83_Template");
 function Navigation_ng_template_84_Template(rf, ctx) {
   if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ul", 58)(1, "li")(2, "button", 77);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function Navigation_ng_template_84_Template_button_click_2_listener() {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.setTheme("auto"));
+    const _r4 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "ul", 58)(1, "li")(2, "button", 77);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function Navigation_ng_template_84_Template_button_click_2_listener() {
+      ɵɵrestoreView(_r4);
+      const ctx_r2 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r2.setTheme("auto"));
     }, "Navigation_ng_template_84_Template_button_click_2_listener"));
-    \u0275\u0275elementStart(3, "docs-icon", 78);
-    \u0275\u0275text(4, "routine");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "span");
-    \u0275\u0275text(6, "\u7CFB\u7EDF");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(7, "li")(8, "button", 79);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function Navigation_ng_template_84_Template_button_click_8_listener() {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.setTheme("dark"));
+    ɵɵelementStart(3, "docs-icon", 78);
+    ɵɵtext(4, "routine");
+    ɵɵelementEnd();
+    ɵɵelementStart(5, "span");
+    ɵɵtext(6, "系統");
+    ɵɵelementEnd()()();
+    ɵɵelementStart(7, "li")(8, "button", 79);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function Navigation_ng_template_84_Template_button_click_8_listener() {
+      ɵɵrestoreView(_r4);
+      const ctx_r2 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r2.setTheme("dark"));
     }, "Navigation_ng_template_84_Template_button_click_8_listener"));
-    \u0275\u0275elementStart(9, "docs-icon", 78);
-    \u0275\u0275text(10, "dark_mode");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(11, "span");
-    \u0275\u0275text(12, "\u6697\u9ED1");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(13, "li")(14, "button", 80);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function Navigation_ng_template_84_Template_button_click_14_listener() {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.setTheme("light"));
+    ɵɵelementStart(9, "docs-icon", 78);
+    ɵɵtext(10, "dark_mode");
+    ɵɵelementEnd();
+    ɵɵelementStart(11, "span");
+    ɵɵtext(12, "暗黑");
+    ɵɵelementEnd()()();
+    ɵɵelementStart(13, "li")(14, "button", 80);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function Navigation_ng_template_84_Template_button_click_14_listener() {
+      ɵɵrestoreView(_r4);
+      const ctx_r2 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r2.setTheme("light"));
     }, "Navigation_ng_template_84_Template_button_click_14_listener"));
-    \u0275\u0275elementStart(15, "docs-icon", 78);
-    \u0275\u0275text(16, "light_mode");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(17, "span");
-    \u0275\u0275text(18, "\u660E\u4EAE");
-    \u0275\u0275elementEnd()()()();
+    ɵɵelementStart(15, "docs-icon", 78);
+    ɵɵtext(16, "light_mode");
+    ɵɵelementEnd();
+    ɵɵelementStart(17, "span");
+    ɵɵtext(18, "明亮");
+    ɵɵelementEnd()()()();
   }
 }
 __name(Navigation_ng_template_84_Template, "Navigation_ng_template_84_Template");
 function Navigation_Conditional_86_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span");
-    \u0275\u0275text(1, "\u6587\u6863");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span");
+    ɵɵtext(1, "文件");
+    ɵɵelementEnd();
   }
 }
 __name(Navigation_Conditional_86_Conditional_4_Template, "Navigation_Conditional_86_Conditional_4_Template");
 function Navigation_Conditional_86_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span");
-    \u0275\u0275text(1, "API");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "span");
+    ɵɵtext(1, "API");
+    ɵɵelementEnd();
   }
 }
 __name(Navigation_Conditional_86_Conditional_5_Template, "Navigation_Conditional_86_Conditional_5_Template");
 function Navigation_Conditional_86_Template(rf, ctx) {
   if (rf & 1) {
-    const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 49)(1, "button", 81);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function Navigation_Conditional_86_Template_button_click_1_listener($event) {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.openMobileNav($event));
+    const _r5 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "div", 49)(1, "button", 81);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function Navigation_Conditional_86_Template_button_click_1_listener($event) {
+      ɵɵrestoreView(_r5);
+      const ctx_r2 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r2.openMobileNav($event));
     }, "Navigation_Conditional_86_Template_button_click_1_listener"));
-    \u0275\u0275elementStart(2, "docs-icon", 78);
-    \u0275\u0275text(3, "menu");
-    \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(4, Navigation_Conditional_86_Conditional_4_Template, 2, 0, "span");
-    \u0275\u0275conditionalCreate(5, Navigation_Conditional_86_Conditional_5_Template, 2, 0, "span");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(2, "docs-icon", 78);
+    ɵɵtext(3, "menu");
+    ɵɵelementEnd();
+    ɵɵconditionalCreate(4, Navigation_Conditional_86_Conditional_4_Template, 2, 0, "span");
+    ɵɵconditionalCreate(5, Navigation_Conditional_86_Conditional_5_Template, 2, 0, "span");
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275advance(4);
-    \u0275\u0275conditional(ctx_r2.activeRouteItem() === ctx_r2.PAGE_PREFIX.DOCS ? 4 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx_r2.activeRouteItem() === ctx_r2.PAGE_PREFIX.REFERENCE ? 5 : -1);
+    const ctx_r2 = ɵɵnextContext();
+    ɵɵadvance(4);
+    ɵɵconditional(ctx_r2.activeRouteItem() === ctx_r2.PAGE_PREFIX.DOCS ? 4 : -1);
+    ɵɵadvance();
+    ɵɵconditional(ctx_r2.activeRouteItem() === ctx_r2.PAGE_PREFIX.REFERENCE ? 5 : -1);
   }
 }
 __name(Navigation_Conditional_86_Template, "Navigation_Conditional_86_Template");
@@ -3030,7 +3030,7 @@ var _Navigation = class _Navigation {
     new ConnectionPositionPair({ originX: "end", originY: "center" }, { overlayX: "start", overlayY: "center" }),
     new ConnectionPositionPair({ originX: "end", originY: "top" }, { overlayX: "start", overlayY: "top" })
   ];
-  APPLE_SEARCH_LABEL = `\u2318`;
+  APPLE_SEARCH_LABEL = `⌘`;
   DEFAULT_SEARCH_LABEL = `ctrl`;
   activeRouteItem = this.navigationState.primaryActiveRouteItem;
   theme = this.themeManager.theme;
@@ -3126,197 +3126,197 @@ var _Navigation = class _Navigation {
   }
 };
 __name(_Navigation, "Navigation");
-__publicField(_Navigation, "\u0275fac", /* @__PURE__ */ __name(function Navigation_Factory(__ngFactoryType__) {
+__publicField(_Navigation, "ɵfac", /* @__PURE__ */ __name(function Navigation_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Navigation)();
 }, "Navigation_Factory"));
-__publicField(_Navigation, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _Navigation, selectors: [["div", 8, "adev-nav"]], attrs: _c02, decls: 87, vars: 44, consts: [["docsVersionMiniMenu", ""], ["socialMiniMenu", ""], ["themeMiniMenu", ""], [1, "wrapper", 3, "docsClickOutside", "docsClickOutsideIgnore"], [1, "adev-mobile-nav-bar"], ["type", "button", "aria-label", "\u5207\u6362\u79FB\u52A8\u7AEF\u5BFC\u822A", 1, "adev-mobile-nav-button", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 223 236", "width", "32"], ["clip-path", "url(#2a)"], ["fill", "url(#2b)", "d", "m222.077 39.192-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"], ["fill", "url(#2c)", "d", "m222.077 39.192-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"], ["id", "2b", "x1", "49.009", "x2", "225.829", "y1", "213.75", "y2", "129.722", "gradientUnits", "userSpaceOnUse"], ["stop-color", "#E40035"], ["offset", ".24", "stop-color", "#F60A48"], ["offset", ".352", "stop-color", "#F20755"], ["offset", ".494", "stop-color", "#DC087D"], ["offset", ".745", "stop-color", "#9717E7"], ["offset", "1", "stop-color", "#6C00F5"], ["id", "2c", "x1", "41.025", "x2", "156.741", "y1", "28.344", "y2", "160.344", "gradientUnits", "userSpaceOnUse"], ["stop-color", "#FF31D9"], ["offset", "1", "stop-color", "#FF5BE1", "stop-opacity", "0"], ["id", "2a"], ["fill", "#fff", "d", "M0 0h223v236H0z"], ["role", "presentation"], [1, "adev-nav-primary", "docs-scroll-hide"], ["type", "button", "aria-label", "\u5173\u95ED\u5BFC\u822A", 1, "adev-close-nav", 3, "click"], [1, "adev-nav__top"], [1, "adev-nav-item", "adev-nav-item--logo"], ["aria-label", "Angular \u9996\u9875", "routerLink", "/"], ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 223 236", "width", "32", 1, "angular-logo"], ["src", "assets/images/uwu.png", "alt", "Angular logo", "height", "34", 1, "uwu-logo", 2, "width", "auto", "margin", "0"], [1, "adev-nav-item"], ["type", "button", "aria-label", "\u9009\u62E9 Angular \u7248\u672C", "role", "menu", 1, "adev-version-button", 3, "cdkMenuClosed", "click", "cdkMenuTriggerFor", "cdkMenuPosition"], ["xmlns", "http://www.w3.org/2000/svg", "height", "15", "viewBox", "0 -960 960 960", "width", "15", "fill", "inherit"], ["d", "M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z"], ["type", "button", "title", "\u641C\u7D22\u6587\u6863", 1, "adev-nav-button", 3, "click"], ["aria-hidden", "true", "xmlns", "http://www.w3.org/2000/svg", "width", "16", "height", "16", "fill", "inherit"], ["d", "M14.583 15.48 9.104 10a4.591 4.591 0 0 1-1.458.844 5.156 5.156 0 0 1-1.771.302c-1.5 0-2.77-.52-3.813-1.563C1.022 8.542.5 7.285.5 5.813c0-1.473.52-2.73 1.563-3.771C3.103 1 4.367.479 5.854.479 7.326.48 8.58 1 9.614 2.042c1.035 1.041 1.553 2.298 1.553 3.77 0 .598-.098 1.174-.292 1.73A5.287 5.287 0 0 1 10 9.104l5.5 5.459-.917.916ZM5.854 9.895c1.125 0 2.083-.4 2.875-1.198a3.95 3.95 0 0 0 1.188-2.885 3.95 3.95 0 0 0-1.188-2.886C7.938 2.13 6.98 1.73 5.854 1.73c-1.139 0-2.107.4-2.906 1.198-.799.799-1.198 1.76-1.198 2.886 0 1.125.4 2.086 1.198 2.885.799.799 1.767 1.198 2.906 1.198Z"], [1, "adev-nav-item__label", "adev-search-desktop"], [3, "routerLink"], ["aria-hidden", "true", "xmlns", "http://www.w3.org/2000/svg", "width", "14", "height", "18", "fill", "inherit"], ["d", "M3.645 13.792h6.708v-1.25H3.645v1.25Zm0-3.542h6.708V9H3.645v1.25Zm-2.063 7.083a1.2 1.2 0 0 1-.875-.375 1.2 1.2 0 0 1-.375-.875V1.917a1.2 1.2 0 0 1 .375-.875 1.2 1.2 0 0 1 .875-.375h7.52l4.563 4.562v10.854a1.2 1.2 0 0 1-.375.875 1.2 1.2 0 0 1-.875.375H1.582ZM8.478 5.792V1.917H1.582v14.166h10.833V5.792H8.478Z"], [1, "adev-nav-item__label"], ["aria-hidden", "true", "xmlns", "http://www.w3.org/2000/svg", "width", "18", "height", "10", "fill", "inherit"], ["d", "m5.668 10-5-5 5-5 1.187 1.188L3.022 5.02l3.813 3.812L5.668 10Zm6.667 0-1.188-1.188L14.98 4.98l-3.812-3.812L12.335 0l5 5-5 5Z"], ["xmlns", "http://www.w3.org/2000/svg", "height", "24", "viewBox", "0 -960 960 960", "width", "24"], ["d", "M450.001-611.691v-32.386q-39.385-9.923-64.692-41.897-25.308-31.975-25.308-74.025 0-49.922 35.038-84.96 35.039-35.038 84.961-35.038t84.961 35.038q35.038 35.038 35.038 84.96 0 42.05-25.308 74.025-25.307 31.974-64.692 41.897v32.386l273.846 157.538q17.173 9.912 26.663 26.582 9.491 16.671 9.491 36.495v62.152q0 19.824-9.491 36.495-9.49 16.67-26.663 26.582L516.154-111.771q-17.203 9.846-36.217 9.846t-36.091-9.846L176.155-265.847q-17.173-9.912-26.663-26.582-9.491-16.671-9.491-36.495v-62.152q0-19.824 9.491-36.495 9.49-16.67 26.663-26.582l273.846-157.538Zm-6.155 364.537L200-387.461v58.537q0 3.078 1.539 5.962 1.538 2.885 4.615 4.808l267.692 154.692q3.077 1.923 6.154 1.923t6.154-1.923l267.692-154.692q3.077-1.923 4.615-4.808 1.539-2.884 1.539-5.962v-58.537L516.154-247.154q-17.203 9.847-36.217 9.847t-36.091-9.847Zm6.155-162.847V-542.77L250.46-427.691l223.386 128.846q3.077 1.924 6.154 1.924t6.154-1.924l223.001-128.846L509.999-542.77v132.769h-59.998ZM480-699.999q25 0 42.5-17.5t17.5-42.5q0-25-17.5-42.5t-42.5-17.5q-25 0-42.5 17.5t-17.5 42.5q0 25 17.5 42.5t42.5 17.5Zm-2.308 538.46Z"], [1, "adev-nav__bottom"], ["type", "button", "aria-label", "\u6253\u5F00\u793E\u4EA4\u5A92\u4F53\u94FE\u63A5", 3, "cdkMenuClosed", "cdkMenuOpened", "cdkMenuTriggerFor", "cdkMenuPosition"], ["type", "button", "aria-label", "\u6253\u5F00\u4E3B\u9898\u9009\u53D6\u5668", 3, "cdkMenuClosed", "cdkMenuOpened", "cdkMenuTriggerFor", "cdkMenuPosition"], [1, "adev-secondary-tablet-bar"], ["clip-path", "url(#a)"], ["fill", "url(#b)", "d", "m222.077 39.192-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"], ["fill", "url(#c)", "d", "m222.077 39.192-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"], ["id", "b", "x1", "49.009", "x2", "225.829", "y1", "213.75", "y2", "129.722", "gradientUnits", "userSpaceOnUse"], ["id", "c", "x1", "41.025", "x2", "156.741", "y1", "28.344", "y2", "160.344", "gradientUnits", "userSpaceOnUse"], ["id", "a"], ["cdkMenu", "", 1, "adev-mini-menu", "adev-version-picker"], ["type", "button", "cdkMenuItem", "", 3, "href"], ["cdkMenu", "", 1, "adev-mini-menu"], ["cdkMenuItem", "", "title", "Angular YouTube \u9891\u9053", "target", "_blank", "rel", "noopener", 3, "href"], ["width", "20", "height", "15", "viewBox", "0 0 20 15", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M18.7556 2.94783C18.5803 1.98018 17.745 1.27549 16.7756 1.05549C15.325 0.747832 12.6403 0.527832 9.73563 0.527832C6.83266 0.527832 4.105 0.747832 2.65266 1.05549C1.685 1.27549 0.847969 1.93549 0.672656 2.94783C0.495625 4.04783 0.320312 5.58783 0.320312 7.56783C0.320312 9.54783 0.495625 11.0878 0.715625 12.1878C0.892656 13.1555 1.72797 13.8602 2.69563 14.0802C4.23563 14.3878 6.87563 14.6078 9.78031 14.6078C12.685 14.6078 15.325 14.3878 16.865 14.0802C17.8327 13.8602 18.668 13.2002 18.845 12.1878C19.0203 11.0878 19.2403 9.50314 19.285 7.56783C19.1956 5.58783 18.9756 4.04783 18.7556 2.94783ZM7.36031 10.6478V4.48783L12.728 7.56783L7.36031 10.6478Z"], ["cdkMenuItem", "", "title", "Angular X (\u524D Twitter) \u6863\u6848", "target", "_blank", "rel", "noopener", 3, "href"], ["width", "17", "height", "16", "viewBox", "0 0 17 16", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M0.04145 0.04432l6.56351 8.77603L0 15.95564h1.48651l5.78263-6.24705 4.6722 6.24705h5.05865l-6.9328-9.26967L16.21504.04432h-1.48651l-5.32552 5.75341L5.1001.04432H.04145Zm2.18602 1.09497h2.32396l10.26221 13.72122h-2.32396L2.22747 1.13928Z"], ["cdkMenuItem", "", "title", "Angular Bluesky \u6863\u6848", "target", "_blank", "rel", "noopener", 3, "href"], ["width", "16", "height", "16", "viewBox", "0 0 16 16", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M3.468 1.948C5.303 3.325 7.276 6.118 8 7.616c.725-1.498 2.697-4.29 4.532-5.668C13.855.955 16 .186 16 2.632c0 .489-.28 4.105-.444 4.692-.572 2.04-2.653 2.561-4.504 2.246 3.236.551 4.06 2.375 2.281 4.2-3.376 3.464-4.852-.87-5.23-1.98-.07-.204-.103-.3-.103-.218 0-.081-.033.014-.102.218-.379 1.11-1.855 5.444-5.231 1.98-1.778-1.825-.955-3.65 2.28-4.2-1.85.315-3.932-.205-4.503-2.246C.28 6.737 0 3.12 0 2.632 0 .186 2.145.955 3.468 1.948Z"], ["cdkMenuItem", "", "title", "Angular Medium \u535A\u5BA2", "target", "_blank", "rel", "noopener", 3, "href"], ["width", "20", "height", "20", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M7 6A7 7 0 107 20 7 7 0 107 6zM18 6.5A3 6.5 0 1018 19.5 3 6.5 0 1018 6.5zM23 8A1 5 0 1023 18 1 5 0 1023 8z"], ["cdkMenuItem", "", "title", "Angular Github", "target", "_blank", "rel", "noopener", 3, "href"], ["width", "20", "height", "20", "viewBox", "0 0 20 20", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["fill-rule", "evenodd", "clip-rule", "evenodd", "d", "M7.59948 19.0428C7.59948 18.8069 7.59118 18.182 7.58656 17.3526C4.89071 17.9526 4.32164 16.0201 4.32164 16.0201C3.88087 14.8718 3.24533 14.5663 3.24533 14.5663C2.36518 13.9492 3.31179 13.9621 3.31179 13.9621C4.28471 14.0323 4.79656 14.9868 4.79656 14.9868C5.66102 16.5052 7.06456 16.0672 7.61748 15.8125C7.70564 15.17 7.95579 14.732 8.23271 14.4837C6.08056 14.2331 3.81764 13.3801 3.81764 9.57199C3.81764 8.48737 4.19564 7.6003 4.81548 6.90522C4.71625 6.65414 4.38302 5.64384 4.91056 4.27537C4.91056 4.27537 5.72471 4.00814 7.57594 5.29399C8.34856 5.07384 9.17795 4.96307 10.0027 4.95937C10.8256 4.96307 11.6546 5.07384 12.429 5.29399C14.2793 4.00814 15.0921 4.27537 15.0921 4.27537C15.621 5.64337 15.2883 6.65368 15.1881 6.90522C15.8093 7.6003 16.1841 8.48737 16.1841 9.57199C16.1841 13.3898 13.9179 14.2298 11.7589 14.4758C12.1073 14.7828 12.4166 15.3892 12.4166 16.3165C12.4166 17.6452 12.4041 18.7174 12.4041 19.0428C12.4041 19.3091 12.579 19.6178 13.071 19.5205C16.9193 18.2041 19.6936 14.4814 19.6936 10.0926C19.6936 4.60353 15.3538 0.154297 10.0009 0.154297C4.64887 0.154297 0.309021 4.60353 0.309021 10.0926C0.309483 14.4828 3.08656 18.2078 6.9381 19.5218C7.42225 19.6128 7.59948 19.3058 7.59948 19.0428Z"], ["cdkMenuItem", "", "title", "Angular Discord", "target", "_blank", "rel", "noopener", 3, "href"], ["xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 127.14 96.36", "width", "20", "height", "20", "fill", "none"], ["fill-rule", "evenodd", "clip-rule", "evenodd", "d", "M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,110.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"], ["type", "button", "cdkMenuItem", "", "aria-label", "\u8BBE\u7F6E\u4E3A\u7CFB\u7EDF\u9ED8\u8BA4\u4E3B\u9898", 3, "click"], [1, "docs-icon_high-contrast"], ["type", "button", "cdkMenuItem", "", "aria-label", "\u8BBE\u7F6E\u4E3A\u6697\u9ED1\u4E3B\u9898", 3, "click"], ["type", "button", "cdkMenuItem", "", "aria-label", "\u8BBE\u7F6E\u4E3A\u660E\u4EAE\u4E3B\u9898", 3, "click"], ["type", "button", 3, "click"]], template: /* @__PURE__ */ __name(function Navigation_Template(rf, ctx) {
+__publicField(_Navigation, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _Navigation, selectors: [["div", 8, "adev-nav"]], attrs: _c02, decls: 87, vars: 44, consts: [["docsVersionMiniMenu", ""], ["socialMiniMenu", ""], ["themeMiniMenu", ""], [1, "wrapper", 3, "docsClickOutside", "docsClickOutsideIgnore"], [1, "adev-mobile-nav-bar"], ["type", "button", "aria-label", "切換行動端導向", 1, "adev-mobile-nav-button", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 223 236", "width", "32"], ["clip-path", "url(#2a)"], ["fill", "url(#2b)", "d", "m222.077 39.192-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"], ["fill", "url(#2c)", "d", "m222.077 39.192-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"], ["id", "2b", "x1", "49.009", "x2", "225.829", "y1", "213.75", "y2", "129.722", "gradientUnits", "userSpaceOnUse"], ["stop-color", "#E40035"], ["offset", ".24", "stop-color", "#F60A48"], ["offset", ".352", "stop-color", "#F20755"], ["offset", ".494", "stop-color", "#DC087D"], ["offset", ".745", "stop-color", "#9717E7"], ["offset", "1", "stop-color", "#6C00F5"], ["id", "2c", "x1", "41.025", "x2", "156.741", "y1", "28.344", "y2", "160.344", "gradientUnits", "userSpaceOnUse"], ["stop-color", "#FF31D9"], ["offset", "1", "stop-color", "#FF5BE1", "stop-opacity", "0"], ["id", "2a"], ["fill", "#fff", "d", "M0 0h223v236H0z"], ["role", "presentation"], [1, "adev-nav-primary", "docs-scroll-hide"], ["type", "button", "aria-label", "關閉導向", 1, "adev-close-nav", 3, "click"], [1, "adev-nav__top"], [1, "adev-nav-item", "adev-nav-item--logo"], ["aria-label", "Angular 首頁", "routerLink", "/"], ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 223 236", "width", "32", 1, "angular-logo"], ["src", "assets/images/uwu.png", "alt", "Angular logo", "height", "34", 1, "uwu-logo", 2, "width", "auto", "margin", "0"], [1, "adev-nav-item"], ["type", "button", "aria-label", "選擇 Angular 版本", "role", "menu", 1, "adev-version-button", 3, "cdkMenuClosed", "click", "cdkMenuTriggerFor", "cdkMenuPosition"], ["xmlns", "http://www.w3.org/2000/svg", "height", "15", "viewBox", "0 -960 960 960", "width", "15", "fill", "inherit"], ["d", "M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z"], ["type", "button", "title", "搜尋文件", 1, "adev-nav-button", 3, "click"], ["aria-hidden", "true", "xmlns", "http://www.w3.org/2000/svg", "width", "16", "height", "16", "fill", "inherit"], ["d", "M14.583 15.48 9.104 10a4.591 4.591 0 0 1-1.458.844 5.156 5.156 0 0 1-1.771.302c-1.5 0-2.77-.52-3.813-1.563C1.022 8.542.5 7.285.5 5.813c0-1.473.52-2.73 1.563-3.771C3.103 1 4.367.479 5.854.479 7.326.48 8.58 1 9.614 2.042c1.035 1.041 1.553 2.298 1.553 3.77 0 .598-.098 1.174-.292 1.73A5.287 5.287 0 0 1 10 9.104l5.5 5.459-.917.916ZM5.854 9.895c1.125 0 2.083-.4 2.875-1.198a3.95 3.95 0 0 0 1.188-2.885 3.95 3.95 0 0 0-1.188-2.886C7.938 2.13 6.98 1.73 5.854 1.73c-1.139 0-2.107.4-2.906 1.198-.799.799-1.198 1.76-1.198 2.886 0 1.125.4 2.086 1.198 2.885.799.799 1.767 1.198 2.906 1.198Z"], [1, "adev-nav-item__label", "adev-search-desktop"], [3, "routerLink"], ["aria-hidden", "true", "xmlns", "http://www.w3.org/2000/svg", "width", "14", "height", "18", "fill", "inherit"], ["d", "M3.645 13.792h6.708v-1.25H3.645v1.25Zm0-3.542h6.708V9H3.645v1.25Zm-2.063 7.083a1.2 1.2 0 0 1-.875-.375 1.2 1.2 0 0 1-.375-.875V1.917a1.2 1.2 0 0 1 .375-.875 1.2 1.2 0 0 1 .875-.375h7.52l4.563 4.562v10.854a1.2 1.2 0 0 1-.375.875 1.2 1.2 0 0 1-.875.375H1.582ZM8.478 5.792V1.917H1.582v14.166h10.833V5.792H8.478Z"], [1, "adev-nav-item__label"], ["aria-hidden", "true", "xmlns", "http://www.w3.org/2000/svg", "width", "18", "height", "10", "fill", "inherit"], ["d", "m5.668 10-5-5 5-5 1.187 1.188L3.022 5.02l3.813 3.812L5.668 10Zm6.667 0-1.188-1.188L14.98 4.98l-3.812-3.812L12.335 0l5 5-5 5Z"], ["xmlns", "http://www.w3.org/2000/svg", "height", "24", "viewBox", "0 -960 960 960", "width", "24"], ["d", "M450.001-611.691v-32.386q-39.385-9.923-64.692-41.897-25.308-31.975-25.308-74.025 0-49.922 35.038-84.96 35.039-35.038 84.961-35.038t84.961 35.038q35.038 35.038 35.038 84.96 0 42.05-25.308 74.025-25.307 31.974-64.692 41.897v32.386l273.846 157.538q17.173 9.912 26.663 26.582 9.491 16.671 9.491 36.495v62.152q0 19.824-9.491 36.495-9.49 16.67-26.663 26.582L516.154-111.771q-17.203 9.846-36.217 9.846t-36.091-9.846L176.155-265.847q-17.173-9.912-26.663-26.582-9.491-16.671-9.491-36.495v-62.152q0-19.824 9.491-36.495 9.49-16.67 26.663-26.582l273.846-157.538Zm-6.155 364.537L200-387.461v58.537q0 3.078 1.539 5.962 1.538 2.885 4.615 4.808l267.692 154.692q3.077 1.923 6.154 1.923t6.154-1.923l267.692-154.692q3.077-1.923 4.615-4.808 1.539-2.884 1.539-5.962v-58.537L516.154-247.154q-17.203 9.847-36.217 9.847t-36.091-9.847Zm6.155-162.847V-542.77L250.46-427.691l223.386 128.846q3.077 1.924 6.154 1.924t6.154-1.924l223.001-128.846L509.999-542.77v132.769h-59.998ZM480-699.999q25 0 42.5-17.5t17.5-42.5q0-25-17.5-42.5t-42.5-17.5q-25 0-42.5 17.5t-17.5 42.5q0 25 17.5 42.5t42.5 17.5Zm-2.308 538.46Z"], [1, "adev-nav__bottom"], ["type", "button", "aria-label", "開啟社交媒體連結", 3, "cdkMenuClosed", "cdkMenuOpened", "cdkMenuTriggerFor", "cdkMenuPosition"], ["type", "button", "aria-label", "開啟主題選取器", 3, "cdkMenuClosed", "cdkMenuOpened", "cdkMenuTriggerFor", "cdkMenuPosition"], [1, "adev-secondary-tablet-bar"], ["clip-path", "url(#a)"], ["fill", "url(#b)", "d", "m222.077 39.192-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"], ["fill", "url(#c)", "d", "m222.077 39.192-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"], ["id", "b", "x1", "49.009", "x2", "225.829", "y1", "213.75", "y2", "129.722", "gradientUnits", "userSpaceOnUse"], ["id", "c", "x1", "41.025", "x2", "156.741", "y1", "28.344", "y2", "160.344", "gradientUnits", "userSpaceOnUse"], ["id", "a"], ["cdkMenu", "", 1, "adev-mini-menu", "adev-version-picker"], ["type", "button", "cdkMenuItem", "", 3, "href"], ["cdkMenu", "", 1, "adev-mini-menu"], ["cdkMenuItem", "", "title", "Angular YouTube 頻道", "target", "_blank", "rel", "noopener", 3, "href"], ["width", "20", "height", "15", "viewBox", "0 0 20 15", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M18.7556 2.94783C18.5803 1.98018 17.745 1.27549 16.7756 1.05549C15.325 0.747832 12.6403 0.527832 9.73563 0.527832C6.83266 0.527832 4.105 0.747832 2.65266 1.05549C1.685 1.27549 0.847969 1.93549 0.672656 2.94783C0.495625 4.04783 0.320312 5.58783 0.320312 7.56783C0.320312 9.54783 0.495625 11.0878 0.715625 12.1878C0.892656 13.1555 1.72797 13.8602 2.69563 14.0802C4.23563 14.3878 6.87563 14.6078 9.78031 14.6078C12.685 14.6078 15.325 14.3878 16.865 14.0802C17.8327 13.8602 18.668 13.2002 18.845 12.1878C19.0203 11.0878 19.2403 9.50314 19.285 7.56783C19.1956 5.58783 18.9756 4.04783 18.7556 2.94783ZM7.36031 10.6478V4.48783L12.728 7.56783L7.36031 10.6478Z"], ["cdkMenuItem", "", "title", "Angular X (前 Twitter) 檔案", "target", "_blank", "rel", "noopener", 3, "href"], ["width", "17", "height", "16", "viewBox", "0 0 17 16", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M0.04145 0.04432l6.56351 8.77603L0 15.95564h1.48651l5.78263-6.24705 4.6722 6.24705h5.05865l-6.9328-9.26967L16.21504.04432h-1.48651l-5.32552 5.75341L5.1001.04432H.04145Zm2.18602 1.09497h2.32396l10.26221 13.72122h-2.32396L2.22747 1.13928Z"], ["cdkMenuItem", "", "title", "Angular Bluesky 檔案", "target", "_blank", "rel", "noopener", 3, "href"], ["width", "16", "height", "16", "viewBox", "0 0 16 16", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M3.468 1.948C5.303 3.325 7.276 6.118 8 7.616c.725-1.498 2.697-4.29 4.532-5.668C13.855.955 16 .186 16 2.632c0 .489-.28 4.105-.444 4.692-.572 2.04-2.653 2.561-4.504 2.246 3.236.551 4.06 2.375 2.281 4.2-3.376 3.464-4.852-.87-5.23-1.98-.07-.204-.103-.3-.103-.218 0-.081-.033.014-.102.218-.379 1.11-1.855 5.444-5.231 1.98-1.778-1.825-.955-3.65 2.28-4.2-1.85.315-3.932-.205-4.503-2.246C.28 6.737 0 3.12 0 2.632 0 .186 2.145.955 3.468 1.948Z"], ["cdkMenuItem", "", "title", "Angular Medium 部落格", "target", "_blank", "rel", "noopener", 3, "href"], ["width", "20", "height", "20", "viewBox", "0 0 24 24", "xmlns", "http://www.w3.org/2000/svg"], ["d", "M7 6A7 7 0 107 20 7 7 0 107 6zM18 6.5A3 6.5 0 1018 19.5 3 6.5 0 1018 6.5zM23 8A1 5 0 1023 18 1 5 0 1023 8z"], ["cdkMenuItem", "", "title", "Angular Github", "target", "_blank", "rel", "noopener", 3, "href"], ["width", "20", "height", "20", "viewBox", "0 0 20 20", "fill", "none", "xmlns", "http://www.w3.org/2000/svg"], ["fill-rule", "evenodd", "clip-rule", "evenodd", "d", "M7.59948 19.0428C7.59948 18.8069 7.59118 18.182 7.58656 17.3526C4.89071 17.9526 4.32164 16.0201 4.32164 16.0201C3.88087 14.8718 3.24533 14.5663 3.24533 14.5663C2.36518 13.9492 3.31179 13.9621 3.31179 13.9621C4.28471 14.0323 4.79656 14.9868 4.79656 14.9868C5.66102 16.5052 7.06456 16.0672 7.61748 15.8125C7.70564 15.17 7.95579 14.732 8.23271 14.4837C6.08056 14.2331 3.81764 13.3801 3.81764 9.57199C3.81764 8.48737 4.19564 7.6003 4.81548 6.90522C4.71625 6.65414 4.38302 5.64384 4.91056 4.27537C4.91056 4.27537 5.72471 4.00814 7.57594 5.29399C8.34856 5.07384 9.17795 4.96307 10.0027 4.95937C10.8256 4.96307 11.6546 5.07384 12.429 5.29399C14.2793 4.00814 15.0921 4.27537 15.0921 4.27537C15.621 5.64337 15.2883 6.65368 15.1881 6.90522C15.8093 7.6003 16.1841 8.48737 16.1841 9.57199C16.1841 13.3898 13.9179 14.2298 11.7589 14.4758C12.1073 14.7828 12.4166 15.3892 12.4166 16.3165C12.4166 17.6452 12.4041 18.7174 12.4041 19.0428C12.4041 19.3091 12.579 19.6178 13.071 19.5205C16.9193 18.2041 19.6936 14.4814 19.6936 10.0926C19.6936 4.60353 15.3538 0.154297 10.0009 0.154297C4.64887 0.154297 0.309021 4.60353 0.309021 10.0926C0.309483 14.4828 3.08656 18.2078 6.9381 19.5218C7.42225 19.6128 7.59948 19.3058 7.59948 19.0428Z"], ["cdkMenuItem", "", "title", "Angular Discord", "target", "_blank", "rel", "noopener", 3, "href"], ["xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 127.14 96.36", "width", "20", "height", "20", "fill", "none"], ["fill-rule", "evenodd", "clip-rule", "evenodd", "d", "M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,110.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"], ["type", "button", "cdkMenuItem", "", "aria-label", "設定為系統預設主題", 3, "click"], [1, "docs-icon_high-contrast"], ["type", "button", "cdkMenuItem", "", "aria-label", "設定為暗黑主題", 3, "click"], ["type", "button", "cdkMenuItem", "", "aria-label", "設定為明亮主題", 3, "click"], ["type", "button", 3, "click"]], template: /* @__PURE__ */ __name(function Navigation_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 3);
-    \u0275\u0275listener("docsClickOutside", /* @__PURE__ */ __name(function Navigation_Template_div_docsClickOutside_0_listener() {
-      \u0275\u0275restoreView(_r1);
-      return \u0275\u0275resetView(ctx.closeMobileNav());
+    const _r1 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "div", 3);
+    ɵɵlistener("docsClickOutside", /* @__PURE__ */ __name(function Navigation_Template_div_docsClickOutside_0_listener() {
+      ɵɵrestoreView(_r1);
+      return ɵɵresetView(ctx.closeMobileNav());
     }, "Navigation_Template_div_docsClickOutside_0_listener"));
-    \u0275\u0275elementStart(1, "div", 4)(2, "button", 5);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function Navigation_Template_button_click_2_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      return \u0275\u0275resetView(ctx.openMobileNav($event));
+    ɵɵelementStart(1, "div", 4)(2, "button", 5);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function Navigation_Template_button_click_2_listener($event) {
+      ɵɵrestoreView(_r1);
+      return ɵɵresetView(ctx.openMobileNav($event));
     }, "Navigation_Template_button_click_2_listener"));
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(3, "svg", 6)(4, "g", 7);
-    \u0275\u0275element(5, "path", 8)(6, "path", 9);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "defs")(8, "linearGradient", 10);
-    \u0275\u0275element(9, "stop", 11)(10, "stop", 12)(11, "stop", 13)(12, "stop", 14)(13, "stop", 15)(14, "stop", 16);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(15, "linearGradient", 17);
-    \u0275\u0275element(16, "stop", 18)(17, "stop", 19);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(18, "clipPath", 20);
-    \u0275\u0275element(19, "path", 21);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(20, "docs-icon", 22);
-    \u0275\u0275text(21, "menu");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(22, "nav", 23)(23, "button", 24);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function Navigation_Template_button_click_23_listener() {
-      \u0275\u0275restoreView(_r1);
-      return \u0275\u0275resetView(ctx.closeMobileNav());
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(3, "svg", 6)(4, "g", 7);
+    ɵɵelement(5, "path", 8)(6, "path", 9);
+    ɵɵelementEnd();
+    ɵɵelementStart(7, "defs")(8, "linearGradient", 10);
+    ɵɵelement(9, "stop", 11)(10, "stop", 12)(11, "stop", 13)(12, "stop", 14)(13, "stop", 15)(14, "stop", 16);
+    ɵɵelementEnd();
+    ɵɵelementStart(15, "linearGradient", 17);
+    ɵɵelement(16, "stop", 18)(17, "stop", 19);
+    ɵɵelementEnd();
+    ɵɵelementStart(18, "clipPath", 20);
+    ɵɵelement(19, "path", 21);
+    ɵɵelementEnd()()();
+    ɵɵnamespaceHTML();
+    ɵɵelementStart(20, "docs-icon", 22);
+    ɵɵtext(21, "menu");
+    ɵɵelementEnd()()();
+    ɵɵelementStart(22, "nav", 23)(23, "button", 24);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function Navigation_Template_button_click_23_listener() {
+      ɵɵrestoreView(_r1);
+      return ɵɵresetView(ctx.closeMobileNav());
     }, "Navigation_Template_button_click_23_listener"));
-    \u0275\u0275elementStart(24, "docs-icon", 22);
-    \u0275\u0275text(25, "close");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(26, "ul", 25)(27, "li", 26)(28, "a", 27);
-    \u0275\u0275conditionalCreate(29, Navigation_Conditional_29_Template, 17, 0, ":svg:svg", 28)(30, Navigation_Conditional_30_Template, 1, 0, "img", 29);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(31, "div", 30)(32, "button", 31);
-    \u0275\u0275listener("cdkMenuClosed", /* @__PURE__ */ __name(function Navigation_Template_button_cdkMenuClosed_32_listener() {
-      \u0275\u0275restoreView(_r1);
-      return \u0275\u0275resetView(ctx.closeMenu());
+    ɵɵelementStart(24, "docs-icon", 22);
+    ɵɵtext(25, "close");
+    ɵɵelementEnd()();
+    ɵɵelementStart(26, "ul", 25)(27, "li", 26)(28, "a", 27);
+    ɵɵconditionalCreate(29, Navigation_Conditional_29_Template, 17, 0, ":svg:svg", 28)(30, Navigation_Conditional_30_Template, 1, 0, "img", 29);
+    ɵɵelementEnd();
+    ɵɵelementStart(31, "div", 30)(32, "button", 31);
+    ɵɵlistener("cdkMenuClosed", /* @__PURE__ */ __name(function Navigation_Template_button_cdkMenuClosed_32_listener() {
+      ɵɵrestoreView(_r1);
+      return ɵɵresetView(ctx.closeMenu());
     }, "Navigation_Template_button_cdkMenuClosed_32_listener"))("click", /* @__PURE__ */ __name(function Navigation_Template_button_click_32_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      return \u0275\u0275resetView(ctx.openVersionMenu($event));
+      ɵɵrestoreView(_r1);
+      return ɵɵresetView(ctx.openVersionMenu($event));
     }, "Navigation_Template_button_click_32_listener"));
-    \u0275\u0275text(33);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(34, "svg", 32);
-    \u0275\u0275element(35, "path", 33);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(36, Navigation_ng_template_36_Template, 3, 0, "ng-template", null, 0, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(38, "li", 30)(39, "button", 34);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function Navigation_Template_button_click_39_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      return \u0275\u0275resetView(ctx.toggleSearchDialog($event));
+    ɵɵtext(33);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(34, "svg", 32);
+    ɵɵelement(35, "path", 33);
+    ɵɵelementEnd()();
+    ɵɵtemplate(36, Navigation_ng_template_36_Template, 3, 0, "ng-template", null, 0, ɵɵtemplateRefExtractor);
+    ɵɵelementEnd()();
+    ɵɵnamespaceHTML();
+    ɵɵelementStart(38, "li", 30)(39, "button", 34);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function Navigation_Template_button_click_39_listener($event) {
+      ɵɵrestoreView(_r1);
+      return ɵɵresetView(ctx.toggleSearchDialog($event));
     }, "Navigation_Template_button_click_39_listener"));
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(40, "svg", 35);
-    \u0275\u0275element(41, "path", 36);
-    \u0275\u0275elementEnd();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(42, "span", 37)(43, "kbd");
-    \u0275\u0275text(44);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(45, "kbd");
-    \u0275\u0275text(46, "K");
-    \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(47, "li", 30)(48, "a", 38);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(49, "svg", 39);
-    \u0275\u0275element(50, "path", 40);
-    \u0275\u0275elementEnd();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(51, "span", 41);
-    \u0275\u0275text(52, "\u6587\u6863");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(53, "li", 30)(54, "a", 38);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(55, "svg", 42);
-    \u0275\u0275element(56, "path", 43);
-    \u0275\u0275elementEnd();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(57, "span", 41);
-    \u0275\u0275text(58, "\u6559\u7A0B");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(59, "li", 30)(60, "a", 38);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(61, "svg", 44);
-    \u0275\u0275element(62, "path", 45);
-    \u0275\u0275elementEnd();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(63, "span", 41);
-    \u0275\u0275text(64, "\u6F14\u7EC3\u573A");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(65, "li", 30)(66, "a", 38);
-    \u0275\u0275namespaceSVG();
-    \u0275\u0275elementStart(67, "svg", 39);
-    \u0275\u0275element(68, "path", 40);
-    \u0275\u0275elementEnd();
-    \u0275\u0275namespaceHTML();
-    \u0275\u0275elementStart(69, "span", 41);
-    \u0275\u0275text(70, "\u53C2\u8003\u624B\u518C");
-    \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(71, "div", 46)(72, "div", 30)(73, "button", 47);
-    \u0275\u0275listener("cdkMenuClosed", /* @__PURE__ */ __name(function Navigation_Template_button_cdkMenuClosed_73_listener() {
-      \u0275\u0275restoreView(_r1);
-      return \u0275\u0275resetView(ctx.closeMenu());
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(40, "svg", 35);
+    ɵɵelement(41, "path", 36);
+    ɵɵelementEnd();
+    ɵɵnamespaceHTML();
+    ɵɵelementStart(42, "span", 37)(43, "kbd");
+    ɵɵtext(44);
+    ɵɵelementEnd();
+    ɵɵelementStart(45, "kbd");
+    ɵɵtext(46, "K");
+    ɵɵelementEnd()()()();
+    ɵɵelementStart(47, "li", 30)(48, "a", 38);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(49, "svg", 39);
+    ɵɵelement(50, "path", 40);
+    ɵɵelementEnd();
+    ɵɵnamespaceHTML();
+    ɵɵelementStart(51, "span", 41);
+    ɵɵtext(52, "文件");
+    ɵɵelementEnd()()();
+    ɵɵelementStart(53, "li", 30)(54, "a", 38);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(55, "svg", 42);
+    ɵɵelement(56, "path", 43);
+    ɵɵelementEnd();
+    ɵɵnamespaceHTML();
+    ɵɵelementStart(57, "span", 41);
+    ɵɵtext(58, "教程");
+    ɵɵelementEnd()()();
+    ɵɵelementStart(59, "li", 30)(60, "a", 38);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(61, "svg", 44);
+    ɵɵelement(62, "path", 45);
+    ɵɵelementEnd();
+    ɵɵnamespaceHTML();
+    ɵɵelementStart(63, "span", 41);
+    ɵɵtext(64, "演練場");
+    ɵɵelementEnd()()();
+    ɵɵelementStart(65, "li", 30)(66, "a", 38);
+    ɵɵnamespaceSVG();
+    ɵɵelementStart(67, "svg", 39);
+    ɵɵelement(68, "path", 40);
+    ɵɵelementEnd();
+    ɵɵnamespaceHTML();
+    ɵɵelementStart(69, "span", 41);
+    ɵɵtext(70, "參考手冊");
+    ɵɵelementEnd()()()();
+    ɵɵelementStart(71, "div", 46)(72, "div", 30)(73, "button", 47);
+    ɵɵlistener("cdkMenuClosed", /* @__PURE__ */ __name(function Navigation_Template_button_cdkMenuClosed_73_listener() {
+      ɵɵrestoreView(_r1);
+      return ɵɵresetView(ctx.closeMenu());
     }, "Navigation_Template_button_cdkMenuClosed_73_listener"))("cdkMenuOpened", /* @__PURE__ */ __name(function Navigation_Template_button_cdkMenuOpened_73_listener() {
-      \u0275\u0275restoreView(_r1);
-      return \u0275\u0275resetView(ctx.openMenu("social"));
+      ɵɵrestoreView(_r1);
+      return ɵɵresetView(ctx.openMenu("social"));
     }, "Navigation_Template_button_cdkMenuOpened_73_listener"));
-    \u0275\u0275elementStart(74, "docs-icon", 22);
-    \u0275\u0275text(75, "more_horiz");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(76, Navigation_ng_template_76_Template, 25, 6, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(78, "div", 30)(79, "button", 48);
-    \u0275\u0275listener("cdkMenuClosed", /* @__PURE__ */ __name(function Navigation_Template_button_cdkMenuClosed_79_listener() {
-      \u0275\u0275restoreView(_r1);
-      return \u0275\u0275resetView(ctx.closeMenu());
+    ɵɵelementStart(74, "docs-icon", 22);
+    ɵɵtext(75, "more_horiz");
+    ɵɵelementEnd()();
+    ɵɵtemplate(76, Navigation_ng_template_76_Template, 25, 6, "ng-template", null, 1, ɵɵtemplateRefExtractor);
+    ɵɵelementEnd();
+    ɵɵelementStart(78, "div", 30)(79, "button", 48);
+    ɵɵlistener("cdkMenuClosed", /* @__PURE__ */ __name(function Navigation_Template_button_cdkMenuClosed_79_listener() {
+      ɵɵrestoreView(_r1);
+      return ɵɵresetView(ctx.closeMenu());
     }, "Navigation_Template_button_cdkMenuClosed_79_listener"))("cdkMenuOpened", /* @__PURE__ */ __name(function Navigation_Template_button_cdkMenuOpened_79_listener() {
-      \u0275\u0275restoreView(_r1);
-      return \u0275\u0275resetView(ctx.openMenu("theme-picker"));
+      ɵɵrestoreView(_r1);
+      return ɵɵresetView(ctx.openMenu("theme-picker"));
     }, "Navigation_Template_button_cdkMenuOpened_79_listener"));
-    \u0275\u0275elementStart(80, "docs-icon", 22);
-    \u0275\u0275conditionalCreate(81, Navigation_Case_81_Template, 1, 1)(82, Navigation_Case_82_Template, 1, 1)(83, Navigation_Case_83_Template, 1, 1);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(84, Navigation_ng_template_84_Template, 19, 0, "ng-template", null, 2, \u0275\u0275templateRefExtractor);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275conditionalCreate(86, Navigation_Conditional_86_Template, 6, 2, "div", 49);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(80, "docs-icon", 22);
+    ɵɵconditionalCreate(81, Navigation_Case_81_Template, 1, 1)(82, Navigation_Case_82_Template, 1, 1)(83, Navigation_Case_83_Template, 1, 1);
+    ɵɵelementEnd()();
+    ɵɵtemplate(84, Navigation_ng_template_84_Template, 19, 0, "ng-template", null, 2, ɵɵtemplateRefExtractor);
+    ɵɵelementEnd()()();
+    ɵɵconditionalCreate(86, Navigation_Conditional_86_Template, 6, 2, "div", 49);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     let tmp_31_0;
-    const docsVersionMiniMenu_r6 = \u0275\u0275reference(37);
-    const socialMiniMenu_r7 = \u0275\u0275reference(77);
-    const themeMiniMenu_r8 = \u0275\u0275reference(85);
-    \u0275\u0275property("docsClickOutsideIgnore", \u0275\u0275pureFunction1(42, _c1, ctx.SECONDARY_NAV_ID));
-    \u0275\u0275attribute("id", ctx.PRIMARY_NAV_ID);
-    \u0275\u0275advance(22);
-    \u0275\u0275classProp("adev-nav-primary--open", ctx.isMobileNavigationOpened())("adev-nav-primary--rc", ctx.currentDocsVersionMode === "rc")("adev-nav-primary--next", ctx.currentDocsVersionMode === "next")("adev-nav-primary--deprecated", ctx.currentDocsVersionMode === "deprecated");
-    \u0275\u0275advance(5);
-    \u0275\u0275classProp("adev-nav-item--active", ctx.activeRouteItem() === ctx.PAGE_PREFIX.HOME);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(!ctx.isUwu ? 29 : 30);
-    \u0275\u0275advance(3);
-    \u0275\u0275classProp("adev-mini-menu-open", ctx.openedMenu === "version-picker");
-    \u0275\u0275property("cdkMenuTriggerFor", docsVersionMiniMenu_r6)("cdkMenuPosition", ctx.miniMenuPositions);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx.currentDocsVersion().displayName, " ");
-    \u0275\u0275advance(9);
-    \u0275\u0275attribute("aria-label", "Open search dialog with " + ctx.searchTitle);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx.searchLabel);
-    \u0275\u0275advance(3);
-    \u0275\u0275classProp("adev-nav-item--active", ctx.activeRouteItem() === ctx.PAGE_PREFIX.DOCS);
-    \u0275\u0275advance();
-    \u0275\u0275property("routerLink", ctx.PAGE_PREFIX.DOCS);
-    \u0275\u0275advance(5);
-    \u0275\u0275classProp("adev-nav-item--active", ctx.activeRouteItem() === ctx.PAGE_PREFIX.TUTORIALS);
-    \u0275\u0275advance();
-    \u0275\u0275property("routerLink", ctx.PAGE_PREFIX.TUTORIALS);
-    \u0275\u0275advance(5);
-    \u0275\u0275classProp("adev-nav-item--active", ctx.activeRouteItem() === ctx.PAGE_PREFIX.PLAYGROUND);
-    \u0275\u0275advance();
-    \u0275\u0275property("routerLink", ctx.PAGE_PREFIX.PLAYGROUND);
-    \u0275\u0275advance(5);
-    \u0275\u0275classProp("adev-nav-item--active", ctx.activeRouteItem() === ctx.PAGE_PREFIX.REFERENCE);
-    \u0275\u0275advance();
-    \u0275\u0275property("routerLink", ctx.PAGE_PREFIX.REFERENCE);
-    \u0275\u0275advance(6);
-    \u0275\u0275classProp("adev-nav-item--active", ctx.openedMenu === "social");
-    \u0275\u0275advance();
-    \u0275\u0275property("cdkMenuTriggerFor", socialMiniMenu_r7)("cdkMenuPosition", ctx.miniMenuPositions);
-    \u0275\u0275advance(5);
-    \u0275\u0275classProp("adev-nav-item--active", ctx.openedMenu === "theme-picker");
-    \u0275\u0275advance();
-    \u0275\u0275property("cdkMenuTriggerFor", themeMiniMenu_r8)("cdkMenuPosition", ctx.miniMenuPositions);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional((tmp_31_0 = ctx.theme()) === "light" ? 81 : tmp_31_0 === "dark" ? 82 : tmp_31_0 === "auto" ? 83 : -1);
-    \u0275\u0275advance(5);
-    \u0275\u0275conditional(ctx.activeRouteItem() === ctx.PAGE_PREFIX.DOCS || ctx.activeRouteItem() === ctx.PAGE_PREFIX.REFERENCE ? 86 : -1);
+    const docsVersionMiniMenu_r6 = ɵɵreference(37);
+    const socialMiniMenu_r7 = ɵɵreference(77);
+    const themeMiniMenu_r8 = ɵɵreference(85);
+    ɵɵproperty("docsClickOutsideIgnore", ɵɵpureFunction1(42, _c1, ctx.SECONDARY_NAV_ID));
+    ɵɵattribute("id", ctx.PRIMARY_NAV_ID);
+    ɵɵadvance(22);
+    ɵɵclassProp("adev-nav-primary--open", ctx.isMobileNavigationOpened())("adev-nav-primary--rc", ctx.currentDocsVersionMode === "rc")("adev-nav-primary--next", ctx.currentDocsVersionMode === "next")("adev-nav-primary--deprecated", ctx.currentDocsVersionMode === "deprecated");
+    ɵɵadvance(5);
+    ɵɵclassProp("adev-nav-item--active", ctx.activeRouteItem() === ctx.PAGE_PREFIX.HOME);
+    ɵɵadvance(2);
+    ɵɵconditional(!ctx.isUwu ? 29 : 30);
+    ɵɵadvance(3);
+    ɵɵclassProp("adev-mini-menu-open", ctx.openedMenu === "version-picker");
+    ɵɵproperty("cdkMenuTriggerFor", docsVersionMiniMenu_r6)("cdkMenuPosition", ctx.miniMenuPositions);
+    ɵɵadvance();
+    ɵɵtextInterpolate1(" ", ctx.currentDocsVersion().displayName, " ");
+    ɵɵadvance(9);
+    ɵɵattribute("aria-label", "Open search dialog with " + ctx.searchTitle);
+    ɵɵadvance(2);
+    ɵɵtextInterpolate(ctx.searchLabel);
+    ɵɵadvance(3);
+    ɵɵclassProp("adev-nav-item--active", ctx.activeRouteItem() === ctx.PAGE_PREFIX.DOCS);
+    ɵɵadvance();
+    ɵɵproperty("routerLink", ctx.PAGE_PREFIX.DOCS);
+    ɵɵadvance(5);
+    ɵɵclassProp("adev-nav-item--active", ctx.activeRouteItem() === ctx.PAGE_PREFIX.TUTORIALS);
+    ɵɵadvance();
+    ɵɵproperty("routerLink", ctx.PAGE_PREFIX.TUTORIALS);
+    ɵɵadvance(5);
+    ɵɵclassProp("adev-nav-item--active", ctx.activeRouteItem() === ctx.PAGE_PREFIX.PLAYGROUND);
+    ɵɵadvance();
+    ɵɵproperty("routerLink", ctx.PAGE_PREFIX.PLAYGROUND);
+    ɵɵadvance(5);
+    ɵɵclassProp("adev-nav-item--active", ctx.activeRouteItem() === ctx.PAGE_PREFIX.REFERENCE);
+    ɵɵadvance();
+    ɵɵproperty("routerLink", ctx.PAGE_PREFIX.REFERENCE);
+    ɵɵadvance(6);
+    ɵɵclassProp("adev-nav-item--active", ctx.openedMenu === "social");
+    ɵɵadvance();
+    ɵɵproperty("cdkMenuTriggerFor", socialMiniMenu_r7)("cdkMenuPosition", ctx.miniMenuPositions);
+    ɵɵadvance(5);
+    ɵɵclassProp("adev-nav-item--active", ctx.openedMenu === "theme-picker");
+    ɵɵadvance();
+    ɵɵproperty("cdkMenuTriggerFor", themeMiniMenu_r8)("cdkMenuPosition", ctx.miniMenuPositions);
+    ɵɵadvance(2);
+    ɵɵconditional((tmp_31_0 = ctx.theme()) === "light" ? 81 : tmp_31_0 === "dark" ? 82 : tmp_31_0 === "auto" ? 83 : -1);
+    ɵɵadvance(5);
+    ɵɵconditional(ctx.activeRouteItem() === ctx.PAGE_PREFIX.DOCS || ctx.activeRouteItem() === ctx.PAGE_PREFIX.REFERENCE ? 86 : -1);
   }
 }, "Navigation_Template"), dependencies: [RouterLink, ClickOutside, CdkMenu, CdkMenuItem, CdkMenuTrigger, IconComponent], styles: ["\n\n[_nghost-%COMP%] {\n  display: flex;\n  position: sticky;\n  top: 0;\n  z-index: var(--z-index-nav);\n}\n[_nghost-%COMP%]   .adev-mobile-nav-button[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0.75rem;\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  [_nghost-%COMP%]:has(.adev-nav-primary--open) {\n    z-index: 50;\n  }\n}\n@media (max-width: 900px) {\n  [_nghost-%COMP%] {\n    width: 100%;\n  }\n  [_nghost-%COMP%]   .wrapper[_ngcontent-%COMP%] {\n    width: 100%;\n  }\n}\n.adev-mobile-nav-bar[_ngcontent-%COMP%] {\n  display: none;\n  gap: 0.75rem;\n  -webkit-backdrop-filter: blur(16px);\n  backdrop-filter: blur(16px);\n  background-color: color-mix(in srgb, var(--page-background) 70%, transparent);\n  position: relative;\n  width: 100%;\n  padding-block: 0.75rem;\n  padding-inline: var(--layout-padding);\n  border-block-end: 1px solid var(--septenary-contrast);\n  box-sizing: border-box;\n  transform: translateY(0);\n  transition: transform 0.3s ease-out 0.6s;\n}\n@media (max-width: 700px) {\n  .adev-mobile-nav-bar[_ngcontent-%COMP%] {\n    display: flex;\n  }\n}\n.adev-mobile-nav-bar[_ngcontent-%COMP%]:has(+ .adev-nav-primary--open) {\n  transform: translateY(-100%);\n  transition: transform 0.3s ease-in;\n}\n.adev-mobile-nav-bar[_ngcontent-%COMP%]   docs-icon[_ngcontent-%COMP%] {\n  color: var(--primary-contrast);\n}\n.adev-nav-primary[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  max-height: 100vh;\n  overflow: auto;\n  -webkit-backdrop-filter: blur(16px);\n  backdrop-filter: blur(16px);\n  background-color: color-mix(in srgb, var(--page-background) 70%, transparent);\n  z-index: 250;\n  position: relative;\n  transition: background-color 0.3s ease, border-color 0.3s ease;\n  height: 100dvh;\n  padding-block-start: 1rem;\n  padding-block-end: 2rem;\n  box-sizing: border-box;\n  border-block-end: 1px solid var(--septenary-contrast);\n}\n@media (min-width: 900.01px) {\n  .adev-nav-primary[_ngcontent-%COMP%] {\n    border-inline-end: 1px solid var(--septenary-contrast);\n  }\n}\n@media (max-width: 700px) {\n  .adev-nav-primary[_ngcontent-%COMP%] {\n    border-inline-end: 1px solid var(--septenary-contrast);\n  }\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .adev-nav-primary[_ngcontent-%COMP%] {\n    flex-direction: row;\n    width: 100%;\n    padding-inline: calc(var(--layout-padding) - 1.25rem);\n    height: auto;\n    padding-block: 0;\n  }\n}\n.adev-nav-primary.adev-nav-primary--next[_ngcontent-%COMP%], \n.adev-nav-primary.adev-nav-primary--rc[_ngcontent-%COMP%] {\n  background:\n    linear-gradient(\n      140deg,\n      color-mix(in srgb, var(--orange-red), transparent 60%) 0%,\n      color-mix(in srgb, var(--vivid-pink), transparent 40%) 15%,\n      color-mix(in srgb, var(--electric-violet), transparent 70%) 25%,\n      color-mix(in srgb, var(--bright-blue), transparent 60%) 90%);\n}\n.adev-nav-primary.adev-nav-primary--deprecated[_ngcontent-%COMP%] {\n  background-color: var(--deprecated-docs-bg);\n}\n.adev-nav-primary[_ngcontent-%COMP%]    > div[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n@media (max-width: 700px) {\n  .adev-nav-primary[_ngcontent-%COMP%] {\n    position: absolute;\n    top: 0;\n    background-color: var(--page-background);\n    box-shadow: 10px 4px 3px 0 rgba(0, 0, 0, 0.001);\n    transform: translateX(-100%);\n    transition: transform 0.3s ease-in 0.38s;\n  }\n  .adev-nav-primary.adev-nav-primary--open[_ngcontent-%COMP%] {\n    transform: translateX(0%);\n    transition: transform 0.3s ease-out 0.1s;\n  }\n}\n@media (max-width: 700px) and (prefers-reduced-motion: reduce-motion) {\n  .adev-nav-primary[_ngcontent-%COMP%] {\n    transition: none;\n  }\n}\n.adev-nav__top[_ngcontent-%COMP%] {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  display: flex;\n  flex-direction: column;\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .adev-nav__top[_ngcontent-%COMP%] {\n    flex-direction: row;\n  }\n}\n.adev-nav__top[_ngcontent-%COMP%]   .adev-version-button[_ngcontent-%COMP%] {\n  border: 1px solid var(--senary-contrast);\n  border-radius: 0.25rem;\n  width: fit-content;\n  margin: 0 auto;\n  display: flex;\n  justify-content: space-between;\n  gap: 0.25rem;\n  color: var(--quaternary-contrast);\n  fill: var(--quaternary-contrast);\n  transition: color 0.3s ease;\n  font-size: 0.8rem;\n  font-weight: 500;\n}\n.adev-nav__top[_ngcontent-%COMP%]   .adev-version-button[_ngcontent-%COMP%]:hover {\n  color: var(--primary-contrast);\n}\n.adev-nav__top[_ngcontent-%COMP%]   .adev-version-button[_ngcontent-%COMP%]   docs-icon[_ngcontent-%COMP%] {\n  font-size: inherit;\n  line-height: inherit;\n  transition: transform 0.2s ease;\n}\n@media (max-width: 700px) {\n  .adev-nav__top[_ngcontent-%COMP%]   .adev-version-button.adev-mini-menu-open[_ngcontent-%COMP%]::after {\n    transform: rotate(-90deg);\n  }\n}\n@media (min-width: 900.01px) {\n  .adev-nav__top[_ngcontent-%COMP%]   .adev-version-button.adev-mini-menu-open[_ngcontent-%COMP%]::after {\n    transform: rotate(-90deg);\n  }\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .adev-nav__top[_ngcontent-%COMP%]    > li[_ngcontent-%COMP%]:first-of-type {\n    padding-inline-start: 1.25rem;\n  }\n  .adev-nav__top[_ngcontent-%COMP%]   li[_ngcontent-%COMP%] {\n    padding-inline: 0.875rem;\n  }\n}\n.adev-nav__bottom[_ngcontent-%COMP%] {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .adev-nav__bottom[_ngcontent-%COMP%] {\n    flex-direction: row !important;\n    margin-inline-end: 1.25rem;\n    gap: 0.75rem;\n  }\n}\n.adev-nav__bottom[_ngcontent-%COMP%]   .adev-nav-item--active[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]   docs-icon[_ngcontent-%COMP%] {\n  color: var(--primary-contrast);\n}\n.adev-nav__bottom[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  border: none;\n  background-color: transparent;\n  cursor: pointer;\n  width: 100%;\n  padding-inline: 1rem;\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .adev-nav__bottom[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n    padding-inline: 0.5rem;\n  }\n}\n.adev-nav__bottom[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]   docs-icon[_ngcontent-%COMP%] {\n  color: var(--quaternary-contrast);\n  font-size: 1.5rem;\n}\n@media (max-width: 900px) {\n  .adev-nav__bottom[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]   docs-icon[_ngcontent-%COMP%] {\n    font-size: 1.25rem;\n  }\n}\n.adev-nav__bottom[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:hover   docs-icon[_ngcontent-%COMP%] {\n  color: var(--primary-contrast);\n}\n.adev-nav-item--logo[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  height: 34px;\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .adev-nav-item--logo[_ngcontent-%COMP%] {\n    gap: 0.75rem;\n  }\n}\n.adev-close-nav[_ngcontent-%COMP%] {\n  display: none;\n  color: var(--primary-contrast);\n}\n@media (max-width: 700px) {\n  .adev-close-nav[_ngcontent-%COMP%] {\n    display: block;\n  }\n}\n.adev-search-desktop[_ngcontent-%COMP%] {\n  height: 1.375rem;\n  text-transform: capitalize;\n}\n@media (max-width: 900px) {\n  .adev-search-desktop[_ngcontent-%COMP%] {\n    display: none;\n  }\n}\n.adev-sub-navigation-hidden[_ngcontent-%COMP%] {\n  display: none;\n}\n.adev-secondary-tablet-bar[_ngcontent-%COMP%] {\n  font-size: 0.875rem;\n  -webkit-backdrop-filter: blur(16px);\n  backdrop-filter: blur(16px);\n  background-color: color-mix(in srgb, var(--page-background) 70%, transparent);\n  border-block-end: 1px solid var(--septenary-contrast);\n  padding-block: 1rem;\n  padding-inline: var(--layout-padding);\n  transition: background-color 0.3s ease, border-color 0.3s ease;\n}\n.adev-secondary-tablet-bar[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 0.5rem;\n  align-items: center;\n  color: var(--primary-contrast);\n  padding: 0;\n  font-weight: 500;\n}\n@media (min-width: 900.01px) {\n  .adev-secondary-tablet-bar[_ngcontent-%COMP%] {\n    display: none;\n  }\n}\n@media (max-width: 700px) {\n  .adev-secondary-tablet-bar[_ngcontent-%COMP%] {\n    display: none;\n  }\n}\n/*# sourceMappingURL=navigation.component.css.map */", "\n\n.adev-mini-menu[_ngcontent-%COMP%] {\n  padding: 0;\n  color: var(--primary-contrast);\n  background-color: var(--page-background);\n  border: 1px solid var(--senary-contrast);\n  border-radius: 0.25rem;\n  z-index: var(--z-index-mini-menu);\n  box-shadow: 10px 4px 40px 0 rgba(0, 0, 0, 0.075);\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .adev-mini-menu[_ngcontent-%COMP%] {\n    top: 75px;\n    left: 5px;\n  }\n}\n.adev-mini-menu[_ngcontent-%COMP%]   li[_ngcontent-%COMP%] {\n  list-style: none;\n}\n.adev-mini-menu[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  padding: 1rem;\n  min-width: 75px;\n  min-height: 75px;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.adev-mini-menu[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]   docs-icon[_ngcontent-%COMP%] {\n  font-size: 1.5rem;\n  color: var(--quaternary-contrast);\n  transition: color 0.3s ease;\n}\n.adev-mini-menu[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:hover {\n  background-color: var(--senary-contrast);\n}\n.adev-mini-menu[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:hover   span[_ngcontent-%COMP%], \n.adev-mini-menu[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:hover   docs-icon[_ngcontent-%COMP%] {\n  color: var(--primary-contrast);\n}\n.adev-mini-menu[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 1rem;\n  min-width: 50px;\n}\n.adev-mini-menu[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  fill: var(--quaternary-contrast);\n  transition: fill 0.3s ease;\n}\n.adev-mini-menu[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n  background-color: var(--senary-contrast);\n}\n.adev-mini-menu[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover   svg[_ngcontent-%COMP%] {\n  fill: var(--primary-contrast);\n}\n.adev-mini-menu[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  color: var(--quaternary-contrast);\n  transition: color 0.3s ease;\n}\n.adev-mini-menu-open[_ngcontent-%COMP%] {\n  display: block;\n}\n.adev-version-picker[_ngcontent-%COMP%] {\n  overflow-y: auto;\n  max-height: 90vh;\n  top: 30px;\n  left: 10px;\n  position: absolute;\n  bottom: auto;\n}\n.adev-version-picker[_ngcontent-%COMP%]   li[_ngcontent-%COMP%] {\n  padding-inline: 0;\n}\n.adev-version-picker[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  line-height: 1em;\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .adev-version-picker[_ngcontent-%COMP%] {\n    top: 30px;\n    left: auto;\n    bottom: auto;\n  }\n}\n/*# sourceMappingURL=mini-menu.css.map */", '\n\n.adev-nav-item[_ngcontent-%COMP%] {\n  color: var(--quaternary-contrast);\n  position: relative;\n  width: 6.875rem;\n}\n@media (max-width: 700px) {\n  .adev-nav-item[_ngcontent-%COMP%] {\n    width: 5.05rem;\n  }\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .adev-nav-item[_ngcontent-%COMP%] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: auto;\n  }\n}\n.adev-nav-item[_ngcontent-%COMP%]::before {\n  content: "";\n  position: absolute;\n  bottom: 0;\n  top: 0;\n  left: 0;\n  width: 2px;\n  background-color: var(--primary-contrast);\n  opacity: 0;\n  transform: scale(0.9);\n  transform-origin: center;\n  transition: opacity 0.3s ease, transform 0.3s ease;\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .adev-nav-item[_ngcontent-%COMP%]::before {\n    width: auto;\n    top: auto;\n    right: 0;\n    height: 2px;\n  }\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .adev-nav-item[_ngcontent-%COMP%]:not(.adev-nav-item--logo)   a[_ngcontent-%COMP%], \n   .adev-nav-item[_ngcontent-%COMP%]:not(.adev-nav-item--logo)   .adev-nav-button[_ngcontent-%COMP%] {\n    gap: 0.25rem;\n  }\n}\n.adev-nav-item[_ngcontent-%COMP%]   .adev-nav-button[_ngcontent-%COMP%] {\n  width: 100%;\n  font-weight: 500;\n}\n.adev-nav-item[_ngcontent-%COMP%]   a[_ngcontent-%COMP%], \n.adev-nav-item[_ngcontent-%COMP%]   .adev-nav-button[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  gap: 0.75rem;\n  padding-block: 1.25rem;\n  text-decoration: none;\n  fill: var(--quaternary-contrast);\n  color: inherit;\n  cursor: pointer;\n  transition: fill 0.3s ease;\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .adev-nav-item[_ngcontent-%COMP%]   a[_ngcontent-%COMP%], \n   .adev-nav-item[_ngcontent-%COMP%]   .adev-nav-button[_ngcontent-%COMP%] {\n    flex-direction: row;\n  }\n}\n.adev-nav-item__label[_ngcontent-%COMP%] {\n  margin: 0;\n  font-size: 0.813;\n  color: inherit;\n}\n.adev-nav-item__label[_ngcontent-%COMP%]   abbr[_ngcontent-%COMP%] {\n  font-size: 0.688;\n}\n.adev-nav-item[_ngcontent-%COMP%]   i[_ngcontent-%COMP%] {\n  color: var(--quaternary-contrast);\n  transition: color 0.3s ease;\n}\n.adev-nav-item[_ngcontent-%COMP%]   span[_ngcontent-%COMP%], \n.adev-nav-item[_ngcontent-%COMP%]   abbr[_ngcontent-%COMP%] {\n  transition: color 0.3s ease;\n}\n.adev-nav-item[_ngcontent-%COMP%]:hover   a[_ngcontent-%COMP%], \n.adev-nav-item[_ngcontent-%COMP%]:hover   .adev-nav-button[_ngcontent-%COMP%] {\n  fill: var(--primary-contrast);\n}\n.adev-nav-item[_ngcontent-%COMP%]:hover   span[_ngcontent-%COMP%], \n.adev-nav-item[_ngcontent-%COMP%]:hover   abbr[_ngcontent-%COMP%] {\n  color: var(--primary-contrast);\n}\n.adev-nav-item[_ngcontent-%COMP%]:hover   i[_ngcontent-%COMP%] {\n  color: var(--primary-contrast);\n}\n.adev-nav-item--active[_ngcontent-%COMP%]::before {\n  opacity: 1;\n  transform: scaleY(1);\n}\n.adev-nav-item--active[_ngcontent-%COMP%]:not(.adev-nav-item--logo)   path[_ngcontent-%COMP%] {\n  fill: var(--primary-contrast);\n}\n.adev-nav-item--active[_ngcontent-%COMP%]   span[_ngcontent-%COMP%], \n.adev-nav-item--active[_ngcontent-%COMP%]   abbr[_ngcontent-%COMP%], \n.adev-nav-item--active[_ngcontent-%COMP%]   i[_ngcontent-%COMP%] {\n  color: var(--primary-contrast);\n}\n/*# sourceMappingURL=nav-item.css.map */'], changeDetection: 0 }));
 var Navigation = _Navigation;
@@ -3336,7 +3336,7 @@ var Navigation = _Navigation;
     <button
       type="button"
       class="adev-mobile-nav-button"
-      aria-label="\u5207\u6362\u79FB\u52A8\u7AEF\u5BFC\u822A"
+      aria-label="切換行動端導向"
       (click)="openMobileNav($event)"
     >
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 223 236" width="32">
@@ -3395,7 +3395,7 @@ var Navigation = _Navigation;
       type="button"
       class="adev-close-nav"
       (click)="closeMobileNav()"
-      aria-label="\u5173\u95ED\u5BFC\u822A"
+      aria-label="關閉導向"
     >
       <docs-icon role="presentation">close</docs-icon>
     </button>
@@ -3406,7 +3406,7 @@ var Navigation = _Navigation;
         class="adev-nav-item adev-nav-item--logo"
         [class.adev-nav-item--active]="activeRouteItem() === PAGE_PREFIX.HOME"
       >
-        <a aria-label="Angular \u9996\u9875" routerLink="/">
+        <a aria-label="Angular 首頁" routerLink="/">
           <!-- Logo Symbol -->
           @if (!isUwu) {
             <svg
@@ -3473,7 +3473,7 @@ var Navigation = _Navigation;
         <div class="adev-nav-item">
           <button
             type="button"
-            aria-label="\u9009\u62E9 Angular \u7248\u672C"
+            aria-label="選擇 Angular 版本"
             role="menu"
             class="adev-version-button"
             [class.adev-mini-menu-open]="openedMenu === 'version-picker'"
@@ -3519,7 +3519,7 @@ var Navigation = _Navigation;
           class="adev-nav-button"
           type="button"
           (click)="toggleSearchDialog($event)"
-          title="\u641C\u7D22\u6587\u6863"
+          title="搜尋文件"
         >
           <svg
             aria-hidden="true"
@@ -3559,7 +3559,7 @@ var Navigation = _Navigation;
               d="M3.645 13.792h6.708v-1.25H3.645v1.25Zm0-3.542h6.708V9H3.645v1.25Zm-2.063 7.083a1.2 1.2 0 0 1-.875-.375 1.2 1.2 0 0 1-.375-.875V1.917a1.2 1.2 0 0 1 .375-.875 1.2 1.2 0 0 1 .875-.375h7.52l4.563 4.562v10.854a1.2 1.2 0 0 1-.375.875 1.2 1.2 0 0 1-.875.375H1.582ZM8.478 5.792V1.917H1.582v14.166h10.833V5.792H8.478Z"
             />
           </svg>
-          <span class="adev-nav-item__label">\u6587\u6863</span>
+          <span class="adev-nav-item__label">文件</span>
         </a>
       </li>
 
@@ -3580,7 +3580,7 @@ var Navigation = _Navigation;
               d="m5.668 10-5-5 5-5 1.187 1.188L3.022 5.02l3.813 3.812L5.668 10Zm6.667 0-1.188-1.188L14.98 4.98l-3.812-3.812L12.335 0l5 5-5 5Z"
             />
           </svg>
-          <span class="adev-nav-item__label">\u6559\u7A0B</span>
+          <span class="adev-nav-item__label">教程</span>
         </a>
       </li>
 
@@ -3595,7 +3595,7 @@ var Navigation = _Navigation;
               d="M450.001-611.691v-32.386q-39.385-9.923-64.692-41.897-25.308-31.975-25.308-74.025 0-49.922 35.038-84.96 35.039-35.038 84.961-35.038t84.961 35.038q35.038 35.038 35.038 84.96 0 42.05-25.308 74.025-25.307 31.974-64.692 41.897v32.386l273.846 157.538q17.173 9.912 26.663 26.582 9.491 16.671 9.491 36.495v62.152q0 19.824-9.491 36.495-9.49 16.67-26.663 26.582L516.154-111.771q-17.203 9.846-36.217 9.846t-36.091-9.846L176.155-265.847q-17.173-9.912-26.663-26.582-9.491-16.671-9.491-36.495v-62.152q0-19.824 9.491-36.495 9.49-16.67 26.663-26.582l273.846-157.538Zm-6.155 364.537L200-387.461v58.537q0 3.078 1.539 5.962 1.538 2.885 4.615 4.808l267.692 154.692q3.077 1.923 6.154 1.923t6.154-1.923l267.692-154.692q3.077-1.923 4.615-4.808 1.539-2.884 1.539-5.962v-58.537L516.154-247.154q-17.203 9.847-36.217 9.847t-36.091-9.847Zm6.155-162.847V-542.77L250.46-427.691l223.386 128.846q3.077 1.924 6.154 1.924t6.154-1.924l223.001-128.846L509.999-542.77v132.769h-59.998ZM480-699.999q25 0 42.5-17.5t17.5-42.5q0-25-17.5-42.5t-42.5-17.5q-25 0-42.5 17.5t-17.5 42.5q0 25 17.5 42.5t42.5 17.5Zm-2.308 538.46Z"
             />
           </svg>
-          <span class="adev-nav-item__label">\u6F14\u7EC3\u573A</span>
+          <span class="adev-nav-item__label">演練場</span>
         </a>
       </li>
 
@@ -3616,7 +3616,7 @@ var Navigation = _Navigation;
               d="M3.645 13.792h6.708v-1.25H3.645v1.25Zm0-3.542h6.708V9H3.645v1.25Zm-2.063 7.083a1.2 1.2 0 0 1-.875-.375 1.2 1.2 0 0 1-.375-.875V1.917a1.2 1.2 0 0 1 .375-.875 1.2 1.2 0 0 1 .875-.375h7.52l4.563 4.562v10.854a1.2 1.2 0 0 1-.375.875 1.2 1.2 0 0 1-.875.375H1.582ZM8.478 5.792V1.917H1.582v14.166h10.833V5.792H8.478Z"
             />
           </svg>
-          <span class="adev-nav-item__label">\u53C2\u8003\u624B\u518C</span>
+          <span class="adev-nav-item__label">參考手冊</span>
         </a>
       </li>
     </ul>
@@ -3629,7 +3629,7 @@ var Navigation = _Navigation;
           type="button"
           [cdkMenuTriggerFor]="socialMiniMenu"
           [cdkMenuPosition]="miniMenuPositions"
-          aria-label="\u6253\u5F00\u793E\u4EA4\u5A92\u4F53\u94FE\u63A5"
+          aria-label="開啟社交媒體連結"
           (cdkMenuClosed)="closeMenu()"
           (cdkMenuOpened)="openMenu('social')"
         >
@@ -3642,7 +3642,7 @@ var Navigation = _Navigation;
               <a
                 [href]="ngLinks.YOUTUBE"
                 cdkMenuItem
-                title="Angular YouTube \u9891\u9053"
+                title="Angular YouTube 頻道"
                 target="_blank"
                 rel="noopener"
               >
@@ -3664,7 +3664,7 @@ var Navigation = _Navigation;
               <a
                 [href]="ngLinks.X"
                 cdkMenuItem
-                title="Angular X (\u524D Twitter) \u6863\u6848"
+                title="Angular X (前 Twitter) 檔案"
                 target="_blank"
                 rel="noopener"
               >
@@ -3686,7 +3686,7 @@ var Navigation = _Navigation;
               <a
                 [href]="ngLinks.BLUESKY"
                 cdkMenuItem
-                title="Angular Bluesky \u6863\u6848"
+                title="Angular Bluesky 檔案"
                 target="_blank"
                 rel="noopener"
               >
@@ -3708,7 +3708,7 @@ var Navigation = _Navigation;
               <a
                 [href]="ngLinks.MEDIUM"
                 cdkMenuItem
-                title="Angular Medium \u535A\u5BA2"
+                title="Angular Medium 部落格"
                 target="_blank"
                 rel="noopener"
               >
@@ -3777,7 +3777,7 @@ var Navigation = _Navigation;
           type="button"
           [cdkMenuTriggerFor]="themeMiniMenu"
           [cdkMenuPosition]="miniMenuPositions"
-          aria-label="\u6253\u5F00\u4E3B\u9898\u9009\u53D6\u5668"
+          aria-label="開啟主題選取器"
           (cdkMenuClosed)="closeMenu()"
           (cdkMenuOpened)="openMenu('theme-picker')"
         >
@@ -3803,10 +3803,10 @@ var Navigation = _Navigation;
                 type="button"
                 cdkMenuItem
                 (click)="setTheme('auto')"
-                aria-label="\u8BBE\u7F6E\u4E3A\u7CFB\u7EDF\u9ED8\u8BA4\u4E3B\u9898"
+                aria-label="設定為系統預設主題"
               >
                 <docs-icon class="docs-icon_high-contrast">routine</docs-icon>
-                <span>\u7CFB\u7EDF</span>
+                <span>系統</span>
               </button>
             </li>
             <li>
@@ -3814,10 +3814,10 @@ var Navigation = _Navigation;
                 type="button"
                 cdkMenuItem
                 (click)="setTheme('dark')"
-                aria-label="\u8BBE\u7F6E\u4E3A\u6697\u9ED1\u4E3B\u9898"
+                aria-label="設定為暗黑主題"
               >
                 <docs-icon class="docs-icon_high-contrast">dark_mode</docs-icon>
-                <span>\u6697\u9ED1</span>
+                <span>暗黑</span>
               </button>
             </li>
             <li>
@@ -3825,10 +3825,10 @@ var Navigation = _Navigation;
                 type="button"
                 cdkMenuItem
                 (click)="setTheme('light')"
-                aria-label="\u8BBE\u7F6E\u4E3A\u660E\u4EAE\u4E3B\u9898"
+                aria-label="設定為明亮主題"
               >
                 <docs-icon class="docs-icon_high-contrast">light_mode</docs-icon>
-                <span>\u660E\u4EAE</span>
+                <span>明亮</span>
               </button>
             </li>
           </ul>
@@ -3843,7 +3843,7 @@ var Navigation = _Navigation;
       <button type="button" (click)="openMobileNav($event)">
         <docs-icon class="docs-icon_high-contrast">menu</docs-icon>
         @if (activeRouteItem() === PAGE_PREFIX.DOCS) {
-          <span>\u6587\u6863</span>
+          <span>文件</span>
         }
         @if (activeRouteItem() === PAGE_PREFIX.REFERENCE) {
           <span>API</span>
@@ -3856,44 +3856,44 @@ var Navigation = _Navigation;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(Navigation, { className: "Navigation", filePath: "src/app/core/layout/navigation/navigation.component.ts", lineNumber: 41 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(Navigation, { className: "Navigation", filePath: "src/app/core/layout/navigation/navigation.component.ts", lineNumber: 41 });
 })();
 
 // src/app/core/layout/secondary-navigation/secondary-navigation.component.ts
 var _c03 = /* @__PURE__ */ __name((a0) => [a0], "_c0");
 function SecondaryNavigation_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "docs-navigation-list", 4);
-    \u0275\u0275listener("linkClicked", /* @__PURE__ */ __name(function SecondaryNavigation_Conditional_2_Template_docs_navigation_list_linkClicked_0_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.close());
+    const _r1 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "docs-navigation-list", 4);
+    ɵɵlistener("linkClicked", /* @__PURE__ */ __name(function SecondaryNavigation_Conditional_2_Template_docs_navigation_list_linkClicked_0_listener() {
+      ɵɵrestoreView(_r1);
+      const ctx_r1 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r1.close());
     }, "SecondaryNavigation_Conditional_2_Template_docs_navigation_list_linkClicked_0_listener"));
-    \u0275\u0275elementEnd();
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("navigationItems", ctx_r1.navigationItems)("displayItemsToLevel", ctx_r1.maxVisibleLevelsOnSecondaryNav())("expandableLevel", ctx_r1.maxVisibleLevelsOnSecondaryNav());
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵproperty("navigationItems", ctx_r1.navigationItems)("displayItemsToLevel", ctx_r1.maxVisibleLevelsOnSecondaryNav())("expandableLevel", ctx_r1.maxVisibleLevelsOnSecondaryNav());
   }
 }
 __name(SecondaryNavigation_Conditional_2_Template, "SecondaryNavigation_Conditional_2_Template");
 function SecondaryNavigation_For_4_Template(rf, ctx) {
   if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "docs-navigation-list", 5);
-    \u0275\u0275listener("linkClicked", /* @__PURE__ */ __name(function SecondaryNavigation_For_4_Template_docs_navigation_list_linkClicked_0_listener() {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.close());
+    const _r3 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "docs-navigation-list", 5);
+    ɵɵlistener("linkClicked", /* @__PURE__ */ __name(function SecondaryNavigation_For_4_Template_docs_navigation_list_linkClicked_0_listener() {
+      ɵɵrestoreView(_r3);
+      const ctx_r1 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r1.close());
     }, "SecondaryNavigation_For_4_Template_docs_navigation_list_linkClicked_0_listener"));
-    \u0275\u0275elementEnd();
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     const item_r4 = ctx.$implicit;
-    const \u0275$index_8_r5 = ctx.$index;
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("collapsableLevel", \u0275$index_8_r5 + ctx_r1.maxVisibleLevelsOnSecondaryNav())("expandableLevel", \u0275$index_8_r5 + ctx_r1.maxVisibleLevelsOnSecondaryNav() + 1)("navigationItems", \u0275\u0275pureFunction1(4, _c03, item_r4))("displayItemsToLevel", \u0275$index_8_r5 + ctx_r1.maxVisibleLevelsOnSecondaryNav() + 1);
+    const ɵ$index_8_r5 = ctx.$index;
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵproperty("collapsableLevel", ɵ$index_8_r5 + ctx_r1.maxVisibleLevelsOnSecondaryNav())("expandableLevel", ɵ$index_8_r5 + ctx_r1.maxVisibleLevelsOnSecondaryNav() + 1)("navigationItems", ɵɵpureFunction1(4, _c03, item_r4))("displayItemsToLevel", ɵ$index_8_r5 + ctx_r1.maxVisibleLevelsOnSecondaryNav() + 1);
   }
 }
 __name(SecondaryNavigation_For_4_Template, "SecondaryNavigation_For_4_Template");
@@ -3978,30 +3978,30 @@ var _SecondaryNavigation = class _SecondaryNavigation {
   }
 };
 __name(_SecondaryNavigation, "SecondaryNavigation");
-__publicField(_SecondaryNavigation, "\u0275fac", /* @__PURE__ */ __name(function SecondaryNavigation_Factory(__ngFactoryType__) {
+__publicField(_SecondaryNavigation, "ɵfac", /* @__PURE__ */ __name(function SecondaryNavigation_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _SecondaryNavigation)();
 }, "SecondaryNavigation_Factory"));
-__publicField(_SecondaryNavigation, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SecondaryNavigation, selectors: [["adev-secondary-navigation"]], decls: 5, vars: 11, consts: [[1, "adev-secondary-nav-mask", 3, "docsClickOutside", "docsClickOutsideIgnore"], [1, "docs-nav-secondary", "docs-scroll-track-transparent"], [3, "navigationItems", "displayItemsToLevel", "expandableLevel"], [3, "collapsableLevel", "expandableLevel", "navigationItems", "displayItemsToLevel"], [3, "linkClicked", "navigationItems", "displayItemsToLevel", "expandableLevel"], [3, "linkClicked", "collapsableLevel", "expandableLevel", "navigationItems", "displayItemsToLevel"]], template: /* @__PURE__ */ __name(function SecondaryNavigation_Template(rf, ctx) {
+__publicField(_SecondaryNavigation, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _SecondaryNavigation, selectors: [["adev-secondary-navigation"]], decls: 5, vars: 11, consts: [[1, "adev-secondary-nav-mask", 3, "docsClickOutside", "docsClickOutsideIgnore"], [1, "docs-nav-secondary", "docs-scroll-track-transparent"], [3, "navigationItems", "displayItemsToLevel", "expandableLevel"], [3, "collapsableLevel", "expandableLevel", "navigationItems", "displayItemsToLevel"], [3, "linkClicked", "navigationItems", "displayItemsToLevel", "expandableLevel"], [3, "linkClicked", "collapsableLevel", "expandableLevel", "navigationItems", "displayItemsToLevel"]], template: /* @__PURE__ */ __name(function SecondaryNavigation_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 0);
-    \u0275\u0275listener("docsClickOutside", /* @__PURE__ */ __name(function SecondaryNavigation_Template_div_docsClickOutside_0_listener() {
+    ɵɵelementStart(0, "div", 0);
+    ɵɵlistener("docsClickOutside", /* @__PURE__ */ __name(function SecondaryNavigation_Template_div_docsClickOutside_0_listener() {
       return ctx.close();
     }, "SecondaryNavigation_Template_div_docsClickOutside_0_listener"));
-    \u0275\u0275elementStart(1, "div", 1);
-    \u0275\u0275conditionalCreate(2, SecondaryNavigation_Conditional_2_Template, 1, 3, "docs-navigation-list", 2);
-    \u0275\u0275repeaterCreate(3, SecondaryNavigation_For_4_Template, 1, 6, "docs-navigation-list", 3, \u0275\u0275repeaterTrackByIdentity);
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(1, "div", 1);
+    ɵɵconditionalCreate(2, SecondaryNavigation_Conditional_2_Template, 1, 3, "docs-navigation-list", 2);
+    ɵɵrepeaterCreate(3, SecondaryNavigation_For_4_Template, 1, 6, "docs-navigation-list", 3, ɵɵrepeaterTrackByIdentity);
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
-    \u0275\u0275classProp("docs-nav-secondary--open", ctx.isSecondaryNavVisible());
-    \u0275\u0275property("docsClickOutsideIgnore", \u0275\u0275pureFunction1(9, _c03, ctx.PRIMARY_NAV_ID));
-    \u0275\u0275attribute("id", ctx.SECONDARY_NAV_ID);
-    \u0275\u0275advance();
-    \u0275\u0275styleProp("transform", ctx.translateX())("transition", ctx.transition());
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.navigationItems && ctx.navigationItems.length > 0 ? 2 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275repeater(ctx.navigationItemsSlides());
+    ɵɵclassProp("docs-nav-secondary--open", ctx.isSecondaryNavVisible());
+    ɵɵproperty("docsClickOutsideIgnore", ɵɵpureFunction1(9, _c03, ctx.PRIMARY_NAV_ID));
+    ɵɵattribute("id", ctx.SECONDARY_NAV_ID);
+    ɵɵadvance();
+    ɵɵstyleProp("transform", ctx.translateX())("transition", ctx.transition());
+    ɵɵadvance();
+    ɵɵconditional(ctx.navigationItems && ctx.navigationItems.length > 0 ? 2 : -1);
+    ɵɵadvance();
+    ɵɵrepeater(ctx.navigationItemsSlides());
   }
 }, "SecondaryNavigation_Template"), dependencies: [NavigationList, ClickOutside], styles: ["\n\n[_nghost-%COMP%] {\n  z-index: 100;\n}\n@media (min-width: 900.01px) {\n  [_nghost-%COMP%] {\n    position: sticky;\n    top: 0;\n  }\n}\n@media (max-width: 900px) {\n  [_nghost-%COMP%] {\n    position: fixed;\n  }\n}\n@media (max-width: 700px) {\n  [_nghost-%COMP%] {\n    transform: translateX(0);\n    transition: transform 0.3s ease;\n  }\n  [_nghost-%COMP%]:has(.docs-nav-secondary--open) {\n    transform: translateX(82px);\n    transition: transform 0.3s ease-in 0.3s;\n  }\n}\n.adev-secondary-nav-mask[_ngcontent-%COMP%] {\n  position: sticky;\n  top: 0;\n  overflow-x: hidden;\n  min-width: var(--secondary-nav-width);\n  border-inline-end: 1px solid var(--septenary-contrast);\n  background-color: var(--page-background);\n  z-index: var(--z-index-nav);\n  transition: transform 0.45s ease;\n}\n@media (max-width: 900px) {\n  .adev-secondary-nav-mask[_ngcontent-%COMP%] {\n    position: absolute;\n  }\n}\n@media (prefers-reduced-motion: no-preference) {\n  .adev-secondary-nav-mask[_ngcontent-%COMP%] {\n    transition:\n      transform 0.45s ease,\n      background-color 0.3s ease,\n      border-color 0.3s ease;\n  }\n}\n@media (max-width: 900px) {\n  .adev-secondary-nav-mask[_ngcontent-%COMP%] {\n    transform: translateX(-100%);\n  }\n  .adev-secondary-nav-mask.docs-nav-secondary--open[_ngcontent-%COMP%] {\n    transform: translateX(0);\n  }\n}\n@media (max-width: 700px) {\n  .adev-secondary-nav-mask[_ngcontent-%COMP%] {\n    transform: translateX(-100%);\n    transition: transform 0.45s ease-in;\n  }\n  .adev-secondary-nav-mask.docs-nav-secondary--open[_ngcontent-%COMP%] {\n    transform: translateX(0);\n    transition: transform 0.45s ease-out 0.2s;\n  }\n}\n.docs-nav-secondary[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: row;\n  max-width: var(--secondary-nav-width);\n}\n/*# sourceMappingURL=secondary-navigation.component.css.map */"], changeDetection: 0 }));
 var SecondaryNavigation = _SecondaryNavigation;
@@ -4012,7 +4012,7 @@ var SecondaryNavigation = _SecondaryNavigation;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SecondaryNavigation, { className: "SecondaryNavigation", filePath: "src/app/core/layout/secondary-navigation/secondary-navigation.component.ts", lineNumber: 46 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(SecondaryNavigation, { className: "SecondaryNavigation", filePath: "src/app/core/layout/secondary-navigation/secondary-navigation.component.ts", lineNumber: 46 });
 })();
 
 // src/app/core/services/header.service.ts
@@ -4039,10 +4039,10 @@ var _HeaderService = class _HeaderService {
   }
 };
 __name(_HeaderService, "HeaderService");
-__publicField(_HeaderService, "\u0275fac", /* @__PURE__ */ __name(function HeaderService_Factory(__ngFactoryType__) {
+__publicField(_HeaderService, "ɵfac", /* @__PURE__ */ __name(function HeaderService_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HeaderService)();
 }, "HeaderService_Factory"));
-__publicField(_HeaderService, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _HeaderService, factory: _HeaderService.\u0275fac, providedIn: "root" }));
+__publicField(_HeaderService, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _HeaderService, factory: _HeaderService.ɵfac, providedIn: "root" }));
 var HeaderService = _HeaderService;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(HeaderService, [{
@@ -4057,56 +4057,56 @@ var AppComponent_Defer_9_DepsFn = /* @__PURE__ */ __name(() => [CookiePopup], "A
 var AppComponent_Defer_8_Defer_2_DepsFn = /* @__PURE__ */ __name(() => [SearchDialog], "AppComponent_Defer_8_Defer_2_DepsFn");
 function AppComponent_Defer_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "adev-progress-bar")(1, "docs-top-level-banner", 4);
+    ɵɵelement(0, "adev-progress-bar")(1, "docs-top-level-banner", 4);
   }
 }
 __name(AppComponent_Defer_2_Template, "AppComponent_Defer_2_Template");
 function AppComponent_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "adev-secondary-navigation");
+    ɵɵelement(0, "adev-secondary-navigation");
   }
 }
 __name(AppComponent_Conditional_6_Template, "AppComponent_Conditional_6_Template");
 function AppComponent_Defer_8_Defer_1_Conditional_0_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "docs-search-dialog", 5);
-    \u0275\u0275listener("onClose", /* @__PURE__ */ __name(function AppComponent_Defer_8_Defer_1_Conditional_0_Template_docs_search_dialog_onClose_0_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext(3);
-      return \u0275\u0275resetView(ctx_r1.displaySearchDialog.set(false));
+    const _r1 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "docs-search-dialog", 5);
+    ɵɵlistener("onClose", /* @__PURE__ */ __name(function AppComponent_Defer_8_Defer_1_Conditional_0_Template_docs_search_dialog_onClose_0_listener() {
+      ɵɵrestoreView(_r1);
+      const ctx_r1 = ɵɵnextContext(3);
+      return ɵɵresetView(ctx_r1.displaySearchDialog.set(false));
     }, "AppComponent_Defer_8_Defer_1_Conditional_0_Template_docs_search_dialog_onClose_0_listener"));
-    \u0275\u0275elementEnd();
+    ɵɵelementEnd();
   }
 }
 __name(AppComponent_Defer_8_Defer_1_Conditional_0_Template, "AppComponent_Defer_8_Defer_1_Conditional_0_Template");
 function AppComponent_Defer_8_Defer_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275conditionalCreate(0, AppComponent_Defer_8_Defer_1_Conditional_0_Template, 1, 0, "docs-search-dialog");
+    ɵɵconditionalCreate(0, AppComponent_Defer_8_Defer_1_Conditional_0_Template, 1, 0, "docs-search-dialog");
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275conditional(ctx_r1.displaySearchDialog() ? 0 : -1);
+    const ctx_r1 = ɵɵnextContext(2);
+    ɵɵconditional(ctx_r1.displaySearchDialog() ? 0 : -1);
   }
 }
 __name(AppComponent_Defer_8_Defer_1_Template, "AppComponent_Defer_8_Defer_1_Template");
 function AppComponent_Defer_8_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "docs-cookie-popup");
-    \u0275\u0275domTemplate(1, AppComponent_Defer_8_Defer_1_Template, 1, 1);
-    \u0275\u0275defer(2, 1, AppComponent_Defer_8_Defer_2_DepsFn);
-    \u0275\u0275deferPrefetchOnIdle();
+    ɵɵelement(0, "docs-cookie-popup");
+    ɵɵdomTemplate(1, AppComponent_Defer_8_Defer_1_Template, 1, 1);
+    ɵɵdefer(2, 1, AppComponent_Defer_8_Defer_2_DepsFn);
+    ɵɵdeferPrefetchOnIdle();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(2);
-    \u0275\u0275deferWhen(ctx_r1.displaySearchDialog());
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵadvance(2);
+    ɵɵdeferWhen(ctx_r1.displaySearchDialog());
   }
 }
 __name(AppComponent_Defer_8_Template, "AppComponent_Defer_8_Template");
 function AppComponent_Conditional_12_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "footer", 3);
+    ɵɵelement(0, "footer", 3);
   }
 }
 __name(AppComponent_Conditional_12_Template, "AppComponent_Conditional_12_Template");
@@ -4156,43 +4156,43 @@ var _AppComponent = class _AppComponent {
   }
 };
 __name(_AppComponent, "AppComponent");
-__publicField(_AppComponent, "\u0275fac", /* @__PURE__ */ __name(function AppComponent_Factory(__ngFactoryType__) {
+__publicField(_AppComponent, "ɵfac", /* @__PURE__ */ __name(function AppComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AppComponent)();
 }, "AppComponent_Factory"));
-__publicField(_AppComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["adev-root"]], hostBindings: /* @__PURE__ */ __name(function AppComponent_HostBindings(rf, ctx) {
+__publicField(_AppComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _AppComponent, selectors: [["adev-root"]], hostBindings: /* @__PURE__ */ __name(function AppComponent_HostBindings(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275listener("keydown", /* @__PURE__ */ __name(function AppComponent_keydown_HostBindingHandler($event) {
+    ɵɵlistener("keydown", /* @__PURE__ */ __name(function AppComponent_keydown_HostBindingHandler($event) {
       return ctx.setSearchDialogVisibilityOnKeyPress($event);
-    }, "AppComponent_keydown_HostBindingHandler"), \u0275\u0275resolveWindow);
+    }, "AppComponent_keydown_HostBindingHandler"), ɵɵresolveWindow);
   }
-}, "AppComponent_HostBindings"), decls: 13, vars: 4, consts: [[1, "adev-skip", 3, "click"], [1, "adev-nav"], [1, "docs-app-main-content"], ["adev-footer", ""], ["expiry", "2024-12-10", "id", "state-of-js-2024", "link", "https://survey.devographics.com/en-US/survey/state-of-js/2024?source=angular_homepage", "text", "\u5728 The State of JavaScript 2024 survey \u4E2D\u5206\u4EAB\u60A8\u7684 Angular \u4F53\u9A8C"], [3, "onClose"]], template: /* @__PURE__ */ __name(function AppComponent_Template(rf, ctx) {
+}, "AppComponent_HostBindings"), decls: 13, vars: 4, consts: [[1, "adev-skip", 3, "click"], [1, "adev-nav"], [1, "docs-app-main-content"], ["adev-footer", ""], ["expiry", "2024-12-10", "id", "state-of-js-2024", "link", "https://survey.devographics.com/en-US/survey/state-of-js/2024?source=angular_homepage", "text", "在 The State of JavaScript 2024 survey 中分享您的 Angular 體驗"], [3, "onClose"]], template: /* @__PURE__ */ __name(function AppComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "button", 0);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function AppComponent_Template_button_click_0_listener() {
+    ɵɵelementStart(0, "button", 0);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function AppComponent_Template_button_click_0_listener() {
       return ctx.focusFirstHeading();
     }, "AppComponent_Template_button_click_0_listener"));
-    \u0275\u0275text(1, "\u8DF3\u8F6C\u5230\u4E3B\u8981\u5185\u5BB9");
-    \u0275\u0275elementEnd();
-    \u0275\u0275domTemplate(2, AppComponent_Defer_2_Template, 2, 0);
-    \u0275\u0275defer(3, 2, AppComponent_Defer_3_DepsFn);
-    \u0275\u0275element(5, "div", 1);
-    \u0275\u0275conditionalCreate(6, AppComponent_Conditional_6_Template, 1, 0, "adev-secondary-navigation");
-    \u0275\u0275elementStart(7, "div", 2);
-    \u0275\u0275domTemplate(8, AppComponent_Defer_8_Template, 4, 1);
-    \u0275\u0275defer(9, 8, AppComponent_Defer_9_DepsFn);
-    \u0275\u0275element(11, "router-outlet");
-    \u0275\u0275conditionalCreate(12, AppComponent_Conditional_12_Template, 1, 0, "footer", 3);
-    \u0275\u0275elementEnd();
+    ɵɵtext(1, "跳轉到主要內容");
+    ɵɵelementEnd();
+    ɵɵdomTemplate(2, AppComponent_Defer_2_Template, 2, 0);
+    ɵɵdefer(3, 2, AppComponent_Defer_3_DepsFn);
+    ɵɵelement(5, "div", 1);
+    ɵɵconditionalCreate(6, AppComponent_Conditional_6_Template, 1, 0, "adev-secondary-navigation");
+    ɵɵelementStart(7, "div", 2);
+    ɵɵdomTemplate(8, AppComponent_Defer_8_Template, 4, 1);
+    ɵɵdefer(9, 8, AppComponent_Defer_9_DepsFn);
+    ɵɵelement(11, "router-outlet");
+    ɵɵconditionalCreate(12, AppComponent_Conditional_12_Template, 1, 0, "footer", 3);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance(3);
-    \u0275\u0275deferWhen(ctx.isBrowser);
-    \u0275\u0275advance(3);
-    \u0275\u0275conditional(ctx.displaySecondaryNav() ? 6 : -1);
-    \u0275\u0275advance(3);
-    \u0275\u0275deferWhen(ctx.isBrowser);
-    \u0275\u0275advance(3);
-    \u0275\u0275conditional(ctx.displayFooter() ? 12 : -1);
+    ɵɵadvance(3);
+    ɵɵdeferWhen(ctx.isBrowser);
+    ɵɵadvance(3);
+    ɵɵconditional(ctx.displaySecondaryNav() ? 6 : -1);
+    ɵɵadvance(3);
+    ɵɵdeferWhen(ctx.isBrowser);
+    ɵɵadvance(3);
+    ɵɵconditional(ctx.displayFooter() ? 12 : -1);
   }
 }, "AppComponent_Template"), dependencies: [
   Navigation,
@@ -4216,12 +4216,12 @@ var AppComponent = _AppComponent;
         TopLevelBannerComponent
       ], host: {
         "(window:keydown)": "setSearchDialogVisibilityOnKeyPress($event)"
-      }, template: '<button (click)="focusFirstHeading()" class="adev-skip">\u8DF3\u8F6C\u5230\u4E3B\u8981\u5185\u5BB9</button>\n\n@defer (when isBrowser) {\n  <adev-progress-bar />\n  <docs-top-level-banner expiry="2024-12-10" id="state-of-js-2024" link="https://survey.devographics.com/en-US/survey/state-of-js/2024?source=angular_homepage" text="\u5728 The State of JavaScript 2024 survey \u4E2D\u5206\u4EAB\u60A8\u7684 Angular \u4F53\u9A8C"  />\n}\n\n<div class="adev-nav"></div>\n@if (displaySecondaryNav()) {\n  <adev-secondary-navigation />\n}\n<div class="docs-app-main-content">\n  <!--\n    Avoid rendering cookies popup on the server,\n    since there is no benefit of doing this and\n    it requires additional state management.\n  -->\n  @defer (when isBrowser) {\n    <docs-cookie-popup />\n\n    @defer (when displaySearchDialog(); prefetch on idle) {\n      @if (displaySearchDialog()) {\n        <docs-search-dialog (onClose)="displaySearchDialog.set(false)" />\n      }\n    }\n  }\n  <router-outlet />\n\n  @if (displayFooter()) {\n    <footer adev-footer></footer>\n  }\n</div>\n', styles: ['/* src/app/app.component.scss */\n:host {\n  margin-inline: auto;\n  display: flex;\n  flex-direction: row;\n  align-items: flex-start;\n  min-height: 100vh;\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  :host docs-top-level-banner {\n    top: 4.6875rem;\n  }\n}\n@media (max-width: 700px) {\n  :host docs-top-level-banner {\n    top: 3.75rem;\n    transform: translateY(0);\n    transition: transform 0.3s ease-out 0.6s;\n  }\n}\n@media (max-width: 900px) {\n  :host docs-top-level-banner {\n    z-index: calc(var(--z-index-nav) - 1);\n  }\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  :host:has(adev-secondary-navigation) docs-top-level-banner {\n    top: 8.125rem;\n  }\n}\n@media (max-width: 700px) {\n  :host:has(.adev-nav-primary--open) docs-top-level-banner {\n    transform: translateY(-3.75rem);\n    transition: transform 0.3s ease-in;\n  }\n}\n@media (max-width: 900px) {\n  :host {\n    flex-direction: column;\n  }\n}\n:host:has(.docs-nav-secondary--open) .docs-app-main-content::after,\n:host:has(.adev-nav-primary--open) .docs-app-main-content::after {\n  visibility: visible;\n  opacity: 1;\n}\n:host:has(.adev-home) .adev-nav {\n  width: 0;\n  height: 0;\n}\n@media (min-width: 900.01px) {\n  :host:has(.adev-home) footer {\n    margin-left: var(--primary-nav-width);\n  }\n}\n.adev-skip {\n  position: absolute;\n  top: 0.5rem;\n  left: 0.5rem;\n  z-index: 1000;\n  background: var(--primary-contrast);\n  color: var(--page-background);\n  border: 1px solid var(--vivid-pink);\n  border-radius: 0.25rem;\n  padding: 0.5rem;\n  font-size: 0.875rem;\n  transform: translateY(-150%);\n  transition: transform 0.3s ease-out;\n}\n.adev-skip:focus {\n  transform: translateY(0);\n}\n.docs-app-main-content {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh;\n  width: 100%;\n  max-width: 2560px;\n}\n.docs-app-main-content ::after {\n  content: "";\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  -webkit-backdrop-filter: blur(2px);\n  backdrop-filter: blur(2px);\n  background-color: color-mix(in srgb, var(--gray-1000) 5%, transparent);\n  z-index: 50;\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity 0.3s ease;\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .docs-app-main-content {\n    width: 100%;\n  }\n}\nfooter {\n  margin-top: auto;\n}\n/*# sourceMappingURL=app.component.css.map */\n'] }]
+      }, template: '<button (click)="focusFirstHeading()" class="adev-skip">跳轉到主要內容</button>\n\n@defer (when isBrowser) {\n  <adev-progress-bar />\n  <docs-top-level-banner expiry="2024-12-10" id="state-of-js-2024" link="https://survey.devographics.com/en-US/survey/state-of-js/2024?source=angular_homepage" text="在 The State of JavaScript 2024 survey 中分享您的 Angular 體驗"  />\n}\n\n<div class="adev-nav"></div>\n@if (displaySecondaryNav()) {\n  <adev-secondary-navigation />\n}\n<div class="docs-app-main-content">\n  <!--\n    Avoid rendering cookies popup on the server,\n    since there is no benefit of doing this and\n    it requires additional state management.\n  -->\n  @defer (when isBrowser) {\n    <docs-cookie-popup />\n\n    @defer (when displaySearchDialog(); prefetch on idle) {\n      @if (displaySearchDialog()) {\n        <docs-search-dialog (onClose)="displaySearchDialog.set(false)" />\n      }\n    }\n  }\n  <router-outlet />\n\n  @if (displayFooter()) {\n    <footer adev-footer></footer>\n  }\n</div>\n', styles: ['/* src/app/app.component.scss */\n:host {\n  margin-inline: auto;\n  display: flex;\n  flex-direction: row;\n  align-items: flex-start;\n  min-height: 100vh;\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  :host docs-top-level-banner {\n    top: 4.6875rem;\n  }\n}\n@media (max-width: 700px) {\n  :host docs-top-level-banner {\n    top: 3.75rem;\n    transform: translateY(0);\n    transition: transform 0.3s ease-out 0.6s;\n  }\n}\n@media (max-width: 900px) {\n  :host docs-top-level-banner {\n    z-index: calc(var(--z-index-nav) - 1);\n  }\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  :host:has(adev-secondary-navigation) docs-top-level-banner {\n    top: 8.125rem;\n  }\n}\n@media (max-width: 700px) {\n  :host:has(.adev-nav-primary--open) docs-top-level-banner {\n    transform: translateY(-3.75rem);\n    transition: transform 0.3s ease-in;\n  }\n}\n@media (max-width: 900px) {\n  :host {\n    flex-direction: column;\n  }\n}\n:host:has(.docs-nav-secondary--open) .docs-app-main-content::after,\n:host:has(.adev-nav-primary--open) .docs-app-main-content::after {\n  visibility: visible;\n  opacity: 1;\n}\n:host:has(.adev-home) .adev-nav {\n  width: 0;\n  height: 0;\n}\n@media (min-width: 900.01px) {\n  :host:has(.adev-home) footer {\n    margin-left: var(--primary-nav-width);\n  }\n}\n.adev-skip {\n  position: absolute;\n  top: 0.5rem;\n  left: 0.5rem;\n  z-index: 1000;\n  background: var(--primary-contrast);\n  color: var(--page-background);\n  border: 1px solid var(--vivid-pink);\n  border-radius: 0.25rem;\n  padding: 0.5rem;\n  font-size: 0.875rem;\n  transform: translateY(-150%);\n  transition: transform 0.3s ease-out;\n}\n.adev-skip:focus {\n  transform: translateY(0);\n}\n.docs-app-main-content {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh;\n  width: 100%;\n  max-width: 2560px;\n}\n.docs-app-main-content ::after {\n  content: "";\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  -webkit-backdrop-filter: blur(2px);\n  backdrop-filter: blur(2px);\n  background-color: color-mix(in srgb, var(--gray-1000) 5%, transparent);\n  z-index: 50;\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity 0.3s ease;\n}\n@media (min-width: 700.01px) and (max-width: 900px) {\n  .docs-app-main-content {\n    width: 100%;\n  }\n}\nfooter {\n  margin-top: auto;\n}\n/*# sourceMappingURL=app.component.css.map */\n'] }]
     }], () => [], null);
   });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/app/app.component.ts", lineNumber: 53 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/app/app.component.ts", lineNumber: 53 });
 })();
 
 // src/main.ts

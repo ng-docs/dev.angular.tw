@@ -34,26 +34,26 @@ var _StatusSliderComponent = class _StatusSliderComponent {
   }
 };
 __name(_StatusSliderComponent, "StatusSliderComponent");
-__publicField(_StatusSliderComponent, "\u0275fac", /* @__PURE__ */ __name(function StatusSliderComponent_Factory(__ngFactoryType__) {
+__publicField(_StatusSliderComponent, "ɵfac", /* @__PURE__ */ __name(function StatusSliderComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _StatusSliderComponent)();
 }, "StatusSliderComponent_Factory"));
-__publicField(_StatusSliderComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _StatusSliderComponent, selectors: [["app-status-slider"]], decls: 5, vars: 2, consts: [["type", "button", 3, "click"], [1, "box"]], template: /* @__PURE__ */ __name(function StatusSliderComponent_Template(rf, ctx) {
+__publicField(_StatusSliderComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _StatusSliderComponent, selectors: [["app-status-slider"]], decls: 5, vars: 2, consts: [["type", "button", 3, "click"], [1, "box"]], template: /* @__PURE__ */ __name(function StatusSliderComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "nav")(1, "button", 0);
-    \u0275\u0275domListener("click", /* @__PURE__ */ __name(function StatusSliderComponent_Template_button_click_1_listener() {
+    ɵɵdomElementStart(0, "nav")(1, "button", 0);
+    ɵɵdomListener("click", /* @__PURE__ */ __name(function StatusSliderComponent_Template_button_click_1_listener() {
       return ctx.toggle();
     }, "StatusSliderComponent_Template_button_click_1_listener"));
-    \u0275\u0275text(2, "Toggle Status");
-    \u0275\u0275domElementEnd()();
-    \u0275\u0275domElementStart(3, "div", 1);
-    \u0275\u0275text(4);
-    \u0275\u0275domElementEnd();
+    ɵɵtext(2, "Toggle Status");
+    ɵɵdomElementEnd()();
+    ɵɵdomElementStart(3, "div", 1);
+    ɵɵtext(4);
+    ɵɵdomElementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance(3);
-    \u0275\u0275property("@slideStatus", ctx.status);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx.status == "active" ? "Active" : "Inactive", "\n");
+    ɵɵadvance(3);
+    ɵɵproperty("@slideStatus", ctx.status);
+    ɵɵadvance();
+    ɵɵtextInterpolate1(" ", ctx.status == "active" ? "Active" : "Inactive", "\n");
   }
 }, "StatusSliderComponent_Template"), styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n}\n.box[_ngcontent-%COMP%] {\n  width: 300px;\n  border: 5px solid black;\n  display: block;\n  line-height: 300px;\n  text-align: center;\n  font-size: 50px;\n  color: white;\n}\n/*# sourceMappingURL=status-slider.component.css.map */"], data: { animation: [
   trigger("slideStatus", [
@@ -131,7 +131,7 @@ var StatusSliderComponent = _StatusSliderComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(StatusSliderComponent, { className: "StatusSliderComponent", filePath: "src/content/examples/animations/src/app/status-slider.component.ts", lineNumber: 51 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(StatusSliderComponent, { className: "StatusSliderComponent", filePath: "src/content/examples/animations/src/app/status-slider.component.ts", lineNumber: 51 });
 })();
 
 export {

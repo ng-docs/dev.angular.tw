@@ -31,12 +31,12 @@ import {
 // src/app/features/docs/docs.component.ts
 function DocsComponent_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "main", 0);
+    ɵɵelement(0, "main", 0);
   }
   if (rf & 2) {
-    \u0275\u0275nextContext();
-    const docContent_r1 = \u0275\u0275readContextLet(0);
-    \u0275\u0275property("docContent", docContent_r1.contents)("hasToc", true);
+    ɵɵnextContext();
+    const docContent_r1 = ɵɵreadContextLet(0);
+    ɵɵproperty("docContent", docContent_r1.contents)("hasToc", true);
   }
 }
 __name(DocsComponent_Conditional_1_Template, "DocsComponent_Conditional_1_Template");
@@ -47,18 +47,18 @@ var _DocsComponent = class _DocsComponent {
   docContent = input(...ngDevMode ? [void 0, { debugName: "docContent" }] : []);
 };
 __name(_DocsComponent, "DocsComponent");
-__publicField(_DocsComponent, "\u0275fac", /* @__PURE__ */ __name(function DocsComponent_Factory(__ngFactoryType__) {
+__publicField(_DocsComponent, "ɵfac", /* @__PURE__ */ __name(function DocsComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _DocsComponent)();
 }, "DocsComponent_Factory"));
-__publicField(_DocsComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DocsComponent, selectors: [["docs-docs"]], inputs: { docContent: [1, "docContent"] }, decls: 2, vars: 2, consts: [["docsViewer", "", 1, "docs-viewer", 3, "docContent", "hasToc"]], template: /* @__PURE__ */ __name(function DocsComponent_Template(rf, ctx) {
+__publicField(_DocsComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _DocsComponent, selectors: [["docs-docs"]], inputs: { docContent: [1, "docContent"] }, decls: 2, vars: 2, consts: [["docsViewer", "", 1, "docs-viewer", 3, "docContent", "hasToc"]], template: /* @__PURE__ */ __name(function DocsComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275declareLet(0);
-    \u0275\u0275conditionalCreate(1, DocsComponent_Conditional_1_Template, 1, 2, "main", 0);
+    ɵɵdeclareLet(0);
+    ɵɵconditionalCreate(1, DocsComponent_Conditional_1_Template, 1, 2, "main", 0);
   }
   if (rf & 2) {
-    const docContent_r2 = \u0275\u0275storeLet(ctx.docContent());
-    \u0275\u0275advance();
-    \u0275\u0275conditional(docContent_r2 ? 1 : -1);
+    const docContent_r2 = ɵɵstoreLet(ctx.docContent());
+    ɵɵadvance();
+    ɵɵconditional(docContent_r2 ? 1 : -1);
   }
 }, "DocsComponent_Template"), dependencies: [DocViewer], styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  padding-top: var(--layout-padding);\n  padding-bottom: var(--layout-padding);\n}\n[_nghost-%COMP%]   .docs-viewer.docs-animate-content[_ngcontent-%COMP%] {\n  animation: _ngcontent-%COMP%_fade-in 500ms;\n}\n@media (min-width: 1430.01px) {\n  [_nghost-%COMP%] {\n    display: flex;\n    justify-content: center;\n  }\n}\n@keyframes _ngcontent-%COMP%_fade-in {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n/*# sourceMappingURL=docs.component.css.map */"], changeDetection: 0 }));
 var DocsComponent = _DocsComponent;
@@ -69,7 +69,7 @@ var DocsComponent = _DocsComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DocsComponent, { className: "DocsComponent", filePath: "src/app/features/docs/docs.component.ts", lineNumber: 19 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(DocsComponent, { className: "DocsComponent", filePath: "src/app/features/docs/docs.component.ts", lineNumber: 19 });
 })();
 export {
   DocsComponent as default

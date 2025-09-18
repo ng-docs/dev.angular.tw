@@ -100,10 +100,10 @@ var _QuestionService = class _QuestionService {
   }
 };
 __name(_QuestionService, "QuestionService");
-__publicField(_QuestionService, "\u0275fac", /* @__PURE__ */ __name(function QuestionService_Factory(__ngFactoryType__) {
+__publicField(_QuestionService, "ɵfac", /* @__PURE__ */ __name(function QuestionService_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _QuestionService)();
 }, "QuestionService_Factory"));
-__publicField(_QuestionService, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _QuestionService, factory: _QuestionService.\u0275fac }));
+__publicField(_QuestionService, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _QuestionService, factory: _QuestionService.ɵfac }));
 var QuestionService = _QuestionService;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(QuestionService, [{
@@ -116,21 +116,21 @@ var _AppComponent = class _AppComponent {
   questions$ = inject(QuestionService).getQuestions();
 };
 __name(_AppComponent, "AppComponent");
-__publicField(_AppComponent, "\u0275fac", /* @__PURE__ */ __name(function AppComponent_Factory(__ngFactoryType__) {
+__publicField(_AppComponent, "ɵfac", /* @__PURE__ */ __name(function AppComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AppComponent)();
 }, "AppComponent_Factory"));
-__publicField(_AppComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], features: [\u0275\u0275ProvidersFeature([QuestionService])], decls: 5, vars: 3, consts: [[3, "questions"]], template: /* @__PURE__ */ __name(function AppComponent_Template(rf, ctx) {
+__publicField(_AppComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _AppComponent, selectors: [["app-root"]], features: [ɵɵProvidersFeature([QuestionService])], decls: 5, vars: 3, consts: [[3, "questions"]], template: /* @__PURE__ */ __name(function AppComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div")(1, "h2");
-    \u0275\u0275text(2, "Job Application for Heroes");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(3, "app-dynamic-form", 0);
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div")(1, "h2");
+    ɵɵtext(2, "Job Application for Heroes");
+    ɵɵelementEnd();
+    ɵɵelement(3, "app-dynamic-form", 0);
+    ɵɵpipe(4, "async");
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance(3);
-    \u0275\u0275property("questions", \u0275\u0275pipeBind1(4, 1, ctx.questions$));
+    ɵɵadvance(3);
+    ɵɵproperty("questions", ɵɵpipeBind1(4, 1, ctx.questions$));
   }
 }, "AppComponent_Template"), dependencies: [DynamicFormComponent, AsyncPipe], encapsulation: 2 }));
 var AppComponent = _AppComponent;
@@ -151,7 +151,7 @@ var AppComponent = _AppComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/content/examples/dynamic-form/src/app/app.component.ts", lineNumber: 22 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/content/examples/dynamic-form/src/app/app.component.ts", lineNumber: 22 });
 })();
 export {
   AppComponent

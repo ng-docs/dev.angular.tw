@@ -19,16 +19,16 @@ import {
 var _ToggleAnimationsPageComponent = class _ToggleAnimationsPageComponent {
 };
 __name(_ToggleAnimationsPageComponent, "ToggleAnimationsPageComponent");
-__publicField(_ToggleAnimationsPageComponent, "\u0275fac", /* @__PURE__ */ __name(function ToggleAnimationsPageComponent_Factory(__ngFactoryType__) {
+__publicField(_ToggleAnimationsPageComponent, "ɵfac", /* @__PURE__ */ __name(function ToggleAnimationsPageComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ToggleAnimationsPageComponent)();
 }, "ToggleAnimationsPageComponent_Factory"));
-__publicField(_ToggleAnimationsPageComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ToggleAnimationsPageComponent, selectors: [["app-toggle-animations-child-page"]], decls: 4, vars: 0, template: /* @__PURE__ */ __name(function ToggleAnimationsPageComponent_Template(rf, ctx) {
+__publicField(_ToggleAnimationsPageComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _ToggleAnimationsPageComponent, selectors: [["app-toggle-animations-child-page"]], decls: 4, vars: 0, template: /* @__PURE__ */ __name(function ToggleAnimationsPageComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "section")(1, "h2");
-    \u0275\u0275text(2, "Toggle Animations");
-    \u0275\u0275elementEnd();
-    \u0275\u0275element(3, "app-open-close-toggle");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "section")(1, "h2");
+    ɵɵtext(2, "Toggle Animations");
+    ɵɵelementEnd();
+    ɵɵelement(3, "app-open-close-toggle");
+    ɵɵelementEnd();
   }
 }, "ToggleAnimationsPageComponent_Template"), dependencies: [OpenCloseChildComponent], encapsulation: 2 }));
 var ToggleAnimationsPageComponent = _ToggleAnimationsPageComponent;
@@ -49,7 +49,7 @@ var ToggleAnimationsPageComponent = _ToggleAnimationsPageComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ToggleAnimationsPageComponent, { className: "ToggleAnimationsPageComponent", filePath: "src/content/examples/animations/src/app/toggle-animations-page.component.ts", lineNumber: 15 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(ToggleAnimationsPageComponent, { className: "ToggleAnimationsPageComponent", filePath: "src/content/examples/animations/src/app/toggle-animations-page.component.ts", lineNumber: 15 });
 })();
 export {
   ToggleAnimationsPageComponent

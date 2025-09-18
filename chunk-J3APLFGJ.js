@@ -37,28 +37,28 @@ var _HeroAsyncMessageComponent = class _HeroAsyncMessageComponent {
   }
 };
 __name(_HeroAsyncMessageComponent, "HeroAsyncMessageComponent");
-__publicField(_HeroAsyncMessageComponent, "\u0275fac", /* @__PURE__ */ __name(function HeroAsyncMessageComponent_Factory(__ngFactoryType__) {
+__publicField(_HeroAsyncMessageComponent, "ɵfac", /* @__PURE__ */ __name(function HeroAsyncMessageComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HeroAsyncMessageComponent)();
 }, "HeroAsyncMessageComponent_Factory"));
-__publicField(_HeroAsyncMessageComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HeroAsyncMessageComponent, selectors: [["app-hero-async-message"]], decls: 7, vars: 3, consts: [["type", "button", 3, "click"]], template: /* @__PURE__ */ __name(function HeroAsyncMessageComponent_Template(rf, ctx) {
+__publicField(_HeroAsyncMessageComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _HeroAsyncMessageComponent, selectors: [["app-hero-async-message"]], decls: 7, vars: 3, consts: [["type", "button", 3, "click"]], template: /* @__PURE__ */ __name(function HeroAsyncMessageComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "h2");
-    \u0275\u0275text(1, "Async Messages and AsyncPipe");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(2, "p");
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "async");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(5, "button", 0);
-    \u0275\u0275domListener("click", /* @__PURE__ */ __name(function HeroAsyncMessageComponent_Template_button_click_5_listener() {
+    ɵɵdomElementStart(0, "h2");
+    ɵɵtext(1, "Async Messages and AsyncPipe");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(2, "p");
+    ɵɵtext(3);
+    ɵɵpipe(4, "async");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(5, "button", 0);
+    ɵɵdomListener("click", /* @__PURE__ */ __name(function HeroAsyncMessageComponent_Template_button_click_5_listener() {
       return ctx.resend();
     }, "HeroAsyncMessageComponent_Template_button_click_5_listener"));
-    \u0275\u0275text(6, "Resend Messages");
-    \u0275\u0275domElementEnd();
+    ɵɵtext(6, "Resend Messages");
+    ɵɵdomElementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(4, 1, ctx.message$));
+    ɵɵadvance(3);
+    ɵɵtextInterpolate(ɵɵpipeBind1(4, 1, ctx.message$));
   }
 }, "HeroAsyncMessageComponent_Template"), dependencies: [AsyncPipe], encapsulation: 2 }));
 var HeroAsyncMessageComponent = _HeroAsyncMessageComponent;
@@ -76,7 +76,7 @@ var HeroAsyncMessageComponent = _HeroAsyncMessageComponent;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HeroAsyncMessageComponent, { className: "HeroAsyncMessageComponent", filePath: "src/content/examples/pipes/src/app/hero-async-message.component.ts", lineNumber: 15 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(HeroAsyncMessageComponent, { className: "HeroAsyncMessageComponent", filePath: "src/content/examples/pipes/src/app/hero-async-message.component.ts", lineNumber: 15 });
 })();
 
 export {

@@ -4408,7 +4408,7 @@ WARNING: This link could potentially be dangerous`)) {
         let n = _n;
         t2.Marker = n, n._nextId = 1;
       }, 7116: (e2, t2) => {
-        Object.defineProperty(t2, "__esModule", { value: true }), t2.DEFAULT_CHARSET = t2.CHARSETS = void 0, t2.CHARSETS = {}, t2.DEFAULT_CHARSET = t2.CHARSETS.B, t2.CHARSETS[0] = { "`": "\u25C6", a: "\u2592", b: "\u2409", c: "\u240C", d: "\u240D", e: "\u240A", f: "\xB0", g: "\xB1", h: "\u2424", i: "\u240B", j: "\u2518", k: "\u2510", l: "\u250C", m: "\u2514", n: "\u253C", o: "\u23BA", p: "\u23BB", q: "\u2500", r: "\u23BC", s: "\u23BD", t: "\u251C", u: "\u2524", v: "\u2534", w: "\u252C", x: "\u2502", y: "\u2264", z: "\u2265", "{": "\u03C0", "|": "\u2260", "}": "\xA3", "~": "\xB7" }, t2.CHARSETS.A = { "#": "\xA3" }, t2.CHARSETS.B = void 0, t2.CHARSETS[4] = { "#": "\xA3", "@": "\xBE", "[": "ij", "\\": "\xBD", "]": "|", "{": "\xA8", "|": "f", "}": "\xBC", "~": "\xB4" }, t2.CHARSETS.C = t2.CHARSETS[5] = { "[": "\xC4", "\\": "\xD6", "]": "\xC5", "^": "\xDC", "`": "\xE9", "{": "\xE4", "|": "\xF6", "}": "\xE5", "~": "\xFC" }, t2.CHARSETS.R = { "#": "\xA3", "@": "\xE0", "[": "\xB0", "\\": "\xE7", "]": "\xA7", "{": "\xE9", "|": "\xF9", "}": "\xE8", "~": "\xA8" }, t2.CHARSETS.Q = { "@": "\xE0", "[": "\xE2", "\\": "\xE7", "]": "\xEA", "^": "\xEE", "`": "\xF4", "{": "\xE9", "|": "\xF9", "}": "\xE8", "~": "\xFB" }, t2.CHARSETS.K = { "@": "\xA7", "[": "\xC4", "\\": "\xD6", "]": "\xDC", "{": "\xE4", "|": "\xF6", "}": "\xFC", "~": "\xDF" }, t2.CHARSETS.Y = { "#": "\xA3", "@": "\xA7", "[": "\xB0", "\\": "\xE7", "]": "\xE9", "`": "\xF9", "{": "\xE0", "|": "\xF2", "}": "\xE8", "~": "\xEC" }, t2.CHARSETS.E = t2.CHARSETS[6] = { "@": "\xC4", "[": "\xC6", "\\": "\xD8", "]": "\xC5", "^": "\xDC", "`": "\xE4", "{": "\xE6", "|": "\xF8", "}": "\xE5", "~": "\xFC" }, t2.CHARSETS.Z = { "#": "\xA3", "@": "\xA7", "[": "\xA1", "\\": "\xD1", "]": "\xBF", "{": "\xB0", "|": "\xF1", "}": "\xE7" }, t2.CHARSETS.H = t2.CHARSETS[7] = { "@": "\xC9", "[": "\xC4", "\\": "\xD6", "]": "\xC5", "^": "\xDC", "`": "\xE9", "{": "\xE4", "|": "\xF6", "}": "\xE5", "~": "\xFC" }, t2.CHARSETS["="] = { "#": "\xF9", "@": "\xE0", "[": "\xE9", "\\": "\xE7", "]": "\xEA", "^": "\xEE", _: "\xE8", "`": "\xF4", "{": "\xE4", "|": "\xF6", "}": "\xFC", "~": "\xFB" };
+        Object.defineProperty(t2, "__esModule", { value: true }), t2.DEFAULT_CHARSET = t2.CHARSETS = void 0, t2.CHARSETS = {}, t2.DEFAULT_CHARSET = t2.CHARSETS.B, t2.CHARSETS[0] = { "`": "◆", a: "▒", b: "␉", c: "␌", d: "␍", e: "␊", f: "\xB0", g: "\xB1", h: "␤", i: "␋", j: "┘", k: "┐", l: "┌", m: "└", n: "┼", o: "⎺", p: "⎻", q: "─", r: "⎼", s: "⎽", t: "├", u: "┤", v: "┴", w: "┬", x: "│", y: "≤", z: "≥", "{": "π", "|": "≠", "}": "\xA3", "~": "\xB7" }, t2.CHARSETS.A = { "#": "\xA3" }, t2.CHARSETS.B = void 0, t2.CHARSETS[4] = { "#": "\xA3", "@": "\xBE", "[": "ij", "\\": "\xBD", "]": "|", "{": "\xA8", "|": "f", "}": "\xBC", "~": "\xB4" }, t2.CHARSETS.C = t2.CHARSETS[5] = { "[": "\xC4", "\\": "\xD6", "]": "\xC5", "^": "\xDC", "`": "\xE9", "{": "\xE4", "|": "\xF6", "}": "\xE5", "~": "\xFC" }, t2.CHARSETS.R = { "#": "\xA3", "@": "\xE0", "[": "\xB0", "\\": "\xE7", "]": "\xA7", "{": "\xE9", "|": "\xF9", "}": "\xE8", "~": "\xA8" }, t2.CHARSETS.Q = { "@": "\xE0", "[": "\xE2", "\\": "\xE7", "]": "\xEA", "^": "\xEE", "`": "\xF4", "{": "\xE9", "|": "\xF9", "}": "\xE8", "~": "\xFB" }, t2.CHARSETS.K = { "@": "\xA7", "[": "\xC4", "\\": "\xD6", "]": "\xDC", "{": "\xE4", "|": "\xF6", "}": "\xFC", "~": "\xDF" }, t2.CHARSETS.Y = { "#": "\xA3", "@": "\xA7", "[": "\xB0", "\\": "\xE7", "]": "\xE9", "`": "\xF9", "{": "\xE0", "|": "\xF2", "}": "\xE8", "~": "\xEC" }, t2.CHARSETS.E = t2.CHARSETS[6] = { "@": "\xC4", "[": "\xC6", "\\": "\xD8", "]": "\xC5", "^": "\xDC", "`": "\xE4", "{": "\xE6", "|": "\xF8", "}": "\xE5", "~": "\xFC" }, t2.CHARSETS.Z = { "#": "\xA3", "@": "\xA7", "[": "\xA1", "\\": "\xD1", "]": "\xBF", "{": "\xB0", "|": "\xF1", "}": "\xE7" }, t2.CHARSETS.H = t2.CHARSETS[7] = { "@": "\xC9", "[": "\xC4", "\\": "\xD6", "]": "\xC5", "^": "\xDC", "`": "\xE9", "{": "\xE4", "|": "\xF6", "}": "\xE5", "~": "\xFC" }, t2.CHARSETS["="] = { "#": "\xF9", "@": "\xE0", "[": "\xE9", "\\": "\xE7", "]": "\xEA", "^": "\xEE", _: "\xE8", "`": "\xF4", "{": "\xE4", "|": "\xF6", "}": "\xFC", "~": "\xFB" };
       }, 2584: (e2, t2) => {
         var i2, s2, r;
         Object.defineProperty(t2, "__esModule", { value: true }), t2.C1_ESCAPED = t2.C1 = t2.C0 = void 0, (function(e3) {
@@ -6292,26 +6292,26 @@ var _AlertManager = class _AlertManager {
     let message = "";
     switch (reason) {
       case AlertReason.OUT_OF_MEMORY:
-        message = `\u4F60\u7684\u6D4F\u89C8\u5668\u5F53\u524D\u9650\u5236\u4E86\u8FD0\u884C Angular \u6559\u7A0B\u6216\u5728\u7EBF\u6F14\u7EC3\u573A\u6240\u9700\u7684\u5185\u5B58\u3002\u5982\u679C\u4F60\u6709\u591A\u4E2A\u6807\u7B7E\u9875\u6253\u5F00\u4E86\u6559\u7A0B\u6216\u5728\u7EBF\u6F14\u7EC3\u573A\uFF0C\u8BF7\u5173\u95ED\u5176\u4E2D\u7684\u4E00\u4E9B\u5E76\u5237\u65B0\u6B64\u9875\u9762\u3002`;
+        message = `你的瀏覽器當前限制了執行 Angular 教程或線上演練場所需的記憶體。如果你有多個標籤頁開啟了教程或線上演練場，請關閉其中的一些並重新整理此頁面。`;
         break;
       case AlertReason.MOBILE:
-        message = `\u4F60\u6B63\u5728\u79FB\u52A8\u8BBE\u5907\u4E0A\u8FD0\u884C\u5D4C\u5165\u5F0F\u7F16\u8F91\u5668\uFF0C\u8FD9\u53EF\u80FD\u4F1A\u5BFC\u81F4\u5185\u5B58\u4E0D\u8DB3\u9519\u8BEF\u3002`;
+        message = `你正在行動裝置上執行嵌入式編輯器，這可能會導致記憶體不足錯誤。`;
         break;
     }
     this.snackBar.openFromComponent(ErrorSnackBar, {
       panelClass: "docs-invert-mode",
       data: {
         message,
-        actionText: "\u6211\u660E\u767D\u4E86"
+        actionText: "我明白了"
       }
     });
   }
 };
 __name(_AlertManager, "AlertManager");
-__publicField(_AlertManager, "\u0275fac", /* @__PURE__ */ __name(function AlertManager_Factory(__ngFactoryType__) {
+__publicField(_AlertManager, "ɵfac", /* @__PURE__ */ __name(function AlertManager_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AlertManager)();
 }, "AlertManager_Factory"));
-__publicField(_AlertManager, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _AlertManager, factory: _AlertManager.\u0275fac, providedIn: "root" }));
+__publicField(_AlertManager, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _AlertManager, factory: _AlertManager.ɵfac, providedIn: "root" }));
 var AlertManager = _AlertManager;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AlertManager, [{
@@ -6385,17 +6385,17 @@ var _NodeRuntimeState = class _NodeRuntimeState {
   checkUnsupportedEnvironment() {
     if (isIos) {
       this.setError({
-        message: "\u4E0D\u652F\u6301\u6B64\u73AF\u5883",
+        message: "不支援此環境",
         type: ErrorType.UNSUPPORTED_BROWSER_ENVIRONMENT
       });
     }
   }
 };
 __name(_NodeRuntimeState, "NodeRuntimeState");
-__publicField(_NodeRuntimeState, "\u0275fac", /* @__PURE__ */ __name(function NodeRuntimeState_Factory(__ngFactoryType__) {
+__publicField(_NodeRuntimeState, "ɵfac", /* @__PURE__ */ __name(function NodeRuntimeState_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _NodeRuntimeState)();
 }, "NodeRuntimeState_Factory"));
-__publicField(_NodeRuntimeState, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _NodeRuntimeState, factory: _NodeRuntimeState.\u0275fac, providedIn: "root" }));
+__publicField(_NodeRuntimeState, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _NodeRuntimeState, factory: _NodeRuntimeState.ɵfac, providedIn: "root" }));
 var NodeRuntimeState = _NodeRuntimeState;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NodeRuntimeState, [{
@@ -6410,7 +6410,7 @@ var import_addon_fit = __toESM(require_addon_fit());
 
 // src/app/editor/terminal/interactive-terminal.ts
 var import_xterm = __toESM(require_xterm());
-var NOT_VALID_COMMAND_MSG = "Angular \u6587\u6863 - \u4E0D\u5141\u8BB8\u6B64\u547D\u4EE4\uFF01";
+var NOT_VALID_COMMAND_MSG = "Angular 文件 - 不允許此指令！";
 var ALLOWED_KEYS = [
   // Allow Backspace to delete what was typed
   "Backspace",
@@ -6443,7 +6443,7 @@ var _InteractiveTerminal = class _InteractiveTerminal extends import_xterm.Termi
   // Method validate if provided command by user is on the list of the allowed commands.
   // If so, then command is executed, otherwise error message is displayed in the terminal.
   handleCommandExecution() {
-    const commandLinePrefix = "\u276F";
+    const commandLinePrefix = "❯";
     const xtermRed = "\x1B[1;31m";
     this.attachCustomKeyEventHandler((event) => {
       if (ALLOWED_KEYS.includes(event.key)) {
@@ -6493,10 +6493,10 @@ var _CommandValidator = class _CommandValidator {
   }
 };
 __name(_CommandValidator, "CommandValidator");
-__publicField(_CommandValidator, "\u0275fac", /* @__PURE__ */ __name(function CommandValidator_Factory(__ngFactoryType__) {
+__publicField(_CommandValidator, "ɵfac", /* @__PURE__ */ __name(function CommandValidator_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CommandValidator)();
 }, "CommandValidator_Factory"));
-__publicField(_CommandValidator, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _CommandValidator, factory: _CommandValidator.\u0275fac, providedIn: "root" }));
+__publicField(_CommandValidator, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _CommandValidator, factory: _CommandValidator.ɵfac, providedIn: "root" }));
 var CommandValidator = _CommandValidator;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CommandValidator, [{
@@ -6571,10 +6571,10 @@ var _TerminalHandler = class _TerminalHandler {
   }
 };
 __name(_TerminalHandler, "TerminalHandler");
-__publicField(_TerminalHandler, "\u0275fac", /* @__PURE__ */ __name(function TerminalHandler_Factory(__ngFactoryType__) {
+__publicField(_TerminalHandler, "ɵfac", /* @__PURE__ */ __name(function TerminalHandler_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _TerminalHandler)();
 }, "TerminalHandler_Factory"));
-__publicField(_TerminalHandler, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _TerminalHandler, factory: _TerminalHandler.\u0275fac, providedIn: "root" }));
+__publicField(_TerminalHandler, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _TerminalHandler, factory: _TerminalHandler.ɵfac, providedIn: "root" }));
 var TerminalHandler = _TerminalHandler;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TerminalHandler, [{
@@ -6658,7 +6658,7 @@ var _TypingsLoader = class _TypingsLoader {
   }
   async getTypeDefinitionFilesFromDirectory(directory) {
     if (!this.webContainer)
-      throw new Error("this.webContainer \u5C1A\u672A\u5B9A\u4E49");
+      throw new Error("this.webContainer 尚未定義");
     const files = await this.webContainer.fs.readdir(directory);
     return files.filter(this.isTypeDefinitionFile).map((file) => `${directory}/${file}`);
   }
@@ -6676,10 +6676,10 @@ var _TypingsLoader = class _TypingsLoader {
   }
 };
 __name(_TypingsLoader, "TypingsLoader");
-__publicField(_TypingsLoader, "\u0275fac", /* @__PURE__ */ __name(function TypingsLoader_Factory(__ngFactoryType__) {
+__publicField(_TypingsLoader, "ɵfac", /* @__PURE__ */ __name(function TypingsLoader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _TypingsLoader)();
 }, "TypingsLoader_Factory"));
-__publicField(_TypingsLoader, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _TypingsLoader, factory: _TypingsLoader.\u0275fac, providedIn: "root" }));
+__publicField(_TypingsLoader, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _TypingsLoader, factory: _TypingsLoader.ɵfac, providedIn: "root" }));
 var TypingsLoader = _TypingsLoader;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TypingsLoader, [{
@@ -6729,8 +6729,8 @@ var _NodeRuntimeSandbox = class _NodeRuntimeSandbox {
     }
     try {
       if (!this.embeddedTutorialManager.type())
-        throw Error("\u6559\u7A0B\u7C7B\u578B\u4E0D\u53EF\u7528\uFF0C\u65E0\u6CD5\u521D\u59CB\u5316 NodeRuntimeSandbox\u3002");
-      console.time("\u52A0\u8F7D\u65F6\u95F4");
+        throw Error("教程型別不可用，無法初始化 NodeRuntimeSandbox。");
+      console.time("載入時間");
       let webContainer;
       if (this.nodeRuntimeState.loadingStep() === LoadingStep.NOT_STARTED) {
         this.alertManager.init();
@@ -6743,7 +6743,7 @@ var _NodeRuntimeSandbox = class _NodeRuntimeSandbox {
       this.terminalHandler.clearTerminals();
       const startDevServer = this.embeddedTutorialManager.type() !== "cli";
       await this.initProject(startDevServer);
-      console.timeEnd("\u52A0\u8F7D\u65F6\u95F4");
+      console.timeEnd("載入時間");
     } catch (error) {
       const message = this.nodeRuntimeState.error()?.message ?? error.message;
       this.setErrorState(message);
@@ -6800,7 +6800,7 @@ var _NodeRuntimeSandbox = class _NodeRuntimeSandbox {
       0
       /* PROCESS_EXIT_CODE.SUCCESS */
     ].includes(exitCode))
-      throw new Error("\u5B89\u88C5\u5931\u8D25");
+      throw new Error("安裝失敗");
     await Promise.all([
       this.loadTypes(),
       startDevServer ? this.startDevServer() : Promise.resolve()
@@ -6874,7 +6874,7 @@ var _NodeRuntimeSandbox = class _NodeRuntimeSandbox {
       return this.interactiveShellProcess;
     const shellProcess = await webContainer.spawn("bash");
     this.interactiveShellProcess = shellProcess;
-    const ngGenerateTerminalOutputRegex = /(\u001b\[\d+m)?([^\s]+)(\u001b\[\d+m)?/g;
+    const ngGenerateTerminalOutputRegex = /(\[\d+m)?([^\s]+)(\[\d+m)?/g;
     shellProcess.output.pipeTo(new WritableStream({
       write: /* @__PURE__ */ __name((data) => {
         this.checkForOutOfMemoryError(data.toString());
@@ -6973,7 +6973,7 @@ var _NodeRuntimeSandbox = class _NodeRuntimeSandbox {
     });
     await new Promise((resolve, reject) => {
       if (!this.devServerProcess) {
-        reject("\u6CA1\u6709\u8FD0\u884C\u4E2D\u7684\u5F00\u53D1\u670D\u52A1\u5668");
+        reject("沒有執行中的開發伺服器");
         return;
       }
       this.devServerProcess.output.pipeTo(new WritableStream({
@@ -7026,10 +7026,10 @@ var _NodeRuntimeSandbox = class _NodeRuntimeSandbox {
   }
 };
 __name(_NodeRuntimeSandbox, "NodeRuntimeSandbox");
-__publicField(_NodeRuntimeSandbox, "\u0275fac", /* @__PURE__ */ __name(function NodeRuntimeSandbox_Factory(__ngFactoryType__) {
+__publicField(_NodeRuntimeSandbox, "ɵfac", /* @__PURE__ */ __name(function NodeRuntimeSandbox_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _NodeRuntimeSandbox)();
 }, "NodeRuntimeSandbox_Factory"));
-__publicField(_NodeRuntimeSandbox, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _NodeRuntimeSandbox, factory: _NodeRuntimeSandbox.\u0275fac, providedIn: "root" }));
+__publicField(_NodeRuntimeSandbox, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _NodeRuntimeSandbox, factory: _NodeRuntimeSandbox.ɵfac, providedIn: "root" }));
 var NodeRuntimeSandbox = _NodeRuntimeSandbox;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NodeRuntimeSandbox, [{

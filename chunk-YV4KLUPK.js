@@ -43,68 +43,68 @@ var _AppComponent = class _AppComponent {
   }
 };
 __name(_AppComponent, "AppComponent");
-__publicField(_AppComponent, "\u0275fac", /* @__PURE__ */ __name(function AppComponent_Factory(__ngFactoryType__) {
+__publicField(_AppComponent, "ɵfac", /* @__PURE__ */ __name(function AppComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _AppComponent)();
 }, "AppComponent_Factory"));
-__publicField(_AppComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], hostVars: 1, hostBindings: /* @__PURE__ */ __name(function AppComponent_HostBindings(rf, ctx) {
+__publicField(_AppComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _AppComponent, selectors: [["app-root"]], hostVars: 1, hostBindings: /* @__PURE__ */ __name(function AppComponent_HostBindings(rf, ctx) {
   if (rf & 2) {
-    \u0275\u0275syntheticHostProperty("@.disabled", ctx.animationsDisabled);
+    ɵɵsyntheticHostProperty("@.disabled", ctx.animationsDisabled);
   }
 }, "AppComponent_HostBindings"), decls: 30, vars: 2, consts: [["type", "checkbox", "id", "animation-toggle", 3, "click", "checked"], ["for", "animation-toggle"], ["id", "home", "routerLink", "/home", "routerLinkActive", "active", "ariaCurrentWhenActive", "page"], ["id", "about", "routerLink", "/about", "routerLinkActive", "active", "ariaCurrentWhenActive", "page"], ["id", "open-close", "routerLink", "/open-close", "routerLinkActive", "active", "ariaCurrentWhenActive", "page"], ["id", "status", "routerLink", "/status", "routerLinkActive", "active", "ariaCurrentWhenActive", "page"], ["id", "toggle", "routerLink", "/toggle", "routerLinkActive", "active", "ariaCurrentWhenActive", "page"], ["id", "enter-leave", "routerLink", "/enter-leave", "routerLinkActive", "active", "ariaCurrentWhenActive", "page"], ["id", "auto", "routerLink", "/auto", "routerLinkActive", "active", "ariaCurrentWhenActive", "page"], ["id", "heroes", "routerLink", "/heroes", "routerLinkActive", "active", "ariaCurrentWhenActive", "page"], ["id", "hero-groups", "routerLink", "/hero-groups", "routerLinkActive", "active", "ariaCurrentWhenActive", "page"], ["id", "insert-remove", "routerLink", "/insert-remove", "routerLinkActive", "active", "ariaCurrentWhenActive", "page"], ["id", "querying", "routerLink", "/querying", "routerLinkActive", "active", "ariaCurrentWhenActive", "page"]], template: /* @__PURE__ */ __name(function AppComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "h1");
-    \u0275\u0275text(1, "Animations");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "input", 0);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function AppComponent_Template_input_click_2_listener() {
+    ɵɵelementStart(0, "h1");
+    ɵɵtext(1, "Animations");
+    ɵɵelementEnd();
+    ɵɵelementStart(2, "input", 0);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function AppComponent_Template_input_click_2_listener() {
       return ctx.toggleAnimations();
     }, "AppComponent_Template_input_click_2_listener"));
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "label", 1);
-    \u0275\u0275text(4, "Toggle All Animations");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "nav")(6, "a", 2);
-    \u0275\u0275text(7, "Home");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "a", 3);
-    \u0275\u0275text(9, "About");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "a", 4);
-    \u0275\u0275text(11, "Open/Close");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(12, "a", 5);
-    \u0275\u0275text(13, "Status Slider");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(14, "a", 6);
-    \u0275\u0275text(15, "Toggle Animations");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(16, "a", 7);
-    \u0275\u0275text(17, "Enter/Leave");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(18, "a", 8);
-    \u0275\u0275text(19, "Auto Calculation");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(20, "a", 9);
-    \u0275\u0275text(21, "Filter/Stagger");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(22, "a", 10);
-    \u0275\u0275text(23, "Hero Groups");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(24, "a", 11);
-    \u0275\u0275text(25, "Insert/Remove");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(26, "a", 12);
-    \u0275\u0275text(27, "Querying");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(28, "div");
-    \u0275\u0275element(29, "router-outlet");
-    \u0275\u0275elementEnd();
+    ɵɵelementEnd();
+    ɵɵelementStart(3, "label", 1);
+    ɵɵtext(4, "Toggle All Animations");
+    ɵɵelementEnd();
+    ɵɵelementStart(5, "nav")(6, "a", 2);
+    ɵɵtext(7, "Home");
+    ɵɵelementEnd();
+    ɵɵelementStart(8, "a", 3);
+    ɵɵtext(9, "About");
+    ɵɵelementEnd();
+    ɵɵelementStart(10, "a", 4);
+    ɵɵtext(11, "Open/Close");
+    ɵɵelementEnd();
+    ɵɵelementStart(12, "a", 5);
+    ɵɵtext(13, "Status Slider");
+    ɵɵelementEnd();
+    ɵɵelementStart(14, "a", 6);
+    ɵɵtext(15, "Toggle Animations");
+    ɵɵelementEnd();
+    ɵɵelementStart(16, "a", 7);
+    ɵɵtext(17, "Enter/Leave");
+    ɵɵelementEnd();
+    ɵɵelementStart(18, "a", 8);
+    ɵɵtext(19, "Auto Calculation");
+    ɵɵelementEnd();
+    ɵɵelementStart(20, "a", 9);
+    ɵɵtext(21, "Filter/Stagger");
+    ɵɵelementEnd();
+    ɵɵelementStart(22, "a", 10);
+    ɵɵtext(23, "Hero Groups");
+    ɵɵelementEnd();
+    ɵɵelementStart(24, "a", 11);
+    ɵɵtext(25, "Insert/Remove");
+    ɵɵelementEnd();
+    ɵɵelementStart(26, "a", 12);
+    ɵɵtext(27, "Querying");
+    ɵɵelementEnd()();
+    ɵɵelementStart(28, "div");
+    ɵɵelement(29, "router-outlet");
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance(2);
-    \u0275\u0275property("checked", !ctx.animationsDisabled);
-    \u0275\u0275advance(26);
-    \u0275\u0275property("@routeAnimations", ctx.getRouteAnimationData());
+    ɵɵadvance(2);
+    ɵɵproperty("checked", !ctx.animationsDisabled);
+    ɵɵadvance(26);
+    ɵɵproperty("@routeAnimations", ctx.getRouteAnimationData());
   }
 }, "AppComponent_Template"), dependencies: [RouterLink, RouterOutlet], styles: ["\n\nnav[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  padding: .7rem;\n}\nh1[_ngcontent-%COMP%] {\n  margin-bottom: .3rem;\n}\nform[_ngcontent-%COMP%] {\n  margin-bottom: 2rem;\n}\nnav[_ngcontent-%COMP%] {\n  padding-bottom: 3rem;\n}\n/*# sourceMappingURL=app.component.css.map */"], data: { animation: [
   // #enddocregion decorator
@@ -132,7 +132,7 @@ var AppComponent = _AppComponent;
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/content/examples/animations/src/app/app.component.ts", lineNumber: 33 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/content/examples/animations/src/app/app.component.ts", lineNumber: 33 });
 })();
 export {
   AppComponent

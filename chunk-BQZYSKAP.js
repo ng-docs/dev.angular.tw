@@ -147,12 +147,12 @@ var _MatRippleLoader = class _MatRippleLoader {
   }
 };
 __name(_MatRippleLoader, "MatRippleLoader");
-__publicField(_MatRippleLoader, "\u0275fac", /* @__PURE__ */ __name(function MatRippleLoader_Factory(__ngFactoryType__) {
+__publicField(_MatRippleLoader, "ɵfac", /* @__PURE__ */ __name(function MatRippleLoader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatRippleLoader)();
 }, "MatRippleLoader_Factory"));
-__publicField(_MatRippleLoader, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_MatRippleLoader, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _MatRippleLoader,
-  factory: _MatRippleLoader.\u0275fac,
+  factory: _MatRippleLoader.ɵfac,
   providedIn: "root"
 }));
 var MatRippleLoader = _MatRippleLoader;
@@ -169,15 +169,15 @@ var MatRippleLoader = _MatRippleLoader;
 var _MatRippleModule = class _MatRippleModule {
 };
 __name(_MatRippleModule, "MatRippleModule");
-__publicField(_MatRippleModule, "\u0275fac", /* @__PURE__ */ __name(function MatRippleModule_Factory(__ngFactoryType__) {
+__publicField(_MatRippleModule, "ɵfac", /* @__PURE__ */ __name(function MatRippleModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _MatRippleModule)();
 }, "MatRippleModule_Factory"));
-__publicField(_MatRippleModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_MatRippleModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _MatRippleModule,
   imports: [MatCommonModule, MatRipple],
   exports: [MatRipple, MatCommonModule]
 }));
-__publicField(_MatRippleModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_MatRippleModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   imports: [MatCommonModule, MatCommonModule]
 }));
 var MatRippleModule = _MatRippleModule;

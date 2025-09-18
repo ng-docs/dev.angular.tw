@@ -173,12 +173,12 @@ var _Platform = class _Platform {
   }
 };
 __name(_Platform, "Platform");
-__publicField(_Platform, "\u0275fac", /* @__PURE__ */ __name(function Platform_Factory(__ngFactoryType__) {
+__publicField(_Platform, "ɵfac", /* @__PURE__ */ __name(function Platform_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Platform)();
 }, "Platform_Factory"));
-__publicField(_Platform, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_Platform, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _Platform,
-  factory: _Platform.\u0275fac,
+  factory: _Platform.ɵfac,
   providedIn: "root"
 }));
 var Platform = _Platform;
@@ -241,12 +241,12 @@ var __CdkPrivateStyleLoader = class __CdkPrivateStyleLoader {
   }
 };
 __name(__CdkPrivateStyleLoader, "_CdkPrivateStyleLoader");
-__publicField(__CdkPrivateStyleLoader, "\u0275fac", /* @__PURE__ */ __name(function _CdkPrivateStyleLoader_Factory(__ngFactoryType__) {
+__publicField(__CdkPrivateStyleLoader, "ɵfac", /* @__PURE__ */ __name(function _CdkPrivateStyleLoader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || __CdkPrivateStyleLoader)();
 }, "_CdkPrivateStyleLoader_Factory"));
-__publicField(__CdkPrivateStyleLoader, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(__CdkPrivateStyleLoader, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: __CdkPrivateStyleLoader,
-  factory: __CdkPrivateStyleLoader.\u0275fac,
+  factory: __CdkPrivateStyleLoader.ɵfac,
   providedIn: "root"
 }));
 var _CdkPrivateStyleLoader = __CdkPrivateStyleLoader;
@@ -284,12 +284,12 @@ var __IdGenerator = class __IdGenerator {
   }
 };
 __name(__IdGenerator, "_IdGenerator");
-__publicField(__IdGenerator, "\u0275fac", /* @__PURE__ */ __name(function _IdGenerator_Factory(__ngFactoryType__) {
+__publicField(__IdGenerator, "ɵfac", /* @__PURE__ */ __name(function _IdGenerator_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || __IdGenerator)();
 }, "_IdGenerator_Factory"));
-__publicField(__IdGenerator, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(__IdGenerator, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: __IdGenerator,
-  factory: __IdGenerator.\u0275fac,
+  factory: __IdGenerator.ɵfac,
   providedIn: "root"
 }));
 var _IdGenerator = __IdGenerator;
@@ -348,12 +348,12 @@ var _Directionality = class _Directionality {
   }
 };
 __name(_Directionality, "Directionality");
-__publicField(_Directionality, "\u0275fac", /* @__PURE__ */ __name(function Directionality_Factory(__ngFactoryType__) {
+__publicField(_Directionality, "ɵfac", /* @__PURE__ */ __name(function Directionality_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Directionality)();
 }, "Directionality_Factory"));
-__publicField(_Directionality, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_Directionality, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _Directionality,
-  factory: _Directionality.\u0275fac,
+  factory: _Directionality.ɵfac,
   providedIn: "root"
 }));
 var Directionality = _Directionality;
@@ -402,16 +402,16 @@ var _Dir = class _Dir {
   }
 };
 __name(_Dir, "Dir");
-__publicField(_Dir, "\u0275fac", /* @__PURE__ */ __name(function Dir_Factory(__ngFactoryType__) {
+__publicField(_Dir, "ɵfac", /* @__PURE__ */ __name(function Dir_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Dir)();
 }, "Dir_Factory"));
-__publicField(_Dir, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_Dir, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _Dir,
   selectors: [["", "dir", ""]],
   hostVars: 1,
   hostBindings: /* @__PURE__ */ __name(function Dir_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("dir", ctx._rawDir);
+      ɵɵattribute("dir", ctx._rawDir);
     }
   }, "Dir_HostBindings"),
   inputs: {
@@ -421,7 +421,7 @@ __publicField(_Dir, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
     change: "dirChange"
   },
   exportAs: ["dir"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: Directionality,
     useExisting: _Dir
   }])]
@@ -454,15 +454,15 @@ var Dir = _Dir;
 var _BidiModule = class _BidiModule {
 };
 __name(_BidiModule, "BidiModule");
-__publicField(_BidiModule, "\u0275fac", /* @__PURE__ */ __name(function BidiModule_Factory(__ngFactoryType__) {
+__publicField(_BidiModule, "ɵfac", /* @__PURE__ */ __name(function BidiModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _BidiModule)();
 }, "BidiModule_Factory"));
-__publicField(_BidiModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_BidiModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _BidiModule,
   imports: [Dir],
   exports: [Dir]
 }));
-__publicField(_BidiModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({}));
+__publicField(_BidiModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({}));
 var BidiModule = _BidiModule;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BidiModule, [{
@@ -839,10 +839,10 @@ var _CdkFixedSizeVirtualScroll = class _CdkFixedSizeVirtualScroll {
   }
 };
 __name(_CdkFixedSizeVirtualScroll, "CdkFixedSizeVirtualScroll");
-__publicField(_CdkFixedSizeVirtualScroll, "\u0275fac", /* @__PURE__ */ __name(function CdkFixedSizeVirtualScroll_Factory(__ngFactoryType__) {
+__publicField(_CdkFixedSizeVirtualScroll, "ɵfac", /* @__PURE__ */ __name(function CdkFixedSizeVirtualScroll_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkFixedSizeVirtualScroll)();
 }, "CdkFixedSizeVirtualScroll_Factory"));
-__publicField(_CdkFixedSizeVirtualScroll, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkFixedSizeVirtualScroll, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkFixedSizeVirtualScroll,
   selectors: [["cdk-virtual-scroll-viewport", "itemSize", ""]],
   inputs: {
@@ -850,11 +850,11 @@ __publicField(_CdkFixedSizeVirtualScroll, "\u0275dir", /* @__PURE__ */ \u0275\u0
     minBufferPx: "minBufferPx",
     maxBufferPx: "maxBufferPx"
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: VIRTUAL_SCROLL_STRATEGY,
     useFactory: _fixedSizeVirtualScrollStrategyFactory,
     deps: [forwardRef(() => _CdkFixedSizeVirtualScroll)]
-  }]), \u0275\u0275NgOnChangesFeature]
+  }]), ɵɵNgOnChangesFeature]
 }));
 var CdkFixedSizeVirtualScroll = _CdkFixedSizeVirtualScroll;
 (() => {
@@ -987,12 +987,12 @@ var _ScrollDispatcher = class _ScrollDispatcher {
   }
 };
 __name(_ScrollDispatcher, "ScrollDispatcher");
-__publicField(_ScrollDispatcher, "\u0275fac", /* @__PURE__ */ __name(function ScrollDispatcher_Factory(__ngFactoryType__) {
+__publicField(_ScrollDispatcher, "ɵfac", /* @__PURE__ */ __name(function ScrollDispatcher_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ScrollDispatcher)();
 }, "ScrollDispatcher_Factory"));
-__publicField(_ScrollDispatcher, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_ScrollDispatcher, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _ScrollDispatcher,
-  factory: _ScrollDispatcher.\u0275fac,
+  factory: _ScrollDispatcher.ɵfac,
   providedIn: "root"
 }));
 var ScrollDispatcher = _ScrollDispatcher;
@@ -1133,10 +1133,10 @@ var _CdkScrollable = class _CdkScrollable {
   }
 };
 __name(_CdkScrollable, "CdkScrollable");
-__publicField(_CdkScrollable, "\u0275fac", /* @__PURE__ */ __name(function CdkScrollable_Factory(__ngFactoryType__) {
+__publicField(_CdkScrollable, "ɵfac", /* @__PURE__ */ __name(function CdkScrollable_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkScrollable)();
 }, "CdkScrollable_Factory"));
-__publicField(_CdkScrollable, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkScrollable, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkScrollable,
   selectors: [["", "cdk-scrollable", ""], ["", "cdkScrollable", ""]]
 }));
@@ -1248,12 +1248,12 @@ var _ViewportRuler = class _ViewportRuler {
   }
 };
 __name(_ViewportRuler, "ViewportRuler");
-__publicField(_ViewportRuler, "\u0275fac", /* @__PURE__ */ __name(function ViewportRuler_Factory(__ngFactoryType__) {
+__publicField(_ViewportRuler, "ɵfac", /* @__PURE__ */ __name(function ViewportRuler_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ViewportRuler)();
 }, "ViewportRuler_Factory"));
-__publicField(_ViewportRuler, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_ViewportRuler, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _ViewportRuler,
-  factory: _ViewportRuler.\u0275fac,
+  factory: _ViewportRuler.ɵfac,
   providedIn: "root"
 }));
 var ViewportRuler = _ViewportRuler;
@@ -1281,12 +1281,12 @@ var _CdkVirtualScrollable = class _CdkVirtualScrollable extends CdkScrollable {
   }
 };
 __name(_CdkVirtualScrollable, "CdkVirtualScrollable");
-__publicField(_CdkVirtualScrollable, "\u0275fac", /* @__PURE__ */ __name(function CdkVirtualScrollable_Factory(__ngFactoryType__) {
+__publicField(_CdkVirtualScrollable, "ɵfac", /* @__PURE__ */ __name(function CdkVirtualScrollable_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkVirtualScrollable)();
 }, "CdkVirtualScrollable_Factory"));
-__publicField(_CdkVirtualScrollable, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkVirtualScrollable, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkVirtualScrollable,
-  features: [\u0275\u0275InheritDefinitionFeature]
+  features: [ɵɵInheritDefinitionFeature]
 }));
 var CdkVirtualScrollable = _CdkVirtualScrollable;
 (() => {
@@ -1675,26 +1675,26 @@ var _CdkVirtualScrollViewport = class _CdkVirtualScrollViewport extends CdkVirtu
   }
 };
 __name(_CdkVirtualScrollViewport, "CdkVirtualScrollViewport");
-__publicField(_CdkVirtualScrollViewport, "\u0275fac", /* @__PURE__ */ __name(function CdkVirtualScrollViewport_Factory(__ngFactoryType__) {
+__publicField(_CdkVirtualScrollViewport, "ɵfac", /* @__PURE__ */ __name(function CdkVirtualScrollViewport_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkVirtualScrollViewport)();
 }, "CdkVirtualScrollViewport_Factory"));
-__publicField(_CdkVirtualScrollViewport, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(_CdkVirtualScrollViewport, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: _CdkVirtualScrollViewport,
   selectors: [["cdk-virtual-scroll-viewport"]],
   viewQuery: /* @__PURE__ */ __name(function CdkVirtualScrollViewport_Query(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275viewQuery(_c0, 7);
+      ɵɵviewQuery(_c0, 7);
     }
     if (rf & 2) {
       let _t;
-      \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx._contentWrapper = _t.first);
+      ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx._contentWrapper = _t.first);
     }
   }, "CdkVirtualScrollViewport_Query"),
   hostAttrs: [1, "cdk-virtual-scroll-viewport"],
   hostVars: 4,
   hostBindings: /* @__PURE__ */ __name(function CdkVirtualScrollViewport_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("cdk-virtual-scroll-orientation-horizontal", ctx.orientation === "horizontal")("cdk-virtual-scroll-orientation-vertical", ctx.orientation !== "horizontal");
+      ɵɵclassProp("cdk-virtual-scroll-orientation-horizontal", ctx.orientation === "horizontal")("cdk-virtual-scroll-orientation-vertical", ctx.orientation !== "horizontal");
     }
   }, "CdkVirtualScrollViewport_HostBindings"),
   inputs: {
@@ -1704,26 +1704,26 @@ __publicField(_CdkVirtualScrollViewport, "\u0275cmp", /* @__PURE__ */ \u0275\u02
   outputs: {
     scrolledIndexChange: "scrolledIndexChange"
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: CdkScrollable,
     useFactory: /* @__PURE__ */ __name((virtualScrollable, viewport) => virtualScrollable || viewport, "useFactory"),
     deps: [[new Optional(), new Inject(VIRTUAL_SCROLLABLE)], _CdkVirtualScrollViewport]
-  }]), \u0275\u0275InheritDefinitionFeature],
+  }]), ɵɵInheritDefinitionFeature],
   ngContentSelectors: _c1,
   decls: 4,
   vars: 4,
   consts: [["contentWrapper", ""], [1, "cdk-virtual-scroll-content-wrapper"], [1, "cdk-virtual-scroll-spacer"]],
   template: /* @__PURE__ */ __name(function CdkVirtualScrollViewport_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275projectionDef();
-      \u0275\u0275domElementStart(0, "div", 1, 0);
-      \u0275\u0275projection(2);
-      \u0275\u0275domElementEnd();
-      \u0275\u0275domElement(3, "div", 2);
+      ɵɵprojectionDef();
+      ɵɵdomElementStart(0, "div", 1, 0);
+      ɵɵprojection(2);
+      ɵɵdomElementEnd();
+      ɵɵdomElement(3, "div", 2);
     }
     if (rf & 2) {
-      \u0275\u0275advance(3);
-      \u0275\u0275styleProp("width", ctx._totalContentWidth())("height", ctx._totalContentHeight());
+      ɵɵadvance(3);
+      ɵɵstyleProp("width", ctx._totalContentWidth())("height", ctx._totalContentHeight());
     }
   }, "CdkVirtualScrollViewport_Template"),
   styles: ["cdk-virtual-scroll-viewport{display:block;position:relative;transform:translateZ(0)}.cdk-virtual-scrollable{overflow:auto;will-change:scroll-position;contain:strict}.cdk-virtual-scroll-content-wrapper{position:absolute;top:0;left:0;contain:content}[dir=rtl] .cdk-virtual-scroll-content-wrapper{right:0;left:auto}.cdk-virtual-scroll-orientation-horizontal .cdk-virtual-scroll-content-wrapper{min-height:100%}.cdk-virtual-scroll-orientation-horizontal .cdk-virtual-scroll-content-wrapper>dl:not([cdkVirtualFor]),.cdk-virtual-scroll-orientation-horizontal .cdk-virtual-scroll-content-wrapper>ol:not([cdkVirtualFor]),.cdk-virtual-scroll-orientation-horizontal .cdk-virtual-scroll-content-wrapper>table:not([cdkVirtualFor]),.cdk-virtual-scroll-orientation-horizontal .cdk-virtual-scroll-content-wrapper>ul:not([cdkVirtualFor]){padding-left:0;padding-right:0;margin-left:0;margin-right:0;border-left-width:0;border-right-width:0;outline:none}.cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper{min-width:100%}.cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper>dl:not([cdkVirtualFor]),.cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper>ol:not([cdkVirtualFor]),.cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper>table:not([cdkVirtualFor]),.cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper>ul:not([cdkVirtualFor]){padding-top:0;padding-bottom:0;margin-top:0;margin-bottom:0;border-top-width:0;border-bottom-width:0;outline:none}.cdk-virtual-scroll-spacer{height:1px;transform-origin:0 0;flex:0 0 auto}[dir=rtl] .cdk-virtual-scroll-spacer{transform-origin:100% 0}\n"],
@@ -2008,10 +2008,10 @@ var _CdkVirtualForOf = class _CdkVirtualForOf {
   }
 };
 __name(_CdkVirtualForOf, "CdkVirtualForOf");
-__publicField(_CdkVirtualForOf, "\u0275fac", /* @__PURE__ */ __name(function CdkVirtualForOf_Factory(__ngFactoryType__) {
+__publicField(_CdkVirtualForOf, "ɵfac", /* @__PURE__ */ __name(function CdkVirtualForOf_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkVirtualForOf)();
 }, "CdkVirtualForOf_Factory"));
-__publicField(_CdkVirtualForOf, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkVirtualForOf, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkVirtualForOf,
   selectors: [["", "cdkVirtualFor", "", "cdkVirtualForOf", ""]],
   inputs: {
@@ -2020,7 +2020,7 @@ __publicField(_CdkVirtualForOf, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineD
     cdkVirtualForTemplate: "cdkVirtualForTemplate",
     cdkVirtualForTemplateCacheSize: "cdkVirtualForTemplateCacheSize"
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: _VIEW_REPEATER_STRATEGY,
     useClass: _RecycleViewRepeaterStrategy
   }])]
@@ -2060,17 +2060,17 @@ var _CdkVirtualScrollableElement = class _CdkVirtualScrollableElement extends Cd
   }
 };
 __name(_CdkVirtualScrollableElement, "CdkVirtualScrollableElement");
-__publicField(_CdkVirtualScrollableElement, "\u0275fac", /* @__PURE__ */ __name(function CdkVirtualScrollableElement_Factory(__ngFactoryType__) {
+__publicField(_CdkVirtualScrollableElement, "ɵfac", /* @__PURE__ */ __name(function CdkVirtualScrollableElement_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkVirtualScrollableElement)();
 }, "CdkVirtualScrollableElement_Factory"));
-__publicField(_CdkVirtualScrollableElement, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkVirtualScrollableElement, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkVirtualScrollableElement,
   selectors: [["", "cdkVirtualScrollingElement", ""]],
   hostAttrs: [1, "cdk-virtual-scrollable"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: VIRTUAL_SCROLLABLE,
     useExisting: _CdkVirtualScrollableElement
-  }]), \u0275\u0275InheritDefinitionFeature]
+  }]), ɵɵInheritDefinitionFeature]
 }));
 var CdkVirtualScrollableElement = _CdkVirtualScrollableElement;
 (() => {
@@ -2100,16 +2100,16 @@ var _CdkVirtualScrollableWindow = class _CdkVirtualScrollableWindow extends CdkV
   }
 };
 __name(_CdkVirtualScrollableWindow, "CdkVirtualScrollableWindow");
-__publicField(_CdkVirtualScrollableWindow, "\u0275fac", /* @__PURE__ */ __name(function CdkVirtualScrollableWindow_Factory(__ngFactoryType__) {
+__publicField(_CdkVirtualScrollableWindow, "ɵfac", /* @__PURE__ */ __name(function CdkVirtualScrollableWindow_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkVirtualScrollableWindow)();
 }, "CdkVirtualScrollableWindow_Factory"));
-__publicField(_CdkVirtualScrollableWindow, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkVirtualScrollableWindow, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkVirtualScrollableWindow,
   selectors: [["cdk-virtual-scroll-viewport", "scrollWindow", ""]],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: VIRTUAL_SCROLLABLE,
     useExisting: _CdkVirtualScrollableWindow
-  }]), \u0275\u0275InheritDefinitionFeature]
+  }]), ɵɵInheritDefinitionFeature]
 }));
 var CdkVirtualScrollableWindow = _CdkVirtualScrollableWindow;
 (() => {
@@ -2127,15 +2127,15 @@ var CdkVirtualScrollableWindow = _CdkVirtualScrollableWindow;
 var _CdkScrollableModule = class _CdkScrollableModule {
 };
 __name(_CdkScrollableModule, "CdkScrollableModule");
-__publicField(_CdkScrollableModule, "\u0275fac", /* @__PURE__ */ __name(function CdkScrollableModule_Factory(__ngFactoryType__) {
+__publicField(_CdkScrollableModule, "ɵfac", /* @__PURE__ */ __name(function CdkScrollableModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkScrollableModule)();
 }, "CdkScrollableModule_Factory"));
-__publicField(_CdkScrollableModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_CdkScrollableModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _CdkScrollableModule,
   imports: [CdkScrollable],
   exports: [CdkScrollable]
 }));
-__publicField(_CdkScrollableModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({}));
+__publicField(_CdkScrollableModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({}));
 var CdkScrollableModule = _CdkScrollableModule;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CdkScrollableModule, [{
@@ -2149,15 +2149,15 @@ var CdkScrollableModule = _CdkScrollableModule;
 var _ScrollingModule = class _ScrollingModule {
 };
 __name(_ScrollingModule, "ScrollingModule");
-__publicField(_ScrollingModule, "\u0275fac", /* @__PURE__ */ __name(function ScrollingModule_Factory(__ngFactoryType__) {
+__publicField(_ScrollingModule, "ɵfac", /* @__PURE__ */ __name(function ScrollingModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ScrollingModule)();
 }, "ScrollingModule_Factory"));
-__publicField(_ScrollingModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_ScrollingModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _ScrollingModule,
   imports: [BidiModule, CdkScrollableModule, CdkVirtualScrollViewport, CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollableWindow, CdkVirtualScrollableElement],
   exports: [BidiModule, CdkScrollableModule, CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport, CdkVirtualScrollableWindow, CdkVirtualScrollableElement]
 }));
-__publicField(_ScrollingModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_ScrollingModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   imports: [BidiModule, CdkScrollableModule, BidiModule, CdkScrollableModule]
 }));
 var ScrollingModule = _ScrollingModule;

@@ -23,16 +23,16 @@ import {
 // src/content/examples/animations/src/app/enter-and-leave/leave-binding.ts
 function LeaveBinding_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275domElementStart(0, "div", 1);
-    \u0275\u0275animateLeave(/* @__PURE__ */ __name(function LeaveBinding_Conditional_6_Template_animateleave_cb() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.farewell());
+    const _r1 = ɵɵgetCurrentView();
+    ɵɵdomElementStart(0, "div", 1);
+    ɵɵanimateLeave(/* @__PURE__ */ __name(function LeaveBinding_Conditional_6_Template_animateleave_cb() {
+      ɵɵrestoreView(_r1);
+      const ctx_r1 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r1.farewell());
     }, "LeaveBinding_Conditional_6_Template_animateleave_cb"));
-    \u0275\u0275domElementStart(1, "p");
-    \u0275\u0275text(2, "Goodbye");
-    \u0275\u0275domElementEnd()();
+    ɵɵdomElementStart(1, "p");
+    ɵɵtext(2, "Goodbye");
+    ɵɵdomElementEnd()();
   }
 }
 __name(LeaveBinding_Conditional_6_Template, "LeaveBinding_Conditional_6_Template");
@@ -44,27 +44,27 @@ var _LeaveBinding = class _LeaveBinding {
   farewell = signal("leaving", ...ngDevMode ? [{ debugName: "farewell" }] : []);
 };
 __name(_LeaveBinding, "LeaveBinding");
-__publicField(_LeaveBinding, "\u0275fac", /* @__PURE__ */ __name(function LeaveBinding_Factory(__ngFactoryType__) {
+__publicField(_LeaveBinding, "ɵfac", /* @__PURE__ */ __name(function LeaveBinding_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _LeaveBinding)();
 }, "LeaveBinding_Factory"));
-__publicField(_LeaveBinding, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LeaveBinding, selectors: [["app-leave-binding"]], decls: 7, vars: 1, consts: [["type", "button", 3, "click"], [1, "leave-container"]], template: /* @__PURE__ */ __name(function LeaveBinding_Template(rf, ctx) {
+__publicField(_LeaveBinding, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _LeaveBinding, selectors: [["app-leave-binding"]], decls: 7, vars: 1, consts: [["type", "button", 3, "click"], [1, "leave-container"]], template: /* @__PURE__ */ __name(function LeaveBinding_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "h2")(1, "code");
-    \u0275\u0275text(2, "animate.leave");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275text(3, " Binding Example");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(4, "button", 0);
-    \u0275\u0275domListener("click", /* @__PURE__ */ __name(function LeaveBinding_Template_button_click_4_listener() {
+    ɵɵdomElementStart(0, "h2")(1, "code");
+    ɵɵtext(2, "animate.leave");
+    ɵɵdomElementEnd();
+    ɵɵtext(3, " Binding Example");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(4, "button", 0);
+    ɵɵdomListener("click", /* @__PURE__ */ __name(function LeaveBinding_Template_button_click_4_listener() {
       return ctx.toggle();
     }, "LeaveBinding_Template_button_click_4_listener"));
-    \u0275\u0275text(5, "Toggle Element");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275conditionalCreate(6, LeaveBinding_Conditional_6_Template, 3, 0, "div", 1);
+    ɵɵtext(5, "Toggle Element");
+    ɵɵdomElementEnd();
+    ɵɵconditionalCreate(6, LeaveBinding_Conditional_6_Template, 3, 0, "div", 1);
   }
   if (rf & 2) {
-    \u0275\u0275advance(6);
-    \u0275\u0275conditional(ctx.isShown() ? 6 : -1);
+    ɵɵadvance(6);
+    ɵɵconditional(ctx.isShown() ? 6 : -1);
   }
 }, "LeaveBinding_Template"), styles: ["\n\n[_nghost-%COMP%] {\n  display: block;\n  height: 200px;\n}\n.leave-container[_ngcontent-%COMP%] {\n  border: 1px solid #dddddd;\n  margin-top: 1em;\n  padding: 20px 20px 0px 20px;\n  font-weight: bold;\n  font-size: 20px;\n  opacity: 1;\n  transition: opacity 200ms ease-in;\n}\n@starting-style {\n  .leave-container[_ngcontent-%COMP%] {\n    opacity: 0;\n  }\n}\n.leaving[_ngcontent-%COMP%] {\n  opacity: 0;\n  transform: translateY(20px);\n  transition: opacity 500ms ease-out, transform 500ms ease-out;\n}\n/*# sourceMappingURL=leave-binding.css.map */"] }));
 var LeaveBinding = _LeaveBinding;
@@ -75,7 +75,7 @@ var LeaveBinding = _LeaveBinding;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LeaveBinding, { className: "LeaveBinding", filePath: "src/content/examples/animations/src/app/enter-and-leave/leave-binding.ts", lineNumber: 9 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(LeaveBinding, { className: "LeaveBinding", filePath: "src/content/examples/animations/src/app/enter-and-leave/leave-binding.ts", lineNumber: 9 });
 })();
 export {
   LeaveBinding

@@ -39,52 +39,52 @@ import {
 // src/content/examples/animations/src/app/querying.component.ts
 function QueryingComponent_Conditional_3_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "p");
-    \u0275\u0275text(1, "I am a child element that enters and leaves with its parent");
-    \u0275\u0275domElementEnd();
+    ɵɵdomElementStart(0, "p");
+    ɵɵtext(1, "I am a child element that enters and leaves with its parent");
+    ɵɵdomElementEnd();
   }
 }
 __name(QueryingComponent_Conditional_3_Conditional_3_Template, "QueryingComponent_Conditional_3_Conditional_3_Template");
 function QueryingComponent_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275domElementStart(0, "section");
-    \u0275\u0275listener("@query.start", /* @__PURE__ */ __name(function QueryingComponent_Conditional_3_Template_section_animation_query_start_0_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.toggleDisabled = true);
+    const _r1 = ɵɵgetCurrentView();
+    ɵɵdomElementStart(0, "section");
+    ɵɵlistener("@query.start", /* @__PURE__ */ __name(function QueryingComponent_Conditional_3_Template_section_animation_query_start_0_listener() {
+      ɵɵrestoreView(_r1);
+      const ctx_r1 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r1.toggleDisabled = true);
     }, "QueryingComponent_Conditional_3_Template_section_animation_query_start_0_listener"))("@query.done", /* @__PURE__ */ __name(function QueryingComponent_Conditional_3_Template_section_animation_query_done_0_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.toggleDisabled = false);
+      ɵɵrestoreView(_r1);
+      const ctx_r1 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r1.toggleDisabled = false);
     }, "QueryingComponent_Conditional_3_Template_section_animation_query_done_0_listener"));
-    \u0275\u0275domElementStart(1, "p");
-    \u0275\u0275text(2, "I am a simple child element");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275conditionalCreate(3, QueryingComponent_Conditional_3_Conditional_3_Template, 2, 0, "p");
-    \u0275\u0275domElementStart(4, "p");
-    \u0275\u0275text(5, "I am a child element with an animation trigger");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(6, "div", 1)(7, "span", 2);
-    \u0275\u0275text(8);
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(9, "span", 3);
-    \u0275\u0275text(10);
-    \u0275\u0275domElementStart(11, "small");
-    \u0275\u0275text(12, "(heroes are always animated!)");
-    \u0275\u0275domElementEnd()()()();
+    ɵɵdomElementStart(1, "p");
+    ɵɵtext(2, "I am a simple child element");
+    ɵɵdomElementEnd();
+    ɵɵconditionalCreate(3, QueryingComponent_Conditional_3_Conditional_3_Template, 2, 0, "p");
+    ɵɵdomElementStart(4, "p");
+    ɵɵtext(5, "I am a child element with an animation trigger");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(6, "div", 1)(7, "span", 2);
+    ɵɵtext(8);
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(9, "span", 3);
+    ɵɵtext(10);
+    ɵɵdomElementStart(11, "small");
+    ɵɵtext(12, "(heroes are always animated!)");
+    ɵɵdomElementEnd()()()();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275property("@query", void 0);
-    \u0275\u0275advance(3);
-    \u0275\u0275conditional(ctx_r1.show ? 3 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275property("@animateMe", void 0);
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(ctx_r1.hero.id);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1("", ctx_r1.hero.name, " ");
+    const ctx_r1 = ɵɵnextContext();
+    ɵɵproperty("@query", void 0);
+    ɵɵadvance(3);
+    ɵɵconditional(ctx_r1.show ? 3 : -1);
+    ɵɵadvance();
+    ɵɵproperty("@animateMe", void 0);
+    ɵɵadvance(4);
+    ɵɵtextInterpolate(ctx_r1.hero.id);
+    ɵɵadvance(2);
+    ɵɵtextInterpolate1("", ctx_r1.hero.name, " ");
   }
 }
 __name(QueryingComponent_Conditional_3_Template, "QueryingComponent_Conditional_3_Template");
@@ -94,24 +94,24 @@ var _QueryingComponent = class _QueryingComponent {
   hero = HEROES[0];
 };
 __name(_QueryingComponent, "QueryingComponent");
-__publicField(_QueryingComponent, "\u0275fac", /* @__PURE__ */ __name(function QueryingComponent_Factory(__ngFactoryType__) {
+__publicField(_QueryingComponent, "ɵfac", /* @__PURE__ */ __name(function QueryingComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _QueryingComponent)();
 }, "QueryingComponent_Factory"));
-__publicField(_QueryingComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _QueryingComponent, selectors: [["app-querying"]], decls: 4, vars: 2, consts: [[1, "toggle", 3, "click", "disabled"], [1, "hero"], [1, "badge"], [1, "name"]], template: /* @__PURE__ */ __name(function QueryingComponent_Template(rf, ctx) {
+__publicField(_QueryingComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _QueryingComponent, selectors: [["app-querying"]], decls: 4, vars: 2, consts: [[1, "toggle", 3, "click", "disabled"], [1, "hero"], [1, "badge"], [1, "name"]], template: /* @__PURE__ */ __name(function QueryingComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "nav")(1, "button", 0);
-    \u0275\u0275domListener("click", /* @__PURE__ */ __name(function QueryingComponent_Template_button_click_1_listener() {
+    ɵɵdomElementStart(0, "nav")(1, "button", 0);
+    ɵɵdomListener("click", /* @__PURE__ */ __name(function QueryingComponent_Template_button_click_1_listener() {
       return ctx.show = !ctx.show;
     }, "QueryingComponent_Template_button_click_1_listener"));
-    \u0275\u0275text(2, "Toggle View");
-    \u0275\u0275domElementEnd()();
-    \u0275\u0275conditionalCreate(3, QueryingComponent_Conditional_3_Template, 13, 5, "section");
+    ɵɵtext(2, "Toggle View");
+    ɵɵdomElementEnd()();
+    ɵɵconditionalCreate(3, QueryingComponent_Conditional_3_Template, 13, 5, "section");
   }
   if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275domProperty("disabled", ctx.toggleDisabled);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx.show ? 3 : -1);
+    ɵɵadvance();
+    ɵɵdomProperty("disabled", ctx.toggleDisabled);
+    ɵɵadvance(2);
+    ɵɵconditional(ctx.show ? 3 : -1);
   }
 }, "QueryingComponent_Template"), styles: ["\n\nsection[_ngcontent-%COMP%] {\n  border: 1px solid black;\n  overflow: hidden;\n}\nsection[_ngcontent-%COMP%]    > *[_ngcontent-%COMP%] {\n  margin: 1rem;\n}\n.hero[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  border-radius: 4px;\n  color: black;\n  background-color: #DDD;\n}\n.hero[_ngcontent-%COMP%]   .badge[_ngcontent-%COMP%] {\n  display: inline-block;\n  font-size: small;\n  color: white;\n  padding: 0.5rem;\n  background-color: #3d5157;\n  margin-right: .8em;\n  border-radius: 4px 0 0 4px;\n  align-self: stretch;\n}\n.hero[_ngcontent-%COMP%]   .name[_ngcontent-%COMP%] {\n  height: min-content;\n}\n/*# sourceMappingURL=querying.component.css.map */"], data: { animation: [
   trigger("query", [
@@ -219,7 +219,7 @@ var QueryingComponent = _QueryingComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(QueryingComponent, { className: "QueryingComponent", filePath: "src/content/examples/animations/src/app/querying.component.ts", lineNumber: 84 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(QueryingComponent, { className: "QueryingComponent", filePath: "src/content/examples/animations/src/app/querying.component.ts", lineNumber: 84 });
 })();
 export {
   QueryingComponent

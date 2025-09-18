@@ -34,27 +34,27 @@ import {
 // src/content/examples/animations/src/app/hero-list-auto.component.ts
 function HeroListAutoComponent_For_2_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275domElementStart(0, "li")(1, "button", 1);
-    \u0275\u0275domListener("click", /* @__PURE__ */ __name(function HeroListAutoComponent_For_2_Template_button_click_1_listener() {
-      const hero_r2 = \u0275\u0275restoreView(_r1).$implicit;
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.removeHero(hero_r2.id));
+    const _r1 = ɵɵgetCurrentView();
+    ɵɵdomElementStart(0, "li")(1, "button", 1);
+    ɵɵdomListener("click", /* @__PURE__ */ __name(function HeroListAutoComponent_For_2_Template_button_click_1_listener() {
+      const hero_r2 = ɵɵrestoreView(_r1).$implicit;
+      const ctx_r2 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r2.removeHero(hero_r2.id));
     }, "HeroListAutoComponent_For_2_Template_button_click_1_listener"));
-    \u0275\u0275domElementStart(2, "span", 2);
-    \u0275\u0275text(3);
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(4, "span", 3);
-    \u0275\u0275text(5);
-    \u0275\u0275domElementEnd()()();
+    ɵɵdomElementStart(2, "span", 2);
+    ɵɵtext(3);
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(4, "span", 3);
+    ɵɵtext(5);
+    ɵɵdomElementEnd()()();
   }
   if (rf & 2) {
     const hero_r2 = ctx.$implicit;
-    \u0275\u0275property("@shrinkOut", "in");
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(hero_r2.id);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(hero_r2.name);
+    ɵɵproperty("@shrinkOut", "in");
+    ɵɵadvance(3);
+    ɵɵtextInterpolate(hero_r2.id);
+    ɵɵadvance(2);
+    ɵɵtextInterpolate(hero_r2.name);
   }
 }
 __name(HeroListAutoComponent_For_2_Template, "HeroListAutoComponent_For_2_Template");
@@ -66,18 +66,18 @@ var _HeroListAutoComponent = class _HeroListAutoComponent {
   }
 };
 __name(_HeroListAutoComponent, "HeroListAutoComponent");
-__publicField(_HeroListAutoComponent, "\u0275fac", /* @__PURE__ */ __name(function HeroListAutoComponent_Factory(__ngFactoryType__) {
+__publicField(_HeroListAutoComponent, "ɵfac", /* @__PURE__ */ __name(function HeroListAutoComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HeroListAutoComponent)();
 }, "HeroListAutoComponent_Factory"));
-__publicField(_HeroListAutoComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HeroListAutoComponent, selectors: [["app-hero-list-auto"]], inputs: { heroes: [1, "heroes"] }, outputs: { remove: "remove" }, decls: 3, vars: 0, consts: [[1, "heroes"], ["type", "button", 1, "inner", 3, "click"], [1, "badge"], [1, "name"]], template: /* @__PURE__ */ __name(function HeroListAutoComponent_Template(rf, ctx) {
+__publicField(_HeroListAutoComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _HeroListAutoComponent, selectors: [["app-hero-list-auto"]], inputs: { heroes: [1, "heroes"] }, outputs: { remove: "remove" }, decls: 3, vars: 0, consts: [[1, "heroes"], ["type", "button", 1, "inner", 3, "click"], [1, "badge"], [1, "name"]], template: /* @__PURE__ */ __name(function HeroListAutoComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "ul", 0);
-    \u0275\u0275repeaterCreate(1, HeroListAutoComponent_For_2_Template, 6, 3, "li", null, \u0275\u0275repeaterTrackByIdentity);
-    \u0275\u0275domElementEnd();
+    ɵɵdomElementStart(0, "ul", 0);
+    ɵɵrepeaterCreate(1, HeroListAutoComponent_For_2_Template, 6, 3, "li", null, ɵɵrepeaterTrackByIdentity);
+    ɵɵdomElementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance();
-    \u0275\u0275repeater(ctx.heroes());
+    ɵɵadvance();
+    ɵɵrepeater(ctx.heroes());
   }
 }, "HeroListAutoComponent_Template"), styles: ["\n\n.heroes[_ngcontent-%COMP%] {\n  margin: 0 0 2em 0;\n  list-style-type: none;\n  padding: 0;\n  width: 15em;\n}\n.heroes[_ngcontent-%COMP%]   li[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  width: 100%;\n  overflow: hidden;\n}\n.heroes[_ngcontent-%COMP%]   .inner[_ngcontent-%COMP%] {\n  flex: 1;\n  background-color: #EEE;\n  margin: .5em;\n  padding: 0;\n  border-radius: 4px;\n  display: flex;\n  align-items: stretch;\n}\n.heroes[_ngcontent-%COMP%]   button.inner[_ngcontent-%COMP%] {\n  cursor: pointer;\n  font-size: inherit;\n}\n.heroes[_ngcontent-%COMP%]   button.inner[_ngcontent-%COMP%]:hover {\n  color: #2c3a41;\n  background-color: #e6e6e6;\n  left: .1em;\n}\n.heroes[_ngcontent-%COMP%]   button.inner[_ngcontent-%COMP%]:active {\n  background-color: #525252;\n  color: #fafafa;\n}\n.heroes[_ngcontent-%COMP%]   button.inner.selected[_ngcontent-%COMP%] {\n  background-color: black;\n  color: white;\n}\n.heroes[_ngcontent-%COMP%]   button.inner.selected[_ngcontent-%COMP%]:hover {\n  background-color: #505050;\n  color: white;\n}\n.heroes[_ngcontent-%COMP%]   button.inner.selected[_ngcontent-%COMP%]:active {\n  background-color: black;\n  color: white;\n}\n.heroes[_ngcontent-%COMP%]   .badge[_ngcontent-%COMP%] {\n  display: inline-block;\n  font-size: small;\n  color: white;\n  padding: 0.8em 0.7em 0 0.7em;\n  background-color: #405061;\n  line-height: 1em;\n  margin-right: .8em;\n  border-radius: 4px 0 0 4px;\n}\n.heroes[_ngcontent-%COMP%]   .name[_ngcontent-%COMP%] {\n  min-width: max-content;\n  padding: 0.5rem 0;\n}\nlabel[_ngcontent-%COMP%] {\n  display: block;\n  padding-bottom: .5rem;\n}\ninput[_ngcontent-%COMP%] {\n  font-size: 100%;\n  margin-bottom: 1rem;\n}\n/*# sourceMappingURL=hero-list-page.component.css.map */"], data: { animation: [
   trigger("shrinkOut", [
@@ -111,7 +111,7 @@ var HeroListAutoComponent = _HeroListAutoComponent;
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(HeroListAutoComponent, { className: "HeroListAutoComponent", filePath: "src/content/examples/animations/src/app/hero-list-auto.component.ts", lineNumber: 19 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(HeroListAutoComponent, { className: "HeroListAutoComponent", filePath: "src/content/examples/animations/src/app/hero-list-auto.component.ts", lineNumber: 19 });
 })();
 
 export {

@@ -2737,10 +2737,10 @@ var activeCapturingEventOptions = {
 var __ResetsLoader = class __ResetsLoader {
 };
 __name(__ResetsLoader, "_ResetsLoader");
-__publicField(__ResetsLoader, "\u0275fac", /* @__PURE__ */ __name(function _ResetsLoader_Factory(__ngFactoryType__) {
+__publicField(__ResetsLoader, "ɵfac", /* @__PURE__ */ __name(function _ResetsLoader_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || __ResetsLoader)();
 }, "_ResetsLoader_Factory"));
-__publicField(__ResetsLoader, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({
+__publicField(__ResetsLoader, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({
   type: __ResetsLoader,
   selectors: [["ng-component"]],
   hostAttrs: ["cdk-drag-resets-container", ""],
@@ -2971,12 +2971,12 @@ var _DragDropRegistry = class _DragDropRegistry {
   }
 };
 __name(_DragDropRegistry, "DragDropRegistry");
-__publicField(_DragDropRegistry, "\u0275fac", /* @__PURE__ */ __name(function DragDropRegistry_Factory(__ngFactoryType__) {
+__publicField(_DragDropRegistry, "ɵfac", /* @__PURE__ */ __name(function DragDropRegistry_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _DragDropRegistry)();
 }, "DragDropRegistry_Factory"));
-__publicField(_DragDropRegistry, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_DragDropRegistry, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _DragDropRegistry,
-  factory: _DragDropRegistry.\u0275fac,
+  factory: _DragDropRegistry.ɵfac,
   providedIn: "root"
 }));
 var DragDropRegistry = _DragDropRegistry;
@@ -3017,12 +3017,12 @@ var _DragDrop = class _DragDrop {
   }
 };
 __name(_DragDrop, "DragDrop");
-__publicField(_DragDrop, "\u0275fac", /* @__PURE__ */ __name(function DragDrop_Factory(__ngFactoryType__) {
+__publicField(_DragDrop, "ɵfac", /* @__PURE__ */ __name(function DragDrop_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _DragDrop)();
 }, "DragDrop_Factory"));
-__publicField(_DragDrop, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({
+__publicField(_DragDrop, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({
   token: _DragDrop,
-  factory: _DragDrop.\u0275fac,
+  factory: _DragDrop.ɵfac,
   providedIn: "root"
 }));
 var DragDrop = _DragDrop;
@@ -3086,17 +3086,17 @@ var _CdkDragHandle = class _CdkDragHandle {
   }
 };
 __name(_CdkDragHandle, "CdkDragHandle");
-__publicField(_CdkDragHandle, "\u0275fac", /* @__PURE__ */ __name(function CdkDragHandle_Factory(__ngFactoryType__) {
+__publicField(_CdkDragHandle, "ɵfac", /* @__PURE__ */ __name(function CdkDragHandle_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkDragHandle)();
 }, "CdkDragHandle_Factory"));
-__publicField(_CdkDragHandle, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkDragHandle, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkDragHandle,
   selectors: [["", "cdkDragHandle", ""]],
   hostAttrs: [1, "cdk-drag-handle"],
   inputs: {
     disabled: [2, "cdkDragHandleDisabled", "disabled", booleanAttribute]
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: CDK_DRAG_HANDLE,
     useExisting: _CdkDragHandle
   }])]
@@ -3545,17 +3545,17 @@ var _CdkDrag = class _CdkDrag {
   }
 };
 __name(_CdkDrag, "CdkDrag");
-__publicField(_CdkDrag, "\u0275fac", /* @__PURE__ */ __name(function CdkDrag_Factory(__ngFactoryType__) {
+__publicField(_CdkDrag, "ɵfac", /* @__PURE__ */ __name(function CdkDrag_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkDrag)();
 }, "CdkDrag_Factory"));
-__publicField(_CdkDrag, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkDrag, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkDrag,
   selectors: [["", "cdkDrag", ""]],
   hostAttrs: [1, "cdk-drag"],
   hostVars: 4,
   hostBindings: /* @__PURE__ */ __name(function CdkDrag_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275classProp("cdk-drag-disabled", ctx.disabled)("cdk-drag-dragging", ctx._dragRef.isDragging());
+      ɵɵclassProp("cdk-drag-disabled", ctx.disabled)("cdk-drag-dragging", ctx._dragRef.isDragging());
     }
   }, "CdkDrag_HostBindings"),
   inputs: {
@@ -3581,10 +3581,10 @@ __publicField(_CdkDrag, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective
     moved: "cdkDragMoved"
   },
   exportAs: ["cdkDrag"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: CDK_DRAG_PARENT,
     useExisting: _CdkDrag
-  }]), \u0275\u0275NgOnChangesFeature]
+  }]), ɵɵNgOnChangesFeature]
 }));
 var CdkDrag = _CdkDrag;
 (() => {
@@ -3695,17 +3695,17 @@ var _CdkDropListGroup = class _CdkDropListGroup {
   }
 };
 __name(_CdkDropListGroup, "CdkDropListGroup");
-__publicField(_CdkDropListGroup, "\u0275fac", /* @__PURE__ */ __name(function CdkDropListGroup_Factory(__ngFactoryType__) {
+__publicField(_CdkDropListGroup, "ɵfac", /* @__PURE__ */ __name(function CdkDropListGroup_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkDropListGroup)();
 }, "CdkDropListGroup_Factory"));
-__publicField(_CdkDropListGroup, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkDropListGroup, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkDropListGroup,
   selectors: [["", "cdkDropListGroup", ""]],
   inputs: {
     disabled: [2, "cdkDropListGroupDisabled", "disabled", booleanAttribute]
   },
   exportAs: ["cdkDropListGroup"],
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: CDK_DROP_LIST_GROUP,
     useExisting: _CdkDropListGroup
   }])]
@@ -4015,18 +4015,18 @@ var _CdkDropList = class _CdkDropList {
 __name(_CdkDropList, "CdkDropList");
 /** Keeps track of the drop lists that are currently on the page. */
 __publicField(_CdkDropList, "_dropLists", []);
-__publicField(_CdkDropList, "\u0275fac", /* @__PURE__ */ __name(function CdkDropList_Factory(__ngFactoryType__) {
+__publicField(_CdkDropList, "ɵfac", /* @__PURE__ */ __name(function CdkDropList_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkDropList)();
 }, "CdkDropList_Factory"));
-__publicField(_CdkDropList, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkDropList, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkDropList,
   selectors: [["", "cdkDropList", ""], ["cdk-drop-list"]],
   hostAttrs: [1, "cdk-drop-list"],
   hostVars: 7,
   hostBindings: /* @__PURE__ */ __name(function CdkDropList_HostBindings(rf, ctx) {
     if (rf & 2) {
-      \u0275\u0275attribute("id", ctx.id);
-      \u0275\u0275classProp("cdk-drop-list-disabled", ctx.disabled)("cdk-drop-list-dragging", ctx._dropListRef.isDragging())("cdk-drop-list-receiving", ctx._dropListRef.isReceiving());
+      ɵɵattribute("id", ctx.id);
+      ɵɵclassProp("cdk-drop-list-disabled", ctx.disabled)("cdk-drop-list-dragging", ctx._dropListRef.isDragging())("cdk-drop-list-receiving", ctx._dropListRef.isReceiving());
     }
   }, "CdkDropList_HostBindings"),
   inputs: {
@@ -4051,7 +4051,7 @@ __publicField(_CdkDropList, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirec
     sorted: "cdkDropListSorted"
   },
   exportAs: ["cdkDropList"],
-  features: [\u0275\u0275ProvidersFeature([
+  features: [ɵɵProvidersFeature([
     // Prevent child drop lists from picking up the same group as their parent.
     {
       provide: CDK_DROP_LIST_GROUP,
@@ -4189,17 +4189,17 @@ var _CdkDragPreview = class _CdkDragPreview {
   }
 };
 __name(_CdkDragPreview, "CdkDragPreview");
-__publicField(_CdkDragPreview, "\u0275fac", /* @__PURE__ */ __name(function CdkDragPreview_Factory(__ngFactoryType__) {
+__publicField(_CdkDragPreview, "ɵfac", /* @__PURE__ */ __name(function CdkDragPreview_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkDragPreview)();
 }, "CdkDragPreview_Factory"));
-__publicField(_CdkDragPreview, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkDragPreview, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkDragPreview,
   selectors: [["ng-template", "cdkDragPreview", ""]],
   inputs: {
     data: "data",
     matchSize: [2, "matchSize", "matchSize", booleanAttribute]
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: CDK_DRAG_PREVIEW,
     useExisting: _CdkDragPreview
   }])]
@@ -4243,16 +4243,16 @@ var _CdkDragPlaceholder = class _CdkDragPlaceholder {
   }
 };
 __name(_CdkDragPlaceholder, "CdkDragPlaceholder");
-__publicField(_CdkDragPlaceholder, "\u0275fac", /* @__PURE__ */ __name(function CdkDragPlaceholder_Factory(__ngFactoryType__) {
+__publicField(_CdkDragPlaceholder, "ɵfac", /* @__PURE__ */ __name(function CdkDragPlaceholder_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CdkDragPlaceholder)();
 }, "CdkDragPlaceholder_Factory"));
-__publicField(_CdkDragPlaceholder, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({
+__publicField(_CdkDragPlaceholder, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({
   type: _CdkDragPlaceholder,
   selectors: [["ng-template", "cdkDragPlaceholder", ""]],
   inputs: {
     data: "data"
   },
-  features: [\u0275\u0275ProvidersFeature([{
+  features: [ɵɵProvidersFeature([{
     provide: CDK_DRAG_PLACEHOLDER,
     useExisting: _CdkDragPlaceholder
   }])]
@@ -4278,15 +4278,15 @@ var DRAG_DROP_DIRECTIVES = [CdkDropList, CdkDropListGroup, CdkDrag, CdkDragHandl
 var _DragDropModule = class _DragDropModule {
 };
 __name(_DragDropModule, "DragDropModule");
-__publicField(_DragDropModule, "\u0275fac", /* @__PURE__ */ __name(function DragDropModule_Factory(__ngFactoryType__) {
+__publicField(_DragDropModule, "ɵfac", /* @__PURE__ */ __name(function DragDropModule_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _DragDropModule)();
 }, "DragDropModule_Factory"));
-__publicField(_DragDropModule, "\u0275mod", /* @__PURE__ */ \u0275\u0275defineNgModule({
+__publicField(_DragDropModule, "ɵmod", /* @__PURE__ */ ɵɵdefineNgModule({
   type: _DragDropModule,
   imports: [CdkDropList, CdkDropListGroup, CdkDrag, CdkDragHandle, CdkDragPreview, CdkDragPlaceholder],
   exports: [CdkScrollableModule, CdkDropList, CdkDropListGroup, CdkDrag, CdkDragHandle, CdkDragPreview, CdkDragPlaceholder]
 }));
-__publicField(_DragDropModule, "\u0275inj", /* @__PURE__ */ \u0275\u0275defineInjector({
+__publicField(_DragDropModule, "ɵinj", /* @__PURE__ */ ɵɵdefineInjector({
   providers: [DragDrop],
   imports: [CdkScrollableModule]
 }));

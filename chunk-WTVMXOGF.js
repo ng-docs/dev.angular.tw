@@ -23,10 +23,10 @@ var _ExponentialStrengthPipe = class _ExponentialStrengthPipe {
   }
 };
 __name(_ExponentialStrengthPipe, "ExponentialStrengthPipe");
-__publicField(_ExponentialStrengthPipe, "\u0275fac", /* @__PURE__ */ __name(function ExponentialStrengthPipe_Factory(__ngFactoryType__) {
+__publicField(_ExponentialStrengthPipe, "ɵfac", /* @__PURE__ */ __name(function ExponentialStrengthPipe_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ExponentialStrengthPipe)();
 }, "ExponentialStrengthPipe_Factory"));
-__publicField(_ExponentialStrengthPipe, "\u0275pipe", /* @__PURE__ */ \u0275\u0275definePipe({ name: "exponentialStrength", type: _ExponentialStrengthPipe, pure: true }));
+__publicField(_ExponentialStrengthPipe, "ɵpipe", /* @__PURE__ */ ɵɵdefinePipe({ name: "exponentialStrength", type: _ExponentialStrengthPipe, pure: true }));
 var ExponentialStrengthPipe = _ExponentialStrengthPipe;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ExponentialStrengthPipe, [{
@@ -41,22 +41,22 @@ var ExponentialStrengthPipe = _ExponentialStrengthPipe;
 var _PowerBoosterComponent = class _PowerBoosterComponent {
 };
 __name(_PowerBoosterComponent, "PowerBoosterComponent");
-__publicField(_PowerBoosterComponent, "\u0275fac", /* @__PURE__ */ __name(function PowerBoosterComponent_Factory(__ngFactoryType__) {
+__publicField(_PowerBoosterComponent, "ɵfac", /* @__PURE__ */ __name(function PowerBoosterComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _PowerBoosterComponent)();
 }, "PowerBoosterComponent_Factory"));
-__publicField(_PowerBoosterComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _PowerBoosterComponent, selectors: [["app-power-booster"]], decls: 5, vars: 4, template: /* @__PURE__ */ __name(function PowerBoosterComponent_Template(rf, ctx) {
+__publicField(_PowerBoosterComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _PowerBoosterComponent, selectors: [["app-power-booster"]], decls: 5, vars: 4, template: /* @__PURE__ */ __name(function PowerBoosterComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "h2");
-    \u0275\u0275text(1, "Power Booster");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(2, "p");
-    \u0275\u0275text(3);
-    \u0275\u0275pipe(4, "exponentialStrength");
-    \u0275\u0275domElementEnd();
+    ɵɵdomElementStart(0, "h2");
+    ɵɵtext(1, "Power Booster");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(2, "p");
+    ɵɵtext(3);
+    ɵɵpipe(4, "exponentialStrength");
+    ɵɵdomElementEnd();
   }
   if (rf & 2) {
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1("Super power boost: ", \u0275\u0275pipeBind2(4, 1, 2, 10));
+    ɵɵadvance(3);
+    ɵɵtextInterpolate1("Super power boost: ", ɵɵpipeBind2(4, 1, 2, 10));
   }
 }, "PowerBoosterComponent_Template"), dependencies: [ExponentialStrengthPipe], encapsulation: 2 }));
 var PowerBoosterComponent = _PowerBoosterComponent;
@@ -74,7 +74,7 @@ var PowerBoosterComponent = _PowerBoosterComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(PowerBoosterComponent, { className: "PowerBoosterComponent", filePath: "src/content/examples/pipes/src/app/power-booster.component.ts", lineNumber: 12 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(PowerBoosterComponent, { className: "PowerBoosterComponent", filePath: "src/content/examples/pipes/src/app/power-booster.component.ts", lineNumber: 12 });
 })();
 
 export {

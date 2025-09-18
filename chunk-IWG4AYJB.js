@@ -192,10 +192,10 @@ var _SplitResizerHandler = class _SplitResizerHandler {
   }
 };
 __name(_SplitResizerHandler, "SplitResizerHandler");
-__publicField(_SplitResizerHandler, "\u0275fac", /* @__PURE__ */ __name(function SplitResizerHandler_Factory(__ngFactoryType__) {
+__publicField(_SplitResizerHandler, "ɵfac", /* @__PURE__ */ __name(function SplitResizerHandler_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _SplitResizerHandler)();
 }, "SplitResizerHandler_Factory"));
-__publicField(_SplitResizerHandler, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _SplitResizerHandler, factory: _SplitResizerHandler.\u0275fac }));
+__publicField(_SplitResizerHandler, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _SplitResizerHandler, factory: _SplitResizerHandler.ɵfac }));
 var SplitResizerHandler = _SplitResizerHandler;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SplitResizerHandler, [{
@@ -211,264 +211,264 @@ var _c3 = ["revealAnswerButton"];
 var _c4 = /* @__PURE__ */ __name((a0) => ({ restrictedMode: a0 }), "_c4");
 function Tutorial_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
+    ɵɵelementContainer(0);
   }
 }
 __name(Tutorial_ng_container_1_Template, "Tutorial_ng_container_1_Template");
 function Tutorial_Conditional_2_ng_container_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
+    ɵɵelementContainer(0);
   }
 }
 __name(Tutorial_Conditional_2_ng_container_2_Template, "Tutorial_Conditional_2_ng_container_2_Template");
 function Tutorial_Conditional_2_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "main", 11);
+    ɵɵelement(0, "main", 11);
   }
   if (rf & 2) {
-    \u0275\u0275property("docContent", ctx);
+    ɵɵproperty("docContent", ctx);
   }
 }
 __name(Tutorial_Conditional_2_Conditional_3_Template, "Tutorial_Conditional_2_Conditional_3_Template");
 function Tutorial_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 10, 2);
-    \u0275\u0275template(2, Tutorial_Conditional_2_ng_container_2_Template, 1, 0, "ng-container", 6);
-    \u0275\u0275conditionalCreate(3, Tutorial_Conditional_2_Conditional_3_Template, 1, 1, "main", 11);
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 10, 2);
+    ɵɵtemplate(2, Tutorial_Conditional_2_ng_container_2_Template, 1, 0, "ng-container", 6);
+    ɵɵconditionalCreate(3, Tutorial_Conditional_2_Conditional_3_Template, 1, 1, "main", 11);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
     let tmp_6_0;
-    const ctx_r0 = \u0275\u0275nextContext();
-    const tutorialNav_r2 = \u0275\u0275reference(7);
-    \u0275\u0275classProp("adev-nav-open", ctx_r0.showNavigationDropdown());
-    \u0275\u0275advance(2);
-    \u0275\u0275property("ngTemplateOutlet", tutorialNav_r2);
-    \u0275\u0275advance();
-    \u0275\u0275conditional((tmp_6_0 = ctx_r0.documentContent()) ? 3 : -1, tmp_6_0);
+    const ctx_r0 = ɵɵnextContext();
+    const tutorialNav_r2 = ɵɵreference(7);
+    ɵɵclassProp("adev-nav-open", ctx_r0.showNavigationDropdown());
+    ɵɵadvance(2);
+    ɵɵproperty("ngTemplateOutlet", tutorialNav_r2);
+    ɵɵadvance();
+    ɵɵconditional((tmp_6_0 = ctx_r0.documentContent()) ? 3 : -1, tmp_6_0);
   }
 }
 __name(Tutorial_Conditional_2_Template, "Tutorial_Conditional_2_Template");
 function Tutorial_Conditional_5_Conditional_2_ng_container_0_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementContainer(0);
+    ɵɵelementContainer(0);
   }
 }
 __name(Tutorial_Conditional_5_Conditional_2_ng_container_0_Template, "Tutorial_Conditional_5_Conditional_2_ng_container_0_Template");
 function Tutorial_Conditional_5_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275template(0, Tutorial_Conditional_5_Conditional_2_ng_container_0_Template, 1, 0, "ng-container", 13);
+    ɵɵtemplate(0, Tutorial_Conditional_5_Conditional_2_ng_container_0_Template, 1, 0, "ng-container", 13);
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("ngComponentOutlet", ctx_r0.embeddedEditorComponent)("ngComponentOutletInputs", \u0275\u0275pureFunction1(2, _c4, ctx_r0.restrictedMode()));
+    const ctx_r0 = ɵɵnextContext(2);
+    ɵɵproperty("ngComponentOutlet", ctx_r0.embeddedEditorComponent)("ngComponentOutletInputs", ɵɵpureFunction1(2, _c4, ctx_r0.restrictedMode()));
   }
 }
 __name(Tutorial_Conditional_5_Conditional_2_Template, "Tutorial_Conditional_5_Conditional_2_Template");
 function Tutorial_Conditional_5_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 12, 3);
-    \u0275\u0275conditionalCreate(2, Tutorial_Conditional_5_Conditional_2_Template, 1, 4, "ng-container");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "div", 12, 3);
+    ɵɵconditionalCreate(2, Tutorial_Conditional_5_Conditional_2_Template, 1, 4, "ng-container");
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275classProp("adev-split-tutorial", ctx_r0.shouldRenderContent());
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx_r0.embeddedEditorComponent ? 2 : -1);
+    const ctx_r0 = ɵɵnextContext();
+    ɵɵclassProp("adev-split-tutorial", ctx_r0.shouldRenderContent());
+    ɵɵadvance(2);
+    ɵɵconditional(ctx_r0.embeddedEditorComponent ? 2 : -1);
   }
 }
 __name(Tutorial_Conditional_5_Template, "Tutorial_Conditional_5_Template");
 function Tutorial_ng_template_6_Conditional_10_Template(rf, ctx) {
   if (rf & 1) {
-    const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 26, 4);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function Tutorial_ng_template_6_Conditional_10_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r4);
-      const ctx_r0 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r0.answerRevealed() ? ctx_r0.handleResetAnswer() : ctx_r0.handleRevealAnswer());
+    const _r4 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "button", 26, 4);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function Tutorial_ng_template_6_Conditional_10_Template_button_click_0_listener() {
+      ɵɵrestoreView(_r4);
+      const ctx_r0 = ɵɵnextContext(2);
+      return ɵɵresetView(ctx_r0.answerRevealed() ? ctx_r0.handleResetAnswer() : ctx_r0.handleRevealAnswer());
     }, "Tutorial_ng_template_6_Conditional_10_Template_button_click_0_listener"));
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
+    ɵɵtext(2);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275classProp("adev-reset-answer-button", ctx_r0.answerRevealed());
-    \u0275\u0275property("disabled", !ctx_r0.canRevealAnswer());
-    \u0275\u0275attribute("text", ctx_r0.answerRevealed() ? "\u91CD\u7F6E" : "\u663E\u793A\u7B54\u6848")("aria-label", ctx_r0.answerRevealed() ? "\u91CD\u7F6E" : "\u663E\u793A\u7B54\u6848");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", ctx_r0.answerRevealed() ? "\u91CD\u7F6E" : "\u663E\u793A\u7B54\u6848", " ");
+    const ctx_r0 = ɵɵnextContext(2);
+    ɵɵclassProp("adev-reset-answer-button", ctx_r0.answerRevealed());
+    ɵɵproperty("disabled", !ctx_r0.canRevealAnswer());
+    ɵɵattribute("text", ctx_r0.answerRevealed() ? "重置" : "顯示答案")("aria-label", ctx_r0.answerRevealed() ? "重置" : "顯示答案");
+    ɵɵadvance(2);
+    ɵɵtextInterpolate1(" ", ctx_r0.answerRevealed() ? "重置" : "顯示答案", " ");
   }
 }
 __name(Tutorial_ng_template_6_Conditional_10_Template, "Tutorial_ng_template_6_Conditional_10_Template");
 function Tutorial_ng_template_6_Conditional_11_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "a", 19)(1, "button", 27)(2, "docs-icon");
-    \u0275\u0275text(3, "download");
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(0, "a", 19)(1, "button", 27)(2, "docs-icon");
+    ɵɵtext(3, "download");
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("download", ctx_r0.stepName() + ".zip")("href", ctx_r0.localTutorialZipUrl(), \u0275\u0275sanitizeUrl);
+    const ctx_r0 = ɵɵnextContext(2);
+    ɵɵproperty("download", ctx_r0.stepName() + ".zip")("href", ctx_r0.localTutorialZipUrl(), ɵɵsanitizeUrl);
   }
 }
 __name(Tutorial_ng_template_6_Conditional_11_Template, "Tutorial_ng_template_6_Conditional_11_Template");
 function Tutorial_ng_template_6_Conditional_13_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "a", 21)(1, "button", 28)(2, "docs-icon");
-    \u0275\u0275text(3, "chevron_left");
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(0, "a", 21)(1, "button", 28)(2, "docs-icon");
+    ɵɵtext(3, "chevron_left");
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("routerLink", ctx_r0.previousStepPath);
+    const ctx_r0 = ɵɵnextContext(2);
+    ɵɵproperty("routerLink", ctx_r0.previousStepPath);
   }
 }
 __name(Tutorial_ng_template_6_Conditional_13_Template, "Tutorial_ng_template_6_Conditional_13_Template");
 function Tutorial_ng_template_6_Conditional_14_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "button", 22)(1, "docs-icon");
-    \u0275\u0275text(2, "chevron_left");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "button", 22)(1, "docs-icon");
+    ɵɵtext(2, "chevron_left");
+    ɵɵelementEnd()();
   }
 }
 __name(Tutorial_ng_template_6_Conditional_14_Template, "Tutorial_ng_template_6_Conditional_14_Template");
 function Tutorial_ng_template_6_Conditional_15_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "a", 21)(1, "button", 28)(2, "docs-icon");
-    \u0275\u0275text(3, "chevron_right");
-    \u0275\u0275elementEnd()()();
+    ɵɵelementStart(0, "a", 21)(1, "button", 28)(2, "docs-icon");
+    ɵɵtext(3, "chevron_right");
+    ɵɵelementEnd()()();
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275property("routerLink", ctx_r0.nextStepPath);
+    const ctx_r0 = ɵɵnextContext(2);
+    ɵɵproperty("routerLink", ctx_r0.nextStepPath);
   }
 }
 __name(Tutorial_ng_template_6_Conditional_15_Template, "Tutorial_ng_template_6_Conditional_15_Template");
 function Tutorial_ng_template_6_Conditional_16_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "button", 22)(1, "docs-icon");
-    \u0275\u0275text(2, "chevron_right");
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(0, "button", 22)(1, "docs-icon");
+    ɵɵtext(2, "chevron_right");
+    ɵɵelementEnd()();
   }
 }
 __name(Tutorial_ng_template_6_Conditional_16_Template, "Tutorial_ng_template_6_Conditional_16_Template");
 function Tutorial_ng_template_6_Conditional_18_Template(rf, ctx) {
   if (rf & 1) {
-    const _r5 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 29, 4);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function Tutorial_ng_template_6_Conditional_18_Template_button_click_0_listener() {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r0 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r0.answerRevealed() ? ctx_r0.handleResetAnswer() : ctx_r0.handleRevealAnswer());
+    const _r5 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "button", 29, 4);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function Tutorial_ng_template_6_Conditional_18_Template_button_click_0_listener() {
+      ɵɵrestoreView(_r5);
+      const ctx_r0 = ɵɵnextContext(2);
+      return ɵɵresetView(ctx_r0.answerRevealed() ? ctx_r0.handleResetAnswer() : ctx_r0.handleRevealAnswer());
     }, "Tutorial_ng_template_6_Conditional_18_Template_button_click_0_listener"));
-    \u0275\u0275text(2);
-    \u0275\u0275elementEnd();
+    ɵɵtext(2);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275classProp("adev-reset-answer-button", ctx_r0.answerRevealed());
-    \u0275\u0275property("disabled", !ctx_r0.canRevealAnswer());
-    \u0275\u0275attribute("text", ctx_r0.answerRevealed() ? "\u91CD\u7F6E" : "\u663E\u793A\u7B54\u6848")("aria-label", ctx_r0.answerRevealed() ? "\u91CD\u7F6E" : "\u663E\u793A\u7B54\u6848");
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", ctx_r0.answerRevealed() ? "\u91CD\u7F6E" : "\u663E\u793A\u7B54\u6848", " ");
+    const ctx_r0 = ɵɵnextContext(2);
+    ɵɵclassProp("adev-reset-answer-button", ctx_r0.answerRevealed());
+    ɵɵproperty("disabled", !ctx_r0.canRevealAnswer());
+    ɵɵattribute("text", ctx_r0.answerRevealed() ? "重置" : "顯示答案")("aria-label", ctx_r0.answerRevealed() ? "重置" : "顯示答案");
+    ɵɵadvance(2);
+    ɵɵtextInterpolate1(" ", ctx_r0.answerRevealed() ? "重置" : "顯示答案", " ");
   }
 }
 __name(Tutorial_ng_template_6_Conditional_18_Template, "Tutorial_ng_template_6_Conditional_18_Template");
 function Tutorial_ng_template_6_Conditional_19_Conditional_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "a", 21);
-    \u0275\u0275text(1, "\u4E0B\u4E00\u4E2A\u6559\u7A0B");
-    \u0275\u0275elementEnd();
+    ɵɵelementStart(0, "a", 21);
+    ɵɵtext(1, "下一個教程");
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(3);
-    \u0275\u0275property("routerLink", "/" + ctx_r0.nextTutorialPath());
+    const ctx_r0 = ɵɵnextContext(3);
+    ɵɵproperty("routerLink", "/" + ctx_r0.nextTutorialPath());
   }
 }
 __name(Tutorial_ng_template_6_Conditional_19_Conditional_2_Template, "Tutorial_ng_template_6_Conditional_19_Conditional_2_Template");
 function Tutorial_ng_template_6_Conditional_19_Template(rf, ctx) {
   if (rf & 1) {
-    const _r6 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 30);
-    \u0275\u0275listener("docsClickOutside", /* @__PURE__ */ __name(function Tutorial_ng_template_6_Conditional_19_Template_div_docsClickOutside_0_listener() {
-      \u0275\u0275restoreView(_r6);
-      const ctx_r0 = \u0275\u0275nextContext(2);
-      return \u0275\u0275resetView(ctx_r0.hideNavigationDropdown());
+    const _r6 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "div", 30);
+    ɵɵlistener("docsClickOutside", /* @__PURE__ */ __name(function Tutorial_ng_template_6_Conditional_19_Template_div_docsClickOutside_0_listener() {
+      ɵɵrestoreView(_r6);
+      const ctx_r0 = ɵɵnextContext(2);
+      return ɵɵresetView(ctx_r0.hideNavigationDropdown());
     }, "Tutorial_ng_template_6_Conditional_19_Template_div_docsClickOutside_0_listener"));
-    \u0275\u0275element(1, "docs-navigation-list", 31);
-    \u0275\u0275conditionalCreate(2, Tutorial_ng_template_6_Conditional_19_Conditional_2_Template, 2, 1, "a", 21);
-    \u0275\u0275elementEnd();
+    ɵɵelement(1, "docs-navigation-list", 31);
+    ɵɵconditionalCreate(2, Tutorial_ng_template_6_Conditional_19_Conditional_2_Template, 2, 1, "a", 21);
+    ɵɵelementEnd();
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance();
-    \u0275\u0275property("isDropdownView", true)("navigationItems", ctx_r0.tutorialNavigationItems());
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx_r0.nextTutorialPath() ? 2 : -1);
+    const ctx_r0 = ɵɵnextContext(2);
+    ɵɵadvance();
+    ɵɵproperty("isDropdownView", true)("navigationItems", ctx_r0.tutorialNavigationItems());
+    ɵɵadvance();
+    ɵɵconditional(ctx_r0.nextTutorialPath() ? 2 : -1);
   }
 }
 __name(Tutorial_ng_template_6_Conditional_19_Template, "Tutorial_ng_template_6_Conditional_19_Template");
 function Tutorial_ng_template_6_Template(rf, ctx) {
   if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 14)(1, "div", 15)(2, "button", 16);
-    \u0275\u0275listener("click", /* @__PURE__ */ __name(function Tutorial_ng_template_6_Template_button_click_2_listener($event) {
-      \u0275\u0275restoreView(_r3);
-      const ctx_r0 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r0.toggleNavigationDropdown($event));
+    const _r3 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "div", 14)(1, "div", 15)(2, "button", 16);
+    ɵɵlistener("click", /* @__PURE__ */ __name(function Tutorial_ng_template_6_Template_button_click_2_listener($event) {
+      ɵɵrestoreView(_r3);
+      const ctx_r0 = ɵɵnextContext();
+      return ɵɵresetView(ctx_r0.toggleNavigationDropdown($event));
     }, "Tutorial_ng_template_6_Template_button_click_2_listener"));
-    \u0275\u0275elementStart(3, "docs-icon");
-    \u0275\u0275text(4, "unfold_more");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "div", 17)(6, "span");
-    \u0275\u0275text(7);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(8, "span");
-    \u0275\u0275text(9);
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275conditionalCreate(10, Tutorial_ng_template_6_Conditional_10_Template, 3, 6, "button", 18);
-    \u0275\u0275conditionalCreate(11, Tutorial_ng_template_6_Conditional_11_Template, 4, 2, "a", 19);
-    \u0275\u0275elementStart(12, "div", 20);
-    \u0275\u0275conditionalCreate(13, Tutorial_ng_template_6_Conditional_13_Template, 4, 1, "a", 21);
-    \u0275\u0275conditionalCreate(14, Tutorial_ng_template_6_Conditional_14_Template, 3, 0, "button", 22);
-    \u0275\u0275conditionalCreate(15, Tutorial_ng_template_6_Conditional_15_Template, 4, 1, "a", 21);
-    \u0275\u0275conditionalCreate(16, Tutorial_ng_template_6_Conditional_16_Template, 3, 0, "button", 22);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(17, "div", 23);
-    \u0275\u0275conditionalCreate(18, Tutorial_ng_template_6_Conditional_18_Template, 3, 6, "button", 24);
-    \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(19, Tutorial_ng_template_6_Conditional_19_Template, 3, 3, "div", 25);
-    \u0275\u0275elementEnd()();
+    ɵɵelementStart(3, "docs-icon");
+    ɵɵtext(4, "unfold_more");
+    ɵɵelementEnd();
+    ɵɵelementStart(5, "div", 17)(6, "span");
+    ɵɵtext(7);
+    ɵɵelementEnd();
+    ɵɵelementStart(8, "span");
+    ɵɵtext(9);
+    ɵɵelementEnd()()();
+    ɵɵconditionalCreate(10, Tutorial_ng_template_6_Conditional_10_Template, 3, 6, "button", 18);
+    ɵɵconditionalCreate(11, Tutorial_ng_template_6_Conditional_11_Template, 4, 2, "a", 19);
+    ɵɵelementStart(12, "div", 20);
+    ɵɵconditionalCreate(13, Tutorial_ng_template_6_Conditional_13_Template, 4, 1, "a", 21);
+    ɵɵconditionalCreate(14, Tutorial_ng_template_6_Conditional_14_Template, 3, 0, "button", 22);
+    ɵɵconditionalCreate(15, Tutorial_ng_template_6_Conditional_15_Template, 4, 1, "a", 21);
+    ɵɵconditionalCreate(16, Tutorial_ng_template_6_Conditional_16_Template, 3, 0, "button", 22);
+    ɵɵelementEnd();
+    ɵɵelementStart(17, "div", 23);
+    ɵɵconditionalCreate(18, Tutorial_ng_template_6_Conditional_18_Template, 3, 6, "button", 24);
+    ɵɵelementEnd();
+    ɵɵconditionalCreate(19, Tutorial_ng_template_6_Conditional_19_Template, 3, 3, "div", 25);
+    ɵɵelementEnd()();
   }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275classProp("adev-nav-open", ctx_r0.showNavigationDropdown());
-    \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate(ctx_r0.tutorialName());
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r0.stepName());
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx_r0.shouldRenderRevealAnswer() ? 10 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx_r0.localTutorialZipUrl() ? 11 : -1);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx_r0.previousStepPath ? 13 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(!ctx_r0.previousStepPath ? 14 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx_r0.nextStepPath ? 15 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(!ctx_r0.nextStepPath ? 16 : -1);
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx_r0.shouldRenderRevealAnswer() ? 18 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx_r0.showNavigationDropdown() ? 19 : -1);
+    const ctx_r0 = ɵɵnextContext();
+    ɵɵadvance();
+    ɵɵclassProp("adev-nav-open", ctx_r0.showNavigationDropdown());
+    ɵɵadvance(6);
+    ɵɵtextInterpolate(ctx_r0.tutorialName());
+    ɵɵadvance(2);
+    ɵɵtextInterpolate(ctx_r0.stepName());
+    ɵɵadvance();
+    ɵɵconditional(ctx_r0.shouldRenderRevealAnswer() ? 10 : -1);
+    ɵɵadvance();
+    ɵɵconditional(ctx_r0.localTutorialZipUrl() ? 11 : -1);
+    ɵɵadvance(2);
+    ɵɵconditional(ctx_r0.previousStepPath ? 13 : -1);
+    ɵɵadvance();
+    ɵɵconditional(!ctx_r0.previousStepPath ? 14 : -1);
+    ɵɵadvance();
+    ɵɵconditional(ctx_r0.nextStepPath ? 15 : -1);
+    ɵɵadvance();
+    ɵɵconditional(!ctx_r0.nextStepPath ? 16 : -1);
+    ɵɵadvance(2);
+    ɵɵconditional(ctx_r0.shouldRenderRevealAnswer() ? 18 : -1);
+    ɵɵadvance();
+    ɵɵconditional(ctx_r0.showNavigationDropdown() ? 19 : -1);
   }
 }
 __name(Tutorial_ng_template_6_Template, "Tutorial_ng_template_6_Template");
-var INTRODUCTION_LABEL = "\u7B80\u4ECB";
+var INTRODUCTION_LABEL = "簡介";
 var _Tutorial = class _Tutorial {
   content = viewChild("content", ...ngDevMode ? [{ debugName: "content" }] : []);
   editor = viewChild("editor", ...ngDevMode ? [{ debugName: "editor" }] : []);
@@ -598,40 +598,40 @@ var _Tutorial = class _Tutorial {
   }
 };
 __name(_Tutorial, "Tutorial");
-__publicField(_Tutorial, "\u0275fac", /* @__PURE__ */ __name(function Tutorial_Factory(__ngFactoryType__) {
+__publicField(_Tutorial, "ɵfac", /* @__PURE__ */ __name(function Tutorial_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _Tutorial)();
 }, "Tutorial_Factory"));
-__publicField(_Tutorial, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _Tutorial, selectors: [["adev-tutorial"]], viewQuery: /* @__PURE__ */ __name(function Tutorial_Query(rf, ctx) {
+__publicField(_Tutorial, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _Tutorial, selectors: [["adev-tutorial"]], viewQuery: /* @__PURE__ */ __name(function Tutorial_Query(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275viewQuerySignal(ctx.content, _c0, 5);
-    \u0275\u0275viewQuerySignal(ctx.editor, _c1, 5);
-    \u0275\u0275viewQuerySignal(ctx.resizer, _c2, 5);
-    \u0275\u0275viewQuerySignal(ctx.revealAnswerButton, _c3, 5);
+    ɵɵviewQuerySignal(ctx.content, _c0, 5);
+    ɵɵviewQuerySignal(ctx.editor, _c1, 5);
+    ɵɵviewQuerySignal(ctx.resizer, _c2, 5);
+    ɵɵviewQuerySignal(ctx.revealAnswerButton, _c3, 5);
   }
   if (rf & 2) {
-    \u0275\u0275queryAdvance(4);
+    ɵɵqueryAdvance(4);
   }
-}, "Tutorial_Query"), features: [\u0275\u0275ProvidersFeature([SplitResizerHandler])], decls: 8, vars: 7, consts: [["resizer", ""], ["tutorialNav", ""], ["content", ""], ["editor", ""], ["revealAnswerButton", ""], [1, "adev-page-content"], [4, "ngTemplateOutlet"], [1, "docs-tutorial-content", 3, "adev-nav-open"], ["role", "separator", 1, "adev-tutorial-resizer"], [1, "docs-tutorial-editor", 3, "adev-split-tutorial"], [1, "docs-tutorial-content"], ["docsViewer", "", 1, "docs-viewer", "docs-viewer-scroll-margin-large", 3, "docContent"], [1, "docs-tutorial-editor"], [4, "ngComponentOutlet", "ngComponentOutletInputs"], [1, "adev-tutorial-nav-container"], [1, "adev-tutorial-nav"], [1, "adev-unfold-button", 3, "click"], [1, "adev-current-tutorial"], [1, "docs-reveal-answer-button", "adev-reveal-desktop-button", "docs-primary-btn", 3, "disabled", "adev-reset-answer-button"], [3, "download", "href"], [1, "adev-nav-arrows"], [3, "routerLink"], ["disabled", "", 1, "docs-primary-btn"], [1, "adev-reveal-mobile-button-container"], [1, "docs-reveal-answer-button", "adev-reveal-mobile-button", "docs-primary-btn", 3, "disabled", "adev-reset-answer-button"], [1, "adev-tutorial-nav-list-dropdown"], [1, "docs-reveal-answer-button", "adev-reveal-desktop-button", "docs-primary-btn", 3, "click", "disabled"], [1, "adev-download-button", "docs-primary-btn"], [1, "docs-primary-btn"], [1, "docs-reveal-answer-button", "adev-reveal-mobile-button", "docs-primary-btn", 3, "click", "disabled"], [1, "adev-tutorial-nav-list-dropdown", 3, "docsClickOutside"], [1, "adev-nav-list", 3, "isDropdownView", "navigationItems"]], template: /* @__PURE__ */ __name(function Tutorial_Template(rf, ctx) {
+}, "Tutorial_Query"), features: [ɵɵProvidersFeature([SplitResizerHandler])], decls: 8, vars: 7, consts: [["resizer", ""], ["tutorialNav", ""], ["content", ""], ["editor", ""], ["revealAnswerButton", ""], [1, "adev-page-content"], [4, "ngTemplateOutlet"], [1, "docs-tutorial-content", 3, "adev-nav-open"], ["role", "separator", 1, "adev-tutorial-resizer"], [1, "docs-tutorial-editor", 3, "adev-split-tutorial"], [1, "docs-tutorial-content"], ["docsViewer", "", 1, "docs-viewer", "docs-viewer-scroll-margin-large", 3, "docContent"], [1, "docs-tutorial-editor"], [4, "ngComponentOutlet", "ngComponentOutletInputs"], [1, "adev-tutorial-nav-container"], [1, "adev-tutorial-nav"], [1, "adev-unfold-button", 3, "click"], [1, "adev-current-tutorial"], [1, "docs-reveal-answer-button", "adev-reveal-desktop-button", "docs-primary-btn", 3, "disabled", "adev-reset-answer-button"], [3, "download", "href"], [1, "adev-nav-arrows"], [3, "routerLink"], ["disabled", "", 1, "docs-primary-btn"], [1, "adev-reveal-mobile-button-container"], [1, "docs-reveal-answer-button", "adev-reveal-mobile-button", "docs-primary-btn", 3, "disabled", "adev-reset-answer-button"], [1, "adev-tutorial-nav-list-dropdown"], [1, "docs-reveal-answer-button", "adev-reveal-desktop-button", "docs-primary-btn", 3, "click", "disabled"], [1, "adev-download-button", "docs-primary-btn"], [1, "docs-primary-btn"], [1, "docs-reveal-answer-button", "adev-reveal-mobile-button", "docs-primary-btn", 3, "click", "disabled"], [1, "adev-tutorial-nav-list-dropdown", 3, "docsClickOutside"], [1, "adev-nav-list", 3, "isDropdownView", "navigationItems"]], template: /* @__PURE__ */ __name(function Tutorial_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 5);
-    \u0275\u0275template(1, Tutorial_ng_container_1_Template, 1, 0, "ng-container", 6);
-    \u0275\u0275conditionalCreate(2, Tutorial_Conditional_2_Template, 4, 4, "div", 7);
-    \u0275\u0275element(3, "button", 8, 0);
-    \u0275\u0275conditionalCreate(5, Tutorial_Conditional_5_Template, 3, 3, "div", 9);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(6, Tutorial_ng_template_6_Template, 20, 12, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
+    ɵɵelementStart(0, "div", 5);
+    ɵɵtemplate(1, Tutorial_ng_container_1_Template, 1, 0, "ng-container", 6);
+    ɵɵconditionalCreate(2, Tutorial_Conditional_2_Template, 4, 4, "div", 7);
+    ɵɵelement(3, "button", 8, 0);
+    ɵɵconditionalCreate(5, Tutorial_Conditional_5_Template, 3, 3, "div", 9);
+    ɵɵelementEnd();
+    ɵɵtemplate(6, Tutorial_ng_template_6_Template, 20, 12, "ng-template", null, 1, ɵɵtemplateRefExtractor);
   }
   if (rf & 2) {
-    const tutorialNav_r2 = \u0275\u0275reference(7);
-    \u0275\u0275classProp("adev-nav-open", ctx.showNavigationDropdown());
-    \u0275\u0275advance();
-    \u0275\u0275property("ngTemplateOutlet", tutorialNav_r2);
-    \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.shouldRenderContent() ? 2 : -1);
-    \u0275\u0275advance();
-    \u0275\u0275classProp("adev-tutorial-resizer-hidden", !ctx.shouldRenderEmbeddedEditor() || !ctx.shouldRenderContent());
-    \u0275\u0275advance(2);
-    \u0275\u0275conditional(ctx.shouldRenderEmbeddedEditor() ? 5 : -1);
+    const tutorialNav_r2 = ɵɵreference(7);
+    ɵɵclassProp("adev-nav-open", ctx.showNavigationDropdown());
+    ɵɵadvance();
+    ɵɵproperty("ngTemplateOutlet", tutorialNav_r2);
+    ɵɵadvance();
+    ɵɵconditional(ctx.shouldRenderContent() ? 2 : -1);
+    ɵɵadvance();
+    ɵɵclassProp("adev-tutorial-resizer-hidden", !ctx.shouldRenderEmbeddedEditor() || !ctx.shouldRenderContent());
+    ɵɵadvance(2);
+    ɵɵconditional(ctx.shouldRenderEmbeddedEditor() ? 5 : -1);
   }
 }, "Tutorial_Template"), dependencies: [
   NgComponentOutlet,
@@ -710,11 +710,11 @@ var Tutorial = _Tutorial;
           (click)="answerRevealed() ? handleResetAnswer() : handleRevealAnswer()"
           [disabled]="!canRevealAnswer()"
           class="docs-reveal-answer-button adev-reveal-desktop-button docs-primary-btn"
-          [attr.text]="answerRevealed() ? '\u91CD\u7F6E' : '\u663E\u793A\u7B54\u6848'"
-          [attr.aria-label]="answerRevealed() ? '\u91CD\u7F6E' : '\u663E\u793A\u7B54\u6848'"
+          [attr.text]="answerRevealed() ? '重置' : '顯示答案'"
+          [attr.aria-label]="answerRevealed() ? '重置' : '顯示答案'"
           [class.adev-reset-answer-button]="answerRevealed()"
         >
-          {{ answerRevealed() ? '\u91CD\u7F6E' : '\u663E\u793A\u7B54\u6848' }}
+          {{ answerRevealed() ? '重置' : '顯示答案' }}
         </button>
       }
 
@@ -763,11 +763,11 @@ var Tutorial = _Tutorial;
             (click)="answerRevealed() ? handleResetAnswer() : handleRevealAnswer()"
             [disabled]="!canRevealAnswer()"
             class="docs-reveal-answer-button adev-reveal-mobile-button docs-primary-btn"
-            [attr.text]="answerRevealed() ? '\u91CD\u7F6E' : '\u663E\u793A\u7B54\u6848'"
-            [attr.aria-label]="answerRevealed() ? '\u91CD\u7F6E' : '\u663E\u793A\u7B54\u6848'"
+            [attr.text]="answerRevealed() ? '重置' : '顯示答案'"
+            [attr.aria-label]="answerRevealed() ? '重置' : '顯示答案'"
             [class.adev-reset-answer-button]="answerRevealed()"
           >
-            {{ answerRevealed() ? '\u91CD\u7F6E' : '\u663E\u793A\u7B54\u6848' }}
+            {{ answerRevealed() ? '重置' : '顯示答案' }}
           </button>
         }
       </div>
@@ -781,7 +781,7 @@ var Tutorial = _Tutorial;
             class="adev-nav-list"
           />
           @if (nextTutorialPath()) {
-            <a [routerLink]="'/' + nextTutorialPath()">\u4E0B\u4E00\u4E2A\u6559\u7A0B</a>
+            <a [routerLink]="'/' + nextTutorialPath()">下一個教程</a>
           }
         </div>
       }
@@ -792,7 +792,7 @@ var Tutorial = _Tutorial;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(Tutorial, { className: "Tutorial", filePath: "src/app/features/tutorial/tutorial.component.ts", lineNumber: 74 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(Tutorial, { className: "Tutorial", filePath: "src/app/features/tutorial/tutorial.component.ts", lineNumber: 74 });
 })();
 export {
   Tutorial as default

@@ -31,12 +31,12 @@ var _HighlightDirective = class _HighlightDirective {
   }
 };
 __name(_HighlightDirective, "HighlightDirective");
-__publicField(_HighlightDirective, "\u0275fac", /* @__PURE__ */ __name(function HighlightDirective_Factory(__ngFactoryType__) {
+__publicField(_HighlightDirective, "ɵfac", /* @__PURE__ */ __name(function HighlightDirective_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _HighlightDirective)();
 }, "HighlightDirective_Factory"));
-__publicField(_HighlightDirective, "\u0275dir", /* @__PURE__ */ \u0275\u0275defineDirective({ type: _HighlightDirective, selectors: [["", "appHighlight", ""]], hostBindings: /* @__PURE__ */ __name(function HighlightDirective_HostBindings(rf, ctx) {
+__publicField(_HighlightDirective, "ɵdir", /* @__PURE__ */ ɵɵdefineDirective({ type: _HighlightDirective, selectors: [["", "appHighlight", ""]], hostBindings: /* @__PURE__ */ __name(function HighlightDirective_HostBindings(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275listener("mouseenter", /* @__PURE__ */ __name(function HighlightDirective_mouseenter_HostBindingHandler() {
+    ɵɵlistener("mouseenter", /* @__PURE__ */ __name(function HighlightDirective_mouseenter_HostBindingHandler() {
       return ctx.onMouseEnter();
     }, "HighlightDirective_mouseenter_HostBindingHandler"))("mouseleave", /* @__PURE__ */ __name(function HighlightDirective_mouseleave_HostBindingHandler() {
       return ctx.onMouseLeave();

@@ -99,13 +99,13 @@ var _EmbeddedTutorialManager = class _EmbeddedTutorialManager {
   async fetchTutorialSourceCode(tutorial) {
     const tutorialSourceCode = await fetch(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/source-code.json`);
     if (!tutorialSourceCode.ok)
-      throw new Error(`\u7F3A\u5C11\u6559\u7A0B ${tutorial} \u7684\u6E90\u4EE3\u7801\u3002`);
+      throw new Error(`缺少教程 ${tutorial} 的原始碼。`);
     return await tutorialSourceCode.json();
   }
   async fetchTutorialMetadata(tutorial) {
     const tutorialSourceCode = await fetch(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`);
     if (!tutorialSourceCode.ok)
-      throw new Error(`\u7F3A\u5C11\u6559\u7A0B ${tutorial} \u7684\u5143\u6570\u636E\u3002`);
+      throw new Error(`缺少教程 ${tutorial} 的元資料。`);
     return await tutorialSourceCode.json();
   }
   /**
@@ -129,10 +129,10 @@ var _EmbeddedTutorialManager = class _EmbeddedTutorialManager {
   }
 };
 __name(_EmbeddedTutorialManager, "EmbeddedTutorialManager");
-__publicField(_EmbeddedTutorialManager, "\u0275fac", /* @__PURE__ */ __name(function EmbeddedTutorialManager_Factory(__ngFactoryType__) {
+__publicField(_EmbeddedTutorialManager, "ɵfac", /* @__PURE__ */ __name(function EmbeddedTutorialManager_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _EmbeddedTutorialManager)();
 }, "EmbeddedTutorialManager_Factory"));
-__publicField(_EmbeddedTutorialManager, "\u0275prov", /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _EmbeddedTutorialManager, factory: _EmbeddedTutorialManager.\u0275fac, providedIn: "root" }));
+__publicField(_EmbeddedTutorialManager, "ɵprov", /* @__PURE__ */ ɵɵdefineInjectable({ token: _EmbeddedTutorialManager, factory: _EmbeddedTutorialManager.ɵfac, providedIn: "root" }));
 var EmbeddedTutorialManager = _EmbeddedTutorialManager;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(EmbeddedTutorialManager, [{

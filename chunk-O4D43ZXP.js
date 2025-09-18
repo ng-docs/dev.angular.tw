@@ -21,30 +21,30 @@ var _InnerHtmlBindingComponent = class _InnerHtmlBindingComponent {
   htmlSnippet = 'Template <script>alert("0wned")<\/script> <b>Syntax</b>';
 };
 __name(_InnerHtmlBindingComponent, "InnerHtmlBindingComponent");
-__publicField(_InnerHtmlBindingComponent, "\u0275fac", /* @__PURE__ */ __name(function InnerHtmlBindingComponent_Factory(__ngFactoryType__) {
+__publicField(_InnerHtmlBindingComponent, "ɵfac", /* @__PURE__ */ __name(function InnerHtmlBindingComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _InnerHtmlBindingComponent)();
 }, "InnerHtmlBindingComponent_Factory"));
-__publicField(_InnerHtmlBindingComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _InnerHtmlBindingComponent, selectors: [["app-inner-html-binding"]], decls: 9, vars: 2, consts: [[1, "e2e-inner-html-interpolated"], [1, "e2e-inner-html-bound", 3, "innerHTML"]], template: /* @__PURE__ */ __name(function InnerHtmlBindingComponent_Template(rf, ctx) {
+__publicField(_InnerHtmlBindingComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _InnerHtmlBindingComponent, selectors: [["app-inner-html-binding"]], decls: 9, vars: 2, consts: [[1, "e2e-inner-html-interpolated"], [1, "e2e-inner-html-bound", 3, "innerHTML"]], template: /* @__PURE__ */ __name(function InnerHtmlBindingComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275domElementStart(0, "h3");
-    \u0275\u0275text(1, "Binding innerHTML");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(2, "p");
-    \u0275\u0275text(3, "Bound value:");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(4, "p", 0);
-    \u0275\u0275text(5);
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElementStart(6, "p");
-    \u0275\u0275text(7, "Result of binding to innerHTML:");
-    \u0275\u0275domElementEnd();
-    \u0275\u0275domElement(8, "p", 1);
+    ɵɵdomElementStart(0, "h3");
+    ɵɵtext(1, "Binding innerHTML");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(2, "p");
+    ɵɵtext(3, "Bound value:");
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(4, "p", 0);
+    ɵɵtext(5);
+    ɵɵdomElementEnd();
+    ɵɵdomElementStart(6, "p");
+    ɵɵtext(7, "Result of binding to innerHTML:");
+    ɵɵdomElementEnd();
+    ɵɵdomElement(8, "p", 1);
   }
   if (rf & 2) {
-    \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate(ctx.htmlSnippet);
-    \u0275\u0275advance(3);
-    \u0275\u0275domProperty("innerHTML", ctx.htmlSnippet, \u0275\u0275sanitizeHtml);
+    ɵɵadvance(5);
+    ɵɵtextInterpolate(ctx.htmlSnippet);
+    ɵɵadvance(3);
+    ɵɵdomProperty("innerHTML", ctx.htmlSnippet, ɵɵsanitizeHtml);
   }
 }, "InnerHtmlBindingComponent_Template"), encapsulation: 2 }));
 var InnerHtmlBindingComponent = _InnerHtmlBindingComponent;
@@ -55,7 +55,7 @@ var InnerHtmlBindingComponent = _InnerHtmlBindingComponent;
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(InnerHtmlBindingComponent, { className: "InnerHtmlBindingComponent", filePath: "src/content/examples/security/src/app/inner-html-binding.component.ts", lineNumber: 9 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(InnerHtmlBindingComponent, { className: "InnerHtmlBindingComponent", filePath: "src/content/examples/security/src/app/inner-html-binding.component.ts", lineNumber: 9 });
 })();
 
 export {

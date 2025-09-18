@@ -58,12 +58,12 @@ var _CodeEditorComponent = class _CodeEditorComponent {
   }
 };
 __name(_CodeEditorComponent, "CodeEditorComponent");
-__publicField(_CodeEditorComponent, "\u0275fac", /* @__PURE__ */ __name(function CodeEditorComponent_Factory(__ngFactoryType__) {
+__publicField(_CodeEditorComponent, "ɵfac", /* @__PURE__ */ __name(function CodeEditorComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _CodeEditorComponent)();
 }, "CodeEditorComponent_Factory"));
-__publicField(_CodeEditorComponent, "\u0275cmp", /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CodeEditorComponent, selectors: [["adev-code-editor"]], inputs: { tutorialFiles: [1, "tutorialFiles"] }, decls: 1, vars: 0, template: /* @__PURE__ */ __name(function CodeEditorComponent_Template(rf, ctx) {
+__publicField(_CodeEditorComponent, "ɵcmp", /* @__PURE__ */ ɵɵdefineComponent({ type: _CodeEditorComponent, selectors: [["adev-code-editor"]], inputs: { tutorialFiles: [1, "tutorialFiles"] }, decls: 1, vars: 0, template: /* @__PURE__ */ __name(function CodeEditorComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "embedded-editor");
+    ɵɵelement(0, "embedded-editor");
   }
 }, "CodeEditorComponent_Template"), dependencies: [EmbeddedEditor], encapsulation: 2, changeDetection: 0 }));
 var CodeEditorComponent = _CodeEditorComponent;
@@ -79,7 +79,7 @@ var CodeEditorComponent = _CodeEditorComponent;
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(CodeEditorComponent, { className: "CodeEditorComponent", filePath: "src/app/features/home/components/home-editor.component.ts", lineNumber: 33 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && ɵsetClassDebugInfo(CodeEditorComponent, { className: "CodeEditorComponent", filePath: "src/app/features/home/components/home-editor.component.ts", lineNumber: 33 });
 })();
 export {
   CodeEditorComponent
